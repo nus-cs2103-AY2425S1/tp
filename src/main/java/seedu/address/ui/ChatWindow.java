@@ -79,7 +79,7 @@ public class ChatWindow {
      * @param message The user's input message.
      * @return The assistant's response as a String.
      */
-    private String getResponse(String message) {
+    public String getResponse(String message) {
         message = message.toLowerCase().trim();
 
         switch (message) {
@@ -92,6 +92,11 @@ public class ChatWindow {
         case "goodbye":
         case "bye":
             return "Goodbye! Have a great day!";
+        case "thank":
+        case "thanks":
+        case "thank you":
+        case "thank u":
+            return "You're welcome! Always happy to help.";
         case "love":
             return "Love is not about possession; it's about appreciation of \n"
                     + "the journey we share together, hand in hand through \n"

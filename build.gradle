@@ -30,27 +30,30 @@ test {
         showStandardStreams = true
     }
 
+    // Exclude UiTest and ChatWindowTest from the main test task
     doFirst {
         exclude "**/**UiTest*"
+        exclude "**/**ChatWindowTest*"
     }
+
     reports {
         html.required = true
     }
+
     doLast {
         def reportFile = file("${buildDir}/reports/tests/test/index.html")
         def osName = System.getProperty("os.name").toLowerCase()
 
         if (osName.contains("win")) {
-            // For Windows
             def path = reportFile.absolutePath
             def driveLetter = path.charAt(0).toLowerCase()
             def remainingPath = path.substring(2).replace('\\', '/')
             println "\nTest report generated at: file:///${driveLetter}${remainingPath}"
         } else {
-            // For macOS/Linux
             println "\nTest report generated at: file://${reportFile.absolutePath}"
         }
     }
+
     finalizedBy jacocoTestReport
 }
 
@@ -62,31 +65,52 @@ tasks.register('uiTest', Test) {
             '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
             '--add-opens', 'java.base/java.util=ALL-UNNAMED'
     ]
+
+    // Include only UiTest in this task
     doFirst {
         include "**/**UiTest*"
     }
+
     useJUnitPlatform()
+
+    // Ensure chatWindowTest runs after uiTest
+    finalizedBy 'chatWindowTest'
+}
+
+tasks.register('chatWindowTest', Test) {
+    jvmArgs += [
+            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+            '--add-exports', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+            '--add-opens', 'javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.util=ALL-UNNAMED'
+    ]
+
+    // Include only ChatWindowTest in this task
+    doFirst {
+        include "**/**ChatWindowTest*"
+    }
+
+    useJUnitPlatform()
+
     finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-    dependsOn test
+    dependsOn test, uiTest, chatWindowTest
 
-    def disallowedOS = ['ubuntu', 'nux']
-    def os = System.getProperty("os.name").toLowerCase()
-    def isAllowed = disallowedOS.every { !os.contains(it) }
-    if (isAllowed) {
-        dependsOn uiTest
-    }
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
     executionData.from files(jacocoTestReport.executionData)
+
     afterEvaluate {
         classDirectories.from files(classDirectories.files.collect {
             fileTree(dir: it, exclude: ['**/*.jar'])
         })
     }
+
     executionData(fileTree(dir: "$buildDir/jacoco", includes: ["**/*.exec"]))
+
     reports {
         html.required = true
         xml.required = true
@@ -97,13 +121,11 @@ jacocoTestReport {
         def osName = System.getProperty("os.name").toLowerCase()
 
         if (osName.contains("win")) {
-            // For Windows
             def path = reportFile.absolutePath
             def driveLetter = path.charAt(0).toLowerCase()
             def remainingPath = path.substring(2).replace('\\', '/')
             println "\nTest coverage report generated at: file:///${driveLetter}${remainingPath}"
         } else {
-            // For macOS/Linux
             println "\nTest coverage report generated at: file://${reportFile.absolutePath}"
         }
     }
