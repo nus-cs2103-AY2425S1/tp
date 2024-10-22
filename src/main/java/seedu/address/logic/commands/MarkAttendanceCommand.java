@@ -33,9 +33,9 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
             + ": Mark the attendance of people with list of input telegrams on designated date.\n"
             + "Parameters: "
             + PREFIX_TELEGRAM + "TELEGRAM "
-            + PREFIX_DATE + "DATE "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TELEGRAM + "johndoe "
-            + PREFIX_TELEGRAM + "johndog " + PREFIX_DATE + "2024-10-21";
+            + PREFIX_DATE + "DATE \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TELEGRAM + "alexYeoh "
+            + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Mark %1$d people's attendance on %2$s.";
 
