@@ -148,12 +148,11 @@ public class ArchiveCommand extends Command {
     /**
      * Reverses the order of the provided list.
      *
-     * @param <T> The type of the elements in the list.
-     * @param list The list to be reversed.
+     * @param list The deliveryList to be reversed.
      * @return A reversed copy of the provided list.
      */
-    private <T> List<T> reverseList(List<T> list) {
-        List<T> reversedList = new ArrayList<>(list);
+    private List<Delivery> reverseList(List<Delivery> list) {
+        List<Delivery> reversedList = new ArrayList<>(list);
         Collections.reverse(reversedList);
         return reversedList;
     }
