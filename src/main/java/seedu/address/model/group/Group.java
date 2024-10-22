@@ -26,6 +26,7 @@ public class Group {
     private final Set<Task> tasks = new HashSet<>();
 
     /**
+     * Creates a Group with {@code groupName}, {@code students}, and {@code tasks}.
      * Every field must be present and not null.
      */
     public Group(GroupName groupName, Set<Student> students, Set<Task> tasks) {
@@ -36,6 +37,7 @@ public class Group {
     }
 
     /**
+     * Creates a Group with {@code groupName}.
      * Every field must be present and not null.
      */
     public Group(GroupName groupName) {
@@ -77,10 +79,10 @@ public class Group {
     }
 
     /**
-     * Adds a given student into the {@code group} object.
+     * Adds {@code student} into {@code Group}.
      * There can be a maximum of 5 students in each group.
      *
-     * @param student The {@code student} object to be added.
+     * @param student The student to be added.
      */
     public void add(Student student) {
         if (students.size() < MAXIMUM_STUDENTS_IN_GROUP) {
@@ -91,31 +93,47 @@ public class Group {
     }
 
     /**
-     * Adds a given task into the {@code group} object.
+     * Adds {@code task} into {@code Group}.
      * There can be a maximum of 5 students in each group.
      *
-     * @param task The {@code task} object to be added.
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Deletes {@code task} from {@code Group}.
+     *
+     * @param task The task to be deleted.
+     */
     public void deleteTask(Task task) {
         tasks.remove(task);
     }
 
+    /**
+     * Replaces {@code target} with {@code editedTask}.
+     *
+     * @param target The task to be replaced.
+     * @param editedTask The task to replace with.
+     */
     public void setTask(Task target, Task editedTask) {
         deleteTask(target);
         addTask(editedTask);
     }
 
+    /**
+     * Deletes {@code student} from {@code Group}.
+     *
+     * @param student The student to be deleted.
+     */
     public void delete(Student student) {
         students.remove(student);
     }
 
     /**
      * Returns true if both groups have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two groups.
      */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {

@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

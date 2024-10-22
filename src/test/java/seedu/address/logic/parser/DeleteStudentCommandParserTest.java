@@ -7,7 +7,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.deletecommands.DeleteStudentCommand;
+import seedu.address.logic.parser.deletecommands.DeleteStudentCommandParser;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

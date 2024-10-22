@@ -16,7 +16,7 @@ public class TaskName {
     public final String taskName;
 
     /**
-     * Constructs a {@code TaskName}
+     * Constructs a {@code TaskName}.
      *
      * @param name A valid task name.
      */

@@ -29,6 +29,7 @@ public class Student {
     private final Optional<GroupName> groupName;
 
     /**
+     * Creates a Student with {@code name}, {@code email}, {@code tags}, and {@code studentNumber}.
      * Every field must be present and not null.
      */
     public Student(Name name, Email email, Set<Tag> tags, StudentNumber studentNumber) {
@@ -41,6 +42,7 @@ public class Student {
     }
 
     /**
+     * Creates a Student with {@code name}, {@code email}, {@code tags}, {@code studentNumber}, and {@code groupName}.
      * Every field must be present and not null.
      */
     public Student(Name name, Email email, Set<Tag> tags, StudentNumber studentNumber, Optional<GroupName> groupName) {
@@ -94,8 +96,8 @@ public class Student {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same student number.
+     * This defines a weaker notion of equality between two students.
      */
     public boolean isSamePerson(Student otherStudent) {
         if (otherStudent == this) {
@@ -115,7 +117,7 @@ public class Student {
     }
 
     /**
-     * Returns a copy of student which has {@code groupName}.
+     * Returns a copy of student which belongs in a group with {@code groupName}.
      */
     public Student addGroup(GroupName groupName) {
         return new Student(name, email, tags, studentNumber, Optional.of(groupName));
@@ -143,6 +145,12 @@ public class Student {
             && studentNumber.equals(otherStudent.studentNumber);
     }
 
+    /**
+     * Returns a copy of {@code Student} that belongs in a group with {@code groupName}.
+     *
+     * @param groupName The group the student is assigned to.
+     * @return A copy of Student in group with {@code groupName}.
+     */
     public Student setStudentGroup(GroupName groupName) {
         return new Student(name, email, tags, studentNumber, Optional.<GroupName>of(groupName));
     }
