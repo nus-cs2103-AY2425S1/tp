@@ -50,18 +50,18 @@ public class AddEventCommand extends AddCommand {
     private final EventName eventName;
     private final Time time;
     private final Venue venue;
-    private final String personName;
+    private final String celebrityName;
     private final List<String> contactNames;
 
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public AddEventCommand(EventName eventName, Time time, Venue venue, String personName, List<String> contactNames) {
-        requireAllNonNull(eventName, time, venue, personName);
+    public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName, List<String> contactNames) {
+        requireAllNonNull(eventName, time, venue, celebrityName);
         this.eventName = eventName;
         this.time = time;
         this.venue = venue;
-        this.personName = personName;
+        this.celebrityName = celebrityName;
         this.contactNames = contactNames;
     }
 
@@ -72,7 +72,7 @@ public class AddEventCommand extends AddCommand {
         List<Person> contacts;
 
         try {
-            celebrity = model.findPerson(this.personName);
+            celebrity = model.findPerson(this.celebrityName);
             contacts = contactNames.stream().map(model::findPerson).toList();
         } catch (PersonNotFoundException e) {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
@@ -104,7 +104,7 @@ public class AddEventCommand extends AddCommand {
         return eventName.equals(otherAddEventCommand.eventName)
                 && time.equals(otherAddEventCommand.time)
                 && venue.equals(otherAddEventCommand.venue)
-                && personName.equals(otherAddEventCommand.personName)
+                && celebrityName.equals(otherAddEventCommand.celebrityName)
                 && contactNames.equals(otherAddEventCommand.contactNames);
     }
 
@@ -114,7 +114,7 @@ public class AddEventCommand extends AddCommand {
                 .add("eventName", eventName)
                 .add("time", time)
                 .add("venue", venue)
-                .add("Celebrity", personName)
+                .add("Celebrity", celebrityName)
                 .add("Contacts", contactNames)
                 .toString();
     }
