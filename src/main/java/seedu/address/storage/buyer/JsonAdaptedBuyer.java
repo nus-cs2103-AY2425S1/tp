@@ -10,9 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.buyer.Address;
+import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
@@ -28,8 +27,7 @@ public class JsonAdaptedBuyer {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
-    private final String buyerType;
+    private final String budget;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -37,14 +35,12 @@ public class JsonAdaptedBuyer {
      */
     @JsonCreator
     public JsonAdaptedBuyer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("buyerType") String buyerType,
+            @JsonProperty("email") String email, @JsonProperty("budget") String budget,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.buyerType = buyerType;
+        this.budget = budget;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -57,8 +53,7 @@ public class JsonAdaptedBuyer {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        buyerType = source.getBuyerType().value.toString();
+        budget = source.getBudget().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -99,17 +94,16 @@ public class JsonAdaptedBuyer {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (budget == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Budget.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Budget.isValidBudget(budget)) {
+            throw new IllegalValueException(Budget.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
-        final BuyerType modelBuyerType = new BuyerType(buyerType);
+        final Budget modelBudget = new Budget(budget);
 
         final Set<Tag> modelTags = new HashSet<>(buyerTags);
-        return new Buyer(modelName, modelPhone, modelEmail, modelAddress, modelBuyerType, modelTags);
+        return new Buyer(modelName, modelPhone, modelEmail, modelBudget, modelTags);
     }
 
 }

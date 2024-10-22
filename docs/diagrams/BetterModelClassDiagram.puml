@@ -17,5 +17,5 @@ Buyer -up-> "*" Tag
 Buyer *--> Name
 Buyer *--> Phone
 Buyer *--> Email
-Buyer *--> Address
+Buyer *--> Budget
 @enduml

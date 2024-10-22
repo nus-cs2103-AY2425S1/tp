@@ -131,10 +131,11 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         MeetUpList meetUpList = new MeetUpListBuilder().withMeetUp(PITCH_MEETUP).withMeetUp(NETWORKING_MEETUP).build();
         MeetUpList differentMeetUpList = new MeetUpList();
+        PropertyList propertyList = new PropertyList();
 
         // same values -> returns true
-        modelManager = new ModelManager(buyerList, userPrefs, meetUpList);
-        ModelManager modelManagerCopy = new ModelManager(buyerList, userPrefs, meetUpList);
+        modelManager = new ModelManager(buyerList, userPrefs, meetUpList, propertyList);
+        ModelManager modelManagerCopy = new ModelManager(buyerList, userPrefs, meetUpList, propertyList);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -147,15 +148,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different buyerList -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentBuyerList, userPrefs, meetUpList)));
+        assertFalse(modelManager.equals(new ModelManager(differentBuyerList, userPrefs, meetUpList, propertyList)));
 
         // different meetUpList -> returns false
-        assertFalse(modelManager.equals(new ModelManager(buyerList, userPrefs, differentMeetUpList)));
+        assertFalse(modelManager.equals(new ModelManager(buyerList, userPrefs, differentMeetUpList, propertyList)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredBuyerList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(buyerList, userPrefs, meetUpList)));
+        assertFalse(modelManager.equals(new ModelManager(buyerList, userPrefs, meetUpList, propertyList)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredBuyerList(PREDICATE_SHOW_ALL_BUYERS);
@@ -163,6 +164,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setBuyerListFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(buyerList, differentUserPrefs, meetUpList)));
+        assertFalse(modelManager.equals(new ModelManager(buyerList, differentUserPrefs, meetUpList, propertyList)));
     }
 }

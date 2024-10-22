@@ -11,13 +11,15 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.BuyerListParser;
+import seedu.address.logic.parser.AbcliParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 import seedu.address.storage.Storage;
 
 /**
@@ -33,7 +35,6 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final BuyerListParser buyerListParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -41,7 +42,6 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        buyerListParser = new BuyerListParser();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = buyerListParser.parseCommand(commandText);
+        Command command = AbcliParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         logger.info("meetup list is now " + model.getMeetUpList());
@@ -93,6 +93,21 @@ public class LogicManager implements Logic {
     @Override
     public Path getMeetUpListFilePath() {
         return model.getMeetUpListFilePath();
+    }
+
+    @Override
+    public ReadOnlyPropertyList getPropertyList() {
+        return model.getPropertyList();
+    }
+
+    @Override
+    public ObservableList<Property> getFilteredPropertyList() {
+        return model.getFilteredPropertyList();
+    }
+
+    @Override
+    public Path getPropertyListFilePath() {
+        return model.getPropertyListFilePath();
     }
 
     @Override

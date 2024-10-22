@@ -4,7 +4,7 @@ import seedu.address.model.BuyerList;
 import seedu.address.model.buyer.Buyer;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building Budgetbook objects.
  * Example usage: <br>
  *     {@code BuyerList ab = new BuyerListBuilder().withBuyer("John", "Doe").build();}
  */

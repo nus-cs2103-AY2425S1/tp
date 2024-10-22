@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.buyer;
 
 import java.util.Comparator;
 
@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Buyer}.
@@ -35,11 +36,9 @@ public class BuyerCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label budget;
     @FXML
     private Label email;
-    @FXML
-    private Label buyerType;
     @FXML
     private FlowPane tags;
 
@@ -52,9 +51,8 @@ public class BuyerCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(buyer.getName().fullName);
         phone.setText(buyer.getPhone().value);
-        address.setText(buyer.getAddress().value);
+        budget.setText(buyer.getBudget().value);
         email.setText(buyer.getEmail().value);
-        buyerType.setText(buyer.getBuyerType().value.toString());
         buyer.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

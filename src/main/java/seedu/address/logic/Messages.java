@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX = "The meetup index provided is invalid";
+    public static final String MESSAGE_INVALID_PARSER_MODE = "The parser mode provided is invalid";
 
     // MeetUp Strings
     public static final String MESSAGE_MEETUPS_LISTED_OVERVIEW = "%1$d buyers listed!";
@@ -46,8 +47,8 @@ public class Messages {
                 .append(buyer.getPhone())
                 .append("; Email: ")
                 .append(buyer.getEmail())
-                .append("; Address: ")
-                .append(buyer.getAddress())
+                .append("; Budget: ")
+                .append(buyer.getBudget())
                 .append("; Tags: ");
         buyer.getTags().forEach(builder::append);
         return builder.toString();
