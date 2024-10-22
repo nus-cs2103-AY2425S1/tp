@@ -23,8 +23,6 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private final Person person;
-
     @FXML
     private VBox personDetailView;
     @FXML
@@ -40,17 +38,15 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
      * Initializes a new {@code PersonDetailView} for displaying the details of the provided {@code Person}.
      * It sets the person's details (name, phone number, email, and relationship) in the view immediately.
      *
-     * @param p The {@code Person} whose details are to be displayed.
      */
-    public PersonDetailView(Person p) {
+    public PersonDetailView() {
         super(FXML);
-        this.person = p;
-        update(p);
     }
 
     @Override
     public void update(Person person) {
         requireNonNull(person);
+        getRoot().setVisible(true);
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
