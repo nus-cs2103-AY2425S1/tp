@@ -74,7 +74,7 @@ public class DeleteStudentCommandTest {
 
         assertThrows(CommandException.class, "There is more than 1 student of the same name.\n"
                 + "Their student numbers are as follows: A1234567X A0123456Y " + "\n"
-                + "Use the following command: deletestu n/John Ng "
+                + "Use the following command: deletes n/John Ng "
                 + "sn/STUDENT NUMBER to delete the student.", () ->
                 command.execute(modelStub));
     }
