@@ -127,6 +127,9 @@ public class ModelManager implements Model {
 
     @Override
     public Person findEquivalentPerson(Person person) {
+        if (person == null) {
+            return null;
+        }
         return addressBook.findEquivalentPerson(person);
     }
 

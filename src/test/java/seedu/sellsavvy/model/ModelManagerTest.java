@@ -12,6 +12,7 @@ import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
 import static seedu.sellsavvy.testutil.TypicalPersons.BENSON;
+import static seedu.sellsavvy.testutil.TypicalPersons.BOB;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -144,6 +145,28 @@ public class ModelManagerTest {
         Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person differentPerson = new PersonBuilder(selectedPerson).withName(VALID_NAME_BOB).build();
         assertThrows(PersonNotFoundException.class, () -> model.findEquivalentPerson(differentPerson));
+    }
+
+    @Test
+    public void isSelectedPerson_noSelectedPerson() {
+        assertTrue(modelManager.isSelectedPerson(null));
+    }
+
+    @Test
+    public void isSelectedPerson_withSelectedPerson() {
+        modelManager.updateSelectedPerson(ALICE);
+
+        // same object -> returns true
+        assertTrue(modelManager.isSelectedPerson(ALICE));
+
+        // same values -> returns true
+        assertTrue(modelManager.isSelectedPerson(new PersonBuilder(ALICE).build()));
+
+        // different values -> returns false
+        assertFalse(modelManager.isSelectedPerson(BOB));
+
+        // null -> returns false
+        assertFalse(modelManager.isSelectedPerson(null));
     }
 
     @Test

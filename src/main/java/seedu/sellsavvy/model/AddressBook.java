@@ -105,9 +105,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
-     * Returns null if target is null.
      */
     public Person findEquivalentPerson(Person target) {
+        assert target != null;
         return persons.findEquivalentPerson(target);
     }
 

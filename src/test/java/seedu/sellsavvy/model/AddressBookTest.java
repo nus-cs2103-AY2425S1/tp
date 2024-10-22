@@ -3,7 +3,6 @@ package seedu.sellsavvy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
@@ -92,11 +91,6 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
-    }
-
-    @Test
-    public void findEquivalentPerson_returnNullWhenInputIsNull() {
-        assertNull(addressBook.findEquivalentPerson(null));
     }
 
     @Test
