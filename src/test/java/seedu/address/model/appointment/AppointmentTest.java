@@ -215,6 +215,41 @@ public class AppointmentTest {
         // Test that appointments with different end times are not equal
         assertFalse(appointment1.equals(appointment2));
     }
+    @Test
+    public void getAppointmentDetailsTest() {
+        // Prepare the test data
+        Person testPerson = new PersonBuilder().build();
+        LocalDateTime startTime = LocalDateTime.of(2024, 10, 22, 12, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 10, 22, 13, 0);
+
+        // Create an appointment with the completion status as false
+        Appointment appointment = new Appointment("Test Appointment", testPerson.getNric(), startTime, endTime, false);
+
+        // Expected formatted details
+        String expectedDetails = "From: 22 October 2024 12:00HRS To: 22 October 2024 13:00HRS Status: Not Completed";
+
+        // Assert that the details are as expected
+        assertEquals(expectedDetails, appointment.getAppointmentDetails());
+    }
+
+    @Test
+    public void getAppointmentDetailsCompletedTest() {
+        // Prepare the test data
+        Person testPerson = new PersonBuilder().build();
+        LocalDateTime startTime = LocalDateTime.of(2024, 10, 22, 12, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 10, 22, 13, 0);
+
+        // Create an appointment with the completion status as true
+        Appointment appointment = new Appointment("Test Appointment", testPerson.getNric(), startTime, endTime, true);
+
+        // Expected formatted details with completed status
+        String expectedDetails = "From: 22 October 2024 12:00HRS To: 22 October 2024 13:00HRS Status: Completed";
+
+        // Assert that the details are as expected
+        assertEquals(expectedDetails, appointment.getAppointmentDetails());
+    }
+
+
 
 
 
