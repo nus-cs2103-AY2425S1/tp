@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.ddd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ddd.testutil.Assert.assertThrows;
+import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.ddd.testutil.TypicalContacts.ALICE;
-import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
 
 import java.util.Collection;
 import java.util.Collections;
