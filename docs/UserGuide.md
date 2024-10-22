@@ -262,6 +262,6 @@ Action | Format, Examples
 **Help** | `help`
 **Restore** | `restore`
 **Sort** | `sort [ORDER]`<br> e.g., `sort asc`
-**Rename Tag** | `renameTag [ot/OLDTAG] [nt/NEWTAG]`<br> e.g., `renameTag ot/manager nt/boss` 
+**Rename Tag** | `renameTag [ot/OLDTAG] [nt/NEWTAG]`<br> e.g., `renameTag ot/manager nt/boss`
 **Filter** | `filter [t/TAG]`<br> e.g., `filter t/friends`
 
