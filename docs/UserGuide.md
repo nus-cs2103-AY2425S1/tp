@@ -187,21 +187,30 @@ Examples:
 
 ### General Features
 
+#### Command History
+
+You can navigate between previous successful commands and your current command by pressing the `UP` and `DOWN` arrow keys.
+
 #### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the MediBase3. 
 
 Format: `clear`
+
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+>
+> Using the clear command will **REMOVE** all your patient and appointment data from MediBase3. This action is irreversible.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -215,13 +224,13 @@ Format: `exit`
 
 #### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediBase3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/MediBase3.json`. Advanced users are welcome to update data directly by editing that data file.
 
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
