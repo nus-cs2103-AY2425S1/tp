@@ -137,6 +137,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >**Common Mistakes:**
 >* `list ph` followed by `demote 2` - cannot demote a potential hire
 >* `demote 0` - invalid index number
+>* `demote 3` but only have 2 entries - invalid index number, index out of list size 
 ></box>
 </details>
 
@@ -260,7 +261,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >
 >Examples:
 >* `list p` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
->* `find p Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
+>* `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
 >
 ><box type="warning" seamless>
 >
@@ -269,6 +270,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >* `promote 2 2025-20-12` - the day and the month of the contract end date is swapped
 >* `list e` followed by `promote 2 2025-12-20` - cannot promote an employee
 >* `promote 0 2025-12-20` - invalid index number
+>* `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
 ></box>
 </details>
 

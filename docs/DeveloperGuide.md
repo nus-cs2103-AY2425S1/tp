@@ -663,7 +663,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `demote`<br>
      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-    5. Other incorrect demote commands to try: `demote x`, `demote 1 2` (where x is larger than the list size)<br>
+    5. Other incorrect demote commands to try: `demote randomstring`,`demote x`, `demote 1 2` (where x is larger than the list size)<br>
        Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Demoting a person while no employees are being shown (due to having 0 entries or only potential hire entries)
@@ -698,8 +698,8 @@ testers are expected to do more *exploratory* testing.
     7. Test case: `promote 0 2024-20-12`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
 
-    8. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2` (where x is larger than the list size)<br>
-       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
+       8. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`, `promote a b`  (where x is larger than the list size)<br>
+          Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Promoting a person while no potential hires are being shown (due to having 0 entries or only employee entries)
 
