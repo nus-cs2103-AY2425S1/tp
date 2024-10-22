@@ -12,9 +12,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
@@ -165,7 +168,32 @@ public class ModelManager implements Model {
     @Override
     public void deleteTutorial(Tutorial tutorial) {
         requireNonNull(tutorial);
+        tutorials.getTutorials()
+                .stream()
+                .filter(t -> t.equals(tutorial))
+                .forEach(t -> t.getStudents()
+                        .stream()
+                        .forEach(s -> {
+                            EditCommand.EditStudentDescriptor editStudentDescriptor =
+                                    new EditCommand.EditStudentDescriptor();
+                            editStudentDescriptor.setTutorialClass(TutorialClass.none());
+                            Student editedStudent = createEditedStudent(s, editStudentDescriptor);
+                            addressBook.setStudent(s, editedStudent);
+                        }));
         tutorials.deleteTutorial(tutorial);
+    }
+
+    private static Student createEditedStudent(Student studentToEdit,
+                                               EditCommand.EditStudentDescriptor editStudentDescriptor) {
+        assert studentToEdit != null;
+
+        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
+        StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
+        TutorialClass updatedTutorialClass = editStudentDescriptor.getTutorialClass()
+                .orElse(studentToEdit.getTutorialClass());
+        PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
+
+        return new Student(updatedName, updatedStudentId, updatedTutorialClass, updatedDates);
     }
 
     @Override

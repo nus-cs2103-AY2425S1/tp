@@ -88,6 +88,7 @@ public class JsonAdaptedTutorial {
         }
 
         Tutorial tutorial = Tutorial.of(modelTutName, modelTutorialClass);
+
         for (Student student : modelStudents) {
             tutorial.add(student);
         }

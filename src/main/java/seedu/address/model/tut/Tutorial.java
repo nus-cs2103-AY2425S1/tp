@@ -157,6 +157,9 @@ public abstract class Tutorial {
     public static Tutorial of(TutName tutName, TutorialClass tutorialClass) {
         requireNonNull(tutName);
         requireNonNull(tutorialClass);
+        if (tutorialClass.equals(TutorialClass.none())) {
+            return Tutorial.none();
+        }
         return Tutorial.exist(tutName, tutorialClass);
     }
 
@@ -167,7 +170,7 @@ public abstract class Tutorial {
         private static final None none = new None();
 
         private final List<Student> students = new ArrayList<>();
-        private final TutorialClass tutorialClass = TutorialClass.of("-1");
+        private final TutorialClass tutorialClass = TutorialClass.none();
 
         public static None none() {
             return none;
