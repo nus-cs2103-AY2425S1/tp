@@ -11,8 +11,8 @@ public abstract class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_PURPOSE = "Deletes the employee (e) or potential hire (ph) type " +
-            "identified by the index number in the displayed list.";
+    public static final String MESSAGE_PURPOSE = "Deletes the employee (e) or potential hire (ph) type "
+            + "identified by the index number in the displayed list.";
 
     public static final String MESSAGE_FORMAT = COMMAND_WORD + " (e/ph) INDEX";
 
