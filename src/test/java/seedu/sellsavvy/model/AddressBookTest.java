@@ -111,6 +111,12 @@ public class AddressBookTest {
         assertThrows(PersonNotFoundException.class, () -> addressBook.findEquivalentPerson(differentPerson));
     }
 
+    @Test
+    public void findEquivalentPerson_nullInput_throwsAssertionError() {
+        AddressBook addressBook1 = getTypicalAddressBook().createCopy();
+        assertThrows(AssertionError.class, () -> addressBook1.findEquivalentPerson(null));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */

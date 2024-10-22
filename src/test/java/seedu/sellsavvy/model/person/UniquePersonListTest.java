@@ -9,6 +9,7 @@ import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUti
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
 import static seedu.sellsavvy.testutil.TypicalPersons.BOB;
+import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
 import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
 import seedu.sellsavvy.testutil.PersonBuilder;
@@ -182,6 +184,11 @@ public class UniquePersonListTest {
     public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
         uniquePersonList.add(ALICE);
         assertThrows(PersonNotFoundException.class, () -> uniquePersonList.findEquivalentPerson(BOB));
+    }
+
+    @Test
+    public void findEquivalentPerson_nullInput_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> uniquePersonList.findEquivalentPerson(null));
     }
 
     @Test

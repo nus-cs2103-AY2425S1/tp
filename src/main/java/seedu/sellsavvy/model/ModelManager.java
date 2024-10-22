@@ -190,6 +190,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setOrder(Order target, Order editedOrder) {
+        assert getSelectedPerson2() != null; // we shouldn't be calling this method if there is no selectedPerson
         OrderList orderList = getSelectedPerson2().getOrderList();
         orderList.setOrder(target, editedOrder);
     }
