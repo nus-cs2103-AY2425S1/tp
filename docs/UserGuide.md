@@ -184,7 +184,7 @@ Format: `view INDEX`
 - The index **must be within the range** shown on the displayed person list.
 
 Examples:
-- `view 1` shows the contact details of the first person shown on the displayed person list. 
+- `view 1` shows the contact details of the first person shown on the displayed person list.
 
 ### Exiting the program : `exit`
 
