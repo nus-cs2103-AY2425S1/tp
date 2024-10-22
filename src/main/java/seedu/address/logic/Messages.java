@@ -97,7 +97,15 @@ public class Messages {
         builder.append("MeetingTitle: ")
                 .append(meeting.getMeetingTitle())
                 .append("; MeetingDate: ")
-                .append(meeting.getMeetingDate());
+                .append(meeting.getMeetingDate())
+                .append("; Buyer: ")
+                .append(meeting.getBuyer())
+                .append("; Seller: ")
+                .append(meeting.getSeller())
+                .append("; Type: ")
+                .append(meeting.getType())
+                .append("; PostalCode: ")
+                .append(meeting.getPostalCode());
         return builder.toString();
     }
 }

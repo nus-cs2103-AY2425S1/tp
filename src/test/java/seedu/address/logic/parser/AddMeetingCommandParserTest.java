@@ -3,10 +3,18 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETING_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETING_TITLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MEETING_BUYER;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_DATE_DESC_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.MEETING_SELLER;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_TITLE_DESC_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.POSTALCODE;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_CONDO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -26,10 +34,17 @@ public class AddMeetingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Meeting expectedMeeting = new MeetingBuilder().withMeetingTitle(VALID_MEETING_TITLE_ADMIRALTY)
-                .withMeetingDate(VALID_MEETING_DATE_ADMIRALTY).build();
+        Meeting expectedMeeting = new MeetingBuilder()
+                .withMeetingTitle(VALID_MEETING_TITLE_ADMIRALTY)
+                .withMeetingDate(VALID_MEETING_DATE_ADMIRALTY)
+                .withBuyer(VALID_NAME_AMY)
+                .withSeller(VALID_NAME_BOB)
+                .withType(VALID_TYPE_CONDO)
+                .withPostalCode(VALID_POSTALCODE_ADMIRALTY)
+                .build();
         // whitespace only preamble
-        assertParseSuccess(parser, MEETING_TITLE_DESC_ADMIRALTY + MEETING_DATE_DESC_ADMIRALTY,
+        assertParseSuccess(parser, MEETING_TITLE_DESC_ADMIRALTY + MEETING_DATE_DESC_ADMIRALTY + MEETING_BUYER
+                + MEETING_SELLER + TYPE + POSTALCODE,
                 new AddMeetingCommand(expectedMeeting));
     }
 
@@ -40,11 +55,13 @@ public class AddMeetingCommandParserTest {
 
         // duplicate name prefix
         assertParseFailure(parser, MEETING_TITLE_DESC_ADMIRALTY + MEETING_TITLE_DESC_ADMIRALTY
-                + MEETING_DATE_DESC_ADMIRALTY, expectedMessageMeetingTitle);
+                + MEETING_DATE_DESC_ADMIRALTY + MEETING_BUYER
+                + MEETING_SELLER + TYPE + POSTALCODE, expectedMessageMeetingTitle);
 
         // duplicate phone prefix
         assertParseFailure(parser, MEETING_TITLE_DESC_ADMIRALTY + MEETING_DATE_DESC_ADMIRALTY
-                        + MEETING_DATE_DESC_ADMIRALTY, expectedMessageMeetingDate);
+                        + MEETING_DATE_DESC_ADMIRALTY + MEETING_BUYER
+                + MEETING_SELLER + TYPE + POSTALCODE, expectedMessageMeetingDate);
     }
 
     @Test
@@ -67,14 +84,20 @@ public class AddMeetingCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid meeting title
-        assertParseFailure(parser, INVALID_MEETING_TITLE_DESC + MEETING_DATE_DESC_ADMIRALTY,
+        assertParseFailure(parser, INVALID_MEETING_TITLE_DESC + MEETING_DATE_DESC_ADMIRALTY
+                        + MEETING_BUYER
+                        + MEETING_SELLER + TYPE + POSTALCODE,
                 MeetingTitle.MESSAGE_CONSTRAINTS);
 
         // invalid meeting date
-        assertParseFailure(parser, MEETING_TITLE_DESC_ADMIRALTY + INVALID_MEETING_DATE_DESC,
+        assertParseFailure(parser, MEETING_TITLE_DESC_ADMIRALTY + INVALID_MEETING_DATE_DESC
+                        + MEETING_BUYER
+                        + MEETING_SELLER + TYPE + POSTALCODE,
                 MeetingDate.MESSAGE_CONSTRAINTS);
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_MEETING_TITLE_DESC + INVALID_MEETING_DATE_DESC,
+        assertParseFailure(parser, INVALID_MEETING_TITLE_DESC + INVALID_MEETING_DATE_DESC
+                        + MEETING_BUYER
+                        + MEETING_SELLER + TYPE + POSTALCODE,
                 MeetingTitle.MESSAGE_CONSTRAINTS);
     }
 }
