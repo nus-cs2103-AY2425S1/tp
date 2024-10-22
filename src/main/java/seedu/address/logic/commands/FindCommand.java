@@ -23,10 +23,10 @@ public class FindCommand extends Command {
             + "contain any of the specified keywords (case-insensitive) and displays them as a list with";
     public static final String MESSAGE_FORMAT = COMMAND_WORD + " (" + FindEmployeeCommand.ARGUMENT_WORD
         + "/" + FindPotentialCommand.ARGUMENT_WORD + "/" + FindCommand.ARGUMENT_WORD + ") KEYWORD [MORE_KEYWORDS]";
-    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " " + ARGUMENT_WORD + "n/alice bob e/alice@gmail.com";
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " " + ARGUMENT_WORD + " n/alice bob e/alice@gmail.com";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
-            + "\nFormat:" + MESSAGE_FORMAT
-            + "\nExample:" + MESSAGE_EXAMPLE;
+            + "\nFormat: " + MESSAGE_FORMAT
+            + "\nExample: " + MESSAGE_EXAMPLE;
 
     private final PredicateContainer predicateContainer;
 
