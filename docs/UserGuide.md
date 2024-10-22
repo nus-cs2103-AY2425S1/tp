@@ -327,6 +327,9 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Exit** | `exit`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindNric** | `findNric NRIC`<br> e.g., `findNric S1234567A`
+**FindMedCon** | `findMedCon KEYWORD [MORE_KEYWORDS]`<br> e.g., `findMedCon diabetes arthritis`
 **List** | `list`
 **Help** | `help`
