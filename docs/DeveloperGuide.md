@@ -417,7 +417,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 **MSS**:
 
 1. Tutor keys in required fields to add a contact.
-2. TutorEase adds the contact.  
+1. TutorEase adds the contact.  
    Use case ends.
 
 **Extensions**:
@@ -433,7 +433,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 **MSS**:
 
 1. Tutor keys in required fields to delete contact.
-2. TutorEase deletes the contact.  
+1. TutorEase deletes the contact.  
    Use case ends.
 
 **Extensions**:
@@ -448,8 +448,8 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 **MSS**:
 
-1. Tutor keys in required fields to list contacts.
-2. TutorEase lists all the contacts stored.  
+1. Tutor keys in list contacts command.
+1. TutorEase lists all the contacts stored.  
    Use case ends.
 
 **Extensions**:
@@ -464,8 +464,8 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 **MSS**:
 
-1. Tutor keys in a keyword required fields to find contacts whose names contain this keyword.
-2. TutorEase lists the contacts with the given keyword.  
+1. Tutor keys in a keyword in the required field to find contacts whose names contain this keyword.
+1. TutorEase lists the contacts with the given keyword.  
    Use case ends.
 
 **Extensions**:
@@ -479,13 +479,13 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 * **1b**. No contacts found matching the entered keyword.
     * **1b1**. TutorEase displays a message: "No contacts found with the given keyword(s)."  
     * **1b2**. Tutor enters a new keyword or cancels the search.  
-      Use case resumes from Step 2 or ends if canceled.  
+      Use case resumes from Step 2 or ends if cancelled.  
 
 **Use Case: UC05 - Add lesson for student**  
 **MSS:**
 
 1. Tutor keys in required fields to add student contact.
-2. TutorEase adds the lesson to the student.  
+1. TutorEase adds the lesson to the student.  
    Use case ends.
 
 **Extensions:**
@@ -506,7 +506,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 **MSS:**
 
 1. Tutor keys in required fields to delete student contact.
-2. TutorEase deletes the lesson for the student.  
+1. TutorEase deletes the lesson for the student.  
    Use case ends.
 
 **Extensions:**
@@ -527,7 +527,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 **MSS:**
 
 1. Tutor keys in required fields to list all lessons.
-2. TutorEase lists all lessons.    
+1. TutorEase lists all lessons.    
    Use case ends.
 
 **Extensions:**
@@ -542,37 +542,37 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
-2. Data Requirements:
+1. Data Requirements:
     - Size: System must be able to handle at least 1,000 student records, with each containing personal information and
       lesson schedules.
     - Volatility: Contact information is not expected to be changed frequently, but lessons schedules may change
       frequently. System must allow quick updates without issues.
     - Data persistency: all students and lesson data should be stored and retrievable until entry has been deleted.
-3. Environment Requirements:
+1. Environment Requirements:
     - Technical Compatability: System must be compatible with _Mainstream OS_ as long as it has Java `17` or above
       installed.
     - Server Requirements: stored locally.
-4. Capacity:
+1. Capacity:
     - User Capacity: System is designed for local use and therefore for 1 local user.
     - Data Capacity: as mentioned above within Data Requirements.
-5. Documentation:
+1. Documentation:
     - User Guide: A complete user guide will be provided for tutor, detailing every command and cover common
       troubleshooting scenarios.
     - Developer Guide: Comprehensive developer guide will be available, to facilitate future development and
       maintenance.
-6. Fault Tolerance:
+1. Fault Tolerance:
     - Error handling: System should handle up to 90% of incorrect inputs (incorrect date formats, missing fields or etc)
       without crashing and should provide meaningful error messages to guide users to correct the input.
-7. Maintability:
+1. Maintability:
     - System should have modular components that are easily replaceable or upgradable without affecting the application.
-8. Portability:
+1. Portability:
     - System must be portable across devices with different operating systems, allowing tutors to install it easily.
-9. Quality:
+1. Quality:
     - Ease of Use: System should be usable by tutors with minimal computer literacy and include intuitive CLI commands
       and user-friendly prompts.
     - Testing coverage: Unit tests should cover at least 60% of codebase, ensuring high reliability during future
       updates.
-10. Testability:
+1. Testability:
     - Automated Testing: System should support automated unit and integration testing for continuous integration,
       allowing future updates to be tested without manual intervention.
 
