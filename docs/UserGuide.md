@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# TAHub User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAHub can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,11 +17,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -68,19 +68,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
     
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
 
-    1. Visit the [GitHub releases page](https://github.com/se-edu/addressbook-level3/releases).
-    2. Download the `.jar` file (for example, `addressbook.jar`) from the latest release.
-    3. Save the `.jar` file to the folder where you want to store your AddressBook project.
+    1. Visit the [GitHub releases page](https://github.com/se-edu/TAHub-level3/releases).
+    2. Download the `.jar` file (for example, `TAHub.jar`) from the latest release.
+    3. Save the `.jar` file to the folder where you want to store your TAHub project.
 
     
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
     1. **Windows**:
         - Locate the downloaded `.jar` file in your `Downloads` folder.
         - Right-click on the `.jar` file, select **Copy**.
-        - Navigate to the folder where you want to store the AddressBook, right-click and select **Paste**.
+        - Navigate to the folder where you want to store the TAHub, right-click and select **Paste**.
 
     2. **Mac**:
         - Open the **Finder** and go to your `Downloads` folder.
@@ -100,16 +100,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
         - To get the full path of the folder:
             1. Right-click on the folder and select **Properties**.
             2. In the **General** tab, you will see the **Location** field. Copy the location path.
-            3. Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\AddressBook`).
+            3. Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`).
         - Open the **Command Prompt**:
             - Press `Windows + R`, type `cmd`, and press Enter.
         - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
           ```bash
-          cd C:\Users\YourName\Documents\AddressBook
+          cd C:\Users\YourName\Documents\TAHub
           ```
         - Run the app with:
           ```bash
-          java -jar addressbook.jar
+          java -jar TAHub.jar
           ```
 
     2. **Mac/Linux**:
@@ -120,11 +120,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
             - Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy the path.
         - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
           ```bash
-          cd /Users/YourName/Documents/AddressBook
+          cd /Users/YourName/Documents/TAHub
           ```
         - Run the app with:
           ```bash
-          java -jar addressbook.jar
+          java -jar TAHub.jar
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
@@ -246,11 +246,11 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding or editing a grade: `grade`
+### Adding or editing a grade: `addGrade`
 
 Adds or updates a grade for a person in the address book. If a grade with the same test name already exists, it will be overwritten.
 
-Format: `grade INDEX TEST_NAME SCORE WEIGHTAGE`
+Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
 * Adds or updates a grade for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `TEST_NAME` refers to the name of the test (e.g. Midterm Exam).
@@ -259,23 +259,50 @@ Format: `grade INDEX TEST_NAME SCORE WEIGHTAGE`
 * If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
 
 Examples:
-* `grade 1 Midterm 85 20` Adds or updates a grade for the 1st person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
-* `grade 2 FinalExam 92 30` Adds or updates a grade for the 2nd person with a score of 92% for "FinalExam" and 30% weightage.
-* If a test with the same name already exists for that person, the old grade will be replaced.
+* `grade 2 n/Midterm s/85 w/20` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
+* `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
 
-### Deleting a grade from a person: `deletegrade`
+### Deleting a grade from a person: `deleteGrade`
 
 Deletes a grade for a person in the address book.
 
-Format: `deletegrade INDEX TEST_NAME`
+Format: `deleteGrade INDEX n/TEST_NAME`
 
 * Deletes the grade for the specified `TEST_NAME` for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `TEST_NAME` refers to the name of the test whose grade you want to delete.
 
 Examples:
-* `deletegrade 1 Midterm` Deletes the grade for the "Midterm" test for the 1st person in the list.
-* `deletegrade 2 FinalExam` Deletes the "FinalExam" grade for the 2nd person.
+* `deleteGrade 2 n/Midterm` Deletes the grade for the "Midterm" test for the 2nd person in the list.
+* `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
+
+### Marking attendance: `mark`
+
+Marks the attendance record for the specified date for a person in the address book. If the attendance record for that date already exists, it will be overwritten.
+
+Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
+
+* Adds or updates attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* `DATE_TIME` refers to the date and time of attendance that you want to add or edit. It must be written in the format `dd/MM/yyyy HH:mm`.
+* `ATTENDANCE` refers to the attendance status, which must be either `Attended` or `Absent`. They are case-sensitive.
+* If the attendance record for `DATE_TIME` already exists, it will be updated with the new `ATTENDANCE`.
+
+Examples:
+* `mark 2 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+* `find Betsy` followed by `mark 1 d/31/01/2024 10:00 m/Absent` Sets the attendance to 'Absent' on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
+
+### Unmarking attendance: `unmark`
+
+Deletes the attendance record for the specified date for a person in the address book. All the remaining attendance records for that person will be retained.
+
+Format: `unmark INDEX d/DATETIME`
+
+* Deletes attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* `DATE_TIME` refers to the date and time of attendance that you want to delete. It must be written in the format `dd/MM/yyyy HH:mm`.
+
+Examples:
+* `unmark 2 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+* `find Betsy` followed by `unmark 1 d/31/01/2024 10:00` deletes the attendance on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -291,17 +318,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAHub data are saved automatically as a JSON file `[JAR file location]/data/TAHub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, TAHub will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the TAHub to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -313,7 +340,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAHub home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -326,15 +353,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                      |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**        | `clear`                                                                                                                                                               |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **Add Grade**    | `grade INDEX TEST_NAME SCORE WEIGHTAGE` <br> e.g., `grade 1 Midterm 85 30`                                                                                            |
-| **Delete Grade** | `deleteGrade INDEX TEST_NAME` <br> e.g., `delete grade 1 Midterm`                                                                                                     |
-| **Edit Grade**   | Simply add a new grade with the same test name, and the grade will be updated automatically. <br> e.g., `grade 1 Midterm 90 30`                                       |
-| **List**         | `list`                                                                                                                                                                |
-| **Help**         | `help`                                                                                                                                                                |
+| Action                | Format, Examples                                                                                                                                                      |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**             | `clear`                                                                                                                                                               |
+| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Add/Edit Grade**    | `grade INDEX TEST_NAME SCORE WEIGHTAGE` <br> e.g., `grade 1 Midterm 85 30`                                                                                            |
+| **Delete Grade**      | `deleteGrade INDEX TEST_NAME` <br> e.g., `deleteGrade 1 Midterm`                                                                                                      |
+| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended`                                                                               |
+| **Unmark Attendance** | `unmark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `unmark 1 d/31/01/2024 10:00`                                                                                      |
+| **List**              | `list`                                                                                                                                                                |
+| **Help**              | `help`                                                                                                                                                                |
