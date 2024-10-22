@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseOptionalValue;
 
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
@@ -20,7 +20,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.FunctionWithException;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -66,18 +65,5 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         return new AddCommand(person);
     }
-
-    public static <T> T parseOptionalValue(Optional<String> value, FunctionWithException<String,T,
-                ParseException> parser, T defaultValue) throws ParseException {
-        if (value.isPresent()) {
-            return parser.apply(value.get());
-        } else {
-            return defaultValue;
-        }
-    }
-
-
-
-
 
 }

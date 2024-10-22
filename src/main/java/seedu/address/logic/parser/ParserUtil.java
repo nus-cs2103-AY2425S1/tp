@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -16,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.FunctionWithException;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -143,5 +145,18 @@ public class ParserUtil {
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses an {@code Optional} String value using the provided parser {@code FunctionWithException},
+     * returning a default value if the {@code Optional} is empty.
+     */
+    public static <T> T parseOptionalValue(Optional<String> value, FunctionWithException<String,T,
+            ParseException> parser, T defaultValue) throws ParseException {
+        if (value.isPresent()) {
+            return parser.apply(value.get());
+        } else {
+            return defaultValue;
+        }
     }
 }
