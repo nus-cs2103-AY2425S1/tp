@@ -59,7 +59,8 @@ class PersonNameComparator implements Comparator<Person> {
 class PersonDateOfLastVisitComparator implements Comparator<Person> {
     @Override
     public int compare(Person p1, Person p2) {
-        return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE)).value
-                .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE)).value);
+        return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE))
+                .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE)));
     }
+
 }

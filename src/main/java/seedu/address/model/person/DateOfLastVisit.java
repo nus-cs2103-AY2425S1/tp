@@ -3,11 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+
+
 /**
  * Represents a Person's last visited date by the social worker in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateOfLastVisit(String)}
  */
-public class DateOfLastVisit {
+public class DateOfLastVisit implements Comparable<DateOfLastVisit> {
 
     public static final String MESSAGE_CONSTRAINTS = "Date of last visit should be in dd-MM-yyyy format.";
 
@@ -24,6 +26,7 @@ public class DateOfLastVisit {
     // Days 01-31 for other months
     // -------------------
 
+    private final String[] dayMonthYear;
     public final String value;
 
     /**
@@ -35,6 +38,8 @@ public class DateOfLastVisit {
         requireNonNull(date);
         checkArgument(isValidDateOfLastVisit(date), MESSAGE_CONSTRAINTS);
         value = date;
+        String[] init = {date.substring(0,2), date.substring(3,5), date.substring(6)};
+        this.dayMonthYear = init;
     }
 
     /**
@@ -42,6 +47,28 @@ public class DateOfLastVisit {
      */
     public static boolean isValidDateOfLastVisit(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Compares two dates of last visit by year then month then day to find
+     * the right order.
+     *
+     * @param other the date to be compared to.
+     * @return an integer which specifies which date is earlier or if they are equal.
+     */
+    @Override
+    public int compareTo(DateOfLastVisit other) {
+        int yearComparison = this.dayMonthYear[2].compareTo(other.dayMonthYear[2]);
+        if (yearComparison == 0) {
+            int monthComparsion = this.dayMonthYear[1].compareTo(other.dayMonthYear[1]);
+            if (monthComparsion == 0) {
+                return this.dayMonthYear[0].compareTo(other.dayMonthYear[0]);
+            } else {
+                return monthComparsion;
+            }
+        } else {
+            return yearComparison;
+        }
     }
 
     @Override
