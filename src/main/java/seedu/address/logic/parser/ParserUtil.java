@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +95,34 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String scheduleName},{@code String scheduleDate}, and {@code String scheduleTime}
+     * into an {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code scheduleName}, {@code scheduleDate}, or {@code scheduleTime}
+     *      is invalid.
+     */
+    public static Schedule parseSchedule(String scheduleName, String scheduleDate, String scheduleTime)
+            throws ParseException {
+        requireAllNonNull(scheduleName, scheduleDate, scheduleTime);
+        String trimmedScheduleName = scheduleName.trim();
+        String trimmedScheduleDate = scheduleDate.trim();
+        String trimmedScheduleTime = scheduleTime.trim();
+        if (!Schedule.isValidName(trimmedScheduleName)) {
+            throw new ParseException(Schedule.SCHEDULE_NAME_CONSTRAINTS);
+        }
+
+        if (!Schedule.isValidDate(trimmedScheduleDate)) {
+            throw new ParseException(Schedule.DATE_CONSTRAINTS);
+        }
+
+        if (!Schedule.isValidTime(trimmedScheduleTime)) {
+            throw new ParseException(Schedule.TIME_CONSTRAINTS);
+        }
+        return new Schedule(trimmedScheduleName, trimmedScheduleDate, trimmedScheduleTime);
     }
 
     /**

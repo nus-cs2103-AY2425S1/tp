@@ -16,4 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_IG = new Prefix("ig/");
     public static final Prefix PREFIX_FB = new Prefix("fb/");
     public static final Prefix PREFIX_CS = new Prefix("cs/");
+    public static final Prefix PREFIX_SCHEDULE_NAME = new Prefix("sn/");
+    public static final Prefix PREFIX_SCHEDULE_DATE = new Prefix("sd/");
+    public static final Prefix PREFIX_SCHEDULE_TIME = new Prefix("st/");
 }

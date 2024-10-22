@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SocialMedia;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +30,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String scheduleName;
+    private final String date;
+    private final String time;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String socialMedia;
 
@@ -37,12 +41,18 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("socialmedia") String socialMedia) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("scheduleName") String scheduleName, @JsonProperty("date") String date,
+                             @JsonProperty("time") String time, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("socialmedia") String socialMedia) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.scheduleName = scheduleName;
+        this.date = date;
+        this.time = time;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -57,6 +67,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        scheduleName = source.getSchedule().scheduleName;
+        date = source.getSchedule().dateString;
+        time = source.getSchedule().timeString;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -99,18 +112,45 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
 
+        if (scheduleName == null) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+        }
+        if (!Schedule.isValidName(scheduleName)) {
+            throw new IllegalValueException(Schedule.SCHEDULE_NAME_CONSTRAINTS);
+        }
+        if (date == null) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+        }
+        if (!Schedule.isValidDate(date)) {
+            throw new IllegalValueException(Schedule.DATE_CONSTRAINTS);
+        }
+
+        if (time == null) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+        }
+        if (!Schedule.isValidTime(time)) {
+            throw new IllegalValueException(Schedule.TIME_CONSTRAINTS);
+        }
+        final Schedule schedule = new Schedule(scheduleName, date, time);
+
         if (socialMedia == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     SocialMedia.class.getSimpleName()));
         }
+        
         final SocialMedia modelSocialMedia;
+        
         if (socialMedia.startsWith("[ig-")) {
             modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
                     SocialMedia.Platform.INSTAGRAM);
@@ -123,10 +163,11 @@ class JsonAdaptedPerson {
         } else {
             modelSocialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
         }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, schedule, modelTags);
         person.setSocialMedia(modelSocialMedia);
         return person;
     }
-
 }
