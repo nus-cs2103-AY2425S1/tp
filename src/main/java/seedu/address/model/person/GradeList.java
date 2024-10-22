@@ -29,14 +29,26 @@ public class GradeList {
     /**
      * Adds or updates the grade for a specific test.
      * If a grade for the given test name already exists, it is updated.
+     * If the total weightage of all grades exceeds 100%, a runtime exception is thrown.
      *
      * @param grade The grade to be recorded.
-     * @return A new {@code GradeList} with the added or updated grade.
+     * @return A new GradeList containing the updated grades.
+     * @throws RuntimeException if the total weightage exceeds 100%.
      */
-
     public GradeList addGrade(Grade grade) {
         requireNonNull(grade, "Grade cannot be null");
         Map<String, Grade> newGrades = new HashMap<>(this.grades);
+
+        float totalWeightage = 0;
+        for (Grade g : newGrades.values()) {
+            totalWeightage += g.getWeightage();
+        }
+        totalWeightage += grade.getWeightage();
+
+        // Check if the total weightage exceeds 100%
+        if (totalWeightage > 100) {
+            throw new RuntimeException("Total weightage exceeds 100%");
+        }
 
         newGrades.merge(grade.getTestName(), grade, (oldGrade, newGrade) -> newGrade);
 
