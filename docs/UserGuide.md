@@ -13,37 +13,6 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 <!-- * Table of Contents -->
 <page-nav-print />
 
-## Table of Contents
-
-<table style="width: 100%; border-collapse: collapse;">
-  <tr style="background-color: #333; color: white;">
-    <th style="border: 1px solid #000; padding: 10px;">S/N</th>
-    <th style="border: 1px solid #000; padding: 10px;">Content</th>
-  </tr>
-  <tr style="background-color: #f2f2f2;">
-    <td style="border: 1px solid #000; padding: 10px;"><b>1</b></td>
-    <td style="border: 1px solid #000; padding: 10px;"><a href="#quick-start">Quick start</a></td>
-  </tr>
-  <tr style="background-color: #ddd;">
-    <td style="border: 1px solid #000; padding: 10px;"><b>2</b></td>
-    <td style="border: 1px solid #000; padding: 10px;"><a href="#features">Features</a></td>
-  </tr>
-  <tr style="background-color: #f2f2f2;">
-    <td style="border: 1px solid #000; padding: 10px;"><b>3</b></td>
-    <td style="border: 1px solid #000; padding: 10px;"><a href="#faq">FAQ</a></td>
-  </tr>
-  <tr style="background-color: #ddd;">
-    <td style="border: 1px solid #000; padding: 10px;"><b>4</b></td>
-    <td style="border: 1px solid #000; padding: 10px;"><a href="#known-issues">Known Issues</a></td>
-  </tr>
-  <tr style="background-color: #f2f2f2;">
-    <td style="border: 1px solid #000; padding: 10px;"><b>5</b></td>
-    <td style="border: 1px solid #000; padding: 10px;"><a href="#command-summary">Command Summary</a></td>
-  </tr>
-</table>
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
