@@ -109,7 +109,7 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOB));
 
         // multiple incomes
-        assertParseFailure(parser, INCOME_DESC_AMY+ validExpectedPersonString,
+        assertParseFailure(parser, INCOME_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INCOME));
 
         // multiple tiers
@@ -121,7 +121,7 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NEW_REMARK));
 
         // multiple status
-        assertParseFailure(parser,  STATUS_DESC_BOB + validExpectedPersonString,
+        assertParseFailure(parser, STATUS_DESC_BOB + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
 
         // multiple fields repeated

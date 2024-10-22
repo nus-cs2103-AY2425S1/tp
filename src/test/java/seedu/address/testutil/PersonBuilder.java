@@ -121,13 +121,16 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
     }
 
+    /**
+     * Sets the {@code status} of the {@code Person} that we are building.
+     */
     public PersonBuilder withStatus(String status) {
         this.status = new Status(status);
         return this;

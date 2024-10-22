@@ -32,7 +32,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_NONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_NON_URGENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_GOLD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIER_REJECT;

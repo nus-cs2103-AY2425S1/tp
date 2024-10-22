@@ -113,6 +113,9 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code status} of the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPersonDescriptorBuilder withStatus(String status) {
         descriptor.setStatus(new Status(status));
         return this;
