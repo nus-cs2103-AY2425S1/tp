@@ -104,6 +104,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        goodsList.removeIf(receipt -> receipt.isFromSupplier(target.getName()));
     }
 
     @Override
