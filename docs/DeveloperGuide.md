@@ -260,66 +260,287 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Celebrity Talent Managers
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts (talents, contractors, etc)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: The address book offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, track VIP relationships, and schedule events** efficiently. With a customizable field, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                                        | I want to …​                                                  | So that I can…​                                          |
+|----------|----------------------------------------------------------------|---------------------------------------------------------------|----------------------------------------------------------|
+| `* * *`  | Celebrity Talent Manager                                       | add new contacts to my address book                           | keep track of important stakeholders                     |
+| `* * *`  | Celebrity Talent Manager                                       | use command-line shortcuts to manage my contacts and schedule | work faster and more efficiently                         |
+| `* * *`  | Celebrity Talent Manager                                       | delete a contact                                              | remove entries that I no longer need                     |
+| `* * *`  | Celebrity Talent Manager                                       | view details of a specific contact                            | quickly access specific information when needed          |
+| `* * *`  | Celebrity Talent Manager                                       | list my contacts                                              | see an overview of my contacts                           |
+| `* * *`  | Celebrity Talent Manager                                       | add important events and deadlines                            | quickly view my important tasks                          |
+| `* * *`  | Celebrity Talent Manager                                       | add remarks and people to my events and deadlines             | view who is involved with specific tasks                 |
+| `* * *`  | Celebrity Talent Manager                                       | view the event details a client has                           | see and plan around their schedule                       |
+| `* * *`  | Celebrity Talent Manager                                       | view all my events                                            | have an overview of my timetable                         |
+| `* * *`  | Celebrity Talent Manager                                       | delete an event                                               | remove outdated entries                                  |
+| `* * *`  | Celebrity Talent Manager                                       | save my data                                                  | come back to it next time                                |
+| `* *`    | Celebrity Talent Manager dealing with various groups           | group and tag my contacts                                     | group contacts based on specific tags                    |
+| `* *`    | Celebrity Talent Manager with many contacts                    | search for clients using tags                                 | quickly find individuals in a specific group             |
+| `* *`    | Celebrity Talent Manager with many contacts                    | search for clients using names                                | quickly find specific individuals                        |
+| `* *`    | Celebrity Talent Manager                                       | delete a contact only after confirmation                      | prevent accidental deletion of something still important |
+| `* *`    | Celebrity Talent Manager                                       | edit contact information                                      | update ay changes in their information                   |
+| `* *`    | Celebrity Talent Manager who can be forgetful                  | be alerted when I add duplicate entries                       | avoid duplicate entries                                  |
+| `* *`    | Celebrity Talent Manager who is new to the application         | access a help guide in the application                        | find out the command I need when I forget it             |
+| `* *`    | Celebrity Talent Manager                                       | perform mass deletion of entries                              | save time when I have to delete a lot of entries         |
+| `* *`    | Celebrity Talent Manager                                       | set customisable remark fields for entries                    | save information specific to the contact                 |
+| `* *`    | Celebrity Talent Manager who works with international partners | view the calendar different timezones                         | work with clients of different timezones easily          |
+| `* *`    | Celebrity Talent Manager                                       | be alerted when events clash                                  | identify clashes and resolve them easily                 |
+| `* *`    | Celebrity Talent Manager                                       | mark events as over or ended                                  | keep track my schedule                                   |
+| `* *`    | Celebrity Talent Manager                                       | unmark events as over or ended                                | mark tasks as undone or ongoing again                    |
+| `* *`    | Celebrity Talent Manager                                       | add a photo for my contacts                                   | easily remember or recognise the contact                 |
+| `*`      | Celebrity Talent Manager                                       | flag priority contacts                                        | identify contacts that require immediate focus           |
+| `*`      | Celebrity Talent Manager                                       | export and import client data                                 | safely transfer information on different devices         |
+| `*`      | Celebrity Talent Manager who can be careless at times          | undo my last command                                          | quickly revert my changes when they are wrong            |
+| `*`      | Celebrity Talent Manager                                       | set reminders for tasks                                       | get reminded of upcoming tasks that are due soon         |
+| `*`      | Celebrity Talent Manager                                       | set visual indicators for my contacts based on availability   | quickly see if someone is available or not               |
+| `*`      | Celebrity Talent Manager                                       | customise my data storage location                            | change where my data is kept locally                     |
+| `*`      | Celebrity Talent Manager                                       | set my own CLI shortcuts                                      | use the commands faster based on my preferences          |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Talent Manager requests to add a specific contact
+2. TalentHub adds the person
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The command format is incorrect.
 
-  Use case ends.
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-* 3a. The given index is invalid.
+    Use case ends.
+  
+* 1b. Any parameter is missing or invalid.
 
-    * 3a1. AddressBook shows an error message.
+  * 1b1. TalentHub outputs an error message specifying the issue.
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+* 1c. An identical phone number is detected.
+
+  * 1c1. TalentHub outputs an error message specifying the issue.
+
+    Use case ends.
+
+**Use case: UC02 - Delete Contact after List**
+
+**MSS**
+
+1. Talent Manager [list contacts (UC06)](#)
+2. Talent Manager [delete contact (UC04)](#)
+
+   Use case ends.
+
+**Use case: UC03 - Delete Contact after Find**
+
+**MSS**
+
+1. Talent Manager [find contacts (UC05)](#)
+2. Talent Manager [delete contact (UC04)](#)
+
+   Use case ends.
+
+**Use case: UC04 - Delete Contact**
+
+**MSS**
+
+1. Talent Manager requests to delete a specific person in the list
+2. TalentHub deletes the person
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. The list is empty.
+
+  * 1b1. System shows an error message specifying the list is empty.
+
+    Use case ends.
+
+* 1c. The given index is invalid.
+
+  * 1c1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC05 - Find Contact**
+
+**MSS**
+
+1. User requests to find persons with with `keywords`
+2. System processes and list person with `keywords`
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. The keyword is empty.
+
+  * 1b1. System shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC06 - List All Contacts**
+
+**MSS**
+
+1. Talent Manager requests to list contacts
+2. System shows a list of all contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+
+**Use case: UC07 - Add Events**
+
+**MSS**
+
+1. Talent Manager requests to add a event for a specific contact
+2. System adds the event
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. A duplicate event is detected:
+  
+  * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
+
+    Use case ends.
+
+    
+**Use case: UC08 - List All Events**
+
+**MSS**
+
+1. Talent Manager requests to list all events.
+2. System retrieves and displays all events in chronological order.
+   
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is invalid.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 2a. If no events are scheduled.
+
+  * 2a1. System displays a message stating "No events.".
+
+    User case ends.
+
+
+**Use case: UC09 - Delete Event after List**
+
+**MSS**
+
+1. Talent Manager [List Events (UC08)](#)
+2. Talent Manager [Delete Event (UC10)](#)
+
+   Use case ends.
+
+**Use case: UC10 - Delete Event**
+
+1. Talent Manager requests to delete a specific event in the list
+1. TalentHub deletes the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is invalid.
+
+  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+    Use case ends.
+
+* 1b. The list is empty.
+
+    * 1b1. System shows an error message specifying the list is empty.
+
+      Use case ends.
+  
+* 1c. The given index is invalid.
+
+  * 1c1. TalentHub shows an error message.
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. The software should work without requiring an installer.
+3. The software should not depend on a remote server. 
+4. Since the app is intended to be an offline tool, it should function fully without any internet connection.
+5. The application should be packaged into a single JAR file.
+6. File sizes should be reasonable and not exceed the limits given below. 
+   - Product (i.e., the JAR/ZIP file): 100MB
+   - Documents (i.e., PDF files): 15MB/file
+7. The developer guide and user guide should be PDF-friendly. Don't use expandable panels, embedded videos, animated GIFs etc.
+8. The use of third-party libraries/frameworks/services should not be used so as to improve security and stability of the application.
+9. Talent managers with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+10. The application should prioritise one-shot commands over multi-step commands as they are faster. If a multi-step command is provided to help new users, a one-shot equivalent should also be provided for regular/expert users.
+11. Regular tasks (e.g., adding a contact, listing events) should be executable within a few milliseconds to maintain efficiency and not interrupt the talent manager’s workflow.
+12. The system should efficiently handle a large database of contacts and events (e.g., 1,000+ entries), allowing for fast searches, retrievals, and modifications without performance degradation.
+13. The data should be stored locally and should be in a human editable text file.
+14. The data should not be stored using a Database Management System.
+15. The data should be able to be loaded using a data file if the network is down.
+16. The system should provide a user-friendly and intuitive interface with clear instructions and feedback to guide talent managers who are not IT-savvy in using the command-line interface effectively.
+17. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%.
+18. The GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher and for screen scales 150%.
+19. As the app is an offline tool, it should be robust and able to run for extended periods without crashing. Downtime should be limited to under 1% (if any issues require restarting).
+20. The system should be able to recover from crashes within 5 seconds, ensuring minimal disruption to the talent manager’s workflow.
 
 *{More to be added}*
 
@@ -327,7 +548,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Talents**: Well known or up-and-coming individuals who partake in the entertainment industry in one way or another
+* **Industry Professional**: Individuals that talents make contact for events
+* **Events**: Social and networking events organised by third parties e.g. award shows, brand events
+* **Talent Manager**: Industry professionals involved in managing and planning talent schedules
+* **Model-View-Controller (MVC)**: A design pattern that separates an application into three main logical components: the Model, the View, and the Controller. 
+* **Logic Component**: A part of the architecture responsible for handling user commands and parsing them. 
+* **Model Component**: Manages the application’s data and handles the business logic of the application. 
+* **Storage Component**: Manages reading from and writing to the persistent storage. 
+* **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the address book.  
+* **Person**: Refers to a contact object within the address book application. 
+* **Index**: Refers to the position of an individuals contact in the address book
+* **Tag**: The associated description with said contact based on common groups
+* **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

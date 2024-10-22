@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
+import seedu.address.ui.CommandDetailChange;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Format full help instructions for every command for display.
@@ -16,6 +18,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, CommandTabChange.NONE,
+                CommandDetailChange.NONE);
     }
 }
