@@ -17,7 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ChatWindowTest extends ApplicationTest {
+public class ChatWindowUiTest extends ApplicationTest {
     private ChatWindow chatWindow;
     private TextField userInput;
     private TextArea chatArea;

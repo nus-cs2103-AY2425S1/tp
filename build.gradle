@@ -66,29 +66,8 @@ tasks.register('uiTest', Test) {
             '--add-opens', 'java.base/java.util=ALL-UNNAMED'
     ]
 
-    // Include only UiTest in this task
     doFirst {
         include "**/**UiTest*"
-    }
-
-    useJUnitPlatform()
-
-    // Ensure chatWindowTest runs after uiTest
-    finalizedBy 'chatWindowTest'
-}
-
-tasks.register('chatWindowTest', Test) {
-    jvmArgs += [
-            '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
-            '--add-exports', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
-            '--add-opens', 'javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED',
-            '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-            '--add-opens', 'java.base/java.util=ALL-UNNAMED'
-    ]
-
-    // Include only ChatWindowTest in this task
-    doFirst {
-        include "**/**ChatWindowTest*"
     }
 
     useJUnitPlatform()
@@ -97,7 +76,7 @@ tasks.register('chatWindowTest', Test) {
 }
 
 jacocoTestReport {
-    dependsOn test, uiTest, chatWindowTest
+    dependsOn test, uiTest
 
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
