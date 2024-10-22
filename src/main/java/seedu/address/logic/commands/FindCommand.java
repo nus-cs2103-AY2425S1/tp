@@ -46,8 +46,7 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return this.
-                predicate.equals(otherFindCommand.predicate);
+        return this.predicate.equals(otherFindCommand.predicate);
     }
 
     @Override
