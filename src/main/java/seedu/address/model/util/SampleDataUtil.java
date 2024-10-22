@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -24,16 +25,16 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Nric("S1234567A"), new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK,
-                getTagSet("friends"), null),
+                new Nric("S1234567A"), new Address("Blk 30 Geylang Street 29', #06-40"), EMPTY_REMARK,
+                getTagSet("friends"), new Appointment("31-12-2024 00:00")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Nric("S1234567B"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK,
-                getTagSet("colleagues", "friends"), null),
+                getTagSet("colleagues", "friends"), new Appointment("30-12-2024 00:00")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Nric("S1234567C"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK,
-                getTagSet("neighbours"), null),
+                getTagSet("neighbours"), new Appointment("01-05-2025 13:22")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Nric("S1234567D"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK,
