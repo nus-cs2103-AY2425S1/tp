@@ -150,7 +150,7 @@ public class ModelManager implements Model {
         triggerBackup(); // Trigger backup after editing
     }
 
-    @Override
+    /*@Override
     public void backupData(String filePath) throws IOException {
         synchronized (backupManager) {
             logger.info("Starting manual backup.");
@@ -174,7 +174,7 @@ public class ModelManager implements Model {
 
             logger.info("Manual backup completed.");
         }
-    }
+    }*/
 
     // Automatically trigger backup after operations
     protected void triggerBackup() {

@@ -235,46 +235,24 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 The `backup` feature ensures your data is safe by **automatically creating backups** whenever patient records are
 modified. Backups are stored in the `backups` folder located in the root directory of the application.
-In addition to automatic backups, the system also provides a **manual backup option** for users who want more control
-over their data management.
 
-Format: `backup`
+#### **How Automatic Backups Works:**
 
-#### **How Backups works:**
-
-1. **Automatic Backups:**
-    - Each time the patient records are modified (e.g., adding, editing, or deleting a record), the system *
-      *automatically creates a backup**.
-    - These backups are stored in:
-      ```
-      [Application Directory]/backups/
-      ```
-    - Naming Format:
-      ```
-      addressbook-backup-[timestamp].json
-      ```
-    - Example:
-      ```
-      addressbook-backup-2024-10-16_00-00-38-083.json
-      ```
-    - The program retains **only the 10 most recent backups** to manage storage effectively. Older backups are
-      automatically deleted when the limit is exceeded.
-2. **Manual Backups:**
-    - In addition to automatic backups, you can **manually trigger a backup** using the `backup` command anytime.
-    - Command Format:
-      ```
-      backup
-      ```
-    - **Storage Location:**  
-      Manual backups are saved in the same directory:
-      ```
-      [Application Directory]/backups/
-      ```
-    - **Naming Format:**  
-      The manual backup will follow the same naming convention as automatic backups:
-      ```
-      addressbook-backup-[timestamp].json
-      ```
+- Each time the patient records are modified (e.g., adding, editing, or deleting a record), the system **automatically** creates a backup.
+- The program retains **only the 10 most recent backups** to manage storage effectively.
+- Older backups are automatically deleted when the limit is exceeded.
+- These backups are stored in:
+  ```
+  [Application Directory]/backups/
+  ```
+- Naming Format:
+  ```
+  clinicbuddy-backup-[timestamp].json
+  ```
+- Example:
+  ```
+  clinicbuddy-backup-2024-10-16_00-00-38-083.json
+  ```
 
 #### **Accessing Backup Files:**
 
@@ -284,8 +262,6 @@ Format: `backup`
    ```
 2. Identify the backup files using their **timestamp-based naming convention**.
 3. **Move or copy** the files if needed for external storage or manual restoration.
-
-⚠ While the system handles automatic backups, manual backups provide additional flexibility and control when needed.
 
 ### Restoring data from backups : `restore`
 
