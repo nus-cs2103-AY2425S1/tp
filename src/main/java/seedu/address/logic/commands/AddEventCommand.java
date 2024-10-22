@@ -56,7 +56,8 @@ public class AddEventCommand extends AddCommand {
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName, List<String> contactNames) {
+    public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName,
+                           List<String> contactNames) {
         requireAllNonNull(eventName, time, venue, celebrityName);
         this.eventName = eventName;
         this.time = time;
