@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -22,6 +23,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STUDENT_CLASS_DESC_AM
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -129,13 +131,14 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + REGISTER_NUMBER_DESC_AMY + SEX_DESC_AMY
-                + STUDENT_CLASS_DESC_AMY + TAG_DESC_FRIEND;
+                + STUDENT_CLASS_DESC_AMY + TAG_DESC_FRIEND + ATTENDANCE_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withRegisterNumber(VALID_REGISTER_NUMBER_AMY).withSex(VALID_SEX_AMY)
                 .withStudentClass(VALID_STUDENT_CLASS_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-                .build();
+                .withAttendance(VALID_ATTENDANCE_AMY).build();
+
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -201,6 +204,12 @@ public class EditCommandParserTest {
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // attendances
+        userInput = targetIndex.getOneBased() + ATTENDANCE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withAttendance(VALID_ATTENDANCE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

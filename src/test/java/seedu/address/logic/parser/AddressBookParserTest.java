@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEcNameCommand;
 import seedu.address.logic.commands.AddEcNumberCommand;
@@ -27,6 +30,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -123,6 +128,26 @@ public class AddressBookParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PREFIX_ECNUMBER + ecNumber);
 
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_addAttendance() throws Exception {
+        final String absentDate = "20-10-2024";
+        final String absentReason = "Sick";
+
+        AddAttendanceCommand expected = new AddAttendanceCommand(
+                INDEX_FIRST_PERSON,
+                new AbsentDate(absentDate),
+                new AbsentReason(absentReason));
+
+        AddAttendanceCommand command = (AddAttendanceCommand) parser.parseCommand(
+                AddAttendanceCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_ABSENT_DATE + absentDate + " "
+                        + PREFIX_ABSENT_REASON + absentReason);
+
+        // Assert that the expected command matches the parsed command
         assertEquals(expected, command);
     }
 

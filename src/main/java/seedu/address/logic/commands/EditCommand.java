@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +25,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -34,6 +37,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+
 import seedu.address.model.tag.Tag;
 
 /**
@@ -118,9 +122,11 @@ public class EditCommand extends Command {
         EcName updatedEcName = personToEdit.getEcName();
         EcNumber updatedEcNumber = personToEdit.getEcNumber();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        HashMap<AbsentDate, AbsentReason> updatedAttendances = editPersonDescriptor.getAttendances().
+                orElse(personToEdit.getAttendances());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
-                updatedStudentClass, updatedEcName, updatedEcNumber, updatedTags);
+                updatedStudentClass, updatedEcName, updatedEcNumber, updatedTags, updatedAttendances);
     }
 
     @Override
@@ -160,6 +166,7 @@ public class EditCommand extends Command {
         private Sex sex;
         private StudentClass studentClass;
         private Set<Tag> tags;
+        private HashMap<AbsentDate, AbsentReason> attendances;
 
         public EditPersonDescriptor() {}
 
@@ -176,6 +183,7 @@ public class EditCommand extends Command {
             setSex(toCopy.sex);
             setStudentClass(toCopy.studentClass);
             setTags(toCopy.tags);
+            setAttendance(toCopy.attendances);
         }
 
         /**
@@ -183,7 +191,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass,
-                    tags);
+                    tags, attendances);
         }
 
         public void setName(Name name) {
@@ -253,11 +261,29 @@ public class EditCommand extends Command {
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * @return {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
+
+        /**
+         * Sets {@code attendances} to this object's {@code attendances}.
+         * A defensive copy of {@code attendances} is used internally.
+         */
+        public void setAttendance(HashMap<AbsentDate, AbsentReason> attendances) {
+            this.attendances = (attendances != null) ? new HashMap<>(attendances) : null;
+        }
+
+        /**
+         * Returns a defensive copy of the attendance map to prevent modification
+         * of the original {@code HashMap<AbsentDate, AbsentReason>}.
+         * @return {@code Optional#empty()} if {@code attendances} is null.
+         */
+        public Optional<HashMap<AbsentDate, AbsentReason>> getAttendances() {
+            return (attendances != null) ? Optional.of(new HashMap<>(attendances)) : Optional.empty();
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -278,7 +304,8 @@ public class EditCommand extends Command {
                     && Objects.equals(registerNumber, otherEditPersonDescriptor.registerNumber)
                     && Objects.equals(sex, otherEditPersonDescriptor.sex)
                     && Objects.equals(studentClass, otherEditPersonDescriptor.studentClass)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(attendances, otherEditPersonDescriptor.attendances);
         }
 
         @Override
@@ -292,6 +319,7 @@ public class EditCommand extends Command {
                     .add("sex", sex)
                     .add("class", studentClass)
                     .add("tags", tags)
+                    .add("attendances", attendances)
                     .toString();
         }
     }

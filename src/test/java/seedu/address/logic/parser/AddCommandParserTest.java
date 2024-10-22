@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDANCE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -52,6 +54,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -73,7 +76,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, new AddCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -81,7 +84,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB
-                + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -89,7 +92,7 @@ public class AddCommandParserTest {
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-                + TAG_DESC_FRIEND;
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -237,51 +240,57 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, Address.MESSAGE_CONSTRAINTS);
 
         // invalid register number
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_REGISTER_NUMBER_DESC + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, RegisterNumber.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, RegisterNumber.MESSAGE_CONSTRAINTS);
 
         // invalid sex
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + INVALID_SEX_DESC + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, Sex.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, Sex.MESSAGE_CONSTRAINTS);
 
         // invalid class
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + INVALID_STUDENT_CLASS_DESC + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND, StudentClass.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB, StudentClass.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + INVALID_TAG_DESC
-                + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + VALID_TAG_FRIEND + ATTENDANCE_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid attendance
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + INVALID_TAG_DESC
+                + VALID_TAG_FRIEND + INVALID_ATTENDANCE_DESC, AbsentDate.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
+                + ATTENDANCE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

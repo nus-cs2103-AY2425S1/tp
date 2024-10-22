@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +11,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -200,5 +204,59 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String absentDate} into a {@code AbsentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentDate} is invalid.
+     */
+    public static AbsentDate parseAbsentDate(String absentDate) throws ParseException {
+        requireNonNull(absentDate);
+        String trimmedAbsentDate = absentDate.trim();
+        if (!AbsentDate.isValidAbsentDate(absentDate)) {
+            throw new ParseException(AbsentDate.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentDate(trimmedAbsentDate);
+    }
+
+    /**
+     * Parses {@code Collection<String> absentDates} into an {@code ArrayList<AbsentDate>}.
+     */
+    public static ArrayList<AbsentDate> parseAbsentDates(Collection<String> absentDates) throws ParseException {
+        requireNonNull(absentDates);
+        final ArrayList<AbsentDate> absentDateList = new ArrayList<>();
+        for (String absentDate : absentDates) {
+            absentDateList.add(parseAbsentDate(absentDate));
+        }
+        return absentDateList;
+    }
+
+    /**
+     * Parses a {@code String absentReason} into a {@code AbsentReason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentReason} is invalid.
+     */
+    public static AbsentReason parseAbsentReason(String absentReason) throws ParseException {
+        requireNonNull(absentReason);
+        String trimmedAbsentReason = absentReason.trim();
+        if (!AbsentReason.isValidAbsentReason(absentReason)) {
+            throw new ParseException(AbsentReason.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentReason(trimmedAbsentReason);
+    }
+
+    /**
+     * Parses {@code Collection<String> absentReasons} into an {@code ArrayList<AbsentReason>}.
+     */
+    public static ArrayList<AbsentReason> parseAbsentReasons(Collection<String> absentReasons) throws ParseException {
+        requireNonNull(absentReasons);
+        final ArrayList<AbsentReason> absentReasonList = new ArrayList<>();
+        for (String absentReason : absentReasons) {
+            absentReasonList.add(parseAbsentReason(absentReason));
+        }
+        return absentReasonList;
     }
 }

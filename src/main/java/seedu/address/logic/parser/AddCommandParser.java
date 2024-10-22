@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -10,11 +12,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -40,7 +46,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_REGISTER_NUMBER, PREFIX_SEX, PREFIX_STUDENT_CLASS, PREFIX_TAG);
+                        PREFIX_REGISTER_NUMBER, PREFIX_SEX, PREFIX_STUDENT_CLASS, PREFIX_TAG, PREFIX_ABSENT_DATE,
+                        PREFIX_ABSENT_REASON);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_REGISTER_NUMBER, PREFIX_SEX, PREFIX_STUDENT_CLASS)
@@ -63,8 +70,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         EcNumber ecNumber = new EcNumber(""); // Adding a student does not allow EcNumber to be added right away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        ArrayList<AbsentDate> dateList = ParserUtil.parseAbsentDates(argMultimap.getAllValues(PREFIX_ABSENT_DATE));
+        ArrayList<AbsentReason> reasonList = ParserUtil.parseAbsentReasons(argMultimap.
+                getAllValues(PREFIX_ABSENT_REASON));
+        HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
+        for (int i = 0; i < dateList.size(); i++) {
+            attendances.put(dateList.get(i), reasonList.get(i));
+        }
+
         Person person = new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName,
-                ecNumber, tagList);
+                ecNumber, tagList, attendances);
 
         return new AddCommand(person);
     }

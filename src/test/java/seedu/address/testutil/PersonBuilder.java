@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -41,6 +44,7 @@ public class PersonBuilder {
     private EcName ecName = new EcName("Joe Hardy");
     private EcNumber ecNumber;
     private Set<Tag> tags;
+    private HashMap<AbsentDate, AbsentReason> attendances;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -56,6 +60,7 @@ public class PersonBuilder {
         ecName = new EcName(DEFAULT_ECNAME);
         ecNumber = new EcNumber(DEFAULT_ECNUMBER);
         tags = new HashSet<>();
+        attendances = new HashMap<>();
     }
 
     /**
@@ -72,6 +77,7 @@ public class PersonBuilder {
         ecName = personToCopy.getEcName();
         ecNumber = personToCopy.getEcNumber();
         tags = new HashSet<>(personToCopy.getTags());
+        attendances = new HashMap<>(personToCopy.getAttendances());
     }
 
     /**
@@ -155,10 +161,19 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code attendances} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendance(HashMap<AbsentDate, AbsentReason> attendances) {
+        this.attendances = attendances;
+        return this;
+    }
+
+    /**
      * Builds a new Person with all the required attributes.
      */
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags,
+                attendances);
     }
 
 }

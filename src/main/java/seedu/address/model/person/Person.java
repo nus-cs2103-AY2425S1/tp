@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,13 +31,16 @@ public class Person {
     private final EcName ecName;
     private final EcNumber ecNumber;
     private final Set<Tag> tags = new HashSet<>();
+    private final HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
-                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags);
+                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Tag> tags,
+                  HashMap<AbsentDate, AbsentReason> attendances) {
+        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags,
+                attendances);
 
         this.name = name;
         this.phone = phone;
@@ -47,6 +52,12 @@ public class Person {
         this.ecName = ecName;
         this.ecNumber = ecNumber;
         this.tags.addAll(tags);
+        for (Map.Entry<AbsentDate, AbsentReason> entry : attendances.entrySet()) {
+            this.attendances.put(
+                    new AbsentDate(entry.getKey().toString()),  // or entry.getKey().getDate() if there is such a method
+                    new AbsentReason(entry.getValue().toString())  // or entry.getValue().getReason() if there is such a method
+            );
+        }
     }
 
     public Name getName() {
@@ -93,6 +104,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public HashMap<AbsentDate, AbsentReason> getAttendances() {
+        return attendances;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -129,13 +144,15 @@ public class Person {
                 && registerNumber.equals(otherPerson.registerNumber)
                 && sex.equals(otherPerson.sex)
                 && studentClass.equals(otherPerson.studentClass)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && attendances.equals(otherPerson.attendances);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecNumber, tags);
+        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecNumber, tags,
+                attendances);
     }
 
     @Override
@@ -151,6 +168,7 @@ public class Person {
                 .add("emergency contact name", ecName)
                 .add("emergency contact number", ecNumber)
                 .add("tags", tags)
+                //.add("attendances", attendances)
                 .toString();
     }
 
