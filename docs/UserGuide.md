@@ -43,6 +43,8 @@ benefits of a Graphical User Interface (GUI).
 
     * `backup` : Creates a backup of the current patient records.
 
+    * `restore` : Restores patient records from the most recent backup.
+
     * `find S1234567Z` : Finds the patient that has the NRIC
 
     * `find John` : Finds the patient named 'John'
@@ -285,7 +287,43 @@ Format: `backup`
 
 ⚠ While the system handles automatic backups, manual backups provide additional flexibility and control when needed.
 
-_Note: A restore function will be introduced soon to recover patient records from the latest backup._
+### Restoring data from backups : `restore`
+
+The `restore` feature allows you to recover patient records from the most recent backup file or a specific backup file by its name. This is useful in case of unintended data loss or errors.
+
+Format: `restore`
+
+#### **How Restore Works:**
+
+1. **Restore from the Most Recent Backup:**
+- When you execute the `restore` command, ClinicBuddy will restore the patient records from the most recent backup file located in the `/backups/` directory.
+- Command Format:
+  ```
+  restore
+  ```
+2. **Restore from a specific backup file**
+- Command format:
+  ```
+  restore <file_path>
+  ```
+- Example:
+  ```
+  restore backups/clinicbuddy-backup-2024-10-21_22-22-52_123.json
+  ```
+- This will restore the application to the state saved in that specific backup file. If no file path is provided, it will restore from the second most recent backup by default.
+
+#### **Important Notes:**
+
+- Restoring from a backup will **overwrite** the current patient records in ClinicBuddy.
+- Ensure that you want to discard any changes made since the last backup before performing a restore.
+- The `restore` command will restore the entire set of patient records from the backup.
+- It is not possible to restore individual records.
+
+#### **After Restoring:**
+
+- After the restore operation, ClinicBuddy will display a message indicating that the data has been successfully restored from the backup.
+- All patient records will reflect the state they were in at the time of the backup.
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -338,4 +376,5 @@ to any desired location if needed.
  **List**   | `list`                                                                                                                                           
  **Help**   | `help`                                                                                                                                           
 | **Backup** | `backup` <br> e.g., `backup` creates a new backup of the patient records.                                                                        |
+**Restore** | `restore`<br> e.g., `restore` restores patient records from the most recent backup file.
 
