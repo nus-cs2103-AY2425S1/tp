@@ -7,9 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ASCENDING;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.delivery.Delivery;
-
-import java.util.Comparator;
+import seedu.address.model.delivery.DeliverySortComparator;
 
 /**
  * Sorts and lists all deliveries in address book by the specified prefix.
@@ -22,9 +20,9 @@ public class SortDeliveryCommand extends SortCommand {
             + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + PREFIX_SORT_ASCENDING + "SORT ORDER ('a' for ascending and 'd' for descending)";
 
-    private final Comparator<Delivery> comparator;
+    private final DeliverySortComparator comparator;
 
-    public SortDeliveryCommand(Comparator<Delivery> comparator) {
+    public SortDeliveryCommand(DeliverySortComparator comparator) {
         this.comparator = comparator;
     }
 
@@ -33,7 +31,9 @@ public class SortDeliveryCommand extends SortCommand {
         requireNonNull(model);
         model.updateSortedDeliveryList(comparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_DELIVERY_SORTED_OVERVIEW, model.getSortedDeliveryList().size()));
+                String.format(Messages.MESSAGE_DELIVERY_SORTED_OVERVIEW,
+                        model.getSortedDeliveryList().size(),
+                        comparator.toSortOrderString()));
     }
 
     @Override

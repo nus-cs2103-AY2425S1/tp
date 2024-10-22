@@ -1,11 +1,13 @@
 package seedu.address.model.delivery;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.SortOrder;
 
+/**
+ * Represents a comparator for deliveries that sort based on cost.
+ */
 public class DeliverySortCostComparator extends DeliverySortComparator {
     public DeliverySortCostComparator(SortOrder sortOrder) {
-        super(sortOrder.getSortOrder());
+        super(sortOrder);
     }
 
     @Override
@@ -32,10 +34,5 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
 
         DeliverySortCostComparator otherDeliverySortCostComparator = (DeliverySortCostComparator) other;
         return super.getIsSortByAscending() == otherDeliverySortCostComparator.getIsSortByAscending();
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).add("isSortByAscending", super.getIsSortByAscending()).toString();
     }
 }
