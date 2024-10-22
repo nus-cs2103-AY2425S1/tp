@@ -18,6 +18,7 @@ public class Assignment {
         this.score = score;
     }
 
+
     @Override
     public String toString() {
         return "Assignment:" + assignmentName + " " + score;

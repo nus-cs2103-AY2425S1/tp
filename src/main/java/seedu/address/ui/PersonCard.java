@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label telegram;
+    @FXML
     private Label github;
 
     /**
@@ -56,6 +58,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        telegram.setText(person.getTelegram().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -64,10 +67,13 @@ public class PersonCard extends UiPart<Region> {
         } else {
             assignment.setText("No assignment available"); // Optional: for better user feedback
         }
+
         if (person.getGithub() != null) {
             github.setText(person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
         }
+
     }
+
 }

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -24,22 +25,27 @@ public class TelegramTest {
         // null address
         assertThrows(NullPointerException.class, () -> Telegram.isValidTelegram(null));
 
-        // invalid addresses
+        // invalid telegram IDs
         assertFalse(Telegram.isValidTelegram("")); // empty string
         assertFalse(Telegram.isValidTelegram(" ")); // spaces only
+        assertFalse(Telegram.isValidTelegram("-")); // one character
+        assertFalse(Telegram.isValidTelegram("Test")); // the ID does not start with @
+        assertFalse(Telegram.isValidTelegram("@Test!!!")); // contains invalid char '!'
+        assertFalse(Telegram.isValidTelegram("@")); // only contains '@' which is not allowed
 
-        // valid addresses
-        assertTrue(Telegram.isValidTelegram("Blk 456, Den Road, #01-355"));
-        assertTrue(Telegram.isValidTelegram("-")); // one character
-        assertTrue(Telegram.isValidTelegram("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+
+        // valid telegram IDs
+        assertTrue(Telegram.isValidTelegram("@test"));
+        assertTrue(Telegram.isValidTelegram("@1234"));
+        assertTrue(Telegram.isValidTelegram("@test123"));
     }
 
     @Test
     public void equals() {
-        Telegram telegram = new Telegram("Valid Telegram");
+        Telegram telegram = new Telegram("@ValidTelegram");
 
         // same values -> returns true
-        assertTrue(telegram.equals(new Telegram("Valid Telegram")));
+        assertTrue(telegram.equals(new Telegram("@ValidTelegram")));
 
         // same object -> returns true
         assertTrue(telegram.equals(telegram));
@@ -51,6 +57,22 @@ public class TelegramTest {
         assertFalse(telegram.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(telegram.equals(new Telegram("Other Valid Telegram")));
+        assertFalse(telegram.equals(new Telegram("@OtherValidTelegram")));
+    }
+
+    @Test
+    public void compareTo() {
+        Telegram telegram = new Telegram("@Alice");
+        Telegram otherTelegram = new Telegram("@Bob");
+
+        // null input
+        assertThrows(NullPointerException.class, () -> telegram.compareTo(null));
+
+        // valid input
+        assertTrue(telegram.compareTo(otherTelegram) < 0);
+        assertTrue(otherTelegram.compareTo(telegram) > 0);
+
+        // same input
+        assertEquals(0, telegram.compareTo(telegram));
     }
 }

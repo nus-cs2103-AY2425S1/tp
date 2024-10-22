@@ -60,6 +60,7 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withTelegram("@George")
+            .withTags(VALID_TAG_HUSBAND)
             .withGithub("George").build();
 
     // Manually added

@@ -80,14 +80,25 @@ public class AddGradeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // to add error handling
+        // check if assignment is in predefined list
+        if (!model.hasAssignment(assignmentName)) {
+            throw new CommandException("Invalid assignment name: " + assignmentName);
+        }
+
+        if (score > model.maxScore(assignmentName) || score < 0) {
+            throw new CommandException("Score must be between 0.0 and " + model.maxScore(assignmentName));
+        }
+
+        if (!model.hasName(personName)) {
+            throw new CommandException("Person " + personName + " not in address book");
+        }
 
         Person person =
                 model.getAddressBook().getPersonList().stream()
-                        .filter(p -> p.getName().equals(personName))
+                        .filter(p -> p.getName().equalIgnoreCase(personName))
                         .toList()
                         .get(0);
-        model.setPerson(person, createGradeToAddToPerson(person, assignmentName, score));
+        model.setPerson(person, createGradeToAddToPerson(person, model.getAssignmentName(assignmentName), score));
         return new CommandResult(""); // placeholder string to be added
     }
 
