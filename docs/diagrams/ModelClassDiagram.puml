@@ -71,6 +71,10 @@ Person *--> Gender
 Doctor .right.|> Person
 Doctor *--> "1" Specialty
 
+Patient .left.|> Person
+Patient *--> "1" DateOfBirth
+Patient *--> "1" Gender
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
