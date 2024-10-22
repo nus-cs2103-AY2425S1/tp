@@ -24,7 +24,7 @@ public class OweCommandParser implements Parser<OweCommand> {
      */
     public OweCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        logger.log(Level.INFO, "Parsing OweCommand with arguments: " + args);
+        logger.info("Parsing OweCommand with arguments: " + args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HOUR);
         Index index;
@@ -33,12 +33,12 @@ public class OweCommandParser implements Parser<OweCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            logger.log(Level.WARNING, "Failed to parse index. Invalid command format.", pe);
+            logger.warning("Failed to parse index. Invalid command format. Exception: " + pe.getMessage());
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE), pe);
         }
 
         if (!arePrefixHourPresent(argMultimap)) {
-            logger.log(Level.WARNING, "Failed to parse hours owed. Invalid parameters");
+            logger.warning("Failed to parse index. Invalid parameters");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE));
         }
 
@@ -46,7 +46,7 @@ public class OweCommandParser implements Parser<OweCommand> {
 
         hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get());
 
-        logger.log(Level.INFO, "Successfully parsed OweCommand.");
+        logger.info("Successfully parsed OweCommand.");
         return new OweCommand(index, hour);
     }
 

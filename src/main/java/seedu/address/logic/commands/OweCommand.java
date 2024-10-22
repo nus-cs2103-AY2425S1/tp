@@ -98,6 +98,7 @@ public class OweCommand extends Command {
      * Updates the owed amount of the student based on the hours the student owed.
      */
     private static OwedAmount updateOwedAmount(Student student, double hour) {
+        assert student != null && hour % 0.5 == 0;
         double updatedOwedAmount = student.getOwedAmount().value + calculateOwedAmount(student, hour);
         return new OwedAmount(Double.toString(updatedOwedAmount));
     }
