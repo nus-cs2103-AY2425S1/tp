@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -87,7 +87,8 @@ public class SearchPolicyCommandTest {
 
         // create a person with health insurance policy
         Person alice = new PersonBuilder().withName("Alice").build();
-        alice.setPolicies(List.of(healthInsurance));
+        alice.setPolicies(new ArrayList<>(Arrays.asList(healthInsurance)));
+
         model.addPerson(alice);
 
         String policyName = "health insurance";
@@ -121,12 +122,12 @@ public class SearchPolicyCommandTest {
 
         // create a person with health insurance policy
         Person alice = new PersonBuilder().withName("Alice").build();
-        alice.setPolicies(List.of(healthInsurance));
+        alice.setPolicies(new ArrayList<>(Arrays.asList(healthInsurance)));
         model.addPerson(alice);
 
         // create another person with the same insurance policy
         Person bob = new PersonBuilder().withName("Bob").build();
-        bob.setPolicies(List.of(healthInsurance));
+        bob.setPolicies(new ArrayList<>(Arrays.asList(healthInsurance)));
         model.addPerson(bob);
 
         String policyName = "HealthInsurance";
