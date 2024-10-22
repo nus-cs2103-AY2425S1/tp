@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.FindPhoneNumberCommand;
 import seedu.address.logic.commands.FindSellCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.BuyPropertyContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -193,5 +195,10 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class,
                 MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
-
+    @Test
+    public void parseCommand_sortIndividual() throws Exception {
+        Index index = Index.fromOneBased(1);
+        SortIndividualCommand command = (SortIndividualCommand) parser.parseCommand("sorti 1 f/Price o/L");
+        assertNotEquals(new SortIndividualCommand(index, "Price", "L"), command);
+    }
 }
