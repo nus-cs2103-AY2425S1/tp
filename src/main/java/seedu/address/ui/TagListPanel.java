@@ -11,6 +11,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import seedu.address.model.tag.Tag;
 
+import java.util.Comparator;
+
 /**
  * Panel containing the list of tags.
  */
@@ -36,17 +38,19 @@ public class TagListPanel extends UiPart<Region> {
 
     private void updateTagsDisplay(ObservableList<Tag> tags) {
         tagListFlowPane.getChildren().clear();
-        for (Tag tag : tags) {
-            Label tagLabel = new Label(tag.getTagName());
-            tagLabel.getStyleClass().add("tag-label");
+        tags.stream()
+                .sorted(Comparator.comparing(tag -> tag.getTagName().toLowerCase()))
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.getTagName());
+                    tagLabel.getStyleClass().add("tag-label");
 
-            Color colour = TagColourManager.getColourForTag(tag.getTagName());
-            tagLabel.setStyle(String.format("-fx-background-color: #%02x%02x%02x;",
-                    (int) (colour.getRed() * 255),
-                    (int) (colour.getGreen() * 255),
-                    (int) (colour.getBlue() * 255)));
+                    Color colour = TagColourManager.getColourForTag(tag.getTagName());
+                    tagLabel.setStyle(String.format("-fx-background-color: #%02x%02x%02x;",
+                            (int) (colour.getRed() * 255),
+                            (int) (colour.getGreen() * 255),
+                            (int) (colour.getBlue() * 255)));
 
-            tagListFlowPane.getChildren().add(tagLabel);
-        }
+                    tagListFlowPane.getChildren().add(tagLabel);
+                });
     }
 }
