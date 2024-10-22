@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Jackson-friendly version of {@link Wedding}.
@@ -41,8 +42,8 @@ public class JsonAdaptedWedding {
      * Converts a given {@code Wedding} into this class for Jackson use.
      */
     public JsonAdaptedWedding(Wedding source) {
-        name = source.getName();
-        date = source.getDate();
+        name = source.getWeddingName().fullName;
+        date = source.getWeddingDate();
         assignees.addAll(source.getAssignees().stream()
                 .map(JsonAdaptedPersonId::new)
                 .collect(Collectors.toList()));
@@ -58,7 +59,7 @@ public class JsonAdaptedWedding {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NAME_FIELD));
         }
-        final String modelName = name;
+        final WeddingName modelName = new WeddingName(name);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DATE_FIELD));
