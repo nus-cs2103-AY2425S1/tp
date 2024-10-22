@@ -49,6 +49,8 @@ public class Messages {
                 .append(person.getSex())
                 .append("; \nClass: ")
                 .append(person.getStudentClass())
+                .append("; \nEcName: ")
+                .append(person.getEcName())
                 .append("; \nEcNumber: ")
                 .append(person.getEcNumber())
                 .append("; \nTags: ");
