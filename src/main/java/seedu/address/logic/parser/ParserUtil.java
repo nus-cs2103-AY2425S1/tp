@@ -151,7 +151,7 @@ public class ParserUtil {
      * Parses an {@code Optional} String value using the provided parser {@code FunctionWithException},
      * returning a default value if the {@code Optional} is empty.
      */
-    public static <T> T parseOptionalValue(Optional<String> value, FunctionWithException<String,T,
+    public static <T> T parseOptionalValue(Optional<String> value, FunctionWithException<String, T,
             ParseException> parser, T defaultValue) throws ParseException {
         if (value.isPresent()) {
             return parser.apply(value.get());
