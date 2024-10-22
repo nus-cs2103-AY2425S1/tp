@@ -87,61 +87,13 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
 ></box>
 
-
-<br>
-<details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Viewing help: <code>help</code></strong></summary>
-
-  >Displays a help window containing the list of commands, its purpose and the format
-  >
-  >![Ui](images/helpWindow.png)
-  >
-  >Format:`help`
-</details>
-
-
-<br>
-<details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding an employee: <code>employee</code></strong></summary>
-
-  >Adds an employee to StaffSync.
-  >
-  >Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
-  >
-  ><box type="tip" seamless>
-  >
-  >**Tip:** All fields are mandatory
-  ></box>
-  >
-  >Examples:
-  >* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
-</details>
-
-
-<br>
-<details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding a potential hire: <code>potential</code></strong></summary>
-
-  >Adds a potential hire to StaffSync.
-  >
-  >Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
-  >
-  ><box type="tip" seamless>
-  >
-  >**Tip:** All fields are mandatory
-  ></box>
-  >
-  >Examples:
-  >* `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
-</details>
-
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Clearing all entries: <code>clear</code></strong></summary>
 
-  >Clears all entries from StaffSync.
-  >
-  >Format: `clear`
+>Clears all entries from StaffSync.
+>
+>Format: `clear`
 </details>
 
 <br>
@@ -164,6 +116,33 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Demoting a person: <code>demote</code></strong></summary>
+
+>Demotes the specified employee from StaffSync into a potential hire.
+>
+>Format: `demote INDEX`
+>
+>* Demote the employee at the specified `INDEX` to a potential hire.
+>* The index refers to the index number shown in the displayed person list.
+>* The index **must be a positive integer** 1, 2, 3, …​
+>* The index **must be within the size of the list** shown.
+>* The person at the index must be an employee
+>
+>Examples:
+>* `list e` followed by `demote 2` demotes the 2nd person in the employee list.
+>* `find e Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
+>
+><box type="warning" seamless>
+>
+>**Common Mistakes:**
+>* `list ph` followed by `demote 2` - cannot demote a potential hire
+>* `demote 0` - invalid index number
+>* `demote 3` but only have 2 entries - invalid index number, index out of list size 
+></box>
+</details>
+
+<br>
+<details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">[WIP] Editing a person: <code>edit</code></strong></summary>
 
   >Edits an existing person in the StaffSync.
@@ -181,11 +160,28 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding an employee: <code>employee</code></strong></summary>
+
+>Adds an employee to StaffSync.
+>
+>Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
+>
+><box type="tip" seamless>
+>
+>**Tip:** All fields are mandatory
+></box>
+>
+>Examples:
+>* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
+</details>
+
+<br>
+<details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Exiting the program: <code>exit</code></strong></summary>
 
-  >Exits the program.
-  >
-  >Format: `exit`
+>Exits the program.
+>
+>Format: `exit`
 </details>
 
 <br>
@@ -212,12 +208,70 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 <br>
 <details>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Viewing help: <code>help</code></strong></summary>
+
+>Displays a help window containing the list of commands, its purpose and the format
+>
+>![Ui](images/helpWindow.png)
+>
+>Format:`help`
+</details>
+
+<br>
+<details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Listing all persons: <code>list</code></strong></summary>
 
   >Shows a list of all persons in StaffSync.
   >
   >Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
   >* Lists type of persons based on the parameter given.
+</details>
+
+<br>
+<details>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding a potential hire: <code>potential</code></strong></summary>
+
+>Adds a potential hire to StaffSync.
+>
+>Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
+>
+><box type="tip" seamless>
+>
+>**Tip:** All fields are mandatory
+></box>
+>
+>Examples:
+>* `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+</details>
+
+<br>
+<details>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Promoting a person: <code>promote</code></strong></summary>
+
+>Promotes the specified potential hire from StaffSync into an employee.
+>
+>Format: `promote INDEX CONTRACT_END_DATE`
+>
+>* Promote the potential hire at the specified `INDEX` to an employee with the specified `CONTRACT_END_DATE`.
+>* The index refers to the index number shown in the displayed person list.
+>* The index **must be a positive integer** 1, 2, 3, …​
+>* The index **must be within the size of the list** shown.
+>* The person at the index must be a potential hire
+>* The contract end date must be of **valid format** of yyyy-MM-dd
+>
+>Examples:
+>* `list p` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
+>* `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
+>
+><box type="warning" seamless>
+>
+>**Common Mistakes:**
+>* `promote 2 12-20-2025` - the contract end date is in the wrong date format
+>* `promote 2 2025-20-12` - the day and the month of the contract end date is swapped
+>* `list e` followed by `promote 2 2025-12-20` - cannot promote an employee
+>* `promote 0 2025-12-20` - invalid index number
+>* `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
+></box>
 </details>
 
 <br>
@@ -228,15 +282,17 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
 Action     | Format                                                                                        | Examples
 -----------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
-**Help**   | `help`                                                                                        |
 **Clear**  | `clear`                                                                                       |
 **Delete** | `delete e INDEX` <br> `delete ph INDEX`                                                       | `delete e 3`<br> `delete ph 1`
+**Demote** | `demote INDEX`                                                                                | `demote 2`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                  | `edit 2 n/James Lee e/jameslee@example.com`
 **Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
 **Exit**   | `exit`                                                                                        |
 **Find**   | `find all [KEYWORDS]` <br> `find e [KEYWORDS]` <br> `find ph [KEYWORDS]`                      | `find all Jake` <br> `find e Jake` <br> `find ph Jake`
+**Help**   | `help`                                                                                        |
 **List**   | `list all` <br> `list e` <br> `list ph`                                                       |
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+**Promote** | `promote INDEX CONTRACT_END_DATE`                                                             | `promote 2 2025-12-20`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -289,6 +345,5 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **If you try to stretch the Help Window horizontally**, you will not be able to change the width of the Help Window as it is fixed at a certain width
 
 --------------------------------------------------------------------------------------------------------------------
