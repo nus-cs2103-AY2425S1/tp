@@ -13,9 +13,8 @@ import java.util.ArrayList;
  * Storage to store the past commands.
  */
 public class CommandHistoryStorage {
-    private static final Path commandHistoryFilePath = Paths.get("data", "commandHistory.txt");
+    private static Path commandHistoryFilePath = Paths.get("data", "commandHistory.txt");
     private static ArrayList<String> lines = new ArrayList<>();
-
     private int currentLineNumber;
 
     /**
@@ -45,9 +44,8 @@ public class CommandHistoryStorage {
                      new BufferedWriter(new FileWriter(String.valueOf(commandHistoryFilePath), true))) {
             bw.write(text);
             bw.newLine();
-            System.out.println("Successfully written to the file.");
         } catch (IOException e) {
-            System.out.println("Error writing the file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -57,12 +55,10 @@ public class CommandHistoryStorage {
     public static void clearFile() {
         try {
             FileWriter writer =
-                    new FileWriter(String.valueOf(commandHistoryFilePath), false); // 'false' to overwrite the file
-            writer.write(""); // write an empty string to clear the file
+                    new FileWriter(String.valueOf(commandHistoryFilePath), false);
+            writer.write("");
             writer.close();
-            System.out.println("File cleared successfully.");
         } catch (IOException e) {
-            System.out.println("An error occurred while clearing the file.");
             e.printStackTrace();
         }
     }
@@ -75,14 +71,18 @@ public class CommandHistoryStorage {
             assert (false);
         }
 
-        System.out.println("NEXT CURRENT LINE NUMBER BEFORE: " + currentLineNumber);
+        if (lines.isEmpty()) {
+            return "";
+        }
 
         if (this.currentLineNumber < lines.size()) {
             this.currentLineNumber += 1;
+        } else {
+            //Display nothing if no more next command.
+            return "";
         }
 
         String command = lines.get(getZeroBasedNextLineNumber(currentLineNumber));
-        System.out.println("NEXT CURRENT LINE NUMBER AFTER: " + currentLineNumber);
 
         return command;
     }
@@ -105,19 +105,21 @@ public class CommandHistoryStorage {
      * Get previous command within the arraylist.
      */
     public String getPreviousCommand() {
-        int lastLineNumber = countLinesInFile() - 1;
+        int lastLineNumber = countLinesInFile();
+        if (lastLineNumber == 0) {
+            return "";
+        }
+
         if (currentLineNumber > lastLineNumber) {
             assert (false);
         }
 
-        System.out.println("PREV CURRENT LINE NUMBER BEFORE: " + currentLineNumber);
+        String command = lines.get(getZeroBasedPreviousLineNumber(currentLineNumber));
 
         if (this.currentLineNumber > 1) {
             this.currentLineNumber -= 1;
         }
 
-        String command = lines.get(getZeroBasedPreviousLineNumber(currentLineNumber));
-        System.out.println("PREV CURRENT LINE NUMBER AFTER: " + currentLineNumber);
         return command;
     }
 
@@ -141,14 +143,14 @@ public class CommandHistoryStorage {
      *
      * @return the total number of lines in the file
      */
-    private static int countLinesInFile() {
-        int lineCount = 1;
+    public static int countLinesInFile() {
+        int lineCount = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(commandHistoryFilePath)))) {
             while (br.readLine() != null) {
                 lineCount++;
             }
         } catch (IOException e) {
-            System.out.println("Error counting lines in the file: " + e.getMessage());
+            e.printStackTrace();
         }
         return lineCount;
     }
@@ -156,7 +158,7 @@ public class CommandHistoryStorage {
     /**
      * Populate the arraylist with the command history.
      */
-    private static void initHistory() {
+    public static void initHistory() {
         lines.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(commandHistoryFilePath)))) {
             String line;
@@ -170,5 +172,7 @@ public class CommandHistoryStorage {
         }
     }
 
-
+    public void setCommandHistoryFilePath(Path path) {
+        commandHistoryFilePath = path;
+    }
 }
