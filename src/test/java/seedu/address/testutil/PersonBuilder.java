@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -36,6 +37,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<Role> roles;
+    private Set<Appointment> appointments;
     private List<Note> notes;
 
     /**
@@ -49,6 +51,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         roles = SampleDataUtil.getRoleSet(DEFAULT_ROLE);
+        appointments = new HashSet<>();
         notes = SampleDataUtil.getSampleNotes(DEFAULT_NOTE);
     }
 
@@ -63,6 +66,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         roles = new HashSet<>(personToCopy.getRoles());
+        appointments = new HashSet<>(personToCopy.getAppointments());
         notes = new ArrayList<Note>(personToCopy.getNotes());
 
         System.out.println(notes);
@@ -125,16 +129,27 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code notes} into a {@code List<Note>} and set it to the {@code Person} that we are building.
+     * Sets the {@code Note} of the {@code Person} that we are building.
      */
-    public PersonBuilder withNote(String... note) {
+    public PersonBuilder withNote(String ... note) {
         this.notes = SampleDataUtil.getSampleNotes(note);
+        return this;
+    }
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     * A variable number of arguments can be provided.
+     */
+    public PersonBuilder withAppointments(Appointment... appointments) {
+        for (Appointment appointment : appointments) {
+            this.appointments.add(appointment);
+        }
         return this;
     }
 
     /**
-     * Builds a Person object from the data contained in the builder.
-     * @return A Person object with the data from the builder.
+     * Returns a {@code Person} object created from the various fields previously set.
+     *
+     * @return a {@code Person} object created from the various fields previously set.
      */
     public Person build() {
         Person temp = new Person(name, nric, phone, email, address, tags, roles);
