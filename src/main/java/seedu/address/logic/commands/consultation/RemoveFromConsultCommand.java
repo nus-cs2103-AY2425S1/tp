@@ -77,7 +77,9 @@ public class RemoveFromConsultCommand extends Command {
             consultationToEdit.removeStudent(studentToRemove);
         }
 
-        return new CommandResult(String.format(MESSAGE_REMOVE_FROM_CONSULT_SUCCESS, consultationToEdit));
+        return new CommandResult(
+            String.format(MESSAGE_REMOVE_FROM_CONSULT_SUCCESS, consultationToEdit),
+            CommandType.REMOVEFROMCONSULT);
     }
 
     @Override

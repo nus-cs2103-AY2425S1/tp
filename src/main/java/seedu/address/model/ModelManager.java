@@ -25,11 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
-<<<<<<< HEAD
     private final FilteredList<Consultation> filteredConsultations;
-=======
-    private final FilteredList<Consultation> filteredConsultations; // New addition for consultations
->>>>>>> 16bf87ea53a948c75b295adf36ec6da26528b6ce
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,11 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-<<<<<<< HEAD
         filteredConsultations = new FilteredList<>(this.addressBook.getConsultList());
-=======
-        filteredConsultations = new FilteredList<>(this.addressBook.getConsultList()); // Initialize consultations
->>>>>>> 16bf87ea53a948c75b295adf36ec6da26528b6ce
     }
 
     public ModelManager() {
@@ -161,6 +153,7 @@ public class ModelManager implements Model {
         return addressBook.hasConsult(consult);
     }
 
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
