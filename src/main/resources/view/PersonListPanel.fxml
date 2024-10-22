@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <HBox fx:id="personListLabel" spacing="0.5" alignment="CENTER">
+  <HBox fx:id="personListLabel" spacing="0.5" minWidth="350" alignment="CENTER">
     <Label text="Students" />
   </HBox>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
