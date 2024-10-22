@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Eta;
@@ -203,5 +204,26 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String} delivery attribute to ensure it is a valid delivery attribute.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String} delivery attribute is invalid.
+     */
+    public static String parseAttribute(String attribute) throws ParseException {
+        requireNonNull(attribute);
+        String trimmedAttribute = attribute.trim().toLowerCase(); // Make input case-insensitive.
+        if (trimmedAttribute.equals("address")
+            || trimmedAttribute.equals("cost")
+            || trimmedAttribute.equals("date")
+            || trimmedAttribute.equals("eta")
+            || trimmedAttribute.equals("id")
+            || trimmedAttribute.equals("status")) {
+            return trimmedAttribute;
+        } else {
+            throw new ParseException(SortCommand.MESSAGE_UNKNOWN_ATTRIBUTE);
+        }
     }
 }

@@ -24,6 +24,10 @@ public class Cost {
         value = cost;
     }
 
+    public float asFloat() {
+        return Float.parseFloat(this.value.substring(1));
+    }
+
     /**
      * Returns true if a given string is a valid cost.
      */

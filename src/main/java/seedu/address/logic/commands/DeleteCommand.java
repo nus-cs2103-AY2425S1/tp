@@ -82,7 +82,7 @@ public class DeleteCommand extends Command {
     private CommandResult handleDeliveryDeletion(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
-        List<Delivery> deliveryList = inspectedPerson.getDeliveryList();
+        List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
         validateIndexes(deliveryList.size(), indexList);
 
         List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList);
