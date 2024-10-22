@@ -44,12 +44,12 @@ public class Role {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Role)) {
             return false;
         }
 
         Role otherRole = (Role) other;
-        return roleName.equals(otherRole.roleName);
+        return roleName.toLowerCase().equals(otherRole.roleName.toLowerCase());
     }
 
     @Override
