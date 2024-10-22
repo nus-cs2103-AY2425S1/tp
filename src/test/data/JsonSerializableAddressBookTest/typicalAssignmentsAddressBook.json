@@ -1,0 +1,44 @@
+{
+  "_comment": "AddressBook save file which contains the same Person, Project and Assignment values as in TypicalAssignments#getTypicalAddressBook()",
+  "persons" : [{
+    "employeeId": "1",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "friends" ],
+    "skills" : [ "moneyManagement" ]
+  },
+    {
+      "employeeId": "2",
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "tags": [
+        "owesMoney",
+        "friends"
+      ],
+      "skills": [
+        "thievery",
+        "gambling"
+      ]
+    }],
+  "projects" : [ {
+    "name" : "Project Alpha",
+    "id" : "A0276123J"
+  } , {
+    "name" : "Project Beta",
+    "id" : "A0276123K"
+  }],
+  "assignments": [ {
+    "assignmentId": "1",
+    "personId": "1",
+    "projectId": "A0276123J"
+  }, {
+    "assignmentId": "2",
+    "personId": "2",
+    "projectId": "A0276123K"
+  }]
+}
+

@@ -4,9 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalProjects.ALPHA;
+import static seedu.address.testutil.TypicalProjects.BETA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +19,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -89,13 +97,139 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void hasEmployeeId_employeeIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEmployeeId(ALICE.getEmployeeId()));
     }
 
     @Test
+    public void hasEmployeeId_employeeIdInAddressBook_returnsFalse() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasEmployeeId(ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void hasProject_nullProject_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasProject(null));
+    }
+
+    @Test
+    public void hasProject_projectNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasProject(ALPHA));
+    }
+
+    @Test
+    public void hasProject_projectInAddressBook_returnsTrue() {
+        modelManager.addProject(ALPHA);
+        assertTrue(modelManager.hasProject(ALPHA));
+    }
+
+    @Test
+    public void hasProjectId_projectIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasProjectId(ALPHA.getId()));
+    }
+
+    @Test
+    public void hasProjectId_projectIdInAddressBook_returnsFalse() {
+        modelManager.addProject(ALPHA);
+        assertTrue(modelManager.hasProjectId(ALPHA.getId()));
+    }
+
+    @Test
+    public void hasAssignment_nullAssignment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasAssignment((Assignment) null));
+    }
+
+    @Test
+    public void hasAssignment_nullAssignmentId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasAssignment((AssignmentId) null));
+    }
+
+    @Test
+    public void hasAssignment_nullProjectIdAndEmployeeId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasAssignment(null, null));
+    }
+
+    @Test
+    public void hasAssignment_assignmentNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    @Test
+    public void hasAssignment_assignmentInAddressBook_returnsTrue() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        assertTrue(modelManager.hasAssignment(ALICE_ALPHA));
+    }
+
+    @Test
+    public void hasAssignment_assignmentIdInAddressBook_returnsTrue() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        assertTrue(modelManager.hasAssignment(ALICE_ALPHA.getAssignmentId()));
+    }
+
+    @Test
+    public void hasAssignment_assignmentIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasAssignment(ALICE_ALPHA.getAssignmentId()));
+    }
+
+    @Test
+    public void hasAssignment_projectIdAndEmployeeIdInAddressBook_returnsTrue() {
+        modelManager.addAssignment(ALICE_ALPHA);
+        assertTrue(modelManager.hasAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void hasAssignment_projectIdAndEmployeeIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void deleteAssignment_nullAssignment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteAssignment((Assignment) null));
+    }
+
+    @Test
+    public void deleteAssignment_nullAssignmentId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteAssignment((AssignmentId) null));
+    }
+
+    @Test
+    public void deleteAssignment_nullProjectIdAndEmployeeId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteAssignment(null, null));
+    }
+
+    @Test
+    public void deleteAssignment_assignmentNotInAddressBook_throwsAssignmentNotFoundException() {
+        assertThrows(AssignmentNotFoundException.class, () -> modelManager.deleteAssignment(ALICE_ALPHA));
+    }
+
+    @Test
+    public void deleteAssignment_assignmentIdNotInAddressBook_throwsAssignmentNotFoundException() {
+        assertThrows(AssignmentNotFoundException.class, () ->
+                modelManager.deleteAssignment(ALICE_ALPHA.getAssignmentId()));
+    }
+
+    @Test
+    public void deleteAssignment_projectIdAndEmployeeIdNotInAddressBook_throwsAssignmentNotFoundException() {
+        assertThrows(AssignmentNotFoundException.class, () ->
+                modelManager.deleteAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+    @Test
+    public void getFilteredProjectList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredProjectList().remove(0));
+    }
+
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withPerson(ALICE).withPerson(BENSON)
+                .withProject(ALPHA).withProject(BETA)
+                .build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,13 +250,20 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredPersonList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+        // different filteredProjectList -> returns false
+        keywords = ALPHA.getName().fullName.split("\\s+");
+        modelManager.updateFilteredProjectList(
+                new ProjectNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

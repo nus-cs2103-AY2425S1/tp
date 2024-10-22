@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ProjectListPanel projectListPanel;
+    private AssignmentListPanel assignmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +44,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane topPanelPlaceholder;
+
+    @FXML
+    private StackPane projectListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +116,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        topPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
+        projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -133,6 +141,26 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Shows the list of persons.
+     */
+    @FXML
+    public void handleShowPersons() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        PersonListPanel placeholder = personListPanel;
+        topPanelPlaceholder.getChildren().add(placeholder.getRoot());
+    }
+
+    /**
+     * Shows the list of assignments.
+     */
+    @FXML
+    public void handleShowAssignments() {
+        assignmentListPanel = new AssignmentListPanel(logic.getFilteredAssignmentList());
+        AssignmentListPanel placeholder = assignmentListPanel;
+        topPanelPlaceholder.getChildren().add(placeholder.getRoot());
     }
 
     /**
@@ -177,6 +205,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.getTopPanelDisplayType().equals(DisplayType.PERSON_LIST)) {
+                handleShowPersons();
+            }
+
+            if (commandResult.getTopPanelDisplayType().equals(DisplayType.ASSIGNMENT_LIST)) {
+                handleShowAssignments();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

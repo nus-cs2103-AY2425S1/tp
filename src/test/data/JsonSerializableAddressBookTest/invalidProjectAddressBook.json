@@ -1,0 +1,11 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [],
+  "projects" : [ {
+    "name" : "Project Alpha++@",
+    "id" : "A0276123J"
+  }, {
+    "name" : "Project Beta",
+    "id" : "A0276123K"
+  }]
+}
