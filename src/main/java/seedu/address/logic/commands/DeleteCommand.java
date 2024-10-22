@@ -123,21 +123,30 @@ public class DeleteCommand extends Command {
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
 
-        if (targetIndex == null && otherDeleteCommand.targetIndex == null
-                && predicate == null && otherDeleteCommand.predicate == null) {
+        // Both commands have null fields
+        boolean bothHaveNullIndex = targetIndex == null && otherDeleteCommand.targetIndex == null;
+        boolean bothHaveNullPredicates = predicate == null && otherDeleteCommand.predicate == null;
+
+        // Both commands have non-null fields
+        boolean bothHaveIndex = targetIndex != null && otherDeleteCommand.targetIndex != null;
+        boolean bothHavePredicates = predicate != null && otherDeleteCommand.predicate != null;
+
+        // Case 1: Both have null targetIndex and null predicate
+        if (bothHaveNullIndex && bothHaveNullPredicates) {
             return true;
         }
 
-        if (targetIndex != null && otherDeleteCommand.targetIndex != null
-                && predicate == null && otherDeleteCommand.predicate == null) {
+        // Case 2: Both have targetIndex but null predicate
+        if (bothHaveIndex && bothHaveNullPredicates) {
             return targetIndex.equals(otherDeleteCommand.targetIndex);
         }
 
-        if (targetIndex == null && otherDeleteCommand.targetIndex == null
-                && predicate != null && otherDeleteCommand.predicate != null) {
+        // Case 3: Both have null targetIndex but have predicate
+        if (bothHaveNullIndex && bothHavePredicates) {
             return predicate.equals(otherDeleteCommand.predicate);
         }
 
+        // All other cases are false
         return false;
     }
 
