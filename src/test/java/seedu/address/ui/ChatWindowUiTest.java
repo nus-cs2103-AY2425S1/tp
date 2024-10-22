@@ -45,6 +45,7 @@ public class ChatWindowUiTest extends ApplicationTest {
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello"));
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hi"));
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hey"));
+            System.out.println("test");
         });
     }
 

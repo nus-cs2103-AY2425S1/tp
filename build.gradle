@@ -29,37 +29,28 @@ test {
         exceptionFormat = "short"
         showStandardStreams = true
     }
-
-    // Exclude UiTest and ChatWindowTest from the main test task
     doFirst {
         exclude "**/**UiTest*"
-        exclude "**/**ChatWindowTest*"
     }
-
     reports {
         html.required = true
     }
-
     doLast {
         def reportFile = file("${buildDir}/reports/tests/test/index.html")
         def osName = System.getProperty("os.name").toLowerCase()
 
         if (osName.contains("win")) {
+            // For Windows
             def path = reportFile.absolutePath
             def driveLetter = path.charAt(0).toLowerCase()
             def remainingPath = path.substring(2).replace('\\', '/')
             println "\nTest report generated at: file:///${driveLetter}${remainingPath}"
         } else {
+            // For macOS/Linux
             println "\nTest report generated at: file://${reportFile.absolutePath}"
         }
     }
-
     finalizedBy jacocoTestReport
-}
-
-if (System.getProperty("os.name").toLowerCase().contains("linux")) {
-    test.enabled = false
-    println "Tests are disabled on Ubuntu/Linux."
 }
 
 tasks.register('uiTest', Test) {
@@ -70,13 +61,10 @@ tasks.register('uiTest', Test) {
             '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
             '--add-opens', 'java.base/java.util=ALL-UNNAMED'
     ]
-
     doFirst {
         include "**/**UiTest*"
     }
-
     useJUnitPlatform()
-
     finalizedBy jacocoTestReport
 }
 
