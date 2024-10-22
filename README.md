@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-**<h2>🦁 EventfulNUS is every NUS Inter-Faculty Games (IFG) organiser's handy contact manager! 🏆</h2>**
+**<h2>🦁 EventfulNUS is every sports event organiser's handy contact manager! 🏆</h2>**
 
 **All event organizers will be able to:**
 - 🏀 View what kind of participant each contact is in the application is without having to dig through paperwork / NUSync.

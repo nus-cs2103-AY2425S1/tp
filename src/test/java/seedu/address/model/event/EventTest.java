@@ -2,60 +2,54 @@ package seedu.address.model.event;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
-    public void isValidEvent_validEvent_returnsTrue() {
-        assertTrue(Event.isValidEvent("Birthday Party"));
+    void equals_sameObject_returnsTrue() {
+        Event event = new Event(new EventName("Event 1"));
+        assertEquals(event, event);
     }
 
     @Test
-    public void isValidEvent_blankEvent_returnsFalse() {
-        assertFalse(Event.isValidEvent(""));
+    void equals_nullObject_returnsFalse() {
+        Event event = new Event(new EventName("Event 1"));
+        assertNotEquals(null, event);
     }
 
     @Test
-    public void isValidEvent_eventWithOnlySpaces_returnsFalse() {
-        assertFalse(Event.isValidEvent("   "));
+    void equals_differentType_returnsFalse() {
+        Event event = new Event(new EventName("Event 1"));
+        assertNotEquals("String", event);
     }
 
     @Test
-    public void constructor_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Event(null));
+    void equals_differentEventName_returnsFalse() {
+        Event event1 = new Event(new EventName("Event 1"));
+        Event event2 = new Event(new EventName("Event 2"));
+        assertNotEquals(event1, event2);
     }
 
     @Test
-    public void constructor_invalidEvent_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Event(""));
+    void equals_sameEventName_returnsTrue() {
+        Event event1 = new Event(new EventName("Event 1"));
+        Event event2 = new Event(new EventName("Event 1"));
+        assertEquals(event1, event2);
     }
 
     @Test
-    public void equals_sameEvent_returnsTrue() {
-        Event event = new Event("Meeting");
-        assertEquals(event, new Event("Meeting"));
+    void hashCode_sameEventName_returnsSameHashCode() {
+        Event event1 = new Event(new EventName("Event 1"));
+        Event event2 = new Event(new EventName("Event 1"));
+        assertEquals(event1.hashCode(), event2.hashCode());
     }
 
     @Test
-    public void equals_differentEvent_returnsFalse() {
-        Event event = new Event("Meeting");
-        assertNotEquals(event, new Event("Conference"));
-    }
-
-    @Test
-    public void hashCode_sameEvent_returnsSameHashCode() {
-        Event event = new Event("Meeting");
-        assertEquals(event.hashCode(), new Event("Meeting").hashCode());
-    }
-
-    @Test
-    public void hashCode_differentEvent_returnsDifferentHashCode() {
-        Event event = new Event("Meeting");
-        assertNotEquals(event.hashCode(), new Event("Conference").hashCode());
+    void hashCode_differentEventName_returnsDifferentHashCode() {
+        Event event1 = new Event(new EventName("Event 1"));
+        Event event2 = new Event(new EventName("Event 2"));
+        assertNotEquals(event1.hashCode(), event2.hashCode());
     }
 }

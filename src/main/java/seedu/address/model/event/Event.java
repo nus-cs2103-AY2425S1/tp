@@ -1,39 +1,34 @@
 package seedu.address.model.event;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents an Event in the address book.
- * Guarentees: immutable, is valid as declared in {@link #isValidEvent(String)}
+ * Represents an {@code Event} in the address book.
  */
 public class Event {
-    public static final String MESSAGE_CONSTRAINTS = "Events can take any values, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[^\\s].*";
-    public final String value;
+    // Identity fields
+    private final EventName name;
 
     /**
-     * Constructs an {@code Event}
-     * @param event A valid event.
+     * Every field must be present and not null.
      */
-    public Event(String event) {
-        requireNonNull(event);
-        checkArgument(isValidEvent(event), MESSAGE_CONSTRAINTS);
-        value = event;
+    public Event(EventName name) {
+        requireAllNonNull(name);
+        this.name = name;
     }
 
     /**
-     * returns true if a given string is a valid event.
+     * Returns the name of the event.
      */
-    public static boolean isValidEvent(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public EventName getName() {
+        return name;
     }
 
-    @Override
-    public String toString() {
-        return value;
-    }
-
+    /**
+     * Returns true if both events have the same name.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -45,15 +40,18 @@ public class Event {
             return false;
         }
 
-        return value.equals(otherEvent.value);
-    }
-
-    public String getValue() {
-        return value;
+        return name.equals(otherEvent.name);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .toString();
     }
 }
