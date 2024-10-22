@@ -64,5 +64,18 @@ public class ExportCommand extends Command {
             throw new CommandException("Error writing to the CSV file: " + e.getMessage());
         }
     }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ExportCommand)) {
+            return false;
+        }
+        ExportCommand e = (ExportCommand) other;
+        return filePath.equals(e.filePath);
+    }
 }
 
