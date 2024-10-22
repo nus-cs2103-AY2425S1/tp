@@ -14,9 +14,8 @@ import seedu.address.model.person.Person;
  * and supports undo and redo commands
  */
 public class VersionedAddressBook extends AddressBook {
-    // TODO: Update undo and redo fail messages
-    private static final String MESSAGE_REDO_FAIL = "Redo fail";
-    private static final String MESSAGE_UNDO_FAIL = "Undo fail";
+    private static final String MESSAGE_REDO_FAIL = "Redo failed: No next state to redo to!";
+    private static final String MESSAGE_UNDO_FAIL = "Undo failed: No previous state to undo to!";
 
     private final List<ReadOnlyAddressBook> addressBookStateList;
     private final List<Predicate<? super Person>> predicateStateList;
@@ -49,10 +48,19 @@ public class VersionedAddressBook extends AddressBook {
         currentStatePointer++;
     }
 
+    /**
+     * Returns the Predicate of the current state.
+     * @return Predicate of the current state.
+     */
     public Predicate<? super Person> getCurrentPredicate() {
         return predicateStateList.get(currentStatePointer);
     }
 
+    /**
+     * Reverts to the previous state of the address book.
+     * @return Previous state of the address book.
+     * @throws CommandException If there is no previous state to undo to.
+     */
     public ReadOnlyAddressBook undo() throws CommandException {
         if (currentStatePointer <= 0) {
             throw new CommandException(MESSAGE_UNDO_FAIL);
@@ -62,6 +70,11 @@ public class VersionedAddressBook extends AddressBook {
         return addressBookStateList.get(currentStatePointer);
     }
 
+    /**
+     * Advances to the next state of the address book.
+     * @return Next state of the address book.
+     * @throws CommandException If there is no next state to redo to.
+     */
     public ReadOnlyAddressBook redo() throws CommandException {
         if (currentStatePointer >= addressBookStateList.size() - 1) {
             throw new CommandException(MESSAGE_REDO_FAIL);
