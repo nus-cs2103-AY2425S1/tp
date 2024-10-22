@@ -85,11 +85,10 @@ public class Person {
      */
     public Person addGrade(Grade grade) {
         requireAllNonNull(grade);
-
-        GradeList newGradeList = this.gradeList.addGrade(grade);
-
+        GradeList newGradeList;
+        newGradeList = this.gradeList.addGrade(grade);
         return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradeList,
-                          this.attendanceList);
+                this.attendanceList);
     }
 
     /**

@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Represents a list of grades for a student in the address book.
  */
@@ -32,10 +31,11 @@ public class GradeList {
      * If a grade for the given test name already exists, it is updated.
      *
      * @param grade The grade to be recorded.
+     * @return A new {@code GradeList} with the added or updated grade.
      */
+
     public GradeList addGrade(Grade grade) {
         requireNonNull(grade, "Grade cannot be null");
-
         Map<String, Grade> newGrades = new HashMap<>(this.grades);
 
         newGrades.merge(grade.getTestName(), grade, (oldGrade, newGrade) -> newGrade);
@@ -104,7 +104,21 @@ public class GradeList {
         return summary;
     }
 
-    // TODO: Check if total weightage has crossed 100%
+    /**
+     * Calculates the total weightage of all the grades in the list.
+     *
+     * @return The total weightage of all grades as a percentage (0 to 100).
+     */
+    public float getTotalWeightage() {
+        float totalWeightage = 0;
+
+        // Iterate over all grades to sum their weightages
+        for (Grade g : this.grades.values()) {
+            totalWeightage += g.getWeightage();
+        }
+
+        return totalWeightage;
+    }
 
     /**
      * Returns true if the grade list is empty.

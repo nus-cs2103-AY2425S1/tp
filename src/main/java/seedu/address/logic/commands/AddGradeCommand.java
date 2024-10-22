@@ -25,6 +25,7 @@ public class AddGradeCommand extends Command {
             + "Existing grades will be updated by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) n/EXAM_NAME s/EXAM_SCORE w/EXAM_WEIGHTAGE\n"
             + "Example: " + COMMAND_WORD + " 1 n/Midterm s/85 w/30";
+    public static final String MESSAGE_EXCEED_WEIGHTAGE = "The total weightage of grades cannot exceed 100%";
 
     private final Grade toAdd;
     private final Index index;
@@ -59,6 +60,14 @@ public class AddGradeCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        // need help: should the checks be done here?
+        float totalWeightage = personToEdit.getGradeList().getTotalWeightage();
+        totalWeightage += this.toAdd.getWeightage();
+
+        if (totalWeightage > 100) {
+            throw new CommandException(MESSAGE_EXCEED_WEIGHTAGE);
+        }
+
         Person updatedPerson = personToEdit.addGrade(this.toAdd);
 
         model.setPerson(personToEdit, updatedPerson);
