@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHON
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_RELATIONSHIP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +24,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Adds an emergency contact to an existing person in the address book.
+ */
 public class AddEmergencyContactCommand extends Command {
+
     public static final String COMMAND_WORD = "addec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new emergency contact to the person "

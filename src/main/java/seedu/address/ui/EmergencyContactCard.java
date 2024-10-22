@@ -1,16 +1,10 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import seedu.address.model.person.EmergencyContact;
-import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.

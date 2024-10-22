@@ -40,10 +40,10 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_EMERGENCY_CONTACT_NAME + person.getEmergencyContact().getName().fullName + " ");
-        sb.append(PREFIX_EMERGENCY_CONTACT_PHONE + person.getEmergencyContact().getPhone().value + " ");
+        sb.append(PREFIX_EMERGENCY_CONTACT_NAME + person.getFirstEmergencyContact().getName().fullName + " ");
+        sb.append(PREFIX_EMERGENCY_CONTACT_PHONE + person.getFirstEmergencyContact().getPhone().value + " ");
         sb.append(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP
-                + person.getEmergencyContact().getRelationship().relationship + " ");
+                + person.getFirstEmergencyContact().getRelationship().relationship + " ");
         sb.append(PREFIX_DOC_NAME + person.getDoctor().getName().fullName + " ");
         sb.append(PREFIX_DOC_PHONE + person.getDoctor().getPhone().value + " ");
         sb.append(PREFIX_DOC_EMAIL + person.getDoctor().getEmail().value + " ");

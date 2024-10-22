@@ -18,13 +18,13 @@ public class JsonAdaptedEmergencyContactTest {
     private static final String INVALID_ECPHONE = "+651234";
     private static final String INVALID_ECRS = "Pet";
     private static final String INVALID_ECRS_CHARACTERS = "@s5!ho";
-    private static final String VALID_ECNAME = BENSON.getEmergencyContact().getName().toString();
-    private static final String VALID_ECPHONE = BENSON.getEmergencyContact().getPhone().toString();
-    private static final String VALID_ECRS = BENSON.getEmergencyContact().getRelationship().toString();
+    private static final String VALID_ECNAME = BENSON.getFirstEmergencyContact().getName().toString();
+    private static final String VALID_ECPHONE = BENSON.getFirstEmergencyContact().getPhone().toString();
+    private static final String VALID_ECRS = BENSON.getFirstEmergencyContact().getRelationship().toString();
 
     @Test
     public void toModelType_validEmergencyContactDetails_returnsEmergencyContact() throws Exception {
-        EmergencyContact emergencyContact = BENSON.getEmergencyContact();
+        EmergencyContact emergencyContact = BENSON.getFirstEmergencyContact();
         JsonAdaptedEmergencyContact jsonAdaptedEmergencyContact = new JsonAdaptedEmergencyContact(emergencyContact);
         assertEquals(jsonAdaptedEmergencyContact.toModelType(),
                 emergencyContact);

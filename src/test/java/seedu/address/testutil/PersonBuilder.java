@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -35,20 +37,22 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private EmergencyContact emergencyContact;
+    private Set<EmergencyContact> emergencyContacts;
+    private EmergencyContact firstEmergencyContact;
     private Doctor doctor;
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code PersonBuilder} with the default details. The person has only one emergency contact
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        emergencyContact = new EmergencyContact(new Name(DEFAULT_ECNAME),
+        firstEmergencyContact = new EmergencyContact(new Name(DEFAULT_ECNAME),
                 new Phone(DEFAULT_ECPHONE), new Relationship(DEFAULT_ECRS));
+        emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
         doctor = new Doctor(new DoctorName(DEFAULT_DOC_NAME), new Phone(DEFAULT_DOC_PHONE),
                     new Email(DEFAULT_DOC_EMAIL));
         tags = new HashSet<>();
@@ -62,7 +66,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        emergencyContact = personToCopy.getEmergencyContact();
+        firstEmergencyContact = personToCopy.getFirstEmergencyContact();
+        emergencyContacts = personToCopy.getEmergencyContacts();
         doctor = personToCopy.getDoctor();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -113,8 +118,9 @@ public class PersonBuilder {
      * building.
      */
     public PersonBuilder withEcName(String ecName) {
-        this.emergencyContact = new EmergencyContact(new Name(ecName), emergencyContact.getPhone(),
-                emergencyContact.getRelationship());
+        this.firstEmergencyContact = new EmergencyContact(new Name(ecName), firstEmergencyContact.getPhone(),
+                firstEmergencyContact.getRelationship());
+        this.emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
         return this;
     }
 
@@ -123,8 +129,9 @@ public class PersonBuilder {
      * building.
      */
     public PersonBuilder withEcPhone(String ecPhone) {
-        this.emergencyContact = new EmergencyContact(emergencyContact.getName(), new Phone(ecPhone),
-                emergencyContact.getRelationship());
+        this.firstEmergencyContact = new EmergencyContact(firstEmergencyContact.getName(), new Phone(ecPhone),
+                firstEmergencyContact.getRelationship());
+        this.emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
         return this;
     }
 
@@ -133,8 +140,9 @@ public class PersonBuilder {
      * are building.
      */
     public PersonBuilder withEcRelationship(String ecRelationship) {
-        this.emergencyContact = new EmergencyContact(emergencyContact.getName(), emergencyContact.getPhone(),
-                new Relationship(ecRelationship));
+        this.firstEmergencyContact = new EmergencyContact(firstEmergencyContact.getName(),
+                firstEmergencyContact.getPhone(), new Relationship(ecRelationship));
+        this.emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
         return this;
     }
 
@@ -163,7 +171,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, emergencyContact, doctor, tags);
+        return new Person(name, phone, email, address, emergencyContacts, doctor, tags);
     }
 
 }

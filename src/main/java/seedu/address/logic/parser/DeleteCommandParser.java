@@ -19,8 +19,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         String[] splitIndices = args.split(" ");
         String personIndexArg = splitIndices[1];
-        String emergencyContactIndexArg = splitIndices.length > 2 ? splitIndices[2] :
-                ParserUtil.NO_EMERGENCY_CONTACT_INDEX;
+        String emergencyContactIndexArg = splitIndices.length > 2 ? splitIndices[2]
+                : ParserUtil.NO_EMERGENCY_CONTACT_INDEX;
         try {
             Index personIndex = ParserUtil.parseIndex(personIndexArg);
             Index emergencyContactIndex = ParserUtil.parseIndex(emergencyContactIndexArg);

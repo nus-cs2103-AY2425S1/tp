@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -11,7 +10,10 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.EmergencyContact;
 
-public class EmergencyContactListPanel extends UiPart<Region>{
+/**
+ * Panel containing the list of emergency contacts.
+ */
+public class EmergencyContactListPanel extends UiPart<Region> {
     private static final String FXML = "EmergencyContactListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EmergencyContactListPanel.class);
 
@@ -28,7 +30,8 @@ public class EmergencyContactListPanel extends UiPart<Region>{
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code EmergencyContact} using a {@code EmergencyContactCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code EmergencyContact}
+     * using a {@code EmergencyContactCard}.
      */
     class EmergencyContactListViewCell extends ListCell<EmergencyContact> {
         @Override

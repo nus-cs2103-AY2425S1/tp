@@ -2,7 +2,18 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_RELATIONSHIP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_TO_EDIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -107,20 +118,20 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private Boolean isEmergencyContactFieldsProvided(String args, ArgumentMultimap argMultimap) {
-        if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent() &&
-        !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent() &&
-        !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent() &&
-        !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).isPresent()) {
+        if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()
+            && !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent()
+            && !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent()
+            && !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).isPresent()) {
             return false;
         }
         return true;
     }
 
     private Boolean isEmergencyContactFieldsValid(String args, ArgumentMultimap argMultimap) {
-        if (!argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent() &&
-                (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent() ||
-                argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent() ||
-                argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).isPresent())) {
+        if (!argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()
+               && (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent()
+                || argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent()
+                || argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).isPresent())) {
             return false;
         }
         return true;

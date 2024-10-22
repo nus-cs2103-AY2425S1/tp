@@ -1,13 +1,11 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -63,6 +61,9 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+    public EmergencyContact getFirstEmergencyContact() {
+        return emergencyContacts.iterator().next();
+    }
 
     public Set<EmergencyContact> getEmergencyContacts() {
         return Collections.unmodifiableSet(emergencyContacts);
@@ -84,6 +85,12 @@ public class Person {
         return emergencyContacts.size() == 1;
     }
 
+    /**
+     * Checks if the specified emergency contact exists in the list of emergency contacts.
+     *
+     * @param emergencyContactToCheck The emergency contact to check for.
+     * @return {@code true} if the emergency contact exists in the list, {@code false} otherwise.
+     */
     public Boolean hasEmergencyContact(EmergencyContact emergencyContactToCheck) {
         for (EmergencyContact emergencyContact : emergencyContacts) {
             if (emergencyContact.equals((emergencyContactToCheck))) {

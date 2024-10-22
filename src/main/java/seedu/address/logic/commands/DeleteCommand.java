@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
@@ -32,6 +31,10 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Index emergencyContactIndex;
 
+    /**
+     * @param targetIndex of the person in the filtered person list to delete
+     * @param emergencyContactIndex of the emergency contact in the person's emergency contact list to delete
+     */
     public DeleteCommand(Index targetIndex, Index emergencyContactIndex) {
         this.targetIndex = targetIndex;
         this.emergencyContactIndex = emergencyContactIndex;
@@ -60,7 +63,7 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        if (!(emergencyContactIndex instanceof  Index.EmptyEmergencyContactIndex)) {
+        if (!(emergencyContactIndex instanceof Index.EmptyEmergencyContactIndex)) {
             return executeDeleteEmergencyContact(emergencyContactIndex, personToDelete, model);
         }
         model.deletePerson(personToDelete);

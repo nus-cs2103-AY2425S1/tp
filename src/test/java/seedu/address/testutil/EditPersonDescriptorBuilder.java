@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DoctorName;
@@ -38,9 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setEmergencyContactName(person.getEmergencyContact().getName());
-        descriptor.setEmergencyContactPhone(person.getEmergencyContact().getPhone());
-        descriptor.setEmergencyContactRelationship(person.getEmergencyContact().getRelationship());
+        descriptor.setIndexOfEmergencyContactToEdit(new Index.EmptyEmergencyContactIndex());
         descriptor.setDoctorName(person.getDoctor().getName());
         descriptor.setDoctorPhone(person.getDoctor().getPhone());
         descriptor.setDoctorEmail(person.getDoctor().getEmail());
