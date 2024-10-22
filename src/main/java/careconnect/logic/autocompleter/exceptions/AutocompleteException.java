@@ -10,7 +10,7 @@ public class AutocompleteException extends IllegalValueException {
     public AutocompleteException(String message) {
         super(message);
     }
-
+    // This constructore is added for consistency sake, currently is not being utilized.
     public AutocompleteException(String message, Throwable cause) {
         super(message, cause);
     }
