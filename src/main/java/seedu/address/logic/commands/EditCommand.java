@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -56,6 +57,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_STUDENT_CLASS + "CLASS] "
             + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
+            + "[" + PREFIX_ECNUMBER + "EMERGENCY CONTACT NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -118,7 +120,7 @@ public class EditCommand extends Command {
         StudentClass updatedStudentClass = editPersonDescriptor.getStudentClass()
                 .orElse(personToEdit.getStudentClass());
         EcName updatedEcName = editPersonDescriptor.getEcName().orElse(personToEdit.getEcName());
-        EcNumber updatedEcNumber = personToEdit.getEcNumber();
+        EcNumber updatedEcNumber = editPersonDescriptor.getEcNumber().orElse(personToEdit.getEcNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
@@ -162,6 +164,7 @@ public class EditCommand extends Command {
         private Sex sex;
         private StudentClass studentClass;
         private EcName ecName;
+        private EcNumber ecNumber;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -179,6 +182,7 @@ public class EditCommand extends Command {
             setSex(toCopy.sex);
             setStudentClass(toCopy.studentClass);
             setEcName(toCopy.ecName);
+            setEcNumber(toCopy.ecNumber);
             setTags(toCopy.tags);
         }
 
@@ -187,7 +191,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName,
-                    tags);
+                    ecNumber, tags);
         }
 
         public void setName(Name name) {
@@ -255,6 +259,14 @@ public class EditCommand extends Command {
         }
 
 
+        public void setEcNumber(EcNumber ecNumber) {
+            this.ecNumber = ecNumber;
+        }
+
+        public Optional<EcNumber> getEcNumber() {
+            return Optional.ofNullable(ecNumber);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -292,6 +304,7 @@ public class EditCommand extends Command {
                     && Objects.equals(sex, otherEditPersonDescriptor.sex)
                     && Objects.equals(studentClass, otherEditPersonDescriptor.studentClass)
                     && Objects.equals(ecName, otherEditPersonDescriptor.ecName)
+                    && Objects.equals(ecNumber, otherEditPersonDescriptor.ecNumber)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -306,6 +319,7 @@ public class EditCommand extends Command {
                     .add("sex", sex)
                     .add("class", studentClass)
                     .add("emergency contact name", ecName)
+                    .add("emergency contact number", ecNumber)
                     .add("tags", tags)
                     .toString();
         }
