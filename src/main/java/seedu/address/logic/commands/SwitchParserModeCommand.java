@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AbcliParser;
 import seedu.address.logic.parser.ParserMode;
@@ -40,5 +41,27 @@ public class SwitchParserModeCommand extends Command {
         } catch (ParseException e) {
             throw new CommandException(e.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SwitchParserModeCommand)) {
+            return false;
+        }
+
+        SwitchParserModeCommand otherSwitchParserCommand = (SwitchParserModeCommand) other;
+        return mode.equals(otherSwitchParserCommand.mode);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("switching to: ", mode)
+                .toString();
     }
 }
