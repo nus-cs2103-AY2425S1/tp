@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientStatus;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentStatus;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PROJECT_STATUS = "in progress";
     public static final String DEFAULT_PAYMENT_STATUS = "unpaid";
     public static final String DEFAULT_CLIENT_STATUS = "active";
+    public static final String DEFAULT_DEADLINE = "10-10-2024";
 
     private Name name;
     private Phone phone;
@@ -35,6 +37,7 @@ public class PersonBuilder {
     private ProjectStatus projectStatus;
     private PaymentStatus paymentStatus;
     private ClientStatus clientStatus;
+    private Deadline deadline;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +51,7 @@ public class PersonBuilder {
         projectStatus = new ProjectStatus(DEFAULT_PROJECT_STATUS);
         paymentStatus = new PaymentStatus(DEFAULT_PAYMENT_STATUS);
         clientStatus = new ClientStatus(DEFAULT_CLIENT_STATUS);
+        deadline = new Deadline(DEFAULT_DEADLINE);
     }
 
     /**
@@ -62,6 +66,7 @@ public class PersonBuilder {
         projectStatus = personToCopy.getProjectStatus();
         paymentStatus = personToCopy.getPaymentStatus();
         clientStatus = personToCopy.getClientStatus();
+        deadline = personToCopy.getDeadline();
     }
 
     /**
@@ -127,8 +132,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Deadline} of the {@code Person} that we are building
+     */
+    public PersonBuilder withDeadline(String deadline) {
+        this.deadline = new Deadline(deadline);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, projectStatus, paymentStatus, clientStatus);
+        return new Person(name, phone, email, address, tags, projectStatus, paymentStatus, clientStatus, deadline);
     }
 
 }

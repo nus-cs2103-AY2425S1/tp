@@ -34,6 +34,7 @@
       <Label fx:id="projectStatus" styleClass="cell_small_label"/>
       <Label fx:id="paymentStatus" styleClass="cell_small_label"/>
       <Label fx:id="clientStatus" styleClass="cell_small_label"/>
+      <Label fx:id="deadline" styleClass="cell_small_label"/>
     </VBox>
   </GridPane>
 </HBox>
