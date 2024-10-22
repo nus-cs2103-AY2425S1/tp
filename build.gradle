@@ -69,6 +69,10 @@ shadowJar {
     archiveFileName = 'Talency.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
 
 run {
