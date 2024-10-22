@@ -172,7 +172,6 @@ public class ModelManager implements Model {
                 .stream()
                 .filter(t -> t.equals(tutorial))
                 .forEach(t -> t.getStudents()
-                        .stream()
                         .forEach(s -> {
                             EditCommand.EditStudentDescriptor editStudentDescriptor =
                                     new EditCommand.EditStudentDescriptor();
