@@ -15,19 +15,19 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 ## Command summary
 Click on each command to jump to their subsection.
 
-| Action                                         | Format, Examples                                                                                                                                 |
-|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help--help)**                | `help`                                                                                                                                           |
-| **[Add](#adding-a-person-add)**                | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
-| **[List](#listing-all-persons--list)**         | `list`                                                                                                                                           |
-| **[Edit](#editing-a-person--edit)**            | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **[Mark](#marking-person-as-attended-mark)**   | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
-| **[Unmark](#marking-person-as-absent-unmark)** | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
-| **[Find](#locating-persons-by-name-find)**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
-| **[Sort](#locating-persons-by-name-find)**     | `sort ORDER [n/][i/]`<br> e.g., `sort -1 i/`                                                                                                     |
-| **[Delete](#deleting-a-person--delete)**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
-| **[Clear](#clearing-all-entries--clear)**      | `clear`                                                                                                                                          |
-| **[Exit](#exiting-the-program--exit)**         | `exit`                                                                                                                                           |
+| Action                                                   | Format, Examples                                                                                                                                 |
+|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help--help)**                          | `help`                                                                                                                                           |
+| **[Add](#adding-a-person--add)**                         | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
+| **[List](#listing-all-persons--list)**                   | `list`                                                                                                                                           |
+| **[Edit](#editing-a-person--edit)**                      | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
+| **[Mark](#marking-person-as-attended--mark)**            | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
+| **[Unmark](#marking-person-as-absent--unmark)**          | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
+| **[Find](#locating-persons-by-name--find)**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
+| **[Sort](#sorting-persons-by-name-or-student-id--sort)** | `sort ORDER [n/][i/]`<br> e.g., `sort -1 i/`                                                                                                     |
+| **[Delete](#deleting-a-person--delete)**                 | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
+| **[Clear](#clearing-all-entries--clear)**                | `clear`                                                                                                                                          |
+| **[Exit](#exiting-the-program--exit)**                   | `exit`                                                                                                                                           |
 
 ---
 
@@ -92,7 +92,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to the address book.
 
@@ -131,7 +131,7 @@ Examples:
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Marking person as attended: `mark`
+### Marking person as attended : `mark`
 
 Marks attendance as present of the person by the index number.
 
@@ -144,7 +144,7 @@ Examples:
 
 - `mark 1 tut/1` Marks the 1st person in the address book as attended for tutorial 1.
 
-### Marking person as absent: `unmark`
+### Marking person as absent : `unmark`
 
 Marks attendance as absent of the person by the index number.
 
@@ -157,7 +157,7 @@ Examples:
 
 - `unmark 1 tut/1` Marks the 1st person in the address book as attended for tutorial 1.
 
-### Locating persons by name: `find`
+### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -175,6 +175,23 @@ Examples:
 - `find an` returns `armin` and `brian`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Sorting persons by name or student id : `sort`
+
+Sorts the displayed list of persons by either name or student id.
+
+Format: `sort ORDER [n/][i/]`
+
+- `ORDER` indicates whether the sorted list is **ascending** or **descending**.
+- **Ascending** is represented with integer 1.
+- **Descending** is represented with integer -1.
+- `n/` indicates sorting according to name.
+- `i/` indicates sorting according to student id.
+
+Examples:
+
+- `sort -1 i/` sorts the person list in descending order according to student id.
+- `sort 1 n/` sorts the person list in ascending order according to name.
 
 ### Deleting a person : `delete`
 
