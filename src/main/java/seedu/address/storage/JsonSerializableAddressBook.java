@@ -8,12 +8,15 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -25,10 +28,12 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
     public static final String MESSAGE_DUPLICATE_WEDDING = "Weddings list contains duplicate wedding(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons, tag, and weddings.
@@ -37,10 +42,12 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(
             @JsonProperty("persons") List<JsonAdaptedPerson> persons,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("weddings") List<JsonAdaptedWedding> weddings) {
+            @JsonProperty("weddings") List<JsonAdaptedWedding> weddings,
+            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.persons.addAll(persons);
         this.tags.addAll(tags);
         this.weddings.addAll(weddings);
+        this.tasks.addAll(tasks);
     }
 
     /**
@@ -52,6 +59,7 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         weddings.addAll(source.getWeddingList().stream().map(JsonAdaptedWedding::new).collect(Collectors.toList()));
+        tasks.addAll(source.getTaskList().stream().map(this::mapToJsonAdaptedTask).collect(Collectors.toList()));;
     }
 
     /**
@@ -75,6 +83,13 @@ class JsonSerializableAddressBook {
             }
             addressBook.addTag(tag);
         }
+        for (JsonAdaptedTask jsonAdaptedTask : tasks) {
+            Task task = jsonAdaptedTask.toModelType();
+            if (addressBook.hasTask(task)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            }
+            addressBook.addTask(task);
+        }
         for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
             Wedding wedding = jsonAdaptedWedding.toModelType();
             if (addressBook.hasWedding(wedding)) {
@@ -88,6 +103,7 @@ class JsonSerializableAddressBook {
             Person person = jsonAdaptedPerson.toModelType();
             loadTags(addressBook, person);
             loadWeddings(addressBook, person);
+            loadTasks(addressBook, person);
         }
         return addressBook;
     }
@@ -109,6 +125,31 @@ class JsonSerializableAddressBook {
                 continue;
             }
             addressBook.addWedding(wedding);
+        }
+    }
+
+    private void loadTasks(AddressBook addressBook, Person person) {
+        Set<Task> taskList = person.getTasks();
+        for (Task task : taskList) {
+            if (addressBook.hasTask(task)) {
+                continue;
+            }
+            addressBook.addTask(task);
+        }
+    }
+
+    /**
+     * Maps a given Task to its corresponding JsonAdaptedTask subclass.
+     */
+    private JsonAdaptedTask mapToJsonAdaptedTask(Task task) {
+        if (task instanceof Todo) {
+            return new JsonAdaptedTodo((Todo) task);
+        } else if (task instanceof Deadline) {
+            return new JsonAdaptedDeadline((Deadline) task);
+        } else if (task instanceof Event) {
+            return new JsonAdaptedEvent((Event) task);
+        } else {
+            throw new IllegalArgumentException("Unknown task type");
         }
     }
 }

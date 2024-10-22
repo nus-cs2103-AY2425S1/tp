@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -16,6 +15,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -31,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +42,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
             @JsonProperty("weddings") List<JsonAdaptedWedding> weddings) {
         this.name = name;
         this.phone = phone;
@@ -47,9 +51,13 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
+        }
         if (weddings != null) {
             this.weddings.addAll(weddings);
         }
+
     }
 
     /**
@@ -66,6 +74,24 @@ class JsonAdaptedPerson {
         weddings.addAll(source.getWeddings().stream()
                 .map(JsonAdaptedWedding::new)
                 .collect(Collectors.toList()));
+        tasks.addAll(source.getTasks().stream()
+                .map(this::mapToJsonAdaptedTask)
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Helper function to map a Task to its corresponding JsonAdaptedTask subclass.
+     */
+    private JsonAdaptedTask mapToJsonAdaptedTask(Task task) {
+        if (task instanceof Todo) {
+            return new JsonAdaptedTodo((Todo) task);
+        } else if (task instanceof Deadline) {
+            return new JsonAdaptedDeadline((Deadline) task);
+        } else if (task instanceof Event) {
+            return new JsonAdaptedEvent((Event) task);
+        } else {
+            throw new IllegalArgumentException("Unknown task type");
+        }
     }
 
     /**
@@ -76,9 +102,14 @@ class JsonAdaptedPerson {
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         final List<Wedding> personWeddings = new ArrayList<>();
+        final List<Task> personTasks = new ArrayList<>();
 
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        for (JsonAdaptedTask task : tasks) {
+            personTasks.add(task.toModelType());
         }
 
         for (JsonAdaptedWedding wedding : weddings) {
@@ -119,8 +150,9 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Wedding> modelWeddings = new HashSet<>(personWeddings);
+        final Set<Task> modelTasks = new HashSet<>(personTasks);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
     }
 
 }
