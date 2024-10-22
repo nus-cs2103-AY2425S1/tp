@@ -152,7 +152,7 @@ Example:
 * `owe 1 hr/1.5` updates the tuition fee owed by the 2nd student in the list.
 ![oweResult.png](images/oweResult.png)
 
-<box type="important" heade="#### Constraints">
+<box type="important" header="####">**Constraints**
     Hours owed by a student must be a positive multiple of 0.5.
 </box>
 
