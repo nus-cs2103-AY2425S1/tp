@@ -94,19 +94,46 @@ public class Person {
     public ObservableList<Property> getListOfSellingProperties() {
         return sellingProperties;
     }
-    public ObservableList<Property> getListOfPropertiesSold() {
-        return propertiesSold;
-    }
-
 
     public ObservableList<Property> getListOfBuyingProperties() {
         return buyingProperties;
+    }
+
+    public ObservableList<Property> getListOfPropertiesSold() {
+        return propertiesSold;
     }
 
     public ObservableList<Property> getListOfPropertiesBought() {
         return propertiesBought;
     }
 
+    /**
+     * Returns the total sales revenue for this person who has sold properties.
+     */
+    public int getSalesRevenue() {
+        return this.getListOfPropertiesSold().stream().mapToInt(property -> property.getPrice().getPrice()).sum();
+    }
+
+    /**
+     * Returns the total purchase expense for this person who has bought properties.
+     */
+    public int getPurchaseExpense() {
+        return this.getListOfPropertiesBought().stream().mapToInt(property -> property.getPrice().getPrice()).sum();
+    }
+
+    /**
+     * Returns the number of properties sold by this person.
+     */
+    public int getNumberOfPropertiesSold() {
+        return this.propertiesSold.size();
+    }
+
+    /**
+     * Returns the number of properties bought by this person.
+     */
+    public int getNumberOfPropertiesBought() {
+        return this.propertiesBought.size();
+    }
 
     /**
      * Returns true if both persons have the same name.

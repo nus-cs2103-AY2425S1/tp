@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
+
 /**
  * Represents a Price of a Property in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -23,6 +25,13 @@ public class Price {
      */
     public static boolean isValidPrice(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns an Integer representation of Price.
+     */
+    public Integer getPrice() {
+        return Integer.parseInt(value);
     }
 
     @Override

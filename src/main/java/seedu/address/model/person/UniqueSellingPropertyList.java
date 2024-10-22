@@ -10,7 +10,7 @@ public class UniqueSellingPropertyList {
 
     private ObservableList<Property> uniqueSellingProperties = FXCollections.observableArrayList();
 
-    public void addSellingProperties(ObservableList<Property> properties) {
+    public void addUniqueSellingProperties(ObservableList<Property> properties) {
         requireNonNull(properties);
         for (Property p: properties) {
             if (!uniqueSellingProperties.contains(p)) {

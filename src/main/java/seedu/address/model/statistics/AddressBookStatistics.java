@@ -20,15 +20,15 @@ public class AddressBookStatistics {
     private int totalPropertiesBought;
 
     private int totalPropertiesSold;
-    private int totalSales;
-    private int totalExpenses;
+    private int totalSalesRevenue;
+    private int totalPurchaseExpense;
     private UniquePersonList persons;
     public AddressBookStatistics() {
         this.totalPersons = 0;
         this.totalPropertiesBought = 0;
         this.totalPropertiesSold = 0;
-        this.totalSales = 0;
-        this.totalExpenses = 0;
+        this.totalSalesRevenue = 0;
+        this.totalPurchaseExpense = 0;
         this.sellingPropertyList = new UniqueSellingPropertyList();
         this.buyingPropertyList = new UniqueBuyingPropertyList();
     }
@@ -41,8 +41,12 @@ public class AddressBookStatistics {
         requireNonNull(person);
         ObservableList<Property> listoOfSellingProperties = person.getListOfSellingProperties();
         ObservableList<Property> listoOfBuyingProperties = person.getListOfBuyingProperties();
-        this.sellingPropertyList.addSellingProperties(listoOfSellingProperties);
-        this.buyingPropertyList.addBuyingProperties(listoOfBuyingProperties);
-
+        this.totalPersons += 1;
+        this.sellingPropertyList.addUniqueSellingProperties(listoOfSellingProperties);
+        this.buyingPropertyList.addUniqueBuyingProperties(listoOfBuyingProperties);
+        this.totalPropertiesSold += person.getNumberOfPropertiesSold(); //TODO Testing
+        this.totalPropertiesBought += person.getNumberOfPropertiesBought(); //TODO Testing
+        this.totalSalesRevenue += person.getSalesRevenue(); //TODO Test once SoldCommand is implemented
+        this.totalPurchaseExpense += person.getPurchaseExpense(); //TODO Test once BoughtCommand is implemented
     }
 }
