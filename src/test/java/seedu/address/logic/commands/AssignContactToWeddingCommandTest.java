@@ -78,7 +78,7 @@ public class AssignContactToWeddingCommandTest {
         assignCommand.execute(model);
 
         // Try assigning the same contact again
-        assertThrows(CommandException.class, "Alice has already been assigned to this wedding.",
-                () -> assignCommand.execute(model));
+        assertThrows(CommandException.class,
+                "Alice has already been assigned to this wedding.", () -> assignCommand.execute(model));
     }
 }
