@@ -91,15 +91,20 @@ public class Person {
         } else if (c.equals(Telegram.class)) {
             return this.getTelegram().toString();
         } else if (c.equals(Role.class)) {
-            StringBuilder t = new StringBuilder("| ");
+            StringBuilder r = new StringBuilder("| ");
             Set<Role> roles = this.getRoles();
             for (Role role : roles) {
-                t.append(role + " |");
+                r.append(" " + role + " |");
             }
-            return t.toString();
+            return r.toString();
             // code for this method is currently not very elegant...
-        } else if (c.equals(Set.class)) {
-            return getString(Role.class);
+        } else if (c.equals(Attendance.class)) {
+            StringBuilder a = new StringBuilder("| ");
+            Set<Attendance> sessions = this.getAttendance();
+            for (Attendance sesh : sessions) {
+                a.append(" " + sesh + " |");
+            }
+            return a.toString();
         } else {
             return "";
         }
@@ -112,8 +117,11 @@ public class Person {
     public String generateContactInformation() {
         Field[] fields = Person.class.getDeclaredFields();
         StringBuilder contactInfo = new StringBuilder("");
-        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase()
-                + ": " + this.getString(field.getType()) + "\n"));
+        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES")
+                ? field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n"
+                : field.getName().toUpperCase().equals("ATTENDANCE")
+                        ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
+                        : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
         return contactInfo.toString();
     }
 
