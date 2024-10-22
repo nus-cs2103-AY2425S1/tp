@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -60,7 +62,17 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        Person personToDelete = lastShownList.get(lastShownList.size() - 1);
+        model.deletePerson(personToDelete);
     }
 
     @Override

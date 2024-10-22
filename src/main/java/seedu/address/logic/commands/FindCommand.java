@@ -35,6 +35,11 @@ public class FindCommand extends Command {
     }
 
     @Override
+    public void undo(Model model) {
+
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

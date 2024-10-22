@@ -16,4 +16,9 @@ public class ExitCommand extends Command {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, false, false);
     }
 
+    @Override
+    public void undo(Model model) {
+
+    }
+
 }

@@ -92,6 +92,11 @@ public class EditGameCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, Messages.format(editedGame)));
     }
 
+    @Override
+    public void undo(Model model) {
+
+    }
+
     /**
      * Creates and returns a {@code Game} with the details of {@code gameToEdit}
      * edited with {@code editGameDescriptor}.

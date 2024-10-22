@@ -16,6 +16,13 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        Command previousCommand = model.getPreviousCommand();
+        previousCommand.undo(model);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public void undo(Model model) {
+
     }
 }
