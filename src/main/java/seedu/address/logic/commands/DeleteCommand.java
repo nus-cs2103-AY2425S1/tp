@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using its displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -23,9 +23,11 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted person: %1$s";
+    public static final String MESSAGE_UNDO_SUCCESS = "Reverted deletion of person: %1$s";
 
     private final Index targetIndex;
+    private Person personToDelete;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -33,6 +35,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert !isExecuted : "This command has already been executed";
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -40,7 +43,7 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         /*
         this part of code should only exist in javafx file so remove it so far
@@ -57,7 +60,16 @@ public class DeleteCommand extends Command {
          */
 
         model.deletePerson(personToDelete);
+        isExecuted = true;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        assert isExecuted : "This command has not been executed";
+        requireNonNull(model);
+        model.addPerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override

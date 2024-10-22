@@ -8,6 +8,8 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    protected boolean isExecuted = false;
+
     /**
      * Executes the command and returns the result message.
      *
