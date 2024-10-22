@@ -3,7 +3,6 @@ package tutorease.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeNowString;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
-import static tutorease.address.logic.parser.CliSyntax.PREFIX_LOCATION_INDEX;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -13,7 +12,6 @@ import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
 import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Lesson;
-import tutorease.address.model.lesson.LocationIndex;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Person;
@@ -29,7 +27,6 @@ public class AddLessonCommand extends LessonCommand {
             + "Parameters: "
             + PREFIX_STUDENT_ID + "1 "
             + PREFIX_START_DATE + dateTimeNowString() + " "
-            + PREFIX_LOCATION_INDEX + "1 "
             + PREFIX_DURATION + "1\n";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
@@ -37,7 +34,6 @@ public class AddLessonCommand extends LessonCommand {
 
     private final StudentId studentId;
     private final StartDateTime startDateTime;
-    private final LocationIndex locationIndex;
     private final EndDateTime endDateTime;
 
     /**
@@ -45,14 +41,11 @@ public class AddLessonCommand extends LessonCommand {
      *
      * @param studentId     The student ID of the student to add the lesson to.
      * @param startDateTime The start date time of the lesson.
-     * @param locationIndex The location index of the lesson.
      * @param endDateTime   The end date time of the lesson.
      */
-    public AddLessonCommand(StudentId studentId, StartDateTime startDateTime, LocationIndex locationIndex,
-                            EndDateTime endDateTime) {
+    public AddLessonCommand(StudentId studentId, StartDateTime startDateTime, EndDateTime endDateTime) {
         this.studentId = studentId;
         this.startDateTime = startDateTime;
-        this.locationIndex = locationIndex;
         this.endDateTime = endDateTime;
     }
 
@@ -65,7 +58,7 @@ public class AddLessonCommand extends LessonCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person student = personList.get(studentId.getValue());
-        Lesson lesson = new Lesson(student, this.locationIndex, this.startDateTime, this.endDateTime);
+        Lesson lesson = new Lesson(student, this.startDateTime, this.endDateTime);
         if (model.hasLessons(lesson)) {
             throw new CommandException(MESSAGE_OVERLAP_LESSON);
         }
@@ -86,12 +79,11 @@ public class AddLessonCommand extends LessonCommand {
         AddLessonCommand otherAddLessonCommand = (AddLessonCommand) other;
         return studentId.equals(otherAddLessonCommand.studentId)
                 && startDateTime.equals(otherAddLessonCommand.startDateTime)
-                && locationIndex.equals(otherAddLessonCommand.locationIndex)
                 && endDateTime.equals(otherAddLessonCommand.endDateTime);
     }
     @Override
     public String toString() {
         return String.format("AddLessonCommand[studentId=%s, startDateTime=%s, locationIndex=%s, endDateTime=%s]",
-                studentId, startDateTime, locationIndex, endDateTime);
+                studentId, startDateTime, endDateTime);
     }
 }
