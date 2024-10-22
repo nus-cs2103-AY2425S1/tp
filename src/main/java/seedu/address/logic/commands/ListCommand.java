@@ -16,7 +16,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_PURPOSE = "Lists the contents of StaffSync.";
 
-    public static final String MESSAGE_FORMAT = COMMAND_WORD + " PARAMETER (e/ph/all)";
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " (e/ph/all)";
 
     public static final String MESSAGAE_EXAMPLE = COMMAND_WORD + " e";
 
