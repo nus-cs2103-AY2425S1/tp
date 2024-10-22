@@ -138,13 +138,7 @@ public class PaidCommand extends Command {
         public Optional<Frequency> getFrequency() {
             return Optional.ofNullable(frequency);
         }
-
-        /**
-         * Returns true if frequency is present.
-         */
-        public boolean isFrequencyPresent() {
-            return CollectionUtil.isAnyNonNull(frequency);
-        }
+        
         @Override
         public boolean equals(Object other) {
             if (other == this) {
