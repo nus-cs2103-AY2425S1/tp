@@ -336,18 +336,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* freelance pre-university home tutors
-* has a need to manage a significant number of students, their contacts and relevant information
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Freelance pre-university home tutors
+* Manages a significant number of students
+* Prefers desktop applications
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**: Our software enhances tutoring efficiency by
 
-* simplifying management tasks,
-* reducing scheduling conflicts, and
-* providing a clear overview of classes and finances.
+* Simplifying management tasks
+* Reducing scheduling conflicts
+* Providing a clear overview of classes and finances
 
 It enables seamless tutor coordination with students and parents, improving communication and organization,
 ultimately leading to a more effective and stress-free educational experience.
