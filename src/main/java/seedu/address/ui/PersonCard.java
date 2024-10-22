@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import static seedu.address.model.addresses.Network.BTC;
-
 import java.util.Comparator;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
