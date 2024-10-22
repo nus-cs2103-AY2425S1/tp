@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALCLASS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -62,11 +62,11 @@ public class EditCommandTest {
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
         Student editedStudent = studentInList.withName(VALID_NAME_BOB)
                 .withStudentId(VALID_STUDENTID_BOB)
-                .withTutorialClass(VALID_TUTORIALCLASS_BOB)
+                .withTutorialId(VALID_TUTORIALID_BOB)
                 .build();
 
         EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withStudentId(VALID_STUDENTID_BOB).withTutorialClass(VALID_TUTORIALCLASS_BOB).build();
+                .withStudentId(VALID_STUDENTID_BOB).withTutorialId(VALID_TUTORIALID_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS,

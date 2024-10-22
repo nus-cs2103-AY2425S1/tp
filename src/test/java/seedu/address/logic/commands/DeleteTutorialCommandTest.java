@@ -16,7 +16,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 
@@ -33,7 +33,7 @@ public class DeleteTutorialCommandTest {
         Tutorial tutorial = model.getTutorialList().getTutorials().get(0);
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorial);
         String expectedMessage = String.format(DeleteTutorialCommand.MESSAGE_DELETE_TUTORIAL_SUCCESS,
-                tutorial.getTutorialClass());
+                tutorial.getTutorialId());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 getTypicalAssignmentList(), getTypicalTutorialList());
         expectedModel.deleteTutorial(tutorial);
@@ -44,7 +44,7 @@ public class DeleteTutorialCommandTest {
 
     @Test
     public void execute_invalidTutId_success() {
-        Tutorial tutorial = Tutorial.of(new TutName("tut"), TutorialClass.of("5000"));
+        Tutorial tutorial = Tutorial.of(new TutName("tut"), TutorialId.of("5000"));
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorial);
         assertCommandFailure(deleteTutorialCommand, model, DeleteTutorialCommand.MESSAGE_TUTORIAL_NOT_FOUND);
     }

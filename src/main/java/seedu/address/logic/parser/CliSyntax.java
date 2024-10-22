@@ -16,6 +16,6 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_DUEDATE = new Prefix("d/");
     public static final Prefix PREFIX_STUDENTID = new Prefix("s/");
-    public static final Prefix PREFIX_TUTORIALCLASS = new Prefix("c/");
+    public static final Prefix PREFIX_TUTORIALID = new Prefix("c/");
     public static final Prefix PREFIX_ATTENDANCEDATE = new Prefix("d/");
 }

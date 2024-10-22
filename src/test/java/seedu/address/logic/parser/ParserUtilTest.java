@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_STUDENT_ID = "001"; // leading zeros is not acceptable
-    private static final String INVALID_TUTORIAL_CLASS = " "; // assuming spaces are invalid
+    private static final String INVALID_TUTORIAL_ID = " "; // assuming spaces are invalid
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_STUDENT_ID = "1001";
-    private static final String VALID_TUTORIAL_CLASS = "1001";
+    private static final String VALID_TUTORIAL_ID = "1001";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -65,26 +65,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTutorialClass_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorialClass(null));
+    public void parseTutorialId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorialId(null));
     }
 
     @Test
-    public void parseTutorialClass_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorialClass(INVALID_TUTORIAL_CLASS));
+    public void parseTutorialId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorialId(INVALID_TUTORIAL_ID));
     }
 
     @Test
-    public void parseTutorialClass_validValueWithoutWhitespace_returnsTutorialClass() throws Exception {
-        TutorialClass expectedTutorialClass = TutorialClass.of(VALID_TUTORIAL_CLASS);
-        assertEquals(expectedTutorialClass, ParserUtil.parseTutorialClass(VALID_TUTORIAL_CLASS));
+    public void parseTutorialId_validValueWithoutWhitespace_returnsTutorialId() throws Exception {
+        TutorialId expectedTutorialId = TutorialId.of(VALID_TUTORIAL_ID);
+        assertEquals(expectedTutorialId, ParserUtil.parseTutorialId(VALID_TUTORIAL_ID));
     }
 
     @Test
-    public void parseTutorialClass_validValueWithWhitespace_returnsTrimmedTutorialClass() throws Exception {
-        String tutorialClassWithWhitespace = WHITESPACE + VALID_TUTORIAL_CLASS + WHITESPACE;
-        TutorialClass expectedTutorialClass = TutorialClass.of(VALID_TUTORIAL_CLASS);
-        assertEquals(expectedTutorialClass, ParserUtil.parseTutorialClass(tutorialClassWithWhitespace));
+    public void parseTutorialId_validValueWithWhitespace_returnsTrimmedTutorialId() throws Exception {
+        String tutorialIdWithWhitespace = WHITESPACE + VALID_TUTORIAL_ID + WHITESPACE;
+        TutorialId expectedTutorialId = TutorialId.of(VALID_TUTORIAL_ID);
+        assertEquals(expectedTutorialId, ParserUtil.parseTutorialId(tutorialIdWithWhitespace));
     }
 
 }

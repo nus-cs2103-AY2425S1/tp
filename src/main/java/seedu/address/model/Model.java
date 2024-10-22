@@ -11,7 +11,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 
@@ -85,7 +85,7 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
-    boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date);
+    boolean setStudentAttendance(StudentId target, TutorialId tut, Date date);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
@@ -97,7 +97,7 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     boolean hasTutorial(Tutorial tutorial);
-    boolean hasTutorial(TutorialClass tutorialClass);
+    boolean hasTutorial(TutorialId tutorialId);
     void addTutorial(Tutorial toAdd);
     /**
      * Returns the List of Tut
@@ -168,8 +168,8 @@ public interface Model {
      * Assign student to specified tutorial.
      *
      * @param student Student id of target student.
-     * @param tutorialClass The tutorial class that student will be assigned to.
+     * @param tutorialId The tutorial class that student will be assigned to.
      */
-    void assignStudent(Student student, TutorialClass tutorialClass);
+    void assignStudent(Student student, TutorialId tutorialId);
 
 }

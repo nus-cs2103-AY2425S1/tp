@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Represents an abstract TutorialClass.
  * A TutorialClass can either be an existing class with a specific class code or a "None" type.
  */
-public abstract class TutorialClass {
+public abstract class TutorialId {
 
     public static final String MESSAGE_CONSTRAINTS =
                 "Tutorial class should be numeric and typically represents a class code.";
@@ -26,8 +26,8 @@ public abstract class TutorialClass {
         return test.matches(VALIDATION_REGEX); // Simple numeric validation
     }
 
-    private static TutorialClass exist(String value) {
-        return new TutorialClass.Exist(value);
+    private static TutorialId exist(String value) {
+        return new TutorialId.Exist(value);
     }
 
     /**
@@ -35,7 +35,7 @@ public abstract class TutorialClass {
      *
      * @return A None type of TutorialClass.
      */
-    public static TutorialClass none() {
+    public static TutorialId none() {
         return None.none();
     }
 
@@ -45,15 +45,15 @@ public abstract class TutorialClass {
      * @param value The string value representing the class code.
      * @return A new TutorialClass object.
      */
-    public static TutorialClass of(String value) {
+    public static TutorialId of(String value) {
         requireNonNull(value);
         if (value.equals("-1")) {
-            return TutorialClass.none();
+            return TutorialId.none();
         }
-        return TutorialClass.exist(value);
+        return TutorialId.exist(value);
     }
 
-    private static final class None extends TutorialClass {
+    private static final class None extends TutorialId {
         private static final None none = new None();
         private final String value = "-1";
         public static None none() {
@@ -67,7 +67,7 @@ public abstract class TutorialClass {
 
     }
 
-    private static final class Exist extends TutorialClass {
+    private static final class Exist extends TutorialId {
         private final String value;
 
         @JsonCreator

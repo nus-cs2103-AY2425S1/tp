@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALCLASS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BOB;
@@ -43,7 +43,7 @@ public class UniqueStudentListTest {
     public void contains_studentWithSameIdentityFieldsInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB)
-                .withTutorialClass(VALID_TUTORIALCLASS_BOB)
+                .withTutorialId(VALID_TUTORIALID_BOB)
                 .build();
         assertTrue(uniqueStudentList.contains(editedAlice));
     }
@@ -87,7 +87,7 @@ public class UniqueStudentListTest {
     public void setStudent_editedStudentHasSameIdentity_success() {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE)
-                .withStudentId(VALID_STUDENTID_BOB).withTutorialClass(VALID_TUTORIALCLASS_BOB)
+                .withStudentId(VALID_STUDENTID_BOB).withTutorialId(VALID_TUTORIALID_BOB)
                 .build();
         uniqueStudentList.setStudent(ALICE, editedAlice);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
