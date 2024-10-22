@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SortCommand.ASCENDING;
 import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEWTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLDTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,11 +34,13 @@ import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.ScheduleCommand.ScheduleDescriptor;
+import seedu.address.logic.commands.SocialMediaCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -161,6 +164,13 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD + " 3") instanceof BackupCommand);
     }
 
+    @Test
+    public void parseCommand_socialMedia() throws Exception {
+        SocialMediaCommand command = (SocialMediaCommand) parser.parseCommand(
+                SocialMediaCommand.COMMAND_WORD + " 1 " + PREFIX_IG + "username");
+        assertEquals(new SocialMediaCommand("username", SocialMedia.Platform.INSTAGRAM, INDEX_FIRST_PERSON),
+                command);
+    }
 }
 
 

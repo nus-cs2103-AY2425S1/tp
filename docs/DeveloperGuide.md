@@ -268,7 +268,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 * small business owners
-* sole proprietors 
+* sole proprietors
 
 **Value proposition**: Since these businesses are single-individual teams, keeping track of different stakeholders alone is a hassle. These individuals work on their computers at least for their networking purposes, making the product compatible with their existing workflows. The product is an easy-to-use contact management app that manages customers, business partners and suppliers.
 
