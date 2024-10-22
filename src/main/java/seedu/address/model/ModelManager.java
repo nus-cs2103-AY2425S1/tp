@@ -256,6 +256,7 @@ public class ModelManager implements Model {
     @Override
     public void sortGroupList(Comparator<Group> comparator) {
         requireAllNonNull(comparator);
+        addressBook.setGroups(filteredGroups.sorted(comparator));
     }
 
     @Override
