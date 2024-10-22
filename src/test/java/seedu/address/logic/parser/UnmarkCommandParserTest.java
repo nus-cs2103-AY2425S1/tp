@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ALL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -33,7 +34,7 @@ public class UnmarkCommandParserTest {
     @Test
     public void parse_wildcard_success() {
         assertParseSuccess(parser, "*" + TUTORIAL_DESC_ONE,
-                new UnmarkCommand(true, new Tutorial(VALID_TUTORIAL_ONE)));
+                new UnmarkCommand(INDEX_ALL, new Tutorial(VALID_TUTORIAL_ONE)));
     }
 
     @Test

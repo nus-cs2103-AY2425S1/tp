@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ALL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -33,21 +34,7 @@ public class MarkCommandParserTest {
     @Test
     public void parse_wildcard_success() {
         assertParseSuccess(parser, "*" + TUTORIAL_DESC_ONE,
-                new MarkCommand(true, new Tutorial(VALID_TUTORIAL_ONE)));
-    }
-
-    @Test
-    public void parse_invalidIndex_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE);
-
-        // negative index
-        assertParseFailure(parser, "-5" + TUTORIAL_DESC_ONE, expectedMessage);
-
-        // zero index
-        assertParseFailure(parser, "0" + TUTORIAL_DESC_ONE, expectedMessage);
-
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "string" + TUTORIAL_DESC_ONE, expectedMessage);
+                new MarkCommand(INDEX_ALL, new Tutorial(VALID_TUTORIAL_ONE)));
     }
 
     @Test

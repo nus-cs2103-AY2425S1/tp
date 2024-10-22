@@ -27,26 +27,15 @@ public class UnmarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "tut/1";
 
-    private final List<Index> indexList = new ArrayList<>();
+    private final Index index;
     private final Tutorial tutorial;
-    private final boolean shouldUnmarkAll;
 
     /**
      * @param index of the person in the display list
      * @param tutorial number to remove attendance for
      */
     public UnmarkCommand(Index index, Tutorial tutorial) {
-        this.indexList.add(index);
-        this.shouldUnmarkAll = false;
-        this.tutorial = tutorial;
-    }
-
-    /**
-     * @param shouldUnmarkAll whether to unmark all persons in the display list
-     * @param tutorial number to remove attendance for
-     */
-    public UnmarkCommand(boolean shouldUnmarkAll, Tutorial tutorial) {
-        this.shouldUnmarkAll = shouldUnmarkAll;
+        this.index = index;
         this.tutorial = tutorial;
     }
 
@@ -76,7 +65,7 @@ public class UnmarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> currDisplayedList = model.getFilteredPersonList();
-        List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, indexList, shouldUnmarkAll);
+        List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, index);
         List<Person> editedPersonList = new ArrayList<>();
         for (Person personToEdit : personToEditList) {
             Person editedPerson = this.generateUnmarkedPerson(personToEdit, this.tutorial);
@@ -112,7 +101,7 @@ public class UnmarkCommand extends Command {
 
         // state check
         UnmarkCommand e = (UnmarkCommand) other;
-        return indexList.equals(e.indexList)
+        return index.equals(e.index)
                 && tutorial.equals(e.tutorial);
     }
 }

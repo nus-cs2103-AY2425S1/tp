@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ALL;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -23,7 +23,7 @@ public class CommandUtilTest {
         List<Person> currDisplayedList = this.model.getFilteredPersonList();
         try {
             List<Person> filteredList = CommandUtil.filterPersonsByIndex(currDisplayedList,
-                    new ArrayList<>(), true);
+                    INDEX_ALL);
             assertEquals(currDisplayedList, filteredList);
         } catch (CommandException e) {
             throw new RuntimeException(e);
@@ -36,7 +36,7 @@ public class CommandUtilTest {
         List<Person> expectedList = currDisplayedList.subList(0, 1);
         try {
             List<Person> filteredList = CommandUtil.filterPersonsByIndex(currDisplayedList,
-                    List.of(Index.fromZeroBased(0)), false);
+                    INDEX_FIRST_PERSON);
             assertEquals(expectedList, filteredList);
         } catch (CommandException e) {
             throw new RuntimeException(e);

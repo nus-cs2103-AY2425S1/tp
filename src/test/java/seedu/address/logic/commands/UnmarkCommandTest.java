@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ALL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -86,7 +87,7 @@ public class UnmarkCommandTest {
     public void execute_shouldUnmarkAll_success() {
         Tutorial tutorialToBeAdded = new Tutorial("1");
 
-        UnmarkCommand unmarkCommand = new UnmarkCommand(true, tutorialToBeAdded);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_ALL, tutorialToBeAdded);
 
         try {
             unmarkCommand.execute(model);

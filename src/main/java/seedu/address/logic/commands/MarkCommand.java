@@ -27,26 +27,15 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "tut/1";
 
-    private final List<Index> indexList = new ArrayList<>();
+    private final Index index;
     private final Tutorial tutorial;
-    private final boolean shouldMarkAll;
 
     /**
      * @param index of the person in the display list
      * @param tutorial number to mark attendance for
      */
     public MarkCommand(Index index, Tutorial tutorial) {
-        this.indexList.add(index);
-        this.shouldMarkAll = false;
-        this.tutorial = tutorial;
-    }
-
-    /**
-     * @param shouldMarkAll whether to mark all persons in the display list
-     * @param tutorial number to mark attendance for
-     */
-    public MarkCommand(boolean shouldMarkAll, Tutorial tutorial) {
-        this.shouldMarkAll = shouldMarkAll;
+        this.index = index;
         this.tutorial = tutorial;
     }
 
@@ -75,7 +64,7 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> currDisplayedList = model.getFilteredPersonList();
-        List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, indexList, shouldMarkAll);
+        List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, index);
         List<Person> editedPersonList = new ArrayList<>();
         for (Person personToEdit : personToEditList) {
             Person editedPerson = this.generateMarkedPerson(personToEdit, this.tutorial);
@@ -112,7 +101,7 @@ public class MarkCommand extends Command {
 
         // state check
         MarkCommand e = (MarkCommand) other;
-        return indexList.equals(e.indexList)
+        return index.equals(e.index)
                 && tutorial.equals(e.tutorial);
     }
 }

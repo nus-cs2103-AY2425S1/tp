@@ -12,28 +12,26 @@ import seedu.address.model.person.Person;
  * Contains utility methods used for command execution.
  */
 public class CommandUtil {
+    private static final int filterAll = -1;
 
     /**
      * Filters the list of persons by the indexes provided.
      * @param currDisplayedList list of persons currently displayed
-     * @param indexList list of indexes to filter by
-     * @param shouldFilterAll whether to filter all persons
-     * @return List of persons filtered by the indexes provided
+     * @param index index to filter by
+     * @return List of persons filtered by the index provided
      * @throws CommandException when the index is invalid
      */
     public static List<Person> filterPersonsByIndex(
-            List<Person> currDisplayedList, List<Index> indexList, boolean shouldFilterAll) throws CommandException {
-        if (shouldFilterAll) {
+            List<Person> currDisplayedList, Index index) throws CommandException {
+
+        List<Person> personList = new ArrayList<>();
+        if (index.getZeroBased() >= currDisplayedList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } else if (index.getZeroBased() == CommandUtil.filterAll) {
             return currDisplayedList;
         } else {
-            List<Person> personList = new ArrayList<>();
-            for (Index index : indexList) {
-                if (index.getZeroBased() >= currDisplayedList.size()) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-                }
-                personList.add(currDisplayedList.get(index.getZeroBased()));
-            }
-            return personList;
+            personList.add(currDisplayedList.get(index.getZeroBased()));
         }
+        return personList;
     }
 }
