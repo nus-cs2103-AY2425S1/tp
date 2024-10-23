@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -91,6 +92,11 @@ public class GitHubCommandTest {
      * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public void replaceAllPersons(List<Person> persons) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
