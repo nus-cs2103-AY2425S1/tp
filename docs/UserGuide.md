@@ -80,6 +80,7 @@ A screen (User Interface) similar to the below should appear in a few seconds. N
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+</box>
 
 ## **General commands**
 
