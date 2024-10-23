@@ -15,7 +15,7 @@ import seedu.hireme.model.internshipapplication.Name;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_SORTING_ORDER = "";
+    private static final String INVALID_SORTING_ORDER = "??";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_EMAIL = "rachel@example.com";
@@ -96,6 +96,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseSortingOrder_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(""));
+    }
+
+    @Test
     public void parseSortingOrder_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(INVALID_SORTING_ORDER));
     }
@@ -107,14 +112,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseSortingOrder_validValueWithoutWhitespace_returnsSortingOrder() throws Exception {
-        assertDoesNotThrow(() -> ParseException.class);
+        assertDoesNotThrow(() -> AssertionError.class);
         assertEquals(true, ParserUtil.parseSortingOrder(VALID_SORTING_ORDER));
     }
 
     @Test
     public void parseSortingOrder_validValueWithWhitespace_returnsSortingOrder() throws Exception {
         String sortingOrderWithWhitespace = WHITESPACE + VALID_SORTING_ORDER + WHITESPACE;
-        assertDoesNotThrow(() -> ParseException.class);
+        assertDoesNotThrow(() -> AssertionError.class);
         assertEquals(true, ParserUtil.parseSortingOrder(sortingOrderWithWhitespace));
     }
 
