@@ -249,41 +249,41 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAllergy_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Allergy expectedTag = new Allergy(VALID_ALLERGY_1);
-        assertEquals(expectedTag, ParserUtil.parseAllergy(VALID_ALLERGY_1));
+    public void parseAllergy_validValueWithoutWhitespace_returnsAllergy() throws Exception {
+        Allergy expectedAllergy = new Allergy(VALID_ALLERGY_1);
+        assertEquals(expectedAllergy, ParserUtil.parseAllergy(VALID_ALLERGY_1));
     }
 
     @Test
-    public void parseAllergy_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_ALLERGY_1 + WHITESPACE;
-        Allergy expectedTag = new Allergy(VALID_ALLERGY_1);
-        assertEquals(expectedTag, ParserUtil.parseAllergy(tagWithWhitespace));
+    public void parseAllergy_validValueWithWhitespace_returnsTrimmedAllergy() throws Exception {
+        String allergyWithWhitespace = WHITESPACE + VALID_ALLERGY_1 + WHITESPACE;
+        Allergy expectedAllergy = new Allergy(VALID_ALLERGY_1);
+        assertEquals(expectedAllergy, ParserUtil.parseAllergy(allergyWithWhitespace));
     }
 
     @Test
-    public void parseAllergys_null_throwsNullPointerException() {
+    public void parseAllergies_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAllergies(null));
     }
 
     @Test
-    public void parseAllergys_collectionWithInvalidTags_throwsParseException() {
+    public void parseAllergies_collectionWithInvalidAllergies_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAllergies(Arrays.asList(
                 VALID_ALLERGY_1, INVALID_ALLERGY)));
     }
 
     @Test
-    public void parseAllergys_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseAllergies_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseAllergies(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseAllergys_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Allergy> actualTagSet = ParserUtil.parseAllergies(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
-        Set<Allergy> expectedTagSet = new HashSet<Allergy>(Arrays.asList(
+    public void parseAllergies_collectionWithValidAllergies_returnsAllergySet() throws Exception {
+        Set<Allergy> actualAllergySet = ParserUtil.parseAllergies(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
+        Set<Allergy> expectedAllergySet = new HashSet<Allergy>(Arrays.asList(
                 new Allergy(VALID_ALLERGY_1), new Allergy(VALID_ALLERGY_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedAllergySet, actualAllergySet);
     }
 
     @Test

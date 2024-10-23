@@ -53,8 +53,8 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_ALLERGY_SOYBEANS).build();
+        // different allergies -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_SOYBEANS).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
     @Disabled
@@ -65,7 +65,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
+                + editPersonDescriptor.getAddress().orElse(null) + ", allergies="
                 + editPersonDescriptor.getAllergies().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

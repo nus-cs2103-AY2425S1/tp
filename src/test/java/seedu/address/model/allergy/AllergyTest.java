@@ -12,14 +12,14 @@ public class AllergyTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Allergy(invalidTagName));
+    public void constructor_invalidAllergyName_throwsIllegalArgumentException() {
+        String invalidAllergyName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Allergy(invalidAllergyName));
     }
 
     @Test
-    public void isValidTagName() {
-        // null tag name
+    public void isValidAllergyName() {
+        // null allergy name
         assertThrows(NullPointerException.class, () -> Allergy.isValidAllergyName(null));
     }
 

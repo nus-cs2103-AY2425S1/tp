@@ -48,30 +48,30 @@ public class AddAllergyCommandTest {
         Set<Allergy> allergies = new HashSet<>();
         allergies.add(new Allergy(allergy));
 
-        Set<Allergy> expectedTags = new HashSet<>();
-        expectedTags.add(new Allergy(allergy));
-        expectedTags.addAll(ALICE.getAllergies());
+        Set<Allergy> expectedAllergies = new HashSet<>();
+        expectedAllergies.add(new Allergy(allergy));
+        expectedAllergies.addAll(ALICE.getAllergies());
 
         AddAllergyCommand command = new AddAllergyCommand(nric, allergies);
         command.execute(model);
         Person alice = model.fetchPersonIfPresent(new NricMatchesPredicate(ALICE.getNric()))
                 .orElse(null);
-        assertEquals(expectedTags, alice.getAllergies());
+        assertEquals(expectedAllergies, alice.getAllergies());
     }
 
     @Test
     public void equals() {
         Nric aliceNric = ALICE.getNric();
-        Set<Allergy> aliceTags = ALICE.getAllergies();
+        Set<Allergy> aliceAllergies = ALICE.getAllergies();
         Nric bobNric = BOB.getNric();
-        Set<Allergy> bobTags = BOB.getAllergies();
-        AddAllergyCommand addAliceAllergyCommand = new AddAllergyCommand(aliceNric, aliceTags);
-        AddAllergyCommand addBobCommand = new AddAllergyCommand(bobNric, bobTags);
+        Set<Allergy> bobAllergies = BOB.getAllergies();
+        AddAllergyCommand addAliceAllergyCommand = new AddAllergyCommand(aliceNric, aliceAllergies);
+        AddAllergyCommand addBobCommand = new AddAllergyCommand(bobNric, bobAllergies);
         // same object -> returns true
         assertTrue(addAliceAllergyCommand.equals(addAliceAllergyCommand));
 
         // same values -> returns true
-        AddAllergyCommand addAliceAllergyCommandCopy = new AddAllergyCommand(aliceNric, aliceTags);
+        AddAllergyCommand addAliceAllergyCommandCopy = new AddAllergyCommand(aliceNric, aliceAllergies);
         assertTrue(addAliceAllergyCommand.equals(addAliceAllergyCommandCopy));
 
         // different types -> returns false

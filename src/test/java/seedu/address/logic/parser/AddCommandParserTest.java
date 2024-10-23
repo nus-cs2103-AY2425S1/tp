@@ -71,7 +71,7 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonAllergyValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
                 + DOB_DESC_BOB + GENDER_DESC_BOB + ADDRESS_DESC_BOB;
 
