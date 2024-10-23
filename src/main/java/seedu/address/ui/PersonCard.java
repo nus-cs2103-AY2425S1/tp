@@ -81,6 +81,7 @@ public class PersonCard extends UiPart<Region> {
         if (role.getRole() != "") {
             sb.append("Role: ").append(game.getRole());
         }
+        assert !sb.toString().equals("");
         return new Label(sb.toString());
     }
 

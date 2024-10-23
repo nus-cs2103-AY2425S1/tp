@@ -26,9 +26,6 @@ public class CommandBox extends UiPart<Region> {
 
     private CommandHistory commandHistory = new CommandHistory();
     private final SortedSet<String> entries;
-    //popup GUI
-    private ContextMenu entriesPopup;
-
 
     @FXML
     private AutoSuggestionTextField commandTextField;
@@ -42,7 +39,6 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.entries = new TreeSet<>();
-        this.entriesPopup = new ContextMenu();
         commandTextField.setCommandBox(this);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -107,7 +103,7 @@ public class CommandBox extends UiPart<Region> {
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
         }
-
+        commandTextField.hidePopup();
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
