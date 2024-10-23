@@ -18,8 +18,10 @@ public class BookingsCommand extends Command {
 
     private final LocalDate date;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all record with appointments on the specified date "
-            + "where dates are in the format dd/mm/yy\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all records with appointments on the specified date.\n"
+            + "The date has to be in one of the following accepted formats:\n"
+            + "dd/MM/yyyy OR dd-MM-yyyy OR dd MM yyyy\n"
             + "Parameters: DATE\n"
             + "Examples:\n"
             + COMMAND_WORD + " 23/10/2024\n";
