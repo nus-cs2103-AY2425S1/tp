@@ -19,6 +19,13 @@
     -fx-padding: 0px;
 }
 
+#helpTitle {
+    -fx-font-size: 24px; /* Adjust if necessary */
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50; /* Optional: Adjust text color */
+    -fx-padding: 10 0 20 0; /* Optional: Adjust padding */
+}
+
 .vbox {
     -fx-alignment: center;
     -fx-spacing: 15px;
