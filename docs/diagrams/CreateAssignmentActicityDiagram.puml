@@ -1,0 +1,24 @@
+@startuml
+start
+
+:User creates assignment;
+
+if () then ([Empty title])
+    stop
+else ([else])
+    :Construct add assignment command;
+
+    :Execute add assignment command;
+
+    if () then ([Assignment title already exists]])
+        stop
+    else ([else])
+        :Add assignment to the assignment list;
+        :Return successful command result;
+        :Save assignments into json storage file;
+    endif
+endif
+
+:Display results;
+stop
+@enduml

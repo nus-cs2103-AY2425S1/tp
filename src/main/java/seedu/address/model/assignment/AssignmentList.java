@@ -3,6 +3,7 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
@@ -30,6 +31,15 @@ public class AssignmentList {
     public AssignmentList(ArrayList<Assignment> assignments) {
         requireNonNull(assignments);
 
+        //to avoid duplicate assignments in arraylist
+        HashSet<Assignment> uniqueAssignments = new HashSet<>();
+        for (Assignment assignment : assignments) {
+            requireNonNull(assignment);
+            if (uniqueAssignments.contains(assignment)) {
+                throw new DuplicateAssignmentException();
+            }
+            uniqueAssignments.add(assignment);
+        }
         this.assignments = assignments;
     }
 
@@ -123,6 +133,15 @@ public class AssignmentList {
                 .filter(assignment::equals)
                 .findFirst()
                 .orElseThrow(AssignmentNotFoundException::new);
+    }
+
+    /**
+     * Resets the existing data of this {@code AssignmentList} with {@code newData}.
+     */
+    public void resetData(AssignmentList newData) {
+        requireNonNull(newData);
+        assignments.clear();
+        assignments.addAll(newData.assignments);
     }
 
     @Override

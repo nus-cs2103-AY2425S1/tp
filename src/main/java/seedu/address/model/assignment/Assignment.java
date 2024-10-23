@@ -5,36 +5,36 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 /**
- * Represents an assignment with a title, due date, and completion statuses for students.
+ * Represents an assignment with a title, due dueDate, and completion statuses for students.
  */
 public class Assignment {
     private final String title;
-    private final LocalDateTime date;
+    private final LocalDateTime dueDate;
     private final HashMap<Integer, Boolean> statuses;
     private int numOfCompletedStudents = 0;
 
     /**
-     * Constructs an Assignment with the specified title and due date.
+     * Constructs an Assignment with the specified title and due dueDate.
      *
      * @param title The title of the assignment.
-     * @param date  The due date of the assignment.
+     * @param dueDate  The due dueDate of the assignment.
      */
-    public Assignment(String title, LocalDateTime date) {
+    public Assignment(String title, LocalDateTime dueDate) {
         this.title = title;
-        this.date = date;
+        this.dueDate = dueDate;
         this.statuses = new HashMap<>();
     }
 
     /**
-     * Constructs an Assignment with the specified title, due date and statuses.
+     * Constructs an Assignment with the specified title, due dueDate and statuses.
      *
      * @param title The title of the assignment.
-     * @param date  The due date of the assignment.
+     * @param dueDate  The due dueDate of the assignment.
      * @param statuses The hashmap mapping student indexes to statuses
      */
-    public Assignment(String title, LocalDateTime date, HashMap<Integer, Boolean> statuses) {
+    public Assignment(String title, LocalDateTime dueDate, HashMap<Integer, Boolean> statuses) {
         this.title = title;
-        this.date = date;
+        this.dueDate = dueDate;
         this.statuses = statuses;
         for (boolean i: statuses.values()) {
             if (i) {
@@ -53,12 +53,12 @@ public class Assignment {
     }
 
     /**
-     * Returns the due date of the assignment.
+     * Returns the due dueDate of the assignment.
      *
-     * @return The due date of the assignment.
+     * @return The due dueDate of the assignment.
      */
     public LocalDateTime getDueDate() {
-        return date;
+        return dueDate;
     }
 
     /**
@@ -129,7 +129,7 @@ public class Assignment {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
-        return title + " due on " + formatter.format(date)
+        return title + " due on " + formatter.format(dueDate)
                 + " (" + numOfCompletedStudents + " students have completed!)";
     }
 }
