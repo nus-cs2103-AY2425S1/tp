@@ -99,13 +99,7 @@
     -fx-padding: 0 0 0 0;
 }
 
-.list-cell:filled:even {
-    /* even list cells, 0,2,4... */
-    -fx-background-color: #c5e3f9;
-}
-
-.list-cell:filled:odd {
-    /* odd list cells, 1,3,5... */
+.list-cell:filled {
     -fx-background-color: #c5e3f9;
 }
 

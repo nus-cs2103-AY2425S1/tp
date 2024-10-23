@@ -9,6 +9,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -40,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setDateOfLastVisit(person.getDateOfLastVisit());
+        descriptor.setEmergencyContact(person.getEmergencyContact());
     }
 
     /**
@@ -75,8 +77,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor} that we
+     * are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
@@ -89,6 +91,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withDateOfLastVisit(String dateOfLastVisit) {
         descriptor.setDateOfLastVisit(Optional.of(new DateOfLastVisit(dateOfLastVisit)));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyContact(String emergencyContact) {
+        descriptor.setEmergencyContact(Optional.of(new EmergencyContact(emergencyContact)));
         return this;
     }
 
