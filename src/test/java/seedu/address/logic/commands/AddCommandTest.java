@@ -170,6 +170,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isPinned(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPinnedPersonList(Person person) {
             throw new AssertionError("This method should not be called.");
         }

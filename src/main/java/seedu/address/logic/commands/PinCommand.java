@@ -10,7 +10,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Pins a person in address book to a pinned list.
@@ -23,7 +22,7 @@ public class PinCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_PIN_PERSON_SUCCESS = "Pinned Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already pinned";
+    public static final String MESSAGE_ALREADY_PINNED = "This person already pinned";
 
     private final Index targetIndex;
 
@@ -41,14 +40,15 @@ public class PinCommand extends Command {
         }
 
         Person personToPin = lastShownList.get(targetIndex.getZeroBased());
-        try {
-            model.addPinnedPersonList(personToPin);
-            CommandResult commandResult = new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS,
-                    Messages.formatShort(personToPin)), false, false);
-            return commandResult;
-        } catch (DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        
+        if (model.isPinned(personToPin)) {
+            throw new CommandException(MESSAGE_ALREADY_PINNED);
         }
+
+        model.addPinnedPersonList(personToPin);
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS,
+                Messages.formatShort(personToPin)), false, false);
+        return commandResult;
     }
 
     @Override

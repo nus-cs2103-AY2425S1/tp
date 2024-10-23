@@ -57,7 +57,7 @@ public class PinCommandTest {
         filledModel.addPinnedPersonList(validPerson);
 
         assertThrows(CommandException.class,
-                PinCommand.MESSAGE_DUPLICATE_PERSON, () -> pinCommand.execute(filledModel));
+                PinCommand.MESSAGE_ALREADY_PINNED, () -> pinCommand.execute(filledModel));
     }
 
 

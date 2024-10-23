@@ -328,15 +328,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The details entered about the new person are invalid.
+- 1a. The details entered about the new person are invalid.
 
-  - 2a1. System shows an error message.
+  - 1a1. System shows an error message.
 
     Use case ends.
 
-- 2b. A person with same name is alreadly in contact list.
+- 1b. A person with same name is already in contact list.
 
-  - 2b1. System shows duplicate person message.
+  - 1b1. System shows duplicate person message.
 
     Use case ends.
 
@@ -386,9 +386,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The specified person is invalid.
+- 1a. The specified person is invalid.
 
-  - 2a1. System shows an error message.
+  - 1a1. System shows an error message.
 
     Use case ends.
 
@@ -421,15 +421,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 3a. The specified person is invalid.
+- 2a. The specified person is invalid.
 
-  - 3a1. System shows an error message.
+  - 2a1. System shows an error message.
 
     Use case ends.
 
-- 3b. The note name is invalid.
+- 2b. The note name is invalid.
 
-  - 3b1. System shows an error message.
+  - 2b1. System shows an error message.
 
     Use case ends.
 
@@ -443,9 +443,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension**
 
-- 3a. The person is alreadly pinned.
+- 2a. The person is already pinned.
 
-  - 3a1. System shows duplicate pinned message.
+  - 2a1. System shows duplicated pin message.
 
     Use case ends.
 
@@ -518,4 +518,4 @@ testers are expected to do more *exploratory* testing.
 
    1a. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-2*{ more test cases …​ }*
+2. _{ more test cases …​ }_

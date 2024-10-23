@@ -15,7 +15,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -147,13 +146,20 @@ public class ModelManager implements Model {
      * Returns an unmodifiable view of the list of pinned {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
+
+    @Override
+    public boolean isPinned(Person person) {
+        requireNonNull(person);
+        return pinnedPersons.contains(person);
+    }
+
     @Override
     public ObservableList<Person> getPinnedPersonList() {
         return pinnedPersons.asUnmodifiableObservableList();
     }
 
     @Override
-    public void addPinnedPersonList(Person person) throws DuplicatePersonException {
+    public void addPinnedPersonList(Person person) {
         requireNonNull(person);
         this.pinnedPersons.add(person);
     }
