@@ -12,17 +12,27 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Check that Java is installed:
+   - EduConnect requires **Java 17 or higher** to run. If you're not sure if you have the correct Java version installed, you can click [here for the relevant instructions]().
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download EduConnect onto your computer:
+   - Download the latest version of EduConnect by clicking [here](https://github.com/AY2425S1-CS2103T-F12-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Move the file to a folder:
+   - After downloading, place the `educonnect.jar` file in any folder on your computer where you'd like to store the app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open EduConnect:
+   - Open the "Command Prompt" (for Windows) or "Terminal" (for Mac/Linux).
+   - Type `cd` followed by the folder location where you saved the EduConnect file. For example:
+     - On Windows: `cd C:\Users\YourName\Documents\EduConnect`
+     - On Mac/Linux: `cd /Users/YourName/Documents/EduConnect`
+   - Then type this command to start the app:
+   
+        `java -jar educonnect.jar`
+   - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -35,7 +45,7 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
