@@ -121,7 +121,15 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        if (internalList.size() != otherUniquePersonList.internalList.size()) {
+            return false;
+        }
+        for (int i = 0; i < internalList.size(); i++) {
+            if (!internalList.get(i).equals(otherUniquePersonList.internalList.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

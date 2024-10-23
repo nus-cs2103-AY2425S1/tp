@@ -2,17 +2,21 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.ApptSorter;
+import seedu.address.model.healthservice.HealthService;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
@@ -21,20 +25,77 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+    private final Nric nric;
+    private final Birthdate birthdate;
+    private final Sex sex;
+
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private Address address;
+    private Allergy allergy;
+    private BloodType bloodType;
+    private HealthRisk healthRisk;
+    private HealthRecord healthRecord;
+    private Note note;
+    private Name nokName;
+    private Phone nokPhone;
+    private final Set<HealthService> healthServices = new HashSet<>();
+    private List<Appt> appts = new ArrayList<>();
+
+    /**
+     * Name, Nric, Sex, Birthdate and healthservice must be present and not null
+     */
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices) {
+        this(name, nric, birthdate, sex, healthServices, new Phone("123"), new Email("dummy@gmail.com"));
+    }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices,
+            Phone phone, Email email) {
+        requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
         this.name = name;
+        this.nric = nric;
+        this.birthdate = birthdate;
+        this.sex = sex;
         this.phone = phone;
         this.email = email;
+        this.healthServices.addAll(healthServices);
+        this.address = null;
+        this.allergy = null;
+        this.bloodType = null;
+        this.healthRisk = null;
+        this.healthRecord = null;
+        this.note = null;
+        this.nokName = null;
+        this.nokPhone = null;
+        this.appts.clear();
+    }
+
+    /**
+     * Only Name, NRIC, Sex, BirthDate, HealthServices field need to be present.
+     * The other fields can be null
+     */
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone,
+            Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
+            HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
+        requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
+        this.name = name;
+        this.nric = nric;
+        this.birthdate = birthdate;
+        this.sex = sex;
+        this.phone = phone;
+        this.email = email;
+        this.healthServices.addAll(healthServices);
         this.address = address;
-        this.tags.addAll(tags);
+        this.allergy = allergy;
+        this.bloodType = bloodType;
+        this.healthRisk = healthRisk;
+        this.healthRecord = healthRecord;
+        this.note = note;
+        this.nokName = nokName;
+        this.nokPhone = nokPhone;
+        this.appts = appts;
     }
 
     public Name getName() {
@@ -49,20 +110,96 @@ public class Person {
         return email;
     }
 
+    public Nric getNric() {
+        return nric;
+    }
+
+    public Birthdate getBirthdate() {
+        return birthdate;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public Name getNokName() {
+        return nokName;
+    }
+
+    public Phone getNokPhone() {
+        return nokPhone;
+    }
+
+    public Allergy getAllergy() {
+        return allergy;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
+    }
+
+    public HealthRisk getHealthRisk() {
+        return healthRisk;
+    }
+
+    public Note getNote() {
+        return note;
+    }
+
+    public HealthRecord getHealthRecord() {
+        return healthRecord;
+    }
+
     public Address getAddress() {
         return address;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Adds an appointment to the person's list of appointments.
+     * The appointments will be sorted by date and time.
+     *
+     * @param appt
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public void addAppt(Appt appt) {
+        appts.add(appt);
+        ApptSorter.sortAppointments(appts);
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns an immutable list of appointments.
+     * This list will not contain any duplicate appointments.
+     *
+     * @return List of appointments.
+     */
+    public List<Appt> getAppts() {
+        return Collections.unmodifiableList(appts);
+    }
+
+    /**
+     * Returns a string representation of the appointments
+     * in the form of a list of strings.
+     *
+     * @return String representation of the appointments.
+     */
+    public String getApptsString() {
+        StringBuilder sb = new StringBuilder();
+        for (Appt appt : appts) {
+            sb.append(appt.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<HealthService> getHealthServices() {
+        return Collections.unmodifiableSet(healthServices);
+    }
+
+    /**
+     * Returns true if both persons have the same NRIC.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,8 +208,12 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
     }
+
+    // public void showDetails() {
+
+    // }
 
     /**
      * Returns true if both persons have the same identity and data fields.
@@ -90,27 +231,25 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return this.isSamePerson(otherPerson);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, nric, birthdate, sex, healthServices);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("nric", nric)
+                .add("sex", sex)
+                .add("birthdate", birthdate)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("Health Services", healthServices)
                 .toString();
     }
 

@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private HelpKeywordWindow helpKeywordWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -139,12 +140,34 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
+    public void handleHelp(String keyword) {
+        if (keyword.isEmpty()) {
+            if (!helpWindow.isShowing()) {
+                helpWindow.show();
+            } else {
+                helpWindow.focus();
+            }
+        } else {
+            helpKeywordWindow = new HelpKeywordWindow(keyword);
+            if (!helpKeywordWindow.isShowing()) {
+                helpKeywordWindow.show();
+            } else {
+                helpKeywordWindow.focus();
+            }
+        }
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
+
     }
 
     void show() {
@@ -179,7 +202,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                handleHelp(commandResult.getKeyword());
             }
 
             if (commandResult.isExit()) {

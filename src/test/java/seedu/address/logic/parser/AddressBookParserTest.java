@@ -35,7 +35,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().withHealthServices("Blood Test").build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
@@ -48,9 +48,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
+        Person personToDelete = new PersonBuilder().build();
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + personToDelete.getNric());
+        assertEquals(new DeleteCommand(personToDelete.getNric()), command);
+    }
+
+    @Test
+    public void parseCommand_invalidDelete() throws Exception {
+        String invalidNric = "A0000000Z";
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE), () -> parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
+                + invalidNric));
     }
 
     @Test
@@ -78,8 +87,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        HelpCommand command = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD);
+        assertEquals(new HelpCommand(), command);
+    }
+
+    @Test
+    public void parseCommand_helpKeyword() throws Exception {
+        HelpCommand commandAddKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " add");
+        HelpCommand commandAddfKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " addf");
+        HelpCommand commandApptKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " appt");
+        HelpCommand commandDeleteKeyword = (HelpCommand) parser.parseCommand(
+                HelpCommand.COMMAND_WORD + " delete");
+
+        assertEquals(new HelpCommand("add"), commandAddKeyword);
+        assertEquals(new HelpCommand("addf"), commandAddfKeyword);
+        assertEquals(new HelpCommand("appt"), commandApptKeyword);
+        assertEquals(new HelpCommand("delete"), commandDeleteKeyword);
     }
 
     @Test
@@ -96,6 +119,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }
