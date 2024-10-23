@@ -36,10 +36,6 @@ public class AbsentDate {
         return absentDate != null && (absentDate.matches(VALIDATION_REGEX));
     }
 
-    public String getAbsentDate() {
-        return absentDate;
-    }
-
     @Override
     public String toString() {
         return absentDate;

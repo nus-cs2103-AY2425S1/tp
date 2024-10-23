@@ -35,11 +35,6 @@ public class AbsentReason {
     public static boolean isValidAbsentReason(String reason) {
         return reason != null && (reason.matches(VALIDATION_REGEX) || reason.isEmpty());
     }
-
-    public String getAbsentReason() {
-        return absentReason;
-    }
-
     @JsonValue
     @Override
     public String toString() {
