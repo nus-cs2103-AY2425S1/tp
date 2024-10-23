@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -126,5 +128,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String criteria} into a {@code List<String>}.
+     */
+    public static List<String> parseCriteria(String criteria) throws ParseException {
+        requireNonNull(criteria);
+        final List<String> criteriaSet = new ArrayList<>();
+        for (String criteriaString : criteria.split(" ")) {
+            if (!criteriaString.isEmpty()) {
+                criteriaSet.add(criteriaString);
+            }
+        }
+        return criteriaSet;
     }
 }
