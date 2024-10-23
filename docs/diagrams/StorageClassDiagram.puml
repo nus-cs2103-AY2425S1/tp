@@ -1,52 +1,34 @@
 @startuml
+!include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor #336699
-skinparam classBackgroundColor #F4F6F6
-skinparam classBorderColor #000000
-skinparam classArrowColor #000000
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage as StoragePackage {
-
     package "UserPrefs Storage" #F4F6F6 {
-        Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage {
-            + Optional<UserPrefs> readUserPrefs() throws DataLoadingException
-            + void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException
-        }
+        Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
         Class JsonUserPrefsStorage
     }
-
-    Class "<<interface>>\nStorage" as Storage {
-        + Optional<UserPrefs> readUserPrefs() throws DataLoadingException
-        + void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException
-        + Path getAddressBookFilePath()
-        + Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException
-        + void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException
-    }
-
-    Class StorageManager {
-        - AddressBookStorage addressBookStorage
-        - UserPrefsStorage userPrefsStorage
-        + StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage)
-        + Optional<UserPrefs> readUserPrefs() throws DataLoadingException
-        + void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException
-        + Path getAddressBookFilePath()
-        + Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException
-        + void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException
-    }
-
+    Class "<<interface>>\nStorage" as Storage
+    Class StorageManager
     package "AddressBook Storage" #F4F6F6 {
-        Class "<<interface>>\nAddressBookStorage" as AddressBookStorage {
-            + Path getAddressBookFilePath()
-            + Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException
-            + Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException
-            + void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException
-            + void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException
-        }
+        Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
         Class JsonAddressBookStorage
         Class JsonSerializableAddressBook
         Class JsonAdaptedMember
         Class JsonAdaptedTag
+        Class JsonAdaptedPoint
+        Class JsonAdaptedSession
     }
+}
+
+package Model as ModelPackage {
+    Class Session
+    Class AddressBook
+    Class VersionedAddressBook
+    Class ModelManager
+    Class Member
+    Class Point
 }
 
 Class HiddenOutside #FFFFFF
@@ -55,15 +37,22 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
-
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
-
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedMember
+JsonSerializableAddressBook --> "*" JsonAdaptedPoint
+JsonSerializableAddressBook --> "*" JsonAdaptedSession
 JsonAdaptedMember --> "*" JsonAdaptedTag
+JsonAdaptedMember --> "*" JsonAdaptedSession
+AddressBook --> "*" Session
+VersionedAddressBook --> AddressBook
+StorageManager --> VersionedAddressBook
+ModelManager --> StorageManager
+ModelManager --> AddressBook
+ModelManager --> Member
+Member --> "*" Point
 
 @enduml
-
