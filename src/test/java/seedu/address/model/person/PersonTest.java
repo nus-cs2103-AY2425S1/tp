@@ -92,8 +92,22 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName()
+            + ", gender=" + ALICE.getGender() + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
+            + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + ", subject=" + ALICE.getSubjects()
+            + ", classes=" + ALICE.getClasses() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void getSubjectString_defaultValue_returnsEmptyString() {
+        // Test the default implementation of getSubjectString in Person
+        assertEquals("", ALICE.getSubjectString());
+    }
+
+    @Test
+    public void getClassesString_defaultValue_returnsEmptyString() {
+        // Test the default implementation of getClassesString in Person
+        assertEquals("", ALICE.getClassesString());
     }
 }

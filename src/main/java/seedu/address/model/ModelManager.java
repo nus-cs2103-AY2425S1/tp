@@ -4,13 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,9 +22,11 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private final ObservableList<Person> internalList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -31,9 +36,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.internalList = FXCollections.observableArrayList(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(internalList);
     }
 
     public ModelManager() {
@@ -80,6 +86,8 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        internalList.setAll(addressBook.getPersonList());
+        filteredPersons.setPredicate(internalList::contains);
     }
 
     @Override
@@ -96,6 +104,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        addressBook.updateInternalList(internalList);
     }
 
     @Override
@@ -107,8 +116,45 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        addressBook.updateInternalList(internalList);
+    }
+
+    @Override
+    public void setFilteredPersonList(List<Person> persons) {
+        requireNonNull(persons);
+        internalList.setAll(persons);
+        filteredPersons.setPredicate(filteredPersons.getPredicate());
+    }
+
+    @Override
+    public void commitAddressBook() {
+        logger.info("Committing address book state");
+        assert addressBook != null : "Address book cannot be null";
+        assert filteredPersons.getPredicate() != null : "Predicate cannot be null";
+
+        addressBook.commit(addressBook, filteredPersons.getPredicate());
+    }
+
+    @Override
+    public void undoAddressBook() throws CommandException {
+        logger.info("Attempting to undo address book state");
+
+        ReadOnlyAddressBook prevAddressBook = addressBook.undo();
+        assert prevAddressBook != null : "Address book cannot be null";
+        setAddressBook(prevAddressBook);
+        filteredPersons.setPredicate(addressBook.getCurrentPredicate());
+
+        logger.info("Undo successful");
+    }
+
+    @Override
+    public void redoAddressBook() throws CommandException {
+        /*
+        ReadOnlyAddressBook nextAddressBook = addressBook.redo();
+        setAddressBook(nextAddressBook);
+        filteredPersons.setPredicate(addressBook.getCurrentPredicate());
+         */
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -119,12 +165,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        addressBook.updateInternalList(internalList);
         filteredPersons.setPredicate(predicate);
     }
 

@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -23,9 +25,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,11 +43,13 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NAME + " NAME] "
+            + "[" + PREFIX_GENDER + " GENDER] "
+            + "[" + PREFIX_PHONE + " PHONE] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
+            + "[" + PREFIX_ADDRESS + " ADDRESS] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]"
+            + "[" + PREFIX_CLASSES + "CLASS]"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -68,7 +74,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -96,12 +102,16 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
+        Set<String> updatedClasses = editPersonDescriptor.getClasses().orElse(personToEdit.getClasses());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+            updatedSubjects, updatedClasses);
     }
 
     @Override
@@ -134,10 +144,13 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Gender gender;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<Subject> subjects;
+        private Set<String> classes;
 
         public EditPersonDescriptor() {}
 
@@ -147,17 +160,22 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setGender(toCopy.gender);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setSubjects(toCopy.subjects);
+            setClasses(toCopy.classes);
         }
+
+
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, classes, subjects, gender);
         }
 
         public void setName(Name name) {
@@ -166,6 +184,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
         }
 
         public void setPhone(Phone phone) {
@@ -209,6 +235,22 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setSubjects(Set<Subject> subjects) {
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
+        }
+
+        public Optional<Set<Subject>> getSubjects() {
+            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+        }
+
+        public void setClasses(Set<String> classes) {
+            this.classes = (classes != null) ? new HashSet<>(classes) : null;
+        }
+
+        public Optional<Set<String>> getClasses() {
+            return (classes != null) ? Optional.of(Collections.unmodifiableSet(classes)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -222,21 +264,27 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(gender, otherEditPersonDescriptor.gender)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects)
+                    && Objects.equals(classes, otherEditPersonDescriptor.classes);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+                .add("name", name)
+                .add("gender", gender)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("tags", tags)
+                .add("subjects", subjects)
+                .add("classes", classes)
+                .toString();
         }
     }
 }

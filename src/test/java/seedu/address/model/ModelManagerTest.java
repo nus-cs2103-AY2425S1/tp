@@ -12,15 +12,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class ModelManagerTest {
-
     private ModelManager modelManager = new ModelManager();
+    private ModelManager expectedModelManager = new ModelManager();
+
+    @BeforeEach
+    public void setUp() {
+        modelManager = new ModelManager();
+        expectedModelManager = new ModelManager();
+    }
 
     @Test
     public void constructor() {
@@ -91,6 +100,22 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void undoAddressBook_noPreviousState_throwsCommandException() {
+        assertThrows(CommandException.class, () -> modelManager.undoAddressBook());
+    }
+
+    @Test
+    public void undoAddressBook_withPreviousState_success() throws CommandException {
+        modelManager.addPerson(TypicalPersons.ALICE);
+        modelManager.commitAddressBook();
+
+        modelManager.undoAddressBook();
+
+        assertEquals(modelManager.getAddressBook(), expectedModelManager.getAddressBook());
+        assertEquals(modelManager.getFilteredPersonList(), expectedModelManager.getFilteredPersonList());
     }
 
     @Test

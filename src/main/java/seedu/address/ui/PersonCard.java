@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -40,6 +38,12 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label subjects;
+    @FXML
+    private Label classes;
+    @FXML
+    private Label gender;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,13 +51,32 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
+        if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("student"))) {
+            cardPane.setStyle("-fx-background-color: #5a83a3;"); // Inline style for student
+        } else if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("teacher"))) {
+            cardPane.setStyle("-fx-background-color: #5aa366;"); // Inline style for teacher
+        } else {
+            // Optional: Set default style for other persons without "student" or "teacher" tags
+            cardPane.setStyle("-fx-background-color: #494a46;"); // Default style
+        }
+
+        // Set other UI components
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        String formattedGender = person.getGender().value.toLowerCase().equals("male") ? "Male" : "Female";
+        gender.setText("👫 " + formattedGender);
+        phone.setText("📱 " + person.getPhone().value);
+        address.setText("📍 " + person.getAddress().value);
+        email.setText("📨 " + person.getEmail().value);
+        String formattedSubjects = String.join(" • ", person.getSubjects().stream()
+                .map(subject -> subject.subjectName)
+                .toArray(String[]::new));
+        subjects.setText("📚 " + formattedSubjects);
+        String formattedClasses = String.join(" • ", person.getClasses().stream()
+                .toArray(String[]::new));
+        classes.setText("🏫 " + formattedClasses);
+
     }
+
 }
