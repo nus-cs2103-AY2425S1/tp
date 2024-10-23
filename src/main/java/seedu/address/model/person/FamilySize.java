@@ -53,11 +53,11 @@ public class FamilySize {
             return true;
         }
 
-        if (!(other instanceof FamilySize otherFamilyDate)) {
+        if (!(other instanceof FamilySize otherFamilySize)) {
             return false;
         }
 
-        return this.value == otherFamilyDate.value;
+        return this.value == otherFamilySize.value;
     }
 
     @Override
