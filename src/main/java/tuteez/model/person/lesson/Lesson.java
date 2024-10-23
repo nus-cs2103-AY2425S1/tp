@@ -117,6 +117,8 @@ public class Lesson {
      * @return {@code true} if the two lessons overlap in time, otherwise {@code false}.
      */
     public static boolean isClashingWithOtherLesson(Lesson firstLs, Lesson secondLs) {
+        assert firstLs != null;
+        assert secondLs != null;
         if (!firstLs.lessonDay.equals(secondLs.lessonDay)) {
             return false;
         }
@@ -198,6 +200,8 @@ public class Lesson {
          */
         @Override
         public int compare(Lesson o1, Lesson o2) {
+            assert o1 != null;
+            assert o2 != null;
             int dayComparison = o1.lessonDay.compareTo(o2.lessonDay);
             if (dayComparison != 0) {
                 return dayComparison;
