@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEcNameCommand;
 import seedu.address.logic.commands.AddEcNumberCommand;
+import seedu.address.logic.commands.AddExamCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -30,6 +32,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.EcName;
@@ -148,6 +151,20 @@ public class AddressBookParserTest {
                         + PREFIX_ABSENT_REASON + absentReason);
 
         // Assert that the expected command matches the parsed command
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_addExam() throws Exception {
+
+        final String exam = "Midterm";
+
+        AddExamCommand expected = new AddExamCommand(new Exam(exam));
+
+        AddExamCommand command = (AddExamCommand) parser.parseCommand(
+                AddExamCommand.COMMAND_WORD + " "
+                        + PREFIX_EXAM + exam);
+
         assertEquals(expected, command);
     }
 
