@@ -22,6 +22,7 @@ public class Game {
     public final Username username;
     public final SkillLevel skillLevel;
     public final Role role;
+    private boolean isFavourite;
 
 
     /**
@@ -75,6 +76,17 @@ public class Game {
 
     public Role getRole() {
         return this.role;
+    }
+
+    public boolean getFavouriteStatus() {
+        return this.isFavourite;
+    }
+
+    /**
+     * Sets a game to "favourite"
+     */
+    public void setAsFavourite() {
+        this.isFavourite = true;
     }
 
     /**

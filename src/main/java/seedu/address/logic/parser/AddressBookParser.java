@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new LoadCommand();
 
         case FavouriteGameCommand.COMMAND_WORD:
-            return new FavouriteGameCommand();
+            return new FavouriteGameCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
