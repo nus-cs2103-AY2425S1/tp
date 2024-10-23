@@ -50,6 +50,27 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 
 ## Helpful Guidelines for the User Guide
 
+### Interpreting symbols
+This section explains the symbols that you will find in the rest of the User Guide.
+
+| Symbol               | Meaning                                                |
+|----------------------|--------------------------------------------------------|
+| :warning:            | Warning or some important information for you to know. |
+| :information_source: | Information that you should take note of.              |
+| :bulb:               | Tips from us.                                          |
+
+### Searching for what you need
+This section tells you what information you will find in each of the sections of this guide. Feel free to skip to the sections which you need most.
+
+1. [Quick Start](#quick-start) teaches you how to set up BridalBuddy.
+2. [Tutorial for Beginners](#tutorial-for-beginners) walks you through the basic features of BridalBuddy to get you started.
+3. [Features](#features) helps you understand how all our features work.
+4. [FAQ](#faq) clarifies the doubts that many of our users have.
+5. [Command Summary](#command-summary) summarises all our features for easy reference.
+6. [Glossary](#glossary) explains the more technical terms used in this guide.
+7. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
+
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +80,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
