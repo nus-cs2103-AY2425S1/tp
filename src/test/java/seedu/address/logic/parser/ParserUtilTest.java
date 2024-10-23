@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,12 +14,15 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.WeddingDate;
+import seedu.address.model.wedding.WeddingName;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -192,5 +196,54 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseWeddingName_validWeddingName_success() throws Exception {
+        WeddingName expectedWeddingName = new WeddingName("Smith Wedding");
+        assertEquals(expectedWeddingName, ParserUtil.parseWeddingName("Smith Wedding"));
+    }
+
+    @Test
+    public void parseWeddingName_invalidWeddingName_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingName(""));
+    }
+
+    @Test
+    public void parseWeddingDate_validWeddingDate_success() throws Exception {
+        WeddingDate expectedWeddingDate = new WeddingDate(LocalDate.of(2025, 1, 1));
+        assertEquals(expectedWeddingDate, ParserUtil.parseWeddingDate("01/01/2025"));
+    }
+
+    @Test
+    public void parseWeddingDate_invalidWeddingDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("31/02/2024")); // Invalid date
+    }
+
+    @Test
+    public void parseWeddingDate_pastWeddingDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("01/01/2020")); // Date in the past
+    }
+
+    @Test
+    public void parsePersonIndexString_validPersonIndexes_success() throws Exception {
+        Set<Index> expectedIndexes = Set.of(Index.fromOneBased(1), Index.fromOneBased(2));
+        assertEquals(expectedIndexes, ParserUtil.parsePersonIndexString("1 2"));
+    }
+
+    @Test
+    public void parsePersonIndexString_invalidPersonIndexes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString("invalid"));
+    }
+
+    @Test
+    public void parseTags_validTags_success() throws Exception {
+        Set<Tag> expectedTags = Set.of(new Tag("friend"), new Tag("colleague"));
+        assertEquals(expectedTags, ParserUtil.parseTags(Arrays.asList("friend", "colleague")));
+    }
+
+    @Test
+    public void parseTags_invalidTag_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList("invalid tag!")));
     }
 }

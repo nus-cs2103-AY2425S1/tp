@@ -51,7 +51,7 @@ public class SampleDataUtil {
             new Address("Blk 45 Aljunied Street 85, #11-31"),
             getTagSet("photographer", "videographer"));
     public static final Wedding WEDDING1 = new Wedding(new WeddingName("John and Jane Wedding"),
-            new WeddingDate(LocalDate.parse("12/12/2024", FORMATTER)),
+            new WeddingDate(LocalDate.parse("12/12/2025", FORMATTER)),
             new ArrayList<>(List.of(ALEX.getId(), BERNICE.getId(), CHARLOTTE.getId(), DAVID.getId())));
     public static final Wedding WEDDING2 = new Wedding(new WeddingName("Sean and Emma Wedding"),
             new WeddingDate(LocalDate.parse("14/01/2025", FORMATTER)),
