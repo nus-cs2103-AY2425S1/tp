@@ -13,7 +13,11 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class UniqueProjectList
 Class Person
+Class Project
+Class ProjectName
+Class ProjectId
 Class Address
 Class Email
 Class EmployeeId
@@ -37,7 +41,9 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+AddressBook *-down-> "1" UniquePersonList
+AddressBook *-down-> "1" UniqueProjectList
+
 UniquePersonList --> "~* all" Person
 Person *--> EmployeeId
 Person *--> Name
@@ -46,6 +52,10 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Skill
+
+UniqueProjectList --> "~* all" Project
+Project *--> ProjectName
+Project *--> ProjectId
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -56,4 +66,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Project
 @enduml
