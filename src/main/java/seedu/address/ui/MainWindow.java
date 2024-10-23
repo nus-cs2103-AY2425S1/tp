@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personDetailView = new PersonDetailView();
+        personDetailView = new PersonDetailView(logic.getFilteredEventList());
         personDetailView.getRoot().setVisible(false);
         personDetailViewPlaceholder.getChildren().add(personDetailView.getRoot());
 

@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -20,6 +21,8 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
+    private ObservableList<Person> personList;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList<Person>}
      * and a {@code PersonSelectionHandler} for handling user selections of a person.
@@ -33,6 +36,17 @@ public class PersonListPanel extends UiPart<Region> {
                 personDetailView.update(newValue);
             }
         });
+        this.personList = personList;
+        this.personList.addListener((Observable observable) -> {
+            // set the visibility PersonDetailView to be false when the personList is empty
+            // otherwise take the first person in the list.
+            if (personList.isEmpty()) {
+                personDetailView.getRoot().setVisible(false);
+            } else {
+                personDetailView.update(personList.get(0));
+            }
+        });
+
     }
 
     /**
