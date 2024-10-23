@@ -14,6 +14,8 @@ public class LessonCard extends UiPart<Region> {
     private static final String FXML = "LessonListCard.fxml";
 
     @FXML
+    private Label id;
+    @FXML
     private HBox cardPane;
     @FXML
     private Label startDateTime;
@@ -23,15 +25,18 @@ public class LessonCard extends UiPart<Region> {
     private Label student;
     @FXML
     private Label address;
-
+    @FXML
+    private Label fee;
     /**
      * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
      */
-    public LessonCard(Lesson lesson) {
+    public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML);
+        id.setText(displayedIndex + ". ");
         startDateTime.setText(lesson.getStartDateTimeString());
         endDateTime.setText(lesson.getEndDateTimeString());
         student.setText(lesson.getStudentName());
         address.setText(lesson.getAddress());
+        fee.setText(lesson.getAmountPerHour());
     }
 }
