@@ -28,6 +28,8 @@ import seedu.address.logic.commands.findcommands.FindCommand;
 import seedu.address.logic.commands.listcommands.ListGroupCommand;
 import seedu.address.logic.commands.listcommands.ListStudentCommand;
 import seedu.address.logic.commands.listcommands.ListTaskCommand;
+import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
+import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
 import seedu.address.logic.parser.addcommands.AddGroupCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentToGroupCommandParser;
@@ -39,8 +41,6 @@ import seedu.address.logic.parser.deletecommands.DeleteTaskFromGroupCommandParse
 import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
 import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
-import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
-import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
 import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
