@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -35,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_REMARK, PREFIX_PRIORITY);
+                        PREFIX_REMARK, PREFIX_PRIORITY, PREFIX_DATE_OF_BIRTH, PREFIX_INCOME);
 
         Index index;
 
@@ -46,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_REMARK, PREFIX_PRIORITY);
+                PREFIX_DATE_OF_BIRTH, PREFIX_REMARK, PREFIX_PRIORITY, PREFIX_INCOME);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -61,6 +63,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DATE_OF_BIRTH).isPresent()) {
+            editPersonDescriptor.setDateOfBirth(ParserUtil.parseDateOfBirth(
+                    argMultimap.getValue(PREFIX_DATE_OF_BIRTH).get()));
+        }
+        if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
+            editPersonDescriptor.setIncome(ParserUtil.parseIncome(
+                    argMultimap.getValue(PREFIX_INCOME).get()));
         }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editPersonDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));

@@ -184,7 +184,8 @@ Statistics include:
 * Nb of HIGH Priority People
 * Nb of MEDIUM Priority People
 * Nb of LOW Priority People
-* Nb of People With Monthly Household Income < 2500
+* Nb of People Income <= 800
+* Nb of Appointments Within a Week From Current Date
 
 Format: `statistics`
 
