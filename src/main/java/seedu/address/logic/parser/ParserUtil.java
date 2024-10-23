@@ -144,7 +144,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into a {@code LocalDate}.
+     * Parses a {@code String date} into a {@code WeddingDate}.
      * Leading and trailing whitespaces will be trimmed.
      * The expected format is "dd/MM/yyyy".
      *
@@ -160,4 +160,5 @@ public class ParserUtil {
             throw new ParseException(WeddingDate.MESSAGE_CONSTRAINTS);
         }
     }
+
 }
