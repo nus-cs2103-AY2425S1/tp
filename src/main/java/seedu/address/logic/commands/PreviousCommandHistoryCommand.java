@@ -13,7 +13,7 @@ public class PreviousCommandHistoryCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the previous command entered. ";
 
-    public static final String MESSAGE_SUCCESS = "Previous command is shown";
+    public static final String MESSAGE_SUCCESS = "The previous command is : ";
     public static final String MESSAGE_FAILURE = "There are no more previous commands.";
 
     @Override
@@ -21,7 +21,12 @@ public class PreviousCommandHistoryCommand extends Command {
         requireNonNull(model);
 
         String previousCommand = model.getPreviousCommand();
-        return new CommandResult(previousCommand);
+
+        if (previousCommand.isEmpty()) {
+            return new CommandResult(MESSAGE_FAILURE, previousCommand);
+        }
+
+        return new CommandResult(MESSAGE_SUCCESS + previousCommand, previousCommand);
     }
 
     @Override

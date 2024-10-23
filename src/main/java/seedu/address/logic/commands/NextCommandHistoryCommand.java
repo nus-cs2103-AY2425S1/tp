@@ -13,13 +13,18 @@ public class NextCommandHistoryCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the next command entered. ";
 
-    public static final String MESSAGE_SUCCESS = "Next command is shown";
+    public static final String MESSAGE_SUCCESS = "The next command is : ";
+    public static final String MESSAGE_FAILURE = "There are no more next commands.";
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         String nextCommand = model.getNextCommand();
-        return new CommandResult(nextCommand);
+        if (nextCommand.isEmpty()) {
+            return new CommandResult(MESSAGE_FAILURE, nextCommand);
+        }
+
+        return new CommandResult(MESSAGE_SUCCESS + nextCommand, nextCommand);
     }
 
     @Override

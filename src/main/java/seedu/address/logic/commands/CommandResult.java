@@ -24,12 +24,18 @@ public class CommandResult {
     private final boolean exit;
 
     /**
+     * Command history should be shown to user.
+     */
+    private String history;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.history = history;
     }
 
     /**
@@ -37,7 +43,16 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, "");
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * setting command history,
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, String history) {
+        this(feedbackToUser, false, false, history);
     }
 
     public String getFeedbackToUser() {
@@ -50,6 +65,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public String getHistory() {
+        return history;
     }
 
     @Override

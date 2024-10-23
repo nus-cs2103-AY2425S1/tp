@@ -38,7 +38,7 @@ public class NextCommandHistoryCommandTest {
 
         NextCommandHistoryCommand nextCommandHistoryCommand = new NextCommandHistoryCommand();
         CommandResult commandResult = nextCommandHistoryCommand.execute(modelStub);
-        assertEquals("", commandResult.getFeedbackToUser());
+        assertEquals("There are no more next commands.", commandResult.getFeedbackToUser());
     }
 
     @Test
