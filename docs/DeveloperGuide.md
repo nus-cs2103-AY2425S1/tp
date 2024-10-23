@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TechConnect Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a company).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th company in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new company. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +190,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the company was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -246,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the company being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -280,65 +280,114 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: TechConnect is targeted at students who are looking at jobs in the tech industry.
+TechConnect helps students to organize a list of companies that they are interested in and find relevant companies that matches their needs.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
-
+| Priority | As a …​                                                 | I want to …​                                    | So that I can…​                                                                   |
+|----------|---------------------------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`  | new user                                                | see usage instructions                          | refer to instructions when I forget how to use the App                            |
+| `* * *`  | user                                                    | add a new company                               | refer to the company later                                                        |
+| `* * *`  | user                                                    | delete a company                                | remove entries that I no longer need                                              |
+| `* * *`  | user                                                    | find a company by name                          | locate details of the company without having to go through the entire list        |
+| `* *`    | user                                                    | bookmark a company                              | locate a company that I am interested in                                          |
+| `*`      | user with many companies in the address book            | filter companies by a criterion                 | locate a company relevant to my needs easily                                      |
+| `*`      | user with many bookmarked companies in the address book | see all my bookmarked companies                 | locate a company easily                                                           |
+| `*`      | user                                                    | tag a company                                   | associate them with the given tag                                                 |
+| `*`      | user                                                    | see which company I have contacted              | keep track of which companies I have contacted                                    |
+| `*`      | user                                                    | receive news about companies in my address book | stay informed about events or job opportunities from companies in my address book |
+| `*`      | new user                                                | create a personal profile with my skills        | find a company that matches my profile                                            |
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
+**System: TechConnect (TC)**
+<br/>
+**Use case: UC1 - Add a Company**
+<br/>
+**Actor: User**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User enters the detail of a company into the system
+2.  TC add the company to the contact list, and shows a success message to the user.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The input format is not correct.
 
-  Use case ends.
+    * 1a1. TC shows an error message.
+  
+    Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+* 3a. The given company already exists in the contact list.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TC will not add the company to the contact list.
 
-      Use case resumes at step 2.
+    Use case ends.
 
-*{More to be added}*
+<br/>
+
+**System: TechConnect (TC)**
+<br/>
+**Use case: UC2 - Remove a Company**
+<br/>
+**Actor: User**
+
+**MSS**
+
+1.  User choose a company to remove from the contact list.
+2.  TC removes the company from the contact list, and shows a success message to the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is not correct.
+
+    * 1a1. TC shows an error message.
+
+    Use case resumes at step 1.
+
+<br/>
+
+**System: TechConnect (TC)**
+<br/>
+**Use case: UC3 - Show all Company**
+<br/>
+**Actor: User**
+
+**MSS**
+
+1.  User requests to see all companies in the contact list.
+2.  TC shows all companies in the contact list.
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  File storing user's data should be small and not exceed 10MB per 1000 companies and 10,000 tags
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The app should have a simple and intuitive user interface.
+5. Data retrieval and saving should be reliable to prevent data loss
+6. The code should be modular and easily maintainable, following Java coding standards.
+7. The app should not require internet access, ensuring that the user's data remain private within their local system.
+8. The app should efficiently handle up to 1000 companies and 10,000 tags without a noticeable performance degradation.
+9. The application should be well-tested, with automated tests to ensure reliability and maintainability
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Index**: A numeric value that acts as an identifier to refer to a specific entity in the system.
+* **Tag**: A label to categorize the contacts in the address book.
+* **Bookmark**: A feature to allow users to save a company for future reference. This also provides users quick access to these companies.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -370,17 +419,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a company
 
-1. Deleting a person while all persons are being shown
+1. Deleting a company while all companies are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all companies using the `list` command. Multiple companies in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No company is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

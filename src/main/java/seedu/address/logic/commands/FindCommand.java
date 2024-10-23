@@ -2,23 +2,25 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import java.util.List;
+
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.company.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds an existing company in the address book.
  */
+
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies by company name, tag,"
+            + " or contact number."
+            + "\nParameters: find [/c <Company name>] or [/t <Tag name>] or [/num <Contact number>]"
+            + "\nExample: " + COMMAND_WORD + " /c Google"
+            + "\nExample: " + COMMAND_WORD + " /t Tech"
+            + "\nExample: " + COMMAND_WORD + " /num 12345678";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -29,9 +31,16 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredCompanyList(predicate);
+        List<?> filteredCompanies = model.getFilteredCompanyList();
+
+        if (filteredCompanies.isEmpty()) {
+            return new CommandResult("There is no company that suits your keyword!");
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format("Found %d companies!", filteredCompanies.size())
+                        + "\n" + filteredCompanies.toString());
     }
 
     @Override
@@ -51,8 +60,6 @@ public class FindCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
+        return String.format("FindCommand[predicate=%s]", predicate);
     }
 }
