@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -9,14 +10,22 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDeliveryCommand;
+import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkDeliveryCommand;
+import seedu.address.logic.commands.MarkSupplierCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortDeliveryCommand;
+import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -54,13 +63,27 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            if (arguments.trim().startsWith("-s")) {
+                return new AddCommandParser().parse(arguments.trim().substring(2));
+            } else if (arguments.trim().startsWith("-d")) {
+                return new AddDeliveryCommandParser().parse(arguments.trim().substring(2));
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE + "\nOR\n" + AddDeliveryCommand.MESSAGE_USAGE));
+            }
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            if (arguments.trim().startsWith("-s")) {
+                return new DeleteSupplierCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith("-d")) {
+                return new DeleteDeliveryCommandParser().parse(arguments.trim());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteSupplierCommand.MESSAGE_USAGE + "\nOR\n" + DeleteDeliveryCommand.MESSAGE_USAGE));
+            }
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -70,6 +93,31 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case MarkDeliveryCommand.COMMAND_WORD:
+            if (arguments.trim().startsWith("-s")) {
+                return new MarkSupplierCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith("-d")) {
+                return new MarkDeliveryCommandParser().parse(arguments.trim());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MarkSupplierCommand.MESSAGE_USAGE + "\nOR\n" + MarkDeliveryCommand.MESSAGE_USAGE));
+            }
+
+        case SortCommand.COMMAND_WORD:
+            if (arguments.trim().startsWith(PREFIX_DELIVERY.getPrefix())) {
+                return new SortDeliveryCommandParser().parse(arguments.trim());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SortDeliveryCommand.MESSAGE_USAGE));
+            }
+
+        case UpcomingCommand.COMMAND_WORD:
+            if (arguments.equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        UpcomingCommand.MESSAGE_USAGE));
+            }
+            return new UpcomingCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -82,5 +130,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

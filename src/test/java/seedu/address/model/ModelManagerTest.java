@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
+import static seedu.address.testutil.TypicalDeliveries.BREAD;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -15,6 +17,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Status;
+import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -86,6 +91,80 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasDelivery_nullDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasDelivery(null));
+    }
+
+    @Test
+    public void hasDeliveryNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasDelivery(APPLE));
+    }
+
+    @Test
+    public void hasDelivery_deliveryInAddressBook_returnsTrue() {
+        modelManager.addDelivery(BREAD);
+        assertTrue(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void deleteDelivery_nullDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteDelivery(null));
+    }
+
+    @Test
+    public void deleteDelivery_deliveryNotInAddressBook_throwsDeliveryNotFoundException() {
+        assertThrows(DeliveryNotFoundException.class, () -> modelManager.deleteDelivery(APPLE));
+    }
+
+    @Test
+    public void deleteDelivery_existingDelivery_removesSuccessfully() {
+        modelManager.addDelivery(BREAD);
+        modelManager.deleteDelivery(BREAD);
+        assertFalse(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void setDelivery_nullTarget_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setDelivery(null, APPLE));
+    }
+
+    @Test
+    public void setDelivery_nullUpdatedDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setDelivery(APPLE, null));
+    }
+
+    @Test
+    public void setDelivery_deliveryNotInAddressBook_throwsDeliveryNotFoundException() {
+        assertThrows(DeliveryNotFoundException.class, () -> modelManager.setDelivery(APPLE, BREAD));
+    }
+
+    @Test
+    public void setDelivery_existingDelivery_successfulUpdate() {
+        modelManager.addDelivery(BREAD);
+        Delivery updatedApple = new Delivery(
+                BREAD.getDeliveryProduct(),
+                BREAD.getDeliverySender(),
+                Status.CANCELLED,
+                BREAD.getDeliveryDate(),
+                BREAD.getDeliveryCost(),
+                BREAD.getDeliveryQuantity());
+
+        modelManager.setDelivery(BREAD, updatedApple);
+        assertTrue(modelManager.hasDelivery(updatedApple));
+        assertFalse(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void getFilteredDeliveryList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDeliveryList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredDeliveryList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredDeliveryList(null));
     }
 
     @Test

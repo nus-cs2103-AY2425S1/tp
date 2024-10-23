@@ -1,15 +1,19 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# AB-3 Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +25,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +61,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -70,7 +69,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,14 +88,16 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -108,7 +109,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -117,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -127,18 +128,20 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -171,58 +174,67 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<box type="info" seamless>
 
-</div>
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
-</div>
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<box type="info" seamless>
 
-</div>
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -268,65 +280,287 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: 
+Manage and track deliveries faster than using a typical mouse/GUI driven app. 
+Plan and allocate manpower more effectively to prepare for future deliveries.
+Match with the appropriate suppliers to find products correctly.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​     | I want to …​                                      | So that I can…​                                                                                            |
+|----------|-------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `* * *`  | shop owner  | view all my supplier contacts                     |                                                                                                            |
+| `* * *`  | shop owner  | add supplier contact                              |                                                                                                            |
+| `* * *`  | shop owner  | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
+| `* * *`  | shop owner  | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
+| `* *`    | shop owner  | Search for my supplier contacts by name           | I can find the contact information of the person I am looking for through names                            |
+| `*`      | shop owner  | Search for my supplier contacts by contact number | I can find the contact information of the person I am looking for through a contact number                 |
+| `*`      | shop owner  | Search for my supplier contacts by product        | I can find the contact information of the supplier I am looking for based on the product they supply       |
+| `* *`    | shop owner  | have custom tags for my suppliers                 | I can keep track of special details about my suppliers                                                     |
+| `* * *`  | shop owner  | add delivery information                          | I can track of the upcoming deliveries                                                                     |
+| `* *`    | shop owner  | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
+| `* * *`  | shop owner  | delete delivery information                       | I can delete deliveries that are no longer happening                                                       |
+| `* *`    | shop owner  | mark delivery with completion status              | I know if a delivery has been completed/postponed/cancelled                                                |
+| `*`      | shop owner  | Search for my deliveries by date                  | I can find the deliveries happening on a certain date                                                      |
+| `*`      | shop owner  | Search for my deliveries by supplier name         | I can find the deliveries associated with a supplier                                                       |
+| `* *`    | shop owner  | view past deliveries                              | I can keep track of deliveries that have been completed                                                    |
+| `* *`    | shop owner  | view list of products                             | I know what products I am currently selling                                                                |
 
 *{More to be added}*
 
-### Use cases
+### Use cases 
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**System**: Vendor Vault (VV)
 
-**Use case: Delete a person**
+**Use Case**: UC01 - Add Supplier Information
 
-**MSS**
+**Actor**: Grocer
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Main Success Scenario (MSS)**:
+1. User chooses to add supplier information with the required supplier details (name, contact, email, company, products).
+2. VV successfully adds the supplier and displays the updated list of suppliers.  
+   Use case ends.
 
-    Use case ends.
+**Extensions**:
+- **1a.** VV detects missing or incorrectly formatted data.
+    - **1a1.** VV displays an appropriate error message.  
+      Use case ends.
 
-**Extensions**
 
-* 2a. The list is empty.
+- **1b.** User enters duplicate supplier information.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+- **1c.** User omits supplier name.
+    - **1c1.** VV displays an error message.  
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+- **1d.** User omits or provides an invalid contact number.
+    - **1d1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1e.** User omits or provides an invalid email address.
+    - **1e1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1f.** User omits the address or provides an invalid format.
+    - **1f1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1g.** User omits the company name.
+    - **1g1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1h.** User omits product information entry.
+    - **1h1.** VV displays an error message.  
+      Use case ends.
+
+      
+- **1i.** User provides duplicate supplier information (e.g., an entry with the same name and contact details already exists).
+    - **1i1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC02 - Delete Supplier
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to delete a supplier.
+2. VV deletes the supplier and displays the updated supplier list.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the supplier index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+      
+- **1b.** The entered supplier index does not exist in the supplier list.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC03 - Mark Supplier Status
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to mark a supplier's status as active or inactive.
+2. VV updates the supplier's status and displays the updated supplier list.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the supplier index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects that the supplier index does not exist in the list.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1c.** VV detects that the status (active/inactive) is missing or invalid.
+    - **1c1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC04 - Add Deliveries
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to add a new delivery by entering the details for the new delivery (date and time, supplier index, product name, quantity, cost).
+2. VV adds the delivery entry to the list and displays the updated list of deliveries.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the date or time format is invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects that the supplier index is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1c.** VV detects that the product name is missing.
+    - **1c1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1d.** VV detects that the quantity or cost is missing or invalid.
+    - **1d1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1e.** VV detects a duplicate delivery (matching date, time, supplier index, and product name).
+    - **1e1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC05 - Delete Delivery
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to delete a delivery entry.
+2. VV removes the delivery entry from the list and displays the updated list of deliveries.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the delivery index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects invalid formatting.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC06 - Set the Status of Deliveries
+
+**Actor**: Grocer
+
+**Main Success Scenario (MSS)**:
+1. User chooses to set the status of a delivery as pending, delivered, or cancelled.
+2. VV displays a confirmation message and the updated list of deliveries.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects that the delivery index is missing or invalid.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1b.** VV detects that the status is missing.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1c.** VV detects that the status is not one of the accepted values (pending, delivered, or cancelled).
+    - **1c1.** VV displays an error message.  
+      Use case ends.
+
+
+- **1d.** VV detects invalid formatting.
+    - **1d1.** VV displays an error message.  
+      Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+Performance Requirements
+1. The system should respond to user input within 2 seconds for all CRUD operations on contacts and deliveries (e.g., adding, deleting, searching).
+2. The application should take no longer than 5 seconds to launch and load all necessary data (e.g., contacts, deliveries) on any supported platform.
+
+Scalability Requirements
+3. The system should be able to handle at least 1,000 contacts and 1000 deliveries without noticeable degradation in performance
+
+Usability Requirements
+4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+
+Compatibility / Portability Requirements
+5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies
+6. The product should work as a standalone JAR file, not exceeding 100MB in size without needing an installer.
+
+Data Requirements
+7. The system should not use any Database Management System (DBMS) for data storage. The contacts and deliveries data should be stored locally in a human-editable file.
+8. The system should ensure that the data file remains consistent and free from corruption across system crashes or improper shutdowns.
+
+Security Requirements
+9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine
+
+Maintainability Requirements
+10. The system should follow Object-Oriented Programming (OOP) principles to facilitate future maintenance and feature additions.
+11. The project should be developed in a breadth-first incremental manner, with consistent delivery of features over the course of the development cycle.
+
+Testability Requirements
+12. The system should be designed to support unit and integration testing, with testable modules and clearly defined boundaries.
+13. The application should not depend on any external remote servers for its core functionality, ensuring that the product can be tested and used offline without network dependencies.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Breadth-first Incremental Manner**: An approach to software development where features are implemented across the entire scope of the project in shallow layers, gradually adding depth and complexity over time. This method ensures that all major components of the system are developed in parallel, allowing for early integration and testing of the overall system structure.
+* **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
+* **CRUD Operations**: Refers to Create, Read, Update, and Delete operations. In this system, CRUD applies to managing supplier contacts and delivery information.
+* **DBMS (Database Management System)**: A software system that enables users to define, create, maintain and control access to a database. It provides an organised way of managing, storing, and retrieving vast amounts of data.
+* **Delivery Information**: Details about a specific delivery, including date, supplier, products, and status.
+* **Human-Editable File**: A plain text file that can be easily opened, read, and modified by users, typically in formats such as JSON, CSV, or TXT, without needing specialised software.
+* **JAR File**: A Java ARchive file, which is a package file format that aggregates many Java class files and associated resources (text, images, etc.) into one file for distribution.
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **OOP (Object-Oriented Programming)**: A programming paradigm based on the concept of objects, which can contain data and methods.
+* **Supplier Contact**: A record containing information about a supplier, including name, contact details, and associated products.
+* **Unit and Integration Testing**:
+  * **Unit Testing**: A software testing method where individual units or components of the software are tested in isolation to ensure they work correctly. 
+  * **Integration Testing**: A phase of software testing where individual software modules are combined and tested as a group to verify that they work correctly together.
+
+  
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,10 +568,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 

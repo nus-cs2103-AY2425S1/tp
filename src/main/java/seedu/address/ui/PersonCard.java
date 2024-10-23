@@ -35,11 +35,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label company;
     @FXML
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane products;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,10 +54,34 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        company.setText(person.getCompany().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getProducts().stream()
+                .sorted(Comparator.comparing(product -> product.productName))
+                .forEach(product -> products.getChildren().add(new Label(product.productName)));
+        setStatusStyle(person.getStatus().status);
+        status.setText(person.getStatus().status.toUpperCase());
+    }
+
+    private void setStatusStyle(String currentStatus) {
+        this.status.getStyleClass().clear();
+
+        switch (currentStatus) {
+        case "active":
+            status.getStyleClass().add("status-success");
+            status.getStyleClass().add("cell_small_label");
+            break;
+        case "inactive":
+            status.getStyleClass().add("status-error");
+            status.getStyleClass().add("cell_small_label");
+            break;
+        default:
+            status.getStyleClass().add("status-default");
+            status.getStyleClass().add("cell_small_label");
+            break;
+        }
     }
 }

@@ -4,13 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +25,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Delivery> filteredDeliveries;
+    private final SortedList<Delivery> sortedDeliveries;
+    private boolean isViewingFilteredList = true;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +40,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredDeliveries = new FilteredList<>(this.addressBook.getDeliveryList());
+        sortedDeliveries = new SortedList<>(this.addressBook.getDeliveryList());
     }
 
     public ModelManager() {
@@ -87,6 +95,7 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Person List Methods ==========================================================================
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -109,6 +118,63 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Delivery List Methods ======================================================================
+    @Override
+    public boolean hasDelivery(Delivery delivery) {
+        requireNonNull(delivery);
+        return addressBook.hasDelivery(delivery);
+    }
+
+    @Override
+    public void deleteDelivery(Delivery target) {
+        addressBook.removeDelivery(target);
+    }
+
+    @Override
+    public void addDelivery(Delivery target) {
+        addressBook.addDelivery(target);
+        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES); // Refresh the list after adding
+    }
+
+    @Override
+    public void setDelivery(Delivery target, Delivery updatedDelivery) {
+        requireNonNull(target);
+        requireNonNull(updatedDelivery);
+
+        addressBook.setDelivery(target, updatedDelivery);
+    }
+
+    @Override
+    public ObservableList<Delivery> getModifiedDeliveryList() {
+        return isViewingFilteredList ? getFilteredDeliveryList() : getSortedDeliveryList();
+    }
+
+    //=========== Filtered Delivery List Accessors =============================================================
+    @Override
+    public ObservableList<Delivery> getFilteredDeliveryList() {
+        return filteredDeliveries;
+    }
+
+    @Override
+    public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+        requireNonNull(predicate);
+        isViewingFilteredList = true;
+        filteredDeliveries.setPredicate(predicate);
+    }
+
+    //=========== Sorted Delivery List Accessors ===============================================================
+    @Override
+    public ObservableList<Delivery> getSortedDeliveryList() {
+        return sortedDeliveries;
+    }
+
+    @Override
+    public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
+        requireNonNull(comparator);
+        isViewingFilteredList = false;
+        sortedDeliveries.setComparator(comparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================
