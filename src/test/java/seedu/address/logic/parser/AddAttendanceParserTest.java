@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ public class AddAttendanceParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, ATTENDANCE_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, ATTENDANCE_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // no field specified
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
@@ -37,10 +38,10 @@ public class AddAttendanceParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + ATTENDANCE_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + ATTENDANCE_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + ATTENDANCE_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + ATTENDANCE_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -51,7 +52,7 @@ public class AddAttendanceParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_ATTENDANCE_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1" + INVALID_ATTENDANCE_DESC, AbsentDate.MESSAGE_CONSTRAINTS);
     }
 
     @Test
