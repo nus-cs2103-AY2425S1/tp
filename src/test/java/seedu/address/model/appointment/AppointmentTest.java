@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 public class AppointmentTest {
@@ -29,6 +31,12 @@ public class AppointmentTest {
         assertTrue(() -> Appointment.isValidAppointment("11/11/2025 1100"));
     }
 
+    @Test
+    public void getDate_validDate_returnsCorrectDate() {
+        LocalDateTime expectedDate = LocalDateTime.of(2025, 11, 11, 11, 0);
+        Appointment appointment = new Appointment("11/11/2025 1100");
+        assertEquals(expectedDate, appointment.getDate());
+    }
     @Test
     public void equals() {
         Appointment appointment = new Appointment("11/11/2025 1100");

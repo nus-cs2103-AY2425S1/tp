@@ -141,6 +141,18 @@ public class Person {
     }
 
     /**
+     * Retrieves the earliest appointment date among this person's appointments.
+     *
+     * @return the earliest appointment date as a LocalDateTime, or null if there are no appointments.
+     */
+    public LocalDateTime getEarliestAppointmentDate() {
+        return appointments.stream()
+                .map(Appointment::getDate) // Assuming Appointment has a method getDate() that returns LocalDateTime
+                .min(LocalDateTime::compareTo) // Finds the minimum date
+                .orElse(null); // Returns null if there are no appointments
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

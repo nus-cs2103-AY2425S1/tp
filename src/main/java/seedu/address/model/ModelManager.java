@@ -130,6 +130,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortFilteredPersons() {
+        logger.info("Sorting filtered person list by appointments.");
+        addressBook.sortByAppointments();
+        assert !filteredPersons.isEmpty() : "Filtered person list should not be empty after sorting.";
+
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);

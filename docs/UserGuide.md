@@ -197,6 +197,14 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Sorting list based on Appointment Dates : `sort`
+
+Sorts the persons in the address book on the basis of their appointment dates.
+
+Format: `sort`
+
+* No other parameters should be supplied.
+
 ### Starring a person : `star`
 
 Stars the specified person from the address book into favourites.
@@ -299,5 +307,6 @@ Action     | Format, Examples
 **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`
 **Help**   | `help`
 **List**   | `list` <br/>`list *` (to list starred contacts) 
+**Sort**   | `sort` (to sort contacts based on appointment dates) 
 **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
 **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` 

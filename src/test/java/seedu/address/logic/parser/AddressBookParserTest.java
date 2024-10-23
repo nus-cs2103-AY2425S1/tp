@@ -25,6 +25,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.NoteCommand.NoteDescriptor;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StarCommand;
 import seedu.address.logic.commands.UnstarCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -116,6 +117,12 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
+    }
+
 
     @Test
     public void parseCommand_star() throws Exception {
