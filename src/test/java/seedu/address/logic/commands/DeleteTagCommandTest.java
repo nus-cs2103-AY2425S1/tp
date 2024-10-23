@@ -29,7 +29,6 @@ public class DeleteTagCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteTag(tagToDelete);
-
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
 

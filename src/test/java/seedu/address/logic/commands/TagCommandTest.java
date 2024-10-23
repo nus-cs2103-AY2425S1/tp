@@ -107,7 +107,7 @@ public class TagCommandTest {
     public void execute_nonExistentTag_failure() {
         HashSet<Tag> tagsToAdd = new HashSet(Arrays.asList(new Tag(new TagName("nonExistentTag"))));
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, tagsToAdd);
-        String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND;
+        String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND + ".\n" + Messages.MESSAGE_FORCE_TAG_TO_CONTACT;
 
         CommandTestUtil.assertCommandFailure(tagCommand, model, expectedMessage);
     }
