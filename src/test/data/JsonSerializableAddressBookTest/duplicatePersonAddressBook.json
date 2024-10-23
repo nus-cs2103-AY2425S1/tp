@@ -3,12 +3,20 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
+    "role": "client",
+    "worker" : {
+      "deliveryIds" : [ "1729621344714-0584" ]
+    },
     "address": "123, Jurong West Ave 6, #08-111, S120300",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "role": "client",
+    "worker" : {
+      "deliveryIds" : [ "1729621344714-0584" ]
+    },
     "address": "4th street, S120399"
   } ]
 }
