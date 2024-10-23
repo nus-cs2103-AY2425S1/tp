@@ -29,7 +29,7 @@ public class Student {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final String remark;
-    //AssignmentList initially null
+    //AssignmentList initially an empty list
     private List<Assignment> assignmentList = new ArrayList<Assignment>();
 
     /**
