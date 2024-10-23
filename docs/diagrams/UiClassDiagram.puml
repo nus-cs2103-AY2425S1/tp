@@ -39,7 +39,7 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
-PersonListPanel -down-> "*" ContactDetails
+PersonListPanel -down-> "0..1" ContactDetails
 
 MainWindow -left-|> UiPart
 ContactDetails -down-|> UiPart
