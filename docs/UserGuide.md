@@ -116,7 +116,45 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book. The module role pairs are edited with a slightly different syntax which
+is explained below.
+
+#### Module-role
+
+The module-role pairs can be edited by adding, deleting, or replacing.
+
+##### Add new module-role pairs
+
+Format: `edit INDEX r/+(MODULECODE[-ROLETYPE])+`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+The index **must be a positive integer** 1, 2, 3, …​
+* At least one module-role pair must be provided.
+* Multiple module-role pairs can be added at once, separated by `" "`.
+
+Examples:
+* `edit 1 r/+CS2103T-Prof` add role "professor of CS2103T" to the first person.
+* `edit 1 r/+CS1101S MA1521-TA` add role "Student of CS1101S" and "TA of MA1521" to the first person.
+
+<box type="warning" seamless>
+
+**Common Mistakes:**
+- If you are adding multiple module-role pairs, only the first pair should have a `+` sign before the module-role pair. 
+The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +MA1521-TA` is unnecessary and will cause an error.
+- You only need to specify one `r/`. i.e. `r/+CS1101S r/+MA1521-TA` is unnecessary and will cause an error.
+</box>
+
+##### Delete existing module-role pairs
+
+TODO
+
+##### Replace existing module-role pairs
+
+TODO
+
+#### All other fields
+
+Except for the module-role pairs, all other fields can only be edited by complete replacement.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]+​`
 
@@ -125,7 +163,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]+​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -250,7 +288,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague` 
 **Clear**  | `clear`                                                                                                                                                                                                     
 **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                    
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                  
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/+(MODULECODE[-ROLETYPE])+]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                  
 **Find**   | `find (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find n/James n/Jake r/CS1101S r/MA1521`                                                                                                                         
 **List**   | `list`                                                                                                                                                                                                      
 **Help**   | `help`                                                                                                                                                                                                      
