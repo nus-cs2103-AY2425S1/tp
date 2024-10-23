@@ -41,13 +41,16 @@ public class GoodsReceiptBuilder {
         price = DEFAULT_PRICE;
     }
 
+    /**
+     * Sets the {@code goods} of the {@code GoodsReceipt} that we are building.
+     */
     public GoodsReceiptBuilder withGoods(Goods goods) {
         this.goods = goods;
         return this;
     }
 
     /**
-     * Sets the {@code GoodsName} of the {@code GoodsReceipt} that we are building.
+     * Sets the {@code goodsName} of the {@code GoodsReceipt} that we are building.
      */
     public GoodsReceiptBuilder withGoodsName(GoodsName goodsName) {
         this.goodsName = goodsName;

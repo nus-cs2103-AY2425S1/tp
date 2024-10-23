@@ -32,11 +32,17 @@ public class FindCommand extends Command {
 
     private final GoodsCategories goodsCategory;
 
+    /**
+     * Constructs a find command with a person predicate only.
+     */
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
         this.goodsCategory = null;
     }
 
+    /**
+     * Constructs a find command with a specified goods category.
+     */
     public FindCommand(Predicate<Person> predicate, GoodsCategories goodsCategory) {
         this.predicate = predicate;
         this.goodsCategory = goodsCategory;

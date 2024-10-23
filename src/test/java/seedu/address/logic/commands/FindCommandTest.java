@@ -13,25 +13,17 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.goodsreceipt.Date;
-import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.GoodsBuilder;
-import seedu.address.testutil.GoodsReceiptBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

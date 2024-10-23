@@ -3,16 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
@@ -47,7 +44,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(predicate, category);
     }
 
-    public GoodsCategories parseGoodsCategory(ArgumentMultimap argMultimap) throws ParseException {
+    private GoodsCategories parseGoodsCategory(ArgumentMultimap argMultimap) throws ParseException {
         Optional<String> categoryArg = argMultimap.getValue(PREFIX_CATEGORY);
         if (categoryArg.isEmpty()) {
             return null;
