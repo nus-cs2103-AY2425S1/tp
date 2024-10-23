@@ -55,6 +55,7 @@ public class FindCommandTest {
                 secondRolePredicate, secondTelegramPredicate);
         FindCommand findFourthCommand = new FindCommand(secondNamePredicate,
                 firstRolePredicate, firstTelegramPredicate);
+        FindCommand findFifthCommand = new FindCommand(firstNamePredicate, firstRolePredicate, secondTelegramPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -78,6 +79,9 @@ public class FindCommandTest {
 
         // different role predicate only -> returns false
         assertFalse(findFirstCommand.equals(findThirdCommand));
+
+        // different telegram predicate only -> returns false
+        assertFalse(findFirstCommand.equals(findFifthCommand));
     }
 
     @Test
