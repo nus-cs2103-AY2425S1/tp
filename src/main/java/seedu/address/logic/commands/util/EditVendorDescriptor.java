@@ -16,8 +16,7 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
     private Company company;
     private Budget budget;
 
-    public EditVendorDescriptor() {
-    }
+    public EditVendorDescriptor() {}
 
     /**
      * Copy constructor.
@@ -26,6 +25,7 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
     public EditVendorDescriptor(EditVendorDescriptor toCopy) {
         super(toCopy);
         setCompany(toCopy.company);
+        setBudget(toCopy.budget);
     }
 
     /**
