@@ -24,7 +24,7 @@ public class Student {
     // Data fields
     private final seedu.edulog.model.student.Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private boolean isPresent = false;
+    private boolean hasPaid = false;
 
     /**
      * Every field must be present and not null except isPresent.
@@ -36,7 +36,7 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.isPresent = false;
+        this.hasPaid = false;
     }
 
     public Name getName() {
@@ -68,22 +68,22 @@ public class Student {
      *
      * @return {@code true} if the student is present, {@code false} otherwise
      */
-    public boolean getIsPresent() {
-        return isPresent;
+    public boolean getHasPaid() {
+        return hasPaid;
     }
 
     /**
-     * Marks the student as present.
+     * Marks the student as paid.
      */
     public void mark() {
-        isPresent = true;
+        hasPaid = true;
     }
 
     /**
-     * Marks the student as absent.
+     * Marks the student as unpaid.
      */
     public void unmark() {
-        isPresent = false;
+        hasPaid = false;
     }
 
     /**
@@ -120,13 +120,13 @@ public class Student {
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
-                && isPresent == otherStudent.isPresent;
+                && hasPaid == otherStudent.hasPaid;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, isPresent);
+        return Objects.hash(name, phone, email, address, tags, hasPaid);
     }
 
     @Override
@@ -137,7 +137,7 @@ public class Student {
                 .add("email", email)
                 .add("edulog", address)
                 .add("tags", tags)
-                .add("isPresent", isPresent)
+                .add("hasPaid", hasPaid)
                 .toString();
     }
 
