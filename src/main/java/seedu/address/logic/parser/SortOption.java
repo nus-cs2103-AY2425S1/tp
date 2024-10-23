@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.comparators.NameComparator;
@@ -27,10 +30,8 @@ public enum SortOption {
     };
     // Add more sorting options here if needed
 
-    public static final List<String> VALID_SORT_OPTIONS = List.of(NAME.value, HOURS.value);
-
     public static final String MESSAGE_CONSTRAINTS = "Invalid sort option.\nValid options are: "
-            + String.join(", ", VALID_SORT_OPTIONS);
+            + getValidSortOptionsAsString();
 
     public static final String MESSAGE_EMPTY_SORT_OPTION = "Sort option cannot be empty.";
 
@@ -69,6 +70,28 @@ public enum SortOption {
      * @return {@code Comparator<Person>} based on the sort option.
      */
     public abstract Comparator<Person> getComparator();
+
+    /**
+     * Returns an unmodifiable list of valid sort option strings.
+     *
+     * @return List of valid sort options.
+     */
+    private static List<String> getValidSortOptions() {
+        return Collections.unmodifiableList(
+                Arrays.stream(SortOption.values())
+                        .map(SortOption::toString)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    /**
+     * Returns a comma-separated string of valid sort options.
+     *
+     * @return String of valid sort options.
+     */
+    private static String getValidSortOptionsAsString() {
+        return String.join(", ", getValidSortOptions());
+    }
 
     @Override
     public String toString() {
