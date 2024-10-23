@@ -72,7 +72,7 @@ public class EditOwnerCommandParserTest {
         assertParseFailure(parser, MESSAGE_ENTITY + "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, MESSAGE_ENTITY + "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, MESSAGE_ENTITY + "1 z/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
