@@ -75,6 +75,32 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
+    public void equals() throws CommandException, ParseException {
+        Index index = Index.fromZeroBased(0);
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(index);
+        // Test equality with the same object (identity)
+        assertTrue(deleteLessonCommand.equals(deleteLessonCommand));
+
+        // Test equality with null
+        assertFalse(deleteLessonCommand.equals(null));
+
+        // Test equality with an object of different type
+        assertFalse(deleteLessonCommand.equals(new Object()));
+
+        // Test equality with a different DeleteLessonCommand (different index)
+        DeleteLessonCommand differentCommand = new DeleteLessonCommand(Index.fromOneBased(2));
+        assertFalse(deleteLessonCommand.equals(differentCommand));
+    }
+
+    @Test
+    public void toString_correctFormat() {
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(Index.fromOneBased(1));
+        // Verify that the toString method returns the correct format
+        String expectedString = String.format(DeleteLessonCommand.DELETE_COMMAND_STRING_FORMAT, 0);
+        assertEquals(expectedString, deleteLessonCommand.toString());
+    }
+
+    @Test
     public void execute_validIndex_success() throws CommandException, ParseException {
         ModelStubAcceptingLessonDeleted modelStub = new ModelStubAcceptingLessonDeleted();
         LessonBuilder lessonBuilder = new LessonBuilder();
