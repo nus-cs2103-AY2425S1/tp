@@ -39,7 +39,7 @@ public class DateTest {
     }
 
     @Test
-    public void compare_DatesOrder_returnsInteger() {
+    public void compare_datesOrder_returnsInteger() {
         Date date1 = new Date("10/01/18");
         Date date2 = new Date("20/05/24");
 
