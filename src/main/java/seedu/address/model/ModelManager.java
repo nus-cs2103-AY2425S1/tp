@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Person;
 
 /**
@@ -92,6 +93,17 @@ public class ModelManager implements Model {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
+    @Override
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return addressBook.hasPhone(person);
+    }
+
+    @Override
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return addressBook.hasEmail(person);
+    }
 
     @Override
     public void deletePerson(Person target) {
@@ -122,10 +134,20 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    public ObservableList<Person> getOnlyClientList() {
+        filteredPersons.setPredicate(PREDICATE_SHOW_ONLY_CLIENTS);
+        return filteredPersons;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void addDelivery(Person person, Delivery delivery) {
+        person.addDelivery(delivery);
     }
 
     @Override

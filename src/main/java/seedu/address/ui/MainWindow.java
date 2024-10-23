@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -110,7 +111,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getOnlyClientList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -163,8 +164,23 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleInspect(CommandResult commandResult) {
+        logger.info("Changing UI...");
+
+        InspectWindow inspectWindow;
+        inspectWindow = new InspectWindow(primaryStage, logic, commandResult.getPerson());
+        inspectWindow.show();
+        inspectWindow.fillInnerParts();
+        inspectWindow.getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        AddressBookParser.setInspect(true);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public ResultDisplay getResultDisplay() {
+        return resultDisplay;
     }
 
     /**
@@ -184,6 +200,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isInspect()) {
+                handleInspect(commandResult);
             }
 
             return commandResult;
