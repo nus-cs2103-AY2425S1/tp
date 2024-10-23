@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new FilterTagCommandParser().parse(arguments);
 
         case DeleteTagCommand.COMMAND_WORD:
-            logger.info("here");
+            logger.info("deleting tag");
             return new DeleteTagCommandParser().parse(arguments);
 
         default:
