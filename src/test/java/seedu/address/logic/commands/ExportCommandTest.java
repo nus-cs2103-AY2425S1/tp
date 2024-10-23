@@ -317,8 +317,6 @@ public class ExportCommandTest {
         assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
     }
 
-    // Add these test methods to your ExportCommandTest class
-
     @Test
     public void execute_fileAlreadyExistsInHomeAndCleanupFails() throws IOException {
         // Setup test files
@@ -370,7 +368,76 @@ public class ExportCommandTest {
         }
     }
 
-    // Add this helper method if not already present
+    @Test
+    public void testEscapeSpecialCharacters() throws CommandException, IOException {
+        Student studentWithCommas = new StudentBuilder()
+                .withName("Test Student")
+                .withPhone("12345678")
+                .withEmail("john@example.com")
+                .withCourses("CS2103T", "CS2101")
+                .build();
+        model.addStudent(studentWithCommas);
+
+        String filename = "commas";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+
+        filesToCleanup.add(dataFile);
+        filesToCleanup.add(homeFile);
+
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        exportCommand.execute(model);
+
+        List<String> lines = Files.readAllLines(dataFile);
+        String dataLine = lines.get(1);
+        // Fields with commas should be wrapped in quotes
+        assertTrue(dataLine.contains("\"CS2103T, CS2101\""));
+    }
+
+    @Test
+    public void execute_fileAlreadyExistsInHome() throws IOException {
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+
+        // Create the file in home directory first
+        Files.createFile(homeFile);
+        filesToCleanup.add(homeFile);
+
+        Student student = new StudentBuilder()
+                .withName("Test Student")
+                .withPhone("12345678")
+                .withEmail("test@example.com")
+                .withCourses("CS2103T")
+                .build();
+        model.addStudent(student);
+
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, homeFile);
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
+        assertFalse(Files.exists(dataFile), "Data file should be cleaned up");
+    }
+
+    /**
+     * Helper method to throw a fail
+     * @param message Error message to pass to AssertionError
+     */
     private void fail(String message) {
         throw new AssertionError(message);
     }
