@@ -54,7 +54,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_ALLERGY_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
     @Disabled

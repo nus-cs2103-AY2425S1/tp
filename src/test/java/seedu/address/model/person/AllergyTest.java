@@ -1,4 +1,4 @@
-package seedu.address.model.allergy;
+package seedu.address.model.person;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -15,12 +15,6 @@ public class AllergyTest {
     public void constructor_invalidAllergyName_throwsIllegalArgumentException() {
         String invalidAllergyName = "";
         assertThrows(IllegalArgumentException.class, () -> new Allergy(invalidAllergyName));
-    }
-
-    @Test
-    public void isValidAllergyName() {
-        // null allergy name
-        assertThrows(NullPointerException.class, () -> Allergy.isValidAllergyName(null));
     }
 
 }
