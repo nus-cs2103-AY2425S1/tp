@@ -1,14 +1,17 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
+
 
 /**
  * The API of the Model component.
@@ -95,9 +98,11 @@ public interface Model {
     boolean hasOrder(Order order);
 
     ObservableList<Order> getOrderList();
+
     void addShortCut(ShortCut shortcut);
     void removeShortCut(ShortCut shortcut);
     boolean hasShortCut(ShortCut shortCut);
     ObservableList<ShortCut> getShortCutList();
     boolean hasAlias(Alias alias);
+    List<Person> getPeopleByPostalCode(PostalCode postalCode);
 }

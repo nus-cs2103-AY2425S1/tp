@@ -18,6 +18,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d customers listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NO_MATCH = "No match found!";
+    public static final String MESSAGE_INVALID_POSTAL = "This postal code is invalid.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

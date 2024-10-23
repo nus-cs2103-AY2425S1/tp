@@ -1,5 +1,5 @@
 layout: page
-title: Vinoth's Project Portfolio Page
+title: Toh Heng Xing's Project Portfolio Page
 ---
 
 ### Project: NomNom Notifier
