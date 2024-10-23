@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons in PawPatrol to the user.
  */
 public abstract class ListCommand extends Command {
 

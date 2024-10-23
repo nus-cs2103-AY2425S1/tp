@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -13,14 +14,15 @@ import seedu.address.model.Model;
 import seedu.address.model.owner.Owner;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to PawPatrol.
  */
 public class AddOwnerCommand extends Command {
 
     public static final String COMMAND_WORD = "owner";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an owner to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an owner to PawPatrol. "
         + "Parameters: "
+        + PREFIX_IC_NUMBER + "IC_NUMBER "
         + PREFIX_NAME + "NAME "
         + PREFIX_PHONE + "PHONE "
         + PREFIX_EMAIL + "EMAIL "
@@ -32,7 +34,7 @@ public class AddOwnerCommand extends Command {
         + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
     public static final String MESSAGE_SUCCESS = "New owner added: %1$s";
-    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in PawPatrol";
 
     private final Owner toAdd;
 

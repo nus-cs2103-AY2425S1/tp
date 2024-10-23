@@ -7,7 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -27,11 +27,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns PawPatrol.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getPawPatrol()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyPawPatrol getPawPatrol();
 
     /**
      * Returns an unmodifiable view of the filtered list of persons
@@ -45,9 +45,9 @@ public interface Logic {
     ObservableList<Pet> getFilteredPetList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' PawPatrol file path.
      */
-    Path getAddressBookFilePath();
+    Path getPawPatrolFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

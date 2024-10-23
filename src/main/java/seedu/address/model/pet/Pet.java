@@ -12,7 +12,7 @@ import seedu.address.model.link.Linkable;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Pet in the address book.
+ * Represents a Pet in PawPatrol.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Pet implements Linkable {

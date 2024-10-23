@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public interface Storage extends PawPatrolStorage, UserPrefsStorage {
     Path getPawPatrolFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readPawPatrol() throws DataLoadingException;
+    Optional<ReadOnlyPawPatrol> readPawPatrol() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void savePawPatrol(ReadOnlyPawPatrol pawPatrol) throws IOException;
 
 }
