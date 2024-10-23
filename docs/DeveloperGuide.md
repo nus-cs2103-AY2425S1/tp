@@ -6,7 +6,6 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -117,19 +116,19 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<img src="images/UpdatedModelClassDiagram.png" width="450" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores the address book data i.e., all `Person` objects (which include both `Patient` and `Caregiver` objects). These are contained in a `UniquePersonList` object.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list, which is exposed to outsiders as an unmodifiable `ObservableList<Person>`. The UI can be bound to this list so that it automatically updates when the data changes.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
+* manages relationships between `Patient` and `Caregiver`. Each `Patient` can have one or more `Caregivers` linked to them through a `List<Caregiver>` in the `Patient` object. Caregivers are linked by a `patientID`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+The `Model` does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The updated model introduces a `Caregiver` class linked to a `Patient` object through a unique `patientID`. The system maintains this relationship and ensures that caregivers can only be associated with valid patients.<br>
+
 
 </div>
 
@@ -262,71 +261,482 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Independent Geriatricians managing elderly patients
+* Those patients have chronic conditions
+* Geriatrician can type fast
+* Prefers CLI over GUI
+* Needs to manage several patients
+**Value proposition**: We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
-
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a...          | I want to...                                 | So that I can...                                                  |
+| -------- | ---------------- | -------------------------------------------- | ----------------------------------------------------------------- |
+| `* * *`  | new user         | use sample data to walk through features     | explore the app without inputting my own data                     |
+| `* * *`  | new user         | remove sample data                           | start using the app for my own data                               |
+| `* * *`  | new user         | set up a doctor profile                      | customize the system based on my professional needs               |
+| `* * *`  | new user         | add patient details via CLI                  | efficiently manage a heavy patient load                           |
+| `* * *`  | new user         | use the help command                         | refer to available commands and usage instructions                |
+| `* * *`  | regular user     | store patient data                           | view patient details across multiple sessions without re-entering |
+| `* * *`  | regular user     | distinguish between duplicate patients       | avoid confusion when patients have the same name                  |
+| `* * *`  | regular user     | edit patient data                            | update patient information such as contact details                |
+| `* * *`  | regular user     | delete patient data                          | remove patients who no longer need to be tracked                  |
+| `* * *`  | regular user     | schedule follow-up appointments              | quickly update and track patient follow-ups                       |
+| `* * *`  | novice user      | filter appointments by date                  | plan my day effectively by viewing scheduled appointments         |
+| `* * *`  | novice user      | filter by condition                          | prioritize patients based on their medical conditions             |
+| `* * *`  | novice user      | filter by patients                           | find patients with higher health risks to follow up with them     |
+| `* *`    | novice user      | send email reminders to patients             | remind patients about upcoming appointments                       |
+| `* *`    | experienced user | batch update patient contact records         | streamline updates after events like mass screenings              |
+| `*`      | experienced user | batch delete patient contact records         | declutter the system by removing multiple patients at once        |
+| `*`      | experienced user | retrieve patient medication history          | quickly find past medications in emergency situations             |
+| `*`      | experienced user | retrieve caregiver information               | inform caregivers to enhance patient care                         |
+| `*`      | experienced user | use aliases for commands                     | speed up command usage in the CLI app                             |
+| `*`      | experienced user | remove inactive patients from default view   | declutter the app and focus on active patients                    |
+| `*`      | experienced user | use fuzzy search to retrieve patient details | find patient information even with partial or incomplete data     |
+| `*`      | experienced user | export patient data to a CSV file            | backup data and use it in other applications                      |
+| `*`      | experienced user | import patient data from a CSV file          | restore backups or transfer data from other systems               |
 
-*{More to be added}*
+*User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
+*User stories for the final version:* Stories 1 - 13 are for the final version.
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case 1: Add a New Patient**
+
+**System**: CareLink
+**Use Case**: UC01 - Add New Patient
+**Actor**: Geriatrician (Fred)
+
+**Preconditions**
+- Fred is logged into CareLink.
+- Fred is at the patient details entry screen.
+
+**Guarantees**
+- Patient details are saved only if the input data is valid.
+- Duplicates are not created (NRIC uniqueness is enforced).
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. Fred enters command to `add` a new patient.
+2. CareLink requests patient details.
+3. Fred enters the patient details.
+4. CareLink validates the input data.
+5. CareLink saves the patient details to the system.
+6. CareLink displays a success message and shows the newly added patient in the system.
+7. Use case ends.
 
 **Extensions**
+- **3a. Invalid patient data entered**:
+    - CareLink displays an error message indicating which data is invalid.
+    - Fred corrects the input, and the use case resumes from step 3.
+    - Use case ends.
 
-* 2a. The list is empty.
 
-  Use case ends.
+**Use Case 2: View Patient Details**
 
-* 3a. The given index is invalid.
+**System**: CareLink
+**Use Case**: UC02 - View Patient Details
+**Actor**: Geriatrician (Fred)
 
-    * 3a1. AddressBook shows an error message.
+**Preconditions**
+- Fred is logged into CareLink.
 
-      Use case resumes at step 2.
+**Guarantees**
+- The patient's details are successfully retrieved and displayed.
+- The correct patient's information is displayed without errors.
+
+**Main Success Scenario (MSS)**
+1. Fred enters command to `view` a patient's details.
+2. CareLink retrieves the patient’s details.
+3. CareLink displays the patient's details to Fred.
+4. Use case ends.
+
+**Extensions**
+- **3a. Invalid or nonexistent patient NRIC entered**:
+    - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
+    - Fred corrects the NRIC, and the use case resumes from step 3.
+    - Use case ends.
+
+**Use Case 3: Adding a Caregiver and Linking to an Existing Patient**
+
+**System**: CareLink
+**Use Case**: UC03 - Adding a Caregiver and Linking to an Existing Patient
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Caregiver details are saved only if the input data is valid.
+- Duplicates are not created
+- The caregiver is correctly linked to the specified patient.
+
+### MSS
+1. Fred enters command to `add caregiver` and enters the necessary details, including the patient ID.
+2. CareLink validates all input details against criteria.
+3. CareLink saves the caregiver's details and links them to the specified patient ID.
+4. CareLink confirms the addition and linking with a success message.
+5. Use case ends.
+
+### Extensions
+- **2a. Validation Fails**:
+    - 2a.1: If any validation fails, CareLink displays an error message, and the caregiver is not added.
+    - Use case ends.
+
+- **2b. Specified Patient ID Does Not Exist**:
+    - 2b.1: If the specified patient ID does not exist, CareLink displays an error message.
+    - Use case ends.
+
+**Use Case 4: Update Patient Details**
+
+**System**: CareLink
+**Use Case**: UC04 - Update Patient Details
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- The patient’s details are successfully updated in the system.
+
+### Main Success Scenario (MSS)
+1. Fred enters command to `update` and provides the NRIC of patient and new details.
+2. CareLink validates the new input.
+3. CareLink updates the records and confirms the update with a success message.
+4. Use case ends.
+
+### Extensions
+- **2a. Record Does Not Exist**:
+    - 2a.1: If the record does not exist, CareLink informs Fred.
+    - Use case ends.
+
+- **2b. Input Validation Fails**:
+    - 2b.1: If input validation fails, CareLink displays an error message and does not update the record.
+    - Use case ends.
+
+
+
+**Use Case 5: Delete Patient Details**
+
+**System**: CareLink
+**Use Case**: UC05 - Delete Patient Details
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+- The patient exists in the system.
+
+### Guarantees
+- The patient's details are successfully removed from the system.
+
+### Main Success Scenario (MSS)
+1. Fred enters command to `delete` a patient’s details.
+2. CareLink retrieves the patient's information.
+3. CareLink deletes the patient's record.
+4. Use case ends.
+
+### Extensions
+- **2a. Patient Does Not Exist**:
+    - 2a.1: If no patient record matches the given details, CareLink displays an error message.
+    - Use case ends.
+
+
+**Use Case 6: Export All Patient Data to CSV**
+
+**System**: CareLink
+**Use Case**: UC06 - Export All Patient Data to CSV
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- The CSV file is successfully exported and available for download.
+
+### Main Success Scenario (MSS)
+1. Fred enters command to export all patient data to CSV.
+2. CareLink asks the destination for copying the file to.
+3. Fred provides the destination address
+4. CareLink makes a copy of the file at the specified location.
+5. Use case ends.
+
+### Extensions
+
+- **3a. File Copy Error**:
+    - 3a.1: If CareLink encounters an error during the copy process, an error message is displayed.
+    - Use case ends.
+
+
+**Use Case 7: Import Patient Data using CSV**
+
+**System**: CareLink
+**Use Case**: UC07 - Import Patient Data using CSV
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+- A CSV file containing patient data is available for import, and the format is correct.
+
+### Guarantees
+- The patient data from the CSV file is successfully imported into CareLink.
+
+### Main Success Scenario (MSS)
+1. Fred selects the option to import patient data using a CSV file.
+2. Fred provides the CSV file.
+3. CareLink validates the contents of the CSV file.
+4. CareLink imports the patient data from the CSV file into the system.
+5. CareLink confirms the successful import of the data with a success message.
+6. Use case ends.
+
+### Extensions
+- **3a. CSV Format Invalid**:
+    - 3a.1: If the CSV file is incorrectly formatted, CareLink displays an error message and the data is not imported.
+    - Use case ends.
+
+
+**Use Case 8: Filter Data by Date**
+
+**System**: CareLink
+**Use Case**: UC08 - Filter Data by Date
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Data is successfully filtered by the specified date range and displayed.
+
+### Main Success Scenario (MSS)
+1. Fred enters command to filter patient data by date.
+2. CareLink prompts Fred to input a date range.
+3. Fred enters the desired start and end dates.
+4. CareLink filters the patient data based on the specified date range.
+5. CareLink displays the filtered data to Fred.
+6. Use case ends.
+
+### Extensions
+- **3a. Invalid Date Format**:
+    - 3a.1: If Fred enters an invalid date format, CareLink displays an error message and prompts Fred to re-enter the date range.
+    - Use case resumes from step 3.
+
+- **4a. No Data Found for Date Range**:
+    - 4a.1: If no patient data exists for the specified date range, CareLink informs Fred that no records were found.
+    - Use case ends.
+
+
+**Use Case 9: Filter Data by Medical Condition**
+
+**System**: CareLink
+**Use Case**: UC09 - Filter Data by Medical Condition
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Data is successfully filtered by the specified condition and displayed.
+
+### Main Success Scenario (MSS)
+1. Fred enters command to `filter` patient data by medical condition.
+2. CareLink prompts Fred to input the medical condition.
+3. Fred enters the medical condition.
+4. CareLink filters the patient data based on the specified medical condition.
+5. CareLink displays the filtered data to Fred.
+6. Use case ends.
+
+### Extensions
+- **3a. Invalid Condition**:
+    - 3a.1: If Fred enters a medical condition that doesn't exist in the system, CareLink displays an error message and prompts Fred to re-enter the condition.
+    - Use case resumes from step 3.
+
+- **4a. No Data Found for Condition**:
+    - 4a.1: If no patient data exists for the specified condition, CareLink informs Fred that no records were found.
+    - Use case ends.
+
+**Use Case 10: Filter Data by Patients**
+
+**System**: CareLink
+**Use Case**: UC10 - Filter Data by Patients
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+
+### Guarantees
+- Data is successfully filtered by the specified patient(s) and displayed.
+
+### Main Success Scenario (MSS)
+1. Fred enters the command to filter patient data by specific patients.
+2. CareLink prompts Fred to input patient identifiers.
+3. Fred enters the patient identifiers.
+4. CareLink filters the patient data based on the specified patient identifiers.
+5. CareLink displays the filtered data to Fred.
+6. Use case ends.
+
+### Extensions
+- **3a. Invalid Patient Identifier**:
+    - 3a.1: If Fred enters an invalid patient identifier, CareLink displays an error message and prompts Fred to re-enter the identifier.
+    - Use case resumes from step 3.
+
+- **4a. No Data Found for Patients**:
+    - 4a.1: If no patient data exists for the specified patients, CareLink informs Fred that no records were found.
+    - Use case ends.
+
+**Use Case 11: Schedule Follow-up Appointments**
+
+**System**: CareLink
+**Use Case**: UC11 - Schedule Follow-up Appointments
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink.
+- The patient exists in the system.
+
+### Guarantees
+- A follow-up appointment is successfully scheduled and confirmed.
+
+### Main Success Scenario (MSS)
+1. Fred enters the command to schedule a follow-up appointment for a patient.
+2. CareLink prompts Fred to input the patient’s details and select a date and time.
+3. Fred enters the patient details and an available date and time for the appointment.
+4. CareLink confirms the follow-up appointment and saves it in the system.
+5. CareLink displays a confirmation message with the appointment details.
+6. Use case ends.
+
+### Extensions
+- **2a. Patient Does Not Exist**:
+    - 2a.1: If the entered patient identifier does not exist, CareLink displays an error message.
+    - Use case ends.
+
+**Use Case 12: Set Up Doctor Profile**
+
+**System**: CareLink
+**Use Case**: UC12 - Set Up Doctor Profile
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+- Fred is logged into CareLink for the first time or his profile setup is incomplete.
+
+### Guarantees
+- Fred’s doctor profile is successfully created or updated.
+
+### Main Success Scenario (MSS)
+1. Fred enters command to set up his doctor profile.
+2. CareLink prompts Fred to enter profile details.
+3. Fred enters all required details.
+4. CareLink saves Fred’s profile and confirms the setup with a success message.
+5. Use case ends.
+
+### Extensions
+
+- **4a. Profile Save Error**:
+    - 4a.1: If CareLink encounters an error while saving the profile, an error message is displayed, and the setup process is halted.
+    - Use case ends.
+
+### Use Case 13: Filter Patients by Risk Level
+
+**System**: CareLink
+**Use Case**: UC13 - Filter Patients by Risk Level
+**Actor**: Geriatrician (Fred)
+
+### Preconditions
+Fred is logged into CareLink.
+The system contains patient data with risk levels.
+### Guarantees
+The patients are successfully filtered by their risk level and displayed.
+Main Success Scenario (MSS)
+Fred enters a command to filter patients by risk level.
+CareLink prompts Fred to input the risk level.
+Fred enters the risk level (e.g., high).
+CareLink filters the patients based on the specified risk level and displays the results.
+Use case ends.
+### Extensions
+**3a.** Invalid Risk Level Entered:
+
+**3a.1**: If Fred enters an invalid risk level, CareLink displays an error message and prompts Fred to re-enter the risk level.
+Use case resumes from step 3.
+
+**4a.** No Data Found for Risk Level:
+
+**4a.1**: If no patients exist with the specified risk level, CareLink informs Fred that no records were found.
+Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Typing-Preferred**
+   - **Category:** User Efficiency
+   - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
+   - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
 
-*{More to be added}*
+2. **Platform-Independent**
+   - **Category:** Environment Requirements
+   - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
+   - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
+
+3. **No-DBMS**
+   - **Category:** Technical Requirements
+   - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
+   - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
+
+4. **Human-Editable File**
+   - **Category:** Data Requirements
+   - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
+   - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
+
+5. **Single-User**
+   - **Category:** User Constraints
+   - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
+   - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
+
+6. **Portability**
+    - **Category:** System Constraints
+    - **Requirement:** The product must support downloading CSV files that can be easily loaded and used on another system.
+    - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
+
+7. **Readable Font Size**
+    - **Category:** Usability
+    - **Requirement:** The font size should be reasonably large to ensure readability, particularly for users who may have difficulty reading smaller text.
+    - **User Benefit:** Ensures users can comfortably read information on the interface, improving accessibility and user experience.
+
+8. **Simplicity**
+    - **Category:** Usability
+    - **Requirement:** The interface should be intuitive, with straightforward workflows that make it easy to navigate and use.
+    - **User Benefit:** Reduces the learning curve for new users, allowing for efficient and hassle-free operation, improving overall user satisfaction.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Patient Record**: The complete set of data related to a patient, including their contact information, medical notes, medication history, appointment schedules, and caregiver details.
+
+- **Caregiver**: A person associated with a patient who helps in managing the patient’s healthcare needs, often involved in emergency contacts or follow-ups.
+
+- **Follow-up Appointment**: An appointment scheduled after an initial consultation or visit to monitor the patient's ongoing condition or treatment progress.
+
+- **CLI (Command-Line Interface)**: A method of interacting with CareLink by typing commands, designed to optimize efficiency for users who prefer typing over using graphical interfaces.
+- **API (Application Programming Interface)**: A set of functions and procedures allowing applications to access the features or data of another service, application, or system.
+- **Sequence Diagram**: A type of diagram that shows how objects interact with each other over time, specifically highlighting the sequence of messages exchanged.
+- **Model**: In software design, the component responsible for representing the application's data, including logic for accessing and modifying that data.
+- **NRIC**: National Registration Identity Card, a unique identification number used in Singapore to identify individuals, and used in CareLink to uniquely identify patient records.
+
+- **Batch Update**: A feature in CareLink that allows the user to make changes to multiple patient records at once, such as updating contact information for a group of patients.
+
+- **Active Patient**: A patient who is currently being treated by the geriatrician and appears in the default view of CareLink.
+
+- **Inactive Patient**: A patient who is no longer actively being treated but whose records are kept in the system for historical reference; they do not appear in the default view.
+
+- **Fuzzy Search**: A search feature that allows users to find patient records using partial or approximate information, such as a part of the patient’s name or NRIC.
+
+- **Alias**: A shortcut or simplified command that users can define to speed up repetitive tasks within the CLI, making CareLink more efficient to use for experienced users.
+
+- **CSV (Comma-Separated Values)**: A simple file format used to store tabular data where each field is separated by a comma.
+
+- **AB3 (Address Book 3)**: A contact management application that allows users to store, manage, and search contact details. It is designed for maintaining a digital address book, often used as a foundation for developing further CLI-based applications.
+
+- **Geriatricians**: Doctors specializing in the healthcare of elderly patients, focusing on the prevention, diagnosis, and treatment of diseases and conditions that commonly affect older adults, often playing a key role in managing chronic illnesses and improving quality of life.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -379,4 +789,5 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+1. _{ more test cases ...​ }_
+

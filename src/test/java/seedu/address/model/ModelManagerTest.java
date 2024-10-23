@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -10,12 +11,17 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.ContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -118,7 +124,9 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        ArgumentMultimap mapForKeywords = new ArgumentMultimap();
+        Arrays.stream(keywords).forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
+        modelManager.updateFilteredPersonList(new ContainsKeywordsPredicate(mapForKeywords));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
@@ -129,4 +137,64 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+    @Test
+    public void addAppointment_noConflict_success() {
+        Person testPerson = new Person(ALICE);
+        modelManager.addPerson(testPerson);
+
+        LocalDateTime startTime = LocalDateTime.of(2024, 10, 22, 12, 0);
+        LocalDateTime endTime = startTime.plusHours(1);
+        Appointment appointment = new Appointment("Test Appointment", testPerson.getNric(), startTime, endTime);
+
+        boolean result = modelManager.addAppointment(appointment, testPerson);
+        assertTrue(result);
+        assertEquals(1, modelManager.getAppointmentsForPerson(testPerson).size());
+    }
+
+    @Test
+    public void addAppointment_conflict_returnsFalse() {
+        Person testPerson = new Person(ALICE);
+        modelManager.addPerson(testPerson);
+
+        LocalDateTime startTime = LocalDateTime.of(2024, 10, 22, 12, 0);
+        LocalDateTime endTime = startTime.plusHours(1);
+        Appointment appointment1 = new Appointment("Appointment 1", testPerson.getNric(), startTime, endTime);
+        modelManager.addAppointment(appointment1, testPerson);
+
+        // Conflicting appointment
+        LocalDateTime conflictingStartTime = startTime.plusMinutes(30);
+        Appointment appointment2 = new Appointment("Appointment 2", testPerson.getNric(),
+            conflictingStartTime, endTime.plusHours(1));
+
+        boolean result = modelManager.addAppointment(appointment2, testPerson);
+        assertFalse(result);
+        assertEquals(1, modelManager.getAppointmentsForPerson(testPerson).size());
+    }
+
+    @Test
+    public void getAllAppointments_returnsAllAppointments() {
+        Person person1 = new Person(ALICE);
+        Person person2 = new Person(BENSON);
+        modelManager.addPerson(person1);
+        modelManager.addPerson(person2);
+
+        LocalDateTime startTime1 = LocalDateTime.of(2024, 10, 22, 12, 0);
+        LocalDateTime endTime1 = startTime1.plusHours(1);
+        Appointment appointment1 = new Appointment("Appointment 1", person1.getNric(), startTime1, endTime1);
+
+        LocalDateTime startTime2 = startTime1.plusHours(2);
+        LocalDateTime endTime2 = startTime2.plusHours(1);
+        Appointment appointment2 = new Appointment("Appointment 2", person2.getNric(), startTime2, endTime2);
+
+        modelManager.addAppointment(appointment1, person1);
+        modelManager.addAppointment(appointment2, person2);
+
+        List<Appointment> allAppointments = modelManager.getAllAppointments();
+        assertEquals(2, allAppointments.size());
+        assertTrue(allAppointments.contains(appointment1));
+        assertTrue(allAppointments.contains(appointment2));
+    }
+
+
+
 }
