@@ -24,12 +24,17 @@ public class TagBuilder {
         // Check the first word
         if (parts.length > 1) {
             String firstWord = parts[0];
-            String levelValue = parts[1];
+            String tagValue = parts[1];
             switch (firstWord) {
             case "difficulty":
-                return new DifficultyTag("Difficulty", levelValue);
+                return new DifficultyTag("Difficulty", tagValue);
             case "salary":
-                return new SalaryTag("Salary", levelValue);
+                return new SalaryTag("Salary", tagValue);
+            case "wlb":
+                return new WorkLifeBalanceTag("WLB", tagValue);
+            case "period":
+                int year = Integer.parseInt(parts.length > 2 ? parts[2] : "0"); // Default year if missing
+                return new PeriodTag("Period", tagValue, year);
             default:
                 throw new IllegalArgumentException("Unknown tag type: " + firstWord);
             }
