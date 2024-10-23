@@ -145,7 +145,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding an Emergency contact's name : `addEcName` 
+### Adding an Emergency contact's name : `addEcName`
 
 Adds an emergency contact's name to the specified person in the address book.
 
@@ -166,7 +166,7 @@ Examples:
 
 ### Adding an Emergency contact's number : `addEcNumber`
 
-Adds a emergency contact's number to the specified person in the address book.
+Adds an emergency contact's number to the specified person in the address book.
 
 Format: `addEcNumber INDEX [ep/ECNUMBER]`
 
@@ -182,6 +182,37 @@ Format: `addEcNumber INDEX [ep/ECNUMBER]`
 Examples:
 * `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
 * `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
+
+### Adding a Submission : `addSubmission`
+
+Adds a submission to every person in the address book.
+
+Format: `addSubmission sm/SUBMISSION_NAME`
+
+<box type="tip" seamless>
+
+**Tip:** If a new student is added after a submission is added, the submission has to be added again for it to be reflected for the new student.
+</box>
+
+* The submission name can only contain alphanumeric characters and spaces.
+
+Examples:
+* `addSubmission sm/Assignment 1`
+
+### Adding a Submission Status: `addSubmissionStatus`
+
+Adds a submission status for the specified submission for the person at the specified index.
+
+Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
+
+* The submission status must be a boolean value "T" or "F", or `NIL`.
+* The submission status can be edited using the same command with a different submission status.
+* The submission status can be deleted by entering the submission status as `NIL`.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `addSubmissionStatus 1 sm/Assignment 1 ss/T`
+* `addSubmissionStatus 1 sm/Tutorial 2 ss/NIL`
 
 ### Clearing all entries : `clear`
 
@@ -242,3 +273,5 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Add Emergency Phone Number**  | `EcNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`
+**AddSubmission** | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`
+**AddSubmissionStatus** | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/T`
