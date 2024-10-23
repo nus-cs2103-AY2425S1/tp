@@ -47,4 +47,12 @@ ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
 FilterCommand -up-|> Command
+
+note right of FilterCommandParser
+Internally creates and combines multiple predicates
+(e.g., NameContainsSubstringPredicate,
+IncomeComparisonPredicate, etc.) into a
+CombinedPredicate.
+end note
+
 @enduml
