@@ -184,6 +184,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<GoodsReceipt> getFilteredReceiptsList() {
+        return filteredReceipts;
+    }
+
+    @Override
     public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
         filteredReceipts.setPredicate(predicate);
         return this.goodsList.findReceipts(predicate);
