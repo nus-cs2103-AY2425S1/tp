@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
 
 import seedu.address.model.Model;
 
+/**
+ * Deletes all goods that match the given goodsName.
+ */
 public class DeleteGoodsCommand extends Command {
     public static final String COMMAND_WORD = "deletegoods";
 
@@ -18,7 +21,9 @@ public class DeleteGoodsCommand extends Command {
 
     private final String goodsName;
 
-    public DeleteGoodsCommand(String goodsName) { this.goodsName = goodsName; }
+    public DeleteGoodsCommand(String goodsName) {
+        this.goodsName = goodsName;
+    }
 
     @Override
     public CommandResult execute(Model model) {
@@ -35,11 +40,10 @@ public class DeleteGoodsCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteGoodsCommand)) {
+        if (!(other instanceof DeleteGoodsCommand otherDeleteGoodsCommand)) {
             return false;
         }
 
-        DeleteGoodsCommand otherDeleteGoodsCommand = (DeleteGoodsCommand) other;
         return goodsName.equals(otherDeleteGoodsCommand.goodsName);
     }
 }
