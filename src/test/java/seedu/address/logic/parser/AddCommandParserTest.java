@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GRAD_YEAR_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -56,15 +57,17 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB)
+                .withNoGradYear().withNoEmergencyContact().withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOM_NUMBER_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ROOM_NUMBER_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withNoGradYear().withNoEmergencyContact()
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_NUMBER_DESC_BOB + ADDRESS_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
@@ -74,7 +77,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOM_NUMBER_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+                + ROOM_NUMBER_DESC_BOB + ADDRESS_DESC_BOB + GRAD_YEAR_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -152,12 +155,13 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // roomNumber not present
-        Person expectedPerson = new PersonBuilder(AMY).withNoRoomNumber().build();
+        Person expectedPerson = new PersonBuilder(AMY)
+                .withNoRoomNumber().withNoGradYear().withNoEmergencyContact().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // zero tags
-        expectedPerson = new PersonBuilder(AMY).withTags().build();
+        expectedPerson = new PersonBuilder(AMY).withNoGradYear().withNoEmergencyContact().withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + ROOM_NUMBER_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));

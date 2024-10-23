@@ -21,10 +21,10 @@ public class RoomNumberTest {
 
     @Test
     public void isValidRoomNumber() {
-        // null address
-        assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
+        // null room number
+        assertThrows(NullPointerException.class, () -> RoomNumber.isValidRoomNumber(null));
 
-        // invalid addresses
+        // invalid room number
         assertFalse(RoomNumber.isValidRoomNumber("#01-0123")); // additional special character #
         assertFalse(RoomNumber.isValidRoomNumber("010123")); // no -
         assertFalse(RoomNumber.isValidRoomNumber("010-123")); // wrong placement of -
@@ -33,8 +33,8 @@ public class RoomNumberTest {
         assertFalse(RoomNumber.isValidRoomNumber("#01-012")); // incorrect digits for room
         assertFalse(RoomNumber.isValidRoomNumber("#01-01234")); // incorrect digits for room
 
-        // valid addresses
-        assertTrue(Address.isValidAddress("05-5053"));
+        // valid room number
+        assertTrue(RoomNumber.isValidRoomNumber("05-5053"));
     }
 
     @Test

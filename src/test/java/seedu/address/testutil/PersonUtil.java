@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRAD_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
@@ -40,6 +41,9 @@ public class PersonUtil {
             sb.append(PREFIX_ROOM_NUMBER + person.getRoomNumber().get().value + " ");
         }
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        if (person.getGradYear().isPresent()) {
+            sb.append(PREFIX_GRAD_YEAR + person.getGradYear().get().value + " ");
+        }
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -61,6 +65,8 @@ public class PersonUtil {
                 .append(emergencyName.fullName).append(" "));
         descriptor.getEmergencyPhone().ifPresent(emergencyPhone -> sb.append(PREFIX_EMERGENCY_PHONE)
                 .append(emergencyPhone.value).append(" "));
+        descriptor.getGradYear().ifPresent(gradYear -> sb.append(PREFIX_GRAD_YEAR).append(gradYear.value)
+                .append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

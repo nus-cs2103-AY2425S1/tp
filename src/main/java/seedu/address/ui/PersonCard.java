@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label emergencyContactPhone;
     @FXML
+    private Label gradYear;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -73,6 +75,12 @@ public class PersonCard extends UiPart<Region> {
         emergencyContactPhone.setText(
                 person.getEmergencyContactPhone().map(phone -> phone.value)
                         .orElse("Emergency contact phone not yet assigned")
+        );
+
+        // display default text if grad year is not assigned
+        gradYear.setText(
+                person.getGradYear().map(gradYear -> gradYear.value)
+                        .orElse("-")
         );
 
         person.getTags().stream()
