@@ -35,8 +35,5 @@
 
         <!-- Email label -->
         <Label fx:id="email" styleClass="cell_small_label" text="Email: \$email" />
-
-        <!-- Address label -->
-        <Label fx:id="address" styleClass="cell_small_label" text="Address: \$address" />
     </VBox>
 </ScrollPane>

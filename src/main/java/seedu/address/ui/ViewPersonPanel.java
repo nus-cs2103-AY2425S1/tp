@@ -30,9 +30,6 @@ public class ViewPersonPanel extends UiPart<Region> {
     @FXML
     private Label email;
 
-    @FXML
-    private Label address;
-
     /**
      * Details to include inside the panel
      */
@@ -47,7 +44,6 @@ public class ViewPersonPanel extends UiPart<Region> {
         job.setText("Job : " + person.getJob().jobName);
         phone.setText("Phone Number : " + person.getPhone().value);
         email.setText("Email Address : " + person.getEmail().value);
-        address.setText("Address : " + person.getAddress().value);
         Set<Tag> tags = person.getTags();
         if (tags.contains(Person.DEFAULT_TAG_PENDING)) {
             status.setText("Status : " + Person.DEFAULT_TAG_PENDING.tagName);
