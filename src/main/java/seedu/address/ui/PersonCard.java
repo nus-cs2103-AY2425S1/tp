@@ -77,12 +77,10 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void setAppointmentFields(Person person) {
-        // Law of Demeter is not maintained, however the purpose simply retrieves information through getters,
-        // and there may be zero risk of modifications.
         if (person.getAppointment() != null) {
-            appointmentDescription.setText(person.getAppointment().getDescription());
-            appointmentStart.setText(person.getAppointment().getStart().toString());
-            appointmentEnd.setText(person.getAppointment().getEnd().toString());
+            appointmentDescription.setText(person.getAppointmentDescription());
+            appointmentStart.setText(person.getAppointmentStart().toString());
+            appointmentEnd.setText(person.getAppointmentEnd().toString());
         } else {
             // Use of ChatGPT to see how to hide unwanted label
             // Prompt: How to remove label if appointment is null
