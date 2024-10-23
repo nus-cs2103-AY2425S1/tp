@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ContactDisplay;
 import seedu.address.ui.TestContactDisplay;
 
 public class ViewCommandTest {
@@ -40,4 +41,15 @@ public class ViewCommandTest {
         assertEquals("Phone:", contactDisplay.getPhone());
         assertEquals("Email:", contactDisplay.getEmail());
     }
+
+    @Test
+    public void execute_showHelpDisplay() {
+        contactDisplay.showHelpDisplay();
+
+        assertEquals(ContactDisplay.CONDENSED_HELP_MESSAGE, contactDisplay.getName());
+        assertEquals(null, contactDisplay.getCategory());
+        assertEquals(null, contactDisplay.getPhone());
+        assertEquals(null, contactDisplay.getEmail());
+    }
+
 }
