@@ -5,8 +5,10 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APPSTATUS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import seedu.internbuddy.commons.core.index.Index;
+import seedu.internbuddy.commons.util.ToStringBuilder;
 import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
@@ -34,6 +36,7 @@ public class UpdateCommand extends Command {
     private final Index companyIndex;
     private final Index applicationIndex;
     private final AppStatus appStatus;
+    private Application applicationToEdit;
 
     /**
      * @param companyIndex of the company in the filtered company list to edit application from
@@ -65,7 +68,7 @@ public class UpdateCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
         }
 
-        Application applicationToEdit = applicationList.get(applicationIndex.getZeroBased());
+        applicationToEdit = applicationList.get(applicationIndex.getZeroBased());
         Application editedApplication = applicationToEdit.setAppStatus(appStatus);
         applicationList.set(applicationIndex.getZeroBased(), editedApplication);
 
@@ -77,4 +80,26 @@ public class UpdateCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS, editedApplication));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UpdateCommand otherUpdateCommand)) {
+            return false;
+        }
+
+        return Objects.equals(companyIndex, otherUpdateCommand.companyIndex)
+            && Objects.equals(applicationIndex, otherUpdateCommand.applicationIndex)
+            && Objects.equals(appStatus, otherUpdateCommand.appStatus);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("applicationToEdit", applicationToEdit)
+                .toString();
+    }
 }
