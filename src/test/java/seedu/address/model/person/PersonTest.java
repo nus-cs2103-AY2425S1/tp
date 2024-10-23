@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GRAD_YEAR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_NUMBER_BOB;
@@ -91,6 +92,10 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRoomNumber(VALID_ROOM_NUMBER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different grad year -> returns false
+        editedAlice = new PersonBuilder(ALICE).withGradYear(VALID_GRAD_YEAR_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -105,6 +110,7 @@ public class PersonTest {
                 + ", room number=" + ALICE.getRoomNumber().orElse(null)
                 + ", address=" + ALICE.getAddress()
                 + ", emergency contact=" + ALICE.getEmergencyContact().orElse(null)
+                + ", graduation year=" + ALICE.getGradYear().orElse(null)
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
