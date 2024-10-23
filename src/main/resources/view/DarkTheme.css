@@ -394,6 +394,6 @@
 
 .tags-title-label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 15px;
     -fx-text-fill: -color-dark;
+    -fx-font-size: 18px;
 }

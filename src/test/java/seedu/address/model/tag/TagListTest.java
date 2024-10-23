@@ -56,6 +56,42 @@ public class TagListTest {
     }
 
     @Test
+    public void checkAcceptableTagListSize_belowMaximum_success() {
+        for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE - 2; i++) {
+            tagList.addTag(new Tag(String.valueOf(i)));
+        }
+
+        assertTrue(tagList.checkAcceptableSize(1));
+    }
+
+    @Test
+    public void checkAcceptableTagListSize_addMultipleTagsBelowMaximum_success() {
+        for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE - 3; i++) {
+            tagList.addTag(new Tag(String.valueOf(i)));
+        }
+
+        assertTrue(tagList.checkAcceptableSize(2));
+    }
+
+    @Test
+    public void checkAcceptableTagListSize_atMaximum_success() {
+        for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE - 1; i++) {
+            tagList.addTag(new Tag(String.valueOf(i)));
+        }
+
+        assertTrue(tagList.checkAcceptableSize(1));
+    }
+
+    @Test
+    public void checkAcceptableTagListSize_aboveMaximum_failure() {
+        for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE; i++) {
+            tagList.addTag(new Tag(String.valueOf(i)));
+        }
+
+        assertFalse(tagList.checkAcceptableSize(1));
+    }
+
+    @Test
     public void equals_sameTagLists_success() {
         TagList otherTagList = new TagList();
         tagList.addTag(tag1);
