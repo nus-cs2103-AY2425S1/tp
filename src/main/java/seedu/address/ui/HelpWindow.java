@@ -381,9 +381,9 @@ public class HelpWindow extends UiPart<Stage> {
             Hyperlink jarLink = new Hyperlink("https://github.com/se-edu/addressbook-level3/releases");
             jarLink.setOnAction(e -> openHyperlink("https://github.com/se-edu/addressbook-level3/releases"));
 
-            Text instructions = new Text("\n\n3. Copy the `.jar` file to your desired folder and open a terminal." +
-                    "\n\n4. Run the application using `java -jar fart_in_a.jar`." +
-                    "\n\n5. Type commands in the command box and press Enter.");
+            Text instructions = new Text("\n\n3. Copy the `.jar` file to your desired folder and open a terminal."
+                     + "\n\n4. Run the application using `java -jar fart_in_a.jar`."
+                     + "\n\n5. Type commands in the command box and press Enter.");
 
             helpContentFlow.getChildren().addAll(beforeLink1, javaLink, afterLink1, jarLink);
 
