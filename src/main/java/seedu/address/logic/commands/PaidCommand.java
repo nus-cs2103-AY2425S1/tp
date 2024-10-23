@@ -29,7 +29,7 @@ public class PaidCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the person identified by the index number to have made "
             + "payment and updates the policy renewal frequency.\n"
-            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_FREQUENCY + "FREQUENCY]\n"
+            + "Parameters: INDEX (must be a positive integer) " + " " + PREFIX_FREQUENCY + "FREQUENCY\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_FREQUENCY + "3";
 

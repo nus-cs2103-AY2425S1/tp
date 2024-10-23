@@ -63,6 +63,6 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        frequency.setText("Policy duration: " + person.getFrequency().toString() + " Months");
+        frequency.setText("Policy duration: " + person.getFrequency().toString() + " Month(s)");
     }
 }

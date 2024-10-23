@@ -51,7 +51,7 @@ public class Messages {
                 .append("; HasPaid: ")
                 .append(person.getHasPaid() ? "Yes" : "No")
                 .append("; Policy Renewal Frequency: ")
-                .append(person.getFrequency() + " months")
+                .append(person.getFrequency() + " month(s)")
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
