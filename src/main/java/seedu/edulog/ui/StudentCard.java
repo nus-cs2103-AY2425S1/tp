@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -40,6 +42,12 @@ public class StudentCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ImageView paidStatus;
+
+    private final Image UNPAID_ICON = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
+    private final Image PAID_ICON = new Image(getClass().getResource("/images/paid.png").toExternalForm());
+
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -55,5 +63,6 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        paidStatus.setImage(student.getHasPaid() ? PAID_ICON : UNPAID_ICON);
     }
 }
