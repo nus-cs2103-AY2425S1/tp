@@ -7,8 +7,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 import seedu.address.model.person.Volunteer;
-import seedu.address.model.person.comparators.NameComparator;
-import seedu.address.model.person.comparators.VolunteerComparator;
 
 /**
  * Sorts the person list based on the specified option.
@@ -93,7 +91,8 @@ public class SortCommand extends Command {
      * @return A CommandResult indicating that the list has been sorted by name.
      */
     private CommandResult executeSortByName(Model model) {
-        model.updatePersonListSort(new NameComparator());
+        assert sortOption != null;
+        model.updatePersonListSort(sortOption.getComparator());
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, sortOption));
     }
 
@@ -114,7 +113,8 @@ public class SortCommand extends Command {
             return new CommandResult(MESSAGE_SORT_HOURS_NO_VOLUNTEERS);
         }
 
-        model.updatePersonListSort(new VolunteerComparator());
+        assert sortOption != null;
+        model.updatePersonListSort(sortOption.getComparator());
 
         if (model.hasOnlyPersonsOfType(Volunteer.class)) {
             return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, sortOption));

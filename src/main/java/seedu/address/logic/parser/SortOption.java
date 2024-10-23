@@ -2,15 +2,30 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
+
+import seedu.address.model.person.Person;
+import seedu.address.model.person.comparators.NameComparator;
+import seedu.address.model.person.comparators.VolunteerComparator;
 
 /**
  * Contains valid sorting options for the sort command.
  */
 public enum SortOption {
-    NAME("name"),
-    HOURS("hours");
-    // Add more sorting options if needed
+    NAME("name") {
+        @Override
+        public Comparator<Person> getComparator() {
+            return new NameComparator();
+        }
+    },
+    HOURS("hours") {
+        @Override
+        public Comparator<Person> getComparator() {
+            return new VolunteerComparator();
+        }
+    };
+    // Add more sorting options here if needed
 
     public static final List<String> VALID_SORT_OPTIONS = List.of(NAME.value, HOURS.value);
 
@@ -32,7 +47,6 @@ public enum SortOption {
 
     /**
      * Parses a {@code String sortOption} into a {@code SortOption}.
-     * Leading and trailing whitespaces are trimmed.
      *
      * @param sortOption The sort option string to parse.
      * @return The corresponding {@code SortOption}.
@@ -48,6 +62,13 @@ public enum SortOption {
         }
         throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
     }
+
+    /**
+     * Returns the appropriate comparator for the sort option.
+     *
+     * @return {@code Comparator<Person>} based on the sort option.
+     */
+    public abstract Comparator<Person> getComparator();
 
     @Override
     public String toString() {
