@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -27,6 +28,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,25 +44,28 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         if (!AddressBookParser.getInspect()) {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                            PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE,
+                        PREFIX_ADDRESS,
+                        PREFIX_TAG);
             //Check if name is present
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_PERSON));
             }
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ROLE, PREFIX_ADDRESS);
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             //Set default values if prefixes not present
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse("00000000"));
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse("example@gmail.com"));
+            Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).orElse("client"));
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(
                     "nullAddress, S000000")
             );
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Person person = new Person(name, phone, email, address, tagList);
+            Person person = new Person(name, phone, email, role, address, tagList);
 
             return new AddCommand(person);
         } else {
