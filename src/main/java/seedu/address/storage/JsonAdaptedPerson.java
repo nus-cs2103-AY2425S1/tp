@@ -56,8 +56,8 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
+        phone = source.getPhone().map(Object :: toString).orElse(null);
+        email = source.getEmail().map(Object :: toString).orElse(null);;
         address = source.getAddress().map(Object :: toString).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag :: new)
@@ -114,8 +114,8 @@ class JsonAdaptedPerson {
         final ModuleRoleMap modelModuleRoleMap = moduleRoleMap.toModelType();
 
         return new Person(modelName,
-                modelPhone,
-                modelEmail,
+                Optional.ofNullable(modelPhone),
+                Optional.ofNullable(modelEmail),
                 Optional.ofNullable(modelAddress),
                 modelTags,
                 modelModuleRoleMap);
