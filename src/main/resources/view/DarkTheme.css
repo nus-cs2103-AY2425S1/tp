@@ -361,6 +361,12 @@
     -fx-text-fill: black;
 }
 
+/* Hover effect to highlight the payment status */
+#paymentStatus: hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
 .payment_status_pending {
     -fx-background-color: #ffa500;
 }
@@ -371,7 +377,7 @@
 }
 
 .payment_status_paid {
-    -fx-background-color: green;
+    -fx-background-color: #59ac59;
 }
 
 .payment_status_partial {
