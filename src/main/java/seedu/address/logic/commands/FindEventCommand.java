@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.util.PredicateDryRunUtil.filterEventsDryRun;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 
 /**
@@ -28,8 +32,14 @@ public class FindEventCommand extends FindCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        FilteredList<Event> events = filterEventsDryRun(model, predicate);
+        if (events.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_NO_EVENTS_FOUND);
+        }
+
         model.updateFilteredEventList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
