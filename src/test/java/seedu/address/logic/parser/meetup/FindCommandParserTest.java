@@ -38,7 +38,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_wrongTag_failParse() {
+    public void parse_validArgsWrongTag_failParse() {
         assertParseFailure(parser, INVALID_FIND_MEETUP_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
