@@ -223,6 +223,15 @@ Displays the total number of guests invited to the wedding and the total number 
 [_Back to Top_](#table-of-contents)
 
 
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+[_Back to Top_](#table-of-contents)
+
+
 ### **Guest Related Commands**
 
 :information_source: Commands listed in this section are applicable to managing your guest list.
@@ -308,18 +317,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### **Other Useful Features**
 
