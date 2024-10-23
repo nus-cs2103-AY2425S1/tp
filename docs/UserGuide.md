@@ -70,9 +70,9 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 | Index |        Action         |                                                        Format                                                        |                                          examples                                          |
 |:-----:|:---------------------:|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
-|   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIMING]`         | `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 l/S1 s/MATH s/CHEMISTRY` |
+|   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 l/S1 s/MATH s/CHEMISTRY` |
 |   2   |        Delete         |                                                   `delete i/INDEX`                                                   |                                        `delete i/2`                                        |
-|   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIMING]` |                         `update Alex Yeoh n/James Lee e/99999999`                          |
+|   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                         `update Alex Yeoh n/James Lee e/99999999`                          |
 |   4   |         Find          |                        `find n/KEYWORD [MORE_KEYWORDS]` or `find l/LEVEL` or `find s/SUBJECT`                        |                       `find n/Alex` or `find l/S2` or `find s/MATH`                        |
 |   5   |         List          |                                                        `list`                                                        |                                           `list`                                           |
 |   6   |          Tag          |                                          `tag n/NAME [l/LEVEL] [s/SUBJECT]`                                          |                                `tag n/John Doe l/S1 s/MATH`                                |
@@ -104,9 +104,11 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
   e.g `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/MATH` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/MATH`, `s/MATH s/PHYSICS` etc.
+  e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/MATH`, `s/MATH s/PHYSICS` etc.<br>
+  e.g. `[lt/LESSON_TIME]…​` can be used as ` ` (i.e. 0 times), `lt/SUN-11:00-13:00`, `lt/SUN-11:00-13:00 lt/WED-17:00-19:00` etc.
 
-* `lt/LESSON_TIMING` must follow the format:`lt/day-start-end`
+* `lt/LESSON_TIME` must follow the format:`lt/day-start-end`<br>
+  e.g. `lt/SUN-13:00-15:00`
   * Acceptable values for `day` are `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
   * `start` must be in `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive.
   * `end` must be in `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive, and `end` must be later than `start`.
@@ -126,7 +128,7 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 Adds a student to the address book.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/SCHOOL_LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIMING]`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/SCHOOL_LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
 
 <box type="tip" seamless>
 
@@ -159,7 +161,7 @@ Deletes the specified student from the address book.
 
 Updates the details of an existing student in the address book.
 
-**Format:** `update NAME [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​ [lt/LESSON_TIMING]`
+**Format:** `update NAME [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
 
 * Updates the student with the specified `NAME`. The name refers to the full name shown in the displayed student list.
 * At least one of the optional fields must be provided.

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -58,6 +59,7 @@ public class CommandTestUtil {
     public static final String VALID_TASK_DEADLINE = "2024-10-15";
     public static final String VALID_TASK_DEADLINE_AMY = "2024-01-01";
     public static final String VALID_TASK_INDEX = "1";
+    public static final String VALID_LESSON_TIME = "SUN-11:00-13:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -79,7 +81,7 @@ public class CommandTestUtil {
     public static final String TASK_DEADLINE_DESC_AMY = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_AMY;
     public static final String TASK_DEADLINE_DESC_BOB = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE;
     public static final String TASK_INDEX_DESC = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
-
+    public static final String LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -91,7 +93,7 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_DESCRIPTION + "   "; // blank task description
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE + "2024-14-23"; // invalid month
     public static final String INVALID_TASK_INDEX = " " + PREFIX_TASK_INDEX + "1!";
-
+    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "every thurs";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

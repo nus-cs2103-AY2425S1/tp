@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -100,8 +101,10 @@ public class TagCommand extends Command {
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(personToTag.getSubjects());
         Level schoolLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
         TaskList updatedTaskList = tagsToAdd.getTaskList().orElse(personToTag.getTaskList());
+        Set<LessonTime> updatedLessonTimes = tagsToAdd.getLessonTimes()
+                .orElse(personToTag.getLessonTimes());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects, schoolLevel, updatedTaskList);
+                updatedAddress, updatedNote, updatedSubjects, schoolLevel, updatedTaskList, updatedLessonTimes);
     }
 
     @Override
