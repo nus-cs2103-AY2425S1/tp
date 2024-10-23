@@ -77,6 +77,7 @@ public class SampleDataUtil {
     /**
      * Generates a {@code Map<Tutorial, AttendanceStatus} based on the given strings by calling the overloaded method
      * and defaulting attendance to not taken place.
+     *
      * @param strings Array of tutorial indexes.
      * @return A map with containing each tutorial mapped to its attendance.
      */
@@ -88,6 +89,7 @@ public class SampleDataUtil {
 
     /**
      * Generates a {@code Map<Tutorial, AttendanceStatus} based on the given arrays.
+     *
      * @param strings Array of tutorial indexes.
      * @param attendance Array of attendance corresponding to each tutorial.
      * @return A map with containing each tutorial mapped to its attendance.
