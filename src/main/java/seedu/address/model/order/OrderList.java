@@ -18,6 +18,7 @@ public abstract class OrderList<T extends Order> {
      * @param order The order to be added.
      */
     public void addOrder(T order) {
+        assert order != null : "Order to add cannot be null";
         orders.add(order);
     }
 
@@ -37,6 +38,7 @@ public abstract class OrderList<T extends Order> {
      * @return The order associated with the given phone number, or null if not found.
      */
     public T findOrderByPhoneNumber(String phoneNumber) {
+        assert phoneNumber != null : "Phone number cannot be null";
         for (T order : orders) {
             if (order.getPhoneNumber().equals(phoneNumber)) {
                 return order;
@@ -52,6 +54,7 @@ public abstract class OrderList<T extends Order> {
      * @return True if the order was successfully removed, false otherwise.
      */
     public boolean removeOrder(String phoneNumber) {
+        assert phoneNumber != null : "Phone number cannot be null";
         return orders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
     }
 
