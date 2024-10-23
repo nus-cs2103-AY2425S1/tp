@@ -8,7 +8,7 @@ import static seedu.hireme.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.hireme.logic.commands.CommandTestUtil.showInternshipApplicationAtIndex;
 import static seedu.hireme.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLICATION;
 import static seedu.hireme.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP_APPLICATION;
-import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
+import static seedu.hireme.testutil.TypicalInternshipApplications.getClonedAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,11 +22,13 @@ import seedu.hireme.model.internshipapplication.Status;
 
 public class StatusCommandTest {
 
-    private Model<InternshipApplication> model = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+    private Model<InternshipApplication> model = new ModelManager<>(getClonedAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        InternshipApplication internshipApplicationToUpdate = model
+        Model<InternshipApplication> clonedModel = new ModelManager<>(getClonedAddressBook(), new UserPrefs());
+
+        InternshipApplication internshipApplicationToUpdate = clonedModel
                 .getFilteredList().get(INDEX_FIRST_INTERNSHIP_APPLICATION.getZeroBased());
 
         StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED);
@@ -34,9 +36,8 @@ public class StatusCommandTest {
         String expectedMessage = String.format(StatusCommand.MESSAGE_STATUS_CHANGE_SUCCESS,
                 Messages.format(internshipApplicationToUpdate), Status.ACCEPTED.getValue());
 
-        ModelManager<InternshipApplication> expectedModel = new ModelManager<>(model.getAddressBook(), new UserPrefs());
+        ModelManager<InternshipApplication> expectedModel = new ModelManager<>(getClonedAddressBook(), new UserPrefs());
 
-        // Create a new updated internship application
         InternshipApplication updatedApplication = new InternshipApplication(
                 internshipApplicationToUpdate.getCompany(),
                 internshipApplicationToUpdate.getDateOfApplication(),
@@ -46,7 +47,7 @@ public class StatusCommandTest {
 
         expectedModel.setItem(internshipApplicationToUpdate, updatedApplication);
 
-        assertCommandSuccess(statusCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(statusCommand, clonedModel, expectedMessage, expectedModel);
     }
 
     @Test

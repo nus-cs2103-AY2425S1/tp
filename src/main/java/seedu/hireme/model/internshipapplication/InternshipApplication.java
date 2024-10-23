@@ -199,4 +199,24 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
 
         return tsb.toString();
     }
+
+    /**
+     * Creates and returns a deep copy of this {@code InternshipApplication}.
+     * <p>
+     * The deep copy ensures that the new {@code InternshipApplication} is a completely independent
+     * copy, meaning any changes to the new object will not affect the original object.
+     * This method creates a new {@code Company} instance to avoid sharing mutable state, but since
+     * {@code String} and {@code Status} are immutable, those are shared directly.
+     * </p>
+     *
+     * @return A new {@code InternshipApplication} instance with the same values as this instance.
+     */
+    public InternshipApplication deepCopy() {
+        return new InternshipApplication(
+                new Company(this.company.getEmail(), this.company.getName()), // Deep copy of mutable Company
+                this.dateOfApplication, // String is immutable, safe to share reference
+                this.role, // String is immutable, safe to share reference
+                this.status // Status is immutable (enum), safe to share reference
+        );
+    }
 }
