@@ -87,8 +87,9 @@ public class AddressBookParser {
         case SortByPriorityCommand.COMMAND_WORD, SortByPriorityCommand.ALT_COMMAND_WORD:
             return new SortByPriorityCommandParser().parse(arguments);
 
-        case AddReminderCommand.COMMAND_WORD:
+        case AddReminderCommand.COMMAND_WORD, AddReminderCommand.ALT_COMMAND_WORD:
             return new AddReminderCommandParser().parse(arguments);
+
         case SortByDateCommand.COMMAND_WORD, SortByDateCommand.ALT_COMMAND_WORD:
             return new SortByDateCommandParser().parse(arguments);
 

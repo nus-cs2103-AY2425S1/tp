@@ -20,6 +20,7 @@ import seedu.address.model.person.Reminder;
 public class AddReminderCommand extends Command {
 
     public static final String COMMAND_WORD = "remind";
+    public static final String ALT_COMMAND_WORD = "rem";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Create a reminder "
             + "Parameters: INDEX (must be a positive integer) "
