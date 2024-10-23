@@ -71,6 +71,12 @@ public class AddTaskCommand extends Command {
                 taskToAdd.getTaskDescription(), targetPerson.getName(), taskToAdd.getTaskDeadline()));
     }
 
+    /**
+     * Creates a new Copy of {@code targetPerson} that contains {@code taskToAdd}
+     * @param targetPerson the {@code Person} to be updated
+     * @param taskToAdd the {@code Task} to be added into the targetPerson
+     * @return
+     */
     private static Person createUpdatedPerson(Person targetPerson, Task taskToAdd) {
         Name name = targetPerson.getName();
         Phone phone = targetPerson.getPhone();

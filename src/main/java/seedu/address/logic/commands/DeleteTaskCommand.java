@@ -73,6 +73,7 @@ public class DeleteTaskCommand extends Command {
         }
         Task taskToDelete = taskList.get(targetIndex.getZeroBased());
 
+        //Creates a new Person with the task removed
         Person updatedPerson = createUpdatedPerson(targetPerson, taskToDelete);
         model.setPerson(targetPerson, updatedPerson);
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
@@ -81,6 +82,12 @@ public class DeleteTaskCommand extends Command {
                 taskToDelete.getTaskDeadline()));
     }
 
+    /**
+     * Creates a new instance of Person with the task deleted
+     * @param targetPerson the {@code Person} to be copied over
+     * @param taskToDelete the {@code Task} to be removed
+     * @return a new instance of the targetPerson with the taskToDelete removed
+     */
     private static Person createUpdatedPerson(Person targetPerson, Task taskToDelete) {
         Name name = targetPerson.getName();
         Phone phone = targetPerson.getPhone();
