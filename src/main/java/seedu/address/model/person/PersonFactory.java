@@ -11,6 +11,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -25,7 +26,12 @@ import seedu.address.model.tag.Tag;
  * {@code ArgumentMultimap} to supply role-specific fields.
  */
 public class PersonFactory {
-
+    private static final String MISSING_HOURS_MESSAGE = "Missing hours! For a Volunteer, you must specify hours "
+            + "contributed by the volunteer using the h/ prefix.";
+    private static final String MISSING_DONATED_AMOUNT_MESSAGE = "Missing donated amount! "
+            + "For a Donor, you must specify a donated amount using the d/ prefix.";
+    private static final String MISSING_END_DATE_MESSAGE = "Missing partnership end date! "
+            + "For a Partner, you must specify a partnership end date using the ped/ prefix.";
     private static final String HOURS = "hours";
     private static final String DONATED_AMOUNT = "donatedAmount";
     private static final String END_DATE = "partnershipEndDate";
@@ -33,36 +39,6 @@ public class PersonFactory {
     private static final String HOURS_EXIST_ERROR = "Hours field should not exist for role: ";
     private static final String AMOUNT_EXIST_ERROR = "Donated Amount field should not exist for role: ";
     private static final String END_DATE_EXIST_ERROR = "Partnership End Date field should not exist for role: ";
-    /**
-     * Creates a specific subclass of {@code Person} based on the provided role-specific fields.
-     * This method examines the provided fields to determine which subclass of {@code Person}
-     * (i.e., {@code Volunteer}, {@code Donor}, or {@code Partner}) to instantiate.
-     *
-     * @param name The name of the person.
-     * @param phone The phone number of the person.
-     * @param email The email address of the person.
-     * @param address The address of the person.
-     * @param tags The tags associated with the person.
-     * @param hours The hours contributed, applicable for {@code Volunteer}; otherwise, {@code null}.
-     * @param donatedAmount The donated amount, applicable for {@code Donor}; otherwise, {@code null}.
-     * @param partnershipEndDate The partnership end date, applicable for {@code Partner}; otherwise, {@code null}.
-     * @return A new instance of the appropriate {@code Person} subclass based on the provided fields.
-     * @throws IllegalArgumentException If none of the subclass-specific fields are provided, or if
-     *         more than one subclass-specific field is non-null.
-     */
-    public static Person createPerson(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                                      Hours hours, DonatedAmount donatedAmount, Date partnershipEndDate) {
-        if (hours != null) {
-            return new Volunteer(name, phone, email, address, tags, hours);
-        } else if (donatedAmount != null) {
-            return new Donor(name, phone, email, address, tags, donatedAmount);
-        } else if (partnershipEndDate != null) {
-            return new Partner(name, phone, email, address, tags, partnershipEndDate);
-        } else {
-            throw new IllegalArgumentException("At least one role-specific attribute (hours, donatedAmount, "
-                    + "or partnershipEndDate) must be provided.");
-        }
-    }
     /**
      * Creates a {@code Person} instance based on the specified {@code Role}.
      *
@@ -80,25 +56,21 @@ public class PersonFactory {
                                       ArgumentMultimap argMultimap) throws ParseException {
         switch (role) {
         case VOLUNTEER:
-            if (argMultimap.getValue(PREFIX_HOURS).isEmpty()) {
-                throw new ParseException("Hours must be specified for a Volunteer.");
-            }
-            Hours hours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
+            String hoursValue = checkRequiredField(argMultimap, PREFIX_HOURS, MISSING_HOURS_MESSAGE);
+            Hours hours = ParserUtil.parseHours(hoursValue);
             return new Volunteer(name, phone, email, address, tags, hours);
 
         case DONOR:
-            if (argMultimap.getValue(PREFIX_DONATED_AMOUNT).isEmpty()) {
-                throw new ParseException("Donated amount must be specified for a Donor.");
-            }
+            String donatedAmountValue = checkRequiredField(argMultimap, PREFIX_DONATED_AMOUNT,
+                    MISSING_DONATED_AMOUNT_MESSAGE);
             DonatedAmount donatedAmount =
-                    ParserUtil.parseDonatedAmount(argMultimap.getValue(PREFIX_DONATED_AMOUNT).get());
+                    ParserUtil.parseDonatedAmount(donatedAmountValue);
             return new Donor(name, phone, email, address, tags, donatedAmount);
         case PARTNER:
-            if (argMultimap.getValue(PREFIX_PARTNERSHIP_END_DATE).isEmpty()) {
-                throw new ParseException("Partnership end date must be specified for a Partner.");
-            }
+            String partnershipEndDateValue = checkRequiredField(argMultimap, PREFIX_PARTNERSHIP_END_DATE,
+                    MISSING_END_DATE_MESSAGE);
             Date partnershipEndDate =
-                    ParserUtil.parsePartnershipEndDate(argMultimap.getValue(PREFIX_PARTNERSHIP_END_DATE).get());
+                    ParserUtil.parsePartnershipEndDate(partnershipEndDateValue);
             return new Partner(name, phone, email, address, tags, partnershipEndDate);
         case PERSON:
             return new Person(name, phone, email, address, tags);
@@ -179,6 +151,24 @@ public class PersonFactory {
     }
 
     /**
+     * Validates and retrieves a required field from {@code ArgumentMultimap} using the given {@code Prefix}.
+     * If the field is not present, a {@code ParseException} is thrown with the specified error message.
+     *
+     * @param argMultimap  The {@code ArgumentMultimap} containing the parsed arguments.
+     * @param prefix       The {@code Prefix} used to identify the required field.
+     * @param errorMessage The error message to be displayed if the field is missing.
+     * @return The string value of the required field.
+     * @throws ParseException If the field is missing or not present.
+     */
+    private static String checkRequiredField(ArgumentMultimap argMultimap, Prefix prefix, String errorMessage)
+            throws ParseException {
+        if (argMultimap.getValue(prefix).isEmpty()) {
+            throw new ParseException(errorMessage);
+        }
+        return argMultimap.getValue(prefix).get();
+    }
+
+    /**
      * Retrieves the hours value for a {@code Volunteer}. If {@code personToEdit} is a {@code Volunteer},
      * its hours value is used as the default. Otherwise, {@code editPersonDescriptor} must contain a non-null hours
      * value.
@@ -194,8 +184,7 @@ public class PersonFactory {
             Volunteer volunteer = (Volunteer) person;
             return descriptor.getHours().orElse(volunteer.getHours());
         } else {
-            return descriptor.getHours().orElseThrow(() -> new CommandException("Hours must be provided for a new "
-                    + "Volunteer."));
+            return descriptor.getHours().orElseThrow(() -> new CommandException(MISSING_HOURS_MESSAGE));
         }
     }
 
@@ -215,8 +204,8 @@ public class PersonFactory {
             Donor donor = (Donor) person;
             return descriptor.getDonatedAmount().orElse(donor.getDonatedAmount());
         } else {
-            return descriptor.getDonatedAmount().orElseThrow(() -> new CommandException("Donated amount must be "
-                    + "provided for a new Donor."));
+            return descriptor.getDonatedAmount()
+                    .orElseThrow(() -> new CommandException(MISSING_DONATED_AMOUNT_MESSAGE));
         }
     }
 
@@ -235,8 +224,7 @@ public class PersonFactory {
             Partner partner = (Partner) person;
             return descriptor.getEndDate().orElse(partner.getEndDate());
         } else {
-            return descriptor.getEndDate().orElseThrow(() -> new CommandException("Partnership end date must be "
-                    + "provided for a new Partner."));
+            return descriptor.getEndDate().orElseThrow(() -> new CommandException(MISSING_END_DATE_MESSAGE));
         }
     }
 
