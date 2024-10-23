@@ -30,7 +30,7 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, String title) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new PersonListViewCell()); // map each item to a display cell
         titleLabel.setText(title);
     }
 

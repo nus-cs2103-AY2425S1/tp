@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <scene>
@@ -45,7 +46,7 @@
           </padding>
         </StackPane>
 
-        <SplitPane VBox.vgrow="ALWAYS" styleClass="pane-with-border">
+        <HBox fx:id="contactLists" VBox.vgrow="ALWAYS" styleClass="pane-with-border" spacing="-3">
           <VBox fx:id="guestList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
             <StackPane fx:id="guestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
@@ -53,7 +54,7 @@
           <VBox fx:id="vendorList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
             <StackPane fx:id="vendorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
-        </SplitPane>
+        </HBox>
       </VBox>
     </Scene>
   </scene>
