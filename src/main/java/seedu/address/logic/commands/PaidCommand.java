@@ -22,10 +22,10 @@ public class PaidCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) POLICY_NAME\n"
             + "Example: " + COMMAND_WORD + " 1 Health Insurance";
 
-    public static final String MESSAGE_SUCCESS = "Policy %1$s is paid for %2$s. Next payment date updated.";
+    public static final String MESSAGE_SUCCESS = "Policy %1$s for %2$s is marked as paid. Next payment date updated.";
     public static final String MESSAGE_INVALID_POLICY = "The policy %1$s does not exist for %2$s.";
 
-    public static final String MESSAGE_INVALID_PAYDATE = "The policy %1$s coverage for %2$s ends after this year.";
+    public static final String MESSAGE_INVALID_PAYDATE = "The coverage of policy %1$s for %2$s ends after this year.";
 
     private final Index targetIndex;
     private final String policyName;
