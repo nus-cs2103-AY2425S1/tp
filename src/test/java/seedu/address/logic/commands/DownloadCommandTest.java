@@ -19,8 +19,8 @@ import seedu.address.testutil.PersonBuilder;
 class DownloadCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    Set<Tag> emptyTagSet = new HashSet<>();
     private DownloadCommand downloadCommand;
+    private final Set<Tag> emptyTagSet = new HashSet<>();
 
     @Test
     public void execute_downloadWithTags_success() {

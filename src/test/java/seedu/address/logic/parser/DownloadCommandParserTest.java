@@ -49,7 +49,7 @@ class DownloadCommandParserTest {
 
     @Test
     public void parse_invalidTag_throwsParseException() {
-        assertParseFailure(parser,  " " + CliSyntax.PREFIX_TAG,
+        assertParseFailure(parser, " " + CliSyntax.PREFIX_TAG,
                 Tag.MESSAGE_CONSTRAINTS);
     }
 
