@@ -30,7 +30,7 @@ public class RoleTest {
 
 
         // valid roles
-        assertTrue(Role.isValidRole("student")); // exactly 3 numbers
+        assertTrue(Role.isValidRole("student")); //
         assertTrue(Role.isValidRole("STUDENT"));
         assertTrue(Role.isValidRole("ParENt")); // long phone numbers
     }
