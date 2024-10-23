@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -127,8 +128,9 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
         Telegram telegram = person.getTelegram();
         Set<Role> roles = person.getRoles();
         Set<Attendance> updatedAttendances = newAttendanceList;
+        FavouriteStatus favouriteStatus = person.getFavouriteStatus();
 
-        return new Person(name, phone, email, telegram, roles, updatedAttendances);
+        return new Person(name, phone, email, telegram, roles, updatedAttendances, favouriteStatus);
     }
 
     private void markAttendance(Model model, List<Person> peopleToMark, Attendance attendance) {

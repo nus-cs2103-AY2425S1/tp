@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String telegram;
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final List<JsonAdaptedAttendance> attendance = new ArrayList<>();
+    private final String favouriteStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,11 +40,13 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
             @JsonProperty("roles") List<JsonAdaptedRole> roles,
-            @JsonProperty("attendance") List<JsonAdaptedAttendance> attendance) {
+            @JsonProperty("attendance") List<JsonAdaptedAttendance> attendance,
+                             @JsonProperty("favouriteStatus") String favouriteStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
+        this.favouriteStatus = favouriteStatus;
         if (roles != null) {
             this.roles.addAll(roles);
         }
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         telegram = source.getTelegram().value;
+        favouriteStatus = source.getFavouriteStatus().toString();
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .toList());
@@ -116,9 +121,20 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
         final Telegram modelTelegram = new Telegram(telegram);
+
+        if (favouriteStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    FavouriteStatus.class.getSimpleName()));
+        }
+        if (!FavouriteStatus.isValidFavouriteStatus(favouriteStatus)) {
+            throw new IllegalValueException(FavouriteStatus.MESSAGE_CONSTRAINTS);
+        }
+        final FavouriteStatus modelFavouriteStatus = FavouriteStatus.valueOf(favouriteStatus);
+
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Set<Attendance> modelAttendance = new HashSet<>(personAttendance);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles, modelAttendance);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles,
+                modelAttendance, modelFavouriteStatus);
     }
 
 }

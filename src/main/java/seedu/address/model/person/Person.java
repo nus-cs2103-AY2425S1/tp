@@ -24,6 +24,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Telegram telegram;
+    private final FavouriteStatus isFavourite;
 
     // Data fields
     private final Set<Role> roles = new HashSet<>();
@@ -33,14 +34,15 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Telegram telegram,
-                  Set<Role> roles, Set<Attendance> attendance) {
-        requireAllNonNull(name, phone, email, telegram, roles);
+                  Set<Role> roles, Set<Attendance> attendance, FavouriteStatus isFavourite) {
+        requireAllNonNull(name, phone, email, telegram, roles, isFavourite);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.roles.addAll(roles);
         this.attendance.addAll(attendance);
+        this.isFavourite = isFavourite;
     }
 
     public Name getName() {
@@ -57,6 +59,10 @@ public class Person {
 
     public Telegram getTelegram() {
         return telegram;
+    }
+
+    public FavouriteStatus getFavouriteStatus() {
+        return isFavourite;
     }
 
     /**
