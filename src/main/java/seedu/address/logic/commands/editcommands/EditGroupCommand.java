@@ -28,13 +28,14 @@ public class EditGroupCommand extends Command {
     public static final String COMMAND_WORD = "edit_grp";
     public static final String COMMAND_WORD_ALIAS = "eg";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the group "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Edits the details of the group "
         + "by the group name used in the displayed student list. "
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: "
         + "[" + PREFIX_GROUP_NAME + "GROUP NAME]\n"
-        + "Example: " + COMMAND_WORD
-        + PREFIX_GROUP_NAME + "TEAM 1"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GROUP_NAME + "TEAM 1 "
         + PREFIX_GROUP_NAME + "Update Group Name";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";

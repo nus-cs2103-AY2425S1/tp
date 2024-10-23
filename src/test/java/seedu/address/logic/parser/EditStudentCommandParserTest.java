@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -63,10 +64,6 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
-        // More extensive testing of duplicate parameter detections is done in
-        // AddStudentCommandParserTest#parse_repeatedNonTagValue_failure()
-
-        // valid followed by invalid
         String userInput = STUDENT_NUMBER_DESC_AMY + INVALID_EMAIL_DESC + EMAIL_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
@@ -91,13 +88,19 @@ public class EditStudentCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
-        String userInput = STUDENT_NUMBER_DESC_AMY + " " + PREFIX_TAG + "";
+    public void parse_resetToEmptyTag_success() {
+        String userInput = STUDENT_NUMBER_DESC_AMY + " " + PREFIX_TAG;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         EditStudentCommand expectedCommand = new EditStudentCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
             descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+    @Test
+    public void parse_invalidPrefix_failure() {
+        String userInput = STUDENT_NUMBER_DESC_AMY + " " + PREFIX_TAG + " " + PREFIX_INDEX + "1";
+        assertThrows(ParseException.class, ()-> parser.parse(userInput),
+            String.format(Messages.MESSAGE_ILLEGAL_PREFIX_USED, EditStudentCommand.MESSAGE_USAGE));
     }
 }

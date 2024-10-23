@@ -24,6 +24,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENT_NO_NOT_FOUND = "The student number provided is not found";
     public static final String MESSAGE_GROUP_NAME_NOT_FOUND = "The group name provided is not found";
+    public static final String MESSAGE_ILLEGAL_PREFIX_USED = "Illegal prefix is used.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

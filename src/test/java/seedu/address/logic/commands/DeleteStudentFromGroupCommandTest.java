@@ -19,6 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.deletecommands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
@@ -46,11 +47,16 @@ public class DeleteStudentFromGroupCommandTest {
 
     @Test
     public void execute_studentExistsInGroup_success() throws CommandException {
+        Model model = new ModelManager();
+        model.addPerson(validStudent);
+        model.addGroup(validGroup);
+        model.addPersonToGroup(validStudent, validGroup);
         DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
             validStudent.getStudentNumber());
         CommandResult commandResult = command.execute(model);
         assertEquals(String.format(DeleteStudentFromGroupCommand.MESSAGE_DELETE_PERSON_SUCCESS,
             validStudent.getStudentNumber(), validGroup.getGroupName()), commandResult.getFeedbackToUser());
+        assertFalse(model.hasPersonInGroup(validStudent, validGroup));
     }
 
     @Test

@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
@@ -35,5 +37,11 @@ public class EditGroupCommandParserTest {
     public void parse_noFieldEdited_failure() {
         String userInput = " " + PREFIX_GROUP_NAME + "OriginalGroup";
         assertThrows(ParseException.class, () -> parser.parse(userInput), EditGroupCommand.MESSAGE_NOT_EDITED);
+    }
+    @Test
+    public void parse_invalidPrefix_failure() {
+        String userInput = " " + PREFIX_GROUP_NAME + "OriginalGroup" + PREFIX_STUDENT_NAME + "Student Name";
+        assertThrows(ParseException.class, ()-> parser.parse(userInput),
+            String.format(Messages.MESSAGE_ILLEGAL_PREFIX_USED, EditGroupCommand.MESSAGE_USAGE));
     }
 }
