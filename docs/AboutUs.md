@@ -1,58 +1,61 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-## Project team
+You can reach us at the email `cs2103t-w13-3@outlook.com`
 
-### John Doe
+## MindMap [W13-3]
 
-<img src="images/johndoe.png" width="200px">
+### Toh Leong Chuan
+
+<img src="images/t-leongchuan.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/t-leongchuan)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Ze Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/slidings.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/slidings)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Project Advisor
 
-### Johnny Doe
+### Lee Zhi Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhiyi12345.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/zhiyi12345)]
+[[portfolio](team/johndoe.md)]
+
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Jean Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeanyang04.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/jeanyang04)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ler Jun Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junyi73.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/junyi73)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
