@@ -53,6 +53,11 @@ public class AbcliParserTest {
     }
 
     @Test
+    public void switchMode_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> AbcliParser.switchMode(null));
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
                 -> AbcliParser.parseCommand(""));

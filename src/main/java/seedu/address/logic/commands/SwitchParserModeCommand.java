@@ -7,6 +7,8 @@ import seedu.address.logic.parser.ParserMode;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Switches Parser mode.
  */
@@ -26,6 +28,7 @@ public class SwitchParserModeCommand extends Command {
      * Creates a SwitchParserModeCommand to switch to the specified {@code ParserMode}
      */
     public SwitchParserModeCommand(ParserMode mode) {
+        requireNonNull(mode);
         this.mode = mode;
     }
 

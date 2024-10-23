@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PARSER_MODE;
 
@@ -57,6 +58,8 @@ public class AbcliParser {
      * @throws ParseException if the mode doesn't exist
      */
     public static void switchMode(ParserMode mode) throws ParseException {
+        requireNonNull(mode);
+
         switch (mode) {
 
         case BUYER:
