@@ -24,9 +24,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentHasPaidPredicate;
+import seedu.address.model.predicate.StudentHasPaidPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -72,10 +72,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("n/david li", "p/123", "pay/true", "n/l");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(
+                Arrays.asList(
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("david", "li"), Person::getFullName, true),
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("123"), Person::getPhoneValue, false),
+                        new StudentHasPaidPredicate(true),
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("l"), Person::getFullName, true))
+        ), command);
     }
 
     @Test
