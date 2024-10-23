@@ -57,7 +57,7 @@ public class SampleDataUtil {
                     Optional.of(new Email("royb@example.com")),
                     Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
                     getTagSet("colleagues"), Optional.of(new DateOfLastVisit("06-06-2024")),
-                    Optional.of(new EmergencyContact("92492021")),new Remark("")) };
+                    Optional.of(new EmergencyContact("92492021")), new Remark(""))};
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {

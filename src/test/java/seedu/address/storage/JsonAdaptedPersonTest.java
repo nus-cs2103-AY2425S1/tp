@@ -50,7 +50,8 @@ public class JsonAdaptedPersonTest {
 
         assertEquals(
                 new JsonAdaptedPerson(VALID_SPECIAL_CHARACTER_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TAGS, VALID_DATEOFLASTVISIT, VALID_EMERGENCY_CONTACT, VALID_REMARK).toModelType().getName(),
+                        VALID_TAGS, VALID_DATEOFLASTVISIT,
+                        VALID_EMERGENCY_CONTACT, VALID_REMARK).toModelType().getName(),
                 new Name(VALID_SPECIAL_CHARACTER_NAME));
     }
 
@@ -280,7 +281,8 @@ public class JsonAdaptedPersonTest {
         String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
                 .withEmail(VALID_EMAIL).withAddress(VALID_ADDRESS).withTags(validTagsInString)
-                .withDateOfLastVisit(VALID_DATEOFLASTVISIT).withRemark("").build();
+                .withDateOfLastVisit(VALID_DATEOFLASTVISIT)
+                .withEmergencyContact(VALID_EMERGENCY_CONTACT).withRemark("").build();
         assertEquals(expectedPerson, person.toModelType());
     }
 }

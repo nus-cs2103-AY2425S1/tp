@@ -161,6 +161,10 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds person
+     * @return Person to build
+     */
     public Person build() {
         return new Person(name, phone, email, address, tags, dateOfLastVisit,
                 emergencyContact, remark);
