@@ -131,6 +131,24 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Searching by a specified field : `search` 
+
+Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
+
+Format: `search by/FIELD KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* Only the specified field is searched.
+* Substrings will be matched e.g. `Alexander` will be shown with the keyword `Alex`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `search by/Name alice bob charlie`
+* `search by/Tag friend colleague`
+* `search by/Address street avenue`
+* `search by/Phone 98765432 12345678`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
