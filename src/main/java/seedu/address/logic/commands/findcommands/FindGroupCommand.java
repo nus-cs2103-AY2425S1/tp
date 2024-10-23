@@ -25,6 +25,7 @@ public class FindGroupCommand extends Command {
         + "and displays them as list with index numbers.\n"
         + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
         + "Example: " + COMMAND_WORD + "/" + COMMAND_WORD_ALIAS + " group 1";
+    public static final int LIST_GROUP_MARKER = 1;
 
     private static final Logger logger = LogsCenter.getLogger(FindGroupCommand.class);
 
@@ -38,11 +39,12 @@ public class FindGroupCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(predicate);
+        model.setStateGroups();
         logger.info(String.format("Found %1s groups with predicate - %2s", model.getFilteredGroupList().size(),
             predicate));
         return new CommandResult(
             String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW,
-                model.getFilteredGroupList().size())
+                model.getFilteredGroupList().size()), LIST_GROUP_MARKER
         );
     }
 
