@@ -20,6 +20,12 @@ public class EmailTest {
     }
 
     @Test
+    public void constructor_invalidLengthEmail_throwsIllegalArgumentException() {
+        String invalidEmail = "this.email.is.definitely.too.long.for.our.requirements@example.com";
+        assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
+    }
+
+    @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
@@ -64,6 +70,17 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+    }
+
+    @Test
+    public void isValidLengthEmail() {
+        // valid length
+        assertTrue(Email.isValidLengthEmail("rachel@example.com")); // within limit
+        assertTrue(Email.isValidLengthEmail("this.email@long.com")); // just below limit
+
+        // invalid length
+        assertFalse(Email.isValidLengthEmail("this.email.is.definitely.too.long.for.our.requirements@example.com"));
+        assertFalse(Email.isValidLengthEmail("rachel@examplecom ")); // space included
     }
 
     @Test

@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
+ * Extra comment by Hans Hehe
  */
 public class CommandBox extends UiPart<Region> {
 

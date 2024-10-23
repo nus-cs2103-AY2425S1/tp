@@ -2,18 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JobCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -47,6 +43,9 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        if (!Name.isValidLengthName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_LENGTH_CONSTRAINTS);
+        }
         return new Name(trimmedName);
     }
 
@@ -62,6 +61,9 @@ public class ParserUtil {
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
+        if (!Phone.isValidLengthPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_LENGTH_CONSTRAINTS);
+        }
         return new Phone(trimmedPhone);
     }
 
@@ -71,13 +73,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static JobCode parseJobCode(String jobCode) throws ParseException {
+        requireNonNull(jobCode);
+        String trimmedJobCode = jobCode.trim();
+        if (!JobCode.isValidJobCode(trimmedJobCode)) {
+            throw new ParseException(JobCode.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new JobCode(trimmedJobCode);
     }
 
     /**
@@ -92,6 +94,9 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
+        if (!Email.isValidLengthEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
         return new Email(trimmedEmail);
     }
 
@@ -104,21 +109,21 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTagCode(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
     }
 
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
+    ///**
+    // * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+    // */
+    //public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    //    requireNonNull(tags);
+    //    final Set<Tag> tagSet = new HashSet<>();
+    //    for (String tagName : tags) {
+    //        tagSet.add(parseTag(tagName));
+    //    }
+    //    return tagSet;
+    //}
 }
