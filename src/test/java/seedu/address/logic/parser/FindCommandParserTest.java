@@ -46,6 +46,17 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_emptyNameKeyword_throwsParseException() {
+        assertParseFailure(parser, "n/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNameCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleSpacesAfterPrefix_throwsParseException() {
+        assertParseFailure(parser, "n/     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgsPhone_returnsFindPhoneCommand() {
         // valid phone number
         FindPhoneCommand expectedFindPhoneCommand =
