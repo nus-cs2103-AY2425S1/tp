@@ -24,6 +24,10 @@ public class ArgumentPredicate implements Predicate<Person> {
 
     private void addIfPresent(Supplier<String> fieldSupplier, Predicate<Person> predicate,
                               Person person, List<Boolean> validParameters) {
+        assert fieldSupplier != null : "Field supplier should not be null";
+        assert predicate != null : "Predicate should not be null";
+        assert person != null : "Person should not be null";
+        assert validParameters != null : "Valid parameters list should not be null";
         if (!fieldSupplier.get().isEmpty()) {
             validParameters.add(predicate.test(person));
         }
@@ -31,6 +35,10 @@ public class ArgumentPredicate implements Predicate<Person> {
 
     private void addIfDeadlinePresent(Supplier<String> fieldSupplier, Predicate<Person> predicate,
                                       Person person, List<Boolean> validParameters) {
+        assert fieldSupplier != null : "Field supplier should not be null";
+        assert predicate != null : "Predicate should not be null";
+        assert person != null : "Person should not be null";
+        assert validParameters != null : "Valid parameters list should not be null";
         if (!fieldSupplier.get().equals(LocalDate.MIN.format(Deadline.OUTPUT_FORMATTER))) {
             validParameters.add(predicate.test(person));
         }
@@ -38,6 +46,10 @@ public class ArgumentPredicate implements Predicate<Person> {
 
     private void addIfTagPresent(Set<Tag> tags, Predicate<Person> predicate,
                                  Person person, List<Boolean> validParameters) {
+        assert tags != null : "Tags should not be null";
+        assert predicate != null : "Predicate should not be null";
+        assert person != null : "Person should not be null";
+        assert validParameters != null : "Valid parameters list should not be null";
         if (!tags.isEmpty()) {
             validParameters.add(predicate.test(person));
         }

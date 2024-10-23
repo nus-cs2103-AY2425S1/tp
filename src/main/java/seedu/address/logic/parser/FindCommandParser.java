@@ -42,6 +42,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        assert anyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PROJECT_STATUS, PREFIX_PAYMENT_STATUS,
+                PREFIX_CLIENT_STATUS, PREFIX_DEADLINE) : "At least 1 prefix is present";
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_DEADLINE, PREFIX_PROJECT_STATUS,
                 PREFIX_PAYMENT_STATUS, PREFIX_CLIENT_STATUS, PREFIX_DEADLINE);
