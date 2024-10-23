@@ -9,6 +9,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyWeddingBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -19,13 +20,16 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private WeddingBookStorage weddingBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage,
+            UserPrefsStorage userPrefsStorage, WeddingBookStorage weddingBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.weddingBookStorage = weddingBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -73,6 +77,35 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    // ================ WeddingBook methods ==============================
+
+    @Override
+    public Path getWeddingBookFilePath() {
+        return weddingBookStorage.getWeddingBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyWeddingBook> readWeddingBook() throws DataLoadingException {
+        return readWeddingBook(weddingBookStorage.getWeddingBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyWeddingBook> readWeddingBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return weddingBookStorage.readWeddingBook(filePath);
+    }
+
+    @Override
+    public void saveWeddingBook(ReadOnlyWeddingBook weddingBook) throws IOException {
+        saveWeddingBook(weddingBook, weddingBookStorage.getWeddingBookFilePath());
+    }
+
+    @Override
+    public void saveWeddingBook(ReadOnlyWeddingBook weddingBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        weddingBookStorage.saveWeddingBook(weddingBook, filePath);
     }
 
 }

@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
 import java.nio.file.Path;
 
@@ -13,7 +14,9 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyWeddingBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.WeddingBook;
 
 public class StorageManagerTest {
 
@@ -25,8 +28,9 @@ public class StorageManagerTest {
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonWeddingBookStorage weddingBookStorage = new JsonWeddingBookStorage(getTempFilePath("wb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, weddingBookStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -61,8 +65,26 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void weddingBookReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonWeddingBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonWeddingBookStorageTest} class.
+         */
+        WeddingBook original = getTypicalWeddingBook();
+        storageManager.saveWeddingBook(original);
+        ReadOnlyWeddingBook retrieved = storageManager.readWeddingBook().get();
+        assertEquals(original, new WeddingBook(retrieved));
+    }
+
+    @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getWeddingBookFilePath() {
+        assertNotNull(storageManager.getWeddingBookFilePath());
     }
 
 }
