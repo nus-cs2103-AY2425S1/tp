@@ -80,7 +80,7 @@ public class EditOrderCommandTest {
     }
 
     @Test
-    public void execute_onOrderListInDisplay_failure() {
+    public void execute_noOrderListDisplayed_failure() {
         model.updateSelectedPerson(null);
         Order editedOrder = new OrderBuilder().build();
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(editedOrder).build();
@@ -105,7 +105,7 @@ public class EditOrderCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_warning() {
+    public void execute_duplicateOrderUnfilteredList_warning() {
         Order firstOrder = model.getFilteredOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(firstOrder).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(INDEX_THIRD_PERSON, descriptor);
@@ -121,7 +121,7 @@ public class EditOrderCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidOrderIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size() + 1);
         EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder().withQuantity(VALID_COUNT_BOTTLE).build();
         EditOrderCommand editOrderCommand = new EditOrderCommand(outOfBoundIndex, descriptor);

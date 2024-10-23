@@ -193,11 +193,11 @@ Examples:
 
 ### Editing an order : `editOrder`
 
-Edits an order under the person whose orders are displayed.
+Edits an order under a selected person from their displayed order list.
 
 Format: `edit ORDER_INDEX [i/ITEM] [d/DATE] [c/QUANTITY]`
 
-* A person's order list must be selected using `listOrder` before editing an order from that person.
+* A person's order list must first be displayed before editing an order from that person.
 * Edits the order at the specified `ORDER_INDEX`. The order index refers to the index number shown in the displayed order list.
 * The order index and quantity **must be a positive integer** 1, 2, 3, …​
 * Date must follow the following format: `DD-MM-YYYY`
@@ -299,7 +299,7 @@ _Details coming soon ..._
 | **Add an order**                       | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`<br> e.g. `addOrder 2 i/Lamp d/20-11-2024 c/3`                                                                     |
 | **List all orders**                    | `listOrder INDEX`<br> e.g. `listOrder 3`                                                                                                                      |
 | **Delete an order**                    | `deleteOrder ORDER_INDEX`<br> e.g. `deleteOrder 2`
-**Edit an order**                        | `edit ORDER_INDEX [i/ITEM] [d/DATE] [c/QUANTITY]` <br> `editOrder 1 i/Light bulb d/21-11-2025`|
+| **Edit an order**                      | `edit ORDER_INDEX [i/ITEM] [d/DATE] [c/QUANTITY]` <br> `editOrder 1 i/Light bulb d/21-11-2025`|
 | **Mark an order as completed**         | `markOrder ORDER_INDEX`<br> e.g. `markOrder 2`                                                                                                                |
 | **Filter a person's orders by status** | `filterOrder ORDER_STATUS`<br> e.g. `filterOrder Completed`                                                                                                   |
 | **Help**                               | `help`                                                                                                                                                        |
