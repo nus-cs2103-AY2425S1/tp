@@ -13,7 +13,7 @@ import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
  */
 public class ViewProductCommand extends Command {
 
-    public static final String COMMAND_WORD = "VIEW_PRODUCT";
+    public static final String COMMAND_WORD = "view_product";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all products whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

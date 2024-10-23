@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
+import seedu.address.logic.commands.ViewAllProductCommand;
 import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
@@ -21,8 +22,7 @@ public class ViewProductCommandParser implements Parser<ViewProductCommand> {
     public ViewProductCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewProductCommand.MESSAGE_USAGE));
+            return new ViewAllProductCommand();
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
