@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FileUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.commons.util</a>
+</div>
+
+<h1>Coverage Summary for Class: FileUtil (seedu.address.commons.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FileUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.5%
+  </span>
+  <span class="absValue">
+    (19/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.commons.util;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.InvalidPathException;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.nio.file.Paths;
+&nbsp;
+&nbsp;/**
+&nbsp; * Writes and reads files
+&nbsp; */
+<b class="nc">&nbsp;public class FileUtil {</b>
+&nbsp;
+&nbsp;    private static final String CHARSET = &quot;UTF-8&quot;;
+&nbsp;
+&nbsp;    public static boolean isFileExists(Path file) {
+<b class="pc">&nbsp;        return Files.exists(file) &amp;&amp; Files.isRegularFile(file);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+&nbsp;     * otherwise returns false.
+&nbsp;     * @param path A string representing the file path. Cannot be null.
+&nbsp;     */
+&nbsp;    public static boolean isValidPath(String path) {
+&nbsp;        try {
+<b class="fc">&nbsp;            Paths.get(path);</b>
+<b class="fc">&nbsp;        } catch (InvalidPathException ipe) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a file if it does not exist along with its missing parent directories.
+&nbsp;     * @throws IOException if the file or directory cannot be created.
+&nbsp;     */
+&nbsp;    public static void createIfMissing(Path file) throws IOException {
+<b class="fc">&nbsp;        if (!isFileExists(file)) {</b>
+<b class="fc">&nbsp;            createFile(file);</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a file if it does not exist along with its missing parent directories.
+&nbsp;     */
+&nbsp;    public static void createFile(Path file) throws IOException {
+<b class="pc">&nbsp;        if (Files.exists(file)) {</b>
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        createParentDirsOfFile(file);</b>
+&nbsp;
+<b class="fc">&nbsp;        Files.createFile(file);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates parent directories of file if it has a parent directory
+&nbsp;     */
+&nbsp;    public static void createParentDirsOfFile(Path file) throws IOException {
+<b class="fc">&nbsp;        Path parentDir = file.getParent();</b>
+&nbsp;
+<b class="pc">&nbsp;        if (parentDir != null) {</b>
+<b class="fc">&nbsp;            Files.createDirectories(parentDir);</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Assumes file exists
+&nbsp;     */
+&nbsp;    public static String readFromFile(Path file) throws IOException {
+<b class="fc">&nbsp;        return new String(Files.readAllBytes(file), CHARSET);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Writes given string to a file.
+&nbsp;     * Will create the file if it does not exist yet.
+&nbsp;     */
+&nbsp;    public static void writeToFile(Path file, String content) throws IOException {
+<b class="fc">&nbsp;        Files.write(file, content.getBytes(CHARSET));</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

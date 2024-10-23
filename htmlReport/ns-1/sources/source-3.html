@@ -1,0 +1,323 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MainApp</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address</a>
+</div>
+
+<h1>Coverage Summary for Class: MainApp (seedu.address)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MainApp</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/81)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.logging.Logger;
+&nbsp;
+&nbsp;import javafx.application.Application;
+&nbsp;import javafx.stage.Stage;
+&nbsp;import seedu.address.commons.core.Config;
+&nbsp;import seedu.address.commons.core.LogsCenter;
+&nbsp;import seedu.address.commons.core.Version;
+&nbsp;import seedu.address.commons.exceptions.DataLoadingException;
+&nbsp;import seedu.address.commons.util.ConfigUtil;
+&nbsp;import seedu.address.commons.util.StringUtil;
+&nbsp;import seedu.address.logic.Logic;
+&nbsp;import seedu.address.logic.LogicManager;
+&nbsp;import seedu.address.model.AddressBook;
+&nbsp;import seedu.address.model.AppointmentBook;
+&nbsp;import seedu.address.model.Model;
+&nbsp;import seedu.address.model.ModelManager;
+&nbsp;import seedu.address.model.ReadOnlyAddressBook;
+&nbsp;import seedu.address.model.ReadOnlyAppointmentBook;
+&nbsp;import seedu.address.model.ReadOnlyUserPrefs;
+&nbsp;import seedu.address.model.UserPrefs;
+&nbsp;import seedu.address.model.util.SampleDataUtil;
+&nbsp;import seedu.address.storage.AddressBookStorage;
+&nbsp;import seedu.address.storage.AppointmentBookStorage;
+&nbsp;import seedu.address.storage.JsonAddressBookStorage;
+&nbsp;import seedu.address.storage.JsonAppointmentBookStorage;
+&nbsp;import seedu.address.storage.JsonUserPrefsStorage;
+&nbsp;import seedu.address.storage.Storage;
+&nbsp;import seedu.address.storage.StorageManager;
+&nbsp;import seedu.address.storage.UserPrefsStorage;
+&nbsp;import seedu.address.ui.Ui;
+&nbsp;import seedu.address.ui.UiManager;
+&nbsp;
+&nbsp;/**
+&nbsp; * Runs the application.
+&nbsp; */
+<b class="nc">&nbsp;public class MainApp extends Application {</b>
+&nbsp;
+<b class="nc">&nbsp;    public static final Version VERSION = new Version(1, 3, 0, true);</b>
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger logger = LogsCenter.getLogger(MainApp.class);</b>
+&nbsp;
+&nbsp;    protected Ui ui;
+&nbsp;    protected Logic logic;
+&nbsp;    protected Storage storage;
+&nbsp;    protected Model model;
+&nbsp;    protected Config config;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void init() throws Exception {
+<b class="nc">&nbsp;        logger.info(&quot;=============================[ Initializing Data ]===========================&quot;);</b>
+<b class="nc">&nbsp;        super.init();</b>
+&nbsp;
+<b class="nc">&nbsp;        AppParameters appParameters = AppParameters.parse(getParameters());</b>
+<b class="nc">&nbsp;        config = initConfig(appParameters.getConfigPath());</b>
+<b class="nc">&nbsp;        initLogging(config);</b>
+&nbsp;
+<b class="nc">&nbsp;        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());</b>
+<b class="nc">&nbsp;        UserPrefs userPrefs = initPrefs(userPrefsStorage);</b>
+<b class="nc">&nbsp;        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());</b>
+<b class="nc">&nbsp;        AppointmentBookStorage appointmentBookStorage = new JsonAppointmentBookStorage(</b>
+<b class="nc">&nbsp;                userPrefs.getAppointmentBookFilePath());</b>
+<b class="nc">&nbsp;        storage = new StorageManager(addressBookStorage, userPrefsStorage, appointmentBookStorage);</b>
+&nbsp;
+<b class="nc">&nbsp;        model = initModelManager(storage, userPrefs);</b>
+&nbsp;
+<b class="nc">&nbsp;        logic = new LogicManager(model, storage);</b>
+&nbsp;
+<b class="nc">&nbsp;        ui = new UiManager(logic);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code ModelManager} with the data from {@code storage}&#39;s address book and {@code userPrefs}. &lt;br&gt;
+&nbsp;     * The data from the sample address book will be used instead if {@code storage}&#39;s address book is not found,
+&nbsp;     * or an empty address book will be used instead if errors occur when reading {@code storage}&#39;s address book.
+&nbsp;     */
+&nbsp;    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+<b class="nc">&nbsp;        logger.info(&quot;Using data file : &quot; + storage.getAddressBookFilePath());</b>
+&nbsp;
+&nbsp;        Optional&lt;ReadOnlyAddressBook&gt; addressBookOptional;
+&nbsp;        ReadOnlyAddressBook initialPersonsData;
+&nbsp;        Optional&lt;ReadOnlyAppointmentBook&gt; appointmentBookOptional;
+&nbsp;        ReadOnlyAppointmentBook initialAppointmentData;
+&nbsp;        try {
+<b class="nc">&nbsp;            addressBookOptional = storage.readAddressBook();</b>
+<b class="nc">&nbsp;            if (!addressBookOptional.isPresent()) {</b>
+<b class="nc">&nbsp;                logger.info(&quot;Creating a new data file &quot; + storage.getAddressBookFilePath()</b>
+&nbsp;                        + &quot; populated with a sample AddressBook.&quot;);
+&nbsp;            }
+<b class="nc">&nbsp;            initialPersonsData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);</b>
+<b class="nc">&nbsp;        } catch (DataLoadingException e) {</b>
+<b class="nc">&nbsp;            logger.warning(&quot;Data file at &quot; + storage.getAddressBookFilePath() + &quot; could not be loaded.&quot;</b>
+&nbsp;                    + &quot; Will be starting with an empty AddressBook.&quot;);
+<b class="nc">&nbsp;            initialPersonsData = new AddressBook();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            appointmentBookOptional = storage.readAppointmentBook(initialPersonsData);</b>
+<b class="nc">&nbsp;            if (!appointmentBookOptional.isPresent()) {</b>
+<b class="nc">&nbsp;                logger.info(&quot;Creating a new data file &quot; + storage.getAppointmentBookFilePath()</b>
+&nbsp;                        + &quot; populated with a sample AppointmentBook.&quot;);
+<b class="nc">&nbsp;                initialAppointmentData = SampleDataUtil.getSampleAppointmentBook(initialPersonsData);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                initialAppointmentData = appointmentBookOptional.get();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (DataLoadingException e) {</b>
+<b class="nc">&nbsp;            logger.warning(&quot;Data file at &quot; + storage.getAppointmentBookFilePath() + &quot; could not be loaded.&quot;</b>
+&nbsp;                    + &quot; Will be starting with an empty AppointmentBook.&quot;);
+<b class="nc">&nbsp;            initialAppointmentData = new AppointmentBook();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return new ModelManager(initialPersonsData, initialAppointmentData, userPrefs);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void initLogging(Config config) {
+<b class="nc">&nbsp;        LogsCenter.init(config);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code Config} using the file at {@code configFilePath}. &lt;br&gt;
+&nbsp;     * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
+&nbsp;     * if {@code configFilePath} is null.
+&nbsp;     */
+&nbsp;    protected Config initConfig(Path configFilePath) {
+&nbsp;        Config initializedConfig;
+&nbsp;        Path configFilePathUsed;
+&nbsp;
+<b class="nc">&nbsp;        configFilePathUsed = Config.DEFAULT_CONFIG_FILE;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (configFilePath != null) {</b>
+<b class="nc">&nbsp;            logger.info(&quot;Custom Config file specified &quot; + configFilePath);</b>
+<b class="nc">&nbsp;            configFilePathUsed = configFilePath;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        logger.info(&quot;Using config file : &quot; + configFilePathUsed);</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            Optional&lt;Config&gt; configOptional = ConfigUtil.readConfig(configFilePathUsed);</b>
+<b class="nc">&nbsp;            if (!configOptional.isPresent()) {</b>
+<b class="nc">&nbsp;                logger.info(&quot;Creating new config file &quot; + configFilePathUsed);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            initializedConfig = configOptional.orElse(new Config());</b>
+<b class="nc">&nbsp;        } catch (DataLoadingException e) {</b>
+<b class="nc">&nbsp;            logger.warning(&quot;Config file at &quot; + configFilePathUsed + &quot; could not be loaded.&quot;</b>
+&nbsp;                    + &quot; Using default config properties.&quot;);
+<b class="nc">&nbsp;            initializedConfig = new Config();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        //Update config file in case it was missing to begin with or there are new/unused fields
+&nbsp;        try {
+<b class="nc">&nbsp;            ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            logger.warning(&quot;Failed to save config file : &quot; + StringUtil.getDetails(e));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return initializedConfig;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a {@code UserPrefs} using the file at {@code storage}&#39;s user prefs file path,
+&nbsp;     * or a new {@code UserPrefs} with default configuration if errors occur when
+&nbsp;     * reading from the file.
+&nbsp;     */
+&nbsp;    protected UserPrefs initPrefs(UserPrefsStorage storage) {
+<b class="nc">&nbsp;        Path prefsFilePath = storage.getUserPrefsFilePath();</b>
+<b class="nc">&nbsp;        logger.info(&quot;Using preference file : &quot; + prefsFilePath);</b>
+&nbsp;
+&nbsp;        UserPrefs initializedPrefs;
+&nbsp;        try {
+<b class="nc">&nbsp;            Optional&lt;UserPrefs&gt; prefsOptional = storage.readUserPrefs();</b>
+<b class="nc">&nbsp;            if (!prefsOptional.isPresent()) {</b>
+<b class="nc">&nbsp;                logger.info(&quot;Creating new preference file &quot; + prefsFilePath);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            initializedPrefs = prefsOptional.orElse(new UserPrefs());</b>
+<b class="nc">&nbsp;        } catch (DataLoadingException e) {</b>
+<b class="nc">&nbsp;            logger.warning(&quot;Preference file at &quot; + prefsFilePath + &quot; could not be loaded.&quot;</b>
+&nbsp;                    + &quot; Using default preferences.&quot;);
+<b class="nc">&nbsp;            initializedPrefs = new UserPrefs();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        //Update prefs file in case it was missing to begin with or there are new/unused fields
+&nbsp;        try {
+<b class="nc">&nbsp;            storage.saveUserPrefs(initializedPrefs);</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            logger.warning(&quot;Failed to save config file : &quot; + StringUtil.getDetails(e));</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return initializedPrefs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void start(Stage primaryStage) {
+<b class="nc">&nbsp;        logger.info(&quot;Starting Doctrack &quot; + MainApp.VERSION);</b>
+<b class="nc">&nbsp;        ui.start(primaryStage);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void stop() {
+<b class="nc">&nbsp;        logger.info(&quot;============================ [ Stopping Doctrack ] =============================&quot;);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            storage.saveUserPrefs(model.getUserPrefs());</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            logger.severe(&quot;Failed to save preferences &quot; + StringUtil.getDetails(e));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

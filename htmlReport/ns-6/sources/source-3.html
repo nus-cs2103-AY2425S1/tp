@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Logic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.logic</a>
+</div>
+
+<h1>Coverage Summary for Class: Logic (seedu.address.logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Logic</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.logic;
+&nbsp;
+&nbsp;import java.nio.file.Path;
+&nbsp;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import seedu.address.commons.core.GuiSettings;
+&nbsp;import seedu.address.logic.commands.CommandResult;
+&nbsp;import seedu.address.logic.commands.exceptions.CommandException;
+&nbsp;import seedu.address.logic.parser.exceptions.ParseException;
+&nbsp;import seedu.address.model.ReadOnlyAddressBook;
+&nbsp;import seedu.address.model.appointment.Appointment;
+&nbsp;import seedu.address.model.person.Person;
+&nbsp;
+&nbsp;/**
+&nbsp; * API of the Logic component
+&nbsp; */
+&nbsp;public interface Logic {
+&nbsp;    /**
+&nbsp;     * Executes the command and returns the result.
+&nbsp;     *
+&nbsp;     * @param commandText The command as entered by the user.
+&nbsp;     * @return the result of the command execution.
+&nbsp;     * @throws CommandException If an error occurs during command execution.
+&nbsp;     * @throws ParseException   If an error occurs during parsing.
+&nbsp;     */
+&nbsp;    CommandResult execute(String commandText) throws CommandException, ParseException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the AddressBook.
+&nbsp;     *
+&nbsp;     * @see seedu.address.model.Model#getAddressBook()
+&nbsp;     */
+&nbsp;    ReadOnlyAddressBook getAddressBook();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an unmodifiable view of the filtered list of persons
+&nbsp;     */
+&nbsp;    ObservableList&lt;Person&gt; getFilteredPersonList();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an unmodifiable view of the filtered list of appointments
+&nbsp;     */
+&nbsp;    ObservableList&lt;Appointment&gt; getFilteredAppointmentList();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the user prefs&#39; address book file path.
+&nbsp;     */
+&nbsp;    Path getAddressBookFilePath();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the user prefs&#39; address book file path.
+&nbsp;     */
+&nbsp;    Path getAppointmentBookFilePath();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the user prefs&#39; GUI settings.
+&nbsp;     */
+&nbsp;    GuiSettings getGuiSettings();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the user prefs&#39; GUI settings.
+&nbsp;     */
+&nbsp;    void setGuiSettings(GuiSettings guiSettings);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

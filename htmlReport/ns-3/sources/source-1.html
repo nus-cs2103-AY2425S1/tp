@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Index</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.commons.core.index</a>
+</div>
+
+<h1>Coverage Summary for Class: Index (seedu.address.commons.core.index)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Index</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.commons.core.index;
+&nbsp;
+&nbsp;import seedu.address.commons.util.ToStringBuilder;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents a zero-based or one-based index.
+&nbsp; * &lt;p&gt;
+&nbsp; * {@code Index} should be used right from the start (when parsing in a new user input), so that if the current
+&nbsp; * component wants to communicate with another component, it can send an {@code Index} to avoid having to know what
+&nbsp; * base the other component is using for its index. However, after receiving the {@code Index}, that component can
+&nbsp; * convert it back to an int if the index will not be passed to a different component again.
+&nbsp; */
+&nbsp;public class Index {
+&nbsp;
+&nbsp;    public static final String MESSAGE_CONSTRAINTS = &quot;Index is not a non-zero unsigned integer.&quot;;
+&nbsp;
+&nbsp;    private final int zeroBasedIndex;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Index can only be created by calling {@link Index#fromZeroBased(int)} or
+&nbsp;     * {@link Index#fromOneBased(int)}.
+&nbsp;     */
+<b class="fc">&nbsp;    private Index(int zeroBasedIndex) {</b>
+<b class="fc">&nbsp;        if (zeroBasedIndex &lt; 0) {</b>
+<b class="fc">&nbsp;            throw new IndexOutOfBoundsException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        this.zeroBasedIndex = zeroBasedIndex;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public int getZeroBased() {
+<b class="fc">&nbsp;        return zeroBasedIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getOneBased() {
+<b class="fc">&nbsp;        return zeroBasedIndex + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new {@code Index} using a zero-based index.
+&nbsp;     */
+&nbsp;    public static Index fromZeroBased(int zeroBasedIndex) {
+<b class="fc">&nbsp;        return new Index(zeroBasedIndex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new {@code Index} using a one-based index.
+&nbsp;     */
+&nbsp;    public static Index fromOneBased(int oneBasedIndex) {
+<b class="fc">&nbsp;        return new Index(oneBasedIndex - 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object other) {
+<b class="fc">&nbsp;        if (other == this) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // instanceof handles nulls
+<b class="fc">&nbsp;        if (!(other instanceof Index otherIndex)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return zeroBasedIndex == otherIndex.zeroBasedIndex;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return new ToStringBuilder(this).add(&quot;zeroBasedIndex&quot;, zeroBasedIndex).toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UniqueAppointmentList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.model.appointment</a>
+</div>
+
+<h1>Coverage Summary for Class: UniqueAppointmentList (seedu.address.model.appointment)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UniqueAppointmentList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.2%
+  </span>
+  <span class="absValue">
+    (15/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (36/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.model.appointment;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import javafx.collections.FXCollections;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
+&nbsp;import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * A list of appointments that enforces uniqueness between its elements and does not allow nulls.
+&nbsp; * An appointment is considered unique by comparing using {@code Appointment#isSameAppointment(Appointment)}.
+&nbsp; * As such, adding and updating of appointments uses Appointment#isSameAppointment(Appointment) for equality so as
+&nbsp; * to ensure that the appointment being added or updated isunique in terms of identity in the UniqueAppointmentList.
+&nbsp; * However, the removal of an appointment uses Appointment#equals(Object) so as to ensure that the appointment with
+&nbsp; * exactly the same fields will be removed.
+&nbsp; *
+&nbsp; * Supports a minimal set of list operations.
+&nbsp; *
+&nbsp; * @see Appointment#isSameAppointment(Appointment)
+&nbsp; */
+<b class="fc">&nbsp;public class UniqueAppointmentList implements Iterable&lt;Appointment&gt; {</b>
+&nbsp;
+<b class="fc">&nbsp;    private final ObservableList&lt;Appointment&gt; internalList = FXCollections.observableArrayList();</b>
+<b class="fc">&nbsp;    private final ObservableList&lt;Appointment&gt; internalUnmodifiableList =</b>
+<b class="fc">&nbsp;            FXCollections.unmodifiableObservableList(internalList);</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if the list contains an equivalent appointment as the given argument.
+&nbsp;     */
+&nbsp;    public boolean contains(Appointment toCheck) {
+<b class="fc">&nbsp;        requireNonNull(toCheck);</b>
+<b class="fc">&nbsp;        return internalList.stream().anyMatch(toCheck::isSameAppointment);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if the list contains an equivalent appointment as the given argument.
+&nbsp;     */
+&nbsp;    public boolean contains(AppointmentDescriptor toCheck) {
+<b class="nc">&nbsp;        requireNonNull(toCheck);</b>
+<b class="nc">&nbsp;        return internalList.stream().anyMatch(toCheck::isSameAppointment);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds an appointment to the list.
+&nbsp;     * The appointment must not already exist in the list.
+&nbsp;     */
+&nbsp;    public void add(Appointment toAdd) {
+<b class="fc">&nbsp;        requireNonNull(toAdd);</b>
+<b class="fc">&nbsp;        if (contains(toAdd)) {</b>
+<b class="fc">&nbsp;            throw new DuplicateAppointmentException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        internalList.add(toAdd);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces the appointment {@code target} in the list with {@code editedAppointment}.
+&nbsp;     * {@code target} must exist in the list.
+&nbsp;     * The appointmnet identity of {@code editedAppointment} must not be the same as another
+&nbsp;     * existing appointment in the list.
+&nbsp;     */
+&nbsp;    public void setAppointment(Appointment target, Appointment editedAppointment) {
+<b class="fc">&nbsp;        requireAllNonNull(target, editedAppointment);</b>
+&nbsp;
+<b class="fc">&nbsp;        int index = internalList.indexOf(target);</b>
+<b class="fc">&nbsp;        if (index == -1) {</b>
+<b class="fc">&nbsp;            throw new AppointmentNotFoundException();</b>
+&nbsp;        }
+&nbsp;
+<b class="pc">&nbsp;        if (!target.isSameAppointment(editedAppointment) &amp;&amp; contains(editedAppointment)) {</b>
+<b class="nc">&nbsp;            throw new DuplicateAppointmentException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        internalList.set(index, editedAppointment);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes the equivalent appointment from the list.
+&nbsp;     * The appointment must exist in the list.
+&nbsp;     */
+&nbsp;    public void remove(Appointment toRemove) {
+<b class="fc">&nbsp;        requireNonNull(toRemove);</b>
+<b class="pc">&nbsp;        if (!internalList.remove(toRemove)) {</b>
+<b class="nc">&nbsp;            throw new AppointmentNotFoundException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void setAppointments(UniqueAppointmentList replacement) {
+<b class="nc">&nbsp;        requireNonNull(replacement);</b>
+<b class="nc">&nbsp;        internalList.setAll(replacement.internalList);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces the contents of this list with {@code appointments}.
+&nbsp;     * {@code appointments} must not contain duplicate appointments.
+&nbsp;     */
+&nbsp;    public void setAppointments(List&lt;Appointment&gt; appointments) {
+<b class="fc">&nbsp;        requireAllNonNull(appointments);</b>
+<b class="pc">&nbsp;        if (!appointmentsAreUnique(appointments)) {</b>
+<b class="nc">&nbsp;            throw new DuplicateAppointmentException();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        internalList.setAll(appointments);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the backing list as an unmodifiable {@code ObservableList}.
+&nbsp;     */
+&nbsp;    public ObservableList&lt;Appointment&gt; asUnmodifiableObservableList() {
+<b class="fc">&nbsp;        return internalUnmodifiableList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Iterator&lt;Appointment&gt; iterator() {
+<b class="nc">&nbsp;        return internalList.iterator();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object other) {
+<b class="pc">&nbsp;        if (other == this) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // instanceof handles nulls
+<b class="pc">&nbsp;        if (!(other instanceof UniqueAppointmentList)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        UniqueAppointmentList otherUniqueAppointmentList = (UniqueAppointmentList) other;</b>
+<b class="fc">&nbsp;        return internalList.equals(otherUniqueAppointmentList.internalList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        return internalList.hashCode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return internalList.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if {@code appointments} contains only unique appointments.
+&nbsp;     */
+&nbsp;    private boolean appointmentsAreUnique(List&lt;Appointment&gt; appointments) {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; appointments.size() - 1; i++) {</b>
+<b class="fc">&nbsp;            for (int j = i + 1; j &lt; appointments.size(); j++) {</b>
+<b class="pc">&nbsp;                if (appointments.get(i).isSameAppointment(appointments.get(j))) {</b>
+<b class="nc">&nbsp;                    return false;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

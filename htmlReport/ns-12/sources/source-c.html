@@ -1,0 +1,104 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserPrefsStorage</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.storage</a>
+</div>
+
+<h1>Coverage Summary for Class: UserPrefsStorage (seedu.address.storage)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">UserPrefsStorage</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.storage;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;import seedu.address.commons.exceptions.DataLoadingException;
+&nbsp;import seedu.address.model.ReadOnlyUserPrefs;
+&nbsp;import seedu.address.model.UserPrefs;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents a storage for {@link seedu.address.model.UserPrefs}.
+&nbsp; */
+&nbsp;public interface UserPrefsStorage {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the file path of the UserPrefs data file.
+&nbsp;     */
+&nbsp;    Path getUserPrefsFilePath();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns UserPrefs data from storage.
+&nbsp;     * Returns {@code Optional.empty()} if storage file is not found.
+&nbsp;     *
+&nbsp;     * @throws DataLoadingException if the loading of data from preference file failed.
+&nbsp;     */
+&nbsp;    Optional&lt;UserPrefs&gt; readUserPrefs() throws DataLoadingException;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Saves the given {@link seedu.address.model.ReadOnlyUserPrefs} to the storage.
+&nbsp;     * @param userPrefs cannot be null.
+&nbsp;     * @throws IOException if there was any problem writing to the file.
+&nbsp;     */
+&nbsp;    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

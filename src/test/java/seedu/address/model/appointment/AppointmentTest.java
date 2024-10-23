@@ -3,6 +3,7 @@ package seedu.address.model.appointment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE_P;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -38,11 +39,37 @@ public class AppointmentTest {
             person1, new Sickness("Cold"), new Medicine("Aspirin"));
         appointment3 = new Appointment(new AppointmentType("Followup"), dateTime2,
             person2, new Sickness("Flu"), new Medicine("Tamiflu"));
+    }
 
+    @Test
+    public void constructorTest_appointments_returnsCorrectAppointmentObject() {
+        AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(new AppointmentType("Checkup"),
+                dateTime1, new Sickness("Cold"), new Medicine("Aspirin"));
+        Appointment appointment4 = new Appointment(1, person1, appointmentDescriptor);
 
-        System.out.println(appointment1);
-        System.out.println(appointment1);
-        System.out.println(appointment1);
+        assertEquals(new AppointmentType("Checkup"), appointment4.getAppointmentType());
+        assertEquals(person1, appointment4.getPerson());
+        assertEquals(dateTime1, appointment4.getAppointmentDateTime());
+        assertEquals(new Medicine("Aspirin"), appointment4.getMedicine());
+    }
+
+    @Test
+    void constructor_validInputs_createsAppointment() {
+        AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(new AppointmentType("Checkup"),
+                dateTime1, new Sickness("Cold"), new Medicine("Aspirin"));
+        Appointment appointment4 = new Appointment(1, person1, appointmentDescriptor);
+
+        assertEquals(new AppointmentType("Checkup"), appointment4.getAppointmentType());
+        assertEquals(person1, appointment4.getPerson());
+        assertEquals(dateTime1, appointment4.getAppointmentDateTime());
+        assertEquals(new Medicine("Aspirin"), appointment4.getMedicine());
+    }
+
+    @Test
+    void constructor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                new Appointment(new AppointmentType("Checkup"), dateTime1, null,
+                        new Sickness("Cold"), new Medicine("Aspirin")));
     }
 
     @Test

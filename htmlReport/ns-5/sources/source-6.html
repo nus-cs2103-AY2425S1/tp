@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > StringUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.commons.util</a>
+</div>
+
+<h1>Coverage Summary for Class: StringUtil (seedu.address.commons.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.7%
+  </span>
+  <span class="absValue">
+    (18/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.commons.util;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;import static seedu.address.commons.util.AppUtil.checkArgument;
+&nbsp;
+&nbsp;import java.io.PrintWriter;
+&nbsp;import java.io.StringWriter;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * Helper functions for handling strings.
+&nbsp; */
+<b class="nc">&nbsp;public class StringUtil {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if the {@code sentence} contains the {@code word}.
+&nbsp;     *   Ignores case, but a full word match is required.
+&nbsp;     *   &lt;br&gt;examples:&lt;pre&gt;
+&nbsp;     *       containsWordIgnoreCase(&quot;ABc def&quot;, &quot;abc&quot;) == true
+&nbsp;     *       containsWordIgnoreCase(&quot;ABc def&quot;, &quot;DEF&quot;) == true
+&nbsp;     *       containsWordIgnoreCase(&quot;ABc def&quot;, &quot;AB&quot;) == false //not a full word match
+&nbsp;     *       &lt;/pre&gt;
+&nbsp;     * @param sentence cannot be null
+&nbsp;     * @param word cannot be null, cannot be empty, must be a single word
+&nbsp;     */
+&nbsp;    public static boolean containsWordIgnoreCase(String sentence, String word) {
+<b class="fc">&nbsp;        requireNonNull(sentence);</b>
+<b class="fc">&nbsp;        requireNonNull(word);</b>
+&nbsp;
+<b class="fc">&nbsp;        String preppedWord = word.trim();</b>
+<b class="fc">&nbsp;        checkArgument(!preppedWord.isEmpty(), &quot;Word parameter cannot be empty&quot;);</b>
+<b class="fc">&nbsp;        checkArgument(preppedWord.split(&quot;\\s+&quot;).length == 1, &quot;Word parameter should be a single word&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        String preppedSentence = sentence;</b>
+<b class="fc">&nbsp;        String[] wordsInPreppedSentence = preppedSentence.split(&quot;\\s+&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        return Arrays.stream(wordsInPreppedSentence)</b>
+<b class="fc">&nbsp;                .anyMatch(preppedWord::equalsIgnoreCase);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns a detailed message of the t, including the stack trace.
+&nbsp;     */
+&nbsp;    public static String getDetails(Throwable t) {
+<b class="fc">&nbsp;        requireNonNull(t);</b>
+<b class="fc">&nbsp;        StringWriter sw = new StringWriter();</b>
+<b class="fc">&nbsp;        t.printStackTrace(new PrintWriter(sw));</b>
+<b class="fc">&nbsp;        return t.getMessage() + &quot;\n&quot; + sw.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if {@code s} represents a non-zero unsigned integer
+&nbsp;     * e.g. 1, 2, 3, ..., {@code Integer.MAX_VALUE} &lt;br&gt;
+&nbsp;     * Will return false for any other non-null string input
+&nbsp;     * e.g. empty string, &quot;-1&quot;, &quot;0&quot;, &quot;+1&quot;, and &quot; 2 &quot; (untrimmed), &quot;3 0&quot; (contains whitespace), &quot;1 a&quot; (contains letters)
+&nbsp;     * @throws NullPointerException if {@code s} is null.
+&nbsp;     */
+&nbsp;    public static boolean isNonZeroUnsignedInteger(String s) {
+<b class="fc">&nbsp;        requireNonNull(s);</b>
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            int value = Integer.parseInt(s);</b>
+<b class="fc">&nbsp;            return value &gt; 0 &amp;&amp; !s.startsWith(&quot;+&quot;); // &quot;+1&quot; is successfully parsed by Integer#parseInt(String)</b>
+<b class="fc">&nbsp;        } catch (NumberFormatException nfe) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

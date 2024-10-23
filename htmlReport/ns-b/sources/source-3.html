@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Model</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Model (seedu.address.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Model</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.model;
+&nbsp;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.function.Predicate;
+&nbsp;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import seedu.address.commons.core.GuiSettings;
+&nbsp;import seedu.address.model.appointment.Appointment;
+&nbsp;import seedu.address.model.appointment.AppointmentDescriptor;
+&nbsp;import seedu.address.model.person.Person;
+&nbsp;import seedu.address.model.person.PersonDescriptor;
+&nbsp;
+&nbsp;/**
+&nbsp; * The API of the Model component.
+&nbsp; */
+&nbsp;public interface Model {
+&nbsp;    /** {@code Predicate} that always evaluate to true */
+<b class="fc">&nbsp;    Predicate&lt;Person&gt; PREDICATE_SHOW_ALL_PERSONS = unused -&gt; true;</b>
+<b class="fc">&nbsp;    Predicate&lt;Appointment&gt; PREDICATE_SHOW_ALL_APPOINTMENTS = unused -&gt; true;</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces user prefs data with the data in {@code userPrefs}.
+&nbsp;     */
+&nbsp;    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the user prefs.
+&nbsp;     */
+&nbsp;    ReadOnlyUserPrefs getUserPrefs();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the user prefs&#39; GUI settings.
+&nbsp;     */
+&nbsp;    GuiSettings getGuiSettings();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the user prefs&#39; GUI settings.
+&nbsp;     */
+&nbsp;    void setGuiSettings(GuiSettings guiSettings);
+&nbsp;
+&nbsp;    //=========== AddressBook ================================================================================
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the user prefs&#39; address book file path.
+&nbsp;     */
+&nbsp;    Path getAddressBookFilePath();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the user prefs&#39; address book file path.
+&nbsp;     */
+&nbsp;    void setAddressBookFilePath(Path addressBookFilePath);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces address book data with the data in {@code addressBook}.
+&nbsp;     */
+&nbsp;    void setAddressBook(ReadOnlyAddressBook addressBook);
+&nbsp;
+&nbsp;    /** Returns the AddressBook */
+&nbsp;    ReadOnlyAddressBook getAddressBook();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if a person with the same identity as {@code person} exists in the address book.
+&nbsp;     */
+&nbsp;    boolean hasPerson(Person person);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if a person descriptor with the same identity as {@code person} exists in the address book.
+&nbsp;     */
+&nbsp;    boolean hasPerson(PersonDescriptor personDescriptor);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the person with the corresponding personId in the addressBook.
+&nbsp;     */
+&nbsp;    Optional&lt;Person&gt; findPerson(int personId);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deletes the given person.
+&nbsp;     * The person must exist in the address book.
+&nbsp;     */
+&nbsp;    void deletePerson(Person target);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the given person.
+&nbsp;     * {@code person} must not already exist in the address book.
+&nbsp;     */
+&nbsp;    Person addPerson(PersonDescriptor personDescriptor);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces the given person {@code target} with {@code editedPerson}.
+&nbsp;     * {@code target} must exist in the address book.
+&nbsp;     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+&nbsp;     */
+&nbsp;    void setPerson(Person target, Person editedPerson);
+&nbsp;
+&nbsp;    /** Returns an unmodifiable view of the filtered person list */
+&nbsp;    ObservableList&lt;Person&gt; getFilteredPersonList();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+&nbsp;     * @throws NullPointerException if {@code predicate} is null.
+&nbsp;     */
+&nbsp;    void updateFilteredPersonList(Predicate&lt;Person&gt; predicate);
+&nbsp;
+&nbsp;    //=========== AppointmentBook ==============================================================================
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the user prefs&#39; appointment book file path.
+&nbsp;     */
+&nbsp;    Path getAppointmentBookFilePath();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the user prefs&#39; appointment book file path.
+&nbsp;     */
+&nbsp;    void setAppointmentBookFilePath(Path appointmentBookFilePath);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces appointment book data with the data in {@code appointmentBook}.
+&nbsp;     */
+&nbsp;    void setAppointmentBook(ReadOnlyAppointmentBook appointmentBook);
+&nbsp;
+&nbsp;    /** Returns the AppointmentBook */
+&nbsp;    ReadOnlyAppointmentBook getAppointmentBook();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if an appointment with the same identity as {@code appointment} exists in the appt book.
+&nbsp;     */
+&nbsp;    boolean hasAppointment(Appointment appointment);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if an appointment descriptor with the same identity as {@code appointment} exists in the appt book.
+&nbsp;     */
+&nbsp;    boolean hasAppointment(AppointmentDescriptor appointmentDescriptor);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Deletes the given appointment.
+&nbsp;     * The appointment must exist in the appointment book.
+&nbsp;     */
+&nbsp;    void deleteAppointment(Appointment target);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds the given appointment.
+&nbsp;     * {@code appointment} must not already exist in the appointment book.
+&nbsp;     */
+&nbsp;    Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces the given appointment {@code target} with {@code editedAppointment}.
+&nbsp;     * {@code target} must exist in the appointment book.
+&nbsp;     * The appointment identity of {@code editedAppointment} must not be the same as
+&nbsp;     * another existing appointment in the appointment book.
+&nbsp;     */
+&nbsp;    void setAppointment(Appointment target, Appointment editedAppointment);
+&nbsp;
+&nbsp;    /** Returns an unmodifiable view of the filtered appointment list */
+&nbsp;    ObservableList&lt;Appointment&gt; getFilteredAppointmentList();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+&nbsp;     * @throws NullPointerException if {@code predicate} is null.
+&nbsp;     */
+&nbsp;    void updateFilteredAppointmentList(Predicate&lt;Appointment&gt; predicate);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

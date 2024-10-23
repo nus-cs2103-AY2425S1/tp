@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HelpWindow</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.ui</a>
+</div>
+
+<h1>Coverage Summary for Class: HelpWindow (seedu.address.ui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HelpWindow</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.ui;
+&nbsp;
+&nbsp;import java.util.logging.Logger;
+&nbsp;
+&nbsp;import javafx.fxml.FXML;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;import javafx.scene.input.Clipboard;
+&nbsp;import javafx.scene.input.ClipboardContent;
+&nbsp;import javafx.stage.Stage;
+&nbsp;import seedu.address.commons.core.LogsCenter;
+&nbsp;
+&nbsp;/**
+&nbsp; * Controller for a help page
+&nbsp; */
+&nbsp;public class HelpWindow extends UiPart&lt;Stage&gt; {
+&nbsp;
+&nbsp;    public static final String USERGUIDE_URL = &quot;https://se-education.org/addressbook-level3/UserGuide.html&quot;;
+&nbsp;    public static final String HELP_MESSAGE = &quot;Refer to the user guide: &quot; + USERGUIDE_URL;
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);</b>
+&nbsp;    private static final String FXML = &quot;HelpWindow.fxml&quot;;
+&nbsp;
+&nbsp;    @FXML
+&nbsp;    private Button copyButton;
+&nbsp;
+&nbsp;    @FXML
+&nbsp;    private Label helpMessage;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new HelpWindow.
+&nbsp;     *
+&nbsp;     * @param root Stage to use as the root of the HelpWindow.
+&nbsp;     */
+&nbsp;    public HelpWindow(Stage root) {
+<b class="nc">&nbsp;        super(FXML, root);</b>
+<b class="nc">&nbsp;        helpMessage.setText(HELP_MESSAGE);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates a new HelpWindow.
+&nbsp;     */
+&nbsp;    public HelpWindow() {
+<b class="nc">&nbsp;        this(new Stage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Shows the help window.
+&nbsp;     * @throws IllegalStateException
+&nbsp;     *     &lt;ul&gt;
+&nbsp;     *         &lt;li&gt;
+&nbsp;     *             if this method is called on a thread other than the JavaFX Application Thread.
+&nbsp;     *         &lt;/li&gt;
+&nbsp;     *         &lt;li&gt;
+&nbsp;     *             if this method is called during animation or layout processing.
+&nbsp;     *         &lt;/li&gt;
+&nbsp;     *         &lt;li&gt;
+&nbsp;     *             if this method is called on the primary stage.
+&nbsp;     *         &lt;/li&gt;
+&nbsp;     *         &lt;li&gt;
+&nbsp;     *             if {@code dialogStage} is already showing.
+&nbsp;     *         &lt;/li&gt;
+&nbsp;     *     &lt;/ul&gt;
+&nbsp;     */
+&nbsp;    public void show() {
+<b class="nc">&nbsp;        logger.fine(&quot;Showing help page about the application.&quot;);</b>
+<b class="nc">&nbsp;        getRoot().show();</b>
+<b class="nc">&nbsp;        getRoot().centerOnScreen();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if the help window is currently being shown.
+&nbsp;     */
+&nbsp;    public boolean isShowing() {
+<b class="nc">&nbsp;        return getRoot().isShowing();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Hides the help window.
+&nbsp;     */
+&nbsp;    public void hide() {
+<b class="nc">&nbsp;        getRoot().hide();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Focuses on the help window.
+&nbsp;     */
+&nbsp;    public void focus() {
+<b class="nc">&nbsp;        getRoot().requestFocus();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Copies the URL to the user guide to the clipboard.
+&nbsp;     */
+&nbsp;    @FXML
+&nbsp;    private void copyUrl() {
+<b class="nc">&nbsp;        final Clipboard clipboard = Clipboard.getSystemClipboard();</b>
+<b class="nc">&nbsp;        final ClipboardContent url = new ClipboardContent();</b>
+<b class="nc">&nbsp;        url.putString(USERGUIDE_URL);</b>
+<b class="nc">&nbsp;        clipboard.setContent(url);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

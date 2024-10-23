@@ -1,0 +1,313 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EditCommand</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.logic.commands</a>
+</div>
+
+<h1>Coverage Summary for Class: EditCommand (seedu.address.logic.commands)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EditCommand</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/24)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EditCommand$EditEntityDescriptor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.logic.commands;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+&nbsp;import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+&nbsp;import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+&nbsp;import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+&nbsp;import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import seedu.address.commons.core.index.Index;
+&nbsp;import seedu.address.logic.commands.exceptions.CommandException;
+&nbsp;import seedu.address.model.Model;
+&nbsp;
+&nbsp;/**
+&nbsp; * Edits the details of an existing entity (person or appointment) in the address book.
+&nbsp; */
+&nbsp;public abstract class EditCommand extends Command {
+&nbsp;
+&nbsp;    public static final String COMMAND_WORD = &quot;edit&quot;;
+&nbsp;    public static final String MESSAGE_EDIT_PERSON_SUCCESS = &quot;Edited Person: %1$s&quot;;
+&nbsp;    public static final String MESSAGE_NOT_EDITED = &quot;At least one field to edit must be provided.&quot;;
+&nbsp;    public static final String MESSAGE_DUPLICATE_PERSON = &quot;This person already exists in the address book.&quot;;
+&nbsp;
+<b class="fc">&nbsp;    public static final String MESSAGE_USAGE = COMMAND_WORD</b>
+&nbsp;            + &quot;: Edits the details of an entity (person or appointment) identified &quot;
+&nbsp;            + &quot;by the index number used in the displayed person list. &quot;
+&nbsp;            + &quot;Existing values will be overwritten by the input values.\n&quot;
+&nbsp;            + &quot;Parameters: INDEX (must be a positive integer) &quot;
+&nbsp;            + &quot;ENTITY_TYPE &quot;
+&nbsp;            + &quot;INDEX &quot;
+&nbsp;            + &quot;ENTITY_ARGUMENTS...\n&quot;
+&nbsp;            + &quot;Example: &quot; + COMMAND_WORD + &quot; &quot; + &quot;person&quot; + &quot; &quot; + &quot;1&quot;
+&nbsp;            + &quot;[&quot; + PREFIX_NAME + &quot;NAME] &quot;
+&nbsp;            + &quot;[&quot; + PREFIX_PHONE + &quot;PHONE] &quot;
+&nbsp;            + &quot;[&quot; + PREFIX_EMAIL + &quot;EMAIL] &quot;
+&nbsp;            + &quot;[&quot; + PREFIX_ADDRESS + &quot;ADDRESS] &quot;
+&nbsp;            + &quot;[&quot; + PREFIX_TAG + &quot;TAG]...\n&quot;
+&nbsp;            + &quot;Example: &quot; + COMMAND_WORD + &quot; 1 &quot;
+&nbsp;            + PREFIX_PHONE + &quot;91234567 &quot;
+&nbsp;            + PREFIX_EMAIL + &quot;johndoe@example.com&quot;;
+&nbsp;
+&nbsp;
+&nbsp;    protected final Index targetIndex;
+&nbsp;    protected final EditEntityDescriptor editEntityDescriptor;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @param targetIndex Index of entity to be edited.
+&nbsp;     */
+<b class="fc">&nbsp;    public EditCommand(Index targetIndex, EditEntityDescriptor editEntityDescriptor) {</b>
+<b class="fc">&nbsp;        requireNonNull(targetIndex);</b>
+<b class="fc">&nbsp;        requireNonNull(editEntityDescriptor);</b>
+<b class="fc">&nbsp;        this.targetIndex = targetIndex;</b>
+<b class="fc">&nbsp;        this.editEntityDescriptor = editEntityDescriptor;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public CommandResult execute(Model model) throws CommandException {
+<b class="fc">&nbsp;        requireNonNull(model);</b>
+<b class="fc">&nbsp;        List&lt;?&gt; lastShownList = getFilteredList(model);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (targetIndex.getZeroBased() &gt;= lastShownList.size()) {</b>
+<b class="fc">&nbsp;            throw new CommandException(getInvalidIndexMessage());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Object entityToEdit = lastShownList.get(targetIndex.getZeroBased());</b>
+<b class="fc">&nbsp;        Object editedEntity = createEditedEntity(model, entityToEdit, editEntityDescriptor);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        if (isSameEntity(model, editedEntity, entityToEdit) &amp;&amp; hasEntity(model, editedEntity)) {</b>
+<b class="fc">&nbsp;            throw new CommandException(getDuplicateMessage());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        editEntity(model, editedEntity, entityToEdit);</b>
+<b class="fc">&nbsp;        return new CommandResult(String.format(getSuccessMessage(), formatEntity(editedEntity)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Checks if entity already exists in list
+&nbsp;     */
+&nbsp;    protected abstract boolean hasEntity(Model model, Object entity) throws CommandException;
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Checks if entity to edit is the same as edited entity
+&nbsp;     */
+&nbsp;    protected abstract boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
+&nbsp;            throws CommandException;
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the filtered list of entities in the model.
+&nbsp;     */
+&nbsp;    protected abstract List&lt;?&gt; getFilteredList(Model model);
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Edits Entity
+&nbsp;     */
+&nbsp;    protected abstract void editEntity(Model model, Object editedEntity, Object entityToEdit) throws CommandException;
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Adds the entity to the model.
+&nbsp;     */
+&nbsp;    protected abstract Object createEditedEntity(Model model, Object entityToEdit,
+&nbsp;                                                 EditEntityDescriptor editEntityDescriptor) throws CommandException;
+&nbsp;
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Returns success message to display upon adding entity.
+&nbsp;     */
+&nbsp;    protected abstract String getSuccessMessage();
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Returns duplicate message to display upon adding entity.
+&nbsp;     */
+&nbsp;    protected abstract String getDuplicateMessage();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the invalid index message when the index is out of bounds.
+&nbsp;     */
+&nbsp;    protected abstract String getInvalidIndexMessage();
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Formats the entity for displaying in the success message.
+&nbsp;     */
+&nbsp;    protected abstract String formatEntity(Object entity);
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object other) {
+<b class="fc">&nbsp;        if (other == this) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // instanceof handles nulls
+<b class="fc">&nbsp;        if (!(other instanceof EditCommand)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        EditCommand otherEditCommand = (EditCommand) other;</b>
+<b class="fc">&nbsp;        return targetIndex.equals(otherEditCommand.targetIndex)</b>
+<b class="fc">&nbsp;                &amp;&amp; editEntityDescriptor.equals(otherEditCommand.editEntityDescriptor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Abstract descriptor for editing entities.
+&nbsp;     */
+&nbsp;    public abstract static class EditEntityDescriptor {
+&nbsp;        // This class can have common fields or methods for all entities.
+&nbsp;
+<b class="fc">&nbsp;        public EditEntityDescriptor() {}</b>
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Copy constructor.
+&nbsp;         */
+<b class="fc">&nbsp;        public EditEntityDescriptor(EditEntityDescriptor toCopy) {</b>
+&nbsp;            // Copy logic for common fields, if any, can go here.
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public abstract boolean equals(Object other);
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

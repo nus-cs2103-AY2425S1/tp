@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CommandResult</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.logic.commands</a>
+</div>
+
+<h1>Coverage Summary for Class: CommandResult (seedu.address.logic.commands)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CommandResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.logic.commands;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;import seedu.address.commons.util.ToStringBuilder;
+&nbsp;
+&nbsp;/**
+&nbsp; * Represents the result of a command execution.
+&nbsp; */
+&nbsp;public class CommandResult {
+&nbsp;
+&nbsp;    private final String feedbackToUser;
+&nbsp;
+&nbsp;    /** Help information should be shown to the user. */
+&nbsp;    private final boolean showHelp;
+&nbsp;
+&nbsp;    /** The application should exit. */
+&nbsp;    private final boolean exit;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a {@code CommandResult} with the specified fields.
+&nbsp;     */
+<b class="fc">&nbsp;    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {</b>
+<b class="fc">&nbsp;        this.feedbackToUser = requireNonNull(feedbackToUser);</b>
+<b class="fc">&nbsp;        this.showHelp = showHelp;</b>
+<b class="fc">&nbsp;        this.exit = exit;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+&nbsp;     * and other fields set to their default value.
+&nbsp;     */
+&nbsp;    public CommandResult(String feedbackToUser) {
+<b class="fc">&nbsp;        this(feedbackToUser, false, false);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public String getFeedbackToUser() {
+<b class="fc">&nbsp;        return feedbackToUser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isShowHelp() {
+<b class="fc">&nbsp;        return showHelp;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isExit() {
+<b class="fc">&nbsp;        return exit;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object other) {
+<b class="fc">&nbsp;        if (other == this) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // instanceof handles nulls
+<b class="fc">&nbsp;        if (!(other instanceof CommandResult)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        CommandResult otherCommandResult = (CommandResult) other;</b>
+<b class="fc">&nbsp;        return feedbackToUser.equals(otherCommandResult.feedbackToUser)</b>
+&nbsp;                &amp;&amp; showHelp == otherCommandResult.showHelp
+&nbsp;                &amp;&amp; exit == otherCommandResult.exit;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="fc">&nbsp;        return Objects.hash(feedbackToUser, showHelp, exit);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return new ToStringBuilder(this)</b>
+<b class="fc">&nbsp;                .add(&quot;feedbackToUser&quot;, feedbackToUser)</b>
+<b class="fc">&nbsp;                .add(&quot;showHelp&quot;, showHelp)</b>
+<b class="fc">&nbsp;                .add(&quot;exit&quot;, exit)</b>
+<b class="fc">&nbsp;                .toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

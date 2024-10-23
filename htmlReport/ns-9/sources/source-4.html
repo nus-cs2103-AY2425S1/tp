@@ -1,0 +1,298 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArgumentTokenizer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.logic.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: ArgumentTokenizer (seedu.address.logic.parser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArgumentTokenizer</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.9%
+  </span>
+  <span class="absValue">
+    (31/32)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ArgumentTokenizer$PrefixPosition</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.4%
+  </span>
+  <span class="absValue">
+    (37/38)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.logic.parser;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * Tokenizes arguments string of the form: {@code preamble &lt;prefix&gt;value &lt;prefix&gt;value ...}&lt;br&gt;
+&nbsp; *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.&lt;br&gt;
+&nbsp; * 1. An argument&#39;s value can be an empty string e.g. the value of {@code k/} in the above example.&lt;br&gt;
+&nbsp; * 2. Leading and trailing whitespaces of an argument value will be discarded.&lt;br&gt;
+&nbsp; * 3. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
+&nbsp; *    in the above example.&lt;br&gt;
+&nbsp; */
+<b class="nc">&nbsp;public class ArgumentTokenizer {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
+&nbsp;     * respective argument values. Only the given prefixes will be recognized in the arguments string.
+&nbsp;     *
+&nbsp;     * @param argsString Arguments string of the form: {@code preamble &lt;prefix&gt;value &lt;prefix&gt;value ...}
+&nbsp;     * @param prefixes   Prefixes to tokenize the arguments string with
+&nbsp;     * @return           ArgumentMultimap object that maps prefixes to their arguments
+&nbsp;     */
+&nbsp;    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+<b class="fc">&nbsp;        List&lt;PrefixPosition&gt; positions = findAllPrefixPositions(argsString, prefixes);</b>
+<b class="fc">&nbsp;        return extractArguments(argsString, positions);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds all zero-based prefix positions in the given arguments string.
+&nbsp;     *
+&nbsp;     * @param argsString Arguments string of the form: {@code preamble &lt;prefix&gt;value &lt;prefix&gt;value ...}
+&nbsp;     * @param prefixes   Prefixes to find in the arguments string
+&nbsp;     * @return           List of zero-based prefix positions in the given arguments string
+&nbsp;     */
+&nbsp;    private static List&lt;PrefixPosition&gt; findAllPrefixPositions(String argsString, Prefix... prefixes) {
+<b class="fc">&nbsp;        return Arrays.stream(prefixes)</b>
+<b class="fc">&nbsp;                .flatMap(prefix -&gt; findPrefixPositions(argsString, prefix).stream())</b>
+<b class="fc">&nbsp;                .collect(Collectors.toList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * {@see findAllPrefixPositions}
+&nbsp;     */
+&nbsp;    private static List&lt;PrefixPosition&gt; findPrefixPositions(String argsString, Prefix prefix) {
+<b class="fc">&nbsp;        List&lt;PrefixPosition&gt; positions = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);</b>
+<b class="fc">&nbsp;        while (prefixPosition != -1) {</b>
+<b class="fc">&nbsp;            PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);</b>
+<b class="fc">&nbsp;            positions.add(extendedPrefix);</b>
+<b class="fc">&nbsp;            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return positions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the index of the first occurrence of {@code prefix} in
+&nbsp;     * {@code argsString} starting from index {@code fromIndex}. An occurrence
+&nbsp;     * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
+&nbsp;     * such occurrence can be found.
+&nbsp;     *
+&nbsp;     * E.g if {@code argsString} = &quot;e/hip/900&quot;, {@code prefix} = &quot;p/&quot; and
+&nbsp;     * {@code fromIndex} = 0, this method returns -1 as there are no valid
+&nbsp;     * occurrences of &quot;p/&quot; with whitespace before it. However, if
+&nbsp;     * {@code argsString} = &quot;e/hi p/900&quot;, {@code prefix} = &quot;p/&quot; and
+&nbsp;     * {@code fromIndex} = 0, this method returns 5.
+&nbsp;     */
+&nbsp;    private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
+<b class="fc">&nbsp;        int prefixIndex = argsString.indexOf(&quot; &quot; + prefix, fromIndex);</b>
+<b class="fc">&nbsp;        return prefixIndex == -1 ? -1</b>
+<b class="fc">&nbsp;                : prefixIndex + 1; // +1 as offset for whitespace</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Extracts prefixes and their argument values, and returns an {@code ArgumentMultimap} object that maps the
+&nbsp;     * extracted prefixes to their respective arguments. Prefixes are extracted based on their zero-based positions in
+&nbsp;     * {@code argsString}.
+&nbsp;     *
+&nbsp;     * @param argsString      Arguments string of the form: {@code preamble &lt;prefix&gt;value &lt;prefix&gt;value ...}
+&nbsp;     * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
+&nbsp;     * @return                ArgumentMultimap object that maps prefixes to their arguments
+&nbsp;     */
+&nbsp;    private static ArgumentMultimap extractArguments(String argsString, List&lt;PrefixPosition&gt; prefixPositions) {
+&nbsp;
+&nbsp;        // Sort by start position
+<b class="fc">&nbsp;        prefixPositions.sort((prefix1, prefix2) -&gt; prefix1.getStartPosition() - prefix2.getStartPosition());</b>
+&nbsp;
+&nbsp;        // Insert a PrefixPosition to represent the preamble
+<b class="fc">&nbsp;        PrefixPosition preambleMarker = new PrefixPosition(new Prefix(&quot;&quot;), 0);</b>
+<b class="fc">&nbsp;        prefixPositions.add(0, preambleMarker);</b>
+&nbsp;
+&nbsp;        // Add a dummy PrefixPosition to represent the end of the string
+<b class="fc">&nbsp;        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(&quot;&quot;), argsString.length());</b>
+<b class="fc">&nbsp;        prefixPositions.add(endPositionMarker);</b>
+&nbsp;
+&nbsp;        // Map prefixes to their argument values (if any)
+<b class="fc">&nbsp;        ArgumentMultimap argMultimap = new ArgumentMultimap();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; prefixPositions.size() - 1; i++) {</b>
+&nbsp;            // Extract and store prefixes and their arguments
+<b class="fc">&nbsp;            Prefix argPrefix = prefixPositions.get(i).getPrefix();</b>
+<b class="fc">&nbsp;            String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));</b>
+<b class="fc">&nbsp;            argMultimap.put(argPrefix, argValue);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return argMultimap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the trimmed value of the argument in the arguments string specified by {@code currentPrefixPosition}.
+&nbsp;     * The end position of the value is determined by {@code nextPrefixPosition}.
+&nbsp;     */
+&nbsp;    private static String extractArgumentValue(String argsString,
+&nbsp;                                        PrefixPosition currentPrefixPosition,
+&nbsp;                                        PrefixPosition nextPrefixPosition) {
+<b class="fc">&nbsp;        Prefix prefix = currentPrefixPosition.getPrefix();</b>
+&nbsp;
+<b class="fc">&nbsp;        int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();</b>
+<b class="fc">&nbsp;        String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());</b>
+&nbsp;
+<b class="fc">&nbsp;        return value.trim();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Represents a prefix&#39;s position in an arguments string.
+&nbsp;     */
+&nbsp;    private static class PrefixPosition {
+&nbsp;        private int startPosition;
+&nbsp;        private final Prefix prefix;
+&nbsp;
+<b class="fc">&nbsp;        PrefixPosition(Prefix prefix, int startPosition) {</b>
+<b class="fc">&nbsp;            this.prefix = prefix;</b>
+<b class="fc">&nbsp;            this.startPosition = startPosition;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        int getStartPosition() {
+<b class="fc">&nbsp;            return startPosition;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Prefix getPrefix() {
+<b class="fc">&nbsp;            return prefix;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

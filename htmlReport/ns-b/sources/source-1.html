@@ -1,0 +1,286 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AddressBook</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.model</a>
+</div>
+
+<h1>Coverage Summary for Class: AddressBook (seedu.address.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AddressBook</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.2%
+  </span>
+  <span class="absValue">
+    (15/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.1%
+  </span>
+  <span class="absValue">
+    (41/45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.model;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import seedu.address.commons.util.ToStringBuilder;
+&nbsp;import seedu.address.model.person.Person;
+&nbsp;import seedu.address.model.person.PersonDescriptor;
+&nbsp;import seedu.address.model.person.UniquePersonList;
+&nbsp;
+&nbsp;/**
+&nbsp; * Wraps all data at the address-book level
+&nbsp; * Duplicates are not allowed (by .isSamePerson comparison)
+&nbsp; */
+&nbsp;public class AddressBook implements ReadOnlyAddressBook {
+&nbsp;
+&nbsp;    private int nextPersonId;
+&nbsp;    private final UniquePersonList persons;
+&nbsp;
+&nbsp;    /*
+&nbsp;     * The &#39;unusual&#39; code block below is a non-static initialization block, sometimes used to avoid duplication
+&nbsp;     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+&nbsp;     *
+&nbsp;     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+&nbsp;     *   among constructors.
+&nbsp;     */
+&nbsp;    {
+<b class="fc">&nbsp;        persons = new UniquePersonList();</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public AddressBook() {</b>
+<b class="fc">&nbsp;        nextPersonId = 0;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+&nbsp;     */
+&nbsp;    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+<b class="fc">&nbsp;        this();</b>
+<b class="fc">&nbsp;        resetData(toBeCopied);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public int getNextPersonId() {
+<b class="fc">&nbsp;        return nextPersonId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNextPersonId(int personId) {
+<b class="fc">&nbsp;        this.nextPersonId = personId;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //// list overwrite operations
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces the contents of the person list with {@code persons}.
+&nbsp;     * {@code persons} must not contain duplicate persons.
+&nbsp;     */
+&nbsp;    public void setPersons(List&lt;Person&gt; persons) {
+<b class="fc">&nbsp;        this.persons.setPersons(persons);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+&nbsp;     */
+&nbsp;    public void resetData(ReadOnlyAddressBook newData) {
+<b class="fc">&nbsp;        requireNonNull(newData);</b>
+&nbsp;
+<b class="fc">&nbsp;        setNextPersonId(newData.getNextPersonId());</b>
+<b class="fc">&nbsp;        setPersons(newData.getPersonList());</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //// person-level operations
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if a person with the same identity as {@code person} exists in the address book.
+&nbsp;     */
+&nbsp;    public boolean hasPerson(Person person) {
+<b class="fc">&nbsp;        requireNonNull(person);</b>
+<b class="fc">&nbsp;        return persons.contains(person);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns true if a person with the same identity as {@code person} exists in the address book.
+&nbsp;     */
+&nbsp;    public boolean hasPerson(PersonDescriptor personDescriptor) {
+<b class="fc">&nbsp;        requireNonNull(personDescriptor);</b>
+<b class="fc">&nbsp;        return persons.contains(personDescriptor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a person to the address book.
+&nbsp;     * The person must not already exist in the address book.
+&nbsp;     */
+&nbsp;    public void addPerson(Person person) {
+<b class="fc">&nbsp;        persons.add(person);</b>
+<b class="fc">&nbsp;        ++nextPersonId;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a person to the address book.
+&nbsp;     * The person must not already exist in the address book.
+&nbsp;     */
+&nbsp;    public Person addPerson(PersonDescriptor personDescriptor) {
+<b class="fc">&nbsp;        requireNonNull(personDescriptor);</b>
+<b class="fc">&nbsp;        Person person = new Person(nextPersonId, personDescriptor);</b>
+<b class="fc">&nbsp;        persons.add(person);</b>
+<b class="fc">&nbsp;        ++nextPersonId;</b>
+<b class="fc">&nbsp;        return person;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+&nbsp;     * {@code target} must exist in the address book.
+&nbsp;     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+&nbsp;     */
+&nbsp;    public void setPerson(Person target, Person editedPerson) {
+<b class="fc">&nbsp;        requireNonNull(editedPerson);</b>
+&nbsp;
+<b class="fc">&nbsp;        persons.setPerson(target, editedPerson);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Removes {@code key} from this {@code AddressBook}.
+&nbsp;     * {@code key} must exist in the address book.
+&nbsp;     */
+&nbsp;    public void removePerson(Person key) {
+<b class="fc">&nbsp;        persons.remove(key);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Optional&lt;Person&gt; findPerson(int personId) {
+<b class="nc">&nbsp;        return persons.findPerson(personId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //// util methods
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return new ToStringBuilder(this)</b>
+<b class="fc">&nbsp;                .add(&quot;persons&quot;, persons)</b>
+<b class="fc">&nbsp;                .toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObservableList&lt;Person&gt; getPersonList() {
+<b class="fc">&nbsp;        return persons.asUnmodifiableObservableList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object other) {
+<b class="pc">&nbsp;        if (other == this) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // instanceof handles nulls
+<b class="pc">&nbsp;        if (!(other instanceof AddressBook)) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        AddressBook otherAddressBook = (AddressBook) other;</b>
+<b class="fc">&nbsp;        return persons.equals(otherAddressBook.persons);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return persons.hashCode();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

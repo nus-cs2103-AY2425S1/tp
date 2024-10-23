@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ArgumentMultimap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.logic.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: ArgumentMultimap (seedu.address.logic.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArgumentMultimap</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.logic.parser;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.stream.Stream;
+&nbsp;
+&nbsp;import seedu.address.logic.Messages;
+&nbsp;import seedu.address.logic.parser.exceptions.ParseException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Stores mapping of prefixes to their respective arguments.
+&nbsp; * Each key may be associated with multiple argument values.
+&nbsp; * Values for a given key are stored in a list, and the insertion ordering is maintained.
+&nbsp; * Keys are unique, but the list of argument values may contain duplicate argument values, i.e. the same argument value
+&nbsp; * can be inserted multiple times for the same prefix.
+&nbsp; */
+<b class="fc">&nbsp;public class ArgumentMultimap {</b>
+&nbsp;
+&nbsp;    /** Prefixes mapped to their respective arguments**/
+<b class="fc">&nbsp;    private final Map&lt;Prefix, List&lt;String&gt;&gt; argMultimap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Associates the specified argument value with {@code prefix} key in this map.
+&nbsp;     * If the map previously contained a mapping for the key, the new value is appended to the list of existing values.
+&nbsp;     *
+&nbsp;     * @param prefix   Prefix key with which the specified argument value is to be associated
+&nbsp;     * @param argValue Argument value to be associated with the specified prefix key
+&nbsp;     */
+&nbsp;    public void put(Prefix prefix, String argValue) {
+<b class="fc">&nbsp;        List&lt;String&gt; argValues = getAllValues(prefix);</b>
+<b class="fc">&nbsp;        argValues.add(argValue);</b>
+<b class="fc">&nbsp;        argMultimap.put(prefix, argValues);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the last value of {@code prefix}.
+&nbsp;     */
+&nbsp;    public Optional&lt;String&gt; getValue(Prefix prefix) {
+<b class="fc">&nbsp;        List&lt;String&gt; values = getAllValues(prefix);</b>
+<b class="fc">&nbsp;        return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the last value of {@code prefix}.
+&nbsp;     */
+&nbsp;    public String getEntityType() {
+<b class="fc">&nbsp;        return getPreamble().split(&quot; &quot;)[0];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns all values of {@code prefix}.
+&nbsp;     * If the prefix does not exist or has no values, this will return an empty list.
+&nbsp;     * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
+&nbsp;     */
+&nbsp;    public List&lt;String&gt; getAllValues(Prefix prefix) {
+<b class="fc">&nbsp;        if (!argMultimap.containsKey(prefix)) {</b>
+<b class="fc">&nbsp;            return new ArrayList&lt;&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return new ArrayList&lt;&gt;(argMultimap.get(prefix));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
+&nbsp;     */
+&nbsp;    public String getPreamble() {
+<b class="fc">&nbsp;        return getValue(new Prefix(&quot;&quot;)).orElse(&quot;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
+&nbsp;     * once among the arguments.
+&nbsp;     */
+&nbsp;    public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
+<b class="fc">&nbsp;        Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()</b>
+<b class="fc">&nbsp;                .filter(prefix -&gt; argMultimap.containsKey(prefix) &amp;&amp; argMultimap.get(prefix).size() &gt; 1)</b>
+<b class="fc">&nbsp;                .toArray(Prefix[]::new);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (duplicatedPrefixes.length &gt; 0) {</b>
+<b class="fc">&nbsp;            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

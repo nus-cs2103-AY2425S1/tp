@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Messages</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.logic</a>
+</div>
+
+<h1>Coverage Summary for Class: Messages (seedu.address.logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Messages</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.logic;
+&nbsp;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import java.util.stream.Stream;
+&nbsp;
+&nbsp;import seedu.address.logic.parser.Prefix;
+&nbsp;import seedu.address.model.appointment.Appointment;
+&nbsp;import seedu.address.model.appointment.AppointmentDescriptor;
+&nbsp;import seedu.address.model.person.Person;
+&nbsp;import seedu.address.model.person.PersonDescriptor;
+&nbsp;
+&nbsp;/**
+&nbsp; * Container for user visible messages.
+&nbsp; */
+<b class="pc">&nbsp;public class Messages {</b>
+&nbsp;
+&nbsp;    public static final String MESSAGE_UNKNOWN_COMMAND = &quot;Unknown command&quot;;
+&nbsp;    public static final String MESSAGE_INVALID_COMMAND_FORMAT = &quot;Invalid command format! \n%1$s&quot;;
+&nbsp;    public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX = &quot;The appointment index is invalid&quot;;
+&nbsp;    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = &quot;The person index provided is invalid&quot;;
+&nbsp;    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = &quot;%1$d persons listed!&quot;;
+&nbsp;    public static final String MESSAGE_DUPLICATE_FIELDS =
+&nbsp;                &quot;Multiple values specified for the following single-valued field(s): &quot;;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns an error message indicating the duplicate prefixes.
+&nbsp;     */
+&nbsp;    public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
+<b class="pc">&nbsp;        assert duplicatePrefixes.length &gt; 0;</b>
+&nbsp;
+<b class="fc">&nbsp;        Set&lt;String&gt; duplicateFields =</b>
+<b class="fc">&nbsp;                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());</b>
+&nbsp;
+<b class="fc">&nbsp;        return MESSAGE_DUPLICATE_FIELDS + String.join(&quot; &quot;, duplicateFields);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Formats the {@code person} for display to the user.
+&nbsp;     */
+&nbsp;    public static String formatPerson(Person person) {
+<b class="fc">&nbsp;        return formatPerson(person.getPersonDescriptor());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Formats the {@code person} for display to the user.
+&nbsp;     */
+&nbsp;    public static String formatPerson(PersonDescriptor person) {
+<b class="fc">&nbsp;        final StringBuilder builder = new StringBuilder();</b>
+<b class="fc">&nbsp;        builder.append(person.getName())</b>
+<b class="fc">&nbsp;                .append(&quot;; Phone: &quot;)</b>
+<b class="fc">&nbsp;                .append(person.getPhone())</b>
+<b class="fc">&nbsp;                .append(&quot;; Email: &quot;)</b>
+<b class="fc">&nbsp;                .append(person.getEmail())</b>
+<b class="fc">&nbsp;                .append(&quot;; Address: &quot;)</b>
+<b class="fc">&nbsp;                .append(person.getAddress())</b>
+<b class="fc">&nbsp;                .append(&quot;; Tags: &quot;);</b>
+<b class="fc">&nbsp;        person.getTags().forEach(builder::append);</b>
+<b class="fc">&nbsp;        return builder.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Formats the {@code appointment} for display to the user.
+&nbsp;     */
+&nbsp;    public static String formatAppointment(Appointment appointment) {
+<b class="fc">&nbsp;        return formatAppointment(appointment.getAppointmentDescriptor());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Formats the {@code appointment} for display to the user.
+&nbsp;     */
+&nbsp;    public static String formatAppointment(AppointmentDescriptor appointment) {
+<b class="fc">&nbsp;        final StringBuilder builder = new StringBuilder();</b>
+<b class="fc">&nbsp;        builder.append(appointment.getAppointmentType())</b>
+<b class="fc">&nbsp;                .append(&quot;; Date and Time&quot;)</b>
+<b class="fc">&nbsp;                .append(appointment.getAppointmentDateTime())</b>
+<b class="fc">&nbsp;                .append(&quot;; Sickness: &quot;)</b>
+<b class="fc">&nbsp;                .append(appointment.getSickness())</b>
+<b class="fc">&nbsp;                .append(&quot;; Medicine: &quot;)</b>
+<b class="fc">&nbsp;                .append(appointment.getMedicine());</b>
+<b class="fc">&nbsp;        return builder.toString();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

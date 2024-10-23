@@ -36,6 +36,20 @@ class JsonAdaptedAppointmentTest {
     private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
 
     @Test
+    void constructor_validArguments_returnsCorrectJsonAdaptedAppointment() throws IllegalValueException {
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, VALID_APPOINTMENT_TYPE,
+                VALID_APPOINTMENT_DATE_TIME, 1, VALID_SICKNESS, VALID_MEDICINE);
+        Appointment modelAppointment = appointment.toModelType(addressBookStub);
+        JsonAdaptedAppointment appointment1 = new JsonAdaptedAppointment(modelAppointment);
+        modelAppointment = appointment1.toModelType(addressBookStub);
+
+        assertEquals(LocalDateTime.parse(VALID_APPOINTMENT_DATE_TIME), modelAppointment.getAppointmentDateTime());
+        assertEquals(VALID_PERSON_ID, modelAppointment.getPerson().getPersonId());
+        assertEquals(VALID_SICKNESS, modelAppointment.getSickness().value);
+        assertEquals(VALID_MEDICINE, modelAppointment.getMedicine().value);
+    }
+
+    @Test
     void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, VALID_APPOINTMENT_TYPE,
                 VALID_APPOINTMENT_DATE_TIME, 1, VALID_SICKNESS, VALID_MEDICINE);

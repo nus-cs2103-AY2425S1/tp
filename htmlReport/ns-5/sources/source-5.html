@@ -1,0 +1,294 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.commons.util</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonUtil (seedu.address.commons.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.4%
+  </span>
+  <span class="absValue">
+    (27/28)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JsonUtil$LevelDeserializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (10/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.9%
+  </span>
+  <span class="absValue">
+    (31/33)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.commons.util;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.logging.Level;
+&nbsp;import java.util.logging.Logger;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonAutoDetect;
+&nbsp;import com.fasterxml.jackson.annotation.PropertyAccessor;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationContext;
+&nbsp;import com.fasterxml.jackson.databind.DeserializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.fasterxml.jackson.databind.SerializationFeature;
+&nbsp;import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
+&nbsp;import com.fasterxml.jackson.databind.module.SimpleModule;
+&nbsp;import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+&nbsp;
+&nbsp;import seedu.address.commons.core.LogsCenter;
+&nbsp;import seedu.address.commons.exceptions.DataLoadingException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Converts a Java object instance to JSON and vice versa
+&nbsp; */
+<b class="nc">&nbsp;public class JsonUtil {</b>
+&nbsp;
+<b class="fc">&nbsp;    private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);</b>
+&nbsp;
+<b class="fc">&nbsp;    private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()</b>
+<b class="fc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
+<b class="fc">&nbsp;            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)</b>
+<b class="fc">&nbsp;            .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)</b>
+<b class="fc">&nbsp;            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)</b>
+<b class="fc">&nbsp;            .registerModule(new SimpleModule(&quot;SimpleModule&quot;)</b>
+<b class="fc">&nbsp;                    .addSerializer(Level.class, new ToStringSerializer())</b>
+<b class="fc">&nbsp;                    .addDeserializer(Level.class, new LevelDeserializer(Level.class)));</b>
+&nbsp;
+&nbsp;    static &lt;T&gt; void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
+<b class="fc">&nbsp;        FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    static &lt;T&gt; T deserializeObjectFromJsonFile(Path jsonFile, Class&lt;T&gt; classOfObjectToDeserialize)
+&nbsp;            throws IOException {
+<b class="fc">&nbsp;        return fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the JSON object from the given file or {@code Optional.empty()} object if the file is not found.
+&nbsp;     * If any values are missing from the file, default values will be used, as long as the file is a valid JSON file.
+&nbsp;     *
+&nbsp;     * @param filePath cannot be null.
+&nbsp;     * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
+&nbsp;     * @throws DataLoadingException if loading of the JSON file failed.
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; Optional&lt;T&gt; readJsonFile(
+&nbsp;            Path filePath, Class&lt;T&gt; classOfObjectToDeserialize) throws DataLoadingException {
+<b class="fc">&nbsp;        requireNonNull(filePath);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (!Files.exists(filePath)) {</b>
+<b class="fc">&nbsp;            return Optional.empty();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        logger.info(&quot;JSON file &quot; + filePath + &quot; found.&quot;);</b>
+&nbsp;
+&nbsp;        T jsonFile;
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);</b>
+<b class="fc">&nbsp;        } catch (IOException e) {</b>
+<b class="fc">&nbsp;            logger.warning(&quot;Error reading from jsonFile file &quot; + filePath + &quot;: &quot; + e);</b>
+<b class="fc">&nbsp;            throw new DataLoadingException(e);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return Optional.of(jsonFile);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Saves the Json object to the specified file.
+&nbsp;     * Overwrites existing file if it exists, creates a new file if it doesn&#39;t.
+&nbsp;     * @param jsonFile cannot be null
+&nbsp;     * @param filePath cannot be null
+&nbsp;     * @throws IOException if there was an error during writing to the file
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; void saveJsonFile(T jsonFile, Path filePath) throws IOException {
+<b class="fc">&nbsp;        requireNonNull(filePath);</b>
+<b class="fc">&nbsp;        requireNonNull(jsonFile);</b>
+&nbsp;
+<b class="fc">&nbsp;        serializeObjectToJsonFile(filePath, jsonFile);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts a given string representation of a JSON data to instance of a class
+&nbsp;     * @param &lt;T&gt; The generic type to create an instance of
+&nbsp;     * @return The instance of T with the specified values in the JSON string
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; T fromJsonString(String json, Class&lt;T&gt; instanceClass) throws IOException {
+<b class="fc">&nbsp;        return objectMapper.readValue(json, instanceClass);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Converts a given instance of a class into its JSON data string representation
+&nbsp;     * @param instance The T object to be converted into the JSON string
+&nbsp;     * @param &lt;T&gt; The generic type to create an instance of
+&nbsp;     * @return JSON data representation of the given class instance, in string
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; String toJsonString(T instance) throws JsonProcessingException {
+<b class="fc">&nbsp;        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Contains methods that retrieve logging level from serialized string.
+&nbsp;     */
+&nbsp;    private static class LevelDeserializer extends FromStringDeserializer&lt;Level&gt; {
+&nbsp;
+&nbsp;        protected LevelDeserializer(Class&lt;?&gt; vc) {
+<b class="fc">&nbsp;            super(vc);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Override
+&nbsp;        protected Level _deserialize(String value, DeserializationContext ctxt) {
+<b class="fc">&nbsp;            return getLoggingLevel(value);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Gets the logging level that matches loggingLevelString
+&nbsp;         * &lt;p&gt;
+&nbsp;         * Returns null if there are no matches
+&nbsp;         *
+&nbsp;         */
+&nbsp;        private Level getLoggingLevel(String loggingLevelString) {
+<b class="fc">&nbsp;            return Level.parse(loggingLevelString);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public Class&lt;Level&gt; handledType() {
+<b class="nc">&nbsp;            return Level.class;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

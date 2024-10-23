@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AppUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.commons.util</a>
+</div>
+
+<h1>Coverage Summary for Class: AppUtil (seedu.address.commons.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AppUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (8/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.commons.util;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;
+&nbsp;import javafx.scene.image.Image;
+&nbsp;import seedu.address.MainApp;
+&nbsp;
+&nbsp;/**
+&nbsp; * A container for App specific utility functions
+&nbsp; */
+<b class="nc">&nbsp;public class AppUtil {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets an {@code Image} from the specified path.
+&nbsp;     */
+&nbsp;    public static Image getImage(String imagePath) {
+<b class="fc">&nbsp;        requireNonNull(imagePath);</b>
+<b class="fc">&nbsp;        return new Image(MainApp.class.getResourceAsStream(imagePath));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks that {@code condition} is true. Used for validating arguments to methods.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException if {@code condition} is false.
+&nbsp;     */
+&nbsp;    public static void checkArgument(Boolean condition) {
+<b class="fc">&nbsp;        if (!condition) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException();</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks that {@code condition} is true. Used for validating arguments to methods.
+&nbsp;     *
+&nbsp;     * @throws IllegalArgumentException with {@code errorMessage} if {@code condition} is false.
+&nbsp;     */
+&nbsp;    public static void checkArgument(Boolean condition, String errorMessage) {
+<b class="fc">&nbsp;        if (!condition) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(errorMessage);</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>

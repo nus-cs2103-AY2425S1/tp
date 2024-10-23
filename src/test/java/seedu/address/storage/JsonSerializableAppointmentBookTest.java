@@ -2,14 +2,11 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -34,10 +31,11 @@ public class JsonSerializableAppointmentBookTest {
             TEST_DATA_FOLDER.resolve("invalidAppointmentAppointmentBook.json");
     private static final Path DUPLICATE_APPOINTMENT_FILE =
             TEST_DATA_FOLDER.resolve("duplicateAppointmentAppointmentBook.json");
-    private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
+    private static final ArrayList<PersonDescriptor> typicalPersons = new ArrayList<>(Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(typicalPersons);
 
     // todo: Same error as the testcase in JsonAdaptedAppointmentBookTest.java
-//    @Disabled("For next iteration")
+    @Disabled("For next iteration")
     @Test
     void toModelType_typicalAppointmentsFile_success() throws Exception {
         JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_APPOINTMENTS_FILE,
@@ -56,7 +54,7 @@ public class JsonSerializableAppointmentBookTest {
 
 
     // todo: Same error as the testcase in JsonAdaptedAppointmentBookTest.java
-//    @Disabled("For next iteration")
+    @Disabled("For next iteration")
     @Test
     void toModelType_duplicateAppointments_throwsIllegalValueException() throws Exception {
         JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_APPOINTMENT_FILE,

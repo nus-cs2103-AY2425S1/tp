@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > JsonAppointmentBookStorage</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">seedu.address.storage</a>
+</div>
+
+<h1>Coverage Summary for Class: JsonAppointmentBookStorage (seedu.address.storage)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JsonAppointmentBookStorage</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (18/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package seedu.address.storage;
+&nbsp;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.file.Path;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.logging.Logger;
+&nbsp;
+&nbsp;import seedu.address.commons.core.LogsCenter;
+&nbsp;import seedu.address.commons.exceptions.DataLoadingException;
+&nbsp;import seedu.address.commons.exceptions.IllegalValueException;
+&nbsp;import seedu.address.commons.util.FileUtil;
+&nbsp;import seedu.address.commons.util.JsonUtil;
+&nbsp;import seedu.address.model.ReadOnlyAddressBook;
+&nbsp;import seedu.address.model.ReadOnlyAppointmentBook;
+&nbsp;
+&nbsp;/**
+&nbsp; * A class to access Appointment data stored as a json file on the hard disk.
+&nbsp; */
+&nbsp;public class JsonAppointmentBookStorage implements AppointmentBookStorage {
+<b class="fc">&nbsp;    private static final Logger logger = LogsCenter.getLogger(JsonAppointmentBookStorage.class);</b>
+&nbsp;
+&nbsp;    private Path filePath;
+&nbsp;
+<b class="fc">&nbsp;    public JsonAppointmentBookStorage(Path filePath) {</b>
+<b class="fc">&nbsp;        this.filePath = filePath;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Path getAppointmentBookFilePath() {
+<b class="fc">&nbsp;        return filePath;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Optional&lt;ReadOnlyAppointmentBook&gt; readAppointmentBook(
+&nbsp;            ReadOnlyAddressBook addressBook) throws DataLoadingException {
+<b class="nc">&nbsp;        return readAppointmentBook(filePath, addressBook);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Similar to {@link #readAppointmentBook(Path)}.
+&nbsp;     *
+&nbsp;     * @param filePath location of the data. Cannot be null.
+&nbsp;     * @throws DataLoadingException if loading the data from storage failed.
+&nbsp;     */
+&nbsp;    public Optional&lt;ReadOnlyAppointmentBook&gt; readAppointmentBook(
+&nbsp;            Path filePath,
+&nbsp;            ReadOnlyAddressBook addressBook) throws DataLoadingException {
+<b class="fc">&nbsp;        requireNonNull(filePath);</b>
+&nbsp;
+<b class="fc">&nbsp;        Optional&lt;JsonSerializableAppointmentBook&gt; jsonAppointmentBook = JsonUtil.readJsonFile(</b>
+&nbsp;                filePath, JsonSerializableAppointmentBook.class);
+<b class="fc">&nbsp;        if (!jsonAppointmentBook.isPresent()) {</b>
+<b class="fc">&nbsp;            return Optional.empty();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            return Optional.of(jsonAppointmentBook.get().toModelType(addressBook));</b>
+<b class="fc">&nbsp;        } catch (IllegalValueException ive) {</b>
+<b class="fc">&nbsp;            logger.info(&quot;Illegal values found in &quot; + filePath + &quot;: &quot; + ive.getMessage());</b>
+<b class="fc">&nbsp;            throw new DataLoadingException(ive);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook) throws IOException {
+<b class="nc">&nbsp;        saveAppointmentBook(appointmentBook, filePath);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Similar to {@link #saveAppointmentBook(ReadOnlyAppointmentBook)}.
+&nbsp;     *
+&nbsp;     * @param filePath location of the data. Cannot be null.
+&nbsp;     */
+&nbsp;    public void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook, Path filePath) throws IOException {
+<b class="fc">&nbsp;        requireNonNull(appointmentBook);</b>
+<b class="fc">&nbsp;        requireNonNull(filePath);</b>
+&nbsp;
+<b class="fc">&nbsp;        FileUtil.createIfMissing(filePath);</b>
+<b class="fc">&nbsp;        JsonUtil.saveJsonFile(new JsonSerializableAppointmentBook(appointmentBook), filePath);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-22 22:22</div>
+</div>
+</body>
+</html>
