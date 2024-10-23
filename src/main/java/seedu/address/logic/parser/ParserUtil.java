@@ -184,7 +184,6 @@ public class ParserUtil {
     }
 
     /**
-
      * Parses an {@code Optional} String value using the provided parser {@code FunctionWithException},
      * returning a default value if the {@code Optional} is empty.
      */
@@ -196,7 +195,7 @@ public class ParserUtil {
             return defaultValue;
         }
     }
-    
+
     /**
      * Checks if a command word matches any known invalid variants and throws a ParseException if found.
      * @param commandWord The command word to validate
