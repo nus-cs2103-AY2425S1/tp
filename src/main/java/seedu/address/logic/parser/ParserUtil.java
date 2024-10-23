@@ -2,12 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Company;
@@ -136,5 +139,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String yearMonthStr} into a {@code YearMonth}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code yearMonthStr} is invalid.
+     */
+    public static YearMonth parseYearMonth(String yearMonthStr) throws ParseException {
+        requireNonNull(yearMonthStr);
+        String trimmedYearMonth = yearMonthStr.trim();
+        YearMonth yearMonth;
+        try {
+            yearMonth = YearMonth.parse(trimmedYearMonth);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_MONTH_FORMAT);
+        }
+        return yearMonth;
     }
 }

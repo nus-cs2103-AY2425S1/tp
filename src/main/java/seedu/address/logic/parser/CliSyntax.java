@@ -16,7 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_AMOUNT = new Prefix("amt/");
     public static final Prefix PREFIX_OTHER_PARTY = new Prefix("o/");
     public static final Prefix PREFIX_DATE = new Prefix("dt/");
-
-
-
+    public static final Prefix PREFIX_START_MONTH = new Prefix("s/");
+    public static final Prefix PREFIX_END_MONTH = new Prefix("e/");
 }

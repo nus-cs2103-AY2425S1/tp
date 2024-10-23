@@ -25,6 +25,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format!\nDate format: yyyy-MM-DD";
+    public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format!\nMonth format: yyyy-MM";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!\n"
+            + "Start date must be before or equal to end date";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
