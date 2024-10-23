@@ -55,12 +55,10 @@ public class SearchBirthdayCommand extends Command {
             endDate = dates[1].trim();
 
             if (!isValidDate(startDate) || !isValidDate(endDate)) {
-                System.out.println("here");
                 throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
             }
 
             if (LocalDate.parse(startDate, formatter).isAfter(LocalDate.parse(endDate, formatter))) {
-                System.out.println("here1");
                 throw new CommandException(MESSAGE_START_DATE_AFTER_END_DATE);
             }
         } else {
