@@ -89,6 +89,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
 
     @Override
     public void deleteTransaction(Transaction transaction) {
+        requireNonNull(transaction);
         transactionBook.removeTransaction(transaction);
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TXNS);
     }
