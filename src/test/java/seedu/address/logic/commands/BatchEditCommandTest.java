@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Set;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -92,7 +91,22 @@ class BatchEditCommandTest {
         expectedModel.setPerson(ALICE, changedAlice);
         expectedModel.setPerson(BENSON, changedBenson);
         expectedModel.setPerson(DANIEL, changedDaniel);
-        expectedModel.updateFilteredPersonList(Predicate.not(Model.PREDICATE_SHOW_ALL_PERSONS));
+        expectedModel.updateFilteredPersonList(new PersonContainsTagsPredicate(Set.of(frenTag)));
+
+        assertCommandSuccess(batchEditCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_nonExistentTag_successWithMessage() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Tag nonExistentTag = new Tag("nonExistentTag");
+        PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Set.of(nonExistentTag));
+        BatchEditCommand batchEditCommand = new BatchEditCommand(nonExistentTag, friendsTag, predicate);
+
+        String expectedMessage = String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG, nonExistentTag);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(predicate);
 
         assertCommandSuccess(batchEditCommand, model, expectedMessage, expectedModel);
     }

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +31,7 @@ public class BatchEditCommand extends Command {
 
     public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM = "Tag changed from: %1$s\n";
     public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO = "Tag changed to: %1$s\n";
+    public static final String MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG = "No person with Tag= %s is found";
 
     private final Tag oldTag;
     private final Tag newTag;
@@ -59,9 +59,12 @@ public class BatchEditCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
-        List<Person> curentShownList = model.getFilteredPersonList();
-        ArrayList<Person> nonObservableList = new ArrayList<>(curentShownList);
+        ArrayList<Person> nonObservableList = new ArrayList<>(model.getFilteredPersonList());
         StringBuilder feedbackToUser = new StringBuilder();
+
+        if (nonObservableList.isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG, oldTag));
+        }
 
         for (Person person : nonObservableList) {
             Person updatedPerson = changeTag(person, oldTag, newTag);
@@ -71,6 +74,8 @@ public class BatchEditCommand extends Command {
                     + String.format(MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO, Messages.format(updatedPerson)));
         }
 
+        PersonContainsTagsPredicate newPredicate = new PersonContainsTagsPredicate(Set.of(newTag));
+        model.updateFilteredPersonList(newPredicate);
         return new CommandResult(feedbackToUser.toString());
     }
 
