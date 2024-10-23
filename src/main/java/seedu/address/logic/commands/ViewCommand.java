@@ -107,6 +107,10 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * Returns the instant of the current stage, or {null} if there is no stage open.
+     */
+
     public static Stage getCurrentStage() {
         return currentStage;
     }
