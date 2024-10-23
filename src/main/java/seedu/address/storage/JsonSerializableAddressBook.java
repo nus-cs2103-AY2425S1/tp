@@ -21,6 +21,7 @@ import seedu.address.model.wedding.Wedding;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_WEDDING = "Weddings list contains duplicate wedding(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
@@ -52,20 +53,33 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        //Wedding has to be added first, since person has a reference to wedding
+        for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
+            Wedding wedding = jsonAdaptedWedding.toModelType();
+            if (addressBook.hasWedding(wedding)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_WEDDING);
+            }
+            addressBook.addWedding(wedding);
+        }
+
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
+            //addressBook is passed to person to get the wedding reference
+            Person person = jsonAdaptedPerson.toModelType(addressBook.getWeddingList());
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
         }
-        for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
-            Wedding wedding = jsonAdaptedWedding.toModelType();
-            if (addressBook.hasWedding(wedding)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+
+        //Add wedding clients to the wedding
+        for (Wedding wedding : addressBook.getWeddingList()) {
+            for (Person person : addressBook.getPersonList()) {
+                if (person.getOwnWedding() != null && person.getOwnWedding().equals(wedding)) {
+                    wedding.addClient(person);
+                }
             }
-            addressBook.addWedding(wedding);
         }
+
         return addressBook;
     }
 

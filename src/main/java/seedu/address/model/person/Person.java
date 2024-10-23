@@ -48,7 +48,7 @@ public class Person {
      * Every field, except tag and wedding, must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
-        requireAllNonNull(name, phone, email, address, role);
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -91,6 +91,10 @@ public class Person {
 
     public Set<Wedding> getWeddingJobs() {
         return weddingJobs;
+    }
+
+    public void addWeddingJob(Wedding wedding) {
+        weddingJobs.add(wedding);
     }
 
     /**
@@ -144,16 +148,12 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && role.equals(otherPerson.role)
-                && ownWedding.equals(otherPerson.ownWedding)
-                && weddingJobs.equals(otherPerson.weddingJobs);
+                && address.equals(otherPerson.address);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, ownWedding, weddingJobs);
+        return Objects.hash(name, phone, email, address);
     }
 
     @Override
