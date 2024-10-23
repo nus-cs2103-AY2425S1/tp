@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
+//import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -44,7 +46,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the person identified "
             + "by the NRIC number or name used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: NRIC OR name (case insensitive)"
+            + "Parameters: NRIC OR INDEX (must be a positive integer)"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_GENDER + "GENDER] "
@@ -56,7 +58,7 @@ public class UpdateCommand extends Command {
             + "Example1: " + COMMAND_WORD + " S1234567Z "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
-            + "Example2: " + COMMAND_WORD + " Alex "
+            + "Example2: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -64,11 +66,10 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_SAME_NRID = "Multiple persons with the same NRIC found. Please specify further.";
-    public static final String MESSAGE_SAME_NAME = "Multiple persons with the same name found. Please specify further.";
     public static final String MESSAGE_APPOINTMENT_TAKEN = "There is an existing appointment at that timeslot";
 
     private final Nric nric;
-    private final Name name;
+    private final Index index;
     private final UpdatePersonDescriptor editPersonDescriptor;
 
     /**
@@ -80,20 +81,20 @@ public class UpdateCommand extends Command {
         requireNonNull(editPersonDescriptor);
 
         this.nric = nric;
-        this.name = null;
+        this.index = null;
         this.editPersonDescriptor = new UpdatePersonDescriptor(editPersonDescriptor);
     }
 
     /**
-     * @param name                 of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index                 of the person in the filtered person list to edit
+     * @param editPersonDescriptor  details to edit the person with
      */
-    public UpdateCommand(Name name, UpdatePersonDescriptor editPersonDescriptor) {
-        requireNonNull(name);
+    public UpdateCommand(Index index, UpdatePersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
         this.nric = null;
-        this.name = name;
+        this.index = index;
         this.editPersonDescriptor = new UpdatePersonDescriptor(editPersonDescriptor);
     }
 
@@ -136,19 +137,13 @@ public class UpdateCommand extends Command {
                 // Handle multiple matches for NRIC
                 throw new CommandException(MESSAGE_SAME_NRID);
             }
-        } else { // for name
-            List<Person> matchingPersons = lastShownList.stream()
-                    .filter(person -> person.getName().equals(name))
-                    .toList();
-
-            if (matchingPersons.isEmpty()) {
-                throw new CommandException(MESSAGE_NOT_EDITED);
-            } else if (matchingPersons.size() == 1) {
-                personToEdit = matchingPersons.get(0);
-            } else {
-                // Handle multiple matches for Name
-                throw new CommandException(MESSAGE_SAME_NAME);
+        } else { // for index
+            assert index != null;
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
+
+            personToEdit = lastShownList.get(index.getZeroBased());
         }
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
@@ -182,18 +177,25 @@ public class UpdateCommand extends Command {
             return nric.equals(otherEditCommand.nric)
                     && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
         } else {
-            assert name != null;
-            return name.equals(otherEditCommand.name)
+            assert index != null;
+            return index.equals(otherEditCommand.index)
                     && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
         }
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("nric", nric)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+        if (nric != null) {
+            return new ToStringBuilder(this)
+                    .add("nric", nric)
+                    .add("editPersonDescriptor", editPersonDescriptor)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("index", index)
+                    .add("editPersonDescriptor", editPersonDescriptor)
+                    .toString();
+        }
     }
 
     /**

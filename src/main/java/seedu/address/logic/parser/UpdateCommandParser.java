@@ -16,10 +16,10 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.tag.Tag;
 
@@ -41,29 +41,34 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AGE, PREFIX_GENDER,
                         PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (!argMultimap.getPreamble().isEmpty() && argMultimap.getPreamble().contains("/")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
-        }
-
-        // Get the NRIC or name from the preamble
+        // Get the NRIC or index from the preamble
         String preamble = argMultimap.getPreamble().trim();
         if (preamble.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         }
 
-        // Parse the NRIC or name
+        // Parse the NRIC or index
         boolean isContainNric = Nric.isValidNric(preamble);
         Nric nric = null;
-        Name name = null;
+        Index index = null;
 
-        if (isContainNric) {
-            nric = ParserUtil.parseNric(preamble);
-        } else {
-            name = ParserUtil.parseName(preamble);
+
+        try {
+            if (isContainNric) {
+                nric = ParserUtil.parseNric(preamble);
+            } else {
+                index = ParserUtil.parseIndex(preamble);
+            }
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_AGE, PREFIX_GENDER, PREFIX_NRIC,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         // Create an UpdatePersonDescriptor from the arguments
         UpdateCommand.UpdatePersonDescriptor editPersonDescriptor = new UpdatePersonDescriptor();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -72,6 +77,9 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         }
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             editPersonDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            editPersonDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
@@ -92,7 +100,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         if (isContainNric) {
             return new UpdateCommand(nric, editPersonDescriptor);
         } else {
-            return new UpdateCommand(name, editPersonDescriptor);
+            return new UpdateCommand(index, editPersonDescriptor);
         }
     }
 
