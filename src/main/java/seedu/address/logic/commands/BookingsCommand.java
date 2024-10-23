@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.BookingIsOnDate;
 
@@ -34,8 +35,9 @@ public class BookingsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(new BookingIsOnDate(date));
+        String formattedDate = date.format(ParserUtil.ENGLISH_FORMAT_WITH_TIME);
         return new CommandResult(
-                String.format(Messages.MESSAGE_NUMBER_OF_BOOKINGS, model.getFilteredPersonList().size(), date));
+                String.format(Messages.MESSAGE_NUMBER_OF_BOOKINGS, model.getFilteredPersonList().size(), formattedDate));
     }
 
     @Override
