@@ -23,7 +23,7 @@ public class NewtagCommandParserTest {
         Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, "bride's friend", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/bride's friend", new NewtagCommand(expectedTags));
     }
 
     @Test
@@ -31,12 +31,17 @@ public class NewtagCommandParserTest {
         Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, "   bride's friend   ", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/   bride's friend   ", new NewtagCommand(expectedTags));
     }
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingPrefix_throwsParseException() {
+        assertParseFailure(parser, "bride's friend", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -57,6 +62,6 @@ public class NewtagCommandParserTest {
         Tag expectedTag = new Tag("friend");
         List<Tag> expectedTags = new ArrayList<>();
         expectedTags.add(expectedTag);
-        assertParseSuccess(parser, "  FRIEND  ", new NewtagCommand(expectedTags));
+        assertParseSuccess(parser, " t/FRIEND", new NewtagCommand(expectedTags));
     }
 }
