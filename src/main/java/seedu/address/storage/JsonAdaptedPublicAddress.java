@@ -41,10 +41,11 @@ class JsonAdaptedPublicAddress {
      * @throws IllegalValueException if there were any data constraints violated in the adapted label.
      */
     public PublicAddress toModelType(Network network) throws IllegalValueException {
-        if (!PublicAddress.isValidPublicAddress(publicAddress) || !PublicAddress.isValidPublicAddressLabel(label)) {
-            throw new IllegalValueException(PublicAddress.MESSAGE_CONSTRAINTS);
+        try {
+            return PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
         }
-        return PublicAddressFactory.createPublicAddress(network, publicAddress, label);
     }
 
 }

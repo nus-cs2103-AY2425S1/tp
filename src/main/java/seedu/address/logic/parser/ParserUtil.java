@@ -110,18 +110,14 @@ public class ParserUtil {
         requireNonNull(paLabel);
 
         String trimmedPublicAddress = publicAddress.trim();
-        if (!PublicAddress.isValidPublicAddress(trimmedPublicAddress)) {
-            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
-        }
-
         String trimmedPaLabel = paLabel.trim();
-        if (!PublicAddress.isValidPublicAddressLabel(trimmedPaLabel)) {
-            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
-        }
-
         Network parsedNetwork = parseNetwork(network);
 
-        return PublicAddressFactory.createPublicAddress(parsedNetwork, trimmedPublicAddress, trimmedPaLabel);
+        try {
+            return PublicAddressFactory.createPublicAddress(parsedNetwork, trimmedPublicAddress, trimmedPaLabel);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 
     /**
@@ -139,7 +135,7 @@ public class ParserUtil {
             String[] addressArgs = trimmedPublicAddress.split(delimiter);
 
             if (addressArgs.length != 2) {
-                throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+                throw new ParseException("Missing arguments for public address");
             }
 
             String network = addressArgs[0];
