@@ -134,7 +134,7 @@ public class CsvConvertersTest {
     }
 
     @Test
-    public void goodsConverter_convertToWrite() {
+    public void goodsConverter_convertToWrite_success() {
         CsvConverters.GoodsConverter converter = new CsvConverters.GoodsConverter();
         GoodsName goodsName = new GoodsName("Apple");
         GoodsCategories category = GoodsCategories.CONSUMABLES;
