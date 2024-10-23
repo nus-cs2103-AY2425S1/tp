@@ -80,6 +80,13 @@ public class UniqueLinkList implements Iterable<Link> {
     }
 
     /**
+     * Removes all links from list involving an ID.
+     */
+    public void deleteLinksWithId(String id) {
+        internalList.removeIf(link -> link.getFrom().getUniqueID().equals(id) || link.getTo().getUniqueID().equals(id));
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Link> asUnmodifiableObservableList() {

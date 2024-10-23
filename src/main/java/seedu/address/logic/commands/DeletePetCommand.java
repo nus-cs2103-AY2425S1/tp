@@ -41,6 +41,7 @@ public class DeletePetCommand extends DeleteCommand {
 
         Pet petToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePet(petToDelete);
+        model.deleteLinksWithId(petToDelete.getUniqueID());
         return new CommandResult(String.format(MESSAGE_DELETE_PET_SUCCESS, Messages.format(petToDelete)));
 
     }

@@ -41,6 +41,7 @@ public class DeleteOwnerCommand extends DeleteCommand {
 
         Owner ownerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteOwner(ownerToDelete);
+        model.deleteLinksWithId(ownerToDelete.getUniqueID());
         return new CommandResult(String.format(MESSAGE_DELETE_OWNER_SUCCESS, Messages.format(ownerToDelete)));
 
     }
