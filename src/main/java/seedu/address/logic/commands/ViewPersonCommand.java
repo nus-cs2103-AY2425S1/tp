@@ -6,23 +6,25 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameMatchesKeywordsPredicate;
+import seedu.address.ui.CommandDetailChange;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Views the specific information of a person in address book whose name is the argument keywords.
- * Keyword matching is case-sensitive.
+ * Keyword matching is case-insensitive.
  */
-public class ViewContactCommand extends ViewCommand {
+public class ViewPersonCommand extends ViewCommand {
 
-    public static final String COMMAND_FIELD = "contact";
+    public static final String COMMAND_FIELD = "person";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the person whose name is "
-            + "the specified keywords (case-sensitive) and displays him/her.\n"
+            + "the specified keywords (case-insensitive) and displays him/her.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " David Li";
 
     private final NameMatchesKeywordsPredicate predicate;
 
-    public ViewContactCommand(NameMatchesKeywordsPredicate predicate) {
+    public ViewPersonCommand(NameMatchesKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -31,7 +33,8 @@ public class ViewContactCommand extends ViewCommand {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                false, false, CommandTabChange.PERSON, CommandDetailChange.DETAILED);
     }
 
     @Override
@@ -41,12 +44,12 @@ public class ViewContactCommand extends ViewCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ViewContactCommand)) {
+        if (!(other instanceof ViewPersonCommand)) {
             return false;
         }
 
-        ViewContactCommand otherViewContactCommand = (ViewContactCommand) other;
-        return predicate.equals(otherViewContactCommand.predicate);
+        ViewPersonCommand otherViewPersonCommand = (ViewPersonCommand) other;
+        return predicate.equals(otherViewPersonCommand.predicate);
     }
 
     @Override

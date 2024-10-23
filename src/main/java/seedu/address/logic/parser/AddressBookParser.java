@@ -8,12 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddContactCommand;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -54,7 +55,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddContactCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
@@ -64,7 +65,7 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -80,6 +81,9 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

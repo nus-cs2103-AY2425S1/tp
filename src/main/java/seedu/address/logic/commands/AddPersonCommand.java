@@ -12,22 +12,25 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.CommandDetailChange;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Adds a person to the address book.
  */
-public class AddContactCommand extends AddCommand {
+public class AddPersonCommand extends AddCommand {
 
     public static final String COMMAND_FIELD = "person";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + COMMAND_FIELD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -43,7 +46,7 @@ public class AddContactCommand extends AddCommand {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddContactCommand(Person person) {
+    public AddPersonCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -57,7 +60,8 @@ public class AddContactCommand extends AddCommand {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), false,
+                false, CommandTabChange.PERSON, CommandDetailChange.NONE);
     }
 
     @Override
@@ -67,12 +71,12 @@ public class AddContactCommand extends AddCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddContactCommand)) {
+        if (!(other instanceof AddPersonCommand)) {
             return false;
         }
 
-        AddContactCommand otherAddContactCommand = (AddContactCommand) other;
-        return toAdd.equals(otherAddContactCommand.toAdd);
+        AddPersonCommand otherAddPersonCommand = (AddPersonCommand) other;
+        return toAdd.equals(otherAddPersonCommand.toAdd);
     }
 
     @Override

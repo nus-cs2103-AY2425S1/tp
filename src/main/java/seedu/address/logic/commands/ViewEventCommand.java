@@ -6,6 +6,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.event.EventNameMatchesKeywordsPredicate;
+import seedu.address.ui.CommandDetailChange;
+import seedu.address.ui.CommandTabChange;
 
 /**
  * Views the specific information of an event in address book whose name is the argument keywords.
@@ -15,7 +17,7 @@ public class ViewEventCommand extends ViewCommand {
     public static final String COMMAND_FIELD = "event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the event whose name is "
-            + "the specified keywords (case-sensitive) and displays it.\n"
+            + "the specified keywords (case-insensitive) and displays it.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " Awards show";
 
@@ -31,7 +33,8 @@ public class ViewEventCommand extends ViewCommand {
         requireNonNull(model);
         model.updateFilteredEventList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()),
+                false, false, CommandTabChange.EVENT, CommandDetailChange.DETAILED);
 
     }
 

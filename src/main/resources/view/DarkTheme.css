@@ -23,6 +23,13 @@
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
+.contact-box {
+    -fx-background-color: #1d1d1d;
+    -fx-border-color: #1d1d1d;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}
 
 .text-field {
     -fx-font-size: 12pt;
@@ -307,6 +314,12 @@
     -fx-padding: 8 1 8 1;
 }
 
+.underline {
+    -fx-border-color: #3e7b91;
+    -fx-border-width: 0 0 1 0;
+    underline-position: bottom;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -343,6 +356,15 @@
 }
 
 #tags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#celebrity .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;

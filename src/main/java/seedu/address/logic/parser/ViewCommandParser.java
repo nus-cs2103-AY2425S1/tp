@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewContactCommand;
 import seedu.address.logic.commands.ViewEventCommand;
+import seedu.address.logic.commands.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -37,8 +37,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         final String commandField = matcher.group("commandField");
         final String keywords = matcher.group("keywords");
 
-        if (commandField.equals(ViewContactCommand.COMMAND_FIELD)) {
-            return new ViewContactCommandParser().parse(keywords);
+        if (commandField.equals(ViewPersonCommand.COMMAND_FIELD)) {
+            return new ViewPersonCommandParser().parse(keywords);
         }
 
         if (commandField.equals(ViewEventCommand.COMMAND_FIELD)) {

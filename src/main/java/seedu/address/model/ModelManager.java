@@ -108,6 +108,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person findPerson(String personName) {
+        return addressBook.findPerson(personName);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -118,19 +123,19 @@ public class ModelManager implements Model {
     public boolean hasEvent(Event event) {
         requireNonNull(event);
         return addressBook.hasEvent(event);
-    };
+    }
+
     @Override
     public void addEvent(Event toAdd) {
         requireNonNull(toAdd);
         addressBook.addEvent(toAdd);
     }
+
     @Override
     public void removeEvent(Event target) {
         requireNonNull(target);
         addressBook.removeEvent(target);
     }
-
-
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -183,10 +188,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredEvents.equals(otherModelManager.filteredEvents);
     }
-
-
-
-
-
-
 }
