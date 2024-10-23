@@ -18,4 +18,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Nric
+Person *--> CallFrequency
+Person *--> "*" ContactRecord
 @enduml
