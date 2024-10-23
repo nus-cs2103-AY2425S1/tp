@@ -1,6 +1,7 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,6 +24,7 @@ import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
 import tutorease.address.model.person.Address;
+import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
@@ -98,7 +100,7 @@ public class EditContactCommand extends ContactCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -108,7 +110,15 @@ public class EditContactCommand extends ContactCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
+        if (role.equals(Role.STUDENT)) {
+            return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
+        }
+        if (role.equals(Role.GUARDIAN)) {
+            return new Guardian(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
+        }
+
+        throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditContactCommand.MESSAGE_ROLE_CANNOT_BE_EDITED));
     }
 
     @Override
