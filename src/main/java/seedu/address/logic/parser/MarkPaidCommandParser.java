@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 
@@ -8,7 +9,6 @@ import java.util.Collections;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.MarkPaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.MonthPaid;
@@ -24,22 +24,35 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
      */
     public MarkPaidCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTHPAID);
+        String preamble = argMultimap.getPreamble().trim();
+        Set<MonthPaid> monthsPaid = parseMonthsPaidForMarkPaid(argMultimap.getAllValues(PREFIX_MONTHPAID));
 
-        if (argMultimap.getPreamble().isEmpty() || !ParserUtil.isValidIndex(argMultimap.getPreamble())) {
+        if (preamble.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        MarkPaidCommand.MarkPaidTarget target;
+        switch (preamble.toLowerCase()) {
+        case "all":
+            target = MarkPaidCommand.MarkPaidTarget.all();
+            break;
+        default:
+            if (!ParserUtil.isValidIndex(preamble)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
+            }
+            try {
+                Index index = ParserUtil.parseIndex(preamble);
+                target = MarkPaidCommand.MarkPaidTarget.fromIndex(index);
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MarkPaidCommand.MESSAGE_USAGE), pe);
+            }
+            break;
         }
 
-        Set<MonthPaid> monthsPaid = parseMonthsPaidForMarkPaid(argMultimap.getAllValues(PREFIX_MONTHPAID));
 
-        return new MarkPaidCommand(index, monthsPaid);
+        return new MarkPaidCommand(target, monthsPaid);
     }
 
     private Set<MonthPaid> parseMonthsPaidForMarkPaid(Collection<String> monthsPaid) throws ParseException {

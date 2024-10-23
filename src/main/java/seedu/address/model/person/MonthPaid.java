@@ -22,7 +22,6 @@ public class MonthPaid implements Comparable<MonthPaid> {
         checkArgument(isValidMonthPaid(monthPaidValue), MESSAGE_CONSTRAINTS);
         this.monthPaidValue = monthPaidValue;
     }
-
     /**
      * Returns true if a given string is a valid monthsPaid.
      */

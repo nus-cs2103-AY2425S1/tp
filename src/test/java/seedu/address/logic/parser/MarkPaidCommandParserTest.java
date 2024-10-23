@@ -42,8 +42,8 @@ public class MarkPaidCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = String.valueOf(targetIndex.getOneBased());
         // empty field
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(targetIndex, Collections.emptySet());
-
+        MarkPaidCommand expectedCommand = new MarkPaidCommand(MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex),
+                Collections.emptySet());
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
@@ -65,7 +65,8 @@ public class MarkPaidCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = String.valueOf(targetIndex.getOneBased()) + " " + withPrefix(VALID_MONTHPAID1);
         // empty field
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(targetIndex, Set.of(new MonthPaid(VALID_MONTHPAID1)));
+        MarkPaidCommand expectedCommand = new MarkPaidCommand(MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex),
+                Set.of(new MonthPaid(VALID_MONTHPAID1)));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -77,7 +78,8 @@ public class MarkPaidCommandParserTest {
                 + " " + withPrefix(VALID_MONTHPAID2);
         // empty field
         MarkPaidCommand expectedCommand = new MarkPaidCommand(
-                targetIndex, Set.of(new MonthPaid(VALID_MONTHPAID1), new MonthPaid(VALID_MONTHPAID2)));
+                MarkPaidCommand.MarkPaidTarget.fromIndex(targetIndex), Set.of(new MonthPaid(VALID_MONTHPAID1),
+                    new MonthPaid(VALID_MONTHPAID2)));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
