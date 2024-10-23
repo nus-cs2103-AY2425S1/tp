@@ -81,6 +81,10 @@ public class Policy {
         return policyName;
     }
 
+    public void updateNextPaymentDate() {
+        payment.updatePaymentDueDate();
+    }
+
     @Override
     public int hashCode() {
         return policyName.hashCode() + startDate.hashCode()

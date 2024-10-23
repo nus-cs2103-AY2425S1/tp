@@ -24,7 +24,7 @@ public class Payment {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public final String value;
-    private final LocalDate paymentDueDate;
+    private LocalDate paymentDueDate;
     private final BigDecimal amount;
 
     /**
@@ -62,9 +62,13 @@ public class Payment {
         }
     }
 
+    public void updatePaymentDueDate() {
+        paymentDueDate = paymentDueDate.plusYears(1);
+    }
+
     @Override
     public String toString() {
-        return value;
+        return paymentDueDate.format(DATE_FORMATTER) + " " + amount;
     }
 
     @Override
