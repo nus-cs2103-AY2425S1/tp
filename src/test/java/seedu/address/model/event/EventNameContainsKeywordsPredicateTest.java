@@ -60,6 +60,14 @@ public class EventNameContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
+
+        // partial keywords
+        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Ali", "Bo"));
+        assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
+
+        // partial keywords with mixed-case
+        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("aLi", "bO"));
+        assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
     }
 
     @Test
