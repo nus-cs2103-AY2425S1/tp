@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -65,14 +63,16 @@ public class DeleteAppointmentCommandTest {
 
         Person personWithAppointmentToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                personWithAppointmentToDelete.getName(), personWithAppointmentToDelete.getSchedules().iterator().next());
+                personWithAppointmentToDelete.getName(),
+                personWithAppointmentToDelete.getSchedules().iterator().next());
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 Messages.format(personWithAppointmentToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        expectedModel.deleteAppointment(personWithAppointmentToDelete, personWithAppointmentToDelete.getSchedules().iterator().next());
+        expectedModel.deleteAppointment(personWithAppointmentToDelete,
+            personWithAppointmentToDelete.getSchedules().iterator().next());
 
         assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
     }
