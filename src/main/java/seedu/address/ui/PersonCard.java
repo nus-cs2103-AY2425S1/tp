@@ -52,7 +52,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(ContactType contactType, Person person, int displayedIndex) {
         super(getFxml(contactType));
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        id.setText(String.valueOf(displayedIndex));
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);

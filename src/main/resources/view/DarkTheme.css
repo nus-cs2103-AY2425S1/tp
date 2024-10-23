@@ -285,6 +285,20 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.scroll-pane {
+    -fx-border-color: transparent;   /* Remove any borders */
+    -fx-background-insets: 0;        /* Remove insets */
+    -fx-padding: 0;
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.flow-pane {
+    -fx-background-color: derive(#1d1d1d, 40%);
+    -fx-border-color: transparent;   /* Remove any borders */
+    -fx-background-insets: 0;        /* Remove insets */
+    -fx-padding: 0;
+}
+
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
     -fx-background-insets: 3;
