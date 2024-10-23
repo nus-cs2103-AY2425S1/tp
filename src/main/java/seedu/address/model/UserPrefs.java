@@ -16,7 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     // Default sort by priority
-    private String sortPreference = " ";
+    private String sortPreference = "default";
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -91,7 +91,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && sortPreference.equals(otherUserPrefs.sortPreference);
     }
 
     @Override

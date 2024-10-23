@@ -38,8 +38,34 @@ public class SaveSortPreferenceCommandTest {
     }
 
     @Test
-    public void execute_save_success() {
-        CommandResult expectedCommandResult = new CommandResult(SaveSortPreferenceCommand.MESSAGE_SUCCESS);
-        assertCommandSuccess(new SaveSortPreferenceCommand("high"), model, expectedCommandResult, expectedModel);
+    public void execute_high() {
+        String expectedMessage = SaveSortPreferenceCommand.MESSAGE_SUCCESS;
+        SaveSortPreferenceCommand command = new SaveSortPreferenceCommand("high");
+        expectedModel.setSortPreference("high");
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_low() {
+        String expectedMessage = SaveSortPreferenceCommand.MESSAGE_SUCCESS;
+        SaveSortPreferenceCommand command = new SaveSortPreferenceCommand("low");
+        expectedModel.setSortPreference("low");
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_recent() {
+        String expectedMessage = SaveSortPreferenceCommand.MESSAGE_SUCCESS;
+        SaveSortPreferenceCommand command = new SaveSortPreferenceCommand("recent");
+        expectedModel.setSortPreference("recent");
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_distant() {
+        String expectedMessage = SaveSortPreferenceCommand.MESSAGE_SUCCESS;
+        SaveSortPreferenceCommand command = new SaveSortPreferenceCommand("distant");
+        expectedModel.setSortPreference("distant");
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 }
