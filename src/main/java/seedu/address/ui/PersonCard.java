@@ -4,8 +4,11 @@ import static seedu.address.model.util.ContactType.PERSON;
 
 import java.util.Comparator;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -45,6 +48,9 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ImageView pinIcon;
+    private BooleanProperty isPinned = new SimpleBooleanProperty(false);
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,6 +66,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        isPinned.set(person.getPinned());
+        pinIcon.visibleProperty().bind(isPinned);
     }
 
     /**
