@@ -3,7 +3,9 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERS_LISTED_OVERVIEW;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
@@ -54,6 +56,15 @@ public class FilterOrderCommandTest {
 
         // different status -> returns false
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
+    }
+
+    @Test
+    public void execute_noSelectedPersonInModel_throwsCommandException() {
+        String expectedMessage = String.format(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
+        StatusEqualsKeywordPredicate predicate = new StatusEqualsKeywordPredicate(Status.PENDING);
+        FilterOrderCommand command = new FilterOrderCommand(predicate);
+
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
