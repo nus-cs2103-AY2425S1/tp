@@ -143,8 +143,8 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
-        private Email email;
+        private Optional<Phone> phone;
+        private Optional<Email> email;
         private Optional<Address> address;
         private Set<Tag> tags;
         private EditModuleRoleOperation editModuleRoleOperation;
@@ -179,20 +179,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
+        public void setPhone(Optional<Phone> phone) {
             this.phone = phone;
         }
 
         public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+            return phone;
         }
 
-        public void setEmail(Email email) {
+        public void setEmail(Optional<Email> email) {
             this.email = email;
         }
 
         public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+            return email;
         }
 
         public void setAddress(Optional<Address> address) {
