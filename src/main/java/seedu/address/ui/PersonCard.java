@@ -18,6 +18,10 @@ import seedu.address.model.person.RsvpStatus;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String PENDING_STYLE =  "-fx-background-color: #eba250; -fx-background-radius: 2";
+    private static final String COMING_STYLE =  "-fx-background-color: #85bd80; -fx-background-radius: 2";
+    private static final String NOT_COMING_STYLE =  "-fx-background-color: #DD0000; -fx-background-radius: 2; "
+           + "-fx-text-fill: white";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -29,9 +33,7 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
-    private static final String PENDING_STYLE =  "-fx-background-color: #eba250; -fx-background-radius: 2";
-    private static final String COMING_STYLE =  "-fx-background-color: #85bd80; -fx-background-radius: 2";
-    private static final String NOT_COMING_STYLE =  "-fx-background-color: #DD0000; -fx-background-radius: 2; -fx-text-fill: white";
+
 
     @FXML
     private HBox cardPane;
