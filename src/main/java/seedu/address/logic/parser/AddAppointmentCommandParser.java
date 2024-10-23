@@ -6,13 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Time;
 import seedu.address.model.person.Name;
 import seedu.address.model.shared.Date;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new {@code AddAppointmentCommand} object
@@ -30,7 +30,8 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PATIENT_NAME, PREFIX_DOCTOR_NAME,
                 PREFIX_DATE, PREFIX_TIME) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PATIENT_NAME, PREFIX_DOCTOR_NAME,

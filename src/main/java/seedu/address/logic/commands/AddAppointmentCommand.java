@@ -8,6 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+import java.util.Optional;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,9 +22,6 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.shared.Date;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Adds an appointment to an existing person in the address book.
@@ -78,7 +78,7 @@ public class AddAppointmentCommand extends Command {
 
         Person patientToEdit = patient.get();
         Person doctorToEdit = doctor.get();
-        this.appointmentToAdd = new Appointment((Doctor)doctorToEdit, (Patient)patientToEdit, this.date, this.time);
+        this.appointmentToAdd = new Appointment((Doctor) doctorToEdit, (Patient) patientToEdit, this.date, this.time);
 
         Person editedPatient;
         Person editedDoctor;
