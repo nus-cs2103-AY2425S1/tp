@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.ChatWindow" spacing="15"
+      style="-fx-background-color: #1C1C1C; -fx-alignment: CENTER; -fx-padding: 20;">
+
+    <Label text="EZSTATE Help Bot"
+           style="-fx-text-fill: #FFD700; -fx-font-size: 28pt; -fx-font-weight: bold; -fx-padding: 10;" />
+
+    <TextArea fx:id="chatArea"
+              prefHeight="300"
+              prefWidth="400"
+              editable="false"
+              style="-fx-background-color: #333; -fx-text-fill: black; -fx-padding: 10; -fx-border-color: #B8860B; -fx-border-radius: 5px; -fx-border-width: 2;" />
+
+    <TextField fx:id="userInput"
+               promptText="Type your message..."
+               style="-fx-background-color: #444; -fx-text-fill: black; -fx-border-color: #B8860B; -fx-border-radius: 5px; -fx-border-width: 2; -fx-padding: 5;" />
+
+    <Button text="Send"
+            onAction="#handleSendButtonAction"
+            style="-fx-background-color: #B8860B; -fx-text-fill: white; -fx-padding: 10; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-font-weight: bold;" />
+</VBox>
+

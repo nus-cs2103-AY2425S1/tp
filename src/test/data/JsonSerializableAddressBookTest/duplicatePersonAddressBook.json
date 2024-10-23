@@ -3,12 +3,22 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "property": "123, Jurong West Ave 6, #08-111",
+    "remark": "",
+    "date": "",
+    "from": "",
+    "to" : "",
+    "tags": [ "friends" ],
+    "role": "buyer"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "property": "4th street",
+    "remark": "",
+    "date": "",
+    "from": "",
+    "to" : "",
+    "role": "buyer"
   } ]
 }
