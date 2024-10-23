@@ -3,7 +3,6 @@ package tutorease.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.logging.Logger;
-
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.logic.Messages;
