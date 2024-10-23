@@ -2,98 +2,53 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
-import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
 
-
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Represents the top-level AddressBook. It holds managers responsible for volunteers and events.
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
-    private final UniqueVolunteerList volunteers;
-
-    private final UniqueEventList events;
-
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-
-        volunteers = new UniqueVolunteerList();
-
-        events = new UniqueEventList();
-
-    }
-
-    public AddressBook() {}
+    private final EventManager eventManager;
+    private final VolunteerManager volunteerManager;
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook with empty managers.
+     */
+    public AddressBook() {
+        eventManager = new EventManager();
+        volunteerManager = new VolunteerManager();
+    }
+
+    /**
+     * Creates an AddressBook using the data in the {@code toBeCopied}.
+     *
+     * @param toBeCopied A ReadOnlyAddressBook whose data will be copied.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
+        this(); // Initialize with empty managers
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
-
     /**
-     * Replaces the contents of the person list with {@code volunteers}.
-     * {@code volunteers} must not contain duplicate volunteers.
-     */
-    public void setVolunteers(List<Volunteer> volunteers) {
-        this.volunteers.setVolunteers(volunteers);
-    }
-
-    /**
-     * Replaces the contents of the event list with {@code events}.
-     * {@code events} must not contain duplicate events.
-     */
-    public void setEvents(List<Event> events) {
-        this.events.setEvents(events);
-    }
-
-    /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this AddressBook with {@code newData}.
+     *
+     * @param newData The new data to be copied.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
-        setVolunteers(newData.getVolunteerList());
-        setEvents(newData.getEventList());
-    }
-
-    //// volunteer-level operations
-
-    /**
-     * Returns true if a volunteer with the same identity as {@code volunteer} exists in the volunteer book.
-     */
-    public boolean hasVolunteer(Volunteer volunteer) {
-        requireNonNull(volunteer);
-        return volunteers.contains(volunteer);
+        volunteerManager.setVolunteers(newData.getVolunteerList());
+        eventManager.setEvents(newData.getEventList());
     }
 
     /**
-     * Adds a volunteer to the volunteer book.
-     * The volunteer must not already exist in the volunteer book.
+     * Adds a volunteer to the volunteer manager.
      */
-    public void addVolunteer(Volunteer v) {
-        volunteers.add(v);
+    public void addVolunteer(Volunteer volunteer) {
+        volunteerManager.addVolunteer(volunteer);
     }
 
     /**
@@ -103,122 +58,68 @@ public class AddressBook implements ReadOnlyAddressBook {
      * existing volunteer in the volunteer book.
      */
     public void setVolunteer(Volunteer target, Volunteer editedVolunteer) {
-        requireNonNull(editedVolunteer);
-
-        volunteers.setVolunteer(target, editedVolunteer);
+        volunteerManager.setVolunteer(target, editedVolunteer);
     }
 
     /**
-     * Removes {@code key} from this {@code VolunteerBook}.
-     * {@code key} must exist in the volunteer book.
+     * Removes a volunteer and unassign them from all events.
      */
-    public void removeVolunteer(Volunteer key) {
-        events.removeParticipant(key.getName().fullName);
-        volunteers.remove(key);
+    public void removeVolunteer(Volunteer volunteer) {
+        volunteerManager.removeVolunteer(volunteer);
+        eventManager.unassignVolunteerFromAllEvents(volunteer);
     }
-    //// event level operations
+
+    /**
+     * Returns true if a volunteer with the same identity as {@code volunteer} exists in the volunteer book.
+     */
+    public boolean hasVolunteer(Volunteer volunteer) {
+        return volunteerManager.hasVolunteer(volunteer);
+    }
+
+    /**
+     * Adds an event to the event manager.
+     */
+    public void addEvent(Event event) {
+        eventManager.addEvent(event);
+    }
+
+    /**
+     * Removes an event and unassign all volunteers from it.
+     */
+    public void removeEvent(Event event) {
+        volunteerManager.unassignEventFromAllVolunteers(event);
+        eventManager.removeEvent(event);
+    }
 
     /**
      * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
     public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return events.contains(event);
-    }
-
-    /**
-     * Adds an event to the address book.
-     * The event must not already exist in the address book.
-     */
-    public void addEvent(Event event) {
-        events.add(event);
-    }
-
-    /**
-     * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
-     *
-     * NOTE: This method is used for editing events, which is NOT SUPPORTED YET
-     * Wei Kiat Note: Renamed this due to style errors
-     */
-    public void setEventsTbd(Event target, Event editedEvent) {
-        requireNonNull(editedEvent);
-
-        events.setEvent(target, editedEvent);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeEvent(Event key) {
-        volunteers.removeEvent(key.getName().toString());
-        events.remove(key);
+        return eventManager.hasEvent(event);
     }
 
     /**
      * Assigns a volunteer to an event.
-     * @param v Volunteer to be assigned.
-     * @param e Event to be assigned to.
-     * @throws DuplicateAssignException if the volunteer is already assigned to the event.
      */
-    public void assignVolunteerToEvent(Volunteer v, Event e) throws DuplicateAssignException {
-        // Store the names to avoid duplication
-        String volunteerName = v.getName().fullName;
-        String eventName = e.getName().toString();
-        // Check if the volunteer is already assigned to the event
-        if (e.getVolunteers().contains(volunteerName)) {
-            throw new DuplicateAssignException();
-        }
-        // Check if the event is already in the volunteer's list
-        if (v.getEvents().contains(eventName)) {
-            throw new DuplicateAssignException();
-        }
-        // Add the event and volunteer association
-        v.addEvent(eventName);
-        e.assignVolunteer(volunteerName);
+    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException {
+        eventManager.assignVolunteerToEvent(volunteer, event);
+        volunteerManager.assignEventToVolunteer(volunteer, event);
     }
 
     /**
-     * Unassigns a volunteer from an event.
-     * @param v Volunteer to be unassigned.
-     * @param e Event to be unassigned from.
-     * @throws NotAssignedException if the volunteer is not assigned to the event.
+     * Unassign a volunteer from an event.
      */
-    public void unassignVolunteerFromEvent(Volunteer v, Event e) throws NotAssignedException {
-        // Store the names to avoid duplication
-        String volunteerName = v.getName().toString();
-        String eventName = e.getName().toString();
-        // Check if the volunteer is not assigned to the event
-        if (!e.getVolunteers().contains(volunteerName)) {
-            throw new NotAssignedException();
-        }
-        if (!v.getEvents().contains(eventName)) {
-            throw new NotAssignedException();
-        }
-        // Remove the volunteer and event association
-        v.removeEvent(eventName);
-        e.unassignVolunteer(volunteerName);
+    public void unassignVolunteerFromEvent(Volunteer volunteer, Event event) throws NotAssignedException {
+        eventManager.unassignVolunteerFromEvent(volunteer, event);
+        volunteerManager.unassignEventFromVolunteer(volunteer, event);
     }
 
-    //// util methods
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("volunteers", volunteers)
-                .add("events", events)
-                .toString();
-    }
-
-    @Override
     public ObservableList<Volunteer> getVolunteerList() {
-        return volunteers.asUnmodifiableObservableList();
+        return volunteerManager.getVolunteers().asUnmodifiableObservableList();
     }
 
-    @Override
     public ObservableList<Event> getEventList() {
-        return events.asUnmodifiableObservableList();
+        return eventManager.getEvents().asUnmodifiableObservableList();
     }
 
     @Override
@@ -227,17 +128,21 @@ public class AddressBook implements ReadOnlyAddressBook {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof handles nulls and ensures the correct type
         if (!(other instanceof AddressBook)) {
             return false;
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return volunteers.equals(otherAddressBook.volunteers) && events.equals(otherAddressBook.events);
+
+        // Compare the volunteerManager and eventManager directly
+        return volunteerManager.equals(otherAddressBook.volunteerManager)
+                && eventManager.equals(otherAddressBook.eventManager);
     }
 
     @Override
     public int hashCode() {
-        return events.hashCode() + volunteers.hashCode();
+        return volunteerManager.hashCode() * 31 + eventManager.hashCode();
     }
+
 }
