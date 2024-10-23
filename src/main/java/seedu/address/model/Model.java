@@ -156,6 +156,11 @@ public interface Model {
     String listAssignments();
 
     /**
+     * Replaces assignment data with the data in {@code assignments}.
+     */
+    void setAssignments(AssignmentList assignments);
+
+    /**
      * Delete the specified tutorial class.
      * The tutorial class must exist in the tutorial list.
      *
@@ -181,5 +186,10 @@ public interface Model {
      * @param tutorialId The tutorial class that student will be assigned to.
      */
     void assignStudent(Student student, TutorialId tutorialId);
+
+    /**
+     * Replaces tutorial data with the data in {@code tutorials}.
+     */
+    void setTutorials(TutorialList tutorials);
 
 }
