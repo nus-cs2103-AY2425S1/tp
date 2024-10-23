@@ -349,6 +349,13 @@
     -fx-border-radius: 4px !important;
     -fx-background-radius: 4px !important;
 }
+.tag-supplier {
+    -fx-background-color: green !important;
+    -fx-text-fill: white !important;
+    -fx-padding: 2px 5px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+}
 
 #tags .label {
     -fx-text-fill: white;

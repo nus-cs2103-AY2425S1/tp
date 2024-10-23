@@ -60,9 +60,9 @@ public class PersonCard extends UiPart<Region> {
                     // Apply the CSS class for "customer" tag
                     if (tag.tagName.equals("customer")) {
                         tagLabel.getStyleClass().add("tag-customer");  // Ensure that the "tag-customer" style is defined in your CSS
-                        System.out.println("Applied style class to customer tag: " + tagLabel.getStyleClass());
-                    }
-
+                    } else if (tag.tagName.equals("supplier")) {
+                            tagLabel.getStyleClass().add("tag-supplier");
+                        }
                     tags.getChildren().add(tagLabel);
                 });
     }
