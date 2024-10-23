@@ -27,7 +27,6 @@ public class CreateTaskCommand extends Command {
             + PREFIX_TASK + "deadline Submit proposal /by 2024-10-31";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
     private final HashSet<Task> tasksToAdd;

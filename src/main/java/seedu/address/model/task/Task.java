@@ -64,23 +64,6 @@ public class Task {
     }
 
     /**
-     * Returns the presence of the given keyword within the description.
-     * "true" if the keyword is present, "false" if the keyword is not.
-     *
-     * @param keyword The supplied keyword string.
-     * @return The boolean indicating presence of the keyword
-     */
-    public boolean hasKeyword(String keyword) {
-        String[] descriptionArray = description.split(" ");
-        for (String word : descriptionArray) {
-            if (word.equals(keyword)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns the presence of the given keyword if it is
      * within a partial/full word in the description, case-insensitive.
      * "true" if the keyword is present, "false" if the keyword is not.

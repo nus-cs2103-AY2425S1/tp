@@ -30,17 +30,17 @@ public class SampleDataUtil {
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"),
                 getWeddingSet("Casey's Wedding"),
-                getTaskSet("Finalize Catering Menu")),
+                getTaskSet("todo: Finalize Catering Menu")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"),
                 getWeddingSet(),
-                getTaskSet("Set Up Venue Decorations")),
+                getTaskSet("todo: Set Up Venue Decorations")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"),
                 getWeddingSet("Wedding August 2029", "Wedding 2"),
-                getTaskSet("Send invitations")),
+                getTaskSet("todo: Send invitations")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"),
@@ -50,12 +50,12 @@ public class SampleDataUtil {
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"),
                 getWeddingSet("Casey's Wedding"),
-                getTaskSet("Schedule Hair and Makeup Trials")),
+                getTaskSet("deadline: Schedule Hair and Makeup Trials")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"),
                 getWeddingSet("Wedding 10"),
-                getTaskSet("Schedule Hair and Makeup Trials"))
+                getTaskSet("event: Schedule Hair and Makeup Trials"))
         };
     }
 

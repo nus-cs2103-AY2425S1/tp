@@ -49,6 +49,10 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    // =======================================================================
+    // Person Parsing Methods
+    // =======================================================================
+
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
@@ -133,6 +137,10 @@ public class ParserUtil {
         return tagSet;
     }
 
+    // =======================================================================
+    // Task Parsing Methods
+    // =======================================================================
+
     /**
      * Parses a task description to determine the task type and details.
      *
@@ -174,6 +182,7 @@ public class ParserUtil {
      */
     private static ParsedTask parseTaskTypeAndDetails(String taskDescription) throws ParseException {
         requireNonNull(taskDescription);
+        // Splits the descriptions into a maximum of 2 tokens, based on first whitespace present
         String[] tokens = taskDescription.split("\\s+", 2);
 
         if (tokens.length < 2) {
@@ -186,11 +195,23 @@ public class ParserUtil {
         return new ParsedTask(taskType, taskDetails);
     }
 
-
+    /**
+     * Parses the task details for a "Todo" task and returns a {@code Todo} object.
+     *
+     * @param taskDetails The task details to parse.
+     * @return A Todo object.
+     */
     private static Todo parseTodoTask(String taskDetails) {
         return new Todo(taskDetails.trim());
     }
 
+    /**
+     * Parses the task details for a "Deadline" task and returns a {@code Deadline} object.
+     *
+     * @param taskDetails The task details to parse.
+     * @return A Deadline object.
+     * @throws ParseException if the format is invalid.
+     */
     private static Deadline parseDeadlineTask(String taskDetails) throws ParseException {
         String[] deadlineParts = taskDetails.split("/by ", 2);
         // Check if both description and deadline are present
@@ -204,6 +225,13 @@ public class ParserUtil {
         return new Deadline(description, byDate);
     }
 
+    /**
+     * Parses the task details for an "Event" task and returns an {@code Event} object.
+     *
+     * @param taskDetails The task details to parse.
+     * @return An Event object.
+     * @throws ParseException if the format is invalid.
+     */
     private static Event parseEventTask(String taskDetails) throws ParseException {
         String[] eventParts = taskDetails.split("/from", 2);
         if (eventParts.length < 2 || !eventParts[1].contains("/to")) {
@@ -211,11 +239,11 @@ public class ParserUtil {
         }
         String description = eventParts[0].trim();
         String[] dateParts = eventParts[1].split("/to", 2);
-        String startDateStr = dateParts[0].trim();
-        String endDateStr = dateParts[1].trim();
-        validateDateFormat(startDateStr, endDateStr);
+        String startDate = dateParts[0].trim();
+        String endDate = dateParts[1].trim();
+        validateDateFormat(startDate, endDate);
 
-        return new Event(description, startDateStr, endDateStr);
+        return new Event(description, startDate, endDate);
     }
 
     /**
@@ -251,8 +279,9 @@ public class ParserUtil {
         }
     }
 
-
-
+    // =======================================================================
+    // Wedding Parsing Methods
+    // =======================================================================
 
     /**
      * Parses {@code String} wedding into {@code Wedding} object.
