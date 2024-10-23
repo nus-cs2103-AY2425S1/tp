@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -25,6 +27,7 @@ class JsonAdaptedStatus {
      * Converts a given {@code Status} into a {@code JsonAdaptedStatus} for Jackson use.
      */
     public JsonAdaptedStatus(Status source) {
+        requireNonNull(source);
         status = source.toParsableString();
     }
 

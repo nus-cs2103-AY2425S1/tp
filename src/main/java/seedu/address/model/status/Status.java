@@ -33,6 +33,7 @@ public class Status {
      * Returns true if a given string is a valid status value.
      *
      * @param test The string to be tested
+     * @return A boolean value that checks if a given string, belongs to one of the valid status enum values
      */
     public static boolean isValidStatus(String test) {
         if (test.isEmpty()) {
