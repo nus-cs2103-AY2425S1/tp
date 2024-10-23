@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_1;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDoctorCommand;
 import seedu.address.logic.commands.AddPatientCommand;
@@ -25,10 +27,13 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Time;
 import seedu.address.model.doctor.Doctor;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.shared.Date;
 import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
@@ -48,9 +53,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addDoctor() throws Exception {
-        Doctor patient = new DoctorBuilder().build();
-        AddDoctorCommand command = new AddDoctorCommand(patient);
-        assertEquals(new AddDoctorCommand(patient), command);
+        Doctor doctor = new DoctorBuilder().build();
+        AddDoctorCommand command = new AddDoctorCommand(doctor);
+        assertEquals(new AddDoctorCommand(doctor), command);
     }
 
     @Test
@@ -58,6 +63,16 @@ public class AddressBookParserTest {
         Patient patient = new PatientBuilder().build();
         AddPatientCommand command = new AddPatientCommand(patient);
         assertEquals(new AddPatientCommand(patient), command);
+    }
+
+    @Test
+    public void parseCommand_addAppointment() throws Exception {
+        Name patientName = APPOINTMENT_1.getPatient().getName();
+        Name doctorName = APPOINTMENT_1.getDoctor().getName();
+        Date date = APPOINTMENT_1.getDate();
+        Time time = APPOINTMENT_1.getTime();
+        AddAppointmentCommand command = new AddAppointmentCommand(patientName, doctorName, date, time);
+        assertEquals(new AddAppointmentCommand(patientName, doctorName, date, time), command);
     }
 
     @Test
