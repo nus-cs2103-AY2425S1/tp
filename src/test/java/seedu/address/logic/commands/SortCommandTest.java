@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_HOURS_NO_VOLUNTEERS;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -91,7 +91,10 @@ public class SortCommandTest {
 
         SortCommand sortCommand = new SortCommand(SortOption.HOURS);
 
-        assertCommandSuccess(sortCommand, model, MESSAGE_SORT_HOURS_NO_VOLUNTEERS, expectedModel);
+        String entityType = "Volunteer";
+        String expectedMessage = String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND, entityType.toLowerCase());
+
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
 
         // Check that the list remains unsorted (original order)
         ObservableList<Person> actualList = model.getPersonList();

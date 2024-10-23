@@ -26,10 +26,11 @@ public class SortCommand extends Command {
     public static final String MESSAGE_DEFAULT_SUCCESS = "Sorted by default order";
     public static final String MESSAGE_SORT_SUCCESS = "Sorted by %s";
     public static final String MESSAGE_UNSUPPORTED_SORT_OPTION = "Unsupported sort option: %s";
-    public static final String MESSAGE_SORT_HOURS_WITH_NON_VOLUNTEERS =
-            "Volunteers sorted by hours contributed. Non-volunteers are listed after volunteers.";
-    public static final String MESSAGE_SORT_HOURS_NO_VOLUNTEERS =
-            "No volunteers found. The list remains unsorted.";
+
+    public static final String MESSAGE_SORT_BY_ROLE_CRITERIA_WITH_OTHERS =
+            "%1$ss sorted by %2$s. Non-%3$ss are listed after %3$ss.";
+    public static final String MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND =
+            "No %ss found. The list remains unsorted.";
 
     private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
 
@@ -81,10 +82,9 @@ public class SortCommand extends Command {
     }
 
     /**
-     * Resets the person list to its default order (insertion order).
+     * Creates a {@code CommandResult} indicating that the list has been sorted to its default order (insertion order).
      *
-     * @param model The model on which to clear the sort.
-     * @return A CommandResult indicating that the list has been sorted in the default order.
+     * @return A {@code CommandResult}
      */
     private static CommandResult executeDefaultSort(Model model) {
         return new CommandResult(MESSAGE_DEFAULT_SUCCESS);
@@ -97,8 +97,7 @@ public class SortCommand extends Command {
      * @return A CommandResult indicating that the list has been sorted by name.
      */
     private CommandResult executeSortByName(Model model) {
-        assert sortOption != null;
-        model.updatePersonListSort(sortOption.getComparator());
+        updateSort(model);
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, sortOption));
     }
 
@@ -115,18 +114,35 @@ public class SortCommand extends Command {
      *         - If there are no volunteers, the list remains unsorted.
      */
     private CommandResult executeSortByHours(Model model) {
+        String entityType = "Volunteer";
+        String sortCriterion = "hours contributed";
+
         if (!model.hasPersonsOfType(Volunteer.class)) {
-            return new CommandResult(MESSAGE_SORT_HOURS_NO_VOLUNTEERS);
+            return new CommandResult(String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND,
+                    entityType.toLowerCase()));
         }
 
-        assert sortOption != null;
-        model.updatePersonListSort(sortOption.getComparator());
+        updateSort(model);
 
         if (model.hasOnlyPersonsOfType(Volunteer.class)) {
             return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, sortOption));
         } else {
-            return new CommandResult(MESSAGE_SORT_HOURS_WITH_NON_VOLUNTEERS);
+            return new CommandResult(String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_WITH_OTHERS,
+                    entityType, sortCriterion, entityType.toLowerCase()));
         }
+    }
+
+    /**
+     * Updates the sorting of the person list in the given {@code Model} based on the current {@code SortOption}.
+     *
+     * This method retrieves the appropriate comparator from the {@code SortOption} and applies it to
+     * the person list in the {@code Model} to update the sorting order.
+     *
+     * @param model The model containing the person list to be sorted. Must not be null.
+     */
+    private void updateSort(Model model) {
+        assert sortOption != null;
+        model.updatePersonListSort(sortOption.getComparator());
     }
 
     @Override
