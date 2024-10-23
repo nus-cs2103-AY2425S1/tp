@@ -28,7 +28,8 @@ public class ClaimSet implements Set<Claim> {
      */
     private static int hash(String description) {
         requireNonNull(description);
-        return description.hashCode() % size;
+        // Ensure a non-negative index, even for Integer.MIN_VALUE.
+        return (description.hashCode() & Integer.MAX_VALUE) % size;
     }
 
     /**
