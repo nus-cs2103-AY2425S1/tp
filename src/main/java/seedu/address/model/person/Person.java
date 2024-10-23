@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -100,6 +101,34 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getId().equals(getId());
+    }
+
+    /**
+     * Returns the start time of the person's appointment if it exists.
+     *
+     * @return the start time of the appointment as a {@code LocalDateTime},
+     *         or {@code null} if the person does not have an appointment.
+     */
+    public LocalDateTime getAppointmentStart() {
+        if (this.appointment == null) {
+            return null;
+        }
+
+        return appointment.getStart();
+    }
+
+    /**
+     * Returns the end time of the person's appointment if it exists.
+     *
+     * @return the end time of the appointment as a {@code LocalDateTime},
+     *         or {@code null} if the person does not have an appointment.
+     */
+    public LocalDateTime getAppointmentEnd() {
+        if (this.appointment == null) {
+            return null;
+        }
+
+        return appointment.getEnd();
     }
 
     /**

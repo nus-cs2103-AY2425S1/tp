@@ -1,5 +1,6 @@
 package seedu.address.model.appointment;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.DateUtil.DATE_FORMATTER;
 
 import java.time.LocalDate;
@@ -21,16 +22,20 @@ public class AppointmentContainsDatePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        requireNonNull(person);
         if (person.getAppointment() == null) {
             return false;
         } else if (this.date == null) {
             return true;
         }
 
-        LocalDate startDate = person.getAppointment().getStart().toLocalDate();
-        LocalDate endDate = person.getAppointment().getEnd().toLocalDate();
+        LocalDate startDate = person.getAppointmentStart().toLocalDate();
+        LocalDate endDate = person.getAppointmentEnd().toLocalDate();
 
-        return !this.date.isBefore(startDate) && !this.date.isAfter(endDate);
+        boolean isDateBeforeStart = this.date.isBefore(startDate);
+        boolean isDateAfterEnd = this.date.isAfter(endDate);
+
+        return !isDateBeforeStart && !isDateAfterEnd;
     }
 
     @Override

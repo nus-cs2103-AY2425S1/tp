@@ -137,7 +137,7 @@ public class ModelManager implements Model {
 
     private void initializeAppointmentList() {
         AppointmentContainsDatePredicate predicate = new AppointmentContainsDatePredicate(LocalDate.now());
-        filteredAppointments.setPredicate(predicate);
+        updateFilteredAppointmentList(predicate);
     }
 
     /**
