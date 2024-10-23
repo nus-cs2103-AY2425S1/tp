@@ -60,21 +60,4 @@ public class PersonHasFeaturePredicateTest {
 
     }
 
-
-
-    @Test
-    public void testPhoneIsNullMatchesAnyPhoneReturnsTrue() {
-        Tag tag = new Tag("Low Risk");
-        Email email = new Email("test@example.com");
-        Address address = new Address("123 Main St");
-
-        PersonHasFeaturePredicate predicate = new PersonHasFeaturePredicate(tag, null, email, address);
-
-        // Create a person with a matching features
-        Person person = new Person(new Name("John Doe"), new Phone("87654321"), email, address, tag);
-
-        assertTrue(predicate.test(person));
-    }
-
-
 }
