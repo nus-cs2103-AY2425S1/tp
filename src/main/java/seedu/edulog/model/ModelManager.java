@@ -116,6 +116,14 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Mark all students
+     */
+    @Override
+    public void markAllStudents() {
+        eduLog.markAllStudents();
+    }
+
+    /**
      * Marks the given student as absent.
      * The student must exist in the address book.
      *
@@ -127,6 +135,9 @@ public class ModelManager implements Model {
         eduLog.unmarkStudent(target);
     }
 
+    /**
+     * Unmark all students
+     */
     @Override
     public void unmarkAllStudents() {
         eduLog.unmarkAllStudents();

@@ -72,6 +72,11 @@ public interface Model {
     void markStudent(Student target);
 
     /**
+     * Mark all students
+     */
+    void markAllStudents();
+
+    /**
      * Marks the given student as absent.
      * The student must exist in the address book.
      */

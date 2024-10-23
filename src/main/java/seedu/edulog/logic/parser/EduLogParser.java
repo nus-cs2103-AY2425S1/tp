@@ -20,6 +20,7 @@ import seedu.edulog.logic.commands.ExitCommand;
 import seedu.edulog.logic.commands.FindCommand;
 import seedu.edulog.logic.commands.HelpCommand;
 import seedu.edulog.logic.commands.ListCommand;
+import seedu.edulog.logic.commands.MarkAllCommand;
 import seedu.edulog.logic.commands.MarkCommand;
 import seedu.edulog.logic.commands.UnmarkAllCommand;
 import seedu.edulog.logic.commands.UnmarkCommand;
@@ -76,6 +77,9 @@ public class EduLogParser {
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
+
+        case MarkAllCommand.COMMAND_WORD:
+            return new MarkAllCommand();
 
         case UnmarkCommand.COMMAND_WORD:
             return new UnmarkCommandParser().parse(arguments);
