@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Tuteez Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -137,6 +137,28 @@ The `Model` component,
 </box>
 
 
+**API** : [`LessonManager.java`]()
+
+<puml src="diagrams/LessonManagerClassDiagram.puml" width="450" />
+
+The `LessonManager` component, 
+* stores all the info regarding `Lesson` objects.`LessonManager.dayLessonsMap` is a `HashMap` where keys are `Day`s, intuitively there are only 7 keys in the `HashMap`. One for each day of the week.
+* uses a `TreeSet<Lesson>` as value of `LessonManager.dayLessonMap`. A `TreeSet` is used to maintain ordering of lessons. Lessons are ordered according to `Lesson.startTime`
+* is the main class that determines any overlapping or clashing lessons. Refer to `LessonManager#isClashingWithExistingLesson`
+
+<puml src="diagrams/AddSequenceDiagram.puml" width="1000" />
+
+The diagram above is an example of how abstraction is used for the `AddCommand`. Some `opt` statements and other complexities have been removed but the general flow is clear. 
+* In words, for every lesson a new student has. `LessonManager` checks against existing lessons on the same `Day`. It then calls `Lesson#isClashingWithOtherLesson` which takes two `Lesson` objects are arguments and returns `True` if they clash else `False`
+
+
+
+<box type="info" seamless>
+
+Note: As of `v1.4` clashing lessons are not allowed, hence when a `Person` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
+
+</box>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -147,6 +169,8 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+
 
 ### Common classes
 

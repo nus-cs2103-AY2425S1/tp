@@ -1,0 +1,67 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddCommand" as AddCommand #0000FF
+participant "toAdd:Person" as Person #0000FF
+participant ":CommandResult" as CommandResult #0000FF
+
+[-> AddCommand : execute(model)
+activate AddCommand
+
+box Model MODEL_COLOR_T1
+participant "model: Model" as Model MODEL_COLOR
+participant "ModelManager" as ModelManager MODEL_COLOR
+end box
+
+AddCommand -> Model : hasPerson(toAdd)
+activate Model
+deactivate Model
+
+AddCommand -> Person : getLessons()
+activate Person
+deactivate Person
+
+participant ":AddressBook" as AddressBook #0000FF
+participant ":LessonManager" as LessonManager #0000FF
+participant "<<class>>\nLesson" as Lesson #0000FF
+loop student's lessons
+    AddCommand -> Model : isClashingWithExistingLesson(lesson)
+    activate Model
+        Model -> ModelManager : isClashingWithExistingLesson(lesson)
+        activate ModelManager
+            ModelManager -> AddressBook : isClashingWithExistingLesson(lesson)
+            activate AddressBook
+                AddressBook -> LessonManager : isClashingWithExistingLesson(lesson)
+                activate LessonManager
+                loop lessons on specific day
+                    LessonManager -> Lesson : isClashingWithOtherLesson(lesson, lessonOnDay)
+                    activate Lesson
+                    Lesson --> LessonManager
+                    deactivate Lesson
+                end
+               LessonManager --> AddressBook
+               deactivate LessonManager
+           AddressBook --> ModelManager
+           deactivate AddressBook
+       ModelManager --> Model
+       deactivate ModelManager
+    Model --> AddCommand
+    deactivate Model
+end
+
+AddCommand -> Model : addPerson(toAdd)
+activate Model
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+CommandResult --> AddCommand
+deactivate CommandResult
+[<-- AddCommand
+deactivate AddCommand
+
+
+@enduml
