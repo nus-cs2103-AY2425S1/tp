@@ -66,7 +66,15 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveBaseName = "UniLink"
+    archiveClassifier = null
+    archiveFileName = "UniLink.jar"
+
+    manifest {
+        attributes(
+                'Main-Class': 'seedu.address.MainApp'
+        )
+    }
 }
 
 defaultTasks 'clean', 'test'

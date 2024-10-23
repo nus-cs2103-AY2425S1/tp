@@ -10,11 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,20 +28,23 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
+    private final String telegramHandle;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String contactType;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("telegramHandle") String telegramHandle,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("contactType") String contactType) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.telegramHandle = telegramHandle;
+        this.contactType = contactType;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -53,7 +57,8 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        telegramHandle = source.getTelegramHandle().value;
+        contactType = source.getContactType().value.toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -94,16 +99,27 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (telegramHandle == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TelegramHandle.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
+
+        if (contactType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ContactType.class.getSimpleName()));
+        }
+        if (!ContactType.isValidContactType(contactType)) {
+            throw new IllegalValueException(ContactType.MESSAGE_CONSTRAINTS);
+        }
+        final ContactType modelContactType = new ContactType(contactType);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle, modelTags);
+
     }
 
 }
