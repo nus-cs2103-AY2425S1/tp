@@ -11,7 +11,8 @@ import seedu.address.model.Model;
 public class ConfirmCommand extends Command {
     public static final String COMMAND_WORD = "confirm";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Confirms the operation the user tries to do.\n"
-            + "After the user has entered a important command (delete/clear), the user can confirm the command by typing 'confirm'.\n"
+            + "After the user has entered a important command (delete/clear), the user can confirm the command by "
+            + "typing 'confirm'.\n"
             + "Example: " + COMMAND_WORD;
 
     @Override
