@@ -19,7 +19,8 @@ public class IdentityNumber {
     public static final char[] IDENTITY_NUMBER_FIN_SUFFIX = {'X' , 'W', 'U', 'T', 'R', 'Q', 'P', 'N', 'M', 'L', 'K'};
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Message Constraints not yet Implemented";
+            "NRIC must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits,"
+            + "and ending with a checksum letter (e.g., S1234567D).";
 
     public final String identificationNumber;
 

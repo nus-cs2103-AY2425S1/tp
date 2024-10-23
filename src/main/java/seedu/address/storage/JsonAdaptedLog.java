@@ -13,7 +13,7 @@ import seedu.address.model.log.Log;
 /**
  * Jackson-friendly version of {@link Log}.
  */
-class JsonAdaptedLog {
+public class JsonAdaptedLog {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Log's %s field is missing!";
 
@@ -24,8 +24,8 @@ class JsonAdaptedLog {
      * Constructs a {@code JsonAdaptedLog} with the given log details.
      */
     @JsonCreator
-    public JsonAdaptedLog(@JsonProperty("entry") String entry,
-        @JsonProperty("appointmentDate") String appointmentDate) {
+    public JsonAdaptedLog(@JsonProperty("appointmentDate") String appointmentDate,
+                          @JsonProperty("entry") String entry) {
         this.entry = entry;
         this.appointmentDate = appointmentDate;
     }
@@ -36,7 +36,7 @@ class JsonAdaptedLog {
     public JsonAdaptedLog(Log source) {
         entry = source.getEntry();
         // Convert AppointmentDate to string
-        appointmentDate = source.getAppointmentDate(); // Assuming getAppointmentDate() returns the formatted string
+        appointmentDate = source.getAppointmentDate().toString();
     }
 
     /**

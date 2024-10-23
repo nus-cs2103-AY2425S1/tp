@@ -32,7 +32,8 @@ public class TypicalPersons {
             .withPhone("94351253").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withIdentityNumber("S6642654H")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withLogs("19 Oct 2024|Doctor's Appointment").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withIdentityNumber("S9844952C")
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withIdentityNumber("S6914918I")
