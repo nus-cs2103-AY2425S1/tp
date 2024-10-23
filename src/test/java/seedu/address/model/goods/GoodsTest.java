@@ -34,14 +34,14 @@ public class GoodsTest {
     }
 
     @Test
-    public void sameGoods_success() {
+    public void equals_sameGoods_success() {
         Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
         Goods otherGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
         assertEquals(testGoods, otherGoods);
     }
 
     @Test
-    public void differentGoods_failure() {
+    public void equals_differentGoods_failure() {
         Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
         Goods otherGoods = new Goods(new GoodsName("Other Bread"), GoodsCategories.CONSUMABLES);
         assertNotEquals(testGoods, otherGoods);
