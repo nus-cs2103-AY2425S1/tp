@@ -26,7 +26,7 @@ public class AssignVendorCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$s has been added as a vendor.";
 
-    public static final String MESSAGE_DUPLICATE_VENDOR = "This person is already a vendor.";
+    public static final String MESSAGE_DUPLICATE_VENDOR = "%1$s is already a vendor.";
 
     private final Index targetIndex;
 
@@ -51,9 +51,9 @@ public class AssignVendorCommand extends Command {
 
         Person personToAssign = lastShownList.get(targetIndex.getZeroBased());
 
-        // need to change to check if model has the vendor already existing
+        // need to change to check if model already has vendor
         if (model.hasVendor(personToAssign)) {
-            throw new CommandException(MESSAGE_DUPLICATE_VENDOR);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
         }
 
         model.assignVendor(personToAssign);
