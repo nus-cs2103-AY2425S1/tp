@@ -36,6 +36,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.MarkPresentAllCommand;
+import seedu.address.logic.commands.UnmarkPresentAllCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -195,6 +196,16 @@ public class AddressBookParserTest {
         MarkPresentAllCommand command = (MarkPresentAllCommand) parser.parseCommand(MarkPresentAllCommand.COMMAND_WORD
                 + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " " + PREFIX_DATE + date);
         assertEquals(new MarkPresentAllCommand(tutorialGroup, date), command);
+    }
+
+    @Test
+    public void parseCommand_unmarkPresentAll() throws Exception {
+        TutorialGroup tutorialGroup = DIDDY.getTutorialGroup();
+        LocalDate date = LocalDate.of(2024, 10, 23);
+        UnmarkPresentAllCommand command = (UnmarkPresentAllCommand) parser.parseCommand(
+                UnmarkPresentAllCommand.COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " "
+                        + PREFIX_DATE + date);
+        assertEquals(new UnmarkPresentAllCommand(tutorialGroup, date), command);
     }
 
 
