@@ -87,6 +87,7 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     void addCourse(Course course);
+    void setCourse(Course target, Course editedCourse);
     void deleteCourse(Course course);
     boolean hasCourse(Course course);
 

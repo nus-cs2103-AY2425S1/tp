@@ -71,7 +71,7 @@ public class EditCourseCommand extends Command {
         Course courseToEdit = courseList.getCourseWithCourseCode(courseCode);
         Course editedCourse = createEditedCourse(courseToEdit, editCourseDescriptor);
 
-//        model.setCourse(courseToEdit, editedCourse);
+        model.setCourse(courseToEdit, editedCourse);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_COURSE_SUCCESS, Messages.format(editedCourse)));
     }
