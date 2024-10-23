@@ -76,4 +76,22 @@ public class DeleteAppointmentCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, appointment));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // Check if it's the same object
+        if (other == this) {
+            return true;
+        }
+
+        // Check if the other object is an instance of AddAppointmentCommand
+        if (!(other instanceof DeleteAppointmentCommand)) {
+            return false;
+        }
+
+        // Cast and check if the fields are equal
+        DeleteAppointmentCommand otherCommand = (DeleteAppointmentCommand) other;
+        return patientNric.equals(otherCommand.patientNric)
+                && startDateTime.equals(otherCommand.startDateTime);
+    }
+
 }

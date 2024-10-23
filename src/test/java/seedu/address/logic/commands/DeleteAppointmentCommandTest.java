@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
@@ -67,6 +69,31 @@ public class DeleteAppointmentCommandTest {
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_NO_APPOINTMENT);
 
         assertCommandFailure(deleteAppointmentCommand, modelStub, expectedMessage);
+    }
+
+    @Test
+    public void equals() {
+        DeleteAppointmentCommand deleteAppointmentCommand1 = new DeleteAppointmentCommand(VALID_NRIC,
+            VALID_DATE, VALID_START_TIME);
+        DeleteAppointmentCommand deleteAppointmentCommand2 = new DeleteAppointmentCommand(VALID_NRIC,
+            VALID_DATE, VALID_START_TIME);
+
+        // same object -> returns true
+        assertTrue(deleteAppointmentCommand1.equals(deleteAppointmentCommand1));
+
+        // same values -> returns true
+        assertTrue(deleteAppointmentCommand1.equals(deleteAppointmentCommand2));
+
+        // different types -> returns false
+        assertFalse(deleteAppointmentCommand1.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteAppointmentCommand1.equals(null));
+
+        // different appointment -> returns false
+        DeleteAppointmentCommand deleteAppointmentCommand3 = new DeleteAppointmentCommand(VALID_NRIC,
+            VALID_DATE, LocalTime.of(12, 0));
+        assertFalse(deleteAppointmentCommand1.equals(deleteAppointmentCommand3));
     }
 
 }
