@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_FAILURE;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_FILE_EXISTS;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_HOME_FILE_EXISTS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -139,64 +140,6 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void execute_normalExport_success() throws CommandException, IOException {
-        // Add a sample student to the model
-        Student sampleStudent = createSampleStudent();
-        model.addStudent(sampleStudent);
-
-        String filename = "test";
-        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
-
-        // Track files for cleanup
-        Path dataFile = dataDir.resolve(filename + ".csv");
-        Path homeFile = homeDir.resolve(filename + ".csv");
-        filesToCleanup.add(dataFile);
-        filesToCleanup.add(homeFile);
-
-        CommandResult result = exportCommand.execute(model);
-
-        // Verify success message
-        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS_WITH_COPY,
-                1, dataFile, homeFile);
-        assertEquals(expectedMessage, result.getFeedbackToUser());
-
-        // Verify file contents
-        verifyExportedFileContent(dataFile, sampleStudent);
-        verifyExportedFileContent(homeFile, sampleStudent);
-    }
-
-    @Test
-    public void execute_fileExistsWithForceFlag_success() throws CommandException, IOException {
-        // Add a sample student to the model
-        Student sampleStudent = createSampleStudent();
-        model.addStudent(sampleStudent);
-
-        String filename = "test";
-        Path dataFile = dataDir.resolve(filename + ".csv");
-        Path homeFile = homeDir.resolve(filename + ".csv");
-
-        // Create existing files
-        Files.createFile(dataFile);
-        Files.createFile(homeFile);
-
-        // Track files for cleanup
-        filesToCleanup.add(dataFile);
-        filesToCleanup.add(homeFile);
-
-        ExportCommand exportCommand = new ExportCommand(filename, true, dataDir);
-        CommandResult result = exportCommand.execute(model);
-
-        // Verify success message
-        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS_WITH_COPY,
-                1, dataFile, homeFile);
-        assertEquals(expectedMessage, result.getFeedbackToUser());
-
-        // Verify file contents
-        verifyExportedFileContent(dataFile, sampleStudent);
-        verifyExportedFileContent(homeFile, sampleStudent);
-    }
-
-    @Test
     public void execute_fileExistsWithoutForceFlag_throwsCommandException() throws IOException {
         String filename = "test";
         Path dataFile = dataDir.resolve(filename + ".csv");
@@ -207,57 +150,6 @@ public class ExportCommandTest {
 
         String expectedMessage = String.format(MESSAGE_FILE_EXISTS, dataFile);
         assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
-    }
-
-    @Test
-    public void execute_homeFileExistsWithoutForceFlag_throwsCommandException() throws IOException {
-        String filename = "test";
-        Path homeFile = homeDir.resolve(filename + ".csv");
-        Files.createFile(homeFile);
-        filesToCleanup.add(homeFile);
-
-        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
-
-        String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, homeFile);
-        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
-    }
-
-    @Test
-    public void execute_homeDirectoryCopyFails_returnsSuccessWithDataFileOnly() throws Exception {
-        // Add a sample student
-        Student sampleStudent = createSampleStudent();
-        model.addStudent(sampleStudent);
-
-        String filename = "test";
-        Path dataFile = dataDir.resolve(filename + ".csv");
-        filesToCleanup.add(dataFile);
-
-        // Create a read-only home directory to force copy failure
-        Path testHomeDir = temporaryFolder.resolve("home");
-        Files.createDirectories(testHomeDir);
-        testHomeDir.toFile().setReadOnly();
-
-        // Create command with test home directory
-        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
-            @Override
-            protected Path getHomeFilePath(String filename) {
-                return testHomeDir.resolve(filename + ".csv");
-            }
-        };
-
-        CommandResult result = exportCommand.execute(model);
-
-        // Verify success message only mentions data file
-        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS,
-                1, dataFile);
-        assertEquals(expectedMessage, result.getFeedbackToUser());
-
-        // Verify data file exists and contains correct content
-        assertTrue(Files.exists(dataFile));
-        verifyExportedFileContent(dataFile, sampleStudent);
-
-        // Clean up: Reset directory permissions
-        testHomeDir.toFile().setWritable(true);
     }
 
     // You may also want to add a direct test for getHomeFilePath
@@ -291,5 +183,195 @@ public class ExportCommandTest {
                         .map(course -> course.toString())
                         .collect(Collectors.joining(";")));
         assertEquals(expectedLine, lines.get(1));
+    }
+
+    @Test
+    public void execute_homeDirectoryCopyFails_returnsSuccessWithDataFileOnly() throws Exception {
+        // Add a sample student
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        filesToCleanup.add(dataFile);
+
+        // Instead of using file permissions, simulate IO failure using a custom ExportCommand
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                // Return a non-existent directory path that will cause an IOException
+                return temporaryFolder.resolve("nonexistent").resolve("directory").resolve(filename + ".csv");
+            }
+        };
+
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message only mentions data file
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS,
+                1, dataFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify data file exists and contains correct content
+        assertTrue(Files.exists(dataFile));
+        verifyExportedFileContent(dataFile, sampleStudent);
+    }
+
+    @Test
+    public void execute_normalExport_success() throws CommandException, IOException {
+        // Add a sample student to the model
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+
+        // Use a subdirectory in the temporary folder instead of actual home directory
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+
+        filesToCleanup.add(dataFile);
+        filesToCleanup.add(homeFile);
+
+        // Create command with custom home directory
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS_WITH_COPY,
+                1, dataFile, homeFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify file contents
+        verifyExportedFileContent(dataFile, sampleStudent);
+        verifyExportedFileContent(homeFile, sampleStudent);
+    }
+
+    @Test
+    public void execute_fileExistsWithForceFlag_success() throws CommandException, IOException {
+        // Add a sample student to the model
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+
+        // Use a subdirectory in the temporary folder instead of actual home directory
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+
+        // Create existing files
+        Files.createFile(dataFile);
+        Files.createFile(homeFile);
+
+        // Track files for cleanup
+        filesToCleanup.add(dataFile);
+        filesToCleanup.add(homeFile);
+
+        // Create command with custom home directory
+        ExportCommand exportCommand = new ExportCommand(filename, true, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS_WITH_COPY,
+                1, dataFile, homeFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify file contents
+        verifyExportedFileContent(dataFile, sampleStudent);
+        verifyExportedFileContent(homeFile, sampleStudent);
+    }
+
+    @Test
+    public void execute_homeFileExistsWithoutForceFlag_throwsCommandException() throws IOException {
+        String filename = "test";
+
+        // Use a subdirectory in the temporary folder instead of actual home directory
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+        Files.createFile(homeFile);
+        filesToCleanup.add(homeFile);
+
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, homeFile);
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
+    }
+
+    // Add these test methods to your ExportCommandTest class
+
+    @Test
+    public void execute_fileAlreadyExistsInHomeAndCleanupFails() throws IOException {
+        // Setup test files
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+
+        // Create the file in home directory to trigger FileAlreadyExistsException
+        Files.createFile(homeFile);
+        filesToCleanup.add(homeFile);
+
+        // Create a command that will encounter FileAlreadyExistsException
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        try {
+            exportCommand.execute(model);
+            fail("Expected CommandException was not thrown");
+        } catch (CommandException e) {
+            assertEquals(String.format(MESSAGE_HOME_FILE_EXISTS, homeFile), e.getMessage());
+            assertFalse(Files.exists(dataFile), "Data file should be cleaned up");
+        }
+    }
+
+    @Test
+    public void execute_writingToDataFileThrowsIoException() throws IOException {
+        String filename = "test";
+
+        // Create a read-only data directory to force IOException during write
+        Files.createDirectories(dataDir);
+        dataDir.toFile().setReadOnly();
+
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+
+        try {
+            exportCommand.execute(model);
+            fail("Expected CommandException was not thrown");
+        } catch (CommandException e) {
+            assertTrue(e.getMessage().contains(MESSAGE_FAILURE));
+        } finally {
+            // Reset directory permissions for cleanup
+            dataDir.toFile().setWritable(true);
+        }
+    }
+
+    // Add this helper method if not already present
+    private void fail(String message) {
+        throw new AssertionError(message);
     }
 }
