@@ -1,4 +1,4 @@
-package seedu.address.model.student;
+package seedu.address.model.attendance;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}.
  */
 public class Attendance {
-    public static final String MESSAGE_CONSTRAINTS = "Attendance status must be either 'present' or 'absent'";
+    public static final String MESSAGE_CONSTRAINTS = "Attendance status must be either 'p' or 'a'";
 
     // Valid attendance statuses
-    public static final String VALIDATION_REGEX = "^(present|absent)$";
+    public static final String VALIDATION_REGEX = "^(p|a)$";
 
     public final String value;
     /**
@@ -31,7 +31,7 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return value;
+        return value.equals("p") ? "Present" : "Absent";
     }
 
     @Override

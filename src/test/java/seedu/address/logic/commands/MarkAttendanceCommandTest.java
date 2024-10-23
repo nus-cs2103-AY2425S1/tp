@@ -18,9 +18,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -32,20 +32,20 @@ public class MarkAttendanceCommandTest {
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         modelStub.addStudent(validStudent);
 
-        Attendance attendance = new Attendance("present");
+        Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
         MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
 
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(), "present", date),
-                result.getFeedbackToUser());
+        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(),
+                        validStudent.getTutorialGroup(), attendance, date), result.getFeedbackToUser());
     }
 
     @Test
     public void execute_studentNotFound_throwsCommandException() {
         ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
-        Attendance attendance = new Attendance("present");
+        Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
         MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
 

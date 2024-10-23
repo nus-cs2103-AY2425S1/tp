@@ -49,7 +49,6 @@ public class DeleteStudentCommand extends Command {
         if (studentToDelete == null) {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
-
         model.deleteStudent(studentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS) + studentToDelete.getName());
     }

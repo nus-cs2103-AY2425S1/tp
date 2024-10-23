@@ -18,12 +18,11 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Phone;
-import seedu.address.model.student.Attendance;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.model.tag.Tag;
@@ -190,8 +189,8 @@ public class ParserUtil {
     public static Attendance parseAttendance(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();
-        if (!PersonAttendance.isValidAttendance(trimmedStatus)) {
-            throw new ParseException("Invalid attendance status. It must be either 'present' or 'absent'.");
+        if (!Attendance.isValidAttendance(trimmedStatus)) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
         return new Attendance(trimmedStatus);
     }
