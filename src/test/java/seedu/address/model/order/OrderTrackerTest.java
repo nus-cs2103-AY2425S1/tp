@@ -34,7 +34,8 @@ class OrderTrackerTest {
         OrderTracker tracker1 = new OrderTracker();
         OrderTracker tracker2 = new OrderTracker();
         tracker1.add(history);
-        Thread.sleep(1);  // Sleep for 1 millisecond to be safe
+        // Sleep for 1 millisecond to be safe
+        Thread.sleep(1);
         // The time for the order should be different
         tracker2.add(order);
 
