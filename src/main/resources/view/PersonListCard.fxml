@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
+
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -26,6 +28,10 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="attendance" text="{attendanceDisplay}" />
+        <stylesheets>
+          <URL value="@PersonListCard.css"/>
+        </stylesheets>
       </HBox>
       <FlowPane fx:id="roles" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />

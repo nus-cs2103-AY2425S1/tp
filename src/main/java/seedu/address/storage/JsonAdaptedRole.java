@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 
 /**
@@ -14,7 +15,7 @@ class JsonAdaptedRole {
     private final String roleName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code roleName}.
      */
     @JsonCreator
     public JsonAdaptedRole(String roleName) {
@@ -41,6 +42,9 @@ class JsonAdaptedRole {
     public Role toModelType() throws IllegalValueException {
         if (!Role.isValidRoleName(roleName)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        if (roleName.equals(Member.MEMBER_ROLE)) {
+            return new Member();
         }
         return new Role(roleName);
     }

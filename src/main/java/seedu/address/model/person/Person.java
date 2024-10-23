@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.role.Role;
 
 /**
@@ -26,17 +27,20 @@ public class Person {
 
     // Data fields
     private final Set<Role> roles = new HashSet<>();
+    private final Set<Attendance> attendance = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Role> roles) {
+    public Person(Name name, Phone phone, Email email, Telegram telegram,
+                  Set<Role> roles, Set<Attendance> attendance) {
         requireAllNonNull(name, phone, email, telegram, roles);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.roles.addAll(roles);
+        this.attendance.addAll(attendance);
     }
 
     public Name getName() {
@@ -56,11 +60,20 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Role> getRoles() {
         return Collections.unmodifiableSet(roles);
+    }
+
+    /**
+     * Returns an immutable attendance set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted
+     * @return the attendance set encapsulated by Person
+     */
+    public Set<Attendance> getAttendance() {
+        return Collections.unmodifiableSet(attendance);
     }
 
     /**
@@ -78,15 +91,20 @@ public class Person {
         } else if (c.equals(Telegram.class)) {
             return this.getTelegram().toString();
         } else if (c.equals(Role.class)) {
-            StringBuilder t = new StringBuilder("| ");
+            StringBuilder r = new StringBuilder("| ");
             Set<Role> roles = this.getRoles();
             for (Role role : roles) {
-                t.append(role + " |");
+                r.append(" " + role + " |");
             }
-            return t.toString();
+            return r.toString();
             // code for this method is currently not very elegant...
-        } else if (c.equals(Set.class)) {
-            return getString(Role.class);
+        } else if (c.equals(Attendance.class)) {
+            StringBuilder a = new StringBuilder("| ");
+            Set<Attendance> sessions = this.getAttendance();
+            for (Attendance sesh : sessions) {
+                a.append(" " + sesh + " |");
+            }
+            return a.toString();
         } else {
             return "";
         }
@@ -99,8 +117,11 @@ public class Person {
     public String generateContactInformation() {
         Field[] fields = Person.class.getDeclaredFields();
         StringBuilder contactInfo = new StringBuilder("");
-        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase()
-                + ": " + this.getString(field.getType()) + "\n"));
+        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES")
+                ? field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n"
+                : field.getName().toUpperCase().equals("ATTENDANCE")
+                        ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
+                        : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
         return contactInfo.toString();
     }
 
