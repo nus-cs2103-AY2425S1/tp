@@ -1,12 +1,13 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
@@ -138,7 +139,7 @@ public class ArgumentPredicateTest {
     }
 
     @Test
-    public void test_PersonContainWrongKeywords_returnsFalse() {
+    public void test_personContainWrongKeywords_returnsFalse() {
         // Match name and tags, but does not match phone
         Person testMultipleParametersFailPerson = new PersonBuilder().withName("Luk")
                 .withPhone("9999").withEmail("__No_Email__")
