@@ -65,7 +65,7 @@ public class MakeupLessonCommand extends Command {
         ClashResult clashResult = model.checkClashingLesson(makeupLesson);
         if (clashResult.hasClash()) {
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
-                    Messages.format(clashResult.getClashingLesson())));
+                    clashResult.getClashingLesson().toDisplay()));
         }
 
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());

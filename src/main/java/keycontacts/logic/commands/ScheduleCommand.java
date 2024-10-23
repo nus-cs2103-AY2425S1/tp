@@ -75,7 +75,7 @@ public class ScheduleCommand extends Command {
         if (clashResult.hasClash()) {
             model.setStudent(studentToUpdateWithoutRegularLesson, studentToUpdate); // revert change if clash
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
-                    Messages.format(clashResult.getClashingLesson())));
+                    clashResult.getClashingLesson().toDisplay()));
         }
 
         model.setStudent(studentToUpdateWithoutRegularLesson, updatedStudent);

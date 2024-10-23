@@ -23,7 +23,7 @@ import keycontacts.model.student.Student;
 class JsonSerializableStudentDirectory {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-    public static final String MESSAGE_CLASHING_LESSONS = "Students list contains clashing lesson(s).";
+    public static final String MESSAGE_CLASHING_LESSONS = "Students list contains clashing lesson(s): %1$s.";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
@@ -61,12 +61,14 @@ class JsonSerializableStudentDirectory {
 
             for (MakeupLesson makeupLesson : makeupLessons) {
                 if (studentDirectory.checkClashingLesson(makeupLesson).hasClash()) {
-                    throw new IllegalValueException(MESSAGE_CLASHING_LESSONS);
+                    throw new IllegalValueException(String.format(MESSAGE_CLASHING_LESSONS,
+                            studentDirectory.checkClashingLesson(makeupLesson).getClashingLesson().toDisplay()));
                 }
             }
 
             if (studentDirectory.checkClashingLesson(regularLesson).hasClash()) {
-                throw new IllegalValueException(MESSAGE_CLASHING_LESSONS);
+                throw new IllegalValueException(String.format(MESSAGE_CLASHING_LESSONS,
+                        studentDirectory.checkClashingLesson(regularLesson).getClashingLesson().toDisplay()));
             }
 
             studentDirectory.addStudent(student);

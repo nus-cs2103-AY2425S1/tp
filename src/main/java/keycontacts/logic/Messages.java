@@ -55,7 +55,4 @@ public class Messages {
         return collection.stream().map(T::toString).collect(Collectors.joining(", "));
     }
 
-    public static String format(Lesson lesson) {
-        return lesson.toDisplay();
-    }
 }
