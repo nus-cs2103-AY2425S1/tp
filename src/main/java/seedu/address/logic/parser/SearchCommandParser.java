@@ -77,7 +77,7 @@ public class SearchCommandParser implements Parser<Command> {
             return new SearchAppointmentCommand(dateTime);
         } catch (CommandException e) {
             throw new ParseException(
-                    String.format(e.getMessage() + "\n"+ SearchAppointmentCommand.MESSAGE_USAGE));
+                    String.format(e.getMessage() + "\n" + SearchAppointmentCommand.MESSAGE_USAGE));
         }
     }
 
