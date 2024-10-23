@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Pair;
 
 /**
  * Represents a Restaurant in the address book.
@@ -25,8 +26,8 @@ public class Restaurant {
     private final Address address;
     private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
-    private final Price price;
     private boolean isFavourite;
+    private final Tag price;
 
     /**
      * Every field must be present and not null.
@@ -38,10 +39,11 @@ public class Restaurant {
         this.email = email;
         this.address = address;
         this.rating = rating;
-        this.tags.addAll(tags);
 
-        // Price is set to 0.0 for now, will have functionality added in the next milestone
-        this.price = new Price(0.0);
+        // Extract the price tag and other tags
+        Pair<Tag, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
+        this.price = priceTagAndOtherTags.getFirst();
+        this.tags.addAll(priceTagAndOtherTags.getSecond());
 
         // Default to not favourite
         this.isFavourite = false;
@@ -76,41 +78,26 @@ public class Restaurant {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
+        Set<Tag> tags = new HashSet<>(this.tags);
+        tags.addAll(getPriceTags());
         return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns an immutable tag set without $, $$, $$$ or $$$$, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable tag set without symbols in PriceCategory
      */
     public Set<Tag> getTagsWithoutPrice() {
-        Set<Tag> tagsWithoutPrice = new HashSet<>();
-        for (Tag tag : tags) {
-            if (!tag.tagName.equals("$")
-                    && !tag.tagName.equals("$$")
-                    && !tag.tagName.equals("$$$")
-                    && !tag.tagName.equals("$$$$")) {
-                tagsWithoutPrice.add(tag);
-            }
-        }
-        return Collections.unmodifiableSet(tagsWithoutPrice);
+        return tags;
     }
 
     /**
-     * Returns an immutable tag set with only $, $$, $$$ or $$$$, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable tag set containing only the single price tag.
      */
     public Set<Tag> getPriceTags() {
-        Set<Tag> priceTags = new HashSet<>();
-        for (Tag tag : tags) {
-            if (tag.tagName.equals("$")
-                    || tag.tagName.equals("$$")
-                    || tag.tagName.equals("$$$")
-                    || tag.tagName.equals("$$$$")) {
-                priceTags.add(tag);
-            }
+        if (price == null) {
+            return Collections.emptySet();
         }
-        return Collections.unmodifiableSet(priceTags);
+        return Collections.singleton(price);
     }
 
     /**

@@ -13,8 +13,10 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.PriceCategory;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -136,6 +138,10 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
+        }
+
+        if (PriceCategory.hasMultiplePriceTags(tagSet)) {
+            throw new ParseException(PriceCategory.MESSAGE_MULTIPLE_PRICE_TAGS);
         }
         return tagSet;
     }
