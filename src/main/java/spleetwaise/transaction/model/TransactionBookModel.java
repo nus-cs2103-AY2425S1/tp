@@ -47,4 +47,9 @@ public interface TransactionBookModel {
      * Deletes transactions of a person with the given id. Used for when a person is deleted.
      */
     void deleteTransactionsOfPersonId(String personId);
+
+    /**
+     * Deletes the given transaction. Transaction must be present in the transactionBook.
+     */
+    void deleteTransaction(Transaction target);
 }

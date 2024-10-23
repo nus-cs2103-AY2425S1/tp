@@ -3,11 +3,16 @@ package spleetwaise.transaction.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import spleetwaise.address.commons.core.index.Index;
+import spleetwaise.address.testutil.Assert;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.model.transaction.TransactionIdPredicate;
@@ -46,6 +51,22 @@ public class CommandTestUtil {
     ) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br> - a {@code CommandException} is thrown <br> - the
+     * CommandException message matches {@code expectedMessage} <br> - the transaction book, filtered transaction list
+     * and selected transaction in {@code actualModel} remain unchanged
+     */
+    public static void assertCommandFailure(Command command, TransactionBookModel actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        TransactionBook expectedTransactionBook = new TransactionBook(actualModel.getTransactionBook());
+        List<Transaction> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTransactionList());
+
+        Assert.assertThrows(CommandException.class, expectedMessage, command::execute);
+        assertEquals(expectedTransactionBook, actualModel.getTransactionBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredTransactionList());
     }
 
     /**
