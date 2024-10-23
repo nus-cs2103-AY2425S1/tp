@@ -76,6 +76,10 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     * Adds a label to the cardPaneContents with a specific style class.
+     * @param label The Label to be added to the UI.
+     */
     public void addLabel(Label label) {
         label.getStyleClass().add("cell_small_label");
         cardPaneContents.getChildren().add(label);

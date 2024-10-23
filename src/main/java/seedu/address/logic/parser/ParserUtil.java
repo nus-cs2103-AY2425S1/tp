@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -129,6 +130,30 @@ public class ParserUtil {
             throw new ParseException(Company.MESSAGE_CONSTRAINTS);
         }
         return new Company(trimmedCompany);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Budget parseBudget(String budget) throws ParseException {
+        requireNonNull(budget);
+        String trimmedBudget = budget.trim();
+
+        double budgetValue;
+        try {
+            budgetValue = Double.parseDouble(trimmedBudget);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Budget.isValidBudget(budgetValue)) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Budget(budgetValue);
     }
 
     /**
