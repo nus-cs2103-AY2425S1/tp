@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sun.net.httpserver.Authenticator;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -189,5 +190,14 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+    @Test
+    public void parseGrade_validInput_success() throws Exception {
+        assertEquals(100, ParserUtil.parseGrade("100"));
+    }
+
+    @Test
+    public void parseGrade_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, Module.GRADE_CONSTRAINTS, () -> ParserUtil.parseGrade("101"));
     }
 }
