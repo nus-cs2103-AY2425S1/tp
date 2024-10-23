@@ -73,7 +73,7 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         model.removeAppointment(appointment, person);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, startDateTime));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, appointment));
     }
 
 }
