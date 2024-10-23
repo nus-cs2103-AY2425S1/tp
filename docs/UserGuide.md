@@ -12,11 +12,11 @@ It is an app targeted at Wedding Planners to help them streamline guest and vend
 As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
 That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
 
-With CodeSphere, you can easily:
-* Add a course that you teach.
-* Then, add students into that course.
+With BridalBuddy, you can easily:
+* Add a guest to the wedding that you are planning.
+* Separately, add a vendor you are collaborating with for that wedding.
 
-And to find out more about what else CodeSphere can do for you, continue to read the rest of this all-encompassing user guide.
+To discover more about what BridalBuddy has to offer, keep reading the rest of this comprehensive user guide.
 
 ## Table of Contents
 1. [**User Guide Tips**](#user-guide-tips)
