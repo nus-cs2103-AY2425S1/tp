@@ -52,7 +52,7 @@ public class SortCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof SortCommand)) {
             return false;
         }
 
