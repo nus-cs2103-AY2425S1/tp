@@ -8,7 +8,6 @@ import java.util.Objects;
 public class Note {
 
     public static final String MESSAGE_CONSTRAINTS = "Notes should be alphanumeric.";
-    public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     private String note;
