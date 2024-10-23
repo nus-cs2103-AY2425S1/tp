@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.meetup;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,7 +21,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all meet-up whose meet-up names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " john ron tom ";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "KEYWORD ";
 
     private final MeetUpContainsKeywordsPredicate predicate;
 
