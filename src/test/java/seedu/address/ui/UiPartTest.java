@@ -58,6 +58,19 @@ public class UiPartTest {
     }
 
     @Test
+    public void constructor_validFileName_loadsFile() {
+        TestUiPart<TestFxmlObject> uiPart = new TestUiPart<>(VALID_FILE_PATH);
+        assertEquals(VALID_FILE_ROOT, uiPart.getRoot());
+    }
+
+    @Test
+    public void constructor_validFileNameWithRoot_loadsFile() {
+        TestFxmlObject root = new TestFxmlObject();
+        TestUiPart<TestFxmlObject> uiPart = new TestUiPart<>(VALID_FILE_WITH_FX_ROOT_PATH, root);
+        assertEquals(VALID_FILE_ROOT, uiPart.getRoot());
+    }
+
+    @Test
     public void constructor_nullFileName_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>((String) null));
         assertThrows(NullPointerException.class, () -> new TestUiPart<Object>((String) null, new Object()));
@@ -84,7 +97,7 @@ public class UiPartTest {
 
     /**
      * UiPart used for testing.
-     * It should only be used with invalid FXML files or the valid file located at {@link VALID_FILE_PATH}.
+     * It should only be used with invalid FXML files or the valid file located at VALID_FILE_PATH.
      */
     private static class TestUiPart<T> extends UiPart<T> {
 

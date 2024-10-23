@@ -1,0 +1,72 @@
+// @@author Darren
+// Reused from https://github.com/AY2324S2-CS2103T-W10-1/tp/blob/master/docs/diagrams/AddCommandSequenceDiagram.puml
+// with minor modifications
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "r:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("args")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("args")
+activate AddressBookParser
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser : parse("args")
+activate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand
+
+AddCommand --> AddCommandParser : r
+deactivate AddCommand
+
+AddCommandParser --> AddressBookParser : r
+deactivate AddCommandParser
+
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+AddCommand -> Model : addPerson(Person)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand : result
+deactivate CommandResult
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

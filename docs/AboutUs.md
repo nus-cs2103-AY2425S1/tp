@@ -9,51 +9,57 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Dominic
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dominic2412.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[homepage](https://github.com/dominic2412)]
+[[github](https://github.com/dominic2412)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+*
+- Rank: ***** General (5 star General)
+- Role: Lead developer & Chief of UserGuide
+- Responsibilities: lead the team, oversee the User guide
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+### Tung Yan Zuo
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/darren-tung.png" width="200px">
+
+[[github](http://github.com/darren-tung)]
+[[portfolio](team/darrentung.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: To be confirmed
 
-### Johnny Doe
+### Stanley Tang Zhiheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/stanleytangzh.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/stanleytangzh)] [[portfolio](team/stanleytang.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: to be added soon
 
-### James Doe
+### Rithani Saravanakumar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rithanisk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rithanisk)]
+[[portfolio](team/rithanisk.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Integration
+
+### Aditya Joshi
+
+<img src="images/thisisaditya17.png" width="200px">
+
+[[github](http://github.com/thisisaditya17)]
+[[portfolio](team/thisisaditya17.md)]
+
+* Role: Developer
+* Responsibilities: To be confirmed
+
+

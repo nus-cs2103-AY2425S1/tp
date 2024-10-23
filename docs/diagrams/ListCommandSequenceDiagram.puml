@@ -1,0 +1,53 @@
+// @@author dominic2412
+
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "r:ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("list")
+activate AddressBookParser
+
+' Create ListCommand
+create ListCommand
+AddressBookParser -> ListCommand : new ListCommand()
+activate ListCommand
+
+AddressBookParser --> LogicManager : ListCommand
+deactivate AddressBookParser
+
+LogicManager -> ListCommand : execute(model)
+activate ListCommand
+
+ListCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+' Create CommandResult
+create CommandResult
+ListCommand -> CommandResult : new CommandResult("Listed all persons")
+activate CommandResult
+
+CommandResult --> ListCommand : result
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

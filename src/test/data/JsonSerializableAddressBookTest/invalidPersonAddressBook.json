@@ -1,8 +1,14 @@
 {
-  "persons": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
-  } ]
+  "persons": [
+    {
+      "name": "Hans Muster",
+      "phone": "9482424",
+      "email": "invalid@email!3e",
+      "address": "4th street",
+      "skills": "DevOps, Python",
+      "status": "Rejected",
+      "note": "",
+      "desiredRole": "Software Engineer"
+    }
+  ]
 }
