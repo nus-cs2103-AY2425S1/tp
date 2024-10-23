@@ -60,6 +60,25 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
+    //Manually added
+    public static final Person ADAM = new PersonBuilder().withName("Adam Meier")
+            .withStudentId("E0000011")
+            .withEmail("adam@example.com")
+            .withPhone("91131253")
+            .withTags("friends")
+            .withTutorials(new String[]{"1"}, new AttendanceStatus[]{AttendanceStatus.PRESENT}).build();
+    public static final Person BETTY = new PersonBuilder().withName("Betty Curt")
+            .withStudentId("E0000012")
+            .withEmail("betty@example.com")
+            .withPhone("91405432")
+            .withTags("owesMoney", "friends")
+            .withTutorials(new String[]{"1"}, new AttendanceStatus[]{AttendanceStatus.ABSENT}).build();
+    public static final Person CLAIRE = new PersonBuilder().withName("Claire Kurz")
+            .withStudentId("E0000013")
+            .withEmail("claire@example.com")
+            .withPhone("91150063")
+            .withTutorials(new String[]{"1"}, new AttendanceStatus[]{AttendanceStatus.NOT_TAKEN_PLACE}).build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -97,6 +116,18 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with all the typical persons
+     * and their specified tutorial attendance in random order.
+     */
+    public static AddressBook getShuffledTypicalAddressBookWithTutorials() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getShuffledTypicalPersonsWithTutorials()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
@@ -113,6 +144,16 @@ public class TypicalPersons {
 
     public static List<Person> getShuffledTypicalPersons() {
         List<Person> shuffledList = new ArrayList<>(getTypicalPersons());
+        Collections.shuffle(shuffledList);
+        return shuffledList;
+    }
+
+    public static List<Person> getTypicalPersonsWithTutorials() {
+        return new ArrayList<>(Arrays.asList(ADAM, BETTY, CLAIRE));
+    }
+
+    public static List<Person> getShuffledTypicalPersonsWithTutorials() {
+        List<Person> shuffledList = new ArrayList<>(getTypicalPersonsWithTutorials());
         Collections.shuffle(shuffledList);
         return shuffledList;
     }

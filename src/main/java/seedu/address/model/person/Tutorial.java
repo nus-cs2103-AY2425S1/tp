@@ -58,4 +58,8 @@ public class Tutorial {
     public String toString() {
         return '[' + tutorial + ']';
     }
+
+    public String getTutorialNumber() {
+        return tutorial;
+    }
 }
