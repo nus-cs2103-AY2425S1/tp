@@ -28,6 +28,7 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
 
     private Person deletedPerson;
+    private Index deletedPersonIndex;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -43,6 +44,8 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        deletedPersonIndex = Index.fromZeroBased(
+                model.getAddressBookIndex(targetIndex.getZeroBased()));
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
         model.addCommandToLog(this);
@@ -54,7 +57,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         assert !model.hasPerson(deletedPerson) : "Deleted person should not be in AddressBook";
 
-        model.insertPerson(deletedPerson, targetIndex.getZeroBased());
+        model.insertPerson(deletedPerson, deletedPersonIndex.getZeroBased());
     }
 
     @Override

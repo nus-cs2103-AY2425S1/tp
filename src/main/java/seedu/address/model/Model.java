@@ -88,13 +88,26 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns the current predicate applied to the filtered person list */
+    Predicate<Person> getCurrentPredicate();
+
+    /** Returns the index of the Person in AddressBook given the index of the Person in the filtered person list */
+    int getAddressBookIndex(int index);
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Adds the command to {@code CommandLog}.
+     * @param command must be a command that can be undone.
+     */
     void addCommandToLog(Command command);
 
+    /**
+     * Returns most recent {@code Command} in {@code CommandLog}.
+     */
     Command getPreviousCommand();
 }
