@@ -82,7 +82,7 @@ benefits of a Graphical User Interface (GUI).
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -203,6 +203,21 @@ Examples:
 
 * `list` followed by `delete S1234567Z` deletes the patient that has NRIC of 'S1234567Z' in the list.
 * `find Betsy` followed by `delete S2345678E` deletes the person with 'S2345678E' in the results of the `find` command.
+
+### Finding all persons with appointments on a specific date : `bookings`
+
+Finds all persons with appointments on the specified date.
+
+Format: `bookings DATE`
+
+* Finds all persons with appointments on `DATE`
+* `DATE` has to be of the format `dd/MM/yyyy` OR `dd-MM-yyyy` OR `dd MM yyyy`
+
+Examples:
+* `bookings 01/02/2024`
+* `bookings 01-02-2024`
+
+  ![result for 'bookings 01/02/2024'](./images/bookings01-02-2024.png)
 
 ### Clearing all entries : `clear`
 
