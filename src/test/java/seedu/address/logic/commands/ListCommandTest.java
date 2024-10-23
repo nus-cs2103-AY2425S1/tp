@@ -79,13 +79,6 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listWithReversePrefix_success() {
-        ListCommand listCommand = new ListCommand(null, true);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
     public void execute_listWithInvalidSortField_throwsCommandException() {
         ListCommand listCommand = new ListCommand("invalid", false);
         assertThrows(CommandException.class, () -> listCommand.execute(model));

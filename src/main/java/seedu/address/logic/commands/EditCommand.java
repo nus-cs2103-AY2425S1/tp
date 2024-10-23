@@ -200,10 +200,10 @@ public class EditCommand extends Command {
         public void setNotes(Notes notes) {
             this.notes = notes;
         }
-    
+
         public Optional<Notes> getNotes() {
             return Optional.ofNullable(notes);
-        }        
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -245,13 +245,13 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("notes", notes)
-                    .add("tags", tags)
-                    .toString();
+                .add("name", getName().orElse(null))
+                .add("phone", getPhone().orElse(null))
+                .add("email", getEmail().orElse(null))
+                .add("address", getAddress().orElse(null))
+                .add("notes", getNotes().orElse(null))
+                .add("tags", getTags().orElse(null))
+                .toString();
         }
     }
 }

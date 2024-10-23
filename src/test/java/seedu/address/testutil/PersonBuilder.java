@@ -100,7 +100,7 @@ public class PersonBuilder {
     public PersonBuilder withEmptyNotes() {
         this.notes = Notes.createEmpty();
         return this;
-    }    
+    }
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.

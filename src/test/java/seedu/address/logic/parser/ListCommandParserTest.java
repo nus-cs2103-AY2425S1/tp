@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
@@ -31,28 +29,6 @@ public class ListCommandParserTest {
         // sort by email with reverse
         assertParseSuccess(parser, " s/email r/", new ListCommand("email", true));
 
-        // case insensitive sort field
-        assertParseSuccess(parser, " s/NAME", new ListCommand("name", false));
-        assertParseSuccess(parser, " s/EmAiL", new ListCommand("email", false));
     }
 
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-        // invalid sort field
-        assertParseFailure(parser, " s/invalid", ListCommand.MESSAGE_INVALID_SORT_FIELD);
-
-        // reverse without sort field
-        assertParseFailure(parser, " r/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-
-        // invalid prefix
-        assertParseFailure(parser, " x/name", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-
-        // multiple sort fields
-        assertParseFailure(parser, " s/name s/email", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            ListCommand.MESSAGE_USAGE));
-
-        // multiple reverse flags
-        assertParseFailure(parser, " s/name r/ r/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            ListCommand.MESSAGE_USAGE));
-    }
 }

@@ -21,9 +21,9 @@ import seedu.address.model.person.Person;
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
-
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -32,8 +32,8 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        logger.info("Creating JsonSerializableAddressBook with " + 
-            (persons != null ? persons.size() : 0) + " persons");
+        logger.info("Creating JsonSerializableAddressBook with "
+            + (persons != null ? persons.size() : 0) + " persons");
         if (persons != null) {
             this.persons.addAll(persons);
         }
@@ -45,8 +45,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        logger.info("Converting AddressBook to JSON with " + 
-            source.getPersonList().size() + " persons");
+        logger.info("Converting AddressBook to JSON with "
+            + source.getPersonList().size() + " persons");
         persons.addAll(source.getPersonList().stream()
             .map(person -> {
                 logger.info("Converting person: " + person.getName());
@@ -62,13 +62,13 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        logger.info("Converting JSON to AddressBook with " + 
-            persons.size() + " persons"); // Debug
+        logger.info("Converting JSON to AddressBook with "
+            + persons.size() + " persons");
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             try {
                 Person person = jsonAdaptedPerson.toModelType();
-                logger.info("Successfully converted person: " + 
-                    person.getName()); // Debug
+                logger.info("Successfully converted person: "
+                    + person.getName());
                 if (addressBook.hasPerson(person)) {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
                 }

@@ -14,7 +14,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -99,11 +98,11 @@ public class MainApp extends Application {
 
         try {
             if (initialData == SampleDataUtil.getSampleAddressBook()) {
-                storage.saveAddressBook(initialData);  // Save sample data immediately
+                storage.saveAddressBook(initialData);
             }
         } catch (IOException e) {
             logger.warning("Failed to save sample data : " + e);
-        }        
+        }
 
         return new ModelManager(initialData, userPrefs);
     }

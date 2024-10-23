@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Notes implements OptionalField {
     public static final String MESSAGE_CONSTRAINTS = "Notes can take any values, and can be empty";
     public static final String EMPTY_FIELD_FORMAT = "%EMPTY-FIELD%";
-    
+
     public final String value;
-    
+
     private Notes() {
         this.value = "";
     }
@@ -72,7 +72,7 @@ public class Notes implements OptionalField {
         return value.hashCode();
     }
 
-    @Override 
+    @Override
     public boolean isEmpty() {
         return value.isEmpty() || value.equals(EMPTY_FIELD_FORMAT);
     }

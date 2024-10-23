@@ -89,6 +89,12 @@ public class ParserUtil {
         return new Address(trimmedAddress);
     }
 
+    /**
+     * Parses a {@code String notes} into a {@code Notes}.
+    * Leading and trailing whitespaces will be trimmed.
+    *
+    * @throws ParseException if the given {@code notes} is invalid.
+    */
     public static Notes parseNotes(String notes) throws ParseException {
         requireNonNull(notes);
         String trimmedNotes = notes.trim();
@@ -96,7 +102,7 @@ public class ParserUtil {
             throw new ParseException(Notes.MESSAGE_CONSTRAINTS);
         }
         return new Notes(trimmedNotes);
-    }    
+    }
 
     /**
      * Parses a {@code String email} into an {@code Email}.
