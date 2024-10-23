@@ -1,6 +1,6 @@
 name: Java CI
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
@@ -37,7 +37,7 @@ jobs:
           java-package: jdk+fx
 
       - name: Build and check with Gradle
-        run: ./gradlew check coverage
+        run: ./gradlew clean checkstyleMain checkstyleTest nonGuiTests coverage
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
