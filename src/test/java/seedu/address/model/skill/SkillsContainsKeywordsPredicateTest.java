@@ -2,6 +2,7 @@ package seedu.address.model.skill;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -76,6 +77,12 @@ public class SkillsContainsKeywordsPredicateTest {
         predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("frontend", "backend"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
+    }
+
+    @Test
+    public void test_personIsNull_throwsAssertionError() {
+        SkillsContainsKeywordsPredicate predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("database"));
+        assertThrows(AssertionError.class, () -> predicate.test(null));
     }
 
     @Test
