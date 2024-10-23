@@ -65,6 +65,34 @@ public class PersonTest {
     }
 
     @Test
+    public void testHasPhoneWithoutPhone() {
+        Person betty = new PersonBuilder(BETTY).withEmptyPhone().build();
+
+        assertFalse(betty.hasPhone());
+    }
+
+    @Test
+    public void testHasPhoneWithPhone() {
+        Person carl = new PersonBuilder(CARL).build();
+
+        assertTrue(carl.hasPhone());
+    }
+
+    @Test
+    public void testHasEmailWithoutEmail() {
+        Person betty = new PersonBuilder(BETTY).withEmptyEmail().build();
+
+        assertFalse(betty.hasEmail());
+    }
+
+    @Test
+    public void testHasEmailWithEmail() {
+        Person carl = new PersonBuilder(CARL).build();
+
+        assertTrue(carl.hasEmail());
+    }
+
+    @Test
     public void testHasAddressWithoutAddress() {
         Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
 
