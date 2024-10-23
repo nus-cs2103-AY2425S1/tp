@@ -351,12 +351,12 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 (For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case: UC01 - Add student contact**
+**Use Case: UC01 - Add contact**
 
 **MSS**:
 
-1. Tutor keys in required fields to add student contact.
-2. TutorEase adds the student contact.  
+1. Tutor keys in required fields to add a contact.
+1. TutorEase adds the contact.  
    Use case ends.
 
 **Extensions**:
@@ -367,12 +367,12 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC02 - Delete student contact**
+**Use Case: UC02 - Delete contact**
 
 **MSS**:
 
-1. Tutor keys in required fields to delete student contact.
-2. TutorEase deletes the student contact.  
+1. Tutor keys in required fields to delete contact.
+1. TutorEase deletes the contact.  
    Use case ends.
 
 **Extensions**:
@@ -383,12 +383,12 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC03 - List student contacts**
+**Use Case: UC03 - List contacts**
 
 **MSS**:
 
-1. Tutor keys in required fields to list student contacts.
-2. TutorEase lists the student contact.  
+1. Tutor keys in list contacts command.
+1. TutorEase lists all the contacts stored.  
    Use case ends.
 
 **Extensions**:
@@ -399,11 +399,32 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.              
       Use case resumes from Step 2.
 
-**Use Case: UC04 - Add lesson for student**  
+**Use Case: UC04 - Find contacts with a specific name keyword**
+
+**MSS**:
+
+1. Tutor keys in a keyword in the required field to find contacts whose names contain this keyword.
+1. TutorEase lists the contacts with the given keyword.  
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Use case resumes from Step 2.
+
+* **1b**. No contacts found matching the entered keyword.
+    * **1b1**. TutorEase displays a message: "No contacts found with the given keyword(s)."  
+    * **1b2**. Tutor enters a new keyword or cancels the search.  
+      Use case resumes from Step 2 or ends if cancelled.  
+
+**Use Case: UC05 - Add lesson for student**  
 **MSS:**
 
 1. Tutor keys in required fields to add student contact.
-2. TutorEase adds the lesson to the student.  
+1. TutorEase adds the lesson to the student.  
    Use case ends.
 
 **Extensions:**
@@ -420,11 +441,11 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC05 - Delete lesson for student**  
+**Use Case: UC06 - Delete lesson for student**  
 **MSS:**
 
 1. Tutor keys in required fields to delete student contact.
-2. TutorEase deletes the lesson for the student.  
+1. TutorEase deletes the lesson for the student.  
    Use case ends.
 
 **Extensions:**
@@ -441,11 +462,11 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC06 - List all lessons**  
+**Use Case: UC07 - List all lessons**  
 **MSS:**
 
 1. Tutor keys in required fields to list all lessons.
-2. TutorEase lists all lessons.    
+1. TutorEase lists all lessons.    
    Use case ends.
 
 **Extensions:**

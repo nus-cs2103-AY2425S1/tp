@@ -38,10 +38,10 @@ class DeleteContactCommandTest {
     public void testToString_returnsCorrectString() {
         Index index = Index.fromZeroBased(0);
         DeleteContactCommand deleteCommand = new DeleteContactCommand(index);
+        String expectedString = String.format(DeleteContactCommand.DELETE_COMMAND_STRING_FORMAT, 0);
 
         // Test toString method
-        assertEquals("DeleteContactCommand{targetIndex=tutorease.address.commons.core."
-                + "index.Index{zeroBasedIndex=0}}", deleteCommand.toString());
+        assertEquals(expectedString, deleteCommand.toString());
     }
 
     @Test

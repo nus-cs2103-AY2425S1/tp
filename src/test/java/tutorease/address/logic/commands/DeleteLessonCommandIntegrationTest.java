@@ -44,8 +44,8 @@ public class DeleteLessonCommandIntegrationTest {
                 .build();
         expectedModel.addLesson(validLesson);
 
-        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getStartDateTime(),
-                        validLesson.getEndDateTime()), model,
+        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getFee(),
+                        validLesson.getStartDateTime(), validLesson.getEndDateTime()), model,
                 String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
                 expectedModel);
 
@@ -63,8 +63,8 @@ public class DeleteLessonCommandIntegrationTest {
                 .build();
         expectedModel.addLesson(validLesson);
 
-        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getStartDateTime(),
-                        validLesson.getEndDateTime()), model,
+        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getFee(),
+                        validLesson.getStartDateTime(), validLesson.getEndDateTime()), model,
                 String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
                 expectedModel);
 

@@ -2,10 +2,12 @@ package tutorease.address.testutil;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_FEE;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.EndDateTime;
+import tutorease.address.model.lesson.Fee;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.person.Person;
@@ -17,6 +19,7 @@ public class LessonBuilder {
     public static final String STUDENT = "Amy Bee";
 
     private Person student;
+    private Fee fee;
     private StartDateTime startDateTime;
     private EndDateTime endDateTime;
     /**
@@ -24,6 +27,7 @@ public class LessonBuilder {
      */
     public LessonBuilder() throws ParseException {
         student = new StudentBuilder().withName(STUDENT).build();
+        fee = new Fee(VALID_FEE);
         startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
         endDateTime = EndDateTime.createEndDateTime(VALID_END_DATE);
     }
@@ -56,6 +60,15 @@ public class LessonBuilder {
      * Builds the Lesson object.
      */
     public Lesson build() {
-        return new Lesson(student, startDateTime, endDateTime);
+        return new Lesson(student, fee, startDateTime, endDateTime);
+    }
+
+    /**
+     * Sets the fee of the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withFee(String fee) throws ParseException {
+        requireNonNull(fee);
+        this.fee = new Fee(fee);
+        return this;
     }
 }
