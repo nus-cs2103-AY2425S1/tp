@@ -157,7 +157,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code}
+     * Parses {@code order} into an appropriate {@code SortOrder}
      */
     public static SortOrder parseSortOrder(String order) throws ParseException {
         requireNonNull(order);

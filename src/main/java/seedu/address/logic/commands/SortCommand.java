@@ -9,6 +9,9 @@ import java.util.Comparator;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Sorts the currently filtered list of Persons in a user-determined order
+ */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String COMMAND_ALIAS = "so";
@@ -22,6 +25,9 @@ public class SortCommand extends Command {
 
     private final SortOrder order;
 
+    /**
+     * Creates a SortCommand to sort the list of Persons in the specified {@code order}
+     */
     public SortCommand(SortOrder order) {
         requireNonNull(order);
         this.order = order;

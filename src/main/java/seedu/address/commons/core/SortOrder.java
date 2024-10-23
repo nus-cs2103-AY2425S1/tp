@@ -1,5 +1,8 @@
 package seedu.address.commons.core;
 
+/**
+ * Enumeration of the possible orderings that the user can sort by
+ */
 public enum SortOrder {
     ASC("asc", "ascending"),
     DESC("desc", "descending"),
@@ -11,7 +14,10 @@ public enum SortOrder {
     public final String keyword;
     private final String stringRep;
 
-    private SortOrder(String keyword, String stringRep) {
+    /**
+     * Creates the relevant enum values with the appropriate {@code keyword} and {@code stringRep}
+     */
+    SortOrder(String keyword, String stringRep) {
         this.keyword = keyword;
         this.stringRep = stringRep;
     }
