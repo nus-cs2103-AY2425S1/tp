@@ -1,13 +1,8 @@
 package seedu.address.testutil;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderHistory;
 import seedu.address.model.order.OrderTracker;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -47,7 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         postalCode = new PostalCode(DEFAULT_POSTAL_CODE);
         tags = new HashSet<>();
-        tracker = null;
+        tracker = new OrderTracker();
     }
 
     /**

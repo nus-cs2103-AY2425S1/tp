@@ -84,6 +84,15 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(replacement.internalList);
     }
 
+    public Person findPersonByName(Name name) {
+        for (int i = 0; i < internalList.size() - 1; i++) {
+            if (internalList.get(i).getName().equals(name)) {
+                return internalList.get(i);
+            }
+        }
+        return null;
+    }
+
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.

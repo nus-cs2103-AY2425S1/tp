@@ -7,7 +7,7 @@ public class Order {
     private final String name;
 
     public Order(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     @Override

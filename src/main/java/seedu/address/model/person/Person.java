@@ -22,12 +22,12 @@ public class Person implements Comparable<Person> {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final OrderTracker tracker;
 
     // Data fields
     private final Address address;
     private final PostalCode postalCode;
     private final Set<Tag> tags = new HashSet<>();
+    private final OrderTracker tracker;
 
     /**
      * Every field must be present and not null.
