@@ -79,6 +79,6 @@ public class GradYearPredicate implements Predicate<Person> {
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("graduateYear", graduationYear).toString();
+        return new ToStringBuilder(this).add("graduationYear", graduationYear).toString();
     }
 }
