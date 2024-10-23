@@ -85,7 +85,7 @@ public class InternshipApplicationTest {
     public void toStringMethod() {
         String expected = InternshipApplication.class.getCanonicalName() + "{Company="
                 + APPLE.getCompany() + ", Date of Application="
-                + APPLE.getDateOfApplication() + ", Role=" + APPLE.getRole() + "}";
+                + APPLE.getDateOfApplication() + ", Role=" + APPLE.getRole() + ", Status=" + APPLE.getStatus() + "}";
         assertEquals(expected, APPLE.toString());
     }
 }
