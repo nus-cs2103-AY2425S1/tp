@@ -91,7 +91,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2b2b2b;
 }
 
 .list-cell {
@@ -321,7 +321,7 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #383838 #383838 #383838 #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
@@ -351,3 +351,23 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.pane-with-border {
+    -fx-padding: 10;
+    -fx-border-color: grey;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-color: #2b2b2b;
+}
+
+#weddingListView {
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: as-needed;
+}
+
+.list-cell:empty {
+    -fx-background-color: #383838;
+}
+
+
+
