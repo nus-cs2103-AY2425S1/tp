@@ -146,13 +146,13 @@ public class EventParserUtil {
     /**
      * Parses a {@code String description} into a {@code Description} object.
      *
-     * @param time The string representing the description.
+     * @param description The string representing the description.
      * @return A {@code Description} object if the given string is valid.
      * @throws ParseException if the given string is not a valid description.
      */
-    public static Description parseDescription(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedDescription = time.trim();
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
