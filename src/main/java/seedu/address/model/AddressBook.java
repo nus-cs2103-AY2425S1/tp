@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -76,6 +77,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds a module to the person in address book.
+     * The person must not already exist in the address book.
+     */
+    public void addModule(Person person, Module module) {
+        requireNonNull(person);
+        requireNonNull(module);
+
+        if (!hasPerson(person)) {
+            throw new IllegalArgumentException("Person not found in the address book.");
+        }
+
+        Person updatedPerson = person.addModule(module);
+        setPerson(person, updatedPerson);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -92,6 +109,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+
+    /**
+     * Removes {@code module} from {@code person} in AddressBook.
+     * {@code person} must exist in the address book.
+     */
+    public void removeModule(Person person, Module module) {
+        requireNonNull(person);
+        requireNonNull(module);
+
+        if (!hasPerson(person)) {
+            throw new IllegalArgumentException("Person not found in the address book.");
+        }
+        Person updatedPerson = person.deleteModule(module);
+        setPerson(person, updatedPerson);
     }
 
     //// util methods

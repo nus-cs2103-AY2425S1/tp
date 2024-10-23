@@ -12,11 +12,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 
@@ -39,6 +39,9 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+
+        System.out.println(deleteCommand + "\n" + expectedMessage + "\n");
+        System.out.println(model + "\n" + expectedModel + "\n");
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -136,7 +139,8 @@ public class DeleteCommandTest {
         StudentId targetStudentId = firstPerson.getStudentId();
 
         DeleteCommand deleteCommand = new DeleteCommand(targetStudentId);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetStudentId=" + targetStudentId + "}";
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetStudentId=" + targetStudentId
+                + ", module=" + null + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
@@ -148,4 +152,37 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
+
+    @Test
+    public void execute_invalidModuleToDelete_throwsCommandException() {
+        Person personWithNoModule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StudentId studentIdToDelete = personWithNoModule.getStudentId();
+        Module nonExistentModule = new Module("CS9999");
+
+        DeleteCommand deleteCommand = new DeleteCommand(studentIdToDelete, nonExistentModule);
+        assertCommandFailure(
+                deleteCommand, model, String.format(DeleteCommand.MESSAGE_MODULE_NOT_FOUND, studentIdToDelete));
+    }
+
+    @Test
+    public void execute_deleteModule_whenNoModules() {
+        Person personWithoutModules = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StudentId studentIdToDelete = personWithoutModules.getStudentId();
+        Module moduleToDelete = new Module("CS2103T");
+
+        DeleteCommand deleteCommand = new DeleteCommand(studentIdToDelete, moduleToDelete);
+        assertCommandFailure(
+                deleteCommand, model, String.format(DeleteCommand.MESSAGE_MODULE_NOT_FOUND, studentIdToDelete));
+    }
+
+    @Test
+    public void execute_invalidStudentIdWithModule_throwsCommandException() {
+        StudentId invalidStudentId = new StudentId("12345679");
+        Module moduleToDelete = new Module("CS2103T");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidStudentId, moduleToDelete);
+
+        assertCommandFailure(
+                deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_NOT_FOUND, invalidStudentId));
+    }
+
 }

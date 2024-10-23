@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 
 /**
@@ -64,10 +65,21 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given module for the given person.
+     * The person and the corresponding module must exist in the address book.
+     */
+    void deleteModule(Person target, Module module);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given module to the given person.
+     */
+    void addModule(Person target, Module module);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -95,4 +107,5 @@ public interface Model {
      * Returns the Person object to display.
      */
     Person getPersonToDisplay();
+
 }

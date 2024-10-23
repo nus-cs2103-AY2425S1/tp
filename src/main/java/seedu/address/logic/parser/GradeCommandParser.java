@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import java.util.stream.Stream;
 
@@ -25,15 +24,17 @@ public class GradeCommandParser implements Parser<GradeCommand> {
      */
     public GradeCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STUDENTID, PREFIX_MODULE, PREFIX_GRADE);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE, PREFIX_GRADE);
+        String preamble = argMultimap.getPreamble();
+        argMultimap.verifyNoDuplicateStudentId(args);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENTID, PREFIX_MODULE, PREFIX_GRADE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE, PREFIX_GRADE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENTID, PREFIX_MODULE, PREFIX_GRADE);
-        StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE, PREFIX_GRADE);
+
+        StudentId studentId = ParserUtil.parseStudentId(preamble);
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
 
@@ -47,5 +48,4 @@ public class GradeCommandParser implements Parser<GradeCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }

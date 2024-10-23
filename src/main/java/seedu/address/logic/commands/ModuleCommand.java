@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -24,11 +23,11 @@ public class ModuleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to a student. "
             + "Parameters: "
-            + PREFIX_STUDENTID + "ID "
+            + "ID "
             + PREFIX_MODULE + "MODULE "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENTID + "12345678 "
+            + "12345678 "
             + PREFIX_MODULE + "CS2103T ";
 
     public static final String MESSAGE_SUCCESS = "New module added for Student %1$s";

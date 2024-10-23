@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -41,7 +40,7 @@ public class EditCommand extends Command {
             + "by the studentId assigned to the corresponding student. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENTID (must be a valid and existing 8-digit Student ID) "
-            + "[" + PREFIX_STUDENTID + "STUDENTID] "
+            + "[" + "STUDENTID] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -171,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, address, course, tag, modules);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, course, tag, modules);
         }
 
         public void setStudentId(StudentId studentId) {

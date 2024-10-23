@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -26,12 +25,12 @@ public class GradeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a course-specific grade to a student. "
             + "Parameters: "
-            + PREFIX_STUDENTID + "ID "
+            + "ID "
             + PREFIX_MODULE + "MODULE "
             + PREFIX_GRADE + "GRADE "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENTID + "12345678 "
+            + "12345678 "
             + PREFIX_MODULE + "CS2103T "
             + PREFIX_GRADE + "A+ ";
 
