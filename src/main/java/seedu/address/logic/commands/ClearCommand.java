@@ -10,8 +10,10 @@ import seedu.address.model.Model;
 public abstract class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_USAGE = "clear person OR clear appt";
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the entity identified by the user. \n"
+            + "Parameters: entity (person or appt) \n "
+            + "Example: " + COMMAND_WORD + "appt \n";
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

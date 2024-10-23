@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -17,6 +18,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STATUS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -29,6 +32,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -44,6 +48,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonDescriptor;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -56,8 +61,8 @@ public class AddPersonCommandParserTest {
 
         // whitespace before person entity string in preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + PERSON_ENTITY_STRING + NAME_DESC_BOB
-            + PHONE_DESC_BOB + EMAIL_DESC_BOB
-            + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddPersonCommand(expectedPerson));
+            + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + STATUS_DESC_BOB + TAG_DESC_FRIEND,
+                new AddPersonCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -66,14 +71,14 @@ public class AddPersonCommandParserTest {
                 .buildDescriptor();
         assertParseSuccess(parser,
             PERSON_ENTITY_STRING + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
             new AddPersonCommand(expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-            + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+            + ADDRESS_DESC_BOB + STATUS_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, PERSON_ENTITY_STRING + NAME_DESC_AMY + validExpectedPersonString,
@@ -91,11 +96,16 @@ public class AddPersonCommandParserTest {
         assertParseFailure(parser, PERSON_ENTITY_STRING + ADDRESS_DESC_AMY + validExpectedPersonString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
+        // multiple statuses
+        assertParseFailure(parser, PERSON_ENTITY_STRING + STATUS_DESC_AMY + validExpectedPersonString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
+
         // multiple fields repeated
         assertParseFailure(parser,
             PERSON_ENTITY_STRING + validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
-                + ADDRESS_DESC_AMY + validExpectedPersonString,
-            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
+                + ADDRESS_DESC_AMY + STATUS_DESC_AMY + validExpectedPersonString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL,
+                    PREFIX_PHONE, PREFIX_STATUS));
 
         // invalid value followed by valid value
 
@@ -115,6 +125,10 @@ public class AddPersonCommandParserTest {
         assertParseFailure(parser, PERSON_ENTITY_STRING + INVALID_ADDRESS_DESC + validExpectedPersonString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
+        // invalid status
+        assertParseFailure(parser, PERSON_ENTITY_STRING + INVALID_STATUS_DESC + validExpectedPersonString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
+
         // valid value followed by invalid value
 
         // invalid name
@@ -132,6 +146,10 @@ public class AddPersonCommandParserTest {
         // invalid address
         assertParseFailure(parser, PERSON_ENTITY_STRING + validExpectedPersonString + INVALID_ADDRESS_DESC,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+
+        // invalid status
+        assertParseFailure(parser, PERSON_ENTITY_STRING + validExpectedPersonString + INVALID_STATUS_DESC,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
     }
 
     @Test
@@ -139,8 +157,8 @@ public class AddPersonCommandParserTest {
         // zero tags
         PersonDescriptor expectedPerson = new PersonBuilder(AMY).withTags().buildDescriptor();
         assertParseSuccess(parser,
-            PERSON_ENTITY_STRING + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-            new AddPersonCommand(expectedPerson));
+            PERSON_ENTITY_STRING + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                    + STATUS_DESC_AMY, new AddPersonCommand(expectedPerson));
     }
 
     @Test
@@ -182,36 +200,43 @@ public class AddPersonCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, PERSON_ENTITY_STRING + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-            + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+            + ADDRESS_DESC_BOB + STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, PERSON_ENTITY_STRING + NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB
-            + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+            + ADDRESS_DESC_BOB + STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser,
             PERSON_ENTITY_STRING + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                    + STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser,
             PERSON_ENTITY_STRING + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+
+        // invalid status
+        assertParseFailure(parser,
+            PERSON_ENTITY_STRING + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_STATUS_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Status.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser,
             PERSON_ENTITY_STRING + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + STATUS_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser,
-            PERSON_ENTITY_STRING + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-            Name.MESSAGE_CONSTRAINTS);
+            PERSON_ENTITY_STRING + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + STATUS_DESC_BOB
+                    + INVALID_ADDRESS_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser,
             PREAMBLE_NON_EMPTY + PERSON_ENTITY_STRING + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + STATUS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

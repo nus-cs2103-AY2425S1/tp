@@ -4,6 +4,8 @@
   pageNav: 3
 ---
 
+<br>
+
 ![](images/doctrack.png)
 # User Guide
 
@@ -15,7 +17,11 @@ for your large medical files.
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<br>
+
 ---
+
+<br>
 
 ## Quick start
 
@@ -61,7 +67,11 @@ For more information, see this:
 
 7. Refer to the [Command Overview](#command-overview) below for details of each command.
 
+<br>
+
 ---
+
+<br>
 
 ## Interacting with DocTrack
 
@@ -88,7 +98,11 @@ Here are some **key points** to keep in mind when using commands:
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is because some space characters surrounding line-breaks may be omitted when copied over.
 
+<br>
+
 ---
+
+<br>
 
 ## Command Overview
 
@@ -98,7 +112,11 @@ The following sections describe the various commands available in the DocTrack p
 - [Appointment Commands](#appointment-commands)
 - [General Commands](#general-commands)
 
+<br>
+
 ---
+
+<br>
 
 ### Person Commands
 
@@ -188,15 +206,87 @@ Examples:
 
 <br>
 
----
+##### Clearing all persons : `clear person`
 
-### Appointment Commands
+Clears all entries from the address book after a validation check from the user.
+
+Format: `clear person`
 
 <br>
 
-TODO: Add appointment commands here.
+---
+
+<br>
+
+### Appointment Commands
+
+- An **appointment** is defined by several fields: an appointment type, appointment date & time, ID of the patient who is associated with the appointment, sickness, and medicine.  
+- You can interact with appointments in DocTrack using the instructions below:
+
+<br>
+
+##### Adding an appointment: `add appt`
+
+Adds an appointment to the DocTrack. 
+
+Format: `add appt i/PATIENT_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
+
+Examples:
+
+- `add appt i/John Doe d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`
+- `add appt i/Jo An d/30/01/2024-12-01 16:40:00 ty/Follow-up s/Asthma m/Inhaler`
+
+<br>
+
+##### Listing all appointments : `list appt`
+
+Shows a list of all appointments in DocTrack.
+
+Format: `list appt`
+
+<br>
+
+##### Editing an appointment : `edit appt`
+
+Edits an existing appointment in DocTrack.
+
+Format: `edit appt INDEX [i/PATIENT_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`
+
+- Edits the appointment at the specified `INDEX`.
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+
+Examples:
+
+- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` Edits the date and time and the medicine to be `29/03/2025 10:30` and `Budesonide` respectively.
+
+<br>
+
+##### Deleting an appointment : `delete appt`
+
+Deletes the specified appointment from DocTrack.
+
+Format: `delete appt INDEX`
+
+- Deletes the appointment at the specified `INDEX`.
+
+Examples:
+
+- `list appt` followed by `delete appt 2` deletes the 2nd appointment in DocTrack.
+
+<br>
+
+##### Clearing all appointments : `clear appt`
+
+Clears all entries from the appointment book after a validation check from the user.
+
+Format: `clear appt`
+
+<br>
 
 ---
+
+<br>
 
 ### General Commands
 
@@ -211,14 +301,6 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
-<br>
-
-##### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
 
 <br>
 
@@ -247,7 +329,11 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+<br>
+
 ---
+
+<br>
 
 ## FAQ
 
@@ -264,21 +350,29 @@ Examples:
 computer?<br>
 **A**: [Install the DocTrack app](#quick-start) in the other computer. When you run it, it creates empty [.json](https://www.json.org/json-en.html) files in the `data` folder. Replace these empty files with the `addressbook.json` and `appointmentbook.json` files from your previous computer.
 
+<br>
+
 ---
+
+<br>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+<br>
+
 ---
+
+<br>
 
 ## Command summary
 
 | Action     | Format, Examples                                                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
+| **Clear**  | `clear person`<br> `clear appt`                                                                     |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |

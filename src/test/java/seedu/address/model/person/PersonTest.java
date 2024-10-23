@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -36,7 +37,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-            .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+            .withAddress(VALID_ADDRESS_BOB).withStatus(VALID_STATUS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -87,6 +88,10 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE_P).withAddress(VALID_ADDRESS_BOB).build();
         assertNotEquals(ALICE_P, editedAlice);
 
+        // different status -> returns false
+        editedAlice = new PersonBuilder(ALICE_P).withStatus(VALID_STATUS_BOB).build();
+        assertNotEquals(ALICE_P, editedAlice);
+
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE_P).withTags(VALID_TAG_HUSBAND).build();
         assertNotEquals(ALICE_P, editedAlice);
@@ -96,8 +101,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{personId=" + ALICE_P.getPersonId()
             + ", name=" + ALICE_P.getName() + ", phone=" + ALICE_P.getPhone()
-            + ", email=" + ALICE_P.getEmail() + ", address=" + ALICE_P.getAddress() + ", tags="
-            + ALICE_P.getTags() + "}";
+            + ", email=" + ALICE_P.getEmail() + ", address=" + ALICE_P.getAddress() + ", status="
+            + ALICE_P.getStatus() + ", tags=" + ALICE_P.getTags() + "}";
         assertEquals(expected, ALICE_P.toString());
     }
 }
