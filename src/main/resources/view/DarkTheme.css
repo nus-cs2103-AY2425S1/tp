@@ -359,3 +359,17 @@
     -fx-font-size: 11;
 }
 
+.normal-tag {
+    -fx-background-color: #007bff; /* Blue background */
+    -fx-text-fill: white; /* White text */
+    -fx-padding: 5; /* Padding around the text */
+    -fx-border-radius: 3; /* Rounded corners */
+}
+
+.blood-type-tag {
+    -fx-background-color: #d06651; /* Red background */
+    -fx-text-fill: white; /* White text */
+    -fx-padding: 5; /* Padding around the text */
+    -fx-border-radius: 3; /* Rounded corners */
+}
+

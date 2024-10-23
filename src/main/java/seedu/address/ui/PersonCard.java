@@ -67,8 +67,18 @@ public class PersonCard extends UiPart<Region> {
         email.setText("Email : " + person.getEmail().value);
         appointment.setText("Appointment : " + person.getAppointment().dateTime);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.tagName)) // Ensure getTagName() method exists in Tag class
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName); // Ensure getTagName() method exists in Tag class
+
+                    if (tag.isBloodType) {
+                        tagLabel.setStyle("-fx-background-color: #ff0500; -fx-text-fill: white;");
+                    } else {
+                        tagLabel.getStyleClass().add("normal-tag");
+                    }
+
+                    tags.getChildren().add(tagLabel);
+                });
 
         if (person.getAppointment().isToday()) {
             appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;"); // Green

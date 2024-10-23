@@ -3,16 +3,19 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.ParserUtil;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
+    public static final String BLOOD_TYPE_PREFIX = "Blood type ";
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}+ ]+";
     public final String tagName;
+    public final boolean isBloodType;
 
     /**
      * Constructs a {@code Tag}.
@@ -22,7 +25,13 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        if (ParserUtil.isValidBloodType(tagName)) {
+            this.tagName = BLOOD_TYPE_PREFIX + tagName;
+            this.isBloodType = true;
+        } else {
+            this.tagName = tagName;
+            this.isBloodType = false;
+        }
     }
 
     /**
@@ -59,4 +68,10 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    public static void main(String[] args) {
+        Tag tag = new Tag("A+");
+        Tag tag1 = new Tag("asd");
+        System.out.println(tag.isBloodType);
+        System.out.println(tag1.isBloodType);
+    }
 }
