@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new DeleteWeddingCommand object
  */
-public class DeleteWeddingCommandParser {
+public class DeleteWeddingCommandParser implements Parser<DeleteWeddingCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteWeddingCommand
      * and returns a DeleteWeddingCommand object for execution.
