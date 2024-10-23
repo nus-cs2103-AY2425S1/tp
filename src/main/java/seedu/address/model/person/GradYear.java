@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Resident's graduation year in the dormManager book.
  * Guarantees: immutable; is valid as declared in {@link #isValidGradYear(String)}
+ * Note: is optional.
  */
 public class GradYear {
 

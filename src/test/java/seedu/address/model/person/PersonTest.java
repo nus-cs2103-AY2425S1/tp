@@ -108,7 +108,7 @@ public class PersonTest {
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
                 + ", room number=" + ALICE.getRoomNumber().orElse(null)
-                + ", address=" + ALICE.getAddress()
+                + ", address=" + ALICE.getAddress().orElse(null)
                 + ", emergency contact=" + ALICE.getEmergencyContact().orElse(null)
                 + ", graduation year=" + ALICE.getGradYear().orElse(null)
                 + ", tags=" + ALICE.getTags() + "}";

@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Resident's room number in the dormManager book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRoomNumber(String)}
+ * Note: is optional.
  */
 public class RoomNumber {
 
