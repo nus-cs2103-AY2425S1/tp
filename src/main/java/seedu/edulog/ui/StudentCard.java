@@ -45,8 +45,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private ImageView paidStatus;
 
-    private final Image UNPAID_ICON = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
-    private final Image PAID_ICON = new Image(getClass().getResource("/images/paid.png").toExternalForm());
+    private final Image unpaidIcon = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
+    private final Image paidIcon = new Image(getClass().getResource("/images/paid.png").toExternalForm());
 
 
     /**
@@ -63,6 +63,6 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        paidStatus.setImage(student.getHasPaid() ? PAID_ICON : UNPAID_ICON);
+        paidStatus.setImage(student.getHasPaid() ? paidIcon : unpaidIcon);
     }
 }
