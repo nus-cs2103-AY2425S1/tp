@@ -120,6 +120,11 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
+    public ObservableList<Person> getFilteredPersonList() {
+        return filteredPersons;
+    }
+
+    @Override
     public ObservableList<Person> getFilteredGuestList() {
         return new FilteredList<>(filteredPersons,
                 person -> person instanceof Guest);
