@@ -14,6 +14,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
     public static final Prefix PREFIX_YEARGROUP = new Prefix("yg/");
     public static final Prefix PREFIX_SORT_PARAM = new Prefix("s/");
+    public static final Prefix PREFIX_FILTER_PARAM = new Prefix("f/");
+
 
 
 
