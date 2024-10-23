@@ -15,7 +15,7 @@ import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
- * Links an existing person in the address book to an existing Concert
+ * Links an existing person in the address book to an existing concert
  */
 public class AddConcertContactCommand extends Command {
 
@@ -36,26 +36,26 @@ public class AddConcertContactCommand extends Command {
     private final Index indexC;
 
     /**
-     * @param index1 of the person in the person list to link
-     * @param index2 of the concert in the concert list
+     * @param personIndex of the person in the person list to link
+     * @param concertIndex of the concert in the concert list
      */
-    public AddConcertContactCommand(Index index1, Index index2) {
-        requireNonNull(index1);
-        requireNonNull(index2);
+    public AddConcertContactCommand(Index personIndex, Index concertIndex) {
+        requireNonNull(personIndex);
+        requireNonNull(concertIndex);
 
-        this.indexP = index1;
-        this.indexC = index2;
+        this.indexP = personIndex;
+        this.indexC = concertIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
         List<Concert> lastShownConcertList = model.getFilteredConcertList();
-        assert lastShownList != null : "Person list should not be null";
+        assert lastShownPersonList != null : "Person list should not be null";
         assert lastShownConcertList != null : "Concert list should not be null";
 
-        if (indexP.getZeroBased() >= lastShownList.size()) {
+        if (indexP.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -63,7 +63,7 @@ public class AddConcertContactCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
         }
 
-        Person personToLink = lastShownList.get(indexP.getZeroBased());
+        Person personToLink = lastShownPersonList.get(indexP.getZeroBased());
         Concert concert = lastShownConcertList.get(indexC.getZeroBased());
 
         ConcertContact linkedPerson = new ConcertContact(personToLink, concert);
