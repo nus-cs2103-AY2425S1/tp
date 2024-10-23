@@ -39,7 +39,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_PURPOSE = "Edits the details of the person identified by the index number "
             + "used in the displayed person list.";
 
-    public static final String MESSAGE_FORMAT = "INDEX "
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " INDEX "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
             + "[" + PREFIX_EMAIL + "EMAIL] "

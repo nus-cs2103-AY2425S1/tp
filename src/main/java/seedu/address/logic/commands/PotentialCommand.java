@@ -23,7 +23,8 @@ public class PotentialCommand extends Command {
 
     public static final String MESSAGE_PURPOSE = "Adds a potential hire to the address book.";
 
-    public static final String MESSAGE_FORMAT = PREFIX_NAME + "NAME "
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " "
+            + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
