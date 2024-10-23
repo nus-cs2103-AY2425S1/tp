@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
 
-public class PersonHasTagPredicateTest {
+public class PersonHasFeaturePredicateTest {
     private PersonHasFeaturePredicate highTagOnlyPredicate =
           new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null);
     private PersonHasFeaturePredicate lowTagOnlyPredicate =
@@ -58,8 +58,23 @@ public class PersonHasTagPredicateTest {
                       new Phone(ALICE.getPhone().value), null, null);
         assertTrue(highTagOnlyPredicate.test(ALICE));
 
-
-
     }
+
+
+
+    @Test
+    public void testPhoneIsNullMatchesAnyPhoneReturnsTrue() {
+        Tag tag = new Tag("Low Risk");
+        Email email = new Email("test@example.com");
+        Address address = new Address("123 Main St");
+
+        PersonHasFeaturePredicate predicate = new PersonHasFeaturePredicate(tag, null, email, address);
+
+        // Create a person with a matching features
+        Person person = new Person(new Name("John Doe"), new Phone("87654321"), email, address, tag);
+
+        assertTrue(predicate.test(person));
+    }
+
 
 }
