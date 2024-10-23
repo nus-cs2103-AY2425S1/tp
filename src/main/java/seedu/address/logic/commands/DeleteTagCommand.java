@@ -57,7 +57,7 @@ public class DeleteTagCommand extends Command {
     private void removeTagFromPersons(Model model, Tag tag) {
         List<Person> persons = model.getFullPersonList();
         for (Person person : persons) {
-            if (person.getTags().contains(tag)) {
+            if (person.hasTag(tag)) {
                 replacePerson(model, person, tag);
             }
         }
