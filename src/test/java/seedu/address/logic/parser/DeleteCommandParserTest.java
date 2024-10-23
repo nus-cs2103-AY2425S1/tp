@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -39,29 +40,29 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validPhoneNumber_returnsDeleteCommand() {
-        Phone phone = new Phone("94351253");
-        assertParseSuccess(parser, "p/94351253", new DeleteCommand(phone));
+        Phone phone = new Phone(VALID_PHONE_BOB);
+        assertParseSuccess(parser, PHONE_DESC_BOB, new DeleteCommand(phone));
     }
 
     @Test
     public void parse_validAddress_returnsDeleteCommand() {
-        Address address = new Address("123, Jurong West Ave 6, #08-111");
-        assertParseSuccess(parser, "a/123, Jurong West Ave 6, #08-111", new DeleteCommand(address));
+        Address address = new Address(VALID_ADDRESS_BOB);
+        assertParseSuccess(parser, ADDRESS_DESC_BOB, new DeleteCommand(address));
     }
 
     @Test
     public void parse_validTags_returnsDeleteCommand() {
-        Tag tag = new Tag("friends");
+        Tag tag = new Tag(VALID_TAG_FRIEND);
         Set<Tag> tags = new HashSet<>();
         tags.add(tag);
-        assertParseSuccess(parser, "t/friends", new DeleteCommand(tags));
+        assertParseSuccess(parser, TAG_DESC_FRIEND, new DeleteCommand(tags));
     }
 
 
     @Test
     public void parse_validEmail_returnsDeleteCommand() {
-        Email email = new Email("alice@example.com");
-        assertParseSuccess(parser, "e/alice@example.com", new DeleteCommand(email));
+        Email email = new Email(VALID_EMAIL_BOB);
+        assertParseSuccess(parser, EMAIL_DESC_BOB, new DeleteCommand(email));
     }
 
 

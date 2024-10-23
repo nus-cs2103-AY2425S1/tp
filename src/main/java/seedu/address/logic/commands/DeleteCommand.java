@@ -115,11 +115,11 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command.
-     * Deletes the person from the model based on the provided criteria (index, phone number, name, address, email, or tags).
+     * Deletes the person from the model based on the provided criteria.
      *
      * @param model The model that holds the list of persons.
      * @return The result of the delete command execution.
-     * @throws CommandException If no valid person is found by index, phone number, name, address, email, or tags.
+     * @throws CommandException If no valid person is found.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -278,8 +278,16 @@ public class DeleteCommand extends Command {
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         if (targetIndex != null) {
             return targetIndex.equals(otherDeleteCommand.targetIndex);
-        } else {
+        } else if (phoneNumber != null) {
             return phoneNumber.equals(otherDeleteCommand.phoneNumber);
+        } else if (address != null) {
+            return address.equals(otherDeleteCommand.address);
+        } else if (email != null) {
+            return email.equals(otherDeleteCommand.email);
+        } else if (tags != null) {
+            return tags.equals(otherDeleteCommand.tags);
+        } else {
+            return predicate.equals(otherDeleteCommand.predicate);
         }
     }
 
