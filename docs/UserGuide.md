@@ -15,19 +15,20 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 ## Command summary
 Click on each command to jump to their subsection.
 
-| Action                                                   | Format, Examples                                                                                                                                 |
-|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help--help)**                          | `help`                                                                                                                                           |
-| **[Add](#adding-a-person--add)**                         | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
-| **[List](#listing-all-persons--list)**                   | `list`                                                                                                                                           |
-| **[Edit](#editing-a-person--edit)**                      | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **[Mark](#marking-person-as-attended--mark)**            | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
-| **[Unmark](#marking-person-as-absent--unmark)**          | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
-| **[Find](#locating-persons-by-name--find)**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
-| **[Sort](#sorting-persons-by-name-or-student-id--sort)** | `sort ORDER [n/][i/]`<br> e.g., `sort -1 i/`                                                                                                     |
-| **[Delete](#deleting-a-person--delete)**                 | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
-| **[Clear](#clearing-all-entries--clear)**                | `clear`                                                                                                                                          |
-| **[Exit](#exiting-the-program--exit)**                   | `exit`                                                                                                                                           |
+| Action                                           | Format, Examples                                                                                                                                 |
+|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help--help)**                  | `help`                                                                                                                                           |
+| **[Add](#adding-a-person--add)**                 | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
+| **[List](#listing-all-persons--list)**           | `list`                                                                                                                                           |
+| **[Edit](#editing-a-person--edit)**              | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
+| **[Mark](#marking-person-as-attended--mark)**    | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
+| **[Unmark](#marking-person-as-absent--unmark)**  | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
+| **[Reset](#resetting-person-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> e.g., `reset 2 tut/1`                                                                                             |
+| **[Find](#locating-persons-by-name--find)**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
+| **[Sort](#sorting-persons--sort)**               | `sort ORDER [n/][i/][tut/]`<br> e.g., `sort -1 i/`                                                                                               |
+| **[Delete](#deleting-a-person--delete)**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
+| **[Clear](#clearing-all-entries--clear)**        | `clear`                                                                                                                                          |
+| **[Exit](#exiting-the-program--exit)**           | `exit`                                                                                                                                           |
 
 ---
 
@@ -176,17 +177,18 @@ Examples:
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Sorting persons by name or student id : `sort`
+### Sorting persons : `sort`
 
-Sorts the displayed list of persons by either name or student id.
+Sorts the displayed list of persons by either name, student id or tutorial attendance.
 
-Format: `sort ORDER [n/][i/]`
+Format: `sort ORDER [n/][i/][tut/]`
 
 - `ORDER` indicates whether the sorted list is **ascending** or **descending**.
 - **Ascending** is represented with integer 1.
 - **Descending** is represented with integer -1.
 - `n/` indicates sorting according to name.
 - `i/` indicates sorting according to student id.
+- `tut/` indicates sorting according to tutorial attendance.
 
 Examples:
 
