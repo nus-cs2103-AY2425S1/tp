@@ -163,6 +163,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Opens the group window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleGroups() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +197,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowGroups()) {
+                handleGroups();
             }
 
             return commandResult;

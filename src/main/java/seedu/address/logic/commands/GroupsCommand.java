@@ -13,10 +13,10 @@ public class GroupsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all groups";
 
-
+    public static final String SHOWING_GROUPS_MESSAGE = "Opened help window.";
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(model.groupsString() + "\n" + MESSAGE_SUCCESS);
+        return new CommandResult(SHOWING_GROUPS_MESSAGE, false, true, false);
     }
 }
