@@ -1,23 +1,18 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.TypicalDescriptions.DESCRIPTION_FIRST;
+import static seedu.ddd.testutil.TypicalIds.getTypicalIdsAsSet;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
-import seedu.ddd.logic.Messages;
-import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
@@ -25,91 +20,28 @@ import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.event.Event;
-import seedu.ddd.testutil.ClientBuilder;
-import seedu.ddd.testutil.VendorBuilder;
 
-public class AddCommandTest {
-
+public class AddEventCommandTest {
     @Test
-    public void constructor_nullContact_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullClientIds_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(null,
+                getTypicalIdsAsSet(), DESCRIPTION_FIRST));
     }
 
     @Test
-    public void execute_clientAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Contact validClient = new ClientBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validClient).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validClient)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validClient), modelStub.contactsAdded);
+    public void constructor_nullVendorIds_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(getTypicalIdsAsSet(),
+                null, DESCRIPTION_FIRST));
     }
 
     @Test
-    public void execute_vendorAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Contact validVendor = new VendorBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validVendor).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validVendor)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validVendor), modelStub.contactsAdded);
-    }
-
-    @Test
-    public void execute_duplicateClient_throwsCommandException() {
-        Contact validClient = new ClientBuilder().build();
-        AddCommand addCommand = new AddCommand(validClient);
-        ModelStub modelStub = new ModelStubWithContact(validClient);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void execute_duplicateVendor_throwsCommandException() {
-        Contact validVendor = new VendorBuilder().build();
-        AddCommand addCommand = new AddCommand(validVendor);
-        ModelStub modelStub = new ModelStubWithContact(validVendor);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void equals() {
-        Contact alice = new ClientBuilder().withName("Alice").build();
-        Contact bob = new ClientBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+    public void constructor_nullDescription_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(getTypicalIdsAsSet(),
+                getTypicalIdsAsSet(), null));
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -247,9 +179,9 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the event being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingEventAdded extends ModelStub {
         final ArrayList<Contact> contactsAdded = new ArrayList<>();
 
         @Override
@@ -269,5 +201,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
