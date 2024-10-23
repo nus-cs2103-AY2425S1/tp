@@ -13,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public abstract class TutorialId {
 
     public static final String MESSAGE_CONSTRAINTS =
-                "Tutorial class should be numeric and typically represents a class code.";
-    public static final String VALIDATION_REGEX = "0|[1-9]\\d+"; // Numeric, can be extended to specific format
+                "Tutorial class should be in the format of Txxxx where xxxx are four digits.";
+    public static final String VALIDATION_REGEX = "^T\\d{4}$"; // Numeric, can be extended to specific format
 
     /**
      * Checks if the provided string is a valid tutorial class.

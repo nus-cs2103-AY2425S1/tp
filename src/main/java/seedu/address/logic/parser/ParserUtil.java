@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -112,17 +111,10 @@ public class ParserUtil {
     public static TutorialId parseTutIndex(String id) throws ParseException {
         requireNonNull(id);
         String trimmedId = id.trim();
-        checkArgument(checkUsingIsDigitMethod(trimmedId), Tutorial.MESSAGE_ID_CONSTRAINTS);
-        return TutorialId.of(trimmedId);
-    }
-
-    static boolean checkUsingIsDigitMethod(String input) {
-        for (char c : input.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
+        if (!TutorialId.isValidTutorialClass(trimmedId)) {
+            throw new ParseException(TutorialId.MESSAGE_CONSTRAINTS);
         }
-        return true;
+        return TutorialId.of(trimmedId);
     }
 
     /**
