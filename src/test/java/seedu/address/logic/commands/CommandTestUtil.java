@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -49,6 +50,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_ROLE_AMY = "PATIENT";
     public static final String VALID_ROLE_BOB = "CAREGIVER";
+    public static final String VALID_NOTE = "Note text";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -72,6 +74,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "mother";
+    public static final String INVALID_NOTE_DESC = " " + PREFIX_NOTE + " ";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -96,6 +99,8 @@ public class CommandTestUtil {
     public static final String VALID_START_TIME_DESC_APPOINTMENT = " " + PREFIX_START_TIME
         + VALID_START_TIME_APPOINTMENT;
     public static final String VALID_END_TIME_DESC_APPOINTMENT = " " + PREFIX_END_TIME + VALID_END_TIME_APPOINTMENT;
+
+    public static final String VALID_NOTE_DESC = " " + PREFIX_NOTE + VALID_NOTE;
 
     public static final String INVALID_DATE_DESC_APPOINTMENT = " " + PREFIX_DATE
         + INVALID_DATE_APPOINTMENT; // Invalid date format in YYYY/MM/DD format

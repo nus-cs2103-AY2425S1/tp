@@ -143,6 +143,10 @@ public class UniquePersonList implements Iterable<Person> {
         caregiver.removePatient(patient.getNric());
     }
 
+    public void addNoteToPerson(Note note, Person person) {
+        person.addNote(note);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

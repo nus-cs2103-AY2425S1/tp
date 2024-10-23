@@ -83,7 +83,7 @@ public class DeleteAppointmentCommand extends Command {
             return true;
         }
 
-        // Check if the other object is an instance of AddAppointmentCommand
+        // Check if the other object is an instance of DeleteAppointmentCommand
         if (!(other instanceof DeleteAppointmentCommand)) {
             return false;
         }

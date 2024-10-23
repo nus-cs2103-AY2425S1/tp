@@ -16,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -208,6 +209,9 @@ public class ModelManager implements Model {
         return null;
     }
 
+    public void addNoteToPerson(Note note, Person person) {
+        addressBook.addNoteToPerson(note, person);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
