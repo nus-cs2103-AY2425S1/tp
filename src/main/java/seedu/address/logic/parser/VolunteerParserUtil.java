@@ -9,7 +9,6 @@ import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
-import seedu.address.model.volunteer.Time;
 
 
 /**
@@ -96,23 +95,4 @@ public class VolunteerParserUtil {
         }
         return new Email(trimmedEmail);
     }
-
-    /**
-     * Parses a given string as a {@code Time} and returns it after validation.
-     *
-     * @param time The time string to be parsed.
-     * @return A valid {@code Time} object.
-     * @throws ParseException If the given time does not conform to the time constraints.
-     */
-    public static Time parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        if (!seedu.address.model.volunteer.Time.isValidTime(trimmedTime)) {
-            throw new ParseException(seedu.address.model.volunteer.Time.MESSAGE_CONSTRAINTS);
-        }
-        return new Time(trimmedTime);
-    }
-
-
-
 }

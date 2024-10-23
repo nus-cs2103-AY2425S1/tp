@@ -44,11 +44,7 @@ public class Messages {
                 .append("; Email: ")
                 .append(volunteer.getEmail())
                 .append("; Available Date: ")
-                .append(volunteer.getAvailableDate())
-                .append("; Start Time Availability: ")
-                .append(volunteer.getStartTimeAvailability())
-                .append("; End Time Availability: ")
-                .append(volunteer.getEndTimeAvailability());
+                .append(volunteer.getAvailableDate());
         return builder.toString();
     }
 

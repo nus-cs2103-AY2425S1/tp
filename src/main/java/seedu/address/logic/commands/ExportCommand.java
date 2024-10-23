@@ -34,7 +34,7 @@ public class ExportCommand extends Command {
         StringBuilder volunteerCsvOutput = new StringBuilder();
 
         // CSV headers
-        volunteerCsvOutput.append("Name,Phone,Email,Available Date,Start Time,End Time,Events\n");
+        volunteerCsvOutput.append("Name,Phone,Email,Available Date,Events\n");
 
         // Build the CSV content
         for (Volunteer volunteer : volunteers) {
@@ -51,8 +51,6 @@ public class ExportCommand extends Command {
                     .append(volunteer.getPhone()).append(",")
                     .append(volunteer.getEmail()).append(",")
                     .append(volunteer.getAvailableDate()).append(",")
-                    .append(volunteer.getStartTimeAvailability()).append(",")
-                    .append(volunteer.getEndTimeAvailability()).append(",")
                     .append(events)
                     .append("\n");
         }
