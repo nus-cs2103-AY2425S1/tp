@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMERGENCY_CONTACT = "93838383";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
-    public static final String DEFAULT_LEVEL = "P3";
+    public static final String DEFAULT_LEVEL = "S1 Express";
 
     private Name name;
     private Phone phone;
@@ -119,7 +119,7 @@ public class PersonBuilder {
      * Sets the {@code Level} of the {@code Person} that we are building.
      */
     public PersonBuilder withLevel(String level) {
-        this.level = !level.isEmpty() ? new Level(level) : new Level("NONE");
+        this.level = level.isEmpty() ? new Level("NONE NONE") : new Level(level);
         return this;
     }
 

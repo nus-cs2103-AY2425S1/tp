@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_P3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S4_NT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
@@ -77,13 +77,13 @@ public class TagCommandTest {
         Person taggedPerson = personInList
                 .withName(VALID_NAME_BOB)
                 .withSubjects(VALID_SUBJECT_ENGLISH)
-                .withLevel(VALID_LEVEL_P3)
+                .withLevel(VALID_LEVEL_S4_NT)
                 .build();
 
         UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
                 .withName(VALID_NAME_BOB)
                 .withSubjects(VALID_SUBJECT_ENGLISH)
-                .withLevel(VALID_LEVEL_P3)
+                .withLevel(VALID_LEVEL_S4_NT)
                 .build();
 
         TagCommand tagCommand = new TagCommand(lastPerson.getName(), descriptor);
@@ -159,14 +159,14 @@ public class TagCommandTest {
         Name name = new Name(VALID_NAME_BOB);
         UpdatePersonDescriptor updatePersonDescriptor = new UpdatePersonDescriptorBuilder()
                 .withSubjects(VALID_SUBJECT_MATH)
-                .withLevel(VALID_LEVEL_P3)
+                .withLevel(VALID_LEVEL_S4_NT)
                 .build();
 
         TagCommand tagCommand = new TagCommand(name, updatePersonDescriptor);
 
         String expected =
                 String.format("%s{name=%s, level=Optional[%s], subjects=Optional[[[%s]]]}",
-                        TagCommand.class.getCanonicalName(), name, VALID_LEVEL_P3, VALID_SUBJECT_MATH);
+                        TagCommand.class.getCanonicalName(), name, VALID_LEVEL_S4_NT, VALID_SUBJECT_MATH);
 
         assertEquals(expected, tagCommand.toString());
     }

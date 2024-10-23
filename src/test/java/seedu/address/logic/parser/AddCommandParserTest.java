@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMERGENCY_CON
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.LEVEL_DESC_P3;
+import static seedu.address.logic.commands.CommandTestUtil.LEVEL_DESC_S1_EXPRESS;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -54,7 +54,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB
-                + ADDRESS_DESC_BOB + LEVEL_DESC_P3 + SUBJECT_DESC_ENGLISH, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + LEVEL_DESC_S1_EXPRESS + SUBJECT_DESC_ENGLISH, new AddCommand(expectedPerson));
 
 
         // multiple subjects - all accepted
@@ -63,7 +63,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB
-                        + LEVEL_DESC_P3 + ADDRESS_DESC_BOB + SUBJECT_DESC_MATH + SUBJECT_DESC_ENGLISH,
+                        + LEVEL_DESC_S1_EXPRESS + ADDRESS_DESC_BOB + SUBJECT_DESC_MATH + SUBJECT_DESC_ENGLISH,
                 new AddCommand(expectedPersonMultipleSubjects));
     }
 
@@ -126,7 +126,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero subjects
-        Person expectedPerson = new PersonBuilder(AMY).withSubjects().withLevel("").build();
+        Person expectedPerson = new PersonBuilder(AMY).withSubjects().withLevel("NONE NONE").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY
                         + EMERGENCY_CONTACT_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
@@ -175,9 +175,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB
                 + INVALID_ADDRESS_DESC + SUBJECT_DESC_MATH + SUBJECT_DESC_ENGLISH, Address.MESSAGE_CONSTRAINTS);
 
-        // invalid subject
+        // adding student with subject without level
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB
-                + ADDRESS_DESC_BOB + INVALID_SUBJECT_DESC + VALID_SUBJECT_ENGLISH, Subject.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_BOB + INVALID_SUBJECT_DESC + VALID_SUBJECT_ENGLISH, Subject.MESSAGE_LEVEL_NEEDED);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB

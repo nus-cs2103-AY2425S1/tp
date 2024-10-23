@@ -4,11 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEVEL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.LEVEL_DESC_P3;
+import static seedu.address.logic.commands.CommandTestUtil.LEVEL_DESC_S1_EXPRESS;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MATH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_P3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S1_EXPRESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
@@ -33,11 +33,11 @@ public class TagCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
 
-        String userInput = NAME_DESC_BOB + SUBJECT_DESC_MATH + LEVEL_DESC_P3;
+        String userInput = NAME_DESC_BOB + SUBJECT_DESC_MATH + LEVEL_DESC_S1_EXPRESS;
 
         UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
                 .withSubjects(VALID_SUBJECT_MATH)
-                .withLevel(VALID_LEVEL_P3)
+                .withLevel(VALID_LEVEL_S1_EXPRESS)
                 .build();
 
         TagCommand expectedCommand = new TagCommand(new Name(VALID_NAME_BOB), descriptor);
@@ -60,9 +60,9 @@ public class TagCommandParserTest {
     @Test
     public void parse_onlyLevelPresent_success() {
 
-        String userInput = NAME_DESC_BOB + LEVEL_DESC_P3;
+        String userInput = NAME_DESC_BOB + LEVEL_DESC_S1_EXPRESS;
         UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
-                .withLevel(VALID_LEVEL_P3)
+                .withLevel(VALID_LEVEL_S1_EXPRESS)
                 .build();
 
         TagCommand expectedCommand = new TagCommand(new Name(VALID_NAME_BOB), descriptor);
@@ -84,7 +84,7 @@ public class TagCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         //No name specified
-        assertParseFailure(parser, SUBJECT_DESC_MATH + LEVEL_DESC_P3, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, SUBJECT_DESC_MATH + LEVEL_DESC_S1_EXPRESS, MESSAGE_INVALID_FORMAT);
 
         //No Subject and no Level specified
         assertParseFailure(parser, NAME_DESC_BOB, MESSAGE_INVALID_FORMAT);

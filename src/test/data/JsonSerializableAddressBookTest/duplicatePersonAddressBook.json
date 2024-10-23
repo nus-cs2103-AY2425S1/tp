@@ -6,7 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "note": "",
     "subjects": [ "MATH" ],
-    "level": "P3",
+    "level": "S1 Express",
     "lessonTimes" : [ ]
   }, {
     "name": "Alice Pauline",
@@ -14,7 +14,7 @@
     "emergencyContact": "94351253",
     "address": "4th street",
     "note": "",
-    "level": "P6",
+    "level": "S1 NA",
     "lessonTimes" : [ ]
   } ]
 }

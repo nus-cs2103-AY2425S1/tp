@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_TIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.LEVEL_DESC_K2;
+import static seedu.address.logic.commands.CommandTestUtil.LEVEL_DESC_S4_NT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -18,7 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_K2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S4_NT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -181,8 +181,8 @@ public class UpdateCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // level
-        userInput = targetName + LEVEL_DESC_K2;
-        descriptor = new UpdatePersonDescriptorBuilder().withLevel(VALID_LEVEL_K2).build();
+        userInput = targetName + LEVEL_DESC_S4_NT;
+        descriptor = new UpdatePersonDescriptorBuilder().withLevel(VALID_LEVEL_S4_NT).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

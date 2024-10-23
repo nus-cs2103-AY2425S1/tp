@@ -37,17 +37,17 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         UpdatePersonDescriptor editPersonTags = new UpdatePersonDescriptor();
 
+        if (argMultiMap.getValue(PREFIX_LEVEL).isPresent()) {
+            editPersonTags.setLevel(
+                    ParserUtil.parseLevel(
+                            argMultiMap.getValue(PREFIX_LEVEL).get()));
+
+        }
+
         if (argMultiMap.getValue(PREFIX_SUBJECT).isPresent()) {
             editPersonTags.setSubjects(
                     ParserUtil.parseSubjects(
                             argMultiMap.getAllValues(PREFIX_SUBJECT)));
-        }
-
-        if (argMultiMap.getValue(PREFIX_LEVEL).isPresent()) {
-            editPersonTags.setLevel(
-                    ParserUtil.parseLevel(
-                            argMultiMap.getValue(PREFIX_LEVEL).get()
-                    ));
         }
 
         if (argMultiMap.getValue(PREFIX_SUBJECT).isEmpty()) {
@@ -57,6 +57,5 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         return new TagCommand(personToTag, editPersonTags);
-
     }
 }

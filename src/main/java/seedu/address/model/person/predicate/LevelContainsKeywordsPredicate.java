@@ -2,7 +2,6 @@ package seedu.address.model.person.predicate;
 
 import java.util.List;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Person;
 
 /**
@@ -16,7 +15,7 @@ public class LevelContainsKeywordsPredicate extends ContainsKeywordsPredicate {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getLevel().levelName, keyword));
+                .anyMatch(keyword -> person.getLevel().levelName.equals(keyword));
     }
 
     @Override

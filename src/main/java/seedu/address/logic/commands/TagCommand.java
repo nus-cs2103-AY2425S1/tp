@@ -89,7 +89,8 @@ public class TagCommand extends Command {
 
     }
 
-    private static Person createPersonWithTags(Person personToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd) {
+    private static Person createPersonWithTags(Person personToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd)
+            throws CommandException {
         assert personToTag != null;
 
         Name updatedName = tagsToAdd.getName().orElse(personToTag.getName());
@@ -98,13 +99,24 @@ public class TagCommand extends Command {
                 .orElse(personToTag.getEmergencyContact());
         Address updatedAddress = tagsToAdd.getAddress().orElse(personToTag.getAddress());
         Note updatedNote = tagsToAdd.getNote().orElse(personToTag.getNote());
+
+        Level updatedLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
+
+        if (updatedLevel != null && tagsToAdd.getSubjects().isPresent()) {
+            if (!Subject.isValidSubjectsByLevel(updatedLevel,
+                            tagsToAdd
+                                .getSubjects()
+                                .get())) {
+                throw new CommandException(Subject.getValidSubjectMessage());
+            }
+        }
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(personToTag.getSubjects());
-        Level schoolLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
+
         TaskList updatedTaskList = tagsToAdd.getTaskList().orElse(personToTag.getTaskList());
         Set<LessonTime> updatedLessonTimes = tagsToAdd.getLessonTimes()
                 .orElse(personToTag.getLessonTimes());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects, schoolLevel, updatedTaskList, updatedLessonTimes);
+                updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList, updatedLessonTimes);
     }
 
     @Override

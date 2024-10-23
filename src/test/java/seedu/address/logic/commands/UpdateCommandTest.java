@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S1_EXPRESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -72,10 +73,11 @@ public class UpdateCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person updatedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withLevel(VALID_LEVEL_S1_EXPRESS)
                 .withSubjects(VALID_SUBJECT_MATH).build();
 
         UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withSubjects(VALID_SUBJECT_MATH).build();
+                .withPhone(VALID_PHONE_BOB).withLevel(VALID_LEVEL_S1_EXPRESS).withSubjects(VALID_SUBJECT_MATH).build();
         UpdateCommand updateCommand = new UpdateCommand(lastPerson.getName(), descriptor);
 
         String expectedMessage =
