@@ -51,6 +51,7 @@ public class NewtagCommandTest {
         expectedModel.addTag(tagColleagues);
 
         String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + " " + newTags + "\n"
+
                 + "Your tags: " + expectedModel.getTagList();
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);

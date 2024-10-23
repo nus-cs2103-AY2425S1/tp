@@ -45,7 +45,7 @@ public class UntagCommandTest {
                 personToUntag.getName(),
                 personToUntag.getPhone(),
                 personToUntag.getEmail(),
-                personToUntag.getRsvp(),
+                personToUntag.getRsvpStatus(),
                 updatedTags
         );
 
