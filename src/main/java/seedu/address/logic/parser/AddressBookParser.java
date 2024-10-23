@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ListTagsCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
+import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -92,6 +93,8 @@ public class AddressBookParser {
             return new HelpCommand();
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
+        case ViewWeddingCommand.COMMAND_WORD:
+            return new ViewWeddingCommandParser().parse(arguments);
         case AssignContactToWeddingCommand.COMMAND_WORD:
             return new AssignContactToWeddingCommandParser().parse(arguments);
         case AddWeddingCommand.COMMAND_WORD:
