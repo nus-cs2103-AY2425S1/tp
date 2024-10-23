@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -20,16 +21,22 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** UI State should be changed accordingly. */
     private final UiState uiState;
+
+    /** Details of person should be displayed */
+    private final Person personToView;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    private CommandResult(String feedbackToUser, boolean showHelp, boolean exit, UiState uiState) {
+    private CommandResult(String feedbackToUser, boolean showHelp, boolean exit, UiState uiState,
+                          Person personToView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.uiState = uiState;
+        this.personToView = personToView;
     }
 
     /**
@@ -38,7 +45,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, UiState.DETAILS);
+        this(feedbackToUser, showHelp, exit, UiState.DETAILS, null);
     }
 
     /**
@@ -47,7 +54,16 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, UiState uiState) {
-        this(feedbackToUser, false, false, uiState);
+        this(feedbackToUser, false, false, uiState, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * {@code showHelp}, and {@code exit},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, Person personToView) {
+        this(feedbackToUser, false, false, UiState.SPECIFIC_DETAILS, personToView);
     }
 
     public String getFeedbackToUser() {
@@ -64,6 +80,10 @@ public class CommandResult {
 
     public UiState getUiState() {
         return uiState;
+    }
+
+    public Person getPersonToView() {
+        return personToView;
     }
 
     @Override

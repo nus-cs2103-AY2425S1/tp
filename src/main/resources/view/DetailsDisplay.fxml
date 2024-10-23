@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fillWidth="true" spacing="10">
+
+        <VBox spacing="10" styleClass="vbox-border">
+            <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true"/>
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
+            <Label fx:id="emergencyContact" styleClass="cell_small_label" text="\$emergencyContact" wrapText="true"/>
+            <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
+            <FlowPane fx:id="subjects" />
+        </VBox>
+
+        <Separator styleClass="custom-separator" />
+
+        <VBox spacing="5" styleClass="vbox-border">
+            <Label styleClass="cell_big_label" text="Note" />
+            <Label fx:id="note" styleClass="cell_small_label" text="\$note" wrapText="true" />
+        </VBox>
+
+        <Separator styleClass="custom-separator" />
+
+        <VBox spacing="5" styleClass="vbox-border">
+            <Label styleClass="cell_big_label" text="Tasks" />
+            <Label fx:id="tasks" styleClass="cell_small_label" text="\$tasks" wrapText="true" />
+        </VBox>
+
+    </VBox>
+</ScrollPane>

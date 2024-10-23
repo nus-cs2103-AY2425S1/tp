@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -50,6 +51,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane detailsDisplayPlaceholder;
+
+    @FXML
+    private SplitPane mainSplitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -122,6 +129,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        mainSplitPane.setDividerPosition(0, 1);
     }
 
     /**
@@ -167,8 +176,18 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Changes state of the UI based on type of command.
      */
-    @FXML
-    private void handleUiState(UiState uiState) {
+    private void handleUiState(CommandResult commandResult) {
+        UiState uiState = commandResult.getUiState();
+        if (uiState == UiState.SPECIFIC_DETAILS) {
+            mainSplitPane.setDividerPosition(0, 0.5);
+            DetailsDisplay detailsDisplay = new DetailsDisplay(commandResult.getPersonToView());
+            detailsDisplayPlaceholder.getChildren().clear();
+            detailsDisplayPlaceholder.getChildren().add(detailsDisplay.getRoot());
+            detailsDisplayPlaceholder.setVisible(true);
+        } else {
+            mainSplitPane.setDividerPosition(0, 1);
+            detailsDisplayPlaceholder.setVisible(false);
+        }
         personListPanel.updateUiState(uiState);
     }
 
@@ -195,7 +214,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            handleUiState(commandResult.getUiState());
+            handleUiState(commandResult);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
