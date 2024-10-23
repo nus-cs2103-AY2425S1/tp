@@ -55,7 +55,6 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String INTERVIEW_SCORE_DESC_AMY = " " + PREFIX_INTERVIEW_SCORE + VALID_INTERVIEW_SCORE_AMY;
     public static final String INTERVIEW_SCORE_DESC_BOB = " " + PREFIX_INTERVIEW_SCORE + VALID_INTERVIEW_SCORE_BOB;
     public static final String SKILL_DESC_PYTHON = " " + PREFIX_SKILLS + VALID_SKILL_PYTHON;

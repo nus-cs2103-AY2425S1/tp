@@ -109,7 +109,8 @@ public class EditCommand extends Command {
         InterviewScore updatedInterviewScore = editPersonDescriptor.getInterviewScore()
                 .orElse(personToEdit.getInterviewScore());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedTags);
+        return new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedSkills,
+                updatedInterviewScore, updatedTags);
     }
 
     @Override
