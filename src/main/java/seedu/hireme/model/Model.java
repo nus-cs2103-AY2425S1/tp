@@ -1,6 +1,7 @@
 package seedu.hireme.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -84,4 +85,10 @@ public interface Model<T> {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredList(Predicate<T> predicate);
+
+    /**
+     * Sorts the filtered list using the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortFilteredList(Comparator<T> comparator);
 }

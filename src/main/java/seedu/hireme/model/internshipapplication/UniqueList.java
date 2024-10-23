@@ -2,6 +2,7 @@ package seedu.hireme.model.internshipapplication;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -118,6 +119,16 @@ public class UniqueList<T extends HireMeComparable<T>> implements Iterable<T> {
             throw new DuplicateInternshipException();
         }
         internalList.setAll(items);
+    }
+
+    /**
+     * Sorts the contents of this list according to the comparator.
+     *
+     * @param comparator The sorting order of the list of items.
+     */
+    public void sortItems(Comparator<T> comparator) {
+        requireNonNull(comparator);
+        internalList.sort(comparator);
     }
 
     /**

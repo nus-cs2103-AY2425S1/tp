@@ -23,6 +23,7 @@ import seedu.hireme.model.internshipapplication.Role;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ORDER = "Order can only be 'asc' or 'desc'.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -95,6 +96,22 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static boolean parseSortingOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim().toLowerCase();
+        if (!trimmedOrder.equals("asc") && !trimmedOrder.equals("desc")) {
+            throw new ParseException(MESSAGE_INVALID_ORDER);
+        }
+
+        return order.equals("asc");
     }
 
 }

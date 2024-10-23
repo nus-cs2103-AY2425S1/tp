@@ -3,6 +3,7 @@ package seedu.hireme.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,7 +21,7 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final AddressBook<T> addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<T> filtered;
+    private FilteredList<T> filtered;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -127,6 +128,12 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
     public void updateFilteredList(Predicate<T> predicate) {
         requireNonNull(predicate);
         filtered.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredList(Comparator<T> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortItems(comparator);
     }
 
     @Override
