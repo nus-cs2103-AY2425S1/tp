@@ -69,7 +69,7 @@ public class PersonCard extends UiPart<Region> {
                 });
         isRsvp.setText(person.getRsvpStatusCard());
         isRsvp.backgroundProperty().addListener((observable, oldValue, newValue) -> {
-            if (!person.getRsvp()) {
+            if (!person.getRsvpStatus().equals("Coming")) {
 
                 isRsvp.setStyle("-fx-background-color: #eba250; -fx-background-radius: 2");
             }

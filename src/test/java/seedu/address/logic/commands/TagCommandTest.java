@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,7 +52,7 @@ public class TagCommandTest {
         updatedTags.add(validTag);
 
         Person updatedPerson = new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
-                                          false, updatedTags);
+                                          RsvpStatus.PENDING, updatedTags);
         expectedModel.setPerson(personToTag, updatedPerson);
         expectedModel.addTag(validTag);
         String expectedMessage = String.format(TagCommand.MESSAGE_TAG_PERSON_SUCCESS, Messages.format(updatedPerson));
@@ -68,7 +69,7 @@ public class TagCommandTest {
         Set<Tag> newTags = new HashSet<>(originalPerson.getTags());
         newTags.add(existingTag);
         Person personToTag = new Person(originalPerson.getName(), originalPerson.getPhone(), originalPerson.getEmail(),
-                                        false, newTags);
+                                        RsvpStatus.PENDING, newTags);
 
         model.setPerson(originalPerson, personToTag);
 
