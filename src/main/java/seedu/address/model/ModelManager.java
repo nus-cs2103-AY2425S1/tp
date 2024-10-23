@@ -1,13 +1,14 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -154,7 +155,7 @@ public class ModelManager implements Model {
     public void pinPerson(Person target) {
         requireNonNull(target);
         List<Person> updatedList = new ArrayList<>(filteredPersons);
-        if(updatedList.contains(target)) {
+        if (updatedList.contains(target)) {
             updatedList.remove(target);
         }
         updatedList.add(0, target);
