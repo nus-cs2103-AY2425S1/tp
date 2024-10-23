@@ -41,6 +41,8 @@ public class PersonListPanel extends UiPart<Region> {
             // set the visibility PersonDetailView to be false when the personList is empty
             if (personList.isEmpty()) {
                 personDetailView.getRoot().setVisible(false);
+            } else {
+                personDetailView.update(personList.get(0));
             }
         });
 
