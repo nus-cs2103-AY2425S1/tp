@@ -124,6 +124,27 @@ public class GoodsReceipt {
     }
 
     /**
+     * Returns supplier name.
+     */
+    public Name getSupplierName() {
+        return this.supplierName;
+    }
+
+    /**
+     * Returns procurement date.
+     */
+    public Date getProcurementDate() {
+        return this.procurementDate;
+    }
+
+    /**
+     * Returns arrival date.
+     */
+    public Date getArrivalDate() {
+        return this.arrivalDate;
+    }
+
+    /**
      * Returns total price of the goods.
      */
     public double getPriceTotal() {
