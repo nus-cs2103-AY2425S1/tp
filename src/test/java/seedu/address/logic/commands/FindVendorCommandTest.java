@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_NO_VENDORS_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_VENDORS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalVendors.CARL;
 import static seedu.address.testutil.TypicalVendors.ELLE;
@@ -55,13 +57,11 @@ public class FindVendorCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noVendorFound() {
-        String expectedMessage = String.format(MESSAGE_VENDORS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noVendorFoundError() {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindVendorCommand command = new FindVendorCommand(predicate);
         expectedModel.updateFilteredVendorList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredVendorList());
+        assertCommandFailure(command, model, MESSAGE_NO_VENDORS_FOUND);
     }
 
     @Test

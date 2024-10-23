@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_NO_EVENTS_FOUND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.CARL;
 import static seedu.address.testutil.TypicalEvents.ELLE;
@@ -55,13 +57,11 @@ public class FindEventCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noEventFound() {
-        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noEventFoundError() {
         EventNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredEventList());
+        assertCommandFailure(command, model, MESSAGE_NO_EVENTS_FOUND);
     }
 
     @Test
