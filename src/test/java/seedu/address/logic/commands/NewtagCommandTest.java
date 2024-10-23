@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagList;
 import seedu.address.testutil.TypicalTags;
 
 /**
@@ -66,6 +67,22 @@ public class NewtagCommandTest {
 
         NewtagCommand newTagCommand = new NewtagCommand(duplicateTags);
         String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
+
+        assertCommandFailure(newTagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_tooManyTags_failure() {
+        Tag newTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        List<Tag> newTags = new ArrayList<>();
+        newTags.add(newTag);
+
+        for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE; i++) {
+            model.addTag(new Tag(String.valueOf(i)));
+        }
+
+        NewtagCommand newTagCommand = new NewtagCommand(newTags);
+        String expectedMessage = NewtagCommand.MESSAGE_TOO_MANY_TAGS;
 
         assertCommandFailure(newTagCommand, model, expectedMessage);
     }

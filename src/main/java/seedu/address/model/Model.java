@@ -123,6 +123,14 @@ public interface Model {
     boolean hasTag(Tag tag);
 
     /**
+     * Checks if the size of the tag list is below or equal
+     * to the maximum size allowed.
+     *
+     * @return true if the size is acceptable, false otherwise.
+     */
+    boolean checkAcceptableTagListSize(int additionalSize);
+
+    /**
      * Returns the String representation of the
      * tag list managed by this model.
      *

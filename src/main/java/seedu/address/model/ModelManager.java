@@ -143,32 +143,25 @@ public class ModelManager implements Model {
 
     @Override
     public boolean addTag(Tag tag) {
-        if (this.hasTag(tag)) {
-            return false;
-        }
-        addressBook.addTag(tag);
-        return true;
+        return addressBook.addTag(tag);
     }
 
     @Override
     public boolean addTags(List<Tag> tags) {
+        boolean isSuccessful = true;
         for (Tag tag : tags) {
-            if (!addTag(tag)) {
-                return false;
-            }
+            isSuccessful &= addressBook.addTag(tag);
         }
-        return true;
+        return isSuccessful;
     }
 
     @Override
     public boolean deleteTags(List<Tag> tags) {
+        boolean isSuccessful = true;
         for (Tag tag : tags) {
-            if (!this.hasTag(tag)) {
-                return false;
-            }
-            addressBook.deleteTag(tag);
+            isSuccessful &= addressBook.deleteTag(tag);
         }
-        return true;
+        return isSuccessful;
     }
 
     @Override
@@ -179,6 +172,11 @@ public class ModelManager implements Model {
     @Override
     public String getTagList() {
         return addressBook.tagsToString();
+    }
+
+    @Override
+    public boolean checkAcceptableTagListSize(int additionalTags) {
+        return addressBook.checkAcceptableTagListSize(additionalTags);
     }
 
     @Override
