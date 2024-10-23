@@ -42,7 +42,7 @@ public class PawPatrolTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyPawPatrol_replacesData() {
         PawPatrol newData = getTypicalPawPatrol();
         pawPatrol.resetData(newData);
         assertEquals(newData, pawPatrol);
@@ -65,18 +65,18 @@ public class PawPatrolTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInPawPatrol_returnsFalse() {
         assertFalse(pawPatrol.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInPawPatrol_returnsTrue() {
         pawPatrol.addPerson(ALICE);
         assertTrue(pawPatrol.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInPawPatrol_returnsTrue() {
         pawPatrol.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
             .build();
@@ -94,7 +94,7 @@ public class PawPatrolTest {
     }
 
     @Test
-    public void hasLink_linkNotInAddressBook_returnsFalse() {
+    public void hasLink_linkNotInPawPatrol_returnsFalse() {
         Owner owner = TypicalOwners.ALICE;
         Pet pet = BELLA;
         Link link = new Link(owner, pet);
@@ -103,7 +103,7 @@ public class PawPatrolTest {
     }
 
     @Test
-    public void hasLink_linkInAddressBook_returnsTrue() {
+    public void hasLink_linkInPawPatrol_returnsTrue() {
         Owner owner = TypicalOwners.ALICE;
         Pet pet = BELLA;
         Link link = new Link(owner, pet);

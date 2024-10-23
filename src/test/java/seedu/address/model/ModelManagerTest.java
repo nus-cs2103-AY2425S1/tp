@@ -15,8 +15,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.link.Link;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PawPatrolBuilder;
+import seedu.address.testutil.TypicalOwners;
+import seedu.address.testutil.TypicalPets;
 
 public class ModelManagerTest {
 
@@ -61,12 +64,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setPawPatrolFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setPawPatrolPath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setPawPatrolFilePath_validPath_setsPawPatrolFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setPawPatrolPath(path);
         assertEquals(path, modelManager.getPawPatrolFilePath());
@@ -78,32 +81,63 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInPawPatrol_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasOwner_ownerNotInAddressBook_returnsFalse() {
+    public void hasOwner_ownerNotInPawPatrol_returnsFalse() {
         assertFalse(modelManager.hasOwner(seedu.address.testutil.TypicalOwners.ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPet_petNotInPawPatrol_returnsFalse() {
+        assertFalse(modelManager.hasPet(TypicalPets.BELLA));
+    }
+
+    @Test
+    public void hasLink_linkNotInPawPatrol_returnsFalse() {
+        assertFalse(modelManager.hasLink(new Link(TypicalOwners.ALICE, TypicalPets.BELLA)));
+    }
+
+    @Test
+    public void hasPerson_personInPawPatrol_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasOwner_ownerInAddressBook_returnsTrue() {
+    public void hasOwner_ownerInPawPatrol_returnsTrue() {
         modelManager.addOwner(seedu.address.testutil.TypicalOwners.ALICE);
         assertTrue(modelManager.hasOwner(seedu.address.testutil.TypicalOwners.ALICE));
     }
 
     @Test
-    public void deleteOwner_ownerInAddressBook_returnsFalse() {
+    public void hasPet_petInPawPatrol_returnsTrue() {
+        modelManager.addPet(TypicalPets.BELLA);
+        assertTrue(modelManager.hasPet(TypicalPets.BELLA));
+    }
+
+    @Test
+    public void hasLink_linkInPawPatrol_returnsTrue() {
+        Link link = new Link(TypicalOwners.ALICE, TypicalPets.BELLA);
+        modelManager.addLink(link);
+        assertTrue(modelManager.hasLink(link));
+    }
+
+    @Test
+    public void deleteOwner_ownerInPawPatrol_returnsFalse() {
         modelManager.addOwner(seedu.address.testutil.TypicalOwners.ALICE);
         modelManager.deleteOwner(seedu.address.testutil.TypicalOwners.ALICE);
         assertFalse(modelManager.hasOwner(seedu.address.testutil.TypicalOwners.ALICE));
+    }
+
+    @Test
+    public void deleteLink_linkInPawPatrol_returnsFalse() {
+        Link link = new Link(TypicalOwners.ALICE, TypicalPets.BELLA);
+        modelManager.addLink(link);
+        modelManager.deleteLink(link);
+        assertFalse(modelManager.hasLink(link));
     }
 
     @Test

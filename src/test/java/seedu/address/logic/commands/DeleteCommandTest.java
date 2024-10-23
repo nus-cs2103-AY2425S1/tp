@@ -31,7 +31,7 @@ import seedu.address.testutil.TypicalPets;
 public class DeleteCommandTest {
 
     private Model modelWithOwners = new ModelManager(TypicalOwners.getTypicalPawPatrol(), new UserPrefs());
-    private Model modelWithPets = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithPets = new ModelManager(TypicalPets.getTypicalPawPatrol(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredOwnerList_success() {
@@ -116,7 +116,7 @@ public class DeleteCommandTest {
         showOwnerAtIndex(modelWithOwners, INDEX_FIRST_OWNER);
 
         Index outOfBoundIndex = INDEX_SECOND_OWNER;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of PawPatrol list
         assertTrue(outOfBoundIndex.getZeroBased() < modelWithOwners.getPawPatrol().getOwnerList().size());
 
         DeleteCommand deleteCommand = new DeleteOwnerCommand(outOfBoundIndex);
@@ -129,7 +129,7 @@ public class DeleteCommandTest {
         showPetAtIndex(modelWithPets, INDEX_FIRST_PET);
 
         Index outOfBoundIndex = INDEX_SECOND_PET;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of PawPatrol list
         assertTrue(outOfBoundIndex.getZeroBased() < modelWithPets.getPawPatrol().getPetList().size());
 
         DeleteCommand deleteCommand = new DeletePetCommand(outOfBoundIndex);

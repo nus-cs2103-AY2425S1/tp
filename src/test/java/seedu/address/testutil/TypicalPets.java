@@ -55,7 +55,7 @@ public class TypicalPets {
     /**
      * Returns an {@code PawPatrol} with all the typical pets.
      */
-    public static PawPatrol getTypicalAddressBook() {
+    public static PawPatrol getTypicalPawPatrol() {
         PawPatrol ab = new PawPatrol();
         for (Pet pet : getTypicalPets()) {
             ab.addPet(pet);

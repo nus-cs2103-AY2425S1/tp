@@ -13,7 +13,7 @@ import seedu.address.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyPawPatrol_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyPawPatrol_success() {
         Model model = new ModelManager(getTypicalPawPatrol(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalPawPatrol(), new UserPrefs());
         expectedModel.setPawPatrol(new PawPatrol());
