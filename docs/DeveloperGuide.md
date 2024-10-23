@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,24 +68,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BuyerListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Buyer` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -100,9 +100,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `BuyerListParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a buyer).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -111,23 +111,23 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `BuyerListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `BuyerListParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the buyer list data i.e., all `Buyer` objects (which are contained in a `UniqueBuyerList` object).
+* stores the currently 'selected' `Buyer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Buyer>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `BuyerList`, which `Buyer` references. This allows `BuyerList` to only require one `Tag` object per unique tag, instead of each `Buyer` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -136,18 +136,18 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both buyer list data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `BuyerListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `seedu.budget.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -159,37 +159,37 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedBuyerList`. It extends `BuyerList` with an undo/redo history, stored internally as an `buyerListStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedBuyerList#commit()` — Saves the current buyer list state in its history.
+* `VersionedBuyerList#undo()` — Restores the previous buyer list state from its history.
+* `VersionedBuyerList#redo()` — Restores a previously undone buyer list state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitBuyerList()`, `Model#undoBuyerList()` and `Model#redoBuyerList()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedBuyerList` will be initialized with the initial buyer list state, and the `currentStatePointer` pointing to that single buyer list state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th buyer in the buyer list. The `delete` command calls `Model#commitBuyerList()`, causing the modified state of the buyer list after the `delete 5` command executes to be saved in the `buyerListStateList`, and the `currentStatePointer` is shifted to the newly inserted buyer list state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new buyer. The `add` command also calls `Model#commitBuyerList()`, causing another modified buyer list state to be saved into the `buyerListStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitBuyerList()`, so the buyer list state will not be saved into the `buyerListStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the buyer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoBuyerList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous buyer list state, and restores the buyer list to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial BuyerList state, then there are no previous BuyerList states to restore. The `undo` command uses `Model#canUndoBuyerList()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -206,17 +206,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoBuyerList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the buyer list to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `buyerListStateList.size() - 1`, pointing to the latest buyer list state, then there are no undone BuyerList states to restore. The `redo` command uses `Model#canRedoBuyerList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the buyer list, such as `list`, will usually not call `Model#commitBuyerList()`, `Model#undoBuyerList()` or `Model#redoBuyerList()`. Thus, the `buyerListStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitBuyerList()`. Since the `currentStatePointer` is not pointing at the end of the `buyerListStateList`, all buyer list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -228,13 +228,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire buyer list.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the buyer being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -262,63 +262,157 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+A real estate agent who...
+* has a need to manage a significant number of client contacts
+* frequently needs to track client information, such as property preferences, deal statuses, and meetings
+* hopes to ensure smooth communication with clients by sending updates on listings, reminders for follow-ups, and managing appointments
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Using CLI to streamline management of client contacts and communications will make it more efficient than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                   | I want to …​                                                                                               | So that I can…​                                                            |
+|--------|---------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *` | new user                  | see usage instructions                                                                                     | refer to instructions when I forget how to use the App                     |
+| `* * *` | user                      | add a new client                                                                                           | keep track of their information                                            |
+| `* * *` | user                      | delete a client                                                                                            | remove entries that I no longer need                                       |
+| `* * *` | user                      | find a client by name                                                                                      | locate details of buyers without having to go through the entire list     |
+| `* * *` | user                      | categorize clients as buyers, sellers and renters                                                          | easily filter and manage different client types                            |
+| `* * *` | user                      | filter contacts by tags (e.g. `Meeting Time`, `High` or `Low Priority`)                                    |                                                                            |
+| `* * *` | user                      | send bulk emails to groups of clients                                                                      | inform them of new property listing                                        |
+| `* * *` | user                      | view my contacts using commands                                                                            | track them better                                                          |
+| `* * *` | user                      | collect the name, contact number and email of my clients                                                   |                                                                            |
+| `* * *` | user                      | have a meeting schedule                                                                                    | keep track of future meetings                                              |
+| `* * * ` | user                      | tag clients with labels like `high priority` or `first time buyer`                                         | prioritise my outreach efforts                                             |
+| `* *`  | long-term user of the app | archive old client contacts                                                                                | my buyer list remains up-to-date without deleting past information       |
+| `* *`  | long-term user of the app | mark clients as `inactive` or `closed deal`                                                                | focus on active prospects                                                  |
+| `* *`  | user                      | hide private contact details                                                                               | minimize chance of someone else seeing them by accident                    |
+| `* *`  | user                      | store notes about clients' property preferences                                                            | tailor property recommendations to their needs                             |
+| `* *`  | user                      | set reminders for client follow-ups                                                                        | don't miss important communications                                        |
+| `* *`  | user                      | group clients by location preferences                                                                      | easily send property updates                                               |
+| `* *`  | user                      | track status of property deals for each client (e.g. `interested`, `offer made`, `contract signed`)        | stay organised                                                             |
+| `* *`  | long-term user of the app | log the last interaction date with the client                                                              | maintain regular communication                                             |
+| `* *`  | expert user               | export my contact list to Excel or CSV                                                                     | share it with colleagues or for reporting purposes                         |
+| `* *`  | expert user               | import contacts from my phone or other databases                                                           | quickly build by buyer list                                              |
+| `* *`  | user                      | add notes to client interactions                                                                           | capture important details discussed in meetings or phone calls             |
+| `* *`  | user                      | set a follow-up frequency for each client                                                                  | stay in regular contact                                                    |
+| `* *`  | user                      | track a client's viewing history                                                                           | know which client have been shown to which property                        |
+| `* *`  | user                      | filter clients by their buying timelines (e.g. immediate, next 5 months)                                   | focus on urgent leads                                                      |
+| `* *`  | user                      | set up reminders for key seller-related milestones (e.g. contract expiration, price reduction discussions) | never miss an important deadline                                           |
+| `* *`  | user                      | track client communication preferences                                                                     | engage them through their preferred channels                               |
+| `* *`  | user                      | generate a visual itmeline of a property's selling process                                                 | easily communicate progress to sellers                                     |
+| `* *`  | user                      | collect budget preference, neighbourhood preference and property of my buyer and seller                    |                                                                            |
+| `*`    | user                      | receive notifications when it's time to follow up with a client                                            | not forget                                                                 |
+| `*`    | user                      | assign a lead source to each client, e.g. referral, open house, website                                    | know where my business is coming from                                      |
+| `*`    | real estate agent         | schedule and track open house events                                                                       | ensure smooth operations and follow up with attendees                      |
+| `*`    | user                      | monitor competing listings in the same area                                                                | adjust pricing and marketing strategies accordingly                        |
+| `*`    | user                      | track commission details for each property sale                                                            | keep accurate financial records                                            |
+| `*`    | user                      | generate reports on the number of leads genrated per listing                                               | show sellers the interest their property is receiving                      |
+| `*`    | user                      | manage and log referral partner interactions (e.g. contractors, photographers)                             | maintain strong professional relationships                                 |
+| `*`    | user                      | send property performance updates to sellers (e.g. number of views, showings)                              | keep them informed and engaged                                             |
+| `*`    | user                      | track which clients were referre by past clients                                                           | send buyeralised appreciation messages and foster long-term relationships |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ABCLI` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+<details>
+    <summary><b>Use Case 1: Adding a contact</b></summary>
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1.  User requests to add a contact
+2.  ABCLI adds the contact
+3.  ABCLI shows a success message
+4.  ABCLI shows the updated list of contacts on its interface
+- Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The contact format is invalid
+    * 1a1. ABCLI shows an error message
+    * Use case ends.
 
-  Use case ends.
+</details>
 
-* 3a. The given index is invalid.
+<details>
+    <summary><b>Use Case 2: Deleting a contact</b></summary>
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User requests to list contacts
+2.  ABCLI shows the list of contacts on its interface
+3.  User requests to delete a specific contact
+4.  ABCLI deletes the contact
+5.  ABCLI shows a success message
+6.  ABCLI shows the updated list of contacts on its interface
 
-*{More to be added}*
+- Use case ends
+
+**Extensions**
+- 3a. The index for deletion is not a positive whole number
+  - 3a1. ABCLI shows an error message
+  - Use case ends
+- 3b. The index for deletion is out of range
+  - 3b1. ABCLI shows an error message
+  - Use case ends
+</details>
+
+<details>
+    <summary><b>Use Case 3: Adding a meetup</b></summary>
+
+**MSS**
+1.  User requests to add a meetup
+2.  ABCLI adds the meetup
+3.  ABCLI shows a success message
+4.  ABCLI shows the updated list of meetups on its interface
+- Use case ends
+
+**Extensions**
+- 1a. The command is missing a name
+  - 1a1. ABCLI shows an error message
+  - Use case ends
+
+- 1b. The command is missing a flag
+  - 1b1 ABCLI shows an error message
+  - Use case ends
+</details>
+
+<details>
+    <summary><b>Use Case 4: Viewing contacts</b></summary>
+
+**MSS**
+1.  User requests to view all contacts
+2.  ABCLI shows the list of contacts on its interface
+- Use case ends
+
+**Extensions**
+- 1a. Viewing buyer and seller contacts
+    - 1a1. User requests to view buyer contacts
+    - 1a2. ABCLI shows the list of contacts of buyers on its interface
+    - 1a3. User requests to view seller contacts
+    - 1a4. ABCLI shows the list of contacts of sellers on its interface
+    - Use case ends
+
+- 1b. t/ flag has invalid contact type
+    - 1b1. ABCLI shows an error message
+    - Use case ends
+
+</details>
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 buyers without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -356,17 +450,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a buyer
 
-1. Deleting a person while all persons are being shown
+1. Deleting a buyer while all buyers are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all buyers using the `list` command. Multiple buyers in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No buyer is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -380,3 +474,57 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Non-Functional Requirements
+1. ABCLI should be a result of evolving/enhancing/morphing the given codebase.
+
+1. ABCLI should be targeting users who can type fast and prefer typing over other means of input.
+
+1. ABCLI should be for a single user.
+
+1. ABCLI needs to be developed in a breadth-first incremental manner over the project duration.
+
+1. ABCLI's data should be stored locally and should be in a human editable text file.
+
+1. ABCLI cannot use a DBMS to store data.
+
+1. ABCLI should follow the Object-oriented paradigm primarily.
+
+1. ABCLI should work on the Windows, Linux, and OS-X platforms.
+
+1. ABCLI should work on a computer that has version 17 of Java.
+
+1. ABCLI should work without requiring an installer.
+
+1. ABCLI should not depend on your own remote server.
+
+1. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source, and have permissive license terms and do not require any installation by users and do not violate other constraints.
+
+1. The GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%. In addition, the GUI should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
+
+1. ABCLI has to be packaged into a single JAR file.
+
+### Glossary
+1. **ABCLI**
+Our product name.
+
+1. **CLI**
+The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
+
+1. **Command Line**
+A text box where you enter commands.
+
+1. **Flag**
+In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a flag but `add` is not.
+
+1. **GUI**
+Graphical user interface. The screen you see when opening the application.
+
+1. [**Java**](https://www.java.com/en/)
+A programming language.
+
+1. **Parameter**
+A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
+
+1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)
+An operating system.

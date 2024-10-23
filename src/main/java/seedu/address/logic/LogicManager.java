@@ -11,11 +11,15 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.AbcliParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyBuyerList;
+import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
+import seedu.address.model.buyer.Buyer;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 import seedu.address.storage.Storage;
 
 /**
@@ -31,7 +35,6 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +42,6 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
     }
 
     @Override
@@ -47,11 +49,13 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = AbcliParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        logger.info("meetup list is now " + model.getMeetUpList());
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveBuyerList(model.getBuyerList());
+            storage.saveMeetUpList(model.getMeetUpList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,18 +66,48 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyBuyerList getBuyerList() {
+        return model.getBuyerList();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Buyer> getFilteredBuyerList() {
+        return model.getFilteredBuyerList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getBuyerListFilePath() {
+        return model.getBuyerListFilePath();
+    }
+
+    @Override
+    public ReadOnlyMeetUpList getMeetUpList() {
+        return model.getMeetUpList();
+    }
+
+    @Override
+    public ObservableList<MeetUp> getFilteredMeetUpList() {
+        return model.getFilteredMeetUpList();
+    }
+
+    @Override
+    public Path getMeetUpListFilePath() {
+        return model.getMeetUpListFilePath();
+    }
+
+    @Override
+    public ReadOnlyPropertyList getPropertyList() {
+        return model.getPropertyList();
+    }
+
+    @Override
+    public ObservableList<Property> getFilteredPropertyList() {
+        return model.getFilteredPropertyList();
+    }
+
+    @Override
+    public Path getPropertyListFilePath() {
+        return model.getPropertyListFilePath();
     }
 
     @Override

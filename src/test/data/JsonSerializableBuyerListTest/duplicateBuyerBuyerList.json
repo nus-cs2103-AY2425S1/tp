@@ -1,0 +1,14 @@
+{
+  "buyers": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "budget": "1,000,000",
+    "tags": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "budget": "1,000,000"
+  } ]
+}
