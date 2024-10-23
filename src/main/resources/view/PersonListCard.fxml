@@ -38,6 +38,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="dateOfBirth" styleClass="cell_small_label" text="\$dateOfBirth" />
       <Label fx:id="householdIncome" styleClass="cell_small_label" text="\$householdIncome" />
+      <Label fx:id="familySize" styleClass="cell_small_label" text="\$familySize" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </VBox>
     <VBox alignment="TOP_RIGHT" minHeight="105" GridPane.columnIndex="1">

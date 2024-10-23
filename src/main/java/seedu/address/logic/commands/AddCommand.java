@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAMILY_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -34,6 +35,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_PRIORITY + "PRIORITY = LOW] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_INCOME + "INCOME = 0] "
+            + "[" + PREFIX_FAMILY_SIZE + "FAMILY SIZE = 1] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -42,6 +44,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_PRIORITY + "HIGH "
             + PREFIX_REMARK + "Promises to pay back next week. "
+            + PREFIX_FAMILY_SIZE + "3 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
