@@ -67,12 +67,12 @@ public class CloseClaimCommand extends Command {
         Client clientToCloseClaim = lastShownList.get(index.getZeroBased());
 
         try {
-
             InsurancePlansManager clientToEditInsurancePlansManager = clientToCloseClaim.getInsurancePlansManager();
             InsurancePlan planToBeUsed = clientToEditInsurancePlansManager.getInsurancePlan(insuranceId);
+            clientToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
 
             Claim claimToBeMarkedAsClosed = planToBeUsed.getClaim(claimId);
-            claimToBeMarkedAsClosed.close();
+            clientToEditInsurancePlansManager.closeClaim(planToBeUsed, claimToBeMarkedAsClosed);
 
             Client clientWithClosedClaim = lastShownList.get(index.getZeroBased());
             model.setClient(clientToCloseClaim, clientWithClosedClaim);
