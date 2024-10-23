@@ -9,12 +9,11 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Wedding;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: Field values are validated and immutable.
  */
 public class Person {
 
@@ -27,25 +26,27 @@ public class Person {
     private final Address address;
     private final Tag tag;
 
-    private final Set<Tag> tags = new HashSet<>();        // to remove
+    private final Set<Tag> tags = new HashSet<>(); // to remove
     private final Wedding wedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {    // to remove
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) { // to remove
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.tag = new Tag("Sample Tag");
+        this.tag = null;
         this.wedding = null;
     }
 
-
+    /**
+     * Every field, except tag and wedding, must be present and not null.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Tag tag, Wedding wedding) {
         requireAllNonNull(name, phone, email, address, tag);
         this.name = name;
@@ -80,7 +81,7 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {                     // to remove
+    public Set<Tag> getTags() { // to remove
         return Collections.unmodifiableSet(tags);
     }
 
@@ -97,15 +98,7 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress());
+        return this.equals(otherPerson);
     }
 
     /**

@@ -2,8 +2,12 @@ package seedu.address.model.wedding;
 
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a Client in a Wedding.
+ * Guarantees: Field values are validated and immutable.
+ */
 public class Client {
-    private Person person;
+    private final Person person;
 
     public Client(Person person) {
         this.person = person;
