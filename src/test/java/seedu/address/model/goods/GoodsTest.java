@@ -53,4 +53,12 @@ public class GoodsTest {
         GoodsName otherGoods = new GoodsName("Other Bread");
         assertNotEquals(testGoods, otherGoods);
     }
+
+    @Test
+    public void convertToCsvWrite_success() {
+        Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
+        String expected = "Gardenia Bread,CONSUMABLES";
+        assertEquals(expected, testGoods.convertToCsvWrite());
+    }
+
 }
