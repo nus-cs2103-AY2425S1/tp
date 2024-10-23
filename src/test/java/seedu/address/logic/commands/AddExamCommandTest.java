@@ -2,13 +2,16 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_FINAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_MIDTERM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_PRACTICAL;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +23,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddExamCommandTest {
 
@@ -68,8 +68,8 @@ public class AddExamCommandTest {
     @Test
     public void execute_duplicateExam_throwsCommandException() {
         AddExamCommand addExamCommand = new AddExamCommand(new Exam(VALID_EXAM_MIDTERM));
-        assertThrows(CommandException.class, AddExamCommand.MESSAGE_DUPLICATE_EXAM,
-                () -> addExamCommand.execute(model));
+        assertThrows(CommandException.class, AddExamCommand.MESSAGE_DUPLICATE_EXAM, () -> addExamCommand
+                .execute(model));
     }
 
     @Test
