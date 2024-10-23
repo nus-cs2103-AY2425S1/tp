@@ -122,8 +122,8 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("contactType", contactType)
                 .add("name", name)
-                .add("phone", phone.map(Phone::toString).orElse(""))
-                .add("email", email.map(Email::toString).orElse(""))
+                .add("phone", phone.map(Phone::toString).orElse(" "))
+                .add("email", email.map(Email::toString).orElse(" "))
                 .add("telegramHandle", telegramHandle)
                 .add("tags", tags)
                 .toString();

@@ -53,8 +53,8 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().map(Phone::toString).orElse(""));
-        email.setText(person.getEmail().map(Email::toString).orElse(""));
+        phone.setText(person.getPhone().map(Phone::toString).orElse(" "));
+        email.setText(person.getEmail().map(Email::toString).orElse(" "));
         telegramHandle.setText(person.getTelegramHandle().value);
         String contactTypeStr = person.getContactType().value.toString().toLowerCase();
         contactType.setText(contactTypeStr);
