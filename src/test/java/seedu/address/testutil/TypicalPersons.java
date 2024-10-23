@@ -32,11 +32,11 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withTelegram("carlKurz").build();
+            .withEmail("heinz@example.com").withTelegram("carlKurz").withFavourite().build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withTelegram("danMeier").build();
+            .withEmail("cornelia@example.com").withTelegram("danMeier").withFavourite().build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822224")
-            .withEmail("werner@example.com").withTelegram("elleMeyer").build();
+            .withEmail("werner@example.com").withTelegram("elleMeyer").withFavourite().build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94822427")
             .withEmail("lydia@example.com").withTelegram("fionaKunz").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94822442")

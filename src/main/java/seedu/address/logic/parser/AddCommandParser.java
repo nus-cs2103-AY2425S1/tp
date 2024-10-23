@@ -35,7 +35,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM, PREFIX_ROLE, PREFIX_FAVOURITE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
+                        PREFIX_ROLE, PREFIX_FAVOURITE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -49,7 +50,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Set<Attendance> emptyAttendanceList = new HashSet<>();
-        FavouriteStatus isFavourite = argMultimap.getValue(PREFIX_FAVOURITE).isPresent() ? FavouriteStatus.FAVOURITE : FavouriteStatus.NOT_FAVOURITE;
+        FavouriteStatus isFavourite = argMultimap.getValue(PREFIX_FAVOURITE).isPresent()
+                ? FavouriteStatus.FAVOURITE
+                : FavouriteStatus.NOT_FAVOURITE;
 
         Person person = new Person(name, phone, email, telegram, roleList, emptyAttendanceList, isFavourite);
 

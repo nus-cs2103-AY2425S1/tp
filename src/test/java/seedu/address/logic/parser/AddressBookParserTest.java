@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.IsFavouritePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
@@ -84,7 +85,8 @@ public class AddressBookParserTest {
 
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords),
                 new RoleContainsKeywordsPredicate(List.of()),
-                new TelegramContainsKeywordsPredicate(List.of())), command);
+                new TelegramContainsKeywordsPredicate(List.of()),
+                new IsFavouritePredicate(null)), command);
     }
 
 

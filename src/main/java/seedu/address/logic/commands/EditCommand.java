@@ -108,9 +108,11 @@ public class EditCommand extends Command {
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         Set<Attendance> attendance = personToEdit.getAttendance();
-        FavouriteStatus updatedFavouriteStatus = editPersonDescriptor.getIsFavouriteStatus().orElse(personToEdit.getFavouriteStatus());
+        FavouriteStatus updatedFavouriteStatus = editPersonDescriptor.getIsFavouriteStatus()
+                .orElse(personToEdit.getFavouriteStatus());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedRoles, attendance, updatedFavouriteStatus);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedRoles,
+                attendance, updatedFavouriteStatus);
     }
 
     @Override

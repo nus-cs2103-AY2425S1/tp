@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.IsFavouritePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
 import seedu.address.model.person.TelegramContainsKeywordsPredicate;
@@ -92,7 +93,8 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(List.of("chen", "albert")),
                         new RoleContainsKeywordsPredicate(List.of("member", "exco")),
-                        new TelegramContainsKeywordsPredicate(List.of()));
+                        new TelegramContainsKeywordsPredicate(List.of()),
+                        new IsFavouritePredicate(null));
         assertParseSuccess(parser, " n/chen  n/albert  r/member r/exco ", expectedFindCommand);
 
         // multiple whitespaces between keywords

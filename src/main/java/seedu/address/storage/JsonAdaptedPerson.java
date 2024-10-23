@@ -40,7 +40,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
             @JsonProperty("roles") List<JsonAdaptedRole> roles,
-            @JsonProperty("attendance") List<JsonAdaptedAttendance> attendance, @JsonProperty("favouriteStatus") String favouriteStatus) {
+            @JsonProperty("attendance") List<JsonAdaptedAttendance> attendance,
+                             @JsonProperty("favouriteStatus") String favouriteStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -125,10 +126,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     FavouriteStatus.class.getSimpleName()));
         }
+        if (!FavouriteStatus.isValidFavouriteStatus(favouriteStatus)) {
+            throw new IllegalValueException(FavouriteStatus.MESSAGE_CONSTRAINTS);
+        }
         final FavouriteStatus modelFavouriteStatus = FavouriteStatus.valueOf(favouriteStatus);
+
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Set<Attendance> modelAttendance = new HashSet<>(personAttendance);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles, modelAttendance, modelFavouriteStatus);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles,
+                modelAttendance, modelFavouriteStatus);
     }
 
 }

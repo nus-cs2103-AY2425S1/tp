@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -21,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEGRAM = "amyBee";
+    public static final String DEFAULT_FAVOURITE_STATUS = "NOT_FAVOURITE";
 
     private Name name;
     private Phone phone;
@@ -28,6 +30,7 @@ public class PersonBuilder {
     private Telegram telegram;
     private Set<Role> roles;
     private Set<Attendance> attendance;
+    private FavouriteStatus favouriteStatus = FavouriteStatus.NOT_FAVOURITE;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +42,7 @@ public class PersonBuilder {
         telegram = new Telegram(DEFAULT_TELEGRAM);
         roles = new HashSet<>();
         attendance = new HashSet<>();
+        favouriteStatus = FavouriteStatus.valueOf(DEFAULT_FAVOURITE_STATUS);
     }
 
     /**
@@ -95,8 +99,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code FavouriteStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavourite() {
+        this.favouriteStatus = FavouriteStatus.FAVOURITE;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, telegram, roles, attendance);
+        return new Person(name, phone, email, telegram, roles, attendance, favouriteStatus);
     }
 
 }

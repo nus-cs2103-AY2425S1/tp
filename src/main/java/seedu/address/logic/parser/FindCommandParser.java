@@ -28,7 +28,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_FAVOURITE);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE,
+                PREFIX_TELEGRAM, PREFIX_FAVOURITE);
 
         if (!areSomePrefixesPresent(argumentMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_FAVOURITE)
                 || !argumentMultimap.getPreamble().isEmpty()) {
@@ -51,7 +52,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         nameKeywords = nameKeywords.stream().map(String::trim).toList();
         roleKeywords = roleKeywords.stream().map(String::trim).toList();
         telegramKeywords = telegramKeywords.stream().map(String::trim).toList();
-        FavouriteStatus favouriteStatus = argumentMultimap.getAllValues(PREFIX_FAVOURITE).isEmpty() ? null : FavouriteStatus.FAVOURITE;
+        FavouriteStatus favouriteStatus = argumentMultimap.getAllValues(PREFIX_FAVOURITE).isEmpty()
+                ? null
+                : FavouriteStatus.FAVOURITE;
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new RoleContainsKeywordsPredicate(roleKeywords),

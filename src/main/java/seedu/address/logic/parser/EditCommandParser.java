@@ -35,9 +35,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM, PREFIX_ROLE, PREFIX_FAVOURITE, PREFIX_NONFAVOURITE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
+                        PREFIX_ROLE, PREFIX_FAVOURITE, PREFIX_NONFAVOURITE);
 
-        if (argMultimap.getValue(PREFIX_FAVOURITE).isPresent() && argMultimap.getValue(PREFIX_NONFAVOURITE).isPresent()) {
+        if (argMultimap.getValue(PREFIX_FAVOURITE).isPresent()
+                && argMultimap.getValue(PREFIX_NONFAVOURITE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
