@@ -9,10 +9,11 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: Field values are validated and immutable.
  */
 public class Person {
 
@@ -23,18 +24,37 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tag role;
+
+    private final Set<Tag> tags = new HashSet<>(); // to remove
+    private final Wedding ownWedding;
+    private final Set<Wedding> weddingJobs = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) { // to remove
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.role = null;
+        this.ownWedding = null;
+    }
+
+    /**
+     * Every field, except tag and wedding, must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
+        requireAllNonNull(name, phone, email, address, role);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+        this.ownWedding = ownWedding;
     }
 
     public Name getName() {
@@ -53,12 +73,24 @@ public class Person {
         return address;
     }
 
+    public Tag getRole() {
+        return role;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
+    public Set<Tag> getTags() { // to remove
         return Collections.unmodifiableSet(tags);
+    } // to remove
+
+    public Wedding getOwnWedding() {
+        return ownWedding;
+    }
+
+    public Set<Wedding> getWeddingJobs() {
+        return weddingJobs;
     }
 
     /**
@@ -66,15 +98,7 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress());
+        return this.equals(otherPerson);
     }
 
     /**
@@ -121,23 +145,29 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && role.equals(otherPerson.role)
+                && ownWedding.equals(otherPerson.ownWedding)
+                && weddingJobs.equals(otherPerson.weddingJobs);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, role, ownWedding, weddingJobs);
     }
 
     @Override
     public String toString() {
+        String nullString = "";
+
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("tag", role == null ? nullString : role)
+                .add("wedding", ownWedding == null ? nullString : ownWedding)
+                .add("wedding jobs", weddingJobs)
                 .toString();
     }
 
