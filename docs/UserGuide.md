@@ -224,7 +224,12 @@ To understand how a full command is interpreted, we will utilise the following e
 
 **General Notes about TrackMate:**<br>
 
-TO BE DONE
+> **A command can be categorized into three formats:**
+> 1. `COMMAND` + `PARAMETER_PREFIX` + `PARAMETER`
+> 2. `COMMAND` + `PARAMETER`
+> 3. `COMMAND`
+> 
+> The second format applies specifically to delete commands!
 
 **Notes about the command format:**<br>
 
