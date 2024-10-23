@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -221,18 +220,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> absentDates} into an {@code ArrayList<AbsentDate>}.
-     */
-    public static ArrayList<AbsentDate> parseAbsentDates(Collection<String> absentDates) throws ParseException {
-        requireNonNull(absentDates);
-        final ArrayList<AbsentDate> absentDateList = new ArrayList<>();
-        for (String absentDate : absentDates) {
-            absentDateList.add(parseAbsentDate(absentDate));
-        }
-        return absentDateList;
-    }
-
-    /**
      * Parses a {@code String absentReason} into a {@code AbsentReason}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -247,15 +234,4 @@ public class ParserUtil {
         return new AbsentReason(trimmedAbsentReason);
     }
 
-    /**
-     * Parses {@code Collection<String> absentReasons} into an {@code ArrayList<AbsentReason>}.
-     */
-    public static ArrayList<AbsentReason> parseAbsentReasons(Collection<String> absentReasons) throws ParseException {
-        requireNonNull(absentReasons);
-        final ArrayList<AbsentReason> absentReasonList = new ArrayList<>();
-        for (String absentReason : absentReasons) {
-            absentReasonList.add(parseAbsentReason(absentReason));
-        }
-        return absentReasonList;
-    }
 }
