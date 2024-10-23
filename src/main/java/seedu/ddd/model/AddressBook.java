@@ -17,7 +17,8 @@ import seedu.ddd.model.event.common.UniqueEventList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-    private static int maxId;
+    private static int nextContactId;
+    private static int nextEventId;
     private final UniqueContactList contacts;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -165,15 +166,46 @@ public class AddressBook implements ReadOnlyAddressBook {
         return events.asUnmodifiableObservableList();
     }
 
-    public static void setNextId(int maxId) {
-        AddressBook.maxId = maxId;
+    /**
+     * Sets the {@code nextContactId} for this {@code AddressBook}.
+     */
+    public static void setNextContactId(int nextContactId) {
+        AddressBook.nextContactId = nextContactId;
     }
 
-    public static void incrementNextId() {
-        AddressBook.maxId += 1;
+    /**
+     * Increments the {@code nextContactId} for this {@code AddressBook} by 1.
+     */
+    public static void incrementNextContactId() {
+        AddressBook.nextContactId += 1;
     }
-    public static int getNextId() {
-        return AddressBook.maxId;
+
+    /**
+     * Retrieves the {@code nextContactId} from this {@code AddressBook}.
+     */
+    public static int getNextContactId() {
+        return AddressBook.nextContactId;
+    }
+
+    /**
+     * Sets the {@code nextEventId} for this {@code AddressBook}.
+     */
+    public static void setNextEventId(int nextEventId) {
+        AddressBook.nextEventId = nextEventId;
+    }
+
+    /**
+     * Increments the {@code nextEventId} for this {@code AddressBook} by 1.
+     */
+    public static void incrementNextEventId() {
+        AddressBook.nextEventId += 1;
+    }
+
+    /**
+     * Retrieves the {@code nextEventId} from this {@code AddressBook}.
+     */
+    public static int getNextEventId() {
+        return AddressBook.nextEventId;
     }
 
     @Override

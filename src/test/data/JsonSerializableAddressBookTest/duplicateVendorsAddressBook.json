@@ -18,5 +18,7 @@
     "service" : "abc",
     "id" : 1
   } ],
-  "nextId" : 2
+  "events": [],
+  "nextContactId" : 2,
+  "nextEventId": 0
 }

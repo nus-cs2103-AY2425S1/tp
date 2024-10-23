@@ -43,7 +43,7 @@ abstract class JsonAdaptedContact {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedContact} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedContact(
@@ -79,9 +79,9 @@ abstract class JsonAdaptedContact {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted contact object into the model's {@code Contact} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted contact.
      */
     public Contact toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();

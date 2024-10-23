@@ -50,7 +50,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_ID_AMY = "123";
     public static final String VALID_ID_BOB = "456";
-
+    public static final String VALID_DESCRIPTION_WEDDING_AMY = "Wedding for Amy";
+    public static final String VALID_DESCRIPTION_WEDDING_BOB = "Wedding for Bob";
+    public static final String VALID_EVENT_ID_WEDDING_AMY = "123";
+    public static final String VALID_EVENT_ID_WEDDING_BOB = "456";
     public static final String CLIENT_FLAG = " " + CliFlags.FLAG_CLIENT.getPrefix();
     public static final String VENDOR_FLAG = " " + CliFlags.FLAG_VENDOR.getPrefix();
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;

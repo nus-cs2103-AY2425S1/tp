@@ -14,6 +14,7 @@ import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
+import seedu.ddd.model.event.Event;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -22,17 +23,24 @@ import seedu.ddd.model.contact.vendor.Vendor;
 class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
-    private int nextId;
+    private final List<JsonAdaptedEvent> events = new ArrayList<>();
+    private final int nextContactId;
+    private final int nextEventId;
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given contacts.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("contacts") List<JsonAdaptedContact> contacts,
-        @JsonProperty("nextId") int nextId) {
+        @JsonProperty("events") List<JsonAdaptedEvent> events,
+        @JsonProperty("nextContactId") int nextContactId,
+        @JsonProperty("nextEventId") int nextEventId) {
         this.contacts.addAll(contacts);
-        this.nextId = nextId;
+        this.events.addAll(events);
+        this.nextContactId = nextContactId;
+        this.nextEventId = nextEventId;
     }
 
     /**
@@ -43,7 +51,10 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContactFactory::create)
                 .collect(Collectors.toList()));
-        nextId = AddressBook.getNextId();
+        events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new)
+                .collect(Collectors.toList()));
+        nextContactId = AddressBook.getNextContactId();
+        nextEventId = AddressBook.getNextEventId();
     }
 
     /**
@@ -64,7 +75,18 @@ class JsonSerializableAddressBook {
             }
             addressBook.addContact(contact);
         }
-        AddressBook.setNextId(nextId);
+
+        for (JsonAdaptedEvent jsonAdaptedEvent : events) {
+            Event event = jsonAdaptedEvent.toModelType();
+            if (addressBook.hasEvent(event)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+            }
+            addressBook.addEvent(event);
+        }
+
+        AddressBook.setNextContactId(nextContactId);
+        AddressBook.setNextEventId(nextEventId);
+
         return addressBook;
     }
 }

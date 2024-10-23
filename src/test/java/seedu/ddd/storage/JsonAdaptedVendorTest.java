@@ -39,7 +39,7 @@ public class JsonAdaptedVendorTest {
     private static final int VALID_ID = BENSON.getId().id;
 
     @Test
-    public void toModelType_validClientDetails_returnsClient() throws Exception {
+    public void toModelType_validVendorDetails_returnsVendor() throws Exception {
         JsonAdaptedVendor vendor = new JsonAdaptedVendor(BENSON);
         assertEquals(BENSON, vendor.toModelType());
     }
