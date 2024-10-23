@@ -6,10 +6,45 @@
 
 # BridalBuddy User Guide
 
-BridalBuddy is a **desktop app for managing wedding contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BridalBuddy can get your contact management tasks done faster than traditional GUI apps.
+BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](#glossary).
+It is an app targeted at Wedding Planners to help them streamline guest and vendor management for their clients.
 
-<!-- * Table of Contents -->
-<page-nav-print />
+As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
+That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
+
+With CodeSphere, you can easily:
+* Add a course that you teach.
+* Then, add students into that course.
+
+And to find out more about what else CodeSphere can do for you, continue to read the rest of this all-encompassing user guide.
+
+## Table of Contents
+1. [**User Guide Tips**](#user-guide-tips)
+2. [**Quick Start**](#quick-start)
+3. [**Tutorial for Beginners**](#tutorial-for-beginners)
+4. [**Features**](#features)
+    * [**Accessing Input History**](#accessing-input-history)
+    * [**General Commands**](#general-commands)
+        * [`help` Viewing help](#viewing-help--help)
+        * [`exit` Exiting the program](#exiting-the-program--exit)
+        * [`stats` View the total number of guests and vendors at any point](#view-total-number-of-people--stats)
+    * [**Guest Related Commands**](#guest-related-commands)
+        * [`add_guest` Adding a new guest to the guest list](#adding-a-guest--add_guest)
+        * [`edit_guest` Editing the details of a guest](#editing-a-guest--edit_guest)
+        * [`delete` Deleting a guest from the guest list](#deleting-a-guest--delete_guest)
+    * [**Vendor Related Commands**](#vendor-related-commands)
+        * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor--add_vendor)
+        * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor--edit_vendor)
+        * [`delete_vendor` Deleting a student](#deleting-a-vendor--delete_vendor)
+    * [**Miscellaneous**](#miscellaneous)
+        * [Saving the data](#saving-the-data)
+        * [Editing the data file](#editing-the-data-file)
+5. [**FAQ**](#faq)
+6. [**Known Issues**](#known-issues)
+7. [**Command summary**](#command-summary)
+    * [**Home Page**](#home-page)
+    * [**Course Page**](#course-page)
+8. [**Glossary**](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
