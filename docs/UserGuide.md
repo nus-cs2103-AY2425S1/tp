@@ -94,16 +94,26 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list [s/SORT_OPTION]`
+Format: `list`
+
+### Sorting the displayed list: `sort`
+
+Sorts the currently visible list of persons by a specified field. 
+
+Format: `sort [s/SORT_OPTION]`
+
+* You can use `sort` to arrange the contacts in the list you're currently viewing, whether it's the full list or a subset from commands like `search`.
+* If no sort option is provided, `sort` will restore the list to its original order (i.e. the order in which contacts were added).
+* The sort order remains active until you apply a new sort option.
 
 <box type="tip" seamless>
 
-**Tip:** Optionally, the list can be sorted by specific fields such as contact `name`
+**Tip:** Currently, the supported sort option is `name`. Additional options may be added in future versions. 
 </box>
 
 Examples:
-* `list`
-* `list s/name`
+* `sort`
+* `sort s/name`
 
 ### Editing a person : `edit`
 
@@ -129,20 +139,20 @@ Search persons whose fields match the keywords given.
 Format: `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Search will only be done for the fields indicated by the provided prefixes
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The order of the prefixes provided does not matter. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`
+* Search is restricted to the fields indicated by the provided prefixes.
+* For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
+* The order of the prefixes provided does not affect search results. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`
+* Tag inputs must be alphanumeric
 * Only full words will be matched e.g. `friend` will not match `friends`
-* Persons matching at least one keyword will be returned (i.e. `OR` search)
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague <br>
+1. **Person A:** `name`: John Doe `tag`: colleague `group`: blood drive <br>
 2. **Person B:** `name`: Alex Yeoh `tag`: friends <br>
-3. **Person C:** `name`: David Li `tag`: friends
+3. **Person C:** `name`: David Li `tag`: friends `group`: blood drive
 * `search n/ john` returns persons with the name `john` like `John Doe`
-* `search t/ friends` returns all persons tagged as friends, like `Alex Yeoh`, `David Li`
-* `search n/ Alex t/ friends` returns all persons with name matching `Alex` and tag matching `friends` like `Alex Yeoh` <br>
+* `search t/ friends` returns all persons tagged as friends like `Alex Yeoh` and `David Li`
+* `search n/ david t/ friends g/ blood drive` returns all persons with name matching `david`, tag matching `friends` and in group `blood drive` like `David Li`. <br>
     ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -157,7 +167,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `search n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `search` command.
 
 ### Clearing all entries : `clear`
 
@@ -177,15 +187,6 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
   There must be at least one index provided, and indices should be separated by a space.
 * There cannot be two groups with the same name. If a group
   with the given `GROUP_NAME` currently exists, the command will fail.
-
-### Viewing a group's members: `viewGroup`
-
-Views members of a group.
-
-Format: `viewGroup g/GROUP_NAME`
-
-* Members of group named `GROUP_NAME` are displayed in the GUI list.
-* Group named `GROUP_NAME` must exist.
 
 ### Deleting a group: `deleteGroup`
 
@@ -245,7 +246,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
 **List**   | `list`
 **Help**   | `help`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
