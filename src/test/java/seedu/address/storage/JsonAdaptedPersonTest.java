@@ -59,18 +59,14 @@ public class JsonAdaptedPersonTest {
     private static final HashMap<AbsentDate, AbsentReason> VALID_ATTENDANCE = BENSON.getAttendances();
     private static final Map<String, String> VALID_ATTENDANCE_MAP = convertAttendanceToStringMap(VALID_ATTENDANCE);
 
-    private static final HashMap<AbsentDate, AbsentReason> INVALID_ATTENDANCE_DATE = new HashMap<>() {{
-            put(new AbsentDate(INVALID_ABSENT_DATE), new AbsentReason(VALID_ABSENT_REASON));
-            }};
-    private static final Map<String, String> INVALID_ATTENDANCE_DATE_MAP =
-            convertAttendanceToStringMap(INVALID_ATTENDANCE_DATE);
-    private static final HashMap<AbsentDate, AbsentReason> INVALID_ATTENDANCE_REASON = new HashMap<>() {{
-            put(new AbsentDate(VALID_ABSENT_DATE), new AbsentReason(INVALID_ABSENT_REASON));
-            }};
-    private static final Map<String, String> INVALID_ATTENDANCE_REASON_MAP =
-            convertAttendanceToStringMap(INVALID_ATTENDANCE_REASON);
-
-
+    /**
+     * Converts a map of attendance records from AbsentDate and AbsentReason objects
+     * to a map of their string representations.
+     *
+     * @param attendance A map containing AbsentDate as keys and AbsentReason as values.
+     * @return A map with string representations of the AbsentDate as keys and
+     *         their corresponding AbsentReason as values.
+     */
     private static Map<String, String> convertAttendanceToStringMap(HashMap<AbsentDate, AbsentReason> attendance) {
         Map<String, String> stringAttendanceMap = new HashMap<>();
 
@@ -268,19 +264,27 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidAttendanceDueToInvalidDate_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REGISTER_NUMBER,
-                        VALID_SEX, VALID_STUDENT_CLASS, VALID_ECNAME, INVALID_ECNUMBER, VALID_TAGS,
-                        INVALID_ATTENDANCE_DATE_MAP);
-        String expectedMessage = AbsentDate.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-    @Test
-    public void toModelType_invalidAttendanceDueToInvalidReason_throwsIllegalValueException() {
+        Map<String, String> invalidAttendance = new HashMap<>();
+        invalidAttendance.put(INVALID_ABSENT_DATE, VALID_ABSENT_REASON);
+
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REGISTER_NUMBER,
                         VALID_SEX, VALID_STUDENT_CLASS, VALID_ECNAME, VALID_ECNUMBER, VALID_TAGS,
-                        INVALID_ATTENDANCE_REASON_MAP);
+                        invalidAttendance);
+
+        String expectedMessage = AbsentDate.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAttendanceDueToInvalidReason_throwsIllegalValueException() {
+        Map<String, String> invalidAttendance = new HashMap<>();
+        invalidAttendance.put(VALID_ABSENT_DATE, INVALID_ABSENT_REASON);
+
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REGISTER_NUMBER,
+                        VALID_SEX, VALID_STUDENT_CLASS, VALID_ECNAME, VALID_ECNUMBER, VALID_TAGS,
+                        invalidAttendance);
         String expectedMessage = AbsentReason.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

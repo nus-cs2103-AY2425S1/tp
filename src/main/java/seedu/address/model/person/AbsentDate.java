@@ -33,7 +33,7 @@ public class AbsentDate {
      * @return true if absentDate is valid
      */
     public static boolean isValidAbsentDate(String absentDate) {
-        return absentDate != null && (absentDate.matches(VALIDATION_REGEX) || absentDate.isEmpty());
+        return absentDate != null && (absentDate.matches(VALIDATION_REGEX));
     }
 
     @Override

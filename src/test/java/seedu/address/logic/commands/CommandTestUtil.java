@@ -74,7 +74,6 @@ public class CommandTestUtil {
     public static final String STUDENT_CLASS_DESC_AMY = " " + PREFIX_STUDENT_CLASS + VALID_STUDENT_CLASS_AMY;
     public static final String STUDENT_CLASS_DESC_BOB = " " + PREFIX_STUDENT_CLASS + VALID_STUDENT_CLASS_BOB;
     public static final String ECNAME_DESC_AMY = " " + PREFIX_ECNAME + VALID_ECNAME_AMY;
-    public static final String ECNAME_DESC_BOB = " " + PREFIX_ECNAME + VALID_ECNAME_BOB;
     public static final String ECNUMBER_DESC_AMY = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_AMY;
     public static final String ECNUMBER_DESC_BOB = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -112,13 +111,13 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withRegisterNumber(VALID_REGISTER_NUMBER_AMY).withSex(VALID_SEX_AMY).withTags(VALID_TAG_FRIEND)
                 .withStudentClass(VALID_STUDENT_CLASS_AMY).withEcName(VALID_ECNAME_AMY)
-                .withEcNumber(VALID_ECNUMBER_AMY).withAttendance(VALID_ATTENDANCE_AMY).build();
+                .withEcNumber(VALID_ECNUMBER_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withRegisterNumber(VALID_REGISTER_NUMBER_BOB).withSex(VALID_SEX_BOB)
                 .withStudentClass(VALID_STUDENT_CLASS_BOB).withEcName(VALID_ECNAME_BOB)
                 .withEcNumber(VALID_ECNUMBER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-                .withAttendance(VALID_ATTENDANCE_BOB).build();
+                .build();
     }
 
     /**

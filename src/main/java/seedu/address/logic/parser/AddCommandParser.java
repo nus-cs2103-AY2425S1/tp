@@ -71,8 +71,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         ArrayList<AbsentDate> dateList = ParserUtil.parseAbsentDates(argMultimap.getAllValues(PREFIX_ABSENT_DATE));
-        ArrayList<AbsentReason> reasonList = ParserUtil.parseAbsentReasons(argMultimap.
-                getAllValues(PREFIX_ABSENT_REASON));
+        ArrayList<AbsentReason> reasonList = ParserUtil.parseAbsentReasons(argMultimap
+                .getAllValues(PREFIX_ABSENT_REASON));
         HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
         for (int i = 0; i < dateList.size(); i++) {
             attendances.put(dateList.get(i), reasonList.get(i));

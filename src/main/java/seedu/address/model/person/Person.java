@@ -54,8 +54,8 @@ public class Person {
         this.tags.addAll(tags);
         for (Map.Entry<AbsentDate, AbsentReason> entry : attendances.entrySet()) {
             this.attendances.put(
-                    new AbsentDate(entry.getKey().toString()),  // or entry.getKey().getDate() if there is such a method
-                    new AbsentReason(entry.getValue().toString())  // or entry.getValue().getReason() if there is such a method
+                    new AbsentDate(entry.getKey().toString()),
+                    new AbsentReason(entry.getValue().toString())
             );
         }
     }
@@ -144,8 +144,7 @@ public class Person {
                 && registerNumber.equals(otherPerson.registerNumber)
                 && sex.equals(otherPerson.sex)
                 && studentClass.equals(otherPerson.studentClass)
-                && tags.equals(otherPerson.tags)
-                && attendances.equals(otherPerson.attendances);
+                && tags.equals(otherPerson.tags);
     }
 
     @Override
@@ -168,7 +167,6 @@ public class Person {
                 .add("emergency contact name", ecName)
                 .add("emergency contact number", ecNumber)
                 .add("tags", tags)
-                //.add("attendances", attendances)
                 .toString();
     }
 

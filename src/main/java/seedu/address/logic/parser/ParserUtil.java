@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -215,7 +214,7 @@ public class ParserUtil {
     public static AbsentDate parseAbsentDate(String absentDate) throws ParseException {
         requireNonNull(absentDate);
         String trimmedAbsentDate = absentDate.trim();
-        if (!AbsentDate.isValidAbsentDate(absentDate)) {
+        if (!AbsentDate.isValidAbsentDate(trimmedAbsentDate)) {
             throw new ParseException(AbsentDate.MESSAGE_CONSTRAINTS);
         }
         return new AbsentDate(trimmedAbsentDate);
@@ -242,7 +241,7 @@ public class ParserUtil {
     public static AbsentReason parseAbsentReason(String absentReason) throws ParseException {
         requireNonNull(absentReason);
         String trimmedAbsentReason = absentReason.trim();
-        if (!AbsentReason.isValidAbsentReason(absentReason)) {
+        if (!AbsentReason.isValidAbsentReason(trimmedAbsentReason)) {
             throw new ParseException(AbsentReason.MESSAGE_CONSTRAINTS);
         }
         return new AbsentReason(trimmedAbsentReason);

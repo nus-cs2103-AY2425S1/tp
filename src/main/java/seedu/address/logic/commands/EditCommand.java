@@ -39,7 +39,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
-
 import seedu.address.model.tag.Tag;
 
 /**
@@ -126,8 +125,7 @@ public class EditCommand extends Command {
         EcName updatedEcName = editPersonDescriptor.getEcName().orElse(personToEdit.getEcName());
         EcNumber updatedEcNumber = editPersonDescriptor.getEcNumber().orElse(personToEdit.getEcNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        HashMap<AbsentDate, AbsentReason> updatedAttendances = editPersonDescriptor.getAttendances().
-                orElse(personToEdit.getAttendances());
+        HashMap<AbsentDate, AbsentReason> updatedAttendances = personToEdit.getAttendances();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
                 updatedStudentClass, updatedEcName, updatedEcNumber, updatedTags, updatedAttendances);
@@ -191,7 +189,6 @@ public class EditCommand extends Command {
             setEcName(toCopy.ecName);
             setEcNumber(toCopy.ecNumber);
             setTags(toCopy.tags);
-            setAttendance(toCopy.attendances);
         }
 
         /**
@@ -199,7 +196,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName,
-                    ecNumber, tags, attendances);
+                    ecNumber, tags);
         }
 
         public void setName(Name name) {
@@ -290,14 +287,6 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        /**
-         * Sets {@code attendances} to this object's {@code attendances}.
-         * A defensive copy of {@code attendances} is used internally.
-         */
-        public void setAttendance(HashMap<AbsentDate, AbsentReason> attendances) {
-            this.attendances = (attendances != null) ? new HashMap<>(attendances) : null;
         }
 
         /**

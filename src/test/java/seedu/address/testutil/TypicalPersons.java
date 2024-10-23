@@ -38,9 +38,12 @@ public class TypicalPersons {
 
     public static final AbsentDate VALID_ABSENT_DATE_BENSON = new AbsentDate("16-10-2024");
     public static final AbsentReason VALID_ABSENT_REASON_BENSON = new AbsentReason("Family Emergency");
-    public static final HashMap<AbsentDate, AbsentReason> ATTENDANCE_BENSON = new HashMap<>() {{
-            put(VALID_ABSENT_DATE_BENSON, VALID_ABSENT_REASON_BENSON);
-            }};
+
+    public static final HashMap<AbsentDate, AbsentReason> ATTENDANCE_BENSON;
+    static {
+        ATTENDANCE_BENSON = new HashMap<>();
+        ATTENDANCE_BENSON.put(VALID_ABSENT_DATE_BENSON, VALID_ABSENT_REASON_BENSON);
+    }
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111")
@@ -72,7 +75,7 @@ public class TypicalPersons {
             .withPhone("87652533").withEmail("cornelia@example.com")
             .withAddress("10th street").withRegisterNumber("6")
             .withSex("M").withStudentClass("4D")
-            .withEcName("").withEcNumber("")
+            .withEcName("").withEcNumber("").withTags("friends")
             .withAttendance(new HashMap<>())
             .build();
 

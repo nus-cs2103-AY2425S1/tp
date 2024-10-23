@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashMap;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -11,9 +14,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Person;
-
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Adds absent date and reason to an existing person in the address book.
@@ -77,11 +77,12 @@ public class AddAttendanceCommand extends Command {
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message =  !absentReason.value.isEmpty() ?
-                MESSAGE_ADD_ATTENDANCE_SUCCESS : MESSAGE_DELETE_ATTENDANCE_SUCCESS;
+        String message = !absentReason.value.isEmpty()
+                ? MESSAGE_ADD_ATTENDANCE_SUCCESS : MESSAGE_DELETE_ATTENDANCE_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }
 
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

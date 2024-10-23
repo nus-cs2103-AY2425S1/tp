@@ -14,16 +14,14 @@ public class AbsentReasonTest {
 
     @Test
     public void constructor_invalidReason_throwsIllegalArgumentException() {
-        String invalidReason = ""; // Empty reason is invalid
+        String invalidReason = "+";
         assertThrows(IllegalArgumentException.class, () -> new AbsentReason(invalidReason));
     }
 
     @Test
     public void isValidReason() {
-        // null reason
-        assertThrows(NullPointerException.class, () -> AbsentReason.isValidAbsentReason(null));
-
         // invalid reasons
+        assertFalse(AbsentReason.isValidAbsentReason(null));
         assertFalse(AbsentReason.isValidAbsentReason("123")); // numeric characters not allowed
         assertFalse(AbsentReason.isValidAbsentReason("!@#")); // special characters not allowed
 

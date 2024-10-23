@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Represents the date where the student is absent.

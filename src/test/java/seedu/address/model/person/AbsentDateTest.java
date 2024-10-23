@@ -20,10 +20,8 @@ public class AbsentDateTest {
 
     @Test
     public void isValidAbsentDate() {
-        // null date
-        assertThrows(NullPointerException.class, () -> AbsentDate.isValidAbsentDate(null));
-
         // invalid dates
+        assertFalse(AbsentDate.isValidAbsentDate(null));
         assertFalse(AbsentDate.isValidAbsentDate("")); // empty string
         assertFalse(AbsentDate.isValidAbsentDate(" ")); // spaces only
         assertFalse(AbsentDate.isValidAbsentDate("2024-02-30")); // non-existent date

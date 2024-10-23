@@ -12,14 +12,26 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 
+/**
+ * Parses input arguments and creates a new AddAttendanceCommand object
+ */
+public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> {
 
-public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand>{
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddAttendanceCommand
+     * and returns an AddAttendanceCommand object for execution.
+     *
+     * @param args The input arguments provided by the user.
+     * @return An AddAttendanceCommand object that contains the parsed index, absent date, and absent reason.
+     * @throws ParseException if the user input does not conform to the expected format,
+     *         including missing or invalid absent date or reason.
+     */
     public AddAttendanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ABSENT_DATE, PREFIX_ABSENT_REASON);
 
-        if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent() ||
-                argMultimap.getValue(PREFIX_ABSENT_DATE).get().trim().isEmpty()) {
+        if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent()
+                || argMultimap.getValue(PREFIX_ABSENT_DATE).get().trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAttendanceCommand.MESSAGE_USAGE));
         }

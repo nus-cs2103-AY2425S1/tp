@@ -196,6 +196,7 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + REGISTER_NUMBER_DESC_AMY + SEX_DESC_AMY + STUDENT_CLASS_DESC_AMY, new AddCommand(expectedPerson));
+
     }
 
     @Test
@@ -279,7 +280,7 @@ public class AddCommandParserTest {
 
         // invalid attendance
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + INVALID_TAG_DESC
+                + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + STUDENT_CLASS_DESC_BOB + TAG_DESC_HUSBAND
                 + VALID_TAG_FRIEND + INVALID_ATTENDANCE_DESC, AbsentDate.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported

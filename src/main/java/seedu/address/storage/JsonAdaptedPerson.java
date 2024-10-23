@@ -53,7 +53,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
-                             @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName,
+                             @JsonProperty("class") String studentClass,
+                             @JsonProperty("emergency contact name") String ecName,
                              @JsonProperty("emergency contact number") String ecNumber,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("attendances") Map<String, String> attendances) {
@@ -189,9 +190,24 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final HashMap<AbsentDate, AbsentReason> modelAttendances = new HashMap<>();
-        for (Map.Entry<String, String> entry : attendances.entrySet()) {
-            modelAttendances.put(new AbsentDate(entry.getKey()), new AbsentReason(entry.getValue()));
+        if (attendances != null) {
+            for (Map.Entry<String, String> entry : attendances.entrySet()) {
+                String dateStr = entry.getKey();
+                String reasonStr = entry.getValue();
+
+                if (!AbsentDate.isValidAbsentDate(dateStr)) {
+                    System.out.println("Invalid date detected: " + dateStr);
+                    throw new IllegalValueException(AbsentDate.MESSAGE_CONSTRAINTS);
+                }
+
+                if (!AbsentReason.isValidAbsentReason(reasonStr)) {
+                    throw new IllegalValueException(AbsentReason.MESSAGE_CONSTRAINTS);
+                }
+
+                modelAttendances.put(new AbsentDate(dateStr), new AbsentReason(reasonStr));
+            }
         }
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
                 modelStudentClass, modelEcName, modelEcNumber, modelTags, modelAttendances);
     }
