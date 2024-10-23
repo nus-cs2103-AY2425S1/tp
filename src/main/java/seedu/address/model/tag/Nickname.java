@@ -57,6 +57,12 @@ public class Nickname {
         return value;
     }
 
+    /**
+     * Compares the nickname of another person contact in alphabetical order.
+     *
+     * @param otherNickname Nickname of another person contact
+     * @return Integer status of the comparison
+     */
     public int compareTo(Nickname otherNickname) {
         return value.toLowerCase().compareTo(otherNickname.value.toLowerCase());
     }

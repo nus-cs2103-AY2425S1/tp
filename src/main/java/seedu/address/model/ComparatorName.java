@@ -4,7 +4,12 @@ import seedu.address.model.person.Person;
 
 import java.util.Comparator;
 
-// javadoc comments?
+
+/**
+ * A comparator class that sorts the person contacts by name in terms of alphabetical order. If the full
+ * name of the person contacts is the same, the nickname will be used as the basis for sorting in
+ * alphabetical order as well.
+ */
 public class ComparatorName implements Comparator<Person> {
     final int EQUAL_STATUS = 0;
 
