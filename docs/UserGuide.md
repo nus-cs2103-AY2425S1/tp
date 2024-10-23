@@ -42,8 +42,6 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 5. [**FAQ**](#faq)
 6. [**Known Issues**](#known-issues)
 7. [**Command summary**](#command-summary)
-    * [**Home Page**](#home-page)
-    * [**Course Page**](#course-page)
 8. [**Glossary**](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -239,3 +237,14 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+
+## **Glossary**
+
+| Term/Keyword                       | Definition                                                                                                 |
+|------------------------------------|------------------------------------------------------------------------------------------------------------|
+| **Command Line Interface (CLI)**   | An interface that allows you to interact with our program by inputting lines of text called command-lines. |
+| **Graphical User Interface (GUI)** | An interface that displays information to you and allows you to interact with visual elements.             |
+| **Prefix**                         | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.              |
+
+
+[_Back to Top_](#table-of-contents)
