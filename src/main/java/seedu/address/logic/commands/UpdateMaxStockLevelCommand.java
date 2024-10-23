@@ -16,32 +16,32 @@ import seedu.address.model.product.ProductName;
 /**
  * Edits the details of an existing supplier in the address book.
  */
-public class UpdateStockLevelCommand extends Command {
+public class UpdateMaxStockLevelCommand extends Command {
 
-    public static final String COMMAND_WORD = "update_stock";
+    public static final String COMMAND_WORD = "update_maxstock";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the products identified "
             + "by the product name used in the displayed product list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters:  "
             + PREFIX_PRODUCT_NAME + "PRODUCT_NAME "
-            + PREFIX_STOCK_LEVEL + "STOCK_LEVEL "
-            + "Example: " + COMMAND_WORD + " pr/Sweaters stk/25000 ";
+            + PREFIX_STOCK_LEVEL + "MAX_STOCK_LEVEL "
+            + "Example: " + COMMAND_WORD + " pr/Rice sacks stk/425 ";
 
     public static final String MESSAGE_EDIT_PRODUCT_SUCCESS = "Edited Product: %1$s " + "with Stock Level: %2$s";
     public static final String MESSAGE_NOT_EDITED = "Stock level not provided.";
     public static final String MESSAGE_PRODUCT_NOT_FOUND = "Product not found in the list: %1$s";
 
     private ProductName productName;
-    private int currentStockLevel;
+    private int maxStockLevel;
 
     /**
      * @param pname name of the product in the filtered product list to edit
      */
-    public UpdateStockLevelCommand(ProductName pname, int currentStockLevel) {
+    public UpdateMaxStockLevelCommand(ProductName pname, int maxStockLevel) {
         requireNonNull(pname);
         this.productName = pname;
-        this.currentStockLevel = currentStockLevel;
+        this.maxStockLevel = maxStockLevel;
     }
 
     @Override
@@ -55,12 +55,12 @@ public class UpdateStockLevelCommand extends Command {
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_PRODUCT_NOT_FOUND, productName)));
 
         Product editedProduct = new Product(productName);
-        editedProduct.setStockLevel(currentStockLevel);
+        editedProduct.setMaxStockLevel(maxStockLevel);
 
         model.setProduct(productToEdit, editedProduct);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PRODUCT_SUCCESS,
-                Messages.format(editedProduct), currentStockLevel));
+                Messages.format(editedProduct), maxStockLevel));
     }
 
     @Override
@@ -70,13 +70,13 @@ public class UpdateStockLevelCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UpdateStockLevelCommand)) {
+        if (!(other instanceof UpdateMaxStockLevelCommand)) {
             return false;
         }
 
-        UpdateStockLevelCommand otherUpdateStockCommand = (UpdateStockLevelCommand) other;
-        return productName.equals(otherUpdateStockCommand.productName) &
-                (currentStockLevel == otherUpdateStockCommand.currentStockLevel);
+        UpdateMaxStockLevelCommand otherUpdateMaxStockCommand = (UpdateMaxStockLevelCommand) other;
+        return productName.equals(otherUpdateMaxStockCommand.productName) &
+                (maxStockLevel == otherUpdateMaxStockCommand.maxStockLevel);
     }
 
 }

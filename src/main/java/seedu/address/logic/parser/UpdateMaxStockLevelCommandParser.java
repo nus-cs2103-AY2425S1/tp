@@ -7,14 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.UpdateStockLevelCommand;
+import seedu.address.logic.commands.UpdateMaxStockLevelCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.product.ProductName;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCommand> {
+public class UpdateMaxStockLevelCommandParser implements Parser<UpdateMaxStockLevelCommand> {
 
     public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a positive integer";
     public static final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces,"
@@ -25,7 +25,7 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public UpdateStockLevelCommand parse(String args) throws ParseException {
+    public UpdateMaxStockLevelCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PRODUCT_NAME, PREFIX_STOCK_LEVEL);
@@ -33,16 +33,17 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
         if (!arePrefixesPresent(argMultimap, PREFIX_PRODUCT_NAME, PREFIX_STOCK_LEVEL) ||
                 !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UpdateStockLevelCommand.MESSAGE_USAGE));
+                    UpdateMaxStockLevelCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PRODUCT_NAME, PREFIX_STOCK_LEVEL);
 
         ProductName productName = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
-        UpdateStockLevelCommand resultCurrentStock;
-        resultCurrentStock = parseCurrentStockLevelCommand(argMultimap, productName);
+        UpdateMaxStockLevelCommand resultMaxStock;
+        resultMaxStock = parseMaxStockLevelCommand(argMultimap, productName);
 
-        return resultCurrentStock;
+        return resultMaxStock;
+
     }
 
     /**
@@ -53,21 +54,21 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private UpdateStockLevelCommand parseCurrentStockLevelCommand(ArgumentMultimap argMap, ProductName productName)
+    private UpdateMaxStockLevelCommand parseMaxStockLevelCommand(ArgumentMultimap argMap, ProductName productName)
             throws ParseException {
         try {
-            int currentStockLevel = Integer.parseInt(argMap.getValue(PREFIX_STOCK_LEVEL).get());
+            int maxStockLevel = Integer.parseInt(argMap.getValue(PREFIX_STOCK_LEVEL).get());
 
-            if (currentStockLevel < 0) {
+            if (maxStockLevel < 0) {
                 throw new ParseException(MESSAGE_INVALID_STOCK_LEVEL);
             }
 
-            return new UpdateStockLevelCommand(productName, currentStockLevel);
+            return new UpdateMaxStockLevelCommand(productName, maxStockLevel);
         } catch (IllegalArgumentException e) {
             throw new ParseException(MESSAGE_INVALID_STOCK);
         }
-
     }
 
 }
+
 
