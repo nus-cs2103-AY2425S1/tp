@@ -54,7 +54,7 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
+        phone.setText(person.getPhone().get().value);
         if (person.hasAddress()) {
             Label address = new Label(person.getAddress().map(Object::toString).orElse(null));
             address.getStyleClass().add("cell_small_label");
@@ -62,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
             vBox.getChildren().add(address);
         }
 
-        email = new Label(person.getEmail().value);
+        email = new Label(person.getEmail().get().value);
         email.getStyleClass().add("cell_small_label");
         vBox.getChildren().add(email);
 
