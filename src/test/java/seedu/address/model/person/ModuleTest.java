@@ -66,6 +66,6 @@ public class ModuleTest {
     @Test
     public void toString_returnsCorrectString() {
         Module module = new Module("CS2103T");
-        assertEquals("[CS2103T]", module.toString());
+        assertEquals("[CS2103T | Grade: Ungraded]", module.toString());
     }
 }

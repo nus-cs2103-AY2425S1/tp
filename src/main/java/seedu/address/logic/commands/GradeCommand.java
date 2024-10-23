@@ -43,6 +43,8 @@ public class GradeCommand extends Command {
      * Creates a GradeCommand to grade the specified {@code Person}
      */
     public GradeCommand(Index targetIndex, String module, int grade) {
+        requireNonNull(targetIndex, "Target index cannot be null");
+        requireNonNull(module, "Module cannot be null");
         this.targetIndex = targetIndex;
         this.module = module;
         this.grade = grade;
@@ -56,7 +58,9 @@ public class GradeCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
+        if (grade < 0 || grade > 100) {
+            throw new CommandException(MESSAGE_INVALID_GRADE);
+        }
         Person personToGrade = lastShownList.get(targetIndex.getZeroBased());
         Optional<Module> moduleToGrade = personToGrade.getModules().stream()
                 .filter(m -> m.module.equals(this.module))
@@ -74,6 +78,20 @@ public class GradeCommand extends Command {
                 personToGrade.getGender(), new HashSet<>(updatedModules),
                 new HashSet<>(personToGrade.getTags()));
         model.setPerson(personToGrade, updatedPerson);
-        return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, module, personToGrade.getName()));
+        return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, module.module, personToGrade.getName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof GradeCommand)) {
+            return false;
+        }
+        GradeCommand otherCommand = (GradeCommand) other;
+        return targetIndex.equals(otherCommand.targetIndex)
+                && module.equals(otherCommand.module)
+                && grade == otherCommand.grade;
     }
 }
