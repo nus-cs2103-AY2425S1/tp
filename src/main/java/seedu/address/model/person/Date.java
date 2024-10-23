@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -19,9 +20,10 @@ public abstract class Date {
             String.format("Date should follow %s format, where %s is a valid date (e.g. 31 dec 2019, 1 Dec 1999)",
                     DATE_FORMAT_STRING, DATE_FORMAT_STRING);
 
-    public static final String VALIDATION_REGEX = "\\d{1,2}\\s"
-            + "(?:[Jj]an|[Ff]eb|[Mm]ar|[Aa]pr|[Mm]ay|[Jj]un|[Jj]ul|[Aa]ug|[Ss]ep|[Oo]ct|[Nn]ov|[Dd]ec)\\s"
-            + "\\d{4}";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendPattern(DATE_FORMAT_STRING)
+            .toFormatter();
 
     private final String value;
 
@@ -32,7 +34,7 @@ public abstract class Date {
      */
     public Date(String date) {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        value = date;
+        value = parseLocalDate(date).format(DATE_TIME_FORMATTER);
     }
 
     /**
@@ -50,7 +52,7 @@ public abstract class Date {
      * @return converted LocalDate object
      */
     public final LocalDate toLocalDate() {
-        return LocalDate.parse(value, DateTimeFormatter.ofPattern(DATE_FORMAT_STRING));
+        return LocalDate.parse(value, DATE_TIME_FORMATTER);
     }
 
     @Override
@@ -87,9 +89,6 @@ public abstract class Date {
     public static boolean isValidDate(String test) {
         requireNonNull(test);
 
-        if (!test.matches(VALIDATION_REGEX)) {
-            return false;
-        }
         try {
             parseLocalDate(test);
             return true;
@@ -101,12 +100,11 @@ public abstract class Date {
     /**
      * Parses date string to LocalDate.
      *
-     * @param date A date string with the format "d MM uuuu"
+     * @param date A date string with the format "d MMM yyyy"
      * @return LocalDate
      * @throws DateTimeParseException if string is invalid
      */
     public static LocalDate parseLocalDate(String date) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_STRING);
-        return LocalDate.parse(date, formatter);
+        return LocalDate.parse(date, DATE_TIME_FORMATTER);
     }
 }
