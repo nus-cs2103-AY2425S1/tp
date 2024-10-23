@@ -18,6 +18,9 @@ import seedu.address.model.person.Tutorial;
  */
 public class SortCommand extends Command {
 
+    /**
+     * Enum representing the fields available for sorting.
+     */
     public enum SortField {
         NAME("Name"),
         STUDENT_ID("Student ID"),
@@ -102,11 +105,13 @@ public class SortCommand extends Command {
      * Returns a {@code SortCommand} to sort by tutorial attendance.
      *
      * @param order 1 for ascending, -1 for descending.
+     * @param tutorial The tutorial for which attendance is sorted.
      */
     public static SortCommand sortByTutorialAttendance(Integer order, Tutorial tutorial) {
         requireNonNull(order);
         boolean isAscendingOrder = (order.equals(ASCENDING));
-        return new SortCommand(new TutorialComparator(tutorial, isAscendingOrder), isAscendingOrder, SortField.TUTORIAL_ATTENDANCE);
+        return new SortCommand(
+                new TutorialComparator(tutorial, isAscendingOrder), isAscendingOrder, SortField.TUTORIAL_ATTENDANCE);
     }
 
     /**
@@ -153,10 +158,19 @@ public class SortCommand extends Command {
         return this.sortingComparator.equals(e.sortingComparator);
     }
 
+    /**
+     * Comparator class for comparing persons based on their tutorial attendance.
+     */
     public static class TutorialComparator implements Comparator<Person> {
         private final Tutorial tutorial;
         private final boolean isAscendingOrder;
 
+        /**
+         * Constructs a {@code TutorialComparator} for the specified tutorial and order.
+         *
+         * @param tutorial The tutorial to compare attendance for.
+         * @param isAscendingOrder {@code true} for ascending order, {@code false} for descending.
+         */
         public TutorialComparator(Tutorial tutorial, boolean isAscendingOrder) {
             this.tutorial = tutorial;
             this.isAscendingOrder = isAscendingOrder;
