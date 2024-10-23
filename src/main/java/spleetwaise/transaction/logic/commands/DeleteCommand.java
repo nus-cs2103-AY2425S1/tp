@@ -1,7 +1,10 @@
 package spleetwaise.transaction.logic.commands;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
@@ -23,6 +26,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TRANSACTION_SUCCESS = "Deleted Transaction: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -31,16 +36,20 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        logger.log(Level.INFO, "Executing DeleteCommand with index: {0}", targetIndex.getZeroBased());
+
         CommonModel model = CommonModel.getInstance();
 
         List<Transaction> lastShownList = model.getFilteredTransactionList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Invalid transaction index: {0}", targetIndex.getZeroBased());
             throw new CommandException("The transaction index provided is invalid.");
         }
 
         Transaction transactionToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTransaction(transactionToDelete);
+        logger.log(Level.INFO, "Deleted transaction: {0}", transactionToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, transactionToDelete));
     }
 
