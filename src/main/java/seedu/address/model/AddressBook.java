@@ -122,8 +122,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Sorts persons in the address book by their names alphabetically.
      */
-    public void sortPersons(String order) {
-        persons.sortPersons(order);
+    public void sortPersons(String order, Boolean toSortBySchedule) {
+        persons.sortPersons(order, toSortBySchedule);
     }
 
     //// util methods

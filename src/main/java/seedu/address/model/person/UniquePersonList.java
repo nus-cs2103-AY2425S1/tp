@@ -103,10 +103,22 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts persons in the address book by their names alphabetically in ascending or descending order.
      * @param order the sorting order, either "asc/ascending" for ascending or "desc/descending" for descending.
      */
-    public void sortPersons(String order) {
+    public void sortPersons(String order, Boolean toSortBySchedule) {
         //the order string given will always be either "asc" or "desc"
         requireNonNull(order);
-        Comparator<Person> comparator = Comparator.comparing(person -> person.getName().fullName);
+        Comparator<Person> comparator;
+        if (toSortBySchedule) {
+            comparator = Comparator.comparing((Person person) -> {
+                Schedule schedule = person.getSchedule();
+                return (schedule.date == null && schedule.time == null) ? 1 : 0;
+            }).thenComparing((Person person) -> person.getSchedule().date,
+                    Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing((Person person) -> person.getSchedule().time,
+                    Comparator.nullsLast(Comparator.naturalOrder()));
+
+        } else {
+            comparator = Comparator.comparing(person -> person.getName().fullName);
+        }
         if (order.equals(DESCENDING)) {
             comparator = comparator.reversed();
         }

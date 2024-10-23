@@ -186,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortFilteredPersonList(String order) {
+        public void sortFilteredPersonList(String order, Boolean toSortBySchedule) {
             throw new AssertionError("This method should not be called.");
         }
 
