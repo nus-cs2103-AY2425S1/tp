@@ -448,7 +448,7 @@
   </summary>
 
   <div class="command-content">
-  Finds the employee/potential hire whose names contain any of the given keywords.
+  Finds all employees and/or potential hires whose names contain any of the specified keywords.
 
   <br>
   <br>
@@ -542,7 +542,7 @@
 </details>
 
 </div>
-<div class="content content-droppable content-droppable-last">
+<div class="content content-droppable content-droppable">
 
 <details>
   <summary><strong>Promoting a person<br><code>promote</code></strong>
@@ -582,8 +582,43 @@
 </details>
 
 </div>
+<div class="content content-droppable content-droppable-last">
+
+<details>
+  <summary><strong>Sorting the list<br><code>sort</code></strong>
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
+
+  <div class="command-content">
+  Sorts the list in ascending order by the given parameter.
+
+  <br>
+  <br>
+  Format: `sort name` or `sort date`
+
+  Sorts the list by either the name of the contact or the contract end date.
+  * `name` will sort the list based on the names of the contacts in alphabetical order.
+  * Note that `name` will only sort the ***visible*** contents of the list.
+  * Contacts that have been filtered will not show up when `sort name` is called.
+  * `date` will sort the list based on the contract end dates of the employees in ascending order.
+  * Note that `date` will filter out potential hires from the list as they do not have a contract end date.
+  * `date` will show all employees and not just potential hires.
+
+  Examples:
+  * `sort name` sorts all contacts by name.
+  * `sort date` shows all employees and sorts by contract end date
+</details>
+
+</div>
 
 <br>
+
+
+
+
+
 
 <h1 class="headers" id="command-summary">Commands Summary</h1>
 
@@ -602,6 +637,7 @@ Action     | Format                                                             
 **List**   | `list all` <br> `list e` <br> `list ph`                                                       |
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 **Promote** | `promote INDEX CONTRACT_END_DATE`                                                            | `promote 2 2025-12-20`
+**Sort**   | `sort name` <br> `sort date`                                                                  |
 
 
 </div>
