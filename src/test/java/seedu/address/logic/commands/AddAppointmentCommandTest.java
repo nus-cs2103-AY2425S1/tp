@@ -4,31 +4,30 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.*;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.AppointmentBook;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentDescriptor;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonDescriptor;
-import javafx.collections.ObservableList;
-import seedu.address.testutil.AppointmentBuilder;
-import seedu.address.testutil.PersonBuilder;
+import static seedu.address.testutil.TypicalPersons.BENSON_P;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AppointmentBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescriptor;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDescriptor;
+import seedu.address.testutil.AppointmentBuilder;
 
 public class AddAppointmentCommandTest {
     @Test
@@ -54,7 +53,8 @@ public class AddAppointmentCommandTest {
         AppointmentDescriptor validAppointmentDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
         Appointment validAppointment = new AppointmentBuilder().build();
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(validAppointmentDescriptor, 1);
-        AddAppointmentCommandTest.ModelStub modelStub = new AddAppointmentCommandTest.ModelStubWithAppointment(validAppointment);
+        AddAppointmentCommandTest.ModelStub modelStub = new AddAppointmentCommandTest
+                .ModelStubWithAppointment(validAppointment);
 
         assertThrows(CommandException.class,
                 AddAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT, () -> addAppointmentCommand.execute(modelStub));

@@ -1,24 +1,23 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalAppointments.getTypicalAppointmentBook;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.BENSON_P;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescriptor;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonDescriptor;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.Assert;
-import seedu.address.testutil.PersonBuilder;
 
 
 public class AppointmentBookTest {

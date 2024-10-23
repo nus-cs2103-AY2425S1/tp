@@ -2,11 +2,21 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -31,7 +41,8 @@ public class JsonSerializableAppointmentBookTest {
             TEST_DATA_FOLDER.resolve("invalidAppointmentAppointmentBook.json");
     private static final Path DUPLICATE_APPOINTMENT_FILE =
             TEST_DATA_FOLDER.resolve("duplicateAppointmentAppointmentBook.json");
-    private static final ArrayList<PersonDescriptor> typicalPersons = new ArrayList<>(Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    private static final ArrayList<PersonDescriptor> typicalPersons = new ArrayList<>(
+            Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE));
     private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(typicalPersons);
 
     // todo: Same error as the testcase in JsonAdaptedAppointmentBookTest.java
