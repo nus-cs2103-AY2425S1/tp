@@ -106,4 +106,8 @@ public class LessonTest {
     public void compareTo() {
         assertTrue(lesson.compareTo(lesson) == 0);
     }
+    @Test
+    public void getAmountPerHour() {
+        assertEquals("$10/hr", lesson.getAmountPerHour());
+    }
 }
