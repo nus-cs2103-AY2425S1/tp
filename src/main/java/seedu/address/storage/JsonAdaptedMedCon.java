@@ -44,7 +44,7 @@ class JsonAdaptedMedCon {
         if (medConName == null) {
             throw new IllegalValueException(String.format("%s cannot be null", MedCon.class.getSimpleName()));
         }
-        if (!MedCon.isValidMedCon(medConName)) {
+        if (!MedCon.isValidMedConName(medConName)) {
             throw new IllegalValueException(String.format("%s: %s", MedCon.class.getSimpleName(),
                     MESSAGE_CONSTRAINTS_LENGTH));
         }

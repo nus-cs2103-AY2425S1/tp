@@ -1,10 +1,12 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.allergy.Allergy;
+import seedu.address.model.person.Allergy;
 
 /**
  * Jackson-friendly version of {@link Allergy}.
@@ -40,7 +42,7 @@ class JsonAdaptedAllergy {
      */
     public Allergy toModelType() throws IllegalValueException {
         if (!Allergy.isValidAllergyName(allergyName)) {
-            throw new IllegalValueException(Allergy.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
         }
         return new Allergy(allergyName);
     }

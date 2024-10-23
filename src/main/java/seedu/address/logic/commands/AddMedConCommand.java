@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.HashSet;
@@ -24,10 +26,11 @@ public class AddMedConCommand extends Command {
             + "one or more medical conditions to a patient in the address book.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
-            + "c/CONDITION...\n"
+            + PREFIX_MEDCON + "CONDITION...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "T0123456F "
-            + "c/Diabetes c/Hypertension";
+            + PREFIX_MEDCON + "Diabetes "
+            + PREFIX_MEDCON + "Hypertension";
 
     public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical condition: %1$s to Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
@@ -50,13 +53,13 @@ public class AddMedConCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
-                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
+                .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
         if (person.getNric().equals(this.nric)) {
             Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
             // check for duplicates
             for (MedCon medCon : medCons) {
                 if (!updatedMedConSet.add(medCon)) {
-                    throw new CommandException(String.format(MESSAGE_DUPLICATE_MEDCON, medCon.value));
+                    throw new CommandException(String.format(MESSAGE_DUPLICATE_MEDCON, medCon.medConName));
                 }
             }
             Person editedPerson = new Person(
@@ -76,7 +79,7 @@ public class AddMedConCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         StringBuilder medConsString = new StringBuilder();
-        medCons.forEach(medCon -> medConsString.append(medCon.value).append(", "));
+        medCons.forEach(medCon -> medConsString.append(medCon.medConName).append(", "));
 
         // Remove trailing comma and space, if any
         if (medConsString.length() > 0) {
