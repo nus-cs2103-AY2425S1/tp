@@ -34,7 +34,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             for (int i = 0; i < inputSize; i++) {
                 intArr[i] = Integer.parseInt(inputArr[i].trim());
             }
-            Arrays.sort(intArr);
             //extract only the unique int indexes
             int[] uniqueIntArr = Arrays.stream(intArr)
                     .distinct()
