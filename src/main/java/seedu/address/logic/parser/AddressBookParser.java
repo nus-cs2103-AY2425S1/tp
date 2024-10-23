@@ -105,7 +105,6 @@ public class AddressBookParser {
             return new AddTaskCommandParser().parse(arguments);
 
         case UpdateTaskCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new UpdateTaskCommandParser().parse(arguments);
 
         case ViewTasksCommand.COMMAND_WORD:

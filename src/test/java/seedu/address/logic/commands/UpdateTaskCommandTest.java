@@ -29,6 +29,7 @@ import seedu.address.model.person.task.Task;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.UpdateTaskDescriptorBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for UpdateCommand.
@@ -65,7 +66,7 @@ public class UpdateTaskCommandTest {
             throw new IllegalStateException("Person to update not found");
         }
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -90,7 +91,7 @@ public class UpdateTaskCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(targetPerson, updatedPerson);
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -115,7 +116,7 @@ public class UpdateTaskCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(targetPerson, updatedPerson);
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -131,7 +132,7 @@ public class UpdateTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -157,7 +158,7 @@ public class UpdateTaskCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), updatedPerson);
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
