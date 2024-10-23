@@ -38,7 +38,7 @@ public class AddTeacherCommandTest {
         ModelStubAcceptingTeacherAdded modelStub = new ModelStubAcceptingTeacherAdded();
         Teacher validTeacher = new TeacherBuilder().build();
 
-        CommandResult commandResult = new AddTeacherCommand(validTeacher).execute(modelStub);
+        CommandResult commandResult = new AddTeacherCommand(validTeacher).executeCommand(modelStub);
 
         assertEquals(String.format(AddTeacherCommand.MESSAGE_SUCCESS, Messages.format(validTeacher)),
             commandResult.getFeedbackToUser());
@@ -52,7 +52,7 @@ public class AddTeacherCommandTest {
         ModelStub modelStub = new ModelStubWithTeacher(validTeacher);
 
         assertThrows(CommandException.class,
-                AddTeacherCommand.MESSAGE_DUPLICATE_TEACHER, () -> addTeacherCommand.execute(modelStub));
+                AddTeacherCommand.MESSAGE_DUPLICATE_TEACHER, () -> addTeacherCommand.executeCommand(modelStub));
     }
 
     @Test
@@ -163,6 +163,19 @@ public class AddTeacherCommandTest {
 
         @Override
         public void setFilteredPersonList(List<Person> sortedList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
     }
