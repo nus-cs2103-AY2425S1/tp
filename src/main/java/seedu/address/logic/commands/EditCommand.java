@@ -169,7 +169,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setFees(toCopy.fees);
             setClassId(toCopy.classId);
-            setMonthPaid(toCopy.monthsPaid);
+            setMonthsPaid(toCopy.monthsPaid);
             setTags(toCopy.tags);
         }
 
