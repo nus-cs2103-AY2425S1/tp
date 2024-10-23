@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -29,4 +30,11 @@ public class AddNoteCommandTest {
 
     }
 
+    @Test
+    public void execute_noteTextEmpty() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        AddNoteCommand command = new AddNoteCommand(ALICE.getNric(), "");
+        assertCommandFailure(command, model, AddNoteCommand.MESSAGE_NOTE_TEXT_EMPTY);
+
+    }
 }
