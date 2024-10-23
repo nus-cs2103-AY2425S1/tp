@@ -8,14 +8,18 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.HostServiceManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,9 +35,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private VolunteerListPanel volunteerListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private EventListPanel eventListPanel;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private FlowPane volunteerListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -56,6 +61,8 @@ public class MainWindow extends UiPart<Stage> {
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
+        primaryStage.setTitle("VolunSync");
+
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
@@ -64,8 +71,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -110,8 +115,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        volunteerListPanel = new VolunteerListPanel(logic.getFilteredVolunteerList());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+
+        eventListPanel.getRoot().setPrefWidth(logic.getGuiSettings().getWindowWidth() * 0.45);
+        volunteerListPanel.getRoot().setPrefWidth(logic.getGuiSettings().getWindowWidth() * 0.45);
+
+        volunteerListPanelPlaceholder.getChildren().addAll(volunteerListPanel.getRoot(), eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -140,11 +150,15 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        //@@ author ytw - adapted
+        // method to open a web browser from javafx app was sourced from the following source and adapted to be used
+        // in the project.
+        // source:
+        // https://forums.oracle.com/ords/apexds/post/opening-an-external-web-browser-from-a-javafx-application-4429
+        HostServiceManager.getHostServices().showDocument(MainApp.USERGUIDE_URL);
+        //@@ author
+
+        logger.fine("Showing user guide of VolunSync.");
     }
 
     void show() {
@@ -159,12 +173,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public VolunteerListPanel getVolunteerListPanel() {
+        return volunteerListPanel;
     }
 
     /**

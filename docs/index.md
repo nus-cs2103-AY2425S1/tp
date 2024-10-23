@@ -1,19 +1,20 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: VolunSync
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+**VolunSync** is a volunteer-focused Human Resource Management System (HRMS) designed to streamline nonprofit operations. It provides robust tools for managing volunteers, coordinating events, tracking hours, and facilitating communications.
 
-![Ui](images/Ui.png)
+## Key Features
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+### 1. **Volunteer Management**
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+- Track volunteer profiles, availability, and past involvement.
 
+### 2. **Event Scheduling**
 
-**Acknowledgements**
+- Create and manage volunteer events with automated scheduling.
+- Assign / Unassign volunteers based on availability.
+- Export event schedules and volunteer lists for reporting.
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+**VolunSync** helps nonprofits streamline their volunteer management, making it easy to organize events, track participation, and keep supporters engaged.

@@ -57,7 +57,7 @@
     -->
     <module name="CustomImportOrder">
         <property name="customImportOrderRules"
-            value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
+                  value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
         <property name="specialImportsRegExp" value="^org\."/>
         <property name="thirdPartyPackageRegExp" value="^com\."/>
         <property name="sortImportsInGroupAlphabetically" value="true"/>
@@ -216,7 +216,7 @@
       some other variants which we don't publicized to promote consistency).
       -->
       <property name="reliefPattern"
-       value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on"/>
+                value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on"/>
     </module>
 
     <module name="MissingSwitchDefault"/>
@@ -243,7 +243,7 @@
       3. Constructors
       4. Methods
     -->
-    <module name ="DeclarationOrder"/>
+    <module name="DeclarationOrder"/>
 
     <!-- Checks that default is after all cases in a switch statement -->
     <module name="DefaultComesLast"/>

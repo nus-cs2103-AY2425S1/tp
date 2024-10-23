@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.logging.Level;
 
 import seedu.address.commons.util.ToStringBuilder;
-
 /**
  * Config values used by the app
  */
