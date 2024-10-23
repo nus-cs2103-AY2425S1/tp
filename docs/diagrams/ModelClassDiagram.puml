@@ -33,7 +33,9 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" PredefinedAssignmentData
 UserPrefs .up.|> ReadOnlyUserPrefs
+PredefinedAssignmentData .up |> ReadOnlyPredefinedAssignmentsData
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
@@ -42,6 +44,9 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> Telegram
+Person *--> Github
+Person *--> "*" Assignment
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
