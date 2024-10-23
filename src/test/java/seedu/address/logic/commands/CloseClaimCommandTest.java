@@ -59,7 +59,7 @@ class CloseClaimCommandTest {
     }
 
     @Test
-    void execute_invalidClaim_exceptionHandled() {
+    void execute_invalidClaim_throwsCommandException() {
 
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
         try {
@@ -76,7 +76,7 @@ class CloseClaimCommandTest {
     }
 
     @Test
-    void execute_invalidInsurancePlan_exceptionHandled() {
+    void execute_invalidInsurancePlan_throwsCommandException() {
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
 
         InsurancePlan fakeInsurancePlan = new InvalidInsurancePlan();
