@@ -159,6 +159,8 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: -ab3-label;
+    -fx-text-overrun: ellipsis;
+    -fx-max-width: 200px;
 }
 
 .stack-pane {
