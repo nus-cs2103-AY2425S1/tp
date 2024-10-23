@@ -1,5 +1,13 @@
-#copyButton, #helpMessage {
+#copyButton, #helpMessage, #featureIntroduction {
     -fx-text-fill: white;
+}
+
+#featureIntroduction {
+    -fx-font-size: 20;
+}
+
+#featureIntroduction, #addFeatureHeader, #editFeatureHeader, #deleteFeatureHeader {
+    -fx-font-weight: bold;
 }
 
 #copyButton {
