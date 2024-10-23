@@ -49,6 +49,11 @@ public class CommandResult {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(feedbackToUser, showHelp, exit);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -60,23 +65,16 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return feedbackToUser.equals(otherCommandResult.feedbackToUser) && showHelp == otherCommandResult.showHelp
+               && exit == otherCommandResult.exit;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
-                .toString();
+        return new ToStringBuilder(this).add("feedbackToUser", feedbackToUser)
+                                        .add("showHelp", showHelp)
+                                        .add("exit", exit)
+                                        .toString();
     }
 
 }
