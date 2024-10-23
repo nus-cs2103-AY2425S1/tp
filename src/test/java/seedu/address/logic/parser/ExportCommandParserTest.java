@@ -5,20 +5,26 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.ExportCommand;
 
 public class ExportCommandParserTest {
 
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ExportCommandTest");
+    @TempDir
+    public Path testFolder;
     private ExportCommandParser parser = new ExportCommandParser();
 
     @Test
     public void parse_validArgs_returnsExportCommand() {
-        String validPathName = "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/validExportFile.txt";
-        File exportFile = new File(validPathName);
-        assertParseSuccess(parser, validPathName, new ExportCommand(exportFile));
+        Path validPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        File exportFile = validPath.toFile();
+        assertParseSuccess(parser, exportFile.toString(), new ExportCommand(exportFile));
     }
 
     @Test

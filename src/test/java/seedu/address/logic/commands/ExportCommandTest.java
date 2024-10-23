@@ -13,8 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -26,16 +28,20 @@ import seedu.address.model.UserPrefs;
  */
 public class ExportCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ExportCommandTest");
+    @TempDir
+    public Path testFolder;
 
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validPathNameUnfilteredList_success() throws IOException {
-        String validPathName = "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/validExportFile.txt";
-        Files.deleteIfExists(Path.of(validPathName));
-        File exportFile = new File(validPathName);
-        File expectedExport = new File(
-                "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/expectedExportUnfilteredList.txt");
+        Path validPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        Path expectedExportListPath = TEST_DATA_FOLDER.resolve("expectedExportUnfilteredList.txt");
+        Files.deleteIfExists(validPath);
+        File exportFile = validPath.toFile();
+        File expectedExport = expectedExportListPath.toFile();
+
         ExportCommand exportCommand = new ExportCommand(exportFile);
 
         String expectedMessage = ExportCommand.MESSAGE_SUCCESS + exportFile.getAbsolutePath();
@@ -59,11 +65,13 @@ public class ExportCommandTest {
     @Test
     public void execute_validPathNameFilteredList_success() throws IOException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        String validPathName = "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/validExportFile.txt";
-        Files.deleteIfExists(Path.of(validPathName));
-        File exportFile = new File(validPathName);
-        File expectedExport = new File(
-                "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/expectedExportFilteredList.txt");
+
+        Path validPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        Path expectedExportListPath = TEST_DATA_FOLDER.resolve("expectedExportFilteredList.txt");
+        Files.deleteIfExists(validPath);
+        File exportFile = validPath.toFile();
+        File expectedExport = expectedExportListPath.toFile();
+
         ExportCommand exportCommand = new ExportCommand(exportFile);
 
         String expectedMessage = ExportCommand.MESSAGE_SUCCESS + exportFile.getAbsolutePath();
@@ -90,10 +98,10 @@ public class ExportCommandTest {
 
     @Test
     public void equals() {
-        String firstValidPathName = "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/validExportFile.txt";
-        String secondValidPathName = "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/validExportFile2.txt";
-        File firstExportFile = new File(firstValidPathName);
-        File secondExportFile = new File(secondValidPathName);
+        Path firstValidPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        Path secondValidPath = TEST_DATA_FOLDER.resolve("validExportFile2.txt");
+        File firstExportFile = firstValidPath.toFile();
+        File secondExportFile = secondValidPath.toFile();
         ExportCommand exportFirstCommand = new ExportCommand(firstExportFile);
         ExportCommand exportSecondCommand = new ExportCommand(secondExportFile);
 
@@ -116,8 +124,8 @@ public class ExportCommandTest {
 
     @Test
     public void toStringMethod() {
-        String validPathName = "/Users/prishaprakash/tp/src/test/data/ExportCommandTest/validExportFile.txt";
-        File exportFile = new File(validPathName);
+        Path validPath = TEST_DATA_FOLDER.resolve("validExportFile.txt");
+        File exportFile = validPath.toFile();
         ExportCommand exportCommand = new ExportCommand(exportFile);
         String expected = ExportCommand.class.getCanonicalName() + "{exportFile=" + exportFile + "}";
         assertEquals(expected, exportCommand.toString());
