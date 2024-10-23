@@ -39,19 +39,19 @@ Whether you prefer clicking buttons or typing commands, AgentConnect will help y
 ## Quick start
 
 
-1. **Ensure Java is Installed**  
+1. **Ensure Java is Installed** 
    Make sure you have **Java 17 or above** installed on your computer. If you're not sure, you can download it from [here](https://www.oracle.com/java/technologies/downloads/).
 
-2. **Download AgentConnect**  
+2. **Download AgentConnect**
    Get the latest version of AgentConnect from [this link](https://github.com/se-edu/addressbook-level3/releases). Look for a file named `AgentConnect.jar`.
 
-3. **Place the File**  
+3. **Place the File**
    Move the `AgentConnect.jar` file to a folder where you want to store the application and its data.
 
 4. **Run the Application**
-    - **Option 1: Double-Click**  
+    - **Option 1: Double-Click**
       Simply double-click the `AgentConnect.jar` file to start the application.
-    - **Option 2: Use Command Prompt**  
+    - **Option 2: Use Command Prompt**
       Open the Command Prompt (Windows) or Terminal (Mac/Linux), navigate to the folder containing the `AgentConnect.jar` file, and type:
       ```
       java -jar AgentConnect.jar
@@ -59,9 +59,9 @@ Whether you prefer clicking buttons or typing commands, AgentConnect will help y
       Then press **Enter**.
 
 6. **Try It Out**
-    - **Enter a Command**  
+    - **Enter a Command**
       Type a command into the command box at the bottom and press **Enter**. For example, type `help` to see the help message.
-    - **Explore**  
+    - **Explore**
       Feel free to experiment with different commands.
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -82,11 +82,11 @@ AgentConnect offers a range of features to help you manage your clients effectiv
 - **Ellipsis ...** means you can include the item multiple times or not at all.  
   Example: `[t/TAG]...` allows for multiple tags or none.
 
-- **Order Doesn't Matter**  
+- **Order Doesn't Matter**
   You can enter the parameters in any order.  
   Example: `n/John p/123` is the same as `p/123 n/John`.
 
-- **Extra Parameters are Ignored**  
+- **Extra Parameters are Ignored**
   For commands that don't require additional input, any extra text will be ignored.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.

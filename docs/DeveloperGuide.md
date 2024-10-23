@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list clients.
 2.  User selects a client to assign a policy.
 3.  AgentConnect assigns the policy to the client.
-4.  AgentConnect shows updated client information. 
+4.  AgentConnect shows updated client information.
 Use case ends.
 
 **Extensions**
