@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
