@@ -47,8 +47,13 @@
                 </TableView>
               </content>
             </ScrollPane>
+            
+            <TextFlow fx:id="helpContentFlow" StackPane.alignment="TOP_LEFT">
+              <padding>
+                <Insets top="10" right="15" bottom="10" left="15" />
+              </padding>
+            </TextFlow>
 
-            <TextFlow fx:id="helpContentFlow" StackPane.alignment="TOP_LEFT" />
           </StackPane>
 
         </VBox>
