@@ -7,6 +7,7 @@ import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -44,6 +45,7 @@ public class EditCourseCommand extends Command {
             + PREFIX_NAME + "Programming basics";
 
     public static final String MESSAGE_EDIT_COURSE_SUCCESS = "Edited Course: %1$s";
+    public static final String
     public static final String MESSAGE_COURSE_NOT_EDITED = "At least one field to edit must be provided.";
     
     private final EditCourseDescriptor editCourseDescriptor;
@@ -120,7 +122,7 @@ public class EditCourseCommand extends Command {
      */
     public static class EditCourseDescriptor {
         private String courseCode;
-        private Name name;
+        private CourseName courseName;
 
         public EditCourseDescriptor() {}
 
@@ -129,7 +131,7 @@ public class EditCourseCommand extends Command {
          */
         public EditCourseDescriptor(EditCourseDescriptor toCopy) {
             setCourseCode(toCopy.courseCode);
-            setName(toCopy.name);
+            setCourseName(toCopy.courseName);
         }
 
         /**
@@ -147,12 +149,12 @@ public class EditCourseCommand extends Command {
             return Optional.ofNullable(courseCode);
         }
         
-        public void setName(Name name) {
-            this.name = name;
+        public void setCourseName(CourseName courseNname) {
+            this.courseName = courseName;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<CourseName> getCourseName() {
+            return Optional.ofNullable(courseName);
         }
         
         @Override
@@ -168,13 +170,13 @@ public class EditCourseCommand extends Command {
 
             EditCourseDescriptor otherEditCourseDescriptor = (EditCourseDescriptor) other;
             return Objects.equals(courseCode, otherEditCourseDescriptor.courseCode)
-                    && Objects.equals(name, otherEditCourseDescriptor.name);
+                    && Objects.equals(courseName, otherEditCourseDescriptor.courseName);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
+                    .add("name", courseName)
                     .toString();
         }
     }

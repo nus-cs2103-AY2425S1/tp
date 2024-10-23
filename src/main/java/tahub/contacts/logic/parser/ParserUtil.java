@@ -9,6 +9,8 @@ import java.util.Set;
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.StringUtil;
 import tahub.contacts.logic.parser.exceptions.ParseException;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
 import tahub.contacts.model.person.MatriculationNumber;
@@ -135,5 +137,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    
+    public static CourseCode parseCourseCode(String courseCode) throws ParseException {
+        requireNonNull(courseCode);
+        String trimmedCourseCode = courseCode.trim();
+        if (!CourseCode.isValidCourseCode(courseCode)) {
+            throw new ParseException(CourseCode.MESSAGE_CONSTRAINTS);
+        }
+        return new CourseCode(trimmedCourseCode);
+    }
+    
+    public static CourseName parseCourseName(String courseName) throws ParseException {
+        requireNonNull(courseName);
+        String trimmedCourseName = courseName.trim();
+        if (!CourseName.isValidCourseName(trimmedCourseName)) {
+            throw new ParseException(CourseName.MESSAGE_CONSTRAINTS);
+        }
+        return new CourseName(trimmedCourseName);
     }
 }
