@@ -14,7 +14,7 @@ public class ViewCommandParserTest {
     private ViewCommandParser parser = new ViewCommandParser();
 
     @Test
-    public void parse_validArgs_returnsExportCommand() {
+    public void parse_validArgs_returnsViewCommand() {
         assertParseSuccess(parser, " 1", new ViewCommand(INDEX_FIRST_PERSON));
     }
 
