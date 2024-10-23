@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Confirms the operation the user tries to do.
+ */
 public class ConfirmCommand extends Command {
     public static final String COMMAND_WORD = "confirm";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Confirms the operation the user tries to do.\n"
@@ -14,13 +17,8 @@ public class ConfirmCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.hasSavedCommand()) {
-            CommandResult result = model.executeSavedCommand();
-            model.clearSavedCommand();
-            return result;
-        }
-        model.clearSavedCommand();
-        throw new CommandException("No command to confirm.");
+
+        return model.executeSavedCommand();
     }
 
     @Override

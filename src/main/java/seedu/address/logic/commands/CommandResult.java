@@ -19,6 +19,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The previous command prompts the user for confirmation */
     private final boolean prompt;
 
     /**

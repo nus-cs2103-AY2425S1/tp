@@ -24,9 +24,25 @@ public interface Model {
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+
+    /**
+     * clear the saved command.
+     */
     void clearSavedCommand();
+
+    /**
+     * Sets the command to be saved.
+     */
     void setSaveCommand(Command command);
+
+    /**
+     * Returns true if there is a saved command.
+     */
     boolean hasSavedCommand();
+
+    /**
+     * Executes the saved command.
+     */
     CommandResult executeSavedCommand() throws CommandException;
 
     /**

@@ -43,6 +43,14 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /**
+     * Executes the command and returns the result.
+     *
+     * @param commandText The command as entered by the user.
+     * @return the result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     * @throws ParseException   If an error occurs during parsing.
+     */
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         try {
