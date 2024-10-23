@@ -15,16 +15,21 @@ import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    public static Person alex = new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Address("Blk 30 Geylang Street 29, #06-40"), new Payment("200"),
+            new ArrayList<Participation>(), getTagSet("friends"));
+
     public static Person[] getSamplePersons() {
+        alex.getParticipation().add(new Participation(alex, new Tutorial("Math"), new ArrayList<>()));
+        alex.getParticipation().add(new Participation(alex, new Tutorial("Math"), new ArrayList<>()));
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), new Payment("200"),
-                new ArrayList<Participation>(), getTagSet("friends")),
+            alex, 
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Payment("300"),
                     new ArrayList<Participation>(), getTagSet("colleagues", "friends")),
