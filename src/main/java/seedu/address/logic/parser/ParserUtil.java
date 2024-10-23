@@ -124,11 +124,17 @@ public class ParserUtil {
     public static int parseInsurancePlan(String insurancePlanId) throws ParseException {
         requireNonNull(insurancePlanId);
         int trimmedInsurancePlanId;
+
         try {
             trimmedInsurancePlanId = Integer.parseInt(insurancePlanId.trim());
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
         }
+
+        if (trimmedInsurancePlanId < 0) {
+            throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
+        }
+
         return trimmedInsurancePlanId;
     }
 
