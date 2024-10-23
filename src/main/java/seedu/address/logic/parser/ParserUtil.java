@@ -33,9 +33,16 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not in the following accepted "
+            + "formats:\ndd/MM/yyyy\n"
+            + "dd-MM-yyyy\n"
+            + "dd MM yyyy";
+
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -178,11 +185,12 @@ public class ParserUtil {
     public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
             "dd MMMM yyyy",
             Locale.ENGLISH);
-    public static final DateTimeFormatter[] FORMATTERS = new DateTimeFormatter[] {
+    public static final DateTimeFormatter[] FORMATTERS = new DateTimeFormatter[]{
             DateTimeFormatter.ofPattern("dd/MM/yyyy"),
             DateTimeFormatter.ofPattern("dd-MM-yyyy"),
             DateTimeFormatter.ofPattern("dd MM yyyy")
     };
+
     public static LocalDate parseDate(String date) throws ParseException {
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {
@@ -191,7 +199,7 @@ public class ParserUtil {
                 continue;
             }
         }
-        throw new TimeParseException();
+        throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
     }
 
     /**
