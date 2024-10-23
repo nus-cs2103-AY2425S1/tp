@@ -44,7 +44,8 @@ public class AddReminderCommand extends Command {
      * @param reminderDescription Description of the reminder.
      */
     public AddReminderCommand(Index targetIndex, String reminderDate, String reminderDescription) {
-        requireNonNull(reminderDate, reminderDescription);
+        requireNonNull(reminderDate);
+        requireNonNull(reminderDescription);
         requireNonNull(targetIndex);
 
         this.reminderDate = reminderDate;
