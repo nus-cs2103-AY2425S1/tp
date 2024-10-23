@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Marks the attendance of a person identified using it's displayed index from the address book.
@@ -66,11 +67,13 @@ public class MarkAttendanceByStudentCommand extends Command {
         Person studentToMarkAttendance = lastShownList.get(targetIndex.getZeroBased());
         List<Participation> participationList = studentToMarkAttendance.getParticipation();
 
-        Participation tutorialAttended = getParticipationOfTutorial(participationList, tutorial);
+        Participation tutorialAttended = participationList
+                .stream()
+                .filter(participation -> participation.getTutorialSubject().equals(this.tutorial))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(
+                        String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial)));
 
-        if (tutorialAttended == null) {
-            throw new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial));
-        }
         tutorialAttended.getAttendanceList().add(attendance);
 
         Person markedStudent = new Person(
@@ -111,21 +114,5 @@ public class MarkAttendanceByStudentCommand extends Command {
                 .add("tutorial", tutorial)
                 .toString();
     }
-
-    /**
-     * Returns the participation of the given tutorial from a list of participation.
-     *
-     * @param participationList The list of participation for the student at specified index
-     * @param tutorial Tutorial of the student to mark attendance for
-     * @return {@code Participation} of the student if the student is enrolled in the tutorial; <br>
-     *         {@code null} if the student is not enrolled in the tutorial
-     */
-    private Participation getParticipationOfTutorial(List<Participation> participationList, String tutorial) {
-        for (Participation participation : participationList) {
-            if (participation.isParticipationOfTutorial(tutorial)) {
-                return participation;
-            }
-        }
-        return null;
-    }
+    
 }
