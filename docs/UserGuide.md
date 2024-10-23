@@ -74,9 +74,10 @@ Format: `help`
 
 Adds a restaurant to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/RATING] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The rating is an integer value between 0 to 10. Rating can be empty.
 A restaurant can have any number of tags (including 0)
 </div>
 
@@ -94,7 +95,7 @@ Format: `list`
 
 Edits an existing restaurant in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RATING] [t/TAG]…​`
 
 * Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -154,6 +155,35 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd restaurant in the address book.
 * `find Mala` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
+
+### Rating a restaurant : `rate`
+
+Rates the specified restaurant from the address book.
+
+Format: `rate INDEX [r/RATING]`
+
+* Edits the restaurant's rating at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
+* Existing rating will be updated.
+* The rating **should be an integer between 0 to 10**
+* The rating can be empty
+
+Examples:
+*  `rate 1 r/2` Edits the rating of the 1st restaurant to be `2`.
+*  `rate 2 r/2` Edits the rating of the 2nd restaurant to be `No Rating`.
+
+### Favourite a restaurant : `fav`
+
+Set the specified restaurant from the address book as favourite.
+
+Format: `fav INDEX`
+
+* Deletes the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+*  `fav 1` Favourite the 1st restaurant.
+
 
 ### Clearing all entries : `clear`
 
