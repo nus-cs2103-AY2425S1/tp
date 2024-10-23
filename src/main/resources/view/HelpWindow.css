@@ -1,23 +1,23 @@
 #copyButton, #helpMessage {
-    -fx-text-fill: white; /* Consistent white text for buttons and help message */
+    -fx-text-fill: white;
 }
 
 #copyButton {
-    -fx-background-color: #031926; /* Dark background for consistency */
+    -fx-background-color: #0b0f14;
 }
 
 #copyButton:hover {
-    -fx-background-color: derive(#031926, 15%); /* Slightly lighter shade for hover */
+    -fx-background-color: derive(#0b0f14, 15%);
 }
 
 #copyButton:armed {
-    -fx-background-color: derive(#031926, 30%); /* Even lighter shade for armed state */
+    -fx-background-color: derive(#141a21, 50%);
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#031926, 20%); /* Consistent dark blueish background */
+    -fx-background-color: derive(#141a21, 20%);
 }
 
 #reportBugContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#141a21, 20%);
 }

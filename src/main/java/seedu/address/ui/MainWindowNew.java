@@ -21,9 +21,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> {
+public class MainWindowNew extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "MainWindowNew.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -33,8 +33,10 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private CommandBox commandBox;
     private HelpWindow helpWindow;
     private ReportBugWindow reportBugWindow;
+    private OverviewPanel overviewPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -52,12 +54,12 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane overviewPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindowNew(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -72,6 +74,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         reportBugWindow = new ReportBugWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -116,26 +119,22 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    /**
-     * Fills up all the placeholders of this window.
-     */
     void fillInnerParts() {
-        //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
+        this.resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        this.overviewPanel = new OverviewPanel();
+        overviewPanelPlaceholder.getChildren().add(overviewPanel.getRoot());
+
+        this.personListPanel = new PersonListPanel(logic.getFilteredPersonList(), overviewPanel);
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
     }
 
-    /**
-     * Sets the default size based on {@code guiSettings}.
-     */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
@@ -190,6 +189,7 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+
     /**
      * Executes the command and returns the result.
      *
@@ -216,4 +216,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }
