@@ -15,4 +15,5 @@ class OrderHistoryTest {
         OrderHistory history = new OrderHistory(new Order("cake"), time);
         assertEquals(history.toString(), "Tuesday, December 12, 2023 at 01:54: Ordered cake");
     }
+
 }
