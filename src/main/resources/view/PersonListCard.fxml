@@ -32,7 +32,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
   </GridPane>
-  <FlowPane fx:id="tags" HBox.hgrow="NEVER" maxWidth="200" alignment="CENTER_RIGHT">
+  <FlowPane fx:id="tags" HBox.hgrow="NEVER" maxWidth="250" alignment="CENTER_RIGHT">
     <padding>
       <Insets top="5" right="15" bottom="5" left="5" />
     </padding>

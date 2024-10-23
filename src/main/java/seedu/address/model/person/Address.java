@@ -8,8 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
-
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final int ADDRESS_MAX_LEN = 50;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Addresses can take any values, and it should not be blank, with a max of "
+                    + ADDRESS_MAX_LEN + " characters";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -35,6 +37,10 @@ public class Address {
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isWithinCharLimit(String test) {
+        return test.length() <= ADDRESS_MAX_LEN;
     }
 
     @Override

@@ -11,8 +11,8 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should only contain numbers, and it should be at 3-15 digits long";
+    public static final String VALIDATION_REGEX = "\\d{3,15}"; //Longest phone number internationally is 15 digits
     public final String value;
 
     /**

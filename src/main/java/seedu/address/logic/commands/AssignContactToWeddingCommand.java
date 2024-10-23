@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGN_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
+import static seedu.address.logic.parser.ParserUtil.parsePersonListToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,14 @@ import seedu.address.model.wedding.Wedding;
 
 public class AssignContactToWeddingCommand extends Command {
 
-    public static final String COMMAND_WORD = "assignw";
+    public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns contacts to a specific wedding "
             + "where the wedding and contacts are identified by their index number. \n"
             + "Parameters: assign WeddingIndex (must be a positive integer) "
-            + PREFIX_ASSIGN_CONTACT + "(specify at least 1 person index to assign)... \n"
+            + PREFIX_CONTACT + "(specify at least 1 person index to assign)... \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ASSIGN_CONTACT + "1 2 3";
+            + PREFIX_CONTACT + "1 2 3";
 
     public static final String MESSAGE_ASSIGN_TO_WEDDING_SUCCESS =
             "Assigned the following people to %1$s's wedding: %2$s";
@@ -96,11 +97,7 @@ public class AssignContactToWeddingCommand extends Command {
 
         model.setWedding(weddingToModify, newWedding);
 
-        String assignedPersonNames = newContactsAssignedToWedding.stream()
-                .map(person -> person.getName().toString())
-                .sorted()
-                .reduce((name1, name2) -> name1 + ", " + name2)
-                .orElse("No persons added");
+        String assignedPersonNames = parsePersonListToString(newContactsAssignedToWedding);
 
         return new CommandResult(String.format(MESSAGE_ASSIGN_TO_WEDDING_SUCCESS,
                 weddingToModify.getWeddingName().toString(), assignedPersonNames));

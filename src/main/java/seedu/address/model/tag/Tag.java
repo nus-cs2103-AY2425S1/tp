@@ -14,8 +14,9 @@ import java.util.stream.Collectors;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
+    public static final int TAG_MAX_LEN = 16;
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CHAR_LIMIT = "Tag names cannot exceed " + TAG_MAX_LEN + " characters!";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -28,6 +29,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isWithinCharLimit(tagName), MESSAGE_CHAR_LIMIT);
         this.tagName = tagName;
     }
 
@@ -36,6 +38,10 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isWithinCharLimit(String test) {
+        return test.length() <= TAG_MAX_LEN;
     }
 
     @Override

@@ -39,6 +39,12 @@ public class NameTest {
     }
 
     @Test
+    public void isWithinCharLimit() {
+        assertTrue(Name.isWithinCharLimit("validName"));
+        assertFalse(Name.isWithinCharLimit("longlonglonglonglonglonglonglonglonglonglong"));
+    }
+
+    @Test
     public void equals() {
         Name name = new Name("Valid Name");
 
