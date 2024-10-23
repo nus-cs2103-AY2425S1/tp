@@ -172,6 +172,10 @@ public class PersonMeetsCriteriaPredicateTest {
             addressCriteria,
             tags);
 
+        NameContainsKeywordsPredicate predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("Alice"));
+        
+        assertFalse(predicate1.equals(predicate3));
+        
         assertEquals(predicate1, predicate2);
     }
 
