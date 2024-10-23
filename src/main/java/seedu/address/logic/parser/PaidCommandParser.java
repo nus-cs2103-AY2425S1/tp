@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.commands.PaidCommand.PaidPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Frequency;
 
 
 /**
@@ -38,6 +39,11 @@ public class PaidCommandParser implements Parser<PaidCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FREQUENCY);
         PaidPersonDescriptor paidPersonDescriptor = new PaidPersonDescriptor();
+        Frequency frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get());
+        if (frequency.value.equals("0")) {
+            throw new ParseException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+
         paidPersonDescriptor.setHasPaid();
         paidPersonDescriptor.setFrequency(ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY).get()));
         return new PaidCommand(index, paidPersonDescriptor);
