@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODNAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODNAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -15,23 +13,27 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.ModuleName;
 
 public class ModCommandTest {
 
     private final Model model = new ModelManager();
     @Test
     public void execute() {
+        final ModuleName moduleName = new ModuleName(VALID_MODNAME_AMY);
 
-        assertCommandFailure(new ModCommand(INDEX_FIRST_PERSON, VALID_MODNAME_AMY), model,
+        assertCommandFailure(new ModCommand(INDEX_FIRST_PERSON, moduleName), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), VALID_MODNAME_AMY));
     }
 
     @Test
     public void equals() {
-        final ModCommand standardCommand = new ModCommand(INDEX_FIRST_PERSON, VALID_MODNAME_AMY);
+        final ModCommand standardCommand = new ModCommand(INDEX_FIRST_PERSON,
+                new ModuleName(VALID_MODNAME_AMY));
 
         // same values -> returns true
-        ModCommand commandWithSameValues = new ModCommand(INDEX_FIRST_PERSON, VALID_MODNAME_AMY);
+        ModCommand commandWithSameValues = new ModCommand(INDEX_FIRST_PERSON,
+                new ModuleName(VALID_MODNAME_AMY));
         assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
@@ -44,10 +46,12 @@ public class ModCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertNotEquals(standardCommand, new ModCommand(INDEX_SECOND_PERSON, VALID_MODNAME_AMY));
+        assertNotEquals(standardCommand, new ModCommand(INDEX_SECOND_PERSON,
+                new ModuleName(VALID_MODNAME_AMY)));
 
         // different remark -> returns false
-        assertNotEquals(standardCommand, new ModCommand(INDEX_FIRST_PERSON, VALID_MODNAME_BOB));
+        assertNotEquals(standardCommand, new ModCommand(INDEX_FIRST_PERSON,
+                new ModuleName(VALID_MODNAME_BOB)));
     }
 
 

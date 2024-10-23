@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ModCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ModuleName;
 
 public class ModCommandParser implements Parser<ModCommand> {
 
@@ -26,7 +27,7 @@ public class ModCommandParser implements Parser<ModCommand> {
 
         String modName = argMultiMap.getValue(PREFIX_MOD).orElse("");
 
-        return new ModCommand(index, modName);
+        return new ModCommand(index, new ModuleName(modName));
     }
 
 }

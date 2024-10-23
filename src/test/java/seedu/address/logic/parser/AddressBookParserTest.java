@@ -25,6 +25,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ModCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -103,9 +104,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_mod() throws Exception {
-        final String modName = "CS1101S";
+        final ModuleName modName = new ModuleName("CS1101S");
         ModCommand command = (ModCommand) parser.parseCommand(ModCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MOD + modName);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MOD + modName.toString());
         assertEquals(new ModCommand(INDEX_FIRST_PERSON, modName), command);
     }
 }

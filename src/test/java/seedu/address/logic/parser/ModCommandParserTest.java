@@ -8,8 +8,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.databind.Module;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ModCommand;
+import seedu.address.model.person.ModuleName;
 
 public class ModCommandParserTest {
     private ModCommandParser parser = new ModCommandParser();
@@ -18,11 +21,11 @@ public class ModCommandParserTest {
     public void parse_indexSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_MOD + nonEmptyModName;
-        ModCommand expectedCommand = new ModCommand(INDEX_FIRST_PERSON, nonEmptyModName);
+        ModCommand expectedCommand = new ModCommand(INDEX_FIRST_PERSON, new ModuleName(nonEmptyModName));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         userInput = targetIndex.getOneBased() + " " + PREFIX_MOD;
-        expectedCommand = new ModCommand(INDEX_FIRST_PERSON, "");
+        expectedCommand = new ModCommand(INDEX_FIRST_PERSON, new ModuleName(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

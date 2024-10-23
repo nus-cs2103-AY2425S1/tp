@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ModuleName;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -18,19 +19,16 @@ public class ModCommand extends Command{
             + "Example: " + COMMAND_WORD + " 1 "
             + "m/ CS1101S";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Mod command has not been implemented yet.";
-
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Module: %2$s";
 
-
     private final Index index;
-    private final String moduleName;
+    private final ModuleName moduleName;
 
     /**
      * @param index of the person in the filtered person list to edit the module of
      * @param moduleName of the person to be updated to
      */
-    public ModCommand(Index index, String moduleName) {
+    public ModCommand(Index index, ModuleName moduleName) {
         requireAllNonNull(index, moduleName);
 
         this.index = index;
