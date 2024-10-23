@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.tag.Tag;
 
 
@@ -36,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_FEES, PREFIX_CLASSID, PREFIX_TAG);
+                        PREFIX_FEES, PREFIX_CLASSID, PREFIX_MONTHPAID, PREFIX_TAG);
 
         if (argMultimap.getPreamble().isEmpty() || !ParserUtil.isValidIndex(argMultimap.getPreamble())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -70,6 +72,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_CLASSID).isPresent()) {
             editPersonDescriptor.setClassId(ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).get()));
         }
+
+        parseMonthsPaidForEdit(argMultimap.getAllValues(PREFIX_MONTHPAID))
+                .ifPresent(editPersonDescriptor::setMonthsPaid);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -77,6 +82,25 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> monthsPaid} into a {@code Set<MonthPaid>} if valid,
+     * otherwise throws a ParseException.
+     */
+    private Optional<Set<MonthPaid>> parseMonthsPaidForEdit(Collection<String> monthsPaid) throws ParseException {
+        assert monthsPaid != null;
+
+        if (monthsPaid.isEmpty()) {
+            return Optional.empty();
+        }
+
+        try {
+            Set<MonthPaid> monthPaidSet = ParserUtil.parseMonthsPaid(monthsPaid);
+            return Optional.of(monthPaidSet);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MonthPaid.MESSAGE_CONSTRAINTS);
+        }
     }
 
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {

@@ -9,6 +9,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fees;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -92,6 +93,16 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Parses the {@code monthsPaid} into a {@code Set<MonthPaid>} and sets it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withMonthsPaid(String... monthsPaid) {
+        Set<MonthPaid> monthPaidSet = Stream.of(monthsPaid).map(MonthPaid::new).collect(Collectors.toSet());
+        descriptor.setMonthsPaid(monthPaidSet);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
@@ -104,5 +115,5 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptor build() {
         return descriptor;
     }
-
 }
+
