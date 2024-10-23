@@ -18,8 +18,8 @@ public class PaidCommandParser implements Parser<PaidCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public PaidCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_NAME);
         try {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_NAME);
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
             String policyName = argMultimap.getValue(PREFIX_POLICY_NAME).orElseThrow(() ->
                     new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE)));

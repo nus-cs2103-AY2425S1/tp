@@ -49,11 +49,14 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_AMY = "2024-12-12 10:00";
     public static final String VALID_APPOINTMENT_FIONA = "2024-12-12 10:00";
     public static final String VALID_APPOINTMENT_BOB = "2024-10-10 11:00";
-    public static final String VALID_POLICY_NAME_LIFE = "life insurance ";
-    public static final String VALID_POLICY_NAME_INVESTMENT = "Investment Insurance ";
+    public static final String VALID_POLICY_NAME_LIFE = "life insurance";
+    public static final String VALID_POLICY_NAME_INVESTMENT = "investment insurance";
+    public static final String NON_EXISTENT_POLICY_NAME = "non-existent policy";
+    public static final String EXPIRING_POLICY_NAME = "expiring policy";
     public static final String VALID_DATE_1 = "2024-10-16";
-    public static final String VALID_DATE_2 = "2026-11-11";
+    public static final String VALID_DATE_2 = "2027-11-11";
     public static final String VALID_INSURANCE_PAYMENT = "2025-12-12 349.00";
+    public static final String EXPIRING_INSURANCE_PAYMENT = "2026-12-12 349.00";
     public static final String VALID_INSURANCE_PAYMENT_DATE = "2025-12-12";
     public static final String VALID_INSURANCE_AMOUNT_DUE = "349.00";
 

@@ -62,6 +62,10 @@ public class Payment {
         }
     }
 
+    /**
+     * Updates the payment due date of the insurance payment.
+     * @param policy
+     */
     public void updatePaymentDueDate(Policy policy) {
         if (policy.isExpiringSoon()) {
             return;
