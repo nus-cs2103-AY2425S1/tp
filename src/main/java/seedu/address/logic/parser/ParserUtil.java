@@ -32,6 +32,9 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
 
+        if(StringUtil.isNotNumber(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
         if (!StringUtil.isNotIntegerOverflow(trimmedIndex)) {
             throw new ParseException(MESSAGE_OVERFLOW_INDEX);
         }

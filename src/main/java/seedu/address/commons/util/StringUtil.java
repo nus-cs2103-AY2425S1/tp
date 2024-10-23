@@ -89,4 +89,10 @@ public class StringUtil {
         // checks for valid integer value if length is less than 10, which is checked by isNonZeroUnsignedInteger
         return true;
     }
+    public static boolean isNotNumber(String trimmedIndex) {
+        requireNonNull(trimmedIndex);
+
+        // negates the check that input only has digits 0-9
+        return !trimmedIndex.matches("\\d+");
+    }
 }
