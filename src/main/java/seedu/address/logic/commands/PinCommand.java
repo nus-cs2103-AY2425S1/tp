@@ -40,7 +40,7 @@ public class PinCommand extends Command {
         }
 
         Person personToPin = lastShownList.get(targetIndex.getZeroBased());
-        
+
         if (model.isPinned(personToPin)) {
             throw new CommandException(MESSAGE_ALREADY_PINNED);
         }
