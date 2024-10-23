@@ -56,7 +56,6 @@ public class PersonListPanel extends UiPart<Region> {
                 if (person instanceof Student) {
                     // Apply inline style for student
                     setStyle("-fx-background-color: #349beb;");
-                    System.out.println("student");
 
                 } else if (person instanceof Teacher) {
                     // Apply inline style for teacher

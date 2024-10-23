@@ -245,7 +245,6 @@ public class EditCommand extends Command {
 
         public void setClasses(Set<String> classes) {
             this.classes = (classes != null) ? new HashSet<>(classes) : null;
-            System.out.println(classes);
         }
 
         public Optional<Set<String>> getClasses() {

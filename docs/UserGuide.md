@@ -149,6 +149,36 @@ Examples:
 * `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A) <br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Sorting the results : `sort`
+
+Sorts the results by name / subject / classes.
+
+Format: `sort [ATTRIBUTE]`
+
+* Sorts the results based on the specified `ATTRIBUTE`. The available attributes are `name`, `subject`, `class`.
+* `sort name` sorts the results by name in alphabetical order
+* `sort subject` sorts the results by the subjects they take in alphabetical order
+* `sort class` sorts the results by class in alphanumerical order.
+* The command applies to the current list of displayed results. 
+* Sorting is case-insensitive.
+
+Examples:
+* `list` followed by `sort name` sorts all students in the address book by name.
+
+### Undoing the last command : `undo`
+
+Reverts the most recent change made to the address book.
+
+Format: `undo`
+
+* Reverts the last modification command, restoring the address book to its previous state.
+* Only commands that modify the data (e.g., add, delete, edit, clear) can be undone.
+* Multiple undo commands can be used consecutively to revert multiple changes, one step at a time.
+
+Examples:
+* `add John Doe` followed by `undo` removes John Doe from the address book.
+* `delete 3` followed by `undo` restores the deleted student back to the list.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person or persons from EduConnect.
@@ -221,6 +251,8 @@ Furthermore, certain edits can cause the EduConnect to behave in unexpected ways
 | **Add Teacher** | `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL /address ADDRESS /subject SUBJECT /classes CLASSES` <br/> e.g., `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C` |
 | **Clear**       | `clear`                                                                                                                                                                                                                                                                                                             |
 | **Delete**      | `delete INDEX...`<br> e.g., `delete 3`, `delete 1, 2, 4`                                                                                                                                                                                                                                                            |
+| **Sort**        | `sort ATTRIBUTE`<br/>e.g.,`sort name`,`sort subject`                                                                                                                                                                                                                                                                |
+| **Undo**        | `undo`                                                                                                                                                                                                                                                                                                              |
 | **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                                 |
 | **Find**        | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES]`<br> e.g., `find /name James /classes 8B`                                                                                                                                              |
 | **List**        | `list`                                                                                                                                                                                                                                                                                                              |

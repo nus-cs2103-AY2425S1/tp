@@ -70,15 +70,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_CLASSES).isPresent()) {
             editPersonDescriptor.setClasses(parseClasses(argMultimap.getValue(PREFIX_CLASSES).get()));
-            System.out.println(parseClasses(argMultimap.getValue(PREFIX_CLASSES).get()));
-            System.out.println("classo");
         }
         parseSubjectsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editPersonDescriptor::setSubjects);
         // parse optional tags
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            System.out.println("none");
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
