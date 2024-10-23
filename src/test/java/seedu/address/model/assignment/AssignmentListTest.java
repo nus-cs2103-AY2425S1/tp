@@ -18,6 +18,7 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.Assert;
+import seedu.address.testutil.TypicalAssignments;
 import seedu.address.testutil.TypicalStudents;
 
 public class AssignmentListTest {
@@ -25,6 +26,15 @@ public class AssignmentListTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AssignmentList(null));
+    }
+
+    @Test
+    public void constructor_duplicateAssignment_throwsDuplicateAssignmentException() {
+        ArrayList<Assignment> duplicateAssignments = new ArrayList<>();
+        Assignment assignment = TypicalAssignments.ASSIGNMENT1;
+        duplicateAssignments.add(assignment);
+        duplicateAssignments.add(assignment);
+        assertThrows(DuplicateAssignmentException.class, () -> new AssignmentList(duplicateAssignments));
     }
 
     @Test
