@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.IsFavouritePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
 import seedu.address.model.person.TelegramContainsKeywordsPredicate;
@@ -20,7 +21,7 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: [n/nameKeyword] [r/roleKeyword] [t/telegramKeyword] ...\n"
+            + "Parameters: [n/nameKeyword] [r/roleKeyword] [t/telegramKeyword] [f/] ...\n"
             + "Example: " + COMMAND_WORD + " n/alice tan n/bob r/member n/charlie t/ccharliee";
 
     private final NameContainsKeywordsPredicate namePredicate;
@@ -29,22 +30,25 @@ public class FindCommand extends Command {
 
     private final TelegramContainsKeywordsPredicate telegramPredicate;
 
+    private final IsFavouritePredicate isFavouritePredicate;
+
     /**
      * @param namePredicate determines whether a person has a name that satisfy a condition
      * @param rolePredicate determines whether a person has a role that satisfy a condition
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, RoleContainsKeywordsPredicate rolePredicate,
-                       TelegramContainsKeywordsPredicate telegramPredicate) {
+                       TelegramContainsKeywordsPredicate telegramPredicate, IsFavouritePredicate isFavouritePredicate) {
         this.namePredicate = namePredicate;
         this.rolePredicate = rolePredicate;
         this.telegramPredicate = telegramPredicate;
+        this.isFavouritePredicate = isFavouritePredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        model.updateFilteredPersonList(rolePredicate.or(namePredicate).or(telegramPredicate));
+        model.updateFilteredPersonList(rolePredicate.or(namePredicate).or(telegramPredicate).or(isFavouritePredicate));
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
@@ -64,7 +68,8 @@ public class FindCommand extends Command {
         FindCommand otherFindCommand = (FindCommand) other;
         return namePredicate.equals(otherFindCommand.namePredicate)
                 && rolePredicate.equals(otherFindCommand.rolePredicate)
-                && telegramPredicate.equals(otherFindCommand.telegramPredicate);
+                && telegramPredicate.equals(otherFindCommand.telegramPredicate)
+                && isFavouritePredicate.equals(otherFindCommand.isFavouritePredicate);
     }
 
     @Override
@@ -73,6 +78,7 @@ public class FindCommand extends Command {
                 .add("namePredicate", namePredicate)
                 .add("rolePredicate", rolePredicate)
                 .add("telegramPredicate", telegramPredicate)
+                .add("isFavouritePredicate", isFavouritePredicate)
                 .toString();
     }
 }

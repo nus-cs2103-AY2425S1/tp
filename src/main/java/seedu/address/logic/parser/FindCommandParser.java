@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -10,6 +11,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.FavouriteStatus;
+import seedu.address.model.person.IsFavouritePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
 import seedu.address.model.person.TelegramContainsKeywordsPredicate;
@@ -25,9 +28,9 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_TELEGRAM);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_FAVOURITE);
 
-        if (!areSomePrefixesPresent(argumentMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_TELEGRAM)
+        if (!areSomePrefixesPresent(argumentMultimap, PREFIX_NAME, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_FAVOURITE)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -48,10 +51,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         nameKeywords = nameKeywords.stream().map(String::trim).toList();
         roleKeywords = roleKeywords.stream().map(String::trim).toList();
         telegramKeywords = telegramKeywords.stream().map(String::trim).toList();
+        FavouriteStatus favouriteStatus = argumentMultimap.getAllValues(PREFIX_FAVOURITE).isEmpty() ? null : FavouriteStatus.FAVOURITE;
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new RoleContainsKeywordsPredicate(roleKeywords),
-                new TelegramContainsKeywordsPredicate(telegramKeywords));
+                new TelegramContainsKeywordsPredicate(telegramKeywords), new IsFavouritePredicate(favouriteStatus));
     }
 
     /**
