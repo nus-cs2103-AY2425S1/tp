@@ -10,15 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.LastSeen;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Organisation;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +29,7 @@ class JsonAdaptedPerson {
     private final String priority;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String remark;
+    private final List<JsonAdaptedReminder> reminderList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +39,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("organisation") String organisation, @JsonProperty("lastSeen") String lastSeen,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("priority") String priority,
-            @JsonProperty("remark") String remark) {
+            @JsonProperty("remark") String remark,
+            @JsonProperty("reminderList") List<JsonAdaptedReminder> reminderList) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,6 +52,9 @@ class JsonAdaptedPerson {
         }
         this.priority = priority;
         this.remark = remark;
+        if (reminderList != null) {
+            this.reminderList.addAll(reminderList);
+        }
     }
 
     /**
@@ -75,6 +72,9 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         priority = source.getPriority().toString();
         remark = source.getRemark().value;
+        reminderList.addAll(source.getReminderList().getListOfReminders().stream()
+                .map(JsonAdaptedReminder::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -86,6 +86,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Reminder> personReminders = new ArrayList<>();
+        for (JsonAdaptedReminder reminder : reminderList) {
+            personReminders.add(reminder.toModelType());
         }
 
         if (name == null) {
@@ -151,8 +156,14 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrganisation,
+        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrganisation,
                 modelLastSeen, modelTags, modelPriority, modelRemark);
+
+        for (Reminder reminder : personReminders) {
+            person.getReminderList().addReminder(reminder);
+        }
+
+        return person;
     }
 
 }

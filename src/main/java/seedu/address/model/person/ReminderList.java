@@ -21,6 +21,10 @@ public class ReminderList {
         return listOfReminders.get(index);
     }
 
+    public ObservableList<Reminder> getListOfReminders() {
+        return listOfReminders;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
