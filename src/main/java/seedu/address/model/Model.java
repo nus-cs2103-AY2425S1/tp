@@ -1,12 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 
 /**
  * The API of the Model component.
@@ -93,4 +95,6 @@ public interface Model {
     boolean hasOrder(Order order);
 
     ObservableList<Order> getOrderList();
+
+    List<Person> getPeopleByPostalCode(PostalCode postalCode);
 }

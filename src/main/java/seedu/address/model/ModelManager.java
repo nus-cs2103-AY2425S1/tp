@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -131,8 +133,14 @@ public class ModelManager implements Model {
     public ObservableList<Order> getOrderList() {
         return addressBook.getOrderList();
     }
-    //=========== Filtered Person List Accessors =============================================================
 
+    @Override
+    public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
+        requireNonNull(postalCode);
+        return addressBook.getPersonsByPostalCode(postalCode);
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
