@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -50,6 +52,14 @@ public class EditStudentDescriptorTest {
 
         // different tags -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different remark -> returns false
+        editedAmy = DESC_AMY_WITHOUT_ASSIGNMENT_WITH_REMARK;
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different assignment list -> returns false
+        editedAmy = DESC_AMY_WITH_ASSIGNMENT_WITHOUT_REMARK;
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
