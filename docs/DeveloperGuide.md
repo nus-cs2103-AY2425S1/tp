@@ -194,7 +194,7 @@ It also implements the following operations:
 
 The following sequence diagram shows an example execution of command `findt 1 ...`, where `...` represents any number of keywords.
 
-<puml src="diagrams/FindTransactionsDiagram.puml" width="600" />
+<puml src="diagrams/FindTransactionsDiagram.puml" />
 
 #### Side Effects
 
