@@ -19,6 +19,7 @@ Class Email
 Class Name
 Class Phone
 Class Subject
+Class Schedule
 Class "{abstract}\nFee" as Fee
 Class PaidAmount
 Class OwedAmount
@@ -44,6 +45,7 @@ Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> Address
+Student *--> Schedule
 Student *--> Subject
 Student *--> PaidAmount
 Student *--> OwedAmount
