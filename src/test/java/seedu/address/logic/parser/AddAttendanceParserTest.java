@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static java.awt.font.GlyphMetrics.WHITESPACE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDANCE_DESC;
