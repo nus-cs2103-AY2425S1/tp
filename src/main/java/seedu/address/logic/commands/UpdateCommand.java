@@ -32,6 +32,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.task.TaskList;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Updates the details of an existing person in the address book.
@@ -78,7 +79,7 @@ public class UpdateCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (name.equals("")) {
+        if (name.toString().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
         }
 
@@ -94,7 +95,8 @@ public class UpdateCommand extends Command {
 
         model.setPerson(personToUpdate, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(updatedPerson)));
+        return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(updatedPerson)),
+                UiState.DETAILS);
     }
 
     /**

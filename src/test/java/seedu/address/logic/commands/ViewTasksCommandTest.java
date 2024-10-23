@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.predicate.TaskListNotEmptyPredicate;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewTasksCommand.
@@ -28,6 +29,6 @@ public class ViewTasksCommandTest {
     @Test
     public void execute_showsSameList() {
         assertCommandSuccess(new ViewTasksCommand(), model, ViewTasksCommand.MESSAGE_SUCCESS,
-                expectedModel);
+                UiState.TASKS, expectedModel);
     }
 }

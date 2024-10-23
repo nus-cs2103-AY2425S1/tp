@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.task.Task;
 import seedu.address.model.person.task.TaskDeadline;
 import seedu.address.model.person.task.TaskDescription;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -46,7 +47,7 @@ public class DeleteTaskCommandTest {
         // Check that initially model is different
         assertNotEquals(model, expectedModel);
 
-        assertCommandSuccess(deleteTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test

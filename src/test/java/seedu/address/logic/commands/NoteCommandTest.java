@@ -22,6 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for NoteCommand.
@@ -40,7 +41,7 @@ public class NoteCommandTest {
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class NoteCommandTest {
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
