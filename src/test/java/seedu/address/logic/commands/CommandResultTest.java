@@ -85,7 +85,7 @@ public class CommandResultTest {
     void isView_shouldReturnFalse_whenViewIsNotSet() {
         CommandResult commandResult = new CommandResult("Feedback");
         boolean result = commandResult.isView();
-        assertFalse(result, "Expected isView() to return true");
+        assertFalse(result, "Expected isView() to return false");
     }
 
     @Test

@@ -20,7 +20,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private boolean view = false;
+    private boolean isViewCommand = false;
 
     private Person currentPerson;
 
@@ -38,7 +38,7 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser, boolean view, Person person) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.view = view;
+        this.isViewCommand = view;
         this.exit = false;
         this.showHelp = false;
         this.currentPerson = person;
@@ -65,7 +65,7 @@ public class CommandResult {
     }
 
     public boolean isView() {
-        return view;
+        return isViewCommand;
     }
 
     public Person showPerson() {
