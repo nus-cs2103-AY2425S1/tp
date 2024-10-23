@@ -80,7 +80,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    public void execute_PersonEditedWithOrderDisplayed_success() {
+    public void execute_personEditedWithOrderDisplayed_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
         model.updateSelectedPerson(lastPerson);
