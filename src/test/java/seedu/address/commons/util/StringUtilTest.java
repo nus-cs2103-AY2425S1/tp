@@ -46,6 +46,112 @@ public class StringUtilTest {
     }
 
 
+
+    //---------------- Tests for containsSubstringIgnoreCase ---------------------------------
+
+    /*
+     * Invalid equivalence partitions for substring: null, empty
+     * Invalid equivalence partitions for sentence: null
+     * The three test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containsSubstringIgnoreCase_nullSubstring_throwsNullPointerException() {
+        assertThrows(
+                NullPointerException.class, () -> StringUtil.containsSubstringIgnoreCase("typical sentence", null)
+        );
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_emptySubstring_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Substring parameter cannot be empty", ()
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", "  "));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsSubstringIgnoreCase(null, "abc"));
+    }
+
+    /*
+     * Valid equivalence partitions for substring:
+     *   - one word
+     *   - multiple words
+     *   - string containing symbols/numbers
+     *   - string with leading/trailing spaces
+     *
+     * Valid equivalence partitions for sentence:
+     *   - empty string
+     *   - one word
+     *   - multiple words
+     *   - sentence with extra spaces
+     *
+     * Possible scenarios returning true:
+     *   - matches prefix of sentence
+     *   - matches suffix of sentence
+     *   - matches middle word in sentence
+     *   - matches multiple substrings
+     *
+     * Possible scenarios returning false:
+     *   - query substring exists but is discontinuous
+     *   - sentence matches part of the query substring
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+
+    @Test
+    public void containsSubstringIgnoreCase_validInputs_correctResult() {
+
+        // Empty sentence
+        assertFalse(StringUtil.containsSubstringIgnoreCase("", "ab c"));
+        assertFalse(StringUtil.containsSubstringIgnoreCase("    ", "123"));
+
+        // Query substring exists but is discontinuous
+        assertFalse(
+                StringUtil.containsSubstringIgnoreCase("abc def ghi", "ac")
+        ); // Query substring partitioned by a letter
+        assertFalse(
+                StringUtil.containsSubstringIgnoreCase("abc def ghi", "abcdef")
+        ); // Query substring partitioned by a space
+        assertFalse(
+                StringUtil.containsSubstringIgnoreCase("abc def ghi", "abc ghi")
+        ); // Query substring partitioned by a word
+
+        // Sentence matches part of the query substring only
+        assertFalse(
+                StringUtil.containsSubstringIgnoreCase("abc def ghi", "abc defg")
+        ); // Prefix of query substring is matched
+        assertFalse(
+                StringUtil.containsSubstringIgnoreCase("PetER ChoO", "  METer")
+        ); // Suffix of query substring is matched
+        assertFalse(
+                StringUtil.containsSubstringIgnoreCase("abc def ghi", "z def z")
+        ); // Middle part of query substring is matched
+        assertFalse(
+                StringUtil.containsSubstringIgnoreCase("abc  def ghi", "abc    def")
+        ); // Query substring contains more spaces in between
+
+        // Matches Substring in the sentence, different upper/lower case letters
+        assertTrue(
+                StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "AaA BB")
+        ); // Prefix (boundary case)
+        assertTrue(
+                StringUtil.containsSubstringIgnoreCase("aaa bBb ccc@1", "BB CCc@1")
+        ); // Suffix (boundary case)
+        assertTrue(
+                StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ", " aaa   bbb     ")
+        ); // Sentence has extra spaces
+        assertTrue(
+                StringUtil.containsSubstringIgnoreCase("Aaa", "aA")
+        ); // Only one word in sentence (boundary case)
+        assertTrue(
+                StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "  a b  ")
+        ); // Leading/trailing spaces
+
+        // Matches multiple Substrings in sentence
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAA AAA aAa", "aa A"));
+    }
+
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 
     /*

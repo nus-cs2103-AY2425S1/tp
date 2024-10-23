@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,19 +24,35 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ModuleRoleMap moduleRoleMap;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Optional<Address> address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.moduleRoleMap = new ModuleRoleMap(new HashMap<>());
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Optional<Address> address, Set<Tag> tags,
+                  ModuleRoleMap moduleRoleMap) {
+        requireAllNonNull(name, phone, email, tags, moduleRoleMap);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.moduleRoleMap = moduleRoleMap;
     }
 
     public Name getName() {
@@ -49,8 +67,12 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
+    public Optional<Address> getAddress() {
         return address;
+    }
+
+    public ModuleRoleMap getModuleRoleMap() {
+        return moduleRoleMap;
     }
 
     /**
@@ -71,7 +93,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -94,24 +116,41 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && moduleRoleMap.equals((otherPerson.moduleRoleMap));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, moduleRoleMap);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("email", email);
+
+        address.ifPresent(addr -> builder.add("address", addr));
+        builder.add("tags", tags)
+                .add("roles", moduleRoleMap);
+
+        return builder.toString();
     }
 
+    /**
+     * Returns true if this person has a non-null address.
+     */
+    public boolean hasAddress() {
+        return this.address.isPresent();
+    }
+
+    /**
+     * Returns true if this person has an empty {@code ModuleRoleMap}.
+     */
+    public boolean hasEmptyModuleRoleMap() {
+        return this.moduleRoleMap.getRoles().isEmpty();
+    }
 }
