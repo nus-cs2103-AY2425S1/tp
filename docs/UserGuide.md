@@ -130,6 +130,28 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 * `find Ifan` sorts other names by decreasing similarity to `Ifan` (e.g. Irfan, Isolde, Ayush, ...)
 
+### Filtering persons by criteria: `filter`
+
+Filters the displayed list of persons in the address book to include all persons who meet the specified criteria and displays them with index numbers.
+
+Format: `filter p/PHONE e/EMAIL a/ADDRESS t/TAG...`
+
+Parameters:
+* p/PHONE: The phone number criteria to filter by.
+* e/EMAIL: The email criteria to filter by.
+* a/ADDRESS: The address criteria to filter by.
+* t/TAG...: The tags to filter by.
+
+Examples:
+* `filter p/+65 e/example.com a/Clementi t/Inactive`: Filters the list to include all persons whose phone number contains `+65`, email contains `example.com`, address contains `Clementi`, and have the tag Inactive.
+* `filter p/987 e/johndoe@example.com a/Street`: Filters the list to include all persons whose phone number contains `987`, email is `johndoe@example.com`, and address contains `Street`.
+
+Notes:
+* At least one of p/PHONE, e/EMAIL, or a/ADDRESS must be provided.
+* Multiple criteria for phone, email, address and tags can be specified, separated by spaces.
+* The criteria for phone, email, and address are case-insensitive and can be partial matches.
+* The criteria for tags only checks for exact matches.
+
 ### Deleting a person : `delete`
 
 Deletes the person with the specified `NAME` or the person at the specified `INDEX`
