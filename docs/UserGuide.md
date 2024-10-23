@@ -13,7 +13,7 @@
     --special-bg-color: rgb(235, 243, 255);
     --hover-bg-color: rgb(243, 243, 243);
     --white-bg-color: rgb(255, 255, 255);
-    --code-bg-color: rgb(255, 238, 216, 0.9);
+    --code-bg-color: rgba(202, 206, 255, 0.6);
     --box-bg-color: rgba(255, 130, 21, 0.6);
     --box-border-color: rgba(255, 130, 21, 0.75);
     --warn-bg-color: rgba(255, 0, 0, 0.2);
