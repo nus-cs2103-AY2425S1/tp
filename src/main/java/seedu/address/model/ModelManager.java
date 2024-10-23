@@ -134,6 +134,33 @@ public class ModelManager implements Model {
         addressBook.removeParticipation(target);
     }
 
+    //// tutorial-level operations
+
+    @Override
+    public boolean hasTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        return addressBook.hasTutorial(tutorial);
+    }
+
+//    @Override
+//    public void deleteTutorial(Tutorial tutorial) {
+//        addressBook.remove(tutorial);
+//    }
+
+    @Override
+    public void addTutorial(Tutorial tutorial) {
+        addressBook.addTutorial(tutorial);
+        updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
+    }
+
+//    @Override
+//    public void setTutorial(Tutorial target,  editedPerson) {
+//        requireAllNonNull(target, editedPerson);
+//
+//        addressBook.setPerson(target, editedPerson);
+//    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     //// Persons
@@ -152,9 +179,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //// Tutorials
+    //=========== Filtered Tutorial List Accessors =============================================================
+
     /**
-     * Returns an unmodifiable view of the list of {@code Tutorials} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Tutorial} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -182,7 +210,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredTutorials.equals(otherModelManager.filteredTutorials);
     }
 
 }
