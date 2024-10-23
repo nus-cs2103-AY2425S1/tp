@@ -102,6 +102,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("showDetailWindow", showDetailWindow)
+                .add("personToShow", personToShow)
                 .toString();
     }
 
