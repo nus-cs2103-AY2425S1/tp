@@ -36,7 +36,7 @@ public class DeleteAppointmentCommandTest {
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 Messages.formatSchedule(personWithAppointmentToDelete,
                         personWithAppointmentToDelete.getSchedules().iterator().next()));
-        
+
         System.out.println(expectedMessage);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

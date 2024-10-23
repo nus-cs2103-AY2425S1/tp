@@ -117,7 +117,7 @@ public class ModelManager implements Model {
         addressBook.deleteAppointment(target, appointment);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
-    
+
     @Override
     public void deleteReminder(Person target) {
         requireNonNull(target);

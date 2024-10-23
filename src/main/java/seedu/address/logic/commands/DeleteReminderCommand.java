@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 public class DeleteReminderCommand extends Command{
 
     public static final String COMMAND_WORD = "reminder-delete";
-    
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified reminder.\n"
             + "Parameters: NAME (must be the name of an existing client)\n"
@@ -31,7 +31,7 @@ public class DeleteReminderCommand extends Command{
     public DeleteReminderCommand(Name name) {
         this.name = name;
     }
-    
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

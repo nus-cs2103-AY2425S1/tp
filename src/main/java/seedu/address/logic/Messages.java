@@ -93,7 +93,7 @@ public class Messages {
 
     /**
      * Formats the {@code appointment} for display to the user.
-     * 
+     *
      * @param schedule The {@code schedule} to be formatted.
      */
     public static String formatAppointment(Schedule schedule) {
