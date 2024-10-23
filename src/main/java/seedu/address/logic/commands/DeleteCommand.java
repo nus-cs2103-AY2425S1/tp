@@ -52,8 +52,7 @@ public class DeleteCommand extends Command {
         this.deleteCommandDescriptor = deleteCommandDescriptor;
     }
 
-    private static Person createEditedPerson(Person personToEdit, Set<EmergencyContact> updatedEmergencyContacts)
-            throws CommandException {
+    public static Person createEditedPerson(Person personToEdit, Set<EmergencyContact> updatedEmergencyContacts) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
