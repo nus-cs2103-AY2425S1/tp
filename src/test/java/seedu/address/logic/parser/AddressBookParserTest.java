@@ -156,12 +156,12 @@ public class AddressBookParserTest {
     }
 
     @Test
-
     public void parseCommand_listIncomplete() throws Exception {
         assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD) instanceof ListIncompleteCommand);
         assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD + " 3") instanceof ListIncompleteCommand);
     }
 
+    @Test
     public void parseCommand_findTask() throws Exception {
         Index index = INDEX_FIRST_PERSON;
 
