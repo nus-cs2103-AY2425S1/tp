@@ -21,8 +21,7 @@ Class Phone
 Class Rating
 Class Tag
 Class Favourite
-Class Price
-'Not sure if fav and price is needed here'
+Class Price 
 
 Class I #FFFFFF
 }
