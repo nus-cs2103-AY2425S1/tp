@@ -9,6 +9,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.ShortCut;
+
 
 /**
  * The API of the Model component.
@@ -96,5 +99,10 @@ public interface Model {
 
     ObservableList<Order> getOrderList();
 
+    void addShortCut(ShortCut shortcut);
+    void removeShortCut(ShortCut shortcut);
+    boolean hasShortCut(ShortCut shortCut);
+    ObservableList<ShortCut> getShortCutList();
+    boolean hasAlias(Alias alias);
     List<Person> getPeopleByPostalCode(PostalCode postalCode);
 }

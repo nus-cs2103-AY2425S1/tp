@@ -15,6 +15,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.ShortCut;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -133,7 +136,27 @@ public class ModelManager implements Model {
     public ObservableList<Order> getOrderList() {
         return addressBook.getOrderList();
     }
-
+    @Override
+    public void addShortCut(ShortCut shortcut) {
+        addressBook.addShortCut(shortcut);
+    }
+    @Override
+    public void removeShortCut(ShortCut shortcut) {
+        addressBook.removeShortCut(shortcut);
+    }
+    @Override
+    public boolean hasShortCut(ShortCut shortcut) {
+        return addressBook.hasShortCut(shortcut);
+    }
+    @Override
+    public boolean hasAlias(Alias alias) {
+        return addressBook.hasAlias(alias);
+    }
+    @Override
+    public ObservableList<ShortCut> getShortCutList() {
+        return addressBook.getShortCutList();
+    }
+    //=========== Filtered Person List Accessors =============================================================
     @Override
     public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
         requireNonNull(postalCode);
