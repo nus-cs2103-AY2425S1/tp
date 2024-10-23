@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
@@ -118,7 +118,7 @@ public class AddOwnerCommandTest {
         }
 
         @Override
-        public void setPawPatrolPath(Path addressBookFilePath) {
+        public void setPawPatrolPath(Path pawPatrolFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -143,12 +143,12 @@ public class AddOwnerCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setPawPatrol(ReadOnlyPawPatrol pawPatrol) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPawPatrol getPawPatrol() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -189,6 +189,11 @@ public class AddOwnerCommandTest {
 
         @Override
         public void deleteLink(Link link) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLinksWithId(String id) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -275,8 +280,8 @@ public class AddOwnerCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPawPatrol getPawPatrol() {
+            return new PawPatrol();
         }
     }
 

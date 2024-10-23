@@ -16,10 +16,10 @@ import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.UniquePetList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at PawPatrol level
  * Duplicates are not allowed (by .isSameOwner and .isSamePet comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class PawPatrol implements ReadOnlyPawPatrol {
 
     private final UniquePersonList persons;
     private final UniqueOwnerList owners;
@@ -44,13 +44,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         links = new UniqueLinkList();
     }
 
-    public AddressBook() {
+    public PawPatrol() {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an PawPatrol using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public PawPatrol(ReadOnlyPawPatrol toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -90,9 +90,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code PawPatrol} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyPawPatrol newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
@@ -105,7 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in
-     * the address book.
+     * PawPatrol.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -113,8 +113,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to PawPatrol.
+     * The person must not already exist in PawPatrol.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -123,9 +123,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given person {@code target} in the list with
      * {@code editedPerson}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in PawPatrol.
      * The person identity of {@code editedPerson} must not be the same as another
-     * existing person in the address book.
+     * existing person in PawPatrol.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -134,8 +134,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PawPatrol}.
+     * {@code key} must exist in PawPatrol.
      */
     public void removePerson(Person key) {
         persons.remove(key);
@@ -145,7 +145,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if an owner with the same identity as {@code owner} exists in
-     * the address book.
+     * PawPatrol.
      */
     public boolean hasOwner(Owner owner) {
         requireNonNull(owner);
@@ -153,8 +153,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds an owner to the address book.
-     * The owner must not already exist in the address book.
+     * Adds an owner to PawPatrol.
+     * The owner must not already exist in PawPatrol.
      */
     public void addOwner(Owner o) {
         owners.add(o);
@@ -162,9 +162,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given owner {@code target} in the list with {@code editedOwner}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in PawPatrol.
      * The owner identity of {@code editedOwner} must not be the same as another
-     * existing owner in the address book.
+     * existing owner in PawPatrol.
      */
     public void setOwner(Owner target, Owner editedOwner) {
         requireNonNull(editedOwner);
@@ -173,8 +173,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PawPatrol}.
+     * {@code key} must exist in PawPatrol.
      */
     public void removeOwner(Owner key) {
         owners.remove(key);
@@ -183,8 +183,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     // pet-level operations
 
     /**
-     * Returns true if a pet with the same identity as {@code pet} exits in the
-     * address book.
+     * Returns true if a pet with the same identity as {@code pet} exits in PawPatrol.
      */
     public boolean hasPet(Pet pet) {
         requireNonNull(pet);
@@ -192,8 +191,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a pet to the address book.
-     * The pet must not already exist in the address book.
+     * Adds a pet to PawPatrol.
+     * The pet must not already exist in PawPatrol.
      */
     public void addPet(Pet p) {
         pets.add(p);
@@ -201,9 +200,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given pet {@code target} in the list with {@code editedPet}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in PawPatrol.
      * The pet identity of {@code editedPet} must not be the same as another
-     * existing pet in the address book.
+     * existing pet in PawPatrol.
      */
     public void setPet(Pet target, Pet editedPet) {
         requireNonNull(editedPet);
@@ -212,8 +211,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PawPatrol}.
+     * {@code key} must exist in PawPatrol.
      */
     public void removePet(Pet key) {
         pets.remove(key);
@@ -222,8 +221,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     // link-level operations
 
     /**
-     * Returns true if a link with the same identity as {@code link} exists in the
-     * address book.
+     * Returns true if a link with the same identity as {@code link} exists in PawPatrol.
      */
     public boolean hasLink(Link link) {
         requireNonNull(link);
@@ -231,8 +229,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a link to the address book.
-     * The link must not already exist in the address book.
+     * Adds a link to PawPatrol.
+     * The link must not already exist in PawPatrol.
      */
     public void addLink(Link link) {
         requireNonNull(link);
@@ -240,11 +238,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PawPatrol}.
+     * {@code key} must exist in PawPatrol.
      */
     public void removeLink(Link key) {
         links.remove(key);
+    }
+
+    /**
+     * Remove {@code Link} that involve the specific ID
+     * taken from {@code Linkable}
+     */
+    public void deleteLinksWithId(String id) {
+        links.deleteLinksWithId(id);
     }
 
     // util methods
@@ -286,14 +292,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof PawPatrol)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
+        PawPatrol otherPawPatrol = (PawPatrol) other;
 
-        return persons.equals(otherAddressBook.persons) && owners.equals(otherAddressBook.owners)
-            && pets.equals(otherAddressBook.pets);
+        return persons.equals(otherPawPatrol.persons) && owners.equals(otherPawPatrol.owners)
+            && pets.equals(otherPawPatrol.pets);
     }
 
     @Override

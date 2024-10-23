@@ -27,7 +27,7 @@ public class EditOwnerCommand extends EditCommand<Owner> {
 
     public static final String MESSAGE_EDIT_OWNER_SUCCESS = "Edited Owner: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in PawPatrol.";
 
     private final EditOwnerDescriptor editOwnerDescriptor;
 

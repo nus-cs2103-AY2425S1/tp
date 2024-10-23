@@ -25,7 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonPawPatrolStorage;
@@ -87,6 +87,16 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getFilteredOwnerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredOwnerList().remove(0));
+    }
+
+    @Test
+    public void getFilteredPetList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPetList().remove(0));
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -123,7 +133,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getPawPatrol(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -152,7 +162,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an PawPatrolStorage that throws the IOException e when saving
         JsonPawPatrolStorage addressBookStorage = new JsonPawPatrolStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void savePawPatrol(ReadOnlyPawPatrol pawPatrol, Path filePath)
                     throws IOException {
                 throw e;
             }

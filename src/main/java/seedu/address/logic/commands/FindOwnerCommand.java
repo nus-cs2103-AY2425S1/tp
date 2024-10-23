@@ -8,7 +8,7 @@ import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all owners in the address book whose name contains any of the argument keywords.
+ * Finds and lists all owners in PawPatrol whose name contains any of the argument keywords.
  */
 public class FindOwnerCommand extends FindCommand<Owner> {
 
