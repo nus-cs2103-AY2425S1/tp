@@ -18,7 +18,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-
+    public static final String MESSAGE_NO_TAG = "The person does not contain the tag";
+    public static final String MESSAGE_TAG_NOT_FOUND = "There is no tag presented in the command!";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Tag %1$s is deleted from student %2$s";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

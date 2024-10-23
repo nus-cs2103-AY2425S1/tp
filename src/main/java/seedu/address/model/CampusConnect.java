@@ -3,20 +3,22 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Stack;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the CampusConnect level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class CampusConnect implements ReadOnlyCampusConnect {
 
     private final UniquePersonList persons;
-
+    private final Stack<ReadOnlyCampusConnect> prev = new Stack<>();
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -41,6 +43,27 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     //// list overwrite operations
 
     /**
+     * Stores the current states of the CampusConnect.
+     */
+    public void saveCurrentState() {
+        ReadOnlyCampusConnect newCampusConnect = new CampusConnect(this);
+        prev.add(newCampusConnect);
+    }
+
+    /**
+     * Recover from previous states
+     */
+    public ReadOnlyCampusConnect recoverPreviousState() {
+        if (!prev.isEmpty()) {
+            ReadOnlyCampusConnect out = prev.pop();
+            assert out != null;
+            return out;
+        } else {
+            return new CampusConnect(this);
+        }
+    }
+
+    /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
@@ -53,7 +76,6 @@ public class CampusConnect implements ReadOnlyCampusConnect {
      */
     public void resetData(ReadOnlyCampusConnect newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -102,6 +124,13 @@ public class CampusConnect implements ReadOnlyCampusConnect {
         persons.remove(key);
     }
 
+    /**
+     * Delete a tag from a person.
+     */
+    public void removePersonTag(Person p, Tag t) {
+        persons.deletePersonTag(p, t);
+    }
+
     //// util methods
 
     @Override
@@ -114,6 +143,11 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return persons.asTagList();
     }
 
     @Override

@@ -34,10 +34,10 @@ public class FindCommandParserTest {
                 new FindByNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
 
         // no leading and trailing whitespaces
-        assertParseSuccess(parser, "n/ Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice n/Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "n/ \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " n/ \n Alice \n n/ \t Bob  \t", expectedFindCommand);
     }
 
     @Test
@@ -47,10 +47,10 @@ public class FindCommandParserTest {
                         Arrays.asList("91234567", "995")));
 
         // no leading and trailing whitespaces
-        assertParseSuccess(parser, "p/ 91234567 995", expectedFindCommand);
+        assertParseSuccess(parser, " p/ 91234567 p/ 995", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "p/ \n 91234567 \n \t 995  \t", expectedFindCommand);
+        assertParseSuccess(parser, " p/ \n 91234567 \n p/\t 995  \t", expectedFindCommand);
     }
 
     @Test
@@ -60,10 +60,10 @@ public class FindCommandParserTest {
                         Arrays.asList("ryan@gmail.com", "tasha@gmail.com")));
 
         // no leading and trailing whitespaces
-        assertParseSuccess(parser, "e/ ryan@gmail.com tasha@gmail.com", expectedFindCommand);
+        assertParseSuccess(parser, " e/ ryan@gmail.com e/tasha@gmail.com", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "e/ \n ryan@gmail.com \n \t tasha@gmail.com  \t", expectedFindCommand);
+        assertParseSuccess(parser, " e/ \n ryan@gmail.com \n e/\t tasha@gmail.com  \t", expectedFindCommand);
     }
 
     @Test
@@ -73,10 +73,10 @@ public class FindCommandParserTest {
                         Arrays.asList("PC2174ALecturer", "PC2032classmate")));
 
         // no leading and trailing whitespaces
-        assertParseSuccess(parser, "t/PC2174ALecturer PC2032classmate", expectedFindCommand);
+        assertParseSuccess(parser, " t/PC2174ALecturer t/PC2032classmate", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "t/ \n PC2174ALecturer \n \t PC2032classmate  \t", expectedFindCommand);
+        assertParseSuccess(parser, " t/ \n PC2174ALecturer \n t/\t PC2032classmate  \t", expectedFindCommand);
     }
 
 }

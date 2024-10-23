@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -73,18 +74,18 @@ public class CampusConnectParserTest {
     @Test
     public void parseCommand_findByName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindByNameCommand command = (FindByNameCommand) parser.parseCommand(
-                FindByNameCommand.COMMAND_WORD + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
+        FindByNameCommand command = (FindByNameCommand) parser.parseCommand(AbstractFindCommand.COMMAND_WORD
+                + keywords.stream().map(x -> FindByNameCommand.NAME_COMMAND_WORD + x)
+                .collect(Collectors.joining(" ")));
         assertEquals(new FindByNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_findByPhone() throws Exception {
         List<String> keywords = Arrays.asList("995", "91234567", "132");
-        FindByPhoneCommand command = (FindByPhoneCommand) parser.parseCommand(
-                FindByPhoneCommand.COMMAND_WORD + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
+        FindByPhoneCommand command = (FindByPhoneCommand) parser.parseCommand(AbstractFindCommand.COMMAND_WORD
+                        + keywords.stream().map(x -> FindByPhoneCommand.PHONE_COMMAND_WORD + x)
+                        .collect(Collectors.joining(" ")));
         assertEquals(new FindByPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
     }
 

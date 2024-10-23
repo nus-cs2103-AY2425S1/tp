@@ -7,21 +7,25 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final CampusConnect campusConnect;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Tag> currentlyDefinedTags;
 
     /**
      * Initializes a ModelManager with the given campusConnect and userPrefs.
@@ -29,18 +33,20 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyCampusConnect campusConnect, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(campusConnect, userPrefs);
 
-        logger.fine("Initializing with address book: " + campusConnect + " and user prefs " + userPrefs);
+        logger.fine("Initializing with campus connect: " + campusConnect + " and user prefs " + userPrefs);
 
         this.campusConnect = new CampusConnect(campusConnect);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.campusConnect.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.campusConnect.getPersonList());
+        this.currentlyDefinedTags = FXCollections.observableArrayList();
+        refreshTagList();
     }
 
     public ModelManager() {
         this(new CampusConnect(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    //=========== UserPrefs ==========================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -75,11 +81,12 @@ public class ModelManager implements Model {
         userPrefs.setCampusConnectFilePath(campusConnectFilePath);
     }
 
-    //=========== CampusConnect ================================================================================
+    //=========== CampusConnect ======================================================
 
     @Override
     public void setCampusConnect(ReadOnlyCampusConnect campusConnect) {
         this.campusConnect.resetData(campusConnect);
+        refreshTagList();
     }
 
     @Override
@@ -96,33 +103,37 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         campusConnect.removePerson(target);
+        refreshTagList();
+    }
+
+    @Override
+    public void deletePersonTag(Person p, Tag t) {
+        campusConnect.removePersonTag(p, t);
     }
 
     @Override
     public void addPerson(Person person) {
         campusConnect.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        refreshTagList();
     }
 
     @Override
-    public void insertPerson(Person p , int ind) {
+    public void insertPerson(Person p, int ind) {
         campusConnect.addPerson(p, ind);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        refreshTagList();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         campusConnect.setPerson(target, editedPerson);
+        refreshTagList();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Person List Accessors =====================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedCampusConnect}
-     */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
@@ -134,13 +145,26 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Tag List Accessors =================================================
+
+    /**
+     * Refreshes and returns an unmodifiable view of the list of tags currently in CampusConnect
+     */
+    private void refreshTagList() {
+        currentlyDefinedTags.setAll(campusConnect.getTagList()); // Assume getAllTags aggregates unique tags
+    }
+
+    @Override
+    public ObservableList<Tag> getListOfCurrentTags() {
+        return FXCollections.unmodifiableObservableList(currentlyDefinedTags);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
@@ -151,4 +175,21 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public int hashCode() {
+        // Hash based on essential components of the model manager
+        return campusConnect.hashCode() + userPrefs.hashCode() + filteredPersons.hashCode();
+    }
+
+    @Override
+    public void undoCampusConnect() {
+        ReadOnlyCampusConnect newCampusConnect = campusConnect.recoverPreviousState();
+        this.setCampusConnect(newCampusConnect);
+    }
+
+    @Override
+    public void saveCurrentCampusConnect() {
+        campusConnect.saveCurrentState();
+    }
 }
+

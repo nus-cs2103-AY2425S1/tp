@@ -3,13 +3,16 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -111,10 +114,30 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Delete a tag from a person
+     */
+    public void deletePersonTag(Person p, Tag t) {
+        requireNonNull(p);
+        Person replace = p.removeTag(t);
+        setPerson(p, replace);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the tag list of the Persons recorded
+     */
+    public ObservableList<Tag> asTagList() {
+        Set<Tag> tagSet = new HashSet<>();
+        for (Person person : internalList) {
+            tagSet.addAll(person.getTags());
+        }
+        return FXCollections.observableArrayList(tagSet);
     }
 
     @Override

@@ -1,7 +1,17 @@
-/* General Background and Text */
 .background {
     -fx-background-color: #2B3A67; /* Deep blue background */
-    background-color: #2B3A67; /* Consistent with other references */
+}
+
+.result-display {
+    -fx-font-size: 12pt; /* Increase font size for better visibility */
+    -fx-font-family: "Segoe UI", sans-serif; /* Use a clean, modern font */
+    -fx-text-fill: #1E90FF; /* Dodger blue color for the text */
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
 }
 
 .label {
@@ -30,10 +40,8 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-background-color: #2D4059; /* Slightly lighter blue */
     -fx-text-fill: white;
-}
-
-.tab-pane {
-    -fx-padding: 0 0 0 1;
+    -fx-padding: 4px;
+    -fx-border-radius: 4px;
 }
 
 /* Table and List Views */
@@ -75,8 +83,10 @@
 
 .list-cell:filled:selected {
     -fx-background-color: #FFA500; /* Orange for selection */
+    -fx-text-fill: #2B3A67;
 }
 
+/* Styling for selected cardPane in list */
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #FF8C00; /* Darker orange border */
     -fx-border-width: 1;
@@ -91,20 +101,12 @@
     -fx-padding: 5 22 5 22;
     -fx-border-color: #FFA500; /* Orange border */
     -fx-border-width: 2;
-    -fx-background-radius: 0;
+    -fx-background-radius: 5;
     -fx-background-color: #2B3A67;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #FFFFFF; /* White text */
-}
-
-.button:hover {
-    -fx-background-color: #34495E; /* Lighter blue on hover */
-}
-
-.button:pressed {
-    -fx-background-color: #FFA500; /* Orange when pressed */
-    -fx-text-fill: #2B3A67; /* Switch to blue text */
+    -fx-transition: background-color 0.3s, color 0.3s;
 }
 
 .menu-bar {
@@ -112,8 +114,8 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI SemiBold";
     -fx-text-fill: #FF8C00;
     -fx-opacity: 0.9;
     -fx-font-weight: bold;
@@ -126,7 +128,7 @@
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
-    -fx-padding: 4px;
+    -fx-padding: 6px;
     -fx-pref-height: 30px;
 }
 
@@ -137,16 +139,48 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
+    -fx-background-color: #3e7b91; /* Consistent with subdued blue tone */
+    -fx-padding: 3px 5px;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
 }
 
-.result-display {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI", sans-serif;
-    -fx-text-fill: #1E90FF; /* Dodger blue color for the text */
-    -fx-background-color: transparent;
-    -fx-font-weight: bold;
-    -fx-padding: 5px;
+/* TagListPanel Styling */
+.tag-list-panel {
+    -fx-background-color: #2B3A67; /* Deep blue for consistency */
+    -fx-padding: 10px;
+    -fx-border-color: #FF8C00; /* Darker orange border */
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* TagCard Styling */
+.tag-card {
+    -fx-background-color: #3e7b91; /* Subdued blue tone */
+    -fx-padding: 8px;
+    -fx-border-color: #FFA500; /* Orange border to make it pop */
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-margin: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.person-card:hover, .tag-card:hover {
+    -fx-background-color: #2B3A67; /* darker blue on hover */
+    -fx-cursor: hand;
+}
+
+.label:hover {
+    -fx-cursor: hand;
+}
+
+.tag-card .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI SemiBold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+    -fx-alignment: center; /* Center text */
 }
 

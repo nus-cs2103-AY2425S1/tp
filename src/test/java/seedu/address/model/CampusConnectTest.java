@@ -19,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class CampusConnectTest {
@@ -88,11 +89,24 @@ public class CampusConnectTest {
         assertEquals(expected, campusConnect.toString());
     }
 
+    @Test
+    public void insertPersonTest() {
+        int ind = campusConnect.getPersonList().size();
+        CampusConnect expected = new CampusConnect();
+        expected.resetData(campusConnect);
+
+        campusConnect.addPerson(ALICE, ind);
+        expected.addPerson(ALICE);
+        assertEquals(expected.toString(), campusConnect.toString());
+    }
+
+
     /**
      * A stub ReadOnlyCampusConnect whose persons list can violate interface constraints.
      */
     private static class CampusConnectStub implements ReadOnlyCampusConnect {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
         CampusConnectStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -102,6 +116,10 @@ public class CampusConnectTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
-    }
 
+        @Override
+        public ObservableList<Tag> getTagList() {
+            return tags;
+        }
+    }
 }

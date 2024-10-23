@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -64,6 +65,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Delete a tag from a person.
+     * The person must exist as well as the tag
+     */
+    void deletePersonTag(Person p, Tag tag);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -85,8 +92,23 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Returns a list of tags currently defined in CampusConnect
+     */
+    ObservableList<Tag> getListOfCurrentTags();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Undo the previous actions of users
+     */
+    void undoCampusConnect();
+
+    /**
+     * Save current state of model before execution.
+     */
+    void saveCurrentCampusConnect();
 }

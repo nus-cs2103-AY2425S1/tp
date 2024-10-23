@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.CampusConnect;
-import seedu.address.model.ReadOnlyCampusConnect;
+//import seedu.address.model.CampusConnect;
+//import seedu.address.model.ReadOnlyCampusConnect;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -33,13 +33,15 @@ public class SampleDataUtil {
         };
     }
 
+    // Schedule for deletion
+    /*
     public static ReadOnlyCampusConnect getSampleCampusConnect() {
         CampusConnect sampleAb = new CampusConnect();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
-    }
+    }*/
 
     /**
      * Returns a tag set containing the list of strings given.
@@ -49,5 +51,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }
