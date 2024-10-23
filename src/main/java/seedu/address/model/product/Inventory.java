@@ -38,10 +38,16 @@ public class Inventory {
     }
 
     public void removeStock(int ingredientId, int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity to remove must be greater than 0.");
+        }
+
         if (!stockLevels.containsKey(ingredientId)) {
             throw new NoSuchElementException("Ingredient ID " + ingredientId + " not found.");
         }
+
         int currentStock = stockLevels.get(ingredientId);
+
         if (currentStock < quantity) {
             throw new IllegalArgumentException(
                     String.format("Insufficient stock for ingredient: ID: %d | %s",
@@ -58,9 +64,10 @@ public class Inventory {
 
         for (Ingredient ingredient : ingredients) {
             int ingredientId = ingredient.getProductId();
-            int stock = stockLevels.getOrDefault(ingredientId, 0);
+            int requiredStock = 1;  // Assuming 1 unit of each ingredient is needed per pastry
+            int currentStock = stockLevels.getOrDefault(ingredientId, 0);
 
-            if (stock <= 0) {
+            if (currentStock < requiredStock) {
                 System.out.printf("Insufficient stock for ingredient: ID: %d | %s%n",
                         ingredientId, ingredient.getName());
                 return false;
