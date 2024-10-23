@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
@@ -31,7 +30,6 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
         model.addPerson(validPerson);
@@ -53,7 +51,6 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Tag("rejected")))
         );
         model.addPerson(validPerson);
@@ -71,7 +68,6 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("john@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
 
@@ -87,7 +83,6 @@ public class RejectCommandTest {
                 new Job("Data Analyst"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
         model.addPerson(validPerson);
@@ -104,7 +99,6 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Tag("pending"), new Tag("interviewed")))
         );
         model.addPerson(validPerson);
@@ -127,7 +121,6 @@ public class RejectCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Tag("pending")))
         );
         model.addPerson(validPerson);

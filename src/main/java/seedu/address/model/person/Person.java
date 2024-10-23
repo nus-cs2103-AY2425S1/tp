@@ -26,7 +26,6 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     // Status fields
@@ -35,13 +34,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Job job, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, job, phone, email, address, tags);
+    public Person(Name name, Job job, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, job, phone, email, tags);
         this.name = name;
         this.job = job;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         if (!isHired() && !isRejected()) {
             this.tags.add(DEFAULT_TAG_PENDING);
@@ -61,10 +59,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -156,7 +150,6 @@ public class Person {
                 && job.equals(otherPerson.job)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -167,7 +160,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, job, phone, email, address, tags);
+        return Objects.hash(name, job, phone, email, tags);
     }
 
     @Override
@@ -177,7 +170,6 @@ public class Person {
                 .add("job", job)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }
