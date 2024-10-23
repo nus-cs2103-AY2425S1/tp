@@ -30,7 +30,8 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add r/volunteer h/30 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
+     contact named `John Doe` with a `volunteer` role to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -75,11 +76,31 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to the address book.
+This command adds a contact to the address book. 
+There are 4 types of contacts: Volunteer, Donor, Partner, Person(default) 
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ 
+        [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
+
+- `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
+- `NAME`: The contact's full name.
+- `PHONE_NUMBER`: The contact's phone number.
+- `EMAIL`: The contact's email address.
+- `ADDRESS`: The contact's physical address.
+- `TAG` (Optional): Additional tags associated with the contact.
+- Role-specific fields(not required for `Person`)
+  - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
+  - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
+  - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date.
+
+Note:
+Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of 
+`Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT` 
+is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+If the specified role does not match with the specified field, the add command will be deemed invalid.
+
 
 <box type="tip" seamless>
 
@@ -87,8 +108,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add r/volunteer h/10 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add r/donor d/100 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/rich`
 
 ### Listing all persons : `list`
 
@@ -108,18 +129,25 @@ Format: `sort [s/SORT_OPTION]`
 
 <box type="tip" seamless>
 
-**Tip:** Currently, the supported sort option is `name`. Additional options may be added in future versions. 
+**Tip:** Supported sort options include:
+* `name`: 
+  * Sorts contacts alphabetically by name.
+* `hours`: 
+  * Sorts volunteers by the number of hours they've contributed in ascending order. 
+  * Non-volunteers are placed at the back.
 </box>
 
 Examples:
 * `sort`
 * `sort s/name`
+* `sort s/hours`
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
+         [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -127,6 +155,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* Role-specific fields must correspond to the resulting role after editing.
+  For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
+  Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
+  and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+  If the resulting role does not have the specified field, the edit will be invalid.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -242,10 +275,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` <br> e.g., `add r/volunteer h/19 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
 **List**   | `list`
 **Help**   | `help`

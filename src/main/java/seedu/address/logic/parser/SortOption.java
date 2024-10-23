@@ -3,20 +3,18 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
- * Contains valid sorting options for the list command.
+ * Contains valid sorting options for the sort command.
  */
 public class SortOption {
     public static final String SORT_NAME = "name";
+    public static final String SORT_HOURS = "hours";
     // Add more sorting options if needed
 
-    public static final List<String> VALID_SORT_OPTIONS = Arrays.asList(
-            SORT_NAME
-            // Add other sorting options here
-    );
+    // Add other sorting options here
+    public static final List<String> VALID_SORT_OPTIONS = List.of(SORT_NAME, SORT_HOURS);
 
     public static final String MESSAGE_CONSTRAINTS = "Invalid sort option.\nValid options are: "
             + String.join(", ", VALID_SORT_OPTIONS);
