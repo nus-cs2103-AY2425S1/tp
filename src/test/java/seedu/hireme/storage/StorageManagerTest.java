@@ -70,15 +70,15 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath_correctPathReturned() {
+    public void getUserPrefsFilePath_correctPathReturned() {
         // Setup: Ensure that the file path is not null and correct
-        Path expectedPath = getTempFilePath("ab");
+        Path expectedPath = getTempFilePath("prefs");
 
-        // Act: Get the AddressBook file path from StorageManager
-        Path actualPath = storageManager.getAddressBookFilePath();
+        // Act: Get the UserPrefs file path from StorageManager
+        Path actualPath = storageManager.getUserPrefsFilePath();
 
         // Assert: Verify that the path is not null and matches the expected path
-        assertNotNull(actualPath, "The AddressBook file path should not be null.");
-        assertEquals(expectedPath, actualPath, "The AddressBook file path should match the expected path.");
+        assertNotNull(actualPath, "The UserPrefs file path should not be null.");
+        assertEquals(expectedPath, actualPath, "The UserPrefs file path should match the expected path.");
     }
 }
