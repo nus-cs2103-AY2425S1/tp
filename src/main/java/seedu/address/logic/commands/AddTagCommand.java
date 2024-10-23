@@ -110,6 +110,9 @@ public class AddTagCommand extends Command{
      * corresponding field value of the person.
      */
     public static class AddTagDescriptor {
+        private Name name;
+        private Phone phone;
+        private Email email;
         private Set<Tag> tags;
 
         public AddTagDescriptor() {}
@@ -119,7 +122,34 @@ public class AddTagCommand extends Command{
          * A defensive copy of {@code tags} is used internally.
          */
         public AddTagDescriptor(AddTagCommand.AddTagDescriptor toAdd) {
+            setName(toAdd.name);
+            setPhone(toAdd.phone);
+            setEmail(toAdd.email);
             addTags(toAdd.tags);
+        }
+
+        public void setName(Name name) {
+            this.name = name;
+        }
+
+        public Optional<Name> getName() {
+            return Optional.ofNullable(name);
+        }
+
+        public void setPhone(Phone phone) {
+            this.phone = phone;
+        }
+
+        public Optional<Phone> getPhone() {
+            return Optional.ofNullable(phone);
+        }
+
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
         }
 
         /**
