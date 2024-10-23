@@ -269,7 +269,7 @@ This product is for admin at tuition centres and has to track a large number of 
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 Enable easy management and fast access to student records for administrators working at tuition centres. We aim to provide easy tracking of payments to send reminders, learning progress of students and shifting of classes etc. This also helps tuition centres save time by reducing administrative burdens on their staff.
 
@@ -344,7 +344,7 @@ Use case ends.
 **MSS:**
 1. Admin prompts the system to add a student.
 2. System prompts the admin to key in details of the student.
-3. Admin key in details. 
+3. Admin key in details.
 4. System adds the student and display success status.
 
 Use case ends.
@@ -405,16 +405,16 @@ Use case ends.
   * 3a1. System display wrong format status.
   * 3a2. System prompt admin to key in information again.
   * 3a3. Admin key in information again.
-  
+
     Repeat 3a1 to 3a3 until Admin key in the right information.
   * 3a4. System adds the student and display success status
-    
+
   Use case ends.
 
 * 4a. Payment of the student has already being marked.
   * 4a1. System returns a message on payment of student being marked already.
   * 4a2. System returns a fail status.
-  
+
   Use case ends.
 
 <br><br>
@@ -430,7 +430,7 @@ Use case ends.
 2. Admin selects that student.
 3. System requests for confirmation.
 4. Admin confirms.
-5. System deletes the student information. 
+5. System deletes the student information.
 
 Use case ends.
 
@@ -438,8 +438,8 @@ Use case ends.
 
 * *a. At any time, user chooses to cancel the deletion.
     * *a1. System requests to confirm the cancellation.
-    * *a2. Admin confirms the cancellation. 
-  
+    * *a2. Admin confirms the cancellation.
+
   Use case ends.
 
 <br><br>
