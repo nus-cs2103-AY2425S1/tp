@@ -1,8 +1,9 @@
 {
   "persons": [ {
     "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
+    "id": "P123D5",
+    "ward" : "A1",
+    "diagnosis" : "E. coli infection",
+    "medication" : "Ciprofloxacin (Cipro)"
   } ]
 }

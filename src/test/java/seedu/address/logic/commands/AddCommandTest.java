@@ -55,8 +55,10 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").withId("P12345").withWard("A1")
+                .withDiagnosis("Celiac Disease").withMedication("gluten-free diet").build();
+        Person bob = new PersonBuilder().withName("Bob").withId("P54321").withWard("B3")
+                .withDiagnosis("Celiac Disease").withMedication("gluten-free diet").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -156,6 +158,16 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAppointmentList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredAppointmentList() {
+            throw new AssertionError("This method should not be called");
         }
     }
 

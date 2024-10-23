@@ -1,14 +1,9 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.appointment.Appointment;
 
 /**
  * Represents a Person in the address book.
@@ -18,48 +13,81 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
-
-    // Data fields
-    private final Address address;
+    private final Id id;
+    private final Ward ward;
+    private final Diagnosis diagnosis;
+    private final Medication medication;
+    private final Appointment appointment;
+    private final Notes notes;
+    /*
     private final Set<Tag> tags = new HashSet<>();
+     */
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Id id, Ward ward, Diagnosis diagnosis, Medication medication, Notes notes) {
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.id = id;
+        this.ward = ward;
+        this.diagnosis = diagnosis;
+        this.medication = medication;
+        this.appointment = null;
+        this.notes = notes;
+    }
+    /**
+     * Overloaded Constructor for Appointment instances
+     */
+    public Person(Name name, Id id, Ward ward, Diagnosis diagnosis, Medication medication,
+                  Notes notes, Appointment appointment) {
+        this.name = name;
+        this.id = id;
+        this.ward = ward;
+        this.diagnosis = diagnosis;
+        this.medication = medication;
+        this.notes = notes;
+        this.appointment = appointment;
+    }
+
+    public Id getId() {
+        return id;
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Ward getWard() {
+        return ward;
     }
 
-    public Email getEmail() {
-        return email;
+    public Diagnosis getDiagnosis() {
+        return diagnosis;
     }
 
-    public Address getAddress() {
-        return address;
+
+    public Medication getMedication() {
+        return medication;
     }
 
+    public Notes getNotes() {
+        return this.notes;
+    }
+
+    public Appointment getAppointment() {
+        return this.appointment;
+    }
+
+    /*
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
+    /*
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+     */
 
     /**
      * Returns true if both persons have the same name.
@@ -71,7 +99,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getId().equals(getId());
     }
 
     /**
@@ -90,27 +118,28 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return id.equals(otherPerson.id)
+                && name.equals(otherPerson.name)
+                && ward.equals(otherPerson.ward)
+                && diagnosis.equals(otherPerson.diagnosis)
+                && medication.equals(otherPerson.medication);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, id, ward, diagnosis, medication);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("id", id)
+                .add("ward", ward)
+                .add("diagnosis", diagnosis)
+                .add("medication", medication)
+                .add("notes", notes)
                 .toString();
     }
 

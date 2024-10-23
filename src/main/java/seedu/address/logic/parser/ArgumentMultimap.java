@@ -75,4 +75,24 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns the number of unique Prefixes found minus the Preamble.
+     */
+    public int numberOfUniquePrefixes() {
+        return this.argMultimap.size() - 1;
+    }
+
+    /**
+     * Checks if the {@code ArgumentMultimap} contains a single valid string for the specified prefix.
+     *
+     * @param prefix the {@code Prefix} we want to check for in the argument map.
+     * @return {@code True} if the prefix is present with exactly one non-empty argument;
+     *         {@code False} otherwise.
+     */
+    public boolean hasSingleValidString(Prefix prefix) {
+        return argMultimap.containsKey(prefix)
+                && argMultimap.get(prefix).size() == 1
+                && !argMultimap.get(prefix).get(0).isEmpty();
+    }
 }
