@@ -21,6 +21,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Constructs a Task with the specified Description type description.
+     * The task is initially marked as not done.
+     *
+     * @param description The description of the task.
+     */
     public Task(Description description) {
         this.description = description;
         this.isDone = false;

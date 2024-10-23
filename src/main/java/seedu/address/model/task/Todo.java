@@ -31,6 +31,12 @@ public class Todo extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Constructs a Todo task with the specified Description type description and isDone status.
+     *
+     * @param description The description of the todo task.
+     * @param isDone      The completion status of the event.
+     */
     public Todo(Description description, boolean isDone) {
         super(description);
         this.isDone = isDone;

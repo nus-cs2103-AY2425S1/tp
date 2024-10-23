@@ -16,8 +16,8 @@ import seedu.address.model.task.Todo;
 public class JsonAdaptedTaskTest {
 
     private static final String INVALID_DESCRIPTION = "";
-    private static final String INVALID_DEADLINE_DATE = "32-12-2023"; // Invalid date
-    private static final String INVALID_EVENT_DATE = "invalid-date"; // Invalid date format
+    private static final String INVALID_DEADLINE_DATE = "32-12-2023";
+    private static final String INVALID_EVENT_DATE = "invalid-date";
 
     private static final String VALID_TODO_DESCRIPTION = "Buy groceries";
     private static final String VALID_DEADLINE_DESCRIPTION = "Submit assignment";
@@ -42,27 +42,31 @@ public class JsonAdaptedTaskTest {
 
     @Test
     public void toModelType_validDeadlineDetails_returnsDeadline() throws Exception {
-        JsonAdaptedDeadline deadline = new JsonAdaptedDeadline(VALID_DEADLINE_DESCRIPTION, false, VALID_DEADLINE_DATE);
+        JsonAdaptedDeadline deadline = new JsonAdaptedDeadline(VALID_DEADLINE_DESCRIPTION,
+                false, VALID_DEADLINE_DATE);
         Deadline expectedDeadline = new Deadline(VALID_DEADLINE_DESCRIPTION, VALID_DEADLINE_DATE);
         assertEquals(expectedDeadline, deadline.toModelType());
     }
     @Test
     public void toModelType_invalidDeadlineDate_throwsIllegalValueException() {
-        JsonAdaptedDeadline deadline = new JsonAdaptedDeadline(VALID_DEADLINE_DESCRIPTION, false, INVALID_DEADLINE_DATE);
+        JsonAdaptedDeadline deadline = new JsonAdaptedDeadline(VALID_DEADLINE_DESCRIPTION,
+                false, INVALID_DEADLINE_DATE);
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, deadline::toModelType);
     }
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
-        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_DESCRIPTION, false, VALID_EVENT_START_DATE, VALID_EVENT_END_DATE);
+        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_DESCRIPTION,
+                false, VALID_EVENT_START_DATE, VALID_EVENT_END_DATE);
         Event expectedEvent = new Event(VALID_EVENT_DESCRIPTION, VALID_EVENT_START_DATE, VALID_EVENT_END_DATE);
         assertEquals(expectedEvent, event.toModelType());
     }
 
     @Test
     public void toModelType_invalidEventDates_throwsIllegalValueException() {
-        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_DESCRIPTION, false, INVALID_EVENT_DATE, INVALID_EVENT_DATE);
+        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_DESCRIPTION,
+                false, INVALID_EVENT_DATE, INVALID_EVENT_DATE);
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }

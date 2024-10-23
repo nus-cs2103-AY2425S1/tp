@@ -12,13 +12,13 @@ import seedu.address.model.task.Todo;
 public class JsonAdaptedTodoTest {
 
     private static final String VALID_DESCRIPTION = "Buy groceries";
-    private static final String INVALID_DESCRIPTION = "";  // Invalid due to being empty
-    private static final boolean IS_DONE = false;  // Example completion status
+    private static final String INVALID_DESCRIPTION = ""; // Invalid due to being empty
+    private static final boolean IS_DONE = false;
 
     @Test
     public void toModelType_validTodoDetails_returnsTodo() throws Exception {
         JsonAdaptedTodo jsonAdaptedTodo = new JsonAdaptedTodo(VALID_DESCRIPTION, IS_DONE);
-        Todo expectedTodo = new Todo(VALID_DESCRIPTION);  // Expected model Todo
+        Todo expectedTodo = new Todo(VALID_DESCRIPTION);
         assertEquals(expectedTodo, jsonAdaptedTodo.toModelType());
     }
 
@@ -39,7 +39,7 @@ public class JsonAdaptedTodoTest {
     @Test
     public void toModelType_validTodoWithDone_returnsCorrectly() throws Exception {
         JsonAdaptedTodo jsonAdaptedTodo = new JsonAdaptedTodo(VALID_DESCRIPTION, true);
-        Todo expectedTodo = new Todo(VALID_DESCRIPTION, true);  // Done Todo
+        Todo expectedTodo = new Todo(VALID_DESCRIPTION, true);
         assertEquals(expectedTodo, jsonAdaptedTodo.toModelType());
     }
 }
