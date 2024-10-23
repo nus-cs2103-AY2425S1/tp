@@ -6,9 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ListBothCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListOwnerCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortOwnerCommand;
 import seedu.address.logic.commands.SortPetCommand;
