@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,6 +14,9 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GradeList;
 import seedu.address.model.person.Person;
 
+/**
+ * Aggregation functionalities on grade based on operation and current filtered person list.
+ */
 public class AggGradeCommand extends Command {
     public static final String COMMAND_WORD = "aggGrade";
     public static final Map<String, Operation> OPERATION_TRANSLATE = Collections.unmodifiableMap(
@@ -54,7 +56,7 @@ public class AggGradeCommand extends Command {
 
             filteredList =
                     new SmartList(model.getFilteredPersonList().stream().map(Person::getGradeList)
-                                          .map(gradeList -> gradeList.filter(match)).toList());
+                                          .map(gradeList -> gradeList.filter(match)).toList(), true);
         }
 
         switch (this.operation) {
@@ -66,12 +68,17 @@ public class AggGradeCommand extends Command {
 
     private static class SmartList extends ArrayList<Float> {
 
-        public SmartList(List<GradeList> gradeListList) {
+        public SmartList(List<GradeList> gradeListList, boolean ignoreWeight) {
             super(
                     gradeListList.stream().map(gradeList -> gradeList.getMap().values().stream()
-                            .<Float>reduce(0F,
-                                           (total, grade) -> grade.getScore() * grade.getWeightage() / 100,
-                                           (a, b) -> a + b)).toList());
+                            .reduce(0F,
+                                    (total, grade) -> grade.getScore() * (!ignoreWeight ?
+                                            grade.getWeightage() / 100 : 1),
+                                    Float::sum)).toList());
+        }
+
+        public SmartList(List<GradeList> gradeListList) {
+            this(gradeListList, false);
         }
 
         public float getMedian() {
