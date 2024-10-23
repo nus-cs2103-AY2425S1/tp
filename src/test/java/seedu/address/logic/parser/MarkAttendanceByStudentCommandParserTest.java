@@ -23,7 +23,6 @@ public class MarkAttendanceByStudentCommandParserTest {
         MarkAttendanceByStudentCommand expectedCommand =
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, "Math");
         assertParseSuccess(parser, "12/12/2024 Math", expectedCommand);
-
     }
 
     @Test
