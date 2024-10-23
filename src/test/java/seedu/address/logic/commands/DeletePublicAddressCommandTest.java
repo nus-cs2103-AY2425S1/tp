@@ -48,7 +48,9 @@ public class DeletePublicAddressCommandTest {
     @Test
     public void execute_validIndexValidNetworkValidLabel_success() throws Exception {
         Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        HashSet<PublicAddress> addresses = new HashSet<>(personToDeleteAddress.getPublicAddressesByNetwork(Network.BTC));
+        HashSet<PublicAddress> addresses = new HashSet<>(
+                personToDeleteAddress.getPublicAddressesByNetwork(Network.BTC)
+        );
         addresses.add(new BtcAddress("12345", "test2"));
         addresses.add(new BtcAddress("12345", "test"));
 
