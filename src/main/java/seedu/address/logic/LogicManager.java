@@ -6,9 +6,8 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -18,6 +17,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.association.Association;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.storage.Storage;
@@ -97,8 +97,19 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableSet<Pair<Vendor, Event>> getAssociations() {
-        return model.getAssociations();
+    public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
+        return model.getAssociatedEvents(vendor);
+    }
+
+    @Override
+    public ObservableList<Vendor> getAssociatedVendors(Event event) {
+        return model.getAssociatedVendors(event);
+    }
+
+    @Override
+    public void addAssociationChangeListener(ListChangeListener<? super Association> listener) {
+        // Add the listener to the association list in the model
+        model.getAssociationList().addListener(listener);
     }
 
     @Override

@@ -4,16 +4,16 @@ import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
-import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.util.Pair;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
+import seedu.address.model.association.Association;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.Vendor;
 
@@ -23,6 +23,7 @@ import seedu.address.model.vendor.Vendor;
 public class EventDetailsPanel extends UiPart<Region> {
     private static final String FXML = "EventDetailsPanel.fxml";
     private Event event;
+    private Logic logic;
     private final Logger logger = LogsCenter.getLogger(VendorDetailsPanel.class);
 
     @FXML
@@ -41,8 +42,9 @@ public class EventDetailsPanel extends UiPart<Region> {
     /**
      * Creates a {@code VendorListPanel} with the given {@code ObservableList}.
      */
-    public EventDetailsPanel(ObservableObjectValue<Event> event, ObservableSet<Pair<Vendor, Event>> associations) {
+    public EventDetailsPanel(ObservableObjectValue<Event> event, Logic logic) {
         super(FXML);
+        this.logic = logic;
 
         assignedVendors = FXCollections.observableArrayList();
 
@@ -51,11 +53,11 @@ public class EventDetailsPanel extends UiPart<Region> {
             setEvent(newValue);
 
             // Update assignedVendors when event is changed
-            updateAssignedVendors(associations);
+            updateAssignedVendors();
         });
 
-        associations.addListener((SetChangeListener.Change<? extends Pair<Vendor, Event>> change) -> {
-            updateAssignedVendors(associations);
+        logic.addAssociationChangeListener((ListChangeListener<? super Association>) change -> {
+            updateAssignedVendors();
         });
 
         VendorListPanel vendorListPanel = new VendorListPanel(assignedVendors, "Assigned Vendors");
@@ -74,10 +76,12 @@ public class EventDetailsPanel extends UiPart<Region> {
         noEventMsg.setVisible(false);
     }
 
-    private void updateAssignedVendors(ObservableSet<Pair<Vendor, Event>> associations) {
-        assignedVendors.clear();
-        assignedVendors
-                .addAll(associations.stream().filter(pair -> pair.getValue().equals(event)).map(Pair::getKey).toList());
+    private void updateAssignedVendors() {
+        if (event == null) {
+            assignedVendors.clear();
+        } else {
+            assignedVendors.setAll(logic.getAssociatedVendors(event));
+        }
     }
 
 }

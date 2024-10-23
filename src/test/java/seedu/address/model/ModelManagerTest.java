@@ -17,14 +17,16 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.SetChangeListener;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.association.Association;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
+import seedu.address.model.vendor.UniqueVendorList;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.EventBuilder;
@@ -223,13 +225,41 @@ public class ModelManagerTest {
 
     @Test
     public void getAssociation_newAssociation_updateSuccessful() {
-        ObjectProperty<Pair<Vendor, Event>> observedState = new SimpleObjectProperty<>();
-        modelManager.getAssociations().addListener((SetChangeListener.Change<? extends Pair<Vendor, Event>> change) -> {
-            observedState.set(change.getElementAdded());
+        ObjectProperty<Association> observedState = new SimpleObjectProperty<>();
+        modelManager.getAssociationList().addListener((ListChangeListener<? super Association>) change -> {
+            if (change.next() && change.wasAdded()) {
+                observedState.set((Association) change.getAddedSubList().get(0));
+            }
         });
 
         modelManager.assignVendorToEvent(TypicalVendors.AMY, TypicalEvents.BIRTHDAY);
-        assertEquals(observedState.get(), new Pair<>(TypicalVendors.AMY, TypicalEvents.BIRTHDAY));
+
+        UniqueVendorList uniqueVendorList = new UniqueVendorList();
+        uniqueVendorList.add(TypicalVendors.AMY);
+
+        UniqueEventList uniqueEventList = new UniqueEventList();
+        uniqueEventList.add(TypicalEvents.BIRTHDAY);
+
+        Vendor uniqueVendor = null;
+        for (Vendor vendor : uniqueVendorList) {
+            if (vendor.equals(TypicalVendors.AMY)) {
+                uniqueVendor = vendor;
+                break;
+            }
+        }
+
+        Event uniqueEvent = null;
+        for (Event event : uniqueEventList) {
+            if (event.equals(TypicalEvents.BIRTHDAY)) {
+                uniqueEvent = event;
+                break;
+            }
+        }
+
+        Association expectedAssociation = new Association(
+                uniqueVendorList.getVendorId(uniqueVendor),
+                uniqueEventList.getEventId(uniqueEvent));
+        assertEquals(observedState.get(), expectedAssociation);
     }
 
     @Test

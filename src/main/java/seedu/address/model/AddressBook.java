@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
-import javafx.util.Pair;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.association.Association;
 import seedu.address.model.association.UniqueAssociationList;
@@ -144,11 +141,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void assignVendorToEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
 
-        // Get the UniqueIds for vendor and event
         UniqueId vendorId = vendors.getVendorId(vendor);
         UniqueId eventId = events.getEventId(event);
 
-        // Create the association and add to associations
         Association association = new Association(vendorId, eventId);
         associations.add(association);
     }
@@ -159,8 +154,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     void unassignVendorFromEvent(Vendor vendor, Event event) {
         requireAllNonNull(vendor, event);
-        Pair<Vendor, Event> pair = new Pair<>(vendor, event);
-        associations.remove(pair);
+
+        UniqueId vendorId = vendors.getVendorId(vendor);
+        UniqueId eventId = events.getEventId(event);
+
+        Association association = new Association(vendorId, eventId);
+        associations.remove(association);
     }
 
     /**
@@ -168,9 +167,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public ObservableList<Vendor> getAssociatedVendors(Event event) {
         requireNonNull(event);
-        List<Vendor> vendorsList = associations.stream()
-                .filter(pair -> pair.getValue().equals(event))
-                .map(Pair::getKey)
+        UniqueId eventId = events.getEventId(event);
+        List<Vendor> vendorsList = associations.asUnmodifiableObservableList().stream()
+                .filter(association -> association.getEventId().equals(eventId))
+                .map(association -> getVendorById(association.getVendorId()))
+                .filter(Objects::nonNull) // Ensure no null values are added
                 .collect(Collectors.toList());
 
         return FXCollections.observableArrayList(vendorsList);
@@ -181,9 +182,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public ObservableList<Event> getAssociatedEvents(Vendor vendor) {
         requireNonNull(vendor);
-        List<Event> eventsList = associations.stream()
-                .filter(pair -> pair.getKey().equals(vendor))
-                .map(Pair::getValue)
+        UniqueId vendorId = vendors.getVendorId(vendor);
+        List<Event> eventsList = associations.asUnmodifiableObservableList().stream()
+                .filter(association -> association.getVendorId().equals(vendorId))
+                .map(association -> getEventById(association.getEventId()))
+                .filter(Objects::nonNull) // Ensure no null values are added
                 .collect(Collectors.toList());
 
         return FXCollections.observableArrayList(eventsList);
