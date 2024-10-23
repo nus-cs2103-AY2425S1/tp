@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
@@ -9,12 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -75,7 +71,7 @@ public class UpdateCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (name.equals("")) {
+        if (name.fullName.equals("")) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
         }
 
@@ -107,8 +103,16 @@ public class UpdateCommand extends Command {
                 .orElse(personToUpdate.getEmergencyContact());
         Address updatedAddress = updatePersonDescriptor.getAddress().orElse(personToUpdate.getAddress());
         Note updatedNote = updatePersonDescriptor.getNote().orElse(personToUpdate.getNote());
-        Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
         Level updatedLevel = updatePersonDescriptor.getLevel().orElse(personToUpdate.getLevel());
+        if (updatedLevel != null && updatePersonDescriptor.getSubjects().isPresent()) {
+            checkArgument(
+                    Subject.isValidSubjectsByLevel(updatedLevel,
+                            updatePersonDescriptor
+                                    .getSubjects()
+                                    .get()),
+                    Subject.MESSAGE_LEVEL_NEEDED);
+        }
+        Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
         TaskList updatedTaskList = updatePersonDescriptor.getTaskList().orElse(personToUpdate.getTaskList());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
                 updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList);

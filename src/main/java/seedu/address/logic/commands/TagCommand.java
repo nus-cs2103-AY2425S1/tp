@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -13,6 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
@@ -86,7 +88,7 @@ public class TagCommand extends Command {
 
     }
 
-    private static Person createPersonWithTags(Person personToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd) {
+    private static Person createPersonWithTags(Person personToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd) throws CommandException {
         assert personToTag != null;
 
         Name updatedName = tagsToAdd.getName().orElse(personToTag.getName());
@@ -95,11 +97,22 @@ public class TagCommand extends Command {
                 .orElse(personToTag.getEmergencyContact());
         Address updatedAddress = tagsToAdd.getAddress().orElse(personToTag.getAddress());
         Note updatedNote = tagsToAdd.getNote().orElse(personToTag.getNote());
+
+        Level updatedLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
+
+        if (updatedLevel != null && tagsToAdd.getSubjects().isPresent()) {
+            if(!Subject.isValidSubjectsByLevel(updatedLevel,
+                            tagsToAdd
+                                .getSubjects()
+                                .get())) {
+                throw new CommandException(Subject.messageValidSubjectsByLevel);
+            }
+        }
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(personToTag.getSubjects());
-        Level schoolLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
+
         TaskList updatedTaskList = tagsToAdd.getTaskList().orElse(personToTag.getTaskList());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects, schoolLevel, updatedTaskList);
+                updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList);
     }
 
     @Override

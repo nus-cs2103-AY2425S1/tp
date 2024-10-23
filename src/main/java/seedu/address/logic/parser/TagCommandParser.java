@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Subject;
 
 /**
  * Parses input arguments and creates a new TagCommand object
@@ -37,18 +39,20 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         UpdatePersonDescriptor editPersonTags = new UpdatePersonDescriptor();
 
+        if (argMultiMap.getValue(PREFIX_LEVEL).isPresent()) {
+            editPersonTags.setLevel(
+                    ParserUtil.parseLevel(
+                            argMultiMap.getValue(PREFIX_LEVEL).get()));
+
+        }
+
         if (argMultiMap.getValue(PREFIX_SUBJECT).isPresent()) {
             editPersonTags.setSubjects(
                     ParserUtil.parseSubjects(
                             argMultiMap.getAllValues(PREFIX_SUBJECT)));
         }
 
-        if (argMultiMap.getValue(PREFIX_LEVEL).isPresent()) {
-            editPersonTags.setLevel(
-                    ParserUtil.parseLevel(
-                            argMultiMap.getValue(PREFIX_LEVEL).get()
-                    ));
-        }
+
 
         if (argMultiMap.getValue(PREFIX_SUBJECT).isEmpty()) {
             if (argMultiMap.getValue(PREFIX_LEVEL).isEmpty()) {
