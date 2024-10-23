@@ -14,7 +14,10 @@ import static seedu.address.testutil.TypicalConcertContacts.ALICE_GLASTONBURY;
 import static seedu.address.testutil.TypicalConcertContacts.BENSON_COACHELLA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CONCERT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -81,19 +84,20 @@ public class FindConcertContactCommandTest {
     @Test
     public void execute_personKeyword_noConcertContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 0);
-        FindConcertContactCommand command = new FindConcertContactCommand(Index.fromZeroBased(2), null);
-        Person p = getTypicalAddressBook().getPersonList().get(2);
+        FindConcertContactCommand command = new FindConcertContactCommand(INDEX_THIRD_PERSON, null);
+        Person p = getTypicalAddressBook().getPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p);
         expectedModel.updateFilteredConcertContactList(predicate);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredConcertContactList());
     }
+
     @Test
     public void execute_personKeyword_multipleConcertContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 2);
-        FindConcertContactCommand command = new FindConcertContactCommand(Index.fromZeroBased(0), null);
-        Person p = getTypicalAddressBook().getPersonList().get(0);
+        FindConcertContactCommand command = new FindConcertContactCommand(INDEX_FIRST_PERSON, null);
+        Person p = getTypicalAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p);
         expectedModel.updateFilteredConcertContactList(predicate);
 
@@ -104,8 +108,8 @@ public class FindConcertContactCommandTest {
     @Test
     public void execute_concertKeyword_noConcertContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 0);
-        FindConcertContactCommand command = new FindConcertContactCommand(null, Index.fromZeroBased(2));
-        Concert c = getTypicalAddressBook().getConcertList().get(2);
+        FindConcertContactCommand command = new FindConcertContactCommand(null, INDEX_THIRD_CONCERT);
+        Concert c = getTypicalAddressBook().getConcertList().get(INDEX_THIRD_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
@@ -116,8 +120,8 @@ public class FindConcertContactCommandTest {
     @Test
     public void execute_concertKeyword_multipleConcertContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 2);
-        FindConcertContactCommand command = new FindConcertContactCommand(null, Index.fromZeroBased(0));
-        Concert c = getTypicalAddressBook().getConcertList().get(0);
+        FindConcertContactCommand command = new FindConcertContactCommand(null, INDEX_FIRST_CONCERT);
+        Concert c = getTypicalAddressBook().getConcertList().get(INDEX_FIRST_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
@@ -129,10 +133,10 @@ public class FindConcertContactCommandTest {
     public void execute_personAndConcertKeyword_noConcertContactsFound() {
         String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 0);
         FindConcertContactCommand command = new FindConcertContactCommand(
-                Index.fromZeroBased(0),
-                Index.fromZeroBased(2));
-        Person p = getTypicalAddressBook().getPersonList().get(0);
-        Concert c = getTypicalAddressBook().getConcertList().get(2);
+                INDEX_FIRST_PERSON,
+                INDEX_THIRD_CONCERT);
+        Person p = getTypicalAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Concert c = getTypicalAddressBook().getConcertList().get(INDEX_THIRD_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p) && cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
@@ -144,10 +148,10 @@ public class FindConcertContactCommandTest {
     public void execute_personAndConcertKeyword_oneConcertContactFound() {
         String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 1);
         FindConcertContactCommand command = new FindConcertContactCommand(
-                Index.fromZeroBased(0),
-                Index.fromZeroBased(0));
-        Person p = getTypicalAddressBook().getPersonList().get(0);
-        Concert c = getTypicalAddressBook().getConcertList().get(0);
+                INDEX_FIRST_PERSON,
+                INDEX_FIRST_CONCERT);
+        Person p = getTypicalAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Concert c = getTypicalAddressBook().getConcertList().get(INDEX_FIRST_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p) && cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
@@ -157,11 +161,11 @@ public class FindConcertContactCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index concertIndex = Index.fromZeroBased(1);
-        Index personIndex = Index.fromZeroBased(1);
-        FindConcertContactCommand findCommand = new FindConcertContactCommand(personIndex, concertIndex);
-        String expected = FindConcertContactCommand.class.getCanonicalName() + "{indexP=" + personIndex + ", indexC="
-                + concertIndex + "}";
+        FindConcertContactCommand findCommand = new FindConcertContactCommand(INDEX_SECOND_PERSON,
+                INDEX_SECOND_CONCERT);
+        String expected = FindConcertContactCommand.class.getCanonicalName()
+                + "{indexP=" + INDEX_SECOND_PERSON
+                + ", indexC=" + INDEX_SECOND_CONCERT + "}";
         assertEquals(expected, findCommand.toString());
     }
 }
