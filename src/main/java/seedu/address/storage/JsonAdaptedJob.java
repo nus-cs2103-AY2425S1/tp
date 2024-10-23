@@ -29,6 +29,7 @@ class JsonAdaptedJob {
     private final String salary;
     private final String description;
     private final List<JsonAdaptedTag> requirements = new ArrayList<>();
+    private final List<String> matches = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
@@ -57,6 +58,7 @@ class JsonAdaptedJob {
         requirements.addAll(source.getRequirements().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        matches.addAll(source.getMatches().stream().collect(Collectors.toList()));
     }
 
     /**
@@ -79,7 +81,8 @@ class JsonAdaptedJob {
 
         Set<Tag> modelJobRequirements = new HashSet<>(jobRequirements);
 
-        return new Job(modelName, modelJobCompany, modelJobSalary, modelJobDescription, modelJobRequirements);
+        return new Job(modelName, modelJobCompany, modelJobSalary, modelJobDescription, modelJobRequirements,
+                new HashSet<>());
     }
 
 }

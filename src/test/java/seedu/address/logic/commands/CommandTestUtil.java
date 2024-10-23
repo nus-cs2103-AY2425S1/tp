@@ -2,10 +2,14 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -18,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
+import seedu.address.model.job.Job;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -27,6 +32,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Test Data for Contacts
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -70,6 +76,27 @@ public class CommandTestUtil {
                 .withSkills(VALID_SKILL_CUDA, VALID_SKILL_PYTHON).build();
     }
 
+    // Test data for Jobs
+    public static final String VALID_JOBNAME_BARISTA = "Full-time Barista";
+    public static final String VALID_COMPANY_BARISTA = "Starbucks, Singapore";
+    public static final String VALID_SALARY_BARISTA = "2500";
+    public static final String[] VALID_REQUIREMENTS_BARISTA = {"Strong", "Pleasant"};
+    public static final String VALID_DESCRIPTION_BARISTA =
+            "At Starbucks, we are looking for someone who brings a " + "lot to the table";
+
+    public static final String JOBNAME_DESC_BARISTA = " " + PREFIX_NAME + VALID_JOBNAME_BARISTA;
+    public static final String COMPANY_DESC_BARISTA = " " + PREFIX_COMPANY + VALID_COMPANY_BARISTA;
+    public static final String SALARY_DESC_BARISTA = " " + PREFIX_SALARY + VALID_SALARY_BARISTA;
+    public static final String REQUIREMENTS_DESC_BARISTA = " " + PREFIX_REQUIREMENTS + VALID_REQUIREMENTS_BARISTA;
+    public static final String DESCRIPTION_DESC_BARISTA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BARISTA;
+
+    public static final String INVALID_JOBNAME_DESC = " " + PREFIX_NAME + "!val!d"; // '!' not allowed in name
+    public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "!val!d"; // '!' not allowed in name
+    public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "$100/day"; // only numbers are allowed
+    public static final String INVALID_REQUIREMENTS_DESC = " " + PREFIX_REQUIREMENTS + "!val!d"; // '!' not allowed
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!val!d"; //'!' not allowed
+
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
@@ -100,17 +127,21 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered lists and selected entity in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Person> expectedFilteredPersonList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Job> expectedFilteredJobList = new ArrayList<>(actualModel.getFilteredJobList());
+        List<Company> expectedFilteredCompanyList = new ArrayList<>(actualModel.getFilteredCompanyList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredPersonList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredJobList, actualModel.getFilteredJobList());
+        assertEquals(expectedFilteredCompanyList, actualModel.getFilteredCompanyList());
     }
     /**
      * Updates {@code model}'s person filtered list to show only the person at the
