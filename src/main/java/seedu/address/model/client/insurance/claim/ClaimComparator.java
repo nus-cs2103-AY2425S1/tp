@@ -44,10 +44,10 @@ public class ClaimComparator implements Comparator<Claim> {
     @Override
     public int compare(Claim o1, Claim o2) {
         if (o1.getClaimStatus() && !o2.getClaimStatus()) {
-            return 1;
+            return -1;
         }
         if (o2.getClaimStatus() && !o1.getClaimStatus()) {
-            return -1;
+            return 1;
         }
         return o1.getClaimId().toUpperCase().compareTo(o2.getClaimId().toUpperCase());
     }
