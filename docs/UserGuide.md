@@ -6,7 +6,7 @@
 
 # Tuteez User Guide
 
-Tuteez is a **desktop address book app designed specifically for tutors to manage student contacts**, optimized for use via a  Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student. If you can type fast, Tuteez can get your contact management tasks done faster than traditional GUI apps.
+Tuteez is a **desktop address book app designed specifically for tech-savvy private tutors to manage student contacts**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Key features include **conflict-free scheduling**, **storing detailed contact information**, and the ability to **add personalized remarks** for each student. If you can type fast, Tuteez can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -81,9 +81,11 @@ Adds a student to Tuteez.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [l/LESSON]…​`
 
-- The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the format `HHMM-HHMM`, separated by a space.
+- Only the **name** and **phone number** are required fields. The other fields are optional.
+- The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
     - Example: `l/monday 0900-1100` or `l/Wednesday 1400-1600`
     - Tutors cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify the user with an error message.
+
 <box type="tip" seamless>
 
 **Tip:** A student can have any number of tags and lessons (including 0)
@@ -108,7 +110,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags or lessons, existing values will be replaced; adding tags and lessons are not cumulative.
+* When editing **tags** or **lessons**, **all previous values will be replaced** by the new ones entered.
+    - This means you must **retype all old tags** or **lessons** you wish to keep, as editing will overwrite them completely.
+    - For example, if a student already has two lessons and you wish to add another, you need to re-enter the previous lessons along with the new one.
 * Lessons cannot clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, the app will notify the user with an error message.
 * You can remove all tags or lessons by typing `t/` or `l/` without specifying any values after them.
 
