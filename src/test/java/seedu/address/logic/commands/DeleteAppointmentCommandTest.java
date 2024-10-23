@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.time.LocalDate;
@@ -44,4 +45,16 @@ public class DeleteAppointmentCommandTest {
 
         assertCommandSuccess(deleteAppointmentCommand, modelStub, expectedMessage, expectedModelStub);
     }
+
+    @Test
+    public void execute_invalidNric() {
+        Model modelStub = new ModelManager();
+
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(VALID_NRIC, VALID_DATE,
+            VALID_START_TIME);
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_PERSON_NOT_FOUND, VALID_NRIC);
+
+        assertCommandFailure(deleteAppointmentCommand, modelStub, expectedMessage);
+    }
+
 }
