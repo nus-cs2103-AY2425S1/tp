@@ -26,16 +26,14 @@
           <Label fx:id="featureIntroduction" text="Basic feature introduction"/>
         </VBox>
         <VBox fx:id="addFeatureGuide">
-          <Text fx:id="addFeatureHeader">
-            Add
-          </Text>
-          <Text>
+          <Text styleClass="feature-text" fx:id="addFeatureHeader" text="Text" />
+          <Text styleClass="feature-text" fx:id="addFeatureDesc">
             Adds a person to DorManagerPro
           </Text>
-          <Text>
+          <Text styleClass="feature-text" fx:id="addFeatureFormat">
             Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
           </Text>
-          <Text>
+          <Text styleClass="feature-text" fx:id="addFeatureNotes">
             Note: ROOM_NUMBER, ADDRESS and TAGs are optional.
           </Text>
         </VBox>
@@ -43,28 +41,28 @@
           <Text fx:id="editFeatureHeader">
             Edit
           </Text>
-          <Text>
-            Edits a person in DorManagerPro
+          <Text styleClass="feature-text" fx:id="editFeatureDesc">
+            Edits an existing person in DorManagerPro
           </Text>
-          <Text>
-            Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
+          <Text styleClass="feature-text" fx:id="editFeatureFormat">
+            Format: edit 2 n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
           </Text>
-          <Text>
-            Note: ROOM_NUMBER, ADDRESS and TAGs are optional.
+          <Text styleClass="feature-text" fx:id="editFeatureNotes">
+            Note: All fields are optional, but there must be 1 or more fields.
           </Text>
         </VBox>
         <VBox fx:id="deleteFeatureGuide">
           <Text fx:id="deleteFeatureHeader">
             Delete
           </Text>
-          <Text>
-            Adds a person to the address book
+          <Text styleClass="feature-text" fx:id="deleteFeatureDesc">
+            Deletes the specified person from DorManagerPro
           </Text>
-          <Text>
-            Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
+          <Text styleClass="feature-text" fx:id="deleteFeatureFormat">
+            Format: delete INDEX
           </Text>
-          <Text>
-            Note: ROOM_NUMBER, ADDRESS and TAGs are optional.
+          <Text styleClass="feature-text" fx:id="deleteFeatureNotes">
+            Note: INDEX is based on what can currently be seen in DorManagerPro.
           </Text>
         </VBox>
         <HBox alignment="CENTER" fx:id="userGuideLinkContainer">

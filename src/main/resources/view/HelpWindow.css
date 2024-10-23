@@ -1,3 +1,8 @@
+
+.feature-text {
+    -fx-text-fill: white;
+}
+
 #copyButton, #helpMessage, #featureIntroduction {
     -fx-text-fill: white;
 }
