@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/AY2425S1-CS2103T-T13-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T13-3/tp/actions) [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T13-3/tp/graph/badge.svg?token=L39TRCVDDB)](https://codecov.io/gh/AY2425S1-CS2103T-T13-3/tp)
+[![Java CI](https://github.com/AY2425S1-CS2103T-T13-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T13-3/tp/actions/workflows/gradle.yml) [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T13-3/tp/graph/badge.svg?token=L39TRCVDDB)](https://codecov.io/gh/AY2425S1-CS2103T-T13-3/tp)
 
 # PawPatrol: Veterinary Address Book and Patient Management System
 
