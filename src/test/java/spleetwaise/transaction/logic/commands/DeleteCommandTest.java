@@ -8,16 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.UserPrefs;
-import spleetwaise.transaction.testutil.TypicalIndexes;
-import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.Messages;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Transaction;
+import spleetwaise.transaction.testutil.TypicalIndexes;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 /**
@@ -25,8 +21,6 @@ import spleetwaise.transaction.testutil.TypicalTransactions;
  */
 public class DeleteCommandTest {
 
-    private final AddressBookModel addressBookModel = new AddressBookModelManager(
-            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
     private final TransactionBookModel transactionBookModel = new TransactionBookModelManager(
             TypicalTransactions.getTypicalTransactionBook()
     );
