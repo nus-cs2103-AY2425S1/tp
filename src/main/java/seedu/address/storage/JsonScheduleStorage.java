@@ -109,7 +109,7 @@ public class JsonScheduleStorage implements ScheduleStorage {
     public void handleCorruptedFile() {
         try {
             FileUtil.copyFile(this.filePath,
-                    Path.of(this.filePath.toString()+"."+new Random().nextInt()+".bak"));
+                    Path.of(this.filePath.toString() + "." + new Random().nextInt() + ".bak"));
             logger.info("Corrupted schedule.json file backed up");
         } catch (IOException e) {
             logger.warning("unable to back up corrupted schedule file");

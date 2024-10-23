@@ -113,4 +113,9 @@ public class StorageManager implements Storage {
     public void handleCorruptedFile() {
         scheduleStorage.handleCorruptedFile();
     }
+
+    @Override
+    public void handleCorruptedAddressbookFile() {
+        addressBookStorage.handleCorruptedAddressbookFile();
+    }
 }

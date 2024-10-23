@@ -26,6 +26,7 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonScheduleStorage;
+import seedu.address.storage.JsonSerializableAddressBook;
 import seedu.address.storage.JsonSerializableScheduleStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.ScheduleStorage;
@@ -91,6 +92,9 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            if (JsonSerializableAddressBook.hasErrorConvertingToModelType()) {
+                storage.handleCorruptedAddressbookFile();
+            }
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
@@ -102,17 +106,19 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + scheduleStorage.getScheduleListFilePath());
             }
             initialScheduleList = scheduleListOptional.orElse(new ScheduleList());
-            if (JsonSerializableScheduleStorage.hasErrorConvertingToModelType) {
+            if (JsonSerializableScheduleStorage.hasErrorConvertingToModelType()) {
                 scheduleStorage.handleCorruptedFile();
             }
-            scheduleStorage.saveScheduleList(initialScheduleList);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + scheduleStorage.getScheduleListFilePath()
                     + " could not be loaded. Will be starting with an empty ScheduleList.");
             initialScheduleList = new ScheduleList();
+        }
+        try {
+            storage.saveAddressBook(initialData);
+            scheduleStorage.saveScheduleList(initialScheduleList);
         } catch (IOException e) {
-            logger.warning("unable to back up corrupted schedule file");
-            initialScheduleList = new ScheduleList();
+            logger.warning("Failed to save initial data to the file: " + StringUtil.getDetails(e));
         }
 
         return new ModelManager(initialData, userPrefs, initialScheduleList);

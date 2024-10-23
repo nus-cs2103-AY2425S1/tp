@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,19 +14,18 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyScheduleList;
 import seedu.address.model.ScheduleList;
 import seedu.address.model.schedule.Meeting;
-import java.util.logging.Logger;
 
 /**
  * An Immutable ScheduleList that is serializable to JSON format.
  */
 @JsonRootName(value = "schedulelist")
 public class JsonSerializableScheduleStorage {
+
     public static final String MEETING_DUPLICATE_PERSON = "Schedule list contains duplicate meeting(s).";
     private static final Logger logger = LogsCenter.getLogger(JsonSerializableScheduleStorage.class);
+    private static boolean hasErrorConvertingToModelType = false;
 
     private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
-
-    public static boolean hasErrorConvertingToModelType = false;
 
     /**
      * Constructs a {@code JsonSerializableScheduleStorage} with the given persons.
@@ -69,5 +69,9 @@ public class JsonSerializableScheduleStorage {
             scheduleList.addMeeting(meeting);
         }
         return scheduleList;
+    }
+
+    public static boolean hasErrorConvertingToModelType() {
+        return hasErrorConvertingToModelType;
     }
 }
