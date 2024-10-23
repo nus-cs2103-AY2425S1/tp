@@ -1,10 +1,10 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-import java.awt.Desktop;
-import java.net.URI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -328,31 +327,31 @@ public class HelpWindow extends UiPart<Stage> {
      * Initializes the command summary data for the TableView.
      */
     private void initializeCommandSummaryData() {
-        actionColumn.setCellValueFactory
-                (cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[0]));
-        formatColumn.setCellValueFactory
-                (cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[1]));
-        exampleColumn.setCellValueFactory
-                (cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[2]));
+        actionColumn.setCellValueFactory(
+                cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[0]));
+        formatColumn.setCellValueFactory(
+                cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[1]));
+        exampleColumn.setCellValueFactory(
+                cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[2]));
 
         commandSummaryData.clear();
 
         commandSummaryData.addAll(
-                new String[]{"Add", "add n/NAME p/PHONE_NUMBER\n " +
-                        "e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​", "add n/James Ho p/22224444 \n" +
-                        "e/jamesho@example.com a/123, \nClementi Rd, 1234665 b/11 09 2001 \nt/friend t/colleague"},
+                new String[]{"Add", "add n/NAME p/PHONE_NUMBER\n "
+                         + "e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​", "add n/James Ho p/22224444 \n"
+                         + "e/jamesho@example.com a/123, \nClementi Rd, 1234665 b/11 09 2001 \nt/friend t/colleague"},
                 new String[]{"Clear", "clear", ""},
                 new String[]{"Delete", "delete INDEX", "delete 3"},
-                new String[]{"Edit", "edit INDEX [n/NAME] [p/PHONE_NUMBER]\n " +
-                        "[e/EMAIL] [a/ADDRESS] [t/TAG]…​", "edit 2 n/James Lee\n e/jameslee@example.com"},
+                new String[]{"Edit", "edit INDEX [n/NAME] [p/PHONE_NUMBER]\n "
+                         + "[e/EMAIL] [a/ADDRESS] [t/TAG]…​", "edit 2 n/James Lee\n e/jameslee@example.com"},
                 new String[]{"Find", "find KEYWORD [MORE_KEYWORDS]", "find James Jake"},
                 new String[]{"List", "list", ""},
                 new String[]{"Help", "help", ""},
                 new String[]{"Paid", "paid INDEX", "paid 3"},
                 new String[]{"Unpaid", "unpaid INDEX", "unpaid 3"}
         );
-        commandSummaryData.removeIf(row -> row == null || row.length == 0 ||
-                (row[0].isEmpty() && row[1].isEmpty() && row[2].isEmpty()));
+        commandSummaryData.removeIf(row -> row == null || row.length == 0
+                || (row[0].isEmpty() && row[1].isEmpty() && row[2].isEmpty()));
 
         commandSummaryTable.setItems(commandSummaryData);
 
