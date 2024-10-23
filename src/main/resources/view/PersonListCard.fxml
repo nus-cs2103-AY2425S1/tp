@@ -26,7 +26,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" style="-fx-font-weight: bold;"/>
         <Region minWidth="20"/>
         <HBox spacing="0.5" alignment="CENTER_LEFT"> <!-- HBox for phone icon and number -->
           <ImageView fx:id="phoneIcon" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true"/>
