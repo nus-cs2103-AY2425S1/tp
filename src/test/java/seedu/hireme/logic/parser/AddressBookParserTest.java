@@ -19,11 +19,14 @@ import seedu.hireme.logic.commands.ExitCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
 import seedu.hireme.logic.commands.ListCommand;
+import seedu.hireme.logic.commands.StatusCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 import seedu.hireme.testutil.InternshipApplicationUtil;
+
 
 public class AddressBookParserTest {
 
@@ -86,5 +89,23 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_statusAccept_success() throws Exception {
+        StatusCommand command = (StatusCommand) parser.parseCommand("/accept 1");
+        assertEquals(new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED), command);
+    }
+
+    @Test
+    public void parseCommand_statusPending_success() throws Exception {
+        StatusCommand command = (StatusCommand) parser.parseCommand("/pending 1");
+        assertEquals(new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.PENDING), command);
+    }
+
+    @Test
+    public void parseCommand_statusReject_success() throws Exception {
+        StatusCommand command = (StatusCommand) parser.parseCommand("/reject 1");
+        assertEquals(new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.REJECTED), command);
     }
 }

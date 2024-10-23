@@ -16,8 +16,10 @@ import seedu.hireme.logic.commands.ExitCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
 import seedu.hireme.logic.commands.ListCommand;
+import seedu.hireme.logic.commands.StatusCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Parses user input.
@@ -58,6 +60,15 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case StatusCommand.COMMAND_WORD_ACCEPT:
+            return new StatusCommandParser(Status.ACCEPTED).parse(arguments);
+
+        case StatusCommand.COMMAND_WORD_PENDING:
+            return new StatusCommandParser(Status.PENDING).parse(arguments);
+
+        case StatusCommand.COMMAND_WORD_REJECT:
+            return new StatusCommandParser(Status.REJECTED).parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
