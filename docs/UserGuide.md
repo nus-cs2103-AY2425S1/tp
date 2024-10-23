@@ -97,14 +97,14 @@ Format: `/d INDEX`
 * Deletes the internship application at the specified `INDEX`.
 * The index refers to the index number shown in the displayed internship application list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* You cannot delete an internship application whose index number does not exist. If you only have 3 internship 
+* You cannot delete an internship application whose index number does not exist. If you only have 3 internship
 applications then the last internship application has an index number of 3. Thus, you are not able to delete the fourth
 internship application as it does not exist.
 
 Examples:
 * `/list` followed by `/d 2` deletes the 2nd application in the list.
 * `/f Google` followed by `/d 1` deletes the 1st application in the results of the `/f` command.
-* `/list` followed by `/d 4` when you only have 3 internship applications returns 
+* `/list` followed by `/d 4` when you only have 3 internship applications returns
 `The internship application index provided is invalid`
 
 ### Clearing all entries : `/clear`
