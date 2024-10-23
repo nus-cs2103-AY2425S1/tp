@@ -16,9 +16,9 @@ public class TagBuilderTest {
         Tag tagMedium = tagBuilder.build("difficulty_MeDium");
         Tag tagHigh = tagBuilder.build("difficulty_HiGh");
 
-        assertEquals("Difficulty: LOW", tagLow.toString());
-        assertEquals("Difficulty: MEDIUM", tagMedium.toString());
-        assertEquals("Difficulty: HIGH", tagHigh.toString());
+        assertEquals("Difficulty:LOW", tagLow.toString());
+        assertEquals("Difficulty:MEDIUM", tagMedium.toString());
+        assertEquals("Difficulty:HIGH", tagHigh.toString());
     }
 
     // SalaryTag Tests
@@ -28,9 +28,9 @@ public class TagBuilderTest {
         Tag tagMedium = tagBuilder.build("salary_mEdIum");
         Tag tagHigh = tagBuilder.build("salary_High");
 
-        assertEquals("Salary: LOW", tagLow.toString());
-        assertEquals("Salary: MEDIUM", tagMedium.toString());
-        assertEquals("Salary: HIGH", tagHigh.toString());
+        assertEquals("Salary:LOW", tagLow.toString());
+        assertEquals("Salary:MEDIUM", tagMedium.toString());
+        assertEquals("Salary:HIGH", tagHigh.toString());
     }
 
     // Work-Life Balance Tag Tests
@@ -40,9 +40,9 @@ public class TagBuilderTest {
         Tag tagMedium = tagBuilder.build("wlb_MEDium");
         Tag tagHigh = tagBuilder.build("wlb_high");
 
-        assertEquals("Work-Life Balance: LOW", tagLow.toString());
-        assertEquals("Work-Life Balance: MEDIUM", tagMedium.toString());
-        assertEquals("Work-Life Balance: HIGH", tagHigh.toString());
+        assertEquals("WLB:LOW", tagLow.toString());
+        assertEquals("WLB:MEDIUM", tagMedium.toString());
+        assertEquals("WLB:HIGH", tagHigh.toString());
     }
 
     // PeriodTag Tests
@@ -52,9 +52,9 @@ public class TagBuilderTest {
         Tag tagWinter = tagBuilder.build("period_winter_2500");
         Tag tagPart = tagBuilder.build("period_PARTTIME_2000");
 
-        assertEquals("Period: SUMMER 2000", tagSummer.toString());
-        assertEquals("Period: WINTER 2500", tagWinter.toString());
-        assertEquals("Period: PARTTIME 2000", tagPart.toString());
+        assertEquals("Period:SUMMER-2000", tagSummer.toString());
+        assertEquals("Period:WINTER-2500", tagWinter.toString());
+        assertEquals("Period:PARTTIME-2000", tagPart.toString());
 
     }
 
@@ -62,7 +62,7 @@ public class TagBuilderTest {
     @Test
     public void build_customTag_returnsCorrectToString() {
         Tag tag = tagBuilder.build("customTag");
-        assertEquals("[customTag]", tag.toString());
+        assertEquals("customTag", tag.toString());
     }
 
     @Test

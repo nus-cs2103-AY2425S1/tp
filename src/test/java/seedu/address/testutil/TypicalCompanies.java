@@ -27,11 +27,11 @@ public class TypicalCompanies {
     public static final Company GOOGLE = new CompanyBuilder().withName("Google")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("google@example.com")
             .withPhone("00000001")
-            .withTags("google").build();
+            .withTags("Salary: High", "WLB: low", "Difficulty: low", "Period: Summer 2025").build();
     public static final Company META = new CompanyBuilder().withName("Meta")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("meta@example.com").withPhone("00000002")
-            .withTags("bigTech", "facebook").build();
+            .withTags("Salary: High", "WLB: low", "Difficulty: low", "Period: Summer 2025").build();
     public static final Company GRAB = new CompanyBuilder().withName("Grab").withPhone("00000003")
             .withEmail("grab@example.com").withAddress("wall street").build();
     public static final Company SHOPEE = new CompanyBuilder().withName("Shopee").withPhone("00000004")

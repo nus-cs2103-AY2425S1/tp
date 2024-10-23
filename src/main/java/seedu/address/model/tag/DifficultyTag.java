@@ -49,6 +49,6 @@ public class DifficultyTag extends Tag {
 
     @Override
     public String toString() {
-        return "Difficulty: " + this.difficultyLevel;
+        return "Difficulty:" + this.difficultyLevel;
     }
 }

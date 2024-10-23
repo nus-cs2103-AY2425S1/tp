@@ -50,6 +50,6 @@ public class WorkLifeBalanceTag extends Tag {
 
     @Override
     public String toString() {
-        return "Work-Life Balance: " + this.workLifeBalanceLevel;
+        return "WLB:" + this.workLifeBalanceLevel;
     }
 }

@@ -26,8 +26,8 @@ public class PeriodTag extends Tag {
      * Constructs a {@code PeriodTag} with the given tag name, period, and year.
      *
      * @param tagName The name of the tag.
-     * @param period The internship period (e.g., "Summer", "Winter", "PARTTIME").
-     * @param year The year of the internship, between 2000 and 2500.
+     * @param period The internship period together with year (e.g., "Summer 2000", "Winter 2015", "PARTTIME 2100").
+     * @param year The year of internship.
      * @throws IllegalArgumentException if the period is not valid or the year is out of range.
      */
     PeriodTag(String tagName, String period, int year) throws IllegalArgumentException {
@@ -58,6 +58,6 @@ public class PeriodTag extends Tag {
 
     @Override
     public String toString() {
-        return "Period: " + this.period + " " + this.year;
+        return "Period:" + this.period + "-" + this.year;
     }
 }

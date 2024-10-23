@@ -49,6 +49,6 @@ public class SalaryTag extends Tag {
 
     @Override
     public String toString() {
-        return "Salary: " + this.salaryLevel;
+        return "Salary:" + this.salaryLevel;
     }
 }
