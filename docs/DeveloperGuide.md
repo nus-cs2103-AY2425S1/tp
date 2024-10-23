@@ -239,6 +239,36 @@ In order to select a student to be displayed on the detail's panel, the student 
 <puml src="diagrams/ViewStudentSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `view_student` Command" />
 
 ## Adding a remark to a student
+This `remark` command allows the user to add a remark for a specific student.
+The user must specify the student's index from the displayed list, followed by the remark to be added.
+
+#### Design Considerations:
+In order to add a remark to a student, the user must provide a number representing the student's index and remark string to get attached to that selected student from the list.
+
+**Aspect: Identifying the student to add a remark to:**
+* Alternative 1 (current choice): Identify the student by their index.
+    * Pros: Straightforward and easy to implement. Users only need to reference the index in the list to add a remark, which makes it less error prone.
+    * Cons: The student index may change every time the list is filtered, so the user has to check for the student index every time the user before calling this command.
+
+* Alternative 2: Identify student by their name.
+    * Pros: Users do not have to worry about filtered indexes, so the user does not have to check the list every time before calling this command.
+    * Cons: Since TAchy allows multiple contacts with the same name, the system may encounter ambiguity when handling duplicate names, so additional fields are required to uniquely identify the contacts.
+
+#### Implementation
+* LogicManager executes the command "remark".
+* LogicManager parses the command via AddressBookParser.
+* AddressBookParser creates and delegates parsing to RemarkCommandParser.
+* RemarkCommandParser creates a RemarkCommand object.
+* RemarkCommand is returned to RemarkCommandParser and back to AddressBookParser.
+* LogicManager then executes RemarkCommand, which interacts with the Model.
+* RemarkCommand creates a CommandResult object.
+* CommandResult is returned to RemarkCommand, which returns the result to LogicManager.
+* The sequence concludes with the return to the caller from LogicManager.
+* This describes the flow of command execution, parsing, and interaction with the model.
+
+#### Example invocation sequence for RemarkCommand
+<puml src="diagrams/RemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark` Command" />
+
 
 ### \[Proposed\] Undo/redo feature
 
