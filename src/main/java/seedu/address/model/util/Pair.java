@@ -47,8 +47,8 @@ public class Pair<A, B> {
         }
         if (obj instanceof Pair) {
             Pair<?, ?> other = (Pair<?, ?>) obj;
-            return (first == null ? other.first == null : first.equals(other.first)) &&
-                   (second == null ? other.second == null : second.equals(other.second));
+            return (first == null ? other.first == null : first.equals(other.first))
+                    && (second == null ? other.second == null : second.equals(other.second));
         }
         return false;
     }

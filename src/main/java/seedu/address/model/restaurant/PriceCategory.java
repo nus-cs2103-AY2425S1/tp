@@ -15,7 +15,7 @@ public enum PriceCategory {
     EXPENSIVE(40, "$$$"),
     LUXURY(Integer.MAX_VALUE, "$$$$");
 
-    public static final String MESSAGE_CONSTRAINTS = "Price categories should be one of the " 
+    public static final String MESSAGE_CONSTRAINTS = "Price categories should be one of the "
             + "following: $, $$, $$$, $$$$";
     public static final String MESSAGE_MULTIPLE_PRICE_TAGS = "Multiple price tags found in the "
             + "set of tags";
@@ -24,7 +24,7 @@ public enum PriceCategory {
 
     /**
      * Constructs a {@code PriceCategory}.
-     * 
+     *
      * @param maxValue the maximum value of the price category
      * @param symbol   the symbol of the price category
      */
@@ -35,7 +35,7 @@ public enum PriceCategory {
 
     /**
      * Returns the symbol of the price category.
-     * 
+     *
      * @return the symbol of the price category
      */
     public String getSymbol() {
@@ -44,7 +44,7 @@ public enum PriceCategory {
 
     /**
      * Returns true if the symbol is part of a price category.
-     * 
+     *
      * @param symbol the symbol to check
      * @return true if the symbol is part of a price category
      */
@@ -59,7 +59,7 @@ public enum PriceCategory {
 
     /**
      * Returns the price category based on the value of the price.
-     * 
+     *
      * @param value the value of the price
      * @return the price category
      */
@@ -74,7 +74,7 @@ public enum PriceCategory {
 
     /**
      * Extracts the price tag from a set of tags.
-     * 
+     *
      * @param tags the set of tags
      * @return a pair of the price tag and the other tags
      */
@@ -96,7 +96,7 @@ public enum PriceCategory {
 
     /**
      * Returns true if the set of tags has multiple price tags.
-     * 
+     *
      * @param tags the set of tags
      * @return true if the set of tags has multiple price tags
      */
