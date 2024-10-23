@@ -61,7 +61,7 @@ public class DeleteMeetingCommandTest {
         MeetingDate meetingDate = new MeetingDate(VALID_MEETING_DATE_ADMIRALTY);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(notFoundMeetingTitle, meetingDate);
         assertCommandFailure(deleteMeetingCommand, model,
-                String.format("Meeting not found. ", notFoundMeetingTitle, meetingDate));
+                String.format("Meeting not found with title: %s and date: %s", notFoundMeetingTitle, meetingDate));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class DeleteMeetingCommandTest {
         MeetingDate notFoundMeetingDate = new MeetingDate(VALID_NOTFOUND_MEETING_DATE);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(meetingTitle, notFoundMeetingDate);
         assertCommandFailure(deleteMeetingCommand, model,
-                String.format("Meeting not found. ", meetingTitle, notFoundMeetingDate));
+                String.format("Meeting not found with title: %s and date: %s", meetingTitle, notFoundMeetingDate));
     }
 
     @Test
@@ -79,7 +79,8 @@ public class DeleteMeetingCommandTest {
         MeetingDate notFoundMeetingDate = new MeetingDate(VALID_NOTFOUND_MEETING_DATE);
         DeleteMeetingCommand deleteMeetingCommand = new DeleteMeetingCommand(notFoundMeetingTitle, notFoundMeetingDate);
         assertCommandFailure(deleteMeetingCommand, model,
-                String.format("Meeting not found. ", notFoundMeetingTitle, notFoundMeetingDate));
+                String.format("Meeting not found with title: %s and date: %s",
+                        notFoundMeetingTitle, notFoundMeetingDate));
     }
 
     @Test
