@@ -2,21 +2,19 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.StackPane?>
-
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane styleClass="stack-panel" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <stylesheets>
     <URL value="@css/CommandBox.css" />
   </stylesheets>
 
-  <HBox fx:id="commandTextContainer" alignment="CENTER_LEFT" spacing="5" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17">
+  <HBox fx:id="commandTextContainer" alignment="CENTER_LEFT" spacing="5" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml">
     <FontIcon fx:id="commandTextIcon" iconLiteral="fas-terminal"/>
-    <TextArea fx:id="commandTextArea" promptText="Enter command here..." wrapText="true" maxHeight="200" HBox.hgrow="ALWAYS"/>
+    <TextArea fx:id="commandTextArea" maxHeight="200" promptText="Enter command here..." wrapText="true" HBox.hgrow="ALWAYS" />
   </HBox>
 
 </StackPane>
-
