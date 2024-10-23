@@ -2,12 +2,17 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.submission.Submission;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -49,9 +54,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label ecNumber;
     @FXML
-    private FlowPane submissions;
-    @FXML
     private FlowPane tags;
+    @FXML
+    private TableView<Submission> tableView;
+    @FXML
+    private TableColumn<Submission, String> submissionNameColumn;
+    @FXML
+    private TableColumn<Submission, String> submissionStatusColumn;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,12 +78,11 @@ public class PersonCard extends UiPart<Region> {
         studentClass.setText(person.getStudentClass().value);
         ecName.setText(person.getEcName().value);
         ecNumber.setText(person.getEcNumber().value);
-        person.getSubmissions().stream()
-                .sorted(Comparator.comparing(submission -> submission.submissionName))
-                .forEach(submission -> submissions.getChildren().add(new Label(submission.submissionName)));
-        person.getSubmissions().stream()
-                .sorted(Comparator.comparing(submission -> submission.submissionName))
-                .forEach(submission -> submissions.getChildren().add(new Label(submission.submissionStatus)));
+
+        submissionNameColumn.setCellValueFactory(new PropertyValueFactory<>("submissionName"));
+        submissionStatusColumn.setCellValueFactory(new PropertyValueFactory<>("submissionStatus"));
+        tableView.setItems(FXCollections.observableArrayList(person.getSubmissions()));
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

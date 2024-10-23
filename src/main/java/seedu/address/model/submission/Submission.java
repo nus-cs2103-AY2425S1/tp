@@ -63,6 +63,14 @@ public class Submission {
         return submissionStatus.matches(STATUS_VALIDATION_REGEX);
     }
 
+    public String getSubmissionName() {
+        return submissionName;
+    }
+
+    public String getSubmissionStatus() {
+        return submissionStatus;
+    }
+
     @Override
     public String toString() {
         return submissionName;

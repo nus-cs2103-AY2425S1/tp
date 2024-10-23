@@ -43,7 +43,7 @@ class JsonAdaptedSubmission {
         } else if (!Submission.isValidSubmissionStatus(submissionStatus)) {
             throw new IllegalValueException(Submission.STATUS_MESSAGE_CONSTRAINTS);
         }
-        return new Submission(submissionName);
+        return new Submission(submissionName, submissionStatus);
     }
 
 }
