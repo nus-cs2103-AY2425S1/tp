@@ -262,71 +262,236 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* Insurance agents tracking their clients
+* Has a need to manage and track a significant number of clients with detailed insurance-related information.
+* Frequently engages with clients, requiring automated reminders for appointments, renewals, and follow-ups.
+* Prefers desktop apps that support fast and efficient data management over mobile or web alternatives.
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  provides quick and efficient access to client details, tailored for insurance agents who need a streamlined interface to manage contacts, track policy updates, and schedule client follow-ups.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| Priority | As a …​ | I want to …​                                       | So that I can…​                                                               |
+|----------|---------|----------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | add clients to my existing addressbook             | store their contacts and respective information                               |
+| `* * *`  | user    | know if client has been added successfully         | so that I can proceed with the next steps or take corrective action if needed |
+| `* * *`  | user    | know my last and next appointment dates            | remember to attend to the appointment                                         |
+| `* * *`  | user    | update existing client details                     | keep their information up to date.                                            |
+| `* * *`  | user    | record client's email address                      | contact them through email                                                    |
+| `* * *`  | user    | sort clients by renewal dates                      | prioritize my outreach efforts                                                |
+| `* * *`  | user    | remove clients should they change insurance agents |                                                                               |
+| `* * *`  | user    | categorise my clients based on policies            | easily organise and filter my client list                                     |
+| `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
+| `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
+| `* * *`  | user    | know when is my client's next insurance payment    | so that I can keep track of client's payment                                  |
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AgentConnect` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1.  User adds a new person by entering the command with name, phone number, email, address, insurance type, and appointment dates.
+2.  AgentConnect validates the input.
+3.  AgentConnect adds the new person with all the details provided.
+4.  AgentConnect shows a success message confirming the person has been added.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 2a. Some fields are invalid (e.g., name, phone, email).
+  * 2a1. AgentConnect shows an error message for the invalid fields.
+  * 2a2. User corrects the fields and resubmits the command.
+  * Use case resumes from step 2.
+
+* 2b. Duplicate person detected (same name + address).
+    * 2b1. AgentConnect shows a warning message about the duplicate entry.
+    * 2b2. User decides whether to overwrite or cancel the operation.
+    * Use case resumes at step 2 if user decides to proceed
+
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters the delete command with the Index of the person to be deleted.
+2. AgentConnect validates the input.
+3. AgentConnect confirms the deletion request by showing the contact details.
+4. AgentConnect deletes the contact and shows a success message
 
     Use case ends.
 
 **Extensions**
+* 2a. Contact not found (Invalid Index)
+  * 2a1. AgentConnect shows an error message indicating Index is invalid.
+  * 2a2. User can retry with a valid Index
 
-* 2a. The list is empty.
+**Use case: Sort Clients**
 
-  Use case ends.
+**MSS**
 
-* 3a. The given index is invalid.
+1. User sort the clients by entering the sort command with a valid parameter and order.
+2. AgentConnect validates the input.
+3. AgentConnect retrieves the current client list from storage.
+4. AgentConnect sorts the clients based on the specified parameter and order.
+5. AgentConnect updates the client list in the GUI to reflect the new sorted order.
+6. AgentConnect shows a success message confirming the clients have been sorted.
 
-    * 3a1. AddressBook shows an error message.
+    Use case ends.
 
-      Use case resumes at step 2.
+
+**Extensions**
+
+* 2a. Sorting parameter are missing or invalid (e.g., name, insurance type, address, policy renewal date).
+    * 2a1. AgentConnect shows an error message for the invalid sorting parameter.
+    * 2a2. User corrects the sorting parameter and resubmits the command.
+    * Use case resumes from step 2.
+
+* 2b. Sorting order are missing or invalid (e.g., asc, desc).
+    * 2a1. AgentConnect shows an error message for the invalid sorting order.
+    * 2a2. User corrects the sorting order and resubmits the command.
+    * Use case resumes from step 2.
+
+
+**Use case: Edit Client Details**
+
+**MSS**
+
+1.  User edits some details for an existing person by entering the edit command with index of the person and new details.
+2.  AgentConnect validates the input.
+3.  AgentConnect update the corresponding details of the person with the new details provided.
+4.  AgentConnect shows a success message confirming the details fo the person have been edited.
+
+**Extensions**
+
+* 2a. Some fields are invalid (e.g., name, phone, email).
+    * 2a1. AgentConnect shows an error message for the invalid fields.
+    * 2a2. User corrects the fields and resubmits the command.
+    * Use case resumes from step 2.
+
+* 2b. Person not found (Invalid index).
+    * 2b1. AgentConnect shows a warning message indicating index is invalid.
+    * 2b2. User resubmits the command with a valid index.
+    * Use case resumes from step 2.
+
+**Use case: Categorise client by policy**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User selects a client to assign a policy.
+3.  AgentConnect assigns the policy to the client.
+4.  AgentConnect shows updated client information. 
+Use case ends.
+
+**Extensions**
+
+* 2a. Client does not exist.
+    * 2a1. AgentConnect shows an error message for the invalid client.
+    * 2a2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 2.
+
+* 2b. Policy type is not valid.
+    * 2b1. AgentConnect shows an error message for the invalid policy type.
+    * 2b2. AgentConnect prompts the user to enter a valid policy type.
+    * Use case resumes from step 2.
+
+**Use case: Retrieve appointment date**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User requests to view a client’s appointment dates.
+3.  AgentConnect retrieves and displays the requested appointment date.
+Use case ends.
+
+**Extensions**
+
+* 2a. No appointment data available.
+    * 2a1. AgentConnect shows a message indicating no appointment date available.
+    * Use case ends.
+
+* 2b. Invalid client name.
+    * 2b1. AgentConnect shows an error message for the invalid client.
+    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 1.
+
+
+**Use case: Retrieve client's birthday**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User requests to view a specific client’s birthday.
+3.  AgentConnect retrieves and displays the client’s birthday.
+Use case ends.
+
+**Extensions**
+
+* 2a. No birthday data available.
+    * 2a1. AgentConnect shows a message indicating no birthday date available.
+    * Use case ends.
+
+* 2b. Invalid client name.
+    * 2b1. AgentConnect shows an error message for the invalid client.
+    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 1.
+
+**Use case: Retrieve next payment date**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User requests to view a client's payment date.
+3.  AgentConnect retrieves and display the next payment date.
+Use case ends.
+
+**Extensions**
+
+* 2a. No payment data available.
+    * 2a1. AgentConnect shows a message indicating no payment data available.
+    * Use case ends.
+
+* 2b. Invalid client name.
+    * 2b1. AgentConnect shows an error message for the invalid client.
+    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+    * Use case resumes from step 1.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  Should be able to hold up to 1000 persons without noticeable lag for typical usage.
+2.  A user with above-average typing speed for regular English text should be able to add a new contact (including insurance and appointment details) faster using commands than with the mouse.
+3.  The system should provide real-time validation (e.g., when typing the phone number or email) to reduce error rates and ensure correct input formats.
+4.  Novice users should be able to complete a typical workflow in under 5 minutes, without external help.
+5.  The system codebase should allow for the introduction of new features with less than 10% of existing code modification.
+6.  The system should validate all inputs (e.g., phone number, email, insurance details) according to predefined formats (e.g., email must follow a standard email format) to maintain data consistency and integrity.
+7.  AgentConnect should detect and handle duplicate entries (based on client name + address) by prompting users to resolve conflicts before adding a new entry.
+8.  If the system encounters an unexpected error, it should display a user-friendly error message without exposing technical details and allow the user to retry the action.
+9.  The system should respond to common user actions (e.g., adding or deleting a person, sorting clients) within 1 second, ensuring a smooth and responsive experience.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Appointment**: A scheduled meeting or event between the user and a client, managed within AgentConnect, with details like date and purpose.
+* **Policy**: An insurance or financial agreement purchased by a client, which can be categorized based on its type (e.g., Life Insurance, Health Insurance, Home Insurance).
+* **Client**: A person whose details (e.g., contact information, insurance policies, appointments) are stored and managed within AgentConnect.
+* **Duplicate Entry**: When a person with identical details (e.g., same name and address) already exists in the system, the system will flag this as a potential duplicate to avoid redundancy.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
