@@ -182,4 +182,15 @@ public class PersonListTest {
     public void toStringMethod() {
         assertEquals(personList.asUnmodifiableObservableList().toString(), personList.toString());
     }
+
+    @Test
+    public void hashCodeMethod() {
+        assertEquals(personList.asUnmodifiableObservableList().hashCode(), personList.hashCode());
+    }
+
+    @Test
+    public void equals() {
+        assertTrue(personList.equals(personList));
+        assertFalse(personList.equals(null));
+    }
 }
