@@ -5,11 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.AppointmentContainsDatePredicate;
@@ -25,6 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> filteredAppointments;
+    private final SortedList<Person> sortedAppointments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +42,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.addressBook.getPersonList());
         initializeAppointmentList();
+        sortedAppointments = new SortedList<>(filteredAppointments, Comparator.comparing(Person::getAppointmentStart));
     }
 
     public ModelManager() {
@@ -137,7 +141,7 @@ public class ModelManager implements Model {
 
     private void initializeAppointmentList() {
         AppointmentContainsDatePredicate predicate = new AppointmentContainsDatePredicate(LocalDate.now());
-        updateFilteredAppointmentList(predicate);
+        filterAppointmentList(predicate);
     }
 
     /**
@@ -145,12 +149,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredAppointmentList() {
-        return filteredAppointments;
+    public ObservableList<Person> getSortedAppointmentList() {
+        return sortedAppointments;
     }
 
     @Override
-    public void updateFilteredAppointmentList(Predicate<Person> predicate) {
+    public void filterAppointmentList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
     }

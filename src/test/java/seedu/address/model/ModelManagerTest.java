@@ -8,6 +8,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,9 +18,12 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -98,7 +103,26 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAppointmentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getSortedAppointmentList().remove(0));
+    }
+
+    @Test
+    public void sortAndFilterAppointmentList_validDate_sortAndFilterAppointmentList() {
+        // set up model
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).withPerson(CARL)
+                .withPerson(DANIEL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        // create the expected list
+        ObservableList<Person> expectedList = FXCollections.observableArrayList(CARL, BENSON);
+
+        // create the actual list
+        modelManager.filterAppointmentList(new AppointmentContainsDatePredicate(
+                LocalDate.parse("23-10-2024", DATE_FORMATTER)));
+        ObservableList<Person> actualList = modelManager.getSortedAppointmentList();
+
+        assertEquals(actualList, expectedList);
     }
 
     @Test
@@ -131,7 +155,7 @@ public class ModelManagerTest {
 
         // different filteredList of appointments -> return false
         LocalDate date = LocalDate.parse("23-10-2024", DATE_FORMATTER);
-        modelManager.updateFilteredAppointmentList(new AppointmentContainsDatePredicate(date));
+        modelManager.filterAppointmentList(new AppointmentContainsDatePredicate(date));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

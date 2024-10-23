@@ -93,7 +93,7 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredAppointmentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getSortedAppointmentList().remove(0));
     }
 
     /**
