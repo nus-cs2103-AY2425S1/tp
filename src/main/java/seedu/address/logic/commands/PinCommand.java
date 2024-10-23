@@ -47,11 +47,15 @@ public class PinCommand extends Command {
             peopleToPin.add(personToPin);
         }
 
+        assert peopleToPin.size() == targetIndices.size();
+
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToPin) {
             model.pinPerson(person);
             resultMessages.add(Messages.format(person));
         }
+
+        assert resultMessages.size() == targetIndices.size();
 
         model.sortByPin();
 
