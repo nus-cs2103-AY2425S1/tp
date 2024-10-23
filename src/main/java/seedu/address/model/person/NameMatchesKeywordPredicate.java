@@ -10,23 +10,17 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  * Different from NameContainsKeywordsPredicate as it requires all keywords to be present in the name.
  */
-public class NameMatchesNamePredicate implements Predicate<Person> {
+public class NameMatchesKeywordPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public NameMatchesNamePredicate(List<String> names) {
+    public NameMatchesKeywordPredicate(List<String> names) {
         this.keywords = names;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(name -> {
-                    if (name.contains(" ")) {
-                        return person.getName().fullName.equalsIgnoreCase(name);
-                    } else {
-                        return StringUtil.containsWordIgnoreCase(person.getName().fullName, name);
-                    }
-                });
+        return !keywords.isEmpty() && keywords.stream()
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
     @Override
@@ -36,12 +30,12 @@ public class NameMatchesNamePredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameMatchesNamePredicate)) {
+        if (!(other instanceof NameMatchesKeywordPredicate)) {
             return false;
         }
 
-        NameMatchesNamePredicate otherNameMatchesNamePredicate = (NameMatchesNamePredicate) other;
-        return keywords.equals(otherNameMatchesNamePredicate.keywords);
+        NameMatchesKeywordPredicate otherNameMatchesKeywordPredicate = (NameMatchesKeywordPredicate) other;
+        return keywords.equals(otherNameMatchesKeywordPredicate.keywords);
     }
 
     @Override
