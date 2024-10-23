@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String postalCode;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final Boolean isArchived;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,7 +40,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("postalCode") String postalCode,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isArchived") Boolean isArchived) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +49,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.isArchived = isArchived;
     }
 
     /**
@@ -62,6 +64,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isArchived = source.isArchived();
     }
 
     /**
@@ -119,7 +122,14 @@ class JsonAdaptedPerson {
 
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPostalCode, modelTags);
+
+        if (isArchived == null) {
+            throw new IllegalValueException("isArchived cannot be null");
+        }
+
+        final Boolean modelIsArchived = isArchived;
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPostalCode, modelTags, modelIsArchived);
     }
 
 }
