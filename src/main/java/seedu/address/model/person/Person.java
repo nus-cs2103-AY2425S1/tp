@@ -65,7 +65,7 @@ public class Person {
         return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
     }
 
-    public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
+    public void setPublicAddressesByNetwork(Network network, Set<PublicAddress> addresses) {
         requireAllNonNull(network, addresses);
         if (addresses.isEmpty()) {
             this.publicAddresses.remove(network);
