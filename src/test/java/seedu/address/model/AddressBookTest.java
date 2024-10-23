@@ -20,9 +20,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalAppointments;
 
 public class AddressBookTest {
 
@@ -116,6 +118,29 @@ public class AddressBookTest {
         public ObservableList<Appointment> getAppointmentList() {
             return appointments;
         }
+    }
+
+    @Test
+    public void hasAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasAppointment(null));
+    }
+
+    @Test
+    public void hasAppointment_appointmentNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasAppointment(TypicalAppointments.APPOINTMENT_1));
+    }
+
+    @Test
+    public void hasAppointment_appointmentInAddressBook_returnsTrue() {
+        addressBook.addAppointment(TypicalAppointments.APPOINTMENT_1);
+        assertTrue(addressBook.hasAppointment(TypicalAppointments.APPOINTMENT_1));
+    }
+
+    @Test
+    public void addAppointment_appointmentAlreadyExists_throwsDuplicateAppointmentException() {
+        addressBook.addAppointment(TypicalAppointments.APPOINTMENT_1);
+        assertThrows(DuplicateAppointmentException.class, () -> addressBook
+                .addAppointment(TypicalAppointments.APPOINTMENT_1));
     }
 
 }

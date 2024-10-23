@@ -73,4 +73,17 @@ public class JsonSerializableAddressBookTest {
                 dataFromFile::toModelType);
     }
 
+    @Test
+    public void illegalValueException_withMessageAndCause() {
+        String message = "Test message";
+        Throwable cause = new Throwable("Cause of exception");
+
+        IllegalValueException exception = new IllegalValueException(message, cause);
+
+        assertEquals(message, exception.getMessage());
+
+        assertEquals(cause, exception.getCause());
+    }
+
+
 }
