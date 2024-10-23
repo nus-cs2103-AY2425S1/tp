@@ -15,6 +15,7 @@ import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.commons.core.index.Index;
@@ -34,7 +35,12 @@ import seedu.sellsavvy.testutil.PersonBuilder;
  */
 public class EditPersonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -69,6 +75,30 @@ public class EditPersonCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
+
+        assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_personEditedWithOrderDisplayed_success() {
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        model.updateSelectedPerson(lastPerson);
+
+        PersonBuilder personInList = new PersonBuilder(lastPerson);
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditPersonCommand editPersonCommand = new EditPersonCommand(indexLastPerson, descriptor);
+
+        String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.updateSelectedPerson(editedPerson);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
     }

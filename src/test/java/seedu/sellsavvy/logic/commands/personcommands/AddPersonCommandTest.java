@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.CommandResult;
@@ -24,6 +25,7 @@ import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
 import seedu.sellsavvy.model.ReadOnlyUserPrefs;
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.PersonBuilder;
 
@@ -173,6 +175,31 @@ public class AddPersonCommandTest {
 
         @Override
         public void updateSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getSelectedPerson2() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public FilteredList<Order> getFilteredOrderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setOrder(Order target, Order editedOrder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person findEquivalentPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }

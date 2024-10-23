@@ -19,6 +19,7 @@ import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
 
 /**
  * Contains helper methods for testing Order commands.
@@ -47,6 +48,16 @@ public class OrderCommandTestUtil {
     public static final String INVALID_COUNT_ZERO = " " + PREFIX_COUNT + "0";
     public static final String INVALID_COUNT_NEGATIVE = " " + PREFIX_COUNT + "-2";
     public static final String INVALID_COUNT_STRING = " " + PREFIX_COUNT + "2 some random string";
+
+    public static final EditOrderCommand.EditOrderDescriptor DESC_ATLAS;
+    public static final EditOrderCommand.EditOrderDescriptor DESC_BOTTLE;
+
+    static {
+        DESC_ATLAS = new EditOrderDescriptorBuilder()
+                .withItem(VALID_ITEM_ATLAS).withDate(VALID_DATE_ATLAS).withQuantity(VALID_COUNT_ATLAS).build();
+        DESC_BOTTLE = new EditOrderDescriptorBuilder()
+                .withItem(VALID_ITEM_BOTTLE).withDate(VALID_DATE_BOTTLE).withQuantity(VALID_COUNT_BOTTLE).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>

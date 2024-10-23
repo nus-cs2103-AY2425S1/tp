@@ -13,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.commons.core.LogsCenter;
+import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -117,8 +119,20 @@ public class ModelManager implements Model {
 
     @Override
     public Model createCopy() {
-        return new ModelManager(addressBook.createCopy(), userPrefs);
+        Model modelCopy = new ModelManager(addressBook.createCopy(), userPrefs);
+        Person selectedPersonCopy = modelCopy.findEquivalentPerson(getSelectedPerson2());
+        modelCopy.updateSelectedPerson(selectedPersonCopy);
+        return modelCopy;
     }
+
+    @Override
+    public Person findEquivalentPerson(Person person) {
+        if (person == null) {
+            return null;
+        }
+        return addressBook.findEquivalentPerson(person);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -153,6 +167,34 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isSelectedPerson(Person person) {
+        if (getSelectedPerson2() == null) {
+            return person == null;
+        }
+        return getSelectedPerson2().equals(person);
+    }
+
+    @Override
+    public Person getSelectedPerson2() {
+        return selectedPerson.get();
+    }
+
+    @Override
+    public FilteredList<Order> getFilteredOrderList() {
+        if (getSelectedPerson2() == null) {
+            return null;
+        }
+        return getSelectedPerson2().getFilteredOrderList();
+    }
+
+    @Override
+    public void setOrder(Order target, Order editedOrder) {
+        assert getSelectedPerson2() != null; // we shouldn't be calling this method if there is no selectedPerson
+        OrderList orderList = getSelectedPerson2().getOrderList();
+        orderList.setOrder(target, editedOrder);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -164,9 +206,15 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
+        boolean isSameDisplayedPerson = getSelectedPerson2() == null
+                ? otherModelManager.getSelectedPerson2() == null
+                : getSelectedPerson2().equals(otherModelManager.getSelectedPerson2());
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && isSameDisplayedPerson;
     }
 
 }

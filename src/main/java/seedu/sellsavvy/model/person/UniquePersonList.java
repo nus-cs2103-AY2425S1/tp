@@ -117,6 +117,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
+     */
+    public Person findEquivalentPerson(Person target) {
+        requireNonNull(target);
+
+        if (!internalList.contains(target)) {
+            throw new PersonNotFoundException();
+        }
+
+        int index = internalList.indexOf(target);
+        return internalList.get(index);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

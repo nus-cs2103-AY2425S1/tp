@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -91,11 +93,36 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    //TODO: change it to getSelectedPersonProperty
     /** Returns an unmodifiable view of selected person */
     ReadOnlyObjectProperty<Person> getSelectedPerson();
+
+    //TODO: change it to getSelectedPerson
+    /** Returns the selected person displayed*/
+    Person getSelectedPerson2();
+
+    /** Returns the {@code OrderList} displayed*/
+    FilteredList<Order> getFilteredOrderList();
 
     /**
      * Updates the selected person whose orders are displayed.
      */
     void updateSelectedPerson(Person person);
+
+    /**
+     * Checks if the given {@code person} is the selected person whose orders are displayed.
+     */
+    boolean isSelectedPerson(Person person);
+
+    /**
+     * Replaces the given order {@code target} with {@code editedOrder}.
+     * {@code target} must exist in the displayed order list.
+     */
+    void setOrder(Order target, Order editedOrder);
+
+    /**
+     * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
+     * Returns null if target is null.
+     */
+    Person findEquivalentPerson(Person person);
 }

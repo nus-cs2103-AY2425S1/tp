@@ -27,8 +27,8 @@ public class ListOrderCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs()).createCopy();
     }
 
     @Test
@@ -38,6 +38,9 @@ public class ListOrderCommandTest {
 
         String expectedMessage = String.format(ListOrderCommand.MESSAGE_LIST_ORDER_SUCCESS,
                 selectedPerson.getName().fullName);
+
+        expectedModel.updateSelectedPerson(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
 
         assertCommandSuccess(listOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -57,6 +60,9 @@ public class ListOrderCommandTest {
 
         Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ListOrderCommand listOrderCommand = new ListOrderCommand(INDEX_FIRST_PERSON);
+
+        expectedModel.updateSelectedPerson(
+                expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
 
         String expectedMessage = String.format(ListOrderCommand.MESSAGE_LIST_ORDER_SUCCESS,
                 selectedPerson.getName().fullName);

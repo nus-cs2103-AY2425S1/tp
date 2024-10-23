@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -36,9 +37,9 @@ public class DeleteOrderCommandTest {
 
     @Test
     public void execute_validIndexOrderList_success() {
-        Model expectedModel = model.createCopy();
-        Person person = model.getFilteredPersonList().get(3);
+        Person person = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
         model.updateSelectedPerson(person);
+        Model expectedModel = model.createCopy();
 
         OrderList expectedOrderList = expectedModel.getFilteredPersonList().get(3).getOrderList();
         Order expectedOrder = expectedOrderList.get(INDEX_FIRST_ORDER.getZeroBased());

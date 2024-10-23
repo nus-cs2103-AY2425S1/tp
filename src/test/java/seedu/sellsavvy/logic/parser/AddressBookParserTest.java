@@ -19,6 +19,8 @@ import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.DeleteOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
 import seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
@@ -35,6 +37,7 @@ import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
 import seedu.sellsavvy.testutil.EditPersonDescriptorBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;
 import seedu.sellsavvy.testutil.OrderUtil;
@@ -123,10 +126,21 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_editOrder() throws Exception {
+        Order order = new OrderBuilder().build();
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(order).build();
+        EditOrderCommand command = (EditOrderCommand) parser.parseCommand(
+                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased() + " "
+                        + OrderUtil.getEditOrderDescriptorDetails(descriptor));
+        assertEquals(new EditOrderCommand(INDEX_FIRST_ORDER, descriptor), command);
+    }
+
+    @Test
     public void parseCommand_markOrder() throws Exception {
         MarkOrderCommand command = (MarkOrderCommand) parser.parseCommand(
                 MarkOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
         assertEquals(new MarkOrderCommand(INDEX_FIRST_ORDER), command);
+
     }
 
     @Test

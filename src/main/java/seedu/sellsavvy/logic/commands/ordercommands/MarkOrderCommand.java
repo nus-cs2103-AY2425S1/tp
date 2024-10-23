@@ -3,6 +3,8 @@ package seedu.sellsavvy.logic.commands.ordercommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 
+import java.util.List;
+
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.logic.Messages;
@@ -14,9 +16,7 @@ import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.order.Status;
-import seedu.sellsavvy.model.person.Person;
 
 /**
  * Marks an order as completed.
@@ -49,23 +49,23 @@ public class MarkOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person selectedPerson = model.getSelectedPerson().get();
-        if (selectedPerson == null) {
+        List<Order> filteredOrderList = model.getFilteredOrderList();
+        if (filteredOrderList == null) {
             throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         }
 
-        OrderList orderList = selectedPerson.getOrderList();
-        if (index.getZeroBased() >= orderList.size()) {
+        if (index.getZeroBased() >= filteredOrderList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
 
-        Order orderToMark = orderList.get(index.getZeroBased());
+        Order orderToMark = filteredOrderList.get(index.getZeroBased());
         Order newOrder = createMarkedOrder(orderToMark);
-        orderList.setOrder(orderToMark, newOrder);
+        model.setOrder(orderToMark, newOrder);
         String feedbackToUser = (orderToMark.getStatus() == Status.COMPLETED)
                 ? MESSAGE_ORDER_ALREADY_MARKED_WARNING : "";
         return new CommandResult(
                 feedbackToUser + String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
+
     }
 
     /**

@@ -2,10 +2,13 @@ package seedu.sellsavvy.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -20,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
+import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
 import seedu.sellsavvy.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -89,6 +93,30 @@ public class AddressBookTest {
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void findEquivalentPerson_modelContainsEquivalentPerson() {
+        AddressBook addressBook1 = getTypicalAddressBook().createCopy();
+        AddressBook addressBook2 = addressBook1.createCopy();
+        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person selectedPersonCopy = addressBook2.findEquivalentPerson(selectedPerson);
+        assertNotSame(selectedPersonCopy, selectedPerson);
+        assertEquals(selectedPersonCopy, selectedPerson);
+    }
+
+    @Test
+    public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
+        AddressBook addressBook1 = getTypicalAddressBook().createCopy();
+        Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person differentPerson = new PersonBuilder(selectedPerson).withName(VALID_NAME_BOB).build();
+        assertThrows(PersonNotFoundException.class, () -> addressBook.findEquivalentPerson(differentPerson));
+    }
+
+    @Test
+    public void findEquivalentPerson_nullInput_throwsAssertionError() {
+        AddressBook addressBook1 = getTypicalAddressBook().createCopy();
+        assertThrows(AssertionError.class, () -> addressBook1.findEquivalentPerson(null));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -103,6 +131,7 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
     }
 
 }

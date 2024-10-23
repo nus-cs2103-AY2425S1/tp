@@ -2,6 +2,7 @@ package seedu.sellsavvy.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
@@ -166,6 +167,26 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void findEquivalentPerson_modelContainsEquivalentPerson() {
+        uniquePersonList.add(ALICE);
+        UniquePersonList copyList = uniquePersonList.copyPersons();
+        Person aliceDup = copyList.findEquivalentPerson(ALICE);
+        assertNotSame(aliceDup, ALICE);
+        assertEquals(aliceDup, ALICE);
+    }
+
+    @Test
+    public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
+        uniquePersonList.add(ALICE);
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.findEquivalentPerson(BOB));
+    }
+
+    @Test
+    public void findEquivalentPerson_nullInput_throwsAssertionError() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.findEquivalentPerson(null));
     }
 
     @Test
