@@ -9,10 +9,7 @@ import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.OrderList;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Pastry;
-import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.*;
 
 /**
  * The API of the Model component.
@@ -105,4 +102,6 @@ public interface Model {
     void addSupplyOrder(SupplyOrder supplyOrder);
 
     OrderList getOrderList();
+
+    Inventory getInventory();
 }

@@ -32,6 +32,7 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.ViewIngredientCatalogueCommand;
 import seedu.address.logic.commands.ViewOrderListCommand;
 import seedu.address.logic.commands.ViewPastryCatalogueCommand;
+import seedu.address.logic.commands.ViewInventoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -137,6 +138,9 @@ public class AddressBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case ViewInventoryCommand.COMMAND_WORD:
+            return new ViewInventoryCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
