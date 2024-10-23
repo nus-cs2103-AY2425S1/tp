@@ -15,7 +15,10 @@ UniquePersonList -right-> Person
 Person -up-> "*" Tag
 
 Person *--> Name
-Person *--> Phone
+Person *--> TelegramHandle
 Person *--> Email
-Person *--> Address
+Person *--> StudentStatus
+Person *--> Roles
+Person *--> Nickname
+
 @enduml
