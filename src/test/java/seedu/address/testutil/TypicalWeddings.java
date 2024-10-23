@@ -1,5 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,12 +25,14 @@ public class TypicalWeddings {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static final Wedding WEDDING_ONE = new Wedding(new WeddingName("John and Jane Wedding"),
-            new WeddingDate(LocalDate.parse("12/12/2024", formatter)));
+            new WeddingDate(LocalDate.parse("12/12/2024", formatter)),
+            new ArrayList<>(List.of(ALICE.getId(), ELLE.getId(), BENSON.getId())));
     public static final Wedding WEDDING_TWO = new Wedding(new WeddingName("Mike and Anna Wedding"),
-            new WeddingDate(LocalDate.parse("13/01/2024", formatter)));
-
+            new WeddingDate(LocalDate.parse("13/01/2024", formatter)),
+            new ArrayList<>(List.of(FIONA.getId(), ELLE.getId(), GEORGE.getId())));
     public static final Wedding WEDDING_THREE = new Wedding(new WeddingName("Phoebe and Jay Wedding"),
-            new WeddingDate(LocalDate.parse("13/11/2024", formatter)));
+            new WeddingDate(LocalDate.parse("13/11/2024", formatter)),
+            new ArrayList<>(List.of(CARL.getId(), FIONA.getId(), BENSON.getId())));;
 
     private TypicalWeddings() {}
 
