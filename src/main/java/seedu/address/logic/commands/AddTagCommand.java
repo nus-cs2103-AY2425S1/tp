@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -79,7 +81,14 @@ public class AddTagCommand extends Command {
         Name updatedName = addTagDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = addTagDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = addTagDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Tag> updatedTags = addTagDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> currentTags = personToEdit.getTags();
+        Optional<Set<Tag>> optionalNewTags = addTagDescriptor.getTags();
+        Set<Tag> updatedTags = new HashSet<Tag>();
+        if (optionalNewTags.isPresent()) {
+            Set<Tag> newTags = optionalNewTags.get();
+            updatedTags.addAll(newTags);
+        }
+        updatedTags.addAll(currentTags);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
     }
@@ -128,7 +137,7 @@ public class AddTagCommand extends Command {
             setName(toAdd.name);
             setPhone(toAdd.phone);
             setEmail(toAdd.email);
-            addTags(toAdd.tags);
+            setTags(toAdd.tags);
         }
 
         public void setName(Name name) {
@@ -159,17 +168,8 @@ public class AddTagCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void addTags(Set<Tag> tags) {
-            if (tags != null) {
-                if (this.tags == null) {
-                    this.tags = tags;
-                    return;
-                }
-                for (Tag tag : tags) {
-                    this.tags.add(tag);
-                }
-            }
-
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**

@@ -51,7 +51,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
             addTagDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
 
-        parseTagstoAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::addTags);
+        parseTagstoAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::setTags);
 
         return new AddTagCommand(index, addTagDescriptor);
     }
