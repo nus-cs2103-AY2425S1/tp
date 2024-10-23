@@ -25,8 +25,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
-import seedu.address.model.person.task.Task;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
 import seedu.address.testutil.UpdateTaskDescriptorBuilder;
 import seedu.address.ui.Ui.UiState;
@@ -140,18 +138,6 @@ public class CommandTestUtil {
             UiState expectedUiState, Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, expectedUiState);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
-    }
-
-    /**
-     * Simulates adding a task to a person without executing the command,
-     * confirms that the {@code actualModel} matches the {@code expectedModel} after the task addition.
-     */
-    public static void assertAddTaskCommandSuccess(Model actualModel, Model expectedModel,
-                                                   Person originalPerson, Task addedTask) {
-        Person updatedPerson = new PersonBuilder(originalPerson).build();
-        updatedPerson.getTaskList().add(addedTask);
-        expectedModel.setPerson(originalPerson, updatedPerson);
-        assertEquals(expectedModel, actualModel);
     }
 
     /**

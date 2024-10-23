@@ -5,12 +5,22 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.task.Task;
+import seedu.address.model.person.task.TaskList;
 import seedu.address.ui.Ui.UiState;
 
 /**
@@ -56,11 +66,33 @@ public class AddTaskCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        targetPerson.getTaskList().add(taskToAdd);
+        Person updatedPerson = createUpdatedPerson(targetPerson, taskToAdd);
 
+        model.setPerson(targetPerson, updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 taskToAdd.getTaskDescription(), targetPerson.getName(), taskToAdd.getTaskDeadline()),
                 UiState.DETAILS);
+    }
+
+    /**
+     * Creates a new Copy of {@code targetPerson} that contains {@code taskToAdd}
+     * @param targetPerson the {@code Person} to be updated
+     * @param taskToAdd the {@code Task} to be added into the targetPerson
+     * @return
+     */
+    private static Person createUpdatedPerson(Person targetPerson, Task taskToAdd) {
+        Name name = targetPerson.getName();
+        Phone phone = targetPerson.getPhone();
+        EmergencyContact emergencyContact = targetPerson.getEmergencyContact();
+        Address address = targetPerson.getAddress();
+        Note note = targetPerson.getNote();
+        Set<Subject> subjects = targetPerson.getSubjects();
+        Level level = targetPerson.getLevel();
+        TaskList taskList = targetPerson.getTaskList().copy();
+        taskList.add(taskToAdd);
+        Set<LessonTime> lessonTimes = targetPerson.getLessonTimes();
+        return new Person(name, phone, emergencyContact,
+                address, note, subjects, level, taskList, lessonTimes);
     }
 
     @Override
