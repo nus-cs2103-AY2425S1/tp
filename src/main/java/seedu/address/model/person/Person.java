@@ -132,6 +132,29 @@ public class Person {
     }
 
     /**
+     * Returns a new Person object after deletion of a specified module.
+     */
+    public Person deleteModule(Module module) {
+        requireNonNull(module, "Module cannot be null");
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
+
+        updatedModules.remove(module);
+        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
+    }
+
+    /**
+     * Returns true if the person has the specified module.
+     *
+     * @param module The module to check.
+     * @return true if the person has the module, false otherwise.
+     */
+    public boolean hasModule(Module module) {
+        requireNonNull(module, "Module cannot be null");
+        return modules.contains(module);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */

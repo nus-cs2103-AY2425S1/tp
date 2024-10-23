@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -128,7 +129,17 @@ public class ModelManagerTest {
         // different person -> returns false
         assertNotEquals(BENSON, modelManager.getPersonToDisplay());
     }
+    @Test
+    public void addModule_invalidPerson_throwsException() {
+        Module module = new Module("CS2101");
+        assertThrows(IllegalArgumentException.class, () -> modelManager.addModule(BENSON, module));
+    }
 
+    @Test
+    public void deleteModule_invalidPerson_throwsException() {
+        Module module = new Module("CS2101");
+        assertThrows(IllegalArgumentException.class, () -> modelManager.deleteModule(BENSON, module));
+    }
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();

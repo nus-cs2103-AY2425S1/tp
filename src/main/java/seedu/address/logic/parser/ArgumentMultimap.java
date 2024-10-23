@@ -75,4 +75,33 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Verifies that there is no more than one StudentId present in the preamble.
+     * If multiple StudentIds are found, this method throws a {@code ParseException}.
+     *
+     * @throws ParseException if multiple StudentIds are present in the arguments.
+     */
+    public void verifyNoDuplicateStudentId(String input) throws ParseException {
+        String trimmedInput = input.trim();
+        String[] tokens = trimmedInput.split("\\s+");
+        int count = 0;
+        for (String token : tokens) {
+            if (!token.startsWith("m/") && !token.startsWith("g/")
+                    && !token.startsWith("n/") && !token.startsWith("p/")
+                    && !token.startsWith("e/") && !token.startsWith("a/")
+                    && !token.startsWith("c/") && !token.startsWith("t/")) {
+
+                boolean isStudentId = token.matches("^[!?&@]*\\d{7,8}$")
+                        || token.matches("^[A-Za-z]\\d{7}[A-Za-z]?$");
+
+                if (isStudentId) {
+                    count++;
+                }
+            }
+        }
+        if (count > 1) {
+            throw new ParseException(Messages.getErrorMessageForDuplicateID());
+        }
+    }
 }
