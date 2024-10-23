@@ -175,6 +175,11 @@ public class CourseCommandTest {
         }
 
         @Override
+        public void setCourse(Course target, Course editedCourse) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteCourse(Course course) {
             throw new AssertionError("This method should not be called.");
         }
