@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
  */
 public class TagList {
     private final ObservableList<Tag> tags;
-    public static int MAXIMUM_TAGLIST_SIZE = 30;
+    public static final int MAXIMUM_TAGLIST_SIZE = 30;
 
     public TagList() {
         tags = FXCollections.observableArrayList();
