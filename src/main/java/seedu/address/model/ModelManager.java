@@ -13,7 +13,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.*;
+import seedu.address.model.person.DateDistantToRecentComparator;
+import seedu.address.model.person.DateRecentToDistantComparator;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityHighToLowComparator;
+import seedu.address.model.person.PriorityLowToHighComparator;
 
 /**
  * Represents the in-memory model of the address book data.
