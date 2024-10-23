@@ -1,15 +1,19 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# TrueRental Developer Guide
+
+<!-- * Table of Contents -->
+<a id="table-of-contents"/><page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +25,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +61,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -70,7 +69,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,35 +88,37 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("cdelete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `cdelete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteClientCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a [_client_](#glossary-client)).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteClientCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -127,18 +128,20 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -171,58 +174,67 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `cdelete 5` command to delete the 5th [_client_](#glossary-client) in the address book. The `cdelete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `cdelete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new [_client_](#glossary-client). The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<box type="info" seamless>
 
-</div>
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+</box>
 
-![UndoRedoState3](images/UndoRedoState3.png)
+Step 4. The user now decides that adding the [_client_](#glossary-client) was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
-</div>
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<box type="info" seamless>
 
-</div>
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -234,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `cdelete`, just save the [_client_](#glossary-client) being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -262,71 +274,337 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* are [_letting agents_](#glossary-letting-agent)
+* has a need to manage a significant number of [_client_](#glossary-client)'s personal and [_rental information_](#glossary-rental-information)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manage many [_client_](#glossary-client)'s personal and [_rental information_](#glossary-rental-information), such as name, phone number, address, rental start date, rental end date, monthly rent amount, etc.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                 | I can …​                                       | So that I can…​                                                         |
+|----------|----------------------------|---------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | user                       | save a _client_'s personal information            | contact them easily                                                        |
+| `* * *`  | user                       | save a _client_'s _rental information_            | view their respective properties                                           |
+| `* * *`  | user                       | edit a _client_'s personal information            | modify their personal details                                              |
+| `* * *`  | user                       | edit a _client_'s _rental information_            | modify their property's _rental information_                               |
+| `* * * ` | user                       | delete a _client_'s personal information          | clear my application when he/she is no longer my _client_                  |
+| `* * *`  | user                       | delete a _client_'s _rental information_          | clear my application when the property is not owned by my _client_ anymore |
+| `* * *`  | user                       | find a _client_'s personal information            | find the _client_ easily                                                   |
+| `* * *`  | user                       | find a _client_'s _rental information_            | find the _client_'s property easily                                        |
+| `* *`    | user                       | colour code a _client_                            | differentiate more important _clients_                                     |
+| `* *`    | user                       | attach files to a _client_                        | attach important contracts to the respective _clients_                     |
+| `* *`    | user                       | assign tags to _clients_                          | differentiate _clients_ by any interesting factors                         |
+| `* *`    | user                       | autofill CLI commands                             | easily assess the command line without typing the command again            |
+| `* *`    | user                       | export all _client_'s personal information        | save it somewhere else                                                     |
+| `* *`    | user                       | export a specific _client_'s _rental information_ | save it somewhere else                                                     |
+| `*`      | user                       | send emails to a _client_                         | schedule meetings with them                                                |
+| `*`      | user                       | set reminders for a _client_                      | remember my schedule with individual _client_                              |
+| `*`      | user                       | lock my application                               | protect my data                                                            |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TrueRental` system and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a [_client_](#glossary-client)**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User chooses to add a _client_
+2.  User enters _client_'s information
+3.  System validates user input
+4.  System adds new _client_ information
+5.  System notifies user upon successful add operation
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. System detects error for invalid instruction
+
+    * 3a1. System prompts error for invalid instruction
+    * 3a2. User enters new instruction
+    * Steps 3a1-3a2 are repeated until instruction is valid
+
+    Use case continues from step 3.
+
+* 3b. System detects error in _client_'s information
+
+    * 3b1. System prompts error for invalid _client_'s information
+    * 3b2. User enters new _client_'s information
+    * Steps 3b1-3b2 are repeated until _client_'s information is valid
+
+    Use case continues from step 3.
+
+* 3c. System detects duplicated _client_'s information
+
+    * 3c1. System prompts error for duplicated _client_'s information
+    * 3c2. User enters new non-duplicated _client_'s information
+    * Steps 3c1-3c2 are repeated until _client_'s information is valid
+
+    Use case continues from step 4.
+
+* *a. At any time, user chooses not proceed on with the operation.
+
+    Use case ends.
+
+**Use case: Add a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
+
+**MSS**
+
+1.  User chooses to add _rental information_
+2.  User selects _client_
+3.  User enters _client_'s _rental information_
+4.  System validates user input
+5.  System updates new _client_ information
+6.  System notifies user upon successful add operation
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. System detects error for invalid instruction
+
+    * 4a1. System prompts error for invalid instruction
+    * 4a2. User enters new instruction
+    * Steps 4a1-4a2 are repeated until instruction is valid
+
+    Use case continues from step 4.
+
+* 4b. System detects error for invalid _client_
+
+    * 4b1. System prompts error for invalid _client_
+    * 4b2. User selects new _client_
+    * Steps 4b1-4b2 are repeated until selected _client_ is valid
+
+    Use case continues from step 4.
+
+* 4c. System detects error in _client_'s _rental information_
+
+    * 4c1. System prompts error for invalid _client_'s _rental information_
+    * 4c2. User enters new _client_'s _rental information_
+    * Steps 4c1-4c2 are repeated until _client_'s _rental information_ is valid
+
+    Use case continues from step 4.
+
+* 4d. System detects duplicated _client_'s _rental information_
+
+    * 4d1. System prompts error for duplicated _client_'s _rental information_
+    * 4d2. User enters new non-duplicated _client_'s _rental information_
+    * Steps 4d1-4d2 are repeated until _client_'s _rental information_ is valid
+
+    Use case continues from step 5.
+
+* *a. At any time, user chooses not proceed on with the operation.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Find a [_client_](#glossary-client)**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User chooses to find a _client_
+2.  User enters keyword
+3.  System validates user input
+4.  System filters list of _client_ based on keyword
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects error for invalid instruction
+
+    * 3a1. System prompts error for invalid instruction
+    * 3a2. User enters new instruction
+    * Steps 3a1-3a2 are repeated until instruction is valid
+
+    Use case continues from step 3.
+
+* 3b. System detects error for invalid keyword
+
+    * 3b1. System prompts error for invalid keyword
+    * 3b2. User enters new keyword
+    * Steps 3b1-3b2 are repeated until keyword is valid
+
+    Use case continues from step 4.
+
+* 4a. The list is empty.
+
+    Use case ends.
+
+* *a. At any time, user chooses not proceed on with the operation.
+
+  Use case ends.
+
+**Use case: Edit a [_client_](#glossary-client)'s information**
+
+**MSS**
+
+1.  User chooses to edit a _client_'s information.
+2.  User enters the _client_ information that he / she wants to update.
+3.  System validates user input.
+4.  System updates the _client_'s information as requested.
+5.  System notifies user for successful modification.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects error for invalid instruction.
+
+    * 3a1. System prompts error for invalid instruction.
+    * 3a2. User enters new instruction.
+    * Steps 3a1-3a2 are repeated until the instruction is valid.
+
+    Use case resumes from step 3.
+
+* 3b. System detects error for invalid _client_ information.
+
+    * 3b1. System prompts error for invalid _client_ information.
+    * 3b2. User enters new _client_ information.
+    * Steps 3b1-3b2 are repeated until the _client_ information is valid.
+
+    Use case resumes from step 3.
+
+* 4a. System fails to update the _client_'s information.
+
+    * 4a1. System prompts user that edit has failed.
+
+    Use case resumes from step 1 or user choose not to proceed and use case ends.
+
+* *a. At any time, User chooses not to proceed with the operation.
+
+    Use case ends.
+
+**Use case: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
+
+**MSS**
+
+1.  User chooses to edit a _client_'s _rental information_.
+2.  User enters the _rental information_ that he / she wants to update.
+3.  System validates user input.
+4.  System updates the _client_'s _rental information_ as requested.
+5.  System notifies user for successful modification.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects error for invalid instruction.
+
+    * 3a1. System prompts error for invalid instruction.
+    * 3a2. User enters new instruction.
+    * Steps 3a1-3a2 are repeated until the instruction is valid.
+
+    Use case resumes from step 3.
+
+* 3b. System detects error for invalid _rental information_.
+
+    * 3b1. System prompts error for invalid _rental information_.
+    * 3b2. User enters new _rental information_.
+    * Steps 3b1-3b2 are repeated until the _rental information_ is valid.
+  
+    Use case resumes from step 3.
+
+* 4a. System fails to update the _client_'s _rental information_.
+
+    * 4a1. System prompts user that edit has failed.
+
+    Use case resumes from step 1 or user choose not to proceed and use case ends.
+
+* *a. At any time, User chooses not to proceed with the operation.
+
+    Use case ends.
+
+
+**Use case: Delete a [_client_](#glossary-client)**
+
+**MSS**
+
+1.  User chooses to delete a _client_ and all related _rental information_
+2.  User types in a command consisting the index of the _client_
+3.  System prompts the user for confirmation
+4.  User confirms the deletion
+5.  System deletes that _client_ and all related _rental information_
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is not valid
+
+    * 2a1. System prompts error for invalid index
+    * 2a2. User enters new instruction
+    * Steps 2a1-2a2 are repeated until the instruction is valid
+
+  Use case resumes from step 3.
+
+* 4a. User cancels the deletion
+
+  Use case ends.
+
+
+**Use case: Delete a [_rental information_](#glossary-rental-information) from a [_client_](#glossary-client)**
+
+**MSS**
+
+1.  User chooses to delete a specific _rental information_ from a _client_
+2.  User types in a command consisting the index of the _client_ and _rental information_
+3.  System prompts the user for confirmation
+4.  User confirms the deletion
+5.  System deletes that _rental information_
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index is not valid
+
+    * 2a1. System prompts error for invalid index
+    * 2a2. User enters new instruction
+    * Steps 2a1-2a2 are repeated until the instruction is valid
+
+  Use case resumes from step 3.
+
+* 4a. User cancels the deletion
+
+  Use case ends.
+
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1.  Should work on any [_mainstream OS_](#glossary-mainstream-os) as long as it has Java `17` or above installed.
+2.  Should be able to hold up to 1000 [_clients_](#glossary-client) without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  A user should be able to see clearly with reasonably large texts.
+5.  The user interface should be simple, functional, and visually inoffensive to the majority of users.
+6.  A new user should be able to view information intuitively, even if they do not know the commands used to perform tasks.
+7.  Should be able to type up to 2000 characters without a noticeable lag.
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* <a id="glossary-mainstream-os"/>**Mainstream OS**: Windows, Linux, Unix, MacOS
+* <a id="glossary-private-contact-detail"/>**Private contact detail**: A contact detail that is not meant to be shared with others
+* <a id="glossary-user"/>**User**: A letting agent that is using TrueRental to manage the contact information of their clients
+* <a id="glossary-client"/>**Client**: An individual that is renting a property from a letting agent
+* <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
+* <a id="glossary-system"/>**System**: TrueRental desktop application
+* <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number and email, not meant to be shared with others.
+* <a id="glossary-rental-information"/>**Client's rental information**: A client's rental information containing address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not meant to be shared with others.
+* <a id="glossary-mss"/>**MSS**: Main Success Scenario.
+
+[Back to top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,10 +612,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
@@ -356,19 +636,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a [_client_](#glossary-client)
 
-1. Deleting a person while all persons are being shown
+1. Deleting a _client_ while all _clients_ are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `cdelete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `cdelete 0`<br>
+      Expected: No _client_ is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `cdelete`, `cdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
