@@ -485,6 +485,7 @@ MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/
 | **AddAllergy** | `addAllergy i/NRIC al/ALLERGY…` | `addAllergy i/S1234567A al/Dust al/Pollen` |
 | **Clear**  | `clear`                                                               | -                                                                                                   |
 | **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                  |
+| **DelAllergy** | `delAllergy i/NRIC al/ALLERGY…` | `delAllergy i/S1234567A al/Dust al/Pollen` |
 | **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                   |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                   |
 | **FindNric**| `findNric NRIC`| `findNric S1234567A`                                                                                |                                                                                                                                              |
