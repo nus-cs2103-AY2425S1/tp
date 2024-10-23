@@ -138,6 +138,11 @@ public class ModelManager implements Model {
         addressBook.setEvent(target, editedEvent);
     }
 
+    @Override
+    public int getFilteredEventListSize() {
+        return filteredEvents.size();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
