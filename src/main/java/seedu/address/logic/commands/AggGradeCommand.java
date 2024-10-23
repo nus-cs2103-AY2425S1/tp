@@ -28,6 +28,8 @@ public class AggGradeCommand extends Command {
             + "Operations can be: " + String.join(", ", OPERATION_TRANSLATE.keySet()) + "\n"
             + "example:\n" + "  aggGrade median\n" + "  aggGrade median n/midterm";
 
+    public static final String MESSAGE_OPERATION_CONSTRAINTS = "Invalid operations passed. The available operations " +
+            "are: \n" + String.join(", ", OPERATION_TRANSLATE.keySet());
 
     /**
      * Operations that can be done with the aggGrade command.

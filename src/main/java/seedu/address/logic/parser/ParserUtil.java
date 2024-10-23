@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AggGradeCommand.MESSAGE_OPERATION_CONSTRAINTS;
 import static seedu.address.logic.commands.AggGradeCommand.OPERATION_TRANSLATE;
 import static seedu.address.model.person.Grade.MESSAGE_SCORE_CONSTRAINTS;
 import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
@@ -251,8 +252,7 @@ public class ParserUtil {
         String trimmedValue = value.trim();
 
         if (!OPERATION_TRANSLATE.containsKey(trimmedValue)) {
-            // TODO
-            throw new ParseException("todo");
+            throw new ParseException(MESSAGE_OPERATION_CONSTRAINTS);
         }
 
         return OPERATION_TRANSLATE.get(trimmedValue);
