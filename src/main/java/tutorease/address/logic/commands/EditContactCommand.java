@@ -40,7 +40,7 @@ public class EditContactCommand extends ContactCommand {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + COMMAND_WORD
+    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
             + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"

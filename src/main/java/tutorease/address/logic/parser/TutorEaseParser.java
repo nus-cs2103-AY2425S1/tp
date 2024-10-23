@@ -11,7 +11,6 @@ import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.ContactCommand;
-import tutorease.address.logic.commands.EditContactCommand;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.HelpCommand;
 import tutorease.address.logic.commands.LessonCommand;
@@ -52,9 +51,6 @@ public class TutorEaseParser {
         switch (commandWord) {
         case ContactCommand.COMMAND_WORD:
             return new ContactCommandParser().parse(arguments);
-
-        case EditContactCommand.COMMAND_WORD:
-            return new EditContactCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

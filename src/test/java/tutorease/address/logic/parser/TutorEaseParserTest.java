@@ -51,15 +51,6 @@ public class TutorEaseParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new StudentBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
-    }
-
-    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
@@ -100,6 +91,16 @@ public class TutorEaseParserTest {
                 ContactCommand.COMMAND_WORD + " " + FindContactCommand.COMMAND_WORD
                         + " " + String.join(" ", keywords));
         assertEquals(new FindContactCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_edit() throws Exception {
+        Person person = new StudentBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditContactCommand command = (EditContactCommand) parser.parseCommand(ContactCommand.COMMAND_WORD + " "
+                + EditContactCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
 }
