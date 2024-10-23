@@ -256,9 +256,13 @@ Entering the `add_guest` command returns the following result on your screen:
 
 ### Editing a guest : `edit_guest`
 
-Edits any details of a guest on your existing guest list.
+Edits the details of the guest identified by the index number used in the displayed guest list. Existing values will be overwritten by the input values.
 
-**Format:** ``
+**Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [t/TAG]...`
+
+* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
+
+   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 Entering the `edit_guest` command returns the following result on your screen:
 
@@ -273,7 +277,7 @@ Deletes a guest from your existing guest list.
 
 **Format:** `delete_guest INDEX`
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list that you see on your screen**.
+* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
@@ -293,7 +297,7 @@ Entering the `delete_guest` command returns the following result on your screen:
 
 Adds a vendor to the bottom of the existing overall vendor list.
 
-**Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP_STATUS] [t/TAG]...`
+**Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS company/COMPANY [t/TAG]...`
 
 Entering the `add_vendor` command returns the following result on your screen:
 
@@ -304,9 +308,13 @@ Entering the `add_vendor` command returns the following result on your screen:
 
 ### Editing a vendor : `edit_vendor`
 
-Edits any details of a vendor on your existing vendor list.
+Edits the details of the vendor identified by the index number used in the displayed vendor list. Existing values will be overwritten by the input values.
 
-**Format:** ``
+**Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [company/COMPANY] [t/TAG]...`
+
+* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
+
+    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
 Entering the `edit_vendor` command returns the following result on your screen:
 
@@ -321,7 +329,7 @@ Deletes a vendor from your existing vendor list.
 
 **Format:** `delete_vendor INDEX`
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list that you see on your screen**.
+* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
 
    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
