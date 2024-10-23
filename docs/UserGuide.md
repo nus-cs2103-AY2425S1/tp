@@ -140,7 +140,7 @@ Format: `contact edit INDEX [/nNAME] [/pPHONE] [/eEMAIL] [/aADDRESS] [/tTAG]…�
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `/t` without
   specifying any tags after it.
-* Role is not allowed to be edited!
+* Role is not editable!
 
 Examples:
 
