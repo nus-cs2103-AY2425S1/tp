@@ -1,10 +1,21 @@
 package seedu.ddd.model.contact.common.predicate;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
-import static seedu.ddd.logic.parser.CliSyntax.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
-import static seedu.ddd.testutil.TypicalContacts.*;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ddd.testutil.TypicalContacts.ALICE;
+import static seedu.ddd.testutil.TypicalContacts.BENSON;
+
+
 
 import org.junit.jupiter.api.Test;
 
@@ -244,5 +255,14 @@ public class ContactPredicateBuilderTest {
         argMultimap.put(PREFIX_PHONE, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
         assertThrows(ParseException.class, predicateBuilder::build);
+    }
+
+    @Test
+    public void toStringMethod() {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
+
+        String expected = ContactPredicateBuilder.class.getCanonicalName() + "{}";
+        assertEquals(expected, predicateBuilder.toString());
     }
 }
