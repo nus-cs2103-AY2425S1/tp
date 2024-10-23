@@ -24,17 +24,19 @@ public class LinkCard extends UiPart<Region> {
     public final Link link;
 
     @FXML
+    private Label id;
+    @FXML
     private HBox cardPane;
     @FXML
     private Label linkText;
 
     /**
-     * Creates a {@code OwnerCode} with the given {@code Owner} and index to display.
+     * Creates a {@code LinkCode} with the given {@code Link} and index to display.
      */
     public LinkCard(Link link, int displayedIndex) {
         super(FXML);
         this.link = link;
         //id.setText(displayedIndex + ". ");
-        linkText.setText(link.toString());
+        linkText.setText(link.description());
     }
 }

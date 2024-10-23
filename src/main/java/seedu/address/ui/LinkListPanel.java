@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -15,7 +16,7 @@ import seedu.address.model.link.Link;
  */
 public class LinkListPanel extends UiPart<Region> {
     private static final String FXML = "LinkListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(OwnerListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(LinkListPanel.class);
 
     @FXML
     private ListView<Link> linkListView;
@@ -25,7 +26,10 @@ public class LinkListPanel extends UiPart<Region> {
      */
     public LinkListPanel(ObservableList<Link> linkList) {
         super(FXML);
-        linkListView.setItems(linkList);
+        System.out.println(linkList);
+        ObservableList<Link> reversedList = FXCollections.observableArrayList(linkList);
+        FXCollections.reverse(reversedList);
+        linkListView.setItems(reversedList);
         linkListView.setCellFactory(listView -> new LinkListViewCell());
     }
 

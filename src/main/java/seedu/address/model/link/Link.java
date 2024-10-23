@@ -33,6 +33,10 @@ public class Link {
         return to;
     }
 
+    public String description() {
+        return "Link from owner " + from.getUniqueID() + " to pet " + to.getUniqueID();
+    }
+
     /**
      * Returns true if both links have the same fields.
      * This defines a strong notion of equality between two links.

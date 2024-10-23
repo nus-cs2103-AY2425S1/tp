@@ -13,6 +13,8 @@ public class ListCommandViewManager {
 
     private VBox ownerList;
     private VBox petList;
+
+    private VBox linkList;
     private StackPane combinedListPanelPlaceholder;
 
     private StackPane linkListPanelPlaceholder;
@@ -25,9 +27,10 @@ public class ListCommandViewManager {
      * @param combinedListPanelPlaceholder The combined list view placeholder (StackPane).
      */
     public ListCommandViewManager(VBox ownerList, VBox petList, StackPane combinedListPanelPlaceholder,
-                                  StackPane linkListPanelPlaceholder) {
+                                  VBox linkList, StackPane linkListPanelPlaceholder) {
         this.ownerList = ownerList;
         this.petList = petList;
+        this.linkList = linkList;
         this.combinedListPanelPlaceholder = combinedListPanelPlaceholder;
         this.linkListPanelPlaceholder = linkListPanelPlaceholder;
     }
@@ -63,8 +66,10 @@ public class ListCommandViewManager {
         petList.setManaged(false);
         combinedListPanelPlaceholder.setVisible(false);
         combinedListPanelPlaceholder.setManaged(false);
-        linkListPanelPlaceholder.setVisible(true);
-        linkListPanelPlaceholder.setManaged(true);
+        linkList.setVisible(true);
+        linkList.setManaged(true);
+        //linkListPanelPlaceholder.setVisible(true);
+        //linkListPanelPlaceholder.setManaged(true);
 
         /*
         // Create a new LinkCard for the link
@@ -90,6 +95,8 @@ public class ListCommandViewManager {
         ownerList.setManaged(false);
         combinedListPanelPlaceholder.setVisible(false);
         combinedListPanelPlaceholder.setManaged(false);
+        linkList.setVisible(false);
+        linkList.setManaged(false);
 
         // Show the pet list
         petList.setVisible(true);
@@ -104,6 +111,8 @@ public class ListCommandViewManager {
         petList.setManaged(false);
         combinedListPanelPlaceholder.setVisible(false);
         combinedListPanelPlaceholder.setManaged(false);
+        linkList.setVisible(false);
+        linkList.setManaged(false);
 
         // Show the owner list
         ownerList.setVisible(true);
@@ -118,6 +127,8 @@ public class ListCommandViewManager {
         petList.setManaged(false);
         combinedListPanelPlaceholder.setVisible(true);
         combinedListPanelPlaceholder.setManaged(true);
+        linkList.setVisible(false);
+        linkList.setManaged(false);
 
         // Hide the owner list
         ownerList.setVisible(false);
