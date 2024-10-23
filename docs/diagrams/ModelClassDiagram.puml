@@ -4,23 +4,24 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+Package Model as ModelPackage <<Rectangle>> {
+  Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+  Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+  Class "<<interface>>\nModel" as Model
+  Class AddressBook
+  Class ModelManager
+  Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+  Class UniquePersonList
+  Class Person
+  Class Address
+  Class Email
+  Class Name
+  Class Phone
+  Class Tag
+  Class University
 
-Class I #FFFFFF
+  Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -42,6 +43,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> University
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
