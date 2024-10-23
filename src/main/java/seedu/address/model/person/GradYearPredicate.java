@@ -32,11 +32,11 @@ public class GradYearPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Optional<GradYear> otherGradYear = person.getGradYear();
-        if (otherGradYear == null || this.graduationYear == null) {
-            return false;
-        } else {
-            return Integer.parseInt(otherGradYear.toString()) < Integer.parseInt(this.graduationYear.toString());
+        if (otherGradYear.isPresent()) {
+            return Integer.parseInt(otherGradYear.get().toString()) < Integer.parseInt(this.graduationYear.toString());
         }
+
+        return false;
     }
 
     /**

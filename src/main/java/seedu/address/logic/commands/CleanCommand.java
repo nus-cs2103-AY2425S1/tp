@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.Year;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -10,6 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.GradYear;
+import seedu.address.model.person.GradYearPredicate;
 
 
 
@@ -34,7 +37,8 @@ public class CleanCommand extends Command {
      */
     public CleanCommand() {
         // TO DO: CHANGE THIS TO USE A GradDate Predicate comparing to LocalDateTime.now()
-        this.predicate = p -> true;
+        String year = String.valueOf(Year.now().getValue());
+        this.predicate = new GradYearPredicate(new GradYear(year));
     }
 
     @Override
