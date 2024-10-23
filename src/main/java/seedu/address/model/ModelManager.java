@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 
@@ -192,5 +194,10 @@ public class ModelManager implements Model {
     public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
         filteredReceipts.setPredicate(predicate);
         return this.goodsList.findReceipts(predicate);
+    }
+
+    @Override
+    public void deleteGoods(String goodsName) {
+        goodsList.removeIf(receipt -> Objects.equals(receipt.getGoods().getReadableGoodsName(), goodsName));
     }
 }
