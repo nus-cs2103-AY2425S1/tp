@@ -56,4 +56,18 @@ public class VolunteerNewCommand extends Command {
         model.addVolunteer(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof VolunteerNewCommand) {
+            VolunteerNewCommand otherCommand = (VolunteerNewCommand) other;
+            return otherCommand.toAdd.equals(toAdd);
+        } else {
+            return false;
+        }
+    }
 }

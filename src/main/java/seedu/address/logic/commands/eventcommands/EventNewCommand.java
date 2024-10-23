@@ -63,4 +63,18 @@ public class EventNewCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof EventNewCommand) {
+            EventNewCommand otherCommand = (EventNewCommand) other;
+            return otherCommand.toAdd.equals(toAdd);
+        } else {
+            return false;
+        }
+    }
 }
