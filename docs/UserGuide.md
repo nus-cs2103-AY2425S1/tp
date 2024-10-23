@@ -151,21 +151,21 @@ Examples:
 * `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Getting that parameter of all these people: `get` 
-Gets the specified parameter of the filtered people from SocialBook.
+### Getting the parameters of these people: `get` 
+Gets the specified parameters of each individual person in current person list.
 
 Format: `get PARAMETERS`
 
-* Gets the specified parameters for each person in the filtered list.
-* The only valid parameters are: n/, p/, e/, a/.
+* The only valid parameters are: name, phone, email, address.
+* Parameters are not case sensitive, which means `get PHONE name` will return phone number and name details too.
 * All inputted parameters must be valid for the details to be displayed. 
 * The details will be displayed in the order of the inputted parameters.
 * Executing the same parameter multiple times in the same command will still only return one set of that detail.
 
 Examples:
-* `list` followed by `get p/ e/` gets the phone numbers followed by the emails of the people in SocialBook.
-* `list` followed by `get p/ p/` gets only one set of the phone numbers of the people in SocialBook.
-* `find p/HIGH` followed by `get n/ a/` gets the names followed by the addresses of the high priority people.
+* `list` followed by `get phone EMAIL` gets the phone numbers followed by the emails of the people in SocialBook.
+* `list` followed by `get pHone phone` gets only one set of the phone numbers of the people in SocialBook.
+* `find p/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people.
 
 ### Clearing all entries : `clear`
 
@@ -175,14 +175,14 @@ Format: `clear`
 
 ### Displaying overall statistics : `statistics`
 
-Displays the statistics of filtered list.
+Displays the statistics of current person list.
 
 Statistics include: 
-* Nb of People
-* Nb of HIGH Priority People
-* Nb of MEDIUM Priority People
-* Nb of LOW Priority People
-* Nb of People With Monthly Household Income < 2500
+* Number of People
+* Number of HIGH Priority People
+* Number of MEDIUM Priority People
+* Number of LOW Priority People
+* Number of People With Monthly Household Income < 2500
 
 Format: `statistics`
 

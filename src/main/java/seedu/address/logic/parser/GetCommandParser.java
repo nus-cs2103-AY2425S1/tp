@@ -19,11 +19,11 @@ public class GetCommandParser implements Parser<GetCommand> {
      */
     public GetCommand parse(String args) throws ParseException {
 
-        String[] parameters = args.trim().split(" ");
+        String[] parameters = args.trim().split("\\s+");
         int size = parameters.length;
         for (int i = 0; i < size; i++) {
             String trimmedParam = parameters[i].trim();
-            if (!trimmedParam.matches("^[a-zA-Z]+/$")) {
+            if (!trimmedParam.matches("^[a-zA-Z]+$")) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
             }
