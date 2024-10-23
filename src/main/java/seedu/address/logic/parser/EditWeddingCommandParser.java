@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditWeddingCommand;
 import seedu.address.logic.commands.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;

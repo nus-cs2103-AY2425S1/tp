@@ -24,9 +24,9 @@ public class EditWeddingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": edits wedding \n"
-            + "Parameters: " + PREFIX_NAME + "NAME"
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Pb&J " + PREFIX_DATE + "21/03/2024";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Pb&J " + PREFIX_DATE + "21/03/2024";
 
     public static final String MESSAGE_SUCCESS = "Edited Wedding: %1$s \n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -87,7 +87,7 @@ public class EditWeddingCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditWeddingCommand)) {
             return false;
         }
 
@@ -149,7 +149,7 @@ public class EditWeddingCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
+            if (!(other instanceof EditWeddingDescriptor)) {
                 return false;
             }
 
