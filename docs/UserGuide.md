@@ -94,13 +94,10 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+> **Tip:** A person can have any number of tags (including 0).
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/200 c/1`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 f/220 c/2 t/criminal`
+* 'add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/250 c/1'
 
 ---
 
@@ -116,7 +113,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -150,9 +147,6 @@ Examples:
 
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
-
-![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ---
 
 ### 2.6 Deleting a Person : `delete`
@@ -177,6 +171,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+---
 
 ### 2.8 Exiting the Program : `exit`
 
@@ -201,6 +196,34 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+---
+### 2.11 Marking a Payment as Completed
+
+Updates the payment status of a student to completed.
+
+**Format:** `markpaid INDEX YEAR_MONTH`
+
+* Marks the payment of the person at the specified `INDEX` for the given month and year.
+* The `INDEX` refers to the index number shown in the displayed person list.
+* The `YEAR_MONTH` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* The index **must be within the range** of the number of people in the list.
+* You can only mark the payment as completed for the current or a past month, not for future months.
+
+**Examples:**
+* `markpaid 1 2024-10` – Marks the payment of the 1st student as completed for October 2024.
+* `markpaid 3 2023-12` – Marks the payment of the 3rd student as completed for December 2023.
+
+---
+### 2.13 Bar Chart
+
+Displays a bar chart showing the number of students who made payments for each month. This feature allows you to visually track the payment trends.
+
+**Format:** `bar`
+
+* The x-axis representing the months (e.g., 2024-01, 2024-02, etc.).
+* The y-axis showing the number of students who made their payments during each month.
+* If no payments were made in a given month, the value for that month will be zero.
+
 --------------------------------------------------------------------------------------------------------------------
 
 # 3. FAQ
@@ -222,9 +245,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Bar Chart** | `bar`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Exit** | `exit`
+**Help** | `help`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Mark Paid** | `mark INDEX`<br> e.g., `mark 1` (Marks the 1st student's payment as completed)
+**Pie Chart** | `pie`
