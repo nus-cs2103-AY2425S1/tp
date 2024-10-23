@@ -99,15 +99,12 @@
     -fx-padding: 0 0 0 0;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+.list-cell:filled {
+    -fx-background-color: #c5e3f9;
 }
 
 .list-cell:filled:selected {
+    /* controls the cell that is selected by user */
     -fx-background-color: #424d5f;
 }
 
@@ -116,20 +113,25 @@
     -fx-border-width: 1;
 }
 
-.list-cell .label {
+.list-cell:filled:selected .label {
+    /* the label for the cell that is selected by user */
     -fx-text-fill: white;
+}
+
+.list-cell .label {
+    -fx-text-fill: black;
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    /*-fx-text-fill: #010504;*/
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    /*-fx-text-fill: #010504;*/
 }
 
 .stack-pane {
@@ -150,7 +152,7 @@
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .result-display .label {
@@ -308,8 +310,10 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    /* controls the entire cell (HBox) */
+    /*-fx-background-color: #c5e3f9;*/
+    -fx-border-color: black;
+    -fx-border-width: 1 1 0 1;
 }
 
 #commandTypeLabel {
@@ -318,14 +322,16 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    /* controls the command text field */
+    /*-fx-background-color: transparent #383838 transparent #383838;*/
+    -fx-background-color: #faf5da;
     -fx-background-insets: 0;
     -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -333,7 +339,6 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
 
