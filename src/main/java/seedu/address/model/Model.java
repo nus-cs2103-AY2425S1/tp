@@ -98,6 +98,16 @@ public interface Model {
     void deletePet(Pet target);
 
     /**
+     * Sorts the list of pets in PawPatrol
+     */
+    void sortPets();
+
+    /**
+     * Sorts the list of owners in PawPatrol
+     */
+    void sortOwners();
+
+    /**
      * Deletes the given link.
      * The link must exist in PawPatrol.
      */

@@ -218,6 +218,20 @@ public class PawPatrol implements ReadOnlyPawPatrol {
         pets.remove(key);
     }
 
+    /**
+     * Sorts the list of pets in PawPatrol
+     */
+    public void sortPets() {
+        pets.sort();
+    }
+
+    /**
+     * Sorts the list of owners in PawPatrol
+     */
+    public void sortOwners() {
+        owners.sort();
+    }
+
     // link-level operations
 
     /**
