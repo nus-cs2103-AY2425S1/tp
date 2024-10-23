@@ -40,6 +40,7 @@ JSON | JavaScript Object Notation(JSON) is a lightweight data-interchange format
 Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.
 Prefix | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter.
 
+
 ### Text Formatting Conventions
 We will be using different text formatting styles to help you better understand the content of the user guide.
 
@@ -47,7 +48,7 @@ Format | Description
 ------ | -----------
 [hyperlink](#how-to-use-this-user-guide) | Blue hyperlinks are used to bring you to external websites or another section of the User Guide for more information.
 **Bold** | Bold text is used to highlight important information or key points.
-`Monospace` | Text with a monospace font and a gray background is used to represent commands, parameters and code snippets.
+`Monospace` | Text with a monospace font and a gray background is used to represent commands, parameters, code snippets and other technical terms.
 
 ### Annotated Text-Box Conventions
 The following annotated text-boxes are used throught this guide to provide useful insights on MediBase3 and its features:
@@ -114,10 +115,10 @@ the constraints of each parameter when used in a command.
 |`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter. | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A` |
 |`DOB` | Date of birth (DOB) of the patient. | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future. | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32` |
 |`GENDER` | Gender of the patient. | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). | :white_check_mark:`m`<br>:white_check_mark:`F`<br>:x:`Male` |
-|`EMAIL` | Email address of the patient. | - Should be in the format `local-part@domain`. <br> - Should not be blank. | :white_check_mark:`techraj@gmail.com`<br>:x:`techraj@gmail` |
+|`EMAIL` | Email address of the patient. | - Should be in the format `local-part@domain`. <br> - Should not be blank. | :white_check_mark:`raj@gmail.com`<br>:x:`raj@gmail` |
 |`ADDRESS` | Address of the patient. | - Any value is allowed. <br> - Should not be blank. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
 |`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
-
+|`ALLERGY` | Allergy of the patient. | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank. | :white_check_mark:`Peanuts`<br>:x:`Pe@nuts` |
 [Back to Table of Contents](#table-of-contents)
 
 {: .alert .alert-info}
@@ -160,7 +161,7 @@ Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 > * All fields are compulsory and must be non-empty.
 > * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case.
 > * The new patient will be added to the end of the Patient List Panel.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints of each parameter.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Examples:
 * `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
@@ -185,9 +186,9 @@ Format: `delete NRIC`
 > :information_source: **Note:**
 > 
 > * Deletes the patient with the specified `NRIC` in MediBase3.
-> * The `NRIC` provided must be the **full NRIC** of the patient to be deleted. E.g. `S1234567A` and not `S123`.
+> * The `NRIC` provided must be the **full NRIC** of the patient to be deleted. e.g. `S1234567A` and not `S123`.
 > * You can delete a patient even if they are not being currently displayed in the Patient List Panel.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
+> * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
 
 Example:
 * `delete S1234567A` will delete the patient with the NRIC `S1234567A`.
@@ -211,10 +212,10 @@ Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAI
 > :information_source: **Note:**
 > 
 > * Edits the patient with the specified `NRIC` in MediBase3.
-> * **At least one** of the optional fields must be provided. E.g. `edit S1234567A` is invalid.
+> * **At least one** of the optional fields must be provided. e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
 > * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for each parameter.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 Example:
 *  `edit S1234567A p/91234567 e/johndoe@example.com` will edit the phone number and email address of the patient with the NRIC`S1234567A`
@@ -245,39 +246,71 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > :information_source: **Note:**
 >
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
+> * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
+> * `ALLERGY` is case-insensitive and will be stored as **upper case** in the patient's details.
+> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
+
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
 > 
-> * You can add multiple allergies to a patient by using multiple al/ALLERGY parameters.
+> * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 ### Managing Priority
 [To be filled up]
 ### Finding Patients
 
-#### Listing all persons : `list`
+{: .alert .alert-info}
+> :information_source: **Note:**
+> 
+> * The following commands in this section will alter the view of the Patient List Panel to display only patients that match the given criteria.
+> * They will not alter the view of the Appointment List Panel.
 
-Shows a list of all persons in the address book.
+#### Listing all patients : `list`
+
+Shows a list of all patients in MediBase3.
 
 Format: `list`
 
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> If you have used any other commands under the [Finding Patients](#finding-patients) section to alter the view of the Patient List Panel, 
+> you can use this command to reset to the default view to view all patients!
+
 [Back to Table of Contents](#table-of-contents)
 
-#### Locating persons by name: `find`
+#### Listing all patients by their priority: `list`
 
-Finds persons whose names contain any of the given keywords.
+Shows a list of all patients with a specific `PRIORITY` in MediBase3.
+
+Format: `listPrio !/PRIORITY`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+> 
+> * An empty Patient List Panel will be displayed if no patients with the given `PRIORITY` are found.
+> * `PRIORITY` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section. 
+
+Example: 
+* `listPrio !/High` will display all patients with the priority `HIGH`.
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Locating patients by name: `find`
+
+Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 {: .alert .alert-info} 
-> **:information_source: **Note:**
+> :information_source: **Note:**
 > 
-> * The search is case-insensitive. e.g `hans` will match `Hans`
+> * The search is case-insensitive. e.g. `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
+> * Only **full words** will be matched e.g. `Han` will not match `Hans`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
@@ -292,7 +325,7 @@ Examples:
 
 #### Locating patients by medical condition: `findMedCon`
 
-Finds patients whose medical condition contain the given keywords.
+Finds patients whose medical condition(s) contain the given keywords.
 
 Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 
@@ -302,10 +335,10 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 > * The search is case-insensitive. e.g `diabetes` will match `Diabetes`
 > * The order of the keywords does not matter. e.g. `diabetes arthritis` will match `arthritis` and `diabetes` 
 > * Only the medical condition is searched.
-> * Only full medical condition will be matched e.g. `diabetes` will not match `diabete`
+> * Only **full words** will be matched e.g. `diabetes` will not match `diabete`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
 >    e.g. `diabetes` will return `Alex Yeoh`, `David Li`
-> * Returns an empty patient list panel if no matching patients with the given keywords are found.
+> * Returns an empty Patient List Panel if no matching patients with the given keywords are found.
 
 Example:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
@@ -314,17 +347,18 @@ Example:
 
 #### Locating patient by NRIC: `findNric`
 
-Finds patients whose names contain the given NRIC.
+Finds patients based on their NRIC.
 
 Format: `find NRIC`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
-> * The search is case-insensitive. e.g. `S1234567a` will match `S1234567A`
-> * Only the NRIC is searched.
-> * Only full NRIC will be matched e.g. `S1234567a` will not match `S12345`
-> * Returns an empty patient list panel if no matching patients with the given `NRIC` are found.
-> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
+> 
+> * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
+> * Only the `NRIC` is searched.
+> * Only **full NRIC** will be matched e.g. `S1234567a` will not match `S12345`
+> * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
+> * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
 
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
@@ -347,11 +381,16 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
+{: .alert .alert-success}
+> :bulb: **Tip:**
+> 
+> You can also access this message by clicking on the `Help` button or by pressing `F1` on your keyboard.
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the MediBase3. 
+Clears all entries from the MediBase3 database. 
 
 Format: `clear`
 
@@ -420,17 +459,19 @@ MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/
 ## Command summary
 
 
-| Action     | Format                                                                | Examples                                                                                                       |
-|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| Action     | Format                                                                | Examples                                                                                            |
+|------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **Clear**  | `clear`                                                               | -                                                                                                              |
-| **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                             |
-| **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
-| **FindNric**| `findNric NRIC`| `findNric S1234567A`                                                                                           |                                                                                                                                              |
-| **FindMedCon**| `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`                                                                                |                                                                                                           |
-| **List**   | `list`                                                                | -                                                                                                              |
-| **Help**   | `help`                                                                | -                                                                                                              |
+| **AddAllergy** | `addAllergy i/NRIC al/ALLERGY…` | `addAllergy i/S1234567A al/Dust al/Pollen` |
+| **Clear**  | `clear`                                                               | -                                                                                                   |
+| **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                  |
+| **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                   |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                   |
+| **FindNric**| `findNric NRIC`| `findNric S1234567A`                                                                                |                                                                                                                                              |
+| **FindMedCon**| `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`                                                                     |                                                                                                           |
+| **List**   | `list`                                                                | -                                                                                                   |
+| **ListPrio**| `listPrio !/PRIORITY` | `listPrio !/High`                                                                                   |
+| **Help**   | `help`                                                                | -                                                                                                   |
 
 
 
