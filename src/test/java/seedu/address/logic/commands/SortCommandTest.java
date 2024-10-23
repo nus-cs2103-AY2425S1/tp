@@ -25,7 +25,8 @@ public class SortCommandTest {
     @Test
     public void execute_nameAscendingOrder_success() {
         SortCommand sortCommand = new SortCommand(PersonComparator.NAME, true);
-        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
+                PersonComparator.NAME, "ascending");
         Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
                 .NAME, true), new UserPrefs());
 
@@ -35,7 +36,8 @@ public class SortCommandTest {
     @Test
     public void execute_nameDescendingOrder_success() {
         SortCommand sortCommand = new SortCommand(PersonComparator.NAME, false);
-        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
+                PersonComparator.NAME, "descending");
         Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
                 .NAME, false), new UserPrefs());
 
@@ -45,7 +47,8 @@ public class SortCommandTest {
     @Test
     public void execute_dateOfLastVisitAscending_success() {
         SortCommand sortCommand = new SortCommand(PersonComparator.DATE_OF_LAST_VISIT, true);
-        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
+                PersonComparator.DATE_OF_LAST_VISIT, "ascending");
         Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
                 .DATE_OF_LAST_VISIT, true), new UserPrefs());
 
@@ -55,7 +58,8 @@ public class SortCommandTest {
     @Test
     public void execute_dateOfLastVisitDescending_success() {
         SortCommand sortCommand = new SortCommand(PersonComparator.DATE_OF_LAST_VISIT, false);
-        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS,
+                PersonComparator.DATE_OF_LAST_VISIT, "descending");
         Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
                 .DATE_OF_LAST_VISIT, false), new UserPrefs());
 

@@ -30,7 +30,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATEOFLASTVISIT,
                         PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (argMultimap.anyIsPresent(INVALID_PREFIXES)) {
+        if (argMultimap.anyIsPresent(INVALID_PREFIXES) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 

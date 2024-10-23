@@ -12,14 +12,15 @@ import seedu.address.model.person.PersonComparator;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_SUCCESS = "Sorted.";
+    public static final String MESSAGE_SUCCESS = "Sorted contacts by %s in %s order.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the presented list "
             + "in descending or ascending order according to "
             + "name or date of last visit.\n"
-            + "Parameters: Parameter prefix/Order\n"
+            + "Parameters: Field prefix/Order "
             + "Example: " + COMMAND_WORD + " n/ascending\n"
-            + "If order is not specified (ex. n/) ascending order assumed.";
+            + "If order is not specified (ex. n/) ascending order assumed. "
+            + "Shortcuts for order (desc, asc) are valid inputs. ex: sort n/desc.";
 
     private final String sortParameter;
 
@@ -43,7 +44,8 @@ public class SortCommand extends Command {
                 || sortParameter.equals(PersonComparator.DATE_OF_LAST_VISIT));
         requireNonNull(model);
         model.sortPersonList(sortParameter, isAscendingOrder);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                sortParameter, isAscendingOrder ? "ascending" : "descending"));
     }
 
     @Override
