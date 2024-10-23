@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
 import seedu.address.model.predicate.StudentAttendedTutorialPredicate;
 import seedu.address.model.predicate.StudentHasPaidPredicate;
 import seedu.address.model.predicate.SubjectMatchesKeywordsPredicate;

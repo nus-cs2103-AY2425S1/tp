@@ -130,6 +130,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteParticipation(Participation target) {
+        addressBook.removeParticipation(target);
+    }
+
+    //// tutorial-level operations
+
+    @Override
     public boolean hasTutorial(Tutorial tutorial) {
         requireNonNull(tutorial);
         return addressBook.hasTutorial(tutorial);
@@ -149,10 +156,6 @@ public class ModelManager implements Model {
     public void createTutorial(Tutorial tutorial) {
         addressBook.addTutorial(tutorial);
         updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
-    }
-
-    public void deleteParticipation(Participation target) {
-        addressBook.removeParticipation(target);
     }
 
     //// tutorial-level operations
