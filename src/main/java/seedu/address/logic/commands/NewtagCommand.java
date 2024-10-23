@@ -16,8 +16,8 @@ public class NewtagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new tag (case insensitive).\n"
             + "Parameters: TAG_NAME (MAX 50 alphanumeric characters, spaces, parenthesis and apostrophes)\n"
             + "Example: " + COMMAND_WORD + " t/Bride's Friend";
-    public static final String MESSAGE_SUCCESS = "New tag added: ";
-    public static final String MESSAGE_DUPLICATE = "This tag already exists.\n";
+    public static final String MESSAGE_SUCCESS = "New tag(s) added: ";
+    public static final String MESSAGE_DUPLICATE = "Some tag(s) provided have been added before.\n";
     private final List<Tag> tags;
 
     /**

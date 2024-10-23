@@ -64,4 +64,32 @@ public class NewtagCommandParserTest {
         expectedTags.add(expectedTag);
         assertParseSuccess(parser, " t/FRIEND", new NewtagCommand(expectedTags));
     }
+
+    @Test
+    public void parse_multipleValidArgs_returnsNewtagCommand() {
+        Tag tagBridesFriend = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        Tag tagColleagues = TypicalTags.COLLEAGUES;
+        List<Tag> expectedTags = new ArrayList<>();
+        expectedTags.add(tagBridesFriend);
+        expectedTags.add(tagColleagues);
+        assertParseSuccess(parser, " t/bride's friend t/colleagues", new NewtagCommand(expectedTags));
+    }
+
+    @Test
+    public void parse_multipleValidArgsWithoutSpace_throwsParseException() {
+        assertParseFailure(parser, " t/bride's sidet/groom's side",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleArgsOneInvalid_throwsParseException() {
+        assertParseFailure(parser, " t/bride's side t/^@%",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleArgsOneExceedsMaxLength_throwsParseException() {
+        assertParseFailure(parser, " t/bride's side t/" + "a".repeat(51),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
+    }
 }
