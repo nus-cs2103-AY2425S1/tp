@@ -1,4 +1,7 @@
-package seedu.address.storage;
+package seedu.address.storage.attendance;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,8 +10,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 
-import java.time.LocalDate;
-
 /**
  * Jackson-friendly version of {@link AttendanceRecord}.
  */
@@ -16,8 +17,8 @@ public class JsonAdaptedAttendanceRecord {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "AttendanceRecord's %s field is missing!";
 
-    private final String date;
-    private final JsonAdaptedAttendance attendance;
+    public final String date;
+    public final JsonAdaptedAttendance attendance;
 
     /**
      * Constructs a {@code JsonAdaptedAttendanceRecord} with the given attendance record details.
@@ -46,10 +47,19 @@ public class JsonAdaptedAttendanceRecord {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date"));
         }
+        try {
+            LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException("Invalid date format!");
+        }
+        final LocalDate modelDate = LocalDate.parse(date);
+
         if (attendance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "attendance"));
         }
-        final LocalDate modelDate = LocalDate.parse(date);
+        if (!Attendance.isValidAttendance(attendance.status)) {
+            throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
+        }
         final Attendance modelAttendance = attendance.toModelType();
         return new AttendanceRecord(modelDate, modelAttendance);
     }

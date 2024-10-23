@@ -33,6 +33,18 @@ public class AttendanceRecord {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof AttendanceRecord)) {
+            return false;
+        }
+        AttendanceRecord otherRecord = (AttendanceRecord) other;
+        return date.equals(otherRecord.date) && attendance.equals(otherRecord.attendance);
+    }
+
+    @Override
     public int hashCode() {
         return date.hashCode() + attendance.hashCode();
     }

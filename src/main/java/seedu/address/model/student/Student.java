@@ -178,4 +178,8 @@ public class Student extends Person {
         return null;
     }
 
+    public void addAttendanceRecord(AttendanceRecord ar) {
+        attendanceRecords.add(ar);
+    }
+
 }

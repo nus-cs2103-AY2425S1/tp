@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.attendance;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +13,7 @@ public class JsonAdaptedAttendance {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Attendance's %s field is missing!";
 
-    private final String status;
+    public final String status;
 
     /**
      * Constructs a {@code JsonAdaptedAttendance} with the given attendance status.
@@ -39,6 +39,7 @@ public class JsonAdaptedAttendance {
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "status"));
         }
+
         if (!Attendance.isValidAttendance(status)) {
             throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
         }
