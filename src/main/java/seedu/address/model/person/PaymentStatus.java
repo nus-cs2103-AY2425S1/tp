@@ -5,18 +5,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's payment status in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPaymentStatus(String)} (String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPaymentStatus(String)}
  */
 public class PaymentStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Payment Status should be 'pending', 'partial', 'paid', 'late' (case insensitive)";
-
+    public static final String NO_PAYMENT_STATUS = "__No_Payment_Status__";
     private static final String LATE = "late";
     private static final String PAID = "paid";
     private static final String PARTIAL = "partial";
     private static final String PENDING = "pending";
-
     public final String value;
 
     /**
@@ -26,8 +25,12 @@ public class PaymentStatus {
      */
     public PaymentStatus(String status) {
         requireNonNull(status);
-        checkArgument(isValidPaymentStatus(status), MESSAGE_CONSTRAINTS);
-        value = parseStatus(status);
+        if (status.equals(NO_PAYMENT_STATUS)) {
+            value = parseStatus("");
+        } else {
+            checkArgument(isValidPaymentStatus(status), MESSAGE_CONSTRAINTS);
+            value = parseStatus(status);
+        }
     }
 
     /**

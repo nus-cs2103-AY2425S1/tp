@@ -17,6 +17,7 @@ public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the format dd-MM-yyyy, and it should be a valid date.";
+    public static final String NO_DEADLINE = "__No_Deadline__";
     public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
@@ -31,8 +32,12 @@ public class Deadline {
      */
     public Deadline(String deadline) {
         requireNonNull(deadline);
-        checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
-        this.value = LocalDate.parse(deadline, INPUT_FORMATTER);
+        if (deadline.equals(NO_DEADLINE)) {
+            this.value = LocalDate.MIN;
+        } else {
+            checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
+            this.value = LocalDate.parse(deadline, INPUT_FORMATTER);
+        }
     }
 
     /**
