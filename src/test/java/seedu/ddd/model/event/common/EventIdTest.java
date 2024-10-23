@@ -1,4 +1,4 @@
-package seedu.ddd.model.event;
+package seedu.ddd.model.event.common;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;

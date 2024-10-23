@@ -1,6 +1,6 @@
 package seedu.ddd.testutil;
 
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * A utility class for Event.
