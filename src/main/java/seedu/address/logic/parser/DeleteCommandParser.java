@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_TO_EDIT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteCommand.DeleteCommandDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -17,18 +20,31 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        String[] splitIndices = args.trim().split(" ");
-        String personIndexArg = splitIndices.length > 0 ? splitIndices[0] : "";
-        String emergencyContactIndexArg = splitIndices.length > 1 ? splitIndices[1]
-                : ParserUtil.NO_EMERGENCY_CONTACT_INDEX;
+        requireNonNull(args);
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_EMERGENCY_CONTACT_TO_EDIT);
+
+        Index personIndex;
+
         try {
-            Index personIndex = ParserUtil.parseIndex(personIndexArg);
-            Index emergencyContactIndex = ParserUtil.parseIndex(emergencyContactIndexArg);
-            return new DeleteCommand(personIndex, emergencyContactIndex);
+            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EMERGENCY_CONTACT_TO_EDIT);
+        DeleteCommandDescriptor deleteCommandDescriptor = new DeleteCommandDescriptor();
+
+        if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()) {
+            deleteCommandDescriptor.setEmergencyContactIndex(
+                    ParserUtil.parseIndex(
+                            argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT)
+                                    .orElse(ParserUtil.NO_EMERGENCY_CONTACT_INDEX)));
+        }
+
+        return new DeleteCommand(personIndex, deleteCommandDescriptor);
     }
 
 }

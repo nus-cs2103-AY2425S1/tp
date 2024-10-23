@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -29,15 +32,15 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS = "Deleted Emergency Contact: %1$s";
 
     private final Index targetIndex;
-    private final Index emergencyContactIndex;
+    private final DeleteCommandDescriptor deleteCommandDescriptor;
 
     /**
      * @param targetIndex of the person in the filtered person list to delete
      * @param emergencyContactIndex of the emergency contact in the person's emergency contact list to delete
      */
-    public DeleteCommand(Index targetIndex, Index emergencyContactIndex) {
+    public DeleteCommand(Index targetIndex, DeleteCommandDescriptor deleteCommandDescriptor) {
         this.targetIndex = targetIndex;
-        this.emergencyContactIndex = emergencyContactIndex;
+        this.deleteCommandDescriptor = deleteCommandDescriptor;
     }
 
     private CommandResult executeDeleteEmergencyContact(Index emergencyContactIndex,
@@ -63,8 +66,10 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        if (!(emergencyContactIndex instanceof Index.EmptyEmergencyContactIndex)) {
-            return executeDeleteEmergencyContact(emergencyContactIndex, personToDelete, model);
+
+        Optional<Index> emergencyContactIndex = deleteCommandDescriptor.getEmergencyContactIndex();
+        if (emergencyContactIndex.isPresent()) {
+            return executeDeleteEmergencyContact(emergencyContactIndex.get(), personToDelete, model);
         }
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
@@ -90,5 +95,49 @@ public class DeleteCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
+    }
+
+    public static class DeleteCommandDescriptor {
+        private Index emergencyContactIndex;
+
+        public DeleteCommandDescriptor() {
+        }
+
+        /**
+         * Copy constructor.
+         */
+        public DeleteCommandDescriptor(DeleteCommandDescriptor toCopy) {
+            setEmergencyContactIndex(toCopy.emergencyContactIndex);
+        }
+
+        public Optional<Index> getEmergencyContactIndex() {
+            return Optional.ofNullable(emergencyContactIndex);
+        }
+
+        public void setEmergencyContactIndex(Index emergencyContactIndex) {
+            this.emergencyContactIndex = emergencyContactIndex;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof DeleteCommandDescriptor)) {
+                return false;
+            }
+
+            DeleteCommandDescriptor otherDeletCommandDescriptor = (DeleteCommandDescriptor) other;
+            return Objects.equals(emergencyContactIndex, otherDeletCommandDescriptor.emergencyContactIndex);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("emergency contact index", emergencyContactIndex)
+                    .toString();
+        }
     }
 }
