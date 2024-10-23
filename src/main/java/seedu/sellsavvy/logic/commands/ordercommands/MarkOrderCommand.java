@@ -18,6 +18,8 @@ import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.Person;
 
+import java.util.List;
+
 /**
  * Marks an order as completed.
  */
@@ -48,23 +50,22 @@ public class MarkOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person selectedPerson = model.getSelectedPerson().get();
-        if (selectedPerson == null) {
+        List<Order> filteredOrderList = model.getFilteredOrderList();
+        if (filteredOrderList == null) {
             throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         }
 
-        OrderList orderList = selectedPerson.getOrderList();
-        if (index.getZeroBased() >= orderList.size()) {
+        if (index.getZeroBased() >= filteredOrderList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
 
-        Order orderToMark = orderList.get(index.getZeroBased());
+        Order orderToMark = filteredOrderList.get(index.getZeroBased());
         if (orderToMark.getStatus() == Status.COMPLETED) {
             throw new CommandException(MESSAGE_ORDER_ALREADY_MARKED);
         }
 
         Order newOrder = createMarkedOrder(orderToMark);
-        orderList.setOrder(orderToMark, newOrder);
+        model.setOrder(orderToMark, newOrder);
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
     }
 

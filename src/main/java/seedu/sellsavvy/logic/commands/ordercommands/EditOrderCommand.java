@@ -84,7 +84,7 @@ public class EditOrderCommand extends Command {
                 : "";
 
         model.setOrder(orderToEdit, editedOrder);
-        return new CommandResult(String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
+        return new CommandResult(feedbackToUser + String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
     }
 
     /**
