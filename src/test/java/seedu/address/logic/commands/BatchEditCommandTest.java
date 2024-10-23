@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -24,10 +25,8 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 class BatchEditCommandTest {
-
-
-    Tag friendsTag = new Tag("friends");
-    Tag frenTag = new Tag("fren");
+    private Tag friendsTag = new Tag("friends");
+    private Tag frenTag = new Tag("fren");
 
     @Test
     public void constructor_nullArguments_throwsNullPointerException() {
@@ -65,24 +64,24 @@ class BatchEditCommandTest {
                 Messages.format(DANIEL)
         );
 
-        Person NEWALICE = new PersonBuilder().withName("Alice Pauline")
+        Person changedAlice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("TEACHER")
                 .withTags("fren").build();
-        Person NEWBENSON = new PersonBuilder().withName("Benson Meier")
+        Person changedBenson = new PersonBuilder().withName("Benson Meier")
                 .withRole("Student")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withEmail("johnd@example.com").withPhone("98765432")
                 .withTags("owesMoney", "fren").build();
-        Person NEWDANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+        Person changedDaniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
                 .withRole("Parent")
                 .withEmail("cornelia@example.com").withAddress("10th street")
                 .withTags("fren").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(ALICE, NEWALICE);
-        expectedModel.setPerson(BENSON, NEWBENSON);
-        expectedModel.setPerson(DANIEL, NEWDANIEL);
+        expectedModel.setPerson(ALICE, changedAlice);
+        expectedModel.setPerson(BENSON, changedBenson);
+        expectedModel.setPerson(DANIEL, changedDaniel);
         expectedModel.updateFilteredPersonList(Predicate.not(Model.PREDICATE_SHOW_ALL_PERSONS));
 
         assertCommandSuccess(batchEditCommand, model, expectedMessage, expectedModel);
@@ -130,12 +129,15 @@ class BatchEditCommandTest {
 
     @Test
     public void equals() {
-
         PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Set.of(friendsTag));
         BatchEditCommand batchEditCommand = new BatchEditCommand(friendsTag, frenTag, predicate);
 
         PersonContainsTagsPredicate differentPredicate = new PersonContainsTagsPredicate(Set.of());
-        BatchEditCommand differentBatchEdit = new BatchEditCommand(new Tag("differentTag"), frenTag, differentPredicate);
+        BatchEditCommand differentBatchEdit = new BatchEditCommand(
+                new Tag("differentTag"),
+                frenTag,
+                differentPredicate
+        );
 
         // same object -> returns true
         assertTrue(batchEditCommand.equals(batchEditCommand));
