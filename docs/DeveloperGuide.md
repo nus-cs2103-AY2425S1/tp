@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
 # TutorEase Developer Guide
@@ -101,30 +101,31 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
-call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking 
+`execute("contact delete 1")` API call
+as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `contact delete 1` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `TutorEaseParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
-   is executed by the `LogicManager`.
+   a parser that matches the command (e.g., `DeleteContactCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteContactCommand`)
+   which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
@@ -137,16 +138,15 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `TutorEaseParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TutorEaseParser` returns back as
-  a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+  placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above
+  to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser`
+  returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the
+  `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -164,8 +164,8 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`,
-which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `TutorEase`,
+which `Person` references. This allows `TutorEase` to only require one `Tag` object per unique tag, instead of
 each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
@@ -174,8 +174,7 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -183,14 +182,14 @@ The `Storage` component,
 
 * can save both address book data and user preference data in JSON format, and read them back into corresponding
   objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+* inherits from both `TutorEaseStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `tutorease.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -220,14 +219,14 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+Step 2. The user executes `contact delete 5` command to delete the 5th person in the address book. The `contact delete`
+command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `contact delete 5`
+command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly
+inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
+Step 3. The user executes `contact add /nDavid …​` to add a new person. The `contact add` command also
 calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
 the `addressBookStateList`.
 
@@ -309,7 +308,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `contact delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -337,18 +336,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* freelance pre-university home tutors
-* has a need to manage a significant number of students, their contacts and relevant information
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Freelance pre-university home tutors
+* Manages a significant number of students
+* Prefers desktop applications
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**: Our software enhances tutoring efficiency by
 
-* simplifying management tasks,
-* reducing scheduling conflicts, and
-* providing a clear overview of classes and finances.
+* Simplifying management tasks
+* Reducing scheduling conflicts
+* Providing a clear overview of classes and finances
 
 It enables seamless tutor coordination with students and parents, improving communication and organization,
 ultimately leading to a more effective and stress-free educational experience.
@@ -584,14 +582,14 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
     1. Download the jar file and copy into an empty folder
-
+   
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
+   
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
@@ -601,18 +599,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-    1. Test case: `delete 1`<br>
+    1. Prerequisites: List all persons using the `contact list` command. Multiple persons in the list.
+   
+    1. Test case: `contact delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
-
-    1. Test case: `delete 0`<br>
+   
+    1. Test case: `contact delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   
+    1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the
+       list size)<br>
        Expected: Similar to previous.
-
+   
 1. _{ more test cases …​ }_
 
 ### Deleting a lesson
@@ -637,7 +636,7 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_

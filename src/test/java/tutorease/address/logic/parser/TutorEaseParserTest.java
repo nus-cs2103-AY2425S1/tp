@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorease.address.logic.commands.CommandTestUtil.DURATION_DESC;
-import static tutorease.address.logic.commands.CommandTestUtil.LOCATION_INDEX_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.FEE_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
 import static tutorease.address.testutil.Assert.assertThrows;
@@ -13,17 +13,17 @@ import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.commands.ClearCommand;
+import tutorease.address.logic.commands.ContactCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.logic.commands.ExitCommand;
-import tutorease.address.logic.commands.FindCommand;
+import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.HelpCommand;
 import tutorease.address.logic.commands.LessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
@@ -66,14 +66,6 @@ public class TutorEaseParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -96,8 +88,18 @@ public class TutorEaseParserTest {
                 + " "
                 + AddLessonCommand.COMMAND_WORD
                 + " " + STUDENT_ID_DESC
-                + " " + LOCATION_INDEX_DESC
+                + " " + FEE_DESC
                 + " " + START_DATE_TIME_DESC
                 + " " + DURATION_DESC) instanceof AddLessonCommand);
     }
+
+    @Test
+    public void parseCommand_find() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindContactCommand command = (FindContactCommand) parser.parseCommand(
+                ContactCommand.COMMAND_WORD + " " + FindContactCommand.COMMAND_WORD
+                        + " " + String.join(" ", keywords));
+        assertEquals(new FindContactCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
 }
