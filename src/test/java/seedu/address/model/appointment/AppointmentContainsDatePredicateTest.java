@@ -102,13 +102,17 @@ public class AppointmentContainsDatePredicateTest {
         predicate = new AppointmentContainsDatePredicate(null);
         assertFalse(predicate.test(new PersonBuilder().build()));
 
-        // Non-matching dates
+        // Date given is before the appointment
         predicate = new AppointmentContainsDatePredicate(LocalDate.parse("01-01-2023", DATE_FORMATTER));
         Person p = new PersonBuilder()
                 .withAppointment("Surgery",
                         LocalDateTime.parse("23-10-2024-12-00", DATE_TIME_FORMATTER),
                         LocalDateTime.parse("23-10-2024-14-00", DATE_TIME_FORMATTER))
                 .build();
+        assertFalse(predicate.test(p));
+
+        // Date given is after the appointment
+        predicate = new AppointmentContainsDatePredicate(LocalDate.parse("01-01-2025", DATE_FORMATTER));
         assertFalse(predicate.test(p));
     }
 
