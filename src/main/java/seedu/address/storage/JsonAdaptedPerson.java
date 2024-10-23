@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AttendanceCount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String attendanceCount;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,7 +41,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("role") String role,
                              @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("attendance") String attendanceCount) {
         this.name = name;
         this.role = role;
         this.phone = phone;
@@ -48,6 +50,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.attendanceCount = attendanceCount;
     }
 
     /**
@@ -62,6 +65,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        attendanceCount = source.getAttendanceCount().toString();
     }
 
     /**
@@ -115,8 +119,16 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (attendanceCount == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, AttendanceCount.class.getSimpleName()));
+        }
+        if (!AttendanceCount.isValidAttendanceCount(attendanceCount)) {
+            throw new IllegalValueException(AttendanceCount.MESSAGE_CONSTRAINTS);
+        }
+        final AttendanceCount modelAttendanceCount = new AttendanceCount(attendanceCount);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelRole, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelRole, modelPhone, modelEmail, modelAddress, modelTags, modelAttendanceCount);
     }
 
 }

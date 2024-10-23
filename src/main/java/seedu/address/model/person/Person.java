@@ -25,11 +25,26 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final AttendanceCount attendanceCount;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Role role, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Role role, Phone phone, Email email, Address address,
+                  Set<Tag> tags, AttendanceCount attendanceCount) {
+        requireAllNonNull(name, phone, email, address, tags, attendanceCount);
+        this.name = name;
+        this.role = role;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.attendanceCount = attendanceCount;
+    }
+
+
+    public Person(Name name, Role role, Phone phone, Email email, Address address,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.role = role;
@@ -37,7 +52,10 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.attendanceCount = new AttendanceCount("0");
     }
+
+
 
     public Name getName() {
         return name;
@@ -58,6 +76,10 @@ public class Person {
         return address;
     }
 
+    public AttendanceCount getAttendanceCount() {
+        return attendanceCount;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -65,6 +87,7 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
 
     /**
      * Returns true if both persons have the same phone number.
