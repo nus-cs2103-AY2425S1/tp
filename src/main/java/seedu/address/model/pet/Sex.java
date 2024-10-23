@@ -11,7 +11,7 @@ public class Sex {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Pet sex should be either 'M' or 'F' (case insensitive for Male and Female)";
-    public static final String VALIDATION_REGEX = "^[mMfF]$";
+    public static final String VALIDATION_REGEX = "^(M|m|F|f|Male|Female)$";
 
     public final String value;
 
@@ -35,13 +35,7 @@ public class Sex {
 
     @Override
     public String toString() {
-        if (value.equalsIgnoreCase("f")) {
-            return "Female";
-        } else if (value.equalsIgnoreCase("m")) {
-            return "Male";
-        } else {
-            return "Unknown";
-        }
+        return value;
     }
 
     @Override

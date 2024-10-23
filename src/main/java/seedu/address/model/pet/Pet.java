@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.link.Linkable;
@@ -19,7 +20,6 @@ public class Pet implements Linkable {
     private static final String ID_PREFIX = "p";
 
     // Identity fields
-    private static int uid_counter = 0;
     private final String uid;
     private final Name name;
     private final Species species;
@@ -35,17 +35,13 @@ public class Pet implements Linkable {
      */
     public Pet(Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> modelTags) {
         requireAllNonNull(name, species, breed, age, sex);
-        this.uid = name.name + uid_counter++;
+        this.uid = UUID.randomUUID().toString();
         this.name = name;
         this.species = species;
         this.breed = breed;
         this.age = age;
         this.sex = sex;
         this.tags.addAll(tags);
-    }
-
-    public String getUid() {
-        return uid;
     }
 
     public Name getName() {
@@ -86,7 +82,11 @@ public class Pet implements Linkable {
         }
 
         return otherPet != null
-                && otherPet.getName().equals(getName());
+                && otherPet.getName().equals(getName())
+                && otherPet.getSpecies().equals(getSpecies())
+                && otherPet.getBreed().equals(getBreed())
+                && otherPet.getAge().equals(getAge())
+                && otherPet.getSex().equals(getSex());
     }
 
     /**
@@ -120,14 +120,13 @@ public class Pet implements Linkable {
 
     @Override
     public String getUniqueID() {
-        //TODO update this to actually unique ID
-        return ID_PREFIX + name + " " + species + " " + breed + " " + sex;
+        return uid;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("uid", uid)
+                .add("uniqueId", uid)
                 .add("name", name)
                 .add("species", species)
                 .add("breed", breed)

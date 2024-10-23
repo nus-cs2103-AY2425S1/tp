@@ -49,6 +49,7 @@ public class ParserUtilTest {
     private static final String VALID_BREED = "German Shepard";
     private static final String VALID_AGE = "7";
     private static final String VALID_SEX = "M";
+    private static final String VALID_SEX_DISPLAY_FORMAT_MALE = "Male";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -268,14 +269,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseSex_validValueWithoutWhitespace_returnsSex() throws Exception {
-        Sex expectedSex = new Sex(VALID_SEX);
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_MALE);
         assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX));
     }
 
     @Test
     public void parseSex_validValueWithWhitespace_returnsTrimmedSex() throws Exception {
         String sexWithWhitespace = WHITESPACE + VALID_SEX + WHITESPACE;
-        Sex expectedSex = new Sex(VALID_SEX);
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_MALE);
         assertEquals(expectedSex, ParserUtil.parseSex(sexWithWhitespace));
     }
 

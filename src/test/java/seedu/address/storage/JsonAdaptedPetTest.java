@@ -23,7 +23,7 @@ public class JsonAdaptedPetTest {
     private static final String INVALID_BREED = " ";
     private static final String INVALID_SPECIES = " ";
     private static final String INVALID_AGE = "SIXTEEN";
-    private static final String INVALID_SEX = "Female";
+    private static final String INVALID_SEX = "female";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = MAX.getName().toString();

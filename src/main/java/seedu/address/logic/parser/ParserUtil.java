@@ -263,6 +263,11 @@ public class ParserUtil {
         if (!Sex.isValidSex(trimmedSex)) {
             throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
         }
+        if (trimmedSex.equalsIgnoreCase("m")) {
+            return new Sex("Male");
+        } else if (trimmedSex.equalsIgnoreCase("f")) {
+            return new Sex("Female");
+        }
         return new Sex(trimmedSex);
     }
 
