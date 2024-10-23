@@ -33,6 +33,8 @@ public class Name {
 
     /**
      * Returns true if a given string is a valid name.
+     *
+     * @param test String to test.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -51,11 +53,10 @@ public class Name {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Name otherName)) {
             return false;
         }
 
-        Name otherName = (Name) other;
         return fullName.equals(otherName.fullName);
     }
 
