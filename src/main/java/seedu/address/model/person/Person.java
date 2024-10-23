@@ -67,6 +67,21 @@ public class Person {
     public List<Participation> getParticipation() {
         return participationList;
     }
+    public String getFullName() {
+        return name.fullName;
+    }
+
+    public String getPhoneValue() {
+        return phone.value;
+    }
+
+    public String getEmailValue() {
+        return email.value;
+    }
+
+    public String getAddressValue() {
+        return address.value;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -74,6 +89,33 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Checks if the person already contains a participation
+     * @param participation the participation object to check
+     * @return true if it already contains the participation. false otherwise
+     */
+    public boolean hasParticipation(Participation participation) {
+        return participationList.stream()
+                .anyMatch(currentParticipation -> currentParticipation.equals(participation));
+
+    }
+
+    /**
+     * Adds a participation object to the participation list
+     * @param participation object to be added
+     */
+    public void addParticipation(Participation participation) {
+        participationList.add(participation);
+    }
+
+    /**
+     * Removes a participation object from the participation list
+     * @param participation object to be removed
+     */
+    public void removeParticipation(Participation participation) {
+        participationList.remove(participation);
     }
 
     /**

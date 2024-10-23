@@ -38,6 +38,33 @@ public class Tutorial {
     }
 
     /**
+     * Checks if the tutorial already contains a participation
+     * @param participation the participation object to check
+     * @return true if it already contains the participation. false otherwise
+     */
+    public boolean hasParticipation(Participation participation) {
+        return participationList.stream()
+                .anyMatch(currentParticipation -> currentParticipation.equals(participation));
+
+    }
+
+    /**
+     * Adds a participation object to the participation list in tutorial
+     * @param participation object to be added
+     */
+    public void addParticipation(Participation participation) {
+        participationList.add(participation);
+    }
+
+    /**
+     * Removes a participation object from the participation list
+     * @param participation object to be removed
+     */
+    public void removeParticipation(Participation participation) {
+        participationList.remove(participation);
+    }
+
+    /**
      * Returns true if both tutorials are of the same subject.
      * This defines a weaker notion of equality between two tutorials.
      */

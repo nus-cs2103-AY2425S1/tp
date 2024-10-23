@@ -1,6 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_INPUT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_RANGE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NUMBER_OF_INPUTS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_WITH_SPACES;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
@@ -141,6 +147,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String attendance} into an {@code Attendance}.
+     * Leading and trailing whitespaces will be trimmed
+     */
+    public static Tutorial parseTutorial(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Tutorial.isValidTutorial(trimmedSubject)) {
+            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
+        }
+        return new Tutorial(trimmedSubject);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -165,15 +184,6 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    public static Tutorial parseTutorial(String subject) throws ParseException {
-        requireNonNull(subject);
-        String trimmedSubject = subject.trim();
-        if (!Tutorial.isValidTutorial(trimmedSubject)) {
-            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
-        }
-        return new Tutorial(trimmedSubject);
     }
 
     /**

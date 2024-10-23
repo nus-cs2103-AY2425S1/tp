@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterPaidCommand;
-import seedu.address.model.person.StudentHasPaidPredicate;
+import seedu.address.model.predicate.StudentHasPaidPredicate;
 
 
 public class FilterPaidCommandParserTest {
