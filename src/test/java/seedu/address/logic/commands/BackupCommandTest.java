@@ -182,7 +182,7 @@ public class BackupCommandTest {
         }
 
         @Override
-        public void sortFilteredPersonList(String order) {
+        public void sortFilteredPersonList(String order, Boolean isSortBySchedule) {
             throw new AssertionError("This method should not be called.");
         }
 

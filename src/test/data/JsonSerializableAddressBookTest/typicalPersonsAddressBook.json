@@ -27,7 +27,7 @@
     "address" : "wall street",
     "tags" : [ ],
     "scheduleName" : "appointment",
-    "date" : "2024-10-21",
+    "date" : "2024-10-22",
     "time" : "16:00",
     "socialmedia" : "[fb-carl]"
   }, {
@@ -38,8 +38,10 @@
     "tags" : [ "friends" ],
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
-    "time" : "00:00",
+    "time" : "10:00",
+    "tags" : [ "friends" ],
     "socialmedia" : "[cs-danielm]"
+
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -68,7 +70,8 @@
     "tags" : [ ],
     "scheduleName" : "",
     "date" : "",
-    "time" : "",
+    "time" : "16:00",
+    "tags" : [ ],
     "socialmedia" : " "
   } ]
 }

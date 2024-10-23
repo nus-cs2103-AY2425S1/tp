@@ -50,6 +50,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* 
+* Items together in curly square brackets means one and only one of them must be given as input.<br>
+  e.g `{n/NAME t/TAG}` can be used as `n/John Doe` or as `t/friends`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -183,16 +186,18 @@ Examples:
 
 Filters the list of contacts and displays those with the provided tag.
 
-Format: `filter [t/TAG]`
+Format: `filter [t/TAG]...`
 
 * The filter is case-sensitive.
-* Only exact matches of tags will be considered.
+* Filters for users whose tags contains all the input tags.
 * The tag provided must only contain alphanumeric characters
 * If the provided tag does not match any contact, an empty list will be shown.
 
 Examples:
-* `filter t/friends` will filter for contacts with the tag `friends`<br>
+* `filter t/friends` will filter for contacts that has tag `friends`<br>
   ![result for 'filter_friends'](images/filterFriendsResult.png)
+* * `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`<br>
+    ![result for 'filter_friends'](images/filterMultipleTags.png)
 * `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
   ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
 
@@ -226,18 +231,24 @@ Examples:
 
 ### Sort persons by name: `sort`
 
-Sorts and displays the list of persons by name in either ascending or descending alphabetical order
+Sorts and displays the list of persons by schedule or name alphabetically in either ascending or descending order
 
-Format: `sort [ORDER]`
+Format: `sort {n/[ORDER], sch/[ORDER]}`
 
-* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive)
-* If no order is provided, persons will be sorted in ascending order by default
+* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive).
+* If no order is provided, persons will be sorted in ascending order by default.
+* Contact list will be sorted alphabetically by name with `n/` and by schedule with `sch/`.
 
 Examples:
-* `sort` will sort by persons names alphabetically in ascending order
-* `sort ascending` will sort by persons names alphabetically in ascending order
+* `sort n/` will sort by persons names alphabetically in ascending order
+* `sort sch/` will sort by schedule in ascending order
+* `sort n/ascending` will sort by persons names alphabetically in ascending order
   ![result for 'sort and sort ascending'](images/sortResult.png)
-* `sort descending` will sort by persons names alphabetically in descending order
+* `sort n/descending` will sort by persons names alphabetically in descending order
+  ![result for 'sort descending'](images/sortDescendingResult.png)
+* `sort sch/ascending` will sort by schedule in ascending order
+  ![result for 'sort and sort ascending'](images/sortResult.png)
+* `sort sch/descending` will sort by schedule in descending order
   ![result for 'sort descending'](images/sortDescendingResult.png)
 
 ### Clearing all entries : `clear`
