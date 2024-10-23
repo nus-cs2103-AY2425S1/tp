@@ -2,9 +2,15 @@ package seedu.address.logic.commands;
 
 import java.time.LocalDate;
 
+import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.AppointmentContainsDatePredicate;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW;
 
 /**
  * Displays all appointments for the specified date from the address book.
@@ -18,18 +24,21 @@ public class ScheduleDateCommand extends Command {
             + "Parameters: DATE (in dd-MM-yyyy format)\n"
             + "Example: " + COMMAND_WORD + " 12-10-2024";
 
-    public static final String MESSAGE_SUCCESS = "Displayed schedule for: %1$s";
+    private final AppointmentContainsDatePredicate predicate;
 
-    private final LocalDate date;
-
-    public ScheduleDateCommand(LocalDate date) {
-        this.date = date;
+    public ScheduleDateCommand(AppointmentContainsDatePredicate predicate) {
+        requireNonNull(predicate);
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // TODO: Implement logic to filter and display appointments for the given date
-        return new CommandResult(String.format(MESSAGE_SUCCESS, date));
+        requireNonNull(model);
+        model.updateFilteredAppointmentList(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW,
+                        model.getFilteredAppointmentList().size(),
+                        predicate.getPredicateDate()));
     }
 
     @Override
@@ -43,13 +52,13 @@ public class ScheduleDateCommand extends Command {
         }
 
         ScheduleDateCommand otherCommand = (ScheduleDateCommand) other;
-        return date.equals(otherCommand.date);
+        return predicate.equals(otherCommand.predicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("date", date)
+                .add("predicate", predicate)
                 .toString();
     }
 }

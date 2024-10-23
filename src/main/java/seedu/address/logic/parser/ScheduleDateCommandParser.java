@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.ScheduleDateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 
 /**
  * Parses input arguments and creates a new ScheduleDateCommand object.
@@ -20,6 +21,7 @@ public class ScheduleDateCommandParser implements Parser<ScheduleDateCommand> {
     public ScheduleDateCommand parse(String args) throws ParseException {
         // Try to parse the date, through ParserUtil
         LocalDate date = ParserUtil.parseLocalDate(args);
-        return new ScheduleDateCommand(date);
+        AppointmentContainsDatePredicate predicate = new AppointmentContainsDatePredicate(date);
+        return new ScheduleDateCommand(predicate);
     }
 }

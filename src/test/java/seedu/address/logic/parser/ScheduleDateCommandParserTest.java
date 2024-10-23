@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ScheduleDateCommand;
+import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 
 
 public class ScheduleDateCommandParserTest {
@@ -19,7 +20,8 @@ public class ScheduleDateCommandParserTest {
     public void parse_validArgs_returnsScheduleDateCommand() {
         // Test with valid date format
         LocalDate expectedDate = LocalDate.of(2024, 10, 12);
-        assertParseSuccess(parser, "12-10-2024", new ScheduleDateCommand(expectedDate));
+        AppointmentContainsDatePredicate predicate = new AppointmentContainsDatePredicate(expectedDate);
+        assertParseSuccess(parser, "12-10-2024", new ScheduleDateCommand(predicate));
     }
 
     @Test
