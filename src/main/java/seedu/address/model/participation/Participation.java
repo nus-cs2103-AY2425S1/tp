@@ -3,7 +3,6 @@ package seedu.address.model.participation;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Address.VALIDATION_REGEX;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.person.Attendance;
@@ -67,6 +66,9 @@ public class Participation {
         return String.format("Attends: %s", tutorial.toString());
     }
 
+    /**
+     * Adds itself to the student and tutorial participation lists
+     */
     public void addSelfToStudentTutorial() {
         student.addParticipation(this);
         tutorial.addParticipation(this);

@@ -5,8 +5,6 @@ import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
-import java.util.Arrays;
-
 /**
  * Unmodifiable view of an address book
  */
