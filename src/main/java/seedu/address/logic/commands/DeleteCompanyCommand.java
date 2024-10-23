@@ -14,7 +14,7 @@ import seedu.address.model.company.Company;
 public class DeleteCompanyCommand extends DeleteCommand<Company> {
 
     public static final String ENTITY_WORD = "company";
-    public static final String MESSAGE_DELETE_COMPANY_SUCCESS = "Company %1$s - %2$s - %3$s - %4$s"
+    public static final String MESSAGE_DELETE_COMPANY_SUCCESS = "Company %1$s - %2$s - %3$s - %4$s "
             + "has been successfully deleted.";
 
     public DeleteCompanyCommand(Index targetIndex) {
