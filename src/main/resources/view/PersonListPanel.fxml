@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="panel-container">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="panel-container" stylesheets="PersonListPanel.css">
   <Label fx:id="titleLabel" styleClass="label-header" />
   <Separator prefWidth="248.0" styleClass="separator"/>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS"/>
