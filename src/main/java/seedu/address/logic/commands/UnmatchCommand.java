@@ -23,7 +23,7 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Unmatch a contact from their job.
+ * Unmatches a contact from their job.
  */
 public class UnmatchCommand extends Command {
     public static final int CONTACT_INDEX_POS = 0;
@@ -34,14 +34,16 @@ public class UnmatchCommand extends Command {
                     + COMMAND_WORD + " 2 1";
 
     public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job: %2$s";
-    public static final String MESSAGE_ALREADY_UNMATCHED = "Contact already unmatched with this job!";
+    public static final String MESSAGE_ALREADY_UNMATCHED = "This contact is not matched with this job!";
+    public static final String MESSAGE_CONTACT_HAS_NO_JOBS = "The contact %1$s is not associated with the job: %2$s!.";
+    public static final String MESSAGE_JOB_HAS_NO_CONTACTS = "The job %1$s is not associated with the contact: %2$s!";
 
     private final Index contactIndex;
     private final Index jobIndex;
 
     /**
-     * @param contactIndex Index of the contact in the filtered person list to unmatch
-     * @param jobIndex Index of the job in the filtered contact list to unmatch
+     * @param contactIndex Index of the contact in the filtered person list to unmatch.
+     * @param jobIndex Index of the job in the filtered job list to unmatch.
      */
     public UnmatchCommand(Index contactIndex, Index jobIndex) {
         requireNonNull(contactIndex);
@@ -71,22 +73,11 @@ public class UnmatchCommand extends Command {
         assert contactToUnmatch != null;
         assert jobToUnmatch != null;
 
-        // TODO: Assume contact name is used to preserve uniqueness for now
-        final String contactIdentifier = contactToUnmatch.getIdentifier();
-        final String jobIdentifier = jobToUnmatch.getIdentifier();
+        validateMatching(contactToUnmatch, jobToUnmatch);
 
-        // Check if the contact is already unmatched from the job
-        boolean hasContactMatchedJob = contactToUnmatch.hasMatched(jobIdentifier);
-        boolean hasJobMatchedContact = jobToUnmatch.hasMatched(contactIdentifier);
-
-        if (!hasContactMatchedJob && !hasJobMatchedContact) {
-            throw new CommandException(MESSAGE_ALREADY_UNMATCHED);
-        }
-
-        assert hasContactMatchedJob == hasJobMatchedContact;
-        // Unmatch the contact from the job by removing the associations
+        // Proceed with unmatching the contact from the job
         Person unmatchedContact = unmatchContactFromJob(contactToUnmatch);
-        Job unmatchedJob = unmatchJobFromContact(jobToUnmatch, contactIdentifier);
+        Job unmatchedJob = unmatchJobFromContact(jobToUnmatch, contactToUnmatch.getIdentifier());
 
         // Update the model with the unmatched contact and job
         model.setPerson(contactToUnmatch, unmatchedContact);
@@ -112,17 +103,45 @@ public class UnmatchCommand extends Command {
     /**
      * Removes the contact from the job's match list.
      */
-    private static Job unmatchJobFromContact(Job job, String contactName) {
+    private static Job unmatchJobFromContact(Job job, String contactIdentifier) {
         Name name = job.getName();
         JobCompany company = job.getCompany();
         JobSalary salary = job.getSalary();
         JobDescription description = job.getDescription();
         Set<Tag> requirements = job.getRequirements();
         Set<String> matches = job.getMatches();
-        matches.remove(contactName);
+        matches.remove(contactIdentifier);
         return new Job(name, company, salary, description, requirements, matches);
     }
 
+    /**
+     * Validates that the contact and job are matched to each other and that both
+     * entities have relevant matches.
+     */
+    private void validateMatching(Person contactToUnmatch, Job jobToUnmatch) throws CommandException {
+        // Check if the contact has no jobs associated at all
+        if (contactToUnmatch.getMatch() == null || contactToUnmatch.getMatch().isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_CONTACT_HAS_NO_JOBS, contactToUnmatch.getName(),
+                    jobToUnmatch.getName()));
+        }
+
+        // Check if the job has no contacts associated at all
+        if (jobToUnmatch.getMatches().isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_JOB_HAS_NO_CONTACTS, jobToUnmatch.getName(),
+                    contactToUnmatch.getName()));
+        }
+
+        // Check if the contact and job are not matched to each other
+        boolean hasContactMatchedJob = contactToUnmatch.hasMatched(jobToUnmatch.getIdentifier());
+        boolean hasJobMatchedContact = jobToUnmatch.hasMatched(contactToUnmatch.getIdentifier());
+
+        if (!hasContactMatchedJob || !hasJobMatchedContact) {
+            throw new CommandException(MESSAGE_ALREADY_UNMATCHED);
+        }
+
+        // Assert to ensure that both entities are symmetrically matched
+        assert hasContactMatchedJob == hasJobMatchedContact;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
