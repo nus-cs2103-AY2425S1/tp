@@ -46,12 +46,17 @@ public class DateTest {
         assertFalse(Date.isValidDate("2024-04-31")); // invalid day for April
         assertFalse(Date.isValidDate("abc/def/ghij")); // non-numeric
         assertFalse(Date.isValidDate("2024-12")); // missing day
+        assertFalse(Date.isValidDate("12 Oct 2023"));
+        assertFalse(Date.isValidDate("12 October 2023"));
+        assertFalse(Date.isValidDate("2024-00-12"));
+        assertFalse(Date.isValidDate("2024-02-00"));
 
         // valid dates
         assertTrue(Date.isValidDate("2024-01-01")); // valid case
         assertTrue(Date.isValidDate("2024-02-29")); // leap year case
         assertTrue(Date.isValidDate("2024-12-15")); // valid case
         assertTrue(Date.isValidDate("2024-12-31")); // valid case
+        assertTrue(Date.isValidDate("0000-01-01")); // valid case
     }
 
     @Test
