@@ -25,7 +25,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private ReceiptLog goodsList; // TODO: Add ReadOnly Feature to Goods
+    private final FilteredList<GoodsReceipt> filteredReceipts;
+    private final ReceiptLog goodsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.goodsList = new ReceiptLog(goodsList);
+        filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
     }
 
     public ModelManager() {
@@ -182,7 +184,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<GoodsReceipt> getFilteredReceiptsList() {
+        return filteredReceipts;
+    }
+
+    @Override
     public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
+        filteredReceipts.setPredicate(predicate);
         return this.goodsList.findReceipts(predicate);
     }
 }

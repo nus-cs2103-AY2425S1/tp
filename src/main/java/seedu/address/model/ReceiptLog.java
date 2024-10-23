@@ -16,10 +16,7 @@ import seedu.address.model.goodsreceipt.UniqueGoodsReceiptList;
  */
 public class ReceiptLog implements ReadOnlyReceiptLog {
 
-    private final UniqueGoodsReceiptList receipts;
-    {
-        receipts = new UniqueGoodsReceiptList();
-    }
+    private final UniqueGoodsReceiptList receipts = new UniqueGoodsReceiptList();
 
     public ReceiptLog() {}
 

@@ -159,6 +159,8 @@ public class GoodsReceipt {
 
         return this.goods.equals(otherReceipt.goods)
                 &&
+                this.supplierName.equals(otherReceipt.supplierName)
+                &&
                 this.arrivalDate.equals(otherReceipt.arrivalDate)
                 &&
                 this.procurementDate.equals(otherReceipt.procurementDate)
