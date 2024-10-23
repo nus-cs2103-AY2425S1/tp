@@ -32,6 +32,11 @@ public class FindTimeCommandParser implements Parser<FindTimeCommand> {
         List<String> validRanges = Arrays.stream(timeKeywords)
                 .filter(PreferredTime::isValidPreferredTime).toList();
 
+        if (validRanges.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTimeCommand.MESSAGE_USAGE));
+        }
+
         // return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(timeKeywords)));
         return new FindTimeCommand(new PreferredTimeOverlapsRangesPredicate(validRanges));
     }

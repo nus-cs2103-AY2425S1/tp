@@ -1,23 +1,24 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindTimeCommand;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.preferredtime.PreferredTimeOverlapsRangesPredicate;
-
-import java.util.Arrays;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.FindTimeCommand;
+import seedu.address.model.preferredtime.PreferredTimeOverlapsRangesPredicate;
+
 
 public class FindTimeCommandParserTest {
     private FindTimeCommandParser parser = new FindTimeCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTimeCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTimeCommand.MESSAGE_USAGE));
     }
 
     @Test
