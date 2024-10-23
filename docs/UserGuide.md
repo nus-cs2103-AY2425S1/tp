@@ -79,11 +79,12 @@ Format: `help`
 
 Adds a student to Tuteez.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [l/LESSON]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [l/LESSON]…​`
 
 - The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the format `HHMM-HHMM`, separated by a space.
     - Example: `l/monday 0900-1100` or `l/Wednesday 1400-1600`
 
+<box type="tip" seamless>
 
 **Tip:** A student can have any number of tags and lessons (including 0)
 </box>
@@ -129,7 +130,12 @@ Format:
 * Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
 * When deleting, if the `REMARK_INDEX` is not valid, an error will be shown.
 * You can add any text as a remark, and remarks are displayed in the order they were added.
-  
+
+<box type="tip" seamless>
+
+**Tip:** You can also use the abbreviated command `rmk` as a shortcut for `remark`.
+</box>
+
 Examples:
 * `remark 1 -a Great progress in Math` Adds the remark "Great progress in Math" to the first student.
 * `remark 2 -a Needs improvement in English` Adds the remark "Needs improvement in English" to the second student.
@@ -164,6 +170,11 @@ Format: `delete INDEX` or `delete NAME`
     - When using the `NAME` option, the full name of the student must be provided.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**Tip:** You can also use the abbreviated command `del` as a shortcut for `delete`.
+</box>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
