@@ -151,17 +151,18 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from EduConnect.
+Deletes the specified person or persons from EduConnect.
 
-Format: `delete INDEX`
+Format: `delete INDEX…​`
 
-* Deletes the person at the specified `INDEX`.
+* You can delete one or more people by specifying their `INDEX`(es) in the list.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in EduConnect.
 * `find /name Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete 1 2 3` deletes the 1st, 2nd and 3rd persons in the list in one command.
 
 ### Clearing entries : `clear`
 
@@ -219,7 +220,7 @@ Furthermore, certain edits can cause the EduConnect to behave in unexpected ways
 | **Add Student** | `student n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `student /name John Doe /gender male /contact 98765432 /email johnd@gmail.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A`                                                                                             |
 | **Add Teacher** | `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL /address ADDRESS /subject SUBJECT /classes CLASSES` <br/> e.g., `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C` |
 | **Clear**       | `clear`                                                                                                                                                                                                                                                                                                             |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                                 |
+| **Delete**      | `delete INDEX...`<br> e.g., `delete 3`, `delete 1, 2, 4`                                                                                                                                                                                                                                                            |
 | **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                                 |
 | **Find**        | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES]`<br> e.g., `find /name James /classes 8B`                                                                                                                                              |
 | **List**        | `list`                                                                                                                                                                                                                                                                                                              |
