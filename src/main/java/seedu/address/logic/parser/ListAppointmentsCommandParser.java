@@ -34,9 +34,14 @@ public class ListAppointmentsCommandParser implements Parser<ListAppointmentsCom
             try {
                 dateFilter = Optional.of(LocalDate.parse(dateTimeParts[0]));
                 if (dateTimeParts.length > 1) {
-                    timeFilter = Optional.of(LocalTime.parse(dateTimeParts[1]));
+                    String timeString = dateTimeParts[1];
+                    // Parse time in HHmm format
+                    timeFilter = Optional.of(LocalTime.of(
+                            Integer.parseInt(timeString.substring(0, 2)),
+                            Integer.parseInt(timeString.substring(2))
+                    ));
                 }
-            } catch (DateTimeParseException e) {
+            } catch (DateTimeParseException | NumberFormatException | StringIndexOutOfBoundsException e) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAppointmentsCommand.MESSAGE_USAGE));
             }

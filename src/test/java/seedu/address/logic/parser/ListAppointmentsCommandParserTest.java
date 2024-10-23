@@ -35,7 +35,7 @@ public class ListAppointmentsCommandParserTest {
         ListAppointmentsCommand expectedCommand = new ListAppointmentsCommand(
                 Optional.of(LocalDate.of(2024, 10, 15)),
                 Optional.of(LocalTime.of(14, 30)));
-        assertParseSuccess(parser, " d/2024-10-15 14:30", expectedCommand);
+        assertParseSuccess(parser, " d/2024-10-15 1430", expectedCommand);
     }
 
     @Test

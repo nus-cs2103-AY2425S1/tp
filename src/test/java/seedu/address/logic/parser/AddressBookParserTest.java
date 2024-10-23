@@ -125,7 +125,7 @@ public class AddressBookParserTest {
 
         // Test with date and time parameters
         ListAppointmentsCommand dateTimeCommand = (ListAppointmentsCommand) parser.parseCommand(
-                ListAppointmentsCommand.COMMAND_WORD + " d/2024-10-15 14:30");
+                ListAppointmentsCommand.COMMAND_WORD + " d/2024-10-15 1430");
         assertEquals(new ListAppointmentsCommand(
                         Optional.of(LocalDate.of(2024, 10, 15)),
                         Optional.of(LocalTime.of(14, 30))),

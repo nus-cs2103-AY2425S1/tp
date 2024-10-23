@@ -28,8 +28,8 @@ public class ListAppointmentsCommand extends Command {
             + ": Lists all upcoming appointments in the address book.\n"
             + "Parameters: [" + PREFIX_DATE + "] [TIME]\n"
             + "DATE: Optional date filter in the format YYYY-MM-DD\n"
-            + "TIME: Optional time filter in the format HH:mm\n"
-            + "Example: " + COMMAND_WORD + PREFIX_DATE + "2024-10-15 14:30";
+            + "TIME: Optional time filter in the format HHmm\n"
+            + "Example: " + COMMAND_WORD + PREFIX_DATE + "2024-10-15 1430";
 
     public static final String MESSAGE_SUCCESS = "Listed %d upcoming appointments";
 
