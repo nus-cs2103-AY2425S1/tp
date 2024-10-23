@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::getEarlierCommand, this::getLaterCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -238,5 +238,19 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Returns the previous command.
+     */
+    private String getEarlierCommand() {
+        return "testearlier";
+    }
+
+    /**
+     * Returns the next command.
+     */
+    private String getLaterCommand() {
+        return "testlater";
     }
 }
