@@ -129,7 +129,6 @@ public class ModelManagerTest {
         // different person -> returns false
         assertNotEquals(BENSON, modelManager.getPersonToDisplay());
     }
-    
     @Test
     public void addModule_invalidPerson_throwsException() {
         Module module = new Module("CS2101");
