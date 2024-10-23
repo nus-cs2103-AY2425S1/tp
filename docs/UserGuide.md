@@ -31,9 +31,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
    * `list` : Lists all contacts.
 
    * `add r/volunteer h/30 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
-     contact of type `volunteer` and 
-     named 
-     `John Doe` to the Address Book.
+     contact of type `volunteer` and named`John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -80,7 +78,7 @@ Format: `help`
 
 ### Adding a contact: `add`
 
-This command adds a person to the address book. 
+This command adds a contact to the address book. 
 There are 4 types of contacts: Volunteer, Donor, Partner, Person(default) 
 
 Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ 
