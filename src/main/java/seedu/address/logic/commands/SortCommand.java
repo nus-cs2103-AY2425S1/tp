@@ -21,6 +21,9 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // Assertion to check that model is not null at runtime
+        assert model != null : "Model should not be null";
+
         model.updateSortedPersonList();
         return new CommandResult(MESSAGE_SORT_LIST_SUCCESS);
     }
