@@ -17,7 +17,7 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     private final Company company;
     private final Date dateOfApplication;
     private final Role role;
-    private final Status status;
+    private Status status;
 
     /**
      * Constructs an {@code InternshipApplication} with the specified company, date of application, and role.
@@ -39,7 +39,7 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     }
 
     /**
-     * Constructs an {@code InternshipApplication} with the specified company, date of application, and role.
+     * Constructs an {@code InternshipApplication} with the specified company, date of application, role, and status.
      * All fields must be present and not null.
      *
      * @param company The company offering the internship.
@@ -61,7 +61,7 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     /**
      * Returns the company associated with the internship application.
      *
-     * @return The company object.
+     * @return The {@code Company} object.
      */
     public Company getCompany() {
         return company;
@@ -70,7 +70,7 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     /**
      * Returns the name of the company.
      *
-     * @return The name object of the company.
+     * @return The {@code Name} object of the company.
      */
     public Name getCompanyName() {
         return company.getName();
@@ -88,7 +88,7 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     /**
      * Returns the date of application for the internship.
      *
-     * @return The date of application.
+     * @return The {@code Date} of application.
      */
     public Date getDateOfApplication() {
         return dateOfApplication;
@@ -97,24 +97,33 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     /**
      * Returns the role applied for in the internship.
      *
-     * @return The role object.
+     * @return The {@code Role} object.
      */
     public Role getRole() {
         return role;
     }
 
     /**
-     * Returns the status ofthe internship.
+     * Returns the status of the internship.
      *
-     * @return The status enum.
+     * @return The {@code Status} enum.
      */
     public Status getStatus() {
         return status;
     }
 
     /**
+     * Updates the status of the internship application.
+     *
+     * @param status The new status to be set.
+     */
+    public void setStatus(Status status) {
+        this.status = requireNonNull(status);
+    }
+
+    /**
      * Returns true if both internship applications have the same company, date of application, and role.
-     * Defines a weaker notion of equality between two internship applications.
+     * This defines a weaker notion of equality between two internship applications.
      *
      * @param otherInternship The other internship application to compare.
      * @return True if the specified internship application is the same as the current one, false otherwise.
@@ -128,12 +137,13 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
         return otherInternship != null
                 && otherInternship.getCompany().equals(getCompany())
                 && otherInternship.getDateOfApplication().equals(getDateOfApplication())
-                && otherInternship.getRole().equals(getRole());
+                && otherInternship.getRole().equals(getRole())
+                && otherInternship.getStatus().equals(getStatus());
     }
 
     /**
      * Returns true if both internship applications have the same identity and data fields.
-     * Defines a stronger notion of equality between two internship applications.
+     * This defines a stronger notion of equality between two internship applications.
      *
      * @param other The other object to compare.
      * @return True if the specified object is equal to the current internship application, false otherwise.
@@ -151,17 +161,18 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
         InternshipApplication otherInternship = (InternshipApplication) other;
         return company.equals(otherInternship.company)
                 && dateOfApplication.equals(otherInternship.dateOfApplication)
-                && role.equals(otherInternship.role);
+                && role.equals(otherInternship.role)
+                && status.equals(otherInternship.status);
     }
 
     /**
-     * Returns the hash code of the internship application based on the company, date of application, and role.
+     * Returns the hash code of the internship application based on the company, date of application, role, and status.
      *
      * @return The hash code of the internship application.
      */
     @Override
     public int hashCode() {
-        return Objects.hash(company, dateOfApplication, role);
+        return Objects.hash(company, dateOfApplication, role, status);
     }
 
     /**
@@ -182,6 +193,30 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
             tsb.add("Role", role);
         }
 
+        if (status != null) {
+            tsb.add("Status", status);
+        }
+
         return tsb.toString();
+    }
+
+    /**
+     * Creates and returns a deep copy of this {@code InternshipApplication}.
+     * <p>
+     * The deep copy ensures that the new {@code InternshipApplication} is a completely independent
+     * copy, meaning any changes to the new object will not affect the original object.
+     * This method creates a new {@code Company} instance to avoid sharing mutable state, but since
+     * {@code String} and {@code Status} are immutable, those are shared directly.
+     * </p>
+     *
+     * @return A new {@code InternshipApplication} instance with the same values as this instance.
+     */
+    public InternshipApplication deepCopy() {
+        return new InternshipApplication(
+                new Company(this.company.getEmail(), this.company.getName()), // Deep copy of mutable Company
+                this.dateOfApplication, // String is immutable, safe to share reference
+                this.role, // String is immutable, safe to share reference
+                this.status // Status is immutable (enum), safe to share reference
+        );
     }
 }
