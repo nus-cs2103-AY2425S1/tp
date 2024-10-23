@@ -56,7 +56,7 @@ public class UpdateMemberCommandParser implements Parser<UpdateMemberCommand> {
         if (argMultimap.getValue(PREFIX_ROOM).isPresent()) {
             updateMemberDescriptor.setRoom(ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updateMemberDescriptor::setTags);
+        parseTagsForUpdate(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updateMemberDescriptor::setTags);
 
         if (!updateMemberDescriptor.isAnyFieldUpdated()) {
             throw new ParseException(UpdateMemberCommand.MESSAGE_NOT_UPDATED);
@@ -70,7 +70,7 @@ public class UpdateMemberCommandParser implements Parser<UpdateMemberCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Tag>> parseTagsForUpdate(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

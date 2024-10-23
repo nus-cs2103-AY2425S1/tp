@@ -59,7 +59,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete_member 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -99,18 +99,18 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_member 1")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteMemberCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteMemberCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a member).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -122,8 +122,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddMemberCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -296,7 +296,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​         | I want to …​                                                     | So that I can …​                                                        | Remarks/Notes                                                                         |
-| -------- | --------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| -------- | --------------- |------------------------------------------------------------------| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `* * *`  | First-time user | Explore the app using sample data                                | I can understand its features without manually entering data            |                                                                                       |
 | `* * *`  | First-time user | See a guide on how to use the app                                | I can better understand its functionalities                             |                                                                                       |
 | `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the app                    |                                                                                       |
@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Frequent user   | Add or delete points for each member                             | I can track the overall participation status in the CCA                 |                                                                                       |
 | `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                        |                                                                                       |
 | `* * *`  | Frequent user   | Filter the data to see members with low attendance               | I can identify which members need attention                             |                                                                                       |
-| `* * *`  | User            | Edit member details (e.g., name, contact)                        | I can keep the member database up to date                               |                                                                                       |
+| `* * *`  | User            | Update member details (e.g., name, contact)                      | I can keep the member database up to date                               |                                                                                       |
 | `* *`    | First-time user | Import data from an existing Google Sheets document or csv file  | I can quickly upload my data without manual entry                       |                                                                                       |
 | `* *`    | Frequent user   | Automatically track attendance at each session                   | I don't need to manually mark attendance for each session               | Using QR codes? That would need some kind of integration though, would be complicated |
 | `* *`    | Frequent user   | See a breakdown of points for each member quickly                | I can monitor attendance records without navigating multiple screens    |                                                                                       |
@@ -578,7 +578,7 @@ None.
     A combination of unit and integration testing that checks both the individual components and their interactions in the Hall Pointer system.
 
 25. **Command:**\
-    A typed instruction input by the user in the CLI to perform an action in Hall Pointer, such as adding members, editing details, or tracking points (e.g., `add`, `list`, `delete`).
+    A typed instruction input by the user in the CLI to perform an action in Hall Pointer, such as adding members, updating details, or tracking points (e.g., `add`, `list`, `delete`).
 
 ## **Appendix: Instructions for manual testing**
 

@@ -16,7 +16,7 @@
 
 ### Key Features
 
-- **Manage Members:** Add, edit, delete, and view CCA members easily.
+- **Manage Members:** Add, update, delete, and view CCA members easily.
 - **Track Attendance:** Record participation in events and track members with low attendance.
 - **Allocate Points:** Customize and track hall points based on member participation in activities.
 - **Efficient CLI-based Commands:** Perform tasks quickly using CLI commands for users familiar with typing.

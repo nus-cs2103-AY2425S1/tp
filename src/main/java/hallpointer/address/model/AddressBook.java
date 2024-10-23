@@ -76,14 +76,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given member {@code target} in the list with {@code editedMember}.
+     * Replaces the given member {@code target} in the list with {@code updatedMember}.
      * {@code target} must exist in the address book.
-     * The member identity of {@code editedMember} must not be the same as another existing member in the address book.
+     * The member identity of {@code updatedMember} must not be the same as another existing member in the address book.
      */
-    public void setMember(Member target, Member editedMember) {
-        requireNonNull(editedMember);
+    public void setMember(Member target, Member updatedMember) {
+        requireNonNull(updatedMember);
 
-        members.setMember(target, editedMember);
+        members.setMember(target, updatedMember);
     }
 
     /**
