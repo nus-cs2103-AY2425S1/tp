@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
         // Push the command to the undo stack if it is a ConcreteCommand and successfully executed
         // No need to check for success as the command will exit through an exception if it fails
         if (command instanceof ConcreteCommand) {
-            model.pushConcreteCommand((ConcreteCommand) command);
+            model.pushToUndoStack((ConcreteCommand) command);
         }
 
         try {

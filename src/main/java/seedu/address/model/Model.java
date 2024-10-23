@@ -95,10 +95,10 @@ public interface Model {
     /**
      * Pushes a concrete command to the undo stack.
      */
-    void pushConcreteCommand(ConcreteCommand command);
+    void pushToUndoStack(ConcreteCommand command);
 
     /**
      * Undoes the most recent concrete command.
      */
-    CommandResult undo();
+    CommandResult undoAddressBook();
 }

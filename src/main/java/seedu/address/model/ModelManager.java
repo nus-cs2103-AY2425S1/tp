@@ -159,12 +159,12 @@ public class ModelManager implements Model {
     //=========== Undo/Redo ================================================================================
 
     @Override
-    public void pushConcreteCommand(ConcreteCommand command) {
+    public void pushToUndoStack(ConcreteCommand command) {
         undoStack.push(command);
     }
 
     @Override
-    public CommandResult undo() {
+    public CommandResult undoAddressBook() {
         if (undoStack.isEmpty()) {
             return null;
         }

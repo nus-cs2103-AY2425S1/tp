@@ -118,12 +118,12 @@ public class ViewCommandTest {
         }
 
         @Override
-        public void pushConcreteCommand(ConcreteCommand command) {
+        public void pushToUndoStack(ConcreteCommand command) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public CommandResult undo() {
+        public CommandResult undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
     }
