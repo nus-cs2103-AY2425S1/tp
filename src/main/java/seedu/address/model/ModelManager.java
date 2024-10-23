@@ -24,9 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final SortedList<Person> sortedPersons;
-
-    private ObservableList<Person> personList;
+    private final SortedList<Person> sortedAndFilteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        sortedPersons = new SortedList<>(filteredPersons);
+        sortedAndFilteredPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -125,7 +123,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return sortedPersons;
+        return sortedAndFilteredPersons;
     }
 
     @Override
@@ -136,8 +134,7 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredPersonList(Comparator<Person> comparator) {
-        requireNonNull(comparator);
-        sortedPersons.setComparator(comparator);
+        sortedAndFilteredPersons.setComparator(comparator);
     }
 
     @Override

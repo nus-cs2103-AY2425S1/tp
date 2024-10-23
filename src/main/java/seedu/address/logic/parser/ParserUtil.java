@@ -265,7 +265,7 @@ public class ParserUtil {
         STUDENTCLASS("student class"),
         EMERGENCYCONTACTNAME("emergency contact name"),
         EMERGENCYCONTACTNUMBER("emergency contact number"),
-        NOTATTRIBUTE("");
+        NONE("none");
 
         public static final String MESSAGE_CONSTRAINTS = "Sorting Attribute is invalid";
 

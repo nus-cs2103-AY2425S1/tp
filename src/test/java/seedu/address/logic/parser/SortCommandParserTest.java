@@ -21,6 +21,10 @@ public class SortCommandParserTest {
     }
 
     @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "name and number", MESSAGE_INVALID_FORMAT);
+    }
+    @Test
     public void parse_validArgs_returnsSortCommand() {
         SortCommand expectedSortCommand = new SortCommand(ParserUtil.SortAttribute.REGISTERNUMBER);
 

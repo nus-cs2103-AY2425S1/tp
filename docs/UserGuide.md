@@ -226,10 +226,12 @@ Format: `sort [ATTRIBUTE]`
 </box>
 
 * Sorts the list based on the ATTRIBUTE
+* Unsort the list when the attribute is `none`
 
 Examples:
 * `sort name` to sort the list based on student's names
 * `sort register number` to sort the list based on student's register numbers
+* `sort none` to unsort the list
 
 ### Clearing all entries : `clear`
 

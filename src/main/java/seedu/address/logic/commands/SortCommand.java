@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil.SortAttribute;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -29,9 +29,11 @@ public class SortCommand extends Command {
             + "Attributes: name, phone, email, address, register number, sex, \n"
             + "student class, emergency contact name, emergency contact number";
 
-    public static final String MESSAGE_SUCCESS = "Sorted the list based on %1$s";
-    public static final String MESSAGE_SORT_ATTRIBUTE_NOT_SPECIFIED = "The sort attribute is not specified!";
+    public static final String MESSAGE_SORTED_SUCCESS = "Sorted the list based on %1$s";
+    public static final String MESSAGE_UNSORTED_SUCCESS = "Your list is now unsorted and back to the original!";
+
     private final SortAttribute sortAttribute;
+    private Comparator<Person> comparator;
 
     /**
      * @param sortAttribute attribute to sort the persons in the list
@@ -42,19 +44,22 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
-        Comparator<Person> comparator = this.getComparator();
-        model.sortFilteredPersonList(comparator);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.sortAttribute));
+        this.comparator = this.getComparator();
+        model.sortFilteredPersonList(this.comparator);
+        return new CommandResult(this.generateSuccessMessage());
     }
 
 
+    public String generateSuccessMessage() {
+        return isNull(comparator) ? MESSAGE_UNSORTED_SUCCESS : String.format(MESSAGE_SORTED_SUCCESS, sortAttribute);
+    }
     /**
      * Retrieves the comparator needed to sort the list.
-     * @throws CommandException if the comparator cannot be found.
+     * Returns null to unsort.
      */
-    public Comparator<Person> getComparator() throws CommandException {
+    public Comparator<Person> getComparator() {
 
         switch (sortAttribute) {
 
@@ -86,7 +91,7 @@ public class SortCommand extends Command {
             return new EcNumberCompare();
 
         default:
-            throw new CommandException(MESSAGE_SORT_ATTRIBUTE_NOT_SPECIFIED);
+            return null;
         }
     }
 

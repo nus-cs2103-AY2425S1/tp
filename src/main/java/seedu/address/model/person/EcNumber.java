@@ -38,6 +38,7 @@ public class EcNumber implements Comparable<EcNumber> {
      */
     public Integer toInt() {
         if (value.isEmpty()) {
+            // max value when empty so that it goes to the bottom when sorted
             return Integer.MAX_VALUE;
         }
         return Integer.valueOf(this.value);
