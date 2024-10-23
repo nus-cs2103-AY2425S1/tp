@@ -15,6 +15,8 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String CSS_THEME = "-fx-font-family: \"Segoe UI\";\n"
+            + "    -fx-font-size: 13px;";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -31,6 +33,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label age;
+    @FXML
+    private Label gender;
+    @FXML
+    private Label nric;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -38,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label appointment;
     @FXML
     private FlowPane tags;
 
@@ -49,11 +59,25 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        age.setText("Age : " + person.getAge().value);
+        gender.setText("Gender : " + person.getGender().value);
+        nric.setText("NRIC : " + person.getNric().fullNric);
+        phone.setText("Phone : " + person.getPhone().value);
+        address.setText("Address : " + person.getAddress().value);
+        email.setText("Email : " + person.getEmail().value);
+        appointment.setText("Appointment : " + person.getAppointment().dateTime);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        if (person.getAppointment().isToday()) {
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;"); // Green
+        } else if (person.getAppointment().hasPassed()) {
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #ff0500;"); // Red
+        } else if (person.getAppointment().hasNotPassed()) {
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #f0c44a;"); // Yellow
+        } else {
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: white;"); // White
+        }
     }
 }
