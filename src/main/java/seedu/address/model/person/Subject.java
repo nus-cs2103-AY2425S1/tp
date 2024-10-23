@@ -65,6 +65,4 @@ public class Subject {
         return false;
     }
 
-
-
 }

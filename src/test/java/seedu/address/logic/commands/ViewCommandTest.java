@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +34,9 @@ public class ViewCommandTest {
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person viewedPerson = new PersonBuilder(personInFilteredList).build();
         Index index = Index.fromOneBased(1);
-        String expectedCommandResult = String.format(ViewCommand.MESSAGE_SUCCESS, Messages.format(viewedPerson));
+        List<Person> associatedPeople = model.getAssociatedPeople(viewedPerson);
+        String expectedCommandResult = String.format(ViewCommand.MESSAGE_SUCCESS,
+                Messages.format(viewedPerson, associatedPeople));
         assertCommandSuccess(new ViewCommand(index), model, commandHistory, expectedCommandResult, expectedModel);
     }
 

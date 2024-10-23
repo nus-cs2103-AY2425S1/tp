@@ -39,6 +39,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code args} into an {@code Index} array and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer)
+     *     or if the format was wrong.
+     */
+    public static Index[] parseIndices(String args) throws ParseException {
+        String trimmedIndices = args.trim();
+        String[] parts = trimmedIndices.split(" ");
+        if (parts.length != 2) {
+            throw new ParseException("no");
+        }
+        return new Index[]{parseIndex(parts[0]), parseIndex(parts[1])};
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *

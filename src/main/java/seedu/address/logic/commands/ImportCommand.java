@@ -19,7 +19,7 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a list of persons provided in"
-            + " the provided file."
+            + " the provided file. \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_FILEPATH + "~/data/test.txt";
 

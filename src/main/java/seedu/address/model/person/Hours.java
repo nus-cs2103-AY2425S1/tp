@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's hours worked in the address book.
+ * Represents a Person's tutoring hours in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidHours(String)}
  */
 public class Hours {
-
 
     public static final String MESSAGE_CONSTRAINTS =
             "Hours should be non-negative, and in numerics.";
@@ -16,14 +15,14 @@ public class Hours {
     public final String value;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Hour}.
      *
-     * @param phone A valid phone number.
+     * @param hour A valid number of hours.
      */
-    public Hours(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidHours(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+    public Hours(String hour) {
+        requireNonNull(hour);
+        checkArgument(isValidHours(hour), MESSAGE_CONSTRAINTS);
+        value = hour;
     }
 
     public int getHoursInt() {
