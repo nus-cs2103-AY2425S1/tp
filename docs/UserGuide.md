@@ -93,6 +93,7 @@ Before running MediBase3, ensure that **Java 17** is installed on your system.
 You should see something like:
 
 ![javaVersionWindows.jpeg](images%2FjavaVersionWindows.jpeg)
+
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
 ### For macOS:
@@ -116,6 +117,7 @@ This means that your machine is running Java version 17.0.12, which means that J
 You should see something like this:
 
 ![javaVersionMacOS.png](images%2FjavaVersionMacOS.png)
+
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
 
@@ -133,23 +135,24 @@ This means that your machine is running Java version 17.0.11, which means that J
    You should see something like this:
 
 ![javaVersionLinux.jpg](images%2FjavaVersionLinux.jpg)
+
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
 ---
 
 {: .alert .alert-info}
-:information_source: **Note**
-Depending on your system setup, you may need to install JavaFX separately. You can refer to the [OpenJFX installation guide](https://openjfx.io/openjfx-docs/#install-javafx) for detailed instructions.
+>:information_source: **Note**
+>Depending on your system setup, you may need to install JavaFX separately. You can refer to the [OpenJFX installation guide](https://openjfx.io/openjfx-docs/#install-javafx) for detailed instructions.
 
 {: .alert .alert-info}
-:information_source: **Note**
-For users of other operating systems, as long as you have the following installed, you can use MediBase3:
-- Java/OpenJDK 17
-- JavaFX/OpenJFX 17
+>:information_source: **Note**
+>For users of other operating systems, as long as you have the following installed, you can use MediBase3:
+>- Java/OpenJDK 17
+>- JavaFX/OpenJFX 17
 
 {: .alert .alert-info}
-:information_source: **Note**
-For Linux users with Wayland compositors, ensure you install **OpenJFX 21** for better compatibility.
+>:information_source: **Note**
+>For Linux users with Wayland compositors, ensure you install **OpenJFX 21** for better compatibility.
 
 
 ---
@@ -202,7 +205,7 @@ MediBase3 can be controlled using commands in the **Command Line Interface (CLI)
 
 Each command follows this structure:
 
-![CommandPromptFormat.png](images%2FCommandPromptFormat.png)
+![CommandPromptFormat.jpg](images%2FCommandPromptFormat.jpg)
 
 Here’s a breakdown of the parts:
 
@@ -214,10 +217,10 @@ Here’s a breakdown of the parts:
 
 ### Example:
 
-add n/John Doe p/98765432 e/johndoe@example.com
+add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
 - **Command:** `add`
-- **Prefix:** `n/` (name), `p/` (phone), `e/` (email)
-- **Parameter:** `John Doe`, `98765432`, `johndoe@example.com`
+- **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
+- **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
 
 ---
 
@@ -272,6 +275,7 @@ Here’s a basic tutorial on how to start using the application:
 
 Now you’re ready to use MediBase3!
 For a comprehensive list of features and how to use them, [click here!](#features).
+
 If you have eny more common questions, [click here!](#faq).
 
 [Back to Table of Contents](#table-of-contents)
