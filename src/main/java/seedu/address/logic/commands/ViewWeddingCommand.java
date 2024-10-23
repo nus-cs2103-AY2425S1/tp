@@ -13,6 +13,9 @@ import seedu.address.model.person.PersonInWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
+/**
+ * Displays a list of contacts involved in the specified wedding.
+ */
 public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
