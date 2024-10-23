@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -89,8 +90,9 @@ public class AddTaskCommand extends Command {
         Level level = targetPerson.getLevel();
         TaskList taskList = targetPerson.getTaskList().copy();
         taskList.add(taskToAdd);
+        Set<LessonTime> lessonTimes = targetPerson.getLessonTimes();
         return new Person(name, phone, emergencyContact,
-                address, note, subjects, level, taskList);
+                address, note, subjects, level, taskList, lessonTimes);
     }
 
     @Override
