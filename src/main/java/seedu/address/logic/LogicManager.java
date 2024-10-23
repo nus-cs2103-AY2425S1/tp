@@ -48,21 +48,28 @@ public class LogicManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
-
-        CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
-
         try {
+            logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+            CommandResult commandResult;
+            Command command = addressBookParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+
+            if (!commandResult.isPrompt()) {
+                model.clearSavedCommand();
+            }
+
             storage.saveAddressBook(model.getAddressBook());
+
+            return commandResult;
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        } catch (Exception e) {
+            model.clearSavedCommand();
+            throw e;
         }
-
-        return commandResult;
     }
 
     @Override
