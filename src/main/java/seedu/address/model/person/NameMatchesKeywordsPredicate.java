@@ -30,8 +30,8 @@ public class NameMatchesKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        NameMatchesKeywordsPredicate otherNameContainsKeywordsPredicate = (NameMatchesKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        NameMatchesKeywordsPredicate otherNameMatchesKeywordsPredicate = (NameMatchesKeywordsPredicate) other;
+        return keywords.equals(otherNameMatchesKeywordsPredicate.keywords);
     }
 
     @Override
