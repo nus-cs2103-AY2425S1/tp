@@ -8,9 +8,6 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 
-
-
-
 import java.util.Set;
 import java.util.stream.Stream;
 

@@ -53,7 +53,7 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         ListingStorage listingStorage = new JsonListingsStorage(userPrefs.getListingsFilePath());
-        storage = new StorageManager(addressBookStorage,listingStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, listingStorage);
 
         model = initModelManager(storage, userPrefs);
 
