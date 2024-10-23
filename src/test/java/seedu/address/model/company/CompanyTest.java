@@ -89,14 +89,22 @@ public class CompanyTest {
         // different tags -> returns false
         editedGoogle = new CompanyBuilder(GOOGLE).withTags(VALID_TAG_BIGTECH).build();
         assertFalse(GOOGLE.equals(editedGoogle));
+
+        // different career page URL -> returns false
+        editedGoogle = new CompanyBuilder(GOOGLE).withCareerPageUrl("different-career-url.com").build();
+        assertFalse(GOOGLE.equals(editedGoogle));
+
+        // different remark -> returns false
+        editedGoogle = new CompanyBuilder(GOOGLE).withRemark("Different remark").build();
+        assertFalse(GOOGLE.equals(editedGoogle));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Company.class.getCanonicalName() + "{name=" + GOOGLE.getName() + ", phone="
-                + GOOGLE.getPhone()
-                + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress() + ", tags="
-                + GOOGLE.getTags() + "}";
+                + GOOGLE.getPhone() + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress()
+                + ", url=" + GOOGLE.getCareerPageUrl() + ", tags=" + GOOGLE.getTags()
+                + ", remark=" + GOOGLE.getRemark() + "}";
         assertEquals(expected, GOOGLE.toString());
     }
 }

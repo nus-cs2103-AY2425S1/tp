@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK; // New prefix for remark
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -36,6 +37,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_MICROSOFT = "Block 123, Microsoft Street 3";
     public static final String VALID_TAG_BIGTECH = "bigTech";
     public static final String VALID_TAG_COMPANY = "company";
+    public static final String VALID_REMARK = "Hard to schedule interview"; // New valid remark
 
     public static final String NAME_DESC_TESLA = " " + PREFIX_NAME + VALID_NAME_TESLA;
     public static final String NAME_DESC_MICROSOFT = " " + PREFIX_NAME + VALID_NAME_MICROSOFT;
@@ -47,12 +49,14 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_MICROSOFT = " " + PREFIX_ADDRESS + VALID_ADDRESS_MICROSOFT;
     public static final String TAG_DESC_COMPANY = " " + PREFIX_TAG + VALID_TAG_COMPANY;
     public static final String TAG_DESC_BIGTECH = " " + PREFIX_TAG + VALID_TAG_BIGTECH;
+    public static final String REMARK_DESC_VALID = " " + PREFIX_REMARK + VALID_REMARK; // New valid remark description
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + ""; // Empty remark not allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -63,10 +67,10 @@ public class CommandTestUtil {
     static {
         DESC_TESLA = new EditCompanyDescriptorBuilder().withName(VALID_NAME_TESLA)
                 .withPhone(VALID_PHONE_TESLA).withEmail(VALID_EMAIL_TESLA).withAddress(VALID_ADDRESS_TESLA)
-                .withTags(VALID_TAG_COMPANY).build();
+                .withTags(VALID_TAG_COMPANY).withRemark(VALID_REMARK).build(); // Added remark
         DESC_MICROSOFT = new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT)
                 .withPhone(VALID_PHONE_MICROSOFT).withEmail(VALID_EMAIL_MICROSOFT).withAddress(VALID_ADDRESS_MICROSOFT)
-                .withTags(VALID_TAG_BIGTECH, VALID_TAG_COMPANY).build();
+                .withTags(VALID_TAG_BIGTECH, VALID_TAG_COMPANY).withRemark(VALID_REMARK).build(); // Added remark
     }
 
     /**
@@ -76,7 +80,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -92,7 +96,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }

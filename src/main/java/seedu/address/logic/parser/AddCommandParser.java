@@ -50,7 +50,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         CareerPageUrl careerPageUrl = ParserUtil.parseCareerPageUrl(argMultimap.getValue(PREFIX_CAREER_PAGE_URL).get());
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse("")); // Allow empty remark
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)
+                .orElse(String.valueOf(new Remark("")))); // Allow empty remark
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Company company = new Company(name, phone, email, address, careerPageUrl, tagList, remark);

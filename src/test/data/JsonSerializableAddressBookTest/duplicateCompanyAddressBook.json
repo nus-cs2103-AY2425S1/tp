@@ -1,14 +1,22 @@
 {
-  "companies": [ {
-    "name": "Google",
-    "phone": "94351253",
-    "email": "goolge@google.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "bigTech" ]
-  }, {
-    "name": "Google",
-    "phone": "94351253",
-    "email": "google@example.com",
-    "address": "4th street"
-  } ]
+  "companies": [
+    {
+      "name": "Google",
+      "phone": "94351253",
+      "email": "goolge@google.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "careerPageUrl": "www.google-careers.com",
+      "remark": "Search engine giant",
+      "tags": ["bigTech"]
+    },
+    {
+      "name": "Google",
+      "phone": "94351253",
+      "email": "google@example.com",
+      "address": "4th Street",
+      "careerPageUrl": "www.google-careers.com",
+      "remark": "Duplicate Google entry",
+      "tags": []
+    }
+  ]
 }

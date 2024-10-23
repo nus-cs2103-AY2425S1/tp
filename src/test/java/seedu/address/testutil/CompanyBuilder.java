@@ -9,6 +9,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
+import seedu.address.model.company.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,12 +23,14 @@ public class CompanyBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_URL = "careers.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "This is a default remark"; // New default remark
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private CareerPageUrl careerPageUrl;
+    private Remark remark;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +42,7 @@ public class CompanyBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         careerPageUrl = new CareerPageUrl(DEFAULT_URL);
+        remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
 
@@ -51,6 +55,7 @@ public class CompanyBuilder {
         email = companyToCopy.getEmail();
         address = companyToCopy.getAddress();
         careerPageUrl = companyToCopy.getCareerPageUrl();
+        remark = companyToCopy.getRemark();
         tags = new HashSet<>(companyToCopy.getTags());
     }
 
@@ -95,8 +100,27 @@ public class CompanyBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code CareerPageUrl} of the {@code Company} that we are building.
+     */
+    public CompanyBuilder withCareerPageUrl(String careerPageUrl) {
+        this.careerPageUrl = new CareerPageUrl(careerPageUrl);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code Company} that we are building.
+     */
+    public CompanyBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
+     * Builds and returns a {@code Company}.
+     */
     public Company build() {
-        return new Company(name, phone, email, address, careerPageUrl, tags);
+        return new Company(name, phone, email, address, careerPageUrl, tags, remark);
     }
 
 }

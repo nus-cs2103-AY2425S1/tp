@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CAREER_PAGE_URL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -28,18 +29,20 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_CAREER_PAGE_URL + "CAREER PAGE URL "
+            + PREFIX_REMARK + "REMARK "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_CAREER_PAGE_URL + "www.google-careers.com"
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_NAME + "Google "
+            + PREFIX_PHONE + "650-253-0000 "
+            + PREFIX_EMAIL + "google@gmail.com "
+            + PREFIX_ADDRESS + "1600 Amphitheatre Parkway, Mountain View, CA 94043 "
+            + PREFIX_CAREER_PAGE_URL + "www.google-careers.com "
+            + PREFIX_REMARK + "Interview process takes around 6 weeks "
+            + PREFIX_TAG + "interviewDifficulty "
+            + PREFIX_TAG + "salary";
 
     public static final String MESSAGE_SUCCESS = "New company added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This company already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book";
 
     private final Company toAdd;
 
@@ -56,7 +59,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasCompany(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_COMPANY);
         }
 
         model.addCompany(toAdd);

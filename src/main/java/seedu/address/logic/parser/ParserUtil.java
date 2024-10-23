@@ -151,9 +151,12 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * If no remark is provided (empty string), returns an empty Remark.
      */
-    public static Remark parseRemark(String remark) {
+    public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
-        return new Remark(trimmedRemark); // Allowing empty remarks
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 }
