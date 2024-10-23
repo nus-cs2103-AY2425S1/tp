@@ -23,7 +23,6 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 2. [**Quick Start**](#quick-start)
 3. [**Tutorial for Beginners**](#tutorial-for-beginners)
 4. [**Features**](#features)
-    * [**Accessing Input History**](#accessing-input-history)
     * [**General Commands**](#general-commands)
         * [`help` Viewing help](#viewing-help--help)
         * [`stats` Viewing the total number of guests and vendors](#view-total-number-of-people--stats)
@@ -127,7 +126,7 @@ This section will walk you through all the basic features of BridalBuddy and wil
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**:bulb: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -147,15 +146,27 @@ This section will walk you through all the basic features of BridalBuddy and wil
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### **General Commands**
+
+:information_source: Commands listed in this section are applicable to both guest management and vendor management.
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 **Format:** `help`
 
 Entering the `help` command returns the following result on your screen:
 
 ![help message](images/helpMessage.png)
+
+### **Guest Related Commands**
+
+:information_source: Commands listed in this section are applicable to managing your guest list.
+
+### **Vendor Related Commands**
+
+:information_source: Commands listed in this section are applicable to managing your vendor list.
 
 ### Adding a person: `add`
 
