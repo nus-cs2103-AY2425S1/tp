@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalTags.FLORIST;
+import static seedu.address.testutil.TypicalTasks.TODO_TASK;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,6 +20,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -134,6 +139,35 @@ public class ModelManagerTest {
     public void updateFilteredTagList_nullPredicate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.updateFilteredTagList(null));
     }
+
+    @Test
+    public void setTag_validTag_replacesTagSuccessfully() {
+        modelManager.addTag(FLORIST);
+        Tag editedTag = new Tag(new TagName("newFlorist"));
+        modelManager.setTag(FLORIST, editedTag);
+        assertTrue(modelManager.hasTag(editedTag));
+        assertFalse(modelManager.hasTag(FLORIST));
+    }
+
+    @Test
+    public void setTask_validTask_replacesTaskSuccessfully() {
+        modelManager.addTask(TODO_TASK);
+        Task editedTask = new Todo("New task description");
+        modelManager.setTask(TODO_TASK, editedTask);
+        assertTrue(modelManager.hasTask(editedTask));
+        assertFalse(modelManager.hasTask(TODO_TASK));
+    }
+
+    @Test
+    public void setWedding_validWedding_replacesWeddingSuccessfully() {
+        Wedding wedding = new Wedding(new WeddingName("Old Wedding"));
+        Wedding editedWedding = new Wedding(new WeddingName("New Wedding"));
+        modelManager.addWedding(wedding);
+        modelManager.setWedding(wedding, editedWedding);
+        assertTrue(modelManager.hasWedding(editedWedding));
+        assertFalse(modelManager.hasWedding(wedding));
+    }
+
 
     @Test
     public void equals() {

@@ -62,6 +62,18 @@ public class DescriptionTest {
     }
 
     @Test
+    public void equals_nullDescription_returnsFalse() {
+        Description description = new Description(VALID_DESCRIPTION);
+        assertFalse(description.equals(null));
+    }
+
+    @Test
+    public void equals_differentObjectType_returnsFalse() {
+        Description description = new Description(VALID_DESCRIPTION);
+        assertFalse(description.equals("some string"));
+    }
+
+    @Test
     public void hashCode_sameDescription_returnsSameHashCode() {
         Description description1 = new Description(VALID_DESCRIPTION);
         Description description2 = new Description(VALID_DESCRIPTION);

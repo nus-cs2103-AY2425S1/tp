@@ -47,6 +47,17 @@ public class ParsedTaskTest {
     }
 
     @Test
+    public void equals_nullParsedTask_returnsFalse() {
+        ParsedTask parsedTask = new ParsedTask(VALID_TASK_TYPE, VALID_TASK_DETAILS);
+        assertFalse(parsedTask.equals(null));
+    }
+
+    @Test
+    public void equals_differentObjectType_returnsFalse() {
+        ParsedTask parsedTask = new ParsedTask(VALID_TASK_TYPE, VALID_TASK_DETAILS);
+        assertFalse(parsedTask.equals("some string"));
+    }
+    @Test
     public void hashCode_sameParsedTask_returnsSameHashCode() {
         ParsedTask parsedTask1 = new ParsedTask(VALID_TASK_TYPE, VALID_TASK_DETAILS);
         ParsedTask parsedTask2 = new ParsedTask(VALID_TASK_TYPE, VALID_TASK_DETAILS);
