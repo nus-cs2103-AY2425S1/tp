@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
-import static seedu.address.logic.parser.SortOption.SORT_HOURS;
-import static seedu.address.logic.parser.SortOption.SORT_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortOption;
@@ -66,10 +64,10 @@ public class SortCommand extends Command {
             return executeDefaultSort(model);
         }
 
-        switch (sortOption.toString()) {
-        case SORT_NAME:
+        switch (sortOption) {
+        case NAME:
             return executeSortByName(model);
-        case SORT_HOURS:
+        case HOURS:
             return executeSortByHours(model);
         default:
             // Defensive programming: This should not happen as SortOption validates input,
