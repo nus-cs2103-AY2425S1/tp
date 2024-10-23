@@ -1,20 +1,18 @@
 package seedu.address.model.tag;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Constructs a set of {@code Tag}s that are predefined by the user.
+ * Constructs an {@code ObservableList} of {@code Tag}s that are predefined by the user.
  */
 public class TagList {
-    private Set<Tag> tags;
+    private final ObservableList<Tag> tags;
 
     public TagList() {
-        tags = new HashSet<>();
+        tags = FXCollections.observableArrayList();
     }
 
     /**
@@ -24,7 +22,11 @@ public class TagList {
      * @return true if the tag was added, false if it already exists.
      */
     public boolean addTag(Tag tag) {
-        return tags.add(tag);
+        if (tags.contains(tag)) {
+            return false;
+        }
+        tags.add(tag);
+        return true;
     }
 
     /**
@@ -43,7 +45,7 @@ public class TagList {
      * @param tags The tags to add.
      */
     public void setTags(List<Tag> tags) {
-        this.tags = new HashSet<>(tags);
+        this.tags.setAll(tags);
     }
 
     /**
@@ -54,11 +56,13 @@ public class TagList {
     }
 
     /**
-     * Returns the backing set as an unmodifiable {@code ObservableList}.
+     * Returns the backing set as an observable {@code ObservableList}.
      */
-    public ObservableList<Tag> asUnmodifiableObservableList() {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(tags));
+
+    public ObservableList<Tag> asObservableList() {
+        return tags;
     }
+
     @Override
     public String toString() {
         if (tags.isEmpty()) {
