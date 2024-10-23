@@ -103,7 +103,12 @@ public class ViewCommand extends Command {
         }
         if (currentStage.isShowing()) {
             currentStage.close();
+            currentStage = null;
         }
+    }
+
+    public static Stage getCurrentStage() {
+        return currentStage;
     }
 
     @Override

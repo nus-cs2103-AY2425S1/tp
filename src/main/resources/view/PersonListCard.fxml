@@ -50,15 +50,6 @@
         <Label fx:id="remark" styleClass="cell_small_label" />
       </HBox>
 
-      <HBox>
-        <Label text="Birthday:" styleClass="cell_small_label"/>
-        <Label fx:id="birthday" styleClass="cell_small_label" />
-      </HBox>
-
-      <VBox>
-        <Label text="History:" styleClass="cell_small_label"/>
-        <VBox fx:id="history" />
-      </VBox>
 
     </VBox>
   </GridPane>

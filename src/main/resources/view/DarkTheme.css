@@ -386,8 +386,3 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
-
-.favourite-tag {
-    -fx-background-color: #d47a2b !important; /* Ensure this is applied */
-    -fx-text-fill: white !important;          /* Ensure this is applied */
-}

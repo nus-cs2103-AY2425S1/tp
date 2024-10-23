@@ -43,10 +43,7 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label remark;
-    @FXML
-    private Label birthday;
-    @FXML
-    private VBox history;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,7 +57,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-        birthday.setText(person.getBirthday().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
@@ -70,11 +66,11 @@ public class PersonCard extends UiPart<Region> {
                     }
                     tags.getChildren().add(tagLabel);
                 });
-        person.getHistory().getHistoryEntries().forEach((date, activities) -> {
-            StringBuilder historyText = new StringBuilder(date.toString() + ": \n");
-            historyText.append(String.join(", \n", activities));
-            Label historyLabel = new Label(historyText.toString());
-            history.getChildren().add(historyLabel);
-        });
+//        person.getHistory().getHistoryEntries().forEach((date, activities) -> {
+//            StringBuilder historyText = new StringBuilder(date.toString() + ": \n");
+//            historyText.append(String.join(", \n", activities));
+//            Label historyLabel = new Label(historyText.toString());
+//            history.getChildren().add(historyLabel);
+//        });
     }
 }
