@@ -33,11 +33,11 @@ If you can type fast and you need to manage celebrities and their schedules, **T
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list person` : Lists all contacts.
+   * `list person` : Lists all persons.
 
    * `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to TalentHub.
 
-   * `delete person 3` : Deletes the 3rd contact shown in the current list.
+   * `delete person 3` : Deletes the 3rd person shown in the current list.
 
    * `clear all` : Deletes all events and contacts.
 
