@@ -24,8 +24,8 @@ public class Student {
     // Data fields
     private final seedu.edulog.model.student.Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean hasPaid = false;
     private final Fee fee;
-    private boolean isPresent = false;
 
     /**
      * Every field must be present and not null except isPresent. I suggest
@@ -38,8 +38,9 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.hasPaid = false;
         this.fee = new Fee(0);
-        this.isPresent = false;
+
     }
 
     /**
@@ -53,7 +54,7 @@ public class Student {
         this.address = address;
         this.tags.addAll(tags);
         this.fee = fee;
-        this.isPresent = false;
+        this.hasPaid = false;
     }
 
     /**
@@ -67,7 +68,7 @@ public class Student {
         this.address = address;
         this.tags.addAll(tags);
         this.fee = fee;
-        this.isPresent = isPresent;
+        this.hasPaid = isPresent;
     }
 
     public Name getName() {
@@ -99,8 +100,8 @@ public class Student {
      *
      * @return {@code true} if the student is present, {@code false} otherwise
      */
-    public boolean getIsPresent() {
-        return isPresent;
+    public boolean getHasPaid() {
+        return hasPaid;
     }
 
     public Fee getFee() {
@@ -108,17 +109,17 @@ public class Student {
     }
 
     /**
-     * Marks the student as present.
+     * Marks the student as paid.
      */
     public void mark() {
-        isPresent = true;
+        hasPaid = true;
     }
 
     /**
-     * Marks the student as absent.
+     * Marks the student as unpaid.
      */
     public void unmark() {
-        isPresent = false;
+        hasPaid = false;
     }
 
     /**
@@ -155,14 +156,14 @@ public class Student {
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
                 && tags.equals(otherStudent.tags)
-                && isPresent == otherStudent.isPresent
+                && hasPaid == otherStudent.hasPaid
                 && fee.equals(otherStudent.fee);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, isPresent, fee);
+        return Objects.hash(name, phone, email, address, tags, hasPaid);
     }
 
     @Override
@@ -173,8 +174,7 @@ public class Student {
                 .add("email", email)
                 .add("edulog", address)
                 .add("tags", tags)
-                .add("isPresent", isPresent)
-                .add("fee", fee)
+                .add("hasPaid", hasPaid)
                 .toString();
     }
 
