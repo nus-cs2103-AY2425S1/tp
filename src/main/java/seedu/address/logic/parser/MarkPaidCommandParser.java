@@ -10,7 +10,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkPaidCommand;
-import seedu.address.logic.commands.MarkPaidTarget;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.MonthPaid;
 
@@ -33,22 +32,25 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
         }
 
-        MarkPaidTarget target;
-        if (preamble.equalsIgnoreCase("all")) {
-            target = MarkPaidTarget.all();
-        } else {
+        MarkPaidCommand.MarkPaidTarget target;
+        switch (preamble.toLowerCase()) {
+        case "all":
+            target = MarkPaidCommand.MarkPaidTarget.all();
+            break;
+        default:
             if (!ParserUtil.isValidIndex(preamble)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE));
             }
-            Index index;
             try {
-                index = ParserUtil.parseIndex(preamble);
+                Index index = ParserUtil.parseIndex(preamble);
+                target = MarkPaidCommand.MarkPaidTarget.fromIndex(index);
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MarkPaidCommand.MESSAGE_USAGE), pe);
             }
-            target = MarkPaidTarget.fromIndex(index);
+            break;
         }
+
 
         return new MarkPaidCommand(target, monthsPaid);
     }
