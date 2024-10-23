@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 /**
@@ -25,6 +28,10 @@ public class GradeList {
 
     public GradeList(Map<String, Grade> grades) {
         this.grades = Collections.unmodifiableMap(grades);
+    }
+
+    private GradeList(List<Grade> grades) {
+        this.grades = grades.stream().collect(Collectors.toMap(Grade::getTestName, grade -> grade));
     }
 
     /**
@@ -68,6 +75,10 @@ public class GradeList {
         newList.remove(testName);
 
         return new GradeList(newList);
+    }
+
+    public GradeList filter(Predicate<Grade> predicate) {
+        return new GradeList(this.grades.values().stream().filter(predicate).toList());
     }
 
     /**

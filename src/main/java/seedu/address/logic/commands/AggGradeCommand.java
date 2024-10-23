@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import seedu.address.model.Model;
 import seedu.address.model.person.Grade;
@@ -24,11 +25,14 @@ public class AggGradeCommand extends Command {
         MEDIAN
     }
 
-    private Operation operation;
+    private final Operation operation;
+    private final String examName;
 
-    public AggGradeCommand(Operation operation) {
+    public AggGradeCommand(Operation operation, String examName) {
         requireNonNull(operation);
+
         this.operation = operation;
+        this.examName = examName;
     }
 
     private CommandResult executeMedian(Model model, SmartList filteredList) {
@@ -44,6 +48,14 @@ public class AggGradeCommand extends Command {
 
         SmartList filteredList =
                 new SmartList(model.getFilteredPersonList().stream().map(Person::getGradeList).toList());
+
+        if (examName != null) {
+            Predicate<Grade> match = (grade) -> grade.getTestName().equalsIgnoreCase(this.examName);
+
+            filteredList =
+                    new SmartList(model.getFilteredPersonList().stream().map(Person::getGradeList)
+                                          .map(gradeList -> gradeList.filter(match)).toList());
+        }
 
         switch (this.operation) {
         case MEDIAN:

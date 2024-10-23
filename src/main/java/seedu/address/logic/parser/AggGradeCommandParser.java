@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.AggGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -22,7 +24,9 @@ public class AggGradeCommandParser implements Parser<AggGradeCommand> {
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
         AggGradeCommand.Operation operation = ParserUtil.parseAggGradeOperation(argMultiMap.getPreamble());
+        Optional<String> name = argMultiMap.getValue(PREFIX_NAME);
+        String examName = name.isPresent() ? ParserUtil.parseTestName(name.get()) : null;
 
-        return new AggGradeCommand(operation);
+        return new AggGradeCommand(operation, examName);
     }
 }
