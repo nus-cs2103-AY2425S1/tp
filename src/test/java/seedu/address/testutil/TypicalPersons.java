@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ORGANISATION_AM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ORGANISATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_PRETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_HANDSOME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_PRETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
