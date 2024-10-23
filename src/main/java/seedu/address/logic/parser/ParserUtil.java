@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,5 +105,25 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static RsvpStatus parseRsvpStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        try {
+            return RsvpStatus.of(trimmedStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(RsvpStatus.MESSAGE_CONSTRAINTS);
+        }
+
+    }
+
+    public static Set<RsvpStatus> parseStatuses(Collection<String> statuses) throws ParseException {
+        requireNonNull(statuses);
+        final Set<RsvpStatus> statusSet = new HashSet<>();
+        for (String status : statuses) {
+            statusSet.add(parseRsvpStatus(status));
+        }
+        return statusSet;
     }
 }
