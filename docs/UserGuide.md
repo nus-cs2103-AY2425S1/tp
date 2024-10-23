@@ -146,10 +146,12 @@ Format: `delete INDEXES`
 * The indexes refer to the index numbers shown in the displayed person list.
 * The indexes **must be a positive integer** 1, 2, 3, …​
 * The indexes can be in **any order** so long as all the indexes fall within the size of the current list.
+* Duplicated valid index inputs would be treated as unique index inputs.
 
 Examples:
 * `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
 ### Getting that parameter of all these people: `get` 
 Gets the specified parameter of the filtered people from SocialBook.
