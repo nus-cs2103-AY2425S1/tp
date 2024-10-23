@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.owner.Address;
 import seedu.address.model.owner.Email;
+import seedu.address.model.owner.IdentificationCardNumber;
 import seedu.address.model.owner.Name;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.Phone;
@@ -15,11 +16,13 @@ public class OwnerBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_IC_NUMBER = "S1234567D";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private IdentificationCardNumber icNumber;
 
     /**
      * Creates a {@code OwnerBuilder} with the default details.
@@ -29,6 +32,7 @@ public class OwnerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        icNumber = new IdentificationCardNumber(DEFAULT_IC_NUMBER);
     }
 
     /**
@@ -39,6 +43,7 @@ public class OwnerBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        icNumber = personToCopy.getIdentificationNumber();
     }
 
     /**
@@ -73,8 +78,16 @@ public class OwnerBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code IdentificationCardNumber} of the {@code Owner} that we are building.
+     */
+    public OwnerBuilder withIcNumber(String icNumber) {
+        this.icNumber = new IdentificationCardNumber(icNumber);
+        return this;
+    }
+
     public Owner build() {
-        return new Owner(name, phone, email, address);
+        return new Owner(icNumber, name, phone, email, address);
     }
 
 }

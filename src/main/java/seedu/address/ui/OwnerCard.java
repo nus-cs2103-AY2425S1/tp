@@ -26,6 +26,8 @@ public class OwnerCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label icNumber;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -43,6 +45,7 @@ public class OwnerCard extends UiPart<Region> {
         super(FXML);
         this.owner = owner;
         id.setText(displayedIndex + ". ");
+        icNumber.setText(owner.getIdentificationNumber().getRedacted());
         name.setText(owner.getName().fullName);
         phone.setText(owner.getPhone().value);
         address.setText(owner.getAddress().value);

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalOwners.ALICE;
@@ -25,23 +26,18 @@ public class OwnerTest {
         // null -> returns false
         assertFalse(ALICE.isSameOwner(null));
 
-        // same name, all other attributes different -> returns true
-        Owner editedAlice = new OwnerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-            .withAddress(VALID_ADDRESS_BOB).build();
+        // same IC number, all other attributes different -> returns true
+        Owner editedAlice = new OwnerBuilder(ALICE).withName("Not alice").withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(ALICE.isSameOwner(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new OwnerBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different IC number, all other attributes same -> returns false
+        editedAlice = new OwnerBuilder(ALICE).withIcNumber(VALID_IC_NUMBER_BOB).build();
         assertFalse(ALICE.isSameOwner(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Owner editedBob = new OwnerBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameOwner(editedBob));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new OwnerBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameOwner(editedBob));
+        // IC number has trailing spaces, all other attributes same -> returns true
+        Owner editedBob = new OwnerBuilder(BOB).withIcNumber(VALID_IC_NUMBER_BOB + " ").build();
+        assertTrue(BOB.isSameOwner(editedBob));
     }
 
     @Test
@@ -81,7 +77,8 @@ public class OwnerTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Owner.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
+        String expected = Owner.class.getCanonicalName() + "{identificationNumber=" + ALICE.getIdentificationNumber()
+            + ", name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
             + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + "}";
         assertEquals(expected, ALICE.toString());
     }
