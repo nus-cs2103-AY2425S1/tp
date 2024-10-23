@@ -102,7 +102,7 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
-         
+
         case SwitchCommand.COMMAND_WORD:
         case SwitchCommand.COMMAND_ALIAS:
             return new SwitchCommandParser().parse(arguments);
