@@ -33,6 +33,8 @@ public class Inventory {
     }
 
     public void addStock(int ingredientId, int quantity) {
+        assert quantity >= 0 : "Quantity to add must be >= 0";  // Assertion
+
         if (!stockLevels.containsKey(ingredientId)) {
             throw new NoSuchElementException("Ingredient ID " + ingredientId + " not found.");
         }
@@ -65,6 +67,7 @@ public class Inventory {
     }
 
     public boolean canMakePastry(Pastry pastry) {
+        assert pastry != null : "Pastry cannot be null";  // Assertion
         List<Ingredient> ingredients = pastry.getIngredients();
 
         for (Ingredient ingredient : ingredients) {
@@ -82,6 +85,7 @@ public class Inventory {
     }
 
     public void displayStockLevels() {
+        assert !stockLevels.isEmpty() : "Stock levels should not be empty";  // Assertion
         System.out.println("Current Ingredient Stock Levels:");
         for (Map.Entry<Integer, Integer> entry : stockLevels.entrySet()) {
             Ingredient ingredient = ingredientCatalogue.getIngredientById(entry.getKey());
@@ -91,6 +95,7 @@ public class Inventory {
     }
 
     public String getFormattedStockLevels() {
+        assert !stockLevels.isEmpty() : "Stock levels should not be empty";  // Assertion
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Integer, Integer> entry : stockLevels.entrySet()) {
             Ingredient ingredient = ingredientCatalogue.getIngredientById(entry.getKey());
