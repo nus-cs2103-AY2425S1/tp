@@ -18,9 +18,17 @@ public class SortCommandParserTest {
         SortCommand expectedSortCommand1 = new SortCommand(new DateComparator(true));
         assertParseSuccess(parser, "earliest", expectedSortCommand1);
 
+        // Mixed-case order word
+        SortCommand expectedSortCommand2 = new SortCommand(new DateComparator(true));
+        assertParseSuccess(parser, "eaRliEsT", expectedSortCommand2);
+
         // no leading and trailing whitespaces
-        SortCommand expectedSortCommand2 = new SortCommand(new DateComparator(false));
-        assertParseSuccess(parser, "latest", expectedSortCommand2);
+        SortCommand expectedSortCommand3 = new SortCommand(new DateComparator(false));
+        assertParseSuccess(parser, "latest", expectedSortCommand3);
+
+        // Mixed-case order word
+        SortCommand expectedSortCommand4 = new SortCommand(new DateComparator(false));
+        assertParseSuccess(parser, "lATEst", expectedSortCommand4);
     }
 
     @Test

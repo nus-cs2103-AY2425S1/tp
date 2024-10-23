@@ -118,7 +118,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_ORDER);
         }
 
-        return order.equals("earliest");
+        return trimmedOrder.equals("earliest");
     }
 
 }

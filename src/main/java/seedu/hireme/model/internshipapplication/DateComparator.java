@@ -69,7 +69,7 @@ public class DateComparator implements Comparator<InternshipApplication> {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("earliest order", String.valueOf(isEarliestOrder))
+                .add("isEarliestOrder", String.valueOf(isEarliestOrder))
                 .toString();
     }
 }
