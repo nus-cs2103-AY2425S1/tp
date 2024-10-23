@@ -37,6 +37,15 @@ public abstract class Property {
         this.tags = tags;
     }
 
+    /**
+     * Constructs a {@code Property}.
+     *
+     * @param postalCode A valid Property postalCode.
+     * @param unitNumber A valid unit number.
+     * @param price A valid price.
+     * @param actualPrice A valid price.
+     * @param tags A set of tags associated to the Property
+     */
     public Property(PostalCode postalCode, UnitNumber unitNumber, Price price, Price actualPrice, Set<Tag> tags) {
         this.postalCode = postalCode;
         this.unitNumber = unitNumber;
@@ -110,9 +119,8 @@ public abstract class Property {
      * @param newPrice Price {@code Price} that the user specifies as the actual price.
      */
     public void setActualPrice(Optional<Price> newPrice) {
-        newPrice.ifPresentOrElse(
-                price -> this.actualPrice = price,
-                () -> this.actualPrice = new Price(this.price.value));
+        newPrice.ifPresentOrElse(price -> this.actualPrice = price, () ->
+                this.actualPrice = new Price(this.price.value));
     }
 
     @Override

@@ -1,13 +1,13 @@
 package seedu.address.model.statistics;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniqueBuyingPropertyList;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniqueSellingPropertyList;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Contains all statistics related to the AddressBook.
@@ -24,6 +24,9 @@ public class AddressBookStatistics {
 
     private UniquePersonList persons;
 
+    /**
+     * Initialises an empty {@code AddressBookStatistics} that has all field set to 0 or a new empty list.
+     */
     public AddressBookStatistics() {
         this.totalPersons = 0;
         this.totalPropertiesBought = 0;
@@ -34,6 +37,17 @@ public class AddressBookStatistics {
         this.uniqueBuyingPropertyList = new UniqueBuyingPropertyList();
     }
 
+    /**
+     * Inialises a  {@code AddressBookStatistics} based on the fields provided by the user.
+     *
+     * @param totalPersons Total number of persons in the address book
+     * @param totalPropertiesBought Total number of properties bought by all persons in the address book
+     * @param totalPropertiesSold Total number of properties sold by all persons in the address book
+     * @param totalSalesRevenue Total money earned from properties sold by all persons in the address book
+     * @param totalPurchaseExpense Total money spent from properties bought by all persons in the address book
+     * @param uniqueSellingPropertyList A list of unique properties that all persons in the address book wants to buy.
+     * @param uniqueBuyingPropertyList A list of unique properties that all persons in the address book wants to sell.
+     */
     public AddressBookStatistics(int totalPersons,
                                  int totalPropertiesBought,
                                  int totalPropertiesSold,

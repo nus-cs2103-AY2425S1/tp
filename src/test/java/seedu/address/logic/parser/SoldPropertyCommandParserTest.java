@@ -1,23 +1,25 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.BoughtPropertyCommand;
-import seedu.address.logic.commands.SoldPropertyCommand;
-import seedu.address.model.person.Price;
-
-import java.util.Optional;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROPERTY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PROPERTY;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.SoldPropertyCommand;
+import seedu.address.model.person.Price;
 
 public class SoldPropertyCommandParserTest {
 
     private final SoldPropertyCommandParser parser = new SoldPropertyCommandParser();
 
     @Test
-    public void parse_validArgs_returnSoldCommandWithUpdatedPrice_success() {
+    public void parseValidArgsReturnSoldCommandWithUpdatedPrice_success() {
         String priceString = "2000000";
         Optional<Price> actualPrice = Optional.of(new Price(priceString));
 
@@ -35,7 +37,7 @@ public class SoldPropertyCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnSoldCommandWithUpdatedPriceAndBigGapInArguments_success() {
+    public void parseValidArgsReturnSoldCommandWithUpdatedPriceAndBigGapInArguments_success() {
         String priceString = "2000000";
         Optional<Price> actualPrice = Optional.of(new Price(priceString));
 
@@ -53,7 +55,7 @@ public class SoldPropertyCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnSoldCommandWithNoUpdatedPrice_success() {
+    public void parseValidArgsReturnSoldCommandWithNoUpdatedPrice_success() {
         Optional<Price> actualPrice = Optional.ofNullable(null);
 
         String input = INDEX_FIRST_PERSON.getOneBased()

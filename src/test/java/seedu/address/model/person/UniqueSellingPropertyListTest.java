@@ -1,43 +1,47 @@
 package seedu.address.model.person;
 
-import javafx.collections.ObservableList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.testutil.TypicalPersons;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class UniqueSellingPropertyListTest {
 
-public class UniqueBuyingPropertyListTest {
-
-    UniqueBuyingPropertyList uniqueBuyingPropertyList = new UniqueBuyingPropertyList();
-    ObservableList<Property> propertiesToAdd = TypicalPersons.ALICE.getListOfBuyingProperties();
+    private UniqueSellingPropertyList uniqueSellingPropertyList = new UniqueSellingPropertyList();
+    private ObservableList<Property> propertiesToAdd = TypicalPersons.ALICE.getListOfSellingProperties();
     @Test
-    public void execute_addUniqueBuyingProperties_success() {
-        uniqueBuyingPropertyList.addUniqueBuyingProperties(propertiesToAdd);
+    public void execute_addUniqueSellingProperties_success() {
+        uniqueSellingPropertyList.addUniqueSellingProperties(propertiesToAdd);
 
-        assertEquals(propertiesToAdd.size(), uniqueBuyingPropertyList.getUniqueBuyingPropertiesCount());
+        assertEquals(propertiesToAdd.size(), uniqueSellingPropertyList.getUniqueSellingPropertiesCount());
     }
 
     @Test
-    public void addUniqueBuyingProperties_duplicateProperties_noDuplicatesAdded() {
-        uniqueBuyingPropertyList.addUniqueBuyingProperties(propertiesToAdd);
-        uniqueBuyingPropertyList.addUniqueBuyingProperties(propertiesToAdd);
+    public void addUniqueSellingProperties_duplicateProperties_noDuplicatesAdded() {
+        uniqueSellingPropertyList.addUniqueSellingProperties(propertiesToAdd);
+        uniqueSellingPropertyList.addUniqueSellingProperties(propertiesToAdd);
 
         // Verify that there are no duplicate properties
-        assertEquals(propertiesToAdd.size(), uniqueBuyingPropertyList.getUniqueBuyingPropertiesCount());
+        assertEquals(propertiesToAdd.size(), uniqueSellingPropertyList.getUniqueSellingPropertiesCount());
     }
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        assertTrue(uniqueBuyingPropertyList.equals(uniqueBuyingPropertyList));
+        assertTrue(uniqueSellingPropertyList.equals(uniqueSellingPropertyList));
     }
 
     @Test
     public void equals_differentObjectsWithSameProperties_returnsTrue() {
-        UniqueBuyingPropertyList anotherList = new UniqueBuyingPropertyList();
-        anotherList.addUniqueBuyingProperties(propertiesToAdd);
+        UniqueSellingPropertyList anotherList = new UniqueSellingPropertyList();
+        anotherList.addUniqueSellingProperties(propertiesToAdd);
 
-        uniqueBuyingPropertyList.addUniqueBuyingProperties(propertiesToAdd);
-        assertTrue(uniqueBuyingPropertyList.equals(anotherList));
+        uniqueSellingPropertyList.addUniqueSellingProperties(propertiesToAdd);
+        assertTrue(uniqueSellingPropertyList.equals(anotherList));
     }
 
     @Test
@@ -46,8 +50,8 @@ public class UniqueBuyingPropertyListTest {
         ObservableList<Property> differentProperties = TypicalPersons.BOB.getListOfBuyingProperties();
         anotherList.addUniqueBuyingProperties(differentProperties);
 
-        uniqueBuyingPropertyList.addUniqueBuyingProperties(propertiesToAdd);
-        assertFalse(uniqueBuyingPropertyList.equals(anotherList));
+        uniqueSellingPropertyList.addUniqueSellingProperties(propertiesToAdd);
+        assertFalse(uniqueSellingPropertyList.equals(anotherList));
     }
 
     @Test
@@ -55,9 +59,9 @@ public class UniqueBuyingPropertyListTest {
         UniqueBuyingPropertyList anotherList = new UniqueBuyingPropertyList();
         anotherList.addUniqueBuyingProperties(propertiesToAdd);
 
-        uniqueBuyingPropertyList.addUniqueBuyingProperties(propertiesToAdd);
+        uniqueSellingPropertyList.addUniqueSellingProperties(propertiesToAdd);
 
-        assertEquals(uniqueBuyingPropertyList.hashCode(), anotherList.hashCode());
+        assertEquals(uniqueSellingPropertyList.hashCode(), anotherList.hashCode());
     }
 
     @Test
@@ -66,8 +70,8 @@ public class UniqueBuyingPropertyListTest {
         ObservableList<Property> differentProperties = TypicalPersons.BOB.getListOfBuyingProperties();
         anotherList.addUniqueBuyingProperties(differentProperties);
 
-        uniqueBuyingPropertyList.addUniqueBuyingProperties(propertiesToAdd);
+        uniqueSellingPropertyList.addUniqueSellingProperties(propertiesToAdd);
 
-        assertNotEquals(uniqueBuyingPropertyList.hashCode(), anotherList.hashCode());
+        assertNotEquals(uniqueSellingPropertyList.hashCode(), anotherList.hashCode());
     }
 }

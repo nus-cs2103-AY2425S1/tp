@@ -32,6 +32,7 @@ public class PersonBuilder {
     private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
     private ObservableList<Property> propertiesBought = FXCollections.observableArrayList();
     private ObservableList<Property> propertiesSold = FXCollections.observableArrayList();
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -166,6 +167,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Returns an instance of the {@code Person}.
+     */
     public Person build() {
         return new Person(name, phone, email, address, tags, sellingProperties, buyingProperties, propertiesSold,
                 propertiesBought);

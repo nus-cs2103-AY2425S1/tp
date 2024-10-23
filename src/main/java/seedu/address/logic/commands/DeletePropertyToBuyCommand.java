@@ -278,7 +278,7 @@ public class DeletePropertyToBuyCommand extends Command {
             }
         }
 
-        public void setPropertiesBought(List<Property> PropertiesBought) {
+        public void setPropertiesBought(List<Property> propertiesBought) {
             this.propertiesBought = (propertiesBought != null) ? FXCollections.observableArrayList(propertiesBought)
                     : null;
         }

@@ -1,22 +1,25 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.BoughtPropertyCommand;
-import seedu.address.model.person.Price;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROPERTY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PROPERTY;
 
 import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.BoughtPropertyCommand;
+import seedu.address.model.person.Price;
 
 public class BoughtPropertyCommandParserTest {
 
     private final BoughtPropertyCommandParser parser = new BoughtPropertyCommandParser();
 
     @Test
-    public void parse_validArgs_returnBoughtCommandWithUpdatedPrice_success() {
+    public void parseValidArgsReturnBoughtCommandWithUpdatedPrice_success() {
         String priceString = "2000000";
         Optional<Price> actualPrice = Optional.of(new Price(priceString));
 
@@ -34,7 +37,7 @@ public class BoughtPropertyCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnBoughtCommandWithUpdatedPriceAndBigGapInArguments_success() {
+    public void parseValidArgsReturnBoughtCommandWithUpdatedPriceAndBigGapInArguments_success() {
         String priceString = "2000000";
         Optional<Price> actualPrice = Optional.of(new Price(priceString));
 
@@ -52,7 +55,7 @@ public class BoughtPropertyCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnBoughtCommandWithNoUpdatedPrice_success() {
+    public void parseValidArgsReturnBoughtCommandWithNoUpdatedPrice_success() {
         Optional<Price> actualPrice = Optional.ofNullable(null);
 
         String input = INDEX_FIRST_PERSON.getOneBased()
@@ -68,7 +71,7 @@ public class BoughtPropertyCommandParserTest {
     }
 
     @Test
-    public void parse_missingArgs_returnBoughtCommandFailure() {
+    public void parse_missingArgsReturnBoughtCommandFailure() {
         String input = INDEX_FIRST_PERSON.getOneBased()
                 + " ";
 
@@ -78,7 +81,7 @@ public class BoughtPropertyCommandParserTest {
     }
 
     @Test
-    public void parse_emptyArgs_returnBoughtCommandFailure() {
+    public void parse_emptyArgsReturnBoughtCommandFailure() {
         String input = " ";
 
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, BoughtPropertyCommand.MESSAGE_USAGE);
@@ -87,7 +90,7 @@ public class BoughtPropertyCommandParserTest {
     }
 
     @Test
-    public void parse_tooManyArgs_returnBoughtCommandFailure() {
+    public void parse_tooManyArgsReturnBoughtCommandFailure() {
         String input = INDEX_FIRST_PERSON.getOneBased()
                 + " "
                 + INDEX_FIRST_PROPERTY.getOneBased()

@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Objects;
-
 /**
  * Represents a Price of a Property in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.

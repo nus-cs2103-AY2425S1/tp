@@ -71,6 +71,7 @@ public class TypicalPersons {
             .withEmail("danielle@example.com").withAddress("11th street").withTags("friends")
             .withSellProperty(PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS)
             .withSellProperty(PROPERTY_OTHERPROPERTY_WITH_MULTIPLE_TAGS)
+            .withSellProperty(PROPERTY_CONDO_WITH_TAG)
             .withSellProperty(PROPERTY_OTHERPROPERTY)
             .withBuyProperty(PROPERTY_HDB_WITH_MULTIPLE_TAGS)
             .withBuyProperty(new PropertyToBuyBuilder().build()).build();

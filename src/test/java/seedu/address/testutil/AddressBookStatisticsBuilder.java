@@ -5,6 +5,9 @@ import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniqueSellingPropertyList;
 import seedu.address.model.statistics.AddressBookStatistics;
 
+/**
+ * Builds an instance of the {@code AddressBookStatistic}.
+ */
 public class AddressBookStatisticsBuilder {
     private int totalPersons;
     private int totalPropertiesBought;
@@ -15,6 +18,10 @@ public class AddressBookStatisticsBuilder {
     private UniqueBuyingPropertyList uniqueBuyingPropertyList;
 
     private UniquePersonList persons;
+
+    /**
+     * Initialises an instance of the {@code AddressBookStatisticsBuilder}.
+     */
     public AddressBookStatisticsBuilder() {
         this.totalPersons = 0;
         this.totalPropertiesBought = 0;
@@ -81,6 +88,9 @@ public class AddressBookStatisticsBuilder {
         return this;
     }
 
+    /**
+     * Returns an instance of the {@code AddressBookStatistics}.
+     */
     public AddressBookStatistics build() {
         return new AddressBookStatistics(totalPersons, totalPropertiesBought, totalPropertiesSold,
                 totalSalesRevenue, totalPurchaseExpense, uniqueSellingPropertyList, uniqueBuyingPropertyList);

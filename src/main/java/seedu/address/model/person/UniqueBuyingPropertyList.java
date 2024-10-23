@@ -1,15 +1,24 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * A list of unique properties that users want to buy.
+ */
 public class UniqueBuyingPropertyList {
     private int uniqueBuyingPropertiesCount;
 
     private ObservableList<Property> uniqueBuyingProperties = FXCollections.observableArrayList();
 
+    /**
+     * Adds {@code properties} to a list of unique property to buy list only if the current list
+     * does not contain this property.
+     *
+     * @param properties Properties that all users in the address book want to buy.
+     */
     public void addUniqueBuyingProperties(ObservableList<Property> properties) {
         requireNonNull(properties);
         for (Property p: properties) {
@@ -20,8 +29,11 @@ public class UniqueBuyingPropertyList {
         }
     }
 
-    public UniqueBuyingPropertyList getUniqueBuyingPropertiesList() {
-        return (UniqueBuyingPropertyList) uniqueBuyingProperties;
+    /**
+     * Returns the number of unique properties to buy by all persons in the address book.
+     */
+    public int getUniqueBuyingPropertiesCount() {
+        return uniqueBuyingPropertiesCount;
     }
 
     @Override

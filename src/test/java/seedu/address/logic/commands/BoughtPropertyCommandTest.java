@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BILL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,9 +22,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Price;
 import seedu.address.model.person.Property;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PropertyToBuyBuilder;
-
-import java.util.Optional;
 
 public class BoughtPropertyCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

@@ -1,6 +1,17 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BILL;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -11,13 +22,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Price;
 import seedu.address.model.person.Property;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PropertyToBuyBuilder;
-
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.*;
 
 public class SoldPropertyCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

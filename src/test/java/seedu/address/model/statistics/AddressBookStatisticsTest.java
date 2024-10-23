@@ -1,12 +1,13 @@
 package seedu.address.model.statistics;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.UniqueBuyingPropertyList;
 import seedu.address.model.person.UniqueSellingPropertyList;
 import seedu.address.testutil.AddressBookStatisticsBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 public class AddressBookStatisticsTest {
 

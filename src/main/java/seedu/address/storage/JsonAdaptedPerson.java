@@ -166,7 +166,8 @@ class JsonAdaptedPerson {
         //final ObservableList<Property> modelBuyProperties = new ArrayList<>(personBuyProperties);
         final ObservableList<Property> modelBuyProperties = FXCollections.observableArrayList(personBuyProperties);
         final ObservableList<Property> modelSoldProperties = FXCollections.observableArrayList(personSoldProperties);
-        final ObservableList<Property> modelBoughtProperties = FXCollections.observableArrayList(personBoughtProperties);
+        final ObservableList<Property> modelBoughtProperties = FXCollections
+                .observableArrayList(personBoughtProperties);
 
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
