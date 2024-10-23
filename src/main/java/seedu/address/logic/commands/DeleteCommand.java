@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by one of the specified attributes.\n"
+            + ": Deletes the person identified by the specified attributes.\n"
             + "Parameters: [" + "INDEX" + "] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
