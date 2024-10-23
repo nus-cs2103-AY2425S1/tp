@@ -36,7 +36,6 @@ public class CleanCommand extends Command {
      * Creates a CleanCommand to delete the people whose graduation dates have past
      */
     public CleanCommand() {
-        // TO DO: CHANGE THIS TO USE A GradDate Predicate comparing to LocalDateTime.now()
         String year = String.valueOf(Year.now().getValue());
         this.predicate = new GradYearPredicate(new GradYear(year));
     }
