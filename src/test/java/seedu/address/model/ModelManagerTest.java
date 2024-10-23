@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -15,6 +16,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Job;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -46,6 +49,33 @@ public class ModelManagerTest {
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
+    }
+
+    @Test
+    public void findPersonByNameAndJob_success() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+        assertEquals(modelManager.findPersonByNameAndJob(new Name("Alice Pauline"),
+                new Job("Software Engineer L1")), ALICE);
+        assertEquals(modelManager.findPersonByNameAndJob(new Name("Benson Meier"),
+                new Job("Software Engineer L2")), BENSON);
+    }
+
+    @Test
+    public void findPersonByNameAndJob_failure() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+        // non-matching name, matching job
+        assertNull(modelManager.findPersonByNameAndJob(new Name("Carl Kurz"),
+                new Job("Software Engineer L1")));
+
+        // matching name, non-matching job
+        assertNull(modelManager.findPersonByNameAndJob(new Name("Alice Pauline"),
+                new Job("Software Engineer L3")));
+
+        // non-matching name, non-matching job
+        assertNull(modelManager.findPersonByNameAndJob(new Name("Daniel Meier"),
+                new Job("Software Engineer L4")));
     }
 
     @Test

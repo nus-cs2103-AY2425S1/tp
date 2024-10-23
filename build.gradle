@@ -25,6 +25,10 @@ test {
     finalizedBy jacocoTestReport
 }
 
+run {
+    enableAssertions = true
+}
+
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
@@ -63,10 +67,11 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'HiredFiredPro.jar'
 }
 
 defaultTasks 'clean', 'test'
