@@ -24,10 +24,13 @@ import seedu.address.logic.commands.deletecommands.DeleteTaskFromGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
 import seedu.address.logic.commands.editcommands.EditTaskCommand;
-import seedu.address.logic.commands.findcommands.FindCommand;
+import seedu.address.logic.commands.findcommands.FindStudentCommand;
 import seedu.address.logic.commands.listcommands.ListGroupCommand;
 import seedu.address.logic.commands.listcommands.ListStudentCommand;
 import seedu.address.logic.commands.listcommands.ListTaskCommand;
+import seedu.address.logic.commands.sortcommands.SortGroupCommand;
+import seedu.address.logic.commands.sortcommands.SortStudentCommand;
+import seedu.address.logic.commands.sortcommands.SortTaskCommand;
 import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
 import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
 import seedu.address.logic.parser.addcommands.AddGroupCommandParser;
@@ -42,10 +45,13 @@ import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
 import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.findcommands.FindCommandParser;
+import seedu.address.logic.parser.findcommands.FindStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
 import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListTaskCommandParser;
+import seedu.address.logic.parser.sortcommands.SortGroupCommandParser;
+import seedu.address.logic.parser.sortcommands.SortStudentCommandParser;
+import seedu.address.logic.parser.sortcommands.SortTaskCommandParser;
 
 /**
  * Parses user input.
@@ -82,9 +88,13 @@ public class AddressBookParser {
         switch (commandWord) {
 
         // Student
-        case ListStudentCommand.COMMAND_WORD_ALIS:
+        case ListStudentCommand.COMMAND_WORD_ALIAS:
         case ListStudentCommand.COMMAND_WORD:
             return new ListStudentCommandParser().parse(arguments);
+
+        case FindStudentCommand.COMMAND_WORD_ALIAS:
+        case FindStudentCommand.COMMAND_WORD:
+            return new FindStudentCommandParser().parse(arguments);
 
         case AddStudentCommand.COMMAND_WORD_ALIAS:
         case AddStudentCommand.COMMAND_WORD:
@@ -144,6 +154,17 @@ public class AddressBookParser {
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);
 
+        case SortStudentCommand.COMMAND_WORD_ALIAS:
+        case SortStudentCommand.COMMAND_WORD:
+            return new SortStudentCommandParser().parse(arguments);
+
+        case SortGroupCommand.COMMAND_WORD_ALIAS:
+        case SortGroupCommand.COMMAND_WORD:
+            return new SortGroupCommandParser().parse(arguments);
+
+        case SortTaskCommand.COMMAND_WORD_ALIAS:
+        case SortTaskCommand.COMMAND_WORD:
+            return new SortTaskCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
@@ -151,14 +172,8 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
 
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            // throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-            // will implement in v1.4
-            return new FindCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

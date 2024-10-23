@@ -14,6 +14,9 @@ import seedu.address.commons.core.State;
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    // used to define strictness of FuzzyWuzzy ratio
+    // higher means must match more
+    public static final int MATCH_RATIO = 75;
     private static final State DEFAULT_STATE = new State("Students");
     private static final State GROUP_STATE = new State("Groups");
     private static final State GROUP_TASK_STATE = new State("GroupTask");
@@ -21,12 +24,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private String mostRecentGroupTaskDisplay = "";
     private State guiState = GROUP_STATE;
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data", "addressbook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+    }
+
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
      */
@@ -114,7 +119,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+            && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
     }
 
     @Override
