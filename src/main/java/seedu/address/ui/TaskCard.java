@@ -44,5 +44,21 @@ public class TaskCard extends UiPart<Region> {
 
         isDone.setText(task.getIsDone() ? "Completed" : "Incomplete");
     }
+
+    public Label getDescriptionLabel() {
+        return description;
+    }
+
+    public Label getIdLabel() {
+        return id;
+    }
+
+    public Label getDateLabel() {
+        return date;
+    }
+
+    public Label getIsDoneLabel() {
+        return isDone;
+    }
 }
 

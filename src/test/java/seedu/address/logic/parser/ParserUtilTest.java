@@ -54,6 +54,15 @@ public class ParserUtilTest {
     private static final String VALID_EVENT_END_DATE = "2024-10-05";
     private static final String VALID_DEADLINE_DATE = "2024-12-31";
 
+    private static final String INVALID_DEADLINE_DATE_MONTH = "deadline Submit assignment /by 2024-13-31";
+    private static final String INVALID_DEADLINE_DATE_DAY = "deadline Submit assignment /by 2024-12-32";
+    private static final String INVALID_DEADLINE_DATE_STRING = "deadline Submit assignment /by not-a-date";
+
+    private static final String INVALID_EVENT_DATE_MONTH = "event Conference /from 2024-13-01 /to 2024-12-31";
+    private static final String INVALID_EVENT_DATE_DAY = "event Conference /from 2024-12-01 /to 2024-12-32";
+    private static final String INVALID_EVENT_DATE_STRING = "event Conference /from 2024-12-01 /to not-a-date";
+    private static final String INVALID_EVENT_DATE_ORDER = "event Conference /from 2024-12-31 /to 2024-12-01";
+
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -284,5 +293,32 @@ public class ParserUtilTest {
     public void parseTasks_collectionWithInvalidTask_throwsParseException() {
         assertThrows(ParseException.class, () ->
                 ParserUtil.parseTasks(Arrays.asList(VALID_TODO_DESCRIPTION, INVALID_DEADLINE_FORMAT)));
+    }
+
+    @Test
+    public void parseTask_invalidDeadlineDate_throwsParseException() {
+        // Invalid month
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_DEADLINE_DATE_MONTH));
+
+        // Invalid day
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_DEADLINE_DATE_DAY));
+
+        // Invalid date string
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_DEADLINE_DATE_STRING));
+    }
+
+    @Test
+    public void parseTask_invalidEventDates_throwsParseException() {
+        // Invalid month
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_EVENT_DATE_MONTH));
+
+        // Invalid day
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_EVENT_DATE_DAY));
+
+        // Invalid date string
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_EVENT_DATE_STRING));
+
+        // "from" date is after "to" date
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_EVENT_DATE_ORDER));
     }
 }

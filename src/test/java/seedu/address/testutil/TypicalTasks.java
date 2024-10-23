@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
@@ -40,6 +41,19 @@ public class TypicalTasks {
     public static final Deadline DEADLINE_TASK = new Deadline(VALID_DEADLINE_DESCRIPTION, VALID_DEADLINE_DATE);
     public static final Event EVENT_TASK = new Event(VALID_EVENT_DESCRIPTION,
             VALID_EVENT_START_DATE, VALID_EVENT_END_DATE);
+
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+
+        for (Task task : getTypicalTasks()) {
+            ab.addTask(task);
+        }
+        return ab;
+    }
 
     // Returns a list of all typical tasks
     public static List<Task> getTypicalTasks() {
