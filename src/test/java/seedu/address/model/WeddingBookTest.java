@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEDDING_NAME_ONE;
+import static seedu.address.testutil.TypicalWeddings.WEDDING_FOUR;
 import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
 import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
@@ -82,6 +83,31 @@ public class WeddingBookTest {
     public void getWeddingList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> weddingBook.getWeddingList().remove(0));
     }
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        WeddingBook originalBook = getTypicalWeddingBook();
+
+        WeddingBook tempBook = getTypicalWeddingBook();
+        tempBook.addWedding(WEDDING_FOUR);
+        WeddingBook weddingBookCopy = tempBook;
+
+        assertTrue(originalBook.equals(getTypicalWeddingBook()));
+
+        // same object -> returns true
+        assertTrue(originalBook.equals(originalBook));
+
+        // null -> returns false
+        assertFalse(originalBook.equals(null));
+
+        // different type -> returns false
+        assertFalse(originalBook.equals(5));
+
+        // different wedding book -> returns false
+        assertFalse(originalBook.equals(weddingBookCopy));
+    }
+
 
     @Test
     public void toStringMethod() {
