@@ -4,6 +4,9 @@ import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tag.exceptions.InvalidGradeIndexException;
 
 /**
@@ -13,6 +16,7 @@ import seedu.address.model.tag.exceptions.InvalidGradeIndexException;
 public class Grade {
     public static final String MESSAGE_CONSTRAINTS = "Grade index should be numeric and between 0 to 5";
     public static final String VALIDATION_REGEX = "\\d+";
+    private static final Logger logger = LogsCenter.getLogger(Grade.class);
     public final String gradeIndex;
 
     /**
@@ -55,6 +59,7 @@ public class Grade {
         case 4:
             return "Excellent (4)";
         default:
+            logger.warning("isValidGradeIndex method may not be working as expected");
             throw new InvalidGradeIndexException();
         }
     }
