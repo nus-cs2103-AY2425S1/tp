@@ -1,0 +1,9 @@
+.root {
+    -fx-background-color: derive(#dafaff, 20%);
+}
+
+.label {
+    -fx-font-family: Verdana Bold, Helvetica, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #124264;
+}

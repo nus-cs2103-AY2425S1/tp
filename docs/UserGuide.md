@@ -1,41 +1,67 @@
 ---
 layout: page
-title: User Guide
+title: AcademyAssist User Guide
+
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## Table of Contents
 
-* Table of Contents
-{:toc}
+1. [Introduction](#introduction)
 
---------------------------------------------------------------------------------------------------------------------
+2. [Quick Start](#quick-start)
+
+3. [Features](#features)
+   * [Adding a student](#adding-a-student--add)
+   * [Deleting a student](#deleting-a-student--del)
+   * [Editing a student](#editing-a-student--edit)
+   * [Viewing all student](#viewing-all-students--view)
+   * [Finding a student](#finding-a-student--find)
+   * [Sorting students](#sorting-students--sort)
+   * [Clearing all entries](#clearing-all-entries--clear)
+   * [Getting help](#getting-help--help)
+   * [Exiting the program](#exiting-the-program--exit)
+
+4. [Data Management](#data-management-in-academyassist)
+
+5. [FAQ](#faq)
+
+6. [Command summary](#command-summary)
+
+## Introduction
+Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers.
+This desktop application is designed to streamline your administrative tasks, allowing you to focus more
+on what truly matters - educating and nurturing young minds.
+
+AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical
+User Interface (GUI).** This hybrid approach ensures that you can manage your student database with
+lightning-fast efficiency while still enjoying the visual benefits of modern software design. Whether you're a
+seasoned administrator or new to digital management systems, AcademyAssist is intuitive enough for beginners yet
+powerful enough for experts. With features like quick student addition, easy information retrieval,
+and automated data saving, AcademyAssist is set to revolutionize how you manage your tuition center.
+
+Let's embark on this journey to simpler, faster, and more effective student management!
+
+---
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   1. Open a terminal window, and go to the main folder where all your project files are stored.
+   2. Run the `java -version` command to confirm the terminal is using Java 17.
+   3. If Java version is not Java 17, download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `AcademyAssist.jar` file from the official website.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Move the file to the folder you want to use as the _home folder_ for your AcademyAssist.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. For first time users, a help window appears automatically and details of some basic features are shown.
 
-   * `list` : Lists all contacts.
+6. Type the command in the command box and press Enter to execute it. For example, to bring up the help window
+again, type `help` and press Enter.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,109 +69,143 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+* Words in `UPPER_CASE` are the inputs to be supplied by the user.
+  e.g `delete STUDENT_ID` means the user has to enter the ID number of the student to be deleted.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
+* Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will
+be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple
+lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
-### Viewing help : `help`
+### Adding a student : `add`
 
-Shows a message explaning how to access the help page.
+Adds a new student to the tuition center management system.
 
-![help message](images/helpMessage.png)
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT`
 
-Format: `help`
-
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+* `NAME` should be 1-100 characters long and contain only alphabets and spaces.
+* `PHONE_NUMBER` should be an 8-digit number.
+* `EMAIL` is compulsory and should follow the format username@domain.
+* `ADDRESS` is compulsory.
+* `IC_NUMBER` is compulsory and should follow the format of Singaporean IC and FIN numbers (e.g., S1234567A).
+* `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
+secondary school years 7 - 13).
+* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Only subjects that are available
+within the tuition centre will be allowed. Subjects are case-insensitive (i.e. science, Science, SCIENCE will be treated
+as the same).
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
 
-### Listing all persons : `list`
+![Add Success Message](/images/add.png)
 
-Shows a list of all persons in the address book.
+### Deleting a student : `delete`
 
-Format: `list`
+Removes a student from the tuition center management system.
 
-### Editing a person : `edit`
+Format: `delete STUDENT_ID`
 
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `delete S00001`
 
-### Locating persons by name: `find`
+![Delete Success Message](/images/delete.png)
 
-Finds persons whose names contain any of the given keywords.
+### Editing a student : `edit`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Edits an existing student's details in the system.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `edit STUDENT_ID FIELD/NEW_VALUE`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is 
+automatically assigned when the student contact is first added and can be found by viewing the student's details.
+* `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
+* `NEW_VALUE` should follow the format for the respective field.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `edit S00001 a/New_Address`
+* `edit s00002 p/91234567 a/New_Address`
+
+![Edit Success Message](/images/edit.png)
+
+### Viewing all students : `view`
+
+Shows a list of all students in the system.
+
+Format: `view`
+
+![View Success Message](/images/view.png)
+
+### Finding a student : `find`
+
+Finds students whose names contain any of the given keywords.
+
+Format: `find NAME [MORE_NAMES]`
+
+* The search is case-insensitive (i.e. John, JOHN, john are all treated the same way).
+* You can only search for a student by their name.
+* Students matching at least one keyword will be returned.
+
+Examples:
+* `find John` returns `John` and `John Doe`
+* `find John Jane` returns any student having names `John` or `Jane`
+
+![Find Success Message](/images/find.png)
+
+### Adding a class to a student : `addc`
+
+Adds a class to an existing student's record.
+
+Format: `addc STUDENT_ID s/SUBJECT`
+
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
+  automatically assigned when the student contact is first added and can be found by viewing the student's details.
+* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
+  (i.e. science, SCIENCE, Science are treated the same way).
+
+Examples:
+* `addc S00001 s/Science`
+
+![addc Success Message](/images/addc.png)
+
+### Sorting students : `sort`
+
+Sorts the list of students based on a specified field.
+
+Format: `sort s/FIELD`
+
+* `FIELD` can be either `name` or `class`.
+
+Examples:
+* `sort s/name`
+* `sort s/class`
+
+![Sort Success Message](/images/sort.png)
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all student entries from the system.
 
 Format: `clear`
+
+![Clear Success Message](/images/clear.png)
+
+### Getting help : `help`
+
+Shows a message explaining how to access the help page.
+
+Format: `help`
+
+![Help Success Message](/images/help.png)
 
 ### Exiting the program : `exit`
 
@@ -153,47 +213,72 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+---
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+## Data Management in AcademyAssist
 
-### Editing the data file
+Welcome to the Data Management section of AcademyAssist! Here, we'll explain how your important information
+is stored and managed.
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+### How Your Data is Saved
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+Don't worry about constantly saving your work - AcademyAssist has got you covered! Here's what you need to know:
 
-### Archiving data files `[coming in v2.0]`
+1. **Automatic Saving**: Every time you make a change, like adding a new student or updating information,
+AcademyAssist saves it right away. You don't have to do anything!
 
-_Details coming soon ..._
+2. **Where Your Data Lives**: All your information is safely stored on your computer in a special file.
+It's like a digital filing cabinet just for AcademyAssist.
+
+3. **Easy to Understand**: We use a format called JSON to store your data. While you don't need
+to know the details, it's designed to be easy for both computers and humans to read if needed.
+
+### Keeping Your Data Safe
+
+Your information is important, so here are some tips to keep it secure:
+
+1. **Make Backups**: It's always a good idea to have an extra copy of your data. Once a week,
+why not copy your AcademyAssist file to a USB drive or cloud storage?
+
+2. **Be Careful with Editing**: While it's possible to open and edit the data file directly, we don't recommend
+it unless you're an expert in CLI applications. It's safer to make changes through the AcademyAssist program.
+
+
+### What If Something Goes Wrong?
+
+Don't panic! AcademyAssist is designed to handle most issues smoothly. But if you do run into problems:
+
+1. **Check for Messages**: If there's an issue loading your data, AcademyAssist will show a helpful
+message explaining what's wrong.
+
+2. **Use Your Backup**: This is where your backup copy comes in handy. You can replace the problematic
+file with your backup to get back on track.
+
+Remember, AcademyAssist is here to make managing student information easy and stress-free.
+If you ever have questions about your data, just ask - we're always happy to help!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous AcademyAssist folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action | Format, Examples                                                                                                                                                                        |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/IC_NUMBER yg/YEAR_GROUP s/SUBJECT` <br> e.g., `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T384859A yg/3 s/Science` |
+| **Delete** | `delete STUDENT_ID`<br> e.g., `delete S00001`                                                                                                                                           |
+| **Edit** | `edit STUDENT_ID FIELD/NEW_VALUE`<br> e.g.,`edit S00001 a/New_Address`                                                                                                                  |
+| **View** | `view`                                                                                                                                                                                  |
+| **Find** | `find NAME [MORE_NAMES]`<br> e.g., `find John Jane`                                                                                                                                     |
+| **Add Class** | `addc STUDENT_ID s/SUBJECT`<br> e.g., `addc S00003 Science`                                                                                                                             |
+| **Sort** | `sort s/FIELD`<br> e.g., `sort s/name`                                                                                                                                                  |
+| **Clear** | `clear`                                                                                                                                                                                 |
+| **Help** | `help`                                                                                                                                                                                  |
+| **Exit** | `exit`                                                                                                                                                                                  |
