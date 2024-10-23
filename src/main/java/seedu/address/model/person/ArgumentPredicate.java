@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.tag.Tag;
 import static java.util.Objects.requireNonNull;
 
@@ -49,29 +48,34 @@ public class ArgumentPredicate implements Predicate<Person> {
 
             addIfPresent(() -> toFind.getName().toString(), p -> {
                 String[] nameKeywords = toFind.getName().toString().split("\\s+");
-                NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+                NameContainsKeywordsPredicate namePredicate =
+                        new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
                 return namePredicate.test(p);
             }, person, validParameters);
 
-            addIfPresent(() -> toFind.getPhone().toString(), p -> toFind.getPhone().equals(p.getPhone()), person, validParameters);
-
-            addIfPresent(() -> toFind.getEmail().toString(), p -> toFind.getEmail().equals(p.getEmail()), person, validParameters);
-
-            addIfPresent(() -> toFind.getAddress().toString(), p -> toFind.getAddress().equals(p.getAddress()), person, validParameters);
-
-            addIfPresent(() -> toFind.getProjectStatus().toString(), p -> toFind.getProjectStatus().equals(p.getProjectStatus()),
+            addIfPresent(() -> toFind.getPhone().toString(), p -> toFind.getPhone().equals(p.getPhone()),
                     person, validParameters);
 
-            addIfPresent(() -> toFind.getPaymentStatus().toString(), p -> toFind.getPaymentStatus().equals(p.getPaymentStatus()),
+            addIfPresent(() -> toFind.getEmail().toString(), p -> toFind.getEmail().equals(p.getEmail()),
                     person, validParameters);
 
-            addIfPresent(() -> toFind.getClientStatus().toString(), p -> toFind.getClientStatus().equals(p.getClientStatus()),
+            addIfPresent(() -> toFind.getAddress().toString(), p -> toFind.getAddress().equals(p.getAddress()),
                     person, validParameters);
 
-            addIfDeadlinePresent(() -> toFind.getDeadline().toString(), p -> toFind.getDeadline().equals(p.getDeadline()),
-                    person, validParameters);
+            addIfPresent(() -> toFind.getProjectStatus().toString(), p -> toFind.getProjectStatus()
+                            .equals(p.getProjectStatus()), person, validParameters);
 
-            addIfTagPresent(toFind.getTags(), p -> toFind.getTags().stream().anyMatch(p.getTags()::contains), person, validParameters);
+            addIfPresent(() -> toFind.getPaymentStatus().toString(), p -> toFind.getPaymentStatus()
+                            .equals(p.getPaymentStatus()), person, validParameters);
+
+            addIfPresent(() -> toFind.getClientStatus().toString(), p -> toFind.getClientStatus()
+                            .equals(p.getClientStatus()), person, validParameters);
+
+            addIfDeadlinePresent(() -> toFind.getDeadline().toString(), p -> toFind.getDeadline()
+                            .equals(p.getDeadline()), person, validParameters);
+
+            addIfTagPresent(toFind.getTags(), p -> toFind.getTags().stream()
+                    .anyMatch(p.getTags()::contains), person, validParameters);
 
         return validParameters;
     }

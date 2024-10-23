@@ -51,12 +51,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse("__No_Email__"));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse("__No_Address__"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        ProjectStatus projectStatus = ParserUtil.parseProjectStatus(argMultimap.getValue(PREFIX_PROJECT_STATUS).orElse("__No_Project_Status__"));
-        PaymentStatus paymentStatus = ParserUtil.parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS).orElse("__No_Payment_Status__"));
-        ClientStatus clientStatus = ParserUtil.parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).orElse("__No_Client_Status__"));
-        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).orElse("__No_Deadline__"));
+        ProjectStatus projectStatus = ParserUtil.parseProjectStatus(argMultimap.getValue(PREFIX_PROJECT_STATUS)
+                .orElse("__No_Project_Status__"));
+        PaymentStatus paymentStatus = ParserUtil.parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS)
+                .orElse("__No_Payment_Status__"));
+        ClientStatus clientStatus = ParserUtil.parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS)
+                .orElse("__No_Client_Status__"));
+        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE)
+                .orElse("__No_Deadline__"));
 
-        Person person = new Person(name, phone, email, address, tagList, projectStatus, paymentStatus, clientStatus, deadline);
+        Person person = new Person(name, phone, email, address, tagList, projectStatus,
+                paymentStatus, clientStatus, deadline);
         return new FindCommand(new ArgumentPredicate(person));
     }
 
