@@ -104,7 +104,7 @@ public class TutorialListTest {
     }
 
     @Test
-    public void hasTutorialClassTest_success() {
+    public void hasTutorialIdTest_success() {
         TutorialList tutorialList = new TutorialList();
         tutorialList.addTutorial(TUTORIAL2);
         assertTrue(tutorialList.hasTutorial(TUTORIAL_ID));

@@ -231,7 +231,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(TutorialId tutorialClass) {
+        public boolean hasTutorial(TutorialId tutorialId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -311,8 +311,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(TutorialId tutorialClass) {
-            requireNonNull(tutorialClass);
+        public boolean hasTutorial(TutorialId tutorialId) {
+            requireNonNull(tutorialId);
             return false;
         }
 
@@ -343,14 +343,14 @@ public class AddCommandTest {
         }
 
         @Override
-        public void assignStudent(Student student, TutorialId tutorialClass) {
+        public void assignStudent(Student student, TutorialId tutorialId) {
             requireNonNull(student);
-            requireNonNull(tutorialClass);
+            requireNonNull(tutorialId);
         }
 
         @Override
-        public boolean hasTutorial(TutorialId tutorialClass) {
-            requireNonNull(tutorialClass);
+        public boolean hasTutorial(TutorialId tutorialId) {
+            requireNonNull(tutorialId);
             return true;
         }
 

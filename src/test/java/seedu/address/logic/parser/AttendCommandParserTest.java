@@ -51,7 +51,7 @@ public class AttendCommandParserTest {
     }
 
     @Test
-    public void parse_missingTutorialClass_failure() {
+    public void parse_missingTutorialId_failure() {
         String userInput = " " + PREFIX_STUDENTID + "1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 

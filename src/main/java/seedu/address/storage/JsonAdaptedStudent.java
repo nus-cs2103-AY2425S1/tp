@@ -75,10 +75,10 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     TutorialId.class.getSimpleName()));
         }
-        if (!TutorialId.isValidTutorialClass(tutorialId)) {
+        if (!TutorialId.isValidTutorialId(tutorialId)) {
             throw new IllegalValueException(TutorialId.MESSAGE_CONSTRAINTS);
         }
-        final TutorialId modelTutorialClass = TutorialId.of(tutorialId);
+        final TutorialId modelTutorialId = TutorialId.of(tutorialId);
 
         final PresentDates modelPresentDates;
 
@@ -88,7 +88,7 @@ class JsonAdaptedStudent {
             modelPresentDates = new PresentDates(new HashSet<>());
         }
 
-        return new Student(modelName, modelStudentId, modelTutorialClass, modelPresentDates);
+        return new Student(modelName, modelStudentId, modelTutorialId, modelPresentDates);
     }
 
 }

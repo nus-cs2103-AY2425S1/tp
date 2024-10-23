@@ -76,7 +76,7 @@ public class JsonAdaptedTutorial {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialId"));
         }
 
-        final TutorialId modelTutorialClass = TutorialId.of(tutorialId);
+        final TutorialId modelTutorialId = TutorialId.of(tutorialId);
         final TutName modelTutName = new TutName(tutName);
         final List<Student> modelStudents = new ArrayList<>();
         for (JsonAdaptedStudent student : students) {
@@ -87,7 +87,7 @@ public class JsonAdaptedTutorial {
             modelTutDates.add(tutDate.toModelType());
         }
 
-        Tutorial tutorial = Tutorial.of(modelTutName, modelTutorialClass);
+        Tutorial tutorial = Tutorial.of(modelTutName, modelTutorialId);
 
         for (Student student : modelStudents) {
             tutorial.add(student);

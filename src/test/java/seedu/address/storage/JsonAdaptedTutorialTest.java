@@ -24,7 +24,7 @@ public class JsonAdaptedTutorialTest {
 
     private static final String INVALID_TUT_NAME = "";
     private static final String VALID_TUT_NAME = TUTORIAL_SAMPLE.getTutName().tutName;
-    private static final String VALID_TUTORIAL_CLASS = TUTORIAL_SAMPLE.getTutorialId().toString();
+    private static final String VALID_TUTORIAL_ID = TUTORIAL_SAMPLE.getTutorialId().toString();
 
     private static final JsonAdaptedStudent VALID_STUDENT = new JsonAdaptedStudent(ALICE);
     private static final JsonAdaptedTutDate VALID_TUT_DATE = new JsonAdaptedTutDate(TUT_DATE);
@@ -62,7 +62,7 @@ public class JsonAdaptedTutorialTest {
     }
 
     @Test
-    public void toModelType_invalidTutorialClass_throwsIllegalValueException() {
+    public void toModelType_invalidTutorialId_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with invalid tutorial class
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
                 VALID_TUT_NAME, null,
@@ -76,7 +76,7 @@ public class JsonAdaptedTutorialTest {
     @Test
     public void toModelType_missingStudentsList_noException() throws Exception {
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
-                VALID_TUT_NAME, VALID_TUTORIAL_CLASS,
+                VALID_TUT_NAME, VALID_TUTORIAL_ID,
                 null,
                 List.of(VALID_TUT_DATE)
         );
@@ -86,7 +86,7 @@ public class JsonAdaptedTutorialTest {
     @Test
     public void toModelType_missingTutDatesList_noException() throws Exception {
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
-                VALID_TUT_NAME, VALID_TUTORIAL_CLASS,
+                VALID_TUT_NAME, VALID_TUTORIAL_ID,
                 List.of(VALID_STUDENT),
                 null
         );
@@ -98,7 +98,7 @@ public class JsonAdaptedTutorialTest {
         JsonAdaptedTutDate invalidTutDate = new JsonAdaptedTutDate("", List.of("studentId"));
 
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
-                VALID_TUT_NAME, VALID_TUTORIAL_CLASS,
+                VALID_TUT_NAME, VALID_TUTORIAL_ID,
                 List.of(VALID_STUDENT),
                 List.of(invalidTutDate)
         );
@@ -109,13 +109,13 @@ public class JsonAdaptedTutorialTest {
     @Test
     public void toModelType_allValidFields_returnsTutorial() throws Exception {
         JsonAdaptedTutorial jsonTut = new JsonAdaptedTutorial(
-                VALID_TUT_NAME, VALID_TUTORIAL_CLASS,
+                VALID_TUT_NAME, VALID_TUTORIAL_ID,
                 List.of(VALID_STUDENT), List.of(VALID_TUT_DATE)
         );
 
         Tutorial tutorial = jsonTut.toModelType();
         assertEquals(VALID_TUT_NAME, tutorial.getTutName().tutName);
-        assertEquals(VALID_TUTORIAL_CLASS, tutorial.getTutorialId().toString());
+        assertEquals(VALID_TUTORIAL_ID, tutorial.getTutorialId().toString());
         assertEquals(1, tutorial.getStudents().size());
     }
 
