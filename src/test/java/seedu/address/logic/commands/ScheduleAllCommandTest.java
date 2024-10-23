@@ -33,7 +33,7 @@ public class ScheduleAllCommandTest {
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
+    public void execute_scheduleIsFiltered_showsEverything() {
         showAppointmentAtIndex(model, INDEX_FIRST_PERSON);
         expectedModel.filterAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
         assertCommandSuccess(new ScheduleAllCommand(), model, ScheduleAllCommand.MESSAGE_SUCCESS, expectedModel);
