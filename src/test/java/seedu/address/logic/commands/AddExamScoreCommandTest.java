@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_FINAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_MIDTERM;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_PRACTICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_QUIZ;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_SCORE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_SCORE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,12 +23,8 @@ import seedu.address.model.exam.Exam;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddExamScoreCommandTest {
 
@@ -60,7 +56,7 @@ public class AddExamScoreCommandTest {
     @Test
     public void execute_examNotFound_throwsCommandException() {
         AddExamScoreCommand addExamScoreCommand = new AddExamScoreCommand(INDEX_FIRST_PERSON,
-                new Exam(VALID_EXAM_PRACTICAL), VALID_EXAM_SCORE_AMY);
+                new Exam(VALID_EXAM_QUIZ), VALID_EXAM_SCORE_AMY);
         assertThrows(CommandException.class, AddExamScoreCommand.MESSAGE_EXAM_NOT_FOUND,
                 () -> addExamScoreCommand.execute(model));
     }

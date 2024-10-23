@@ -20,7 +20,7 @@ public class Exam {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String SCORE_VALIDATION_REGEX = "^(?:[0-9]|[1-9][0-9]|100)$";
+    public static final String SCORE_VALIDATION_REGEX = "^(?:[0-9]|[1-9][0-9]|100|NIL)$";
 
     public final String examName;
     public final String examScore;
@@ -34,7 +34,7 @@ public class Exam {
         requireNonNull(examName);
         checkArgument(isValidExamName(examName), NAME_MESSAGE_CONSTRAINTS);
         this.examName = examName;
-        this.examScore = null;
+        this.examScore = "NIL";
     }
 
     /**

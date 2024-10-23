@@ -43,6 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_EXAM_MIDTERM = "Midterm";
     public static final String VALID_EXAM_FINAL = "Final";
     public static final String VALID_EXAM_PRACTICAL = "Practical";
+    public static final String VALID_EXAM_QUIZ = "Quiz";
     public static final String VALID_EXAM_SCORE_AMY = "70";
     public static final String VALID_EXAM_SCORE_BOB = "65";
     public static final String VALID_TAG_HUSBAND = "husband";

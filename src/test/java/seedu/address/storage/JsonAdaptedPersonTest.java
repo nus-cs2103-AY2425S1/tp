@@ -33,7 +33,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_STUDENT_CLASS = "A1";
     private static final String INVALID_ECNAME = "---";
     private static final String INVALID_ECNUMBER = "123";
-    private static final String INVALID_EXAM = "Midterm%";
+    private static final String INVALID_EXAM_NAME = "Midterm%";
+    private static final String INVALID_EXAM_SCORE = "101";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -224,7 +225,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidExams_throwsIllegalValueException() {
         List<JsonAdaptedExam> invalidExams = new ArrayList<>(VALID_EXAMS);
-        invalidExams.add(new JsonAdaptedExam(new Exam(INVALID_EXAM)));
+        invalidExams.add(new JsonAdaptedExam(INVALID_EXAM_NAME, INVALID_EXAM_SCORE));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REGISTER_NUMBER,
                         VALID_SEX, VALID_STUDENT_CLASS, VALID_ECNAME, VALID_ECNUMBER, invalidExams, VALID_TAGS);
