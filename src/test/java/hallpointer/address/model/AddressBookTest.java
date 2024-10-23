@@ -46,9 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateMembers_throwsDuplicateMemberException() {
         // Two members with the same identity fields
-        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
+        Member updatedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Member> newMembers = Arrays.asList(ALICE, editedAlice);
+        List<Member> newMembers = Arrays.asList(ALICE, updatedAlice);
         AddressBookStub newData = new AddressBookStub(newMembers);
 
         assertThrows(DuplicateMemberException.class, () -> addressBook.resetData(newData));
@@ -73,9 +73,9 @@ public class AddressBookTest {
     @Test
     public void hasMember_memberWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addMember(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
+        Member updatedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasMembers(editedAlice));
+        assertTrue(addressBook.hasMembers(updatedAlice));
     }
 
     @Test

@@ -49,6 +49,7 @@ public class AddSessionCommand extends Command {
     public AddSessionCommand(Session session, Set<Index> memberIndexes) {
         requireNonNull(session);
         requireNonNull(memberIndexes);
+        assert !memberIndexes.isEmpty();
 
         toAdd = session;
         this.memberIndexes = memberIndexes.stream().toList();

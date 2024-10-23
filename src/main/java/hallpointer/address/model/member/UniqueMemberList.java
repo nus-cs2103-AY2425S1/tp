@@ -49,23 +49,23 @@ public class UniqueMemberList implements Iterable<Member> {
     }
 
     /**
-     * Replaces the member {@code target} in the list with {@code editedMember}.
+     * Replaces the member {@code target} in the list with {@code updatedMember}.
      * {@code target} must exist in the list.
-     * The member identity of {@code editedMember} must not be the same as another existing member in the list.
+     * The member identity of {@code updatedMember} must not be the same as another existing member in the list.
      */
-    public void setMember(Member target, Member editedMember) {
-        requireAllNonNull(target, editedMember);
+    public void setMember(Member target, Member updatedMember) {
+        requireAllNonNull(target, updatedMember);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new MemberNotFoundException();
         }
 
-        if (!target.isSameMember(editedMember) && contains(editedMember)) {
+        if (!target.isSameMember(updatedMember) && contains(updatedMember)) {
             throw new DuplicateMemberException();
         }
 
-        internalList.set(index, editedMember);
+        internalList.set(index, updatedMember);
     }
 
     /**
