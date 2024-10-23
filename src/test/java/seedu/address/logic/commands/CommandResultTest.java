@@ -50,6 +50,12 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+
+        // different showPersons value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false).hashCode());
+
+        // different showEvents value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, true).hashCode());
     }
 
     @Test
