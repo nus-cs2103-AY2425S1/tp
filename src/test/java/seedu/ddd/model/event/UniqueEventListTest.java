@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
-import static seedu.ddd.testutil.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.TypicalContacts.BOB;
 import static seedu.ddd.testutil.TypicalEvents.WEDDING_A;
 import static seedu.ddd.testutil.TypicalEvents.WEDDING_B;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.contact.exceptions.DuplicateContactException;
 import seedu.ddd.model.event.exceptions.DuplicateEventException;
 import seedu.ddd.model.event.exceptions.EventNotFoundException;
 import seedu.ddd.testutil.EventBuilder;
