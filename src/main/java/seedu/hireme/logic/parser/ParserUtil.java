@@ -114,6 +114,7 @@ public class ParserUtil {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
+        assert isInvalidCommand == false;
         if (!trimmedOrder.equals("earliest") && !trimmedOrder.equals("latest")) {
             throw new ParseException(MESSAGE_INVALID_ORDER);
         }
