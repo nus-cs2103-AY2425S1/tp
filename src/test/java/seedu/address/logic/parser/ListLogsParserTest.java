@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ListLogsCommand;
 import seedu.address.model.person.IdentityNumber;
 
@@ -16,20 +15,24 @@ public class ListLogsParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListLogsCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidIdentityNumber_throwsParseException() {
         // Input too short/long
-        assertParseFailure(parser, "i/S123", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "i/S12345678901", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "i/S123", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListLogsCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "i/S12345678901", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListLogsCommand.MESSAGE_USAGE));
 
         // Missing prefix
-        assertParseFailure(parser, "S1234567A", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "S1234567A", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListLogsCommand.MESSAGE_USAGE));
     }
 
-    //Not sure why is this failing
+    //TODO: Cant parse succesfully - perhaps due to missing person someetimes?
     @Test
     public void parse_validArgs_returnsListLogsCommand() {
         // no leading and trailing whitespaces
