@@ -23,7 +23,7 @@ public class MarkSupplierCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) STATUS (active, inactive)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SUPPLIER + " 1 active";
 
-    public static final String MESSAGE_MARK_SUPPLIER_SUCCESS = "Marked Supplier: %1$s as %2$s";
+    public static final String MESSAGE_MARK_SUPPLIER_SUCCESS = "Marked Supplier %1$s as %2$s";
 
     private final Index targetIndex;
     private final SupplierStatus status;
@@ -55,7 +55,7 @@ public class MarkSupplierCommand extends Command {
 
         model.setPerson(supplierToMark, markedSupplier);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARK_SUPPLIER_SUCCESS, supplierToMark, status));
+        return new CommandResult(String.format(MESSAGE_MARK_SUPPLIER_SUCCESS, targetIndex.getOneBased(), status));
     }
 
     @Override
