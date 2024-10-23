@@ -17,6 +17,7 @@ import seedu.address.logic.commands.eventcommands.EventViewCommand;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
 import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerDeleteCommand;
+import seedu.address.logic.commands.volunteercommands.VolunteerNewCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -27,11 +28,17 @@ public class AddressBookParserTest {
     private String createCommand(String indicator, String commandWord) {
         return indicator + " " + commandWord;
     }
+
+    private String createCommand(String indicator, String commandWord, String commandArgument) {
+        return indicator + " " + commandWord + " " + commandArgument;
+    }
+
     @Test
     public void parseCommand_newEvent() throws Exception {
+        String eventDetails = "n/Food collection l/NTUC d/2024-11-29 s/00:00 e/23:59";
         assertTrue(
                 parser.parseCommand(createCommand(AddressBookParser.EVENT_COMMAND_INDICATOR,
-                        EventNewCommand.COMMAND_WORD)) instanceof EventNewCommand
+                        EventNewCommand.COMMAND_WORD, eventDetails)) instanceof EventNewCommand
         );
     }
 
@@ -39,7 +46,7 @@ public class AddressBookParserTest {
     public void parseCommand_deleteEvent() throws Exception {
         assertTrue(
                 parser.parseCommand(createCommand(AddressBookParser.EVENT_COMMAND_INDICATOR,
-                        EventDeleteCommand.COMMAND_WORD)) instanceof EventDeleteCommand
+                        EventDeleteCommand.COMMAND_WORD, "1")) instanceof EventDeleteCommand
         );
     }
 
@@ -47,22 +54,24 @@ public class AddressBookParserTest {
     public void parseCommand_viewEvent() throws Exception {
         assertTrue(
             parser.parseCommand(createCommand(AddressBookParser.EVENT_COMMAND_INDICATOR,
-                  EventViewCommand.COMMAND_WORD)) instanceof EventViewCommand
+                  EventViewCommand.COMMAND_WORD, "1")) instanceof EventViewCommand
         );
     }
 
     @Test
     public void parseCommand_findEvent() throws Exception {
+        String keyword = "food";
         assertTrue(
             parser.parseCommand(createCommand(AddressBookParser.EVENT_COMMAND_INDICATOR,
-                    FindEventCommand.COMMAND_WORD)) instanceof FindEventCommand
+                    FindEventCommand.COMMAND_WORD, keyword)) instanceof FindEventCommand
         );
     }
     @Test
     public void parseCommand_newVolunteer() throws Exception {
+        String volunteerDetails = "n/John Doe p/98765432 em/johndoe@example.com d/2020-10-10";
         assertTrue(
             parser.parseCommand(createCommand(AddressBookParser.VOLUNTEER_COMMAND_INDICATOR,
-            VolunteerNewCommand.COMMAND_WORD)) instanceof VolunteerNewCommand
+            VolunteerNewCommand.COMMAND_WORD, volunteerDetails)) instanceof VolunteerNewCommand
         );
     }
 
@@ -70,7 +79,7 @@ public class AddressBookParserTest {
     public void parseCommand_deleteVolunteer() throws Exception {
         assertTrue(
             parser.parseCommand(createCommand(AddressBookParser.VOLUNTEER_COMMAND_INDICATOR,
-                VolunteerDeleteCommand.COMMAND_WORD)) instanceof VolunteerDeleteCommand
+                VolunteerDeleteCommand.COMMAND_WORD, "1")) instanceof VolunteerDeleteCommand
         );
     }
 
@@ -78,25 +87,30 @@ public class AddressBookParserTest {
     public void parseCommand_viewVolunteer() throws Exception {
         assertTrue(
             parser.parseCommand(createCommand(AddressBookParser.VOLUNTEER_COMMAND_INDICATOR,
-            VolunteerViewCommand.COMMAND_WORD)) instanceof VolunteerViewCommand
+            VolunteerViewCommand.COMMAND_WORD, "1")) instanceof VolunteerViewCommand
         );
     }
 
     @Test void parseCommand_findVolunteer() throws Exception {
+        String keyword = "john";
         assertTrue(
             parser.parseCommand(createCommand(AddressBookParser.VOLUNTEER_COMMAND_INDICATOR,
-                    FindVolunteerCommand.COMMAND_WORD)) instanceof FindVolunteerCommand
+                    FindVolunteerCommand.COMMAND_WORD, keyword)) instanceof FindVolunteerCommand
         );
     }
 
     @Test
     public void parseCommand_assign() throws Exception {
-        assertTrue(parser.parseCommand(AssignCommand.COMMAND_WORD) instanceof AssignCommand);
+        String commandDetails = "e/ 1 v/ 1";
+        assertTrue(parser.parseCommand(createCommand(AssignCommand.COMMAND_WORD, commandDetails))
+                instanceof AssignCommand);
     }
 
     @Test
     public void parseCommand_unassign() throws Exception {
-        assertTrue(parser.parseCommand(UnassignCommand.COMMAND_WORD) instanceof UnassignCommand);
+        String commandDetails = "e/ 1 v/ 1";
+        assertTrue(parser.parseCommand(createCommand(UnassignCommand.COMMAND_WORD, commandDetails))
+                instanceof UnassignCommand);
     }
 
     @Test
@@ -119,6 +133,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(
+            ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand")
+        );
     }
 }

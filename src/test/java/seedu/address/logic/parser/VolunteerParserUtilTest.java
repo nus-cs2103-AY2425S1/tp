@@ -12,7 +12,6 @@ import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
-import seedu.address.model.volunteer.Time;
 
 public class VolunteerParserUtilTest {
 
@@ -146,29 +145,5 @@ public class VolunteerParserUtilTest {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         Date expectedDate = new Date(VALID_DATE);
         assertEquals(expectedDate, VolunteerParserUtil.parseDate(dateWithWhitespace));
-    }
-
-    @Test
-    public void parseTime_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> VolunteerParserUtil.parseTime((String) null));
-    }
-
-    @Test
-    public void parseTime_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> VolunteerParserUtil.parseTime(INVALID_TIME));
-        assertThrows(ParseException.class, () -> VolunteerParserUtil.parseTime(INVALID_TIME_24H_FORMAT));
-    }
-
-    @Test
-    public void parseTime_validValueWithoutWhitespace_returnsTime() throws Exception {
-        Time expectedTime = new Time(VALID_TIME);
-        assertEquals(expectedTime, VolunteerParserUtil.parseTime(VALID_TIME));
-    }
-
-    @Test
-    public void parseTime_validValueWithWhitespace_returnsTrimmedTime() throws Exception {
-        String timeWithWhitespace = WHITESPACE + VALID_TIME + WHITESPACE;
-        Time expectedTime = new Time(VALID_TIME);
-        assertEquals(expectedTime, VolunteerParserUtil.parseTime(timeWithWhitespace));
     }
 }
