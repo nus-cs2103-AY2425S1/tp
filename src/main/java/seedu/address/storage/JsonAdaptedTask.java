@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 
 /**
@@ -24,6 +25,8 @@ import seedu.address.model.task.Task;
 })
 public abstract class JsonAdaptedTask {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
+
     protected final String description;
     protected final boolean isDone;
 
@@ -40,5 +43,20 @@ public abstract class JsonAdaptedTask {
         this.isDone = isDone;
     }
 
-    public abstract Task toModelType();
+    public abstract Task toModelType() throws IllegalValueException;
+
+    /**
+     * Converts the description string into a {@code Description} object, validating it in the process.
+     *
+     * @throws IllegalValueException if the description is invalid.
+     */
+    protected Description toModelDescription() throws IllegalValueException {
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Description"));
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(description);
+    }
 }

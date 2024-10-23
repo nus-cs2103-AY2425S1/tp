@@ -2,8 +2,9 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 
 /**
@@ -27,13 +28,17 @@ public class JsonAdaptedTodo extends JsonAdaptedTask {
         super(source.getDescription(), source.getIsDone());
     }
 
+
+
     /**
-     * Converts this Jackson-friendly adapted Todo object into the model's {@code Todo} object.
+     * Converts this Jackson-friendly adapted todo object into the model's {@code Todo} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted todo task.
+     * @throws IllegalValueException if there are any data constraints violated in the adapted todo.
      */
-    public Todo toModelType() {
-        return new Todo(description);
+    @Override
+    public Task toModelType() throws IllegalValueException {
+        Description modelDescription = toModelDescription();
+        return new Todo(modelDescription.toString(), isDone);
     }
 }
 
