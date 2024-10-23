@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
  * Constructs an {@code ObservableList} of {@code Tag}s that are predefined by the user.
  */
 public class TagList {
-    private final ObservableList<Tag> tags;
     public static final int MAXIMUM_TAGLIST_SIZE = 30;
+    private final ObservableList<Tag> tags;
 
     public TagList() {
         tags = FXCollections.observableArrayList();
