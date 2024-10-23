@@ -29,11 +29,13 @@ import seedu.address.model.tag.Tag;
 public class MarkPaidCommand extends Command {
 
     public static final String COMMAND_WORD = "markpaid";
+    public static final String COMMAND_WORD_ALIAS = "mp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the months paid for the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing months paid of that person will be overwritten by input to this command.\n"
-            + "Parameters: INDEX (must be a positive integer)" + "MONTHSPAID... (yyyy-mm format; mm must be 01-12)\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_MONTHPAID + "MONTHPAID... (yyyy-mm format; mm must be 01-12)\n"
             + "Example 1: " + COMMAND_WORD + " 1 " + PREFIX_MONTHPAID + "2024-01\n"
             + "Example 2: " + COMMAND_WORD + " 1 "
             + PREFIX_MONTHPAID + "2024-01"
