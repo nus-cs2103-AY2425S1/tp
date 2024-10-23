@@ -16,6 +16,10 @@ public record Appointment(LocalDate date, LocalTime startTime, LocalTime endTime
                 date.getYear() == LocalDate.now().getYear() ? "EEEE, MMMM d" : "EEEE, MMMM d, yyyy"));
     }
 
+    public LocalDate getUnformattedDate() {
+        return date;
+    }
+
     public String getFormattedStartTime() {
         return startTime.format(DateTimeFormatter.ofPattern(isSamePeriod() ? "h:mm" : "h:mm a"));
     }
