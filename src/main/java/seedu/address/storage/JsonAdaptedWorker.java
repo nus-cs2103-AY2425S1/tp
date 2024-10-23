@@ -19,8 +19,9 @@ import seedu.address.model.person.Worker;
  */
 public class JsonAdaptedWorker {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedWorker.class);
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Worker's %s field is missing!";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedWorker.class);
 
     private final List<String> deliveryIds = new ArrayList<>();
 

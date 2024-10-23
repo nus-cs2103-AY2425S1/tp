@@ -6,8 +6,9 @@ import java.util.Random;
  * Represents a delivery's unique ID.
  */
 public class DeliveryId {
-    public final String value;
     public static final String VALIDATION_REGEX = "^\\d{13}-\\d{4}$";
+
+    public final String value;
 
     public DeliveryId(String value) {
         this.value = value;
