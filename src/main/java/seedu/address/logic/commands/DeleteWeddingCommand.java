@@ -85,11 +85,15 @@ public class DeleteWeddingCommand extends Command {
                     } else {
                         throw new CommandException(
                                 String.format(MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED,
-                                        Messages.format(targetWedding)));
+                                        Messages.format(targetWedding))
+                                + ".\n"
+                                + Messages.MESSAGE_FORCE_DELETE_WEDDING
+                        );
                     }
                 }
             }
         }
+        model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
         throw new CommandException(String.format(MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND,
                 Messages.format(targetWedding)));
     }

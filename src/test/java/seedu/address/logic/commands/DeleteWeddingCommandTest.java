@@ -20,7 +20,7 @@ public class DeleteWeddingCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validDeleteWeddingCommand_success() {
+    public void execute_validDeleteWeddingCommand() {
         Wedding weddingToDelete = model.getFilteredWeddingList().get(0);
         DeleteWeddingCommand deleteWeddingCommand = new DeleteWeddingCommand(weddingToDelete);
 
