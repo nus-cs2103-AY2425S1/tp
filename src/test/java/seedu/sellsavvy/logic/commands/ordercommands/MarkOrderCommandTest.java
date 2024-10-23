@@ -19,7 +19,6 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 public class MarkOrderCommandTest {
@@ -69,16 +68,21 @@ public class MarkOrderCommandTest {
     }
 
     @Test
-    public void execute_orderAlreadyMarked_throwsCommandException() {
-        Index targetIndex = INDEX_FIRST_ORDER;
-        MarkOrderCommand markOrderCommand = new MarkOrderCommand(targetIndex);
+    public void execute_orderAlreadyMarked_warningGiven() {
+        MarkOrderCommand markOrderCommand = new MarkOrderCommand(INDEX_SECOND_ORDER);
 
-        // mark the first order
-        OrderList orderList = model.getSelectedPerson().get().getOrderList();
-        Order order = orderList.get(targetIndex.getZeroBased());
-        orderList.setOrder(order, MarkOrderCommand.createMarkedOrder(order));
+        Model expectedModel = model.createCopy();
+        Order orderToBeMarked = expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased())
+                .getOrderList().get(INDEX_SECOND_ORDER.getZeroBased());
+        Order markedOrder = MarkOrderCommand.createMarkedOrder(orderToBeMarked);
 
-        assertCommandFailure(markOrderCommand, model, MarkOrderCommand.MESSAGE_ORDER_ALREADY_MARKED);
+        expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased()).getOrderList()
+                .setOrder(orderToBeMarked, markedOrder);
+        String expectedMessage = String.format(MarkOrderCommand.MESSAGE_ORDER_ALREADY_MARKED_WARNING
+                        + MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS,
+                Messages.format(markedOrder));
+
+        assertCommandSuccess(markOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
