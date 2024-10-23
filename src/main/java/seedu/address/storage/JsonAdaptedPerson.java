@@ -37,7 +37,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("role") String role,
-            @JsonProperty("skills") List<JsonAdaptedSkill> skills) {
+            @JsonProperty("skills") List<JsonAdaptedSkill> skills,
+            @JsonProperty("match") String match) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,7 +46,7 @@ class JsonAdaptedPerson {
         if (skills != null) {
             this.skills.addAll(skills);
         }
-        this.match = null;
+        this.match = match;
     }
 
     /**
@@ -106,7 +107,10 @@ class JsonAdaptedPerson {
         final Role modelRole = new Role(role);
 
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
-        return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills);
+
+        final String modelMatch = match;
+
+        return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills, modelMatch);
     }
 
 }

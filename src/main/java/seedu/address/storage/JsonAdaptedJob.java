@@ -85,8 +85,10 @@ class JsonAdaptedJob {
 
         Set<Tag> modelJobRequirements = new HashSet<>(jobRequirements);
 
+        Set<String> modelJobMatches = new HashSet<>(matches);
+
         return new Job(modelName, modelJobCompany, modelJobSalary, modelJobDescription, modelJobRequirements,
-                new HashSet<>());
+                modelJobMatches);
     }
 
 }

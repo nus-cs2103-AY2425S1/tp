@@ -51,7 +51,7 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
-        this.match = Optional.of(match);
+        this.match = Optional.ofNullable(match);
     }
 
     public Name getName() {
