@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_OWNERS;
 
+import seedu.address.model.Model;
+
+/**
+ * Sort all owners in the application.
+ */
 public class SortOwnerCommand extends SortCommand {
     /** The message displayed when the list of owners is successfully sorted. */
     public static final String MESSAGE_SORT_OWNER_SUCCESS = "Sorted all owners";
@@ -31,7 +34,7 @@ public class SortOwnerCommand extends SortCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SortPetCommand)) {
+        if (!(other instanceof SortOwnerCommand)) {
             return false;
         }
         return true;

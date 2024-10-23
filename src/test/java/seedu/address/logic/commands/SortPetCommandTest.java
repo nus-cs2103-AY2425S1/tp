@@ -14,7 +14,7 @@ import seedu.address.testutil.TypicalPawPatrol;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class SortOwnerCommandTest {
+public class SortPetCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -23,38 +23,38 @@ public class SortOwnerCommandTest {
     public void setUp() {
         model = new ModelManager(TypicalPawPatrol.getTypicalPawPatrol(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortOwners();
+        expectedModel.sortPets();
     }
 
     @Test
-    public void create_sortUnfilteredOwnerList_success() {
-        assertCommandSuccess(new SortOwnerCommand(), model, SortOwnerCommand.MESSAGE_SORT_OWNER_SUCCESS, expectedModel);
+    public void create_sortUnfilteredPetList_success() {
+        assertCommandSuccess(new SortPetCommand(), model, SortPetCommand.MESSAGE_SORT_PET_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_sortUnfilteredOwnerList_success() {
-        SortOwnerCommand sortOwnerCommand = new SortOwnerCommand();
+    public void execute_sortUnfilteredPetList_success() {
+        SortPetCommand sortPetCommand = new SortPetCommand();
 
-        String expectedMessage = String.format(SortOwnerCommand.MESSAGE_SORT_OWNER_SUCCESS);
+        String expectedMessage = String.format(SortPetCommand.MESSAGE_SORT_PET_SUCCESS);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortOwners();
+        expectedModel.sortPets();
 
-        assertCommandSuccess(sortOwnerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(sortPetCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        //showOwnerAtIndex(model, INDEX_FIRST_OWNER); fix later
-        assertCommandSuccess(new ListBothCommand(), model, ListBothCommand.MESSAGE_SUCCESS, expectedModel);
+        //showPetAtIndex(model, INDEX_FIRST_Pet); fix later
+        assertCommandSuccess(new SortPetCommand(), model, SortPetCommand.MESSAGE_SORT_PET_SUCCESS, expectedModel);
     }
 
     @Test
     public void equals() {
-        SortOwnerCommand sortOwnerCommand = new SortOwnerCommand();
+        SortPetCommand sortPetCommand = new SortPetCommand();
 
-        assertEquals(sortOwnerCommand, new SortOwnerCommand());
+        assertEquals(sortPetCommand, new SortPetCommand());
 
-        assertEquals(sortOwnerCommand, sortOwnerCommand);
+        assertEquals(sortPetCommand, sortPetCommand);
     }
 }

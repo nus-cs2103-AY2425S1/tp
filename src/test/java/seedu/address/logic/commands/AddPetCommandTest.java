@@ -203,6 +203,16 @@ public class AddPetCommandTest {
         }
 
         @Override
+        public void sortOwners() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPets() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addLink(Link link) {
             throw new AssertionError("This method should not be called.");
         }

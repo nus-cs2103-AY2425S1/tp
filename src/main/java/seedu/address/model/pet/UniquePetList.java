@@ -99,7 +99,7 @@ public class UniquePetList implements Iterable<Pet> {
     }
 
     /**
-     * sorts the list of pets by
+     * sorts the list of pets by name
      */
     public void sort() {
         internalList.sort(Comparator

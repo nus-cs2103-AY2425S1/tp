@@ -10,7 +10,9 @@ import static seedu.address.testutil.TypicalOwners.AARON;
 import static seedu.address.testutil.TypicalOwners.BENSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPets.*;
+import static seedu.address.testutil.TypicalPets.AARFUL;
+import static seedu.address.testutil.TypicalPets.BELLA;
+import static seedu.address.testutil.TypicalPets.BISON;
 
 import java.util.Arrays;
 import java.util.Collection;

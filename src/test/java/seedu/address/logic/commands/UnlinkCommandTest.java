@@ -234,6 +234,11 @@ public class UnlinkCommandTest {
         }
 
         @Override
+        public void deleteLinksWithId(String id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -245,6 +250,16 @@ public class UnlinkCommandTest {
 
         @Override
         public void setPet(Pet target, Pet editedPet) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortOwners() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPets() {
             throw new AssertionError("This method should not be called.");
         }
 

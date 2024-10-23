@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
+import seedu.address.model.Model;
+
+/**
+ * sorts all pets in the application to the user.
+ */
 public class SortPetCommand extends SortCommand {
     /** The message displayed when the list of pets is successfully sorted. */
-    public static final String MESSAGE_SUCCESS = "Sorted all pets";
+    public static final String MESSAGE_SORT_PET_SUCCESS = "Sorted all pets";
 
     /**
      * Executes the sort pet command, updating the filtered list in the model
@@ -21,7 +24,7 @@ public class SortPetCommand extends SortCommand {
         requireNonNull(model);
         model.sortPets();
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SORT_PET_SUCCESS);
     }
 
     @Override
