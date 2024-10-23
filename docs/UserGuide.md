@@ -55,7 +55,6 @@ Shows a message explaining how to access the help page.
 
 Format: `/help`
 
-
 ### Adding an internship application: `/a`
 
 Adds an internship application to HireMe.
@@ -81,7 +80,7 @@ Format: `/f PATTERN`
 * The search is case-insensitive. e.g. `goo` will match `Google`.
 * The searches are made only for company names.
 * If you search for `oo`, then you will see a list of all the internship applications that you have applied for
-whose companies have `oo` in their names.
+  whose companies have `oo` in their names.
 
 Examples:
 * `/f Goo` returns `Google` and `Google 2`
@@ -102,6 +101,23 @@ Examples:
 * `/filter Accepted`
 * `/filter Rejected`
 
+### Changing the status of an internship application : `/accept`, `/pending`, `/reject`
+
+Updates the status of the specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
+
+Formats:
+- `/accept INDEX`: Changes the status to `ACCEPTED`.
+- `/pending INDEX`: Changes the status to `PENDING`.
+- `/reject INDEX`: Changes the status to `REJECTED`.
+
+* The `INDEX` refers to the index number shown in the displayed internship application list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `/list` followed by `/accept 2` marks the 2nd application in the list as accepted.
+* `/pending 3` changes the 3rd application in the current list to pending.
+* `/reject 1` rejects the 1st application in the list.
+
 ### Deleting an internship application : `/d`
 
 Deletes the specified internship application from HireMe.
@@ -111,15 +127,15 @@ Format: `/d INDEX`
 * Deletes the internship application at the specified `INDEX`.
 * The index refers to the index number shown in the displayed internship application list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* You cannot delete an internship application whose index number does not exist. If you only have 3 internship 
-applications then the last internship application has an index number of 3. Thus, you are not able to delete the fourth
-internship application as it does not exist.
+* You cannot delete an internship application whose index number does not exist. If you only have 3 internship
+  applications then the last internship application has an index number of 3. Thus, you are not able to delete the fourth
+  internship application as it does not exist.
 
 Examples:
 * `/list` followed by `/d 2` deletes the 2nd application in the list.
 * `/f Google` followed by `/d 1` deletes the 1st application in the results of the `/f` command.
-* `/list` followed by `/d 4` when you only have 3 internship applications returns 
-`The internship application index provided is invalid`
+* `/list` followed by `/d 4` when you only have 3 internship applications returns
+  `The internship application index provided is invalid`
 
 ### Clearing all entries : `/clear`
 
@@ -162,3 +178,6 @@ Action     | Format, Examples
 **Find**   | `/f KEYWORD [MORE_KEYWORDS]`<br> e.g., `/f Google Facebook`
 **List**   | `/list`
 **Help**   | `/help`
+**Accept** | `/accept INDEX`<br> e.g., `/accept 2`
+**Pending**| `/pending INDEX`<br> e.g., `/pending 3`
+**Reject** | `/reject INDEX`<br> e.g., `/reject 1`
