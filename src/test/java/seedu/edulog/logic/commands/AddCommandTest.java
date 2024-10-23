@@ -151,6 +151,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void markAllStudents() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void unmarkStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -159,6 +164,7 @@ public class AddCommandTest {
         public void unmarkAllStudents() {
             throw new AssertionError("This method should not be called");
         }
+
         @Override
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
