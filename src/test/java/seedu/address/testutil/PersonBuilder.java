@@ -22,7 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_REMARK = "She likes aardvarks.";
+    public static final String DEFAULT_REMARK = "likes apple";
     public static final String DEFAULT_PRIORITY = "low";
     public static final String DEFAULT_ORGANISATION = "NUS";
     public static final String DEFAULT_LAST_SEEN = "01-01-2024";

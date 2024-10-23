@@ -19,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -66,6 +67,12 @@ public class AddressBookTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void notNull_InSampleAddressBook_returnsTrue() {
+        AddressBook addressBook1 = (AddressBook) SampleDataUtil.getSampleAddressBook();
+        assertTrue(addressBook1 != null);
     }
 
     @Test
