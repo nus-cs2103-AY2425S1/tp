@@ -35,6 +35,12 @@
     "email" : "johndoe@example.com",
     "availableDate" : "2020-10-10",
     "involvedIn" : [ ]
+  }, {
+    "name" : "John doe",
+    "phone" : "98765432",
+    "email" : "johndoe@example.com",
+    "availableDate" : "2020-10-10",
+    "involvedIn" : [ ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
@@ -114,6 +120,14 @@
     "startTime" : "00:00",
     "endTime" : "23:59",
     "location" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "description" : "Collecting unsold food from NTUC for distribution",
+    "volunteers" : [ ]
+  }, {
+    "eventName" : "food collection",
+    "date" : "2024-11-29",
+    "startTime" : "00:00",
+    "endTime" : "23:59",
+    "location" : "NTUC",
     "description" : "Collecting unsold food from NTUC for distribution",
     "volunteers" : [ ]
   } ]

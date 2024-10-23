@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -42,6 +48,31 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_EVENT_NAME_A = "Annual Charity Run";
+    public static final String VALID_EVENT_NAME_B = "Community Outreach";
+    public static final String VALID_LOCATION_EVENT_A = "East Coast Park";
+    public static final String VALID_LOCATION_EVENT_B = "Community Center Hall";
+    public static final String VALID_DATE_EVENT_A = "2024-12-15";
+    public static final String VALID_DATE_EVENT_B = "2024-11-01";
+    public static final String VALID_START_TIME_EVENT_A = "08:00";
+    public static final String VALID_START_TIME_EVENT_B = "14:00";
+    public static final String VALID_END_TIME_EVENT_A = "10:00";
+    public static final String VALID_END_TIME_EVENT_B = "17:00";
+    public static final String VALID_DESCRIPTION_EVENT_A = "Annual charity run for raising funds";
+    public static final String VALID_DESCRIPTION_EVENT_B = "Community outreach program to help families in need";
+    public static final String EVENT_NAME_DESC_A = " " + EVENT_PREFIX_NAME + VALID_EVENT_NAME_A;
+    public static final String EVENT_NAME_DESC_B = " " + EVENT_PREFIX_NAME + VALID_EVENT_NAME_B;
+    public static final String LOCATION_DESC_A = " " + EVENT_PREFIX_LOCATION + VALID_LOCATION_EVENT_A;
+    public static final String LOCATION_DESC_B = " " + EVENT_PREFIX_LOCATION + VALID_LOCATION_EVENT_B;
+    public static final String DATE_DESC_A = " " + EVENT_PREFIX_DATE + VALID_DATE_EVENT_A;
+    public static final String DATE_DESC_B = " " + EVENT_PREFIX_DATE + VALID_DATE_EVENT_B;
+    public static final String START_TIME_DESC_A = " " + EVENT_PREFIX_START_TIME + VALID_START_TIME_EVENT_A;
+    public static final String START_TIME_DESC_B = " " + EVENT_PREFIX_START_TIME + VALID_START_TIME_EVENT_B;
+    public static final String END_TIME_DESC_A = " " + EVENT_PREFIX_END_TIME + VALID_END_TIME_EVENT_A;
+    public static final String END_TIME_DESC_B = " " + EVENT_PREFIX_END_TIME + VALID_END_TIME_EVENT_B;
+    public static final String DESCRIPTION_DESC_A = " " + EVENT_PREFIX_DESCRIPTION + VALID_DESCRIPTION_EVENT_A;
+    public static final String DESCRIPTION_DESC_B = " " + EVENT_PREFIX_DESCRIPTION + VALID_DESCRIPTION_EVENT_B;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
