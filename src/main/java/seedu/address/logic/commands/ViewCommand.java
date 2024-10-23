@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.ui.ContactDisplay;
+import seedu.address.ui.TestContactDisplay;
 
 /**
  * Diplays the details of an existing person in the address book.
@@ -27,6 +28,7 @@ public class ViewCommand extends Command {
 
     private final Index index;
     private final ContactDisplay contactDisplay;
+    private final TestContactDisplay testContactDisplay;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -36,6 +38,17 @@ public class ViewCommand extends Command {
         requireNonNull(index);
         this.index = index;
         this.contactDisplay = contactDisplay;
+        this.testContactDisplay = new TestContactDisplay();
+    }
+
+    /**
+     * @param index of the person in the filtered person list to edit
+     */
+    public ViewCommand(Index index, TestContactDisplay testContactDisplay) {
+        requireNonNull(index);
+        this.index = index;
+        this.contactDisplay = null;
+        this.testContactDisplay = testContactDisplay;
     }
 
     @Override
@@ -48,7 +61,11 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = lastShownList.get(index.getZeroBased());
-        contactDisplay.updateContactDetails(personToView);
+        if (contactDisplay == null) {
+            testContactDisplay.updateContactDetails(personToView);
+        } else {
+            contactDisplay.updateContactDetails(personToView);
+        }
 
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)),
         personToView);
