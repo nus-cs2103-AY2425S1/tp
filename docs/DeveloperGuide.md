@@ -440,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Tag                           | A keyword or label applied to a contact for easier filtering or searching                                               |
 | Search Query                  | A user-provided input (e.g., name or role) to filter contacts in the list                                               |
 | Role                          | A Volunteer, Donor or Partner                                                                                           |
-| Group                         | A named collection of contacts                                                                                          |
+| Group                         | A named collection of contacts, allowing users to filter or perform actions on specific subsets of people easily.       |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
