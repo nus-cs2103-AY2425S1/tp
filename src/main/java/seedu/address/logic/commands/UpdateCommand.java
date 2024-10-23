@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -27,6 +28,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 //import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -54,68 +56,70 @@ public class UpdateCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example1: " + COMMAND_WORD + " S1234567Z "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@example.com\n"
             + "Example2: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_UPDATE_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_SAME_NRID = "Multiple persons with the same NRIC found. Please specify further.";
+    public static final String MESSAGE_SAME_NRIC = "Multiple persons with the same NRIC found. Please specify further.";
     public static final String MESSAGE_APPOINTMENT_TAKEN = "There is an existing appointment at that timeslot";
 
     private final Nric nric;
     private final Index index;
-    private final UpdatePersonDescriptor editPersonDescriptor;
+    private final UpdatePersonDescriptor updatePersonDescriptor;
 
     /**
      * @param nric                 of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param updatePersonDescriptor details to edit the person with
      */
-    public UpdateCommand(Nric nric, UpdatePersonDescriptor editPersonDescriptor) {
+    public UpdateCommand(Nric nric, UpdatePersonDescriptor updatePersonDescriptor) {
         requireNonNull(nric);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(updatePersonDescriptor);
 
         this.nric = nric;
         this.index = null;
-        this.editPersonDescriptor = new UpdatePersonDescriptor(editPersonDescriptor);
+        this.updatePersonDescriptor = new UpdatePersonDescriptor(updatePersonDescriptor);
     }
 
     /**
      * @param index                 of the person in the filtered person list to edit
-     * @param editPersonDescriptor  details to edit the person with
+     * @param updatePersonDescriptor  details to edit the person with
      */
-    public UpdateCommand(Index index, UpdatePersonDescriptor editPersonDescriptor) {
+    public UpdateCommand(Index index, UpdatePersonDescriptor updatePersonDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(updatePersonDescriptor);
 
         this.nric = null;
         this.index = index;
-        this.editPersonDescriptor = new UpdatePersonDescriptor(editPersonDescriptor);
+        this.updatePersonDescriptor = new UpdatePersonDescriptor(updatePersonDescriptor);
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code updatePersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, UpdatePersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, UpdatePersonDescriptor updatePersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
-        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
-        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = updatePersonDescriptor.getName().orElse(personToEdit.getName());
+        Age updatedAge = updatePersonDescriptor.getAge().orElse(personToEdit.getAge());
+        Gender updatedGender = updatePersonDescriptor.getGender().orElse(personToEdit.getGender());
+        Nric updatedNric = updatePersonDescriptor.getNric().orElse(personToEdit.getNric());
+        Phone updatedPhone = updatePersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = updatePersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = updatePersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Appointment updateAppointment = updatePersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
+        Set<Tag> updatedTags = updatePersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedAge, updatedGender, updatedNric,
-                updatedPhone, updatedEmail, updatedAddress, null, updatedTags);
+                updatedPhone, updatedEmail, updatedAddress, updateAppointment, updatedTags);
     }
 
     @Override
@@ -125,6 +129,7 @@ public class UpdateCommand extends Command {
         Person personToEdit;
 
         if (nric != null) {
+//            System.out.println("OK");
             List<Person> matchingPersons = lastShownList.stream()
                     .filter(person -> person.getNric().equals(nric))
                     .toList();
@@ -135,7 +140,7 @@ public class UpdateCommand extends Command {
                 personToEdit = matchingPersons.get(0);
             } else {
                 // Handle multiple matches for NRIC
-                throw new CommandException(MESSAGE_SAME_NRID);
+                throw new CommandException(MESSAGE_SAME_NRIC);
             }
         } else { // for index
             assert index != null;
@@ -146,7 +151,7 @@ public class UpdateCommand extends Command {
             personToEdit = lastShownList.get(index.getZeroBased());
         }
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = createEditedPerson(personToEdit, updatePersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -159,7 +164,7 @@ public class UpdateCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     @Override
@@ -175,11 +180,11 @@ public class UpdateCommand extends Command {
 
         if (nric != null) {
             return nric.equals(otherEditCommand.nric)
-                    && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                    && updatePersonDescriptor.equals(otherEditCommand.updatePersonDescriptor);
         } else {
             assert index != null;
             return index.equals(otherEditCommand.index)
-                    && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                    && updatePersonDescriptor.equals(otherEditCommand.updatePersonDescriptor);
         }
     }
 
@@ -188,12 +193,12 @@ public class UpdateCommand extends Command {
         if (nric != null) {
             return new ToStringBuilder(this)
                     .add("nric", nric)
-                    .add("editPersonDescriptor", editPersonDescriptor)
+                    .add("editPersonDescriptor", updatePersonDescriptor)
                     .toString();
         } else {
             return new ToStringBuilder(this)
                     .add("index", index)
-                    .add("editPersonDescriptor", editPersonDescriptor)
+                    .add("editPersonDescriptor", updatePersonDescriptor)
                     .toString();
         }
     }
@@ -210,6 +215,7 @@ public class UpdateCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Appointment appointment;
         private Set<Tag> tags;
 
         public UpdatePersonDescriptor() {
@@ -227,6 +233,8 @@ public class UpdateCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setAppointment(toCopy.appointment);
+
             setTags(toCopy.tags);
         }
 
@@ -294,6 +302,14 @@ public class UpdateCommand extends Command {
             this.address = address;
         }
 
+        public Optional<Appointment> getAppointment() {
+            return Optional.ofNullable(appointment);
+        }
+
+        public void setAppointment(Appointment appointment) {
+            this.appointment = appointment;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -329,6 +345,7 @@ public class UpdateCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(appointment, otherEditPersonDescriptor.appointment)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -342,6 +359,7 @@ public class UpdateCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("appointment", appointment)
                     .add("tags", tags)
                     .toString();
         }
