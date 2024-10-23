@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERREDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -20,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.game.Game;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GAME);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_GAME, PREFIX_PREFERREDTIME);
 
         Index index;
 
@@ -64,6 +66,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         parseGamesForEdit(argMultimap.getAllValues(PREFIX_GAME)).ifPresent(editPersonDescriptor::setGames);
+        parsePreferredTimesForEdit(argMultimap.getAllValues(PREFIX_PREFERREDTIME))
+                .ifPresent(editPersonDescriptor::setPreferredTimes);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -100,6 +104,25 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> gameSet = games.size() == 1 && games.contains("") ? Collections.emptySet() : games;
         return Optional.of(ParserUtil.parseGames(gameSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> preferredTimes} into a {@code Set<PreferredTime>}
+     * if {@code preferredTimes} is non-empty.
+     * If {@code preferredTimes} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<PreferredTime>} containing zero preferred times.
+     */
+    private Optional<Set<PreferredTime>> parsePreferredTimesForEdit(Collection<String> preferredTimes)
+            throws ParseException {
+        assert preferredTimes != null;
+
+        if (preferredTimes.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> preferredTimeSet = preferredTimes.size() == 1 && preferredTimes.contains("")
+                ? Collections.emptySet()
+                : preferredTimes;
+        return Optional.of(ParserUtil.parsePreferredTimes(preferredTimeSet));
     }
 
 }
