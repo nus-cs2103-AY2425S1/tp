@@ -109,13 +109,13 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `find person`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find person KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -123,9 +123,103 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find person John` returns `john` and `John Doe`
+* `find person john betsy` returns `John Doe`, `Betsy Crowe`<br>
+  ![result for 'find john betsy'](images/findJohnBetsyResult.png)
+
+### Locating events by name: `find event`
+
+Finds events whose names contain any of the given keywords.
+
+Format: `find person KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `hiking` will match `Hiking`
+* The order of the keywords does not matter. e.g. `Hair Cut` will match `Cut Hair`
+* Only the name is searched.
+* Only full words will be matched e.g. `Oscar` will not match `Oscars`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hair Hiking` will return `Hair Cut`, `Park Hiking`, `Hiking`
+
+Examples:
+* `find event Hiking` returns `Hiking` and `Park Hiking`
+* `find event Hair Oscars` returns `Hair Cut`, `Oscars`<br>
+  ![result for 'find hair oscars'](images/findHairOscarsResult.png)
+
+### Viewing person by name: `view person`
+
+The `view person` command allows you to view the details of a person whose name matches 
+the given keywords in the exact order.
+
+Format: `view person KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `john` will match `John`
+* The order of the keywords matters. e.g. `John Doe` will match `John Doe` but not `Doe John`
+* Only the **full name** is searched.
+* Only exact full-word matches will return a result. For example, `John` will not match `Johnny`.
+* Persons whose name matches all keywords exactly and in the correct order will be returned.
+  e.g. `John` will not match `John Doe`
+
+Examples:
+
+* `view person Betsy Crowe` returns the details for `Betsy Crowe`<br>
+* `view person John Doe` returns the details for `John Doe`
+  ![result for 'view john doe'](images/viewJohnDoeResult.png)
+
+### Viewing event by name: `view event`
+
+The `view event` command allows you to view the details of (an) event(s) whose name matches
+the given keywords in the exact order.
+
+Format: `view event KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `hiking` will match `Hiking`
+* The order of the keywords matters. e.g. `Hair Cut` will match `Hair Cut` but not `Cut Hair`
+* Only the **full name** is searched.
+* Only exact full-word matches will return a result. For example, `Oscar` will not match `Oscars`.
+* Persons whose name matches all keywords exactly and in the correct order will be returned.
+  e.g. `Hiking` will not match `Park Hiking`
+
+Examples:
+
+* `view event Oscars` returns the details for `Oscars`
+* `view event Hair Cut` returns the details for `Hair Cut`<br>
+  ![result for 'view hair cut'](images/viewHairCutResult.png)
+
+### Filtering person by tag: `filter person`
+
+The `filter person` command allows you to filter persons based on the exact tag provided,
+ensuring that only persons with that tag are displayed.
+
+Format: `filter event TAG`
+
+* The search is case-insensitive. e.g. `celebrity` will match `Celebrity`.
+* Only exact full-word matches will return a result. e.g. `Hair` will not match `Hairdresser`.
+
+Examples:
+
+* `filter person Hairdresser` returns the persons who are hair dressers.
+* `filter person Celcbrity` returns the persons who are celebrities.
+  ![result for 'filter celebrity'](images/filterCelebrityResult.png)
+
+### Filtering events by celebrity name: `filter event`
+
+The `filter event` command allows you to filter events based on the exact celebrity name provided, 
+ensuring that only events associated with that celebrity are displayed.
+
+Format: `filter event CELEBRITY_NAME`
+
+* The search is case-insensitive. e.g. `betsy crowe` will match `Betsy Crowe`.
+* The order of the keywords matters. e.g. `Betsy Crowe` will not match `Crowe Betsy`.
+* Only the full celebrity name is searched. 
+* Only exact full-word matches will return a result. e.g. `Bet` will not match `Betsy`.
+* Partial matches will not work. e.g. `Betsy` will match `Betsy` but not `Betsy Crowe`.
+
+Examples:
+
+* `filter event Jim Bob` returns the events for `Jim Bob`
+* `filter event Betsy Crowe` returns the events for `Betsy Crowe`
+  ![result for 'filter betsy crowe'](images/filterBetsyCroweResult.png)
+
 
 ### Deleting a person : `delete`
 
