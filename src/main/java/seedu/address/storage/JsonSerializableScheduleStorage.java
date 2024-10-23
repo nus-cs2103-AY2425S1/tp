@@ -8,10 +8,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyScheduleList;
 import seedu.address.model.ScheduleList;
 import seedu.address.model.schedule.Meeting;
+import java.util.logging.Logger;
 
 /**
  * An Immutable ScheduleList that is serializable to JSON format.
@@ -19,8 +21,11 @@ import seedu.address.model.schedule.Meeting;
 @JsonRootName(value = "schedulelist")
 public class JsonSerializableScheduleStorage {
     public static final String MEETING_DUPLICATE_PERSON = "Schedule list contains duplicate meeting(s).";
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableScheduleStorage.class);
 
     private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
+
+    public static boolean hasErrorConvertingToModelType = false;
 
     /**
      * Constructs a {@code JsonSerializableScheduleStorage} with the given persons.
@@ -47,9 +52,19 @@ public class JsonSerializableScheduleStorage {
     public ScheduleList toModelType() throws IllegalValueException {
         ScheduleList scheduleList = new ScheduleList();
         for (JsonAdaptedMeeting jsonAdaptedMeeting : meetings) {
-            Meeting meeting = jsonAdaptedMeeting.toModelType();
+            Meeting meeting;
+            try {
+                meeting = jsonAdaptedMeeting.toModelType();
+            } catch (IllegalValueException e) {
+                logger.severe("Malformed meeting detected in json file. "
+                        + "This meeting will not be added.");
+                hasErrorConvertingToModelType = true;
+                continue;
+            }
             if (scheduleList.hasMeeting(meeting)) {
-                throw new IllegalValueException(MEETING_DUPLICATE_PERSON);
+                logger.warning(MEETING_DUPLICATE_PERSON);
+                hasErrorConvertingToModelType = true;
+                continue;
             }
             scheduleList.addMeeting(meeting);
         }

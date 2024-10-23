@@ -26,6 +26,7 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonScheduleStorage;
+import seedu.address.storage.JsonSerializableScheduleStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.ScheduleStorage;
 import seedu.address.storage.Storage;
@@ -85,20 +86,32 @@ public class MainApp extends Application {
         ReadOnlyScheduleList initialScheduleList;
         try {
             addressBookOptional = storage.readAddressBook();
-            scheduleListOptional = scheduleStorage.readScheduleList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            if (!scheduleListOptional.isPresent()) {
-                logger.info("Creating a new data file " + scheduleStorage.getScheduleListFilePath());
-            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialScheduleList = scheduleListOptional.orElse(new ScheduleList());
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+        }
+        try {
+            scheduleListOptional = scheduleStorage.readScheduleList();
+            if (!scheduleListOptional.isPresent()) {
+                logger.info("Creating a new data file " + scheduleStorage.getScheduleListFilePath());
+            }
+            initialScheduleList = scheduleListOptional.orElse(new ScheduleList());
+            if (JsonSerializableScheduleStorage.hasErrorConvertingToModelType) {
+                scheduleStorage.handleCorruptedFile();
+            }
+            scheduleStorage.saveScheduleList(initialScheduleList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + scheduleStorage.getScheduleListFilePath()
+                    + " could not be loaded. Will be starting with an empty ScheduleList.");
+            initialScheduleList = new ScheduleList();
+        } catch (IOException e) {
+            logger.warning("unable to back up corrupted schedule file");
             initialScheduleList = new ScheduleList();
         }
 
