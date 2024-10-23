@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Rsvp;
+import seedu.address.model.person.Relation;
 
 /**
  * Stores the details to edit the guest with. Each non-empty field value will replace the
@@ -13,6 +14,7 @@ import seedu.address.model.person.Rsvp;
  */
 public class EditGuestDescriptor extends EditPersonDescriptor {
     private Rsvp rsvp;
+    private Relation relation;
 
     public EditGuestDescriptor() {
 
@@ -39,8 +41,16 @@ public class EditGuestDescriptor extends EditPersonDescriptor {
         this.rsvp = rsvp;
     }
 
+    public void setRelation(Relation relation) {
+        this.relation = relation;
+    }
+
     public Optional<Rsvp> getRsvp() {
         return Optional.ofNullable(rsvp);
+    }
+
+    public Optional<Relation> getRelation() {
+        return Optional.ofNullable(relation);
     }
 
     @Override

@@ -94,7 +94,7 @@ public class GuestTest {
     public void toStringMethod() {
         String expected = Guest.class.getCanonicalName() + "{name=" + AMY.getName() + ", phone=" + AMY.getPhone()
                 + ", email=" + AMY.getEmail() + ", address=" + AMY.getAddress() + ", tags=" + AMY.getTags() + ", RSVP="
-                + AMY.getRsvp() + "}";
+                + AMY.getRsvp() + ", Relation=" + AMY.getRelation() + "}";
         assertEquals(expected, AMY.toString());
     }
 

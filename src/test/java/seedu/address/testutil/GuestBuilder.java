@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Guest;
+import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 
 /**
@@ -8,8 +9,10 @@ import seedu.address.model.person.Rsvp;
  */
 public class GuestBuilder extends PersonBuilder<GuestBuilder> {
     public static final String DEFAULT_RSVP = "PENDING";
+    public static final String DEFAULT_RELATION = "U";
 
     private Rsvp rsvp;
+    private Relation relation;
 
     /**
      * Creates a {@code GuestBuilder} with the default details.
@@ -17,6 +20,7 @@ public class GuestBuilder extends PersonBuilder<GuestBuilder> {
     public GuestBuilder() {
         super();
         rsvp = new Rsvp(DEFAULT_RSVP);
+        relation = new Relation(DEFAULT_RELATION);
     }
 
     /**
@@ -25,6 +29,7 @@ public class GuestBuilder extends PersonBuilder<GuestBuilder> {
     public GuestBuilder(Guest guestToCopy) {
         super(guestToCopy);
         rsvp = guestToCopy.getRsvp();
+        relation = guestToCopy.getRelation();
     }
 
     /**
@@ -35,7 +40,15 @@ public class GuestBuilder extends PersonBuilder<GuestBuilder> {
         return this;
     }
 
+    /**
+     * Sets the {@code Rsvp} of the {@code Guest} that we are building.
+     */
+    public GuestBuilder withRelation(String relation) {
+        this.relation = new Relation(relation);
+        return this;
+    }
+
     public Guest build() {
-        return new Guest(getName(), getPhone(), getEmail(), getAddress(), getTags(), rsvp);
+        return new Guest(getName(), getPhone(), getEmail(), getAddress(), getTags(), rsvp, relation);
     }
 }
