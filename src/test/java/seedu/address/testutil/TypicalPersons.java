@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -70,11 +72,12 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRegisterNumber(VALID_REGISTER_NUMBER_AMY)
             .withSex(VALID_SEX_AMY).withStudentClass(VALID_STUDENT_CLASS_AMY)
-            .withEcName(VALID_ECNAME_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withEcName(VALID_ECNAME_AMY).withEcNumber(VALID_ECNUMBER_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRegisterNumber(VALID_REGISTER_NUMBER_BOB)
             .withSex(VALID_SEX_BOB).withStudentClass(VALID_STUDENT_CLASS_BOB)
-            .withEcName(VALID_ECNAME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withEcName(VALID_ECNAME_BOB).withEcNumber(VALID_ECNUMBER_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
