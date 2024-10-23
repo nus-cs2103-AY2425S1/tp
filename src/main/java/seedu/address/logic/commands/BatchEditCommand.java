@@ -30,7 +30,8 @@ public class BatchEditCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "OLDTAG " + PREFIX_TAG + "NEWTAG";
 
-    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS = "Tag changed from: %1$s\n";
+    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM = "Tag changed from: %1$s\n";
+    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO = "Tag changed to: %1$s\n";
 
     private final Tag oldTag;
     private final Tag newTag;
@@ -66,8 +67,8 @@ public class BatchEditCommand extends Command {
             Person updatedPerson = changeTag(person, oldTag, newTag);
             model.setPerson(person, updatedPerson);
             feedbackToUser.append(String
-                    .format(MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS,
-                            Messages.format(person)));
+                    .format(MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM, Messages.format(person))
+                    + String.format(MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO, Messages.format(updatedPerson)));
         }
 
         return new CommandResult(feedbackToUser.toString());

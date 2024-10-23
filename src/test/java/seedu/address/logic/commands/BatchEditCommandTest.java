@@ -53,17 +53,6 @@ class BatchEditCommandTest {
         PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Set.of(friendsTag));
         BatchEditCommand batchEditCommand = new BatchEditCommand(friendsTag, frenTag, predicate);
 
-        String expectedMessage = String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS,
-                Messages.format(ALICE)
-        ) + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS,
-                Messages.format(BENSON)
-        ) + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS,
-                Messages.format(DANIEL)
-        );
-
         Person changedAlice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("TEACHER")
@@ -77,6 +66,27 @@ class BatchEditCommandTest {
                 .withRole("Parent")
                 .withEmail("cornelia@example.com").withAddress("10th street")
                 .withTags("fren").build();
+
+        String expectedMessage = String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
+                Messages.format(ALICE))
+
+                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
+                Messages.format(changedAlice))
+
+                + String.format(
+                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
+                Messages.format(BENSON))
+
+                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
+                Messages.format(changedBenson))
+
+                + String.format(
+                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
+                Messages.format(DANIEL))
+
+                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
+                Messages.format(changedDaniel));
+
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(ALICE, changedAlice);
@@ -94,16 +104,25 @@ class BatchEditCommandTest {
         PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Set.of(friendsTag));
         BatchEditCommand batchEditCommand = new BatchEditCommand(friendsTag, friendsTag, predicate);
 
-        String expectedMessage = String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS,
-                Messages.format(ALICE)
-        ) + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS,
-                Messages.format(BENSON)
-        ) + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS,
-                Messages.format(DANIEL)
-        );
+        String expectedMessage = String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
+                Messages.format(ALICE))
+
+                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
+                Messages.format(ALICE))
+
+                + String.format(
+                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
+                Messages.format(BENSON))
+
+                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
+                Messages.format(BENSON))
+
+                + String.format(
+                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
+                Messages.format(DANIEL))
+
+                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
+                Messages.format(DANIEL));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredPersonList(predicate);
