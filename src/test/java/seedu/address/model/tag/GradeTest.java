@@ -39,6 +39,21 @@ public class GradeTest {
     }
 
     @Test
+    public void gradeIndexToName() {
+        Grade unknownGrade = new Grade("0");
+        Grade failingGrade = new Grade("1");
+        Grade satisfactoryGrade = new Grade("2");
+        Grade goodGrade = new Grade("3");
+        Grade excellentGrade = new Grade("4");
+
+        assertEquals("Unknown (0)", unknownGrade.gradeIndexToName());
+        assertEquals("Failing (1)", failingGrade.gradeIndexToName());
+        assertEquals("Satisfactory (2)", satisfactoryGrade.gradeIndexToName());
+        assertEquals("Good (3)", goodGrade.gradeIndexToName());
+        assertEquals("Excellent (4)", excellentGrade.gradeIndexToName());
+    }
+
+    @Test
     public void equals() {
         Grade grade = new Grade("2");
 
