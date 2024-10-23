@@ -186,7 +186,7 @@ public class UniquePersonListTest {
 
     @Test
     public void findEquivalentPerson_nullInput_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> uniquePersonList.findEquivalentPerson(null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.findEquivalentPerson(null));
     }
 
     @Test

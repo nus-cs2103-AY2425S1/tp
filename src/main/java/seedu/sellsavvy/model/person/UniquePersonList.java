@@ -120,14 +120,13 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
      */
     public Person findEquivalentPerson(Person target) {
-        assert target != null; // Caller should handle null targets before calling this method
+        requireNonNull(target);
 
-        int index = internalList.indexOf(target);
-
-        if (index == -1) {
+        if (!internalList.contains(target)) {
             throw new PersonNotFoundException();
         }
 
+        int index = internalList.indexOf(target);
         return internalList.get(index);
     }
 
