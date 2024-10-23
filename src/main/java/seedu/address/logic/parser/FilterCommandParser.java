@@ -1,18 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Predicate;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Predicate;
 
 /**
  * Parses the user's input and return a FilterCommand object for execution
@@ -20,7 +18,7 @@ import java.util.function.Predicate;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    Set<Predicate<Person>> predicateSet = new HashSet<>();
+    private final Set<Predicate<Person>> predicateSet = new HashSet<>();
 
     /**
      * Parses the user's input based on the prefix provided and returns the matching FilterCommand object
@@ -40,6 +38,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         return new FilterCommand(predicateSet);
+    }
 
+    public Set<Predicate<Person>> getPredicateSet() {
+        return this.predicateSet;
     }
 }
