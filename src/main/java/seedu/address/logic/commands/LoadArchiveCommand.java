@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.filename.Filename;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -29,9 +30,9 @@ public class LoadArchiveCommand extends Command {
     public static final String MESSAGE_NOT_FOUND = "Archive file not found: %1$s";
     public static final String MESSAGE_FAILURE = "Failed to load archive file: %1$s";
 
-    private final String archiveFilename;
+    private final Filename archiveFilename;
 
-    public LoadArchiveCommand(String archiveFilename) {
+    public LoadArchiveCommand(Filename archiveFilename) {
         this.archiveFilename = archiveFilename;
     }
 
@@ -42,8 +43,9 @@ public class LoadArchiveCommand extends Command {
         Path source = model.getAddressBookFilePath();
         assert source != null : "Address book file path is null";
 
-        Path archiveFile = Paths.get(source.getParent().toString(), "archive", archiveFilename);
+        Path archiveFile = Paths.get(source.getParent().toString(), "archive", archiveFilename.toString());
         if (!Files.exists(archiveFile)) {
+            logger.info("Archive file not found: " + archiveFilename);
             return new CommandResult(String.format(MESSAGE_NOT_FOUND, archiveFilename));
         }
 

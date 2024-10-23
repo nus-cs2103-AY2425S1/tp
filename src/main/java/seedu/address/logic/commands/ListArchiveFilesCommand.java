@@ -36,6 +36,7 @@ public class ListArchiveFilesCommand extends Command {
 
         Path archiveDir = Paths.get(source.getParent().toString(), "archive");
         if (!Files.exists(archiveDir)) {
+            logger.info("No archive directory found.");
             return new CommandResult(MESSAGE_NO_ARCHIVE);
         }
 
