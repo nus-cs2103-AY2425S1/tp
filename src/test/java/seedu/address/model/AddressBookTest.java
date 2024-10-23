@@ -2,11 +2,17 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_WITH_RENTAL;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
+import static seedu.address.testutil.TypicalRentalInformation.RENTAL_ONE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +25,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.exceptions.DuplicatePersonException;
+import seedu.address.model.rentalinformation.RentalInformation;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.RentalInformationBuilder;
 
 public class AddressBookTest {
 
@@ -28,6 +36,13 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+    }
+
+    @Test
+    public void constructor_addressBookTobeCopied_addressBookWithCopiedData() {
+        AddressBook addressBookToBeCopied = getTypicalAddressBookWithRental();
+        AddressBook latestAddressBook = new AddressBook(addressBookToBeCopied);
+        assertEquals(addressBookToBeCopied, latestAddressBook);
     }
 
     @Test
@@ -76,14 +91,66 @@ public class AddressBookTest {
     }
 
     @Test
+    public void removePerson_personToRemove_success() {
+        addressBook.addPerson(FIONA);
+        assertTrue(addressBook.hasPerson(FIONA));
+        addressBook.removePerson(FIONA);
+        assertFalse(addressBook.hasPerson(FIONA));
+    }
+
+    @Test
+    public void setPerson_updatedPerson_success() {
+        Client updatedClient = new PersonBuilder(FIONA).withPhone("88888888").build();
+        addressBook.addPerson(FIONA);
+        assertTrue(addressBook.hasPerson(FIONA));
+        addressBook.setPerson(FIONA, updatedClient);
+        assertTrue(addressBook.hasPerson(updatedClient));
+        assertFalse(addressBook.hasPerson(FIONA));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void hasRentalInformation_nullClientAndRentalInformation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasRentalInformation(null, null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasRentalInformation(ALICE_WITH_RENTAL, null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasRentalInformation(null, RENTAL_ONE));
+    }
+
+    @Test
+    public void hasRentalInformation_clientNotExist_returnsFalse() {
+        AddressBook addressBookWithRental = getTypicalAddressBookWithRental();
+        assertFalse(addressBookWithRental.hasRentalInformation(CARL, RENTAL_ONE));
+    }
+
+    @Test
+    public void hasRentalInformation_rentalInformationNotInClientInAddressBook_returnsFalse() {
+        AddressBook addressBookWithRental = getTypicalAddressBookWithRental();
+        assertFalse(addressBookWithRental.hasRentalInformation(ALICE, RENTAL_ONE));
+    }
+
+    @Test
+    public void hasRentalInformation_rentalInformationInClientInAddressBook_returnsTrue() {
+        AddressBook addressBookWithRental = getTypicalAddressBookWithRental();
+        RentalInformation rentalInformation = new RentalInformationBuilder().withAddress("BLK 10 Ang Mo Kio")
+                .withRentalStartDate("01/01/2024").withRentalEndDate("31/12/2024").withRentDueDate("10")
+                .withMonthlyRent("3000").withDeposit("9000").withCustomerList("David").build();
+        assertTrue(addressBookWithRental.hasRentalInformation(ALICE_WITH_RENTAL, rentalInformation));
     }
 
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{clients=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equalsMethod() {
+        assertEquals(addressBook, addressBook);
+        assertNotEquals(addressBook, RENTAL_ONE);
     }
 
     /**
