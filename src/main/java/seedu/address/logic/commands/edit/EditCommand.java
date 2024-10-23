@@ -101,14 +101,15 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone().orElse(null));
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail().orElse(null));
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress().orElse(null));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ModuleRoleMap updatedModuleRoleMap = editPersonDescriptor.getModuleRoleOperation()
                 .map(o -> o.execute(personToEdit.getModuleRoleMap())).orElse(personToEdit.getModuleRoleMap());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, Optional.ofNullable(updatedAddress),
+        return new Person(updatedName, Optional.ofNullable(updatedPhone), Optional.ofNullable(updatedEmail),
+                Optional.ofNullable(updatedAddress),
                 updatedTags, updatedModuleRoleMap);
     }
 
