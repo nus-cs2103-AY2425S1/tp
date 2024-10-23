@@ -8,6 +8,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -26,7 +33,36 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validIndex_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
+
+    @Test
+    public void parse_validPhoneNumber_returnsDeleteCommand() {
+        Phone phone = new Phone("94351253");
+        assertParseSuccess(parser, "p/94351253", new DeleteCommand(phone));
+    }
+
+    @Test
+    public void parse_validAddress_returnsDeleteCommand() {
+        Address address = new Address("123, Jurong West Ave 6, #08-111");
+        assertParseSuccess(parser, "a/123, Jurong West Ave 6, #08-111", new DeleteCommand(address));
+    }
+
+    @Test
+    public void parse_validTags_returnsDeleteCommand() {
+        Tag tag = new Tag("friends");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(tag);
+        assertParseSuccess(parser, "t/friends", new DeleteCommand(tags));
+    }
+
+
+    @Test
+    public void parse_validEmail_returnsDeleteCommand() {
+        Email email = new Email("alice@example.com");
+        assertParseSuccess(parser, "e/alice@example.com", new DeleteCommand(email));
+    }
+
+
 }

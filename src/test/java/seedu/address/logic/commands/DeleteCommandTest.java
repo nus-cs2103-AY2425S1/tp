@@ -72,7 +72,6 @@ public class DeleteCommandTest {
         }
     }
 
-
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
