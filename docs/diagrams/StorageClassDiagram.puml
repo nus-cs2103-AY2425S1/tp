@@ -5,23 +5,30 @@ skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage as StoragePackage {
-
-package "UserPrefs Storage" #F4F6F6{
-Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
-Class JsonUserPrefsStorage
+    package "UserPrefs Storage" #F4F6F6 {
+        Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
+        Class JsonUserPrefsStorage
+    }
+    Class "<<interface>>\nStorage" as Storage
+    Class StorageManager
+    package "AddressBook Storage" #F4F6F6 {
+        Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+        Class JsonAddressBookStorage
+        Class JsonSerializableAddressBook
+        Class JsonAdaptedMember
+        Class JsonAdaptedTag
+        Class JsonAdaptedPoint
+        Class JsonAdaptedSession
+    }
 }
 
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
-
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedMember
-Class JsonAdaptedTag
-}
-
+package Model as ModelPackage {
+    Class Session
+    Class AddressBook
+    Class VersionedAddressBook
+    Class ModelManager
+    Class Member
+    Class Point
 }
 
 Class HiddenOutside #FFFFFF
@@ -30,14 +37,22 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
-
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
-
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedMember
+JsonSerializableAddressBook --> "*" JsonAdaptedPoint
+JsonSerializableAddressBook --> "*" JsonAdaptedSession
 JsonAdaptedMember --> "*" JsonAdaptedTag
+JsonAdaptedMember --> "*" JsonAdaptedSession
+AddressBook --> "*" Session
+VersionedAddressBook --> AddressBook
+StorageManager --> VersionedAddressBook
+ModelManager --> StorageManager
+ModelManager --> AddressBook
+ModelManager --> Member
+Member --> "*" Point
 
 @enduml
