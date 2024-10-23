@@ -2,7 +2,7 @@ package seedu.internbuddy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APPSTATUS;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
 
 import java.util.stream.Stream;
 
@@ -24,13 +24,13 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
     @Override
     public UpdateCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPSTATUS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APP_STATUS);
 
         AppStatus appStatus;
         Index companyIndex;
         Index applicationIndex;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_APPSTATUS)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_APP_STATUS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         }
 
@@ -38,7 +38,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             Index[] indexes = ParserUtil.parseWithdrawIndex(argMultimap.getPreamble());
             companyIndex = indexes[0];
             applicationIndex = indexes[1];
-            appStatus = ParserUtil.parseAppStatus(argMultimap.getValue(PREFIX_APPSTATUS).get());
+            appStatus = ParserUtil.parseAppStatus(argMultimap.getValue(PREFIX_APP_STATUS).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
         }
