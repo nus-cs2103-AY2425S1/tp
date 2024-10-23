@@ -14,7 +14,7 @@ import seedu.address.model.person.Nric;
 /**
  * Parses input arguments and creates a new AddNoteCommand object
  */
-public class AddNoteParser implements Parser<AddNoteCommand> {
+public class AddNoteCommandParser implements Parser<AddNoteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddNoteCommand

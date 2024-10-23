@@ -95,7 +95,7 @@ public class AddressBookParser {
             return new DeleteAppointmentParser().parse(arguments);
 
         case AddNoteCommand.COMMAND_WORD:
-            return new AddNoteParser().parse(arguments);
+            return new AddNoteCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
