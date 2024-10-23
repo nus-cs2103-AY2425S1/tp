@@ -22,11 +22,13 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withId("P12345").withWard("A1").withDiagnosis("Celiac Disease")
-            .withMedication("gluten-free diet").withNotes("prone to falling")
-            .build();
+            .withMedication("gluten-free diet").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withId("P54321").withWard("A2").withDiagnosis("Celiac Disease")
-            .withMedication("gluten-free diet")
+            .withMedication("gluten-free diet").withNotes("some notes")
+            .withAppointment("surgery",
+                    LocalDateTime.of(2024, 11, 11, 11, 0),
+                    LocalDateTime.of(2024, 11, 11, 11, 50))
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withId("P73443").withWard("B3").withDiagnosis("Celiac Disease")
