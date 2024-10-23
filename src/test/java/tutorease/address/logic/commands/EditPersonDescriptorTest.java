@@ -13,7 +13,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND
 
 import org.junit.jupiter.api.Test;
 
-import tutorease.address.logic.commands.EditContactCommand.EditPersonDescriptor;
+import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

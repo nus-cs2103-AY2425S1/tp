@@ -8,7 +8,7 @@ import tutorease.address.model.person.Person;
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
     private final Person student;
     private final Fee fee;
     private final StartDateTime startDateTime;
@@ -120,6 +120,14 @@ public class Lesson {
     public String getFeeString() {
         return fee.getValueString();
     }
+    /**
+     * Returns the amount per hour for the lesson.
+     *
+     * @return The amount per hour of the lesson.
+     */
+    public String getAmountPerHour() {
+        return fee + "/hr";
+    }
 
     @Override
     public String toString() {
@@ -158,6 +166,7 @@ public class Lesson {
      * @return A negative integer, zero, or a positive integer as this lesson is before, same time, or after
      *         the specified lesson.
      */
+    @Override
     public int compareTo(Lesson lesson) {
         if (this.startDateTime.equals(lesson.startDateTime)) {
             return this.endDateTime.compareTo(lesson.endDateTime);

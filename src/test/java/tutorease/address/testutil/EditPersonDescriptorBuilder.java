@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import tutorease.address.logic.commands.EditContactCommand.EditPersonDescriptor;
+import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
 import tutorease.address.model.person.Name;

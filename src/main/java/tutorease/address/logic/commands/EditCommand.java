@@ -1,7 +1,6 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -25,7 +24,6 @@ import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
-import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
@@ -36,12 +34,11 @@ import tutorease.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditContactCommand extends ContactCommand {
+public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
-            + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -51,14 +48,13 @@ public class EditContactCommand extends ContactCommand {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + " " + ContactCommand.COMMAND_WORD + " " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_ROLE_CANNOT_BE_EDITED = "Role cannot be changed!";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -67,7 +63,7 @@ public class EditContactCommand extends ContactCommand {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditContactCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -100,8 +96,7 @@ public class EditContactCommand extends ContactCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
-            throws CommandException {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -111,15 +106,7 @@ public class EditContactCommand extends ContactCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        if (role.getRoleString().equals(Role.STUDENT)) {
-            return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
-        }
-        if (role.getRoleString().equals(Role.GUARDIAN)) {
-            return new Guardian(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
-        }
-
-        throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditContactCommand.MESSAGE_ROLE_CANNOT_BE_EDITED));
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
     }
 
     @Override
@@ -129,11 +116,11 @@ public class EditContactCommand extends ContactCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditContactCommand)) {
+        if (!(other instanceof EditCommand)) {
             return false;
         }
 
-        EditContactCommand otherEditCommand = (EditContactCommand) other;
+        EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }

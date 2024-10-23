@@ -20,8 +20,8 @@ import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.ContactCommand;
-import tutorease.address.logic.commands.EditContactCommand;
-import tutorease.address.logic.commands.EditContactCommand.EditPersonDescriptor;
+import tutorease.address.logic.commands.EditCommand;
+import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.HelpCommand;
@@ -48,6 +48,15 @@ public class TutorEaseParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
+    public void parseCommand_edit() throws Exception {
+        Person person = new StudentBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -91,16 +100,6 @@ public class TutorEaseParserTest {
                 ContactCommand.COMMAND_WORD + " " + FindContactCommand.COMMAND_WORD
                         + " " + String.join(" ", keywords));
         assertEquals(new FindContactCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new StudentBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditContactCommand command = (EditContactCommand) parser.parseCommand(ContactCommand.COMMAND_WORD + " "
-                + EditContactCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
 }
