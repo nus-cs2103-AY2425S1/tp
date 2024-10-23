@@ -199,7 +199,7 @@ public class Student {
         Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
         updatedMakeupLessons.remove(makeupLesson);
 
-        return new Updater().withoutMakeupLesson(updatedMakeupLessons).update();
+        return new Updater().withMakeupLessons(updatedMakeupLessons).update();
     }
 
     /**
@@ -338,11 +338,6 @@ public class Student {
         }
 
         private Updater withMakeupLessons(Set<MakeupLesson> makeupLessons) {
-            this.makeupLessons = makeupLessons;
-            return this;
-        }
-
-        private Updater withoutMakeupLesson(Set<MakeupLesson> makeupLessons) {
             this.makeupLessons = makeupLessons;
             return this;
         }
