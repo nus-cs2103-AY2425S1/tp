@@ -30,7 +30,7 @@ public class ClearCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult executeCommand(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(x -> !predicate.test(x));
         List<Person> remainingPersons = model.getFilteredPersonList();

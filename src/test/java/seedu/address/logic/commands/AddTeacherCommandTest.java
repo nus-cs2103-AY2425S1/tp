@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.MICHAEL;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,52 +23,50 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.model.person.Teacher;
+import seedu.address.testutil.TeacherBuilder;
 
-
-
-public class AddStudentCommandTest {
+public class AddTeacherCommandTest {
 
     @Test
-    public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null));
+    public void constructor_nullTeacher_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTeacherCommand(null));
     }
 
     @Test
-    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-        Student validStudent = new StudentBuilder().build();
+    public void execute_teacherAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingTeacherAdded modelStub = new ModelStubAcceptingTeacherAdded();
+        Teacher validTeacher = new TeacherBuilder().build();
 
-        CommandResult commandResult = new AddStudentCommand(validStudent).executeCommand(modelStub);
+        CommandResult commandResult = new AddTeacherCommand(validTeacher).executeCommand(modelStub);
 
-        assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
+        assertEquals(String.format(AddTeacherCommand.MESSAGE_SUCCESS, Messages.format(validTeacher)),
+            commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validTeacher), modelStub.teachersAdded);
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
-        Student validStudent = new StudentBuilder().build();
-        AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithStudent(validStudent);
+    public void execute_duplicateTeacher_throwsCommandException() {
+        Teacher validTeacher = new TeacherBuilder().build();
+        AddTeacherCommand addTeacherCommand = new AddTeacherCommand(validTeacher);
+        ModelStub modelStub = new ModelStubWithTeacher(validTeacher);
 
         assertThrows(CommandException.class,
-                AddStudentCommand.MESSAGE_DUPLICATE_PERSON, () -> addStudentCommand.executeCommand(modelStub));
+                AddTeacherCommand.MESSAGE_DUPLICATE_TEACHER, () -> addTeacherCommand.executeCommand(modelStub));
     }
 
     @Test
     public void equals() {
-        Student alice = new StudentBuilder().withName("Alice").build();
-        Student bob = new StudentBuilder().withName("Bob").build();
-        AddStudentCommand addAliceCommand = new AddStudentCommand(alice);
-        AddStudentCommand addBobCommand = new AddStudentCommand(bob);
+        Teacher alice = new TeacherBuilder().withName("Alice").build();
+        Teacher bob = new TeacherBuilder().withName("Bob").build();
+        AddTeacherCommand addAliceCommand = new AddTeacherCommand(alice);
+        AddTeacherCommand addBobCommand = new AddTeacherCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddStudentCommand addAliceCommandCopy = new AddStudentCommand(alice);
+        AddTeacherCommand addAliceCommandCopy = new AddTeacherCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -78,14 +75,15 @@ public class AddStudentCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different student -> returns false
+        // different teacher -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddStudentCommand addCommand = new AddStudentCommand(MICHAEL);
-        String expected = AddStudentCommand.class.getCanonicalName() + "{toAdd=" + MICHAEL + "}";
+        Teacher michael = new TeacherBuilder().withName("Michael").build();
+        AddTeacherCommand addCommand = new AddTeacherCommand(michael);
+        String expected = AddTeacherCommand.class.getCanonicalName() + "{toAdd=" + michael + "}";
         assertEquals(expected, addCommand.toString());
     }
 
@@ -172,12 +170,10 @@ public class AddStudentCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");
@@ -185,39 +181,39 @@ public class AddStudentCommandTest {
     }
 
     /**
-     * A Model stub that contains a single student.
+     * A Model stub that contains a single teacher.
      */
-    private class ModelStubWithStudent extends ModelStub {
-        private final Student student;
+    private class ModelStubWithTeacher extends ModelStub {
+        private final Teacher teacher;
 
-        ModelStubWithStudent(Student student) {
-            requireNonNull(student);
-            this.student = student;
+        ModelStubWithTeacher(Teacher teacher) {
+            requireNonNull(teacher);
+            this.teacher = teacher;
         }
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return this.student.isSamePerson(person);
+            return this.teacher.isSamePerson(person);
         }
     }
 
     /**
-     * A Model stub that always accepts the student being added.
+     * A Model stub that always accepts the teacher being added.
      */
-    private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Student> studentsAdded = new ArrayList<>();
+    private class ModelStubAcceptingTeacherAdded extends ModelStub {
+        final ArrayList<Teacher> teachersAdded = new ArrayList<>();
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return studentsAdded.stream().anyMatch(person::isSamePerson);
+            return teachersAdded.stream().anyMatch(person::isSamePerson);
         }
 
         @Override
         public void addPerson(Person person) {
             requireNonNull(person);
-            studentsAdded.add((Student) person);
+            teachersAdded.add((Teacher) person);
         }
 
         @Override
