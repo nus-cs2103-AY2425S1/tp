@@ -11,6 +11,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
     private static final String WHITESPACE_SPLIT = "\\s+";
+    private static final int NUM_EXPECTED_ARGUMENTS = 1;
+    private static final int FIRST_ARGUMENT_INDEX = 0;
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
@@ -23,11 +25,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         String[] splitArgs = trimmedArgs.split(WHITESPACE_SPLIT);
 
         // if the number of indices given is not exactly 1, throw an exception
-        if (!(splitArgs.length == 1)) {
+        if (!(splitArgs.length == NUM_EXPECTED_ARGUMENTS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        Index indexToView = parseViewIndex(splitArgs[0]);
+        Index indexToView = parseViewIndex(splitArgs[FIRST_ARGUMENT_INDEX]);
         return new ViewCommand(indexToView);
     }
 
