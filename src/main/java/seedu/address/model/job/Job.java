@@ -58,7 +58,9 @@ public class Job {
         return Collections.unmodifiableSet(requirements);
     }
 
-    /** Returns true if both jobs have the same name and company. */
+    /**
+     *  Returns true if both jobs have the same name and company.
+     */
     public boolean isSameJob(Job otherJob) {
         if (otherJob == this) {
             return true;
@@ -71,8 +73,11 @@ public class Job {
         return matches;
     }
 
-    public boolean hasMatched(String contactName) {
-        return this.matches.contains(contactName);
+    /**
+     * Returns true if the contacts phone number is in matches
+     */
+    public boolean hasMatched(String contactPhoneNumber) {
+        return this.matches.contains(contactPhoneNumber);
     }
 
     /**

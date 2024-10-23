@@ -102,12 +102,25 @@ public class Person {
      * Returns a string that identify the Person object
      */
     public String getIdentifier() {
-        // TODO: This identifier cannot guarantee uniqueness
-        return name.fullName;
+        return phone.toString();
     }
+    // Todo: To be closed in PR review, basically we agreed that a person is unique due to contact and email
+    //  and you can see that before this PR, you can add a contact with the same contact or email. Let me know ur thots.
+    ///**
+    // * Returns true if both persons have the same name.
+    // * This defines a weaker notion of equality between two persons.
+    // */
+    //public boolean isSamePerson(Person otherPerson) {
+    //    if (otherPerson == this) {
+    //        return true;
+    //    }
+    //
+    //        return otherPerson != null
+    //                && otherPerson.getName().equals(getName());
+    //    }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same contact or email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -115,9 +128,9 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
-    }
+            return otherPerson != null
+                    && (otherPerson.getEmail().equals(getEmail()) || otherPerson.getPhone().equals(getPhone()));
+        }
 
     /**
      * Returns true if both persons have the same identity and data fields.
@@ -146,7 +159,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, role, skills);
+        return Objects.hash(name, phone, email, role, skills, match);
     }
 
     @Override
