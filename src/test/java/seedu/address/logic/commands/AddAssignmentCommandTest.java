@@ -33,7 +33,7 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void constructor_nullStudentAndAssignmentDescriptor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(null, null));
+        assertThrows(AssertionError.class, () -> new AddAssignmentCommand(null, null));
     }
 
     @Test

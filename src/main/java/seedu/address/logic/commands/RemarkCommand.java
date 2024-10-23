@@ -40,6 +40,9 @@ public class RemarkCommand extends Command {
      * @param remark to add to the student
      */
     public RemarkCommand(Index studentIndex, String remark) {
+        assert studentIndex != null;
+        assert remark != null;
+
         requireNonNull(studentIndex);
         requireNonNull(remark);
 
