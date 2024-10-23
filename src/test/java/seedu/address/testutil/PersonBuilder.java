@@ -3,9 +3,9 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -38,7 +38,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Allergy> tags;
+    private Set<Allergy> allergies;
     private Priority priority;
     private Set<Appointment> appointments;
     private Set<MedCon> medCons;
@@ -54,7 +54,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        allergies = new HashSet<>();
         priority = new Priority(DEFAULT_PRIORITY);
         appointments = new HashSet<>();
         medCons = new HashSet<>();
@@ -71,7 +71,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getAllergies());
+        allergies = new HashSet<>(personToCopy.getAllergies());
         priority = personToCopy.getPriority();
         appointments = new HashSet<>(personToCopy.getAppointments());
         medCons = new HashSet<>(personToCopy.getMedCons());
@@ -95,10 +95,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withAllergies(String ... tags) {
-        this.tags = SampleDataUtil.getAllergiesSet(tags);
+    public PersonBuilder withAllergies(String ... allergies) {
+        this.allergies = SampleDataUtil.getAllergiesSet(allergies);
         return this;
     }
 
@@ -172,7 +172,7 @@ public class PersonBuilder {
      * @return A {@code Person} object with the current state of this builder.
      */
     public Person build() {
-        return new Person(name, phone, email, nric, address, dob, gender, tags, priority, appointments, medCons);
+        return new Person(name, phone, email, nric, address, dob, gender, allergies, priority, appointments, medCons);
     }
 
 }

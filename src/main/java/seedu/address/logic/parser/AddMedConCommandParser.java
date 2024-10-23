@@ -32,9 +32,9 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MEDCON);
 
-        // Check if NRIC is provided
+        // Check if NRIC and medical condition is provided
         if (!argMultimap.arePrefixesPresent(PREFIX_NRIC, PREFIX_MEDCON) || !argMultimap.getPreamble().isEmpty()) {
-            logger.warning("NRIC not provided in AddMedConCommand arguments.");
+            logger.warning("NRIC and medical condition not provided in AddMedConCommand arguments.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMedConCommand.MESSAGE_USAGE));
         }
 

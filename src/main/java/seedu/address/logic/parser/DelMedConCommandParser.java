@@ -34,9 +34,9 @@ public class DelMedConCommandParser implements Parser<DelMedConCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_MEDCON);
 
-        // Check if NRIC is provided
+        // Check if NRIC and medical condition is provided
         if (!argMultimap.arePrefixesPresent(PREFIX_NRIC, PREFIX_MEDCON) || !argMultimap.getPreamble().isEmpty()) {
-            logger.warning("NRIC not provided in DelMedConCommand arguments.");
+            logger.warning("NRIC and medical condition not provided in DelMedConCommand arguments.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelMedConCommand.MESSAGE_USAGE));
         }
 

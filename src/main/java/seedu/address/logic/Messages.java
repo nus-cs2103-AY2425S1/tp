@@ -21,6 +21,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_CONSTRAINTS_LENGTH =
             "length should not exceed the limit of 30 characters";
+    public static final String MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH = " names should be alphanumeric and not "
+            + "exceed 30 characters";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

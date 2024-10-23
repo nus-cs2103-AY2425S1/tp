@@ -15,8 +15,8 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Person;
 
 /**
@@ -67,11 +67,11 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getAllergies().isPresent()) {
-            Set<Allergy> tags = descriptor.getAllergies().get();
-            if (tags.isEmpty()) {
+            Set<Allergy> allergies = descriptor.getAllergies().get();
+            if (allergies.isEmpty()) {
                 sb.append(PREFIX_ALLERGY);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_ALLERGY).append(s.allergyName).append(" "));
+                allergies.forEach(s -> sb.append(PREFIX_ALLERGY).append(s.allergyName).append(" "));
             }
         }
         // Appointments not supported in edit command

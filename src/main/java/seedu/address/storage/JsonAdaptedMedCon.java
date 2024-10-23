@@ -16,7 +16,7 @@ class JsonAdaptedMedCon {
     private final String medConName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedAllergy} with the given {@code allergyName}.
      */
     @JsonCreator
     public JsonAdaptedMedCon(String medConName) {
@@ -24,7 +24,7 @@ class JsonAdaptedMedCon {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Allergy} into this class for Jackson use.
      */
     public JsonAdaptedMedCon(MedCon source) {
         medConName = source.getMedCon();
@@ -36,7 +36,7 @@ class JsonAdaptedMedCon {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code MedCon} object.
+     * Converts this Jackson-friendly adapted allergy object into the model's {@code MedCon} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted MedCon.
      */
@@ -44,7 +44,7 @@ class JsonAdaptedMedCon {
         if (medConName == null) {
             throw new IllegalValueException(String.format("%s cannot be null", MedCon.class.getSimpleName()));
         }
-        if (!MedCon.isValidMedCon(medConName)) {
+        if (!MedCon.isValidMedConName(medConName)) {
             throw new IllegalValueException(String.format("%s: %s", MedCon.class.getSimpleName(),
                     MESSAGE_CONSTRAINTS_LENGTH));
         }

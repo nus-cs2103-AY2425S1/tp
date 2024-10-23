@@ -15,9 +15,9 @@ import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -162,21 +162,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String allergy} into a {@code Allergy}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code allergy} is invalid.
-     */
-    public static Allergy parseAllergy(String allergy) throws ParseException {
-        requireNonNull(allergy);
-        String trimmedAllergy = allergy.trim();
-        if (!Allergy.isValidAllergyName(trimmedAllergy)) {
-            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
-        }
-        return new Allergy(trimmedAllergy);
-    }
-
-    /**
      * Parses a serialised {@code String appointment} into a {@code Appointment}.
      *
      * Leading and trailing whitespaces will be trimmed.
@@ -205,15 +190,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>}.
+     * Parses and validates the given allergy string.
+     *
+     * @param allergyStr The medical condition string to parse.
+     * @return A {@code Allergy} object.
+     * @throws ParseException If the allergy string is invalid.
      */
-    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
-        requireNonNull(allergies);
-        final Set<Allergy> allergiesSet = new HashSet<>();
-        for (String allergyName : allergies) {
-            allergiesSet.add(parseAllergy(allergyName));
+    public static Allergy parseAllergy(String allergyStr) throws ParseException {
+        requireNonNull(allergyStr);
+        if (allergyStr.isEmpty()) {
+            throw new ParseException("Allergy " + MESSAGE_EMPTY_FIELD);
+        } else if (allergyStr.length() > 30) {
+            throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!allergyStr.matches(Allergy.VALIDATION_REGEX)) {
+            throw new ParseException("Invalid allergy format.");
         }
-        return allergiesSet;
+        return new Allergy(allergyStr);
     }
 
     /**
@@ -258,6 +250,7 @@ public class ParserUtil {
      * @throws ParseException If the medical condition string is invalid.
      */
     public static MedCon parseMedCon(String medConStr) throws ParseException {
+        requireNonNull(medConStr);
         if (medConStr.isEmpty()) {
             throw new ParseException("Medical condition " + MESSAGE_EMPTY_FIELD);
         } else if (medConStr.length() > 30) {

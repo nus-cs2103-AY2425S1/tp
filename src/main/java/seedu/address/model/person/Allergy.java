@@ -1,7 +1,9 @@
-package seedu.address.model.allergy;
+package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 /**
  * Represents an Allergy in the address book.
@@ -22,15 +24,19 @@ public class Allergy implements Comparable<Allergy> {
      */
     public Allergy(String allergyName) {
         requireNonNull(allergyName);
-        checkArgument(isValidAllergyName(allergyName), MESSAGE_CONSTRAINTS);
+        checkArgument(!allergyName.isEmpty(), MESSAGE_EMPTY_FIELD);
+        checkArgument(isValidAllergyName(allergyName), MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
         this.allergyName = allergyName;
     }
 
     /**
      * Returns true if a given string is a valid allergy name.
      */
-    public static boolean isValidAllergyName(String test) {
-        return test.matches(VALIDATION_REGEX) && test.length() <= 30;
+    public static boolean isValidAllergyName(String allergy) {
+        if (allergy == null || allergy.isEmpty()) {
+            return false;
+        }
+        return allergy.matches(VALIDATION_REGEX) && allergy.length() <= 30;
     }
 
     @Override

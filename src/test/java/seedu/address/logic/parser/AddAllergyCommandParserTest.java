@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddAllergyCommand;
-import seedu.address.model.allergy.Allergy;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Nric;
 
 public class AddAllergyCommandParserTest {

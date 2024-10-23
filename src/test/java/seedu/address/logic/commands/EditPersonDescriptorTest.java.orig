@@ -53,8 +53,13 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+<<<<<<< HEAD
+        // different allergies -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_SOYBEANS).build();
+=======
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_ALLERGY_BOB).build();
+>>>>>>> deleteAllergy
         assertFalse(DESC_AMY.equals(editedAmy));
     }
     @Disabled

@@ -24,9 +24,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -114,14 +114,14 @@ public class EditCommand extends Command {
         DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
-        Set<Allergy> updatedTags = editPersonDescriptor.getAllergies().orElse(personToEdit.getAllergies());
+        Set<Allergy> updatedAllergies = editPersonDescriptor.getAllergies().orElse(personToEdit.getAllergies());
         Priority updatedPriority = personToEdit.getPriority();
         Set<Appointment> updatedAppointments = editPersonDescriptor.getAppointments()
                                                                    .orElse(personToEdit.getAppointments());
         Set<MedCon> updatedMedCons = editPersonDescriptor.getMedCons().orElse(personToEdit.getMedCons());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric, updatedAddress, updatedDateOfBirth,
-                updatedGender, updatedTags, updatedPriority, updatedAppointments, updatedMedCons);
+                updatedGender, updatedAllergies, updatedPriority, updatedAppointments, updatedMedCons);
 
     }
 

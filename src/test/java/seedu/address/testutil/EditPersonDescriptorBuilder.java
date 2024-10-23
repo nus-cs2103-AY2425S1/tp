@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -42,7 +42,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setAllergies(person.getAllergies());
         // Appointment editing not supported
     }
 
@@ -106,7 +105,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... allergies) {
+    public EditPersonDescriptorBuilder withAllergies(String... allergies) {
         Set<Allergy> allergiesSet = Stream.of(allergies).map(Allergy::new).collect(Collectors.toSet());
         descriptor.setAllergies(allergiesSet);
         return this;

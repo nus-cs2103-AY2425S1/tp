@@ -34,7 +34,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ALLERGY = "#friend";
     private static final String INVALID_PRIORITY = "invalidPriority";
     private static final String INVALID_APPOINTMENTS = "yolo:today:0420";
 
@@ -201,12 +201,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedAllergy> invalidTags = new ArrayList<>(VALID_ALLERGIES);
-        invalidTags.add(new JsonAdaptedAllergy(INVALID_TAG));
+    public void toModelType_invalidAllergies_throwsIllegalValueException() {
+        List<JsonAdaptedAllergy> invalidAllergies = new ArrayList<>(VALID_ALLERGIES);
+        invalidAllergies.add(new JsonAdaptedAllergy(INVALID_ALLERGY));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ADDRESS,
-                        VALID_DATE_OF_BIRTH, VALID_GENDER, invalidTags, VALID_PRIORITY, VALID_APPOINTMENTS,
+                        VALID_DATE_OF_BIRTH, VALID_GENDER, invalidAllergies, VALID_PRIORITY, VALID_APPOINTMENTS,
                         VALID_MEDCON);
         assertThrows(IllegalValueException.class, person::toModelType);
     }

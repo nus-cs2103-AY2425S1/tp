@@ -11,15 +11,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 
@@ -73,8 +67,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPersonDescriptor::setAllergies);
-
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
@@ -82,21 +74,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(new NricMatchesPredicate(patientNric), editPersonDescriptor);
     }
 
-
-    /**
-     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>} if {@code allergies} is non-empty.
-     * If {@code allergies} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Allergy>} containing zero allergies.
-     */
-    private Optional<Set<Allergy>> parseAllergiesForEdit(Collection<String> allergies) throws ParseException {
-        assert allergies != null;
-
-        if (allergies.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> allergiesSet = allergies.size() == 1 && allergies.contains("")
-                ? Collections.emptySet()
-                : allergies;
-        return Optional.of(ParserUtil.parseAllergies(allergiesSet));
-    }
 }

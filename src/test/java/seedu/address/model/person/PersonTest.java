@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_SOYBEANS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
@@ -41,7 +41,7 @@ public class PersonTest {
         // same nric, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withName(VALID_NAME_BOB).withDateOfBirth(VALID_DOB_BOB).withGender(VALID_GENDER_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_SOYBEANS).withPriority(VALID_PRIORITY_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_BOB).withPriority(VALID_PRIORITY_BOB)
                 .withMedCons(VALID_MEDCON_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -97,7 +97,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different allergies -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAllergies(VALID_ALLERGY_SOYBEANS).build();
+        editedAlice = new PersonBuilder(ALICE).withAllergies(VALID_ALLERGY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different medical condition -> returns false

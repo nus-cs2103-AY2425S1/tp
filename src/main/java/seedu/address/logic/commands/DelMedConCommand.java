@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.HashSet;
@@ -24,10 +26,11 @@ public class DelMedConCommand extends Command {
             + "one or more medical conditions to a patient in the address book.\n"
             + "Parameters: "
             + PREFIX_NRIC + "NRIC "
-            + "c/CONDITION...\n"
+            + PREFIX_MEDCON + "CONDITION...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "T0123456F "
-            + "c/Diabetes c/Hypertension";
+            + PREFIX_MEDCON + "Diabetes "
+            + PREFIX_MEDCON + "Hypertension";
 
     public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition: %1$s from Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
@@ -37,8 +40,10 @@ public class DelMedConCommand extends Command {
     private final Set<MedCon> medCons;
 
     /**
-     * @param nric of the patient to unassign the medical conditions from.
-     * @param medCons set of medical conditions to be removed.
+     * Creates a {@code DelMedConCommand} to unassign the specified medical conditions from a patient.
+     *
+     * @param nric The NRIC of the patient to unassign the medical conditions from.
+     * @param medCons The set of medical conditions to be removed.
      */
     public DelMedConCommand(Nric nric, Set<MedCon> medCons) {
         requireAllNonNull(nric, medCons);
@@ -50,7 +55,7 @@ public class DelMedConCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
-                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
+                .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
 
         if (person.getNric().equals(this.nric)) {
             Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
@@ -58,7 +63,7 @@ public class DelMedConCommand extends Command {
             // check if the medical conditions to delete exist in the current set
             for (MedCon medCon : medCons) {
                 if (!updatedMedConSet.remove(medCon)) {
-                    throw new CommandException(String.format(MESSAGE_MEDCON_NOT_FOUND, medCon.value));
+                    throw new CommandException(String.format(MESSAGE_MEDCON_NOT_FOUND, medCon.medConName));
                 }
             }
 
@@ -81,7 +86,7 @@ public class DelMedConCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         StringBuilder medConsString = new StringBuilder();
-        medCons.forEach(medCon -> medConsString.append(medCon.value).append(", "));
+        medCons.forEach(medCon -> medConsString.append(medCon.medConName).append(", "));
 
         // Remove trailing comma and space, if any
         if (medConsString.length() > 0) {
