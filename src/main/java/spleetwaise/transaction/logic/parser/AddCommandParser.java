@@ -60,7 +60,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
             transaction = new Transaction(person, amount, description, date);
         } else {
             transaction = new Transaction(person, amount, description);

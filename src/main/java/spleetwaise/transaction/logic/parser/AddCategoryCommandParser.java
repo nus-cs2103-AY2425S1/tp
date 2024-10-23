@@ -1,9 +1,9 @@
 package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_TXN;
-import static spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_USAGE;
 
 import java.util.stream.Stream;
 
@@ -39,7 +39,7 @@ public class AddCategoryCommandParser implements Parser<AddCategoryCommand> {
         int index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TXN).get());
 
         Transaction txn = ParserUtil.getTransactionFromIndex(index);
-        String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());                                                                                       ;
+        String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
 
         return new AddCategoryCommand(txn, category);
     }

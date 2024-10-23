@@ -29,7 +29,7 @@ public class RemoveCategoryCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Remove a category from transaction.\n" + "Parameters: " + PREFIX_TXN
                     + "TRANSACTION_INDEX " + PREFIX_CATEGORY + "CATEGORY " + "Example: " + COMMAND_WORD + " "
-                    + PREFIX_TXN + "1 " + PREFIX_CATEGORY + "Transport\n\n";
+                    + PREFIX_TXN + "1 " + PREFIX_CATEGORY + "Transport";
 
     private final Transaction transaction;
     private final String category;

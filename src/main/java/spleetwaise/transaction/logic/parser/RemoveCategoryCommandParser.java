@@ -1,9 +1,9 @@
 package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static spleetwaise.transaction.logic.commands.RemoveCategoryCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_TXN;
-import static spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_USAGE;
 
 import java.util.stream.Stream;
 

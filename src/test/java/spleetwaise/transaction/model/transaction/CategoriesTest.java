@@ -28,11 +28,4 @@ public class CategoriesTest {
         assertThrows(NullPointerException.class, () -> new Categories().remove(testCat));
     }
 
-    @Test
-    public void isValidCategory_empty_throwsNullPointerException() {
-        String testCat = null;
-
-        assertThrows(NullPointerException.class, () -> Categories.isValidCategory(testCat));
-    }
-
 }

@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_TXN;
 
-
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.transaction.model.transaction.Categories;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -23,7 +21,7 @@ public class AddCategoryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Category added to transaction: [%s] with [%s]";
 
-    public static final String MESSAGE_NO_SUCH_CATEGORY = "No such category found.";
+    public static final String MESSAGE_EMPTY_CATEGORY = "Cannot define empty category.";
 
     /**
      * The message usage string that explains how to use this command.
@@ -31,7 +29,7 @@ public class AddCategoryCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Add a category to transaction.\n" + "Parameters: " + PREFIX_TXN + "TRANSACTION_INDEX "
                     + PREFIX_CATEGORY + "CATEGORY " + "Example: " + COMMAND_WORD + " " + PREFIX_TXN + "1 "
-                    + PREFIX_CATEGORY + "Transport\n\n" + "List of categories: " + Categories.printAllCategories();
+                    + PREFIX_CATEGORY + "Transport";
 
     private final Transaction transaction;
     private final String category;
@@ -52,8 +50,8 @@ public class AddCategoryCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        if (!Categories.isValidCategory(category)) {
-            throw new CommandException(MESSAGE_NO_SUCH_CATEGORY);
+        if (category.length() <= 0) {
+            throw new CommandException(MESSAGE_EMPTY_CATEGORY);
         }
 
         transaction.addCategory(category);
