@@ -287,7 +287,26 @@ Example:
 ### Managing Allergies
 [To be filled up]
 ### Managing Priority
-[To be filled up]
+
+#### Setting Priority : `setPriority`
+
+Sets Priority to an existing patient in MediBase3.
+
+Format: `setPriority i/NRIC !/PRIORITY`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Sets Priority to the patient with the specified `NRIC` in MediBase3.
+> * You can set Priority to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after Priority has been set.
+> * On default Patient has been set to `NONE` Priority level.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+
+Example: 
+* `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
+
+[Back to Table of Contents](#table-of-contents)
+
 ### Finding Patients
 
 {: .alert .alert-info}
