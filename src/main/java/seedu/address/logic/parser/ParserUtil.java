@@ -172,7 +172,11 @@ public class ParserUtil {
         String trimmedDate = date.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
-            return new WeddingDate(LocalDate.parse(trimmedDate, formatter));
+            LocalDate parsedDate = LocalDate.parse(trimmedDate, formatter);
+            if (!parsedDate.isAfter(LocalDate.now())) {
+                throw new ParseException("Wedding date must be after current date.");
+            }
+            return new WeddingDate(parsedDate);
         } catch (DateTimeParseException e) {
             throw new ParseException(WeddingDate.MESSAGE_CONSTRAINTS);
         }
