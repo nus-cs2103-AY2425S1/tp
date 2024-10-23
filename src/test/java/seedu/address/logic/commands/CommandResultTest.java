@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult.SwitchView;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -44,6 +45,8 @@ public class CommandResultTest {
                 SwitchView.NONE)));
 
         // different switchView value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
+                SwitchView.WEDDING)));
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
                 SwitchView.TASK)));
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,

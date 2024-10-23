@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private WeddingListPanel weddingListPanel;
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -115,6 +116,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
 
         resultDisplay = new ResultDisplay();
@@ -125,41 +128,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    /**
-     * Switches the view shown to the user.
-     * @param switchView The view that should be shown.
-     */
-    public void switchView(SwitchView switchView) {
-        switch (switchView) {
-        case PERSON:
-            changeToPersonView();
-            break;
-        case TASK:
-            changeToTaskView();
-            break;
-        default:
-            throw new UnsupportedOperationException("Invalid view selected.");
-        }
-    }
-
-    /**
-     * Changes the list panel to show the {@code Person} list.
-     */
-    public void changeToPersonView() {
-        personListPanel.updatePersonList(logic.getFilteredPersonList());
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-    }
-
-    /**
-     * Shows the task list panel.
-     */
-    public void changeToTaskView() {
-        taskListPanel.updatePersonList(logic.getFilteredTaskList());
-        listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     /**
@@ -236,4 +204,52 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Switches the view shown to the user.
+     * @param switchView The view that should be shown.
+     */
+    public void switchView(SwitchView switchView) {
+        switch (switchView) {
+        case PERSON:
+            changeToPersonView();
+            break;
+        case TASK:
+            changeToTaskView();
+            break;
+        case WEDDING:
+            changeToWeddingView();
+            break;
+        default:
+            throw new UnsupportedOperationException("Invalid view selected.");
+        }
+    }
+
+    /**
+     * Changes the list panel to show the {@code Wedding} list.
+     */
+    public void changeToWeddingView() {
+        weddingListPanel.updateWeddingList(logic.getFilteredWeddingList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+    }
+
+    /**
+     * Changes the list panel to show the {@code Task} list.
+     */
+    public void changeToTaskView() {
+        taskListPanel.updatePersonList(logic.getFilteredTaskList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+    }
+
+    /**
+     * Changes the list panel to show the {@code Person} list.
+     */
+    public void changeToPersonView() {
+        personListPanel.updatePersonList(logic.getFilteredPersonList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
 }
