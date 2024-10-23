@@ -285,18 +285,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                                 | Format, Examples                                                                                                                                              |
-|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                                 | Format, Examples                                                                                                                                                    |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add a person**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**                              | `clear`                                                                                                                                                       |
-| **Delete a person**                    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                           |
-| **Edit a person**                      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`                                   |
-| **Find person(s)**                     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                     |
-| **List all persons**                   | `list`                                                                                                                                                        |
-| **Add an order**                       | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`<br> e.g. `addOrder 2 i/Lamp d/20-11-2024 c/3`                                                                     |
-| **List all orders**                    | `listOrder INDEX`<br> e.g. `listOrder 3`                                                                                                                      |
-| **Delete an order**                    | `deleteOrder ORDER_INDEX`<br> e.g. `deleteOrder 2`                                                                                                            |
-| **Mark an order as completed**         | `markOrder ORDER_INDEX`<br> e.g. `markOrder 2`       
-| **Revert an order to pending status**  | `unmarkOrder ORDER_INDEX`<br> e.g., `unmarkOrder 2`
-| **Filter a person's orders by status** | `filterOrder ORDER_STATUS`<br> e.g. `filterOrder Completed`                                                                                                   |
-| **Help**                               | `help`                                                                                                                                                        |
+| **Clear**                              | `clear`                                                                                                                                                             |
+| **Delete a person**                    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
+| **Edit a person**                      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find person(s)**                     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                           |
+| **List all persons**                   | `list`                                                                                                                                                              |
+| **Add an order**                       | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`<br> e.g. `addOrder 2 i/Lamp d/20-11-2024 c/3`                                                                           |
+| **List all orders**                    | `listOrder INDEX`<br> e.g. `listOrder 3`                                                                                                                            |
+| **Delete an order**                    | `deleteOrder ORDER_INDEX`<br> e.g. `deleteOrder 2`                                                                                                                  |
+| **Mark an order as completed**         | `markOrder ORDER_INDEX`<br> e.g. `markOrder 2`                                                                                                                      |                                                                                                                                                                                                                                           |
+| **Revert an order to pending status**  | `unmarkOrder ORDER_INDEX`<br> e.g., `unmarkOrder 2`                                                                                                                 |
+| **Filter a person's orders by status** | `filterOrder ORDER_STATUS`<br> e.g. `filterOrder Completed`                                                                                                         |
+| **Help**                               | `help`                                                                                                                                                              |
