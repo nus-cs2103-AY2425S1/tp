@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -22,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -43,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+            + "[" + PREFIX_TAG + "TAG]..."
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -51,7 +54,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -99,9 +101,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Boolean updatedHasPaid = editPersonDescriptor.getHasPaid().orElse(personToEdit.getHasPaid());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
+                updatedTags, updatedHasPaid);
     }
 
     @Override
@@ -137,9 +142,12 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Birthday birthday;
         private Set<Tag> tags;
+        private Boolean hasPaid;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -150,14 +158,16 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setBirthday(toCopy.birthday);
             setTags(toCopy.tags);
+            this.hasPaid = toCopy.hasPaid;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, tags, hasPaid);
         }
 
         public void setName(Name name) {
@@ -192,6 +202,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setBirthday(Birthday birthday) {
+            this.birthday = birthday;
+        }
+
+        public Optional<Birthday> getBirthday() {
+            return Optional.ofNullable(birthday);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -207,6 +225,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setHasPaid(Boolean hasPaid) { // needed for EditPersonDescriptorTest.java
+            this.hasPaid = hasPaid;
+        }
+
+        public Optional<Boolean> getHasPaid() { // needed for EditPersonDescriptorTest.java
+            return Optional.ofNullable(hasPaid);
         }
 
         @Override
@@ -225,7 +251,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(birthday, otherEditPersonDescriptor.birthday)
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(hasPaid, otherEditPersonDescriptor.hasPaid);
         }
 
         @Override
@@ -235,7 +263,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("birthday", birthday)
                     .add("tags", tags)
+                    .add("hasPaid", hasPaid)
                     .toString();
         }
     }

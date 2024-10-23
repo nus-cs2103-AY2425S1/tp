@@ -9,51 +9,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lim Qiao Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/meatyturtle.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/meatyturtle)]
+[[linkedin](https://linkedin.com/limqiaoyi)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibility: Integration
 
-### Jane Doe
+### Shane Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shantaa.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/shantaa)]
+
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
+
+### Justin Aw
+
+<img src="images/justin-aw46.png" width="200px">
+
+[[github](http://github.com/Justin-Aw46)]
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Joshua Ng
+
+<img src="images/alphapyke.png" width="200px">
+
+[[github](http://github.com/AlphaPyke)]
+
+* Role: Code Quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards and git standards.
+
+### Tiew Wei Xuan
+
+<img src="images/fymbc.png" width="200px">
+
+[[github](http://github.com/fymbc)]
 
 * Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling, Tracking, Deliverables, Deadlines

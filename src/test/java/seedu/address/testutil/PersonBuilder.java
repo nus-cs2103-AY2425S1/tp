@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -20,12 +21,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_BIRTHDAY = "11 09 2001";
+    public static final Boolean DEFAULT_HASPAID = false;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Birthday birthday;
     private Set<Tag> tags;
+    private Boolean hasPaid;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +40,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
         tags = new HashSet<>();
+        hasPaid = DEFAULT_HASPAID;
     }
 
     /**
@@ -46,7 +53,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        birthday = personToCopy.getBirthday();
         tags = new HashSet<>(personToCopy.getTags());
+        hasPaid = personToCopy.getHasPaid();
     }
 
     /**
@@ -89,8 +98,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
+        return this;
+    }
+
+    /**
+     * Sets the {@code hasPaid} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withHasPaid(Boolean hasPaid) {
+        this.hasPaid = hasPaid;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, birthday, tags, hasPaid);
     }
 
 }
