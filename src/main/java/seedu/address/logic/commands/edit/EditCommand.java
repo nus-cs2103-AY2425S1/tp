@@ -224,7 +224,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<EditModuleRoleOperation> getModuleRoleOperation() {
-            return (editModuleRoleOperation != null) ? Optional.of(editModuleRoleOperation) : Optional.empty();
+            return Optional.ofNullable(editModuleRoleOperation);
         }
 
         @Override
