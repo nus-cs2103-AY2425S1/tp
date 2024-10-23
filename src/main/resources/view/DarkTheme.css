@@ -102,14 +102,18 @@
 
 .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
+    -fx-border-color: #f2e7e6;
+    -fx-border-width: 0.5;
 }
 
 .list-cell:filled:odd {
     -fx-background-color: #515658;
+    -fx-border-color: #f2e7e6;
+    -fx-border-width: 0.5;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #5a8a85;
 }
 
 .list-cell:filled:selected #cardPane {
