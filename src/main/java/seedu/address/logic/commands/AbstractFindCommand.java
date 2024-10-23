@@ -10,7 +10,7 @@ import seedu.address.model.person.ContainsKeywordsPredicate;
 /**
  * Abstract Find command to house the other find command classes.
  */
-public abstract class AbstractFindCommand extends Command {
+public class AbstractFindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final String NAME_COMMAND_WORD = " n/";

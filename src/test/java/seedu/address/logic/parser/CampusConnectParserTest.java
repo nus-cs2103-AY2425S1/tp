@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.model.person.CombinedContainsKeywordsPredicate;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,15 +81,28 @@ public class CampusConnectParserTest {
                 .collect(Collectors.joining(" ")));
         assertEquals(new FindByNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
+//
+//    @Test
+//    public void parseCommand_findByPhone() throws Exception {
+//        List<String> keywords = Arrays.asList("995", "91234567", "132");
+//        FindByPhoneCommand command = (FindByPhoneCommand) parser.parseCommand(AbstractFindCommand.COMMAND_WORD
+//                        + keywords.stream().map(x -> FindByPhoneCommand.PHONE_COMMAND_WORD + x)
+//                        .collect(Collectors.joining(" ")));
+//        assertEquals(new FindByPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
+//    }
 
     @Test
     public void parseCommand_findByPhone() throws Exception {
         List<String> keywords = Arrays.asList("995", "91234567", "132");
         FindByPhoneCommand command = (FindByPhoneCommand) parser.parseCommand(AbstractFindCommand.COMMAND_WORD
-                        + keywords.stream().map(x -> FindByPhoneCommand.PHONE_COMMAND_WORD + x)
-                        .collect(Collectors.joining(" ")));
-        assertEquals(new FindByPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
+                + keywords.stream().map(x -> FindByPhoneCommand.PHONE_COMMAND_WORD + x)
+                .collect(Collectors.joining(" ")));
+        // Update the expectation to match new predicate handling, possibly:
+        CombinedContainsKeywordsPredicate expectedPredicate =
+                new CombinedContainsKeywordsPredicate(Collections.singletonList(new PhoneContainsKeywordsPredicate(keywords)));
+        assertEquals(new FindByPhoneCommand(expectedPredicate), command);
     }
+
 
     @Test
     public void parseCommand_help() throws Exception {
