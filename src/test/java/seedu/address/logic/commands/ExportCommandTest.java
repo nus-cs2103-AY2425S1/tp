@@ -3,11 +3,17 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_LIKES_CATS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_VCF;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.CHARLIE;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,13 +38,10 @@ public class ExportCommandTest {
     public void toCsvStringMethod() {
         ExportCommand exportCommand = new ExportCommand(FILE_TYPE_CSV);
 
-        String tag = "\"friends\"";
-        String note = "\"High profile client, Likes dumplings\"";
+        String expected = VALID_NAME_CHARLIE + "," + VALID_PHONE_CHARLIE + "," + VALID_EMAIL_CHARLIE + ",\""
+            + VALID_ADDRESS_CHARLIE + "\",\"" + VALID_TAG_FRIEND + "\",\"" + VALID_NOTE_LIKES_CATS + "\"";
 
-        String expected = ALICE.getName() + "," + ALICE.getPhone() + "," + ALICE.getEmail() + ",\""
-            + ALICE.getAddress() + "\"" + "," + tag + "," + note;
-
-        assertEquals(expected, exportCommand.toCsvString(ALICE));
+        assertEquals(expected, exportCommand.toCsvString(CHARLIE));
     }
 
     @Test

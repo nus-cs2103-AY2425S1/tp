@@ -30,8 +30,9 @@ public class ExportCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "csv";
 
     public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
-    public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file";
-    public static final String MESSAGE_CONSTRAINTS = "This file type is not supported, we only support CSV and VCF.";
+    public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file"
+            + ", please ensure that the file is closed before exporting";
+    public static final String MESSAGE_CONSTRAINTS = "This file type is not supported, we only support CSV and VCF";
 
     private final String csvHeaders = "Name,Phone No,Email,Address,Tags,Notes";
 
@@ -86,11 +87,7 @@ public class ExportCommand extends Command {
      */
     private void exportToCsv(Model model) throws CommandException, IOException {
 
-        // Check if the directory and file exists
-        if (!FileUtil.isFileExists(exportCsvPath)) {
-            // Create a csv file to save the tasks
-            FileUtil.createFile(exportCsvPath);
-        }
+        FileUtil.createIfMissing(exportCsvPath);
 
         StringJoiner sj = new StringJoiner("\n");
         sj.add(csvHeaders);

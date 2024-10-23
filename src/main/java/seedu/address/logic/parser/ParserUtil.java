@@ -156,8 +156,6 @@ public class ParserUtil {
             return type;
         } catch (IllegalArgumentException argex) {
             throw new ParseException(MESSAGE_CONSTRAINTS);
-        } catch (NullPointerException nullex) {
-            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
     }
 }
