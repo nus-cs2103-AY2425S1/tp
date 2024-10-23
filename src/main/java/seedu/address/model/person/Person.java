@@ -27,7 +27,7 @@ public class Person {
     private final Tag role;
 
     private final Set<Tag> tags = new HashSet<>(); // to remove
-    private final Wedding ownWedding;
+    private Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
     /**
@@ -55,6 +55,10 @@ public class Person {
         this.address = address;
         this.role = role;
         this.ownWedding = ownWedding;
+    }
+
+    public void setOwnWedding(Wedding wedding) {
+        ownWedding = wedding;
     }
 
     public Name getName() {

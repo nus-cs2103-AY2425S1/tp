@@ -30,6 +30,7 @@ public class Wedding {
     //this method is particularly for the storage of the wedding
     public void addClient(Person person) {
         this.client = new Client(person);
+        person.setOwnWedding(this);
     }
 
     public Name getName() {
@@ -85,13 +86,12 @@ public class Wedding {
 
         Wedding otherWedding = (Wedding) other;
         return name.equals(otherWedding.name)
-               && client.equals(otherWedding.client)
                && date.equals(otherWedding.date)
                && venue.equals(otherWedding.venue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, client, date, venue);
+        return Objects.hash(name, date, venue);
     }
 }
