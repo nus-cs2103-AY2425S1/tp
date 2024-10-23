@@ -1,5 +1,4 @@
 package seedu.address;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -38,6 +37,7 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 2, 2, true);
 
+
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -75,20 +75,35 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            Optional<ReadOnlyAddressBook> addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
+                initialData = SampleDataUtil.getSampleAddressBook();
+            } else {
+                initialData = addressBookOptional.get();
+                if (initialData.getPersonList().isEmpty()) {
+                    logger.info("AddressBook empty. Loading sample data.");
+                    initialData = SampleDataUtil.getSampleAddressBook();
+                } else {
+                    logger.info("Loaded " + initialData.getPersonList().size() + " persons from storage.");
+                }
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            initialData = SampleDataUtil.getSampleAddressBook();
         }
+
+        try {
+            if (initialData == SampleDataUtil.getSampleAddressBook()) {
+                storage.saveAddressBook(initialData);  // Save sample data immediately
+            }
+        } catch (IOException e) {
+            logger.warning("Failed to save sample data : " + e);
+        }        
 
         return new ModelManager(initialData, userPrefs);
     }

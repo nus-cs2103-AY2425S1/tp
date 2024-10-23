@@ -14,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -87,6 +88,15 @@ public class ParserUtil {
         }
         return new Address(trimmedAddress);
     }
+
+    public static Notes parseNotes(String notes) throws ParseException {
+        requireNonNull(notes);
+        String trimmedNotes = notes.trim();
+        if (!Notes.isValidNotes(trimmedNotes)) {
+            throw new ParseException(Notes.MESSAGE_CONSTRAINTS);
+        }
+        return new Notes(trimmedNotes);
+    }    
 
     /**
      * Parses a {@code String email} into an {@code Email}.
