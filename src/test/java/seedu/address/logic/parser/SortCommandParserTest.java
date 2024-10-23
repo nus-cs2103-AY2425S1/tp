@@ -19,6 +19,12 @@ public class SortCommandParserTest {
     }
 
     @Test
+    public void parse_misspelling_throwsParseException() {
+        assertParseFailure(parser, " n/ascenf",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_twoParameters_throwsParseException() {
         assertParseFailure(parser, " n/ d/",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));

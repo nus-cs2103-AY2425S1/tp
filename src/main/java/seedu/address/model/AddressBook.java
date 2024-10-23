@@ -95,6 +95,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sorts {@code persons} according to the provided comparator.
+     */
+    public void sort(Comparator<Person> comparator) {
+        persons.sort(comparator);
+    }
+
     //// util methods
 
     @Override
@@ -127,9 +134,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
-    }
-
-    public void sort(Comparator<Person> comparator) {
-        persons.sort(comparator);
     }
 }
