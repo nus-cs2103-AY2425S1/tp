@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -10,7 +13,6 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class SortCommand extends Command {
 
@@ -45,7 +47,6 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
         Comparator<Person> comparator;
         switch (field.toLowerCase()) {
@@ -65,11 +66,11 @@ public class SortCommand extends Command {
             throw new CommandException(MESSAGE_ORDER);
         }
 
-        List<Person> sortedList = lastShownList.stream()
-                .sorted(comparator)
-                .toList();
+        model.sortPersonList(comparator);
 
-        model.updateFilteredPersonList(sortedList::contains);
+//        List<Person> sortedList = lastShownList.stream()
+//                .sorted(comparator)
+//                .toList();
 
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, field, order));
     }
