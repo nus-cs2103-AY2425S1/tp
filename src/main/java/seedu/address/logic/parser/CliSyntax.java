@@ -12,5 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_AGE = new Prefix("a/");
     public static final Prefix PREFIX_DETAIL = new Prefix("d/");
     public static final Prefix PREFIX_STUDY_GROUP_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_REMOVE_TAG = new Prefix("-t/");
 
 }

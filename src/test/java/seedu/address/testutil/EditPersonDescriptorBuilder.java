@@ -40,6 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAge(person.getAge());
         descriptor.setStudyGroupTags(person.getStudyGroupTags());
         descriptor.setDetail(person.getDetail());
+        descriptor.setTagsToRemove(null);
     }
 
     /**
@@ -94,6 +95,16 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withStudyGroupTags(String... studyGroups) {
         Set<StudyGroupTag> studyGroupSet = Stream.of(studyGroups).map(StudyGroupTag::new).collect(Collectors.toSet());
         descriptor.setStudyGroupTags(studyGroupSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tagsToRemove} into a {@code Set<StudyGroupTag>} and set it
+     * to the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withTagsToRemove(String... tagsToRemove) {
+        Set<StudyGroupTag> toRemoveSet = Stream.of(tagsToRemove).map(StudyGroupTag::new).collect(Collectors.toSet());
+        descriptor.setTagsToRemove(toRemoveSet);
         return this;
     }
 
