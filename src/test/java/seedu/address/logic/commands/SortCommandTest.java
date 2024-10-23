@@ -67,7 +67,7 @@ public class SortCommandTest {
         expectedModel.updateSortingOrder(Comparator.comparing(person -> person.getIncome().getValue()));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, CARL, ALICE, GEORGE, FIONA, DANIEL, ELLE), model.getFilteredPersonList());
     }
 
     @Test
