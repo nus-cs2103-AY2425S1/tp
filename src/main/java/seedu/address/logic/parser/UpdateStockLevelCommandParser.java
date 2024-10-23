@@ -38,14 +38,14 @@ public class UpdateStockLevelCommandParser implements Parser<UpdateStockLevelCom
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PRODUCT_NAME, PREFIX_STOCK_LEVEL);
 
         ProductName productName = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
-        int currentStockLevel = 100;
+        int currentStockLevel = 0;
 
         try {
             currentStockLevel = Integer.parseInt(argMultimap.getValue(PREFIX_STOCK_LEVEL).get());
         } catch (IllegalArgumentException e) {
             throw new ParseException(MESSAGE_INVALID_STOCK);
         }
-        if (currentStockLevel <= 0) {
+        if (currentStockLevel < 0) {
             throw new ParseException(MESSAGE_INVALID_STOCK_LEVEL);
         }
         return new UpdateStockLevelCommand(productName, currentStockLevel);
