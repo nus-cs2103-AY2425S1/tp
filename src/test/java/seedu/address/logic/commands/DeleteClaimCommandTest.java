@@ -35,7 +35,7 @@ class DeleteClaimCommandTest {
                 new DeleteClaimCommand(INDEX_THIRD_CLIENT, 0, claim.getClaimId());
 
         // make sure all the messages only have client name inside the actual classes
-        // because when the message is created here before deletion there can be issues with the
+        // because when the message is created here before deletion there can be issues with
         // the string comparison of the client after deletion and before deletion.
         String expectedMessage = String.format(DeleteClaimCommand.MESSAGE_DELETE_CLAIM_SUCCESS,
                 clientToEdit.getName().toString(), insurancePlan, claim.getClaimId());
