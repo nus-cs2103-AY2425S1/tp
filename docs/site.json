@@ -1,6 +1,6 @@
 {
   "baseUrl": "",
-  "titlePrefix": "",
+  "titlePrefix": "EduLog",
   "titleSuffix": "EduLog",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
