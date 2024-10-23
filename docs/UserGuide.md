@@ -193,7 +193,7 @@ Clears all entries from the edulog.
 
 Format: `clear`
 
-## Marking a student's attendance: `mark'
+### Marking a student's attendance: `mark'
 
 Denotes an existing student as paid. The student may either be identified by index number
 in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
@@ -204,7 +204,7 @@ Examples:
 * `mark 3`
 * `mark Alex Yeoh`
 
-## Marking all students' attendance: `markall'
+### Marking all students' attendance: `markall'
 
 	@@ -171,39 +210,46 @@ Examples:
 Denotes an existing student as unpaid. The student may either be identified by index number
@@ -216,7 +216,7 @@ Examples:
 * `unmark 3`
 * `unmark Alex Yeoh`
 
-## Unmarking all students' attendance: `unmarkall'
+### Unmarking all students' attendance: `unmarkall'
 
 Denotes all existing students as unpaid.
 
