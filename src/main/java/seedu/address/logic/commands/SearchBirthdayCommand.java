@@ -21,42 +21,84 @@ public class SearchBirthdayCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Searches for clients whose birthdays are on the specified date.\n"
             + "Parameters: DATE (must be in yyyy-MM-dd format)\n"
-            + "Example: " + COMMAND_WORD + " 2000-04-25";
+            + "Example: " + COMMAND_WORD + " 2000-04-25\n"
+            + "Example: " + COMMAND_WORD + " 2000-04-25 to 2000-05-25";
 
-    public static final String MESSAGE_SUCCESS = "Listed all clients with birthdays on %s";
+    public static final String MESSAGE_SUCCESS = "Listed all clients with birthdays %s";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. "
             + "Please use yyyy-MM-dd format.";
+    public static final String MESSAGE_INVALID_DATERANGE_FORMAT = "The date range format is invalid. "
+            + "Please use yyyy-MM-dd to yyyy-MM-dd format.";
+    public static final String MESSAGE_START_DATE_AFTER_END_DATE = "Start date cannot be after end date.";
 
-    private final String date;
+    private final String startDate;
+    private final String endDate;
 
     /**
      * Creates a {@code SearchBirthdayCommand} to search for clients with the specified birthday {@code date}.
      *
-     * @param date The date in string format used to search for client birthdays.
+     * @param dateInput The date in string format used to search for client birthdays.
      * @throws CommandException if the {@code date} format is invalid.
      */
-    public SearchBirthdayCommand(String date) throws CommandException {
-        requireNonNull(date);
-        if (!isValidDate(date)) {
-            throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+    public SearchBirthdayCommand(String dateInput) throws CommandException {
+        requireNonNull(dateInput);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // checks if the date input contains to (means it is a range)
+        if (dateInput.contains("to")) {
+            String [] dates = dateInput.split("to");
+            // ensure dates contains 2 date
+            if (dates.length != 2) {
+                throw new CommandException(MESSAGE_INVALID_DATERANGE_FORMAT);
+            }
+            startDate = dates[0].trim();
+            endDate = dates[1].trim();
+
+            if (!isValidDate(startDate) || !isValidDate(endDate)) {
+                throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+            }
+
+            if (LocalDate.parse(startDate, formatter).isAfter(LocalDate.parse(endDate, formatter))) {
+                throw new CommandException(MESSAGE_START_DATE_AFTER_END_DATE);
+            }
+        } else {
+            // if the date is a single date
+            String date = dateInput.trim();
+            if (!isValidDate(date)) {
+                throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+            }
+            startDate = date;
+            endDate = startDate;
         }
-        this.date = date;
+
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         requireNonNull(model);
         Predicate<Person> predicate = person -> {
             Birthday birthday = person.getBirthday();
 
-            if (birthday == null) {
+            if (birthday == null || birthday.value.isEmpty()) {
                 return false;
             }
             String birthdayFormatted = birthday.toString();
-            return birthdayFormatted.equals(date);
+            LocalDate personBirthday = LocalDate.parse(birthdayFormatted, formatter);
+            LocalDate start = LocalDate.parse(startDate, formatter);
+            LocalDate end = LocalDate.parse(endDate, formatter);
+            return (!personBirthday.isBefore(start) && !personBirthday.isAfter(end));
         };
+
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, date));
+        String dateRangeMessage;
+        if (startDate.equals(endDate)) {
+            dateRangeMessage = "on " + startDate;
+        } else {
+            dateRangeMessage = "from " + startDate + " to " + endDate;
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, dateRangeMessage));
     }
 
     /**
@@ -89,6 +131,6 @@ public class SearchBirthdayCommand extends Command {
 
         // Cast and compare the date attribute
         SearchBirthdayCommand otherCommand = (SearchBirthdayCommand) other;
-        return this.date.equals(otherCommand.date);
+        return this.startDate.equals(otherCommand.startDate) && this.endDate.equals(otherCommand.endDate);
     }
 }

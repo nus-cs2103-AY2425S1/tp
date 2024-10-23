@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -24,6 +25,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SearchBirthdayCommand}.
@@ -73,12 +76,37 @@ public class SearchBirthdayCommandTest {
         } catch (CommandException e) {
             assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
         }
+
+        String invalidDateRange = "2000-04-25 to";
+        try {
+            new SearchBirthdayCommand(invalidDateRange);
+            assertFalse(true, "Expected CommandException was not thrown.");
+        } catch (CommandException e) {
+            assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATERANGE_FORMAT, e.getMessage());
+        }
+
+        invalidDateRange = "04-25 to 05-25";
+        try {
+            new SearchBirthdayCommand(invalidDateRange);
+            assertFalse(true, "Expected CommandException was not thrown.");
+        } catch (CommandException e) {
+            assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
+        }
+
+        // Start date after end date
+        String startAfterEndDate = "2000-05-25 to 2000-04-25";
+        try {
+            new SearchBirthdayCommand(startAfterEndDate);
+            assertFalse(true, "Expected CommandException was not thrown.");
+        } catch (CommandException e) {
+            assertEquals(SearchBirthdayCommand.MESSAGE_START_DATE_AFTER_END_DATE, e.getMessage());
+        }
     }
 
     @Test
     public void execute_zeroMatches_noPersonFound() {
-        String date = "2000-12-31"; // Date that no person has in the typical address book
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, date);
+        String date = "2000-12-31";
+        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
             expectedModel.updateFilteredPersonList(person -> false); // No one matches
@@ -92,16 +120,14 @@ public class SearchBirthdayCommandTest {
 
     @Test
     public void execute_oneMatch_personFound() {
-        String date = "2000-12-12"; // Assume AMY has a birthday on December 12, 2000
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, date);
+        String date = "2000-12-12";
+        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
 
             // Update expected model to filter only AMY
             expectedModel.updateFilteredPersonList(person -> person.getBirthday() != null
                     && person.getBirthday().toString().equals(date));
-            System.out.println("Filtered list: " + model.getFilteredPersonList());
-            System.out.println("AMY's birthday: " + BOB.getBirthday());
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
             assertEquals(Collections.singletonList(AMY), model.getFilteredPersonList());
         } catch (CommandException e) {
@@ -111,8 +137,8 @@ public class SearchBirthdayCommandTest {
 
     @Test
     public void execute_multipleMatches_multiplePersonsFound() {
-        String date = "1990-10-10"; // Assume both ALICE and BENSON have birthdays on December 12, 2000
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, date);
+        String date = "1990-10-10";
+        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
 
@@ -137,6 +163,43 @@ public class SearchBirthdayCommandTest {
             new SearchBirthdayCommand(invalidDate);
         } catch (CommandException e) {
             assertEquals(SearchBirthdayCommand.MESSAGE_INVALID_DATE_FORMAT, e.getMessage());
+        }
+    }
+
+    @Test
+    public void execute_dateRange_matchesPersonsInRange() {
+        Model model = new ModelManager();
+        Person alice = new PersonBuilder().withName("Alice").withBirthday("2000-10-10").build();
+        model.addPerson(alice);
+        Person bob = new PersonBuilder().withName("Bob").withBirthday("2000-11-10").build();
+        model.addPerson(bob);
+        Person charles = new PersonBuilder().withName("Charles").withBirthday("2000-12-10").build();
+        model.addPerson(charles);
+
+        String dateRange = "2000-10-01 to 2000-11-30";
+        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "from 2000-10-01 to 2000-11-30");
+        try {
+            Model expectedModel = new ModelManager();
+            expectedModel.addPerson(alice);
+            expectedModel.addPerson(bob);
+            expectedModel.addPerson(charles);
+            SearchBirthdayCommand command = new SearchBirthdayCommand(dateRange);
+
+            expectedModel.updateFilteredPersonList(person -> {
+                if (person.getBirthday() == null || person.getBirthday().value.isEmpty()) {
+                    return false;
+                }
+                String birthdayStr = person.getBirthday().toString();
+                LocalDate birthdayDate = LocalDate.parse(birthdayStr);
+                LocalDate startDate = LocalDate.parse("2000-10-01");
+                LocalDate endDate = LocalDate.parse("2000-11-30");
+                return (!birthdayDate.isBefore(startDate) && !birthdayDate.isAfter(endDate));
+            });
+
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            assertEquals(Arrays.asList(alice, bob), model.getFilteredPersonList());
+        } catch (CommandException e) {
+            e.printStackTrace();
         }
     }
 }
