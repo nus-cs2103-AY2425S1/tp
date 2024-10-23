@@ -58,7 +58,7 @@ public class FindNameCommandTest {
         FindNameCommand command = new FindNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getDisplayPersons());
     }
 
     @Test

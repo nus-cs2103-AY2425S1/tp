@@ -62,7 +62,7 @@ public class FindClientTypeCommandTest {
         FindClientTypeCommand command = new FindClientTypeCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getDisplayPersons());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class FindClientTypeCommandTest {
         FindClientTypeCommand command = new FindClientTypeCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getDisplayPersons());
     }
 
     @Test

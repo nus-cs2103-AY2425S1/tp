@@ -35,7 +35,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validNameUnfilteredList_success() {
         // Retrieve the person to delete based on the first index of the unfiltered list
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
 
         // Create the predicate to match the person based on the name
         NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(
@@ -66,11 +66,13 @@ public class DeleteCommandTest {
     }
 
 
+
     @Test
     public void execute_validNameFilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(new NameContainsKeywordsDeletePredicate(
                 Arrays.asList(personToDelete.getName().fullName.split("\\s+"))));
+
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -83,7 +85,7 @@ public class DeleteCommandTest {
 
     @Test
     public void duplicateNameFilteredList_throwsCommandException() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getDisplayPersons().get(INDEX_FIRST_PERSON.getZeroBased());
         String name = personToDelete.getName().fullName.split("\\s+")[0];
         DeleteCommand deleteCommand = new DeleteCommand(new NameContainsKeywordsDeletePredicate(
                 Arrays.asList(name.split("\\s+"))));
@@ -96,7 +98,7 @@ public class DeleteCommandTest {
 
         assertThrows(CommandException.class, expectedMessage, () -> deleteCommand.execute(model));
         assertEquals(expectedClientHub, model.getClientHub());
-        assertEquals(expectedFilteredList, model.getFilteredPersonList());
+        assertEquals(expectedFilteredList, model.getDisplayPersons());
     }
 
 
@@ -140,6 +142,6 @@ public class DeleteCommandTest {
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getDisplayPersons().isEmpty());
     }
 }

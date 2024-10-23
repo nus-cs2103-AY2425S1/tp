@@ -60,7 +60,7 @@ public class FindAddressCommandTest {
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getDisplayPersons());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class FindAddressCommandTest {
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DANIEL, GEORGE), model.getDisplayPersons());
     }
 
     @Test
