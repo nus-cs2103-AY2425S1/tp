@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
+
+import static java.util.Objects.requireNonNull;
 
 
 /**
@@ -37,6 +37,13 @@ public class ViewCompanyCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the ViewCompanyCommand to display all jobs and persons linked to a company.
+     * <p>
+     * @param model The {@code Model} in which the command operates, containing the company list and job-person linkage data.
+     * @return A {@code CommandResult} containing feedback that shows the jobs and persons linked to the target company.
+     * @throws CommandException If the specified index is invalid or out of bounds.
+     */
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Company> lastShownList = model.getFilteredCompanyList();

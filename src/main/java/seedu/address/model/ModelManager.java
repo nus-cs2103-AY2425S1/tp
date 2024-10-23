@@ -261,8 +261,8 @@ public class ModelManager implements Model {
      * @return A predicate that returns {@code true} if the person is linked to the specified company.
      */
     public Predicate<Person> getPersonLinkedToCompanyPredicate(Company targetCompany) {
-        return person -> person.isMatchPresent() &&
-                person.getMatch().startsWith(targetCompany.getName().toString() + "::");
+        return person -> person.isMatchPresent()
+                && person.getMatch().startsWith(targetCompany.getName().toString() + "::");
     }
 
     /**
