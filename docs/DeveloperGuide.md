@@ -158,6 +158,12 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### View meeting contacts feature
+
+Using `FindCommand`, we list contacts which are in the meeting based on UID.
+
+<puml src="diagrams/MeetingContactsSequenceDiagram.puml"/>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
