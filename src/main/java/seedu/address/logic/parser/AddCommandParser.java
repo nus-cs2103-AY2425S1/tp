@@ -10,11 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -61,10 +63,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         StudentClass studentClass = ParserUtil.parseStudentClass(argMultimap.getValue(PREFIX_STUDENT_CLASS).get());
         EcName ecName = new EcName(""); // Adding a student does not allow EcName to be added right away
         EcNumber ecNumber = new EcNumber(""); // Adding a student does not allow EcNumber to be added right away
+        Set<Exam> examList = Collections.emptySet();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName,
-                ecNumber, tagList);
+                ecNumber, examList, tagList);
 
         return new AddCommand(person);
     }
