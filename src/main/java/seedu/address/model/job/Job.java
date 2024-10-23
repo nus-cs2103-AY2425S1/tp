@@ -102,8 +102,10 @@ public class Job {
         }
 
         Job otherJob = (Job) other;
-        return name.equals(otherJob.name) && company.equals(otherJob.company) && salary.equals(otherJob.salary)
-               && requirements.equals(otherJob.requirements) && description.equals(otherJob.description);
+        return name.equals(otherJob.name)
+                && company.equals(otherJob.company) && salary.equals(otherJob.salary)
+                && requirements.equals(otherJob.requirements) && description.equals(otherJob.description)
+                && matches.equals(otherJob.matches);
     }
 
     @Override
