@@ -54,6 +54,14 @@ public class FilterByJobCommandTest {
         assertEquals(List.of(), model.getFilteredPersonList());
     }
 
+    @Test
+    public void toStringMethod() {
+        JobContainsKeywordsPredicate predicate = new JobContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FilterByJobCommand filterByJobCommand = new FilterByJobCommand(predicate);
+        String expected = FilterByJobCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, filterByJobCommand.toString());
+    }
+
     /**
      * Parses {@code userInput} into a {@code JobContainsKeywordsPredicate}.
      */

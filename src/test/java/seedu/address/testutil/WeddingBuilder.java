@@ -1,5 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.wedding.Datetime;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
@@ -17,6 +22,7 @@ public class WeddingBuilder {
     private WeddingName weddingName;
     private Venue venue;
     private Datetime datetime;
+    private Set<Person> participants;
 
     /**
      * Creates a {@code WeddingBuilder} with the default details.
@@ -25,6 +31,7 @@ public class WeddingBuilder {
         weddingName = new WeddingName(DEFAULT_WEDDING_NAME);
         venue = new Venue(DEFAULT_VENUE);
         datetime = new Datetime(DEFAULT_DATETIME);
+        participants = new HashSet<>();
     }
 
     /**
@@ -34,6 +41,7 @@ public class WeddingBuilder {
         weddingName = weddingToCopy.getWeddingName();
         venue = weddingToCopy.getVenue();
         datetime = weddingToCopy.getDatetime();
+        participants = weddingToCopy.getParticipants();
     }
 
     /**
@@ -60,8 +68,17 @@ public class WeddingBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code participants} into a {@code Set<Person>} and set it to the {@code Wedding} that we
+     * are building.
+     */
+    public WeddingBuilder withParticipant(Person ... participants) {
+        this.participants = SampleDataUtil.getParticipantSet(participants);
+        return this;
+    }
+
     public Wedding build() {
-        return new Wedding(weddingName, venue, datetime);
+        return new Wedding(weddingName, venue, datetime, participants);
     }
 
 }

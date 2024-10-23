@@ -29,10 +29,12 @@ public class AddWeddingCommand extends Command {
             + PREFIX_DATETIME + "11/11/2024 ";
 
     public static final String MESSAGE_SUCCESS = "New Wedding added: %1$s";
+    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
+
     private final Wedding toAdd;
 
     /**
-     *  Creates an AddWeddingCommand to add the specified {@code Wedding}
+     * Creates an AddWeddingCommand to add the specified {@code Wedding}
      * @param wedding
      */
     public AddWeddingCommand(Wedding wedding) {
@@ -42,6 +44,13 @@ public class AddWeddingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
+        if (model.hasWedding(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
+        }
+
+        model.addWedding(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

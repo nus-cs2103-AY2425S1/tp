@@ -16,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +30,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.WeddingBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
@@ -36,7 +38,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class TagAddCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
     private Set<Tag> stubTagList = new HashSet<>();
 
     @BeforeEach
@@ -58,7 +60,8 @@ public class TagAddCommandTest {
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_ADD_TAG_SUCCESS,
                 Messages.tagSetToString(stubTagList), Messages.getName(editedPerson));
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagAddCommand, model, expectedMessage, expectedModel);
@@ -79,7 +82,8 @@ public class TagAddCommandTest {
 
         String expectedMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
                 Messages.getName(editedPerson), tagSetToString(stubTagList));
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagAddCommand, model, expectedMessage, expectedModel);
@@ -104,7 +108,8 @@ public class TagAddCommandTest {
         String duplicatesMessage = String.format(TagAddCommand.MESSAGE_DUPLICATE_TAGS,
                 Messages.getName(editedPerson), VALID_TAG_FRIENDS);
         String expectedMessage = nonDuplicateMessage + duplicatesMessage;
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagAddCommand, model, expectedMessage, expectedModel);
