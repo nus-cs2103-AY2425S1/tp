@@ -43,7 +43,15 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; Tags: ")
+                .append("; Project status: ")
+                .append(person.getProjectStatus())
+                .append("; Payment status: ")
+                .append(person.getPaymentStatus())
+                .append("; Client status: ")
+                .append(person.getClientStatus())
+                .append("; Deadline: ")
+                .append(person.getDeadline());
         person.getTags().forEach(builder::append);
         return builder.toString();
     }

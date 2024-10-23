@@ -11,8 +11,10 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers can contain numbers, spaces and hyphens, and it should be at least 3 digits long.\n"
+                    + "Only 1 space or hyphen is allowed between each alphanumeric character.";
+    public static final String NO_PHONE = "__No_Phone__";
+    public static final String VALIDATION_REGEX = "(?=((\\D*\\d){3,}))\\d{1,}([ -]\\d{1,})*\\s*";
     public final String value;
 
     /**
@@ -22,8 +24,12 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        if (phone.equals(NO_PHONE)) {
+            value = "";
+        } else {
+            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+            value = phone;
+        }
     }
 
     /**
@@ -50,7 +56,7 @@ public class Phone {
         }
 
         Phone otherPhone = (Phone) other;
-        return value.equals(otherPhone.value);
+        return value.trim().equals(otherPhone.value.trim());
     }
 
     @Override
