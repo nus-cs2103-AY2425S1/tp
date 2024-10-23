@@ -50,7 +50,7 @@ public class SearchEventCommandTest {
         // null -> returns false
         assertFalse(searchFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different event -> returns false
         assertFalse(searchFirstCommand.equals(searchSecondCommand));
     }
 
@@ -72,6 +72,14 @@ public class SearchEventCommandTest {
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ANIME, BARBEQUE, CONCERT), model.getFilteredEventList());
+    }
+
+    @Test
+    public void toStringMethod() {
+        EventTagContainsKeywordsPredicate predicate = new EventTagContainsKeywordsPredicate(Arrays.asList("keyword"));
+        SearchEventCommand searchEventCommand = new SearchEventCommand(predicate);
+        String expected = SearchEventCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, searchEventCommand.toString());
     }
 
     /**
