@@ -28,7 +28,7 @@ public class MarkPaidCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Index index = INDEX_FIRST_PERSON;
-        MarkPaidTarget target = MarkPaidTarget.of(index);
+        MarkPaidTarget target = MarkPaidTarget.fromIndex(index);
         MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
         Person modifiedPerson = createMarkedPerson(
                 model.getFilteredPersonList().get(index.getZeroBased()), VALID_MONTHSPAID);
@@ -41,15 +41,16 @@ public class MarkPaidCommandTest {
 
     @Test
     public void toStringMethod() {
-        MarkPaidTarget target = MarkPaidTarget.of(INDEX_FIRST_PERSON);
+        MarkPaidTarget target = MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
         MarkPaidCommand command = new MarkPaidCommand(target, VALID_MONTHSPAID);
-        assertEquals(MarkPaidCommand.class.getCanonicalName()
-                        + "{target=1, monthsPaid=[[" + VALID_MONTHPAID_STRING + "]]}",
+        assertEquals("seedu.address.logic.commands.MarkPaidCommand{target="
+                        + target.toString()
+                        + ", monthsPaid=[[" + VALID_MONTHPAID_STRING + "]]}",
                 command.toString());
     }
     @Test
     public void equals() {
-        MarkPaidTarget target = MarkPaidTarget.of(INDEX_FIRST_PERSON);
+        MarkPaidTarget target = MarkPaidTarget.fromIndex(INDEX_FIRST_PERSON);
         MarkPaidCommand command1 = new MarkPaidCommand(target, VALID_MONTHSPAID);
         MarkPaidCommand command2 = new MarkPaidCommand(target, VALID_MONTHSPAID);
         MarkPaidCommand command3 = new MarkPaidCommand(target, VALID_MONTHSPAID);

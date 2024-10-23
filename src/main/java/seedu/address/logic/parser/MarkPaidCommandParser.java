@@ -47,7 +47,7 @@ public class MarkPaidCommandParser implements Parser<MarkPaidCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MarkPaidCommand.MESSAGE_USAGE), pe);
             }
-            target = MarkPaidTarget.of(index);
+            target = MarkPaidTarget.fromIndex(index);
         }
 
         return new MarkPaidCommand(target, monthsPaid);
