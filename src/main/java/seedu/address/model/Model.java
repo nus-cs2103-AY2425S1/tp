@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -95,7 +96,7 @@ public interface Model {
 
     boolean hasMeeting(Meeting meeting);
 
-    ObservableList<Meeting> getWeeklySchedule();
+    public ObservableList<Meeting> getWeeklySchedule();
 
     void changeWeeklySchedule(Predicate<Meeting> predicate);
 
