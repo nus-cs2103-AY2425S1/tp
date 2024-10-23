@@ -13,12 +13,15 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddNotesCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleAllCommand;
+import seedu.address.logic.commands.ScheduleDateCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -57,37 +60,60 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            logger.fine(String.format("Add command identified, parsing args..."));
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+            logger.fine(String.format("Edit command identified, parsing args..."));
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            logger.fine(String.format("Delete command identified, parsing args..."));
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            logger.fine(String.format("Clear command identified."));
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+            logger.fine(String.format("Find command identified, parsing args..."));
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            logger.fine(String.format("List command identified."));
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
+            logger.fine(String.format("Exit command identified."));
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            logger.fine(String.format("Help command identified."));
             return new HelpCommand();
 
         case AddNotesCommand.COMMAND_WORD:
+            logger.fine(String.format("Add Notes command identified, parsing args..."));
             return new AddNotesCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
+            logger.fine(String.format("View command identified, parsing args..."));
             return new ViewCommandParser().parse(arguments);
 
         case AddAppointmentCommand.COMMAND_WORD:
+            logger.fine(String.format("Add Appointment command identified, parsing args..."));
             return new AddAppointmentCommandParser().parse(arguments);
+
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            logger.fine(String.format("Delete Appointment command identified, parsing args..."));
+            return new DeleteAppointmentCommandParser().parse(arguments);
+
+        case ScheduleDateCommand.COMMAND_WORD:
+            logger.fine(String.format("Schedule Date command identified, parsing args..."));
+            return new ScheduleDateCommandParser().parse(arguments);
+
+        case ScheduleAllCommand.COMMAND_WORD:
+            logger.fine(String.format("Schedule All command identified, parsing args..."));
+            return new ScheduleAllCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

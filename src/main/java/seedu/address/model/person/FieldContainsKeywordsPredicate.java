@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -18,6 +20,8 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
      * @param field The field to be searched
      */
     public FieldContainsKeywordsPredicate(List<String> keywords, String field) {
+        requireNonNull(field);
+        requireNonNull(keywords);
         this.keywords = keywords;
         this.field = field;
     }

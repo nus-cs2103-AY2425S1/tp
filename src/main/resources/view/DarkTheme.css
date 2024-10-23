@@ -350,3 +350,30 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#appointmentDescription {
+    -fx-text-fill: white;
+        -fx-background-color: #f01e2c;
+        -fx-padding: 1 3 1 3;
+        -fx-border-radius: 2;
+        -fx-background-radius: 2;
+        -fx-font-size: 14;
+}
+
+#appointmentStart {
+    -fx-text-fill: white;
+        -fx-background-color: #52a447;
+        -fx-padding: 1 3 1 3;
+        -fx-border-radius: 2;
+        -fx-background-radius: 2;
+        -fx-font-size: 14;
+}
+
+#appointmentEnd {
+    -fx-text-fill: white;
+        -fx-background-color: #3e7b91;
+        -fx-padding: 1 3 1 3;
+        -fx-border-radius: 2;
+        -fx-background-radius: 2;
+        -fx-font-size: 14;
+}

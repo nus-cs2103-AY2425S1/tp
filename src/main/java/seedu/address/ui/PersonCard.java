@@ -40,7 +40,12 @@ public class PersonCard extends UiPart<Region> {
     private Label medication;
     @FXML
     private Label notes;
-
+    @FXML
+    private Label appointmentDescription;
+    @FXML
+    private Label appointmentStart;
+    @FXML
+    private Label appointmentEnd;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,9 +57,13 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().value);
         patientId.setText("ID: " + person.getId().value);
         ward.setText("Ward: " + person.getWard().value);
+        setAppointmentFields(person);
+        /*
         diagnosis.setText("Diagnosis: " + person.getDiagnosis().value);
         medication.setText("Medication: " + person.getMedication().value);
-        notes.setText(person.getNotes().value);
+        notes.setText("Notes: " + (person.getNotes().toString().isEmpty() ? "-" : person.getNotes().value));
+        */
+
         /*
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPhone().value);
@@ -65,5 +74,21 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
          */
+    }
+
+    private void setAppointmentFields(Person person) {
+        // Law of Demeter is not maintained, however the purpose simply retrieves information through getters,
+        // and there may be zero risk of modifications.
+        if (person.getAppointment() != null) {
+            appointmentDescription.setText(person.getAppointment().getDescription());
+            appointmentStart.setText(person.getAppointment().getStart().toString());
+            appointmentEnd.setText(person.getAppointment().getEnd().toString());
+        } else {
+            // Use of ChatGPT to see how to hide unwanted label
+            // Prompt: How to remove label if appointment is null
+            appointmentDescription.setVisible(false); // Hide the label
+            appointmentStart.setVisible(false);
+            appointmentEnd.setVisible(false);
+        }
     }
 }

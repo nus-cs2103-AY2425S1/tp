@@ -32,8 +32,9 @@ public class AddAppointmentCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + " Surgery "
-            + PREFIX_START + " dd-MM-yyyy-HH-mm "
-            + PREFIX_END + " dd-MM-yyyy-HH-mm ";
+            + PREFIX_START + " 01-01-2001-01-00 "
+            + PREFIX_END + " 21-12-2024-23-59 "
+            + "\n Datetime is in the form of dd-MM-yyyy-HH-mm";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added Appointment to Person: %1$s";
     private final Index index;

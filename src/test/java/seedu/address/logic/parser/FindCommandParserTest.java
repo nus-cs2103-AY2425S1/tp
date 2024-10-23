@@ -38,4 +38,10 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "    n/  \n Amy \n \t Ben  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_validPrefixEmptyKeyword_throwsParseException() {
+        assertParseFailure(parser, " i/        ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
+    }
+
 }

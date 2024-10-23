@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Medication;
@@ -14,7 +17,7 @@ import seedu.address.model.person.Ward;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_ID = "P12345";
+    public static final String DEFAULT_ID = "P24689";
     public static final String DEFAULT_WARD = "A1";
     public static final String DEFAULT_DIAGNOSIS = "Celiac Disease";
     public static final String DEFAULT_MEDICATION = "gluten-free diet";
@@ -31,6 +34,7 @@ public class PersonBuilder {
     private Diagnosis diagnosis;
     private Medication medication;
     private Notes notes;
+    private Appointment appointment;
     /*
     private Phone phone;
     private Email email;
@@ -48,6 +52,7 @@ public class PersonBuilder {
         diagnosis = new Diagnosis(DEFAULT_DIAGNOSIS);
         medication = new Medication(DEFAULT_MEDICATION);
         notes = new Notes(DEFAULT_NOTES);
+        appointment = null;
         /*
         diagnosis = new Diagnosis("temp");
         medication = new Medication("temp");
@@ -68,6 +73,7 @@ public class PersonBuilder {
         diagnosis = personToCopy.getDiagnosis();
         medication = personToCopy.getMedication();
         notes = personToCopy.getNotes();
+        appointment = personToCopy.getAppointment();
         /*
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -125,6 +131,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(String description, LocalDateTime start, LocalDateTime end) {
+        this.appointment = new Appointment(description, start, end);
+        return this;
+    }
+
     /*
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
@@ -160,7 +174,7 @@ public class PersonBuilder {
     */
 
     public Person build() {
-        return new Person(name, id, ward, diagnosis, medication, notes);
+        return new Person(name, id, ward, diagnosis, medication, notes, appointment);
     }
 
 }

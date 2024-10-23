@@ -13,9 +13,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Appointment {
 
-    public final String description;
-    public final LocalDateTime start;
-    public final LocalDateTime end;
+    private final String description;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
 
     /**
      * Constructs an {@code Appointment}.
