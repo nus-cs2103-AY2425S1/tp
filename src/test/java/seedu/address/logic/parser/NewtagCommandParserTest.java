@@ -5,6 +5,9 @@ import static seedu.address.logic.commands.NewtagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.NewtagCommand;
@@ -18,13 +21,17 @@ public class NewtagCommandParserTest {
     @Test
     public void parse_validArgs_returnsNewtagCommand() {
         Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
-        assertParseSuccess(parser, "bride's friend", new NewtagCommand(expectedTag));
+        List<Tag> expectedTags = new ArrayList<>();
+        expectedTags.add(expectedTag);
+        assertParseSuccess(parser, "bride's friend", new NewtagCommand(expectedTags));
     }
 
     @Test
     public void parse_leadingAndTrailingSpaces_returnsNewtagCommand() {
         Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
-        assertParseSuccess(parser, "   bride's friend   ", new NewtagCommand(expectedTag));
+        List<Tag> expectedTags = new ArrayList<>();
+        expectedTags.add(expectedTag);
+        assertParseSuccess(parser, "   bride's friend   ", new NewtagCommand(expectedTags));
     }
 
     @Test
@@ -48,6 +55,8 @@ public class NewtagCommandParserTest {
     @Test
     public void parse_caseInsensitiveTag_returnsNewtagCommand() {
         Tag expectedTag = new Tag("friend");
-        assertParseSuccess(parser, "  FRIEND  ", new NewtagCommand(expectedTag));
+        List<Tag> expectedTags = new ArrayList<>();
+        expectedTags.add(expectedTag);
+        assertParseSuccess(parser, "  FRIEND  ", new NewtagCommand(expectedTags));
     }
 }

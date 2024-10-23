@@ -96,6 +96,14 @@ public interface Model {
     boolean addTag(Tag tag);
 
     /**
+     * Adds a tag to the tag list.
+     *
+     * @param tags The tags to be added.
+     * @return true if all tags were successfully added, false if any tag already exists.
+     */
+    boolean addTags(List<Tag> tags);
+
+    /**
      * Deletes a tag from the tag list.
      *
      * @param tags The tag to be deleted.

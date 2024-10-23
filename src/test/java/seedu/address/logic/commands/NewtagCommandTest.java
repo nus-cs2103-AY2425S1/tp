@@ -4,6 +4,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_BRIDES_FRIEND;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -21,12 +24,14 @@ public class NewtagCommandTest {
     @Test
     public void execute_newTag_success() {
         Tag newTag = VALID_TAG_BRIDES_FRIEND;
-        NewtagCommand newTagCommand = new NewtagCommand(newTag);
+        List<Tag> newTags = new ArrayList<>();
+        newTags.add(newTag);
+        NewtagCommand newTagCommand = new NewtagCommand(newTags);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(newTag);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + " " + newTag + "\n"
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + " " + newTags + "\n"
                 + "Your tags: " + expectedModel.getTagList();
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
@@ -35,9 +40,11 @@ public class NewtagCommandTest {
     @Test
     public void execute_duplicateTag_failure() {
         Tag duplicateTag = VALID_TAG_BRIDES_FRIEND;
-        model.addTag(duplicateTag);
+        List<Tag> duplicateTags = new ArrayList<>();
+        duplicateTags.add(duplicateTag);
+        model.addTags(duplicateTags);
 
-        NewtagCommand newTagCommand = new NewtagCommand(duplicateTag);
+        NewtagCommand newTagCommand = new NewtagCommand(duplicateTags);
         String expectedMessage = NewtagCommand.MESSAGE_DUPLICATE;
 
         assertCommandFailure(newTagCommand, model, expectedMessage);

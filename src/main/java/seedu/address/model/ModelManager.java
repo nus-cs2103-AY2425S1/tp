@@ -136,8 +136,17 @@ public class ModelManager implements Model {
         if (this.hasTag(tag)) {
             return false;
         }
-
         addressBook.addTag(tag);
+        return true;
+    }
+
+    @Override
+    public boolean addTags(List<Tag> tags) {
+        for (Tag tag : tags) {
+            if (!addTag(tag)) {
+                return false;
+            }
+        }
         return true;
     }
 
