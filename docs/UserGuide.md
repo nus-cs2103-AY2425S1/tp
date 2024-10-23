@@ -183,6 +183,23 @@ Examples:
 * `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
 * `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
 
+### Sorting the list : `sort`
+
+Sorts the list of students based on the students attributes.
+
+Format: `sort [ATTRIBUTE]`
+
+<box type="tip" seamless>
+
+**Tip:** Students attributes include: name, phone, email, address, sex, register number, student class, emergency contact name, emergency contact number.
+</box>
+
+* Sorts the list based on the ATTRIBUTE
+
+Examples:
+* `sort name` to sort the list based on student's names
+* `sort register number` to sort the list based on student's register numbers
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -241,4 +258,5 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Add Emergency Phone Number**  | `EcNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`
+**Add Emergency Phone Number**  | `addEcNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `addEcNumber 2 ep/91231234`
+**Sort**    |   `sort [ATTRIBUTE]` <br> e.g., `sort student class`
