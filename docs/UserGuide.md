@@ -167,6 +167,7 @@ Entering the `help` command returns the following result on your screen:
 
 [_Back to Top_](#table-of-contents)
 
+
 ### Listing all persons : `list`
 
 Shows a guest list consisting of all invited guests and a vendor list consisting of all vendors involved.
@@ -180,6 +181,14 @@ Entering the `list` command returns the following result on your screen:
 ![list command](images/listCommand.png)
 
 [_Back to Top_](#table-of-contents)
+
+
+### Finding a person : `find`
+
+Finds guests and vendors from the guest list and vendor list respectively that match a given a keyword.
+
+
+
 
 ### **Guest Related Commands**
 
