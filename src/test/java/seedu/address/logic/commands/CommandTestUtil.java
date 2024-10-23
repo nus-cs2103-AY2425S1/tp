@@ -27,10 +27,10 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_STUDENTID_AMY = "1001";
-    public static final String VALID_STUDENTID_BOB = "1002";
-    public static final String VALID_TUTORIALID_AMY = "1001";
-    public static final String VALID_TUTORIALID_BOB = "1001";
+    public static final String VALID_STUDENTID_AMY = "A1111111U";
+    public static final String VALID_STUDENTID_BOB = "A2222222U";
+    public static final String VALID_TUTORIALID_AMY = "T1001";
+    public static final String VALID_TUTORIALID_BOB = "T1001";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,7 +47,7 @@ public class CommandTestUtil {
             + PREFIX_TUTORIALID; // empty string not allowed for tutorial class
     // New constants for testing tutorials
     public static final String VALID_TUT_NAME = "CS2103T";
-    public static final String VALID_TUT_ID = "1001";
+    public static final String VALID_TUT_ID = "T1001";
 
     public static final String TUT_NAME_DESC = " " + CliSyntax.PREFIX_TUT_NAME + VALID_TUT_NAME;
     public static final String TUT_ID_DESC = " " + CliSyntax.PREFIX_ID + VALID_TUT_ID;

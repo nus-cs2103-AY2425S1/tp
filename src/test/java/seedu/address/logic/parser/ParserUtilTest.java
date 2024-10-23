@@ -13,11 +13,9 @@ import seedu.address.model.student.TutorialId;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_STUDENT_ID = "001"; // leading zeros is not acceptable
-    private static final String INVALID_TUTORIAL_ID = " "; // assuming spaces are invalid
+    private static final String INVALID_TUTORIAL_ID = "1021";
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_STUDENT_ID = "1001";
-    private static final String VALID_TUTORIAL_ID = "1001";
+    private static final String VALID_TUTORIAL_ID = "T1001";
 
     private static final String WHITESPACE = " \t\r\n";
 

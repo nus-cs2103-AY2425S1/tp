@@ -18,7 +18,7 @@ import seedu.address.model.tut.TutorialList;
 public class JsonSerializableTutorialListTest {
 
     private static final String VALID_NAME = "CS1010";
-    private static final TutorialId VALID_TUTORIAL_ID = TutorialId.of("1001");
+    private static final TutorialId VALID_TUTORIAL_ID = TutorialId.of("T1001");
 
     private static final List<JsonAdaptedTutorial> jsonAdaptedTutorials = new ArrayList<>();
 

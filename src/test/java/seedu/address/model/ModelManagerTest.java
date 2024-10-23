@@ -105,7 +105,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasTutorial_tutorialInModel_returnsTrue() {
-        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialId.of("1000"));
+        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialId.of("T1000"));
         modelManager.addTutorial(tutorial);
         assertTrue(modelManager.hasTutorial(tutorial));
     }
@@ -117,9 +117,9 @@ public class ModelManagerTest {
 
     @Test
     public void hasTutorial_byTutorialId_returnsTrue() {
-        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialId.of("1000"));
+        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialId.of("T1000"));
         modelManager.addTutorial(tutorial);
-        assertTrue(modelManager.hasTutorial(TutorialId.of("1000")));
+        assertTrue(modelManager.hasTutorial(TutorialId.of("T1000")));
     }
 
     @Test
@@ -145,7 +145,7 @@ public class ModelManagerTest {
         TutorialList tutorialList = new TutorialList();
         modelManager = new ModelManager(addressBook, new UserPrefs(), new AssignmentList(), tutorialList);
 
-        Tutorial tutorial = Tutorial.of(new TutName("CS2103"), TutorialId.of("1000"));
+        Tutorial tutorial = Tutorial.of(new TutName("CS2103"), TutorialId.of("T1000"));
         tutorial.add(ALICE);
         tutorial.add(BENSON);
 

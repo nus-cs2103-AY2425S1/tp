@@ -33,7 +33,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newStudent_success() {
-        Student validStudent = new StudentBuilder().build();
+        Student validStudent = new StudentBuilder().withStudentId("A1234567U").build();
 
 
         Model expectedModel = new ModelManager(model.getAddressBook(),

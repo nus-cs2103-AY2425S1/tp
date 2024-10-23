@@ -197,7 +197,7 @@ public class LogicManagerTest {
         IOException dummyIoException = new IOException("Invalid command format! \n"
                 + "add: Adds a student to the tutorial book. Parameters: n/NAME s/STUDENT_ID "
                 + "c/TUTORIAL_CLASS \n"
-                + "Example: add n/Samson s/1001 c/1001 ");
+                + "Example: add n/Samson s/A1234567U c/T1001 ");
 
         // Create a temporary file path for the tutorial file
         Path tempTutorialFilePath = temporaryFolder.resolve("ExceptionTutorials.json");
