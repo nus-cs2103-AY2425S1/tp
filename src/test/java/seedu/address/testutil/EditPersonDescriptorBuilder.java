@@ -1,11 +1,8 @@
 package seedu.address.testutil;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import javax.swing.text.html.Option;
 
 import seedu.address.logic.commands.edit.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.ParserUtil;

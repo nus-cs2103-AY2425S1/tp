@@ -35,8 +35,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_NAME2 = BETTY.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().map(Object :: toString).orElse(null);;
+    private static final String VALID_PHONE = BENSON.getPhone().map(Object :: toString).orElse(null);
     private static final String VALID_EMAIL = BENSON.getEmail().map(Object :: toString).orElse(null);
     private static final String VALID_ADDRESS = BENSON.getAddress().map(Object :: toString).orElse(null);
     private static final JsonAdaptedModuleRoleMap VALID_EMPTY_MODULE_ROLE_MAP =
@@ -74,7 +73,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullAddress_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME2, VALID_PHONE, VALID_EMAIL, null,
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_BETTY, VALID_PHONE, VALID_EMAIL, null,
                 VALID_TAGS, VALID_MODULE_ROLE_MAP);
         assertEquals(BETTY, person.toModelType());
     }
