@@ -9,6 +9,8 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Client;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Represents a Person in the address book.
@@ -23,18 +25,35 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tag tag;
+
+    private final Set<Tag> tags = new HashSet<>();        // to remove
+    private final Wedding wedding;
+    private final Set<Wedding> weddingJobs = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {    // to remove
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.tag = new Tag("Sample Tag");
+        this.wedding = null;
+    }
+
+
+    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Wedding wedding) {
+        requireAllNonNull(name, phone, email, address, tag);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tag = tag;
+        this.wedding = wedding;
     }
 
     public Name getName() {
@@ -53,12 +72,24 @@ public class Person {
         return address;
     }
 
+    public Tag getTag() {
+        return tag;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
+    public Set<Tag> getTags() {                     // to remove
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Wedding getWedding() {
+        return wedding;
+    }
+
+    public Set<Wedding> getWeddingJobs() {
+        return weddingJobs;
     }
 
     /**
@@ -121,13 +152,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tag.equals(otherPerson.tag)
+                && weddingJobs.equals(otherPerson.weddingJobs);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tag, weddingJobs);
     }
 
     @Override
@@ -137,7 +169,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("tag", tag)
+                .add("wedding jobs", weddingJobs)
                 .toString();
     }
 
