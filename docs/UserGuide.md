@@ -27,7 +27,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
         * [`help` Viewing help](#viewing-help--help)
         * [`list` Listing all persons](#listing-all-persons--list)
         * [`find` Finding a guest/vendor](#finding-a-person--find)
-        * [`clear` Clears all entries from the guest list and the vendor list](#clearing-all-entries--clear)
+        * [`clear` Clearing all entries from the guest list and the vendor list](#clearing-all-entries--clear)
         * [`stats` Viewing the wedding statistics](#view-statistics--stats)
         * [`exit` Exiting the program](#exiting-the-program--exit)
     * [**Guest Related Commands**](#guest-related-commands)
@@ -155,6 +155,7 @@ This section will walk you through all the basic features of BridalBuddy and wil
 
 [_Back to Top_](#table-of-contents)
 
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -186,6 +187,19 @@ Entering the `list` command returns the following result on your screen:
 ### Finding a person : `find`
 
 Finds guests and vendors from the guest list and vendor list respectively that match a given a keyword.
+
+* :warning: You may only search for guests/vendors with up to one keyword at a time.
+
+**Format:** `find n/Amy`
+
+Using the `find` command returns the following result on your screen:
+
+![find command](images/findCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+
+### Clearing all entries : `clear`
 
 
 
