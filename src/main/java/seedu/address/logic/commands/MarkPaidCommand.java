@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -62,35 +63,40 @@ public class MarkPaidCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         if (target.getMarkAll()) {
-            for (Person person : lastShownList) {
-                Person markedPerson = createMarkedPerson(person, monthsPaid);
-                model.setPerson(person, markedPerson);
-            }
-            model.updateFilteredPersonList(person -> {
-                for (MonthPaid month : monthsPaid) {
-                    if (!person.getMonthsPaid().contains(month)) {
-                        return false;
-                    }
-                }
-                return true;
-            });
+            markAllPersons(lastShownList, monthsPaid, model);
+            model.updateFilteredPersonList(personHasAllMonthsPaid(monthsPaid));
             String monthsPaidStr = monthsPaid.toString().replaceAll("^\\[|\\]$", "");
             return new CommandResult(String.format(MESSAGE_MARKPAID_ALL_SUCCESS, monthsPaidStr));
         }
 
+        return executeMarkSingle(model);
+    }
+
+    private void markAllPersons(List<Person> persons, Set<MonthPaid> monthsPaid, Model model) {
+        for (Person person : persons) {
+            Person markedPerson = createMarkedPerson(person, monthsPaid);
+            model.setPerson(person, markedPerson);
+        }
+    }
+
+    private Predicate<Person> personHasAllMonthsPaid(Set<MonthPaid> monthsPaid) {
+        return person -> person.getMonthsPaid().containsAll(monthsPaid);
+    }
+
+
+    private CommandResult executeMarkSingle(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
         Index index = target.getIndex();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         Person personToMark = lastShownList.get(index.getZeroBased());
         Person markedPerson = createMarkedPerson(personToMark, monthsPaid);
-
         model.setPerson(personToMark, markedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARKPAID_PERSON_SUCCESS, Messages.markPaidFormat(markedPerson)));
+        return new CommandResult(String.format(MESSAGE_MARKPAID_PERSON_SUCCESS,
+                Messages.markPaidFormat(markedPerson)));
     }
-
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * marked with {@code monthPaid}.
