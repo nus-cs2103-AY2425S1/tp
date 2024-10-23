@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CELEBRITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CONTACTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.ArrayList;
@@ -24,7 +28,7 @@ import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing event in the address book.
  */
 public class EditEventCommand extends EditCommand {
 
@@ -96,7 +100,7 @@ public class EditEventCommand extends EditCommand {
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.eventFormat(editedEvent)),
-                                                            false, false, CommandTabChange.EVENT, CommandDetailChange.NONE);
+                                false, false, CommandTabChange.EVENT, CommandDetailChange.NONE);
     }
 
     /**
@@ -212,7 +216,9 @@ public class EditEventCommand extends EditCommand {
             this.celebrityName = celebrityName;
         }
 
-        public void setContactsNames(String contactsNames) {this.contactsNames = contactsNames; }
+        public void setContactsNames(String contactsNames) {
+            this.contactsNames = contactsNames;
+        }
 
         public void setContacts(List<Person> contacts) {
             this.contacts = contacts;

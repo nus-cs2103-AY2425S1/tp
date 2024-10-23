@@ -14,7 +14,9 @@ import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
+/**
+ * Parses input arguments and creates a new EditCommand object
+ */
 public class EditCommandParser implements Parser<EditCommand> {
 
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandField>\\S+)(?<keywords>.*)");
