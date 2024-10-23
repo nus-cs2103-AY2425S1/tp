@@ -27,20 +27,7 @@ public class Person {
     private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
     private final ModuleRoleMap moduleRoleMap;
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Optional<Address> address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.moduleRoleMap = new ModuleRoleMap(new HashMap<>());
-    }
-
+    
     /**
      * Every field must be present and not null.
      */
