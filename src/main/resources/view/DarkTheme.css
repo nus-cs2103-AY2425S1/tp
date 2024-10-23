@@ -24,6 +24,14 @@
     -fx-opacity: 1;
 }
 
+.label-eventHeader {
+    -fx-font-size: 22pt;
+    -fx-font-family: "Roboto";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+    -fx-font-weight: bold;
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -126,10 +134,23 @@
     -fx-text-fill: #010504;
 }
 
+.cell_big_label_event {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}
+
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.cell_small_label_event {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+    -fx-padding: 0 0 2 0;
 }
 
 .stack-pane {
