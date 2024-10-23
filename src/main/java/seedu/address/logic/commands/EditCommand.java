@@ -204,7 +204,7 @@ public class EditCommand extends Command {
         }
 
         public void setAssignmentList(List<Assignment> assignmentList) {
-            this.assignmentList = (assignmentList != null) ? new ArrayList<>(assignmentList) : null;
+            this.assignmentList = assignmentList;
         }
 
         public Optional<List<Assignment>> getAssignmentList() {
