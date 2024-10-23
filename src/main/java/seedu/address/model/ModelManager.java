@@ -135,12 +135,12 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPets() {
-        addressBook.sortPets();
+        pawPatrol.sortPets();
     }
 
     @Override
     public void sortOwners() {
-        addressBook.sortOwners();
+        pawPatrol.sortOwners();
     }
 
     @Override

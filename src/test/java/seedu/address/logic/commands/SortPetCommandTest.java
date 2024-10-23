@@ -22,7 +22,7 @@ public class SortPetCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(TypicalPawPatrol.getTypicalPawPatrol(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getPawPatrol(), new UserPrefs());
         expectedModel.sortPets();
     }
 
@@ -37,7 +37,7 @@ public class SortPetCommandTest {
 
         String expectedMessage = String.format(SortPetCommand.MESSAGE_SORT_PET_SUCCESS);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getPawPatrol(), new UserPrefs());
         expectedModel.sortPets();
 
         assertCommandSuccess(sortPetCommand, model, expectedMessage, expectedModel);
