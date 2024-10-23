@@ -109,6 +109,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePersonTag(Person p, Tag t) {
         campusConnect.removePersonTag(p, t);
+        refreshTagList();
     }
 
     @Override
