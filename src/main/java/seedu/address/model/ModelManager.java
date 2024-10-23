@@ -9,8 +9,10 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,23 +23,56 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final CommandHistory commandHistory;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs, and commandHistory.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs, ReadOnlyCommandHistory commandHistory) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+                + " and command history " + commandHistory);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.commandHistory = new CommandHistory(commandHistory);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new CommandHistory());
+    }
+
+
+    //=========== CommandHistory Related =====================================================================
+
+    @Override
+    public void setCommandHistory(ReadOnlyCommandHistory commandHistory) {
+        requireNonNull(commandHistory);
+        this.commandHistory.resetData(commandHistory);
+    }
+
+    @Override
+    public ReadOnlyCommandHistory getCommandHistory() {
+        return commandHistory;
+    }
+
+    @Override
+    public void addCommand(String commandString) {
+        commandHistory.addCommand(commandString);
+    }
+
+    @Override
+    public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandHistory.getEarlierCommandGetterResult(commandGetterResult);
+    }
+
+    @Override
+    public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandHistory.getLaterCommandGetterResult(commandGetterResult);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -143,7 +178,17 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
+                && commandHistory.equals(otherModelManager.commandHistory)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("logger", logger)
+                .add("addressBook", addressBook)
+                .add("userPrefs", userPrefs)
+                .add("commandHistory", commandHistory)
+                .add("filteredPersons", filteredPersons)
+                .toString();
+    }
 }

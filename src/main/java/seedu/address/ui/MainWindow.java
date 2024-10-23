@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -35,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PieChartWindow pieChartWindow;
+
+    private BarChartWindow barChartWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -122,7 +125,8 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::getEarlierCommandGetterResult,
+                this::getLaterCommandGetterResult);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -155,8 +159,23 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handlePieChart() {
+        if (pieChartWindow != null) {
+            pieChartWindow.close();
+        }
         pieChartWindow = new PieChartWindow();
         pieChartWindow.show();
+    }
+
+    /**
+     * Opens the bar chart window.
+     */
+    @FXML
+    public void handleBarChart() {
+        if (barChartWindow != null) {
+            barChartWindow.close();
+        }
+        barChartWindow = new BarChartWindow();
+        barChartWindow.show();
     }
 
 
@@ -207,6 +226,10 @@ public class MainWindow extends UiPart<Stage> {
                 handlePieChart();
             }
 
+            if (commandResult.isShowBarChart()) {
+                handleBarChart();
+            }
+
 
 
 
@@ -217,5 +240,19 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Returns the previous command.
+     */
+    private CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return logic.getEarlierCommandGetterResult(commandGetterResult);
+    }
+
+    /**
+     * Returns the next command.
+     */
+    private CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return logic.getLaterCommandGetterResult(commandGetterResult);
     }
 }
