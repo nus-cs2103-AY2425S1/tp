@@ -25,7 +25,7 @@ import seedu.address.model.wedding.WeddingName;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static final Person ALEX = new Person(new PersonId("969d5233-5ae8-4c56-97b7-b25737afa01a"),
             new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
             new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -51,10 +51,10 @@ public class SampleDataUtil {
             new Address("Blk 45 Aljunied Street 85, #11-31"),
             getTagSet("photographer", "videographer"));
     public static final Wedding WEDDING1 = new Wedding(new WeddingName("John and Jane Wedding"),
-            new WeddingDate(LocalDate.parse("12/12/2024", formatter)),
+            new WeddingDate(LocalDate.parse("12/12/2024", FORMATTER)),
             new ArrayList<>(List.of(ALEX.getId(), BERNICE.getId(), CHARLOTTE.getId(), DAVID.getId())));
     public static final Wedding WEDDING2 = new Wedding(new WeddingName("Sean and Emma Wedding"),
-            new WeddingDate(LocalDate.parse("14/01/2025", formatter)),
+            new WeddingDate(LocalDate.parse("14/01/2025", FORMATTER)),
             new ArrayList<>(List.of(BERNICE.getId(), DAVID.getId(), IRFAN.getId(), ROY.getId())));
     public static Person[] getSamplePersons() {
         return new Person[] {
