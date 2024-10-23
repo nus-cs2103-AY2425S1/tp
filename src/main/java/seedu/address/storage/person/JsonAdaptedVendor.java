@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -21,6 +22,7 @@ import seedu.address.storage.JsonAdaptedTag;
  */
 public class JsonAdaptedVendor extends JsonAdaptedPerson {
     private final String company;
+    private final Double budget;
 
     /**
      * Constructs a {@code JsonAdaptedVendor} with the given vendor details.
@@ -32,10 +34,12 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
              @JsonProperty("email") String email,
              @JsonProperty("address") String address,
              @JsonProperty("company") String company,
+             @JsonProperty("Budget") Double budget,
              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
         setType(type);
         this.company = company;
+        this.budget = budget;
     }
 
     /**
@@ -44,6 +48,7 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
     public JsonAdaptedVendor(Vendor source) {
         super(source);
         this.company = source.getCompany().value;
+        this.budget = source.getBudget().value;
     }
 
     /**
@@ -56,10 +61,17 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
         if (company == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Company.class.getSimpleName()));
         }
+
+        if (budget == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Budget.class.getSimpleName()));
+        }
     }
 
     public Company getModelCompany() {
         return new Company(company);
+    }
+    public Budget getModelBudget() {
+        return new Budget(budget);
     }
 
     /**
@@ -75,7 +87,8 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
         Address modelAddress = getModelAddress();
         Set<Tag> modelTags = getModelTags();
         Company modelCompany = getModelCompany();
-        return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCompany);
+        Budget modelBudget = getModelBudget();
+        return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelCompany, modelBudget);
     }
 
 }

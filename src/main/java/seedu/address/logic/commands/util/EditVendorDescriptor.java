@@ -33,7 +33,7 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
      */
     @Override
     public boolean isAnyFieldEdited() {
-        return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(company);
+        return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(company, budget);
     }
 
     public void setCompany(Company company) {

@@ -139,9 +139,15 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Budget parseBudget(String budget) throws ParseException {
-        requireNonNull(budget);
+        if (budget == null) {
+            return null;
+        }
         String trimmedBudget = budget.trim();
 
+        String budgetWithoutDecimal = trimmedBudget.replace(".", "");
+        if (budgetWithoutDecimal.length() > 15) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
+        }
         double budgetValue;
         try {
             budgetValue = Double.parseDouble(trimmedBudget);

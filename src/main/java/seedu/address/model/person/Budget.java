@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.math.BigDecimal;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -15,8 +17,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Budget {
     public static final String MESSAGE_CONSTRAINTS =
-            "Budget should be a non-negative number with up to 2 decimal places.";
-    public static final Double MINIMUM_BUDGET = 0.0;
+            "Budget should be a non-negative number with up to 2 decimal places. Cannot have more than 15 significant digits.";
+    public static final Double MINIMUM_BUDGET = 0.00;
     public static final String FORMAT_2DP = "%.2f";
 
     public final Double value;
@@ -42,9 +44,9 @@ public class Budget {
         }
 
         // Check 2dp or less
-        String[] splitter = test.toString().split("\\.");
-        int decimalLength = splitter[1].length();
-        return decimalLength <= 2;
+        BigDecimal budgetDecimal = BigDecimal.valueOf(test);
+        int scale = budgetDecimal.scale();
+        return scale <= 2;
     }
 
     @Override

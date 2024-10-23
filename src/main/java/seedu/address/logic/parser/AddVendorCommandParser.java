@@ -50,10 +50,15 @@ public class AddVendorCommandParser implements Parser<AddVendorCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
-        Budget budget = ParserUtil.parseBudget(argMultimap.getValue(PREFIX_BUDGET).get());
+        Budget budget = ParserUtil.parseBudget(argMultimap.getValue(PREFIX_BUDGET).orElse(null));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Vendor vendor = new Vendor(name, phone, email, address, tagList, company, budget);
+        Vendor vendor;
+        if (budget == null) {
+            vendor = new Vendor(name, phone, email, address, tagList, company);
+        } else {
+            vendor = new Vendor(name, phone, email, address, tagList, company, budget);
+        }
         return new AddVendorCommand(vendor);
     }
 

@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
             Label companyLabel = new Label("Company: " + v.getCompany().value);
             addLabel(companyLabel);
 
-            Label budgetLabel = new Label("Budget: $" + v.getBudget().value);
+            Label budgetLabel = new Label("Budget: $" + v.getBudget().toString());
             addLabel(budgetLabel);
         }
 
