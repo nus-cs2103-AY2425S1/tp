@@ -69,17 +69,6 @@ public class Restaurant {
         return rating;
     }
 
-    // I Suppress the Compilation Error Here
-    // Original:
-    // public Price getPrice() {
-    //     return price;
-    // }
-    // Current:
-    public Tag getPrice() {
-        return price;
-    }
-    // End of suppression
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
