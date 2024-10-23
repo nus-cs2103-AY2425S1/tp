@@ -55,6 +55,7 @@ public class DeleteTagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        assert targetIndex.getOneBased() > 0;
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = deleteTagsFromPerson(personToEdit, tagsToDelete);
         model.setPerson(personToEdit, editedPerson);
@@ -102,7 +103,7 @@ public class DeleteTagCommand extends Command {
         }
 
         DeleteTagCommand otherCommand = (DeleteTagCommand) other;
-        return targetIndex.equals(otherCommand.targetIndex);
+        return targetIndex.equals(otherCommand.targetIndex) && tagsToDelete.equals(otherCommand.tagsToDelete);
     }
 
     @Override
