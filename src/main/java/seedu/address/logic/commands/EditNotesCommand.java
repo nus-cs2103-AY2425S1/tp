@@ -29,17 +29,15 @@ public class EditNotesCommand extends Command {
             + "Parameters: INDEX i/[NOTE_INDEX] n/[NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 i/1 n/High profile client.";
 
-    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Person: %1$s";
+    public static final String MESSAGE_EDIT_NOTES_SUCCESS = "Edit note of Person: %1$s";
 
     private final Index personIndex;
     private final Index noteIndex;
     private final Note note;
 
     /**
-     * @param personIndex of the person in the filtered person list to edit the
-     *                    notes
-     * @param noteIndex   of the person in the filtered person list to edit the
-     *                    notes
+     * @param personIndex of the person in the filtered person list to edit the notes
+     * @param noteIndex   of the person in the filtered person list to edit the notes
      * @param note        of the person to be updated to
      */
     public EditNotesCommand(Index personIndex, Index noteIndex, Note note) {
@@ -86,7 +84,7 @@ public class EditNotesCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ADD_NOTES_SUCCESS, Messages.format(personToEdit));
+        return String.format(MESSAGE_EDIT_NOTES_SUCCESS, Messages.format(personToEdit));
     }
 
     private Person updateNote(Person personToEdit, Set<Note> notesToEdit) {
