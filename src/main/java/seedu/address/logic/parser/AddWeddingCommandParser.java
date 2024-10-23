@@ -1,11 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.ParserUtil.parsePersonIndexString;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
@@ -24,17 +29,23 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
      */
     public AddWeddingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME,
+                        CliSyntax.PREFIX_DATE, CliSyntax.PREFIX_CONTACT);
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddWeddingCommand.MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE, PREFIX_CONTACT);
         WeddingName name = ParserUtil.parseWeddingName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         WeddingDate date = ParserUtil.parseWeddingDate(argMultimap.getValue(CliSyntax.PREFIX_DATE).get());
 
+        Set<Index> contactIndexes = new HashSet<>();
+        if (argMultimap.getValue(PREFIX_CONTACT).isPresent()) {
+            contactIndexes = parsePersonIndexString(argMultimap.getValue(PREFIX_CONTACT).get());
+        }
+
         Wedding wedding = new Wedding(name, date);
-        return new AddWeddingCommand(wedding);
+        return new AddWeddingCommand(wedding, contactIndexes);
     }
 
     /**
