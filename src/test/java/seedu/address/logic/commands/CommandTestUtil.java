@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
@@ -54,6 +56,12 @@ public class CommandTestUtil {
     public static final String VALID_ECNAME_BOB = "Sally";
     public static final String VALID_ECNUMBER_AMY = "91234567";
     public static final String VALID_ECNUMBER_BOB = "98765432";
+    public static final String VALID_EXAM_MIDTERM = "Midterm";
+    public static final String VALID_EXAM_FINAL = "Final";
+    public static final String VALID_EXAM_PRACTICAL = "Practical";
+    public static final String VALID_EXAM_QUIZ = "Quiz";
+    public static final String VALID_EXAM_SCORE_AMY = "70";
+    public static final String VALID_EXAM_SCORE_BOB = "65";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final HashMap<AbsentDate, AbsentReason> VALID_ATTENDANCE_AMY = new HashMap<>();
@@ -76,6 +84,8 @@ public class CommandTestUtil {
     public static final String ECNAME_DESC_AMY = " " + PREFIX_ECNAME + VALID_ECNAME_AMY;
     public static final String ECNUMBER_DESC_AMY = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_AMY;
     public static final String ECNUMBER_DESC_BOB = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_BOB;
+    public static final String EXAM_DESC_MIDTERM = " " + PREFIX_EXAM + VALID_EXAM_MIDTERM;
+    public static final String EXAM_SCORE_DESC_AMY = " " + PREFIX_EXAM_SCORE + VALID_EXAM_SCORE_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String ATTENDANCE_DESC_AMY = " " + PREFIX_ABSENT_DATE + "20-10-2024" + " "
@@ -94,6 +104,7 @@ public class CommandTestUtil {
             + "A1"; // wrong format used for student class
     public static final String INVALID_ECNAME_DESC = " " + PREFIX_ECNAME + "John%"; // "%" not allowed in ecname
     public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "1234"; // 4 digit number
+    public static final String INVALID_EXAM_DESC = " " + PREFIX_EXAM + "Midterm%"; // only alphanumeric characters
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ATTENDANCE_DESC = " " + PREFIX_ABSENT_DATE + "2024-13-01" + " "
             + PREFIX_ABSENT_REASON + "MC"; // Date should be in the form of DD-MM-YYYY

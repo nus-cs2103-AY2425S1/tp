@@ -54,8 +54,8 @@ public class AddEcNameCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
-                personToEdit.getStudentClass(), ecName, personToEdit.getEcNumber(), personToEdit.getTags(),
-                personToEdit.getAttendances());
+                personToEdit.getStudentClass(), ecName, personToEdit.getEcNumber(), personToEdit.getExams(),
+                personToEdit.getTags(), personToEdit.getAttendances());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Person;
@@ -61,11 +62,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private TableView<AttendanceEntry> tableView; // Corrected type
+    private TableView<AttendanceEntry> tableView1;
     @FXML
     private TableColumn<AttendanceEntry, String> absentDateColumn;
     @FXML
     private TableColumn<AttendanceEntry, String> absentReasonColumn;
+    @FXML
+    private TableView<Exam> tableView2;
+    @FXML
+    private TableColumn<Exam, String> examNameColumn;
+    @FXML
+    private TableColumn<Exam, String> examScoreColumn;
 
 
     /**
@@ -84,6 +91,11 @@ public class PersonCard extends UiPart<Region> {
         studentClass.setText(person.getStudentClass().value);
         ecName.setText(person.getEcName().value);
         ecNumber.setText(person.getEcNumber().value);
+
+        examNameColumn.setCellValueFactory(new PropertyValueFactory<>("examName"));
+        examScoreColumn.setCellValueFactory(new PropertyValueFactory<>("examScore"));
+        tableView2.setItems(FXCollections.observableArrayList(person.getExams()));
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -94,7 +106,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         ObservableList<AttendanceEntry> observableAttendanceList = FXCollections.observableArrayList(attendanceEntries);
-        tableView.setItems(observableAttendanceList);
+        tableView1.setItems(observableAttendanceList);
 
         absentDateColumn.setCellValueFactory(new PropertyValueFactory<>("absentDate"));
         absentReasonColumn.setCellValueFactory(new PropertyValueFactory<>("absentReason"));

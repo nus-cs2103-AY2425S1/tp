@@ -26,6 +26,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.Model;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
@@ -124,11 +125,12 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getStudentClass());
         EcName updatedEcName = editPersonDescriptor.getEcName().orElse(personToEdit.getEcName());
         EcNumber updatedEcNumber = editPersonDescriptor.getEcNumber().orElse(personToEdit.getEcNumber());
+        Set<Exam> updatedExams = personToEdit.getExams();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         HashMap<AbsentDate, AbsentReason> updatedAttendances = personToEdit.getAttendances();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
-                updatedStudentClass, updatedEcName, updatedEcNumber, updatedTags, updatedAttendances);
+                updatedStudentClass, updatedEcName, updatedEcNumber, updatedExams, updatedTags, updatedAttendances);
     }
 
     @Override

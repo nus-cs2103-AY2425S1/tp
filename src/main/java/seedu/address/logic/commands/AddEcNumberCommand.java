@@ -55,7 +55,7 @@ public class AddEcNumberCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
-                personToEdit.getStudentClass(), personToEdit.getEcName(), ecNumber,
+                personToEdit.getStudentClass(), personToEdit.getEcName(), ecNumber, personToEdit.getExams(),
                 personToEdit.getTags(), personToEdit.getAttendances());
 
         model.setPerson(personToEdit, editedPerson);

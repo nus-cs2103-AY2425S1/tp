@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
@@ -175,6 +176,36 @@ public class ParserUtil {
             throw new ParseException(EcNumber.MESSAGE_CONSTRAINTS);
         }
         return new EcNumber(trimmedEmergencyPhone);
+    }
+
+    /**
+     * Parses a {@code String exam} into a {@code Exam}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code exam} is invalid.
+     */
+    public static Exam parseExam(String exam) throws ParseException {
+        requireNonNull(exam);
+        String trimmedExam = exam.trim();
+        if (!Exam.isValidExamName(trimmedExam)) {
+            throw new ParseException(Exam.NAME_MESSAGE_CONSTRAINTS);
+        }
+        return new Exam(trimmedExam);
+    }
+
+    /**
+     * Parses a {@code String examScore} into a {@code String examScore}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code examScore} is invalid.
+     */
+    public static String parseExamScore(String examScore) throws ParseException {
+        requireNonNull(examScore);
+        String trimmedExamScore = examScore.trim();
+        if (!Exam.isValidExamScore(trimmedExamScore)) {
+            throw new ParseException(Exam.SCORE_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedExamScore;
     }
 
     /**

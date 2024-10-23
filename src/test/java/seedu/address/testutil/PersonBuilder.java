@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
@@ -43,6 +44,7 @@ public class PersonBuilder {
     private StudentClass studentClass;
     private EcName ecName;
     private EcNumber ecNumber;
+    private Set<Exam> exams;
     private Set<Tag> tags;
     private HashMap<AbsentDate, AbsentReason> attendances;
 
@@ -59,6 +61,7 @@ public class PersonBuilder {
         studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
         ecName = new EcName(DEFAULT_ECNAME);
         ecNumber = new EcNumber(DEFAULT_ECNUMBER);
+        exams = new HashSet<>();
         tags = new HashSet<>();
         attendances = new HashMap<>();
     }
@@ -76,6 +79,7 @@ public class PersonBuilder {
         studentClass = personToCopy.getStudentClass();
         ecName = personToCopy.getEcName();
         ecNumber = personToCopy.getEcNumber();
+        exams = new HashSet<>(personToCopy.getExams());
         tags = new HashSet<>(personToCopy.getTags());
         attendances = new HashMap<>(personToCopy.getAttendances());
     }
@@ -85,6 +89,30 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code exams} into a {@code Set<Exam>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withExams(String ... exams) {
+        this.exams = SampleDataUtil.getExamSet(exams);
+        return this;
+    }
+
+    /**
+     * Sets the {@code String examScore} for a specified {@code Exam} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExamScore(String examName, String examScore) {
+        Set<Exam> updatedExams = new HashSet<>();
+        for (Exam exam : this.exams) {
+            Exam updatedExam = exam;
+            if (exam.examName.equals(examName)) {
+                updatedExam = new Exam(examName, examScore);
+            }
+            updatedExams.add(updatedExam);
+        }
+        this.exams = updatedExams;
         return this;
     }
 
@@ -172,8 +200,8 @@ public class PersonBuilder {
      * Builds a new Person with all the required attributes.
      */
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags,
-                attendances);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
+                tags, attendances);
     }
 
 }

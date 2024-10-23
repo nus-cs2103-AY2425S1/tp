@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
@@ -44,6 +45,7 @@ class JsonAdaptedPerson {
     private final String ecNumber;
     private final Map<String, String> attendances;
 
+    private final List<JsonAdaptedExam> exams = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -56,6 +58,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("class") String studentClass,
                              @JsonProperty("emergency contact name") String ecName,
                              @JsonProperty("emergency contact number") String ecNumber,
+                             @JsonProperty("exams") List<JsonAdaptedExam> exams,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("attendances") Map<String, String> attendances) {
 
@@ -68,6 +71,9 @@ class JsonAdaptedPerson {
         this.studentClass = studentClass;
         this.ecName = ecName;
         this.ecNumber = ecNumber;
+        if (exams != null) {
+            this.exams.addAll(exams);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -91,6 +97,9 @@ class JsonAdaptedPerson {
         studentClass = source.getStudentClass().value;
         ecName = source.getEcName().value;
         ecNumber = source.getEcNumber().value;
+        exams.addAll(source.getExams().stream()
+                .map(JsonAdaptedExam::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -106,6 +115,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Exam> personExams = new ArrayList<>();
+        for (JsonAdaptedExam exam : exams) {
+            personExams.add(exam.toModelType());
+        }
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -187,6 +201,7 @@ class JsonAdaptedPerson {
         }
         final EcNumber modelEcNumber = new EcNumber(ecNumber);
 
+        final Set<Exam> modelExams = new HashSet<>(personExams);
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final HashMap<AbsentDate, AbsentReason> modelAttendances = new HashMap<>();
@@ -209,6 +224,6 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
-                modelStudentClass, modelEcName, modelEcNumber, modelTags, modelAttendances);
+                modelStudentClass, modelEcName, modelEcNumber, modelExams, modelTags, modelAttendances);
     }
 }
