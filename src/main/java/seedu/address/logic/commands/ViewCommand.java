@@ -20,9 +20,9 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_VIEW_SUCCESS = "Here are the patient details.";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Views patient details with the given NRIC. "
-        + "Format: view i/NRIC\n"
-        + "Example: " + COMMAND_WORD + " i/S1234567A";
+            + ": Views patient details with the given NRIC. "
+            + "Format: view i/NRIC\n"
+            + "Example: " + COMMAND_WORD + " i/S1234567A";
 
     private final Nric nric;
 
@@ -37,8 +37,8 @@ public class ViewCommand extends Command {
 
         // Find the person with the given nric
         Optional<Person> optionalPerson = lastShownList.stream()
-            .filter(person -> person.getNric().equals(nric))
-            .findFirst();
+                .filter(person -> person.getNric().equals(nric))
+                .findFirst();
 
         if (!optionalPerson.isPresent()) {
             throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
