@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ANDY;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -22,7 +23,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.PersonBuilder;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -33,8 +36,8 @@ public class JsonAdaptedPersonTest {
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_NAME2 = BETTY.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
+    private static final String VALID_PHONE = BENSON.getPhone().map(Object :: toString).orElse(null);;
+    private static final String VALID_EMAIL = BENSON.getEmail().map(Object :: toString).orElse(null);
     private static final String VALID_ADDRESS = BENSON.getAddress().map(Object :: toString).orElse(null);
     private static final JsonAdaptedModuleRoleMap VALID_EMPTY_MODULE_ROLE_MAP =
             new JsonAdaptedModuleRoleMap(ANDY.getModuleRoleMap());
@@ -51,6 +54,22 @@ public class JsonAdaptedPersonTest {
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
         assertEquals(BENSON, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_nullPhone_returnPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_BETTY, null, VALID_EMAIL, VALID_ADDRESS,
+                VALID_TAGS, VALID_MODULE_ROLE_MAP);
+        Person betty = new PersonBuilder(BETTY).withAddress(VALID_ADDRESS).withEmptyPhone().build();
+        assertEquals(betty, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_nullEmail_returnPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_BETTY, VALID_PHONE, null, VALID_ADDRESS,
+                VALID_TAGS, VALID_MODULE_ROLE_MAP);
+        Person betty = new PersonBuilder(BETTY).withAddress(VALID_ADDRESS).withEmptyEmail().build();
+        assertEquals(betty, person.toModelType());
     }
 
     @Test
@@ -107,14 +126,6 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
                         VALID_TAGS, VALID_EMPTY_MODULE_ROLE_MAP);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person :: toModelType);
-    }
-
-    @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
-                VALID_TAGS, VALID_EMPTY_MODULE_ROLE_MAP);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person :: toModelType);
     }
 

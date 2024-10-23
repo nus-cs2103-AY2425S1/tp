@@ -138,8 +138,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName()
                 + "{name=" + ALICE.getName()
-                + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail()
+                + ", phone=" + ALICE.getPhone().map(Objects ::toString).orElse(null)
+                + ", email=" + ALICE.getEmail().map(Objects ::toString).orElse(null)
                 + ", address=" + ALICE.getAddress().map(Objects ::toString).orElse(null)
                 + ", tags=" + ALICE.getTags()
                 + ", roles=" + ALICE.getModuleRoleMap() + "}";
