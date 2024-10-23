@@ -278,5 +278,6 @@ _Details coming soon ..._
 | **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                         |
 | **Findtag** | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                    |
 | **List**    | `list`                                                                                                                                                                            |
+| **Show**    | `show INDEX`<br> e.g., `show 1`                                                                                                                                                   |
 | **Help**    | `help`                                                                                                                                                                            |
 | **Remark**  | `remark INDEX r/[REMARKS]`                                                                                                                                                        |
