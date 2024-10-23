@@ -49,22 +49,22 @@ public class PinContactCommandTest {
         assertCommandFailure(pinContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-//    @Test
-//    public void execute_validIndexFilteredList_success() {
-//        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-//
-//        Person personToPin = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-//        PinContactCommand pinContactCommand = new PinContactCommand(INDEX_FIRST_PERSON);
-//
-//        String expectedMessage = String.format(PinContactCommand.MESSAGE_PIN_PERSON_SUCCESS,
-//                Messages.format(personToPin));
-//
-//        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-//        expectedModel.pinPerson(personToPin);
-//        showNoPerson(expectedModel);
-//
-//        assertCommandSuccess(pinContactCommand, model, expectedMessage, expectedModel);
-//    }
+    //    @Test
+    //    public void execute_validIndexFilteredList_success() {
+    //        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    //
+    //        Person personToPin = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+    //        PinContactCommand pinContactCommand = new PinContactCommand(INDEX_FIRST_PERSON);
+    //
+    //        String expectedMessage = String.format(PinContactCommand.MESSAGE_PIN_PERSON_SUCCESS,
+    //                Messages.format(personToPin));
+    //
+    //        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    //        expectedModel.pinPerson(personToPin);
+    //        showNoPerson(expectedModel);
+    //
+    //        assertCommandSuccess(pinContactCommand, model, expectedMessage, expectedModel);
+    //    }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
