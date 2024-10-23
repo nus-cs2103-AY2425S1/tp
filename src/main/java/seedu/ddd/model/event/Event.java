@@ -22,8 +22,8 @@ public class Event {
 
     public static final String MESSAGE_CONSTRAINTS =
             "There must be at least one client in a specific event.";
-    private final ArrayList<Client> clients;
-    private final ArrayList<Vendor> vendors;
+    private final List<Client> clients;
+    private final List<Vendor> vendors;
     private final Description description;
     private final EventId eventId;
 
@@ -33,7 +33,7 @@ public class Event {
      * @param clients A list of client.
      * @param vendors A list of vendors.
      */
-    public Event(ArrayList<Client> clients, ArrayList<Vendor> vendors, Description description, EventId eventId) {
+    public Event(List<Client> clients, List<Vendor> vendors, Description description, EventId eventId) {
         requireAllNonNull(clients, vendors, description);
         AppUtil.checkArgument(isValidEvent(clients), MESSAGE_CONSTRAINTS);
         this.clients = new ArrayList<>();
@@ -46,10 +46,10 @@ public class Event {
 
     /**
      * Returns true if it is a valid event, which means there must
-     * be at least one {@Client} in clients list.
+     * be at least one {@code Client} in clients list.
      * @param testList The {@code ArrayList} of {@code Client} at the constructor.
      */
-    public static boolean isValidEvent(ArrayList<Client> testList) {
+    public static boolean isValidEvent(List<Client> testList) {
         return !testList.isEmpty();
     }
 

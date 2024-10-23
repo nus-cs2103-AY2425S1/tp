@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
@@ -111,17 +110,6 @@ public class TypicalContacts {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalContacts() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical contacts.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Contact contact : getTypicalContacts()) {
-            ab.addContact(contact);
-        }
-        return ab;
-    }
 
     public static List<Contact> getTypicalContacts() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));

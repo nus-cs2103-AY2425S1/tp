@@ -19,7 +19,7 @@ import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
- * Adds a person to the address book.
+ * Adds a contact to the address book.
  */
 public class AddCommand extends Command {
 
@@ -97,7 +97,7 @@ public class AddCommand extends Command {
 
 
     /**
-     * Creates an AddContactCommand to add the specified {@code Contact}
+     * Creates an AddCommand to add the specified {@code Contact}
      */
     public AddCommand(Contact contact) {
         requireNonNull(contact);
@@ -121,7 +121,7 @@ public class AddCommand extends Command {
         }
 
         // Increment ID counter only if addition of contact is successful
-        AddressBook.incrementNextId();
+        AddressBook.incrementNextContactId();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

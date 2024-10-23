@@ -9,8 +9,11 @@ import seedu.ddd.commons.util.AppUtil;
  */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS =
-            "The description of a event can not be empty.";
-    public static final String EMPTY_STRING = "";
+            "The description of a event cannot be empty.";
+    /*
+     * Checks that there is at least one non-whitespace character
+     */
+    public static final String VALIDATION_REGEX = ".*\\S.*";
 
     public final String description;
 
@@ -28,7 +31,7 @@ public class Description {
      * Returns true if a given string is a valid description.
      */
     public static boolean isValidDescription(String test) {
-        return !test.equals(EMPTY_STRING);
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

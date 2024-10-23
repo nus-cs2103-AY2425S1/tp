@@ -2,7 +2,7 @@ package seedu.ddd.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.ddd.testutil.TypicalContacts.getTypicalAddressBook;
+import static seedu.ddd.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import java.nio.file.Path;
 
