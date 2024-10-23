@@ -5,6 +5,7 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
+AddressBook *-down-> "1" UniqueProjectList
 AddressBook *-right-> "1" UniqueTagList
 AddressBook *-right-> "1" UniqueSkillList
 UniqueTagList -[hidden]down- UniquePersonList
@@ -24,4 +25,9 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+
+UniqueProjectList --> Project
+
+Project *--> ProjectName
+Project *--> ProjectId
 @enduml
