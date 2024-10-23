@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,7 +40,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_PHONE,
                 PREFIX_EMAIL,
                 PREFIX_ADDRESS,
-                PREFIX_TAG);
+                PREFIX_TAG,
+                PREFIX_ROLE);
 
         Nric nric;
 
@@ -68,6 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -89,6 +93,21 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Role>} if {@code roles} is non-empty.
+     * If {@code roles} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Role>} containing zero roles.
+     */
+    private Optional<Set<Role>> parseRolesForEdit(Collection<String> roles) throws ParseException {
+        assert roles != null;
+
+        if (roles.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> roleSet = roles.size() == 1 && roles.contains("") ? Collections.emptySet() : roles;
+        return Optional.of(ParserUtil.parseRoles(roleSet));
     }
 
 }

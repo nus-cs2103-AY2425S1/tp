@@ -160,13 +160,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setRoles(toCopy.roles);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, nric, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, nric, phone, email, address, tags, roles);
         }
 
         public void setName(Name name) {
@@ -227,8 +228,22 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Returns an unmodifiable role set, which throws
+         * {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
         public Optional<Set<Role>> getRoles() {
             return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code roles} to this object's {@code roles}.
+         * A defensive copy of {@code roles} is used internally.
+         */
+        public void setRoles(Set<Role> roles) {
+            this.roles = (roles != null) ? new HashSet<>(roles) : null;
         }
 
         @Override
@@ -248,7 +263,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(roles, otherEditPersonDescriptor.roles);
         }
 
         @Override
@@ -260,6 +276,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("roles", roles)
                     .toString();
         }
     }
