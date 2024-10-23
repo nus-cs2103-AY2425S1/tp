@@ -169,7 +169,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredAppointmentList().size());
 
         Person person = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
-        final LocalDate date = person.getAppointment().getStart().toLocalDate();
+        final LocalDate date = person.getAppointmentStart().toLocalDate();
         model.updateFilteredAppointmentList(new AppointmentContainsDatePredicate(date));
     }
 
