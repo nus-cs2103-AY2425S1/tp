@@ -58,11 +58,11 @@ public class PersonCard extends UiPart<Region> {
     }
     private void createFields() {
         name.setText(person.getName().fullName);
-        phone.setFields("fas-phone-alt", person.getPhone().value);
-        address.setFields("fas-building", person.getAddress().value);
-        email.setFields("fas-envelope", person.getEmail().value);
-        job.setFields("fas-briefcase", person.getJob().value);
-        income.setFields("fas-dollar-sign", person.getIncome().toString());
+        phone.setFields(PersonCardField.PHONE_ICON_LITERAL, person.getPhone().value);
+        address.setFields(PersonCardField.ADDRESS_ICON_LITERAL, person.getAddress().value);
+        email.setFields(PersonCardField.EMAIL_ICON_LITERAL, person.getEmail().value);
+        job.setFields(PersonCardField.JOB_ICON_LITERAL, person.getJob().value);
+        income.setFields(PersonCardField.INCOME_ICON_LITERAL, person.getIncome().toString());
         remark.setText(person.getRemark().value);
         cardFields.getChildren().addAll(phone, address, email, job, income);
     }

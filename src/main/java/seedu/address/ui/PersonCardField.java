@@ -15,6 +15,12 @@ public class PersonCardField extends HBox {
     private FontIcon icon;
     private Label value;
 
+    public static final String PHONE_ICON_LITERAL = "fas-phone-alt";
+    public static final String ADDRESS_ICON_LITERAL = "fas-building";
+    public static final String EMAIL_ICON_LITERAL = "fas-envelope";
+    public static final String JOB_ICON_LITERAL = "fas-briefcase";
+    public static final String INCOME_ICON_LITERAL = "fas-dollar-sign";
+
     /**
      * Creates a template {@code PersonCardField} to display.
      */
