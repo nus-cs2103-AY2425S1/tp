@@ -5,7 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -165,7 +170,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String personIndexString} into a {@code Set<Index>}
      * @param personIndexString
-     * @return Set<Index>
+     * @return {@code Set<Index>}
      * @throws ParseException
      */
 
