@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -40,8 +39,8 @@ public class DeleteAppointmentCommandTest {
         CommandResult commandResult = new DeleteAppointmentCommand(validAppointment).execute(modelStub);
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                Messages.format(validAppointment.getPatient()),
-                Messages.format(validAppointment.getDoctor()),
+                validAppointment.getPatient().getName().toString(),
+                validAppointment.getDoctor().getName().toString(),
                 validAppointment.getDate().toString(),
                 validAppointment.getTime().toString());
 
