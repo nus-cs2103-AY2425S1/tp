@@ -38,8 +38,8 @@ public class AddNotesCommand extends Command {
 
 
     /**
-     * @param index of the person in the filtered person list to edit the notes
-     * @param note of the person to be updated to
+     * @param index of the person in the filtered person list to add a new note
+     * @param note of the person to be added
      */
     public AddNotesCommand(Index index, Note note) {
         requireAllNonNull(index, note);
