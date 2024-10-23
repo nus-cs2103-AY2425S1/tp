@@ -77,7 +77,7 @@ public class EditEventCommand extends EditCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (editEventDescriptor.celebrityName != null ) {
+        if (editEventDescriptor.celebrityName != null) {
             editEventDescriptor.setCelebrity(model.findPerson(editEventDescriptor.celebrityName.trim()));
         }
 
