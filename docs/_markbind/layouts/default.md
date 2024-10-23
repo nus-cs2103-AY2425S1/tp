@@ -13,7 +13,7 @@
     </li>
     <li slot="right">
       <form class="navbar-form">
-        <searchbar :data="searchData" placeholder="Search" :on-hit="searchCallback" menu-align-right></searchbar>
+        <searchbar :data="searchData" placeholder="Search EduLog" :on-hit="searchCallback" menu-align-right></searchbar>
       </form>
     </li>
   </navbar>
