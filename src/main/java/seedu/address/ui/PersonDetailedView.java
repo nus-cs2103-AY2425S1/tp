@@ -39,6 +39,8 @@ public class PersonDetailedView extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label frequency;
+    @FXML
     private Label placeholderLabel;
     @FXML
     private ImageView profileImage;
@@ -59,9 +61,9 @@ public class PersonDetailedView extends UiPart<Region> {
         birthday.setText("Birthday: " + person.getBirthday().value);
         email.setText(person.getEmail().value);
         hasPaid.setText("Paid status: " + (person.getHasPaid() ? "Paid" : "Not Paid"));
-
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        frequency.setText("Policy Renewal Frequency: " + person.getFrequency().value + " month(s)");
     }
 }

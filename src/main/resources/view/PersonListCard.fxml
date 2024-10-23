@@ -40,8 +40,6 @@
 
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="hasPaid" styleClass="cell_small_label" text="\$hasPaid" />
-      <Label fx:id="frequency" styleClass="cell_small_label" text="\$frequency" />
     </VBox>
 
     <!-- Right Section: Tags aligned to the right -->
