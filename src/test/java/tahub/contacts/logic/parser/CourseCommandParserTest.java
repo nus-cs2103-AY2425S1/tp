@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import tahub.contacts.logic.commands.CourseCommand;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 
 public class CourseCommandParserTest {
 
@@ -22,7 +24,7 @@ public class CourseCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Course expectedCourse = new Course(VALID_COURSE_CODE, VALID_COURSE_NAME);
+        Course expectedCourse = new Course(new CourseCode(VALID_COURSE_CODE), new CourseName(VALID_COURSE_NAME));
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + COURSE_CODE_DESC + COURSE_NAME_DESC,
@@ -45,11 +47,11 @@ public class CourseCommandParserTest {
         // invalid course code
         assertParseFailure(parser,
                 PREAMBLE_WHITESPACE + INVALID_COURSE_CODE_DESC + COURSE_NAME_DESC,
-                Course.COURSE_CODE_MESSAGE_CONSTRAINTS);
+                CourseCode.MESSAGE_CONSTRAINTS);
 
         // invalid course description
         assertParseFailure(parser,
                 PREAMBLE_WHITESPACE + COURSE_CODE_DESC + INVALID_COURSE_NAME_DESC,
-                Course.COURSE_NAME_MESSAGE_CONSTRAINTS);
+                CourseName.MESSAGE_CONSTRAINTS);
     }
 }

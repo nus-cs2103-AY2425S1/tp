@@ -3,13 +3,14 @@ package tahub.contacts.logic.parser;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
-import static tahub.contacts.model.course.Course.COURSE_CODE_MESSAGE_CONSTRAINTS;
 
 import java.util.stream.Stream;
 
 import tahub.contacts.logic.commands.CourseCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 
 /**
  * Parses input arguments and creates a new CourseCommand object
@@ -28,18 +29,13 @@ public class CourseCommandParser implements Parser<CourseCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
         }
+        
+        assert argMultimap.getValue(PREFIX_CODE).isPresent();
+        assert argMultimap.getValue(PREFIX_NAME).isPresent();
 
-        String courseCode = argMultimap.getValue(PREFIX_CODE).get();
-        String courseName = argMultimap.getValue(PREFIX_NAME).get();
-
-        if (!Course.isValidCourseCode(courseCode)) {
-            throw new ParseException(COURSE_CODE_MESSAGE_CONSTRAINTS);
-        }
-
-        if (!Course.isValidCourseName(courseName)) {
-            throw new ParseException(Course.COURSE_NAME_MESSAGE_CONSTRAINTS);
-        }
-
+        CourseCode courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
+        CourseName courseName = ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get());
+        
         Course course = new Course(courseCode, courseName);
 
         return new CourseCommand(course);

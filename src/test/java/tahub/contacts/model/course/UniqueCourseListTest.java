@@ -23,13 +23,13 @@ public class UniqueCourseListTest {
 
     @Test
     public void contains_courseNotInList_returnsFalse() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         assertFalse(uniqueCourseList.contains(course));
     }
 
     @Test
     public void contains_courseInList_returnsTrue() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
         assertTrue(uniqueCourseList.contains(course));
     }
@@ -41,34 +41,34 @@ public class UniqueCourseListTest {
 
     @Test
     public void add_duplicateCourse_throwsDuplicateCourseException() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
         assertThrows(DuplicateCourseException.class, () -> uniqueCourseList.add(course));
     }
 
     @Test
     public void setCourse_nullTargetCourse_throwsNullPointerException() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         assertThrows(NullPointerException.class, () -> uniqueCourseList.setCourse(null, course));
     }
 
     @Test
     public void setCourse_nullEditedCourse_throwsNullPointerException() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
         assertThrows(NullPointerException.class, () -> uniqueCourseList.setCourse(course, null));
     }
 
     @Test
     public void setCourse_targetCourseNotInList_throwsCourseNotFoundException() {
-        Course course = new Course("CS1010", "Programming Methodology");
-        Course editedCourse = new Course("CS1020", "Data Structures");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        Course editedCourse = new Course(new CourseCode("CS1020"), new CourseName("Data Structures"));
         assertThrows(CourseNotFoundException.class, () -> uniqueCourseList.setCourse(course, editedCourse));
     }
 
     @Test
     public void setCourse_editedCourseIsSameCourse_success() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
         uniqueCourseList.setCourse(course, course);
         UniqueCourseList expectedUniqueCourseList = new UniqueCourseList();
@@ -78,9 +78,9 @@ public class UniqueCourseListTest {
 
     @Test
     public void setCourse_editedCourseHasSameIdentity_success() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
-        Course editedCourse = new Course("CS1010", "Programming Methodology");
+        Course editedCourse = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.setCourse(course, editedCourse);
         UniqueCourseList expectedUniqueCourseList = new UniqueCourseList();
         expectedUniqueCourseList.add(editedCourse);
@@ -89,9 +89,9 @@ public class UniqueCourseListTest {
 
     @Test
     public void setCourse_editedCourseHasDifferentIdentity_success() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
-        Course editedCourse = new Course("CS1020", "Data Structures");
+        Course editedCourse = new Course(new CourseCode("CS1020"), new CourseName("Data Structures"));
         uniqueCourseList.setCourse(course, editedCourse);
         UniqueCourseList expectedUniqueCourseList = new UniqueCourseList();
         expectedUniqueCourseList.add(editedCourse);
@@ -105,13 +105,13 @@ public class UniqueCourseListTest {
 
     @Test
     public void remove_courseDoesNotExist_throwsCourseNotFoundException() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         assertThrows(CourseNotFoundException.class, () -> uniqueCourseList.remove(course));
     }
 
     @Test
     public void remove_existingCourse_removesCourse() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
         uniqueCourseList.remove(course);
         UniqueCourseList expectedUniqueCourseList = new UniqueCourseList();
@@ -125,7 +125,7 @@ public class UniqueCourseListTest {
 
     @Test
     public void setCourses_uniqueCourseList_replacesOwnListWithProvidedUniqueCourseList() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         uniqueCourseList.add(course);
         UniqueCourseList expectedUniqueCourseList = new UniqueCourseList();
         expectedUniqueCourseList.add(course);
@@ -144,8 +144,8 @@ public class UniqueCourseListTest {
 
     @Test
     public void setCourses_list_replacesOwnListWithProvidedList() {
-        Course course1 = new Course("CS1010", "Programming Methodology");
-        Course course2 = new Course("CS1020", "Data Structures");
+        Course course1 = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        Course course2 = new Course(new CourseCode("CS1020"), new CourseName("Data Structures"));
         uniqueCourseList.add(course1);
         List<Course> courseList = List.of(course2);
         uniqueCourseList.setCourses(courseList);
@@ -160,7 +160,7 @@ public class UniqueCourseListTest {
 
     @Test
     public void setCourses_listWithDuplicateCourses_throwsDuplicateCourseException() {
-        Course course = new Course("CS1010", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         List<Course> listWithDuplicateCourses = List.of(course, course);
         assertThrows(DuplicateCourseException.class, () -> uniqueCourseList.setCourses(listWithDuplicateCourses));
     }

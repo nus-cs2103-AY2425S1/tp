@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 
 public class JsonAdaptedCourseTest {
     private static final String INVALID_COURSE_CODE = "101";
@@ -21,7 +23,7 @@ public class JsonAdaptedCourseTest {
     @Test
     public void toModelType_validCourseDetails_returnsCourse() throws Exception {
         JsonAdaptedCourse course = new JsonAdaptedCourse(VALID_COURSE_CODE, VALID_COURSE_NAME);
-        assertEquals(new Course(VALID_COURSE_CODE, VALID_COURSE_NAME), course.toModelType());
+        assertEquals(new Course(new CourseCode(VALID_COURSE_CODE), new CourseName(VALID_COURSE_NAME)), course.toModelType());
     }
 
     @Test

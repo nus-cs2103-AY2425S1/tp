@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import tahub.contacts.commons.core.GuiSettings;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
 import tahub.contacts.testutil.AddressBookBuilder;
@@ -118,20 +120,20 @@ public class ModelManagerTest {
 
     @Test
     public void hasCourse_courseNotInCourseList_returnsFalse() {
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         assertFalse(modelManager.hasCourse(course));
     }
 
     @Test
     public void hasCourse_courseInCourseList_returnsTrue() {
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         modelManager.addCourse(course);
         assertTrue(modelManager.hasCourse(course));
     }
 
     @Test
     public void deleteCourse_courseInCourseList_deletesCourse() {
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         modelManager.addCourse(course);
         modelManager.deleteCourse(course);
         assertFalse(modelManager.hasCourse(course));
@@ -139,7 +141,7 @@ public class ModelManagerTest {
 
     @Test
     public void addCourse_validCourse_addsCourse() {
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         modelManager.addCourse(course);
         assertTrue(modelManager.hasCourse(course));
     }
@@ -147,7 +149,7 @@ public class ModelManagerTest {
     @Test
     public void setCourseList_validCourseList_setsCourseList() {
         UniqueCourseList courseList = new UniqueCourseList();
-        Course course = new Course("CS1010", "Introduction to CS");
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         courseList.addCourse(course);
         modelManager.setCourseList(courseList);
         assertTrue(modelManager.hasCourse(course));

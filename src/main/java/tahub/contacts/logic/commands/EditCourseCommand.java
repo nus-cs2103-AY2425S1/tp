@@ -7,6 +7,7 @@ import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Address;
@@ -45,16 +46,12 @@ public class EditCourseCommand extends Command {
             + PREFIX_NAME + "Programming basics";
 
     public static final String MESSAGE_EDIT_COURSE_SUCCESS = "Edited Course: %1$s";
-    public static final String
     public static final String MESSAGE_COURSE_NOT_EDITED = "At least one field to edit must be provided.";
     
     private final EditCourseDescriptor editCourseDescriptor;
-
-    /**
-     * @param index of the person in the filtered person list to edit
-     * @param editCourseDescriptor details to edit the person with
-     */
-    public EditCourseCommand(String courseCode, EditCourseDescriptor editCourseDescriptor) {
+    private final CourseCode courseCode;
+    
+    public EditCourseCommand(CourseCode courseCode, EditCourseDescriptor editCourseDescriptor) {
         requireNonNull(courseCode);
         requireNonNull(editCourseDescriptor);
 
@@ -74,19 +71,19 @@ public class EditCourseCommand extends Command {
         Course courseToEdit = courseList.getCourseWithCourseCode(courseCode);
         Course editedCourse = createEditedCourse(courseToEdit, editCourseDescriptor);
 
-        model.setCourse(courseToEdit, editedCourse);
+//        model.setCourse(courseToEdit, editedCourse);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_COURSE_SUCCESS_SUCCESS, Messages.format(editedCourse)));
+        return new CommandResult(String.format(MESSAGE_EDIT_COURSE_SUCCESS, Messages.format(editedCourse)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedCourse(Course courseToEdit, EditCourseDescriptor editCourseDescriptor) {
+    private static Course createEditedCourse(Course courseToEdit, EditCourseDescriptor editCourseDescriptor) {
         assert courseToEdit != null;
 
-        Name updatedCourseName = editCourseDescriptor.getName().orElse(courseToEdit.getName());
+        CourseName updatedCourseName = editCourseDescriptor.getCourseName().orElse(courseToEdit.courseName);
         
         return new Course(courseToEdit.courseCode, updatedCourseName);
     }
@@ -121,7 +118,6 @@ public class EditCourseCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditCourseDescriptor {
-        private String courseCode;
         private CourseName courseName;
 
         public EditCourseDescriptor() {}
@@ -130,26 +126,17 @@ public class EditCourseCommand extends Command {
          * Copy constructor.
          */
         public EditCourseDescriptor(EditCourseDescriptor toCopy) {
-            setCourseCode(toCopy.courseCode);
             setCourseName(toCopy.courseName);
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least course  name is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(courseCode, name);
+            return CollectionUtil.isAnyNonNull(courseName);
         }
         
-        public void setCourseCode(String courseCode) {
-            this.courseCode = courseCode;
-        }
-
-        public Optional<String> getCourseCode() {
-            return Optional.ofNullable(courseCode);
-        }
-        
-        public void setCourseName(CourseName courseNname) {
+        public void setCourseName(CourseName courseName) {
             this.courseName = courseName;
         }
 
@@ -169,8 +156,7 @@ public class EditCourseCommand extends Command {
             }
 
             EditCourseDescriptor otherEditCourseDescriptor = (EditCourseDescriptor) other;
-            return Objects.equals(courseCode, otherEditCourseDescriptor.courseCode)
-                    && Objects.equals(courseName, otherEditCourseDescriptor.courseName);
+            return Objects.equals(courseName, otherEditCourseDescriptor.courseName);
         }
 
         @Override
