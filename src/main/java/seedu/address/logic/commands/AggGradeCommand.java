@@ -23,7 +23,7 @@ public class AggGradeCommand extends Command {
     public static final String COMMAND_WORD = "aggGrade";
     public static final Map<String, Operation> OPERATION_TRANSLATE = Collections.unmodifiableMap(
             Map.of("median", Operation.MEDIAN, "mean", Operation.MEAN, "max", Operation.MAX,
-                   "min", Operation.MIN));
+                   "min", Operation.MIN, "stddev", Operation.STDDEV, "var", Operation.VAR));
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Performs aggregation operationson the displayed "
             + "person list.\n"
             + "Parameters: OPERATION " + PREFIX_NAME + "EXAM_NAME\n"
@@ -43,7 +43,9 @@ public class AggGradeCommand extends Command {
         MEDIAN,
         MEAN,
         MAX,
-        MIN
+        MIN,
+        STDDEV,
+        VAR
     }
 
     private final Operation operation;
@@ -156,6 +158,19 @@ public class AggGradeCommand extends Command {
             return list.get(0);
         }
 
+        public float getVar() {
+            float mean = this.getMean();
+
+            float result = super.stream().map(grade -> (grade - mean) * (grade - mean)).reduce(0F, Float::sum);
+            result /= this.size();
+
+            return result;
+        }
+
+        public float getStddev() {
+            return (float) Math.sqrt(this.getVar());
+        }
+
         public float execute(Operation operation) {
             switch (operation) {
             case MEDIAN:
@@ -166,6 +181,10 @@ public class AggGradeCommand extends Command {
                 return this.getMax();
             case MIN:
                 return this.getMin();
+            case STDDEV:
+                return this.getStddev();
+            case VAR:
+                return this.getVar();
             default:
                 throw new IllegalStateException();
             }
