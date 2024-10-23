@@ -108,12 +108,18 @@ Format: `sort [s/SORT_OPTION]`
 
 <box type="tip" seamless>
 
-**Tip:** Currently, the supported sort option is `name`. Additional options may be added in future versions. 
+**Tip:** Supported sort options include:
+* `name`: 
+  * Sorts contacts alphabetically by name.
+* `hours`: 
+  * Sorts volunteers by the number of hours they've contributed in ascending order. 
+  * Non-volunteers are placed at the back.
 </box>
 
 Examples:
 * `sort`
 * `sort s/name`
+* `sort s/hours`
 
 ### Editing a person : `edit`
 
