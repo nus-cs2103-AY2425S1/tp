@@ -7,7 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class BtcAddressTest {
+public class EthAddressTest {
 
     private static final String VALID_PUBLIC_ADDRESS_1 = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
     private static final String VALID_PUBLIC_ADDRESS_2 = "34qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
@@ -16,58 +16,58 @@ public class BtcAddressTest {
 
     @Test
     public void constructor_nullPublicAddress_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new BtcAddress(null, VALID_LABEL_1));
+        assertThrows(NullPointerException.class, () -> new EthAddress(null, VALID_LABEL_1));
     }
 
     @Test
     public void constructor_nullLabel_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new BtcAddress(VALID_PUBLIC_ADDRESS_1, null));
+        assertThrows(NullPointerException.class, () -> new EthAddress(VALID_PUBLIC_ADDRESS_1, null));
     }
 
     @Test
     public void constructor_invalidPublicAddress_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new BtcAddress("", VALID_LABEL_1));
+        assertThrows(IllegalArgumentException.class, () -> new EthAddress("", VALID_LABEL_1));
     }
 
     @Test
     public void constructor_invalidLabel_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new BtcAddress(VALID_PUBLIC_ADDRESS_1, ""));
+        assertThrows(IllegalArgumentException.class, () -> new EthAddress(VALID_PUBLIC_ADDRESS_1, ""));
     }
 
     @Test
     public void isValidPublicAddress_validInputs_returnsTrue() {
-        assertTrue(new BtcAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1,
+        assertTrue(new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1,
                 VALID_LABEL_1));
-        assertTrue(new BtcAddress(VALID_PUBLIC_ADDRESS_2, VALID_LABEL_2).isValidPublicAddress(VALID_PUBLIC_ADDRESS_2,
+        assertTrue(new EthAddress(VALID_PUBLIC_ADDRESS_2, VALID_LABEL_2).isValidPublicAddress(VALID_PUBLIC_ADDRESS_2,
                 VALID_LABEL_2));
     }
 
     @Test
     public void isValidPublicAddress_emptyAddress_returnsFalse() {
-        assertFalse(new BtcAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress("", VALID_LABEL_1));
+        assertFalse(new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress("", VALID_LABEL_1));
     }
 
     @Test
     public void isValidPublicAddress_emptyLabel_returnsFalse() {
         assertFalse(
-                new BtcAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1, ""));
+                new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1, ""));
     }
 
     @Test
     public void isValidPublicAddress_blankAddress_returnsFalse() {
-        assertFalse(new BtcAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(" ", VALID_LABEL_1));
+        assertFalse(new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(" ", VALID_LABEL_1));
     }
 
     @Test
     public void isValidPublicAddress_blankLabel_returnsFalse() {
-        assertFalse(new BtcAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1,
+        assertFalse(new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1).isValidPublicAddress(VALID_PUBLIC_ADDRESS_1,
                 " "));
     }
 
     @Test
     public void testGetNetwork() {
-        BtcAddress btcAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1);
-        assertEquals(Network.BTC, btcAddress.getNetwork());
+        EthAddress EthAddress = new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1);
+        assertEquals(Network.ETH, EthAddress.getNetwork());
     }
 
 }
