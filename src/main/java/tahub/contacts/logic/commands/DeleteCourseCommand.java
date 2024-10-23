@@ -49,7 +49,7 @@ public class DeleteCourseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteCourseCommand)) {
             return false;
         }
 

@@ -62,4 +62,13 @@ public class EditCourseCommandTest {
         EditCourseCommand commandWithDifferentDescriptor = new EditCourseCommand(new CourseCode("CS2103T"), new EditCourseDescriptorBuilder().withCourseName("Software Construction").build());
         assertEquals(false, standardCommand.equals(commandWithDifferentDescriptor));
     }
+
+    @Test
+    public void toStringMethod() {
+        CourseCode courseCode = new CourseCode("CS1101S");
+        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder().withCourseName("Programming basics").build();
+        EditCourseCommand editCourseCommand = new EditCourseCommand(courseCode, descriptor);
+        String expected = EditCourseCommand.class.getCanonicalName() + "{courseCode=" + courseCode + ", editCourseDescriptor=" + descriptor + "}";
+        assertEquals(expected, editCourseCommand.toString());
+    }
 }
