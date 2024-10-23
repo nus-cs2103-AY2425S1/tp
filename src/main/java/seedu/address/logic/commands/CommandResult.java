@@ -79,4 +79,8 @@ public class CommandResult {
                 .toString();
     }
 
+    public String getPersonName() {
+        String[] parts = feedbackToUser.split(": ");
+        return parts.length > 1 ? parts[1].strip() : "";
+    }
 }

@@ -2,12 +2,14 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -20,6 +22,14 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+
+    public static final String MESSAGE_SIMILAR_PERSON = """
+            %s
+            has the same name, phone number or email as someone else in the list.
+            Double check to ensure that this is not a duplicate.""";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
+
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -51,6 +61,9 @@ class JsonSerializableAddressBook {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            if (addressBook.hasSimilarPerson(person)) {
+                logger.info(String.format(MESSAGE_SIMILAR_PERSON, person));
             }
             addressBook.addPerson(person);
         }

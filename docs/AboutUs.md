@@ -5,55 +5,51 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0969203[at]u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Zen Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zenkoh1.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Zenkoh1)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Logic
 
-### Johnny Doe
+### Linette Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linette-g.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/linette-g)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI
 
-### Jean Doe
+### Brendan Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brendanng7.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/brendanng7)]
+
+* Role: Developer
+* Responsibilities: DevOps
+
+### Ziying
+
+<img src="images/zyng233.png" width="200px">
+
+[[github](http://github.com/zyng233)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Gabriel Chang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gabrielcwt.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gabrielcwt)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing

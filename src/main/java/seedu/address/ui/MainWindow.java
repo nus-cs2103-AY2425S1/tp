@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -8,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -32,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private HistoryListPanel historyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane mainListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +114,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanel = new PersonListPanel(logic.getSortedFilteredPersonList());
+        mainListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -119,8 +123,11 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, logic::getPreviousCommandTextFromHistory,
+                logic::getNextCommandTextFromHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        historyListPanel = new HistoryListPanel();
     }
 
     /**
@@ -186,11 +193,33 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            String personName = commandResult.getPersonName();
+            personListPanel = new PersonListPanel(logic.getSortedFilteredPersonList());
+
+            if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
+                switchMainPanel(personListPanel, historyListPanel);
+            } else {
+                switchMainPanel(historyListPanel, personListPanel);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void switchMainPanel(UiPart<Region> fromPanel, UiPart<Region> toPanel) {
+        if (fromPanel != null && fromPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(fromPanel.getRoot());
+        }
+
+        if (historyListPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(historyListPanel.getRoot());
+        }
+        historyListPanel.initializeCallHistory(logic.getDisplayedCallHistory());
+        mainListPanelPlaceholder.getChildren().remove(toPanel.getRoot());
+        mainListPanelPlaceholder.getChildren().add(toPanel.getRoot());
     }
 }

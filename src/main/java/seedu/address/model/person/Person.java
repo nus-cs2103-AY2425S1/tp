@@ -2,21 +2,25 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Comparable<Person> {
 
     // Identity fields
+    private final Nric nric;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -24,17 +28,36 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ContactRecordList contactRecords = new ContactRecordList();
+    private final CallFrequency callFrequency;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  ContactRecordList contactRecords, CallFrequency callFrequency) {
+        requireAllNonNull(nric, name, phone, email, address, tags, contactRecords, callFrequency);
+        this.nric = nric;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.contactRecords.addAll(contactRecords);
+        this.callFrequency = callFrequency;
+    }
+
+    /**
+     * For creating a new person. Every field but contact record must be present and not null.
+     */
+    public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            CallFrequency callFrequency) {
+        this(nric, name, phone, email, address, tags, new ContactRecordList(ContactRecord.createCurrentRecord("")),
+                callFrequency);
+    }
+
+    public Nric getNric() {
+        return nric;
     }
 
     public Name getName() {
@@ -53,6 +76,22 @@ public class Person {
         return address;
     }
 
+    public ContactRecordList getContactRecords() {
+        return contactRecords;
+    }
+
+    public ContactRecord getLastContacted() {
+        return contactRecords.getLastContacted();
+    }
+
+    public CallFrequency getCallFrequency() {
+        return callFrequency;
+    }
+
+    public LocalDate getNextContactDate() {
+        return getLastContacted().add(callFrequency);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -62,7 +101,14 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Mark the person as contacted.
+     */
+    public void markAsContacted(ContactRecord contactRecord) {
+        contactRecords.markAsContacted(contactRecord);
+    }
+
+    /**
+     * Returns true if both persons have the same nric.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +117,30 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
+    }
+
+
+    /**
+     * Returns true if both persons are the same as defined in {@code isSamePerson(Person otherPerson)}
+     * or if their name, phone number or email are the same.
+     * This defines the weakest notion of equality between two persons.
+     *
+     * @param otherPerson The other person to compare with.
+     * @return True if the persons are similar, false otherwise.
+     */
+    public boolean isSimilarPerson(Person otherPerson) {
+        if (isSamePerson(otherPerson)) {
+            return true;
+        }
+
+        if (otherPerson == null) {
+            return false;
+        }
+
+        return otherPerson.getName().equals(getName())
+               || otherPerson.getPhone().equals(getPhone())
+               || otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -90,7 +159,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return nric.equals(otherPerson.nric)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -100,18 +170,24 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(nric, name, phone, email, address, tags, callFrequency);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("nric", nric)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("call frequency", callFrequency)
                 .toString();
     }
 
+    @Override
+    public int compareTo(Person o) {
+        return this.getNextContactDate().compareTo(o.getNextContactDate());
+    }
 }
