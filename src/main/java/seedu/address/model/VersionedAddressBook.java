@@ -96,4 +96,8 @@ public class VersionedAddressBook extends AddressBook {
     public boolean canRedo() {
         return currentStatePointer < addressBookStateList.size() - 1;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }

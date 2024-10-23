@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -57,6 +58,25 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoWithoutPreviousCommand_failure() throws CommandException {
+        CommandResult result = new UndoCommand().execute(model);
+        assertEquals(UndoCommand.MESSAGE_FAILURE, result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_undoBeyondCapacity_failure() throws CommandException {
+        // Set up the initial state of the model
+        VersionedAddressBook versionedAddressBook = (VersionedAddressBook) model.getVersionedAddressBook();
+        for (int i = 0; i < versionedAddressBook.getCapacity(); i++) {
+            Person person = new PersonBuilder().withName("Person " + i).build();
+            model.addPerson(person);
+        }
+
+        // Undo the changes one by one until the first state
+        for (int i = 0; i < versionedAddressBook.getCapacity() - 1; i++) {
+            new UndoCommand().execute(model);
+        }
+
+        // Attempt to undo beyond the capacity
         CommandResult result = new UndoCommand().execute(model);
         assertEquals(UndoCommand.MESSAGE_FAILURE, result.getFeedbackToUser());
     }

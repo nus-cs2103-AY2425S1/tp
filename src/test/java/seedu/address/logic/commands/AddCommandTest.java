@@ -26,7 +26,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
-
+    public static final String INVALID_METHOD_CALL = "This method should not be called.";
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -90,97 +90,97 @@ public class AddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void setVersionedAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public ReadOnlyAddressBook getVersionedAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void undoAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public void redoAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public boolean canUndoAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
 
         @Override
         public boolean canRedoAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(INVALID_METHOD_CALL);
         }
     }
 
