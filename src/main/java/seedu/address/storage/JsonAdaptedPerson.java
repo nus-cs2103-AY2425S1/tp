@@ -1,17 +1,25 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
+import seedu.address.model.person.AttendanceList;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
+import seedu.address.model.person.GradeList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,22 +35,34 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
+    private final String course;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final Map<String, JsonAdaptedGrade> grades;
+    private final Map<LocalDateTime, JsonAdaptedAttendance> attendances = new TreeMap<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("course") String course,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("grades") Map<String, JsonAdaptedGrade> grades,
+            @JsonProperty("attendances") Map<LocalDateTime, JsonAdaptedAttendance> attendances) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.course = course;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (grades != null) {
+            this.grades = new HashMap<>(grades);
+        } else {
+            this.grades = new HashMap<>();
+        }
+        if (attendances != null) {
+            this.attendances.putAll(attendances);
         }
     }
 
@@ -53,10 +73,16 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        course = source.getCourse().value;
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+                            .map(JsonAdaptedTag::new)
+                            .collect(Collectors.toList()));
+        grades = source.getGradeList().getMap().entrySet().stream().map(entry -> Map.entry(entry.getKey(),
+                                                                                           new JsonAdaptedGrade(
+                                                                                                   entry.getValue())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        source.getAttendanceList().getMap().forEach((key, value) ->
+                                                            attendances.put(key, new JsonAdaptedAttendance(value)));
     }
 
     /**
@@ -94,16 +120,28 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (course == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Course.isValidCourse(course)) {
+            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Course modelCourse = new Course(course);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
 
+        final Map<String, Grade> convertedGrades = new HashMap<>();
+        for (JsonAdaptedGrade grade : grades.values()) {
+            final Grade convertedGrade = grade.toModelType();
+            convertedGrades.put(convertedGrade.getTestName(), convertedGrade);
+        }
+        final GradeList modelGradeList = new GradeList(convertedGrades);
+
+        final Map<LocalDateTime, Attendance> convertedAttendances = new TreeMap<>();
+        attendances.forEach((key, value) -> convertedAttendances.put(key, value.toModelType()));
+        final AttendanceList modelAttendancelist = new AttendanceList(convertedAttendances);
+
+        return new Person(modelName, modelPhone, modelEmail, modelCourse, modelTags, modelGradeList,
+                          modelAttendancelist);
+    }
 }

@@ -41,10 +41,16 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
+                .append("; Course: ")
+                .append(person.getCourse())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        // Append the GradeList (exams and scores)
+        builder.append("; Exams: ")
+                .append(person.getGradeList());
+        // Append the AttendanceList (dates and attendance)
+        builder.append("; Attendances: ")
+                .append(person.getAttendanceList());
         return builder.toString();
     }
 
