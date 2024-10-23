@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+AddressBook *-right-> "1" UniqueAllergyList
+UniqueAllergyList -[hidden]down- UniquePersonList
+UniqueAllergyList -[hidden]down- UniquePersonList
 
-UniqueTagList -right-> "*" Allergy
+UniqueAllergyList -right-> "*" Allergy
 UniquePersonList -right-> Person
 
 Person -up-> "*" Allergy
