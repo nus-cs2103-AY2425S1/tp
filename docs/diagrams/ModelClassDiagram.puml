@@ -21,6 +21,7 @@ Class Phone
 Class Tag
 Class "{abstract}\nFee" as Fee
 Class PaidAmount
+Class OwedAmount
 
 Class I #FFFFFF
 }
@@ -45,7 +46,9 @@ Student *--> Email
 Student *--> Address
 Student *--> "*" Tag
 Student *--> PaidAmount
+Student *--> OwedAmount
 PaidAmount -up-|> Fee
+OwedAmount -up-|> Fee
 
 
 Student -[hidden]up--> I
