@@ -13,12 +13,16 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class UniqueEventList
+Class Event
 Class Person
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Description
+Class EventId
 
 Class I #FFFFFF
 }
@@ -36,12 +40,16 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueEventList
 UniquePersonList --> "~* all" Person
+UniqueEventList --> "~* all" Event
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Event *--> EventId
+Event *--> Description
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
