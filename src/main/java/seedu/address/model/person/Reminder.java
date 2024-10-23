@@ -33,7 +33,7 @@ public class Reminder {
         this.personToMeet = personToMeet;
     }
 
-    private static boolean isValidDate(String test) {
+    public static boolean isValidDate(String test) {
         try {
             LocalDate.parse(test, formatter);
             return true;
@@ -42,7 +42,7 @@ public class Reminder {
         }
     }
 
-    private static boolean isValidDescription(String test) {
+    public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
