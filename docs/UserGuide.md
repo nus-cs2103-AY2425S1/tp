@@ -69,31 +69,210 @@ The following annotated text-boxes are used throught this guide to provide usefu
 
 [Back to Table of Contents](#table-of-contents)
 
-## Quick start
+# Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` 
-   command to run the application.asd
+In this section, lets learn how to set up MediBase3 on your computer.
 
-    {: .alert .alert-secondary}
-    > A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-    > 
-    > ![Ui](images/Ui.png)
+---
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
-   open the help window.
+## Installing MediBase3
 
-    {: .alert .alert-secondary}
-   > Some example commands you can try:
-   > * `list` : Lists all contacts.
-   > * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` tothe Address Book.
-   > * `delete 3` : Deletes the 3rd contact shown in the current list.
-   > * `clear` : Deletes all contacts.
-   > * `exit` : Exits the app.
+### Step 1: Install JDK 17
 
-1. Refer to the [Features](#features) below for details of each command.
+Before running MediBase3, ensure that **Java 17** is installed on your system.
+
+### For Windows:
+
+1. Visit the [Oracle JDK 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
+2. Download the appropriate installer for your system (e.g., `Windows x64 Installer`).
+3. Run the installer and follow the setup instructions.
+4. Verify the installation by opening **Command Prompt** and typing:
+```
+   java -version
+   ```
+You should see something like:
+
+![javaVersionWindows.jpeg](images%2FjavaVersionWindows.jpeg)
+This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
+
+### For macOS:
+
+1. Install **Homebrew** if you haven’t already. Open **Terminal** and type:
+```
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+2. Install Java 17 by typing:
+```
+   brew install openjdk@17
+   ```
+3. Link the installed JDK:
+```
+   sudo ln -sfn $(brew --prefix openjdk@17)/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+   ```
+4. Verify the installation by typing:
+```
+   java -version
+   ```
+You should see something like this:
+
+![javaVersionMacOS.png](images%2FjavaVersionMacOS.png)
+This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
+
+
+### For Ubuntu/Debian:
+
+1. Open **Terminal**.
+2. Install Java 17 by typing:
+```
+   sudo apt install openjdk-17-jdk
+   ```
+3. Verify the installation by typing:
+```
+   java -version
+   ```
+   You should see something like this:
+
+![javaVersionLinux.jpg](images%2FjavaVersionLinux.jpg)
+This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
+
+---
+
+{: .alert .alert-info}
+:information_source: **Note**
+Depending on your system setup, you may need to install JavaFX separately. You can refer to the [OpenJFX installation guide](https://openjfx.io/openjfx-docs/#install-javafx) for detailed instructions.
+
+{: .alert .alert-info}
+:information_source: **Note**
+For users of other operating systems, as long as you have the following installed, you can use MediBase3:
+- Java/OpenJDK 17
+- JavaFX/OpenJFX 17
+
+{: .alert .alert-info}
+:information_source: **Note**
+For Linux users with Wayland compositors, ensure you install **OpenJFX 21** for better compatibility.
+
+
+---
+
+### Step 2: Download the MediBase3 JAR File
+
+1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.3/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this
+![githubAssets.png](images%2FgithubAssets.png)
+1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
+2. Save the file to a location of your choice (e.g., `Downloads` folder).
+
+---
+
+## Launching MediBase3
+
+1. Open **Command Prompt** (Windows) or **Terminal** (macOS).
+2. Navigate to the directory where the `.jar` file is located. For example:
+```
+cd Downloads
+```
+3. Run the application by typing:
+```
+   java -jar medibase3.jar
+   ```
+
+You should be greeted by the UI, which you will see in the next section.
+
+---
+
+## Overview of the GUI
+
+Once MediBase3 is running, you will see the main interface. Here’s an overview of the key parts:
+
+- **Command Box:** Where you can type and enter commands.
+- **Result Display:** Shows the result of the command you entered.
+- **Patient List:** Displays all the patients currently stored in the system.
+- **Appointment List:** Displays the scheduled appointments for patients.
+- **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
+- **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
+
+![GUIOverview.jpg](images%2FGUIOverview.jpg)
+
+---
+
+## Overview of CLI
+
+MediBase3 can be controlled using commands in the **Command Line Interface (CLI)**.
+
+### CLI Command Structure
+
+Each command follows this structure:
+
+![CommandPromptFormat.png](images%2FCommandPromptFormat.png)
+
+Here’s a breakdown of the parts:
+
+| **Component** | **Description**                                    |
+|---------------|----------------------------------------------------|
+| **Command**   | The action you want to perform (e.g., `add`, `edit`) |
+| **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
+| **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
+
+### Example:
+
+add n/John Doe p/98765432 e/johndoe@example.com
+- **Command:** `add`
+- **Prefix:** `n/` (name), `p/` (phone), `e/` (email)
+- **Parameter:** `John Doe`, `98765432`, `johndoe@example.com`
+
+---
+
+## A First Look at MediBase3
+
+Here’s a basic tutorial on how to start using the application:
+
+1. **View the Help Guide:**
+   - Once MediBase3 is running, you can type the following command to view the help window:
+     ```
+     help
+     ```
+2. **Add a New Patient:**
+   - To add a new patient, use the following command:
+     ```
+     add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
+     ```
+   - This will add a patient named John Doe to the system.
+
+
+3. **Edit Patient Information:**
+   - If there’s a typo or information changes, use the `edit` command:
+     ```
+     edit S1234567A p/91234567 e/johndoe@example.com
+     ```
+   - This will change the phone number and email of the patient with NRIC S1234567A
+
+
+4. **Find a Patient by NRIC:**
+   - To find a patient by NRIC, type:
+     ```
+     findNric T0123456A
+     ```
+   - This will show the patient with the NRIC `T0123456A`.
+
+
+5. **Delete a Patient:**
+   - To remove a patient who is no longer visiting the clinic/hospital, type:
+     ```
+     delete T0123456A
+     ```
+   - This deletes the patient with the NRIC `T0123456A`.
+
+
+6. **Clear All Entries:**
+   - To remove all patient and appointment data from the system, type:
+     ```
+     clear
+     ```
+
+---
+
+Now you’re ready to use MediBase3!
+For a comprehensive list of features and how to use them, [click here!](#features).
+If you have eny more common questions, [click here!](#faq).
 
 [Back to Table of Contents](#table-of-contents)
 ## Features
