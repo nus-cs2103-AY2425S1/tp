@@ -21,7 +21,8 @@ public class AssignPolicyCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignPolicyCommand.MESSAGE_USAGE));
 
         //no policy details specified
-        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_POLICY_FORMAT));
+        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_POLICY_FORMAT + "\n"
+                + AssignPolicyCommand.MESSAGE_USAGE));
 
     }
 }
