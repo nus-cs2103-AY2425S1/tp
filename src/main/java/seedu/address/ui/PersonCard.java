@@ -4,11 +4,15 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.MainApp;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RoleType;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -46,6 +50,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane roles;
 
+    private final Image studentIcon = new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
+    private final Image tutorIcon = new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
+    private final Image professorIcon = new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
+
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -76,8 +85,28 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(moduleRolePair -> moduleRolePair.moduleCode.toString()))
                 .forEach(moduleRolePair -> {
                     Label curLabel = new Label(moduleRolePair.toString());
-                    String cssClass = moduleRolePair.roleType.toString().toLowerCase();
+
+                    RoleType roleType = moduleRolePair.roleType;
+
+                    // Update CSS class
+                    String cssClass = roleType.toString().toLowerCase();
                     curLabel.getStyleClass().add(cssClass);
+
+                    if (roleType != null) {
+                        Image image =
+                            roleType == RoleType.STUDENT ? studentIcon :
+                            roleType == RoleType.TUTOR ? tutorIcon :
+                            professorIcon;
+
+                        // Scale height but preserve aspect ratio
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight(14);
+                        imageView.setPreserveRatio(true);
+
+                        curLabel.setGraphic(imageView);
+                        curLabel.setContentDisplay(javafx.scene.control.ContentDisplay.RIGHT);
+                    }
+
                     roles.getChildren().add(curLabel);
                 });
     }
