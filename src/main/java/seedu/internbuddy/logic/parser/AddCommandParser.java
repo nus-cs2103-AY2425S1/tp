@@ -10,7 +10,6 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.internbuddy.logic.commands.AddCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
