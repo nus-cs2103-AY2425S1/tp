@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
+import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.testutil.AttendanceExamples;
 
@@ -103,7 +104,8 @@ public class JsonAdaptedStudentCourseAssociationTest {
         JsonAdaptedTutorial validTutorial = new JsonAdaptedTutorial(VALID_TUTORIAL_ID, validCourse);
 
         StudentCourseAssociation sca = new StudentCourseAssociation(validPerson.toModelType(),
-                validCourse.toModelType(), validTutorial.toModelType(), null);
+                validCourse.toModelType(), validTutorial.toModelType(), new GradingSystem(),
+                VALID_ATTENDANCE.toModelType());
         JsonAdaptedStudentCourseAssociation adaptedSca = new JsonAdaptedStudentCourseAssociation(sca);
         assertEquals(sca, adaptedSca.toModelType());
     }
