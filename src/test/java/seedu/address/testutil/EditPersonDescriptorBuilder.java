@@ -38,7 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setAttendance(person.getAttendance());
+        descriptor.setParticipation(person.getParticipation());
         descriptor.setTags(person.getTags());
     }
 
@@ -71,15 +71,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Attendance} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withAttendance(String attendance) {
-        LocalDate attendanceDate = LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT);
-        descriptor.setAttendance(new Attendance(attendanceDate));
         return this;
     }
 
