@@ -23,6 +23,7 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    enableAssertions = true
 }
 
 task coverage(type: JacocoReport) {
@@ -67,6 +68,10 @@ dependencies {
 
 shadowJar {
     archiveFileName = 'sellsavvy.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'
