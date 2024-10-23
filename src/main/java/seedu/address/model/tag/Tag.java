@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}{1,15}";
 
     public final String tagName;
 
