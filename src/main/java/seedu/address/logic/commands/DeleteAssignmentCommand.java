@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -92,7 +93,10 @@ public class DeleteAssignmentCommand extends Command {
         }
 
         if (studentList.size() > 1) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT,
+                    studentList.stream()
+                            .map(s -> s.getStudentNumber().toString())
+                            .collect(Collectors.joining(", "))));
         }
 
         Student student = studentList.get(0);
