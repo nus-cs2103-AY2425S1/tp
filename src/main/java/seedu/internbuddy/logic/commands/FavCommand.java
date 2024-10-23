@@ -6,6 +6,7 @@ import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 import java.util.List;
 
 import seedu.internbuddy.commons.core.index.Index;
+import seedu.internbuddy.commons.util.ToStringBuilder;
 import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
@@ -54,7 +55,25 @@ public class FavCommand extends Command {
         return new CommandResult(String.format(MESSAGE_FAV_COMPANY_SUCCESS, Messages.format(companyToFav)));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
+        // instanceof handles nulls
+        if (!(other instanceof FavCommand)) {
+            return false;
+        }
 
+        FavCommand otherFavCommand = (FavCommand) other;
+        return index.equals(otherFavCommand.index);
+    }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", index)
+                .toString();
+    }
 }
