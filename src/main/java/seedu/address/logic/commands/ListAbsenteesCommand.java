@@ -9,7 +9,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.DateAbsentPredicate;
 
 /**
- * Finds and lists all students in TAHub who were not present on the specified date.
+ * Finds and lists all students in TAHub who were not present on the specified
+ * date.
  */
 public class ListAbsenteesCommand extends Command {
 

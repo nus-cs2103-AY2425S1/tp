@@ -23,7 +23,7 @@ public class ListAbsenteesCommandParser implements Parser<ListAbsenteesCommand> 
     public ListAbsenteesCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
-        
+
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -37,7 +37,7 @@ public class ListAbsenteesCommandParser implements Parser<ListAbsenteesCommand> 
         }
 
         LocalDateTime date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        
+
         return new ListAbsenteesCommand(new DateAbsentPredicate(date));
     }
 
