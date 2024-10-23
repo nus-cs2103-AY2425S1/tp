@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORTORDER;
@@ -53,6 +54,14 @@ public class CommandTestUtil {
     public static final String VALID_FIELD_GITHUB = "github";
     public static final String VALID_FIELD_TELEGRAM = "telegram";
 
+    public static final String VALID_FIELD_IMPORT_CSV =
+        "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
+    public static final String VALID_FIELD_EXPORT_CSV =
+        "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testExport";
+
+
+    public static final String CSV_IMPORT_DESC_VALID = " " + PREFIX_PATH + VALID_FIELD_IMPORT_CSV;
+    public static final String CSV_EXPORT_DESC_VALID = " " + PREFIX_PATH + VALID_FIELD_EXPORT_CSV;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
