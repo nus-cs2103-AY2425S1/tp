@@ -9,7 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.restaurant.*;
+import seedu.address.model.restaurant.Address;
+import seedu.address.model.restaurant.Email;
+import seedu.address.model.restaurant.Name;
+import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,7 +103,7 @@ public class ParserUtil {
      * @throws ParseException if the given {@code rating} is invalid.
      */
     public static Rating parseRating(String rating) throws ParseException {
-        if (rating.isEmpty()){
+        if (rating.isEmpty()) {
             return new Rating(null);
         }
         Integer trimmedRating = Integer.parseInt(rating.trim());

@@ -1,8 +1,11 @@
 package seedu.address.model.restaurant;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the rating of the restaurant from the user.
+ * Guarantees: immutable; is valid as declared in {@link #isValidRating(Integer)}
+ */
 public class Rating {
     public static final String MESSAGE_CONSTRAINTS = "Price should be a non-negative integer, between 0 to 10";
     public final Integer value;

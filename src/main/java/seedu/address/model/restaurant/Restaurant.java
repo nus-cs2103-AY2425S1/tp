@@ -63,7 +63,9 @@ public class Restaurant {
         return address;
     }
 
-    public Rating getRating() { return rating; }
+    public Rating getRating() {
+        return rating;
+    }
 
     public Price getPrice() {
         return price;

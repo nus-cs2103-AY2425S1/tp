@@ -6,13 +6,16 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.Rating;
+import seedu.address.model.restaurant.Restaurant;
 
+/**
+ * Provide rating for restaurants in the address book.
+ */
 public class RatingCommand extends Command {
     public static final String COMMAND_WORD = "rating";
 
@@ -49,7 +52,8 @@ public class RatingCommand extends Command {
         }
 
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
-        Restaurant editedRestaurant = new Restaurant(restaurantToEdit.getName(), restaurantToEdit.getPhone(), restaurantToEdit.getEmail(),
+        Restaurant editedRestaurant = new Restaurant(restaurantToEdit.getName(),
+                restaurantToEdit.getPhone(), restaurantToEdit.getEmail(),
                 restaurantToEdit.getAddress(), rating, restaurantToEdit.getTags());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);

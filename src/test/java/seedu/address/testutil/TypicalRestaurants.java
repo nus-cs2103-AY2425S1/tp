@@ -29,7 +29,7 @@ public class TypicalRestaurants {
             .withTags("friends").build();
     public static final Restaurant BENSON = new RestaurantBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withPhone("98765432").withRating(5)
             .withTags("owesMoney", "friends").build();
     public static final Restaurant CARL = new RestaurantBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
