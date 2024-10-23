@@ -14,6 +14,7 @@
           spacing="10" style="-fx-padding: 10; -fx-background-color: #B5D4F5; -fx-border-color: #ccc; -fx-font-family: 'Garamond';">
         <Label fx:id="nameLabel" text="Name:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
         <Label fx:id="categoryLabel" text="Category:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
+        <Label fx:id="industryStudentIdLabel" text="" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
         <Label fx:id="phoneLabel" text="Phone:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
         <Label fx:id="emailLabel" text="Email:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
         <Label fx:id="addressLabel" text="Address:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />

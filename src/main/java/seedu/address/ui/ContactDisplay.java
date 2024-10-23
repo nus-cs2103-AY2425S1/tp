@@ -9,6 +9,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.company.Company;
+import seedu.address.model.person.student.Student;
 
 /**
  * A UI component that displays detailed information of a selected contact.
@@ -42,7 +44,7 @@ public class ContactDisplay extends UiPart<Region> {
             + "\n" + "Format: clear\n---\n"
             + "Exiting the program : exit\n"
             + "Exits the program.\n" + "\n" + "Format: exit\n";
-    private static final String FXML = "ContactDisplay.fxml";
+    public static final String FXML = "ContactDisplay.fxml";
     @FXML
     private VBox cardPane;
     @FXML
@@ -55,6 +57,8 @@ public class ContactDisplay extends UiPart<Region> {
     private Label categoryLabel;
     @FXML
     private Label addressLabel;
+    @FXML
+    private Label industryStudentIdLabel;
     @FXML
     private Label tagLabel;
     @FXML
@@ -90,6 +94,50 @@ public class ContactDisplay extends UiPart<Region> {
         addressLabel.setText("Address: " + person.getAddress().value);
         tags.getChildren().clear();
         person.getTags().stream()
+        .sorted(Comparator.comparing(tag -> tag.tagName))
+        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person instanceof Company) {
+            Company company = (Company) person;
+            industryStudentIdLabel.setText("Industry: " + company.getIndustry().value);
+        }
+        if (person instanceof Student) {
+            Student student = (Student) person;
+            industryStudentIdLabel.setText("Student ID: " + student.getStudentID());
+        }
+    }
+
+    /**
+     * Updates the contact display with the details of the specified person.
+     *
+     * @param company The company whose details are to be displayed.
+     */
+    public void updateContactDetails(Company company) {
+        nameLabel.setText("Name: " + company.getName().fullName);
+        categoryLabel.setText("Category: " + company.getCategoryDisplayName());
+        industryStudentIdLabel.setText("Industry: " + company.getIndustry().value);
+        phoneLabel.setText("Phone: " + company.getPhone().value);
+        emailLabel.setText("Email: " + company.getEmail().value);
+        addressLabel.setText("Address: " + company.getAddress().value);
+        tags.getChildren().clear();
+        company.getTags().stream()
+        .sorted(Comparator.comparing(tag -> tag.tagName))
+        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Updates the contact display with the details of the specified person.
+     *
+     * @param student The person whose details are to be displayed.
+     */
+    public void updateContactDetails(Student student) {
+        nameLabel.setText("Name: " + student.getName().fullName);
+        categoryLabel.setText("Category: " + student.getCategoryDisplayName());
+        industryStudentIdLabel.setText("Student ID: " + student.getStudentID());
+        phoneLabel.setText("Phone: " + student.getPhone().value);
+        emailLabel.setText("Email: " + student.getEmail().value);
+        addressLabel.setText("Address: " + student.getAddress().value);
+        tags.getChildren().clear();
+        student.getTags().stream()
         .sorted(Comparator.comparing(tag -> tag.tagName))
         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
