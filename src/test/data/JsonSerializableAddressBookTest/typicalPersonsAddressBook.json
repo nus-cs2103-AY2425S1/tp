@@ -47,7 +47,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "attendance": "0"
+    "attendance": "10"
   }, {
     "name" : "George Best",
     "role" : "parent",
