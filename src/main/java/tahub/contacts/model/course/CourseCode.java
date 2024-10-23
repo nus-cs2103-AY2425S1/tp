@@ -2,8 +2,11 @@ package tahub.contacts.model.course;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.AppUtil.checkArgument;
-import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a Course's code in the unique course list of the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidCourseCode(String)}
+ */
 public class CourseCode {
     public static final String MESSAGE_CONSTRAINTS =
             "Course code should start with one or more uppercase alphabets, "
@@ -17,7 +20,7 @@ public class CourseCode {
     /**
      * Constructs a {@code CourseCode}.
      *
-     * @param courseCode A valid course name.
+     * @param courseCode A valid course code.
      */
     public CourseCode(String courseCode) {
         requireNonNull(courseCode);
@@ -26,7 +29,7 @@ public class CourseCode {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid code.
      */
     public static boolean isValidCourseCode(String test) {
         return test.matches(VALIDATION_REGEX);

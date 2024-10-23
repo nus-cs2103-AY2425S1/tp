@@ -1,5 +1,8 @@
 package tahub.contacts.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
@@ -8,9 +11,9 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.UniqueCourseList;
 
-import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
-
+/**
+ * Deletes a course identified using it's course code in the unique course list of address book.
+ */
 public class DeleteCourseCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-course";
@@ -24,6 +27,11 @@ public class DeleteCourseCommand extends Command {
 
     private final CourseCode courseCode;
     
+    /**
+     * Creates a DeleteCourseCommand to delete the specified {@code Course}
+     * 
+     * @param courseCode of the course to be deleted
+     */
     public DeleteCourseCommand(CourseCode courseCode) {
         this.courseCode = courseCode;
     }

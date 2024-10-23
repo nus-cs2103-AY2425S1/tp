@@ -30,7 +30,7 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing course in the unique course list of the address book.
  */
 public class EditCourseCommand extends Command {
 
@@ -50,7 +50,11 @@ public class EditCourseCommand extends Command {
 
     private final CourseCode courseCode;
     private final EditCourseDescriptor editCourseDescriptor;
-    
+
+    /**
+     * @param courseCode of the course in the filtered course list to edit
+     * @param editCourseDescriptor details to edit the course with
+     */
     public EditCourseCommand(CourseCode courseCode, EditCourseDescriptor editCourseDescriptor) {
         requireNonNull(courseCode);
         requireNonNull(editCourseDescriptor);

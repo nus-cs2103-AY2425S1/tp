@@ -11,13 +11,13 @@ import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteCourseCommand object
  */
 public class DeleteCourseCommandParser implements Parser<DeleteCourseCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteCourseCommand
+     * and returns a DeleteCourseCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCourseCommand parse(String args) throws ParseException {

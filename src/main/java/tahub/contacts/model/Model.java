@@ -87,6 +87,12 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     void addCourse(Course course);
+
+    /**
+     * Replaces the given course {@code target} with {@code editedCourse}.
+     * @param target the course to be replaced
+     * @param editedCourse the course to replace the target
+     */
     void setCourse(Course target, Course editedCourse);
     void deleteCourse(Course course);
     boolean hasCourse(Course course);

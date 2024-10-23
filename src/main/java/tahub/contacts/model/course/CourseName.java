@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Course's name in the unique course list of the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidCourseName(String)}
  */
 public class CourseName {
