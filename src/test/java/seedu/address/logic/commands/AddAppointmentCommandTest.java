@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.AddAppointmentCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON_P;
 
@@ -58,6 +59,14 @@ public class AddAppointmentCommandTest {
 
         assertThrows(CommandException.class,
                 AddAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT, () -> addAppointmentCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_getPersonIdDoesNotExists_returnsCorrectMessage() {
+        AppointmentDescriptor validAppointmentDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
+        Appointment validAppointment = new AppointmentBuilder().build();
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(validAppointmentDescriptor, 1);
+        assertEquals(addAppointmentCommand.getPersonIdDoesNotExistMessage(), MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
