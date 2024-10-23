@@ -141,6 +141,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the edulog.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+### Marking a student's attendance: `mark'
+
+Denotes an existing student as present. The student may either be identified by index number
+in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
+
+Format: `mark <INDEX - must be a positive integer>` OR `mark <STUDENT NAME>`
+
+Examples:
+* `mark 3`
+* `mark Alex Yeoh`
+
 ### Unmarking a student's attendance: `unmark'
 
 Denotes an existing student as absent. The student may either be identified by index number
