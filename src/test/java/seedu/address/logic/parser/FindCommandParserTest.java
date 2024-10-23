@@ -51,8 +51,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_validLevelArgs_returnsFindCommand() {
         FindCommand expectedFindCommand =
-                new FindCommand(new LevelContainsKeywordsPredicate(Arrays.asList("S1")));
-        assertParseSuccess(parser, " l/S1", expectedFindCommand);
+                new FindCommand(new LevelContainsKeywordsPredicate(Arrays.asList("S1 NA")));
+        assertParseSuccess(parser, " l/S1 NA", expectedFindCommand);
     }
 
     @Test

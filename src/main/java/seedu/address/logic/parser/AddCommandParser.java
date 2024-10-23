@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -53,13 +54,19 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Note note = new Note("");
-        Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
         TaskList taskList = new TaskList();
-        Level level = null;
+
+        Level level = new Level("NONE NONE");
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
-        } else {
-            level = new Level("NONE");
+        }
+
+        Set<Subject> subjectList = new HashSet<>();
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            if (argMultimap.getValue(PREFIX_LEVEL).isEmpty()) {
+                throw new ParseException(Subject.MESSAGE_LEVEL_NEEDED);
+            }
+            subjectList = ParserUtil.parseSubjectsByLevel(level, argMultimap.getAllValues(PREFIX_SUBJECT));
         }
         Set<LessonTime> lessonTimes = ParserUtil.parseLessonTimes(argMultimap.getAllValues(PREFIX_LESSON_TIME));
 

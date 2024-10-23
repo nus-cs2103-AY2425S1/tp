@@ -74,6 +74,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             updatePersonDescriptor.setLevel(ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get()));
         }
+
         parseSubjectsForUpdate(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(updatePersonDescriptor::setSubjects);
         parseLessonTimesForUpdate(argMultimap.getAllValues(PREFIX_LESSON_TIME))
                 .ifPresent(updatePersonDescriptor::setLessonTimes);

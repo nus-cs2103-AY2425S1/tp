@@ -54,7 +54,7 @@ public class NoteCommand extends Command {
         Person personToEdit = null;
 
         for (Person person : allStudents) {
-            if (person.getName().toString().equals(name.toString())) {
+            if (person.getName().equals(name)) {
                 personToEdit = person;
             }
         }

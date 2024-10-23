@@ -11,39 +11,78 @@ import java.util.Arrays;
  * Guarantees: immutable; name is valid as declared in {@link #isValidLevelName(String)}
  */
 public class Level {
-    enum Levels {
+
+    enum Year {
         NONE,
-        K1, K2,
-        P1, P2, P3, P4, P5, P6,
-        S1, S2, S3, S4, S5,
-        JC1, JC2,
-
-
+        S1,
+        S2,
+        S3,
+        S4,
+        S5,
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "Level names should be in list: "
-            + Arrays.toString(Levels.values());
+    enum Track {
+        NONE,
+        Express,
+        NA,
+        NT,
+        IP,
+    }
+
+
+    public static final String MESSAGE_CONSTRAINTS = "Level must be in the format 'Year Track' "
+            + "where Year is one of: " + Arrays.toString(Year.values())
+            + " and Track is one of: " + Arrays.toString(Track.values())
+            + " with the exception of S5 which is only allowed to have the Track NA";
 
     public final String levelName;
+
 
     /**
      * Constructs a {@code Level}.
      *
-     * @param levelName A valid level name.
+     * @param levelName A valid Level name.
+     *
      */
     public Level(String levelName) {
         requireNonNull(levelName);
         checkArgument(isValidLevelName(levelName), MESSAGE_CONSTRAINTS);
+
         this.levelName = levelName;
+
     }
 
     /**
      * Returns true if a given string is a valid level name.
      */
-    public static boolean isValidLevelName(String level) {
-        requireNonNull(level);
-        return inEnum(level, Levels.class);
+    public static boolean isValidLevelName(String levelName) {
+        String[] parts = levelName.split(" ");
+
+        if (parts.length != 2) {
+            return false;
+        }
+
+        String year = parts[0];
+        String track = parts [1];
+
+        requireNonNull(year);
+        requireNonNull(track);
+
+        if (year.equals("S5")) {
+            return track.equals("NA");
+        }
+
+        return isValidYear(year) && isValidTrack(track);
     }
+
+    private static boolean isValidYear(String year) {
+        return inEnum(year, Year.class);
+    }
+
+    private static boolean isValidTrack(String track) {
+        return inEnum(track, Track.class);
+    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -52,11 +91,10 @@ public class Level {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Level)) {
+        if (!(other instanceof Level otherLevel)) {
             return false;
         }
 
-        Level otherLevel = (Level) other;
         return levelName.equals(otherLevel.levelName);
     }
 

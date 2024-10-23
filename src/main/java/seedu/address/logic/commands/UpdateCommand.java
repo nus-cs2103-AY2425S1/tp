@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
@@ -78,8 +79,7 @@ public class UpdateCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (name.toString().isEmpty()) {
+        if (name.fullName.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
         }
 
@@ -112,8 +112,16 @@ public class UpdateCommand extends Command {
                 .orElse(personToUpdate.getEmergencyContact());
         Address updatedAddress = updatePersonDescriptor.getAddress().orElse(personToUpdate.getAddress());
         Note updatedNote = updatePersonDescriptor.getNote().orElse(personToUpdate.getNote());
-        Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
         Level updatedLevel = updatePersonDescriptor.getLevel().orElse(personToUpdate.getLevel());
+        if (updatedLevel != null && updatePersonDescriptor.getSubjects().isPresent()) {
+            checkArgument(
+                    Subject.isValidSubjectsByLevel(updatedLevel,
+                            updatePersonDescriptor
+                                    .getSubjects()
+                                    .get()),
+                    Subject.MESSAGE_LEVEL_NEEDED);
+        }
+        Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
         TaskList updatedTaskList = updatePersonDescriptor.getTaskList().orElse(personToUpdate.getTaskList());
         Set<LessonTime> updatedLessonTimes = updatePersonDescriptor.getLessonTimes()
                 .orElse(personToUpdate.getLessonTimes());

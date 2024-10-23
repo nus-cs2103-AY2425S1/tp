@@ -21,6 +21,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
     public NoteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+
         String name = argMultimap.getValue(PREFIX_NAME).orElse("");
         String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
 
