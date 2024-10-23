@@ -80,7 +80,7 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, " p/ " + ALICE.getPhone().value, expectedFilterCommand);
 
         //parse with preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE+ " p/ " + ALICE.getPhone().value, expectedFilterCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " p/ " + ALICE.getPhone().value, expectedFilterCommand);
         //tag only
         expectedFilterCommand = new FilterCommand(highTagOnlyPredicate);
         assertParseSuccess(parser, " t/ High Risk", expectedFilterCommand);
