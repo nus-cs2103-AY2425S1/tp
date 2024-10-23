@@ -4,6 +4,10 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.property.AddCommand;
+import seedu.address.logic.commands.property.DeleteCommand;
+import seedu.address.logic.commands.property.EditCommand;
+import seedu.address.logic.commands.property.FindCommand;
 import seedu.address.logic.commands.property.ViewCommand;
 import seedu.address.logic.parser.CommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,6 +28,18 @@ public class PropertyCommandParser extends CommandParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
+
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
