@@ -42,6 +42,6 @@ class JsonAdaptedExam {
         } else if (!Exam.isValidExamScore(examScore)) {
             throw new IllegalValueException(Exam.SCORE_MESSAGE_CONSTRAINTS);
         }
-        return new Exam(examName);
+        return new Exam(examName, examScore);
     }
 }

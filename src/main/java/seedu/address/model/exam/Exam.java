@@ -63,6 +63,14 @@ public class Exam {
         return examScore.matches(SCORE_VALIDATION_REGEX);
     }
 
+    public String getExamName() {
+        return examName;
+    }
+
+    public String getExamScore() {
+        return examScore;
+    }
+
     @Override
     public String toString() {
         return examName;
