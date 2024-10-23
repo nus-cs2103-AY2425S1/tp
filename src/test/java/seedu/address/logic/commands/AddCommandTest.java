@@ -85,7 +85,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing except addCommandToLog
+     * A default model stub that have all of the methods failing
      */
     private class ModelStub implements Model {
         @Override
@@ -165,7 +165,7 @@ public class AddCommandTest {
 
         @Override
         public void addCommandToLog(Command command) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -208,6 +208,11 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void addCommandToLog(Command command) {
+
         }
 
         @Override
