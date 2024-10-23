@@ -20,18 +20,17 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing entity in the address book.
+ * Edits the details of an existing entity in PawPatrol.
  */
 public abstract class EditCommand<T> extends Command {
-
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the owner or pet identified "
-            + "by the index number used in the displayed owner or pet list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "To edit owners: edit owner INDEX (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
-            + "To edit pets: edit pet INDEX (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: edit owner 1 n/bobby, edit pet 1 n/tom";
+        + "by the index number used in the displayed owner or pet list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "To edit owners: edit owner INDEX (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
+        + "To edit pets: edit pet INDEX (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
+        + "Example: edit o1 n/bobby, edit p1 n/tom";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
@@ -67,8 +66,8 @@ public abstract class EditCommand<T> extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .toString();
+            .add("index", index)
+            .toString();
     }
 
     /**
@@ -165,21 +164,21 @@ public abstract class EditCommand<T> extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                && Objects.equals(email, otherEditPersonDescriptor.email)
+                && Objects.equals(address, otherEditPersonDescriptor.address)
+                && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("tags", tags)
+                .toString();
         }
     }
 }

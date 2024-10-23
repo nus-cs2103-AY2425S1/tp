@@ -12,10 +12,10 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPawPatrol;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access PawPatrol data stored as a json file on the hard disk.
  */
 public class JsonPawPatrolStorage implements PawPatrolStorage {
 
@@ -32,7 +32,7 @@ public class JsonPawPatrolStorage implements PawPatrolStorage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readPawPatrol() throws DataLoadingException {
+    public Optional<ReadOnlyPawPatrol> readPawPatrol() throws DataLoadingException {
         return readPawPatrol(filePath);
     }
 
@@ -42,17 +42,17 @@ public class JsonPawPatrolStorage implements PawPatrolStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyAddressBook> readPawPatrol(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyPawPatrol> readPawPatrol(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-            filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializablePawPatrol> jsonPawPatrol = JsonUtil.readJsonFile(
+            filePath, JsonSerializablePawPatrol.class);
+        if (!jsonPawPatrol.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonPawPatrol.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
@@ -60,21 +60,21 @@ public class JsonPawPatrolStorage implements PawPatrolStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void savePawPatrol(ReadOnlyPawPatrol pawPatrol) throws IOException {
+        savePawPatrol(pawPatrol, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #savePawPatrol(ReadOnlyPawPatrol)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void savePawPatrol(ReadOnlyPawPatrol pawPatrol, Path filePath) throws IOException {
+        requireNonNull(pawPatrol);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializablePawPatrol(pawPatrol), filePath);
     }
 
 }

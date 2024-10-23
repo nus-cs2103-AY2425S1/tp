@@ -5,30 +5,38 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.link.Linkable;
 
 /**
- * Represents an Owner in the address book.
+ * Represents an Owner in PawPatrol.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Owner {
+public class Owner implements Linkable {
+    private static final String ID_PREFIX = "o";
 
     // Identity fields
+    private final IdentificationCardNumber identificationNumber;
+
+    // Data fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
 
     /**
      * Every field must be present and not null.
      */
-    public Owner(Name name, Phone phone, Email email, Address address) {
-        requireAllNonNull(name, phone, email, address);
+    public Owner(IdentificationCardNumber identificationNumber, Name name, Phone phone, Email email, Address address) {
+        requireAllNonNull(identificationNumber, name, phone, email, address);
+        this.identificationNumber = identificationNumber;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+    }
+
+    public IdentificationCardNumber getIdentificationNumber() {
+        return identificationNumber;
     }
 
     public Name getName() {
@@ -47,7 +55,6 @@ public class Owner {
         return address;
     }
 
-
     /**
      * Returns true if both owners have the same ID.
      * This defines a weaker notion of equality between two owner.
@@ -58,7 +65,7 @@ public class Owner {
         }
 
         return otherOwner != null
-            && otherOwner.getName().equals(getName());
+            && otherOwner.getIdentificationNumber().equals(getIdentificationNumber());
     }
 
     /**
@@ -77,7 +84,8 @@ public class Owner {
         }
 
         Owner otherOwner = (Owner) other;
-        return name.equals(otherOwner.name)
+        return identificationNumber.equals(otherOwner.identificationNumber)
+            && name.equals(otherOwner.name)
             && phone.equals(otherOwner.phone)
             && email.equals(otherOwner.email)
             && address.equals(otherOwner.address);
@@ -86,17 +94,22 @@ public class Owner {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address);
+        return Objects.hash(identificationNumber, name, phone, email, address);
+    }
+
+    @Override
+    public String getUniqueID() {
+        return identificationNumber.value;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+            .add("identificationNumber", identificationNumber)
             .add("name", name)
             .add("phone", phone)
             .add("email", email)
             .add("address", address)
             .toString();
     }
-
 }

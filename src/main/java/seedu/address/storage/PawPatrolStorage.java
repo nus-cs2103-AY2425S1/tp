@@ -5,10 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link PawPatrol}.
  */
 public interface PawPatrolStorage {
 
@@ -18,28 +19,28 @@ public interface PawPatrolStorage {
     Path getPawPatrolFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns PawPatrol data as a {@link ReadOnlyPawPatrol}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyAddressBook> readPawPatrol() throws DataLoadingException;
+    Optional<ReadOnlyPawPatrol> readPawPatrol() throws DataLoadingException;
 
     /**
      * @see #getPawPatrolFilePath()
      */
-    Optional<ReadOnlyAddressBook> readPawPatrol(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyPawPatrol> readPawPatrol(Path filePath) throws DataLoadingException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Saves the given {@link ReadOnlyPawPatrol} to the storage.
+     * @param pawPatrol cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void savePawPatrol(ReadOnlyPawPatrol pawPatrol) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #savePawPatrol(ReadOnlyPawPatrol)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void savePawPatrol(ReadOnlyPawPatrol pawPatrol, Path filePath) throws IOException;
 
 }

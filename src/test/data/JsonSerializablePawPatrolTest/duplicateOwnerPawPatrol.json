@@ -1,0 +1,18 @@
+{
+  "persons": [],
+  "owners": [{
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "identificationNumber": "S1234567D"
+  },
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "pauline@example.com",
+      "address": "4th street",
+      "identificationNumber": "S1234567D"
+    }],
+  "pets": []
+}

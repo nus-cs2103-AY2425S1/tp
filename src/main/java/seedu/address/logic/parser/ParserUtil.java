@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import seedu.address.commons.core.Pair;
 import seedu.address.commons.core.index.Index;
@@ -27,9 +26,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
-    // Pattern to match strings of the form "p" followed by an integer with up to 3 digits.
-    private static final Pattern PX_PATTERN = Pattern.compile("^p\\d{1,3}$");
 
     /**
      * Checks if a given string is of the form "px", where "x" is an integer of up to 3 digits.
@@ -55,7 +51,7 @@ public class ParserUtil {
         if (!isValidInput(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        Pair res = new Pair(Index.fromOneBased(Integer.parseInt(Character.toString(trimmedIndex.charAt(1)))),
+        Pair res = new Pair(Index.fromOneBased(Integer.parseInt(trimmedIndex.substring(1))),
                 Character.toString(trimmedIndex.charAt(0)));
         return res;
         //return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -90,6 +86,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static seedu.address.model.owner.Name parseOwnerName(String ownerName) throws ParseException {
+        requireNonNull(ownerName);
+        String trimmedName = ownerName.trim();
+        if (!seedu.address.model.owner.Name.isValidName(trimmedName)) {
+            throw new ParseException(seedu.address.model.owner.Name.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.owner.Name(trimmedName);
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name} for a pet.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,6 +131,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String phone} into a {@code Phone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static seedu.address.model.owner.Phone parseOwnerPhone(String ownerPhone) throws ParseException {
+        requireNonNull(ownerPhone);
+        String trimmedPhone = ownerPhone.trim();
+        if (!seedu.address.model.owner.Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(seedu.address.model.owner.Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.owner.Phone(trimmedPhone);
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -135,6 +161,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static seedu.address.model.owner.Address parseOwnerAddress(String ownerAddress) throws ParseException {
+        requireNonNull(ownerAddress);
+        String trimmedAddress = ownerAddress.trim();
+        if (!seedu.address.model.owner.Address.isValidAddress(trimmedAddress)) {
+            throw new ParseException(seedu.address.model.owner.Address.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.owner.Address(trimmedAddress);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -147,6 +188,37 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static seedu.address.model.owner.Email parseOwnerEmail(String ownerEmail) throws ParseException {
+        requireNonNull(ownerEmail);
+        String trimmedEmail = ownerEmail.trim();
+        if (!seedu.address.model.owner.Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(seedu.address.model.owner.Email.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.owner.Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String icNumber} into an {@code IdentificationCardNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code icNumber} is invalid.
+     */
+    public static seedu.address.model.owner.IdentificationCardNumber parseOwnerIcNumber(String icNumber)
+            throws ParseException {
+        requireNonNull(icNumber);
+        String trimmedIcNumber = icNumber.trim();
+        if (!seedu.address.model.owner.IdentificationCardNumber.isValidIcNumber(trimmedIcNumber)) {
+            throw new ParseException(seedu.address.model.owner.IdentificationCardNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.owner.IdentificationCardNumber(trimmedIcNumber);
     }
 
     /**
@@ -235,4 +307,6 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+
 }
