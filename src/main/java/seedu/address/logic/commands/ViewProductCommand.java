@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.product.Product;
-
-import java.util.function.Predicate;
 
 /**
  * Finds and lists all suppliers in address book whose name contains any of the argument keywords.
