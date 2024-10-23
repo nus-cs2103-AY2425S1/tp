@@ -8,11 +8,13 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null (except the appointment),
+ * field values are validated, immutable.
  */
 public class Person {
 
@@ -23,18 +25,41 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Priority priority;
+    private final Remark remark;
+    private final DateOfBirth dateOfBirth;
+    private final Income income;
+    private final Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
+                  DateOfBirth dateOfBirth, Income income, Set<Tag> tags) {
+        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, tags);
+    }
+
+    /**
+     * Every field must be present and not null, except the appointment.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
+                  DateOfBirth dateOfBirth, Income income, Appointment appointment, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.priority = priority;
+        this.remark = remark;
+        this.dateOfBirth = dateOfBirth;
+        this.income = income;
+        this.appointment = appointment;
         this.tags.addAll(tags);
+    }
+
+    public Person withAppointment(Appointment appointment) {
+        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
     }
 
     public Name getName() {
@@ -51,6 +76,26 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Income getIncome() {
+        return income;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
     /**
@@ -94,13 +139,18 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && priority.equals(otherPerson.priority)
+                && remark.equals(otherPerson.remark)
+                && dateOfBirth.equals(otherPerson.dateOfBirth)
+                && income.equals(otherPerson.income)
+                && Objects.equals(appointment, otherPerson.appointment)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
     }
 
     @Override
@@ -110,8 +160,12 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("priority", priority)
+                .add("remark", remark)
+                .add("dateOfBirth", dateOfBirth)
+                .add("income", income)
+                .add("appointment", appointment)
                 .add("tags", tags)
                 .toString();
     }
-
 }

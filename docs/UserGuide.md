@@ -1,12 +1,15 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# SocialBook User Guide
 
-* Table of Contents
-{:toc}
+AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,9 +44,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -57,20 +60,24 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `statistics`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page or display how to use a specified command.
 
-![help message](images/helpMessage.png)
+![help message](images/updatedHelpMessage.png)
 
-Format: `help`
+Format: `help [COMMAND]`
 
+Examples:
+* `help` 
+* `help add`
+* `help edit`
 
 ### Adding a person: `add`
 
@@ -78,9 +85,10 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+<box type="tip" seamless>
+
+**Tip:** A person can have any number of tags (including 0)
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -88,7 +96,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
 
 Format: `list`
 
@@ -109,43 +117,77 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Finding persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons that match the specified filters.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The search is case-insensitive. e.g `n/alex` will match `Alex`.
+* For names, only those that start with the given filter will be matched e.g. find n/A returns all persons whose first name starts with A only. 
+* For addresses, those that contain the given filter are returned e.g. find a/clementi returns all persons who stay at clementi only.
+* For priorities, exact priorities must be specified to filter accurately e.g. find pri/high returns all persons with high priority only.
+* At least one filter must be specified.
+* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. find n/alex n/david n/bobby
+* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. find n/A n/B pri/HIGH returns all persons whose name starts with either A or B but have high priority. 
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex n/david pri/high` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/newFindAlexDavidResult.png)
+
+### Deleting people : `delete`
+
+Deletes the specified people from the address book.
+
+Format: `delete INDEXES`
+
+* Deletes the people at the specified `INDEXES`.
+* The indexes refer to the index numbers shown in the displayed person list.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* The indexes can be in **any order** so long as all the indexes fall within the size of the current list.
+* Duplicated valid index inputs would be treated as unique index inputs.
+
+Examples:
+* `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
+
+### Getting that parameter of all these people: `get` 
+Gets the specified parameter of the filtered people from SocialBook.
+
+Format: `get PARAMETERS`
+
+* Gets the specified parameters for each person in the filtered list.
+* The only valid parameters are: n/, p/, e/, a/.
+* All inputted parameters must be valid for the details to be displayed. 
+* The details will be displayed in the order of the inputted parameters.
+* Executing the same parameter multiple times in the same command will still only return one set of that detail.
+
+Examples:
+* `list` followed by `get p/ e/` gets the phone numbers followed by the emails of the people in SocialBook.
+* `list` followed by `get p/ p/` gets only one set of the phone numbers of the people in SocialBook.
+* `find p/HIGH` followed by `get n/ a/` gets the names followed by the addresses of the high priority people.
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Displaying overall statistics : `statistics`
+
+Displays the statistics of filtered list.
+
+Statistics include: 
+* Nb of People
+* Nb of HIGH Priority People
+* Nb of MEDIUM Priority People
+* Nb of LOW Priority People
+* Nb of People Income <= 800
+* Nb of Appointments Within a Week From Current Date
+
+Format: `statistics`
 
 ### Exiting the program : `exit`
 
@@ -161,10 +203,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -188,12 +232,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+Action           | Format, Examples
+-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**        | `clear`
+**Delete**       | `delete INDEXES`<br> e.g., `delete 2,3`
+**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Get**          | `get PARAMETERS`<br> e.g.,`get e/ p/`
+**List**         | `list`
+**Statistics**   | `statistics`
+**Help**         | `help`

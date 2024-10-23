@@ -85,6 +85,18 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different priority -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPriority("HIGH").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different remark -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRemark("DIFFERENT REMARK").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different age -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDateOfBirth("28 May 1978").build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -92,8 +104,17 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Person.class.getCanonicalName() + "{name="
+                + ALICE.getName() + ", phone="
+                + ALICE.getPhone() + ", email="
+                + ALICE.getEmail() + ", address="
+                + ALICE.getAddress() + ", priority="
+                + ALICE.getPriority() + ", remark="
+                + ALICE.getRemark() + ", dateOfBirth="
+                + ALICE.getDateOfBirth() + ", income="
+                + ALICE.getIncome() + ", appointment="
+                + ALICE.getAppointment() + ", tags="
+                + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
