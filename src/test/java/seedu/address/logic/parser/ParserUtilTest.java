@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,10 +21,13 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -272,5 +276,50 @@ public class ParserUtilTest {
     public void parseGrade_invalidGrade_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseGrade("invalid"));
         assertThrows(ParseException.class, () -> ParserUtil.parseGrade("101")); // greater than 100
+    }
+
+    @Test
+    public void parseTutorialGroup_validValue_success() throws Exception {
+        TutorialGroup expectedGroup = new TutorialGroup("G01");
+        assertEquals(expectedGroup, ParserUtil.parseTutorialGroup("G01"));
+    }
+
+    @Test
+    public void parseTutorialGroup_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorialGroup("Invalid Group"));
+    }
+
+    @Test
+    public void parseStudentNumber_validValue_success() throws Exception {
+        StudentNumber expectedNumber = new StudentNumber("S1234567A");
+        assertEquals(expectedNumber, ParserUtil.parseStudentNumber("S1234567A"));
+    }
+
+    @Test
+    public void parseStudentNumber_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentNumber("Invalid Number"));
+    }
+
+    @Test
+    public void parseDate_validValue_success() throws Exception {
+        LocalDate expectedDate = LocalDate.of(2024, 12, 01);
+        assertEquals(expectedDate, ParserUtil.parseDate("2024-12-01"));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate("2024-13-01"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate("invalid-date"));
+    }
+
+    @Test
+    public void parseAttendance_validValue_success() throws Exception {
+        Attendance expectedAttendance = new Attendance("p");
+        assertEquals(expectedAttendance, ParserUtil.parseAttendance("p"));
+    }
+
+    @Test
+    public void parseAttendance_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("invalid-status"));
     }
 }
