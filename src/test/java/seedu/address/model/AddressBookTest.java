@@ -6,8 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConcertContacts.ALICE_COACHELLA;
+import static seedu.address.testutil.TypicalConcertContacts.BENSON_COACHELLA;
+import static seedu.address.testutil.TypicalConcerts.COACHELLA;
+import static seedu.address.testutil.TypicalConcerts.GLASTONBURY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,8 +23,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.ConcertBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -46,8 +54,8 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(
+                VALID_TAG_HUSBAND).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -73,20 +81,78 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(
+                VALID_TAG_HUSBAND).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
     @Test
+    public void hasConcert_concertInAddressBook_returnsTrue() {
+        addressBook.addConcert(COACHELLA);
+        assertTrue(addressBook.hasConcert(COACHELLA));
+    }
+
+    @Test
+    public void hasConcert_concertWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addConcert(COACHELLA);
+        Concert editedConcert = new ConcertBuilder(COACHELLA).build();
+        assertTrue(addressBook.hasConcert(editedConcert));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(
+                0));
+    }
+
+    @Test
+    public void getConcertList_modifyList_throwsUnsuppoetedOperationExeception() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getConcertList().remove(
+                0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook
+                .getPersonList() + ", concerts=" + addressBook.getConcertList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equals() {
+        AddressBook other = new AddressBook();
+        addressBook.addConcert(COACHELLA);
+        addressBook.addConcert(GLASTONBURY);
+        other.addConcert(COACHELLA);
+
+        // dofferent concerts return false
+        assertFalse(addressBook.equals(other));
+        other.addConcert(GLASTONBURY);
+
+        // same concert returns true
+        assertTrue(addressBook.equals(other));
+
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(BENSON);
+        other.addPerson(ALICE);
+
+        // different persons return false
+        assertFalse(addressBook.equals(other));
+        other.addPerson(BENSON);
+
+        // same persons return true
+        assertTrue(addressBook.equals(other));
+
+        addressBook.addConcertContact(ALICE_COACHELLA);
+        addressBook.addConcertContact(BENSON_COACHELLA);
+        other.addConcertContact(ALICE_COACHELLA);
+
+        // different concertContacts return false
+        assertFalse(addressBook.equals(other));
+        other.addConcertContact(BENSON_COACHELLA);
+
+        // same people same conert smae concertContacts returns true
+        assertEquals(addressBook, other);
     }
 
     /**
@@ -94,6 +160,8 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Concert> concerts = FXCollections.observableArrayList();
+        private final ObservableList<ConcertContact> concertContacts = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -102,6 +170,16 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Concert> getConcertList() {
+            return concerts;
+        }
+
+        @Override
+        public ObservableList<ConcertContact> getConcertContactList() {
+            return concertContacts;
         }
     }
 

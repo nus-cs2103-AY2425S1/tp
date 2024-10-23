@@ -3,57 +3,58 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
-
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg). 
+We are working on an address book for Concert Managers to manage their contacts.
 
 ## Project team
 
-### John Doe
+### Karthick KC
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/karthickkc.png" width="200px" alt="KKC profile pic">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/karthickkc)]
+[[portfolio](team/karthickkc.md)]
 
-* Role: Project Advisor
+- Role: Project Advisor
+- Responsibilities: Checks on the different PR Requests and helps in reviewing
 
-### Jane Doe
+### Ng Hong Jing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hj235.png" width="200px" alt="Hong Jing's profile photo">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hj235)]
+[[portfolio](team/hongjing.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Team Lead
+- Responsibilities: Work on UI aspect
 
-### Johnny Doe
+### Wesley Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wes-w-z-h.png" width="200px" alt="Wesley's profile photo">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/wes-w-z-h)] [[portfolio](team/wesley.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Add new commands to match features 
 
-### Jean Doe
+### Karthikeyan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/skarthikeyan28.png" alt="Karthikeyan's profile photo" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/SKarthikeyan28)]
+[[portfolio](team/karthikeyan.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Dev Ops, Enhance existing commands to specialise for concert managers  
 
-### James Doe
+### Zachery Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bbbbcccd.png" alt="Zachery's profile photo" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bbbbcccd)]
+[[portfolio](team/zachery.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Assign work (creating different issues) to different team members
+- Responsibilities: Work on features listed for ConcertPhoneBook
+

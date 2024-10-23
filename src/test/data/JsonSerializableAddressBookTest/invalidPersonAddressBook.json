@@ -1,8 +1,18 @@
 {
-  "persons": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
-  } ]
+  "persons": [
+    {
+      "name": "Hans Muster",
+      "phone": "9482424",
+      "email": "invalid@email!3e",
+      "address": "4th street"
+    }
+  ],
+  "concerts": [
+    {
+      "name": "Coachella",
+      "address": "81800 51st Ave, Indio, Southern California, United States",
+      "date": "20 Dec 2024 1010"
+    }
+  ],
+  "concertContacts": []
 }

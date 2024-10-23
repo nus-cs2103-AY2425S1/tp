@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ConcertListPanel concertListPanel;
+    private ConcertContactListPanel concertContactListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +44,22 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem toggleConcertContactViewItem;
+
+    @FXML
+    private StackPane mainPanelPlaceholder;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane concertListPanelPlaceholder;
+
+    @FXML
+    private StackPane concertContactListContainer;
+
+    @FXML
+    private StackPane concertContactListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -74,6 +91,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(toggleConcertContactViewItem, KeyCombination.valueOf("Tab"));
     }
 
     /**
@@ -112,6 +130,12 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        concertListPanel = new ConcertListPanel(logic.getFilteredConcertList());
+        concertListPanelPlaceholder.getChildren().add(concertListPanel.getRoot());
+
+        concertContactListPanel = new ConcertContactListPanel(logic.getFilteredConcertContactList());
+        concertContactListPanelPlaceholder.getChildren().add(concertContactListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -168,6 +192,32 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Toggles the visibility of the list of {@code ConcertContact}.
+     *
+     * Visibility is set to {@code false} by default.
+     */
+    public void handleToggleConcertContactView() {
+        boolean visibility = concertContactListContainer.visibleProperty().get();
+        concertContactListContainer.visibleProperty().setValue(!visibility);
+    }
+
+    /**
+     * Shows the list of {@code ConcertContact}.
+     *
+     */
+    public void handleShowConcertContactView() {
+        concertContactListContainer.visibleProperty().setValue(true);
+    }
+
+    /**
+     * Hides the list of {@code ConcertContact}.
+     *
+     */
+    public void handleHideConcertContactView() {
+        concertContactListContainer.visibleProperty().setValue(false);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -184,6 +234,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowConcertContacts()) {
+                handleShowConcertContactView();
+            } else {
+                handleHideConcertContactView();
             }
 
             return commandResult;
