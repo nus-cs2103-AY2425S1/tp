@@ -47,4 +47,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Set pending status of clear function
+     */
+    public void setClearPendingStatus(boolean isPending);
 }

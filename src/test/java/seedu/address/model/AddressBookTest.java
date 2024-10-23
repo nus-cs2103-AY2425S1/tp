@@ -7,11 +7,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +24,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -84,24 +90,106 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasWedding_weddingNotFound_returnsFalse() {
+        assertFalse(addressBook.hasWedding(WEDDING_ONE));
+    }
+    @Test
+    public void hasWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasWedding(null));
+    }
+
+    @Test
+    public void addWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addWedding(null));
+    }
+
+    @Test
+    public void addWedding_validWedding_hasNewWedding() {
+        Wedding w1 = new Wedding(WEDDING_ONE.getWeddingName(), WEDDING_ONE.getWeddingDate());
+        addressBook.addWedding(w1);
+        assertTrue(addressBook.hasWedding(w1));
+    }
+
+    @Test
+    public void removeWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.removeWedding(null));
+    }
+
+    @Test
+    public void removeWedding_weddingDoesNotExist_throwsWeddingNotFoundException() {
+        Wedding w1 = new Wedding(WEDDING_ONE.getWeddingName(), WEDDING_ONE.getWeddingDate());
+        assertThrows(WeddingNotFoundException.class, () -> addressBook.removeWedding(w1));
+    }
+
+    @Test
+    public void setWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setWedding(null, null));
+    }
+
+    @Test
+    public void setWedding_weddingDoesNotExist_throwsWeddingDoesNotExistException() {
+        Wedding w1 = new Wedding(WEDDING_ONE.getWeddingName(), WEDDING_ONE.getWeddingDate());
+        assertThrows(WeddingNotFoundException.class, () -> addressBook.setWedding(w1, w1));
+    }
+
+    @Test
+    public void sortPersons_emptyList_noChange() {
+        AddressBook emptyAddressBook = new AddressBook();
+        emptyAddressBook.sortPersons(Comparator.comparing(person -> person.getName().toString()));
+        assertEquals(0, emptyAddressBook.getPersonList().size());
+    }
+
+    @Test
+    public void sortPersons_singlePerson_noChange() {
+        AddressBook singlePersonBook = new AddressBook();
+        Person singlePerson = new PersonBuilder().withName("Single Person").build();
+        singlePersonBook.addPerson(singlePerson);
+
+        singlePersonBook.sortPersons(Comparator.comparing(person -> person.getName().toString()));
+        assertEquals(1, singlePersonBook.getPersonList().size());
+        assertEquals(singlePerson, singlePersonBook.getPersonList().get(0));
+    }
+
+    @Test
+    public void sortPersons_typicalList_sortedCorrectly() {
+        AddressBook addressBook = getTypicalAddressBook();
+
+        addressBook.sortPersons(Comparator.comparing(person -> person.getName().toString()));
+
+        assertEquals(ALICE, addressBook.getPersonList().get(0));
+        assertEquals(BENSON, addressBook.getPersonList().get(1));
+        assertEquals(CARL, addressBook.getPersonList().get(2));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons and weddings list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Wedding> weddings = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
+        }
+        AddressBookStub(Collection<Person> persons, Collection<Wedding> weddings) {
+            this.persons.setAll(persons);
+            this.weddings.setAll(weddings);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Wedding> getWeddingList() {
+            return weddings;
         }
     }
 

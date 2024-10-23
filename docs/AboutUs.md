@@ -1,59 +1,55 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+## PlanPerfect Project Team
 
-### John Doe
+### Yash Raj Khandelwal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yxshrk.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Software Developer
+* Responsibilities: Software Developing
 
-* Role: Project Advisor
+### Liyam 
 
-### Jane Doe
+<img src="images/kikokidayo.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](https://github.com/kikokidayo)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Developer 
+* Responsibilities: Developing
 
-* Role: Team Lead
-* Responsibilities: UI
+### Maegan Tan
 
-### Johnny Doe
+<img src="images/maertan.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/maertan)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Developing
 
-### Jean Doe
+### Aditya Ghosh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/adipanda2002.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/adipanda2002)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Software Engineer
+* Responsibilities: Software Engineering
 
-### James Doe
+### Ignatius Oey
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ignatiusoey09.png.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ignatiusoey09)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Developing

@@ -67,6 +67,12 @@ public class EmailTest {
     }
 
     @Test
+    public void isWithinCharLimit() {
+        assertTrue(Email.isWithinCharLimit("valid@gmail.com"));
+        assertFalse(Email.isWithinCharLimit("longlonglonglonglonglonglonglonglonglong@gmail.com"));
+    }
+
+    @Test
     public void equals() {
         Email email = new Email("valid@email");
 

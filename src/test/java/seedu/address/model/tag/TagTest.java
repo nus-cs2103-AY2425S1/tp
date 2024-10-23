@@ -1,6 +1,10 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +25,13 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+    }
+
+    @Test
+    public void stringToTagSet_emptyString_emptySet() {
+        String userInput = "";
+        Set<Tag> tagSet = Tag.stringToTagSet(userInput);
+        assertEquals(tagSet, new HashSet<Tag>());
     }
 
 }

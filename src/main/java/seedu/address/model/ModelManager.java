@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +14,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ActiveTags;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +26,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
+    private final FilteredList<Wedding> filteredWeddings;
+    private ActiveTags activeTags; //Stores all currently used tags
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -34,6 +39,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
+        activeTags = new ActiveTags(this.addressBook.findTagOccurrences());
     }
 
     public ModelManager() {
@@ -111,6 +118,53 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void addWedding(Wedding wedding) {
+        requireNonNull(wedding);
+
+        addressBook.addWedding(wedding);
+        System.out.println(Arrays.toString(addressBook.getWeddingList().toArray()));
+    }
+
+    @Override
+    public boolean hasWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return addressBook.hasWedding(wedding);
+    }
+
+    @Override
+    public void removeWedding(Wedding wedding) {
+        requireNonNull(wedding);
+
+        addressBook.removeWedding(wedding);
+    }
+
+    @Override
+    public void setWedding(Wedding wedding, Wedding editedWedding) {
+        requireAllNonNull(wedding, editedWedding);
+
+        addressBook.setWedding(wedding, editedWedding);
+    }
+
+    @Override
+    public void assignPerson(Wedding wedding, Person person) {
+        requireAllNonNull(wedding, person);
+
+        addressBook.assignPerson(wedding, person);
+    }
+
+    @Override
+    public void unassignPerson(Wedding wedding, Person person) {
+        requireAllNonNull(wedding, person);
+
+        addressBook.unassignPerson(wedding, person);
+    }
+
+    @Override
+    public ObservableList<Wedding> getFilteredWeddingList() {
+        return filteredWeddings;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -126,6 +180,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortPersons(comparator);
+    }
+
+    @Override
+    public ActiveTags getActiveTags() {
+        return activeTags;
     }
 
     @Override

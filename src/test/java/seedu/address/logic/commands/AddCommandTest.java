@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ActiveTags;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -155,6 +159,51 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ActiveTags getActiveTags() {
+            return new ActiveTags(new HashMap<>());
+        }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            return null;
+        }
+
+        @Override
+        public void addWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWedding(Wedding wedding, Wedding newWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void assignPerson(Wedding wedding, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignPerson(Wedding wedding, Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }

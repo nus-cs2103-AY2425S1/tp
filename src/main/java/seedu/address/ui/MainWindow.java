@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -169,15 +170,18 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Executes the command and returns the result.
-     *
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isPendingClear()) {
+                logic.setClearPendingStatus(true);
+            }
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
