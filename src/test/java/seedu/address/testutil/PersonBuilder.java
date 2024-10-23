@@ -39,7 +39,7 @@ public class PersonBuilder {
     private RegisterNumber registerNumber;
     private Sex sex;
     private StudentClass studentClass;
-    private EcName ecName = new EcName("Joe Hardy");
+    private EcName ecName;
     private EcNumber ecNumber;
     private Set<Exam> exams;
     private Set<Tag> tags;
