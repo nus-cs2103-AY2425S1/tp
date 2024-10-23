@@ -26,26 +26,6 @@ public class PaidCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToMarkPaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
-        descriptor.setHasPaid();
-        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, descriptor);
-
-        String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_PERSON_SUCCESS,
-                Messages.format(personToMarkPaid));
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person editedPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
-                personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
-                personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true, personToMarkPaid.getFrequency());
-
-        expectedModel.setPerson(personToMarkPaid, editedPerson);
-
-        assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
@@ -64,14 +44,15 @@ public class PaidCommandTest {
         descriptor.setHasPaid();
         PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_PERSON_SUCCESS,
-                Messages.format(personToMarkPaid));
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         Person paidPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
                 personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
                 personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true, personToMarkPaid.getFrequency());
+
+        String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_PERSON_SUCCESS,
+                Messages.format(paidPerson));
+
         expectedModel.setPerson(personToMarkPaid, paidPerson);
 
         assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
