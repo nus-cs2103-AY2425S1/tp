@@ -20,8 +20,6 @@ public class BookingsCommandParser implements Parser<BookingsCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookingsCommand.MESSAGE_USAGE));
         }
 
-        String[] date = trimmedArgs.split("\\s+");
-
-        return new BookingsCommand(ParserUtil.parseDate(date[0]));
+        return new BookingsCommand(ParserUtil.parseDate(trimmedArgs));
     }
 }
