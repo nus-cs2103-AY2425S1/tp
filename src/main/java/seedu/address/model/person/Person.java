@@ -102,24 +102,28 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
     public Nric getNric() {
         return nric;
+    }
+
+    public Sex getSex() {
+        return sex;
     }
 
     public Birthdate getBirthdate() {
         return birthdate;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Set<HealthService> getHealthService() {
+        return healthServices;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
     }
 
     public Name getNokName() {

@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -43,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane GuiPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -79,6 +80,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     * 
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -112,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        GuiPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -167,7 +169,26 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
 
+    /**
+     * Shows the Patient Info Panel.
+     */
+    @FXML
+    public void showPatientInfo(Person patient) {
+        PatientInfoPanel patientInfoPanel = new PatientInfoPanel(patient);
+        GuiPanelPlaceholder.getChildren().remove(0);
+        GuiPanelPlaceholder.getChildren().add(patientInfoPanel.getRoot());
+    }
+
+    /**
+     * Hides the Patient Info Panel.
+     */
+    @FXML
+    public void hidePatientInfo() {
+        GuiPanelPlaceholder.getChildren().remove(0);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        GuiPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     void show() {
@@ -207,6 +228,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPatientInfo()) {
+                showPatientInfo(commandResult.getPatient());
+            } else {
+                hidePatientInfo();
             }
 
             return commandResult;
