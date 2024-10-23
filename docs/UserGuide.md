@@ -154,7 +154,32 @@ Examples:
 * `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `find` command.
 
 
+### Undoing the last change: `:undo`
+
+Reverts the address book to the state before the last change.\
+User can undo up to 10 changes.\
+Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
+
+Format: `:undo`
+
+Examples:
+* If we add a new contact with `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`, 
+using `:undo` will remove John Doe from the address book.
+* If we delete a contact with `:rm -i 3`, using `:undo` will restore the deleted contact.
+
+### Redoing the last undone change: `:redo`
+
+Reapplies the last undone change to the address book.\
+User can redo up to 10 undo changes.
+
+Format: `:redo`
+
+Examples:
+* After using `:undo` to revert the addition of John Doe, using `:redo` will add John Doe back to the address book.
+* After using `:undo` to revert the deletion of a contact, using `:redo` will delete the contact again.
+
 ### Clearing all entries : `:clear`
+
 
 Clears all entries from the address book.
 
