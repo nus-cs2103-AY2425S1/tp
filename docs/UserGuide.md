@@ -27,7 +27,8 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
     * [**General Commands**](#general-commands)
         * [`help` Viewing help](#viewing-help--help)
         * [`stats` Viewing the total number of guests and vendors](#view-total-number-of-people--stats)
-        * [`find` Finding a person](#finding-a-person--find)
+        * [`list` Listing all persons](#listing-all-persons--list)
+        * [`find` Finding a guest/vendor](#finding-a-person--find)
         * [`clear` Clears all entries from the guest list and the vendor list](#clearing-all-entries--clear)
         * [`exit` Exiting the program](#exiting-the-program--exit)
     * [**Guest Related Commands**](#guest-related-commands)
@@ -78,15 +79,15 @@ This section tells you what information you will find in each of the sections of
 
 ## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java 17 if you do not already have it installed.
-    > To check 
+1. Ensure you have Java `17` or above installed in your Computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17` if you do not already have it installed.
+    > :information_source: To check if you have Java `17` installed, simply run `java -version` on a command terminal to find out.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F09-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
+   A [(GUI)](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
