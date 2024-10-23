@@ -8,6 +8,7 @@ import seedu.address.model.person.Person;
 public final class CommandCommons {
     public static final String DEFAULT_TIER = "";
     public static final String DEFAULT_REMARK = "NA";
+    public static final String DEFAULT_STATUS = "NONE";
     public static final Person EMPTY_PERSON = null;
 
 }

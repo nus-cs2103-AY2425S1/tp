@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -45,6 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_TIER_REJECT = "REJECT";
     public static final String VALID_TIER_GOLD = "GOLD";
 
+
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -57,9 +60,16 @@ public class CommandTestUtil {
     public static final String JOB_DESC_BOB = " " + PREFIX_JOB + VALID_JOB_BOB;
     public static final String INCOME_DESC_AMY = " " + PREFIX_INCOME + VALID_INCOME_AMY;
     public static final String INCOME_DESC_BOB = " " + PREFIX_INCOME + VALID_INCOME_BOB;
-
+    public static final String VALID_REMARK_AMY = "Like skiing.";
+    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
     public static final String TIER_DESC_REJECT = " " + PREFIX_TIER + VALID_TIER_REJECT;
     public static final String TIER_DESC_GOLD = " " + PREFIX_TIER + VALID_TIER_GOLD;
+    public static final String NEW_REMARK_DESC_BOB = " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB;
+    public static final String APPEND_REMARK_DESC_BOB = " " + PREFIX_APPEND_REMARK + VALID_REMARK_BOB;
+    public static final String VALID_STATUS_NON_URGENT = "non_urgent";
+    public static final String VALID_STATUS_NONE = "none";
+    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_NONE;
+    public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_NON_URGENT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -72,14 +82,11 @@ public class CommandTestUtil {
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK;
     public static final String INVALID_NEW_REMARK_DESC = " " + PREFIX_NEW_REMARK;
     public static final String INVALID_APPEND_REMARK_DESC = " " + PREFIX_APPEND_REMARK;
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "null";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final String VALID_REMARK_AMY = "Like skiing.";
-    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
-    public static final String NEW_REMARK_DESC_BOB = " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB;
-    public static final String APPEND_REMARK_DESC_BOB = " " + PREFIX_APPEND_REMARK + VALID_REMARK_BOB;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
