@@ -28,9 +28,10 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="requirements" vgap = "5" hgap = "5"/>
-      <Label fx:id="company" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="salary" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="description" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
+      <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
+      <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+      <Label fx:id="matches" styleClass="cell_small_label" text="\$matches" />
     </VBox>
   </GridPane>
 </HBox>

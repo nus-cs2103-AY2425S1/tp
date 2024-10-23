@@ -78,6 +78,10 @@ public class Person {
         return Collections.unmodifiableSet(skills);
     }
 
+    /**
+     * Returns a {@code String} representing a single association between {@code Job} and {@code Person} if it exists,
+     * null otherwise.
+     */
     public String getMatch() {
         return match.orElse(null);
     }

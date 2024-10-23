@@ -69,6 +69,9 @@ public class Job {
         return otherJob != null && otherJob.getName().equals(getName()) && otherJob.getCompany().equals(getCompany());
     }
 
+    /**
+     * Returns a {@code HashSet} representing associations between {@code Job} and {@code Person}, which can be empty.
+     */
     public Set<String> getMatches() {
         return matches;
     }

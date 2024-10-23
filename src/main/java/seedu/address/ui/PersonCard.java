@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -40,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane skills;
+    @FXML
+    private Label match;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -55,5 +58,15 @@ public class PersonCard extends UiPart<Region> {
         person.getSkills().stream()
                 .sorted(Comparator.comparing(skill -> skill.skillName))
                 .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
+
+        String jobIdentifier = person.getMatch();
+        if (jobIdentifier != null) {
+            String[] jobIdentifierComponents = jobIdentifier.split("::");
+            String companyName = jobIdentifierComponents[0];
+            String jobName = jobIdentifierComponents[1];
+            match.setText("Employed @ " + companyName + " - " + jobName);
+        } else {
+            match.setText("Unemployed");
+        }
     }
 }
