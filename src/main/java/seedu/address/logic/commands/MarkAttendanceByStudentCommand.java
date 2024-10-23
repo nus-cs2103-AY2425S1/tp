@@ -98,9 +98,9 @@ public class MarkAttendanceByStudentCommand extends Command {
         }
 
         MarkAttendanceByStudentCommand otherMarkAttendanceCommand = (MarkAttendanceByStudentCommand) other;
-        return targetIndex.equals(otherMarkAttendanceCommand.targetIndex) &&
-                attendance.equals(otherMarkAttendanceCommand.attendance) &&
-                tutorial.equals(otherMarkAttendanceCommand.tutorial);
+        return targetIndex.equals(otherMarkAttendanceCommand.targetIndex)
+                && attendance.equals(otherMarkAttendanceCommand.attendance)
+                && tutorial.equals(otherMarkAttendanceCommand.tutorial);
     }
 
     @Override

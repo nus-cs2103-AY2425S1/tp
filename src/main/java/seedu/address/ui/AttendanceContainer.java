@@ -30,6 +30,10 @@ public class AttendanceContainer extends UiPart<Region> {
     @FXML
     private VBox attendanceList;
 
+    /**
+     * Creates a {@code AttendanceContainer} with the given list of participation list
+     * to display the attendance of all tutorials.
+     */
     public AttendanceContainer(List<Participation> participationList) {
         super(FXML);
         this.participationList = participationList;

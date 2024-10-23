@@ -2,17 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
-
-import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Attendance;
-import seedu.address.model.person.Payment;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -51,7 +46,7 @@ public class MarkAttendanceByStudentCommandParser implements Parser<MarkAttendan
         Attendance attendance = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
 
         String tutorial = argMultimap.getValue(PREFIX_TUTORIAL).get();
-        if  (!Tutorial.isValidTutorial(tutorial)) {
+        if (!Tutorial.isValidTutorial(tutorial)) {
             throw new ParseException(String.format("%s tutorial is not available at the center", tutorial));
         }
         return new MarkAttendanceByStudentCommand(index, attendance, tutorial);

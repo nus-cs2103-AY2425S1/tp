@@ -24,6 +24,9 @@ public class AttendanceCard extends UiPart<Region> {
     @FXML
     private Label attendance;
 
+    /**
+     * Creates a {@code AttendanceCard} of the given tutorial
+     */
     public AttendanceCard(String tutorial, List<Attendance> attendanceList) {
         super(FXML);
         this.attendanceList = attendanceList;
