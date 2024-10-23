@@ -215,7 +215,7 @@ public class FilterCommandParserTest {
     public void parse_multipleTags_throwsParseException() {
 
         // Simulate user input with multiple tags
-        String userInput = "t/HighRisk t/LowRisk";
+        String userInput = " t/HighRisk t/LowRisk";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
@@ -241,16 +241,6 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_multipleAddresses_throwsParseException() {
-        FilterCommandParser parser = new FilterCommandParser();
-
-        // Simulate user input with multiple addresses
-        String userInput = " a/123 Main St a/456 Elm St";
-
-        assertThrows(ParseException.class, () -> parser.parse(userInput));
-    }
-
-    @Test
-    public void parse_noParameters_throwsParseException() {
         FilterCommandParser parser = new FilterCommandParser();
 
         // Simulate user input with multiple addresses
