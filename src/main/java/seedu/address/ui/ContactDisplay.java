@@ -48,6 +48,8 @@ public class ContactDisplay extends UiPart<Region> {
     @FXML
     private VBox cardPane;
     @FXML
+    private Label helpLabel;
+    @FXML
     private Label nameLabel;
     @FXML
     private Label phoneLabel;
@@ -78,7 +80,7 @@ public class ContactDisplay extends UiPart<Region> {
      */
     @FXML
     private void initialize() {
-        nameLabel.setText(CONDENSED_HELP_MESSAGE);
+        helpLabel.setText(CONDENSED_HELP_MESSAGE);
     }
 
     /**
@@ -87,8 +89,9 @@ public class ContactDisplay extends UiPart<Region> {
      * @param person The person whose details are to be displayed.
      */
     public void updateContactDetails(Person person) {
+        helpLabel.setText(null);
         nameLabel.setText("Name: " + person.getName().fullName);
-        categoryLabel.setText("Category: " + person.getCategoryDisplayName());
+        categoryLabel.setText(person.getCategoryDisplayName());
         phoneLabel.setText("Phone: " + person.getPhone().value);
         emailLabel.setText("Email: " + person.getEmail().value);
         addressLabel.setText("Address: " + person.getAddress().value);
@@ -147,18 +150,22 @@ public class ContactDisplay extends UiPart<Region> {
      */
     public void clear() {
         nameLabel.setText("Name:");
-        categoryLabel.setText("Category:");
+        categoryLabel.setText(null);
+        industryStudentIdLabel.setText("");
         phoneLabel.setText("Phone:");
         emailLabel.setText("Email:");
         addressLabel.setText("Address:");
         tags.getChildren().clear();
+        helpLabel.setText(null);
     }
 
     /**
      * Shows the condensed help message over the contact display.
      */
     public void showHelpDisplay() {
-        nameLabel.setText(CONDENSED_HELP_MESSAGE);
+        helpLabel.setText(CONDENSED_HELP_MESSAGE);
+        nameLabel.setText(null);
+        industryStudentIdLabel.setText(null);
         phoneLabel.setText(null);
         emailLabel.setText(null);
         addressLabel.setText(null);

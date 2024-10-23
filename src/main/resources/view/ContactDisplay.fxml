@@ -8,16 +8,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import seedu.address.model.person.Person?>
 
-<ScrollPane fx:id="scrollPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171"
-             style="-fx-background-color: #B5D4F5;">
+<ScrollPane fx:id="scrollPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" 
+    stylesheets="@ContactDisplay.css">
     <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-          spacing="10" style="-fx-padding: 10; -fx-background-color: #B5D4F5; -fx-border-color: #ccc; -fx-font-family: 'Garamond';">
-        <Label fx:id="nameLabel" text="Name:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
-        <Label fx:id="categoryLabel" text="Category:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
-        <Label fx:id="industryStudentIdLabel" text="" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
-        <Label fx:id="phoneLabel" text="Phone:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
-        <Label fx:id="emailLabel" text="Email:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
-        <Label fx:id="addressLabel" text="Address:" style="-fx-font-size: 14px; -fx-text-fill: #333; -fx-font-family: 'Garamond';" />
-        <FlowPane fx:id="tags" style="-fx-hgap: 5; -fx-vgap: 5; -fx-font-family: 'Garamond';" />
+          spacing="20" alignment="TOP_CENTER">
+        <VBox fx:id="contactHeader" alignment="TOP_CENTER">
+          <Label fx:id="helpLabel" text=""/>
+          <Label fx:id="nameLabel" text="Name:"/>
+          <Label fx:id="categoryLabel" text="Category:"/>
+        </VBox>
+        <VBox fx:id="contactBody" spacing="20" alignment="TOP_CENTER">
+          <Label fx:id="industryStudentIdLabel" text=""/>
+          <Label fx:id="phoneLabel" text="Phone:"/>
+          <Label fx:id="emailLabel" text="Email:"/>
+          <Label fx:id="addressLabel" text="Address:"/>
+          <FlowPane fx:id="tags"/>
+        </VBox>
     </VBox>
 </ScrollPane>
