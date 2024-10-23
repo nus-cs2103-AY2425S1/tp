@@ -10,8 +10,11 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
+/**
+ * Adds a note to a person.
+ */
 public class AddNoteCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "addnote";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to a person.\n"
             + "Parameters: "
@@ -20,20 +23,24 @@ public class AddNoteCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S8484131E "
             + PREFIX_NOTE + "Note text";
-    
+
     public static final String MESSAGE_SUCCESS = "Added note to %1$s: %2$s";
 
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
     public static final String MESSAGE_NOTE_TEXT_EMPTY = "Note text cannot be empty";
-    
+
     private final String noteText;
     private final Nric nric;
-    
+
+    /**
+     * @param nric the nric of the person to add the note to
+     * @param noteText the text of the note
+     */
     public AddNoteCommand(Nric nric, String noteText) {
         this.noteText = noteText;
         this.nric = nric;
     }
-    
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -47,11 +54,11 @@ public class AddNoteCommand extends Command {
         }
 
         Note note = new Note(noteText);
-        
+
         model.addNoteToPerson(note, person);
         return new CommandResult(String.format(MESSAGE_SUCCESS, nric, noteText));
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
