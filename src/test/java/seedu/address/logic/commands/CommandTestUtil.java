@@ -21,11 +21,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddRentalCommand.AddRentalDescriptor;
+import seedu.address.logic.commands.EditRentalCommand.EditRentalDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.testutil.AddRentalDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditRentalDescriptorBuilder;
 
@@ -134,8 +137,10 @@ public class CommandTestUtil {
     public static final String KEYWORD_EMAIL_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_EMAIL_ALICE;
     public static final String KEYWORD_ADDRESS_DESC_ONE = " " + PREFIX_KEYWORD + VALID_ADDRESS_ONE;
 
-    public static final EditRentalCommand.EditRentalDescriptor DESC_RENTAL_ONE;
-    public static final EditRentalCommand.EditRentalDescriptor DESC_RENTAL_TWO;
+    public static final EditRentalDescriptor EDIT_RENTAL_DESCRIPTOR_ONE;
+    public static final EditRentalDescriptor EDIT_RENTAL_DESCRIPTOR_TWO;
+    public static final AddRentalDescriptor ADD_RENTAL_DESCRIPTOR_ONE;
+    public static final AddRentalDescriptor ADD_RENTAL_DESCRIPTOR_TWO;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -144,14 +149,17 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_RENTAL_ONE = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE)
+        EDIT_RENTAL_DESCRIPTOR_ONE = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE)
                 .withRentalStartDate(VALID_RENTAL_START_DATE_ONE).withRentalEndDate(VALID_RENTAL_END_DATE_ONE)
                 .withRentDueDate(VALID_RENT_DUE_DATE_ONE).withMonthlyRent(VALID_MONTHLY_RENT_ONE)
                 .withDeposit(VALID_DEPOSIT_ONE).withCustomerList(VALID_CUSTOMER_LIST_ONE).build();
-        DESC_RENTAL_TWO = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_TWO)
+        EDIT_RENTAL_DESCRIPTOR_TWO = new EditRentalDescriptorBuilder().withAddress(VALID_ADDRESS_TWO)
                 .withRentalStartDate(VALID_RENTAL_START_DATE_TWO).withRentalEndDate(VALID_RENTAL_END_DATE_TWO)
                 .withRentDueDate(VALID_RENT_DUE_DATE_TWO).withMonthlyRent(VALID_MONTHLY_RENT_TWO)
                 .withDeposit(VALID_DEPOSIT_TWO).withCustomerList(VALID_CUSTOMER_LIST_TWO).build();
+        ADD_RENTAL_DESCRIPTOR_ONE = new AddRentalDescriptorBuilder().withAddress(VALID_ADDRESS_ONE).build();
+        ADD_RENTAL_DESCRIPTOR_TWO = new AddRentalDescriptorBuilder().withAddress(VALID_ADDRESS_TWO).build();
+
     }
 
     /**

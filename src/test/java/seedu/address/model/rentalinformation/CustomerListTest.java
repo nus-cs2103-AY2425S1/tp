@@ -58,6 +58,16 @@ public class CustomerListTest {
 
         // different values -> returns false
         assertFalse(customerList.equals(new CustomerList("David")));
+
+        // value is null
+        // one null
+        assertFalse(customerList.equals(new CustomerList()));
+
+        customerList = new CustomerList();
+        assertFalse(customerList.equals(new CustomerList("David")));
+
+        // both null
+        assertTrue(customerList.equals(new CustomerList()));
     }
 
     @Test
@@ -72,7 +82,7 @@ public class CustomerListTest {
     }
 
     @Test
-    public void isSameToString() {
+    public void toStringMethod() {
         CustomerList customerList = new CustomerList("David;Steven");
 
         // same customer list
@@ -81,5 +91,9 @@ public class CustomerListTest {
         // different customer list
         assertNotEquals(customerList.toString(), new CustomerList("David").toString());
         assertNotEquals(customerList.toString(), new CustomerList("Steven;David").toString());
+
+        // null value in customer list
+        customerList = new CustomerList();
+        assertEquals("null", customerList.toString());
     }
 }

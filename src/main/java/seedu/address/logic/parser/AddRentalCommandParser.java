@@ -14,13 +14,8 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddRentalCommand;
+import seedu.address.logic.commands.AddRentalCommand.AddRentalDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.rentalinformation.Address;
-import seedu.address.model.rentalinformation.CustomerList;
-import seedu.address.model.rentalinformation.Deposit;
-import seedu.address.model.rentalinformation.MonthlyRent;
-import seedu.address.model.rentalinformation.RentDueDate;
-import seedu.address.model.rentalinformation.RentalDate;
 import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
@@ -45,41 +40,58 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRentalCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ADDRESS, PREFIX_RENTAL_START_DATE,
-                PREFIX_RENTAL_END_DATE, PREFIX_RENT_DUE_DATE, PREFIX_MONTHLY_RENT, PREFIX_DEPOSIT,
-                PREFIX_CUSTOMER_LIST)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRentalCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddRentalCommand.MESSAGE_REQUIRE_ADDRESS));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ADDRESS, PREFIX_RENTAL_START_DATE,
                 PREFIX_RENTAL_END_DATE, PREFIX_RENT_DUE_DATE, PREFIX_MONTHLY_RENT, PREFIX_DEPOSIT,
                 PREFIX_CUSTOMER_LIST);
 
-        RentalInformation rentalInformation = parseRentalInformation(argMultimap);
+        AddRentalDescriptor addRentalDescriptor = new AddRentalDescriptor();
+
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            addRentalDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_RENTAL_START_DATE).isPresent()) {
+            addRentalDescriptor.setRentalStartDate(ParserUtil.parseRentalDate(
+                    argMultimap.getValue(PREFIX_RENTAL_START_DATE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_RENTAL_END_DATE).isPresent()) {
+            addRentalDescriptor.setRentalEndDate(ParserUtil.parseRentalDate(
+                    argMultimap.getValue(PREFIX_RENTAL_END_DATE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_RENT_DUE_DATE).isPresent()) {
+            addRentalDescriptor.setRentDueDate(ParserUtil.parseRentDueDate(
+                    argMultimap.getValue(PREFIX_RENT_DUE_DATE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_MONTHLY_RENT).isPresent()) {
+            addRentalDescriptor.setMonthlyRent(ParserUtil.parseMonthlyRent(
+                    argMultimap.getValue(PREFIX_MONTHLY_RENT).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_DEPOSIT).isPresent()) {
+            addRentalDescriptor.setDeposit(ParserUtil.parseDeposit(
+                    argMultimap.getValue(PREFIX_DEPOSIT).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_CUSTOMER_LIST).isPresent()) {
+            addRentalDescriptor.setCustomerList(ParserUtil.parseCustomerList(
+                    argMultimap.getValue(PREFIX_CUSTOMER_LIST).get()));
+        }
+
+        if (!addRentalDescriptor.isAddressFieldEdited()) {
+            throw new ParseException(AddRentalCommand.MESSAGE_REQUIRE_ADDRESS);
+        }
+
+        RentalInformation rentalInformation = addRentalDescriptor.getRentalInformationEquivalentWithNull();
 
         return new AddRentalCommand(index, rentalInformation);
-    }
-
-    /**
-     * Parses the rental information from the given {@code ArgumentMultimap} and creates a
-     * {@code RentalInformation} object.
-     *
-     * @param argMultimap The {@code ArgumentMultimap} containing the rental information values
-     *                    to be parsed.
-     * @return A {@code RentalInformation} object populated with the parsed values.
-     * @throws ParseException If the values are invalid.
-     */
-    private RentalInformation parseRentalInformation(ArgumentMultimap argMultimap) throws ParseException {
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        RentalDate rentalStartDate = ParserUtil.parseRentalDate(argMultimap.getValue(PREFIX_RENTAL_START_DATE).get());
-        RentalDate rentalEndDate = ParserUtil.parseRentalDate(argMultimap.getValue(PREFIX_RENTAL_END_DATE).get());
-        RentDueDate rentDueDate = ParserUtil.parseRentDueDate(argMultimap.getValue(PREFIX_RENT_DUE_DATE).get());
-        MonthlyRent monthlyRent = ParserUtil.parseMonthlyRent(argMultimap.getValue(PREFIX_MONTHLY_RENT).get());
-        Deposit deposit = ParserUtil.parseDeposit(argMultimap.getValue(PREFIX_DEPOSIT).get());
-        CustomerList customerList = ParserUtil.parseCustomerList(argMultimap.getValue(PREFIX_CUSTOMER_LIST).get());
-
-        return new RentalInformation(address, rentalStartDate, rentalEndDate, rentDueDate, monthlyRent, deposit,
-                customerList);
     }
 
     /**

@@ -59,6 +59,16 @@ public class RentDueDateTest {
 
         // different values -> returns false
         assertFalse(rentDueDate.equals(new RentDueDate("1")));
+
+        // value is null
+        // one null
+        assertFalse(rentDueDate.equals(new RentDueDate()));
+
+        rentDueDate = new RentDueDate();
+        assertFalse(rentDueDate.equals(new RentDueDate("15")));
+
+        // both null
+        assertTrue(rentDueDate.equals(new RentDueDate()));
     }
 
     @Test
@@ -73,7 +83,7 @@ public class RentDueDateTest {
     }
 
     @Test
-    public void isSameToString() {
+    public void toStringMethod() {
         RentDueDate rentDueDate = new RentDueDate("15");
 
         // same rent due date
@@ -82,5 +92,9 @@ public class RentDueDateTest {
         // different rent due date
         assertNotEquals(rentDueDate.toString(), new RentDueDate("10").toString());
         assertNotEquals(rentDueDate.toString(), new RentDueDate("30").toString());
+
+        // null value in rent due date
+        rentDueDate = new RentDueDate();
+        assertEquals("null", rentDueDate.toString());
     }
 }

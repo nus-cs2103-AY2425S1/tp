@@ -62,6 +62,16 @@ public class MonthlyRentTest {
 
         // different values -> returns false
         assertFalse(monthlyRent.equals(new MonthlyRent("10")));
+
+        // value is null
+        // one null
+        assertFalse(monthlyRent.equals(new MonthlyRent()));
+
+        monthlyRent = new MonthlyRent();
+        assertFalse(monthlyRent.equals(new MonthlyRent("10")));
+
+        // both null
+        assertTrue(monthlyRent.equals(new MonthlyRent()));
     }
 
     @Test
@@ -76,7 +86,7 @@ public class MonthlyRentTest {
     }
 
     @Test
-    public void isSameToString() {
+    public void toStringMethod() {
         MonthlyRent monthlyRent = new MonthlyRent("100");
 
         // same monthly rent
@@ -85,5 +95,9 @@ public class MonthlyRentTest {
         // different monthly rent
         assertNotEquals(monthlyRent.toString(), new MonthlyRent("200").toString());
         assertNotEquals(monthlyRent.toString(), new MonthlyRent("100.35").toString());
+
+        // null value in monthly rent
+        monthlyRent = new MonthlyRent();
+        assertEquals("null", monthlyRent.toString());
     }
 }

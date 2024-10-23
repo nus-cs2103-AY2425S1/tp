@@ -12,7 +12,7 @@ public class Deposit {
             "Deposit should only contain numbers, and in 2 decimal places if needed";
     public static final String VALIDATION_REGEX = "^(0|(?!0)\\d+)(\\.\\d{2})?$";
 
-    public final double deposit;
+    public final Double deposit;
 
     /**
      * Constructs a {@code Deposit}.
@@ -23,6 +23,13 @@ public class Deposit {
         requireNonNull(deposit);
         checkArgument(isValidDeposit(deposit), MESSAGE_CONSTRAINTS);
         this.deposit = Double.parseDouble(deposit);
+    }
+
+    /**
+     * Constructs an {@code Deposit} with deposit as null (not provided).
+     */
+    public Deposit() {
+        deposit = null;
     }
 
     /**
@@ -38,7 +45,7 @@ public class Deposit {
 
     @Override
     public String toString() {
-        return Double.toString(deposit);
+        return deposit == null ? "null" : Double.toString(deposit);
     }
 
     @Override
@@ -53,11 +60,17 @@ public class Deposit {
         }
 
         Deposit otherDeposit = (Deposit) other;
-        return this.deposit == otherDeposit.deposit;
+        if (this.deposit == null && otherDeposit.deposit == null) {
+            return true;
+        } else if (this.deposit == null || otherDeposit.deposit == null) {
+            return false;
+        }
+
+        return this.deposit.equals(otherDeposit.deposit);
     }
 
     @Override
     public int hashCode() {
-        return Double.valueOf(deposit).hashCode();
+        return deposit.hashCode();
     }
 }

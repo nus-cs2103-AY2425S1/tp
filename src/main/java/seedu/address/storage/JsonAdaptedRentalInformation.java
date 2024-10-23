@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.util.AbstractCollection;
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -53,14 +56,22 @@ class JsonAdaptedRentalInformation {
      */
     public JsonAdaptedRentalInformation(RentalInformation source) {
         this.address = source.getAddress().value;
-        this.rentalStartDate = RentalUtil.convertLocalDateToStringWithFormat(
-                source.getRentalStartDate().rentalDate, "dd/MM/yyyy");
-        this.rentalEndDate = RentalUtil.convertLocalDateToStringWithFormat(
-                source.getRentalEndDate().rentalDate, "dd/MM/yyyy");
+        this.rentalStartDate = Optional.ofNullable(source.getRentalStartDate().rentalDate)
+                .map(rsd -> RentalUtil.convertLocalDateToStringWithFormat(rsd, "dd/MM/yyyy"))
+                .orElse(null);
+        this.rentalEndDate = Optional.ofNullable(source.getRentalEndDate().rentalDate)
+                .map(red -> RentalUtil.convertLocalDateToStringWithFormat(red, "dd/MM/yyyy"))
+                .orElse(null);
         this.rentDueDate = source.getRentDueDate().rentDueDate;
-        this.monthlyRent = String.format("%.2f", source.getMonthlyRent().monthlyRent);
-        this.deposit = String.format("%.2f", source.getDeposit().deposit);
-        this.customerList = source.getCustomerList().toString();
+        this.monthlyRent = Optional.ofNullable(source.getMonthlyRent().monthlyRent)
+                .map(mr -> String.format("%.2f", mr))
+                .orElse(null);
+        this.deposit = Optional.ofNullable(source.getDeposit().deposit)
+                .map(d -> String.format("%.2f", d))
+                .orElse(null);
+        this.customerList = Optional.ofNullable(source.getCustomerList().customerList)
+                .map(AbstractCollection::toString)
+                .orElse(null);
     }
 
     /**
@@ -96,8 +107,7 @@ class JsonAdaptedRentalInformation {
 
     private RentalDate modelRentalStartDateFunction() throws IllegalValueException {
         if (rentalStartDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    RentalDate.class.getSimpleName()));
+            return new RentalDate();
         }
 
         if (!RentalDate.isValidRentalDate(rentalStartDate)) {
@@ -109,8 +119,7 @@ class JsonAdaptedRentalInformation {
 
     private RentalDate modelRentalEndDateFunction() throws IllegalValueException {
         if (rentalEndDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    RentalDate.class.getSimpleName()));
+            return new RentalDate();
         }
 
         if (!RentalDate.isValidRentalDate(rentalEndDate)) {
@@ -122,8 +131,7 @@ class JsonAdaptedRentalInformation {
 
     private RentDueDate modelRentDueDateFunction() throws IllegalValueException {
         if (rentDueDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    RentDueDate.class.getSimpleName()));
+            return new RentDueDate();
         }
 
         if (!RentDueDate.isValidDueDate(rentDueDate)) {
@@ -135,8 +143,7 @@ class JsonAdaptedRentalInformation {
 
     private MonthlyRent modelMonthlyRentFunction() throws IllegalValueException {
         if (monthlyRent == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    MonthlyRent.class.getSimpleName()));
+            return new MonthlyRent();
         }
 
         if (!MonthlyRent.isValidMonthlyRent(monthlyRent)) {
@@ -148,8 +155,7 @@ class JsonAdaptedRentalInformation {
 
     private Deposit modelDepositFunction() throws IllegalValueException {
         if (deposit == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Deposit.class.getSimpleName()));
+            return new Deposit();
         }
 
         if (!Deposit.isValidDeposit(deposit)) {
@@ -161,8 +167,7 @@ class JsonAdaptedRentalInformation {
 
     private CustomerList modelCustomerListFunction() throws IllegalValueException {
         if (customerList == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    CustomerList.class.getSimpleName()));
+            return new CustomerList();
         }
 
         if (!CustomerList.isValidCustomerList(customerList)) {
