@@ -33,6 +33,9 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, "")));
+
+        // different history value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, "FAKE DATA")));
     }
 
     @Test
@@ -57,7 +60,8 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit()
+                + ", history=" + commandResult.getHistory() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

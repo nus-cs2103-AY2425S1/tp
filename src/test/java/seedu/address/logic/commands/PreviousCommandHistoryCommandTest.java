@@ -41,6 +41,16 @@ public class PreviousCommandHistoryCommandTest {
     }
 
     @Test
+    public void execute_previousCommandInHistory_failure() throws CommandException {
+        commandHistoryStorage.setCommandHistoryFilePath(testFilePath);
+        ModelStub modelStub = new ModelStub();
+
+        PreviousCommandHistoryCommand previousCommandHistoryCommand = new PreviousCommandHistoryCommand();
+        CommandResult commandResult = previousCommandHistoryCommand.execute(modelStub);
+        assertEquals("There are no more previous commands.", commandResult.getFeedbackToUser());
+    }
+
+    @Test
     public void equals() {
         PreviousCommandHistoryCommand command = new PreviousCommandHistoryCommand();
         assertTrue(command.equals(command));

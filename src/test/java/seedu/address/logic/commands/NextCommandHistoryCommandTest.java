@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -28,12 +27,31 @@ public class NextCommandHistoryCommandTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CommandHistoryTest");
     private static final Path testFilePath =
             TEST_DATA_FOLDER.resolve("commandHistoryTest.txt");;
+    private CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
 
     @Test
     public void execute_nextCommandInHistory_success() throws CommandException, IOException {
         CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
         commandHistoryStorage.setCommandHistoryFilePath(testFilePath);
+        CommandHistoryStorage.writeToFile("BLANK TEST");
         CommandHistoryStorage.writeToFile("MOCK TEST 1");
+
+        ModelStub modelStub = new ModelStub();
+
+        //To test next command
+        PreviousCommandHistoryCommand previousCommandHistoryCommand = new PreviousCommandHistoryCommand();
+        previousCommandHistoryCommand.execute(modelStub);
+        previousCommandHistoryCommand.execute(modelStub);
+
+        NextCommandHistoryCommand nextCommandHistoryCommand = new NextCommandHistoryCommand();
+        CommandResult commandResult = nextCommandHistoryCommand.execute(modelStub);
+        assertEquals("The next command is : MOCK TEST 1", commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_nextCommandInHistory_failure() throws CommandException, IOException {
+        CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
+        commandHistoryStorage.setCommandHistoryFilePath(testFilePath);
         ModelStub modelStub = new ModelStub();
 
         NextCommandHistoryCommand nextCommandHistoryCommand = new NextCommandHistoryCommand();
@@ -57,16 +75,6 @@ public class NextCommandHistoryCommandTest {
     }
 
     private class ModelStub implements Model {
-        private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CommandHistoryTest");
-        private static Path testFilePath;
-        private CommandHistoryStorage commandHistoryStorage;
-
-        public ModelStub() throws IOException {
-            Files.createDirectories(TEST_DATA_FOLDER);
-            testFilePath = TEST_DATA_FOLDER.resolve("commandHistoryTest.txt");
-            commandHistoryStorage = new CommandHistoryStorage();
-            commandHistoryStorage.setCommandHistoryFilePath(testFilePath);
-        }
 
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
