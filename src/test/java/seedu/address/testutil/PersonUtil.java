@@ -40,7 +40,7 @@ public class PersonUtil {
         if (person.getRoomNumber().isPresent()) {
             sb.append(PREFIX_ROOM_NUMBER + person.getRoomNumber().get().value + " ");
         }
-        if(person.getAddress().isPresent()) {
+        if (person.getAddress().isPresent()) {
             sb.append(PREFIX_ADDRESS + person.getAddress().get().value + " ");
         }
         if (person.getGradYear().isPresent()) {
