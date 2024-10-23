@@ -246,13 +246,13 @@ public class MainWindow extends UiPart<Stage> {
      * Returns the previous command.
      */
     private CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
-        return commandGetterResult.updateStringToDisplay("earlier");
+        return logic.getEarlierCommandGetterResult(commandGetterResult);
     }
 
     /**
      * Returns the next command.
      */
     private CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
-        return commandGetterResult.updateStringToDisplay("later");
+        return logic.getLaterCommandGetterResult(commandGetterResult);
     }
 }

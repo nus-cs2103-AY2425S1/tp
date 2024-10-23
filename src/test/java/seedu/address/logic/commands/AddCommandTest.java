@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -171,6 +172,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
             throw new AssertionError("This method should not be called.");
         }
     }

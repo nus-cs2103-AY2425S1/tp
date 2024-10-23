@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 
@@ -100,5 +101,13 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Returns the previous command.
+     */
+    CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult);
 
+    /**
+     * Returns the next command.
+     */
+    CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult);
 }

@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
@@ -46,7 +47,7 @@ public class ModelManager implements Model {
     }
 
 
-    //=========== CommandHistory =============================================================================
+    //=========== CommandHistory Related =====================================================================
 
     @Override
     public void setCommandHistory(ReadOnlyCommandHistory commandHistory) {
@@ -62,6 +63,16 @@ public class ModelManager implements Model {
     @Override
     public void addCommand(String commandString) {
         commandHistory.addCommand(commandString);
+    }
+
+    @Override
+    public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandGetterResult.updateStringToDisplay("earlier");
+    }
+
+    @Override
+    public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandGetterResult.updateStringToDisplay("later");
     }
 
     //=========== UserPrefs ==================================================================================
