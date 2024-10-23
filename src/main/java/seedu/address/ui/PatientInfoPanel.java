@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
@@ -18,9 +17,6 @@ public class PatientInfoPanel extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(PatientInfoPanel.class);
     private static final String FXML = "PatientInfoPanel.fxml";
-
-    @FXML
-    private VBox PatientInfoContainer;
 
     @FXML
     private Label header;
@@ -85,6 +81,11 @@ public class PatientInfoPanel extends UiPart<Region> {
     @FXML
     private Label note;
 
+    /**
+     * Creates a new PatientInfoPanel.
+     *
+     * @param patient
+     */
     public PatientInfoPanel(Person patient) {
         super(FXML);
         header.setText("Patient Information");

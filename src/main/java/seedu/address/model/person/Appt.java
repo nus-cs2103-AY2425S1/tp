@@ -16,7 +16,7 @@ public class Appt {
     /**
      * Comparator to compare two appointments by their date and time.
      * Used for sorting appointments by date and time.
-     * 
+     *
      * @param appt1
      * @param appt2
      * @return int
@@ -33,7 +33,7 @@ public class Appt {
 
     /**
      * Constructs a {@code Appt}.
-     * 
+     *
      * @param dateTime A valid appointment date.
      */
     public Appt(LocalDateTime dateTime) {

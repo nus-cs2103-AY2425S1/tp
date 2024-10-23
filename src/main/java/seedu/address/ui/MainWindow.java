@@ -44,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane GuiPanelPlaceholder;
+    private StackPane guiPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -80,7 +80,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * 
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -114,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        GuiPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        guiPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -177,8 +177,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void showPatientInfo(Person patient) {
         PatientInfoPanel patientInfoPanel = new PatientInfoPanel(patient);
-        GuiPanelPlaceholder.getChildren().remove(0);
-        GuiPanelPlaceholder.getChildren().add(patientInfoPanel.getRoot());
+        guiPanelPlaceholder.getChildren().remove(0);
+        guiPanelPlaceholder.getChildren().add(patientInfoPanel.getRoot());
     }
 
     /**
@@ -186,9 +186,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void hidePatientInfo() {
-        GuiPanelPlaceholder.getChildren().remove(0);
+        guiPanelPlaceholder.getChildren().remove(0);
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        GuiPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        guiPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     void show() {
