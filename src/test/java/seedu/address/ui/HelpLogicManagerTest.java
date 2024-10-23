@@ -2,10 +2,11 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class HelpLogicManagerTest {
 
