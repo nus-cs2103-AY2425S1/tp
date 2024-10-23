@@ -9,10 +9,12 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.ScrollPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
+  <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true" >
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints minWidth="15" prefWidth="60" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -25,16 +27,53 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
+
+    </VBox>
+
+    <columnConstraints>
+      <ColumnConstraints minWidth="15" prefWidth="200" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="1" >
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+
+
+      <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+      <ScrollPane fitToWidth="true" fitToHeight="true"
+                  styleClass="scroll-pane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true">
+        <content>
+          <FlowPane fx:id="tags" prefWidth="200" styleClass="flow-pane"/>
+        </content>
+      </ScrollPane>
       <Label fx:id="grade" />
-      <FlowPane fx:id="tags" />
+
+    </VBox>
+
+    <columnConstraints>
+      <ColumnConstraints minWidth="20" prefWidth="40" hgrow="ALWAYS"/>
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="2">
+      <padding>
+        <Insets top="5" right="15" bottom="5" left="15" />
+      </padding>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+    </VBox>
+
+    <columnConstraints>
+      <ColumnConstraints minWidth="20" prefWidth="40" hgrow="ALWAYS" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="3">
+      <padding>
+        <Insets top="5" right="15" bottom="5" left="15" />
+      </padding>
       <Label fx:id="parentName" styleClass="cell_small_label" text="\$parentName" />
       <Label fx:id="parentPhone" styleClass="cell_small_label" text="\$parentPhone" />
       <Label fx:id="parentEmail" styleClass="cell_small_label" text="\$parentEmail" />
     </VBox>
+
   </GridPane>
 </HBox>
