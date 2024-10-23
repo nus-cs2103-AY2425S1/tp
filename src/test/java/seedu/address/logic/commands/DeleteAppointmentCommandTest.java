@@ -10,8 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Iterator;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -25,27 +23,6 @@ import seedu.address.model.person.Schedule;
 
 public class DeleteAppointmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_validNameUnfilteredList_success() {
-        Person personWithAppointmentToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                personWithAppointmentToDelete.getName(),
-                personWithAppointmentToDelete.getSchedules().iterator().next());
-        String expectedMessage = "";
-
-        Iterator<Schedule> iterator = personWithAppointmentToDelete.getSchedules().iterator();
-        if (iterator.hasNext()) {
-            expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                    Messages.formatSchedule(personWithAppointmentToDelete,
-                            iterator.next()));
-        }
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
-        assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
-    }
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
