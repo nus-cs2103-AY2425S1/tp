@@ -1,5 +1,6 @@
 package seedu.hireme.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.hireme.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.hireme.testutil.Assert.assertThrows;
@@ -106,12 +107,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseSortingOrder_validValueWithoutWhitespace_returnsSortingOrder() throws Exception {
+        assertDoesNotThrow(() -> ParseException.class);
         assertEquals(true, ParserUtil.parseSortingOrder(VALID_SORTING_ORDER));
     }
 
     @Test
     public void parseSortingOrder_validValueWithWhitespace_returnsSortingOrder() throws Exception {
         String sortingOrderWithWhitespace = WHITESPACE + VALID_SORTING_ORDER + WHITESPACE;
+        assertDoesNotThrow(() -> ParseException.class);
         assertEquals(true, ParserUtil.parseSortingOrder(sortingOrderWithWhitespace));
     }
 
