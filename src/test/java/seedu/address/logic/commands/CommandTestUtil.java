@@ -80,7 +80,7 @@ public class CommandTestUtil {
     public static final String TASK_DEADLINE_DESC_BOB = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE;
     public static final String TASK_INDEX_DESC = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
     public static final String LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME;
-
+    public static final String INVALID_SUBJECT = "MATH*";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMERGENCY_CONTACT_DESC =

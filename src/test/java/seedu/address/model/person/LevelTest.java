@@ -29,7 +29,8 @@ public class LevelTest {
         assertFalse(Level.isValidLevelName(" ")); // spaces only
         assertFalse(Level.isValidLevelName("^")); // only non-alphanumeric characters
         assertFalse(Level.isValidLevelName("s!gm4")); // contains non-alphanumeric characters
-
+        assertFalse(Level.isValidLevelName("S5 Express"));
+        
         // valid levels
         assertTrue(Level.isValidLevelName("S1 Express"));
         assertTrue(Level.isValidLevelName("S2 Express"));
@@ -50,6 +51,8 @@ public class LevelTest {
         assertTrue(Level.isValidLevelName("S2 IP"));
         assertTrue(Level.isValidLevelName("S3 IP"));
         assertTrue(Level.isValidLevelName("S4 IP"));
+
+        assertTrue(Level.isValidLevelName("S5 NA"));
     }
 
     @Test
