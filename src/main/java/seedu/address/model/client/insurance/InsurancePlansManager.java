@@ -115,7 +115,6 @@ public class InsurancePlansManager {
     public void checkIfPlanOwned(InsurancePlan plan) throws InsurancePlanException {
         for (InsurancePlan p : insurancePlans) {
             if (p.getInsurancePlanId() == plan.getInsurancePlanId()) {
-
                 return;
             }
         }
@@ -140,7 +139,7 @@ public class InsurancePlansManager {
     }
 
     /**
-     * Adds a claim to the insurance plan of the client. NOTE: Part of this can be moved to {@code InsurancePlan} later.
+     * Adds a claim to the insurance plan of the client.
      *
      * @param insurancePlan The insurance plan the claim is to be added to.
      * @param claim         The claim that is to be added to the insurance plan.

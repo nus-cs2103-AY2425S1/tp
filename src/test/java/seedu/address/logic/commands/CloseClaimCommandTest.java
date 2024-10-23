@@ -28,7 +28,7 @@ class CloseClaimCommandTest {
     void execute_validIndexUnfilteredList_success() throws CommandException,
             InsurancePlanException, ClaimException {
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
-        InsurancePlansManager originalInsurancePlanManager = clientToEdit.getInsurancePlansManager();
+        InsurancePlansManager originalInsurancePlansManager = clientToEdit.getInsurancePlansManager();
 
         InsurancePlan insurancePlan = clientToEdit.getInsurancePlansManager().getInsurancePlan(0);
         Claim claim = clientToEdit.getInsurancePlansManager().getInsurancePlan(0).getClaim("A1001");
@@ -42,11 +42,11 @@ class CloseClaimCommandTest {
         String expectedMessage = String.format(CloseClaimCommand.MESSAGE_CLOSE_CLAIM_SUCCESS,
                 clientToEdit.getName().toString(), insurancePlan, claim.getClaimId());
 
-        InsurancePlansManager updatedInsurancePlanManager = originalInsurancePlanManager.createCopy();
-        updatedInsurancePlanManager.closeClaim(insurancePlan, claim);
+        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
+        updatedInsurancePlansManager.closeClaim(insurancePlan, claim);
 
         assertInsuranceCommandSuccess(closeClaimCommand, model, expectedMessage,
-                originalInsurancePlanManager, updatedInsurancePlanManager);
+                originalInsurancePlansManager, updatedInsurancePlansManager);
     }
 
     @Test

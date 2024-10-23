@@ -122,26 +122,24 @@ public class CommandTestUtil {
      * @param actualModel                  Model that the command is to be checked on.
      * @param expectedMessage              the expected success message.
      * @param actualInsurancePlansManager  the actual state of the insurance plan manager.
-     * @param expectedInsurancePlanManager the expected state of the insurance plan manager.
+     * @param expectedInsurancePlansManager the expected state of the insurance plan manager.
      */
     public static void assertInsuranceCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                                      InsurancePlansManager actualInsurancePlansManager,
-                                                     InsurancePlansManager expectedInsurancePlanManager) {
+                                                     InsurancePlansManager expectedInsurancePlansManager) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertInsuranceCommandSuccess(command, actualModel, expectedCommandResult,
-                actualInsurancePlansManager, expectedInsurancePlanManager);
+                actualInsurancePlansManager, expectedInsurancePlansManager);
     }
 
     private static void assertInsuranceCommandSuccess(Command command, Model actualModel,
                                                       CommandResult expectedCommandResult,
                                                       InsurancePlansManager actualInsurancePlansManager,
-                                                      InsurancePlansManager expectedInsurancePlanManager) {
+                                                      InsurancePlansManager expectedInsurancePlansManager) {
         try {
             CommandResult result = command.execute(actualModel);
-            System.out.println(expectedInsurancePlanManager.convertClaimsToJson());
-            System.out.println(actualInsurancePlansManager.convertClaimsToJson());
             assertEquals(expectedCommandResult, result);
-            assertEquals(expectedInsurancePlanManager, actualInsurancePlansManager);
+            assertEquals(expectedInsurancePlansManager, actualInsurancePlansManager);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
