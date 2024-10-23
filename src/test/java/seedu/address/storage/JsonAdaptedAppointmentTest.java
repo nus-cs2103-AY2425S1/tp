@@ -2,7 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_1;
 import static seedu.address.testutil.TypicalDoctors.ALICE;
+import static seedu.address.testutil.TypicalPatients.AMY;
 import static seedu.address.testutil.TypicalPatients.CARL;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -37,6 +39,7 @@ public class JsonAdaptedAppointmentTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
+
     @Test
     public void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
         List<Doctor> doctorList = new ArrayList<>();
@@ -50,12 +53,33 @@ public class JsonAdaptedAppointmentTest {
     }
 
     @Test
+    public void constructor_validSource_returnsJsonAdaptedAppointment() throws Exception {
+        List<Doctor> doctorList = new ArrayList<>();
+        List<Patient> patientList = new ArrayList<>();
+        doctorList.add(ALICE);
+        patientList.add(AMY);
+        JsonAdaptedAppointment jsonAdaptedAppointment = new JsonAdaptedAppointment(APPOINTMENT_1);
+        assertEquals(APPOINTMENT_1, jsonAdaptedAppointment.toModelType(doctorList, patientList));
+    }
+
+    @Test
     public void toModelType_invalidDoctorName_throwsIllegalValueException() {
         List<Doctor> doctorList = new ArrayList<>();
         List<Patient> patientList = new ArrayList<>();
         doctorList.add(ALICE);
         patientList.add(CARL);
         JsonAdaptedAppointment jsonAdaptedAppointment = new JsonAdaptedAppointment(1, "Alice",
+                "Carl Kurz", VALID_DATE_STRING, VALID_TIME_STRING);
+        assertThrows(IllegalValueException.class, () -> jsonAdaptedAppointment.toModelType(doctorList, patientList));
+    }
+
+    @Test
+    public void toModelType_invalidId_throwsIllegalValueException() {
+        List<Doctor> doctorList = new ArrayList<>();
+        List<Patient> patientList = new ArrayList<>();
+        doctorList.add(ALICE);
+        patientList.add(CARL);
+        JsonAdaptedAppointment jsonAdaptedAppointment = new JsonAdaptedAppointment(null, "Alice Pauline",
                 "Carl Kurz", VALID_DATE_STRING, VALID_TIME_STRING);
         assertThrows(IllegalValueException.class, () -> jsonAdaptedAppointment.toModelType(doctorList, patientList));
     }
