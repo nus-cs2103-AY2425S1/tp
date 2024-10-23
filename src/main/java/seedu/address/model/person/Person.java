@@ -117,7 +117,8 @@ public class Person {
                 && organisation.equals(otherPerson.organisation)
                 && lastSeen.equals(otherPerson.lastSeen)
                 && tags.equals(otherPerson.tags)
-                && priority.equals(otherPerson.priority);
+                && priority.equals(otherPerson.priority)
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
