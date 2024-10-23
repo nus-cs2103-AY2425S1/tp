@@ -120,7 +120,8 @@ public class UpdateTaskCommand extends Command {
         return new Person(
                 personToUpdate.getName(), personToUpdate.getPhone(), personToUpdate.getEmergencyContact(),
                 personToUpdate.getAddress(), personToUpdate.getNote(),
-                personToUpdate.getSubjects(), personToUpdate.getLevel(), updatedTaskList);
+                personToUpdate.getSubjects(), personToUpdate.getLevel(), updatedTaskList,
+                personToUpdate.getLessonTimes());
     }
 
     @Override
