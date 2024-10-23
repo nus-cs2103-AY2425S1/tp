@@ -9,17 +9,17 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Property};s {code LandlordName} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Property> {
+public class LocationContainsKeywordsPredicate implements Predicate<Property> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public LocationContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Property property) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(property.getLocation().value, keyword));
     }
 
     @Override
@@ -28,11 +28,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Property> {
             return true;
         }
 
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof LocationContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherPredicate = (NameContainsKeywordsPredicate) other;
+        LocationContainsKeywordsPredicate otherPredicate = (LocationContainsKeywordsPredicate) other;
         return keywords.equals(otherPredicate.keywords);
     }
 
