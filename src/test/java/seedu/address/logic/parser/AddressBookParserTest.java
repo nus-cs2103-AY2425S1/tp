@@ -34,9 +34,9 @@ import seedu.address.logic.commands.UnattendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
-import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
 
