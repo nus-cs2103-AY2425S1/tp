@@ -226,6 +226,11 @@ public class AddContactCommandTest {
         public void updateFilteredCompanyList(Predicate<Company> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void showLinkedJobsAndPersonsByCompany(Company company) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
