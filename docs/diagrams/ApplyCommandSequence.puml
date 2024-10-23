@@ -1,0 +1,14 @@
+@startuml
+actor User
+User -> ApplyCommand: execute()
+ApplyCommand -> Model: getCompany(companyId)
+Model --> ApplyCommand: Company
+
+ApplyCommand -> Application: new Application(details)
+ApplyCommand -> Company: addApplication(new Application)
+Company --> ApplyCommand: updatedCompany
+
+ApplyCommand -> Model: setCompany(targetCompany, updatedCompany)
+ApplyCommand -> Model: commitAddressBook()
+
+@enduml

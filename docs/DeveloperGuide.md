@@ -163,6 +163,80 @@ Classes used by multiple components are in the `seedu.internbuddy.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Apply feature
+
+#### Implementation
+
+The `ApplyCommand` is responsible for adding a new application to a specified company. It is invoked when a user applies for a position at a company and wants to track the application in the system. This command operates on the `Model`, updating the target company by appending a new application to its list of applications.
+
+The following methods and operations are involved:
+
+* `ApplyCommand#execute()` — Adds a new `Application` to the specified `Company`.
+* `Model#setCompany(Company targetCompany, Company updatedCompany)` — Replaces the existing company in the model with an updated one, which contains the new application.
+* `Model#commitAddressBook()` — Commits the changes to the address book.
+
+##### Example usage scenario:
+
+Step 1. The user selects a company and executes the `apply` command with relevant application details (e.g., position and status). The command fetches the selected company and creates a new `Application`.
+
+Step 2. A copy of the company's current list of applications is made, and the new `Application` is added to the list.
+
+Step 3. The `ApplyCommand` creates an updated `Company` object containing the newly added application and calls `Model#setCompany()` to replace the old company in the model with the updated one.
+
+Step 4. The changes are committed to the address book by calling `Model#commitAddressBook()`.
+
+<puml src="diagrams/ApplyCommandSequence.puml" alt="ApplyCommandSequence" />
+
+#### Design considerations:
+
+**Aspect: How to store the applications:**
+
+* **Alternative 1 (current choice):** Store applications as a modifiable list within each `Company`.
+  * Pros: Simple to implement and modify the list of applications.
+  * Cons: The list must be copied to ensure immutability during updates.
+
+* **Alternative 2:** Store applications as a separate entity with references to companies.
+  * Pros: Improves separation of concerns and scalability for large datasets.
+  * Cons: Increases complexity of application updates.
+
+---
+
+### Update feature
+
+#### Implementation
+
+The `UpdateCommand` is responsible for updating the status of an existing application for a specific company. When a user wants to modify the application status (e.g., changing from "APPLIED" to "INTERVIEWED"), this command is invoked.
+
+The following methods and operations are involved:
+
+* `UpdateCommand#execute()` — Updates the status of the specified `Application` for a particular `Company`.
+* `Model#setCompany(Company targetCompany, Company updatedCompany)` — Replaces the old company in the model with the updated company containing the modified application.
+* `Model#commitAddressBook()` — Commits the modified address book state.
+
+##### Example usage scenario:
+
+Step 1. The user selects a company and executes the `update` command to change the status of an application. The command fetches the target company and retrieves the application to update.
+
+Step 2. A copy of the company's current list of applications is made, and the relevant application is modified by updating its `AppStatus`.
+
+Step 3. The `UpdateCommand` creates an updated `Company` object containing the modified application list and calls `Model#setCompany()` to replace the old company with the updated one.
+
+Step 4. The changes are committed to the address book using `Model#commitAddressBook()`.
+
+<puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
+
+#### Design considerations:
+
+**Aspect: How to modify the application status:**
+
+* **Alternative 1 (current choice):** Modify the application within the company’s application list directly.
+  * Pros: Easy to implement, minimal changes required in the data structure.
+  * Cons: The list must be copied to maintain immutability during updates.
+
+* **Alternative 2:** Store applications in a separate collection and update them independently of the company.
+  * Pros: Cleaner separation of concerns, potentially more scalable.
+  * Cons: Increased complexity in ensuring consistency between companies and applications.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
