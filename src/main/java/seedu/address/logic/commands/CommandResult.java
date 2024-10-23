@@ -63,7 +63,7 @@ public class CommandResult {
         return list;
     }
 
-    // NOTE: NOT THE BEST IMPLEMENTATION BUT WORKS!!! WORK IN PROGRESS
+    // might need more validation to check if personIndex > -1 before retrieving?
     public int getPersonIndex() {
         return personIndex;
     }

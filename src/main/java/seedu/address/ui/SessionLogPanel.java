@@ -41,5 +41,4 @@ public class SessionLogPanel extends UiPart<Region> {
             }
         }
     }
-
 }

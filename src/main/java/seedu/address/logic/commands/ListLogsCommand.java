@@ -44,7 +44,7 @@ public class ListLogsCommand extends Command {
 
         ObservableList<Person> personList = model.getAddressBook().getPersonList();
         int personIndex = -1;
-        Person person  = null;
+        Person person = null;
 
         for (Person p: personList) {
             if (identityNumber.equals(p.getIdentityNumber())) {
@@ -69,7 +69,8 @@ public class ListLogsCommand extends Command {
         }
 
         model.getSessionLog(personIndex);
-        return new CommandResult(String.format(MESSAGE_LIST_LOG_SUCCESS + sb.toString(), identityNumber, person.getName()),
+        return new CommandResult(String.format(MESSAGE_LIST_LOG_SUCCESS + sb.toString(),
+                identityNumber, person.getName()),
                 false, false, true, personIndex);
     }
 

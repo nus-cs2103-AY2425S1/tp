@@ -1,16 +1,9 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.List;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +26,8 @@ public class ListLogsCommandTest {
 
         ListLogsCommand listLogsCommand = new ListLogsCommand(deletedPerson.getIdentityNumber());
 
-        String expectedMessage = String.format(ListLogsCommand.MESSAGE_PERSON_NOT_FOUND, deletedPerson.getIdentityNumber());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        String expectedMessage = String.format(ListLogsCommand.MESSAGE_PERSON_NOT_FOUND,
+                deletedPerson.getIdentityNumber());
 
         assertCommandFailure(listLogsCommand, model, expectedMessage);
     }
