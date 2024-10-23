@@ -18,7 +18,7 @@ public class BarChartWindow extends UiPart<Stage> {
     private static Map<String, Integer> distributionOfMonthsPaid;
 
     @FXML
-    private BarChart barChart;
+    private BarChart<String, Number> barChart;
 
     /**
      * Creates a new BarChartWindow.
