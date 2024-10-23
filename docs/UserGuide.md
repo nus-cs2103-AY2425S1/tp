@@ -19,7 +19,7 @@ With BridalBuddy, you can easily:
 To discover more about what BridalBuddy has to offer, continue reading the rest of this comprehensive user guide.
 
 ## Table of Contents
-1. [**User Guide Tips**](#user-guide-tips)
+1. [**Helpful Guidelines for the User Guide**](#helpful-guidelines-for-the-user-guide)
 2. [**Quick Start**](#quick-start)
 3. [**Tutorial for Beginners**](#tutorial-for-beginners)
 4. [**Features**](#features)
@@ -45,6 +45,11 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 6. [**Known Issues**](#known-issues)
 7. [**Command summary**](#command-summary)
 8. [**Glossary**](#glossary)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Helpful Guidelines for the User Guide
+
 
 --------------------------------------------------------------------------------------------------------------------
 
