@@ -2,22 +2,32 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the model - person, or appointment.
  */
-public class ClearCommand extends Command {
+public abstract class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
-
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the entity identified by the user. \n"
+            + "Parameters: entity (person or appt) \n "
+            + "Example: " + COMMAND_WORD + "appt \n";
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        clearEntity(model);
+        return new CommandResult(getSuccessMessage());
     }
+
+    /*
+     * Clears a specified model.
+     */
+    protected abstract void clearEntity(Model model);
+
+    /*
+     * Returns success message to display upon adding entity.
+     */
+    protected abstract String getSuccessMessage();
 }

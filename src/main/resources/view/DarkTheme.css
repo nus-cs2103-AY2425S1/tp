@@ -132,6 +132,23 @@
     -fx-text-fill: #010504;
 }
 
+.cell_id_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-background-color: #2a92ed;
+    -fx-background-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15 5 15;
+}
+
+.cell_id_prefix_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-text-fill: #2a92ed;
+    -fx-font-weight: bold;
+    -fx-padding: 0 10 0 0;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
