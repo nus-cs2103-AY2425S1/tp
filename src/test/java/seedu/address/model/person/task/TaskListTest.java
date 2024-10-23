@@ -109,8 +109,8 @@ public class TaskListTest {
     @Test
     public void updateTask_validIndex_success() {
         TaskList taskList = new TaskList();
-        taskList.add(MARKING_TASK);  // Assume this task has a valid deadline
-        Task updatedTask = GRADING_TASK;  // Example of updated task
+        taskList.add(MARKING_TASK); // Assume this task has a valid deadline
+        Task updatedTask = GRADING_TASK; // Example of updated task
 
         // Update the task at index 0
         TaskList updatedTaskList = taskList.updateTask(Index.fromZeroBased(0), updatedTask);
@@ -128,25 +128,25 @@ public class TaskListTest {
         taskList.add(MARKING_TASK);
 
         // Ensure NullPointerException is thrown if the updated task is null
-        assertThrows(NullPointerException.class,
-                () -> taskList.updateTask(Index.fromZeroBased(0), null));
+        assertThrows(NullPointerException.class, () -> taskList.updateTask(Index.fromZeroBased(0),
+                null));
     }
 
     @Test
     public void updateTask_indexOutOfRange_throwsIndexOutOfBoundsException() {
         TaskList taskList = new TaskList();
-        taskList.add(MARKING_TASK);  // Only 1 task in the list
+        taskList.add(MARKING_TASK); // Only 1 task in the list
 
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> taskList.updateTask(Index.fromZeroBased(1), GRADING_TASK));
+        assertThrows(IndexOutOfBoundsException.class, () -> taskList.updateTask(Index.fromZeroBased(1),
+                GRADING_TASK));
     }
 
     @Test
     public void updateTask_emptyTaskList_throwsIndexOutOfBoundsException() {
-        TaskList taskList = new TaskList();  // No tasks in the list
+        TaskList taskList = new TaskList(); // No tasks in the list
 
-        assertThrows(IndexOutOfBoundsException.class,
-                () -> taskList.updateTask(Index.fromZeroBased(0), GRADING_TASK));
+        assertThrows(IndexOutOfBoundsException.class, () -> taskList.updateTask(Index.fromZeroBased(0),
+                GRADING_TASK));
     }
 
     @Test
