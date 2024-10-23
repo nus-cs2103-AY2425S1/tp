@@ -47,9 +47,9 @@ public class EditCourseCommand extends Command {
 
     public static final String MESSAGE_EDIT_COURSE_SUCCESS = "Edited Course: %1$s";
     public static final String MESSAGE_COURSE_NOT_EDITED = "At least one field to edit must be provided.";
-    
-    private final EditCourseDescriptor editCourseDescriptor;
+
     private final CourseCode courseCode;
+    private final EditCourseDescriptor editCourseDescriptor;
     
     public EditCourseCommand(CourseCode courseCode, EditCourseDescriptor editCourseDescriptor) {
         requireNonNull(courseCode);
