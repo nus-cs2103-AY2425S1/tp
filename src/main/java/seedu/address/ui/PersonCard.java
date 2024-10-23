@@ -84,10 +84,13 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         // Add module role pairs
+        Integer roleLabelFontSize = 14;
         person.getModuleRoleMap().getData().stream()
                 .sorted(Comparator.comparing(moduleRolePair -> moduleRolePair.moduleCode.toString()))
                 .forEach(moduleRolePair -> {
                     Label curLabel = new Label(moduleRolePair.toString());
+
+                    curLabel.setStyle(curLabel.getStyle() + " -fx-font-size: " + roleLabelFontSize.toString());
 
                     RoleType roleType = moduleRolePair.roleType;
 
@@ -103,7 +106,7 @@ public class PersonCard extends UiPart<Region> {
 
                         // Scale height but preserve aspect ratio
                         ImageView imageView = new ImageView(image);
-                        imageView.setFitHeight(14);
+                        imageView.setFitHeight(roleLabelFontSize);
                         imageView.setPreserveRatio(true);
 
                         curLabel.setGraphic(imageView);
