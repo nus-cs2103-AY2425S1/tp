@@ -12,7 +12,7 @@ import tutorease.address.commons.util.DateTimeUtil;
 /**
  * Represents a DateTime in the address book.
  */
-public class DateTime {
+public class DateTime implements Comparable<DateTime> {
     private static final String MESSAGE_CONSTRAINTS = "DateTime must be in the format of " + getDateTimeFormat();
     private final LocalDateTime dateTime;
     /**
@@ -72,9 +72,21 @@ public class DateTime {
         DateTime otherDateTime = (DateTime) other;
         return dateTime.equals(otherDateTime.dateTime);
     }
+    /**
+     * Compares this date time with another date time.
+     *
+     * @param dateTime The date time to compare with.
+     * @return A negative integer, zero, or a positive integer as this date time is before, equal to, or after the
+     *     specified date time.
+     */
+    @Override
+    public int compareTo(DateTime dateTime) {
+        return this.dateTime.compareTo(dateTime.dateTime);
+    }
 
     /**
      * Returns true if a given string is a valid date and time.
+     *
      * @param dateTime The date and time to be checked.
      * @return True if the date and time is valid, false otherwise.
      */

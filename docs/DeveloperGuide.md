@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
 # TutorEase Developer Guide
@@ -101,23 +101,23 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("contact delete 1"
-)` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking 
+`execute("contact delete 1")` API call
+as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `contact delete 1`
-Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `contact delete 1` Command" />
 
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -146,8 +146,7 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -175,8 +174,7 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -223,7 +221,7 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 Step 2. The user executes `contact delete 5` command to delete the 5th person in the address book. The `contact delete`
 command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `contact delete 5`
-command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly 
+command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly
 inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
@@ -338,18 +336,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* freelance pre-university home tutors
-* has a need to manage a significant number of students, their contacts and relevant information
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Freelance pre-university home tutors
+* Manages a significant number of students
+* Prefers desktop applications
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**: Our software enhances tutoring efficiency by
 
-* simplifying management tasks,
-* reducing scheduling conflicts, and
-* providing a clear overview of classes and finances.
+* Simplifying management tasks
+* Reducing scheduling conflicts
+* Providing a clear overview of classes and finances
 
 It enables seamless tutor coordination with students and parents, improving communication and organization,
 ultimately leading to a more effective and stress-free educational experience.
@@ -415,12 +412,12 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 (For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case: UC01 - Add student contact**
+**Use Case: UC01 - Add contact**
 
 **MSS**:
 
-1. Tutor keys in required fields to add student contact.
-2. TutorEase adds the student contact.  
+1. Tutor keys in required fields to add a contact.
+1. TutorEase adds the contact.  
    Use case ends.
 
 **Extensions**:
@@ -431,12 +428,12 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC02 - Delete student contact**
+**Use Case: UC02 - Delete contact**
 
 **MSS**:
 
-1. Tutor keys in required fields to delete student contact.
-2. TutorEase deletes the student contact.  
+1. Tutor keys in required fields to delete contact.
+1. TutorEase deletes the contact.  
    Use case ends.
 
 **Extensions**:
@@ -447,12 +444,12 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC03 - List student contacts**
+**Use Case: UC03 - List contacts**
 
 **MSS**:
 
-1. Tutor keys in required fields to list student contacts.
-2. TutorEase lists the student contact.  
+1. Tutor keys in list contacts command.
+1. TutorEase lists all the contacts stored.  
    Use case ends.
 
 **Extensions**:
@@ -463,11 +460,32 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.              
       Use case resumes from Step 2.
 
-**Use Case: UC04 - Add lesson for student**  
+**Use Case: UC04 - Find contacts with a specific name keyword**
+
+**MSS**:
+
+1. Tutor keys in a keyword in the required field to find contacts whose names contain this keyword.
+1. TutorEase lists the contacts with the given keyword.  
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Use case resumes from Step 2.
+
+* **1b**. No contacts found matching the entered keyword.
+    * **1b1**. TutorEase displays a message: "No contacts found with the given keyword(s)."  
+    * **1b2**. Tutor enters a new keyword or cancels the search.  
+      Use case resumes from Step 2 or ends if cancelled.  
+
+**Use Case: UC05 - Add lesson for student**  
 **MSS:**
 
 1. Tutor keys in required fields to add student contact.
-2. TutorEase adds the lesson to the student.  
+1. TutorEase adds the lesson to the student.  
    Use case ends.
 
 **Extensions:**
@@ -484,11 +502,11 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC05 - Delete lesson for student**  
+**Use Case: UC06 - Delete lesson for student**  
 **MSS:**
 
 1. Tutor keys in required fields to delete student contact.
-2. TutorEase deletes the lesson for the student.  
+1. TutorEase deletes the lesson for the student.  
    Use case ends.
 
 **Extensions:**
@@ -505,11 +523,11 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC06 - List all lessons**  
+**Use Case: UC07 - List all lessons**  
 **MSS:**
 
 1. Tutor keys in required fields to list all lessons.
-2. TutorEase lists all lessons.    
+1. TutorEase lists all lessons.    
    Use case ends.
 
 **Extensions:**
@@ -524,37 +542,37 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
-2. Data Requirements:
+1. Data Requirements:
     - Size: System must be able to handle at least 1,000 student records, with each containing personal information and
       lesson schedules.
     - Volatility: Contact information is not expected to be changed frequently, but lessons schedules may change
       frequently. System must allow quick updates without issues.
     - Data persistency: all students and lesson data should be stored and retrievable until entry has been deleted.
-3. Environment Requirements:
+1. Environment Requirements:
     - Technical Compatability: System must be compatible with _Mainstream OS_ as long as it has Java `17` or above
       installed.
     - Server Requirements: stored locally.
-4. Capacity:
+1. Capacity:
     - User Capacity: System is designed for local use and therefore for 1 local user.
     - Data Capacity: as mentioned above within Data Requirements.
-5. Documentation:
+1. Documentation:
     - User Guide: A complete user guide will be provided for tutor, detailing every command and cover common
       troubleshooting scenarios.
     - Developer Guide: Comprehensive developer guide will be available, to facilitate future development and
       maintenance.
-6. Fault Tolerance:
+1. Fault Tolerance:
     - Error handling: System should handle up to 90% of incorrect inputs (incorrect date formats, missing fields or etc)
       without crashing and should provide meaningful error messages to guide users to correct the input.
-7. Maintability:
+1. Maintability:
     - System should have modular components that are easily replaceable or upgradable without affecting the application.
-8. Portability:
+1. Portability:
     - System must be portable across devices with different operating systems, allowing tutors to install it easily.
-9. Quality:
+1. Quality:
     - Ease of Use: System should be usable by tutors with minimal computer literacy and include intuitive CLI commands
       and user-friendly prompts.
     - Testing coverage: Unit tests should cover at least 60% of codebase, ensuring high reliability during future
       updates.
-10. Testability:
+1. Testability:
     - Automated Testing: System should support automated unit and integration testing for continuous integration,
       allowing future updates to be tested without manual intervention.
 
@@ -585,14 +603,14 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
     1. Download the jar file and copy into an empty folder
-
+   
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
+   
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
@@ -603,18 +621,18 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `contact list` command. Multiple persons in the list.
-
+   
     1. Test case: `contact delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
-
+   
     1. Test case: `contact delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the 
+   
+    1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the
        list size)<br>
        Expected: Similar to previous.
-
+   
 1. _{ more test cases …​ }_
 
 ### Deleting a lesson
@@ -639,7 +657,7 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_

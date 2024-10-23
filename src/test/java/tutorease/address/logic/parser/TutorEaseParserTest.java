@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorease.address.logic.commands.CommandTestUtil.DURATION_DESC;
-import static tutorease.address.logic.commands.CommandTestUtil.LOCATION_INDEX_DESC;
+import static tutorease.address.logic.commands.CommandTestUtil.FEE_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
 import static tutorease.address.testutil.Assert.assertThrows;
@@ -88,7 +88,7 @@ public class TutorEaseParserTest {
                 + " "
                 + AddLessonCommand.COMMAND_WORD
                 + " " + STUDENT_ID_DESC
-                + " " + LOCATION_INDEX_DESC
+                + " " + FEE_DESC
                 + " " + START_DATE_TIME_DESC
                 + " " + DURATION_DESC) instanceof AddLessonCommand);
     }
