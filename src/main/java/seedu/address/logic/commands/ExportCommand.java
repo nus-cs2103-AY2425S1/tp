@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.FileUtil;
@@ -118,14 +119,14 @@ public class ExportCommand extends Command {
         String address = "\"" + person.getAddress().value + "\"";
         sj.add(address);
 
-        List<String> tags = person.getTags().stream()
-            .map(Tag::toString).toList();
+        String tags = person.getTags().stream()
+            .map(Tag::toString).collect(Collectors.joining(","));
 
-        List<String> notes = person.getNotes().stream()
-            .map(Note::toString).toList();
+        String notes = person.getNotes().stream()
+            .map(Note::getNote).collect(Collectors.joining(","));
 
-        sj.add("\"" + tags.toString().replaceAll("[\\[\\]]", "") + "\"");
-        sj.add("\"" + notes.toString().replaceAll("[\\[\\]]", "") + "\"");
+        sj.add("\"" + tags + "\"");
+        sj.add("\"" + notes + "\"");
 
         return sj.toString();
     }
