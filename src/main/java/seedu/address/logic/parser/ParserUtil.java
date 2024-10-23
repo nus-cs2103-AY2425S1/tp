@@ -5,9 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -15,8 +18,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingDate;
 import seedu.address.model.wedding.WeddingName;
 
@@ -159,5 +164,42 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(WeddingDate.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parses a {@code String personIndexString} into a {@code Set<Index>}
+     * @param personIndexString
+     * @return {@code Set<Index>}
+     * @throws ParseException
+     */
+
+    public static Set<Index> parsePersonIndexString(String personIndexString) throws ParseException {
+        Set<Index> personIndexSet;
+        try {
+            personIndexSet = Arrays.stream(personIndexString.split("\\s+"))
+                    .map(Integer::parseInt)
+                    .map(i -> Index.fromOneBased(i))
+                    .collect(Collectors.toSet());
+
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Wedding.MESSAGE_CONSTRAINTS);
+        }
+
+        return personIndexSet;
+    }
+
+    /**
+     * Parses a {@code ArrayList<Person> personArrayList} into a {@code String parsedPersonNames}
+     * @param personArrayList
+     * @return String
+     */
+    public static String parsePersonListToString(ArrayList<Person> personArrayList) {
+        String parsedPersonNames = personArrayList.stream()
+                .map(person -> person.getName().toString())
+                .sorted()
+                .reduce((name1, name2) -> name1 + ", " + name2)
+                .orElse("");
+
+        return parsedPersonNames;
     }
 }
