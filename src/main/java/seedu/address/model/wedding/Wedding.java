@@ -5,36 +5,37 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
  * Represents a wedding plan.
  */
 public class Wedding {
-    private Husband husband;
-    private Wife wife;
+    private Name name;
+    private Client client;
     private Date date;
     private Venue venue;
-    private ContactMap contactList;
+    private ContactMap contactMap;
 
     /**
      * Constructs a {@code Wedding}.
      */
-    public Wedding(Husband husband, Wife wife, Date date, Venue venue) {
-        requireAllNonNull(husband, wife);
-        this.husband = husband;
-        this.wife = wife;
+    public Wedding(Name name, Client client, Date date, Venue venue) {
+        requireAllNonNull(name, client);
+        this.name = name;
+        this.client = client;
         this.date = date;
         this.venue = venue;
-        this.contactList = new ContactMap();
+        this.contactMap = new ContactMap();
     }
 
-    public Husband getHusband() {
-        return husband;
+    public Name getName() {
+        return name;
     }
 
-    public Wife getWife() {
-        return wife;
+    public Client getClient() {
+        return client;
     }
 
     public Date getDate() {
@@ -54,39 +55,38 @@ public class Wedding {
     }
 
     /**
-     * Returns true if the given person is a spouse in this wedding.
-     *
-     * @param person The person to check.
-     * @return True if the person is either the husband or wife, false otherwise.
-     */
-    public boolean isSpouse(Person person) {
-        return person.equals(husband.getPerson()) || person.equals(wife.getPerson());
-    }
-
-    /**
      * Adds a role and person to the ContactMap for this wedding.
      * Validates that the person being added is not a spouse (husband or wife).
      *
-     * @param role The role to be added.
      * @param person The person who will have the role.
      * @throws IllegalArgumentException If the person is a spouse or if the role is already assigned.
      */
-    public void addRoleToMap(Role role, Person person) {
-        if (isSpouse(person)) {
-            throw new IllegalArgumentException("This person is a spouse and cannot have another role.");
+    public void addRoleToMap(Person person) {
+        if (person.isSamePerson(client.getPerson())) {
+            throw new IllegalArgumentException("This person is a client and cannot have another role.");
         }
-        contactList.addToMap(role, person);
-    }
 
+        if (person.getRole() == null) {
+            throw new IllegalArgumentException("This person does not have a role.");
+        }
+
+        contactMap.addToMap(person.getRole(), person);
+    }
+    /**
+     * Returns true if both weddings have the same identity.
+     */
+    public boolean isSameWedding(Wedding otherWedding) {
+        return this.equals(otherWedding);
+    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("husband", husband)
-                .add("wife", wife)
+                .add("name", name)
+                .add("client", client)
                 .add("date", date)
                 .add("venue", venue)
-                .add("contactList", contactList)
+                .add("contactList", contactMap)
                 .toString();
     }
 
@@ -101,15 +101,15 @@ public class Wedding {
         }
 
         Wedding otherWedding = (Wedding) other;
-        return husband.equals(otherWedding.husband)
-               && wife.equals(otherWedding.wife)
+        return name.equals(otherWedding.name)
+               && client.equals(otherWedding.client)
                && date.equals(otherWedding.date)
                && venue.equals(otherWedding.venue)
-               && contactList.equals(otherWedding.contactList);
+               && contactMap.equals(otherWedding.contactMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(husband, wife, date, venue, contactList);
+        return Objects.hash(name, client, date, venue, contactMap);
     }
 }
