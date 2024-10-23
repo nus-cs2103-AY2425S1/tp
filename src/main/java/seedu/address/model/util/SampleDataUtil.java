@@ -74,15 +74,27 @@ public class SampleDataUtil {
         return getTutorialMap(strings, attendance);
     }
 
+    /**
+     * Generates a {@code Map<Tutorial, AttendanceStatus} based on the given strings by calling the overloaded method
+     * and defaulting attendance to not taken place.
+     *
+     * @param strings Array of tutorial indexes.
+     * @return A map with containing each tutorial mapped to its attendance.
+     */
     public static Map<Tutorial, AttendanceStatus> getTutorialMap(String ... strings) {
         AttendanceStatus[] attendance = new AttendanceStatus[strings.length];
         Arrays.fill(attendance, AttendanceStatus.NOT_TAKEN_PLACE);
         return getTutorialMap(strings, attendance);
     }
 
+    /**
+     * Generates a {@code Map<Tutorial, AttendanceStatus} based on the given arrays.
+     *
+     * @param strings Array of tutorial indexes.
+     * @param attendance Array of attendance corresponding to each tutorial.
+     * @return A map with containing each tutorial mapped to its attendance.
+     */
     public static Map<Tutorial, AttendanceStatus> getTutorialMap(String[] strings, AttendanceStatus[] attendance) {
-        System.out.println(Arrays.toString(strings));
-        System.out.println(Arrays.toString(attendance));
         Map<Tutorial, AttendanceStatus> tutorialMap = new LinkedHashMap<>();
         for (int i = 0; i < strings.length; i++) {
             tutorialMap.put(new Tutorial(strings[i]), attendance[i]);
