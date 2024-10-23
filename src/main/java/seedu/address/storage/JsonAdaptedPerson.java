@@ -20,6 +20,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +40,7 @@ class JsonAdaptedPerson {
     private final String ecName;
     private final String ecNumber;
 
+    private final List<JsonAdaptedSubmission> submissions = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -50,6 +52,7 @@ class JsonAdaptedPerson {
              @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
              @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName,
              @JsonProperty("emergency contact number") String ecNumber,
+             @JsonProperty("submissions") List<JsonAdaptedSubmission> submissions,
              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
 
         this.name = name;
@@ -61,6 +64,9 @@ class JsonAdaptedPerson {
         this.studentClass = studentClass;
         this.ecName = ecName;
         this.ecNumber = ecNumber;
+        if (submissions != null) {
+            this.submissions.addAll(submissions);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -79,6 +85,9 @@ class JsonAdaptedPerson {
         studentClass = source.getStudentClass().value;
         ecName = source.getEcName().value;
         ecNumber = source.getEcNumber().value;
+        submissions.addAll(source.getSubmissions().stream()
+                .map(JsonAdaptedSubmission::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -90,6 +99,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Submission> personSubmissions = new ArrayList<>();
+        for (JsonAdaptedSubmission submission : submissions) {
+            personSubmissions.add(submission.toModelType());
+        }
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -171,9 +185,11 @@ class JsonAdaptedPerson {
         }
         final EcNumber modelEcNumber = new EcNumber(ecNumber);
 
+        final Set<Submission> modelSubmissions = new HashSet<>(personSubmissions);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
-                modelStudentClass, modelEcName, modelEcNumber, modelTags);
+                modelStudentClass, modelEcName, modelEcNumber, modelSubmissions, modelTags);
 
     }
 

@@ -49,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label ecNumber;
     @FXML
+    private FlowPane submissions;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -67,6 +69,12 @@ public class PersonCard extends UiPart<Region> {
         studentClass.setText(person.getStudentClass().value);
         ecName.setText(person.getEcName().value);
         ecNumber.setText(person.getEcNumber().value);
+        person.getSubmissions().stream()
+                .sorted(Comparator.comparing(submission -> submission.submissionName))
+                .forEach(submission -> submissions.getChildren().add(new Label(submission.submissionName)));
+        person.getSubmissions().stream()
+                .sorted(Comparator.comparing(submission -> submission.submissionName))
+                .forEach(submission -> submissions.getChildren().add(new Label(submission.submissionStatus)));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
