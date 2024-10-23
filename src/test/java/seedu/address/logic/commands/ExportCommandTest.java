@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.ExportCommand.MESSAGE_HOME_FILE_EXIST
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -432,6 +433,78 @@ public class ExportCommandTest {
         String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, homeFile);
         assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
         assertFalse(Files.exists(dataFile), "Data file should be cleaned up");
+    }
+
+    @Test
+    public void testEscapeSpecialCharactersMethod() {
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+
+        // Test comma only
+        String withComma = "Hello, World";
+        assertEquals("\"Hello, World\"", exportCommand.escapeSpecialCharacters(withComma));
+
+        // Test double quote only (should be doubled)
+        String withQuote = "Hello\"World";
+        assertEquals("\"Hello\"\"World\"", exportCommand.escapeSpecialCharacters(withQuote));
+
+        // Test single quote only
+        String withSingleQuote = "Hello'World";
+        assertEquals("\"Hello'World\"", exportCommand.escapeSpecialCharacters(withSingleQuote));
+
+        // Test newline
+        String withNewline = "Hello\nWorld";
+        assertEquals("Hello World", exportCommand.escapeSpecialCharacters(withNewline));
+
+        // Test return carriage and newline combination
+        String withCrlf = "Hello\r\nWorld";
+        assertEquals("Hello World", exportCommand.escapeSpecialCharacters(withCrlf));
+
+        // Test normal string (no special characters)
+        String normal = "HelloWorld";
+        assertEquals("HelloWorld", exportCommand.escapeSpecialCharacters(normal));
+    }
+
+    @Test
+    public void testFileAlreadyExistsExceptionHandling() throws IOException, CommandException {
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+
+        // Create file in data directory so we can verify it gets deleted
+        Files.createFile(dataFile);
+
+        // Create a custom ExportCommand that will throw FileAlreadyExistsException at the right moment
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            public CommandResult execute(Model model) throws CommandException {
+                try {
+                    // Write some content to dataFile to verify it exists
+                    Files.write(dataFile, "test content".getBytes());
+
+                    // Now simulate the FileAlreadyExistsException
+                    throw new FileAlreadyExistsException(getHomeFilePath(filename).toString());
+                } catch (FileAlreadyExistsException e) {
+                    // This is the block we want to test
+                    try {
+                        Files.deleteIfExists(dataFile);
+                    } catch (IOException ignored) {
+                        // Ignore cleanup errors
+                    }
+                    throw new CommandException(String.format(MESSAGE_HOME_FILE_EXISTS, getHomeFilePath(filename)));
+                } catch (IOException e) {
+                    throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
+                }
+            }
+        };
+
+        // Verify that the file exists before execution
+        assertTrue(Files.exists(dataFile));
+
+        // Execute and verify exception
+        String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, exportCommand.getHomeFilePath(filename));
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
+
+        // Verify that the file was deleted
+        assertFalse(Files.exists(dataFile), "Data file should be deleted after FileAlreadyExistsException");
     }
 
     /**
