@@ -114,4 +114,23 @@ public interface Model {
      * Filters for persons in the group with name {@code groupName}.
      */
     void filterByGroup(String groupName);
+
+    /**
+     * Returns true if there is at least one person in the list of the specified {@code personType}.
+     *
+     * @param personType The class type of the person (e.g., Volunteer.class, Donor.class).
+     * @return True if at least one person in the list matches the specified type, otherwise false.
+     * @throws NullPointerException if {@code personType} is null.
+     */
+    boolean hasPersonsOfType(Class<? extends Person> personType);
+
+    /**
+     * Returns true if all persons in the list are of the specified {@code personType}.
+     *
+     * @param personType The class type of the person (e.g., Volunteer.class, Donor.class).
+     * @return True if all persons in the list match the specified type, otherwise false.
+     * @throws NullPointerException if {@code personType} is null.
+     */
+    boolean hasOnlyPersonsOfType(Class<? extends Person> personType);
+
 }
