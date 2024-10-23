@@ -26,8 +26,6 @@ public class DeleteAppointmentCommandParserTest {
         // Prepare valid input using appointment ID from TypicalAppointments
         String validInput = String.valueOf(APPOINTMENT_1.getId());
         Appointment appointment = APPOINTMENT_1;
-
-        // Expect success when valid input is provided
         assertParseSuccess(parser, validInput, new DeleteAppointmentCommand(appointment));
     }
 

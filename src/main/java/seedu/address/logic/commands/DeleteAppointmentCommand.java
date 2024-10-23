@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
-
-import java.util.Objects;
 
 /**
  * Deletes an appointment using the unique ID.
@@ -21,7 +21,8 @@ public class DeleteAppointmentCommand extends Command {
             + "Parameters: UNIQUE_ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment for %1$s with Dr. %2$s at %3$s %4$s.";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS =
+            "Deleted appointment for %1$s with Dr. %2$s at %3$s %4$s.";
     public static final String MESSAGE_INVALID_APPOINTMENT_ID = "Invalid Unique ID, appointment does not exist.";
 
     private final Appointment appointmentToDelete;
@@ -50,7 +51,8 @@ public class DeleteAppointmentCommand extends Command {
         if (!appointmentDeleted) {
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT_ID);
         }
-        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(appointmentToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                Messages.format(appointmentToDelete)));
     }
 
     /**
@@ -67,7 +69,6 @@ public class DeleteAppointmentCommand extends Command {
             return true;
         }
 
-        // Check if the other object is an instance of DeleteAppointmentCommand
         if (!(other instanceof DeleteAppointmentCommand)) {
             return false;
         }
