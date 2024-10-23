@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.ddd.commons.core.index.Index;
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Email;
@@ -17,8 +16,7 @@ import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
-import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.event.Description;
+import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.tag.Tag;
 
 /**

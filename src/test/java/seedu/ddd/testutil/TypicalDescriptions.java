@@ -1,6 +1,6 @@
 package seedu.ddd.testutil;
 
-import seedu.ddd.model.event.Description;
+import seedu.ddd.model.event.common.Description;
 
 /**
  * A utility class containing a list of {@code Description} objects to be used in tests.

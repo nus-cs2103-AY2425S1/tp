@@ -18,9 +18,9 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.event.Description;
-import seedu.ddd.model.event.Event;
-import seedu.ddd.model.event.EventId;
+import seedu.ddd.model.event.common.Description;
+import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.EventId;
 
 /**
  * Adds an event to DDD.

@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import seedu.ddd.logic.commands.AddEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.contact.common.Id;
-import seedu.ddd.model.event.Description;
+import seedu.ddd.model.event.common.Description;
 
 /**
  * Parses input arguments and creates a new AddCommand object
