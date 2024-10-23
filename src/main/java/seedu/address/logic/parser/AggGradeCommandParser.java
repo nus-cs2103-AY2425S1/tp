@@ -20,8 +20,7 @@ public class AggGradeCommandParser implements Parser<AggGradeCommand> {
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         if (argMultiMap.getPreamble().isEmpty()) {
-            // TODO
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "TODO"));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AggGradeCommand.MESSAGE_USAGE));
         }
 
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);

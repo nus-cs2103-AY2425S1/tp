@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +22,11 @@ public class AggGradeCommand extends Command {
     public static final String COMMAND_WORD = "aggGrade";
     public static final Map<String, Operation> OPERATION_TRANSLATE = Collections.unmodifiableMap(
             Map.of("median", Operation.MEDIAN));
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Performs aggregation operationson the displayed " +
+            "person list.\n"
+            + "Parameters: OPERATION " + PREFIX_NAME + "EXAM_NAME\n"
+            + "Operations can be: " + String.join(", ", OPERATION_TRANSLATE.keySet()) + "\n"
+            + "example:\n" + "  aggGrade median\n" + "  aggGrade median n/midterm";
 
 
     /**
