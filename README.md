@@ -4,7 +4,7 @@
 ![Ui](docs/images/Ui.png)
 
 # EduVault
-EduVault aims to streamline student record management for tuition center administrators, enabling fast access and easy 
+EduVault aims to streamline student record management for tuition center administrators, enabling fast access and easy
 tracking of payments.
 
 ## Quick Links

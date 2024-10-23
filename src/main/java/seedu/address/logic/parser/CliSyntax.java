@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_ATTENDANCE = new Prefix("attend/");
     public static final Prefix PREFIX_TUTORIAL = new Prefix("tut/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
 }
