@@ -215,15 +215,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void unassignStudent(Student student, TutorialId tutorialId) {
-        requireNonNull(student);
-        requireNonNull(tutorialId);
-        if (!tutorials.hasTutorial(tutorialId)) {
-            throw new TutNoFoundException();
-        }
-        tutorials.unassignStudent(student, tutorialId);
-    }
-    @Override
     public void setTutorials(TutorialList tutorials) {
         this.tutorials.resetData(tutorials);
     }

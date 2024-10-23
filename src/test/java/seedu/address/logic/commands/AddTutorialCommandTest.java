@@ -256,11 +256,6 @@ public class AddTutorialCommandTest {
         }
 
         @Override
-        public void unassignStudent(Student student, TutorialId tutorialId) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setTutorials(TutorialList tutorials) {
             throw new AssertionError("This method should not be called.");
         }
