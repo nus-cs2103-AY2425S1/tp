@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -8,15 +9,15 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code FavouriteStatus} is {@code FAVOURITE}
  */
 public class IsFavouritePredicate implements Predicate<Person> {
-    private final FavouriteStatus favouriteStatus;
+    private final Optional<FavouriteStatus> favouriteStatus;
 
-    public IsFavouritePredicate(FavouriteStatus favouriteStatus) {
+    public IsFavouritePredicate(Optional<FavouriteStatus> favouriteStatus) {
         this.favouriteStatus = favouriteStatus;
     }
 
     @Override
     public boolean test(Person person) {
-        return person.getFavouriteStatus().equals(favouriteStatus);
+        return favouriteStatus.filter(status -> person.getFavouriteStatus().equals(status)).isPresent();
     }
 
     @Override

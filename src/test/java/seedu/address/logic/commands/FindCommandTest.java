@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithTag
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,8 +52,8 @@ public class FindCommandTest {
         TelegramContainsKeywordsPredicate secondTelegramPredicate =
                 new TelegramContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        IsFavouritePredicate nullIsFavouritePredicate = new IsFavouritePredicate(null);
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(FavouriteStatus.FAVOURITE);
+        IsFavouritePredicate nullIsFavouritePredicate = new IsFavouritePredicate(Optional.empty());
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.of(FavouriteStatus.FAVOURITE));
 
 
         FindCommand findFirstCommand = new FindCommand(firstNamePredicate, firstRolePredicate,
@@ -108,7 +109,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         RoleContainsKeywordsPredicate rolePredicate = prepareRolePredicate(" ");
         TelegramContainsKeywordsPredicate telePredicate = prepareTelegramPredicate(" ");
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(null);
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.empty());
         FindCommand command = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
 
         expectedModel.updateFilteredPersonList(namePredicate
@@ -127,7 +128,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz");
         RoleContainsKeywordsPredicate rolePredicate = prepareRolePredicate(" ");
         TelegramContainsKeywordsPredicate telePredicate = prepareTelegramPredicate(" ");
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(null);
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.empty());
         FindCommand command = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
 
         expectedModel.updateFilteredPersonList(namePredicate
@@ -146,7 +147,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         RoleContainsKeywordsPredicate rolePredicate = prepareRolePredicate("friend");
         TelegramContainsKeywordsPredicate telePredicate = prepareTelegramPredicate(" ");
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(null);
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.empty());
         FindCommand command = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
 
         expectedModel.updateFilteredPersonList(namePredicate
@@ -165,7 +166,7 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         RoleContainsKeywordsPredicate rolePredicate = prepareRolePredicate(" ");
         TelegramContainsKeywordsPredicate telePredicate = prepareTelegramPredicate("lenor javiertan");
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(null);
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.empty());
         FindCommand command = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
 
         expectedModel.updateFilteredPersonList(namePredicate
@@ -179,12 +180,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_favouritePredicateOnly_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
 
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         RoleContainsKeywordsPredicate rolePredicate = prepareRolePredicate(" ");
         TelegramContainsKeywordsPredicate telePredicate = prepareTelegramPredicate(" ");
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(FavouriteStatus.FAVOURITE);
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.of(FavouriteStatus.FAVOURITE));
         FindCommand command = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
 
         expectedModel.updateFilteredPersonList(namePredicate
@@ -198,17 +199,20 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleNameAndRoleAndTelegramKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 6);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("javier");
         RoleContainsKeywordsPredicate rolePredicate = prepareRolePredicate("relative");
         TelegramContainsKeywordsPredicate telePredicate = prepareTelegramPredicate("javiertan");
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(FavouriteStatus.FAVOURITE);
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.of(FavouriteStatus.FAVOURITE));
 
         FindCommand command = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
-        expectedModel.updateFilteredPersonList(namePredicate.or(rolePredicate).or(telePredicate));
+        expectedModel.updateFilteredPersonList(namePredicate
+                .or(rolePredicate)
+                .or(telePredicate)
+                .or(isFavouritePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(JAVIER, KELLY, LENOR, CARL, DANIEL, ELLE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, DANIEL, ELLE, JAVIER, KELLY, LENOR), model.getFilteredPersonList());
     }
 
     @Test
@@ -217,7 +221,7 @@ public class FindCommandTest {
         RoleContainsKeywordsPredicate rolePredicate = new RoleContainsKeywordsPredicate(Arrays.asList("friend"));
         TelegramContainsKeywordsPredicate telePredicate = new TelegramContainsKeywordsPredicate(
                 Arrays.asList("georgebest"));
-        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(null);
+        IsFavouritePredicate isFavouritePredicate = new IsFavouritePredicate(Optional.empty());
         FindCommand findCommand = new FindCommand(namePredicate, rolePredicate, telePredicate, isFavouritePredicate);
 
         String expected = FindCommand.class.getCanonicalName() + "{namePredicate=" + namePredicate

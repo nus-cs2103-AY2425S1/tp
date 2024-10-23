@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -86,7 +87,7 @@ public class AddressBookParserTest {
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords),
                 new RoleContainsKeywordsPredicate(List.of()),
                 new TelegramContainsKeywordsPredicate(List.of()),
-                new IsFavouritePredicate(null)), command);
+                new IsFavouritePredicate(Optional.empty())), command);
     }
 
 

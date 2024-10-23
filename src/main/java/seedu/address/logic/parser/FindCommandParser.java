@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
@@ -52,13 +53,14 @@ public class FindCommandParser implements Parser<FindCommand> {
         nameKeywords = nameKeywords.stream().map(String::trim).toList();
         roleKeywords = roleKeywords.stream().map(String::trim).toList();
         telegramKeywords = telegramKeywords.stream().map(String::trim).toList();
-        FavouriteStatus favouriteStatus = argumentMultimap.getAllValues(PREFIX_FAVOURITE).isEmpty()
-                ? null
-                : FavouriteStatus.FAVOURITE;
+        Optional<FavouriteStatus> favouriteStatusPredicate = argumentMultimap.getAllValues(PREFIX_FAVOURITE).isEmpty()
+                ? Optional.ofNullable(null)
+                : Optional.of(FavouriteStatus.FAVOURITE);
 
         return new FindCommand(new NameContainsKeywordsPredicate(nameKeywords),
                 new RoleContainsKeywordsPredicate(roleKeywords),
-                new TelegramContainsKeywordsPredicate(telegramKeywords), new IsFavouritePredicate(favouriteStatus));
+                new TelegramContainsKeywordsPredicate(telegramKeywords),
+                new IsFavouritePredicate(favouriteStatusPredicate));
     }
 
     /**

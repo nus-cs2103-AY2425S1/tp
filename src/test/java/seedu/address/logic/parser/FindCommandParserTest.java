@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -94,7 +95,7 @@ public class FindCommandParserTest {
                 new FindCommand(new NameContainsKeywordsPredicate(List.of("chen", "albert")),
                         new RoleContainsKeywordsPredicate(List.of("member", "exco")),
                         new TelegramContainsKeywordsPredicate(List.of()),
-                        new IsFavouritePredicate(null));
+                        new IsFavouritePredicate(Optional.empty()));
         assertParseSuccess(parser, " n/chen  n/albert  r/member r/exco ", expectedFindCommand);
 
         // multiple whitespaces between keywords
