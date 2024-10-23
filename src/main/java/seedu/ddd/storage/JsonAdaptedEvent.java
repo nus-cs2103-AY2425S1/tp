@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.event.Description;
-import seedu.ddd.model.event.Event;
-import seedu.ddd.model.event.EventId;
+import seedu.ddd.model.event.common.Description;
+import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.EventId;
 
 class JsonAdaptedEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";

@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.event.Description;
-import seedu.ddd.model.event.EventId;
+import seedu.ddd.model.event.common.Description;
+import seedu.ddd.model.event.common.EventId;
 public class JsonAdaptedEventTest {
     private static final String INVALID_DESCRIPTION = "  ";
     private static final int INVALID_EVENT_ID = -1;

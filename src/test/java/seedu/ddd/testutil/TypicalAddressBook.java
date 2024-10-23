@@ -5,7 +5,7 @@ import static seedu.ddd.testutil.TypicalEvents.getTypicalEvents;
 
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * A utility class containing a list of {@code AddressBook} objects to be used in tests.

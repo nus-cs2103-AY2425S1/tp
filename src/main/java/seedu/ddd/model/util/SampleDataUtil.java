@@ -18,9 +18,9 @@ import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.event.Description;
-import seedu.ddd.model.event.Event;
-import seedu.ddd.model.event.EventId;
+import seedu.ddd.model.event.common.Description;
+import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.model.tag.Tag;
 
 /**

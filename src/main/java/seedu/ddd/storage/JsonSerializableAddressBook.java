@@ -14,7 +14,7 @@ import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
