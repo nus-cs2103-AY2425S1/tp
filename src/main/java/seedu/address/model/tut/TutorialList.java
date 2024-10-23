@@ -113,6 +113,15 @@ public class TutorialList {
                 .forEach(t -> t.deleteStudent(student));
     }
 
+    /**
+     * Resets the existing data of this {@code TutorialList} with {@code newData}.
+     */
+    public void resetData(TutorialList newData) {
+        requireNonNull(newData);
+        this.tutorials.clear();
+        this.tutorials.addAll(newData.tutorials);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
