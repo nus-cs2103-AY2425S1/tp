@@ -33,7 +33,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
         }
 
-        String str = "";
+        String str = argMultimap.getValue(PREFIX_NAME).get();
         try {
             Name name = ParserUtil.parseName(str);
             return new DeleteCommand(name);
