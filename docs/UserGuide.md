@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+PhysioPal is a **desktop app for managing contacts for physiotherapists, optimized for use via a Command Line Interface**
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PhysioPal can get
+your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -29,7 +31,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes the contact named `John Doe` in the current list.
+   
+   * `schedule John Doe d/2024-10-14 1200 note/First appointment`: Schedules an appointment for John Doe on October 14, 2024, at 12pm with the given note.
+
+   * `appointment-delete John Doe` : Deletes a scheduled appointment for John Doe.
+
+   * `appointment-list` : Lists all scheduled appointments.
+
+   * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
 
    * `clear` : Deletes all contacts.
 
@@ -86,19 +96,101 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Scheduling an appointment: `schedule`
+
+Schedules an appointment for a client in the address book.
+
+Format: `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
+
+* You can schedule multiple appointments using the `d/` prefix for each date and time.
+* If multiple `note/` prefixes are used, each note will correspond to the `d/` in the same order. If there are fewer notes than dates, the remaining dates will not have any notes.
+* The given date must fall on a weekday.
+* The given time must be on the hour between 0900 and 1700.
+* Format for the date and time must be in yyyy-MM-dd HHmm.
+* The field for notes is optional.
+* When scheduling appointments, the existing schedules of the person will be removed i.e adding of schedules is not cumulative.
+
+Examples:
+* `schedule John Doe d/2024-10-14 1200`
+* `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
+* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting` The note "important meeting" will be associated with the first date only. The second date will have no note.
+
+### Setting a reminder: `reminder`
+
+Sets a reminder for a client before their appointment in the address book.
+
+Format: `reminder NAME r/REMINDER_TIME`
+
+* You can only set a reminder for a person who already has a scheduled appointment.
+* The reminder time must be a valid expression (e.g. "1 day", "2 hours").
+
+Examples:
+* `reminder John Doe r/10 days`
+* `reminder Betsy Crowe r/3 hours`
+
+### Deleting an appointment: `appointment-delete`
+
+Deletes a scheduled appointment for a client in the address book.
+
+Format: `appointment-delete NAME`
+
+* The given date name must be the name of an existing client.
+
+Examples:
+* `appointment-delete John Doe`
+
+### Viewing upcoming appointments: `appointment-list`
+
+Lists all upcoming appointments 
+
+Format: `appointment-list [DATE_AND_TIME]`
+
+* By default this will only show appointments that are in the future (compared to local time now).
+* The optional date and time fields act as filters.
+* A time filter cannot be applied without date filter.
+* Format for the date and time must be in yyyy-MM-dd HHmm.
+
+Examples:
+* `appointment-list`
+* `appointment-list 2024-10-17`
+* `appointment-list 2024-10-18 1000`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Viewing a person: `view [NAME]`
+
+Displays the details of a person in the address book.
+
+**Format:** `view [NAME]`
+
+<div markdown="span" class="alert alert-primary">
+Tip:
+The name must match the full name exactly.
+</div>
+
+**On success:** A pop-up window will show the details including:
+- Name
+- Phone Number
+- Email
+- Address
+- Condition
+- Schedule
+
+**Examples:**
+* `view John Doe`
+* `view Betsy Crowe`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person with the specified `NAME`. The name refers to the name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -106,40 +198,41 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `Betsy Crowe` to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [KEYWORD] [MORE_KEYWORDS] || [p/PHONE]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching the phone number (or parts of it) will be returned
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find p/88` returns `John Doo` (with phone number `88765432`) <br>
+  ![result for 'find alex david'](images/find88.png)
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete NAME`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `NAME`.
+* The name must be the name of an existing person.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete John Doe` deletes the person named `John Doe` in the address book.
 
 ### Clearing all entries : `clear`
 
@@ -166,10 +259,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -192,8 +281,13 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete NAME`<br> e.g., `delete John Doe`
+**Schedule** | `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
+**Appointment Delete** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
+**Reminder** | `reminder NAME r/REMINDER_TIME`
+**Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
+**Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
+**Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
 **List** | `list`
 **Help** | `help`
+**View** | `view [NAME]`

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.ClientUtil.findViewPerson;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -147,6 +150,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the client view window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleShowClient(Person client) {
+        ClientWindow clientWindow = new ClientWindow(client);
+        clientWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -180,6 +192,11 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowClient()) {
+                Person targetClient = findViewPerson(commandText, logic);
+                handleShowClient(targetClient);
             }
 
             if (commandResult.isExit()) {
