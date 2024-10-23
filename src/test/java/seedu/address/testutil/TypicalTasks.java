@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.time.LocalDateTime;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
 
@@ -24,5 +25,14 @@ public class TypicalTasks {
     private TypicalTasks() {
     } // prevents instantiation
 
+    /**
+     * Returns an {@code AddressBook} with all the typical tasks.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        ab.addTask(TASK_COMPLETED);
+        ab.addTask(TASK_PENDING);
+        return ab;
+    }
 
 }

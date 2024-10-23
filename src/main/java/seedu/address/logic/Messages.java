@@ -20,9 +20,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_GROUPS_LISTED_OVERVIEW = "%1$d groups listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+        "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENT_NO_NOT_FOUND = "The student number provided is not found";
     public static final String MESSAGE_GROUP_NAME_NOT_FOUND = "The group name provided is not found";
     public static final String MESSAGE_ILLEGAL_PREFIX_USED = "Illegal prefix is used.";
@@ -34,7 +35,7 @@ public class Messages {
         assert duplicatePrefixes.length > 0;
 
         Set<String> duplicateFields =
-                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+            Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
@@ -45,11 +46,11 @@ public class Messages {
     public static String format(Student student) {
         final StringBuilder builder = new StringBuilder();
         builder.append(student.getName())
-                .append("; Student Number:")
-                .append(student.getStudentNumber())
-                .append("; Email: ")
-                .append(student.getEmail())
-                .append("; Tags: ");
+            .append("; Student Number:")
+            .append(student.getStudentNumber())
+            .append("; Email: ")
+            .append(student.getEmail())
+            .append("; Tags: ");
         student.getTags().forEach(builder::append);
         return builder.toString();
     }
@@ -87,8 +88,8 @@ public class Messages {
     public static String format(Task task) {
         final StringBuilder builder = new StringBuilder();
         builder.append(task.getTaskName() + " ")
-                .append("(Due: " + task.getDeadline() + ") ")
-                .append(task.getStatus());
+            .append("(Due: " + task.getDeadline() + ") ")
+            .append(task.getStatus());
         return builder.toString();
     }
 
