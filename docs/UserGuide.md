@@ -29,7 +29,7 @@ ClientHub is a **desktop app for managing contacts, optimized for use via a Comm
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/likes ramen` : Adds a contact named `John Doe` to the Client Hub.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes John Doe from the Client Hub.
 
    * `clear` : Deletes all contacts.
 
@@ -216,15 +216,23 @@ Result for `fc Investment Plan`:
 
 Deletes the specified person from ClientHub.
 
-Format: `delete INDEX`
+Format: `delete NAME` or `d NAME` or `delete NAME/`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with specified NAME
+* / is used to indicate specific name to delete
+    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
+    * Name written before / must be **EXACT** name of the contact to be deleted.
+    * Order matters when using / to delete a contact.
+
+A **valid** `NAME` for delete should:
+    * Not be empty. 
+        * For eg. Just typing `delete` without providing any `NAME` will throw an error.
+    * Be a valid name that exists in the list of contacts.
+        * For eg. Typing `delete John Doe` when there is no contact with the name `John Doe` will throw an error.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in ClientHub.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete John Doe` deletes the person named `John Doe`
+* `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
 
 ### Clearing all entries : `clear`
 
@@ -277,7 +285,7 @@ _Details coming soon ..._
 |-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CLIENT_TYPE]…​ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` | 
 | **Clear**             | `clear`                                                                                                                                                                                                   |
-| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                       |
+| **Delete**            | `delete NAME`<br> e.g., `delete JAMES`                                                                                                                                                                    |
 | **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​ [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                       | 
 | **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                |
 | **Find Phone Number** | `fp KEYWORD`                                                                                                                                                                                              |
