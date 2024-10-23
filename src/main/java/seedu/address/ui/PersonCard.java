@@ -81,14 +81,13 @@ public class PersonCard extends UiPart<Region> {
                     Network network = entry.getKey();
                     Set<PublicAddress> addresses = entry.getValue();
 
-                    return Stream.concat(
-                            Stream.of(network.toString()),
-                            addresses.stream().map(address -> "  " + address.toString())
+                    return Stream.concat(Stream.of(network.toString()),
+                            addresses.stream().map(address -> "  " + address.toString()).sorted()
                     );
                 })
                 .forEach(output -> {
                     Label label = new Label(output);
-                    label.getStyleClass().add("cell_small_label"); // Add custom CSS class if defined
+                    label.getStyleClass().add("cell_small_label");
                     publicAddress.getChildren().add(label);
                 });
     }
