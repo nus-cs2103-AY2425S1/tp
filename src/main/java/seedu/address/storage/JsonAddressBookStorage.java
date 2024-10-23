@@ -22,13 +22,25 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
     private Path filePath;
+    private Path manualSaveFilePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    /**
+     * Creates a new JsonAddressBookStorage object.
+     *
+     * @param filePath The path to the JSON file where the address book data will be stored.
+     * @param manualSaveFilePath The path to the JSON file where the address book data will be manually saved.
+     */
+    public JsonAddressBookStorage(Path filePath, Path manualSaveFilePath) {
         this.filePath = filePath;
+        this.manualSaveFilePath = manualSaveFilePath;
     }
 
     public Path getAddressBookFilePath() {
         return filePath;
+    }
+
+    public Path getManualSaveFilePath() {
+        return manualSaveFilePath;
     }
 
     @Override

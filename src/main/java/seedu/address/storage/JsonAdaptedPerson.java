@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,11 +12,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.game.Game;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +33,9 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedGame> games = new ArrayList<>();
+    private final List<JsonAdaptedPreferredTime> preferredTimes = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +43,21 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("games") List<JsonAdaptedGame> games,
+            @JsonProperty("preferred times") List<JsonAdaptedPreferredTime> preferredTimes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (games != null) {
+            this.games.addAll(games);
+        }
+        if (preferredTimes != null) {
+            this.preferredTimes.addAll(preferredTimes);
         }
     }
 
@@ -57,6 +72,12 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        games.addAll(source.getGames().values().stream()
+                .map(JsonAdaptedGame::new)
+                .collect(Collectors.toList()));
+        preferredTimes.addAll(source.getPreferredTimes().stream()
+                .map(JsonAdaptedPreferredTime::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -68,6 +89,14 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        final Map<String, Game> personGames = new HashMap<>();
+        for (JsonAdaptedGame game : games) {
+            personGames.put(game.getGameName(), game.toModelType());
+        }
+        final List<PreferredTime> personPreferredTimes = new ArrayList<>();
+        for (JsonAdaptedPreferredTime preferredTime: preferredTimes) {
+            personPreferredTimes.add(preferredTime.toModelType());
         }
 
         if (name == null) {
@@ -103,7 +132,10 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Map<String, Game> modelGames = new HashMap<>(personGames);
+        final Set<PreferredTime> modelPreferredTimes = new HashSet<>(personPreferredTimes);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGames, modelPreferredTimes);
     }
 
 }

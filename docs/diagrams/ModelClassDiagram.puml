@@ -19,6 +19,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class PreferredTime
+Class Game
 
 Class I #FFFFFF
 }
@@ -39,9 +41,11 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
+Person *--> PreferredTime
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Game
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

@@ -4,10 +4,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.game.Game;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +28,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<String, Game> games = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private final Set<PreferredTime> preferredTimes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Map<String, Game> games, Set<PreferredTime> preferredTimes) {
+        requireAllNonNull(name, phone, email, address, tags, games, preferredTimes);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.games.putAll(games);
+        this.preferredTimes.addAll(preferredTimes);
     }
 
     public Name getName() {
@@ -59,6 +68,22 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable map of games, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Map<String, Game> getGames() {
+        return games;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<PreferredTime> getPreferredTimes() {
+        return Collections.unmodifiableSet(preferredTimes);
     }
 
     /**
@@ -94,13 +119,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && games.equals(otherPerson.games)
+                && preferredTimes.equals(otherPerson.preferredTimes);
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, games, preferredTimes);
     }
 
     @Override
@@ -111,6 +139,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("games", games)
+                .add("preferred times", preferredTimes)
                 .toString();
     }
 

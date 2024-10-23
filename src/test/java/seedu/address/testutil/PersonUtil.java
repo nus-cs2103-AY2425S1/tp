@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERREDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,9 +54,18 @@ public class PersonUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
+
+        if (descriptor.getPreferredTimes().isPresent()) {
+            Set<PreferredTime> preferredTimes = descriptor.getPreferredTimes().get();
+            if (preferredTimes.isEmpty()) {
+                sb.append(PREFIX_PREFERREDTIME);
+            } else {
+                preferredTimes.forEach(s -> sb.append(PREFIX_PREFERREDTIME).append(s.preferredTime).append(" "));
             }
         }
         return sb.toString();

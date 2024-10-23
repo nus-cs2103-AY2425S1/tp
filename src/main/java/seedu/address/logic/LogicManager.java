@@ -49,13 +49,28 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (AccessDeniedException e) {
-            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-        } catch (IOException ioe) {
-            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        if (commandResult.isLoad()) {
+            try {
+                ReadOnlyAddressBook loadedAddressBook = storage.loadAddressBookManually().get();
+                model.setAddressBook(loadedAddressBook);
+                storage.saveAddressBook(loadedAddressBook);
+            } catch (Exception e) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, e.getMessage()), e);
+            }
+        } else if (commandResult.isSave()) {
+            try {
+                storage.saveAddressBookManually(model.getAddressBook());
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
+        } else {
+            try {
+                storage.saveAddressBook(model.getAddressBook());
+            } catch (AccessDeniedException e) {
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
         }
 
         return commandResult;
