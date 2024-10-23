@@ -93,17 +93,22 @@ This section tells you what information you will find in each of the sections of
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists down all guests invited to the wedding on the guest list and all vendors involved in the wedding on the vendor list.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/accepted t/friends t/owesMoney` : Adds a guest named `John Doe` to the guest list.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `add_vendor n/Jack Tan p/98273782 e/jackt@example.com a/391, Clementi Mall, #03-32 company/Jack's Florist t/florist t/responsible` : Adds a guest named `Jack Tan` to the vendor list.
 
-    * `clear` : Deletes all contacts.
+    * `delete_guest 3` : Deletes the 3rd guest shown in the current guest list.
+
+    * `delete_vendor 3` : Deletes the 3rd vendor shown in the current vendor list.
+
+    * `clear` : Deletes all persons from both the guest list and the vendor list.
 
     * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+For a comprehensive tutorial on using BridalBuddy to manage your guest and vendor lists as a wedding planner, check out the [Tutorial for Beginners](#tutorial-for-beginners). 
+Alternatively, if you’d like to explore the application independently, refer to the [Features](#features) section below for detailed information on each command.
 
 [_Back to Top_](#table-of-contents)
 
@@ -114,7 +119,7 @@ This section tells you what information you will find in each of the sections of
 This section will walk you through all the basic features of BridalBuddy and will make sure you know everything you need to get started.
 
 
-
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
