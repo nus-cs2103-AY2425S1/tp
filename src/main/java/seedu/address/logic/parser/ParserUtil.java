@@ -16,6 +16,10 @@ import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
+import seedu.address.model.property.AskingPrice;
+import seedu.address.model.property.LandlordName;
+import seedu.address.model.property.Location;
+import seedu.address.model.property.PropertyType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -185,4 +189,78 @@ public class ParserUtil {
         return new To(meetUpTo);
     }
 
+    /**
+     * Parses a {@code String landlordName} into a {@code LandlordName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LandlordName} is invalid.
+     */
+    public static LandlordName parseLandlordName(String landlordName) throws ParseException {
+        requireNonNull(landlordName);
+        String trimmedName = landlordName.trim();
+        if (!LandlordName.isValidName(trimmedName)) {
+            throw new ParseException(LandlordName.MESSAGE_CONSTRAINTS);
+        }
+        return new LandlordName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String phone} into a {@code Phone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Phone} is invalid.
+     */
+    public static seedu.address.model.property.Phone parsePropertyPhone(String phone) throws ParseException {
+        requireNonNull(phone);
+        String trimmedPhone = phone.trim();
+        if (!seedu.address.model.property.Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(seedu.address.model.property.Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.property.Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LandlordName} is invalid.
+     */
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code String askingPrice} into a {@code AskingPrice}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LandlordName} is invalid.
+     */
+    public static AskingPrice parseAskingPrice(String askingPrice) throws ParseException {
+        requireNonNull(askingPrice);
+        String trimmedPrice = askingPrice.trim();
+        if (!AskingPrice.isValidPrice(trimmedPrice)) {
+            throw new ParseException(AskingPrice.MESSAGE_CONSTRAINTS);
+        }
+        return new AskingPrice(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String propertyType} into a {@code PropertyType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LandlordName} is invalid.
+     */
+    public static PropertyType parsePropertyType(String propertyType) throws ParseException {
+        requireNonNull(propertyType);
+        String trimmedType = propertyType.trim();
+        if (!PropertyType.isValidType(trimmedType)) {
+            throw new ParseException(PropertyType.MESSAGE_CONSTRAINTS);
+        }
+        return new PropertyType(trimmedType);
+    }
 }
