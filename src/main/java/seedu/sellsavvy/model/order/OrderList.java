@@ -65,7 +65,7 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
-     * Removes the first instance of an equivalent person from the list.
+     * Removes the first instance of an equivalent order from the list.
      * An equivalent order must exist in the list.
      */
     public void remove(Order toRemove) {
