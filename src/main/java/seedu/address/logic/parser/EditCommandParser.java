@@ -88,7 +88,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * Parses {@code Collection<String> monthsPaid} into a {@code Set<MonthPaid>} if valid,
      * otherwise throws a ParseException.
      */
-    private Optional<Set<MonthPaid>> parseMonthPaidForEdit(Collection<String> monthsPaid) throws ParseException {
+    private Optional<Set<MonthPaid>> parseMonthsPaidForEdit(Collection<String> monthsPaid) throws ParseException {
         assert monthsPaid != null;
 
         if (monthsPaid.isEmpty()) {
