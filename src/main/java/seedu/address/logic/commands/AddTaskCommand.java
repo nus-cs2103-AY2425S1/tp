@@ -71,7 +71,7 @@ public class AddTaskCommand extends Command {
                 taskToAdd.getTaskDescription(), targetPerson.getName(), taskToAdd.getTaskDeadline()));
     }
 
-    private static Person createUpdatedPerson(Person targetPerson, Task taskToDelete) {
+    private static Person createUpdatedPerson(Person targetPerson, Task taskToAdd) {
         Name name = targetPerson.getName();
         Phone phone = targetPerson.getPhone();
         EmergencyContact emergencyContact = targetPerson.getEmergencyContact();
@@ -80,7 +80,7 @@ public class AddTaskCommand extends Command {
         Set<Subject> subjects = targetPerson.getSubjects();
         Level level = targetPerson.getLevel();
         TaskList taskList = targetPerson.getTaskList().copy();
-        taskList.add(taskToDelete);
+        taskList.add(taskToAdd);
         return new Person(name, phone, emergencyContact,
                 address, note, subjects, level, taskList);
     }
