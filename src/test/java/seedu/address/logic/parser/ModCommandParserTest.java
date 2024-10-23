@@ -8,8 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.databind.Module;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ModCommand;
 import seedu.address.model.person.ModuleName;

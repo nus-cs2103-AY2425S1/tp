@@ -20,12 +20,12 @@ public class ModuleName {
     /**
      * Constructs a {@code ModuleName}.
      *
-     * @param ModuleName A valid ModuleName.
+     * @param moduleName A valid ModuleName.
      */
-    public ModuleName(String ModuleName) {
-        requireNonNull(ModuleName);
-        checkArgument(isValidModName(ModuleName), MESSAGE_CONSTRAINTS);
-        moduleName = ModuleName.toUpperCase();
+    public ModuleName(String moduleName) {
+        requireNonNull(moduleName);
+        checkArgument(isValidModName(moduleName), MESSAGE_CONSTRAINTS);
+        this.moduleName = moduleName.toUpperCase();
     }
 
     /**

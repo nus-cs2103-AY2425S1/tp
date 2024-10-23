@@ -26,8 +26,8 @@ import seedu.address.testutil.PersonBuilder;
 
 public class ModCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private static final String MODULE_NAME_STUB = "CS1101S";
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute_addModNameUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

@@ -10,8 +10,16 @@ import seedu.address.logic.commands.ModCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleName;
 
+/**
+ * Parses input arguments and creates a new ModCommand object
+ */
 public class ModCommandParser implements Parser<ModCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ModCommand
+     * and returns a ModCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public ModCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args,
