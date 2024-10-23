@@ -10,32 +10,34 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddAllergyCommand;
+import seedu.address.logic.commands.DelAllergyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Nric;
 
 /**
- * Parses input arguments and creates a new AddAllergyCommand object
+ * Parses user input for the {@link DelAllergyCommand} and creates a new instance of it.
  */
-public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
-    private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
+public class DelAllergyCommandParser implements Parser<DelAllergyCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(DelMedConCommandParser.class);
+
     /**
-     * Parses the given arguments string and creates an {@link AddAllergyCommand} object.
+     * Parses the given arguments string and creates a {@link DelAllergyCommand} object.
      *
      * @param args the arguments string containing user input.
-     * @return An {@Code AddAllergyCommand} object containing the parsed NRIC and set of allergies.
+     * @return A {@link DelAllergyCommand} object containing the parsed NRIC and set of allergies.
      * @throws ParseException if the user input does not conform to the expected format or
      *         if the NRIC is not provided.
      */
-    public AddAllergyCommand parse(String args) throws ParseException {
+    public DelAllergyCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_ALLERGY);
 
         // Check if NRIC and allergy is provided
         if (!argMultimap.arePrefixesPresent(PREFIX_NRIC, PREFIX_ALLERGY) || !argMultimap.getPreamble().isEmpty()) {
             logger.warning("Unexpected preamble detected.");
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAllergyCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelAllergyCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
@@ -51,6 +53,7 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
             allergies.add(allergy);
         }
 
-        return new AddAllergyCommand(nric, allergies);
+        return new DelAllergyCommand(nric, allergies);
     }
+
 }
