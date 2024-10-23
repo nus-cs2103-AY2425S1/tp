@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,12 +60,10 @@ public class BatchEditCommand extends Command {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
         List<Person> curentShownList = model.getFilteredPersonList();
-
+        ArrayList<Person> nonObservableList = new ArrayList<>(curentShownList);
         StringBuilder feedbackToUser = new StringBuilder();
 
-        Person person;
-        while (!curentShownList.isEmpty()) {
-            person = curentShownList.get(0);
+        for (Person person : nonObservableList) {
             Person updatedPerson = changeTag(person, oldTag, newTag);
             model.setPerson(person, updatedPerson);
             feedbackToUser.append(String
