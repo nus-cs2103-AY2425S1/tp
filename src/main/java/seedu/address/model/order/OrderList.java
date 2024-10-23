@@ -1,71 +1,43 @@
 package seedu.address.model.order;
 
-import seedu.address.model.product.Product;
-
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
-/**
- * Class to manage a list of orders, including both supply and customer orders.
- */
-public class OrderList {
-    private List<SupplyOrder> supplyOrders;
-    private List<CustomerOrder> customerOrders;
+public abstract class OrderList<T extends Order> {
 
-    /**
-     * Constructor for OrderList.
-     * Initializes the lists of supply and customer orders.
-     */
+    protected List<T> orders;
+
     public OrderList() {
-        this.supplyOrders = new ArrayList<>();
-        this.customerOrders = new ArrayList<>();
+        this.orders = new ArrayList<>();
     }
 
     /**
-     * Adds a supply order to the list.
+     * Adds an order to the list.
      *
-     * @param supplyOrder The supply order to be added.
+     * @param order The order to be added.
      */
-    public void addSupplyOrder(SupplyOrder supplyOrder) {
-        supplyOrders.add(supplyOrder);
+    public void addOrder(T order) {
+        orders.add(order);
     }
 
     /**
-     * Adds a customer order to the list.
+     * Retrieves all orders.
      *
-     * @param customerOrder The customer order to be added.
+     * @return A list of all orders.
      */
-    public void addCustomerOrder(CustomerOrder customerOrder) {
-        customerOrders.add(customerOrder);
+    public List<T> getOrders() {
+        return new ArrayList<>(orders);  // Return a copy of the list to avoid modification
     }
 
     /**
-     * Retrieves all supply orders.
+     * Finds an order by the phone number.
      *
-     * @return A list of all supply orders.
+     * @param phoneNumber The phone number associated with the order.
+     * @return The order associated with the given phone number, or null if not found.
      */
-    public List<SupplyOrder> getSupplyOrders() {
-        return new ArrayList<>(supplyOrders);  // Return a copy of the list to avoid modification
-    }
-
-    /**
-     * Retrieves all customer orders.
-     *
-     * @return A list of all customer orders.
-     */
-    public List<CustomerOrder> getCustomerOrders() {
-        return new ArrayList<>(customerOrders);  // Return a copy of the list to avoid modification
-    }
-
-    /**
-     * Finds a supply order by the customer's phone number.
-     *
-     * @param phoneNumber The phone number of the customer.
-     * @return The supply order associated with the given phone number, or null if not found.
-     */
-    public SupplyOrder findSupplyOrderByPhoneNumber(String phoneNumber) {
-        for (SupplyOrder order : supplyOrders) {
+    public T findOrderByPhoneNumber(String phoneNumber) {
+        for (T order : orders) {
             if (order.getPhoneNumber().equals(phoneNumber)) {
                 return order;
             }
@@ -74,68 +46,40 @@ public class OrderList {
     }
 
     /**
-     * Finds a customer order by the customer's phone number.
+     * Removes an order by the phone number.
      *
-     * @param phoneNumber The phone number of the customer.
-     * @return The customer order associated with the given phone number, or null if not found.
+     * @param phoneNumber The phone number associated with the order.
+     * @return True if the order was successfully removed, false otherwise.
      */
-    public CustomerOrder findCustomerOrderByPhoneNumber(String phoneNumber) {
-        for (CustomerOrder order : customerOrders) {
-            if (order.getPhoneNumber().equals(phoneNumber)) {
-                return order;
-            }
+    public boolean removeOrder(String phoneNumber) {
+        return orders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
+    }
+
+    /**
+     * View all orders, with pending orders first, each order numbered, and status displayed.
+     *
+     * @return A string representing all the orders in the list.
+     */
+    public String viewOrders() {
+        StringBuilder sb = new StringBuilder();
+
+        // Sort orders: PENDING first, followed by others (e.g., COMPLETED, CANCELLED)
+        orders.sort(Comparator.comparing(Order::getStatus));
+
+        // Generate output
+        for (int i = 0; i < orders.size(); i++) {
+            Order order = orders.get(i);
+            sb.append(String.format("Order %d: [Status: %s]\n", i + 1, order.getStatus()));
+            sb.append(order.viewOrder());
+            sb.append("\n");
         }
-        return null;  // Return null if not found
-    }
-
-    /**
-     * Removes a supply order by the customer's phone number.
-     *
-     * @param phoneNumber The phone number of the customer.
-     * @return True if the order was successfully removed, false otherwise.
-     */
-    public boolean removeSupplyOrder(String phoneNumber) {
-        return supplyOrders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
-    }
-
-    /**
-     * Removes a customer order by the customer's phone number.
-     *
-     * @param phoneNumber The phone number of the customer.
-     * @return True if the order was successfully removed, false otherwise.
-     */
-    public boolean removeCustomerOrder(String phoneNumber) {
-        return customerOrders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
+        return sb.toString();
     }
 
     @Override
     public String toString() {
         return "OrderList{" +
-                "supplyOrders=" + supplyOrders +
-                ", customerOrders=" + customerOrders +
+                "orders=" + orders +
                 '}';
-    }
-
-    public String viewSupplyOrders() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < supplyOrders.size(); i++) {
-            Order order = supplyOrders.get(i);
-            sb.append(String.format("Order %d", i + 1));
-            sb.append("\n");
-            sb.append(order.viewOrder());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-    public String viewCustomerOrders() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < customerOrders.size(); i++) {
-            Order order = customerOrders.get(i);
-            sb.append(String.format("Order %d:", i + 1));
-            sb.append("\n");
-            sb.append(order.viewOrder());
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 }

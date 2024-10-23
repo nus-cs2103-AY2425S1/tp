@@ -11,14 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.OrderList;
-import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.*;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.*;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -31,7 +31,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
-    private final OrderList orderList = new OrderList();
+    private final CustomerOrderList customerOrderList = new CustomerOrderList();
+    private final SupplierOrderList supplierOrderList = new SupplierOrderList();
+    private final Inventory inventory = new Inventory(ingredientCatalogue);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -137,17 +139,22 @@ public class ModelManager implements Model {
 
     @Override
     public void addCustomerOrder(CustomerOrder customerOrder) {
-        orderList.addCustomerOrder(customerOrder);
+        customerOrderList.addOrder(customerOrder);
     }
 
     @Override
     public void addSupplyOrder(SupplyOrder supplyOrder) {
-        orderList.addSupplyOrder(supplyOrder);
+        supplierOrderList.addOrder(supplyOrder);
     }
 
     @Override
-    public OrderList getOrderList() {
-        return orderList;
+    public CustomerOrderList getCustomerOrderList() {
+        return customerOrderList;
+    }
+
+    @Override
+    public SupplierOrderList getSupplierOrderList() {
+        return supplierOrderList;
     }
 
     @Override
@@ -155,6 +162,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
     }
 
     //=========== Filtered Person List Accessors =============================================================
