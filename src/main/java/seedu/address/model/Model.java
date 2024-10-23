@@ -89,5 +89,5 @@ public interface Model {
     /**
      * Sort the filtered person's list according to {@code Person} parameters
      */
-    void sortFilteredPersonList(String parameter, boolean isAscending) throws CommandException;
+    void sortPersonList(String parameter, boolean isAscending) throws CommandException;
 }

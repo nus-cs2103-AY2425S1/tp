@@ -148,7 +148,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersonList(String parameter, boolean isAscending) throws CommandException {
+    public void sortPersonList(String parameter, boolean isAscending) throws CommandException {
         if (isAscending) {
             addressBook.sort(new PersonComparator().getComparator(parameter));
         } else {
