@@ -181,5 +181,13 @@ public interface Model {
      * @param tutorialId The tutorial class that student will be assigned to.
      */
     void assignStudent(Student student, TutorialId tutorialId);
+    /**
+     * Unassign student from specified tutorial.
+     *
+     * @param student Student id of target student.
+     * @param tutorialId The tutorial class that student will be unassigned from.
+     */
+    void unassignStudent(Student student, TutorialId tutorialId);
+
 
 }

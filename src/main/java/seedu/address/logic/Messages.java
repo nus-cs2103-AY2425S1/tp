@@ -18,6 +18,10 @@ public class Messages {
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_STUDENTID =
+            "This student ID already exists in the address book: ";
+    public static final String MESSAGE_TUTORIAL_NOT_FOUND =
+            "The tutorial ID provided doesn't exist! \nTutorial ID: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

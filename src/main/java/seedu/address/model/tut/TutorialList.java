@@ -103,6 +103,20 @@ public class TutorialList {
     }
 
     /**
+     * Remove student from the tutorial class.
+     *
+     * @param student Student to be removed
+     * @param tutorialId Target tutorial
+     */
+    public void unassignStudent(Student student, TutorialId tutorialId) {
+        Tutorial targetTutorial = Tutorial.of(new TutName("Placeholder"), tutorialId);
+        tutorials.stream()
+                .filter(t -> t.equals(targetTutorial))
+                .forEach(t -> t.deleteStudent(student));
+    }
+
+
+    /**
      * Deletes the specified student from all tutorials where the student is present.
      *
      * @param student The student to be removed from the tutorials.

@@ -214,6 +214,16 @@ public class ModelManager implements Model {
         tutorials.assignStudent(student, tutorialId);
     }
 
+    @Override
+    public void unassignStudent(Student student, TutorialId tutorialId) {
+        requireNonNull(student);
+        requireNonNull(tutorialId);
+        if (!tutorials.hasTutorial(tutorialId)) {
+            throw new TutNoFoundException();
+        }
+        tutorials.unassignStudent(student, tutorialId);
+    }
+
     //=========== Assignment ================================================================================
 
     @Override

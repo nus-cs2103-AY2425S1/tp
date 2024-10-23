@@ -246,6 +246,11 @@ public class AttendCommandTest {
         }
 
         @Override
+        public void unassignStudent(Student student, TutorialId tutorialId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
