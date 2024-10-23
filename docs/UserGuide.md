@@ -67,13 +67,13 @@ tasks done faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help : `:help`
 
 Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `:help`
 
 
 ### Adding a person: `:add` or `:a`
@@ -115,23 +115,28 @@ Examples:
    `91234567` and `johndoe@example.com` respectively.
 *  `:edit 2 -n Betsy Crower -t ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `:find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. 
+    
+    e.g `hans` will match `Hans`
+* Persons with a certain name, phone number, email, address and remark can be searched through flags.
+
+   e.g. to find a person with the name `david` and remark `busy`, the arguments would be `-n david -r busy`
+* Each flag is optional, but there must be at least one flag in a query.
+* As long as the contact contains the query, it is considered a match, e.g. searching`Han` will bring up `Hans`
+* Only persons matching all keywords will be returned (i.e. `AND` search).
+  
+  e.g. `-n Hans -p 98765432` will not return `Hans` if his phone number is not `98765432`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `:find -l Serangoon` returns `Bernice Yu` with location `Serangoon Gardens` and `David Li` with location `Serangoon Gardens`
+* `:find -n david -l serangoon` returns `David Li` with location `Serangoon Gardens`
+  ![result for ':find -n david -l serangoon'](images/findDavidSerangoonResult.png)
 
 ### Deleting a person : `:rm`
 
@@ -145,19 +150,19 @@ Format: `:rm -i INDEX` or `:remove -i INDEX`
 
 Examples:
 * `:list` followed by `:rm -i 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `find` command.
+* `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `:find` command.
 
-### Clearing all entries : `clear`
+### Clearing all entries : `:clear`
 
 Clears all entries from the address book.
 
-Format: `clear`
+Format: `:clear`
 
-### Exiting the program : `exit`
+### Exiting the program : `:exit`
 
 Exits the program.
 
-Format: `exit`
+Format: `:exit`
 
 ### Saving the data
 
@@ -200,6 +205,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `:rm -i INDEX`<br> e.g., `:rm -i 3`
 **Edit** | `:edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `:find INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br> e.g.,`:find -n James Lee -e jameslee@example.com`
 **List** | `:list`
 **Help** | `help`
