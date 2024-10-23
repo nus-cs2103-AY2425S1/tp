@@ -86,6 +86,7 @@ public interface Model {
 
     /**
      * Returns the person in the address book with the given name.
+     *
      * @param name The Name to search for
      * @return An Optional containing the matched person if that person is found, otherwise an empty Optional
      */
@@ -105,6 +106,7 @@ public interface Model {
 
     /**
      * Updates the filtered person list to be sorted by the given {@code comparator}.
+     *
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedPersonList(Comparator<Person> comparator);
@@ -117,9 +119,6 @@ public interface Model {
     float maxScore(String assignment);
     String getAssignmentName(String name);
     boolean hasName(Name name);
-
-    //=========== Marking people present =============================================================
-    void markPersonPresent(Name name, int week);
 
     /**
      * Returns {@code Github} detials of the specified {@name}

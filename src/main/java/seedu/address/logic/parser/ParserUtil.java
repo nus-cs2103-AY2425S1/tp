@@ -24,6 +24,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    // Assuming that a typical semester has 13 weeks.
+    public static final int MAX_WEEK = 13;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
@@ -183,11 +185,13 @@ public class ParserUtil {
         requireNonNull(week);
         String trimmedWeek = week.trim();
 
-        // Ensure it's a non-negative integer.
         try {
             int parsedWeek = Integer.parseInt(trimmedWeek);
             if (parsedWeek < 0) {
                 throw new ParseException("Week number must be a non-negative integer.");
+            }
+            if (parsedWeek > MAX_WEEK) {
+                throw new ParseException("Week number cannot exceed 13.");
             }
             return parsedWeek;
         } catch (NumberFormatException e) {

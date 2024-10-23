@@ -193,19 +193,6 @@ public class ModelManager implements Model {
         return addressBook.hasName(name);
     }
 
-    //=========== Marking people present =============================================================
-    @Override
-    public void markPersonPresent(Name name, int week) {
-        for (Person person : filteredPersons) {
-            if (person.getName().fullName.equals(name.fullName)) {
-                person.markWeekPresent(week);
-                return;
-            }
-        }
-
-        throw new IllegalArgumentException("Person not found: " + name);
-    }
-
     public Github getGitHubUsername(Name name) {
         return addressBook.getGitHubUsername(name);
     }

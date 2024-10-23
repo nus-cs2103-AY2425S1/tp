@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
-import static seedu.address.logic.Messages.MESSAGE_MARK_ALREADY_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_UNMARK_ALREADY_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_UNMARK_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
@@ -17,7 +17,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Marks a specific student as present for that particular week.
+ * Unmarks a specific student as present for that particular week.
+ * Marks the student as absent.
  */
 public class UnmarkCommand extends Command {
 
@@ -34,7 +35,8 @@ public class UnmarkCommand extends Command {
     private final Name name;
 
     /**
-     * Constuctor for MarkCommand
+     * Constuctor for UnmarkCommand
+     *
      * @param name the name of the student
      * @param week the week number
      */
@@ -56,7 +58,7 @@ public class UnmarkCommand extends Command {
         Set<Integer> updatedWeeksPresent = new HashSet<>(personToUnmark.getWeeksPresent());
 
         if (!updatedWeeksPresent.remove(week)) {
-            return new CommandResult(String.format(MESSAGE_MARK_ALREADY_SUCCESS, name, week));
+            return new CommandResult(String.format(MESSAGE_UNMARK_ALREADY_SUCCESS, name, week));
         }
 
         Person updatedPerson = new Person(

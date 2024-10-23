@@ -15,7 +15,7 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsMarkCommand() throws ParseException {
-        String userInput = "mark n/Benson Meier w/4";
+        String userInput = " n/Benson Meier w/4";
         MarkCommand expectedCommand = new MarkCommand(new Name("Benson Meier"), 4);
 
         MarkCommand actualCommand = parser.parse(userInput);
@@ -25,25 +25,25 @@ public class MarkCommandParserTest {
 
     @Test
     public void parse_missingName_throwsParseException() {
-        String userInput = "mark w/1";
+        String userInput = " w/1";
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
     public void parse_missingWeek_throwsParseException() {
-        String userInput = "mark n/Benson Meier";
+        String userInput = " n/Benson Meier";
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
     public void parse_invalidName_throwsParseException() {
-        String userInput = "mark n/!invalidName w/1";
+        String userInput = " n/!invalidName w/1";
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
     public void parse_invalidWeek_throwsParseException() {
-        String userInput = "mark n/Benson Meier w/invalidWeek";
+        String userInput = " n/Benson Meier w/invalidWeek";
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 }

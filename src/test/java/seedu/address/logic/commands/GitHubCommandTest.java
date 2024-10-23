@@ -215,11 +215,6 @@ public class GitHubCommandTest {
         }
 
         @Override
-        public void markPersonPresent(Name name, int week) {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
         public Github getGitHubUsername(Name name) {
             requireNonNull(name);
             return this.person.getGithub();

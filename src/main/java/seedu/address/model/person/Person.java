@@ -82,15 +82,16 @@ public class Person {
 
     /**
      * Constructs a new Person object
-     * @param name the name of the person
-     * @param phone the phone number of the person
-     * @param address the address of the person
-     * @param email the email of the person
-     * @param telegram the telegram ID of the person
-     * @param github the github username of the person
-     * @param assignment the assignment of the person
-     * @param weeksPresent the weeks present
-     * @param tags the tags for that person
+     *
+     * @param name the name of the person.
+     * @param phone the phone number of the person.
+     * @param address the address of the person.
+     * @param email the email of the person.
+     * @param telegram the telegram ID of the person.
+     * @param github the github username of the person.
+     * @param assignment the assignment of the person.
+     * @param weeksPresent the weeks present.
+     * @param tags the tags for that person.
      */
     public Person(Name name,
                   Phone phone,
@@ -151,22 +152,6 @@ public class Person {
 
     public Github getGithub() {
         return github;
-    }
-
-    public void markWeekPresent(int week) {
-        this.weeksPresent.add(week);
-    }
-
-    public void unmarkWeekPresent(int week) {
-        weeksPresent.remove(week); // Remove the specified week from the attendance set
-    }
-    /**
-     * Returns true if that week is present in the Set.
-     * @param week the current week
-     * @return true if that week is present
-     */
-    public boolean isPresentForWeek(int week) {
-        return this.weeksPresent.contains(week);
     }
 
     public Set<Integer> getWeeksPresent() {
