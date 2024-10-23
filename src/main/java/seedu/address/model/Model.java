@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.function.Predicate;
 
@@ -97,4 +98,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the sorted person list */
+    ObservableList<Person> getSortedPersonList();
+
+    /**
+     * Updates the comparator property of the sorted person list to sort
+     */
+    void updateSortedPersonListComparator(Comparator<Person> comparator);
+
+    /**
+     * Updates the sorted list to be back to the initial ordering
+     */
+    void setSortedListToDefault();
 }
