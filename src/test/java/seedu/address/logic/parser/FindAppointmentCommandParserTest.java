@@ -12,14 +12,14 @@ public class FindAppointmentCommandParserTest {
 
     @Test
     public void parse_noPrefix_failure() {
-        FindAppointmentCommandParser parser = new FindAppointmentCommandParser();;
+        FindAppointmentCommandParser parser = new FindAppointmentCommandParser();
         assertParseFailure(parser, " appt Alex",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAppointmentCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_unsupportedPrefix_failure() {
-        FindAppointmentCommandParser parser = new FindAppointmentCommandParser();;
+        FindAppointmentCommandParser parser = new FindAppointmentCommandParser();
         assertParseFailure(parser, " appt p/81505050",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAppointmentCommand.MESSAGE_USAGE));
     }

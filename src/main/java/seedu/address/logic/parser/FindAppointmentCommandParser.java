@@ -42,6 +42,9 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
 
     }
 
+    /**
+     * Returns a composed {@code Predicate}, given the argument multimap.
+     */
     private Predicate<Appointment> parsePredicate(ArgumentMultimap argMultimap) throws ParseException {
         Predicate<Appointment> predicate = PREDICATE_SHOW_ALL_APPOINTMENTS;
 
