@@ -55,9 +55,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        renderTags();
+        
         String remarkValue = person.getRemark().value;
         if (remarkValue != null && !remarkValue.trim().isEmpty()) {
             remark.setText(remarkValue);
@@ -65,5 +64,14 @@ public class PersonCard extends UiPart<Region> {
         } else {
             remark.setManaged(false);
         }
+    }
+
+    /**
+     * Displays the tags for the current person.
+     */
+    private void renderTags() {
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
