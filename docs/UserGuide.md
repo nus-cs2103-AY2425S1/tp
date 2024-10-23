@@ -68,7 +68,7 @@ ClubConnect is a **desktop address book application used to streamline the compu
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -145,6 +145,24 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an event: `add_event`
+
+Adds an event to the address book.
+
+Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
+
+* The date inputs must be in the format `YYYY-MM-DD`.
+
+Examples:
+* `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10`
+* `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`
+
+### Listing all events : `list_events`
+
+Shows a list of all events in the address book.
+
+Format: `list_events`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -194,12 +212,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action             | Format, Examples
+-----------        |----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**          | `clear`
+**Delete**         | `delete INDEX`<br> e.g., `delete 3`
+**Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**           | `list`
+**Add Event**      | `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE` <br> e.g., `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10` 
+**List Events**    | `list_events`
+**Help**           | `help`
