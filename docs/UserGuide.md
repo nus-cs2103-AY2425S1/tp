@@ -101,8 +101,24 @@ If your changes to the data file makes its format invalid, the data files will d
 Furthermore, certain edits can cause the json files to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-## Buyers 
+### Switching parser modes : `switch`
 
+Switches the parser mode to the specified parser mode.
+
+Format: `switch PARSER_MODE`
+
+* Switches the parser mode to the specified `PARSER_MODE`.
+* The parser mode takes 3 types:
+* `b` for buyers
+* `m` for meet-ups
+* `p` for properties
+* The default parser mode is set to `b`.
+
+Examples:
+* Upon entering the application, the parser mode is set to `b`.
+* `switch` followed by `m` switches the parser mode to meet-ups.
+
+## Buyers
 ### Adding a buyer: `add`
 
 Adds a buyer to the buyer list.
@@ -183,16 +199,77 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd buyer in the buyer list.
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the results of the `find` command.
 
-### Meet up `[coming in v1.2]`
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected feature in release v1.2**
+## Meet Up
+### Adding a meetup: `add`
 
-You will be able to schedule a meet-up event with your contacts.
+Adds a meet-up to the meet-up list.
 
-Format: `meetup n/NAME i/INFO`
+Format: `add n/MEETUP_NAME i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
+
+<div markdown="span" class="alert alert-primary">
+MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM
+</div>
 
 Examples:
-* `meetup n/kennylewi i/Property viewing on saturday`
+* `add n/Product Pitch i/Product pitch for James at MBS from/2024-10-31 13:00 to/2024-10-31 15:30`
+* `add n/Show buyer 3 houses i/Meet with James Jimes to show him 3 houses that fit his expectations from/2024-10-30 09:30 to/2024-10-30 10:30`
+
+### Listing all meet-ups : `list`
+
+Shows a list of all meet-ups in the meet-up list.
+
+Format: `list`
+
+<div>
+Format: `list`
+
+Examples:
+* `list` will show you all meet-ups in the meet-up list.
 </div>
+
+### Editing a meet-up : `edit`
+
+Edits an existing meet-up in the meet-up list.
+
+Format: `edit INDEX i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_FROM`
+
+<div markdown="span" class="alert alert-primary">
+MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM
+</div>
+
+* Edits the meet-up at the specified `INDEX`. The index refers to the index number shown in the displayed meet-up list. The index **must be a positive integer** 1, 2, 3, …​
+* All fields need to be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
+
+### Locating meet-ups by name: `find`
+
+Finds meet-ups whose meet-up names contain any of the given keywords.
+
+Format: `find KEYWORD`
+
+* The search is case-insensitive. e.g `meet` will match `Meet`
+* Only the meet-up name is searched.
+* Keyword will be matched to full words and sentences e.g. `meet` will match `meetup` and `meet with Jack`
+
+Examples:
+* `find Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for meeting with Jane`
+
+### Deleting a meet-up : `delete`
+
+Deletes the specified meet-up from the buyer list.
+
+Format: `delete INDEX`
+
+* Deletes the meet-up at the specified `INDEX`.
+* The index refers to the index number shown in the displayed meet-up list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd meet-up in the meet-up list.
+* `find meet` followed by `delete 1` deletes the 1st meet-up in the results of the `find` command.
 
 ## Properties
 ### Adding a property: `add`
