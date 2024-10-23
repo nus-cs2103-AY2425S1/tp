@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -122,14 +121,11 @@ public class ExportCommand extends Command {
         String address = "\"" + person.getAddress().value + "\"";
         sj.add(address);
 
-        List<String> tags = new ArrayList<>();
-        List<String> notes = new ArrayList<>();
+        List<String> tags = person.getTags().stream()
+            .map(Tag::toString).toList();
 
-        tags.addAll(person.getTags().stream()
-            .map(Tag::toString).toList());
-
-        notes.addAll(person.getNotes().stream()
-            .map(Note::toString).toList());
+        List<String> notes = person.getNotes().stream()
+            .map(Note::toString).toList();
 
         sj.add("\"" + tags.toString().replaceAll("[\\[\\]]", "") + "\"");
         sj.add("\"" + notes.toString().replaceAll("[\\[\\]]", "") + "\"");
