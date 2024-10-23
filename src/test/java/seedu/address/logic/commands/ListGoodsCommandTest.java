@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -20,7 +22,6 @@ import seedu.address.model.goodsreceipt.GoodsNamePredicate;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.SupplierNamePredicate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests for {@code ListGoodsCommand}
