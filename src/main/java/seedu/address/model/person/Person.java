@@ -29,6 +29,7 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final PostalCode postalCode;
     private final Set<Tag> tags = new HashSet<>();
+    private final Boolean isArchived;
 
     /**
      * Every field must be present and not null.
@@ -42,6 +43,7 @@ public class Person implements Comparable<Person> {
         this.postalCode = postalCode;
         this.tags.addAll(tags);
         this.orderFrequency = new HashMap<>();
+        this.isArchived = false;
     }
 
     /**
@@ -57,6 +59,23 @@ public class Person implements Comparable<Person> {
         this.tags.addAll(tags);
         this.postalCode = postalCode;
         this.orderFrequency = orders;
+        this.isArchived = false;
+    }
+
+    /**
+     * Every field with field must be present and not null with isArchived
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  PostalCode postalCode, Set<Tag> tags, Boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.postalCode = postalCode;
+        this.orderFrequency = new HashMap<>();
+        this.isArchived = isArchived;
     }
 
     public Name getName() {
@@ -81,6 +100,10 @@ public class Person implements Comparable<Person> {
 
     public HashMap<Order, Integer> getOrderFrequency() {
         return this.orderFrequency;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
     }
 
     /**
@@ -165,13 +188,14 @@ public class Person implements Comparable<Person> {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && postalCode.equals(otherPerson.postalCode)
-                && orderFrequency.equals(otherPerson.orderFrequency);
+                && orderFrequency.equals(otherPerson.orderFrequency)
+                && isArchived == otherPerson.isArchived;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, postalCode, tags, orderFrequency);
+        return Objects.hash(name, phone, email, address, postalCode, tags, orderFrequency, isArchived);
     }
 
     @Override
@@ -184,6 +208,7 @@ public class Person implements Comparable<Person> {
                 .add("postalCode", postalCode)
                 .add("tags", tags)
                 .add("orders", orderFrequency)
+                .add("isArchived", isArchived)
                 .toString();
     }
 
