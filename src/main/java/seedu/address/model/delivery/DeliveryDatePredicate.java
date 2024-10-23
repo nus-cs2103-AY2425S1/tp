@@ -29,6 +29,11 @@ public class DeliveryDatePredicate implements Predicate<Delivery> {
                 || (other instanceof DeliveryDatePredicate
                 && targetDate.equals(((DeliveryDatePredicate) other).targetDate));
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName() + "{targetDate=" + targetDate.toString() + "}";
+    }
 }
 
 

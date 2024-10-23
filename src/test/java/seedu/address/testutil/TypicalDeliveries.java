@@ -30,6 +30,13 @@ public class TypicalDeliveries {
             .withCost("200")
             .withQuantity("250 units")
             .build();
+    public static final Delivery DURIAN = new DeliveryBuilder().withProduct("durian")
+            .withSender(TypicalPersons.DANIEL)
+            .withDeliveryTime("03-03-2025 10:30")
+            .withStatus(Status.DELIVERED)
+            .withCost("200")
+            .withQuantity("250 units")
+            .build();
 
     private TypicalDeliveries() {} // prevents instantiation
 
@@ -45,6 +52,6 @@ public class TypicalDeliveries {
     }
 
     public static List<Delivery> getTypicalDeliveries() {
-        return new ArrayList<>(Arrays.asList(APPLE, BREAD, CAN));
+        return new ArrayList<>(Arrays.asList(APPLE, BREAD, CAN, DURIAN));
     }
 }
