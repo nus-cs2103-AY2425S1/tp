@@ -36,7 +36,7 @@ public class OrderList implements Iterable<Order> {
     public void setOrder(Order target, Order editedOrder) {
         requireAllNonNull(target, editedOrder);
 
-        int index = internalList.indexOf(target);
+        int index = indexOf(target);
         if (index == -1) {
             throw new OrderNotFoundException();
         }
@@ -130,4 +130,16 @@ public class OrderList implements Iterable<Order> {
         return internalList.toString();
     }
 
+    /**
+     * Gets the index of the target {@code Order} using "==".
+     */
+    private int indexOf(Order target) {
+        for (int i = 0; i < size(); i++) {
+            if (target == internalList.get(i)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

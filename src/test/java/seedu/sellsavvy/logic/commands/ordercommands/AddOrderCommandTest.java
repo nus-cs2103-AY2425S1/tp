@@ -38,7 +38,7 @@ public class AddOrderCommandTest {
 
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
-        String firstExpectedMessage = String.format(AddOrderCommand.MESSAGE_SUCCESS,
+        String firstExpectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(ABACUS));
         personToAddUnder.getOrderList().add(ABACUS);
 
@@ -47,7 +47,7 @@ public class AddOrderCommandTest {
 
         // Second order, no warning messages
         AddOrderCommand addSecondOrder = new AddOrderCommand(INDEX_FIRST_PERSON, BLOCKS);
-        String secondExpectedMessage = String.format(AddOrderCommand.MESSAGE_SUCCESS,
+        String secondExpectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(BLOCKS));
         personToAddUnder.getOrderList().add(BLOCKS);
 
@@ -63,8 +63,8 @@ public class AddOrderCommandTest {
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
         personToAddUnder.getOrderList().add(ABACUS);
-        String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING + AddOrderCommand.MESSAGE_SUCCESS,
-                personToAddUnder.getName(), Messages.format(ABACUS));
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
+                + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(ABACUS));
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -85,7 +85,7 @@ public class AddOrderCommandTest {
         Model expectedModel = model.createCopy();
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
-        String expectedMessage = String.format(AddOrderCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(ABACUS));
         personToAddUnder.getOrderList().add(ABACUS);
 

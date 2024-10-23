@@ -8,6 +8,7 @@ import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
 
 /**
  * Jackson-friendly version of {@link Order}.
@@ -19,6 +20,7 @@ class JsonAdaptedOrder {
     private final String count;
     private final String date;
     private final String item;
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
@@ -28,10 +30,11 @@ class JsonAdaptedOrder {
      */
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("item") String item, @JsonProperty("count") String count,
-                             @JsonProperty("date") String date) {
+                             @JsonProperty("date") String date, @JsonProperty("status") String status) {
         this.date = date;
         this.item = item;
         this.count = count;
+        this.status = status;
     }
 
     /**
@@ -41,6 +44,7 @@ class JsonAdaptedOrder {
         item = source.getItem().fullDescription;
         date = source.getDate().value;
         count = source.getCount().value;
+        status = source.getStatus().toString();
     }
 
     /**
@@ -73,7 +77,12 @@ class JsonAdaptedOrder {
         }
         final Count modelCount = new Count(count);
 
-        return new Order(modelItem, modelCount, modelDate);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        final Status modelStatus = Status.fromString(status);
+
+        return new Order(modelItem, modelCount, modelDate, modelStatus);
     }
 
 }

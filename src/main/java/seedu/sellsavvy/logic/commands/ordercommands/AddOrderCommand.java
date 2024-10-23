@@ -37,7 +37,7 @@ public class AddOrderCommand extends Command {
             + PREFIX_COUNT + "2\n"
             + "If [" + PREFIX_COUNT + "QUANTITY] is not provided, the quantity will be set to 1";
 
-    public static final String MESSAGE_SUCCESS = "New order added for %1$s: %2$s";
+    public static final String MESSAGE_ADD_ORDER_SUCCESS = "New order added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
             + "This customer already has an order for this item"
             + ", verify if this is a mistake\n";
@@ -71,7 +71,7 @@ public class AddOrderCommand extends Command {
         String feedbackToUser = orderList.contains(toAdd) ? MESSAGE_DUPLICATE_ORDER_WARNING : "";
         orderList.add(toAdd);
 
-        return new CommandResult(feedbackToUser + String.format(MESSAGE_SUCCESS,
+        return new CommandResult(feedbackToUser + String.format(MESSAGE_ADD_ORDER_SUCCESS,
                 personToAddUnder.getName(), Messages.format(toAdd)));
     }
 

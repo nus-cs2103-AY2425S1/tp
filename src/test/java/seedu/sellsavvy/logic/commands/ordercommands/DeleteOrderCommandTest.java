@@ -38,7 +38,6 @@ public class DeleteOrderCommandTest {
         Model expectedModel = model.createCopy();
         Person person = model.getFilteredPersonList().get(3);
         model.updateSelectedPerson(person);
-        expectedModel.updateSelectedPerson(person);
 
         Order order = person.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
@@ -61,7 +60,7 @@ public class DeleteOrderCommandTest {
     }
 
     @Test
-    public void execute_invalidIndex_throwsCommandException() {
+    public void execute_noOrderListDisplayed_throwsCommandException() {
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
 
         assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);

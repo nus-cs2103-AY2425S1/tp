@@ -8,6 +8,7 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_BOTTLE;
 
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
 
 /**
  * A utility class containing a list of {@code Order} objects to be used in tests.
@@ -17,7 +18,7 @@ public class TypicalOrders {
             .withCount("2").withDate("10-10-2025").build();
 
     public static final Order BLOCKS = new OrderBuilder().withItem("Blocks")
-            .withCount("101").withDate("05-05-2025").build();
+            .withCount("101").withDate("05-05-2025").withStatus(Status.COMPLETED).build();
 
     public static final Order CAMERA = new OrderBuilder().withItem("Camera with spare lens")
             .withCount("1").withDate("03-03-2025").build();

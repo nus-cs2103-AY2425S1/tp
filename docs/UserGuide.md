@@ -185,11 +185,26 @@ Format: `deleteOrder ORDER_INDEX`
 * A person's order list must be selected using `listOrder` before deleting an order from that person.
 * Deletes an order under the selected person at the specified `ORDER_INDEX`.
 * The order index refers to the index number shown in the displayed **order** list of the selected person.
-* The index and quantity **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `deleteOrder 1` deletes the order with index 1 from the selected person.
 * `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
+
+### Mark an order as completed : `markOrder`
+
+Marks an order under the person whose orders are displayed as completed.
+
+Format: `markOrder ORDER_INDEX`
+
+* A person's order list must be selected using `listOrder` before marking an order from that person.
+* Marks an order under the selected person at the specified `ORDER_INDEX` as completed.
+* The order index refers to the index number shown in the **displayed order list**.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `markOrder 1` marks the order with index 1 from the displayed order list as completed.
+* `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
 
 ### Clearing all entries : `clear`
 
@@ -242,13 +257,14 @@ _Details coming soon ..._
 
 Action                | Format, Examples
 ----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add a person**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**             | `clear`
-**Delete a person**   | `delete INDEX`<br> e.g., `delete 3`
-**Edit a person**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find person(s)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List all persons**  | `list`
-**Add an order**      | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
-**List all orders**   | `listOrder INDEX`<br> e.g., `listOrder 3`
-**Delete an order**   | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
-**Help**              | `help`
+**Add a person**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**                       | `clear`
+**Delete a person**             | `delete INDEX`<br> e.g., `delete 3`
+**Edit a person**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find person(s)**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List all persons**            | `list`
+**Add an order**                | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
+**List all orders**             | `listOrder INDEX`<br> e.g., `listOrder 3`
+**Delete an order**             | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
+**Mark an order as completed**  | `markOrder ORDER_INDEX`<br> e.g., `markOrder 2`
+**Help**                        | `help`

@@ -21,6 +21,7 @@
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
+        <URL value="@OrderStatus.css"/>
       </stylesheets>
 
       <VBox>

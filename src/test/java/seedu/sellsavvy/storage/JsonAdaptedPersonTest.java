@@ -128,7 +128,8 @@ public class JsonAdaptedPersonTest {
         final String item = BLOCKS.getItem().toString();
         final String count = "0";
         final String date = BLOCKS.getDate().toString();
-        invalidOrderList.add(new JsonAdaptedOrder(item, count, date));
+        final String status = BLOCKS.getStatus().toString();
+        invalidOrderList.add(new JsonAdaptedOrder(item, count, date, status));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, VALID_TAGS, invalidOrderList);
