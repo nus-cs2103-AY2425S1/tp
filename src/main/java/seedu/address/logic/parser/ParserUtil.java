@@ -5,14 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,21 +67,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
-    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -109,7 +95,71 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
-
+    /**
+     * Parses a {@code String assignment name} into a {@code AssignmentName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code assignment name} is invalid.
+     */
+    public static AssignmentName parseAssignmentName(String assignmentName) throws ParseException {
+        requireNonNull(assignmentName);
+        String trimmedAssignmentName = assignmentName.trim();
+        if (!Name.isValidName(trimmedAssignmentName)) {
+            throw new ParseException(AssignmentName.MESSAGE_CONSTRAINTS);
+        }
+        return new AssignmentName(assignmentName);
+    }
+    /**
+     * Parses a {@code String max score} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code max score} is invalid.
+     */
+    public static int parseMaxScore(String maxScore) throws ParseException {
+        requireNonNull(maxScore);
+        String trimmedMaxScore = maxScore.trim();
+        int parsedScore;
+        try {
+            parsedScore = Integer.parseInt(trimmedMaxScore);
+        } catch (NumberFormatException e) {
+            throw new ParseException("The score must be an integer!");
+        }
+        return parsedScore;
+    }
+    /**
+     * Parses a {@code String score} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code score} is invalid.
+     */
+    public static int parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedScore = score.trim();
+        int parsedScore;
+        try {
+            parsedScore = Integer.parseInt(trimmedScore);
+        } catch (NumberFormatException e) {
+            throw new ParseException("The score must be an integer!");
+        }
+        return parsedScore;
+    }
+    /**
+     * Parses a {@code String studentIndex} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentIndex} is invalid.
+     */
+    public static int parseStudentIndex(String studentIndex) throws ParseException {
+        requireNonNull(studentIndex);
+        String trimmedStudentIndex = studentIndex.trim();
+        int parsedStudentIndex;
+        try {
+            parsedStudentIndex = Integer.parseInt(trimmedStudentIndex);
+        } catch (NumberFormatException e) {
+            throw new ParseException("The score must be an integer!");
+        }
+        return parsedStudentIndex;
+    }
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -121,4 +171,13 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
 }
