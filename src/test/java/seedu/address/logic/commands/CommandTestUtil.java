@@ -57,12 +57,14 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final String VALID_PUBLIC_ADDRESS_ETH = "0x0B1C9E1Fb5E13c797c7f0134641810E9A7ca14d2"; //this is a real ETH public address
-    public static final String VALID_PUBLIC_ADDRESS_BTC= "3DHSS7YojEruwgjcGCEEQL7qnBcijqimWE"; //this is a real BTC public address
+    public static final String VALID_PUBLIC_ADDRESS_ETH =
+            "0x0B1C9E1Fb5E13c797c7f0134641810E9A7ca14d2"; //this is a real ETH public address
+    public static final String VALID_PUBLIC_ADDRESS_BTC =
+            "3DHSS7YojEruwgjcGCEEQL7qnBcijqimWE"; //this is a real BTC public address
 
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final AbstractEditCommand.EditPersonDescriptor DESC_AMY;
+    public static final AbstractEditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
