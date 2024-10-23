@@ -15,6 +15,9 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
+/**
+ * Deletes an appointment from the person identified by the patient's NRIC number
+ */
 public class DeleteAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteapp";
@@ -35,13 +38,25 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_NO_APPOINTMENT = "This appointment does not exist in CareLink";
     private final Nric patientNric;
     private final LocalDateTime startDateTime;
-    
+
+    /**
+     * Constructs a DeleteAppointmentCommand object
+     * @param patientNric
+     * @param date
+     * @param startTime
+     */
     public DeleteAppointmentCommand(Nric patientNric, LocalDate date, LocalTime startTime) {
         requireAllNonNull(patientNric, date, startTime);
         this.patientNric = patientNric;
         this.startDateTime = LocalDateTime.of(date, startTime);
     }
 
+    /**
+     * Executes the command to delete an appointment for the person with the given NRIC.
+     * @param model the model to execute the command on
+     * @return the command result
+     * @throws CommandException if the person is not found or the appointment does not exist
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
@@ -50,13 +65,13 @@ public class DeleteAppointmentCommand extends Command {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
-        
+
         Appointment appointment = model.getAppointmentForPersonAndTime(person, startDateTime);
 
         if (appointment == null) {
             throw new CommandException(MESSAGE_NO_APPOINTMENT);
         }
-        
+
         model.removeAppointment(appointment, person);
         return new CommandResult(String.format(MESSAGE_SUCCESS, startDateTime));
     }
