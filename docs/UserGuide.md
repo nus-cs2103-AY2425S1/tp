@@ -28,7 +28,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
         * [`list` Listing all persons](#listing-all-persons--list)
         * [`find` Finding a guest/vendor](#finding-a-person--find)
         * [`clear` Clearing all entries from the guest list and the vendor list](#clearing-all-entries--clear)
-        * [`stats` Viewing the wedding statistics](#view-statistics--stats)
+        * [`stats` Viewing the wedding statistics](#viewing-statistics--stats)
         * [`exit` Exiting the program](#exiting-the-program--exit)
     * [**Guest Related Commands**](#guest-related-commands)
         * [`add_guest` Adding a new guest to the guest list](#adding-a-guest--add_guest)
@@ -201,7 +201,26 @@ Using the `find` command returns the following result on your screen:
 
 ### Clearing all entries : `clear`
 
+Clears and empties out the entire guest list and vendor list. Could be good to start off your preparations for your next wedding.
 
+**Format:** `clear`
+
+Using the `clear` command returns the following result on your screen:
+
+![clear command](images/clearCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+
+### Viewing statistics : `stats`
+
+Displays the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
+
+**Format:** `stats`
+
+![stats command](images/statsCommand.png)
+
+[_Back to Top_](#table-of-contents)
 
 
 ### **Guest Related Commands**
