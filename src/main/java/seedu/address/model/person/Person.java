@@ -76,6 +76,8 @@ public class Person {
         this.assignment = assignment;
     }
 
+
+
     public Name getName() {
         return name;
     }
@@ -199,5 +201,6 @@ public class Person {
                 .add("assignment", assignment)
                 .toString();
     }
+
 
 }
