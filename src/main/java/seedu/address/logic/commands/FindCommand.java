@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -32,6 +35,9 @@ public class FindCommand extends Command {
             + PREFIX_REMARK + "REMARK\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe "
             + PREFIX_LOCATION + "serangoon";
+
+    public static final List<String> INVALID_VARIANTS = Arrays.asList("find", "search", ":search", ":query",
+            "query");
 
     private final PersonSearchPredicate predicate;
 
