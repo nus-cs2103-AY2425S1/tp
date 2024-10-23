@@ -56,4 +56,18 @@ public class Goods {
     public String convertToCsvWrite() {
         return goodsName + "," + category;
     }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+
+        if (!(object instanceof Goods otherGoods)) {
+            return false;
+        }
+
+        return otherGoods.goodsName.equals(this.goodsName) && otherGoods.category.equals(this.category);
+    }
 }
