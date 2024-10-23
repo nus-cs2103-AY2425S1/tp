@@ -1,15 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BILL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,7 +15,11 @@ import seedu.address.testutil.PropertyToBuyBuilder;
 
 import java.util.Optional;
 
-public class BoughtPropertyCommandTest {
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.*;
+
+public class SoldPropertyCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Index outOfBoundsIndex = Index.fromOneBased(100000);
 
@@ -37,12 +32,12 @@ public class BoughtPropertyCommandTest {
     private final Index propertyIndex = Index.fromOneBased(model
             .getFilteredPersonList()
             .get(personIndex.getZeroBased())
-            .getNumberOfPropertiesBought());
+            .getNumberOfPropertiesSold());
 
     private final Index differentPropertyIndex = Index.fromOneBased(model
             .getFilteredPersonList()
             .get(differentPersonIndex.getZeroBased())
-            .getNumberOfPropertiesBought());
+            .getNumberOfPropertiesSold());
 
     private final Optional<Price> actualPrice = Optional.ofNullable(model
             .getFilteredPersonList()
@@ -59,35 +54,35 @@ public class BoughtPropertyCommandTest {
 
     @Test
     public void execute_validModel_success() throws Exception {
-        BoughtPropertyCommand boughtCommand = new BoughtPropertyCommand(personIndex, propertyIndex, actualPrice);
+        SoldPropertyCommand soldCommand = new SoldPropertyCommand(personIndex, propertyIndex, actualPrice);
 
-        Property updatedProperty = ALICE.getBoughtProperty(personIndex, actualPrice);
-        String expectedMessage = String.format(BoughtPropertyCommand.MESSAGE_SUCCESS,
+        Property updatedProperty = ALICE.getSoldProperty(personIndex, actualPrice);
+        String expectedMessage = String.format(SoldPropertyCommand.MESSAGE_SUCCESS,
                 Messages.formatProperty(updatedProperty));
 
-        Person expectedPerson = new PersonBuilder(ALICE).withPropertyBought(updatedProperty).withBuyProperty().build();
+        Person expectedPerson = new PersonBuilder(ALICE).withPropertySold(updatedProperty).withSellProperty().build();
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(ALICE, expectedPerson);
 
-        assertCommandSuccess(boughtCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(soldCommand, model, expectedMessage, expectedModel);
 
     }
 
     @Test
     public void equals() {
-        BoughtPropertyCommand standardCommand = new BoughtPropertyCommand(
+        SoldPropertyCommand standardCommand = new SoldPropertyCommand(
                 personIndex, propertyIndex, actualPrice);
-        BoughtPropertyCommand commandWithDifferentPersonIndex = new BoughtPropertyCommand(
+        SoldPropertyCommand commandWithDifferentPersonIndex = new SoldPropertyCommand(
                 differentPersonIndex, propertyIndex, actualPrice);
-        BoughtPropertyCommand commandWithDifferentPropertyIndex = new BoughtPropertyCommand(
+        SoldPropertyCommand commandWithDifferentPropertyIndex = new SoldPropertyCommand(
                 personIndex, differentPropertyIndex, actualPrice);
-        BoughtPropertyCommand commandWithDifferentActualPrice = new BoughtPropertyCommand(
+        SoldPropertyCommand commandWithDifferentActualPrice = new SoldPropertyCommand(
                 personIndex, propertyIndex, differentActualPrice);
 
         assertEquals(standardCommand, standardCommand);
 
-        assertEquals(standardCommand, new BoughtPropertyCommand(personIndex, propertyIndex, actualPrice));
+        assertEquals(standardCommand, new SoldPropertyCommand(personIndex, propertyIndex, actualPrice));
 
         assertNotEquals(standardCommand, commandWithDifferentPersonIndex);
 
@@ -98,7 +93,7 @@ public class BoughtPropertyCommandTest {
 
     @Test
     public void execute_invalidPropertyIndex() throws CommandException {
-        BoughtPropertyCommand commandWithOutOfBoundsIndex = new BoughtPropertyCommand(personIndex,
+        SoldPropertyCommand commandWithOutOfBoundsIndex = new SoldPropertyCommand(personIndex,
                 outOfBoundsIndex, actualPrice);
         assertThrows(CommandException.class, () -> commandWithOutOfBoundsIndex.execute(model),
                 Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
@@ -106,7 +101,7 @@ public class BoughtPropertyCommandTest {
 
     @Test
     public void execute_invalidPersonIndex() throws CommandException {
-        BoughtPropertyCommand commandWithOutOfBoundsIndex = new BoughtPropertyCommand(outOfBoundsIndex,
+        SoldPropertyCommand commandWithOutOfBoundsIndex = new SoldPropertyCommand(outOfBoundsIndex,
                 propertyIndex, actualPrice);
         assertThrows(CommandException.class, () -> commandWithOutOfBoundsIndex.execute(model),
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

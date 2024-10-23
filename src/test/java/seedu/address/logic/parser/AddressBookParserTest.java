@@ -193,6 +193,30 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_sold() throws Exception {
+        Index personIndex = Index.fromOneBased(1);
+        Index propertyIndex = Index.fromOneBased(1);
+        String priceString = "2000000";
+        Optional<Price> actualPrice = Optional.of(new Price(priceString));
+
+        String input = "sold "
+                + personIndex.getOneBased()
+                + " "
+                + propertyIndex.getOneBased()
+                + " ap/" + priceString;
+
+        SoldPropertyCommand expectedCommand = new SoldPropertyCommand(
+                personIndex,
+                propertyIndex,
+                actualPrice);
+
+        SoldPropertyCommand command =
+                (SoldPropertyCommand) parser.parseCommand(input);
+
+        assertEquals(command, expectedCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
