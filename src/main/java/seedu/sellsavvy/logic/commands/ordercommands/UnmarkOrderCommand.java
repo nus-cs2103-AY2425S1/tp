@@ -32,8 +32,7 @@ public class UnmarkOrderCommand extends Command {
     public static final String MESSAGE_UNMARK_ORDER_SUCCESS =
             "The order has been reverted to the pending status: %1$s";
     public static final String MESSAGE_ORDER_ALREADY_UNMARKED_WARNING = "Note: "
-            + "This order is already in the pending status"
-            + ", verify if this is a mistake\n";
+            + "This order is already in the pending status";
 
     private final Index index;
 

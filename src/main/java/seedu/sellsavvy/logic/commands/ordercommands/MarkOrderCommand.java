@@ -30,7 +30,8 @@ public class MarkOrderCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_MARK_ORDER_SUCCESS = "The order has been marked as completed: %1$s";
-    public static final String MESSAGE_ORDER_ALREADY_MARKED = "The order has already been marked as completed.";
+    public static final String MESSAGE_ORDER_ALREADY_MARKED_WARNING = "Note: "
+            + "This order is already marked as completed";
 
     private final Index index;
 
@@ -59,13 +60,12 @@ public class MarkOrderCommand extends Command {
         }
 
         Order orderToMark = orderList.get(index.getZeroBased());
-        if (orderToMark.getStatus() == Status.COMPLETED) {
-            throw new CommandException(MESSAGE_ORDER_ALREADY_MARKED);
-        }
-
         Order newOrder = createMarkedOrder(orderToMark);
         orderList.setOrder(orderToMark, newOrder);
-        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
+        String feedbackToUser = (orderToMark.getStatus() == Status.COMPLETED)
+                ? MESSAGE_ORDER_ALREADY_MARKED_WARNING : "";
+        return new CommandResult(
+                feedbackToUser + String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
     }
 
     /**
