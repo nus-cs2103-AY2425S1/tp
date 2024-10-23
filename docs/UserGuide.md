@@ -161,6 +161,29 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Viewing a person: `view [NAME]`
+
+Displays the details of a person in the address book.
+
+**Format:** `view [NAME]`
+
+<div markdown="span" class="alert alert-primary">
+Tip:
+The name must match the full name exactly.
+</div>
+
+**On success:** A pop-up window will show the details including:
+- Name
+- Phone Number
+- Email
+- Address
+- Condition
+- Schedule
+
+**Examples:**
+* `view John Doe`
+* `view Betsy Crowe`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -267,3 +290,4 @@ Action | Format, Examples
 **Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
 **List** | `list`
 **Help** | `help`
+**View** | `view [NAME]`
