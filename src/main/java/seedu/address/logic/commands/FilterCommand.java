@@ -23,7 +23,8 @@ import seedu.address.model.tag.Tag;
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the address book with the given criteria\n"
-            + "Parameters: [prefix]/[filter critera]\n" + "Example: " + COMMAND_WORD + " t/friends";
+            + "Parameters: [s/RSVPSTATUS] [t/TAG]...\n" + "At least one parameter must be provided.\n"
+            + "Example: " + COMMAND_WORD + " s/1 t/bride's side";
     public static final String MESSAGE_TAG_NOT_CREATED = "must be created before being used to filter.";
 
     private final Set<Tag> tagSet;
@@ -38,6 +39,8 @@ public class FilterCommand extends Command {
     };
 
     public FilterCommand(Set<Tag> tagSet, Set<RsvpStatus> statusSet) {
+        requireNonNull(tagSet);
+        requireNonNull(statusSet);
         this.tagSet = tagSet;
         this.statusSet = statusSet;
     }

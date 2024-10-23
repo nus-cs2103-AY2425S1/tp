@@ -15,7 +15,7 @@ public enum RsvpStatus {
     NOT_COMING("Not Coming");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "rsvpStatus should only be 1 (Coming), 2 (Not Coming) or 3 (Pending)";
+            "rsvpStatus should only be 1 (Coming), 2 (Not Coming) or 3 (Pending).";
 
     private final String status;
 
@@ -48,6 +48,7 @@ public enum RsvpStatus {
     }
 
     public static boolean checkValidStatus(String status) {
+        requireNonNull(status);
         switch (status) {
         case "1":
         case "2":
