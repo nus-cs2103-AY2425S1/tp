@@ -18,6 +18,5 @@ Person -up-> "1" Tag : Job Status
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
 Person *--> Job
 @enduml
