@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String level;
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
     private final List<JsonAdaptedTask> taskList = new ArrayList<>();
+    private final List<JsonAdaptedLessonTime> lessonTimes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +47,8 @@ class JsonAdaptedPerson {
             @JsonProperty("emergencyContact") String emergencyContact,
             @JsonProperty("address") String address, @JsonProperty("note") String note,
             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
-            @JsonProperty("level") String level, @JsonProperty("taskList") List<JsonAdaptedTask> taskList) {
+            @JsonProperty("level") String level, @JsonProperty("taskList") List<JsonAdaptedTask> taskList,
+            @JsonProperty("lessonTimes") List<JsonAdaptedLessonTime> lessonTimes) {
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
@@ -57,6 +60,9 @@ class JsonAdaptedPerson {
         }
         if (taskList != null) {
             this.taskList.addAll(taskList);
+        }
+        if (lessonTimes != null) {
+            this.lessonTimes.addAll(lessonTimes);
         }
     }
 
@@ -74,6 +80,9 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
         taskList.addAll(source.getTaskList().getjsonAdaptedTaskList());
+        lessonTimes.addAll(source.getLessonTimes().stream()
+                .map(JsonAdaptedLessonTime::new)
+                .collect(Collectors.toSet()));
     }
 
     /**
@@ -85,6 +94,11 @@ class JsonAdaptedPerson {
         final List<Subject> personSubjects = new ArrayList<>();
         for (JsonAdaptedSubject subject : subjects) {
             personSubjects.add(subject.toModelType());
+        }
+
+        final List<LessonTime> personLessonTimes = new ArrayList<>();
+        for (JsonAdaptedLessonTime lt: lessonTimes) {
+            personLessonTimes.add(lt.toModelType());
         }
 
         if (name == null) {
@@ -145,8 +159,10 @@ class JsonAdaptedPerson {
         TaskList modelTaskList = new TaskList();
         modelTaskList.setTasks(list);
 
+        final Set<LessonTime> modelLessonTimes = new HashSet<>(personLessonTimes);
+
         return new Person(modelName, modelPhone, modelEmergencyContact,
-                modelAddress, modelNote, modelSubjects, modelLevel, modelTaskList);
+                modelAddress, modelNote, modelSubjects, modelLevel, modelTaskList, modelLessonTimes);
 
 
     }

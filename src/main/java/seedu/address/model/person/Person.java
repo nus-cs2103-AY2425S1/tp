@@ -27,12 +27,14 @@ public class Person {
     private final Set<Subject> subjects = new HashSet<>();
     private final Level level;
     private final TaskList taskList;
+    private final Set<LessonTime> lessonTimes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, EmergencyContact emergencyContact,
-                  Address address, Note note, Set<Subject> subjects, Level level, TaskList tasklist) {
+                  Address address, Note note, Set<Subject> subjects,
+                  Level level, TaskList tasklist, Set<LessonTime> lessonTimes) {
         requireAllNonNull(name, phone, address, subjects);
         this.name = name;
         this.phone = phone;
@@ -44,6 +46,9 @@ public class Person {
         }
         this.level = level;
         this.taskList = tasklist.copy();
+        if (!lessonTimes.isEmpty()) {
+            this.lessonTimes.addAll(lessonTimes);
+        }
     }
 
     public Name getName() {
@@ -83,6 +88,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable lesson time set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<LessonTime> getLessonTimes() {
+        return Collections.unmodifiableSet(lessonTimes);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -118,13 +131,14 @@ public class Person {
                 && note.equals(otherPerson.note)
                 && level.equals(otherPerson.level)
                 && subjects.equals(otherPerson.subjects)
-                && taskList.equals(otherPerson.taskList);
+                && taskList.equals(otherPerson.taskList)
+                && lessonTimes.equals(otherPerson.lessonTimes);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emergencyContact, address, note, subjects, level, taskList);
+        return Objects.hash(name, phone, emergencyContact, address, note, subjects, level, taskList, lessonTimes);
     }
 
     @Override
@@ -138,6 +152,7 @@ public class Person {
                 .add("subjects", subjects)
                 .add("level", level)
                 .add("task list", taskList)
+                .add("lesson times", lessonTimes)
                 .toString();
     }
 

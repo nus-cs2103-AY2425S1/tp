@@ -8,7 +8,8 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ "PHYSICS" ],
     "level" : "S3",
-    "taskList" : [ ]
+    "taskList" : [ ],
+    "lessonTimes" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -23,7 +24,8 @@
     }, {
       "taskDescription": "Grade assignment",
       "taskDeadline": "2024-12-31"
-    } ]
+    } ],
+    "lessonTimes" : [ "WED-17:00-19:00", "SUN-11:00-13:00" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -32,7 +34,8 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
     "level" : "P3",
-    "taskList" : [ ]
+    "taskList" : [ ],
+    "lessonTimes" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -41,7 +44,8 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ "MATH" ],
     "level" : "JC1",
-    "taskList" : [ ]
+    "taskList" : [ ],
+    "lessonTimes" : [ ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -50,7 +54,8 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
     "level" : "P3",
-    "taskList" : [ ]
+    "taskList" : [ ],
+    "lessonTimes" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -59,7 +64,8 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
     "level" : "P3",
-    "taskList" : [ ]
+    "taskList" : [ ],
+    "lessonTimes" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -68,6 +74,7 @@
     "note" : "y am i in cs",
     "subjects" : [ ],
     "level" : "S5",
-    "taskList" : [ ]
+    "taskList" : [ ],
+    "lessonTimes" : [ ]
   } ]
 }

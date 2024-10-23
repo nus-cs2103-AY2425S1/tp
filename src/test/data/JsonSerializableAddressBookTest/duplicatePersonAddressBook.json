@@ -6,13 +6,15 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "note": "",
     "subjects": [ "MATH" ],
-    "level": "P3"
+    "level": "P3",
+    "lessonTimes" : [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "emergencyContact": "94351253",
     "address": "4th street",
     "note": "",
-    "level": "P6"
+    "level": "P6",
+    "lessonTimes" : [ ]
   } ]
 }
