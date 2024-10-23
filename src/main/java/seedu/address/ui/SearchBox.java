@@ -19,6 +19,7 @@ public class SearchBox extends UiPart<Region> {
     private static final String FXML = "SearchBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final ChangeListener<String> searchBoxChangeListener;
 
     @FXML
     private TextField searchBoxField;
@@ -29,12 +30,13 @@ public class SearchBox extends UiPart<Region> {
     public SearchBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        searchBoxField.textProperty().addListener(new ChangeListener<String>() {
+        searchBoxChangeListener = new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 handleCommandUpdate();
             }
-        });
+        };
+        searchBoxField.textProperty().addListener(searchBoxChangeListener);
     }
 
     /**
@@ -64,6 +66,9 @@ public class SearchBox extends UiPart<Region> {
      * Clears search box input.
      */
     public void clearSearchBox() {
+        // temporarily disable listener before clearing field
+        searchBoxField.textProperty().removeListener(searchBoxChangeListener);
         searchBoxField.setText("");
+        searchBoxField.textProperty().addListener(searchBoxChangeListener);
     }
 }
