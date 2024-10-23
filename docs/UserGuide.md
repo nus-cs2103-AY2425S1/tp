@@ -192,7 +192,7 @@ Finds guests and vendors from the guest list and vendor list respectively that m
 
 **Format:** `find n/Amy`
 
-Using the `find` command returns the following result on your screen:
+Entering the `find` command returns the following result on your screen:
 
 ![find command](images/findCommand.png)
 
@@ -205,7 +205,7 @@ Clears and empties out the entire guest list and vendor list. Could be good to s
 
 **Format:** `clear`
 
-Using the `clear` command returns the following result on your screen:
+Entering the `clear` command returns the following result on your screen:
 
 ![clear command](images/clearCommand.png)
 
@@ -217,6 +217,8 @@ Using the `clear` command returns the following result on your screen:
 Displays the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
 
 **Format:** `stats`
+
+Entering the `stats` command returns the following result on your screen:
 
 ![stats command](images/statsCommand.png)
 
@@ -239,14 +241,93 @@ Format: `exit`
 [_Back to Top_](#table-of-contents)
 
 
+### Adding a guest : `add_guest`
+
+Adds a guest to the bottom of the existing overall guest list.
+
+**Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP_STATUS] [t/TAG]...`
+
+Entering the `add_guest` command returns the following result on your screen:
+
+![add_guest command](images/addGuestCommand.png)
+
+[_Back to Top_](#table-of-contents)
 
 
+### Editing a guest : `edit_guest`
+
+Edits any details of a guest on your existing guest list.
+
+**Format:** ``
+
+Entering the `edit_guest` command returns the following result on your screen:
+
+![edit_guest command](images/editGuestCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+
+### Deleting a guest : `delete_guest`
+
+Deletes a guest from your existing guest list.
+
+**Format:** `delete_guest INDEX`
+
+* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list that you see on your screen**.
+
+   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+
+Entering the `delete_guest` command returns the following result on your screen:
+
+![delete_guest command](images/deleteGuestCommand.png)
+
+[_Back to Top_](#table-of-contents)
 
 
 ### **Vendor Related Commands**
 
 :information_source: Commands listed in this section are applicable to managing your vendor list.
 
+
+### Adding a vendor : `add_vendor`
+
+Adds a vendor to the bottom of the existing overall vendor list.
+
+**Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP_STATUS] [t/TAG]...`
+
+Entering the `add_vendor` command returns the following result on your screen:
+
+![add_vendor command](images/addVendorCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+
+### Editing a vendor : `edit_vendor`
+
+Edits any details of a vendor on your existing vendor list.
+
+**Format:** ``
+
+Entering the `edit_vendor` command returns the following result on your screen:
+
+![edit_vendor command](images/editVendorCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+
+### Deleting a vendor : `delete_vendor`
+
+Deletes a vendor from your existing vendor list.
+
+**Format:** `delete_vendor INDEX`
+
+* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list that you see on your screen**.
+
+   * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
+
+Entering the `delete_vendor` command returns the following result on your screen:
+
+![delete_vendor command](images/deleteVendorCommand.png)
 
 [_Back to Top_](#table-of-contents)
 
