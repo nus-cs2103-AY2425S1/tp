@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BarChartCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case PieChartCommand.COMMAND_WORD:
             return new PieChartCommand();
+
+        case BarChartCommand.COMMAND_WORD:
+            return new BarChartCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

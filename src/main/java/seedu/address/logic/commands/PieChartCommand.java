@@ -21,12 +21,13 @@ public class PieChartCommand extends Command {
         requireNonNull(model);
         Map<String, Integer> numOfStudentsInEachClass = new HashMap<>();
         model.getFilteredPersonList().forEach(person -> {
+            assert person.getClassId() != null;
             String classId = person.getClassId().value;
             numOfStudentsInEachClass.put(classId, numOfStudentsInEachClass.getOrDefault(classId, 0) + 1);
         });
         assert numOfStudentsInEachClass != null : "numOfStudentsInEachClass map should not be null";
         PieChartWindow.setData(numOfStudentsInEachClass);
-        return new CommandResult(MESSAGE_SUCCESS, false, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, true, false, false);
     }
 }
 

@@ -76,15 +76,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/200 c/1`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 f/220 c/2 t/criminal`
 
 ### Listing all persons : `list`
 
@@ -111,21 +111,27 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names, class IDs or both contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format 1: `find n/KEYWORD [MORE_KEYWORDS]`
+Format 2: `find c/KEYWORD [MORE_KEYWORDS]`
+Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partially matched words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The priority of the search will be class ID then followed by name.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/Jo` returns `john`, `John Doe`, `johnny` and `Johnmy`<br>
+  ![result for 'find n/Jo'](images/findJoResult.png)
+* `find c/2` returns `Jack Doe`, `Jammie Doe`<br>
+  ![result for 'find c/1'](images/findC2Result.png)
+* `find n/Jack c/2` returns `Jack Doe`<br>
+  ![result for 'find n/Jack c/2'](images/findJack2.png)
 
 ### Deleting a person : `delete`
 
@@ -146,6 +152,7 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
 
 ### Exiting the program : `exit`
 

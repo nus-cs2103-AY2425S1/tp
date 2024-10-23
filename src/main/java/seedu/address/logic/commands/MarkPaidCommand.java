@@ -39,7 +39,7 @@ public class MarkPaidCommand extends Command {
             + "Example 1: " + COMMAND_WORD + " 1 " + PREFIX_MONTHPAID + "2024-01\n"
             + "Example 2: " + COMMAND_WORD + " 1 "
             + PREFIX_MONTHPAID + "2024-01"
-            + PREFIX_MONTHPAID + "2024-02";
+            + PREFIX_MONTHPAID + "2024-12";
 
     public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Marked person as paid: %1$s";
     private final Index index;

@@ -43,6 +43,7 @@ public class PieChartWindow extends UiPart<Stage> {
 
     @FXML
     private void initialize() {
+        assert numOfStudentsInEachClass != null;
         piChart.setTitle("Number of students in each class");
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (Map.Entry<String, Integer> entry : numOfStudentsInEachClass.entrySet()) {
@@ -72,6 +73,13 @@ public class PieChartWindow extends UiPart<Stage> {
      */
     public void hide() {
         getRoot().hide();
+    }
+
+    /**
+     * Closes the PiChart window.
+     */
+    public void close() {
+        getRoot().close();
     }
 
     /**

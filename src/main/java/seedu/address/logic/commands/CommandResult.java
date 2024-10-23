@@ -18,6 +18,8 @@ public class CommandResult {
 
     private final boolean showPieChart;
 
+    private final boolean showBarChart;
+
 
     /** The application should exit. */
     private final boolean exit;
@@ -25,10 +27,12 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showPieChart, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp,
+                         boolean showPieChart, boolean showBarChart, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showPieChart = showPieChart;
+        this.showBarChart = showBarChart;
         this.exit = exit;
     }
 
@@ -37,7 +41,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser,
+                false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -50,6 +55,10 @@ public class CommandResult {
 
     public boolean isShowPieChart() {
         return showPieChart;
+    }
+
+    public boolean isShowBarChart() {
+        return showBarChart;
     }
 
 
@@ -71,6 +80,7 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showPieChart == otherCommandResult.showPieChart
+                && showBarChart == otherCommandResult.showBarChart
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
@@ -85,6 +95,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showPieChart", showPieChart)
+                .add("showBarChart", showBarChart)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();

@@ -18,6 +18,6 @@ public class JsonAdaptedMonthPaidTest {
     public void constructor_withAnotherMonthPaid_success() {
         MonthPaid expectedMonthPaid = new MonthPaid("2024-01");
         JsonAdaptedMonthPaid jsonMonthPaid = new JsonAdaptedMonthPaid(expectedMonthPaid);
-        assert(jsonMonthPaid.getMonthPaidValue().equals(expectedMonthPaid.value));
+        assert(jsonMonthPaid.getMonthPaidValue().equals(expectedMonthPaid.monthPaidValue));
     }
 }
