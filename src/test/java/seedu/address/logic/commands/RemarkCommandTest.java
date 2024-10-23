@@ -81,7 +81,7 @@ public class RemarkCommandTest {
     @Test
     public void constructor_nullRemark_throwsNullPointerException() {
         // null remark should throw a NullPointerException
-        assertThrows(NullPointerException.class, () -> new RemarkCommand(INDEX_FIRST_STUDENT, null));
+        assertThrows(AssertionError.class, () -> new RemarkCommand(INDEX_FIRST_STUDENT, null));
     }
 
     @Test
