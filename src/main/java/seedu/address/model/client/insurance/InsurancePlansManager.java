@@ -179,8 +179,13 @@ public class InsurancePlansManager {
      * @param planToBeUsed            The insurance plan the claim belongs to.
      * @param claimToBeMarkedAsClosed The claim to be marked as closed.
      */
-    public void closeClaim(InsurancePlan planToBeUsed, Claim claimToBeMarkedAsClosed) {
-        claimToBeMarkedAsClosed.close();
+    public void closeClaim(InsurancePlan planToBeUsed, Claim claimToBeMarkedAsClosed) throws ClaimException {
+        for (InsurancePlan p : insurancePlans) {
+            if (p.insurancePlanId == planToBeUsed.getInsurancePlanId()) {
+                Claim claimToClose = p.getClaim(claimToBeMarkedAsClosed.getClaimId());
+                claimToClose.close();
+            }
+        }
         planToBeUsed.sortClaims();
     }
 
@@ -331,5 +336,18 @@ public class InsurancePlansManager {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Creates a copy of this object for testing purposes only.
+     */
+    public InsurancePlansManager createCopy() throws InsurancePlanException, ClaimException {
+        String jsonPlansString = toString();
+        InsurancePlansManager copy = new InsurancePlansManager(jsonPlansString);
+
+        String jsonClaimsString = this.convertClaimsToJson();
+        copy.addAllClaimsFromJson(jsonClaimsString);
+
+        return copy;
     }
 }

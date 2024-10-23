@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
 
@@ -28,8 +28,9 @@ class DeleteClaimCommandTest {
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
-        InsurancePlan insurancePlan = clientToEdit.getInsurancePlansManager().getInsurancePlan(0);
-        Claim claim = clientToEdit.getInsurancePlansManager().getInsurancePlan(0).getClaim("A1001");
+        InsurancePlansManager originalInsurancePlanManager = clientToEdit.getInsurancePlansManager();
+        InsurancePlan insurancePlan = originalInsurancePlanManager.getInsurancePlan(0);
+        Claim claim = originalInsurancePlanManager.getInsurancePlan(0).getClaim("A1001");
 
         DeleteClaimCommand deleteClaimCommand =
                 new DeleteClaimCommand(INDEX_THIRD_CLIENT, 0, claim.getClaimId());
@@ -41,10 +42,7 @@ class DeleteClaimCommandTest {
                 clientToEdit.getName().toString(), insurancePlan, claim.getClaimId());
 
         // rebuilds a copy of the claims from string to prevent same-object manipulation
-        String insurancePlanString = insurancePlan.toString();
-        String claimsString = clientToEdit.getInsurancePlansManager().convertClaimsToJson();
-        InsurancePlansManager updatedInsurancePlanManager = new InsurancePlansManager(insurancePlanString);
-        updatedInsurancePlanManager.addAllClaimsFromJson(claimsString);
+        InsurancePlansManager updatedInsurancePlanManager = originalInsurancePlanManager.createCopy();
         updatedInsurancePlanManager.deleteClaimFromInsurancePlan(insurancePlan, claim);
 
         Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
@@ -52,6 +50,7 @@ class DeleteClaimCommandTest {
 
         expectedModel.setClient(clientToEdit, updatedClient);
 
-        assertCommandSuccess(deleteClaimCommand, model, expectedMessage, expectedModel);
+        assertInsuranceCommandSuccess(deleteClaimCommand, model, expectedMessage,
+                clientToEdit.getInsurancePlansManager(), updatedInsurancePlanManager);
     }
 }

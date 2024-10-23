@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,9 +27,9 @@ class CloseClaimCommandTest {
     @Test
     void execute_validIndexUnfilteredList_success() throws CommandException,
             InsurancePlanException, ClaimException {
-        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
+        InsurancePlansManager originalInsurancePlanManager = clientToEdit.getInsurancePlansManager();
+
         InsurancePlan insurancePlan = clientToEdit.getInsurancePlansManager().getInsurancePlan(0);
         Claim claim = clientToEdit.getInsurancePlansManager().getInsurancePlan(0).getClaim("A1001");
 
@@ -43,19 +42,11 @@ class CloseClaimCommandTest {
         String expectedMessage = String.format(CloseClaimCommand.MESSAGE_CLOSE_CLAIM_SUCCESS,
                 clientToEdit.getName().toString(), insurancePlan, claim.getClaimId());
 
-        // rebuilds a copy of the claims from string to prevent same-object manipulation
-        String insurancePlanString = insurancePlan.toString();
-        String claimsString = clientToEdit.getInsurancePlansManager().convertClaimsToJson();
-        InsurancePlansManager updatedInsurancePlanManager = new InsurancePlansManager(insurancePlanString);
-        updatedInsurancePlanManager.addAllClaimsFromJson(claimsString);
+        InsurancePlansManager updatedInsurancePlanManager = originalInsurancePlanManager.createCopy();
         updatedInsurancePlanManager.closeClaim(insurancePlan, claim);
 
-        Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
-                clientToEdit.getAddress(), updatedInsurancePlanManager, clientToEdit.getTags());
-
-        expectedModel.setClient(clientToEdit, updatedClient);
-
-        assertCommandSuccess(closeClaimCommand, model, expectedMessage, expectedModel);
+        assertInsuranceCommandSuccess(closeClaimCommand, model, expectedMessage,
+                originalInsurancePlanManager, updatedInsurancePlanManager);
     }
 
     @Test
