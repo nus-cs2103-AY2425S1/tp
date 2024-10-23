@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COST_BREAD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BREAD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BREAD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUPPLIER_INDEX_BREAD;
 import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalDeliveries.BREAD;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -84,10 +83,6 @@ public class DeliveryTest {
 
         // different dateTime -> returns false
         Delivery editedDelivery = new DeliveryBuilder().withDeliveryTime(VALID_DATE_BREAD).build();
-        assertFalse(APPLE.equals(editedDelivery));
-
-        // different SupplierIndex -> returns true
-        editedDelivery = new DeliveryBuilder().withSupplierIndex(VALID_SUPPLIER_INDEX_BREAD).build();
         assertFalse(APPLE.equals(editedDelivery));
 
         // different cost -> returns false

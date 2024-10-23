@@ -14,7 +14,6 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -42,7 +41,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_invalidProductName_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(INVALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, VALID_QUANTITY, VALID_SENDER);
         String expectedMessage = Product.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -50,7 +49,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullProductName_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(null, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, VALID_QUANTITY, VALID_SENDER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Product.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -58,7 +57,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_invalidTime_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), INVALID_TIME,
-                VALID_COST, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, VALID_QUANTITY, VALID_SENDER);
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -66,7 +65,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullTime_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), null,
-                VALID_COST, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, VALID_QUANTITY, VALID_SENDER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -74,7 +73,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_invalidCost_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                INVALID_COST, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                INVALID_COST, VALID_QUANTITY, VALID_SENDER);
         String expectedMessage = Cost.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -82,7 +81,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullCost_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                null, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                null, VALID_QUANTITY, VALID_SENDER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -90,7 +89,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_invalidQuantity_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, INVALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, INVALID_QUANTITY, VALID_SENDER);
         String expectedMessage = Quantity.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -98,7 +97,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullQuantity_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, null, VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, null, VALID_SENDER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -106,24 +105,8 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullSender_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, VALID_QUANTITY, VALID_SUPPLIER_INDEX, null);
+                VALID_COST, VALID_QUANTITY, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidSupplierindex_throwsIllegalValueException() {
-        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, VALID_QUANTITY, INVALID_SUPPLIER_INDEX, VALID_SENDER);
-        String expectedMessage = SupplierIndex.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullSupplierIndex_throwsIllegalValueException() {
-        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, VALID_QUANTITY, null, VALID_SENDER);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, SupplierIndex.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
 

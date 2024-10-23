@@ -9,7 +9,6 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -25,7 +24,6 @@ public class JsonAdaptedDelivery {
     private final String deliveryTime;
     private final String cost;
     private final String quantity;
-    private final String supplierIndex;
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
@@ -35,7 +33,6 @@ public class JsonAdaptedDelivery {
                                @JsonProperty("deliveryTime") String deliveryTime,
                                @JsonProperty("cost") String cost,
                                @JsonProperty("quantity") String quantity,
-                               @JsonProperty("supplierIndex") String supplierIndex,
                                @JsonProperty("sender") JsonAdaptedPerson sender) {
         this.product = product;
         this.sender = sender;
@@ -43,11 +40,10 @@ public class JsonAdaptedDelivery {
         this.deliveryTime = deliveryTime;
         this.cost = cost;
         this.quantity = quantity;
-        this.supplierIndex = supplierIndex;
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Delivery} into this class for Jackson use.
      */
     public JsonAdaptedDelivery(Delivery source) {
         this.product = source.getDeliveryProduct().productName;
@@ -56,13 +52,12 @@ public class JsonAdaptedDelivery {
         this.deliveryTime = source.getDeliveryDate().toString();
         this.cost = source.getDeliveryCost().value;
         this.quantity = source.getDeliveryQuantity().value;
-        this.supplierIndex = source.getSupplierIndex().toString();
     }
 
     /**
      * Converts this Jackson-friendly adapted delivery object into the model's {@code Delivery} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted delivery.
      */
     public Delivery toModelType() throws IllegalValueException {
 
@@ -116,15 +111,8 @@ public class JsonAdaptedDelivery {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
         }
         final Quantity quantityObj = new Quantity(quantity);
-        if (supplierIndex == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    SupplierIndex.class.getSimpleName()));
-        }
-        if (!SupplierIndex.isValidIndex(supplierIndex)) {
-            throw new IllegalValueException(SupplierIndex.MESSAGE_CONSTRAINTS);
-        }
-        final SupplierIndex supplierIndexObj = new SupplierIndex(supplierIndex);
+
         return new Delivery(productObj, senderObj, statusObj, deliveryDateTimeObj, costObj,
-                quantityObj, supplierIndexObj);
+                quantityObj);
     }
 }

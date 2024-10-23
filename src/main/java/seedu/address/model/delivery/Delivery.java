@@ -153,7 +153,6 @@ public class Delivery {
                 && deliveryDateTime.equals(otherDelivery.deliveryDateTime)
                 && cost.equals(otherDelivery.cost)
                 && quantity.equals(otherDelivery.quantity)
-                && supplierIndex.equals(otherDelivery.supplierIndex)
                 && isSameSender;
     }
 
