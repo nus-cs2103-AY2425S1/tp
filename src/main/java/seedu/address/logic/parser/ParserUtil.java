@@ -4,7 +4,6 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -23,7 +22,6 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.exceptions.TimeParseException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +35,14 @@ public class ParserUtil {
             + "formats:\ndd/MM/yyyy\n"
             + "dd-MM-yyyy\n"
             + "dd MM yyyy";
+    public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
+            "dd MMMM yyyy",
+            Locale.ENGLISH);
+    public static final DateTimeFormatter[] FORMATTERS = new DateTimeFormatter[]{
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+            DateTimeFormatter.ofPattern("dd MM yyyy")
+    };
 
 
     /**
@@ -181,16 +187,6 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-
-    public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
-            "dd MMMM yyyy",
-            Locale.ENGLISH);
-    public static final DateTimeFormatter[] FORMATTERS = new DateTimeFormatter[]{
-            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
-            DateTimeFormatter.ofPattern("dd-MM-yyyy"),
-            DateTimeFormatter.ofPattern("dd MM yyyy")
-    };
-
     public static LocalDate parseDate(String date) throws ParseException {
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {

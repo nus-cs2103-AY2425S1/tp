@@ -17,8 +17,6 @@ import seedu.address.model.person.BookingIsOnDate;
 public class BookingsCommand extends Command {
     public static final String COMMAND_WORD = "bookings";
 
-    private final LocalDate date;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all records with appointments on the specified date.\n"
             + "The date has to be in one of the following accepted formats:\n"
@@ -27,6 +25,7 @@ public class BookingsCommand extends Command {
             + "Examples:\n"
             + COMMAND_WORD + " 23/10/2024\n";
 
+    private final LocalDate date;
     public BookingsCommand(LocalDate date) {
         this.date = date;
     }
@@ -37,7 +36,8 @@ public class BookingsCommand extends Command {
         model.updateFilteredPersonList(new BookingIsOnDate(date));
         String formattedDate = date.format(ParserUtil.ENGLISH_FORMAT_WITH_TIME);
         return new CommandResult(
-                String.format(Messages.MESSAGE_NUMBER_OF_BOOKINGS, model.getFilteredPersonList().size(), formattedDate));
+                String.format(Messages.MESSAGE_NUMBER_OF_BOOKINGS,
+                        model.getFilteredPersonList().size(), formattedDate));
     }
 
     @Override
