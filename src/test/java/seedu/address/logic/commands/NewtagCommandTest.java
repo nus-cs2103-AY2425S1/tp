@@ -26,7 +26,7 @@ public class NewtagCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(newTag);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + " " + newTag + "\n"
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + newTag + "\n"
                 + "Your tags: " + expectedModel.getTagList();
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
