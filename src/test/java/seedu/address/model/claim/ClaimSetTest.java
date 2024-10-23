@@ -3,11 +3,15 @@ package seedu.address.model.claim;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -187,6 +191,84 @@ public class ClaimSetTest {
         String result = claimSet.toString();
         assertTrue(result.contains(claim1.getClaimDescription()));
         assertTrue(result.contains(claim2.getClaimDescription()));
+    }
+
+    @Test
+    public void add_claimNull_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> claimSet.add(null));
+    }
+
+    @Test
+    public void addAll_nullCollection_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> claimSet.addAll(null));
+    }
+
+    @Test
+    public void contains_nullClaim_returnsFalse() {
+        assertFalse(claimSet.contains(null));
+    }
+
+    @Test
+    public void containsAll_validClaims_returnsTrue() {
+        claimSet.add(claim1);
+        claimSet.add(claim2);
+        Set<Claim> claims = new HashSet<>(Arrays.asList(claim1, claim2));
+        assertTrue(claimSet.containsAll(claims));
+    }
+
+    @Test
+    public void containsAll_nonExistingClaim_returnsFalse() {
+        claimSet.add(claim1);
+        Set<Claim> claims = new HashSet<>(Arrays.asList(claim1, claim2));
+        assertFalse(claimSet.containsAll(claims));
+    }
+
+    @Test
+    public void removeAll_validClaims_removesAll() {
+        claimSet.add(claim1);
+        claimSet.add(claim2);
+        Set<Claim> claimsToRemove = new HashSet<>(Arrays.asList(claim1, claim2));
+        assertTrue(claimSet.removeAll(claimsToRemove));
+        assertEquals(0, claimSet.size());
+    }
+
+    @Test
+    public void removeAll_nonExistingClaim_doesNotRemove() {
+        claimSet.add(claim1);
+        Set<Claim> claimsToRemove = Collections.singleton(claim2);
+        assertFalse(claimSet.removeAll(claimsToRemove));
+        assertEquals(1, claimSet.size());
+    }
+
+    @Test
+    public void toArray_withLargerTypedArray_returnsCorrectArray() {
+        claimSet.add(claim1);
+        claimSet.add(claim2);
+        Claim[] array = claimSet.toArray(new Claim[5]); // Array larger than claimSet size
+        assertEquals(2, Arrays.stream(array).filter(Objects::nonNull).count());
+        assertTrue(Arrays.asList(array).contains(claim1));
+        assertTrue(Arrays.asList(array).contains(claim2));
+        assertNull(array[2]);
+    }
+
+    @Test
+    public void clear_emptySet_returnsTrue() {
+        claimSet.clear();
+        assertTrue(claimSet.isEmpty());
+    }
+
+    @Test
+    public void clear_nonEmptySet_returnsTrue() {
+        claimSet.add(claim1);
+        claimSet.clear();
+        assertTrue(claimSet.isEmpty());
+        assertEquals(0, claimSet.size());
+    }
+
+    @Test
+    public void retainAll_throwsUnsupportedOperationException() {
+        Set<Claim> claimsToRetain = new HashSet<>(Arrays.asList(claim1, claim2));
+        assertThrows(UnsupportedOperationException.class, () -> claimSet.retainAll(claimsToRetain));
     }
 }
 
