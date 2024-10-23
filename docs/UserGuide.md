@@ -178,7 +178,7 @@ Examples:
 
 ### Deleting an order under a Person : `deleteOrder`
 
-Deletes an order under a selected person from their displayed order list.
+Deletes an order from the selected person's displayed order list.
 
 Format: `deleteOrder ORDER_INDEX`
 
@@ -193,7 +193,7 @@ Examples:
 
 ### Editing an order : `editOrder`
 
-Edits an order under a selected person from their displayed order list.
+Edits an order from the selected person's displayed order list.
 
 Format: `edit ORDER_INDEX [i/ITEM] [d/DATE] [c/QUANTITY]`
 
@@ -211,7 +211,7 @@ Examples:
 
 ### Mark an order as completed : `markOrder`
 
-Marks an order under a selected person from their displayed order list as completed.
+Marks an order from the selected person's displayed order list as completed.
 
 Format: `markOrder ORDER_INDEX`
 
