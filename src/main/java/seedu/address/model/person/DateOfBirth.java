@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * A class to represent a person's date of birth in the address book.
@@ -12,7 +11,8 @@ import java.time.format.DateTimeParseException;
  */
 public class DateOfBirth extends Date {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date of birth must not be a future date.";
+    public static final String MESSAGE_CONSTRAINTS =
+            String.format("%s. Date of birth must not be a future date.", Date.MESSAGE_CONSTRAINTS);
 
     /**
      * Constructs a {@code DateOfBirth}.
@@ -33,12 +33,12 @@ public class DateOfBirth extends Date {
     public static boolean isValidDate(String test) {
         requireNonNull(test);
 
-        try {
-            LocalDate localDate = Date.parseLocalDate(test);
-            LocalDate now = LocalDate.now();
-            return localDate.isBefore(now) || localDate.isEqual(now);
-        } catch (DateTimeParseException e) {
+        if (!Date.isValidDate(test)) {
             return false;
         }
+
+        LocalDate localDate = Date.parseLocalDate(test);
+        LocalDate now = LocalDate.now();
+        return localDate.isBefore(now) || localDate.isEqual(now);
     }
 }
