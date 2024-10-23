@@ -74,6 +74,11 @@ public class PersonCard extends UiPart<Region> {
         // Add module role pairs
         person.getModuleRoleMap().getData().stream()
                 .sorted(Comparator.comparing(moduleRolePair -> moduleRolePair.moduleCode.toString()))
-                .forEach(moduleRolePair -> roles.getChildren().add(new Label(moduleRolePair.toString())));
+                .forEach(moduleRolePair -> {
+                    Label curLabel = new Label(moduleRolePair.toString());
+                    String cssClass = moduleRolePair.roleType.toString().toLowerCase();
+                    curLabel.getStyleClass().add(cssClass);
+                    roles.getChildren().add(curLabel);
+                });
     }
 }
