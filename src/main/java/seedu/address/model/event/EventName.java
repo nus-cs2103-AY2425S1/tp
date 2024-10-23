@@ -10,13 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EventName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Event names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Event names should only contain alphanumeric characters and spaces"
+            + " ,and should be between 1 and 50 characters long.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]{0,49}$";
 
     public final String eventName;
 
@@ -27,15 +28,16 @@ public class EventName {
      */
     public EventName(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        eventName = name;
+        String trimmedName = name.trim();
+        checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
+        eventName = trimmedName;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
 

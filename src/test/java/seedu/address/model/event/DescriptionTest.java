@@ -15,15 +15,16 @@ public class DescriptionTest {
 
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
-        String invalidDescription = ""; // Invalid case: empty string
-        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
-
-        // Add additional invalid description cases
-        String invalidDescription2 = "   "; // Invalid case: spaces only
+        String invalidDescription1 = "Event@123"; // Invalid case: special character "@"
+        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription1));
+        String invalidDescription3 = "Event123."; // Invalid case: special character "."
+        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription3));
+        String invalidDescription4 = "Happening soon, see you there"; // Invalid case: special character ","
+        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription4));
+        String invalidDescription2 = "Collecting unsold food from NTUC for distribution Collecting unsold food from "
+                                     + "NTUC for distribution a"; // Invalid case: Exceeds 100 char (101)
         assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription2));
 
-        String invalidDescription3 = "Event@123"; // Invalid case: special character
-        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription3));
     }
 
     @Test
@@ -32,16 +33,18 @@ public class DescriptionTest {
         assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
 
         // invalid description
-        assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription(" ")); // spaces only
         assertFalse(Description.isValidDescription("@TestEvent")); // special characters
         assertFalse(Description.isValidDescription("Event@123")); // contains special character
         assertFalse(Description.isValidDescription("123@456!")); // multiple special characters
 
         // valid description
+        assertTrue(Description.isValidDescription("")); // empty string
+        assertTrue(Description.isValidDescription(" ")); // spaces only
         assertTrue(Description.isValidDescription("Birthday Party")); // alphanumeric with spaces
         assertTrue(Description.isValidDescription("Event 2024")); // alphanumeric with numbers
         assertTrue(Description.isValidDescription("SimpleEvent")); // alphanumeric, no spaces
+        assertTrue(Description.isValidDescription("Collecting unsold food from NTUC for distribution "
+                                                  + "Collecting unsold food from NTUC for distribution")); // 100 char
     }
 
     @Test
@@ -68,14 +71,14 @@ public class DescriptionTest {
 
     @Test
     public void toString_returnsFormattedDescription() {
-        Description description = new Description("Workshop 2024");
-        assertTrue(description.toString().equals("Workshop 2024"));
+        Description description = new Description("Workshop 2024 Join us there");
+        assertTrue(description.toString().equals("Workshop 2024 Join us there"));
     }
 
     @Test
     public void hashCode_sameDescription_sameHashCode() {
-        Description desc1 = new Description("Hackathon Event");
-        Description desc2 = new Description("Hackathon Event");
+        Description desc1 = new Description("Hackathon Event hosted by Amazon");
+        Description desc2 = new Description("Hackathon Event hosted by Amazon");
 
         assertTrue(desc1.hashCode() == desc2.hashCode());
     }

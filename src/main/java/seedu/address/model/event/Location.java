@@ -10,13 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Location {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Event locations should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Event locations should only contain alphanumeric characters and spaces, "
+                    + "should not be blank, and must be between 1 and 100 characters long";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum} ]{1,100}$";
 
     public final String eventLocation;
 
@@ -27,15 +28,16 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
-        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
-        eventLocation = location;
+        String trimmedLocation = location.trim();
+        checkArgument(isValidLocation(trimmedLocation), MESSAGE_CONSTRAINTS);
+        eventLocation = trimmedLocation;
     }
 
     /**
      * Returns true if a given string is a valid location description.
      */
     public static boolean isValidLocation(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
 
