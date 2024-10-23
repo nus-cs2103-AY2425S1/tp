@@ -7,8 +7,6 @@ import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.contact.common.Id;
-
 public class EventIdTest {
 
     @Test
@@ -47,19 +45,19 @@ public class EventIdTest {
     //Assumption: The EventId object contains a valid Id.
     @Test
     public void equalsTest() {
-        EventId Id1String = new EventId("0");
-        EventId Id1Int = new EventId(0);
+        EventId id1String = new EventId("0");
+        EventId id1Int = new EventId(0);
 
-        EventId Id2String = new EventId(Integer.toString(Integer.MAX_VALUE));
-        EventId Id2Int = new EventId(Integer.MAX_VALUE);
+        EventId id2String = new EventId(Integer.toString(Integer.MAX_VALUE));
+        EventId id2Int = new EventId(Integer.MAX_VALUE);
 
-        assertTrue(Id1String.equals(Id1String));
-        assertTrue(Id1String.equals(Id1Int));
-        assertTrue(Id2String.equals(Id2Int));
-        assertFalse(Id1String.equals(Id2String));
-        assertFalse(Id1String.equals(Id2Int));
-        assertFalse(Id1Int.equals(Id2String));
-        assertFalse(Id1Int.equals(Id2Int));
-        assertFalse(Id1String.equals(null));
+        assertTrue(id1String.equals(id1String));
+        assertTrue(id1String.equals(id1Int));
+        assertTrue(id2String.equals(id2Int));
+        assertFalse(id1String.equals(id2String));
+        assertFalse(id1String.equals(id2Int));
+        assertFalse(id1Int.equals(id2String));
+        assertFalse(id1Int.equals(id2Int));
+        assertFalse(id1String.equals(null));
     }
 }
