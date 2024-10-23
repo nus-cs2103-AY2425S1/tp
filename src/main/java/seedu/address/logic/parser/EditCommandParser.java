@@ -23,8 +23,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     private static final Logger logger = LogsCenter.getLogger(EditCommandParser.class);
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewCommand
-     * and returns a corresponding ViewCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * and returns a corresponding EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
