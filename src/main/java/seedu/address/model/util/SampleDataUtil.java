@@ -24,23 +24,23 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")),
+            new Person(new Name("Alex Yeoh"), getPhone("87438807"), getEmail("alexyeoh@example.com"),
+                getAddress("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"), getMap("CS2040S", RoleType.PROFESSOR)),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
+            new Person(new Name("Bernice Yu"), getPhone("99272758"), getEmail("berniceyu@example.com"),
+                getAddress("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"), getEmptyMap()),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                Optional.of(new Address("Blk 11 Ang Mo Kio Street 74, #11-04")),
+            new Person(new Name("Charlotte Oliveiro"), getPhone("93210283"), getEmail("charlotte@example.com"),
+                getAddress("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"), getMultipleRolesMap()),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                Optional.of(new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
+            new Person(new Name("David Li"), getPhone("91031282"), getEmail("lidavid@example.com"),
+                getAddress("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"), getEmptyMap()),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")),
+            new Person(new Name("Irfan Ibrahim"), getPhone("92492021"), getEmail("irfan@example.com"),
+                getAddress("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"), getMap("MA1522", RoleType.TUTOR)),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
+            new Person(new Name("Roy Balakrishnan"), getPhone("92624417"), getEmail("royb@example.com"),
+                getAddress("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"), getMultipleRolesMap())
         };
     }
@@ -60,6 +60,27 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns an {@Code Optional<Address>} containing the address given.
+     */
+    public static Optional<Address> getAddress(String string) {
+        return Optional.of(new Address(string));
+    }
+
+    /**
+     * Returns an {@Code Optional<Phone>} containing the phone given.
+     */
+    public static Optional<Phone> getPhone(String string) {
+        return Optional.of(new Phone(string));
+    }
+
+    /**
+     * Returns an {@Code Optional<Email>} containing the address given.
+     */
+    public static Optional<Email> getEmail(String string) {
+        return Optional.of(new Email(string));
     }
 
     /**

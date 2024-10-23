@@ -56,7 +56,14 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ModuleRoleMap moduleRoleMap = ParserUtil.parseModuleRolePairs(argMultimap.getAllValues(PREFIX_MODULE));
 
-        Person person = new Person(name, phone, email, Optional.ofNullable(address), tagList, moduleRoleMap);
+        Person person = new Person(
+                name,
+                Optional.ofNullable(phone),
+                Optional.ofNullable(email),
+                Optional.ofNullable(address),
+                tagList,
+                moduleRoleMap
+        );
         return new AddCommand(person);
     }
 }
