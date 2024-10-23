@@ -164,6 +164,22 @@ The index refers to the index number shown in the displayed company list. The in
 **tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
 </box>
 
+### Adding a company to favourites: 'fav'
+
+Labels an existing company as a favourite
+
+Format: `fav COMPANY_INDEX`
+
+* Sets the favourite field of company at the specified `COMPANY_INDEX` as `true`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+### Removing a company from favourites: 'unfav'
+
+Labels an existing company as a favourite
+
+Format: `unfav COMPANY_INDEX`
+
+* Sets the favourite field of company at the specified `COMPANY_INDEX` as `false`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
 ### Locating companies by name: `find`
 
 Finds companies whose names contain any of the given keywords.
