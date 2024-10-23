@@ -1,5 +1,6 @@
 package seedu.address.model.delivery;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -47,6 +48,14 @@ public class DeliveryProductPredicateTest {
         DeliveryProductPredicate predicate2 = new DeliveryProductPredicate(new Product("bread"));
 
         assertFalse(predicate1.equals(predicate2));
+    }
+
+    @Test
+    public void test_toString() {
+        DeliveryProductPredicate predicate = new DeliveryProductPredicate(new Product("bread"));
+
+        String expectedString = "seedu.address.model.delivery.DeliveryProductPredicate{targetProduct=bread}";
+        assertEquals(expectedString, predicate.toString());
     }
 }
 

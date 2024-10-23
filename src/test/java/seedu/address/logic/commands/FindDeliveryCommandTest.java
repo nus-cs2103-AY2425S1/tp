@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -77,13 +78,25 @@ public class FindDeliveryCommandTest {
      */
     @Test
     public void execute_supplierIndexContainsKeyword_oneDeliveryFound() {
-        // Index 2 should match supplier BENSON for BREAD delivery
         Optional<SupplierIndex> supplierIndex = Optional.empty();
         DeliverySupplierPredicate predicate = new DeliverySupplierPredicate(BENSON);
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
         expectedModel.updateFilteredDeliveryList(predicate);
 
         assertCommandSuccess(command, model, String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 1), expectedModel);
+    }
+
+    /**
+     * Test case for finding deliveries by supplier index when the index is invalid.
+     */
+    @Test
+    public void execute_invalidSupplierIndex_noDeliveriesFound() {
+        Optional<SupplierIndex> supplierIndex = Optional.of(new SupplierIndex("9"));
+        DeliverySupplierPredicate predicate = new DeliverySupplierPredicate(BENSON);
+        FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
+
+        CommandResult result = command.execute(model);
+        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, result.getFeedbackToUser());
     }
 
     /**
@@ -108,7 +121,3 @@ public class FindDeliveryCommandTest {
         assertEquals(expected, findDeliveryCommand.toString());
     }
 }
-
-
-
-

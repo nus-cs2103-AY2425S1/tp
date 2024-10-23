@@ -41,6 +41,24 @@ public class FindDeliveryCommandParserTest {
     }
 
     @Test
+    public void parse_invalidDateTime_throwsParseException() {
+        String userInput = " " + PREFIX_DATETIME + "20-10-2024 1000"; // Invalid date format
+        assertParseFailure(parser, userInput, DateTime.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidSupplierIndex_throwsParseException() {
+        String userInput = " " + PREFIX_SUPPLIER_INDEX + "invalidIndex"; // Invalid supplier index format
+        assertParseFailure(parser, userInput, SupplierIndex.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidProduct_throwsParseException() {
+        String userInput = " " + PREFIX_PRODUCT + "%%%"; // Invalid product format
+        assertParseFailure(parser, userInput, Product.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_validDateFilter_success() {
         String userInput = " " + PREFIX_DATETIME + "20-10-2024 10:00";
         DateTime expectedDateTime = new DateTime("20-10-2024 10:00");

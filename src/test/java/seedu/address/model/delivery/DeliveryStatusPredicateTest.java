@@ -1,5 +1,6 @@
 package seedu.address.model.delivery;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -30,6 +31,7 @@ public class DeliveryStatusPredicateTest {
         DeliveryStatusPredicate predicate = new DeliveryStatusPredicate(Status.DELIVERED);
 
         assertTrue(predicate.equals(predicate));
+        assertTrue(predicate == predicate);
     }
 
     @Test
@@ -41,11 +43,34 @@ public class DeliveryStatusPredicateTest {
     }
 
     @Test
+    public void equals_null_returnsFalse() {
+        DeliveryStatusPredicate predicate = new DeliveryStatusPredicate(Status.PENDING);
+
+        assertFalse(predicate.equals(null));
+    }
+
+    @Test
+    public void equals_differentClass_returnsFalse() {
+        DeliveryStatusPredicate predicate = new DeliveryStatusPredicate(Status.PENDING);
+        Object otherObject = new Object();
+
+        assertFalse(predicate.equals(otherObject));
+    }
+
+    @Test
     public void equals_differentStatus_returnsFalse() {
         DeliveryStatusPredicate predicate1 = new DeliveryStatusPredicate(Status.DELIVERED);
         DeliveryStatusPredicate predicate2 = new DeliveryStatusPredicate(Status.CANCELLED);
 
         assertFalse(predicate1.equals(predicate2));
+    }
+
+    @Test
+    public void test_toString() {
+        DeliveryStatusPredicate predicate = new DeliveryStatusPredicate(Status.DELIVERED);
+
+        String expectedString = "seedu.address.model.delivery.DeliveryStatusPredicate{targetStatus=DELIVERED}";
+        assertEquals(expectedString, predicate.toString());
     }
 }
 
