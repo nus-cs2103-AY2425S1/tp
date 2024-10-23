@@ -10,14 +10,18 @@ public class PublicAddressFactory {
      *
      * @param network the network type for which the public address is created
      * @param address the string representation of the public address
-     * @param tag     the tag associated with the address
+     * @param label the label associated with the address
      * @return a PublicAddress instance specific to the provided network
      * @throws IllegalArgumentException if the network type is unsupported
      */
-    public static PublicAddress createPublicAddress(Network network, String address, String tag) {
+    public static PublicAddress createPublicAddress(Network network, String address, String label) {
         switch (network) {
         case BTC:
-            return new BtcAddress(address, tag);
+            return new BtcAddress(address, label);
+        case ETH:
+            return new EthAddress(address, label);
+        case SOL:
+            return new SolAddress(address, label);
         default:
             throw new IllegalArgumentException("Unsupported network type: " + network);
         }
