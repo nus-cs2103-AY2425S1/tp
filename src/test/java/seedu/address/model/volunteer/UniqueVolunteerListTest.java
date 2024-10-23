@@ -2,12 +2,14 @@ package seedu.address.model.volunteer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalVolunteers.ALICE;
 import static seedu.address.testutil.TypicalVolunteers.BOB;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -163,6 +165,91 @@ public class UniqueVolunteerListTest {
         assertEquals(expectedList, uniqueVolunteerList);
     }
 
+    @Test
+    public void iterator_correctIterationOrder() {
+        uniqueVolunteerList.add(ALICE);
+        uniqueVolunteerList.add(BOB);
+        Iterator<Volunteer> iterator = uniqueVolunteerList.iterator();
 
+        assertTrue(iterator.hasNext());
+        assertEquals(ALICE, iterator.next());
 
+        assertTrue(iterator.hasNext());
+        assertEquals(BOB, iterator.next());
+
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        // Test same object reference
+        assertTrue(uniqueVolunteerList.equals(uniqueVolunteerList));
+    }
+
+    @Test
+    public void equals_nullObject_returnsFalse() {
+        // Test comparison with null
+        assertFalse(uniqueVolunteerList.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        // Test comparison with a different type
+        assertFalse(uniqueVolunteerList.equals(5.0));
+    }
+
+    @Test
+    public void equals_differentUniqueVolunteerList_returnsFalse() {
+        // Test with different UniqueVolunteerList
+        UniqueVolunteerList differentList = new UniqueVolunteerList();
+        differentList.add(BOB);
+        uniqueVolunteerList.add(ALICE);
+
+        assertFalse(uniqueVolunteerList.equals(differentList));
+    }
+
+    @Test
+    public void equals_sameVolunteersInList_returnsTrue() {
+        // Test with two UniqueVolunteerLists having the same volunteers
+        uniqueVolunteerList.add(ALICE);
+        UniqueVolunteerList sameList = new UniqueVolunteerList();
+        sameList.add(ALICE);
+
+        assertTrue(uniqueVolunteerList.equals(sameList));
+    }
+
+    @Test
+    public void toString_nonEmptyList_returnsCorrectString() {
+        uniqueVolunteerList.add(ALICE);
+        uniqueVolunteerList.add(BOB);
+
+        String expected = "[" + ALICE.toString() + ", " + BOB.toString() + "]";
+        assertEquals(expected, uniqueVolunteerList.toString());
+    }
+
+    @Test
+    public void toString_emptyList_returnsEmptyString() {
+        // Test when the list is empty
+        assertEquals("[]", uniqueVolunteerList.toString());
+    }
+
+    @Test
+    public void hashCode_sameVolunteerList_returnsSameHashCode() {
+        // Test hashCode for lists with the same content
+        uniqueVolunteerList.add(ALICE);
+        UniqueVolunteerList sameList = new UniqueVolunteerList();
+        sameList.add(ALICE);
+
+        assertEquals(uniqueVolunteerList.hashCode(), sameList.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentVolunteerList_returnsDifferentHashCode() {
+        // Test hashCode for lists with different content
+        uniqueVolunteerList.add(ALICE);
+        UniqueVolunteerList differentList = new UniqueVolunteerList();
+        differentList.add(BOB);
+
+        assertNotEquals(uniqueVolunteerList.hashCode(), differentList.hashCode());
+    }
 }

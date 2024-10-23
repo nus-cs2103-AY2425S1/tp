@@ -86,6 +86,15 @@ public class VolunteerTest {
         assertFalse(ALICE.equals(editedAliceWithDifferentName));
     }
 
+    @Test
+    public void addEvent_validEvent_eventAdded() {
+        Volunteer volunteer = new VolunteerBuilder().build();
+        String event = "Community Service";
+
+        volunteer.addEvent(event);
+
+        assertTrue(volunteer.getEvents().contains(event));
+    }
 
     @Test
     public void toStringMethod() {
