@@ -5,8 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CloseTutorialCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CreateTutorialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tutorial.Tutorial;
 

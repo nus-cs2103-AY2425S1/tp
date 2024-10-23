@@ -162,13 +162,6 @@ public class ModelManager implements Model {
 
 
 
-//    @Override
-//    public void setTutorial(Tutorial target,  editedPerson) {
-//        requireAllNonNull(target, editedPerson);
-//
-//        addressBook.setPerson(target, editedPerson);
-//    }
-
 
     //=========== Filtered Person List Accessors =============================================================
 

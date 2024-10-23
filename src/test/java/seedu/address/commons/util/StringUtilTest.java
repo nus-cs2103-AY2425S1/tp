@@ -110,7 +110,7 @@ public class StringUtilTest {
 
         // Matches a partial word only
         assertFalse(StringUtil.isWordInSentenceIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.isWordInSentenceIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+        assertFalse(StringUtil.isWordInSentenceIgnoreCase("aaa bbb ccc", "bbbb"));
 
         // Matches word in the sentence, different upper/lower case letters
         assertTrue(StringUtil.isWordInSentenceIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
