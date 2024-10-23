@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " 1" + "or " + COMMAND_WORD + " alex";
 
-    public static final String DELETE_EMPTY_LIST_ERROR_MESSAGE = "There is nothing to delete.";
+    public static final String MESSAGE_DELETE_EMPTY_LIST_ERROR = "There is nothing to delete.";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to delete.\n"
@@ -72,7 +72,7 @@ public class DeleteCommand extends Command {
     public Person deleteWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(DELETE_EMPTY_LIST_ERROR_MESSAGE);
+            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -94,12 +94,11 @@ public class DeleteCommand extends Command {
      * @throws CommandException if the list filtered using {@code targetKeyword} is empty
      */
     public Person deleteWithKeyword(Model model) throws CommandException {
-
         model.updateFilteredPersonList(predicate);
         List<Person> filteredList = model.getFilteredPersonList();
 
         if (filteredList.isEmpty()) {
-            throw new CommandException(DELETE_EMPTY_LIST_ERROR_MESSAGE);
+            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
         } else if (filteredList.size() == 1) {
             Person personToDelete = filteredList.get(0);
             model.deletePerson(personToDelete);

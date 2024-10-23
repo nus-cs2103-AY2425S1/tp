@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -53,36 +54,42 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_PHONE = "This number already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_EMAIL = "This email already exists in the address book.";
+    public static final String MESSAGE_EDIT_EMPTY_LIST_ERROR = "There is nothing to delete.";
+    public static final String MESSAGE_DUPLICATE_HANDLING =
+            "Please specify the index of the contact you want to edit.\n"
+                    + "Find the index from the list below and type edit INDEX ...\n"
+                    + "Example: " + COMMAND_WORD + " 1 ...";
 
     private final Index index;
+    private final NameMatchesKeywordPredicate predicate;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(Index index, NameMatchesKeywordPredicate predicate, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
+        this.predicate = predicate;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToEdit;
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    lastShownList.size()));
+        if (this.index != null) {
+            personToEdit = editWithIndex(model);
+        } else {
+            personToEdit = editWithKeyword(model);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (personToEdit.isSamePerson(editedPerson) || model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -97,6 +104,34 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    public Person editWithIndex(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(MESSAGE_EDIT_EMPTY_LIST_ERROR);
+        }
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    lastShownList.size()));
+        }
+
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    public Person editWithKeyword(Model model) throws CommandException {
+        model.updateFilteredPersonList(predicate);
+        List<Person> filteredList = model.getFilteredPersonList();
+
+        if (filteredList.isEmpty()) {
+            throw new CommandException(MESSAGE_EDIT_EMPTY_LIST_ERROR);
+        } else if (filteredList.size() == 1) {
+            return filteredList.get(0);
+        } else {
+            throw new CommandException(MESSAGE_DUPLICATE_HANDLING);
+        }
     }
 
     /**
