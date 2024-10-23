@@ -21,42 +21,91 @@ public class SearchAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Searches for clients who have appointments on the specified date and time.\n"
             + "Parameters: DATE TIME (must be in yyyy-MM-dd HH:mm format)\n"
-            + "Example: " + COMMAND_WORD + " 2023-12-31 14:30";
+            + "Example: " + COMMAND_WORD + " 2023-12-31 14:30\n"
+            + "Example: " + COMMAND_WORD + "2023-12-31 14:30 to 2024-01-01 16:00";
 
-    public static final String MESSAGE_SUCCESS = "Listed all clients with appointments on %s";
+    public static final String MESSAGE_SUCCESS = "Listed all clients with appointments %s";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "The date format is invalid. "
             + "Please use yyyy-MM-dd HH:mm format.";
 
-    private final String dateTime;
+    public static final String MESSAGE_INVALID_DATERANGE_FORMAT = "The date-time range format is invalid. "
+            + "Please use 'yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm' format.";
+    public static final String MESSAGE_START_DATE_AFTER_END_DATE = "Start date-time cannot be after end date-time.";
+
+    private final String startDateTime;
+    private final String endDateTime;
 
     /**
      * Creates a {@code SearchAppointmentCommand} to search for clients with appointments on the specified dateTime.
      *
-     * @param dateTime The date and time in string format used to search for client appointments.
+     * @param dateTimeInput The date and time in string format used to search for client appointments.
      * @throws CommandException if the {@code dateTime} format is invalid.
      */
-    public SearchAppointmentCommand(String dateTime) throws CommandException {
-        requireNonNull(dateTime);
-        if (!isValidDateTime(dateTime)) {
-            throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+    public SearchAppointmentCommand(String dateTimeInput) throws CommandException {
+        requireNonNull(dateTimeInput);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        // check if the command has "to" in the command
+        if (dateTimeInput.contains("to")) {
+            String[] dateTimes = dateTimeInput.split("to");
+            // Ensure there are exactly two date-times
+            if (dateTimes.length != 2) {
+                throw new CommandException(MESSAGE_INVALID_DATERANGE_FORMAT);
+            }
+            startDateTime = dateTimes[0].trim();
+            endDateTime = dateTimes[1].trim();
+
+            if (!isValidDateTime(startDateTime) || !isValidDateTime(endDateTime)) {
+                throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+            }
+
+            LocalDateTime start = LocalDateTime.parse(startDateTime, formatter);
+            LocalDateTime end = LocalDateTime.parse(endDateTime, formatter);
+
+            if (start.isAfter(end)) {
+                throw new CommandException(MESSAGE_START_DATE_AFTER_END_DATE);
+            }
+
+        } else {
+            String dateTimeStr = dateTimeInput.trim();
+            if (!isValidDateTime(dateTimeStr)) {
+                throw new CommandException(MESSAGE_INVALID_DATE_FORMAT);
+            }
+            startDateTime = dateTimeInput;
+            endDateTime = startDateTime;
         }
-        this.dateTime = dateTime;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Predicate<Person> predicate = person -> {
             Appointment appointment = person.getAppointment();
 
-            if (appointment == null) {
+            if (appointment == null || appointment.value.isEmpty()) {
                 return false;
             }
             String appointmentFormatted = appointment.toString();
-            return appointmentFormatted.equals(dateTime);
+            LocalDateTime personAppointment;
+            try {
+                personAppointment = LocalDateTime.parse(appointmentFormatted, formatter);
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+            LocalDateTime start = LocalDateTime.parse(startDateTime, formatter);
+            LocalDateTime end = LocalDateTime.parse(endDateTime, formatter);
+            return (!personAppointment.isBefore(start) && !personAppointment.isAfter(end));
         };
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, dateTime));
+
+        String dateTimeRangeMessage;
+        if (startDateTime.equals(endDateTime)) {
+            dateTimeRangeMessage = "on " + startDateTime;
+        } else {
+            dateTimeRangeMessage = "from " + startDateTime + " to " + endDateTime;
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, dateTimeRangeMessage));
     }
 
     /**
@@ -89,6 +138,7 @@ public class SearchAppointmentCommand extends Command {
 
         // Cast and compare the dateTime attribute
         SearchAppointmentCommand otherCommand = (SearchAppointmentCommand) other;
-        return this.dateTime.equals(otherCommand.dateTime);
+        return this.startDateTime.equals(otherCommand.startDateTime)
+                && this.endDateTime.equals(otherCommand.endDateTime);
     }
 }
