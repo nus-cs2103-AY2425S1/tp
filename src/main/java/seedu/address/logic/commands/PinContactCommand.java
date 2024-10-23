@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -10,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Pins contact at a given index to the top of the list
@@ -27,6 +29,7 @@ public class PinContactCommand extends Command {
 
     private final Index targetIndex;
 
+    private static Logger logger = LogsCenter.getLogger(PinContactCommand.class);
 
     /**
      * Creates a PinContactCommand to pin contact at {@code Index}
@@ -44,11 +47,13 @@ public class PinContactCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Attempted to pin a contact with an invalid index" + targetIndex);
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToPin = lastShownList.get(targetIndex.getZeroBased());
         model.pinPerson(personToPin);
+        logger.info("Pinned person info: " + Messages.format(personToPin));
         return new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS, Messages.format(personToPin)));
     }
 
