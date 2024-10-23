@@ -2,10 +2,12 @@ package seedu.address.model.person;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.storage.JsonAdaptedMeeting;
 
 /**
  * Tests that a {@code Person}'s fields matches any of the keywords given.
@@ -25,29 +27,36 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Set<Prefix> prefixes = argMultimap.getPrefixes();
-        Boolean result = false;
+        Boolean isMatch = false;
         for (Prefix prefix : prefixes) {
             List<String> keywords = argMultimap.getAllValues(prefix);
             switch (prefix.getPrefix()) {
 
             case "n/":
-                result = keywords.stream()
+                isMatch = keywords.stream()
                         .anyMatch(keyword -> person.nameContainsKeyword(keyword));
                 break;
 
             case "t/":
-                result = keywords.stream()
+                isMatch = keywords.stream()
                         .anyMatch(keyword -> person.hasTag(keyword));
+                break;
+
+            case "u/":
+                assert(keywords.stream().allMatch(keyword -> keyword
+                        .matches(JsonAdaptedMeeting.UIDREGEX)));
+                isMatch = keywords.stream()
+                    .anyMatch(keyword -> person.isSamePersonUid(UUID.fromString(keyword)));
                 break;
 
             default:
                 break;
             }
-            if (result) {
+            if (isMatch) {
                 break;
             }
         }
-        return result;
+        return isMatch;
     }
 
     @Override

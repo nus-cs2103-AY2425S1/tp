@@ -22,7 +22,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
 
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
-
+    public static final String MESSAGE_GENERIC_INDEX_OUT_OF_BOUNDS =
+            "Index provided is out of bounds\n%1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
