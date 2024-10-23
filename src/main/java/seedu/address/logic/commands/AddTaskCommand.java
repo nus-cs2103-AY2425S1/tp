@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.task.Task;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Adds a task to a person in the address book.
@@ -58,7 +59,8 @@ public class AddTaskCommand extends Command {
         targetPerson.getTaskList().add(taskToAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                taskToAdd.getTaskDescription(), targetPerson.getName(), taskToAdd.getTaskDeadline()));
+                taskToAdd.getTaskDescription(), targetPerson.getName(), taskToAdd.getTaskDeadline()),
+                UiState.DETAILS);
     }
 
     @Override

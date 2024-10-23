@@ -23,6 +23,7 @@ import seedu.address.model.person.task.Task;
 import seedu.address.model.person.task.TaskDeadline;
 import seedu.address.model.person.task.TaskDescription;
 import seedu.address.model.person.task.TaskList;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Updates the details of an existing task in a student's task list.
@@ -97,7 +98,7 @@ public class UpdateTaskCommand extends Command {
                 .orElse(originalTask.getTaskDeadline());
 
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, updatedTaskDescription,
-                updatedPerson.getName(), updatedTaskDeadline));
+                updatedPerson.getName(), updatedTaskDeadline), UiState.DETAILS);
     }
 
     /**
