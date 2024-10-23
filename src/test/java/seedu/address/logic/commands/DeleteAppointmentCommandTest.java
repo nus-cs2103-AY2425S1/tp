@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -18,34 +20,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 
+
 public class DeleteAppointmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    /*
-    @Test
-    public void execute_validNameUnfilteredList_success() {
-        Person personWithAppointmentToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        System.out.println(personWithAppointmentToDelete);
-        System.out.println(personWithAppointmentToDelete.getSchedules().iterator().next());
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                personWithAppointmentToDelete.getName(),
-                personWithAppointmentToDelete.getSchedules().iterator().next());
-
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                Messages.formatSchedule(personWithAppointmentToDelete,
-                        personWithAppointmentToDelete.getSchedules().iterator().next()));
-
-        System.out.println(expectedMessage);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
-        System.out.println(model.getAddressBook());
-        expectedModel.deleteAppointment(personWithAppointmentToDelete,
-                personWithAppointmentToDelete.getSchedules().iterator().next());
-
-        assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
-    }
-     */
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
@@ -56,7 +33,6 @@ public class DeleteAppointmentCommandTest {
         assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_INVALID_NAME_DISPLAYED);
     }
 
-    /*
     @Test
     public void execute_validNameFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -67,16 +43,13 @@ public class DeleteAppointmentCommandTest {
                 personWithAppointmentToDelete.getSchedules().iterator().next());
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                Messages.format(personWithAppointmentToDelete));
+                Messages.formatSchedule(personWithAppointmentToDelete,
+                        personWithAppointmentToDelete.getSchedules().iterator().next()));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        expectedModel.deleteAppointment(personWithAppointmentToDelete,
-            personWithAppointmentToDelete.getSchedules().iterator().next());
 
         assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
     }
-     */
 
     @Test
     public void equals() {
@@ -112,14 +85,5 @@ public class DeleteAppointmentCommandTest {
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(name, schedule);
         String expected = DeleteAppointmentCommand.class.getCanonicalName() + "{toDeleteAppointment=" + name + "}";
         assertEquals(expected, deleteAppointmentCommand.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }
