@@ -560,7 +560,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No change to the current list. Error details shown in the status message.
 
    4. Test case `list all asdfg` <br>
-      Expected: All persons in the application are listed regardless of if they are employees or potential hires.
+      Expected: No change to the current list. Error details shown in the status message.
 
    5. Test case `list asdfg` <br>
       Expected: No change to the current displayed list. Error details shown in the status message.
@@ -576,7 +576,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No change to the current list. Error details shown in the status message.
 
    4. Test case `list e asdfg` <br>
-      Expected: All employees in the application are listed.
+      Expected: No change to the current list. Error details shown in the status message.
 
    5. Test case `list asdfg` <br>
       Expected: No change to the current displayed list. Error details shown in the status message.
@@ -592,7 +592,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No change to the current list. Error details shown in the status message.
 
    4. Test case `list ph asdfg` <br>
-      Expected: All potential hires in the application are listed.
+      Expected: No change to the current list. Error details shown in the status message.
 
    5. Test case `list asdfg` <br>
       Expected: No change to the current displayed list. Error details shown in the status message.
@@ -658,7 +658,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `demote 1`<br>
       Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
 
-    2. Test case: `demote 0`<br> 
+    2. Test case: `demote 0`<br>
      Expected: Invalid index found. No employees demoted. Error details shown in the status message.
 
     3. Test case: `Demote 1`<br>
@@ -709,3 +709,48 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `promote 1 2024-12-20`<br>
        Expected: No potential hires are promoted. Error details shown in the status message
+
+### Sorting the contents of StaffSync
+
+1. Sorting with all contacts shown
+
+   Prerequisites: List all contacts using the `list all` command. The list is not empty and not already in order.
+
+   1. Test case: `sort name`<br>
+      Expected: All contacts in StaffSync are sorted by name in ascending order.
+
+   2. Test case: `sort date`<br>
+      Expected: Potential hires are filtered out. Employees are sorted by contract end date in ascending order.
+
+   3. Test case: `sort`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+   4. Test case: `sort 1`<br>
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+   5. Test case: `sort name 1`
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+2. Sorting with an already filtered list
+
+   Prerequisites: List has been filtered using a `find` or `list` command. The list is not empty and not already in order.
+
+   1. Test case: `sort name`<br>
+      Expected: The shown contacts are sorted by name in ascending order. contacts that were filtered out will not be shown.
+
+   2. Test case: `sort date`<br>
+      Expected: List will show all employees. Employees are sorted by contract end date in ascending order.
+
+   3. Test case: `sort`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+   4. Test case: `sort 1`<br>
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+   5. Test case: `sort name 1`
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+## **Appendix: Additional uml diagrams for other cases**
+
+<puml src="diagrams/ListSeqeuenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
+Diagram for interactions inside the logic component for the `list all` command.
