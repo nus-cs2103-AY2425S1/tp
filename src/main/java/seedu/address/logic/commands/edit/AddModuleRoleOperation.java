@@ -22,9 +22,9 @@ public class AddModuleRoleOperation extends EditModuleRoleOperation {
     }
 
     /**
-     * Adds module role pairs to a ModuleRoleMap in place.
-     * @param moduleRoleMapToEdit
-     * @return A ModuleRoleMap of all failed module role pairs.
+     * Creates a new {@code ModuleRoleMap} from {@code moduleRoleMapToEdit} with the module role pairs added.
+     * @param moduleRoleMapToEdit ModuleRoleMap to edit.
+     * @return A new ModuleRoleMap with module role pairs added.
      */
     @Override
     protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) {
