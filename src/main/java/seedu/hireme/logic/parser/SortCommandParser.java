@@ -28,11 +28,11 @@ public class SortCommandParser implements Parser<SortCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        boolean isAscendingOrder = ParserUtil.parseSortingOrder(trimmedArgs);
-        String order = isAscendingOrder ? "ascending" : "descending";
+        boolean isEarliestOrder = ParserUtil.parseSortingOrder(trimmedArgs);
+        String order = isEarliestOrder ? "ascending" : "descending";
         logger.info(String.format("Sorting list in %s order!", order));
 
-        return new SortCommand(new DateComparator(isAscendingOrder));
+        return new SortCommand(new DateComparator(isEarliestOrder));
     }
 
 }

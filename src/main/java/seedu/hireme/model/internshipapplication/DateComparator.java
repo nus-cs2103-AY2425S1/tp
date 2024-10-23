@@ -9,31 +9,35 @@ import seedu.hireme.commons.util.ToStringBuilder;
  */
 public class DateComparator implements Comparator<InternshipApplication> {
 
-    private final boolean isAscendingOrder;
+    private final boolean isEarliestOrder;
 
     /**
      * Constructs a {@code DateComparator} with the given sorting order.
      *
-     * @param isAscendingOrder A boolean which represents whether the list should be sorted in ascending or descending
+     * @param isEarliestOrder A boolean which represents whether the list should be sorted by earliest or latest
      *                         order.
      */
-    public DateComparator(boolean isAscendingOrder) {
-        this.isAscendingOrder = isAscendingOrder;
+    public DateComparator(boolean isEarliestOrder) {
+        this.isEarliestOrder = isEarliestOrder;
     }
 
     /**
-     * Compares which internship application should appear first in the list based on their {@code Date}.
+     * Compares which internship application should appear first in the list based on their {@code Date} and the sorting
+     *     order.
      *
      * @param internshipApplication1 The first internship application.
      * @param internshipApplication2 The second internship application.
-     * @return 0 if the internshipApplication1 object occurs at the same date as internshipApplication2 object, a
-     *     negative number if the internshipApplication1 object occurs before the other and a positive number otherwise.
+     * @return 0 if the internshipApplication1 object occurs at the same date as internshipApplication2 object. Returns
+     *     a negative number if the internshipApplication1 object occurs before the other and a positive number
+     *     otherwise if the sorting order is by earliest date. Conversely, it returns a positive number if the
+     *     internshipApplication1 object occurs before the other and a negative number otherwise if the sorting order
+     *     is by latest date.
      */
     @Override
     public int compare(InternshipApplication internshipApplication1, InternshipApplication internshipApplication2) {
         Date date1 = internshipApplication1.getDateOfApplication();
         Date date2 = internshipApplication2.getDateOfApplication();
-        int multiplier = isAscendingOrder ? 1 : -1;
+        int multiplier = isEarliestOrder ? 1 : -1;
         return multiplier * date1.compareTo(date2);
     }
 
@@ -54,7 +58,7 @@ public class DateComparator implements Comparator<InternshipApplication> {
         }
 
         DateComparator otherComparator = (DateComparator) other;
-        return isAscendingOrder == otherComparator.isAscendingOrder;
+        return isEarliestOrder == otherComparator.isEarliestOrder;
     }
 
     /**
@@ -65,7 +69,7 @@ public class DateComparator implements Comparator<InternshipApplication> {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("ascending order", String.valueOf(isAscendingOrder))
+                .add("earliest order", String.valueOf(isEarliestOrder))
                 .toString();
     }
 }
