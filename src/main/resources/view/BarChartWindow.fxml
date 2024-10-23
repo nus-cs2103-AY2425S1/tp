@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene stylesheets="@BarChart.css">
+            <HBox HBox.hgrow = "ALWAYS" style="-fx-alignment: center-right; -fx-padding: 10px;">
+                <BarChart fx:id="barChart" prefHeight="600.0" prefWidth="800.0" >
+                    <xAxis>
+                        <CategoryAxis label="Month" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Number of Students" tickUnit="1" minorTickCount="0" forceZeroInRange="true" />
+                    </yAxis>
+                </BarChart>
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>

@@ -260,73 +260,175 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Tuition center administrative staff
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+* manage student contacts faster than a typical mouse/GUI driven app
+* one-shot command focus for significantly quicker usage
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                              | I want to …​                                                                                | So that I can…​                                                          |
+|----------|--------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | Tuition Center Administrators        | keep different levels of access for contact information                                     | keep sensitive information not accessible to unauthorized users          |
+| `* * *`  | Tuition Center Administrators        | search for contacts based on multiple criteria (name, role, or ID)                          | can find a specific person quickly without manually scrolling the list   |
+| `* * *`  | Tuition Center Administrators        | a user-friendly command-line interface with clear and concise command options               | quickly perform tasks without a usage guide                              |
+| `* * *`  | Tuition Center Administrators        | manage, retrieve and update the contact information for teachers, students and parents      | smoothly communicate across all parties without any confusions or delays |
+| `* * *`  | Tuition Center Administrators        | able to perform mutliple actions at once                                                    | increase the productivity                                                |
+| `* * *`  | Tuition Center Administrators        | add note about individual students (e.g. learning preferences, special needs, etc)          | can personalise learning experience                                      |
+| `* *`    | Tuition Center Administrators        | send automated payment notifications to parents                                             | can ensure timely payments                                               |
+| `* *`    | Tuition Center Administrators        | integrate a billing system that automatically calculates monthly fees and generate invoices | can reduce workload                                                      |
+| `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                                       |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+### System: EduTuTu
 
-**Use case: Delete a person**
+---
 
-**MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+---
 
-    Use case ends.
+#### **Use Case UC01: Add Student**
+**Actor**: Administrator
 
-**Extensions**
+**Main Success Scenario (MSS)**:
+1. Administrator types the command to add a new student with the required details in a single line.
+2. EduTuTu validates the input details.
+3. EduTuTu adds the new student to the system and logs the action.
 
-* 2a. The list is empty.
+Use case ends.
 
-  Use case ends.
+**Extensions**:
 
-* 3a. The given index is invalid.
+- **2a. Invalid or Missing Data**:
+    - 2a1. EduTuTu logs an error message specifying the invalid fields.
+    - Use case resumes from step 1.
 
-    * 3a1. AddressBook shows an error message.
+- **2b. Duplicate Student Detected**:
+    - 2b1. EduTuTu logs an error message.
+    - Use case resumes from step 1.
 
-      Use case resumes at step 2.
+---
 
-*{More to be added}*
+
+#### **Use Case UC02: Delete Student**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator types the command to delete a student using their unique index:
+2. EduTuTu validates the index.
+3. EduTuTu deletes the student and logs the details of the deleted student.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. Invalid Index Entered**:
+    - 2a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC03: List All Students**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator types the command to list all students.
+2. EduTuTu retrieves all student records and outputs the list in the terminal with unique indices.
+
+Use case ends.
+
+---
+
+#### **Use Case UC04: Find Students**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator types the command to search for students by name or class ID.
+2. EduTuTu validates the search criteria.
+3. EduTuTu searches the system and outputs matching students with unique indices.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. Invalid Search Criteria**:
+    - 2a1.EduTuTu logs an error message specifying the invalid input.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC05: Mark Fees as Paid**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator first searches for the student using the find command.
+2. EduTuTu displays a list of students with unique indices.
+3. Administrator types the command to mark a student's fees as paid, including the student index and date:
+4. EduTuTu validates the student index and date format.
+5. EduTuTu updates the student's record and logs the payment confirmation.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **3b.  Invalid Date Format or Month**:
+    - 3b1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+---
 
-*{More to be added}*
+**1. Performance Requirements**
 
+- **Response Time**: The system should respond to any command within **1 second** under normal operating conditions.
+- **Throughput**: Capable of processing **concurrent commands** from multiple administrators without significant delay.
+- **Capacity**: Should handle up to **1,000 students** without noticeable sluggishness in performance for typical usage.
+
+**2. Maintainability Requirements**
+
+- **Code Quality**: The codebase should be **modular**, well-documented, and adhere to standard coding conventions to facilitate maintenance.
+- **Documentation**: Provide **comprehensive technical documentation** for future developers and maintainers.
+- **Automated Testing**: Implement **unit tests** and **integration tests** to ensure that new changes do not break existing functionality.
+
+**3. Portability Requirements**
+
+- **Cross-Platform Compatibility**: The application must run on any mainstream operating system (**Windows, macOS, Linux**) with **Java 17** or above installed.
+- **Minimal Dependencies**: Avoid platform-specific dependencies to ensure **ease of deployment** across different environments.
+
+**4. Ethical Requirements**
+
+- **Non-Discrimination**: The system should be designed to avoid biases, especially in features like **sorting** or **filtering**.
+- **Transparency**: Actions performed by the system should be **transparent** to users, avoiding hidden processes that could cause confusion.
+
+---
+
+This version uses clear formatting with bullet points for better readability and structure.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tuition Center Administrator**: The person responsible for overseeing the operations of the tuition center, managing contacts, scheduling, and communication with students, parents, and teachers.
+* **Data Migration**: The process of transferring data from one system to another. This feature ensures that contacts, communication history, and other data can be shared across different platforms or stakeholders.
 
 --------------------------------------------------------------------------------------------------------------------
 

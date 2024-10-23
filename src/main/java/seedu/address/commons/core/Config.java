@@ -17,6 +17,7 @@ public class Config {
     // Config values customizable through config file
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path commandHistoryFilePath = Paths.get("commandhistory.json");
 
     public Level getLogLevel() {
         return logLevel;
@@ -33,6 +34,12 @@ public class Config {
     public void setUserPrefsFilePath(Path userPrefsFilePath) {
         this.userPrefsFilePath = userPrefsFilePath;
     }
+    public Path getCommandHistoryFilePath() {
+        return commandHistoryFilePath;
+    }
+    public void setCommandHistoryFilePath(Path commandHistoryFilePath) {
+        this.commandHistoryFilePath = commandHistoryFilePath;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -47,7 +54,8 @@ public class Config {
 
         Config otherConfig = (Config) other;
         return Objects.equals(logLevel, otherConfig.logLevel)
-                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
+                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath)
+                && Objects.equals(commandHistoryFilePath, otherConfig.commandHistoryFilePath);
     }
 
     @Override
@@ -60,6 +68,7 @@ public class Config {
         return new ToStringBuilder(this)
                 .add("logLevel", logLevel)
                 .add("userPrefsFilePath", userPrefsFilePath)
+                .add("commandHistoryFilePath", commandHistoryFilePath)
                 .toString();
     }
 

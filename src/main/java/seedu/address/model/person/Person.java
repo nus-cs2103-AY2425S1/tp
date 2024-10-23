@@ -6,9 +6,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the address book.
@@ -20,20 +23,25 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
+    private final Fees fees;
+    private final ClassId classId;
+    private final Set<MonthPaid> monthsPaid = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Fees fees, ClassId classId,
+                  Set<MonthPaid> monthsPaid, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, fees, classId, monthsPaid, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.fees = fees;
+        this.classId = classId;
+        this.monthsPaid.addAll(monthsPaid);
         this.tags.addAll(tags);
     }
 
@@ -51,6 +59,22 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Fees getFees() {
+        return fees;
+    }
+
+    public ClassId getClassId() {
+        return classId;
+    }
+
+    /**
+     * Returns an immutable monthPaid sortedset, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public SortedSet<MonthPaid> getMonthsPaid() {
+        return Collections.unmodifiableSortedSet(new TreeSet<>(monthsPaid));
     }
 
     /**
@@ -94,13 +118,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && fees.equals(otherPerson.fees)
+                && classId.equals(otherPerson.classId)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, fees, classId, tags);
     }
 
     @Override
@@ -110,6 +136,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("fees", fees)
+                .add("classId", classId)
+                .add("monthsPaid", monthsPaid)
                 .add("tags", tags)
                 .toString();
     }

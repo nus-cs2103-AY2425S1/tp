@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +29,15 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true)));
+
+        // different showPieChart value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false)));
+        // different showBarChart value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, false)));
     }
 
     @Test
@@ -46,17 +51,20 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true).hashCode());
     }
 
     @Test
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
+                + commandResult.getFeedbackToUser()
+                + ", showPieChart=" + commandResult.isShowPieChart()
+                + ", showBarChart=" + commandResult.isShowBarChart()
+                + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }

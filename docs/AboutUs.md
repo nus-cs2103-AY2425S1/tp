@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Hoo Yu Shing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hooyushing.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/hooyushing)]
+[[portfolio](https://www.linkedin.com/in/hoo-yu-shing-252a08238/)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Responsible for overall project coordination.
 
-### Johnny Doe
+### Wong Wai Hin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/waihin26.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/waihin26)]
+[[portfolio](https://www.linkedin.com/in/wai-hin-wong-6875ab110/)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Deliverables and Deadline
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### Jean Doe
+### Matthew Ho
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sumomomomomo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sumomomomomo)]
+[[portfolio](https://www.linkedin.com/in/matthew-ho-803a41192/)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code Quality
+* Responsibilities: Looks after code quality; ensures adherence to coding standards.
 
-### James Doe
+### Munhui Kim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/munhuikim.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/munhuikim)]
+[[portfolio](https://www.linkedin.com/in/munhui-kim/)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
+
+### Vu Hoang Kien
+
+<img src="images/kienvumrpm.png" width="200px">
+
+[[github](http://github.com/kienvumrpm)]
+[[portfolio](https://www.linkedin.com/in/kienvu2211/)]
+
+* Role: Implementor
+* Responsibilities: Help others to debug.

@@ -1,0 +1,19 @@
+* {
+    -Magneta: #FF00FF;
+    -LightPink: #FFB6C1;
+    -LightCoral: #F08080;
+    -FloralWhite: #FFFAF0;
+    -LightSalmon: #FFA07A;
+    -background-color: #D2C0BD;
+
+}
+
+HBox {
+    -fx-background-color: -background-color;
+}
+.default-color0.chart-pie { -fx-pie-color: -Magneta; }
+.default-color1.chart-pie { -fx-pie-color: -LightPink; }
+.default-color2.chart-pie { -fx-pie-color: -LightCoral; }
+.default-color3.chart-pie { -fx-pie-color: -FloralWhite; }
+.default-color4.chart-pie { -fx-pie-color: -LightSalmon; }
+
