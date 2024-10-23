@@ -4,9 +4,11 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
 /**
@@ -61,11 +63,38 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         projectStatus.setText("Project status: " + person.getProjectStatus().toString());
-        paymentStatus.setText("Payment status: " + person.getPaymentStatus().toString());
         clientStatus.setText("Client Status: " + person.getClientStatus().toString());
         deadline.setText("Deadline: " + person.checkAndGetDeadline());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        String payStatus = person.getPaymentStatus().toString();
+        paymentStatus.setText("$");
+
+        Tooltip paymentTooltip = new Tooltip();
+        paymentTooltip.setShowDelay(Duration.seconds(0.01));
+
+        switch (payStatus) {
+        case "pending":
+            paymentStatus.getStyleClass().add("payment_status_pending");
+            paymentTooltip.setText("pending");
+            break;
+        case "late":
+            paymentStatus.getStyleClass().add("payment_status_late");
+            paymentTooltip.setText("late");
+            break;
+        case "paid":
+            paymentStatus.getStyleClass().add("payment_status_paid");
+            paymentTooltip.setText("paid");
+            break;
+        case "partial":
+            paymentStatus.getStyleClass().add("payment_status_partial");
+            paymentTooltip.setText("partial");
+            break;
+        default:
+            break;
+        }
+        Tooltip.install(paymentStatus, paymentTooltip);
     }
 }
