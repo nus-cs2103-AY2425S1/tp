@@ -12,7 +12,7 @@ import seedu.address.logic.commands.EditConcertCommand.EditConcertDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments adn creates a new EditConcertCommand object.
+ * Parses input arguments and creates a new EditConcertCommand object.
  */
 public class EditConcertCommandParser implements Parser<EditConcertCommand> {
 
