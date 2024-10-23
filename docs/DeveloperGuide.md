@@ -444,9 +444,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-- 2b. System detects that the file is used by another process.
+- 2a. System detects that the file is used by another process.
 
-    - 2b1. System shows an error message.
+    - 2a1. System shows an error message.
 
       Use case ends.
 
