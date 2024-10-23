@@ -62,7 +62,7 @@ public class AddEmergencyContactCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToAddEmergencyContactTo}
      * with an added {@code emergencyContactToAdd}.
      */
-    private static Person createEditedPerson(Person personToEdit, EmergencyContact emergencyContactToAdd) {
+    public static Person createEditedPerson(Person personToEdit, EmergencyContact emergencyContactToAdd) {
         assert personToEdit != null;
 
         Set<EmergencyContact> personToEditEmergencyContacts = personToEdit.getEmergencyContacts();
