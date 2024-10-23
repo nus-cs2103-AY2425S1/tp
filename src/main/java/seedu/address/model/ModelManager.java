@@ -130,28 +130,34 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        return addressBook.hasTutorial(tutorial);
+    }
+
+    @Override
+    public void closeTutorial(Tutorial tutorial) {
+        addressBook.closeTutorial(tutorial);
+    }
+
+    @Override
+    public Tutorial getTutorial(Tutorial tutorial) {
+        return addressBook.getTutorial(tutorial);
+    }
+
+    @Override
+    public void createTutorial(Tutorial tutorial) {
+        addressBook.addTutorial(tutorial);
+        updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
+    }
+
     public void deleteParticipation(Participation target) {
         addressBook.removeParticipation(target);
     }
 
     //// tutorial-level operations
 
-    @Override
-    public boolean hasTutorial(Tutorial tutorial) {
-        requireNonNull(tutorial);
-        return addressBook.hasTutorial(tutorial);
-    }
 
-//    @Override
-//    public void deleteTutorial(Tutorial tutorial) {
-//        addressBook.remove(tutorial);
-//    }
-
-    @Override
-    public void addTutorial(Tutorial tutorial) {
-        addressBook.addTutorial(tutorial);
-        updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
-    }
 
 //    @Override
 //    public void setTutorial(Tutorial target,  editedPerson) {
@@ -173,6 +179,7 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -181,8 +188,10 @@ public class ModelManager implements Model {
 
     //=========== Filtered Tutorial List Accessors =============================================================
 
+    //// Tutorials
+
     /**
-     * Returns an unmodifiable view of the list of {@code Tutorial} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Tutorials} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -213,5 +222,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTutorials.equals(otherModelManager.filteredTutorials);
     }
+
+
 
 }
