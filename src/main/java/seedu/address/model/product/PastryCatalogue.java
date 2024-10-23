@@ -2,6 +2,7 @@ package seedu.address.model.product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Catalogue for managing pastries.
@@ -42,5 +43,19 @@ public class PastryCatalogue extends Catalogue {
         Pastry pastry = new Pastry(nextProductId, name, cost, ingredients);
         productCatalogue.put(nextProductId, pastry);  // Store in the product catalogue
         nextProductId++;  // Increment the product ID for the next pastry
+    }
+
+    /**
+     * Retrieves a pastry from the catalogue by its name.
+     * @param name The name of the pastry to retrieve.
+     * @return The pastry if found, otherwise null.
+     */
+    public Pastry getPastryByName(String name) {
+        Optional<Pastry> foundPastry = productCatalogue.values().stream()
+                .filter(product -> product instanceof Pastry)
+                .map(product -> (Pastry) product)
+                .filter(pastry -> pastry.getName().equalsIgnoreCase(name))
+                .findFirst();
+        return foundPastry.orElse(null);
     }
 }
