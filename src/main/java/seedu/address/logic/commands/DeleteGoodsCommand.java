@@ -30,7 +30,7 @@ public class DeleteGoodsCommand extends Command {
         requireNonNull(model);
         model.deleteGoods(goodsName);
 
-        return new CommandResult(goodsName);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, goodsName));
     }
 
     @Override
