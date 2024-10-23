@@ -11,8 +11,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GradYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RoomNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,8 +46,10 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!Name.hasValidChars(trimmedName)) {
+            throw new ParseException(Name.CHAR_MESSAGE_CONSTRAINTS);
+        } else if (!Name.isValidLength(trimmedName)) {
+            throw new ParseException(Name.LENGTH_MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -94,6 +98,37 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+    /**
+     * Parses a {@code String roomNumber} into an {@code RoomNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code roomNumber} is invalid.
+     */
+    public static RoomNumber parseRoomNumber(String roomNumber) throws ParseException {
+        requireNonNull(roomNumber);
+        String trimmedRoomNumber = roomNumber.trim();
+        if (!RoomNumber.isValidRoomNumber(trimmedRoomNumber)) {
+            throw new ParseException(RoomNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new RoomNumber(trimmedRoomNumber);
+    }
+
+    /**
+     * Parses a {@code String gradYear} into an {@code GradYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code GradYear} is invalid.
+     */
+    public static GradYear parseGradYear(String gradYear) throws ParseException {
+        requireNonNull(gradYear);
+        String trimmedGradYear = gradYear.trim();
+        if (!GradYear.isValidGradYear(trimmedGradYear)) {
+            throw new ParseException(GradYear.MESSAGE_CONSTRAINTS);
+        }
+        return new GradYear(trimmedGradYear);
+    }
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.

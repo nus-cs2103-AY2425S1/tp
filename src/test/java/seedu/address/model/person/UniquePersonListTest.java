@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateNameException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -24,27 +24,27 @@ public class UniquePersonListTest {
     private final UniquePersonList uniquePersonList = new UniquePersonList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+    public void containsname_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsName(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniquePersonList.contains(ALICE));
+    public void containsName_personNameNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsName(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void containsName_personNameInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        assertTrue(uniquePersonList.contains(ALICE));
+        assertTrue(uniquePersonList.containsName(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void containsName_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+        assertTrue(uniquePersonList.containsName(editedAlice));
     }
 
     @Test
@@ -53,9 +53,9 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateName_throwsDuplicateNameException() {
         uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+        assertThrows(DuplicateNameException.class, () -> uniquePersonList.add(ALICE));
     }
 
     @Test
@@ -103,10 +103,10 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setPerson_editedPersonHasNonUniqueName_throwsDuplicateNameException() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+        assertThrows(DuplicateNameException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
     }
 
     @Test
@@ -157,9 +157,9 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    public void setPersons_listWithDuplicateNames_throwsDuplicateNameException() {
+        List<Person> listWIthDuplicateNames = Arrays.asList(ALICE, ALICE);
+        assertThrows(DuplicateNameException.class, () -> uniquePersonList.setPersons(listWIthDuplicateNames));
     }
 
     @Test
