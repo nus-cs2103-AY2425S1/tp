@@ -2,15 +2,17 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
  * A class meant to group all relevant details of an appointment together.
  */
 public class Appointment {
-    private Id patientId;
-    private Id doctorId;
-    private String remarks;
+    private final LocalDateTime dateTime;
+    private final int patientId;
+    private final int doctorId;
+    private final String remarks;
 
     /**
      * Creates an appointment instance associated with the specified patient, doctor, and remarks.
@@ -19,18 +21,23 @@ public class Appointment {
      * @param doctorId Id of the doctor.
      * @param remarks Remarks given by the doctor for the appointment or patient.
      */
-    public Appointment(Id patientId, Id doctorId, String remarks) {
-        requireAllNonNull(patientId, doctorId, remarks);
+    public Appointment(LocalDateTime dateTime, int patientId, int doctorId, String remarks) {
+        requireAllNonNull(dateTime, patientId, doctorId, remarks);
+        this.dateTime = dateTime;
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.remarks = remarks;
     }
 
-    public Id getPatientId() {
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public int getPatientId() {
         return patientId;
     }
 
-    public Id getDoctorId() {
+    public int getDoctorId() {
         return doctorId;
     }
 

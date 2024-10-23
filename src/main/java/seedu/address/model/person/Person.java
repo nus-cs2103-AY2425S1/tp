@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,17 +25,19 @@ public class Person implements Appointmentable {
     private final String role;
     private final Phone phone;
     private final Email email;
-    private final Id id;
+    private final int id;
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private final History history;
+    private List<Appointment> appointments;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, String role, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, String role, Phone phone, Email email,
+                  Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, role, phone, email, address, tags);
         this.name = name;
         this.role = role;
         this.phone = phone;
@@ -42,9 +45,25 @@ public class Person implements Appointmentable {
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
-        this.id = new Id(role);
+        this.id = new Id(role).getIdValue();
         this.history = new History();
     }
+
+    public Person(Name name, int id, String role, Phone phone, Email email,
+                  Address address, Remark remark, List<Appointment> appointments, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.id = id;
+        this.role = role;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.tags.addAll(tags);
+        this.appointments = appointments;
+        this.history = new History();
+    }
+
 
     public Name getName() {
         return name;
@@ -73,16 +92,11 @@ public class Person implements Appointmentable {
         this.remark.addNotes(notes);
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
-
-    public History getHistory() {
-        return history;
-    }
-
-    public String getHistoryBase() {
-        return History.getHistoryDataBase();
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
     // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
@@ -184,11 +198,6 @@ public class Person implements Appointmentable {
     }
 
     @Override
-    public String getAllAppointments() {
-        return History.getAllAppointments(this.getId());
-    }
-
-    @Override
     public boolean editAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
         // TODO AFTER v1.3
         return false;
@@ -238,6 +247,9 @@ public class Person implements Appointmentable {
                 .append(getAddress())
                 .append(" Remark: ")
                 .append(getRemark())
+                .append(" Appointments: ");
+        getAppointments().forEach(builder::append);
+        builder.append(getAppointments())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
