@@ -83,7 +83,7 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [l/LESSON
 
 - The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the format `HHMM-HHMM`, separated by a space.
     - Example: `l/monday 0900-1100` or `l/Wednesday 1400-1600`
-
+    - Tutors cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify the user with an error message.
 <box type="tip" seamless>
 
 **Tip:** A student can have any number of tags and lessons (including 0)
@@ -108,10 +108,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* Editing lessons follow the same behavior as tags—i.e. when editing lessons, the existing lessons will be replaced by the input lessons.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* Similarly, you can remove all the person’s lessons by typing `l/` without specifying any lessons after it.
+* When editing tags or lessons, existing values will be replaced; adding tags and lessons are not cumulative.
+* Lessons cannot clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, the app will notify the user with an error message.
+* You can remove all tags or lessons by typing `t/` or `l/` without specifying any values after them.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
