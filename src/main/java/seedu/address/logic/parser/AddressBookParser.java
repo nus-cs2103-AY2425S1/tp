@@ -8,16 +8,52 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkTaskCommand;
+import seedu.address.logic.commands.addcommands.AddGroupCommand;
+import seedu.address.logic.commands.addcommands.AddStudentCommand;
+import seedu.address.logic.commands.addcommands.AddStudentToGroupCommand;
+import seedu.address.logic.commands.addcommands.AddTaskToGroupCommand;
+import seedu.address.logic.commands.deletecommands.DeleteGroupCommand;
+import seedu.address.logic.commands.deletecommands.DeleteStudentCommand;
+import seedu.address.logic.commands.deletecommands.DeleteStudentFromGroupCommand;
+import seedu.address.logic.commands.deletecommands.DeleteTaskFromGroupCommand;
+import seedu.address.logic.commands.editcommands.EditGroupCommand;
+import seedu.address.logic.commands.editcommands.EditStudentCommand;
+import seedu.address.logic.commands.editcommands.EditTaskCommand;
+import seedu.address.logic.commands.findcommands.FindCommand;
+import seedu.address.logic.commands.findcommands.FindStudentCommand;
+import seedu.address.logic.commands.listcommands.ListGroupCommand;
+import seedu.address.logic.commands.listcommands.ListStudentCommand;
+import seedu.address.logic.commands.listcommands.ListTaskCommand;
+import seedu.address.logic.commands.sortcommands.SortGroupCommand;
+import seedu.address.logic.commands.sortcommands.SortStudentCommand;
+import seedu.address.logic.commands.sortcommands.SortTaskCommand;
+import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
+import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
+import seedu.address.logic.parser.addcommands.AddGroupCommandParser;
+import seedu.address.logic.parser.addcommands.AddStudentCommandParser;
+import seedu.address.logic.parser.addcommands.AddStudentToGroupCommandParser;
+import seedu.address.logic.parser.addcommands.AddTaskToGroupCommandParser;
+import seedu.address.logic.parser.deletecommands.DeleteGroupCommandParser;
+import seedu.address.logic.parser.deletecommands.DeleteStudentCommandParser;
+import seedu.address.logic.parser.deletecommands.DeleteStudentFromGroupCommandParser;
+import seedu.address.logic.parser.deletecommands.DeleteTaskFromGroupCommandParser;
+import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
+import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
+import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.findcommands.FindCommandParser;
+import seedu.address.logic.parser.findcommands.FindStudentCommandParser;
+import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
+import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
+import seedu.address.logic.parser.listcommands.ListTaskCommandParser;
+import seedu.address.logic.parser.sortcommands.SortGroupCommandParser;
+import seedu.address.logic.parser.sortcommands.SortStudentCommandParser;
+import seedu.address.logic.parser.sortcommands.SortTaskCommandParser;
 
 /**
  * Parses user input.
@@ -53,23 +89,96 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        // Student
+        case ListStudentCommand.COMMAND_WORD_ALIAS:
+        case ListStudentCommand.COMMAND_WORD:
+            return new ListStudentCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case FindStudentCommand.COMMAND_WORD_ALIAS:
+        case FindStudentCommand.COMMAND_WORD:
+            return new FindStudentCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case AddStudentCommand.COMMAND_WORD_ALIAS:
+        case AddStudentCommand.COMMAND_WORD:
+            return new AddStudentCommandParser().parse(arguments);
+
+        case DeleteStudentCommand.COMMAND_WORD_ALIAS:
+        case DeleteStudentCommand.COMMAND_WORD:
+            return new DeleteStudentCommandParser().parse(arguments);
+
+        case EditStudentCommand.COMMAND_WORD_ALIAS:
+        case EditStudentCommand.COMMAND_WORD:
+            return new EditStudentCommandParser().parse(arguments);
+
+        case AddStudentToGroupCommand.COMMAND_WORD_ALIAS:
+        case AddStudentToGroupCommand.COMMAND_WORD:
+            return new AddStudentToGroupCommandParser().parse(arguments);
+
+        case DeleteStudentFromGroupCommand.COMMAND_WORD_ALIAS:
+        case DeleteStudentFromGroupCommand.COMMAND_WORD:
+            return new DeleteStudentFromGroupCommandParser().parse(arguments);
+
+        // Group
+        case ListGroupCommand.COMMAND_WORD_ALIAS:
+        case ListGroupCommand.COMMAND_WORD:
+            return new ListGroupCommandParser().parse(arguments);
+
+        case AddGroupCommand.COMMAND_WORD_ALIAS:
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD_ALIAS:
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        case EditGroupCommand.COMMAND_WORD_ALIAS:
+        case EditGroupCommand.COMMAND_WORD:
+            return new EditGroupCommandParser().parse(arguments);
+
+        // Task
+        case ListTaskCommand.COMMAND_WORD_ALIAS:
+        case ListTaskCommand.COMMAND_WORD:
+            return new ListTaskCommandParser().parse(arguments);
+
+        case AddTaskToGroupCommand.COMMAND_WORD_ALIAS:
+        case AddTaskToGroupCommand.COMMAND_WORD:
+            return new AddTaskToGroupCommandParser().parse(arguments);
+
+        case DeleteTaskFromGroupCommand.COMMAND_WORD_ALIAS:
+        case DeleteTaskFromGroupCommand.COMMAND_WORD:
+            return new DeleteTaskFromGroupCommandParser().parse(arguments);
+
+        case MarkTaskCommand.COMMAND_WORD_ALIAS:
+        case MarkTaskCommand.COMMAND_WORD:
+            return new MarkTaskCommandParser().parse(arguments);
+
+        case EditTaskCommand.COMMAND_WORD_ALIAS:
+        case EditTaskCommand.COMMAND_WORD:
+            return new EditTaskCommandParser().parse(arguments);
+
+        case SortStudentCommand.COMMAND_WORD_ALIAS:
+        case SortStudentCommand.COMMAND_WORD:
+            return new SortStudentCommandParser().parse(arguments);
+
+        case SortGroupCommand.COMMAND_WORD_ALIAS:
+        case SortGroupCommand.COMMAND_WORD:
+            return new SortGroupCommandParser().parse(arguments);
+
+        case SortTaskCommand.COMMAND_WORD_ALIAS:
+        case SortTaskCommand.COMMAND_WORD:
+            return new SortTaskCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommandParser().parse(arguments);
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
