@@ -105,7 +105,6 @@ public class CommandBox extends UiPart<Region> {
                 // Reset currentIndex and lastInput when space is pressed
                 currentIndex = -1;
                 lastInput = "";
-                System.out.println("[" + lastInput + "]");
             }
         });
     }
@@ -125,7 +124,6 @@ public class CommandBox extends UiPart<Region> {
                 currentIndex = -1;
             }
             lastInput = getLastInput();
-            System.out.println("[" + lastInput + "]");
         });
     }
 
@@ -218,8 +216,6 @@ public class CommandBox extends UiPart<Region> {
      */
     private void processMatches(ArrayList<String> words, ObservableList<String> parameters,
                                              ObservableList<String> matches) {
-        boolean isParameter = false;
-
         for (int i = words.size() - 1; i >= 0; i--) {
             String currentWord = words.get(i);
             if (currentWord.length() >= 3) {
@@ -227,20 +223,14 @@ public class CommandBox extends UiPart<Region> {
                     String newWord = currentWord.substring(0, 2) + matches.get(currentIndex);
                     words.subList(i + 1, words.size()).clear();
                     words.set(i, newWord);
-                    isParameter = true;
                     break;
                 } else if (parameters.contains(currentWord.substring(0, 3))) {
                     String newWord = currentWord.substring(0, 3) + matches.get(currentIndex);
                     words.subList(i + 1, words.size()).clear();
                     words.set(i, newWord);
-                    isParameter = true;
                     break;
                 }
             }
-        }
-
-        if (!isParameter) {
-            words.set(words.size() - 1, matches.get(currentIndex));
         }
     }
 
@@ -333,6 +323,8 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            lastInput = getLastInput();
+            commandTextField.positionCaret(commandTextField.getText().length());
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
