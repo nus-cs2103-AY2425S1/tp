@@ -131,16 +131,20 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
 
     @Override
     public boolean equals(Object other) {
-
+        // Check if the objects are the same instance
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager<?> otherModelManager)) {
+        // Check if the other object is an instance of ModelManager and not null
+        if (!(other instanceof ModelManager<?>)) {
             return false;
         }
 
+        // Cast the other object to ModelManager
+        ModelManager<?> otherModelManager = (ModelManager<?>) other;
+
+        // Compare the state of addressBook, userPrefs, and filtered lists
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filtered.equals(otherModelManager.filtered);
