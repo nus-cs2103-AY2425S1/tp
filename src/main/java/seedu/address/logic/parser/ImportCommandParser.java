@@ -14,8 +14,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
     /**
      * Placeholder
-     * @param args
-     * @return
+     * @param args String
+     * @return ImportCommand
      * @throws ParseException
      */
     @Override
