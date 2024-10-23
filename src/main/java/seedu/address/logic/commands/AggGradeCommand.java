@@ -34,6 +34,8 @@ public class AggGradeCommand extends Command {
             + "are: \n" + String.join(", ", OPERATION_TRANSLATE.keySet());
     public static final String MESSAGE_EMPTY_LIST = "No exam matches your criteria.";
 
+    public static final String MESSAGE_AGGREGATE_RESULT = "Result of the aggregation operation: %.2f%%";
+
     /**
      * Operations that can be done with the aggGrade command.
      */
@@ -60,34 +62,6 @@ public class AggGradeCommand extends Command {
         this.examName = examName;
     }
 
-    private CommandResult executeMedian(Model model, SmartList filteredList) {
-        requireNonNull(model);
-        requireNonNull(filteredList);
-
-        return new CommandResult(String.format("%.2f%%", filteredList.getMedian()));
-    }
-
-    private CommandResult executeMean(Model model, SmartList filteredList) {
-        requireNonNull(model);
-        requireNonNull(filteredList);
-
-        return new CommandResult(String.format("%.2f%%", filteredList.getMean()));
-    }
-
-    private CommandResult executeMax(Model model, SmartList filteredList) {
-        requireNonNull(model);
-        requireNonNull(filteredList);
-
-        return new CommandResult(String.format("%.2f%%", filteredList.getMax()));
-    }
-
-    private CommandResult executeMin(Model model, SmartList filteredList) {
-        requireNonNull(model);
-        requireNonNull(filteredList);
-
-        return new CommandResult(String.format("%.2f%%", filteredList.getMin()));
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -110,18 +84,9 @@ public class AggGradeCommand extends Command {
             throw new CommandException(MESSAGE_EMPTY_LIST);
         }
 
-        switch (this.operation) {
-        case MEDIAN:
-            return executeMedian(model, filteredList);
-        case MEAN:
-            return executeMean(model, filteredList);
-        case MAX:
-            return executeMax(model, filteredList);
-        case MIN:
-            return executeMin(model, filteredList);
-        default:
-            throw new IllegalStateException();
-        }
+        float result = filteredList.execute(operation);
+
+        return new CommandResult(String.format(MESSAGE_AGGREGATE_RESULT, result));
     }
 
     private static class SmartList extends ArrayList<Float> {
@@ -189,6 +154,21 @@ public class AggGradeCommand extends Command {
 
             list.sort(Comparator.naturalOrder());
             return list.get(0);
+        }
+
+        public float execute(Operation operation) {
+            switch (operation) {
+            case MEDIAN:
+                return this.getMedian();
+            case MEAN:
+                return this.getMean();
+            case MAX:
+                return this.getMax();
+            case MIN:
+                return this.getMin();
+            default:
+                throw new IllegalStateException();
+            }
         }
     }
 }
