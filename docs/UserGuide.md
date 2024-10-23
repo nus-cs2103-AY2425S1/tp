@@ -142,7 +142,12 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
-* Skills and tags must be alphanumeric and cannot contain spaces.
+- Employee Id must be: Numeric, no spaces, unique
+- Name must be: [Alphanumeric](#alphanumeric), spaces allowed
+- Phone Number must be: [Numeric](#numeric), no spaces, at least 3 digits long
+- Email must be: A valid email address
+- Address must be: Any characters are valid
+- Skills and tags must be: [Alphanumeric](#alphanumeric), no spaces
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0) and any number of skills (including 0)
@@ -285,6 +290,8 @@ Expected output:
 **Adds a new project** to HRConnect.
 
 Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
+- Project Id must be: [Alphanumeric](#alphanumeric), spaces allowed
+- Project Name must be: [Alphanumeric](#alphanumeric), spaces allowed
 
 Examples:
 
@@ -505,11 +512,17 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 List of certain technical terms / uncommon words used in this user guide.
 
+### Alphanumeric
+- Consisting of the letters A to Z (upper/lowercase) and the digits 0 to 9.
+
 ### Graphical User Interface
 - A digital interface in which a user interacts with graphical components such as icons, buttons, and menus. Example: Windows 11, most websites
 
 ### Java
 - The programming language HRConnect is based on.
 - It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) and installed before attempting to run HRConnect.
+
+### Numeric
+- Consisting of the digits 0 to 9.
 
 [Return to Top](#table-of-contents)
