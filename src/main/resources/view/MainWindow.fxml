@@ -23,7 +23,6 @@
       <stylesheets>
         <URL value="@EdututuTheme.css" />
         <URL value="@Extensions.css" />
-        <URL value = "@RoundedTheme.css" />
       </stylesheets>
       <VBox>
         <StackPane style="-fx-background-color: #D2C0BD;">
