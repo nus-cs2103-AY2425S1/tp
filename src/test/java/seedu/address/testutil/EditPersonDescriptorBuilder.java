@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +38,21 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+    }
+
+    /**
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     */
+    public EditPersonDescriptorBuilder(Student student) {
+        descriptor = new EditPersonDescriptor();
+        descriptor.setName(student.getName());
+        descriptor.setPhone(student.getPhone());
+        descriptor.setEmail(student.getEmail());
+        descriptor.setAddress(student.getAddress());
+        descriptor.setParentName(student.getParentName());
+        descriptor.setParentPhone(student.getParentPhone());
+        descriptor.setParentEmail(student.getParentEmail());
+        descriptor.setTags(student.getTags());
     }
 
     /**
@@ -68,6 +84,30 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the parent {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withParentName(String parentName) {
+        descriptor.setParentName(new Name(parentName));
+        return this;
+    }
+
+    /**
+     * Sets the parent {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withParentPhone(String parentPhone) {
+        descriptor.setParentPhone(new Phone(parentPhone));
+        return this;
+    }
+
+    /**
+     * Sets the parent {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withParentEmail(String parentEmail) {
+        descriptor.setParentEmail(new Email(parentEmail));
         return this;
     }
 

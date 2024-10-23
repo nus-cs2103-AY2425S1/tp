@@ -24,9 +24,11 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isPinned;
 
     /**
      * Every field must be present and not null.
+     * Persons initialised with this constructor will have isPinned set to false by default
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -35,6 +37,19 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isPinned = false;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isPinned) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isPinned = isPinned;
     }
 
     public Name getName() {
@@ -53,12 +68,21 @@ public class Person {
         return address;
     }
 
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean getPinned() {
+        return isPinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        isPinned = pinned;
     }
 
     /**
@@ -100,7 +124,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, isPinned);
     }
 
     @Override
@@ -111,7 +135,25 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("isPinned", String.valueOf(isPinned))
                 .toString();
+    }
+
+    /**
+     * Returns a string describing this person in the format used by {@code Messages}.
+     */
+    public String toMessageString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
     }
 
 }
