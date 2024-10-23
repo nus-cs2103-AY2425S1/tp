@@ -31,7 +31,7 @@ public class AssignCommand extends Command {
             + ASSIGN_EVENT_PREFIX_NAME + "3 ";
 
     /**
-     * Creates a {@code VolunteerAddCommand} to add the specified {@code Volunteer}.
+     * Creates a {@code VolunteerNewCommand} to add the specified {@code Volunteer}.
      *
      * @param volunteer The volunteer to be added.
      */
@@ -39,7 +39,7 @@ public class AssignCommand extends Command {
     private final Index eventIndex;
 
     /**
-     * Constructs a {@code VolunteerAddCommand} that adds the specified {@code Volunteer} to the system.
+     * Constructs a {@code VolunteerNewCommand} that adds the specified {@code Volunteer} to the system.
      *
      * @param volunteerIndex The volunteer to be added. Must not be null.
      */
