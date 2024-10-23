@@ -22,7 +22,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
     private final FilteredList<Transaction> filteredTransactions;
 
     /**
-     * Initializes a AddressBookModelManager with the given transactionBook.
+     * Initializes a TransactionBookModelManager with the given transactionBook.
      */
     public TransactionBookModelManager(TransactionBook transactionBook) {
         requireNonNull(transactionBook);
@@ -34,7 +34,7 @@ public class TransactionBookModelManager implements TransactionBookModel {
     }
 
     /**
-     * Initializes a AddressBookModelManager with the readonly transactionBook.
+     * Initializes a TransactionBookModelManager with the readonly transactionBook.
      */
     public TransactionBookModelManager(ReadOnlyTransactionBook transactionBook) {
         requireNonNull(transactionBook);
