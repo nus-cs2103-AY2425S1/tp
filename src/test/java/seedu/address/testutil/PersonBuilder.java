@@ -48,6 +48,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         emergencyContact = null;
         gradYear = null;
+
         tags = new HashSet<>();
     }
 
@@ -154,9 +155,23 @@ public class PersonBuilder {
     }
 
     /**
-     * Builds a person using AB3 constructor.
+     * Builds a person with all non-null Optional fields.
+     */
+    public Person buildForEditCommand() {
+        if (this.emergencyContact == null) {
+            this.emergencyContact = new EmergencyContact(new Name(DEFAULT_EMERGENCY_NAME), new Phone(DEFAULT_EMERGENCY_PHONE));
+        }
+        if (this.gradYear == null) {
+            this.gradYear = new GradYear(DEFAULT_GRAD_YEAR);
+        }
+        return new Person(name, phone, email, roomNumber, address, emergencyContact, gradYear, tags);
+    }
+
+    /**
+     * Builds a person.
      */
     public Person build() {
         return new Person(name, phone, email, roomNumber, address, emergencyContact, gradYear, tags);
     }
+
 }

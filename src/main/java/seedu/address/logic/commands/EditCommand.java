@@ -223,6 +223,10 @@ public class EditCommand extends Command {
             this.roomNumber = roomNumber;
         }
 
+        public void setNoRoomNumber() {
+            this.roomNumber = null;
+        }
+
         public Optional<RoomNumber> getRoomNumber() {
             return Optional.ofNullable(roomNumber);
         }
@@ -239,6 +243,10 @@ public class EditCommand extends Command {
             this.emergencyName = emergencyName;
         }
 
+        public void setNoEmergencyName() {
+            this.emergencyName = null;
+        }
+
         public Optional<Name> getEmergencyName() {
             return Optional.ofNullable(emergencyName);
         }
@@ -247,12 +255,20 @@ public class EditCommand extends Command {
             this.emergencyPhone = emergencyPhone;
         }
 
+        public void setNoEmergencyPhone() {
+            this.emergencyPhone = null;
+        }
+
         public Optional<Phone> getEmergencyPhone() {
             return Optional.ofNullable(emergencyPhone);
         }
 
         public void setGradYear(GradYear gradYear) {
             this.gradYear = gradYear;
+        }
+
+        public void setNoGradYear() {
+            this.gradYear = null;
         }
 
         public Optional<GradYear> getGradYear() {
