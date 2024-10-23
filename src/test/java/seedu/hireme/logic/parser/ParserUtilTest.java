@@ -14,12 +14,12 @@ import seedu.hireme.model.internshipapplication.Name;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_SORTING_ORDER = "";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SORTING_ORDER = "earliest";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -45,7 +45,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -66,32 +66,9 @@ public class ParserUtilTest {
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 
-    //    @Test
-    //    public void parseAddress_null_throwsNullPointerException() {
-    //        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    //    }
-    //
-    //    @Test
-    //    public void parseAddress_invalidValue_throwsParseException() {
-    //        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    //    }
-    //
-    //    @Test
-    //    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-    //        Address expectedAddress = new Address(VALID_ADDRESS);
-    //        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-    //    }
-
-    //    @Test
-    //    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-    //        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-    //        Address expectedAddress = new Address(VALID_ADDRESS);
-    //        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    //    }
-
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -110,6 +87,27 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseSortingOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortingOrder(null));
+    }
+
+    @Test
+    public void parseSortingOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(INVALID_SORTING_ORDER));
+    }
+
+    @Test
+    public void parseSortingOrder_validValueWithoutWhitespace_returnsSortingOrder() throws Exception {
+        assertEquals(true, ParserUtil.parseSortingOrder(VALID_SORTING_ORDER));
+    }
+
+    @Test
+    public void parseSortingOrder_validValueWithWhitespace_returnsSortingOrder() throws Exception {
+        String sortingOrderWithWhitespace = WHITESPACE + VALID_SORTING_ORDER + WHITESPACE;
+        assertEquals(true, ParserUtil.parseSortingOrder(sortingOrderWithWhitespace));
     }
 
 }
