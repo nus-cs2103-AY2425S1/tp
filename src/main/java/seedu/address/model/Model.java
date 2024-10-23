@@ -130,4 +130,10 @@ public interface Model {
      * Filters a list of goods by the given {@code predicate}.
      */
     public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate);
+
+    /**
+     * Updates the filter of the filtered goods receipts list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate);
 }

@@ -37,8 +37,7 @@ public class ListGoodsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        List<GoodsReceipt> filteredList = model.getFilteredGoods(this.predicate);
-        // USE THE LIST FOR UI
+        model.updateFilteredReceiptsList(this.predicate);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

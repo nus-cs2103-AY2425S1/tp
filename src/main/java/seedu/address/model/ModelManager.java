@@ -190,6 +190,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate) {
+        requireNonNull(predicate);
+        filteredReceipts.setPredicate(predicate);
+    }
+
+    @Override
     public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
         filteredReceipts.setPredicate(predicate);
         return this.goodsList.findReceipts(predicate);
