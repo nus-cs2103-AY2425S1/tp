@@ -21,7 +21,7 @@ public class NewtagCommand extends Command {
     private final List<Tag> tags;
 
     /**
-     * @param tags The tags to be added.
+     * @param tags The {@code List} of tags to be added.
      */
     public NewtagCommand(List<Tag> tags) {
         requireAllNonNull(tags);
@@ -35,7 +35,7 @@ public class NewtagCommand extends Command {
         if (!isSuccessful) {
             throw new CommandException(MESSAGE_DUPLICATE);
         }
-        String successMessage = MESSAGE_SUCCESS + " " + tags + "\n";
+        String successMessage = MESSAGE_SUCCESS + tags + "\n";
 
         model.updateTagList();
 

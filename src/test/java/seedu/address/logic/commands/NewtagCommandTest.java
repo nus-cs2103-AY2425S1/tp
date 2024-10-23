@@ -31,7 +31,7 @@ public class NewtagCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTag(newTag);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + " " + newTags + "\n"
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + newTags + "\n"
                 + "Your tags: " + expectedModel.getTagList();
 
         assertCommandSuccess(newTagCommand, model, expectedMessage, expectedModel);
@@ -50,7 +50,7 @@ public class NewtagCommandTest {
         expectedModel.addTag(tagBridesFriend);
         expectedModel.addTag(tagColleagues);
 
-        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + " " + newTags + "\n"
+        String expectedMessage = NewtagCommand.MESSAGE_SUCCESS + newTags + "\n"
 
                 + "Your tags: " + expectedModel.getTagList();
 
