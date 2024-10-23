@@ -23,9 +23,9 @@ public class ResetAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "reset-att";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Resets all attandence to 0.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Resets all attendance to 0.";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Attendance set to 0 for all students";
+    public static final String MESSAGE_RESET_ATTENDANCE_SUCCESS = "Attendance set to 0 for all students";
 
 
 
@@ -40,7 +40,7 @@ public class ResetAttendanceCommand extends Command {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_RESET_ATTENDANCE_SUCCESS));
     }
 
     /**

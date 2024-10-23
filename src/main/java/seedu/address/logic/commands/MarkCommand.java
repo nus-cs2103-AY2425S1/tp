@@ -23,9 +23,10 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendence of person by index number";
+            + ": Marks the attendance of person by index number";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked attendence for: %1$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked attendance for: %1$s";
+    public static final String MESSAGE_CANNOT_MARK_PARENT = "You can't mark attendance for a parent";
     private final Index targetIndex;
 
     public MarkCommand(Index targetIndex) {
@@ -41,13 +42,14 @@ public class MarkCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        Person markedPerson = createNewPerson(personToMark);
-
-
-        model.setPerson(personToMark, markedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(markedPerson)));
-
+        if (personToMark.getRole().equals(new Role("parent"))) {
+            return new CommandResult(String.format(MESSAGE_CANNOT_MARK_PARENT));
+        } else {
+            Person markedPerson = createNewPerson(personToMark);
+            model.setPerson(personToMark, markedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.getNameOnly(markedPerson)));
+        }
     }
 
 

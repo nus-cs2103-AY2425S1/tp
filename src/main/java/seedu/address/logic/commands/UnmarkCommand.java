@@ -20,12 +20,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class UnmarkCommand extends Command {
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendence of person by index number";
+            + ": Unmarks the attendance of person by index number";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked attendence for: %1$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Unmarked attendance for: %1$s";
+    public static final String MESSAGE_CANNOT_MARK_PARENT = "You can't unmark attendance for a parent";
+    public static final String MESSAGE_CANNOT_UNMARK_FURTHER = "attendance count is already at 0";
     private final Index targetIndex;
 
     public UnmarkCommand(Index targetIndex) {
@@ -41,12 +43,20 @@ public class UnmarkCommand extends Command {
         }
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        Person unmarkedPerson = createNewPerson(personToUnmark);
+        if (personToUnmark.getRole().equals(new Role("Parent"))) {
+            return new CommandResult(String.format(MESSAGE_CANNOT_MARK_PARENT));
+        } else if (personToUnmark.getAttendanceCount().count == 0) {
+            return new CommandResult(Messages.getNameOnly(personToUnmark) + "'s "
+                    +String.format(MESSAGE_CANNOT_UNMARK_FURTHER));
+        } else {
+            Person unmarkedPerson = createNewPerson(personToUnmark);
 
+            model.setPerson(personToUnmark, unmarkedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,
+                    Messages.getNameOnly(unmarkedPerson)));
 
-        model.setPerson(personToUnmark, unmarkedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(unmarkedPerson)));
+        }
     }
 
     private Person createNewPerson (Person selectedPerson) {
@@ -57,8 +67,8 @@ public class UnmarkCommand extends Command {
         Email email = selectedPerson.getEmail();
         Address address = selectedPerson.getAddress();
         Set<Tag> tags = selectedPerson.getTags();
-        AttendanceCount attendenceCount = selectedPerson.getAttendanceCount().decrement();
-        return new Person(name, role, phone, email, address, tags, attendenceCount);
+        AttendanceCount attendanceCount = selectedPerson.getAttendanceCount().decrement();
+        return new Person(name, role, phone, email, address, tags, attendanceCount);
 
     }
 

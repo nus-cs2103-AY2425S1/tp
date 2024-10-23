@@ -26,9 +26,12 @@ public class AttendanceCount {
     }
 
     public AttendanceCount decrement() {
-        assert this.count != 0;
-        Integer newCount = this.count - 1;
-        return new AttendanceCount(newCount.toString());
+        if (this.count == 0) {
+            return this;
+        } else {
+            Integer newCount = this.count - 1;
+            return new AttendanceCount(newCount.toString());
+        }
     }
 
     @Override
