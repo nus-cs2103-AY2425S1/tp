@@ -15,6 +15,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.handler.DuplicatePhoneTagger;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -39,6 +40,7 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 2, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static final DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
 
     protected Ui ui;
     protected Logic logic;
@@ -61,6 +63,7 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
+        duplicatePhoneTagger.tagPhoneDuplicates(model);
 
         logic = new LogicManager(model, storage);
 
