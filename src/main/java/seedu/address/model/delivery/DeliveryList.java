@@ -130,9 +130,7 @@ public class DeliveryList {
      * Checks if the archive status of two deliveries are the same.
      */
     public boolean isSameArchiveStatus(Delivery d1, Delivery d2) {
-        boolean d1Archive = d1.isArchived();
-        boolean d2Archive = d2.isArchived();
-        return (d1Archive && d2Archive) || (!d1Archive && !d2Archive);
+        return d1.isArchived() == d2.isArchived();
     }
 
     /**
