@@ -9,6 +9,9 @@ import seedu.address.model.order.Order;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+/**
+ * Add an order to a customer
+ */
 public class PutOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "put";
@@ -17,7 +20,7 @@ public class PutOrderCommand extends Command {
             + " order is always in lowercase. "
             + "\nParameters: [NAME OF ORDER] "
             + "[" + PREFIX_NAME + " NAME] "
-            + "\nExample: " + COMMAND_WORD + " cake " +  PREFIX_NAME + "John";
+            + "\nExample: " + COMMAND_WORD + " cake " + PREFIX_NAME + "John";
 
     public static final String MESSAGE_SUCCESS = "Order added to customer.";
     public static final String MESSAGE_ORDER_NOT_FOUND = "Order does not exist: %1$s";
@@ -26,6 +29,10 @@ public class PutOrderCommand extends Command {
     private final Order order;
     private final Name name;
 
+    /**
+     * @param order to add
+     * @param name of the customer to add the order
+     */
     public PutOrderCommand(Order order, Name name) {
         this.order = order;
         this.name = name;

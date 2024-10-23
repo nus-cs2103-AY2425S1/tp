@@ -84,15 +84,6 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(replacement.internalList);
     }
 
-    public Person findPersonByName(Name name) {
-        for (int i = 0; i < internalList.size() - 1; i++) {
-            if (internalList.get(i).getName().equals(name)) {
-                return internalList.get(i);
-            }
-        }
-        return null;
-    }
-
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
@@ -104,6 +95,20 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Return a person by its name
+     * @param name of the person
+     * @return person of with the required name, null if not found
+     */
+    public Person findPersonByName(Name name) {
+        for (int i = 0; i < internalList.size() - 1; i++) {
+            if (internalList.get(i).getName().equals(name)) {
+                return internalList.get(i);
+            }
+        }
+        return null;
     }
 
     /**

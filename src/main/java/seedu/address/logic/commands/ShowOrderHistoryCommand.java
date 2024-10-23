@@ -7,6 +7,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+/**
+ * Show the order history of a customer
+ */
 public class ShowOrderHistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "history";

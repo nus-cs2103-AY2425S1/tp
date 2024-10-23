@@ -6,8 +6,18 @@ import seedu.address.logic.commands.ShowOrderHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
+/**
+ * Parser for ShowOrderHistoryCommand
+ */
+
 public class ShowOrderHistoryCommandParser implements Parser<ShowOrderHistoryCommand> {
 
+    /**
+     * Parse args for ShowOrderHistoryCommand
+     * @param args to parse
+     * @return a new ShowOrderHistoryCommand
+     * @throws ParseException if the name of the customer is missing
+     */
     public ShowOrderHistoryCommand parse(String args) throws ParseException {
         args = args.trim();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);

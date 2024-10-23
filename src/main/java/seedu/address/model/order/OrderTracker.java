@@ -5,15 +5,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Track all the order history of a customer
+ */
 public class OrderTracker {
     private ArrayList<OrderHistory> history;
     private HashMap<Order, Integer> frequency;
 
+    /**
+     * Init the OrderTracker
+     */
     public OrderTracker() {
         this.history = new ArrayList<>();
         this.frequency = new HashMap<>();
     }
 
+    /**
+     * Add an order to the tracker
+     * @param order to add
+     */
     public void add(Order order) {
         this.history.add(new OrderHistory(order));
         this.frequency.merge(order, 1, Integer::sum);
