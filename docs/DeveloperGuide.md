@@ -153,7 +153,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.internBuddy.commons` package.
+Classes used by multiple components are in the `seedu.internbuddy.commons` package.
 
 [back to top](#internbuddy-developer-guide)
 
