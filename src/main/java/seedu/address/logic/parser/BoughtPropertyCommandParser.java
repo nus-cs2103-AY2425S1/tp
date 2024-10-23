@@ -39,7 +39,7 @@ public class BoughtPropertyCommandParser implements Parser<BoughtPropertyCommand
         Optional<String> actualPriceValue = argMultimap.getValue(PREFIX_ACTUAL_PRICE);
         Price actualPrice = actualPriceValue.isPresent()
                 ? ParserUtil.parseBuyingPrice(actualPriceValue.get())
-                : new Price("0");
+                : new Price("-1");
 
         return new BoughtPropertyCommand(personIndex, propertyIndex, Optional.of(actualPrice));
     }

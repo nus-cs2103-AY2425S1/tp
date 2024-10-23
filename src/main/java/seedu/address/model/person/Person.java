@@ -108,14 +108,16 @@ public class Person {
      * Returns the total sales revenue for this person who has sold properties.
      */
     public int getSalesRevenue() {
-        return this.getListOfPropertiesSold().stream().mapToInt(property -> property.getActualPrice().getPrice()).sum();
+        return this.getListOfPropertiesSold().stream().mapToInt(property -> (property.getActualPrice() != null)
+                ? property.getActualPrice().getPrice() : new Price("0").getPrice()).sum();
     }
 
     /**
      * Returns the total purchase expense for this person who has bought properties.
      */
     public int getPurchaseExpense() {
-        return this.getListOfPropertiesBought().stream().mapToInt(property -> property.getPrice().getPrice()).sum();
+        return this.getListOfPropertiesBought().stream().mapToInt(property -> (property.getActualPrice() != null)
+                ? property.getActualPrice().getPrice() : new Price("0").getPrice()).sum();
     }
 
     /**
@@ -201,17 +203,29 @@ public class Person {
         buyingProperties.remove(index.getZeroBased());
     }
 
+
     /**
-     * Records a {@code Property} as purchased and removes it from the list of properties to buy.
+     * Returns the {@code Property} purchased with its updated price.
      *
-     * @param index One based Index of property to record and delete.
+     * @param index One based Index of property bought in the list of properties to buy.
+     * @param actualPrice {@code Optional<Price>} of the actual price of the property provided by the user.
      */
-    public Property boughtProperty(Index index, Optional<Price> actualPrice) {
+    public Property getBoughtProperty(Index index, Optional<Price> actualPrice) {
         Property propertyToBeUpdated = buyingProperties.get(index.getZeroBased());
         propertyToBeUpdated.setActualPrice(actualPrice);
-        propertiesBought.add(propertyToBeUpdated);
-        buyingProperties.remove(propertyToBeUpdated);
         return propertyToBeUpdated;
+    }
+
+    /**
+     * Updates the properties to buy list and bought properties list with the {@code Property} purchased.
+     *
+     * @param updatedProperty Property bought with the updated actual price.
+     * @param oldPropertyIndex One based Index of property bought in the list of properties to buy.
+     */
+    public void updateBoughtProperty(Property updatedProperty, Index oldPropertyIndex) {
+        requireAllNonNull(updatedProperty, oldPropertyIndex);
+        propertiesBought.add(updatedProperty);
+        buyingProperties.remove(oldPropertyIndex.getZeroBased());
     }
 
     /**
@@ -282,6 +296,10 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("selling properties", sellingProperties)
+                .add("buying properties", buyingProperties)
+                .add("properties sold", propertiesSold)
+                .add("properties bought", propertiesBought)
                 .toString();
     }
 

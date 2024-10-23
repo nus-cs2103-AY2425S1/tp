@@ -67,7 +67,8 @@ public class BoughtPropertyCommand extends Command {
             throw new CommandException((Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX));
         }
 
-        Property updatedProperty = personToEdit.boughtProperty(personIndex, actualPrice);
+        Property updatedProperty = personToEdit.getBoughtProperty(personIndex, actualPrice);
+        personToEdit.updateBoughtProperty(updatedProperty, propertyIndex);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatProperty(updatedProperty)));

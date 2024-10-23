@@ -20,4 +20,26 @@ public class UniqueSellingPropertyList {
         }
     }
 
+    public UniqueSellingPropertyList getUniqueSellingPropertiesList() {
+        return (UniqueSellingPropertyList) uniqueSellingProperties;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof UniqueSellingPropertyList)) {
+            return false;
+        }
+
+        UniqueSellingPropertyList that = (UniqueSellingPropertyList) o;
+        return uniqueSellingProperties.equals(that.uniqueSellingProperties); // Compare the lists
+    }
+
+    @Override
+    public int hashCode() {
+        return uniqueSellingProperties.hashCode(); // Use the list's hashcode
+    }
+
 }

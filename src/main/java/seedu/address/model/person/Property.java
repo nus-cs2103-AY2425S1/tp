@@ -37,6 +37,14 @@ public abstract class Property {
         this.tags = tags;
     }
 
+    public Property(PostalCode postalCode, UnitNumber unitNumber, Price price, Price actualPrice, Set<Tag> tags) {
+        this.postalCode = postalCode;
+        this.unitNumber = unitNumber;
+        this.price = price;
+        this.actualPrice = actualPrice;
+        this.tags = tags;
+    }
+
     /**
      * Returns the postal code associated with this property
      *
@@ -70,7 +78,7 @@ public abstract class Property {
      * @return the {@code actualPrice} of this property
      */
     public Price getActualPrice() {
-        return actualPrice;
+        return (actualPrice != null) ? actualPrice : null;
     }
 
     /**

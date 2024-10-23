@@ -30,6 +30,8 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private ObservableList<Property> buyingProperties = FXCollections.observableArrayList();
     private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
+    private ObservableList<Property> propertiesBought = FXCollections.observableArrayList();
+    private ObservableList<Property> propertiesSold = FXCollections.observableArrayList();
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -41,6 +43,8 @@ public class PersonBuilder {
         tags = new HashSet<>();
         buyingProperties = FXCollections.observableArrayList();;
         sellingProperties = FXCollections.observableArrayList();;
+        propertiesBought = FXCollections.observableArrayList();;
+        propertiesSold = FXCollections.observableArrayList();;
     }
 
     /**
@@ -54,6 +58,8 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         buyingProperties = FXCollections.observableArrayList(personToCopy.getListOfBuyingProperties());
         sellingProperties = FXCollections.observableArrayList(personToCopy.getListOfSellingProperties());
+        propertiesBought = FXCollections.observableArrayList(personToCopy.getListOfPropertiesBought());
+        propertiesSold = FXCollections.observableArrayList(personToCopy.getListOfPropertiesSold());
     }
 
     /**
@@ -97,7 +103,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code buyingProperties} of the {@code Person} that we are building.
+     * Adds a new {@code property} to buy to the {@code buyingProperties} of the {@code Person} that we are building.
      */
     public PersonBuilder withBuyProperty(Property property) {
         this.buyingProperties.add(property);
@@ -105,14 +111,63 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code sellingProperties} of the {@code Person} that we are building.
+     * Resets the {@code buyingProperties} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBuyProperty() {
+        this.buyingProperties = FXCollections.observableArrayList();
+        return this;
+    }
+
+    /**
+     * Adds a new {@code property} to sell the {@code sellingProperties} of the {@code Person} that we are building.
      */
     public PersonBuilder withSellProperty(Property property) {
         this.sellingProperties.add(property);
         return this;
     }
 
+    /**
+     * Resets the {@code sellingProperties} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSellProperty() {
+        this.sellingProperties = FXCollections.observableArrayList();
+        return this;
+    }
+
+    /**
+     * Adds a new {@code propertiesBought} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPropertyBought(Property property) {
+        this.propertiesBought.add(property);
+        return this;
+    }
+
+    /**
+     * Resets the {@code propertiesBought} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPropertyBought() {
+        this.propertiesBought = FXCollections.observableArrayList();
+        return this;
+    }
+
+    /**
+     * Adds a new {@code propertiesSold} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPropertySold(Property property) {
+        this.propertiesSold.add(property);
+        return this;
+    }
+
+    /**
+     * Resets the {@code propertiesSold} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPropertySold() {
+        this.propertiesSold = FXCollections.observableArrayList();
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, sellingProperties, buyingProperties);
+        return new Person(name, phone, email, address, tags, sellingProperties, buyingProperties, propertiesSold,
+                propertiesBought);
     }
 }

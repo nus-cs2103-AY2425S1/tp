@@ -23,6 +23,10 @@ public class Bto extends Property {
         super(postalCode, unitNumber, price, tags);
     }
 
+    public Bto(PostalCode postalCode, UnitNumber unitNumber, Price actualPrice, Price price, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, actualPrice, tags);
+    }
+
     @Override
     public boolean equals(Object otherBto) {
         if (!super.equals(otherBto)) {

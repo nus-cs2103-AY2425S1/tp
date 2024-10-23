@@ -5,39 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROPERTY;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddPropertyToBuyCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeletePropertyToBuyCommand;
-import seedu.address.logic.commands.DeletePropertyToSellCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindBuyCommand;
-import seedu.address.logic.commands.FindNameCommand;
-import seedu.address.logic.commands.FindPhoneNumberCommand;
-import seedu.address.logic.commands.FindSellCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.BuyPropertyContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneNumberContainsKeywordPredicate;
-import seedu.address.model.person.Property;
-import seedu.address.model.person.SellPropertyContainsKeywordsPredicate;
+import seedu.address.model.person.*;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditPersonPropertyToBuyDescriptorBuilder;
 import seedu.address.testutil.EditPersonPropertyToSellDescriptorBuilder;
@@ -182,6 +166,30 @@ public class AddressBookParserTest {
         DeletePropertyToBuyCommand command =
                 (DeletePropertyToBuyCommand) parser.parseCommand("delBuy 1 1");
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_bought() throws Exception {
+        Index personIndex = Index.fromOneBased(1);
+        Index propertyIndex = Index.fromOneBased(1);
+        String priceString = "2000000";
+        Optional<Price> actualPrice = Optional.of(new Price(priceString));
+
+        String input = "bought "
+                + personIndex.getOneBased()
+                + " "
+                + propertyIndex.getOneBased()
+                + " ap/" + priceString;
+
+        BoughtPropertyCommand expectedCommand = new BoughtPropertyCommand(
+                personIndex,
+                propertyIndex,
+                actualPrice);
+
+        BoughtPropertyCommand command =
+                (BoughtPropertyCommand) parser.parseCommand(input);
+
+        assertEquals(command, expectedCommand);
     }
 
     @Test

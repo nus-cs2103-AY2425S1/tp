@@ -24,6 +24,10 @@ public class Hdb extends Property {
         super(postalCode, unitNumber, price, tags);
     }
 
+    public Hdb(PostalCode postalCode, UnitNumber unitNumber, Price price, Price actualPrice, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, actualPrice, tags);
+    }
+
     @Override
     public boolean equals(Object otherHdb) {
         if (this == otherHdb) {
