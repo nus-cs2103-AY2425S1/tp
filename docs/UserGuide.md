@@ -30,7 +30,8 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
    * `list` : Lists all contacts.
 
-   * `add r/volunteer h/30 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact 
+   * `add r/volunteer h/30 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
+     contact of type `volunteer` and 
      named 
      `John Doe` to the Address Book.
 
