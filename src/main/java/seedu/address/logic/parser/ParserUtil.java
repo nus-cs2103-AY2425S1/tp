@@ -196,7 +196,8 @@ public class ParserUtil {
             return defaultValue;
         }
     }
-
+    
+    /**
      * Checks if a command word matches any known invalid variants and throws a ParseException if found.
      * @param commandWord The command word to validate
      * @throws ParseException If the command word matches any invalid variant, with a message suggesting
