@@ -15,10 +15,19 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class CommandStack implements Serializable {
     private static final int DEFAULT_COMMAND_ARRAY_LIST_MAX_SIZE = 2000;
+    /**
+     * 0-th index of {@code commandArrayList} is treated as the earliest recorded executed command.
+     * This is a consequence of {@code addCommand} adding new command strings to the back of {@code commandArrayList}.
+     */
     private final ArrayList<String> commandArrayList;
     private final int commandArrayListMaxSize;
+    /**
+     * Represents the index of the currently displayed element.
+     * If the value exceeds the index of the final index of commandArrayList, {@code CommandGetterResult}
+     * functions will clamp the value between {@code 0} and {@code commandArrayList.size()} inclusive.
+     */
     @JsonIgnore
-    private int commandArrayIndex; //represents index of currently displayed element
+    private int commandArrayIndex; //
 
     /**
      * Constructs a {@code CommandStack} with default max size, and empty history.
