@@ -28,7 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_INSURANCE_ID = "-1";
     private static final String INVALID_CLAIM_ID = "CS99999";
-    private static final String INVALID_CLAIM_AMOUNT = "-100..15";
+    private static final String INVALID_CLAIM_AMOUNT = "-100..155";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
