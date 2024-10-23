@@ -5,7 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 import static seedu.address.logic.parser.SortOption.SORT_HOURS;
 import static seedu.address.logic.parser.SortOption.SORT_NAME;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 import seedu.address.model.person.Volunteer;
@@ -33,6 +37,8 @@ public class SortCommand extends Command {
             "No volunteers found. The list remains unsorted.";
 
     public final SortOption sortOption;
+
+    private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
 
     /**
      * Constructs a SortCommand with no sort option, which will reset the list to the default order.
@@ -72,8 +78,9 @@ public class SortCommand extends Command {
         case SORT_HOURS:
             return executeSortByHours(model);
         default:
-            // Defensive programming: This should not happen as SortOption validates input,
-            // but we include this to catch any unexpected cases due to future changes.
+            // Log that an unexpected sort option has been encountered
+            logger.severe("Unexpected sort option encountered: " + sortOption
+                    + ". This should not have happened as SortOption should validate inputs.");
             throw new CommandException(String.format(MESSAGE_UNSUPPORTED_SORT_OPTION, sortOption));
         }
     }
