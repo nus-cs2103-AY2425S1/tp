@@ -69,6 +69,10 @@ public class FavouriteGameCommand extends Command {
         return new CommandResult(String.format(MESSAGE_FAVOURITE_GAME_SUCCESS, gameName));
     }
 
+    public void undo(Model model) {
+        
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
