@@ -49,7 +49,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets `[]` are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -66,7 +66,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 
 ### Viewing help : `help`
 
-Shows a message that help window is open.
+Shows a table of all the commands available in ContactMate. Also links to the User Guide.
 
 ![help message](images/HelpWindow.png)
 
@@ -92,7 +92,7 @@ Examples:
 
 ### Listing all elderly : `list`
 
-Shows a list of all elderly in ContactMate.
+Shows a list of all elderly in ContactMate, sorted by priority of who to call next.
 
 Format: `list`
 
@@ -112,7 +112,7 @@ Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CA
 
 Examples:
 *  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st elderly to be `91234567` and `johndoe@example.com` respectively.
-*  `edit S6878830G n/Betsy Crower t/` Edits the name of the elderly with NRIC S6878830G to be `Betsy Crower` and clears all existing tags.
+*  `edit S6878830G n/Betsy Crower t/` Edits the name of the elderly with NRIC `S6878830G` to be `Betsy Crower` and clears all existing tags.
 
 ### Locating elderly by name or nric: `find`
 
@@ -152,8 +152,9 @@ Examples:
 ### Marking an elderly : `mark`
 
 Marks the specified elderly from ContactMate as called. 
-As a result, ContactMate will also update the next contact date for the specified elderly in the Main Window.
-Besides, you can also mark the specified elderly on the specified date with optional notes.
+
+ContactMate will update the list to show the new next contact date of the elderly and sort the list accordingly.
+You can also mark the specified elderly as called on a specific date and add notes.
 
 Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
@@ -170,11 +171,11 @@ Examples:
 
 ### Getting call history : `history`
 
-Shows a list of call history dates and corresponding notes for the specified elderly.
+Shows a list of call dates and corresponding notes for the specified elderly.
 
 Format: `history INDEX/NRIC`
 
-* Shows call history of the elderly at the specified `INDEX` or `NRIC`.
+* Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The NRIC has to be a valid NRIC
@@ -187,6 +188,10 @@ Examples:
 ### Clearing all entries : `clear`
 
 Clears all entries from ContactMate.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+This command is irreversible. Use with caution.
+</div>
 
 Format: `clear`
 
@@ -211,10 +216,6 @@ ContactMate data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, ContactMate will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
