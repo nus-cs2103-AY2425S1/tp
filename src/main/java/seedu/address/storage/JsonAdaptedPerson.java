@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
@@ -31,7 +30,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
     private final String organisation;
     private final String lastSeen;
     private final String priority;
@@ -43,14 +41,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("organisation") String organisation, @JsonProperty("lastSeen") String lastSeen,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("priority") String priority,
-            @JsonProperty("remark") String remark) {
+            @JsonProperty("email") String email, @JsonProperty("organisation") String organisation,
+            @JsonProperty("lastSeen") String lastSeen, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("priority") String priority, @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.organisation = organisation;
         this.lastSeen = lastSeen;
         if (tags != null) {
@@ -67,7 +63,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         organisation = source.getOrganisation().value;
         lastSeen = source.getLastSeen().toString();
         tags.addAll(source.getTags().stream()
@@ -112,13 +107,6 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
         if (!LastSeen.isValidDate(lastSeen)) {
             throw new IllegalValueException(LastSeen.MESSAGE_CONSTRAINTS);
         }
@@ -151,7 +139,7 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrganisation,
+        return new Person(modelName, modelPhone, modelEmail, modelOrganisation,
                 modelLastSeen, modelTags, modelPriority, modelRemark);
     }
 

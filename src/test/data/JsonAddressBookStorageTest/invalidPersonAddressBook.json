@@ -3,7 +3,6 @@
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street",
     "organisation": "National University of Singapore",
     "lastSeen": "01-01-2024"
   } ]
