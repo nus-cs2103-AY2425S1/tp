@@ -2,7 +2,15 @@
   "persons": [ {
     "name": "Hans Muster",
     "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
+    "email": "invalid@email!3e"
+  } ],
+  "events": [ {
+    "name": "IFG"
+  }, {
+    "name": "AUG"
+  }, {
+    "name": "SUNIG"
+  }, {
+    "name": "IVP"
   } ]
 }
