@@ -20,6 +20,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleAllCommand;
+import seedu.address.logic.commands.ScheduleDateCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -104,6 +106,14 @@ public class AddressBookParser {
         case DeleteAppointmentCommand.COMMAND_WORD:
             logger.fine(String.format("Delete Appointment command identified, parsing args..."));
             return new DeleteAppointmentCommandParser().parse(arguments);
+
+        case ScheduleDateCommand.COMMAND_WORD:
+            logger.fine(String.format("Schedule Date command identified, parsing args..."));
+            return new ScheduleDateCommandParser().parse(arguments);
+
+        case ScheduleAllCommand.COMMAND_WORD:
+            logger.fine(String.format("Schedule All command identified, parsing args..."));
+            return new ScheduleAllCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
