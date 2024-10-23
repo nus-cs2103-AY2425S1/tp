@@ -32,7 +32,10 @@ public class ListLogsCommand extends Command {
      * Creates a ListLogsCommand to list the logs of the specified person
      */
     public ListLogsCommand(IdentityNumber id) {
-        this.identityNumber = id;
+        if (id == null) {
+            throw new IllegalArgumentException("Invalid Identity Number");
+        }
+        this.identityNumber = id; // Directly assign the identityNumber
     }
 
     @Override

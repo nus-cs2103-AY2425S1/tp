@@ -24,24 +24,24 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new IdentityNumber("S7633494C"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                    getTagSet("friends"), getLogSet("2023-10-14|First appointment")),
+                    getTagSet("friends"), getLogSet("14 Oct 2023|First appointment")),
             new Person(new Name("Bernice Yu"), new IdentityNumber("S7140834E"), new Phone("99272758"),
                 new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), getLogSet("2024-01-20|Checkup due")),
+                getTagSet("colleagues", "friends"), getLogSet("20 Jan 2024|Checkup due")),
             new Person(new Name("Charlotte Oliveiro"), new IdentityNumber("T0781984B"),
                 new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), getLogSet("2024-02-10|Second Appointment")),
+                getTagSet("neighbours"), getLogSet("10 Feb 2024|Second Appointment")),
             new Person(new Name("David Li"), new IdentityNumber("S5141265F"), new Phone("91031282"),
                 new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), getLogSet("2024-03-15|Checkin with patient")),
+                getTagSet("family"), getLogSet("15 March 2024|Checkin with patient")),
             new Person(new Name("Irfan Ibrahim"), new IdentityNumber("S6532483J"),
                 new Phone("92492021"), new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getLogSet("2024-04-22|Second follow-up")),
+                getTagSet("classmates"), getLogSet("22 April 2024|Second follow-up")),
             new Person(new Name("Roy Balakrishnan"), new IdentityNumber("T1355313G"),
                 new Phone("92624417"), new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getLogSet("2024-04-22|Meditation Techniques"))
+                getTagSet("colleagues"), getLogSet("22 April 2024|Meditation Techniques"))
         };
     }
 
@@ -70,12 +70,16 @@ public class SampleDataUtil {
         return Arrays.stream(logs)
                 .map(log -> {
                     String[] logParts = log.split("\\|", 2);
-                    AppointmentDate appointmentDate = new AppointmentDate(logParts[0].trim());
+                    if (logParts.length != 2) {
+                        throw new IllegalArgumentException("Log format is invalid: " + log);
+                    }
+                    String dateStr = logParts[0].trim();
                     String details = logParts[1].trim();
+
+                    AppointmentDate appointmentDate = new AppointmentDate(dateStr);
+
                     return new Log(appointmentDate, details);
                 })
                 .collect(Collectors.toSet());
     }
-
-
 }

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
 
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 
 /**
@@ -39,7 +40,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
             // Split the log entry into date and entry components
             String[] logParts = logEntry.split("\\|");
             if (logParts.length != 2) {
-                throw new ParseException("Log entry must be in the format 'date|entry'.");
+                throw new ParseException(Log.MESSAGE_CONSTRAINTS);
             }
             String date = logParts[0].trim();
             String entry = logParts[1].trim();
