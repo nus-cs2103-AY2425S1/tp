@@ -6,7 +6,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.Order;
 import seedu.address.model.order.OrderList;
+import seedu.address.model.order.OrderStatus;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.product.Product;
@@ -46,7 +48,7 @@ public class AddCustomerOrderCommand extends Command {
                 .                       filter(Objects::nonNull)
                                         .toList();
 
-        CustomerOrder customerOrder = new CustomerOrder(phoneNumber, productList, "Pending");
+        CustomerOrder customerOrder = new CustomerOrder(phoneNumber, productList, OrderStatus.PENDING);
         model.addCustomerOrder(customerOrder);
 
         return new CommandResult(String.format(MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS, customerOrder.viewOrder()));

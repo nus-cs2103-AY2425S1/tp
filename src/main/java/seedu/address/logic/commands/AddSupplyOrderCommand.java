@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.OrderStatus;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.PastryCatalogue;
@@ -44,7 +45,7 @@ public class AddSupplyOrderCommand extends Command {
                 .                       filter(Objects::nonNull)
                                         .toList();
 
-        SupplyOrder supplyOrder = new SupplyOrder(phoneNumber, productList, "Pending");
+        SupplyOrder supplyOrder = new SupplyOrder(phoneNumber, productList, OrderStatus.PENDING);
         model.addSupplyOrder(supplyOrder);
 
         return new CommandResult(String.format(MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS, supplyOrder.viewOrder()));
