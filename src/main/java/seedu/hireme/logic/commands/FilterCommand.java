@@ -16,9 +16,9 @@ public class FilterCommand extends Command<InternshipApplication> {
     public static final String COMMAND_WORD = "/filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Filters and lists all internship applications with specified status\n"
+            + ": Filters and lists all internship applications with specified status (case-insensitive)\n"
             + "Parameters: STATUS (must be PENDING, ACCEPTED or REJECTED)\n"
-            + "Example: " + COMMAND_WORD + "PENDING";
+            + "Example: " + COMMAND_WORD + " PENDING";
 
     private final StatusPredicate statusPredicate;
 
