@@ -42,9 +42,6 @@ public class Appointment {
         this.date = date;
         this.time = time;
 
-        doctor.addAppointment(this);
-        patient.addAppointment(this);
-
         appointmentById.put(id, this);
     }
 
