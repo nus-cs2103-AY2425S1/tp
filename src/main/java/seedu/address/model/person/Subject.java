@@ -4,7 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.EnumUtil.inEnum;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents a Subject in the address book.
@@ -35,8 +39,8 @@ public class Subject {
     private static final EnumSet<Subjects> validUpperSecondarySubjects = EnumSet.of(
             Subjects.ENGLISH, Subjects.A_MATH, Subjects.E_MATH, Subjects.PHYSICS, Subjects.CHEMISTRY, Subjects.BIOLOGY,
             Subjects.COMBINED_SCIENCE, Subjects.GEOGRAPHY, Subjects.HISTORY, Subjects.LITERATURE, Subjects.ACCOUNTING,
-            Subjects.SOCIAL_STUDIES, Subjects.CHINESE, Subjects.HIGHER_CHINESE, Subjects.MALAY, Subjects.HIGHER_MALAY, Subjects.TAMIL,
-            Subjects.HIGHER_TAMIL, Subjects.HINDI, Subjects.MUSIC, Subjects.ART
+            Subjects.SOCIAL_STUDIES, Subjects.CHINESE, Subjects.HIGHER_CHINESE, Subjects.MALAY, Subjects.HIGHER_MALAY,
+            Subjects.TAMIL, Subjects.HIGHER_TAMIL, Subjects.HINDI, Subjects.MUSIC, Subjects.ART
     );
     static {
         validSubjectsByLevel.put(new Level("S1 Express"), validLowerSecondarySubjects);
@@ -60,9 +64,9 @@ public class Subject {
         validSubjectsByLevel.put(new Level("S4 IP"), validUpperSecondarySubjects);
     }
 
-    private static final String MESSAGE_VALID_SUBJECTS_BASE = "Subject is not valid for given level. " +
-            "Valid subjects for";
-    public static String messageValidSubjectsByLevel = "";
+    private static final String MESSAGE_VALID_SUBJECTS_BASE = "Subject is not valid for given level. "
+            + "Valid subjects for";
+    private static String messageValidSubjectsByLevel = "";
     public final String subjectName;
 
     /**
@@ -90,6 +94,10 @@ public class Subject {
 
     }
 
+    public static String getValidSubjectMessage() {
+        return messageValidSubjectsByLevel;
+    }
+
     /**
      * Returns true if a given string is a valid subject name.
      */
@@ -98,6 +106,9 @@ public class Subject {
         return inEnum(subjectName.toUpperCase(), Subjects.class);
     }
 
+    /**
+     * Returns true if all subjects are valid according to the given level
+     * */
     public static boolean isValidSubjectsByLevel(Level level, Set<Subject> subjects) {
         if (level == null || level.levelName.equals("NONE NONE")) {
             messageValidSubjectsByLevel = Subject.MESSAGE_LEVEL_NEEDED;

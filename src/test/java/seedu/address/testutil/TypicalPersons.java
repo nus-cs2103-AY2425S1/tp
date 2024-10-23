@@ -1,6 +1,16 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_S1_EXPRESS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
 import static seedu.address.testutil.TypicalTasks.GRADING_TASK;
 import static seedu.address.testutil.TypicalTasks.MARKING_TASK;
 

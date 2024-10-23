@@ -9,9 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Subject;
 
 /**
  * Parses input arguments and creates a new TagCommand object

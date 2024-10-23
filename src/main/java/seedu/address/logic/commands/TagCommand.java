@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -14,7 +13,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
@@ -88,7 +86,8 @@ public class TagCommand extends Command {
 
     }
 
-    private static Person createPersonWithTags(Person personToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd) throws CommandException {
+    private static Person createPersonWithTags(Person personToTag, UpdateCommand.UpdatePersonDescriptor tagsToAdd)
+            throws CommandException {
         assert personToTag != null;
 
         Name updatedName = tagsToAdd.getName().orElse(personToTag.getName());
@@ -101,11 +100,11 @@ public class TagCommand extends Command {
         Level updatedLevel = tagsToAdd.getLevel().orElse(personToTag.getLevel());
 
         if (updatedLevel != null && tagsToAdd.getSubjects().isPresent()) {
-            if(!Subject.isValidSubjectsByLevel(updatedLevel,
+            if (!Subject.isValidSubjectsByLevel(updatedLevel,
                             tagsToAdd
                                 .getSubjects()
                                 .get())) {
-                throw new CommandException(Subject.messageValidSubjectsByLevel);
+                throw new CommandException(Subject.getValidSubjectMessage());
             }
         }
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(personToTag.getSubjects());
