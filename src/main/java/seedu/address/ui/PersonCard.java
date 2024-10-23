@@ -29,6 +29,14 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
+
+    private static final Image studentIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
+    private static final Image tutorIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
+    private static final Image professorIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
+
     public final Person person;
 
     @FXML
@@ -49,14 +57,6 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane roles;
-
-    private static final Image studentIcon =
-        new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
-    private static final Image tutorIcon =
-        new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
-    private static final Image professorIcon =
-        new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
-
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
