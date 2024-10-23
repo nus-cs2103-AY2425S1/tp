@@ -75,8 +75,8 @@ public class UpdateMaxStockLevelCommand extends Command {
         }
 
         UpdateMaxStockLevelCommand otherUpdateMaxStockCommand = (UpdateMaxStockLevelCommand) other;
-        return productName.equals(otherUpdateMaxStockCommand.productName) &
-                (maxStockLevel == otherUpdateMaxStockCommand.maxStockLevel);
+        return productName.equals(otherUpdateMaxStockCommand.productName)
+                & (maxStockLevel == otherUpdateMaxStockCommand.maxStockLevel);
     }
 
 }

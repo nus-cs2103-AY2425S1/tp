@@ -75,8 +75,8 @@ public class UpdateStockLevelCommand extends Command {
         }
 
         UpdateStockLevelCommand otherUpdateStockCommand = (UpdateStockLevelCommand) other;
-        return productName.equals(otherUpdateStockCommand.productName) &
-                (currentStockLevel == otherUpdateStockCommand.currentStockLevel);
+        return productName.equals(otherUpdateStockCommand.productName)
+                & (currentStockLevel == otherUpdateStockCommand.currentStockLevel);
     }
 
 }

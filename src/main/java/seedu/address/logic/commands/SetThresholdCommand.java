@@ -75,8 +75,8 @@ public class SetThresholdCommand extends Command {
         }
 
         SetThresholdCommand otherSetThresholdCommand = (SetThresholdCommand) other;
-        return productName.equals(otherSetThresholdCommand.productName) &
-                (stockLevel == otherSetThresholdCommand.stockLevel);
+        return productName.equals(otherSetThresholdCommand.productName)
+                & (stockLevel == otherSetThresholdCommand.stockLevel);
     }
 
 }
