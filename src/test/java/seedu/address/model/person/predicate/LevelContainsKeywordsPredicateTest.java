@@ -42,27 +42,27 @@ public class LevelContainsKeywordsPredicateTest {
     public void test_levelContainsKeywords_returnsTrue() {
         // One keyword
         LevelContainsKeywordsPredicate predicate = new LevelContainsKeywordsPredicate(
-                Collections.singletonList("S1"));
-        assertTrue(predicate.test(new PersonBuilder().withLevel("S1").build()));
+                Collections.singletonList("S1 Express"));
+        assertTrue(predicate.test(new PersonBuilder().withLevel("S1 Express").build()));
 
         // Multiple keywords
-        predicate = new LevelContainsKeywordsPredicate(Arrays.asList("S1", "JC2"));
-        assertTrue(predicate.test(new PersonBuilder().withLevel("S1").build()));
+        predicate = new LevelContainsKeywordsPredicate(Arrays.asList("S1 Express", "S2 Express"));
+        assertTrue(predicate.test(new PersonBuilder().withLevel("S1 Express").build()));
     }
 
     @Test
     public void test_levelDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         LevelContainsKeywordsPredicate predicate = new LevelContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withLevel("S1").build()));
+        assertFalse(predicate.test(new PersonBuilder().withLevel("S1 Express").build()));
 
         // Non-matching keyword
-        predicate = new LevelContainsKeywordsPredicate(Arrays.asList("JC2"));
-        assertFalse(predicate.test(new PersonBuilder().withLevel("S1").build()));
+        predicate = new LevelContainsKeywordsPredicate(Arrays.asList("S2 NA"));
+        assertFalse(predicate.test(new PersonBuilder().withLevel("S1 NA").build()));
 
         // Keywords match phone and address, but does not match level
         predicate = new LevelContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withLevel("S1").withPhone("12345")
+        assertFalse(predicate.test(new PersonBuilder().withLevel("S1 NA").withPhone("12345")
                 .withAddress("Main Street").build()));
     }
 }

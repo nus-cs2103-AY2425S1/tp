@@ -138,8 +138,8 @@ public class UpdateCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // level
-        userInput = targetName + LEVEL_DESC_S1_EXPRESS;
-        descriptor = new UpdatePersonDescriptorBuilder().withLevel(LEVEL_DESC_S1_EXPRESS).build();
+        userInput = targetName + LEVEL_DESC_S4_NT;
+        descriptor = new UpdatePersonDescriptorBuilder().withLevel(VALID_LEVEL_S4_NT).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

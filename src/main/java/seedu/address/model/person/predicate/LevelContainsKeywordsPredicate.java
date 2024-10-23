@@ -16,7 +16,7 @@ public class LevelContainsKeywordsPredicate extends ContainsKeywordsPredicate {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getLevel().levelName, keyword));
+                .anyMatch(keyword -> person.getLevel().levelName.equals(keyword));
     }
 
     @Override

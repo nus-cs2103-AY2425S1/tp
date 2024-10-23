@@ -19,11 +19,11 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withPhone("94351253").withEmergencyContact("94351253").withNote("Needs Jesus rn")
-            .withSubjects("PHYSICS").withLevel("S2 Express").build();
+            .withSubjects("PHYSICS").withLevel("S3 NA").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withNote("Needs Jesus rn")
             .withAddress("311, Clementi Ave 2, #02-25").withEmergencyContact("94351253")
             .withPhone("98765432")
-            .withSubjects("CHEMISTRY", "MATH").withLevel("S1 NA").withTaskList(
+            .withSubjects("CHEMISTRY", "MATH").withLevel("S2 NT").withTaskList(
                     MARKING_TASK, GRADING_TASK
             ).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
@@ -32,9 +32,11 @@ public class TypicalPersons {
             .withEmergencyContact("94351253").withAddress("10th street")
             .withSubjects("MATH").withNote("Needs Jesus rn").withLevel("S1 NT").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("michegan ave").build();
+            .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("michegan ave")
+            .withLevel("S2 NA").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("little tokyo").build();
+            .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("little tokyo")
+            .withLevel("S2 NT").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withNote("y am i in cs").withEmergencyContact("94351253")
             .withAddress("4th street").withLevel("S4 NA").build();

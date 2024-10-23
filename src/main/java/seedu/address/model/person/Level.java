@@ -13,6 +13,7 @@ import java.util.Arrays;
 public class Level {
 
     enum Year {
+        NONE,
         S1,
         S2,
         S3,
@@ -20,6 +21,7 @@ public class Level {
     }
 
     enum Track {
+        NONE,
         Express,
         NA,
         NT,

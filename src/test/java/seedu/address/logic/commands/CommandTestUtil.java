@@ -48,7 +48,7 @@ public class CommandTestUtil {
     public static final String VALID_LEVEL_S4_NT = "S4 NT";
     public static final String LEVEL_DESC_S1_NA = " " + PREFIX_LEVEL + VALID_LEVEL_S1_NA;
     public static final String LEVEL_DESC_S1_EXPRESS = " " + PREFIX_LEVEL + VALID_LEVEL_S1_EXPRESS;
-    public static final String LEVEL_DESC_S4_NA = " " + PREFIX_LEVEL + VALID_LEVEL_S4_NT;
+    public static final String LEVEL_DESC_S4_NT = " " + PREFIX_LEVEL + VALID_LEVEL_S4_NT;
     public static final String VALID_NOTE_AMY = "Likes asking questions.";
     public static final String VALID_NOTE_BOB = "Always sleeping";
     public static final String VALID_TASK_DESCRIPTION_AMY = "Mark homework";

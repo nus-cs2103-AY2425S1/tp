@@ -81,6 +81,9 @@ public class Subject {
      */
     public static boolean isValidSubjectNameByLevel(Level level, String subjectName) {
         requireNonNull(subjectName);
+        if (level.levelName.equals("NONE NONE")) {
+            return false;
+        }
         return validSubjectsByLevel
                 .get(level)
                 .contains(Subjects.valueOf(subjectName.toUpperCase()));
@@ -96,7 +99,8 @@ public class Subject {
     }
 
     public static boolean isValidSubjectsByLevel(Level level, Set<Subject> subjects) {
-        if (level == null) {
+        if (level == null || level.levelName.equals("NONE NONE")) {
+            messageValidSubjectsByLevel = Subject.MESSAGE_LEVEL_NEEDED;
             return false;
         }
         EnumSet<Subjects> validSubjects = validSubjectsByLevel.get(level);

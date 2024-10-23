@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Note note = new Note("");
         TaskList taskList = new TaskList();
 
-        Level level = null;
+        Level level = new Level("NONE NONE");
         if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
             level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
         }

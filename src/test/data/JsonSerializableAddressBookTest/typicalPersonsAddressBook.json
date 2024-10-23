@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "note" : "Needs Jesus rn",
     "subjects" : [ "PHYSICS" ],
-    "level" : "S3",
+    "level" : "S3 NA",
     "taskList" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -16,7 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "note" : "Needs Jesus rn",
     "subjects" : [ "CHEMISTRY", "MATH" ],
-    "level" : "P2",
+    "level" : "S2 NT",
     "taskList" : [ {
       "taskDescription": "Mark homework",
       "taskDeadline": "2024-01-01"
@@ -31,7 +31,7 @@
     "address" : "wall street",
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
-    "level" : "P3",
+    "level" : "S1 Express",
     "taskList" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -40,7 +40,7 @@
     "address" : "10th street",
     "note" : "Needs Jesus rn",
     "subjects" : [ "MATH" ],
-    "level" : "JC1",
+    "level" : "S1 NT",
     "taskList" : [ ]
   }, {
     "name" : "Elle Meyer",
@@ -49,7 +49,7 @@
     "address" : "michegan ave",
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
-    "level" : "P3",
+    "level" : "S2 NA",
     "taskList" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -58,7 +58,7 @@
     "address" : "little tokyo",
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
-    "level" : "P3",
+    "level" : "S2 NT",
     "taskList" : [ ]
   }, {
     "name" : "George Best",
@@ -67,7 +67,7 @@
     "address" : "4th street",
     "note" : "y am i in cs",
     "subjects" : [ ],
-    "level" : "S5",
+    "level" : "S4 NA",
     "taskList" : [ ]
   } ]
 }
