@@ -23,6 +23,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+
+    private final Listings listings;
     private final FilteredList<Person> filteredPersons;
 
     private final FilteredList<Listing> filteredListings;
@@ -30,19 +32,21 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyListings listings) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and listings " + listings +
+                " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.listings = new Listings(listings);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredListings = new FilteredList<>(this.addressBook.getListingList());
+        filteredListings = new FilteredList<>(this.listings.getListingList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new Listings());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -78,6 +82,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getListingsFilePath() {
+        return userPrefs.getListingsFilePath();
+    }
+
+    @Override
+    public void setListingsFilePath(Path listingsFilePath) {
+        requireAllNonNull(listingsFilePath);
+        userPrefs.setListingsFilePath(listingsFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -116,20 +131,32 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== Listings ================================================================================
+
+    @Override
+    public void setListings(ReadOnlyListings listings) {
+        this.listings.resetData(listings);
+    }
+
+    @Override
+    public ReadOnlyListings getListings() {
+        return listings;
+    }
+
     @Override
     public boolean hasListing(Listing listing) {
         requireNonNull(listing);
-        return addressBook.hasListing(listing);
+        return listings.hasListing(listing);
     }
 
     @Override
     public void deleteListing(Listing target) {
-        addressBook.removeListing(target);
+        listings.removeListing(target);
     }
 
     @Override
     public void addListing(Listing listing) {
-        addressBook.addListing(listing);
+        listings.addListing(listing);
         updateFilteredListingList(PREDICATE_SHOW_ALL_LISTINGS);
     }
 
@@ -137,7 +164,7 @@ public class ModelManager implements Model {
     public void setListing(Listing target, Listing editedListing) {
         requireAllNonNull(target, editedListing);
 
-        addressBook.setListing(target, editedListing);
+        listings.setListing(target, editedListing);
     }
 
 
@@ -214,9 +241,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && listings.equals(otherModelManager.listings)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                &&filteredListings.equals(otherModelManager.filteredListings);
+                && filteredListings.equals(otherModelManager.filteredListings);
     }
 
 }

@@ -57,6 +57,24 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Returns the user prefs' listings file path.
+     */
+    Path getListingsFilePath();
+
+    /**
+     * Sets the user prefs' listings file path.
+     */
+    void setListingsFilePath(Path listingsFilePath);
+
+    /**
+     * Replaces listingds data with the data in {@code addressBook}.
+     */
+    void setListings(ReadOnlyListings listings);
+
+    /** Returns the Listings */
+    ReadOnlyListings getListings();
+
     // Methods for clients
 
     /**

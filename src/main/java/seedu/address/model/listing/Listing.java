@@ -1,7 +1,6 @@
 package seedu.address.model.listing;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class Listing {
     private final Name name;
     private final Price price;
     private final Area area;
-    private final Location location;
+    private final Region region;
     private final Address address;
     private final Person seller;
     private final Set<Person> buyers;
@@ -29,24 +28,24 @@ public class Listing {
      * @param address  Address of the listing.
      * @param price    Price of the listing.
      * @param area     Area of the listing in square meters.
-     * @param location Location of the listing, represented by a {@code Location} enum.
+     * @param region   Region of the listing, represented by a {@code Region} enum.
      * @param seller   Seller of the listing, represented by a {@code Person}.
      */
-    public Listing(Name name, Address address, Price price, Area area, Location location, Person seller) {
+    public Listing(Name name, Address address, Price price, Area area, Region region, Person seller, Set<Person> buyers) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(price);
         Objects.requireNonNull(area);
-        Objects.requireNonNull(location);
+        Objects.requireNonNull(region);
         Objects.requireNonNull(address);
         Objects.requireNonNull(seller);
 
         this.name = name;
         this.price = price;
         this.area = area;
-        this.location = location;
+        this.region = region;
         this.address = address;
         this.seller = seller;
-        this.buyers = new HashSet<>();
+        this.buyers = buyers;
     }
 
     public Name getName() { return name; }
@@ -58,8 +57,8 @@ public class Listing {
         return area;
     }
 
-    public Location getLocation() {
-        return location;
+    public Region getRegion() {
+        return region;
     }
 
     public Address getAddress() {
@@ -108,7 +107,7 @@ public class Listing {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, address, area, location, seller, buyers);
+        return Objects.hash(name, price, address, area, region, seller, buyers);
     }
 
     @Override
@@ -116,7 +115,7 @@ public class Listing {
         return new ToStringBuilder(this)
                 .add("address", address)
                 .add("area", area)
-                .add("location", location)
+                .add("region", region)
                 .add("seller", seller)
                 //.add("buyers", )
                 .toString();
