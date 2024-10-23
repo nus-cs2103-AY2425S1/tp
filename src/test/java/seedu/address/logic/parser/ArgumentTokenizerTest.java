@@ -13,6 +13,7 @@ public class ArgumentTokenizerTest {
     private final Prefix pSlash = new Prefix("p/");
     private final Prefix dashT = new Prefix("-t");
     private final Prefix hatQ = new Prefix("^Q");
+    private final Prefix semicolon = new Prefix(";");
 
     @Test
     public void tokenize_emptyArgsString_noValues() {
@@ -124,6 +125,27 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(argMultimap, pSlash, "pSlash value");
         assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value", "");
         assertArgumentPresent(argMultimap, hatQ, "", "");
+    }
+
+    @Test
+    public void tokenize_multipleArgumentsWithSemicolons() {
+        // check if semicolon works as expected
+        // input parsed, regardless of space before or after semicolons
+        String argsString = "SomePreambleString -t dashT-Value ; words after semicolon trimmed -t"
+                + " another dashT value;no space before and after semicolon;";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, dashT, semicolon);
+        assertPreamblePresent(argMultimap, "SomePreambleString");
+        assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value");
+        assertArgumentPresent(argMultimap, semicolon, "words after semicolon trimmed",
+                "no space before and after semicolon", "");
+    }
+
+    @Test
+    public void tokenize_onlyOneSemicolonWithSemicolons() {
+        String argsString = ";";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, semicolon);
+        assertPreamblePresent(argMultimap, "");
+        assertArgumentPresent(argMultimap, semicolon, "");
     }
 
     @Test

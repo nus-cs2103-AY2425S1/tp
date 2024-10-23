@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.DEFAULT_DELIMITER;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +31,22 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps the default delimter to
+     * its argument values. Only the default delimiter will be recognized in the arguments string.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @return List that splits the argument using the default delimiter
+     */
+    public static List<String> tokenizeWithDefault(String argsString) {
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString, DEFAULT_DELIMITER);
+        ArgumentMultimap map = extractArguments(argsString, positions);
+        List<String> items = map.getAllValues(DEFAULT_DELIMITER);
+        items.add(0, map.getPreamble());
+        return items;
+
+    }
+
+    /**
      * Finds all zero-based prefix positions in the given arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
@@ -51,7 +69,11 @@ public class ArgumentTokenizer {
         while (prefixPosition != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
-            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+            if (prefix.equals(DEFAULT_DELIMITER)) {
+                prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition + 1);
+            } else {
+                prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+            }
         }
 
         return positions;
@@ -70,9 +92,13 @@ public class ArgumentTokenizer {
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
-        int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
-        return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
+        if (!prefix.equals(DEFAULT_DELIMITER.getPrefix())) {
+            int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
+            return prefixIndex == -1 ? -1
+                    : prefixIndex + 1; // +1 as offset for whitespace
+        } else {
+            return argsString.indexOf(prefix, fromIndex);
+        }
     }
 
     /**

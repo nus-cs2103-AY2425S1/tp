@@ -1,18 +1,21 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_SHOWN;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalStudents.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +23,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -27,11 +31,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.course.Course;
+import seedu.address.model.student.Student;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -61,7 +66,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, String.format(MESSAGE_INVALID_INDEX_SHOWN, "9"));
     }
 
     @Test
@@ -83,8 +88,13 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void getFilteredConsultationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredConsultationList().remove(0));
     }
 
     /**
@@ -166,10 +176,52 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+                + EMAIL_DESC_AMY;
+        Student expectedStudent = new StudentBuilder(AMY).withCourses().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addStudent(expectedStudent);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_exportCommand_success() throws Exception {
+        // Create data directory path in temporary folder
+        Path dataDir = temporaryFolder.resolve("data");
+
+        // Add a sample student to the model
+        Student sampleStudent = new StudentBuilder().withName("John Doe")
+                .withPhone("12345678")
+                .withEmail("johndoe@example.com")
+                .withCourses("CS2103T").build();
+        model.addStudent(sampleStudent);
+
+        String filename = "export";
+        // Create the command with the temporary directory
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+
+        // Execute the command directly
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify the result message
+        Path expectedPath = dataDir.resolve(filename + ".csv");
+        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, 1, expectedPath),
+                result.getFeedbackToUser());
+
+        // Verify that the file was created
+        assertTrue(Files.exists(expectedPath));
+
+        // Verify the content of the exported file
+        List<String> lines = Files.readAllLines(expectedPath);
+        assertEquals(2, lines.size()); // Header + 1 student
+        assertEquals("Name,Phone,Email,Courses", lines.get(0)); // Verify the header
+
+        String expectedLine = String.format("%s,%s,%s,%s",
+                sampleStudent.getName(),
+                sampleStudent.getPhone(),
+                sampleStudent.getEmail(),
+                sampleStudent.getCourses().stream()
+                        .map(Course::toString)
+                        .collect(Collectors.joining(";")));
+        assertEquals(expectedLine, lines.get(1));
     }
 }
