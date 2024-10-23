@@ -37,7 +37,6 @@ import seedu.address.ui.Ui.UiState;
  * Contains integration tests (interaction with the Model) and unit tests for UpdateCommand.
  */
 public class UpdateCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
