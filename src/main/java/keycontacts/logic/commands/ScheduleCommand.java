@@ -69,7 +69,7 @@ public class ScheduleCommand extends Command {
         }
 
         Student studentToUpdateWithoutRegularLesson = studentToUpdate.withoutRegularLesson();
-        model.setStudent(studentToUpdateWithoutRegularLesson, updatedStudent);
+        model.setStudent(studentToUpdate, studentToUpdateWithoutRegularLesson);
 
         ClashResult clashResult = model.checkClashingLesson(regularLesson);
         if (clashResult.hasClash()) {
