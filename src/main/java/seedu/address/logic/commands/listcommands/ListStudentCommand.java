@@ -16,10 +16,10 @@ import seedu.address.model.VersionHistory;
 public class ListStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "list_s";
-    public static final String COMMAND_WORD_ALIS = "ls";
+    public static final String COMMAND_WORD_ALIAS = "ls";
     public static final int LIST_STUDENT_MARKER = 0;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIS
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Lists all students.\n"
         + "Example: " + COMMAND_WORD;
 
