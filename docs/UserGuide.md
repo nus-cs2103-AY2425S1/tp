@@ -37,7 +37,9 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `paid 3` : Marks the 3rd contact shown in the current list as paid.
+   * `paid 3 f/ 6` : Marks the 3rd contact shown in the current list as paid and sets the policy renewal frequency to 6 months.
+
+   * `unpaid 3` : Marks the 3rd contact shown in the current list as unpaid and changes the policy renewal frequency to 0.
 
    * `clear` : Deletes all contacts.
 
@@ -166,15 +168,16 @@ Format: `clear`
 
 Marks the specified person from the FART book as paid.
 
-Format: `paid INDEX`
+Format: `paid INDEX f/FREQUENCY`
 
 * Marks the person at the specified `INDEX` as paid.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The frequency is the number of months between policy renewals and it can only be 1, 3, 6, or 12.
 
 Examples:
-* `list` followed by `paid 2` marks the 2nd person in the FART book as paid.
-* `find Betsy` followed by `paid 1` marks the 1st person in the results of the `find` command as paid.
+* `list` followed by `paid 2 f/ 6` marks the 2nd person in the FART book as paid and the policy renewal frequency to 6 months.
+* `find Betsy` followed by `paid 1 f/ 6` marks the 1st person in the results of the `find` command as paid.
 
 ### Marking a person as unpaid: `unpaid`
 
@@ -185,6 +188,7 @@ Format: `unpaid INDEX`
 * Marks the person at the specified `INDEX` as unpaid.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Changes the policy renewal frequency to 0
 
 Examples:
 * `list` followed by `unpaid 2` marks the 2nd person in the FART book as unpaid.
