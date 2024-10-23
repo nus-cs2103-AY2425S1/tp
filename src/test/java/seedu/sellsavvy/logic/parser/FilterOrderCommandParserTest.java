@@ -33,13 +33,19 @@ public class FilterOrderCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterOrderCommand() {
-        // no leading and trailing whitespaces, all lower case
+        // valid completed order status
         FilterOrderCommand expectedFilterOrderCommand =
                 new FilterOrderCommand(new StatusEqualsKeywordPredicate(Status.COMPLETED));
-        assertParseSuccess(parser, "Completed", expectedFilterOrderCommand);
-
+        // no leading and trailing whitespaces, all lower case
+        assertParseSuccess(parser, "completed", expectedFilterOrderCommand);
         // multiple whitespaces, status in Start case
         assertParseSuccess(parser, " \n Completed \t", expectedFilterOrderCommand);
+
+        // valid pending order status
+        expectedFilterOrderCommand =
+                new FilterOrderCommand(new StatusEqualsKeywordPredicate(Status.PENDING));
+        assertParseSuccess(parser, "PeNdInG", expectedFilterOrderCommand);
+        assertParseSuccess(parser, "Pending", expectedFilterOrderCommand);
     }
 
 }

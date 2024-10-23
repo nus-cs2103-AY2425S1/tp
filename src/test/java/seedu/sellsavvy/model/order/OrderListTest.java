@@ -90,13 +90,13 @@ public class OrderListTest {
 
     @Test
     public void remove_orderDoesNotExist_throwsOrderNotFoundException() {
-        assertThrows(OrderNotFoundException.class, () -> orderList.remove(INDEX_FIRST_ORDER));
+        assertThrows(OrderNotFoundException.class, () -> orderList.remove(ATLAS));
     }
 
     @Test
     public void remove_existingOrder_removesOrder() {
         orderList.add(ATLAS);
-        orderList.remove(INDEX_FIRST_ORDER);
+        orderList.remove(ATLAS);
         OrderList expectedOrderList = new OrderList();
         assertEquals(expectedOrderList, orderList);
     }

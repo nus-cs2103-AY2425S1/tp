@@ -14,6 +14,11 @@ public class StatusEqualsKeywordPredicate implements Predicate<Order> {
         this.status = status;
     }
 
+    /** Returns the value of the predicate as a string. */
+    public String getValue() {
+        return status.toString();
+    }
+
     @Override
     public boolean test(Order order) {
         return status.equals(order.getStatus());

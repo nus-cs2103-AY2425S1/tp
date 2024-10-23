@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.model.order.Order;
@@ -90,13 +89,6 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
-    }
-
-    /**
-     * Returns the order list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Order> getOrderUnmodifiableObservableList() {
-        return filteredOrders;
     }
 
     /**

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 
 import seedu.sellsavvy.commons.util.ToStringBuilder;
-import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
@@ -26,6 +25,7 @@ public class FilterOrderCommand extends Command {
             + "matching order status (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: ORDER_STATUS (" + Status.MESSAGE_CONSTRAINTS + ")\n"
             + "Example: " + COMMAND_WORD + " Completed";
+    public static final String MESSAGE_FILTER_ORDERS_SUCCESS = "%1$d %2$s orders listed!";
 
     private final StatusEqualsKeywordPredicate predicate;
 
@@ -43,8 +43,8 @@ public class FilterOrderCommand extends Command {
         }
 
         selectedPerson.updateFilteredOrderList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_ORDERS_LISTED_OVERVIEW, selectedPerson.getFilteredOrderList().size()));
+        return new CommandResult(String.format(MESSAGE_FILTER_ORDERS_SUCCESS,
+                selectedPerson.getFilteredOrderList().size(), predicate.getValue()));
     }
 
     @Override

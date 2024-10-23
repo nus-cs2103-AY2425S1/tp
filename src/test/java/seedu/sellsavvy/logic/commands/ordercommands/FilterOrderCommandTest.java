@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
-import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERS_LISTED_OVERVIEW;
+import static seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand.MESSAGE_FILTER_ORDERS_SUCCESS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
@@ -69,7 +69,7 @@ public class FilterOrderCommandTest {
 
     @Test
     public void execute_statusCompleted_oneOrderListed() {
-        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_FILTER_ORDERS_SUCCESS, 1, "Completed");
         StatusEqualsKeywordPredicate predicate = new StatusEqualsKeywordPredicate(Status.COMPLETED);
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 
@@ -86,7 +86,7 @@ public class FilterOrderCommandTest {
 
     @Test
     public void execute_statusPending_threeOrdersListed() {
-        String expectedMessage = String.format(MESSAGE_ORDERS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_FILTER_ORDERS_SUCCESS, 3, "Pending");
         StatusEqualsKeywordPredicate predicate = new StatusEqualsKeywordPredicate(Status.PENDING);
         FilterOrderCommand command = new FilterOrderCommand(predicate);
 

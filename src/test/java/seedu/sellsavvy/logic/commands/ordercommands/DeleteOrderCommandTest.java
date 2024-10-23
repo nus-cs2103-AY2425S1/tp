@@ -18,6 +18,7 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -39,13 +40,13 @@ public class DeleteOrderCommandTest {
         Person person = model.getFilteredPersonList().get(3);
         model.updateSelectedPerson(person);
 
-        Order order = person.getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
-        DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
+        OrderList expectedOrderList = expectedModel.getFilteredPersonList().get(3).getOrderList();
+        Order expectedOrder = expectedOrderList.get(INDEX_FIRST_ORDER.getZeroBased());
+        expectedOrderList.remove(expectedOrder);
         String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS,
-                Messages.format(order));
+                Messages.format(expectedOrder));
 
-        expectedModel.getFilteredPersonList().get(3).getOrderList().remove(INDEX_FIRST_ORDER);
-
+        DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST_ORDER);
         assertCommandSuccess(deleteOrderCommand, model, expectedMessage, expectedModel);
     }
 
