@@ -50,7 +50,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
-        hasPaid = studentToCopy.hasPaid();
+        hasPaid = studentToCopy.getHasPaid();
     }
 
     /**

@@ -68,7 +68,7 @@ public class Student {
      *
      * @return {@code true} if the student is present, {@code false} otherwise
      */
-    public boolean hasPaid() {
+    public boolean getHasPaid() {
         return hasPaid;
     }
 
