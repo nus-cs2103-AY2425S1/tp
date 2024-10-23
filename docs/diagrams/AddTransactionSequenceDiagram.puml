@@ -1,0 +1,98 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTransactionCommandParser" as AddTransactionCommandParser LOGIC_COLOR
+participant "a:AddTransactionCommand" as AddTransactionCommand LOGIC_COLOR
+participant "t:ArrayList<Transaction>" as TransactionList LOGIC_COLOR
+participant "p:Person" as Person LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addt 1 ...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addt 1 ...")
+activate AddressBookParser
+
+AddressBookParser -> AddTransactionCommandParser : parse("1 ...")
+activate AddTransactionCommandParser
+
+create AddTransactionCommand
+AddTransactionCommandParser -> AddTransactionCommand
+activate AddTransactionCommand
+
+AddTransactionCommand --> AddTransactionCommandParser : a
+deactivate AddTransactionCommand
+
+AddTransactionCommandParser --> AddressBookParser : a
+deactivate AddTransactionCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTransactionCommandParser -[hidden]-> AddressBookParser
+destroy AddTransactionCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddTransactionCommand : execute(a)
+activate AddTransactionCommand
+
+AddTransactionCommand -> Model : get info of person to add transaction to
+activate Model
+Model --> AddTransactionCommand
+deactivate Model
+
+create TransactionList
+AddTransactionCommand -> TransactionList
+activate TransactionList
+TransactionList --> AddTransactionCommand
+deactivate TransactionList
+
+AddTransactionCommand -> TransactionList: copy existing transactions to new list
+activate TransactionList
+deactivate TransactionList
+
+AddTransactionCommand -> TransactionList: add new transaction to list
+activate TransactionList
+deactivate TransactionList
+
+AddTransactionCommand -> TransactionList : sort by recency of transaction date
+activate TransactionList
+TransactionList --> AddTransactionCommand : t
+deactivate TransactionList
+
+create Person
+AddTransactionCommand -> Person : Person(..., t)
+activate Person
+
+Person --> AddTransactionCommand: p
+deactivate Person
+
+AddTransactionCommand -> Model : replace initial person with p
+activate Model
+deactivate Model
+
+AddTransactionCommand -> Model: updateFilteredPersonList(...)
+activate Model
+deactivate Model
+
+create CommandResult
+AddTransactionCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTransactionCommand : r
+deactivate CommandResult
+
+AddTransactionCommand --> LogicManager : r
+deactivate AddTransactionCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
