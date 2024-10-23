@@ -30,6 +30,9 @@ public class DeleteAppointmentCommand extends Command {
     private Name name;
     private Schedule appointment;
 
+    /**
+     * Creates a {@code DeleteAppointmentCommand} with the specified name and appointment
+     */
     public DeleteAppointmentCommand(Name name, Schedule appointment) {
         this.name = name;
         this.appointment = appointment;
@@ -54,7 +57,7 @@ public class DeleteAppointmentCommand extends Command {
 
         Person personWithAppointmentToDelete = lastShownList.get(index);
 
-        Schedule appointmentToDelete = new Schedule("","");
+        Schedule appointmentToDelete = new Schedule("", "");
         for (Schedule schedule : personWithAppointmentToDelete.getSchedules()) {
             if (schedule.equals(appointment)) {
                 appointmentToDelete = appointment;

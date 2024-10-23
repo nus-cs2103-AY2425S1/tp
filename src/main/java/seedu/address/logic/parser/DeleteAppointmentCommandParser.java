@@ -26,7 +26,8 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
         Name name = ParserUtil.parseName(argMultimap.getPreamble());
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteAppointmentCommand.MESSAGE_USAGE));
         }
 
         Schedule appointment = ParserUtil.parseSchedule(argMultimap.getValue(PREFIX_DATE).orElse(""));
