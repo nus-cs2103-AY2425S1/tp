@@ -22,6 +22,11 @@ public class ModuleNameTest {
     }
 
     @Test
+    public void emptyModuleNameTest() {
+        assertEquals(new ModuleName(""), new ModuleName(""));
+    }
+
+    @Test
     public void equals() {
         ModuleName moduleName = new ModuleName("CS1231");
 

@@ -13,7 +13,7 @@ public class ModuleName {
             + ", one more dash followed by one more alphabet at the end of the module name.\n"
             + "e.g: CS1231S-T is a valid module name.";
 
-    public static final String VALIDATION_REGEX = "^[A-Za-z]{2,3}\\d{4}([A-Za-z]|-[A-Za-z]|[A-Za-z]-[A-Za-z])?$";
+    public static final String VALIDATION_REGEX = "^([A-Za-z]{2,3}\\d{4}([A-Za-z]|-[A-Za-z]|[A-Za-z]-[A-Za-z])?)?$";
 
     private final String moduleName;
 

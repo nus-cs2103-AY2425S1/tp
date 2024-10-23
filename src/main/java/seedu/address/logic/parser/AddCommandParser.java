@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,26 +36,25 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_TELEHANDLE, PREFIX_TAG);
+                        PREFIX_TELEHANDLE, PREFIX_MOD, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CONTACTTYPE, PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_TELEHANDLE)
+                PREFIX_EMAIL, PREFIX_MOD, PREFIX_TELEHANDLE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_TELEHANDLE, PREFIX_CONTACTTYPE);
+                PREFIX_TELEHANDLE, PREFIX_CONTACTTYPE, PREFIX_MOD);
         ContactType contactType = ParserUtil.parseContactType(argMultimap.getValue(PREFIX_CONTACTTYPE).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         TelegramHandle telegramHandle = ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEHANDLE).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MOD).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(contactType, name, phone, email, telegramHandle, tagList);
-
-
+        Person person = new Person(contactType, name, phone, email, telegramHandle, moduleName, tagList);
         return new AddCommand(person);
     }
 

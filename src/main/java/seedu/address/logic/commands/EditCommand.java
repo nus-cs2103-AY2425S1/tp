@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TELEHANDLE + "TELEHANDLE] "
+            + "[" + PREFIX_MOD + "MODULE NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TELEHANDLE + "@johndoe"
@@ -102,9 +105,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
                 .orElse(personToEdit.getTelegramHandle());
+        ModuleName updateModuleName = editPersonDescriptor.getModuleName().orElse(personToEdit.getModuleName());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedContactType, updatedName, updatedPhone, updatedEmail, updatedTelegramHandle,
-                updatedTags);
+                updateModuleName, updatedTags);
     }
 
     @Override
@@ -140,6 +144,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private TelegramHandle telegramHandle;
+        private ModuleName moduleName;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -153,6 +158,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setTelegramHandle(toCopy.telegramHandle);
+            setModuleName(toCopy.moduleName);
             setTags(toCopy.tags);
         }
 
@@ -195,6 +201,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(telegramHandle);
         }
 
+        public void setModuleName(ModuleName moduleName) {
+            this.moduleName = moduleName;
+        }
+
+        public Optional<ModuleName> getModuleName() {
+            return Optional.ofNullable(moduleName);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -228,6 +242,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
+                    && Objects.equals(moduleName, otherEditPersonDescriptor.moduleName)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -238,6 +253,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("telegramHandle", telegramHandle)
+                    .add("moduleName", moduleName)
                     .add("tags", tags)
                     .toString();
         }

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -22,12 +23,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEHANDLE = "@amybee";
+    public static final String DEFAULT_MODULENAME = "CS1101S";
 
     private ContactType contactType;
     private Name name;
     private Phone phone;
     private Email email;
     private TelegramHandle telegramHandle;
+    private ModuleName moduleName;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +42,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         telegramHandle = new TelegramHandle(DEFAULT_TELEHANDLE);
+        moduleName = new ModuleName(DEFAULT_MODULENAME);
         tags = new HashSet<>();
     }
 
@@ -51,6 +55,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         telegramHandle = personToCopy.getTelegramHandle();
+        moduleName = personToCopy.getModuleName();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -101,8 +106,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ModuleName} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withModuleName(String moduleName) {
+        this.moduleName = new ModuleName(moduleName);
+        return this;
+    }
+
     public Person build() {
-        return new Person(contactType, name, phone, email, telegramHandle, tags);
+        return new Person(contactType, name, phone, email, telegramHandle,moduleName, tags);
     }
 
 }

@@ -55,8 +55,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String CONTACTTYPE_DESC_AMY = " " + PREFIX_CONTACTTYPE + VALID_CONTACTTYPE_AMY;
     public static final String CONTACTTYPE_DESC_BOB = " " + PREFIX_CONTACTTYPE + VALID_CONTACTTYPE_BOB;
-    public static final String MODNAME_DESC_AMY = " " + PREFIX_MOD + VALID_CONTACTTYPE_AMY;
-    public static final String MODNAME_DESC_BOB = " " + PREFIX_MOD + VALID_CONTACTTYPE_BOB;
+    public static final String MODNAME_DESC_AMY = " " + PREFIX_MOD + VALID_MODNAME_AMY;
+    public static final String MODNAME_DESC_BOB = " " + PREFIX_MOD + VALID_MODNAME_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

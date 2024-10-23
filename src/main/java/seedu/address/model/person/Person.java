@@ -24,7 +24,7 @@ public class Person {
 
     // Data fields
     private final TelegramHandle telegramHandle;
-
+    private final ModuleName moduleName;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -32,13 +32,14 @@ public class Person {
      */
 
     public Person(ContactType contactType, Name name, Phone phone, Email email, TelegramHandle telegramHandle,
-                  Set<Tag> tags) {
+                  ModuleName moduleName, Set<Tag> tags) {
         requireAllNonNull(contactType, name, phone, email, tags);
         this.contactType = contactType;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegramHandle = telegramHandle;
+        this.moduleName = moduleName;
 
         this.tags.addAll(tags);
     }
@@ -59,9 +60,12 @@ public class Person {
         return email;
     }
 
-
     public TelegramHandle getTelegramHandle() {
         return telegramHandle;
+    }
+
+    public ModuleName getModuleName() {
+        return moduleName;
     }
 
     /**
@@ -106,13 +110,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && telegramHandle.equals(otherPerson.telegramHandle)
+                && moduleName.equals(otherPerson.moduleName)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegramHandle, tags);
+        return Objects.hash(name, phone, email, telegramHandle, tags, moduleName);
 
     }
 
@@ -124,6 +129,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("telegramHandle", telegramHandle)
+                .add("moduleName", moduleName)
                 .add("tags", tags)
                 .toString();
     }
