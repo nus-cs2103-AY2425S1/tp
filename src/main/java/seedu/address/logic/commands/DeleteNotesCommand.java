@@ -16,7 +16,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes notes of an existing person in BizBook.
+ * Deletes note of an existing person in the addressbook.
  */
 public class DeleteNotesCommand extends Command {
 
@@ -26,13 +26,20 @@ public class DeleteNotesCommand extends Command {
             + ": Delete the note of the person identified "
             + "by the index number used in the last person listing and the index of the note.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "i/ [NOTE_INDEX]\n"
+            + "i/[NOTE_INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "i/ 1";
+            + "i/1";
 
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Deleted note of Person: %1$s";
 
+    /**
+     * Index of the person whose note is to be deleted
+     */
     private final Index index;
+
+    /**
+     * Index of the note be deleted
+     */
     private final Index noteIndex;
 
     /**

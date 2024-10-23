@@ -10,13 +10,13 @@ import seedu.address.logic.commands.DeleteNotesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new NotesCommand object
+ * Parses input arguments and creates a new DeleteNotesCommand object
  */
 public class DeleteNotesCommandParser implements Parser<DeleteNotesCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the NotesCommand
-     * and returns a NotesCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteNotesCommand
+     * and returns a DeleteNotesCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -28,10 +28,11 @@ public class DeleteNotesCommandParser implements Parser<DeleteNotesCommand> {
         Index index;
         Index noteIndex;
         try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
             String noteIndexName = argMultimap.getValue(PREFIX_NOTES_INDEX).orElse("");
             noteIndex = ParserUtil.parseIndex(noteIndexName);
 
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteNotesCommand.MESSAGE_USAGE), ive);
