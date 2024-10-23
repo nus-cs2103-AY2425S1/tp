@@ -245,6 +245,7 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > :information_source: **Note:**
 >
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -319,11 +320,11 @@ Format: `find NRIC`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
-> * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
+> * The search is case-insensitive. e.g. `S1234567a` will match `S1234567A`
 > * Only the NRIC is searched.
-> * Only full NRIC will be matched e.g. `S1234567a` will not match `T12345`
+> * Only full NRIC will be matched e.g. `S1234567a` will not match `S12345`
 > * Returns an empty patient list panel if no matching patients with the given `NRIC` are found.
-> * Patients NRIC follows the NRIC constraint mentioned in the [Parameter Details](#Parameter-Details) section.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
 
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
