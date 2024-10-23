@@ -9,6 +9,7 @@ import seedu.address.logic.commands.RetrievePublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.Network;
 
+
 /**
  * Parses input arguments and creates a new {@link RetrievePublicAddressCommand} object.
  */
