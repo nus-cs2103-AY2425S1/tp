@@ -34,7 +34,8 @@ public class DeleteModuleRoleOperationTest {
         // different types -> returns false
         assertNotEquals(deleteModuleRoleOperation, 0);
         // different values -> returns false
-        DeleteModuleRoleOperation differentDeleteModuleRoleOperation = new DeleteModuleRoleOperation(DEFAULT_MODULE_ROLE_MAP_2);
+        DeleteModuleRoleOperation differentDeleteModuleRoleOperation =
+                new DeleteModuleRoleOperation(DEFAULT_MODULE_ROLE_MAP_2);
         assertNotEquals(deleteModuleRoleOperation, differentDeleteModuleRoleOperation);
     }
 
