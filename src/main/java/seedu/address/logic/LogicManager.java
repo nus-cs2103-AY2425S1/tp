@@ -8,8 +8,10 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CampusConnectParser;
@@ -50,7 +52,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = campusConnectParser.parseCommand(commandText);
-        if (!command.equals(new UndoCommand())) {
+        if (shouldSaveCampusConnect(command)) {
             model.saveCurrentCampusConnect();
         }
         commandResult = command.execute(model);
@@ -94,5 +96,9 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    private boolean shouldSaveCampusConnect(Command c) {
+        return !(c.equals(new UndoCommand()) || c instanceof ListCommand || c instanceof AbstractFindCommand);
     }
 }
