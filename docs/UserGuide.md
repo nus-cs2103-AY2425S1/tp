@@ -31,6 +31,7 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
    Some example commands you can try:
 
    * `list` : Lists all contacts.
+   
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the FART book and automatically marks them as unpaid.
 
@@ -118,7 +119,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by attribute: `find`
 
 Finds persons whose attributes contain any of the given keywords.
 
@@ -189,6 +190,9 @@ Examples:
 * `list` followed by `unpaid 2` marks the 2nd person in the FART book as unpaid.
 * `find Betsy` followed by `unpaid 1` marks the 1st person in the results of the `find` command as unpaid.
 
+### Viewing a Contact's Details
+* **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday
+* **Note:** The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -198,6 +202,7 @@ Format: `exit`
 ### Saving the data
 
 FART data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The location of where the data is stored is specified at the bottom status bar of the app.
 
 ### Editing the data file
 
