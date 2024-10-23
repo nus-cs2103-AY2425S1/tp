@@ -20,10 +20,7 @@ import seedu.address.commons.core.State;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
@@ -42,16 +39,17 @@ public class AddGroupCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+        Model model = new ModelManager();
 
         Student validStudent = new PersonBuilder().build();
         Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
+        model.addPerson(validStudent);
 
-        CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
+        CommandResult commandResult = new AddGroupCommand(validGroup).execute(model);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
             commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
+        assertTrue(model.hasGroup(validGroup));
     }
 
     @Test

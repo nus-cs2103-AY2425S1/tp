@@ -36,7 +36,7 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_GROUP_NAME));
         List<Prefix> invalidPrefixes = ALL_PREFIX;
         invalidPrefixes.removeAll(allowedPrefix);
-        if (!containsInvalidPrefix(args, invalidPrefixes)) {
+        if (containsInvalidPrefix(args, invalidPrefixes)) {
             throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditGroupCommand.MESSAGE_USAGE);
         }
 
@@ -68,10 +68,10 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
     private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes) {
         for (Prefix prefix : invalidPreFixes) {
             if (arg.contains(prefix.getPrefix())) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
 
