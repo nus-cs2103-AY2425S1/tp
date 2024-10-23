@@ -118,40 +118,38 @@ public class EditCommand extends Command {
     /**
      * Returns a description of the changes made to the person.
      */
-    private static String getChangeDescription(Person originalPerson, Person editedPerson) {
+    public static String getChangeDescription(Person personBefore, Person personAfter) {
         StringBuilder changeDescription = new StringBuilder("Changes made: \n");
         boolean isChanged = false;
-        if (!originalPerson.getName().equals(editedPerson.getName())) {
+        if (!personBefore.getName().equals(personAfter.getName())) {
             isChanged = true;
-            changeDescription.append("Name: ").append(originalPerson.getName()).append(" -> ")
-                    .append(editedPerson.getName()).append("\n");
+            changeDescription.append("Name: ").append(personBefore.getName()).append(" -> ")
+                    .append(personAfter.getName()).append("\n");
         }
-        if (!originalPerson.getPhone().equals(editedPerson.getPhone())) {
+        if (!personBefore.getPhone().equals(personAfter.getPhone())) {
             isChanged = true;
-            changeDescription.append("Phone: ").append(originalPerson.getPhone()).append(" -> ")
-                    .append(editedPerson.getPhone()).append("\n");
+            changeDescription.append("Phone: ").append(personBefore.getPhone()).append(" -> ")
+                    .append(personAfter.getPhone()).append("\n");
         }
-        if (!originalPerson.getEmail().equals(editedPerson.getEmail())) {
+        if (!personBefore.getEmail().equals(personAfter.getEmail())) {
             isChanged = true;
-            changeDescription.append("Email: ").append(originalPerson.getEmail()).append(" -> ")
-                    .append(editedPerson.getEmail()).append("\n");
+            changeDescription.append("Email: ").append(personBefore.getEmail()).append(" -> ")
+                    .append(personAfter.getEmail()).append("\n");
         }
-        if (!originalPerson.getAddress().equals(editedPerson.getAddress())) {
+        if (!personBefore.getAddress().equals(personAfter.getAddress())) {
             isChanged = true;
-            changeDescription.append("Address: ").append(originalPerson.getAddress()).append(" -> ")
-                    .append(editedPerson.getAddress()).append("\n");
+            changeDescription.append("Address: ").append(personBefore.getAddress()).append(" -> ")
+                    .append(personAfter.getAddress()).append("\n");
         }
-        if (!originalPerson.getTags().equals(editedPerson.getTags())) {
+        if (!personBefore.getTags().equals(personAfter.getTags())) {
             isChanged = true;
-            changeDescription.append("Tags: ").append(originalPerson.getTags()).append(" -> ")
-                    .append(editedPerson.getTags()).append("\n");
+            changeDescription.append("Tags: ").append(personBefore.getTags()).append(" -> ")
+                    .append(personAfter.getTags()).append("\n");
         }
-        if (!originalPerson.getModuleRoleMap().equals(editedPerson.getModuleRoleMap())) {
+        if (!personBefore.getModuleRoleMap().equals(personAfter.getModuleRoleMap())) {
             isChanged = true;
-            changeDescription.append("Module Roles: ")
-                    .append(originalPerson.getModuleRoleMap().toString().replace("\n", " "))
-                    .append(" -> ").append(editedPerson.getModuleRoleMap().toString().replace("\n", " "))
-                    .append("\n");
+            changeDescription.append(EditModuleRoleOperation.getModuleCodeChangeDescription(
+                    personBefore.getModuleRoleMap(), personAfter.getModuleRoleMap())).append("\n");
         }
 
         return isChanged ? changeDescription.toString() : "No changes made.";

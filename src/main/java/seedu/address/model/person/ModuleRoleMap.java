@@ -247,4 +247,32 @@ public class ModuleRoleMap {
     public boolean remove(ModuleCode moduleCode, RoleType role) {
         return roles.remove(moduleCode, role);
     }
+
+    /**
+     * Returns true if the module role map contains the specified module code.
+     * @param moduleCode The module code to check.
+     * @return True if the module role map contains the specified module code.
+     */
+    public boolean containsModule(ModuleCode moduleCode) {
+        return roles.containsKey(moduleCode);
+    }
+
+    /**
+     * Returns true if the module role map contains the specified module role.
+     * @param moduleCode The module code to check.
+     * @param role The role to check.
+     * @return True if the module role map contains the specified module role.
+     */
+    public boolean containsModuleRolePair(ModuleCode moduleCode, RoleType role) {
+        return roles.containsKey(moduleCode) && roles.get(moduleCode).equals(role);
+    }
+
+    /**
+     * Returns true if the module role map contains the specified module role pair.
+     * @param moduleRolePair The module role pair to check.
+     * @return True if the module role map contains the specified module role pair.
+     */
+    public boolean containsModuleRolePair(ModuleRolePair moduleRolePair) {
+        return containsModuleRolePair(moduleRolePair.moduleCode, moduleRolePair.roleType);
+    }
 }
