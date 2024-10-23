@@ -137,11 +137,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `TutorEaseParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above
-  to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser`
+* When called upon to parse a user command, the `TutorEaseParser` class creates a `ContactCommandParser` or `LessonCommandParser` based on the first word that the tutor keys in, 
+  which creates `XYZContactCommandParser`(e.g. `AddContactCommandParser`, `DeleteContactCommandParser`) and `XYZLessonCommandParser` (e.g. `AddLessonCommandParser`) respectively.
+  `XYZContactCommandParser` and `XYZLessonCommandParser` use the other classes shown above
+  to parse the user command and create a `XYZContactCommand` or `XYZLessonCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser`
   returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the
+* All `XYZContactCommandParser` and `XYZLessonCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the
   `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
