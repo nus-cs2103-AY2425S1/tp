@@ -14,7 +14,7 @@
   </stylesheets>
 
   <HBox fx:id="commandTextContainer" alignment="CENTER_LEFT" spacing="5" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17">
-    <FontIcon fx:id="commandTextIcon" iconLiteral="fas-terminal" iconSize="16" />
+    <FontIcon fx:id="commandTextIcon" iconLiteral="fas-terminal"/>
     <TextArea fx:id="commandTextArea" promptText="Enter command here..." wrapText="true" maxHeight="200" HBox.hgrow="ALWAYS"/>
   </HBox>
 
