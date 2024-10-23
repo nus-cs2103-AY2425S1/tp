@@ -318,18 +318,30 @@ Examples:
 * `delete 1 po/1` deletes the 1st policy of the 1st person in the address book.
 
 ---
-### Undo a delete command: `undo`
-Undo the last delete command. Works for both person and policy deletion.
+### Undo a command : `undo`
+Undo the last delete. Works for add, edit, delete person and clear commands.
 
-Format: `undo` after a successful delete command.
+Format: `undo` 
 
-* Undo the last delete person or policy command to restore back the deletion
-* Only the last delete command can be undone.
+* Undo the last command to restore the address book to the state before the last command.
+* Does not work for assign and deletion of policies.
 
 Examples:
 * `delete 1` followed by `undo` will restore back the deleted person at index 1.
-* `delete 1 po/1` followed by `undo` will restore back the deleted policy at index 1 of the person at index 1.
-* `delete John Doe` followed by undo will restore back John Doe.
+* `clear` followed by `undo` will restore back all the deleted persons.
+
+---
+### Redo a command : `redo`
+Redo the last undo. Works for add, edit, delete person and clear commands.
+
+Format: `redo`
+
+* Redo the last undo command to restore the address book to the state before the undo command.
+* Does not work for assign and deletion of policies.
+
+Examples:
+* `delete 1` followed by `undo` followed by `redo` will delete the person at index 1 again.
+* `clear` followed by `undo` followed by `redo` will clear all the entries again.
 
 ---
 

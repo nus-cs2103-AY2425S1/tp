@@ -92,9 +92,29 @@ public interface Model {
      */
     void sortPersonList(Comparator<Person> comparator);
 
+    /**
+     * Saves the current state of the address book.
+     */
     void commitAddressBook();
+
+    /**
+     * Restores the previous state of the address book.
+     * @throws CommandException if there are no states to undo.
+     */
     void undoAddressBook() throws CommandException;
+
+    /**
+     * Restores the state of the address book to the state before the last undo.
+     */
     void redoAddressBook();
+
+    /**
+     * Returns true if there are previous states to restore.
+     */
     boolean canUndoAddressBook();
+
+    /**
+     * Returns true if there are undone states to restore.
+     */
     boolean canRedoAddressBook();
 }
