@@ -18,6 +18,7 @@ repositories {
 
 checkstyle {
     toolVersion = '10.2'
+
 }
 
 test {
@@ -66,7 +67,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'DLTbook.jar'
 }
 
 defaultTasks 'clean', 'test'
