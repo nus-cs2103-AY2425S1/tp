@@ -1,8 +1,8 @@
 package seedu.address.model.wedding;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -14,27 +14,50 @@ public class Wedding {
     private final WeddingName weddingName;
     private final Venue venue;
     private final Datetime datetime;
-    private final List<Person> participants;
+    private final Set<Person> participants = new HashSet<>();
 
     /**
      * Constructs a {@code Wedding}.
      *
      * @param weddingName A valid wedding name.
+     * @param venue A venue as inputted by the user.
+     * @param datetime A valid date format.
+     * @param participants A list of particpants.
+     */
+    public Wedding(WeddingName weddingName, Venue venue, Datetime datetime, Set<Person> participants) {
+        this.weddingName = weddingName;
+        this.venue = venue;
+        this.datetime = datetime;
+        this.participants.addAll(participants);
+    }
+
+    /**
+     * Constructs a {@code Wedding}.
+     *
+     * @param weddingName A valid wedding name.
+     * @param venue A venue as inputted by the user.
+     * @param datetime A valid date format.
      */
     public Wedding(WeddingName weddingName, Venue venue, Datetime datetime) {
         this.weddingName = weddingName;
         this.venue = venue;
         this.datetime = datetime;
-        this.participants = new ArrayList<>();
     }
+
     public WeddingName getWeddingName() {
         return this.weddingName;
     }
+
     public Venue getVenue() {
         return this.venue;
     }
+
     public Datetime getDatetime() {
         return this.datetime;
+    }
+
+    public Set<Person> getParticipants() {
+        return this.participants;
     }
 
     /**
