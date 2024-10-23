@@ -70,10 +70,10 @@ public class AddAppointmentCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Optional<Person> patient = lastShownList.stream()
-                .filter(person -> person.getName().equals(patientName))
+                .filter(person -> person instanceof Patient && person.getName().equals(patientName))
                 .findAny();
         Optional<Person> doctor = lastShownList.stream()
-                .filter(person -> person.getName().equals(doctorName))
+                .filter(person -> person instanceof Doctor && person.getName().equals(doctorName))
                 .findAny();
 
         Person patientToEdit = patient.get();
