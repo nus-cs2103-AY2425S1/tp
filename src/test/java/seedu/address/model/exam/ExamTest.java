@@ -31,7 +31,7 @@ public class ExamTest {
         assertFalse(Exam.isValidExamName(" ")); // spaces only
         assertFalse(Exam.isValidExamName("Midterm%")); // non-alphanumeric characters
 
-        // valid register number
+        // valid exam name
         assertTrue(Exam.isValidExamName("Midterm")); // only alphabets
         assertTrue(Exam.isValidExamName("Midterm Exam")); // alphabets with space
         assertTrue(Exam.isValidExamName("Midterm 2")); // alphabets and numbers
