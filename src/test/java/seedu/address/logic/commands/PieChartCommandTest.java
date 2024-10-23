@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -15,7 +16,7 @@ public class PieChartCommandTest {
 
     @Test
     public void execute_piChartCommand_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
 
         // Create new persons
         Person person1 = new PersonBuilder().withName("Amy").withPhone("12345678").withEmail("alice@example.com")
