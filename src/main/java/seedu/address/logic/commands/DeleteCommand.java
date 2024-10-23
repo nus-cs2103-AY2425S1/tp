@@ -40,7 +40,7 @@ public class DeleteCommand extends ConcreteCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert !isExecuted : "This command has already been executed";
+        requireNotExecuted();
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -71,7 +71,7 @@ public class DeleteCommand extends ConcreteCommand {
 
     @Override
     public CommandResult undo(Model model) {
-        assert isExecuted : "This command has not been executed";
+        requireExecuted();
         requireAllNonNull(model, personToDelete);
         model.insertPerson(personToDelete, targetIndex);
         isExecuted = false;

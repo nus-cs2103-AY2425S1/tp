@@ -18,7 +18,7 @@ public class ClearCommand extends ConcreteCommand {
 
     @Override
     public CommandResult execute(Model model) {
-        assert !isExecuted : "This command has already been executed";
+        requireNotExecuted();
         requireNonNull(model);
         initialAddressBook = new AddressBook(model.getAddressBook());
         model.setAddressBook(new AddressBook());
@@ -28,7 +28,7 @@ public class ClearCommand extends ConcreteCommand {
 
     @Override
     public CommandResult undo(Model model) {
-        assert isExecuted : "This command has not been executed";
+        requireExecuted();
         requireNonNull(model);
         model.setAddressBook(initialAddressBook);
         isExecuted = false;

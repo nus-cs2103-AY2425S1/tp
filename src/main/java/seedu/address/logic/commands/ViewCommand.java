@@ -44,7 +44,7 @@ public class ViewCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
-        assert !isExecuted : "This command has already been executed";
+        requireNotExecuted();
         requireNonNull(model);
         model.updateFilteredPersonList(combinedPredicate);
         isExecuted = true;

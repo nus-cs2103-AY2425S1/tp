@@ -55,7 +55,7 @@ public class AddCommand extends ConcreteCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert !isExecuted : "This command has already been executed";
+        requireNotExecuted();
         requireNonNull(model);
 
         // Duplication checking for contact number, name and person as a whole.
@@ -72,7 +72,7 @@ public class AddCommand extends ConcreteCommand {
 
     @Override
     public CommandResult undo(Model model) {
-        assert isExecuted : "This command has not been executed";
+        requireExecuted();
         requireNonNull(model);
         model.deletePerson(toAdd);
         isExecuted = false;
