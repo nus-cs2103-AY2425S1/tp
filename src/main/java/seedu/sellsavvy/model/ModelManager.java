@@ -180,12 +180,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Order> getFilteredOrderList() {
-        //TODO change implementation after kx merge
+    public FilteredList<Order> getFilteredOrderList() {
         if (getSelectedPerson2() == null) {
             return null;
         }
-        return getSelectedPerson2().getOrderUnmodifiableObservableList();
+        return getSelectedPerson2().getFilteredOrderList();
     }
 
     @Override

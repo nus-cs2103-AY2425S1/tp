@@ -124,7 +124,7 @@ public class ModelManagerTest {
         modelManager.updateSelectedPerson(ALICE);
         assertEquals(modelManager.getSelectedPerson().get(), ALICE);
         assertEquals(modelManager.getSelectedPerson2(), ALICE);
-        assertEquals(modelManager.getFilteredOrderList(), ALICE.getOrderUnmodifiableObservableList());
+        assertEquals(modelManager.getFilteredOrderList(), ALICE.getFilteredOrderList());
         modelManager.updateSelectedPerson(null);
         assertNull(modelManager.getSelectedPerson().get());
         assertNull(modelManager.getSelectedPerson2());

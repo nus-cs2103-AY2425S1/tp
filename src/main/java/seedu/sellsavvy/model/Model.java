@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
@@ -101,7 +102,7 @@ public interface Model {
     Person getSelectedPerson2();
 
     /** Returns the {@code OrderList} displayed*/
-    ObservableList<Order> getFilteredOrderList();
+    FilteredList<Order> getFilteredOrderList();
 
     /**
      * Updates the selected person whose orders are displayed.

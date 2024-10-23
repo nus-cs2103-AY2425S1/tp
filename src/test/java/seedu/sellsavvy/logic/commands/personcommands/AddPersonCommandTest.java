@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.CommandResult;
@@ -188,9 +189,8 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public ObservableList<Order> getFilteredOrderList() {
+        public FilteredList<Order> getFilteredOrderList() {
             throw new AssertionError("This method should not be called.");
-
         }
 
         @Override
