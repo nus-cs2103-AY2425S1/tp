@@ -174,6 +174,7 @@ public class ParserUtil {
      * @throws ParseException If the name is invalid.
      */
     public static NameContainsKeywordsPredicate parseNamePredicate(String name) throws ParseException {
+        requireNonNull(name);
         if (!Name.isValidName(name)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -186,6 +187,7 @@ public class ParserUtil {
      * @throws ParseException If the phone is invalid.
      */
     public static PhoneContainsKeywordsPredicate parsePhonePredicate(String phone) throws ParseException {
+        requireNonNull(phone);
         if (!Phone.isValidPhone(phone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
@@ -198,6 +200,7 @@ public class ParserUtil {
      * @throws ParseException If the email is invalid.
      */
     public static EmailContainsKeywordsPredicate parseEmailPredicate(String email) throws ParseException {
+        requireNonNull(email);
         if (!Email.isValidEmail(email)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -210,6 +213,7 @@ public class ParserUtil {
      * @throws ParseException If the address is invalid.
      */
     public static AddressContainsKeywordsPredicate parseAddressPredicate(String address) throws ParseException {
+        requireNonNull(address);
         if (!Address.isValidAddress(address)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -222,6 +226,7 @@ public class ParserUtil {
      * @throws ParseException If the rsvp is invalid.
      */
     public static RsvpContainsKeywordsPredicate parseRsvpPredicate(String rsvp) throws ParseException {
+        requireNonNull(rsvp);
         if (!Rsvp.isValidRsvp(rsvp)) {
             throw new ParseException(Rsvp.MESSAGE_CONSTRAINTS);
         }
@@ -234,6 +239,7 @@ public class ParserUtil {
      * @throws ParseException If the company is invalid.
      */
     public static CompanyContainsKeywordsPredicate parseCompanyPredicate(String company) throws ParseException {
+        requireNonNull(company);
         if (!Company.isValidCompany(company)) {
             throw new ParseException(Company.MESSAGE_CONSTRAINTS);
         }
@@ -248,6 +254,7 @@ public class ParserUtil {
      * @throws ParseException If any tag is invalid.
      */
     public static TagContainsKeywordsPredicate parseTagPredicate(List<String> tags) throws ParseException {
+        requireNonNull(tags);
         List<String> tagParts = tags.stream()
                 .flatMap(tag -> Arrays.stream(tag.split(" ")))
                 .map(String::trim)

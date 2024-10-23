@@ -15,9 +15,17 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rsvp;
+import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.RsvpContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +34,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_RSVP = "yes";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +42,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_RSVP = "ACCEPTED";
+    private static final String VALID_COMPANY = "The Florist";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +203,151 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseRsvp_null_throwsNullPointerException() throws ParseException {
+        assertEquals(null, ParserUtil.parseRsvp((String) null));
+    }
+
+    @Test
+    public void parseRsvp_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRsvp(INVALID_RSVP));
+    }
+
+    @Test
+    public void parseRsvp_validValueWithoutWhitespace_returnsRsvp() throws Exception {
+        Rsvp expectedRsvp = new Rsvp(VALID_RSVP);
+        assertEquals(expectedRsvp, ParserUtil.parseRsvp(VALID_RSVP));
+    }
+
+    @Test
+    public void parseRsvp_validValueWithWhitespace_returnsTrimmedRsvp() throws Exception {
+        String rsvpWithWhitespace = WHITESPACE + VALID_RSVP + WHITESPACE;
+        Rsvp expectedRsvp = new Rsvp(VALID_RSVP);
+        assertEquals(expectedRsvp, ParserUtil.parseRsvp(rsvpWithWhitespace));
+    }
+
+    @Test
+    public void parseCompany_null_throwsNullPointerException() throws ParseException {
+        assertEquals(null, ParserUtil.parseCompany((String) null));
+    }
+
+    @Test
+    public void parseCompany_validValueWithoutWhitespace_returnsCompany() throws Exception {
+        Company expectedCompany = new Company(VALID_COMPANY);
+        assertEquals(expectedCompany, ParserUtil.parseCompany(VALID_COMPANY));
+    }
+
+    @Test
+    public void parseCompany_validValueWithWhitespace_returnsTrimmedCompany() throws Exception {
+        String companyWithWhitespace = WHITESPACE + VALID_COMPANY + WHITESPACE;
+        Company expectedCompany = new Company(VALID_COMPANY);
+        assertEquals(expectedCompany, ParserUtil.parseCompany(companyWithWhitespace));
+    }
+
+    @Test
+    public void parseNamePredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNamePredicate((String) null));
+    }
+
+    @Test
+    public void parseNamePredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNamePredicate(INVALID_NAME));
+    }
+
+    @Test
+    public void parseNamePredicate_validValueWithoutWhitespace_success() throws Exception {
+        NameContainsKeywordsPredicate expectedNamePredicate =
+                new NameContainsKeywordsPredicate(Arrays.asList(VALID_NAME.split(" ")));
+        assertEquals(expectedNamePredicate, ParserUtil.parseNamePredicate(VALID_NAME));
+    }
+
+    @Test
+    public void parsePhonePredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhonePredicate((String) null));
+    }
+
+    @Test
+    public void parsePhonePredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhonePredicate(INVALID_PHONE));
+    }
+
+    @Test
+    public void parsePhonePredicate_validValueWithoutWhitespace_success() throws Exception {
+        PhoneContainsKeywordsPredicate expectedPhonePredicate =
+                new PhoneContainsKeywordsPredicate(Arrays.asList(VALID_PHONE.split(" ")));
+        assertEquals(expectedPhonePredicate, ParserUtil.parsePhonePredicate(VALID_PHONE));
+    }
+
+    @Test
+    public void parseAddressPredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddressPredicate((String) null));
+    }
+
+    @Test
+    public void parseAddressPredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddressPredicate(INVALID_ADDRESS));
+    }
+
+    @Test
+    public void parseAddressPredicate_validValueWithoutWhitespace_success() throws Exception {
+        AddressContainsKeywordsPredicate expectedAddressPredicate =
+                new AddressContainsKeywordsPredicate(Arrays.asList(VALID_ADDRESS.split(" ")));
+        assertEquals(expectedAddressPredicate, ParserUtil.parseAddressPredicate(VALID_ADDRESS));
+    }
+
+    @Test
+    public void parseEmailPredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmailPredicate((String) null));
+    }
+
+    @Test
+    public void parseEmailPredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmailPredicate(INVALID_EMAIL));
+    }
+
+    @Test
+    public void parseEmailPredicate_validValueWithoutWhitespace_success() throws Exception {
+        EmailContainsKeywordsPredicate expectedEmailPredicate =
+                new EmailContainsKeywordsPredicate(Arrays.asList(VALID_EMAIL.split(" ")));
+        assertEquals(expectedEmailPredicate, ParserUtil.parseEmailPredicate(VALID_EMAIL));
+    }
+
+    @Test
+    public void parseRsvpPredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRsvpPredicate((String) null));
+    }
+
+    @Test
+    public void parseRsvpPredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRsvpPredicate(INVALID_RSVP));
+    }
+
+    @Test
+    public void parseRsvpPredicate_validValueWithoutWhitespace_success() throws Exception {
+        RsvpContainsKeywordsPredicate expectedRsvpPredicate =
+                new RsvpContainsKeywordsPredicate(Arrays.asList(VALID_RSVP.split(" ")));
+        assertEquals(expectedRsvpPredicate, ParserUtil.parseRsvpPredicate(VALID_RSVP));
+    }
+
+    @Test
+    public void parseCompanyPredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCompanyPredicate((String) null));
+    }
+
+    @Test
+    public void parseCompanyPredicate_validValueWithoutWhitespace_success() throws Exception {
+        CompanyContainsKeywordsPredicate expectedCompanyPredicate =
+                new CompanyContainsKeywordsPredicate(Arrays.asList(VALID_COMPANY.split(" ")));
+        assertEquals(expectedCompanyPredicate, ParserUtil.parseCompanyPredicate(VALID_COMPANY));
+    }
+
+    @Test
+    public void parseCompanyPredicate_validValueWithWhitespace_success() throws Exception {
+        String companyWithWhitespace = WHITESPACE + VALID_COMPANY + WHITESPACE;
+        CompanyContainsKeywordsPredicate expectedCompanyPredicate =
+                new CompanyContainsKeywordsPredicate(Arrays.asList(VALID_COMPANY.split(" ")));
+        assertEquals(expectedCompanyPredicate, ParserUtil.parseCompanyPredicate(companyWithWhitespace));
     }
 }
