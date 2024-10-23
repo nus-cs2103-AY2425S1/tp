@@ -64,4 +64,8 @@ public class LastSeen {
     public int hashCode() {
         return value.hashCode();
     }
+
+    public int compareTo(LastSeen otherDate) {
+        return value.compareTo(otherDate.value);
+    }
 }
