@@ -205,8 +205,8 @@ Format: `edit ORDER_INDEX [i/ITEM] [d/DATE] [c/QUANTITY]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `editOrder 1 i/Light bulb d/21-11-2025` Edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
-*  `editOrder 2 c/22` Edits the quantity of the 2nd order to be `22`.
+*  `editOrder 1 i/Light bulb d/21-11-2025` edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
+*  `editOrder 2 c/22` edits the quantity of the 2nd order to be `22`.
 *  `listOrder 1` followed by `editOrder 3 i/Wallet` selects the 1st person in the address book and edits the item of the 2nd order under the 1st person to be `Wallet`.
 
 ### Mark an order as completed : `markOrder`
