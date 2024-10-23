@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <!-- Title Label -->
+  <Label text="Suppliers" styleClass="panel-title"/>
+  <!-- ListView for Suppliers -->
   <ListView fx:id="supplierListView" VBox.vgrow="ALWAYS" />
 </VBox>
