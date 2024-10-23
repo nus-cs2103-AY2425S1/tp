@@ -81,4 +81,34 @@ public class DateTest {
         Date date = new Date("2024-12-15");
         assertTrue(date.toString().equals("2024-12-15"));
     }
+
+    @Test
+    public void hashCode_sameDate_sameHashCode() {
+        Date date1 = new Date("2024-12-15");
+        Date date2 = new Date("2024-12-15");
+
+        // Check if two identical Date objects return the same hash code
+        assertTrue(date1.equals(date2)); // Ensure the dates are considered equal
+        assertTrue(date1.hashCode() == date2.hashCode()); // Hash codes should be the same
+    }
+
+    @Test
+    public void hashCode_differentDates_differentHashCode() {
+        Date date1 = new Date("2024-12-15");
+        Date date2 = new Date("2025-01-01");
+
+        // Check if two different Date objects return different hash codes
+        assertFalse(date1.equals(date2)); // Ensure the dates are not considered equal
+        assertFalse(date1.hashCode() == date2.hashCode()); // Hash codes should be different
+    }
+
+    @Test
+    public void toParsableString_returnsCorrectString() {
+        Date date1 = new Date("2024-12-31");
+        Date date2 = new Date("2024-01-01");
+
+        // Check if the parsable string is correctly returned
+        assertTrue(date1.toParsableString().equals("2024-12-31"));
+        assertTrue(date2.toParsableString().equals("2024-01-01"));
+    }
 }

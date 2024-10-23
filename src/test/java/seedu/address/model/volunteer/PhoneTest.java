@@ -57,4 +57,22 @@ public class PhoneTest {
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
     }
+
+    @Test
+    public void hashCode_samePhoneNumber_sameHashCode() {
+        Phone phone1 = new Phone("911");
+        Phone phone2 = new Phone("911");
+
+        assertTrue(phone1.equals(phone2));
+        assertTrue(phone1.hashCode() == phone2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentPhoneNumber_differentHashCode() {
+        Phone phone1 = new Phone("911");
+        Phone phone2 = new Phone("912");
+
+        assertFalse(phone1.equals(phone2));
+        assertFalse(phone1.hashCode() == phone2.hashCode());
+    }
 }

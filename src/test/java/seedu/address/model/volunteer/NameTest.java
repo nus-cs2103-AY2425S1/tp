@@ -80,4 +80,21 @@ public class NameTest {
         assertFalse(name.isSameName(null));
     }
 
+    @Test
+    public void hashCode_sameName_sameHashCode() {
+        Name name1 = new Name("Bob Tan");
+        Name name2 = new Name("Bob Tan");
+
+        assertTrue(name1.equals(name2));
+        assertTrue(name1.hashCode() == name2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentNames_differentHashCode() {
+        Name name1 = new Name("Bob Tan");
+        Name name2 = new Name("Alice Tan");
+
+        assertFalse(name1.equals(name2));
+        assertFalse(name1.hashCode() == name2.hashCode());
+    }
 }
