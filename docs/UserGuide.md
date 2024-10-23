@@ -11,12 +11,15 @@
   :root {
     --primary-bg-color: rgb(248, 248, 248);
     --special-bg-color: rgb(235, 243, 255);
-    --highlight-bg-color: rgb(235, 235, 235);
+    --hover-bg-color: rgb(243, 243, 243);
     --white-bg-color: rgb(255, 255, 255);
-    --code-color: rgb(239, 152, 46);
-    --code-bg-color: rgb(245, 245, 245);
-    --box-bg-color: rgba(239, 152, 46, 0.4);
+    --code-bg-color: rgb(255, 238, 216, 0.75);
+    --box-bg-color: rgba(255, 130, 21, 0.6);
+    --box-border-color: rgba(255, 130, 21, 0.75);
+    --warn-bg-color: rgba(255, 0, 0, 0.2);
+    --warn-border-color: rgba(255, 0, 0, 0.4);
     --border-color: rgb(220, 220, 220);
+    --black-color: rgb(0, 0, 0);
   }
 
   * {
@@ -29,6 +32,13 @@
     padding: 8px 16px;
     margin: 16px 0;
     border-radius: 5px;
+    border: 2px solid var(--box-border-color);
+  }
+
+  .box-warn {
+    background-color: var(--warn-bg-color) !important;
+    padding: 16px 32px;
+    border: 2px solid var(--warn-border-color);
   }
 
   .box > p {
@@ -64,7 +74,7 @@
   }
 
   .content-droppable:hover {
-    background-color: var(--highlight-bg-color);
+    background-color: var(--hover-bg-color);
   }
 
   .content-qna {
@@ -90,7 +100,7 @@
   }
 
   code {
-    color: var(--code-color) !important;
+    color: var(--black-color) !important;
     background-color: var(--code-bg-color) !important;
   }
 
@@ -104,6 +114,7 @@
 
   .command-content {
     padding: 24px 16px 8px 16px;
+    font-size: 0.8em;
   }
 
   .qna-content {
@@ -144,7 +155,7 @@
   }
 
   .toc-btns:hover {
-    background-color: var(--highlight-bg-color);
+    background-color: var(--hover-bg-color);
   }
 </style>
 
@@ -207,7 +218,7 @@
 
 <br>
 
-<strong>5. </strong>Type the command in the command div class="box" and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+<strong>5. </strong>Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list ph` : Lists all potential hires.
@@ -334,7 +345,7 @@
   * `list e` followed by `demote 2` demotes the 2nd person in the employee list.
   * `find e Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
 
-  <div class="box" type="warning" seamless>
+  <div class="box box-warn" type="warning" seamless>
     
   **Common Mistakes:**
   * `list ph` followed by `demote 2` - cannot demote a potential hire
@@ -558,7 +569,7 @@
   * `list p` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
   * `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
 
-  <div class="box" type="warning" seamless>
+  <div class="box box-warn" type="warning" seamless>
     
   **Common Mistakes:**
   * `promote 2 12-20-2025` - the contract end date is in the wrong date format
@@ -615,7 +626,7 @@ StaffSync data are saved in the hard disk automatically after any command that c
   
   StaffSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
   
-<div class="box" type="warning" seamless>
+<div class="box box-warn" type="warning" seamless>
   
 **Caution:**
 If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
