@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
@@ -23,8 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_JOB = "Software Engineer";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_SKILL = "Python";
+    public static final String DEFAULT_SKILL = "python";
     public static final String DEFAULT_INTERVIEWSCORE = "6";
     public static final String DEFAULT_STATUS = "pending";
 
@@ -32,7 +30,6 @@ public class PersonBuilder {
     private Job job;
     private Phone phone;
     private Email email;
-    private Address address;
     private Set<Skill> skills;
     private InterviewScore interviewScore;
     private Set<Tag> tags;
@@ -46,7 +43,6 @@ public class PersonBuilder {
         job = new Job(DEFAULT_JOB);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         skills = new HashSet<>();
         skills.add(new Skill(DEFAULT_SKILL));
         interviewScore = new InterviewScore(DEFAULT_INTERVIEWSCORE);
@@ -63,7 +59,6 @@ public class PersonBuilder {
         job = personToCopy.getJob();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
         skills = new HashSet<>(personToCopy.getSkills());
         interviewScore = personToCopy.getInterviewScore();
         tags = new HashSet<>(personToCopy.getTags());
@@ -103,14 +98,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
-
-    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -138,7 +125,7 @@ public class PersonBuilder {
      * Sets the {@code status} of the {@code Person} that we are building.
      */
     public Person build() {
-        Person person = new Person(name, job, phone, email, address, skills, interviewScore, tags);
+        Person person = new Person(name, job, phone, email, skills, interviewScore, tags);
         person.setStatus(status);
         return person;
     }

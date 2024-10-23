@@ -27,10 +27,8 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Skill> skills = new HashSet<>();
     private final InterviewScore interviewScore;
-
     private final Set<Tag> tags = new HashSet<>();
 
     // Status fields
@@ -39,14 +37,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Job job, Phone phone, Email email, Address address, Set<Skill> skills,
+    public Person(Name name, Job job, Phone phone, Email email, Set<Skill> skills,
                   InterviewScore interviewScore, Set<Tag> tags) {
-        requireAllNonNull(name, job, phone, email, address, skills, interviewScore, tags);
+        requireAllNonNull(name, job, phone, email, skills, interviewScore, tags);
         this.name = name;
         this.job = job;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.skills.addAll(skills);
         this.interviewScore = interviewScore;
         this.tags.addAll(tags);
@@ -70,9 +67,6 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
     /**
      * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -181,7 +175,6 @@ public class Person {
                 && job.equals(otherPerson.job)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && skills.equals(otherPerson.skills)
                 && interviewScore.equals(otherPerson.interviewScore)
                 && tags.equals(otherPerson.tags);
@@ -194,7 +187,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, job, phone, email, address, skills, interviewScore, tags);
+        return Objects.hash(name, job, phone, email, skills, interviewScore, tags);
     }
 
     @Override
@@ -204,7 +197,6 @@ public class Person {
                 .add("job", job)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("skills", skills)
                 .add("interview score", interviewScore)
                 .add("tags", tags)

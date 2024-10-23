@@ -22,7 +22,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
@@ -102,7 +101,6 @@ public class ViewStatusCommandTest {
                 new Job("Software Engineer"),
                 new Phone("85355255"),
                 new Email("alice@example.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Skill("python"))),
                 new InterviewScore("6"),
                 new HashSet<>(Arrays.asList(new Tag("friends"), new Tag("colleagues")))
@@ -126,7 +124,6 @@ public class ViewStatusCommandTest {
                 new Job("Data Analyst"),
                 new Phone("85355255"),
                 new Email("alice@example.com"),
-                new Address("123, Jurong West Ave 6, #08-111"),
                 new HashSet<>(Set.of(new Skill("python"))),
                 new InterviewScore("6"),
                 new HashSet<>(Arrays.asList(new Tag("friends")))
