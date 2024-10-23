@@ -108,6 +108,16 @@ public class EduLog implements ReadOnlyEduLog {
     }
 
     /**
+     * Marks given student as present.
+     *
+     * @param student the student to mark as present.
+     */
+    public void markStudent(Student student) {
+        requireNonNull(student);
+        student.mark();
+    }
+
+    /**
      * Marks given student as absent.
      *
      * @param student the student to mark as absent.
