@@ -5,13 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.SupplyOrder;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class CustomerOrderCard extends UiPart<Region> {
+public class SupplyOrderCard extends UiPart<Region> {
 
-    private static final String FXML = "OrderListCard.fxml";
+    private static final String FXML = "SupplyOrderListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -36,7 +37,7 @@ public class CustomerOrderCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public CustomerOrderCard(CustomerOrder order, int displayedIndex) {
+    public SupplyOrderCard(SupplyOrder order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");

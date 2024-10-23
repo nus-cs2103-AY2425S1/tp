@@ -186,7 +186,7 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithPerson extends ModelStub {
         private final Person person;
 
         ModelStubWithPerson(Person person) {

@@ -3,6 +3,7 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -18,7 +19,7 @@
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-opacity: 1;

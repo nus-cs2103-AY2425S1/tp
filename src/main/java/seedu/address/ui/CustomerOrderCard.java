@@ -2,21 +2,16 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.Order;
-import seedu.address.model.person.Person;
-
-import java.util.Comparator;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class OrderCard extends UiPart<Region> {
+public class CustomerOrderCard extends UiPart<Region> {
 
-    private static final String FXML = "OrderListCard.fxml";
+    private static final String FXML = "CustomerOrderListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -41,7 +36,7 @@ public class OrderCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public OrderCard(CustomerOrder order, int displayedIndex) {
+    public CustomerOrderCard(CustomerOrder order, int displayedIndex) {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");

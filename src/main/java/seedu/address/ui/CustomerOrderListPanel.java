@@ -7,18 +7,15 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.Order;
-import seedu.address.model.order.SupplyOrder;
-import seedu.address.model.person.Person;
 
 import java.util.logging.Logger;
 
 /**
  * Panel containing the list of persons.
  */
-public class OrderListPanel extends UiPart<Region> {
-    private static final String FXML = "OrderListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(OrderListPanel.class);
+public class CustomerOrderListPanel extends UiPart<Region> {
+    private static final String FXML = "CustomerOrderListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(CustomerOrderListPanel.class);
 
     @FXML
     private ListView<CustomerOrder> orderListView;
@@ -26,7 +23,7 @@ public class OrderListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public OrderListPanel(ObservableList<CustomerOrder> orderList) {
+    public CustomerOrderListPanel(ObservableList<CustomerOrder> orderList) {
         super(FXML);
         orderListView.setItems(orderList);
         orderListView.setCellFactory(listView -> new OrderListViewCell());
@@ -44,7 +41,7 @@ public class OrderListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new OrderCard(order, getIndex() + 1).getRoot());
+                setGraphic(new CustomerOrderCard(order, getIndex() + 1).getRoot());
             }
         }
     }
