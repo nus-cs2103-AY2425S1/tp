@@ -106,12 +106,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseGames(gameSet));
     }
 
-    // TODO: modify this to create parsePreferredTimesForEdit
     /**
      * Parses {@code Collection<String> preferredTimes} into a {@code Set<PreferredTime>}
      * if {@code preferredTimes} is non-empty.
      * If {@code preferredTimes} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<PreferredTime>} containing zero tags.
+     * {@code Set<PreferredTime>} containing zero preferred times.
      */
     private Optional<Set<PreferredTime>> parsePreferredTimesForEdit(Collection<String> preferredTimes)
             throws ParseException {

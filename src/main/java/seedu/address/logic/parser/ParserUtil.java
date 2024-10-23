@@ -19,9 +19,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.preferredtime.Day;
 import seedu.address.model.preferredtime.PreferredTime;
-import seedu.address.model.preferredtime.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -215,8 +213,7 @@ public class ParserUtil {
         requireNonNull(preferredTime);
         String trimmedPreferredTime = preferredTime.trim();
         if (!PreferredTime.isValidPreferredTime(trimmedPreferredTime)) {
-            throw new ParseException(PreferredTime.MESSAGE_CONSTRAINTS + "\n\n" + Day.MESSAGE_CONSTRAINTS + "\n\n"
-                    + Time.MESSAGE_CONSTRAINTS);
+            throw new ParseException(PreferredTime.MESSAGE_CONSTRAINTS);
         }
         return new PreferredTime(trimmedPreferredTime);
     }

@@ -39,9 +39,8 @@ public class AddCommand extends Command {
             + PREFIX_GAME + "Overwatch "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney"
-            + PREFIX_PREFERREDTIME + "Monday 2100";
+            + PREFIX_PREFERREDTIME + "2100-2230";
 
-    // TODO: currently preferred time is not shown in the MESSAGE_SUCCESS
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
