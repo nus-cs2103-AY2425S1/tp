@@ -42,7 +42,12 @@ public class EventPredicateBuilder {
                     new DescriptionContainsKeywordsPredicate(Arrays.asList(descriptionKeywords)));
         }
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            EventId eventId = new EventId(argMultimap.getValue(PREFIX_ID).get());
+            String trimmedArgs = argMultimap.getValue(PREFIX_ID).get();
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListEventCommand.MESSAGE_EVENT_USAGE));
+            }
+            EventId eventId = new EventId(trimmedArgs);
             combinedPredicate = combinedPredicate.and(new EventIdPredicate(eventId));
         }
 
