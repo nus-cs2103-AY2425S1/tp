@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INTERVIEW_SCORE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INTERVIEW_SCORE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTERVIEW_SCORE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOB_DESC;
