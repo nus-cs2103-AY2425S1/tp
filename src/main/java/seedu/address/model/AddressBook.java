@@ -7,6 +7,8 @@ import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.participation.Participation;
+import seedu.address.model.participation.UniqueParticipationList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tutorial.Tutorial;
@@ -21,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
 
     private final UniqueTutorialList tutorials;
+    private final UniqueParticipationList participations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tutorials = new UniqueTutorialList();
+        participations = new UniqueParticipationList();
     }
 
     public AddressBook() {}
@@ -60,6 +64,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTutorials(List<Tutorial> tutorials) {
         this.tutorials.setTutorials(tutorials);
+    }
+
+    /**
+     * Replaces the contents of the participation list with {@code participations}.
+     * {@code participations} must not contain duplicate tutorials.
+     */
+    public void setParticipations(List<Participation> participation) {
+        this.participations.setParticipation(participation);
     }
 
     /**
@@ -125,6 +137,44 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTutorial(Tutorial t) {
         tutorials.add(t);
+    }
+
+
+    //// participation-level operation
+    /**
+     * Returns true if a participation with the same identity as {@code participation} exists in the address book.
+     */
+    public boolean hasParticipation(Participation participation) {
+        requireNonNull(participation);
+        return participations.contains(participation);
+    }
+
+    /**
+     * Adds a participation to the address book.
+     * The participation must not already exist in the address book.
+     */
+    public void addParticipation(Participation p) {
+        participations.add(p);
+    }
+
+    /**
+     * Replaces the given participation {@code target} in the list with {@code editedParticipation}.
+     * {@code target} must exist in the address book.
+     * The participation identity of {@code editedParticipation} must not be the same as another existing
+     * participation in the address book.
+     */
+    public void setParticipation(Participation target, Participation editedParticipation) {
+        requireNonNull(editedParticipation);
+
+        participations.setParticipation(target, editedParticipation);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeParticipation(Participation key) {
+        participations.remove(key);
     }
 
 
