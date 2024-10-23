@@ -212,6 +212,23 @@ Examples:
 Result for `fc Investment Plan`:
   ![result for 'fc Investment Plan`](images/FindClientType.png)
 
+### Sort by name : `sort`
+
+Sort the current list on ClientHub according to their name.
+
+Format: `sort n/`
+
+* Sorts the list according to their name
+* n/ is used to indicate that the sort is according to their name
+
+A **valid** `n/` for delete should:
+* Not be empty.
+* For eg. Just typing `sort` without providing `n/` will throw an error.
+
+Examples:
+* `sort n/` sorts the list
+* `sort` throws an error
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from ClientHub.
@@ -318,7 +335,10 @@ _Details coming soon ..._
 | **Delete**            | `delete NAME`<br> e.g., `delete JAMES`                                                                                                                                                                    |
 | **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​ [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                       | 
 | **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                |
+| **Find Name*8         | `fn NAME(s)`                                                                                                                                                                                              |
 | **Find Phone Number** | `fp KEYWORD`                                                                                                                                                                                              |
 | **Find Address**      | `fa KEYWORD(s)`                                                                                                                                                                                           |
+| **Find Client Type**  | `fc CLIENT_TYPE`                                                                                                                                                                                          |
+| **Sort Name**         | `sort n/`                                                                                                                                                                                                 |
 | **List**              | `list`                                                                                                                                                                                                    |
 | **Help**              | `help`                                                                                                                                                                                                    |
