@@ -36,7 +36,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setNric(person.getNric());
         descriptor.setBirthDate(person.getBirthdate());
         descriptor.setSex(person.getSex());
-        descriptor.setHealthServices(person.getHealthServices());
     }
 
     /**
@@ -68,18 +67,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withNric(String nric) {
         descriptor.setNric(new Nric(nric));
-        return this;
-    }
-
-    /**
-     * Parses the {@code healthServices} into a {@code Set<HealthService>}
-     * and set it to the {@code EditPersonDescriptor}
-     * that we are building.
-     */
-    public EditPersonDescriptorBuilder withHealthServices(String... healthServices) {
-        Set<HealthService> healthServiceSet = Stream.of(healthServices)
-                .map(HealthService::new).collect(Collectors.toSet());
-        descriptor.setHealthServices(healthServiceSet);
         return this;
     }
 

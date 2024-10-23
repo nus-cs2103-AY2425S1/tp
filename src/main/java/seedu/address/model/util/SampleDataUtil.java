@@ -21,11 +21,11 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Nric("T0123456A"), new Birthdate("2001-05-30"),
-                    new Sex("M"), getHealthServiceSet("Blood Test")),
+                    new Sex("M")),
             new Person(new Name("Bernice Yu"), new Nric("S0123456B"), new Birthdate("1965-08-09"),
-                new Sex("F"), getHealthServiceSet("Vaccination", "Consult")),
+                new Sex("F")),
             new Person(new Name("Charlotte Oliveiro"), new Nric("M1234457A"), new Birthdate("1990-12-20"),
-                new Sex("F"), getHealthServiceSet("Cancer Screening")),
+                new Sex("F"))
         };
     }
 

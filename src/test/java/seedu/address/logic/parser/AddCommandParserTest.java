@@ -19,8 +19,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_BLOOD_TEST;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
@@ -49,7 +47,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST).build();
+        Person expectedPerson = new PersonBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
@@ -57,9 +55,7 @@ public class AddCommandParserTest {
 
 
         // multiple health services - all accepted
-        Person expectedPersonMultipleHealthServices = new PersonBuilder(BOB)
-                .withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST, VALID_HEALTHSERVICE_VACCINATION)
-                .build();
+        Person expectedPersonMultipleHealthServices = new PersonBuilder(BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
                         + BIRTHDATE_DESC_BOB + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION,

@@ -16,8 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_BLOOD_TEST;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
@@ -115,8 +113,7 @@ public class EditCommandParserTest {
                 + SEX_DESC_AMY + BIRTHDATE_DESC_AMY + NAME_DESC_AMY + HEALTHSERVICE_DESC_BLOOD_TEST;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withNric(VALID_NRIC_BOB).withSex(VALID_SEX_AMY).withBirthDate(VALID_BIRTHDATE_AMY)
-                .withHealthServices(VALID_HEALTHSERVICE_VACCINATION, VALID_HEALTHSERVICE_BLOOD_TEST).build();
+                .withNric(VALID_NRIC_BOB).withSex(VALID_SEX_AMY).withBirthDate(VALID_BIRTHDATE_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -163,7 +160,7 @@ public class EditCommandParserTest {
 
         // health services
         userInput = targetIndex.getOneBased() + HEALTHSERVICE_DESC_VACCINATION;
-        descriptor = new EditPersonDescriptorBuilder().withHealthServices(VALID_HEALTHSERVICE_VACCINATION).build();
+        descriptor = new EditPersonDescriptorBuilder().build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -206,7 +203,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + HEALTHSERVICE_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withHealthServices().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

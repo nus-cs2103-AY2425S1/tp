@@ -39,8 +39,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label sex;
     @FXML
-    private FlowPane healthServices;
-    @FXML
     private Label appointmentDateTime;
 
     /**
@@ -54,9 +52,6 @@ public class PersonCard extends UiPart<Region> {
         nric.setText(person.getNric().value);
         sex.setText(person.getSex().value);
         birthDate.setText(person.getBirthdate().value);
-        person.getHealthServices().stream()
-                .sorted(Comparator.comparing(healthservice -> healthservice.healthServiceName))
-                .forEach(healthservice -> healthServices.getChildren().add(new Label(healthservice.healthServiceName)));
         if (person.getAppts().size() == 0) {
             appointmentDateTime.setText("No appointments currently");
         } else {

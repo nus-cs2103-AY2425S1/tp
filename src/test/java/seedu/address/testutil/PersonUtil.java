@@ -1,16 +1,12 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Person;
 
 /**
@@ -34,9 +30,6 @@ public class PersonUtil {
         sb.append(PREFIX_NRIC + person.getNric().value + " ");
         sb.append(PREFIX_SEX + person.getSex().value + " ");
         sb.append(PREFIX_BIRTHDATE + person.getBirthdate().value + " ");
-        person.getHealthServices().stream().forEach(
-            s -> sb.append(PREFIX_HEALTHSERVICE + s.healthServiceName + " ")
-        );
         return sb.toString();
     }
 
@@ -50,14 +43,6 @@ public class PersonUtil {
         descriptor.getSex().ifPresent(sex -> sb.append(PREFIX_SEX).append(sex.value).append(" "));
         descriptor.getBirthDate().ifPresent(birthDate -> sb.append(PREFIX_BIRTHDATE)
                 .append(birthDate.value).append(" "));
-        if (descriptor.getHealthServices().isPresent()) {
-            Set<HealthService> healthServices = descriptor.getHealthServices().get();
-            if (healthServices.isEmpty()) {
-                sb.append(PREFIX_HEALTHSERVICE);
-            } else {
-                healthServices.forEach(s -> sb.append(PREFIX_HEALTHSERVICE).append(s.healthServiceName).append(" "));
-            }
-        }
         return sb.toString();
     }
 }

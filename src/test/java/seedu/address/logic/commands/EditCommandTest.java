@@ -56,8 +56,8 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withNric(VALID_NRIC_BOB).withSex(VALID_SEX_BOB)
-                .withHealthServices(VALID_HEALTHSERVICE_VACCINATION).build();
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withNric(VALID_NRIC_BOB)
+                .withSex(VALID_SEX_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withNric(VALID_NRIC_BOB).withSex(VALID_SEX_BOB)
