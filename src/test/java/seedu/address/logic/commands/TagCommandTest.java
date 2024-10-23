@@ -31,7 +31,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
-import seedu.address.ui.Ui;
 import seedu.address.ui.Ui.UiState;
 
 public class TagCommandTest {
