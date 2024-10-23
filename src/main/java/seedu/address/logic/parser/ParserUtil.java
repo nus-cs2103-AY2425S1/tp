@@ -11,6 +11,14 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -171,6 +179,39 @@ public class ParserUtil {
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Checks if a command word matches any known invalid variants and throws a ParseException if found.
+     * @param commandWord The command word to validate
+     * @throws ParseException If the command word matches any invalid variant, with a message suggesting
+     *                       the correct command
+     */
+    public static void parseInvalidVariants(String commandWord) throws ParseException {
+        if (AddCommand.INVALID_VARIANTS.contains(commandWord)) {
+            throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                    AddCommand.SHORT_COMMAND_WORD, AddCommand.LONG_COMMAND_WORD));
+        } else if (DeleteCommand.INVALID_VARIANTS.contains(commandWord)) {
+            throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                    DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD));
+        } else if (EditCommand.INVALID_VARIANTS.contains(commandWord)) {
+            throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                    EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD));
+        } else if (ExitCommand.INVALID_VARIANTS.contains(commandWord)) {
+            throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                    ExitCommand.COMMAND_WORD));
+        } else if (FindCommand.INVALID_VARIANTS.contains(commandWord)) {
+            throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                    FindCommand.COMMAND_WORD));
+        } else if (HelpCommand.INVALID_VARIANTS.contains(commandWord)) {
+            throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                    HelpCommand.COMMAND_WORD));
+        } else if (ListCommand.INVALID_VARIANTS.contains(commandWord)) {
+            throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                    ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD));
+        } else {
+            return;
+        }
     }
 
 }
