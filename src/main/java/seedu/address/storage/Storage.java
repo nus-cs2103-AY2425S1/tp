@@ -5,15 +5,26 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.CommandHistory;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCommandHistory;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, CommandHistoryStorage {
+    @Override
+    Path getCommandHistoryFilePath();
+    @Override
+    Optional<CommandHistory> readCommandHistory() throws DataLoadingException;
 
+    @Override
+    void saveCommandHistory(ReadOnlyCommandHistory commandHistory) throws IOException;
+
+    @Override
+    Path getUserPrefsFilePath();
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 

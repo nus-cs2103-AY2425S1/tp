@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 
@@ -23,6 +24,21 @@ public interface Model {
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Adds an executed command string in {@code commandHistory}
+     */
+    void addCommand(String commandString);
+
+    /**
+     * Replaces command history data with the data in {@code commandHistory}.
+     */
+    void setCommandHistory(ReadOnlyCommandHistory commandHistory);
+
+    /**
+     * Returns the command history.
+     */
+    ReadOnlyCommandHistory getCommandHistory();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -85,5 +101,13 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Returns the previous command.
+     */
+    CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult);
 
+    /**
+     * Returns the next command.
+     */
+    CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult);
 }

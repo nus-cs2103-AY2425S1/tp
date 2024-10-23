@@ -29,6 +29,7 @@ import seedu.address.model.tag.Tag;
 public class MarkPaidCommand extends Command {
 
     public static final String COMMAND_WORD = "markpaid";
+    public static final String COMMAND_WORD_ALIAS = "mp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the months paid for the person identified "
             + "by the index number used in the displayed person list. "
