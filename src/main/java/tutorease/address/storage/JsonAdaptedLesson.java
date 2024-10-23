@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.lesson.EndDateTime;
+import tutorease.address.model.lesson.Fee;
 import tutorease.address.model.lesson.Lesson;
-import tutorease.address.model.lesson.LocationIndex;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.person.Person;
 
@@ -22,7 +22,7 @@ import tutorease.address.model.person.Person;
 public class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     private final String student;
-    private final String locationIndex;
+    private final String fee;
     private final String startDateTime;
     private final String endDateTime;
 
@@ -31,11 +31,11 @@ public class JsonAdaptedLesson {
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("student") String student,
-                             @JsonProperty("locationIndex") String locationIndex,
+                             @JsonProperty("fee") String fee,
                              @JsonProperty("startDateTime") String startDateTime,
                              @JsonProperty("endDateTime") String endDateTime) {
         this.student = student;
-        this.locationIndex = locationIndex;
+        this.fee = fee;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
@@ -44,8 +44,8 @@ public class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this class for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        student = source.getStudent().getName().fullName;
-        locationIndex = source.getLocationIndex().toString();
+        student = source.getStudentName();
+        fee = source.getFeeString();
         startDateTime = dateTimeToString(source.getStartDateTime().getDateTime());
         endDateTime = dateTimeToString(source.getEndDateTime().getDateTime());
     }
@@ -65,15 +65,14 @@ public class JsonAdaptedLesson {
         }
         final Person studentPerson = addressBook.getPerson(student);
 
-        if (locationIndex == null) {
+        if (fee == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocationIndex.class.getSimpleName()));
+                    Fee.class.getSimpleName()));
         }
-        if (!LocationIndex.isValidLocationIndex(locationIndex)) {
-            throw new IllegalValueException(LocationIndex.MESSAGE_CONSTRAINTS);
+        if (!Fee.isValidFee(fee)) {
+            throw new IllegalValueException(Fee.MESSAGE_CONSTRAINTS);
         }
-        final LocationIndex locationIndex = new LocationIndex(this.locationIndex);
-
+        final Fee fee = new Fee(this.fee);
         if (startDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StartDateTime.class.getSimpleName()));
@@ -94,6 +93,6 @@ public class JsonAdaptedLesson {
         if (startDateTime.isAfter(endDateTime)) {
             throw new IllegalValueException(START_IS_AFTER_END);
         }
-        return new Lesson(studentPerson, locationIndex, startDateTime, endDateTime);
+        return new Lesson(studentPerson, fee, startDateTime, endDateTime);
     }
 }

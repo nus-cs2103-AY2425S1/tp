@@ -54,6 +54,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
             throw new OverlappingLessonException();
         }
         internalList.add(toAdd);
+        internalList.sort(Lesson::compareTo);
     }
 
     /**
