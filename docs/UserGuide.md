@@ -181,6 +181,19 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 * `delete John Doe` deletes the student with the full name "John Doe" from the address book, ignoring case sensitivity.
 
+### Displaying Student Information: `display`
+
+Displays specific information of a student in Tuteez.
+
+Format: `display INDEX`
+
+* Displays the details of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* The displayed information includes the student's name, phone number, email, address, tags, lessons, and any remarks associated with the student.
+  ![result for 'display 1'](images/findAlexDavidResult.png)
+Examples:
+* `display 1` Shows the details of the first student in the list.
+* `display 3` Shows the details of the third student in the list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from Tuteez.
@@ -235,6 +248,7 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [l/LESSON]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math t/monday 0900-1100`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
+**Display**| `display INDEX` <br> e.g., `display 1`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
 **Remark** | `remark INDEX -a REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 -a Great progress in Math`<br> `remark INDEX -d REMARK_INDEX` to delete a specific remark from the student at `INDEX`<br> e.g., `remark 1 -d 2` to delete the second remark of student 1.
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
