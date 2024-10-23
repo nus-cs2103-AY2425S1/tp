@@ -58,32 +58,28 @@ public class PersonCard extends UiPart<Region> {
     }
     private void createFields() {
         name.setText(person.getName().fullName);
-        phone.setText("Phone:", person.getPhone().value);
-        address.setText("Address:", person.getAddress().value);
-        email.setText("Email:", person.getEmail().value);
-        job.setText("Job:", person.getJob().value);
-        income.setText("Income:", person.getIncome().toString());
+        phone.setFields("fas-phone-alt", person.getPhone().value);
+        address.setFields("fas-building", person.getAddress().value);
+        email.setFields("fas-envelope", person.getEmail().value);
+        job.setFields("fas-briefcase", person.getJob().value);
+        income.setFields("fas-dollar-sign", person.getIncome().toString());
         remark.setText(person.getRemark().value);
         cardFields.getChildren().addAll(phone, address, email, job, income);
     }
 
     private void createTier() {
         // Create a label for the tier
-        Label tierLabel = new Label(person.getTier().toParsableString());
+        Label tierLabel = new Label(person.getTier().toParsableString().toUpperCase());
 
-        // Apply a different style class based on the tier value
-        String tier = person.getTier().toParsableString().toUpperCase();
-        switch (tier) {
-        case "GOLD" -> tierLabel.getStyleClass().add("gold-tier");
-        case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
-        case "BRONZE" -> tierLabel.getStyleClass().add("bronze-tier");
-        case "REJECT" -> tierLabel.getStyleClass().add("reject-tier");
-        default -> tierLabel = null;
-        }
-        if (tierLabel != null) {
-            // Add the label to the FlowPane
-            assignedTier.getChildren().add(tierLabel);
-        }
+        // Apply the existing style classes
+        tierLabel.getStyleClass().add("label");
+
+        // Add the tier-specific style class
+        String tier = person.getTier().toParsableString().toLowerCase();
+        tierLabel.getStyleClass().add(tier + "-tier");
+
+        // Add the label to the FlowPane
+        assignedTier.getChildren().add(tierLabel);
     }
 
     private void createStatus() {
