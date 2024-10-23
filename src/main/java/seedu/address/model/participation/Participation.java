@@ -35,7 +35,7 @@ public class Participation {
         return tutorial;
     }
     public String getTutorialSubject() {
-        return this.tutorial.getSubject();
+        return tutorial.getSubject();
     }
     public static Boolean isValidParticipationList(String test) {
         return test.matches(VALIDATION_REGEX);
