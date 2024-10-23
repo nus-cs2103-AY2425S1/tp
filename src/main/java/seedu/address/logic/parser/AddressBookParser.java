@@ -25,11 +25,15 @@ import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
 import seedu.address.logic.commands.editcommands.EditTaskCommand;
 import seedu.address.logic.commands.findcommands.FindCommand;
+import seedu.address.logic.commands.findcommands.FindGroupCommand;
 import seedu.address.logic.commands.findcommands.FindStudentCommand;
 import seedu.address.logic.commands.findcommands.FindTaskCommand;
 import seedu.address.logic.commands.listcommands.ListGroupCommand;
 import seedu.address.logic.commands.listcommands.ListStudentCommand;
 import seedu.address.logic.commands.listcommands.ListTaskCommand;
+import seedu.address.logic.commands.sortcommands.SortGroupCommand;
+import seedu.address.logic.commands.sortcommands.SortStudentCommand;
+import seedu.address.logic.commands.sortcommands.SortTaskCommand;
 import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
 import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
 import seedu.address.logic.parser.addcommands.AddGroupCommandParser;
@@ -45,11 +49,15 @@ import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
 import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.findcommands.FindCommandParser;
+import seedu.address.logic.parser.findcommands.FindGroupCommandParser;
 import seedu.address.logic.parser.findcommands.FindStudentCommandParser;
 import seedu.address.logic.parser.findcommands.FindTaskCommandParser;
 import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
 import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListTaskCommandParser;
+import seedu.address.logic.parser.sortcommands.SortGroupCommandParser;
+import seedu.address.logic.parser.sortcommands.SortStudentCommandParser;
+import seedu.address.logic.parser.sortcommands.SortTaskCommandParser;
 
 /**
  * Parses user input.
@@ -119,6 +127,10 @@ public class AddressBookParser {
         case ListGroupCommand.COMMAND_WORD:
             return new ListGroupCommandParser().parse(arguments);
 
+        case FindGroupCommand.COMMAND_WORD_ALIAS:
+        case FindGroupCommand.COMMAND_WORD:
+            return new FindGroupCommandParser().parse(arguments);
+
         case AddGroupCommand.COMMAND_WORD_ALIAS:
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
@@ -156,13 +168,23 @@ public class AddressBookParser {
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);
 
+        case SortStudentCommand.COMMAND_WORD_ALIAS:
+        case SortStudentCommand.COMMAND_WORD:
+            return new SortStudentCommandParser().parse(arguments);
+
+        case SortGroupCommand.COMMAND_WORD_ALIAS:
+        case SortGroupCommand.COMMAND_WORD:
+            return new SortGroupCommandParser().parse(arguments);
+
+        case SortTaskCommand.COMMAND_WORD_ALIAS:
+        case SortTaskCommand.COMMAND_WORD:
+            return new SortTaskCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
-
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
