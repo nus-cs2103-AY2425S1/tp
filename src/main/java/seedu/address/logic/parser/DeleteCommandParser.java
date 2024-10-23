@@ -39,9 +39,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()) {
             deleteCommandDescriptor.setEmergencyContactIndex(
-                    ParserUtil.parseIndex(
-                            argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT)
-                                    .orElse(ParserUtil.NO_EMERGENCY_CONTACT_INDEX)));
+                    ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).get()));
         }
 
         return new DeleteCommand(personIndex, deleteCommandDescriptor);

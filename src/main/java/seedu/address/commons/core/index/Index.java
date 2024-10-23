@@ -11,7 +11,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
-    public static final Index NO_EMERGENCY_CONTACT_INDEX = new EmptyEmergencyContactIndex();
     private int zeroBasedIndex;
 
     /**
@@ -68,14 +67,4 @@ public class Index {
         return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
     }
 
-    /**
-     * Represents a constant index used to signify the absence of an emergency contact index
-     * provided in the delete command.
-     * This class extends {@code Index} and provides a predefined index value of {@code Integer.MAX_VALUE}.
-     */
-    public static class EmptyEmergencyContactIndex extends Index {
-        public EmptyEmergencyContactIndex() {
-            super(Integer.MAX_VALUE);
-        }
-    }
 }
