@@ -24,8 +24,8 @@ import seedu.address.testutil.TypicalPersons;
  * Contains integration tests (interaction with the Model) for {@code FindPersonCommand}.
  */
 public class FindPersonCommandTest {
-    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalPersons.getTypicalPawPatrol(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalPersons.getTypicalPawPatrol(), new UserPrefs());
 
     @Test
     public void equals() {

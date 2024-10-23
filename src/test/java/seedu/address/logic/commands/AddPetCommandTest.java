@@ -18,9 +18,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
@@ -133,17 +133,17 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void setPawPatrolPath(Path addressBookFilePath) {
+        public void setPawPatrolPath(Path pawPatrolFilePath) {
 
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        public void setPawPatrol(ReadOnlyPawPatrol pawPatrol) {
 
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPawPatrol getPawPatrol() {
             return null;
         }
 
@@ -262,8 +262,8 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPawPatrol getPawPatrol() {
+            return new PawPatrol();
         }
     }
 

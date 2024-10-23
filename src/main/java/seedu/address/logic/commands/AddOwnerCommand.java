@@ -13,13 +13,13 @@ import seedu.address.model.Model;
 import seedu.address.model.owner.Owner;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to PawPatrol.
  */
 public class AddOwnerCommand extends Command {
 
     public static final String COMMAND_WORD = "owner";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an owner to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an owner to PawPatrol. "
         + "Parameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_PHONE + "PHONE "
@@ -32,7 +32,7 @@ public class AddOwnerCommand extends Command {
         + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
     public static final String MESSAGE_SUCCESS = "New owner added: %1$s";
-    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in PawPatrol";
 
     private final Owner toAdd;
 

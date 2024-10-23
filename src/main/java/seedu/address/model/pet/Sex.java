@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Pet's sex in the address book.
+ * Represents a Pet's sex in PawPatrol.
  * Guarantees: immutable; is valid as declared in {@link #isValidSex(String)}
  */
 public class Sex {
