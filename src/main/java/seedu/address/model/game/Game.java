@@ -92,6 +92,13 @@ public class Game {
     }
 
     /**
+     * Removes the "favourite" status from a game
+     */
+    public void removeFavourite() {
+        this.isFavourite = false;
+    }
+
+    /**
      * Returns true if both games have the same name.
      * This defines a weaker notion of equality between two game objects.
      */

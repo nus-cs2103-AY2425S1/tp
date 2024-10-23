@@ -14,12 +14,13 @@ import seedu.address.model.game.Game;
 import seedu.address.model.person.Person;
 
 /**
- * Represents a command to set a game to "favourite" status.
+ * Represents a command to remove the "favourite" status of a game under a person.
  */
-public class FavouriteGameCommand extends Command {
-    public static final String COMMAND_WORD = "favgame";
+public class UnfavouriteGameCommand extends Command {
+    public static final String COMMAND_WORD = "unfavgame";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets a game to \"favourite\" "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Removes the  \"favourite\" status of a game "
             + "under the person specified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -28,7 +29,7 @@ public class FavouriteGameCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GAME + "Valorant ";
 
-    public static final String MESSAGE_FAVOURITE_GAME_SUCCESS = "Favourited Game: %1$s";
+    public static final String MESSAGE_UNFAVOURITE_GAME_SUCCESS = "Un-favourited Game: %1$s";
     public static final String MESSAGE_GAME_NOT_SPECIFIED = "Please specify a game!";
     public static final String MESSAGE_GAME_NOT_FOUND = "Game not found!";
 
@@ -39,11 +40,10 @@ public class FavouriteGameCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param gameName name of the game to be favourited
      */
-    public FavouriteGameCommand(Index index, String gameName) {
+    public UnfavouriteGameCommand(Index index, String gameName) {
         this.index = index;
         this.gameName = gameName;
     }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -64,24 +64,10 @@ public class FavouriteGameCommand extends Command {
             throw new CommandException(MESSAGE_GAME_NOT_FOUND);
         }
 
-        targetGame.setAsFavourite();
+        targetGame.removeFavourite();
         model.setPerson(targetPerson, targetPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_FAVOURITE_GAME_SUCCESS, gameName));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof FavouriteGameCommand)) {
-            return false;
-        }
-
-        FavouriteGameCommand e = (FavouriteGameCommand) other;
-        return index.equals(e.index) && gameName.equals(e.gameName);
+        return new CommandResult(String.format(MESSAGE_UNFAVOURITE_GAME_SUCCESS, gameName));
     }
 }
