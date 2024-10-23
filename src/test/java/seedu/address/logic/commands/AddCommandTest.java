@@ -214,7 +214,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-        boolean isCommitted = false;
+        private boolean isCommitted = false;
 
         @Override
         public boolean hasPerson(Person person) {

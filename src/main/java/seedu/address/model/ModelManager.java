@@ -14,7 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Policy;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -123,11 +122,7 @@ public class ModelManager implements Model {
 
     @Override
     public void undoAddressBook() throws CommandException {
-        if (lastOperation == LastOperation.DELETE_POLICY) {
-            throw new CommandException("Undoing a policy deletion is not allowed.");
-        }
         versionedAddressBook.undo();
-        lastOperation = LastOperation.NONE;
     }
 
     @Override
@@ -178,15 +173,6 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
-    private enum LastOperation {
-        NONE,
-        DELETE_POLICY,
-        ASSIGN_POLICY,
-        OTHER
-    }
-
-    private LastOperation lastOperation = LastOperation.NONE;
 
     @Override
     public void deletePerson(Person target) {
