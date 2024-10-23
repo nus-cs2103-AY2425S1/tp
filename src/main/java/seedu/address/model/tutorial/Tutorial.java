@@ -16,8 +16,8 @@ import seedu.address.model.participation.Participation;
 public class Tutorial {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Subjects should only contain alphanumeric characters only.";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
+            "Tutorial name should only contain alphanumeric characters and spaces, and it should not be blank.";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     private final String subject;
     private final List<Participation> participationList = new ArrayList<>();
 
