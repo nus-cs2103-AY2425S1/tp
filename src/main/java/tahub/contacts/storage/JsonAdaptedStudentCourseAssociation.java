@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
@@ -33,8 +32,8 @@ class JsonAdaptedStudentCourseAssociation {
             @JsonProperty("student") JsonAdaptedPerson student,
             @JsonProperty("course") JsonAdaptedCourse course,
             @JsonProperty("tutorial") JsonAdaptedTutorial tutorial,
-            // To add in JsonAdaptedGradingSystem
-            @JsonProperty("attendance") JsonAdaptedAttendance attendance) {
+            @JsonProperty("attendance") JsonAdaptedAttendance attendance,
+            @JsonProperty("grades") JsonSerializableGradingSystem grades) {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
@@ -85,22 +84,19 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
 
-
         // Checks if the attendance is valid
         if (this.attendance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     JsonAdaptedAttendance.class.getSimpleName()));
         }
         final Attendance attendanceModel = this.attendance.toModelType();
-      
-        // Checks if the gradingsystem is valid
+        // Checks if the GradingSystem is valid
         if (this.grades == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 JsonSerializableGradingSystem.class.getSimpleName()));
         }
-        final GradingSystem gradesModel = this.attendance.toModelType();
-      
+        final JsonSerializableGradingSystem gradesModel = this.grades;
         return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,
-                gradesModel, attendanceModel);
+                gradesModel.toModelType(), attendanceModel);
     }
 }
