@@ -4,7 +4,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ViewToggler;
-import seedu.address.model.link.Link;
 
 /**
  * Manages the list views (owners, pets, combined) based on the command result.

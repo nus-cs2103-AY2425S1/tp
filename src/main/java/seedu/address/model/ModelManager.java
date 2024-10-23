@@ -28,6 +28,8 @@ public class ModelManager implements Model {
     private final FilteredList<Owner> filteredOwners;
     private final FilteredList<Pet> filteredPets;
 
+    private final FilteredList<Link> filteredLinks;
+
     /**
      * Initializes a ModelManager with the given pawPatrol and userPrefs.
      */
@@ -41,6 +43,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.pawPatrol.getPersonList());
         filteredOwners = new FilteredList<>(this.pawPatrol.getOwnerList());
         filteredPets = new FilteredList<>(this.pawPatrol.getPetList());
+        filteredLinks = new FilteredList<>(this.pawPatrol.getLinkList());
     }
 
     public ModelManager() {
@@ -209,6 +212,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Pet> getFilteredPetList() {
         return filteredPets;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
+     * {@code versionedPawPatrol}
+     */
+    @Override
+    public ObservableList<Link> getFilteredLinkList() {
+        return filteredLinks;
     }
 
     /**
