@@ -44,7 +44,7 @@ public class AddDoctorCommand extends Command {
     private final Doctor doctorToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Doctor}
+     * Creates an AddDoctorCommand to add the specified {@code Doctor}
      */
     public AddDoctorCommand(Doctor doctor) {
         requireNonNull(doctor);
