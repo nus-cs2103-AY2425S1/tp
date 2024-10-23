@@ -69,14 +69,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         EcName ecName = new EcName(""); // Adding a student does not allow EcName to be added right away
         EcNumber ecNumber = new EcNumber(""); // Adding a student does not allow EcNumber to be added right away
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-        ArrayList<AbsentDate> dateList = ParserUtil.parseAbsentDates(argMultimap.getAllValues(PREFIX_ABSENT_DATE));
-        ArrayList<AbsentReason> reasonList = ParserUtil.parseAbsentReasons(argMultimap
-                .getAllValues(PREFIX_ABSENT_REASON));
         HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
-        for (int i = 0; i < dateList.size(); i++) {
-            attendances.put(dateList.get(i), reasonList.get(i));
-        }
 
         Person person = new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName,
                 ecNumber, tagList, attendances);
