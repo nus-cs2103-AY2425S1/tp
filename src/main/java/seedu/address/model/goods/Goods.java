@@ -30,7 +30,7 @@ public class Goods {
     public String getReadableGoodsName() {
         return goodsName.toString();
     }
-  
+
     public GoodsCategories getCategory() {
         return category;
     }

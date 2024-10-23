@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGoodsReceipts.aliceReceipt;
-import static seedu.address.testutil.TypicalGoodsReceipts.bobReceipt;
+import static seedu.address.testutil.TypicalGoodsReceipts.ALICE_RECEIPT;
+import static seedu.address.testutil.TypicalGoodsReceipts.BOB_RECEIPT;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
@@ -29,18 +29,18 @@ public class UniqueGoodsReceiptListTest {
 
     @Test
     public void contains_receiptNotInList_returnsFalse() {
-        assertFalse(uniqueGoodsReceiptList.contains(aliceReceipt));
+        assertFalse(uniqueGoodsReceiptList.contains(ALICE_RECEIPT));
     }
 
     @Test
     public void contains_receiptInList_returnsTrue() {
-        uniqueGoodsReceiptList.add(aliceReceipt);
-        assertTrue(uniqueGoodsReceiptList.contains(aliceReceipt));
+        uniqueGoodsReceiptList.add(ALICE_RECEIPT);
+        assertTrue(uniqueGoodsReceiptList.contains(ALICE_RECEIPT));
     }
 
     @Test
     public void contains_receiptWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueGoodsReceiptList.add(aliceReceipt);
+        uniqueGoodsReceiptList.add(ALICE_RECEIPT);
         GoodsReceipt editedAlice = new GoodsReceiptBuilder().withSupplierName(ALICE.getName()).build();
         boolean wat = uniqueGoodsReceiptList.contains(editedAlice);
         assertTrue(uniqueGoodsReceiptList.contains(editedAlice));
@@ -53,8 +53,8 @@ public class UniqueGoodsReceiptListTest {
 
     @Test
     public void add_duplicateReceipt_throwsDuplicatePersonException() {
-        uniqueGoodsReceiptList.add(aliceReceipt);
-        assertThrows(DuplicateReceiptException.class, () -> uniqueGoodsReceiptList.add(aliceReceipt));
+        uniqueGoodsReceiptList.add(ALICE_RECEIPT);
+        assertThrows(DuplicateReceiptException.class, () -> uniqueGoodsReceiptList.add(ALICE_RECEIPT));
     }
 
 
@@ -65,13 +65,13 @@ public class UniqueGoodsReceiptListTest {
 
     @Test
     public void remove_receiptDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(ReceiptNotFoundException.class, () -> uniqueGoodsReceiptList.remove(aliceReceipt));
+        assertThrows(ReceiptNotFoundException.class, () -> uniqueGoodsReceiptList.remove(ALICE_RECEIPT));
     }
 
     @Test
     public void remove_existingReceipt_removesPerson() {
-        uniqueGoodsReceiptList.add(aliceReceipt);
-        uniqueGoodsReceiptList.remove(aliceReceipt);
+        uniqueGoodsReceiptList.add(ALICE_RECEIPT);
+        uniqueGoodsReceiptList.remove(ALICE_RECEIPT);
         UniqueGoodsReceiptList expectedUniqueReceiptList = new UniqueGoodsReceiptList();
         assertEquals(expectedUniqueReceiptList, uniqueGoodsReceiptList);
     }
@@ -84,9 +84,9 @@ public class UniqueGoodsReceiptListTest {
 
     @Test
     public void setPersons_uniqueReceiptList_replacesOwnListWithProvidedUniquePersonList() {
-        uniqueGoodsReceiptList.add(aliceReceipt);
+        uniqueGoodsReceiptList.add(ALICE_RECEIPT);
         UniqueGoodsReceiptList expectedUniqueReceiptList = new UniqueGoodsReceiptList();
-        uniqueGoodsReceiptList.add(bobReceipt);
+        uniqueGoodsReceiptList.add(BOB_RECEIPT);
         uniqueGoodsReceiptList.setReceipts(expectedUniqueReceiptList);
         assertEquals(expectedUniqueReceiptList, uniqueGoodsReceiptList);
     }
@@ -98,17 +98,17 @@ public class UniqueGoodsReceiptListTest {
 
     @Test
     public void setReceipt_list_replacesOwnListWithProvidedList() {
-        uniqueGoodsReceiptList.add(aliceReceipt);
-        List<GoodsReceipt> goodsReceipts = Collections.singletonList(bobReceipt);
+        uniqueGoodsReceiptList.add(ALICE_RECEIPT);
+        List<GoodsReceipt> goodsReceipts = Collections.singletonList(BOB_RECEIPT);
         uniqueGoodsReceiptList.setReceipts(goodsReceipts);
         UniqueGoodsReceiptList expectedUniqueReceiptList = new UniqueGoodsReceiptList();
-        expectedUniqueReceiptList.add(bobReceipt);
+        expectedUniqueReceiptList.add(BOB_RECEIPT);
         assertEquals(expectedUniqueReceiptList, uniqueGoodsReceiptList);
     }
 
     @Test
     public void setReceipt_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<GoodsReceipt> listWithDuplicatePersons = Arrays.asList(aliceReceipt, aliceReceipt);
+        List<GoodsReceipt> listWithDuplicatePersons = Arrays.asList(ALICE_RECEIPT, ALICE_RECEIPT);
         assertThrows(DuplicatePersonException.class, () ->
                 uniqueGoodsReceiptList.setReceipts(listWithDuplicatePersons));
     }
