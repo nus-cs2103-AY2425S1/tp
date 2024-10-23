@@ -15,7 +15,7 @@ import seedu.hireme.logic.validator.DateValidator;
 public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format 'dd/MM/yy' and must be valid.";
+            "Dates must not be in the future, should be in the format 'dd/MM/yy', and must be valid.";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy");
 

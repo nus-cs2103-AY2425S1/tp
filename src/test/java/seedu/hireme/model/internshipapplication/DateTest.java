@@ -30,6 +30,7 @@ public class DateTest {
         assertFalse(DateValidator.of().validate("12/50/24")); // invalid month
         assertFalse(DateValidator.of().validate("-1/05/24")); // invalid day
         assertFalse(DateValidator.of().validate("12?05?24")); // invalid special characters
+        assertFalse(DateValidator.of().validate("12/05/30")); // future date
 
         // valid date
         assertTrue(DateValidator.of().validate("12/05/24")); // valid date
