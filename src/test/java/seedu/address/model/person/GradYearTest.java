@@ -24,13 +24,13 @@ public class GradYearTest {
         // null gradYear
         assertThrows(NullPointerException.class, () -> GradYear.isValidGradYear(null));
 
-        // invalid addresses
+        // invalid gradYears
         assertFalse(GradYear.isValidGradYear("#2003")); // additional special character #
         assertFalse(GradYear.isValidGradYear("17")); // incorrect digits
         assertFalse(GradYear.isValidGradYear("22222")); // incorrect digits
         assertFalse(GradYear.isValidGradYear("3222")); // first digit is not 2
 
-        // valid addresses
+        // valid gradYears
         assertTrue(GradYear.isValidGradYear("2027"));
     }
 

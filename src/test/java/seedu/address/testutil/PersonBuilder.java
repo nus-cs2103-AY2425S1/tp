@@ -139,7 +139,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code GradYear} of the {@code Person} that we are building to null.
+     * Sets the {@code GradYear} of the {@code Person} that we are building.
      */
     public PersonBuilder withGradYear(String gradYear) {
         this.gradYear = new GradYear(gradYear);

@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class GradYear {
 
-    public static final String MESSAGE_CONSTRAINTS = "A string no longer than length 4 in the form of “YYYY” "
+    public static final String MESSAGE_CONSTRAINTS = "A string of length 4 in the form of “YYYY” "
             + "Y are integers representing the year of graduation. "
             + "The first digit is 2. Eg \"2027\"";
 
@@ -23,7 +23,7 @@ public class GradYear {
     public final String value;
 
     /**
-     * Constructs an {@code RoomNumber}.
+     * Constructs an {@code GradYear}.
      *
      * @param gradDate A valid year.
      */
@@ -34,7 +34,7 @@ public class GradYear {
     }
 
     /**
-     * Returns true if a given string is a valid room number.
+     * Returns true if a given string is a valid gradYear.
      */
     public static boolean isValidGradYear(String test) {
         return test.matches(VALIDATION_REGEX);

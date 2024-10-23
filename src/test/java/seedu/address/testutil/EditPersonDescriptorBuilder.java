@@ -102,7 +102,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code GradYear} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withGradYear(String gradYear) {
         descriptor.setGradYear(new GradYear(gradYear));
