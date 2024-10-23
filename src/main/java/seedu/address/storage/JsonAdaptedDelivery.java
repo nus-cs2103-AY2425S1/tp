@@ -24,7 +24,6 @@ public class JsonAdaptedDelivery {
     private final String deliveryTime;
     private final String cost;
     private final String quantity;
-
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
@@ -44,7 +43,7 @@ public class JsonAdaptedDelivery {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Delivery} into this class for Jackson use.
      */
     public JsonAdaptedDelivery(Delivery source) {
         this.product = source.getDeliveryProduct().productName;
@@ -58,7 +57,7 @@ public class JsonAdaptedDelivery {
     /**
      * Converts this Jackson-friendly adapted delivery object into the model's {@code Delivery} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted delivery.
      */
     public Delivery toModelType() throws IllegalValueException {
 
@@ -113,8 +112,7 @@ public class JsonAdaptedDelivery {
         }
         final Quantity quantityObj = new Quantity(quantity);
 
-        return new Delivery(productObj, senderObj, statusObj, deliveryDateTimeObj, costObj, quantityObj);
+        return new Delivery(productObj, senderObj, statusObj, deliveryDateTimeObj, costObj,
+                quantityObj);
     }
-
-
 }

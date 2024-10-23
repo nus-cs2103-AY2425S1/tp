@@ -93,6 +93,26 @@ public class Delivery {
         this.sender = sender;
     }
 
+    /**
+     * Checks if current instance of delivery has an earlier due date than input date.
+     *
+     * @param deliveryDateTime DateTime object to compare against.
+     * @return True if current delivery is to be completed before input delivery.
+     */
+    public boolean hasEarlierDateThan(DateTime deliveryDateTime) {
+        return this.deliveryDateTime.isEarlierThan(deliveryDateTime);
+    }
+
+    /**
+     * Checks if current instance of delivery has same status as input status
+     *
+     * @param deliveryStatus Status object to compare against.
+     * @return True if current delivery have same status as input status.
+     */
+    public boolean hasSameStatus(Status deliveryStatus) {
+        return this.status.equals(deliveryStatus);
+    }
+
 
     /**
      * Returns true if both deliveries have the same package details, sender.
