@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,8 +19,10 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
-    private final CommandGetter getEarlierCommand;
-    private final CommandGetter getLaterCommand;
+    private final CommandGetter getEarlierCommandGetterResult;
+    private final CommandGetter getLaterCommandGetterResult;
+
+    private CommandGetterResult commandGetterResult;
 
     @FXML
     private TextField commandTextField;
@@ -28,12 +31,13 @@ public class CommandBox extends UiPart<Region> {
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
     public CommandBox(CommandExecutor commandExecutor,
-                      CommandGetter getEarlierCommand, CommandGetter getLaterCommand) {
+                      CommandGetter getEarlierCommandGetterResult, CommandGetter getLaterCommandGetterResult) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.getEarlierCommand = getEarlierCommand;
-        this.getLaterCommand = getLaterCommand;
-        setArrowKeyHandler(commandTextField, getEarlierCommand, getLaterCommand);
+        this.getEarlierCommandGetterResult = getEarlierCommandGetterResult;
+        this.getLaterCommandGetterResult = getLaterCommandGetterResult;
+        this.commandGetterResult = new CommandGetterResult("", "");
+        setArrowKeyHandler(commandTextField, getEarlierCommandGetterResult, getLaterCommandGetterResult);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -63,9 +67,13 @@ public class CommandBox extends UiPart<Region> {
                                     CommandGetter getLaterCommand) {
         textField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.UP) {
-                commandTextField.setText(getEarlierCommand.getCommand());
+                CommandGetterResult result = commandGetterResult.updateOriginalTypedString(textField.getText());
+                result = getEarlierCommand.getCommandGetterResult(result);
+                commandTextField.setText(result.getStringToDisplay());
             } else if (keyEvent.getCode() == KeyCode.DOWN) {
-                commandTextField.setText(getLaterCommand.getCommand());
+                CommandGetterResult result = commandGetterResult.updateOriginalTypedString(textField.getText());
+                result = getLaterCommand.getCommandGetterResult(result);
+                commandTextField.setText(result.getStringToDisplay());
             }
         });
     }
@@ -108,7 +116,7 @@ public class CommandBox extends UiPart<Region> {
      */
     @FunctionalInterface
     public interface CommandGetter {
-        String getCommand();
+        CommandGetterResult getCommandGetterResult(CommandGetterResult commandGetterResult);
     }
 
 }
