@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.OrderList;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.product.Product;
@@ -35,11 +36,11 @@ public class DeleteCustomerOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        OrderList orderList = model.getOrderList();
+        CustomerOrderList customerOrderList = model.getCustomerOrderList();
 
-        orderList.removeCustomerOrder(phoneNumber);
+        customerOrderList.removeOrder(phoneNumber);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS, orderList.viewCustomerOrders()));
+        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS, customerOrderList.viewOrders()));
     }
 
 

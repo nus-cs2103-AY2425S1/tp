@@ -16,9 +16,9 @@ public class ViewOrderListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         String result = "Customer Orders: \n"
-                        + model.getOrderList().viewCustomerOrders()
+                        + model.getCustomerOrderList().viewOrders()
                         + "Supply Orders: \n"
-                        + model.getOrderList().viewSupplyOrders();
+                        + model.getSupplierOrderList().viewOrders();
         return new CommandResult(result);
     }
 }
