@@ -81,8 +81,6 @@ public class SampleDataUtil {
     }
 
     public static Map<Tutorial, AttendanceStatus> getTutorialMap(String[] strings, AttendanceStatus[] attendance) {
-        System.out.println(Arrays.toString(strings));
-        System.out.println(Arrays.toString(attendance));
         Map<Tutorial, AttendanceStatus> tutorialMap = new LinkedHashMap<>();
         for (int i = 0; i < strings.length; i++) {
             tutorialMap.put(new Tutorial(strings[i]), attendance[i]);

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,9 @@ import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
+/**
+ * Resets attendance of a person in the address book.
+ */
 public class ResetCommand extends Command {
 
     public static final String COMMAND_WORD = "reset";
@@ -23,41 +27,32 @@ public class ResetCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "tut/1";
 
-    public static final String MESSAGE_RESET_UNNECESSARY =
-            "Tutorial: %2$s is already marked as not taken place for Person: %1$s";
-
-    public static final String MESSAGE_RESET_SUCCESS = "Marked not taken place in Tutorial: %2$s for Person: %1$s";
-
     private final Index index;
     private final Tutorial tutorial;
 
     /**
      * @param index The index of the person to be marked.
-     * @param tutorial Tutorial to set as not taken place.
+     * @param tutorial The tutorial to set as not taken place.
      */
     public ResetCommand(Index index, Tutorial tutorial) {
         this.index = index;
         this.tutorial = tutorial;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> currDisplayedList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= currDisplayedList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = currDisplayedList.get(index.getZeroBased());
+    /**
+     * @param personToEdit The person whose attendance will be reset.
+     * @param tutorial The tutorial to reset attendance for.
+     */
+    private Person generateResetPerson(Person personToEdit, Tutorial tutorial) throws CommandException {
         Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
         if (newTutorials.get(tutorial) == AttendanceStatus.NOT_TAKEN_PLACE) {
             throw new CommandException(
-                    String.format(MESSAGE_RESET_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
+                    String.format(Messages.MESSAGE_RESET_UNNECESSARY, Messages.format(personToEdit),
+                            tutorial.tutorial));
         }
+        newTutorials.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
 
-        newTutorials.put(tutorial, AttendanceStatus.PRESENT);
-
-        Person editedPerson = new Person(
+        return new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),
                 personToEdit.getPhone(),
@@ -65,10 +60,20 @@ public class ResetCommand extends Command {
                 personToEdit.getTags(),
                 newTutorials
         );
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+    }
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        List<Person> currDisplayedList = model.getFilteredPersonList();
+        List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, index);
+        List<Person> editedPersonList = new ArrayList<>();
+        for (Person personToEdit : personToEditList) {
+            Person editedPerson = this.generateResetPerson(personToEdit, this.tutorial);
+            editedPersonList.add(editedPerson);
+            model.setPerson(personToEdit, editedPerson);
+        }
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPersonList));
     }
 
     /**
@@ -76,8 +81,11 @@ public class ResetCommand extends Command {
      * the tutorial was marked as not taken place.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_RESET_SUCCESS, Messages.format(personToEdit), tutorial.tutorial);
+    private String generateSuccessMessage(List<Person> personListToEdit) {
+        return String.join("\n", personListToEdit.stream()
+                .map(personToEdit -> String.format(Messages.MESSAGE_RESET_SUCCESS,
+                        Messages.format(personToEdit), tutorial.tutorial))
+                .toArray(String[]::new));
     }
 
     @Override
