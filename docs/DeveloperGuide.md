@@ -305,12 +305,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a student
 2. User provides the details of the student
-3. System confirms student has been added and displays list of updated students 
+3. System confirms student has been added and displays list of updated students
 
     Use case ends
 
    **Extensions**
-    
+
 * 2a. The name is not provided/invalid format
   * 2a1. System requests name in correct format
   * 2a2. User re-enters the correct/missing name
@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The student entered has already been added
   * 2b1. System indicates that there has already been an entry for the student
-  
+
     Use case ends
 
 * 2c. The phone number is missing or invalid
@@ -344,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 2e1-2e2 are repeated until a valid email is provided
     Use case resumes from step 3
 
-* 2f. The class taken/academic year is missing or invalid 
+* 2f. The class taken/academic year is missing or invalid
   * 2f1. System requests for a valid class/academic year
   * 2f2. User re-enters the correct class/academic year
 
@@ -370,7 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a2. User re-enters the correct/missing details
 
     Steps 1a1-1a2 are repeated until the fields in the specified format are provided
-    
+
     Use case resumes at step 2
 
 ---
@@ -407,10 +407,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to view all student contact details 
+1. User chooses to view all student contact details
 2. System displays a list of students with their relevant details
 
-    Use case ends 
+    Use case ends
 
    **Extensions**
 
@@ -420,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends
 
 * 1b. No students are found in the system
-  * 1b1. System informs user that there are no students added 
+  * 1b1. System informs user that there are no students added
 
     Use case ends
 
@@ -465,7 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User enters an incorrect format
   * 1a1. System displays an error message and prompts user to try again
   * 1a2. User re-enters the correct clear command
-    
+
     Steps 1a1-1a2 are repeated until the correct command is entered
     Use case resumes from step 2
 
@@ -481,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User uses the help command
-2. System shows user a list of commands and their functionality 
+2. System shows user a list of commands and their functionality
 
     Use case ends
 
@@ -502,12 +502,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User tries to sort by an invalid field
   * 1a1. System informs user to sort using only name or class
   * 1a2. User re-enters the command with a valid field.
-    
+
     Steps 1a1-1a2 are repeated until only name or class is entered as the field
     Use case resumes from step 2.
 
-* 2a. There are no students added 
-  * 2a1. System shows a blank screen 
+* 2a. There are no students added
+  * 2a1. System shows a blank screen
 
     Use case ends
 
@@ -532,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  Codebase should follow industry best practices for readability, including consistent naming conventions for easy maintenance.
 7.  The app should follow a modular design so that individual components can be updated without affecting the entire app.
 
-#### Robustness 
+#### Robustness
 8.  The system should gracefully handle unexpected inputs, preventing crashes and allowing users to recover from errors.
 
 #### Testability
