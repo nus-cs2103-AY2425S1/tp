@@ -33,7 +33,7 @@ public class DeletePublicAddressCommandTest {
                 new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
 
         String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDeleteAddress));
+                personToDeleteAddress.getPublicAddresses());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
@@ -44,6 +44,24 @@ public class DeletePublicAddressCommandTest {
     }
 
     @Test
+    public void execute_validIndexValidNetworkValidLabel_success() throws Exception {
+        Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeletePublicAddressCommand deletePublicAddressCommand =
+                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "test");
+
+        String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                personToDeleteAddress.getPublicAddresses());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
+        updatedPerson.setPublicAddressesByNetwork(Network.BTC, new HashSet<>());
+        expectedModel.setPerson(personToDeleteAddress, updatedPerson);
+
+        assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
+    }
+
+
+    @Test
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeletePublicAddressCommand deletePublicAddressCommand =
@@ -51,7 +69,6 @@ public class DeletePublicAddressCommandTest {
 
         assertCommandFailure(deletePublicAddressCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
 
     @Test
     public void equals() {
