@@ -15,6 +15,11 @@ public class Inventory {
         initializeStock();
     }
 
+    // Retrieves an ingredient by name from the ingredient catalogue
+    public Ingredient getIngredientByName(String name) {
+        return ingredientCatalogue.getIngredientByName(name);
+    }
+
     // Initializes stock levels for all ingredients to 0
     private void initializeStock() {
         for (Product product : ingredientCatalogue.getCatalogue().values()) {
