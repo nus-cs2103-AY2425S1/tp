@@ -86,7 +86,7 @@ public class AddressBookParser {
             return new FilterCommandParser().parse(arguments);
 
         case DownloadCommand.COMMAND_WORD:
-            return new DownloadCommand();
+            return new DownloadCommandParser().parse(arguments);
         case AddOrderCommand.COMMAND_WORD:
             return new AddOrderCommandParser().parse(arguments);
         case DeleteOrderCommand.COMMAND_WORD:

@@ -88,7 +88,6 @@ public class StorageManager implements Storage {
 
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(csvContent);
-            System.out.println("CSV file saved to: data/exported.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
