@@ -22,6 +22,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,7 +173,55 @@ public class EditCommandTest {
     }
 
     @Test
+    public void editPolicies_invalidDuplicatePolicyName_throwsCommandException() {
+        Person personToEdit = new PersonBuilder().build();
+        Policy oldPolicy1 = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        Policy oldPolicy2 = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        List<Policy> oldPolicyList = new ArrayList<>();
+        oldPolicyList.add(oldPolicy1);
+        oldPolicyList.add(oldPolicy2);
+        personToEdit.setPolicies(oldPolicyList);
+
+        Policy duplicateNamePolicy =
+                new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        Index validIndex = Index.fromOneBased(1);
+
+        Map<Index, Policy> policyMap = new HashMap<>();
+        policyMap.put(validIndex, duplicateNamePolicy);
+
+        assertThrows(CommandException.class, () -> EditCommand.editPolicies(personToEdit, policyMap));
+    }
+
+    @Test
     public void editPolicies_validPolicyMap_returnsPolicyList() throws CommandException {
+        Person personToEdit = new PersonBuilder().build();
+        Policy oldPolicy1 = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        Policy oldPolicy2 = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        List<Policy> oldPolicyList = new ArrayList<>();
+        oldPolicyList.add(oldPolicy1);
+        oldPolicyList.add(oldPolicy2);
+        personToEdit.setPolicies(oldPolicyList);
+
+        Policy validPolicy = new Policy(VALID_NAME_AMY, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+
+        Index validIndex = Index.fromOneBased(2);
+
+        Map<Index, Policy> policyMap = new HashMap<>();
+        policyMap.put(validIndex, validPolicy);
+
+        List<Policy> expectedPolicyList = new ArrayList<>();
+        expectedPolicyList.add(oldPolicy1);
+        expectedPolicyList.add(validPolicy);
+
+        expectedPolicyList.sort(Comparator.comparing(Policy::getPolicyPaymentDueDate));
+
+        personToEdit.setPolicies(expectedPolicyList);
+
+        assertEquals(expectedPolicyList, EditCommand.editPolicies(personToEdit, policyMap));
+    }
+
+    @Test
+    public void editPolicies_validPolicyMapChangePolicyName_returnsPolicyList() throws CommandException {
         Person personToEdit = new PersonBuilder().build();
         Policy oldPolicy = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
         personToEdit.setPolicies(List.of(oldPolicy));
@@ -185,6 +234,10 @@ public class EditCommandTest {
 
         List<Policy> expectedPolicyList = new ArrayList<>();
         expectedPolicyList.add(validPolicy);
+
+        expectedPolicyList.sort(Comparator.comparing(Policy::getPolicyPaymentDueDate));
+
+        personToEdit.setPolicies(expectedPolicyList);
 
         assertEquals(expectedPolicyList, EditCommand.editPolicies(personToEdit, policyMap));
     }

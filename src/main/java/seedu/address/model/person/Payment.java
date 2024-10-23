@@ -66,9 +66,13 @@ public class Payment {
         paymentDueDate = paymentDueDate.plusYears(1);
     }
 
+    public LocalDate getPaymentDueDate() {
+        return paymentDueDate;
+    }
+
     @Override
     public String toString() {
-        return paymentDueDate.format(DATE_FORMATTER) + " " + amount;
+        return String.format("$%.2f due on %s", amount, paymentDueDate);
     }
 
     @Override

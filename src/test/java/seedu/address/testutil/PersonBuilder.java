@@ -47,6 +47,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
+        policies = new ArrayList<>();
         tags = new HashSet<>();
         policies = new ArrayList<>();
     }
@@ -61,6 +62,7 @@ public class PersonBuilder {
         this.address = personToCopy.getAddress();
         this.birthday = personToCopy.getBirthday();
         this.appointment = personToCopy.getAppointment();
+        this.policies = new ArrayList<>(personToCopy.getPolicies());
         this.tags = new HashSet<>(personToCopy.getTags());
         this.policies = new ArrayList<>(personToCopy.getPolicies());
     }
@@ -131,10 +133,12 @@ public class PersonBuilder {
     public PersonBuilder withPolicies(String... policies) {
         this.policies = new ArrayList<>();
         for (String policy : policies) {
-            this.policies.add(new Policy("Policy", "2022-12-12", "2023-12-12", "2022-12-12 300"));
+            this.policies.add(new Policy("Policy", "2022-12-12",
+                    "2023-12-12", "2022-12-12 300"));
         }
         return this;
     }
+
 
     /**
      * Builds and returns a {@code Person} object with the current state of the {@code PersonBuilder}.
