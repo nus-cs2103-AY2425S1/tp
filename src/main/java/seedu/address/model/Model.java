@@ -114,6 +114,12 @@ public interface Model {
     void deleteLink(Link target);
 
     /**
+     * Deletes links with unique ID.
+     * @param id
+     */
+    void deleteLinksWithId(String id);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */

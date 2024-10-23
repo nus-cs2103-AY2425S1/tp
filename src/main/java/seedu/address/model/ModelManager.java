@@ -253,6 +253,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLinksWithId(String id) {
+        addressBook.deleteLinksWithId(id);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

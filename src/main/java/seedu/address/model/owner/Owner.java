@@ -12,6 +12,7 @@ import seedu.address.model.link.Linkable;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Owner implements Linkable {
+    private static final String ID_PREFIX = "o";
 
     // Identity fields
     private final Name name;
@@ -92,7 +93,7 @@ public class Owner implements Linkable {
 
     @Override
     public String getUniqueID() {
-        return name.fullName;
+        return ID_PREFIX + name.fullName;
     }
 
     @Override

@@ -188,12 +188,7 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void sortOwners() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void sortPets() {
+        public void deleteLinksWithId(String id) {
             throw new AssertionError("This method should not be called.");
         }
 

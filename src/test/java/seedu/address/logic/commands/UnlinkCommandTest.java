@@ -38,33 +38,31 @@ import seedu.address.model.pet.Pet;
 import seedu.address.testutil.OwnerBuilder;
 import seedu.address.testutil.PetBuilder;
 
-public class LinkCommandTest {
+public class UnlinkCommandTest {
 
     @Test
-    public void constructor_nullLink_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LinkCommand(INDEX_FIRST_OWNER, null));
-        assertThrows(NullPointerException.class, () -> new LinkCommand(null, new HashSet<Index>()));
-        assertThrows(NullPointerException.class, () -> new LinkCommand(null, null));
+    public void constructor_nullUnlink_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new UnlinkCommand(null, new HashSet<Index>()));
+        assertThrows(NullPointerException.class, () -> new UnlinkCommand(INDEX_FIRST_OWNER, null));
+        assertThrows(NullPointerException.class, () -> new UnlinkCommand(null, null));
 
         // At least one pet index must be provided
-        assertThrows(IllegalArgumentException.class, () -> new LinkCommand(INDEX_FIRST_OWNER,
-            new HashSet<Index>()));
+        assertThrows(IllegalArgumentException.class, () -> new UnlinkCommand(INDEX_FIRST_OWNER,
+                new HashSet<Index>()));
     }
 
     @Test
-    public void execute_linkAcceptedByModel_addSuccess() throws Exception {
+    public void execute_unlinkAcceptedByModel_success() throws Exception {
         Owner validOwner = new OwnerBuilder().build();
         Pet validPet = new PetBuilder().build();
-        Link link = new Link(validOwner, validPet);
 
-        ModelStubAcceptingLinkAdded modelStub = new ModelStubAcceptingLinkAdded(validOwner, validPet);
+        ModelStubAcceptingUnlinks modelStub = new ModelStubAcceptingUnlinks(validOwner, validPet);
 
-        Set<Index> linkIndexes = new HashSet<>(Arrays.asList(INDEX_FIRST_PET));
-        CommandResult commandResult = new LinkCommand(INDEX_FIRST_OWNER, linkIndexes).execute(modelStub);
+        Set<Index> unlinkIndexes = new HashSet<>(Arrays.asList(INDEX_FIRST_PET));
+        CommandResult commandResult = new UnlinkCommand(INDEX_FIRST_OWNER, unlinkIndexes).execute(modelStub);
 
-        assertEquals(String.format(LinkCommand.MESSAGE_SUCCESS, linkIndexes.size(), Messages.format(validOwner)),
-            commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(link), modelStub.linksAdded);
+        assertEquals(String.format(UnlinkCommand.MESSAGE_SUCCESS, unlinkIndexes.size(), Messages.format(validOwner)),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -73,61 +71,62 @@ public class LinkCommandTest {
         Pet validPet = new PetBuilder().build();
         Link link = new Link(validOwner, validPet);
 
-        ModelStub modelStub = new ModelStubWithExistingLink(validOwner, validPet, link);
+        ModelStubWithExistingLink modelStub = new ModelStubWithExistingLink(validOwner, validPet, link);
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX, () ->
-            new LinkCommand(INDEX_THIRD_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))).execute(modelStub));
+                new UnlinkCommand(INDEX_THIRD_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))).execute(modelStub));
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX, () ->
-            new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_THIRD_PET))).execute(modelStub));
+                new UnlinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_THIRD_PET))).execute(modelStub));
     }
 
     @Test
-    public void execute_duplicateLink_throwsCommandException() {
+    public void execute_noExistingLink_throwsCommandException() {
         Owner validOwner = new OwnerBuilder().build();
         Pet validPet = new PetBuilder().build();
-        Link link = new Link(validOwner, validPet);
 
-        ModelStub modelStub = new ModelStubWithExistingLink(validOwner, validPet, link);
+        ModelStubWithNoExistingLinks modelStub = new ModelStubWithNoExistingLinks(validOwner, validPet);
 
-        assertThrows(CommandException.class,
-            LinkCommand.MESSAGE_DUPLICATE_LINK, () ->
-            new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)))
-            .execute(modelStub)
-        );
+        assertThrows(CommandException.class, UnlinkCommand.MESSAGE_LINK_NOT_FOUND, () ->
+                new UnlinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))).execute(modelStub));
     }
 
     @Test
     public void equals() {
-        LinkCommand linkCommandA = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
-        LinkCommand linkCommandB = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
-        LinkCommand linkCommandC = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_SECOND_PET)));
-        LinkCommand linkCommandD = new LinkCommand(INDEX_SECOND_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        UnlinkCommand unlinkCommandA = new UnlinkCommand(INDEX_FIRST_OWNER,
+                new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        UnlinkCommand unlinkCommandB = new UnlinkCommand(INDEX_FIRST_OWNER,
+                new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        UnlinkCommand unlinkCommandC = new UnlinkCommand(INDEX_FIRST_OWNER,
+                new HashSet<>(Arrays.asList(INDEX_SECOND_PET)));
+        UnlinkCommand unlinkCommandD = new UnlinkCommand(INDEX_SECOND_OWNER,
+                new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
 
         // same object -> returns true
-        assertTrue(linkCommandA.equals(linkCommandA));
+        assertTrue(unlinkCommandA.equals(unlinkCommandA));
 
         // same values -> returns true
-        assertTrue(linkCommandA.equals(linkCommandB));
+        assertTrue(unlinkCommandA.equals(unlinkCommandB));
 
         // different types -> returns false
-        assertFalse(linkCommandA.equals(1));
+        assertFalse(unlinkCommandA.equals(1));
 
         // null -> returns false
-        assertFalse(linkCommandA.equals(null));
+        assertFalse(unlinkCommandA.equals(null));
 
-        // different link targets -> returns false
-        assertFalse(linkCommandA.equals(linkCommandC));
-        assertFalse(linkCommandA.equals(linkCommandD));
-        assertFalse(linkCommandC.equals(linkCommandD));
+        // different unlink targets -> returns false
+        assertFalse(unlinkCommandA.equals(unlinkCommandC));
+        assertFalse(unlinkCommandA.equals(unlinkCommandD));
+        assertFalse(unlinkCommandC.equals(unlinkCommandD));
     }
 
     @Test
     public void toStringMethod() {
-        LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
-        String expected = LinkCommand.class.getCanonicalName() + "{ownerIndex=" + INDEX_FIRST_OWNER.getOneBased()
-            + ", petIndexes=[" + INDEX_FIRST_PET.getOneBased() + "]}";
-        assertEquals(expected, linkCommand.toString());
+        UnlinkCommand unlinkCommand = new UnlinkCommand(INDEX_FIRST_OWNER,
+                new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        String expected = UnlinkCommand.class.getCanonicalName() + "{ownerIndex=" + INDEX_FIRST_OWNER.getOneBased()
+                + ", petIndexes=[" + INDEX_FIRST_PET.getOneBased() + "]}";
+        assertEquals(expected, unlinkCommand.toString());
     }
 
     /**
@@ -235,11 +234,6 @@ public class LinkCommandTest {
         }
 
         @Override
-        public void deleteLinksWithId(String id) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -251,16 +245,6 @@ public class LinkCommandTest {
 
         @Override
         public void setPet(Pet target, Pet editedPet) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void sortOwners() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void sortPets() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -328,17 +312,54 @@ public class LinkCommandTest {
         public boolean hasLink(Link link) {
             return this.link.equals(link);
         }
+
     }
 
-    /**
-     * A Model stub that always accept the link being added.
-     */
-    private class ModelStubAcceptingLinkAdded extends ModelStub {
+    private class ModelStubAcceptingUnlinks extends ModelStub {
         final ArrayList<Link> linksAdded = new ArrayList<>();
         private final Owner owner;
         private final Pet pet;
 
-        ModelStubAcceptingLinkAdded(Owner owner, Pet pet) {
+        ModelStubAcceptingUnlinks(Owner owner, Pet pet) {
+            requireAllNonNull(owner, pet);
+            this.owner = owner;
+            this.pet = pet;
+            Link link = new Link(owner, pet);
+            linksAdded.add(link);
+        }
+
+        @Override
+        public ObservableList<Owner> getFilteredOwnerList() {
+            ObservableList<Owner> ownerList = FXCollections.observableArrayList();
+            ownerList.add(owner);
+            return ownerList;
+        }
+
+        @Override
+        public ObservableList<Pet> getFilteredPetList() {
+            ObservableList<Pet> petList = FXCollections.observableArrayList();
+            petList.add(pet);
+            return petList;
+        }
+
+        @Override
+        public boolean hasLink(Link link) {
+            return linksAdded.stream().anyMatch(link::equals);
+        }
+
+        @Override
+        public void deleteLink(Link link) {
+            requireNonNull(link);
+            linksAdded.remove(link);
+        }
+    }
+
+    private class ModelStubWithNoExistingLinks extends ModelStub {
+        final ArrayList<Link> linksAdded = new ArrayList<>();
+        private final Owner owner;
+        private final Pet pet;
+
+        ModelStubWithNoExistingLinks(Owner owner, Pet pet) {
             requireAllNonNull(owner, pet);
             this.owner = owner;
             this.pet = pet;
@@ -360,14 +381,13 @@ public class LinkCommandTest {
 
         @Override
         public boolean hasLink(Link link) {
-            requireNonNull(link);
             return linksAdded.stream().anyMatch(link::equals);
         }
 
         @Override
-        public void addLink(Link link) {
+        public void deleteLink(Link link) {
             requireNonNull(link);
-            linksAdded.add(link);
+            linksAdded.remove(link);
         }
     }
 }
