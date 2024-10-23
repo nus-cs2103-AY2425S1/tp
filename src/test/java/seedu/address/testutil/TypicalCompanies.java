@@ -27,15 +27,17 @@ public class TypicalCompanies {
     public static final Company GOOGLE = new CompanyBuilder().withName("Google")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("google@example.com")
             .withPhone("00000001")
-            .withTags("google").build();
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company META = new CompanyBuilder().withName("Meta")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("meta@example.com").withPhone("00000002")
-            .withTags("bigTech", "facebook").build();
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company GRAB = new CompanyBuilder().withName("Grab").withPhone("00000003")
-            .withEmail("grab@example.com").withAddress("wall street").build();
+            .withEmail("grab@example.com").withAddress("wall street")
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company SHOPEE = new CompanyBuilder().withName("Shopee").withPhone("00000004")
-            .withEmail("shopee@example.com").withAddress("10th street").withTags("bigTech").build();
+            .withEmail("shopee@example.com").withAddress("10th street").withTags("bigTech")
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company APPLE = new CompanyBuilder().withName("Apple").withPhone("00000005")
             .withEmail("apple@example.com").withAddress("michegan ave").build();
     public static final Company BYTEDANCE = new CompanyBuilder().withName("ByteDance").withPhone("00000006")

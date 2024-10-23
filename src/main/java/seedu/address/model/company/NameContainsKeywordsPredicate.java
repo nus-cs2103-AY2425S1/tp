@@ -18,9 +18,24 @@ public class NameContainsKeywordsPredicate implements Predicate<Company> {
 
     @Override
     public boolean test(Company company) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(company.getName().fullName, keyword));
+        // Collect matching keywords for the company name
+        List<String> matchingNameKeywords = keywords.stream()
+                .filter(keyword ->
+                        StringUtil.containsWordIgnoreCase(company.getName().fullName, keyword))
+                .toList();
+
+        // Collect matching keywords for the company tags
+        List<String> matchingTagKeywords = keywords.stream()
+                .filter(keyword ->
+                        company.getTags().stream()
+                                .anyMatch(tag ->
+                                        StringUtil.containsWordIgnoreCase(tag.toString(), keyword)))
+                .toList();
+
+        return !matchingNameKeywords.isEmpty() || !matchingTagKeywords.isEmpty();
     }
+
+
 
     @Override
     public boolean equals(Object other) {

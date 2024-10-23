@@ -13,6 +13,7 @@ import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagBuilder;
 
 /**
  * A utility class to help with building EditCompanyDescriptor objects.
@@ -94,7 +95,9 @@ public class EditCompanyDescriptorBuilder {
      * that we are building.
      */
     public EditCompanyDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Tag> tagSet = Stream.of(tags)
+                .map(tag -> new TagBuilder().build(tag))
+                .collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
