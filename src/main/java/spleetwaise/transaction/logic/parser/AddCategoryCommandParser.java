@@ -12,6 +12,7 @@ import spleetwaise.address.logic.parser.ArgumentTokenizer;
 import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.AddCategoryCommand;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -39,7 +40,7 @@ public class AddCategoryCommandParser implements Parser<AddCategoryCommand> {
         int index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TXN).get());
 
         Transaction txn = ParserUtil.getTransactionFromIndex(index);
-        String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
 
         return new AddCategoryCommand(txn, category);
     }

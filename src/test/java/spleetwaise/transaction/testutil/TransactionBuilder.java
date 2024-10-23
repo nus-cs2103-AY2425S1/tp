@@ -1,9 +1,13 @@
 package spleetwaise.transaction.testutil;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.IdUtil;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -19,12 +23,15 @@ public class TransactionBuilder {
     private static final Person DEFAULT_PERSON = TypicalPersons.ALICE;
     private static final String DEFAULT_POSITIVE_AMOUNT = "1.23";
     private static final String DEFAULT_NEGATIVE_AMOUNT = "-1.23";
+    private static final Category DEFAULT_CATEGORY = new Category("FOOD");
+    public static final HashSet<Category> DEFAULT_CATEGORY_SET = new HashSet<>(Arrays.asList(DEFAULT_CATEGORY));
 
     private String id;
     private Person person;
     private Amount amount;
     private Description description;
     private Date date;
+    private HashSet<Category> categories;
 
     /**
      * Creates a {@code TransactionBuilder} with the default details.
@@ -35,6 +42,7 @@ public class TransactionBuilder {
         amount = new Amount(DEFAULT_POSITIVE_AMOUNT);
         description = new Description(DEFAULT_DESCRIPTION);
         date = new Date(DEFAULT_DATE);
+        categories = new HashSet<>(Arrays.asList(DEFAULT_CATEGORY));
     }
 
     /**
@@ -46,6 +54,7 @@ public class TransactionBuilder {
         amount = transactionToCopy.getAmount();
         description = transactionToCopy.getDescription();
         date = transactionToCopy.getDate();
+        categories = transactionToCopy.getCategories();
     }
 
 
@@ -90,9 +99,17 @@ public class TransactionBuilder {
     }
 
     /**
+     * Sets the {@code Category} hashset of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withCategories(HashSet<Category> categories) {
+        this.categories = categories;
+        return this;
+    }
+
+    /**
      * Builds and returns the {@code Transaction} object.
      */
     public Transaction build() {
-        return new Transaction(id, person, amount, description, date);
+        return new Transaction(id, person, amount, description, date, categories);
     }
 }

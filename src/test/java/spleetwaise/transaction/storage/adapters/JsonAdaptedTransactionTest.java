@@ -3,6 +3,9 @@ package spleetwaise.transaction.storage.adapters;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,12 +20,15 @@ import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
 import spleetwaise.transaction.testutil.DateUtil;
+import spleetwaise.transaction.testutil.TransactionBuilder;
 
 public class JsonAdaptedTransactionTest {
 
     private static final String VALID_DESCRIPTION = "description";
     private static final String INVALID_DESCRIPTION = "a".repeat(Description.MAX_LENGTH + 1);
     private static final Person[] TEST_PEOPLE = { TypicalPersons.BENSON };
+    private static final JsonAdaptedCategory jCat = new JsonAdaptedCategory("FOOD");
+    private static final List<JsonAdaptedCategory> TEST_CAT = new ArrayList<JsonAdaptedCategory>(List.of(jCat));
     private AddressBookModel addressBookModel;
 
 
@@ -44,11 +50,13 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), TypicalPersons.BENSON.getId(), jAmt,
                 VALID_DESCRIPTION,
-                DateUtil.VALID_DATE
+                DateUtil.VALID_DATE,
+                TEST_CAT
         );
         Transaction t = new Transaction(jTrans.getId(), jPerson.toModelType(), jAmt.toModelType(),
                 new Description(VALID_DESCRIPTION),
-                new Date(DateUtil.VALID_DATE)
+                new Date(DateUtil.VALID_DATE),
+                TransactionBuilder.DEFAULT_CATEGORY_SET
         );
 
         assertEquals(t, jTrans.toModelType(addressBookModel));
@@ -67,7 +75,8 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(null, TypicalPersons.BENSON.getId(), jAmt,
                 VALID_DESCRIPTION,
-                DateUtil.VALID_DATE
+                DateUtil.VALID_DATE,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }
@@ -76,7 +85,8 @@ public class JsonAdaptedTransactionTest {
     public void testConstructor_invalidPerson() {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), null, jAmt, VALID_DESCRIPTION,
-                DateUtil.VALID_DATE
+                DateUtil.VALID_DATE,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }
@@ -86,7 +96,8 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), TypicalPersons.ALICE.getId(), jAmt,
                 VALID_DESCRIPTION,
-                DateUtil.VALID_DATE
+                DateUtil.VALID_DATE,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }
@@ -95,7 +106,8 @@ public class JsonAdaptedTransactionTest {
     public void testConstructor_invalidAmount() {
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), TypicalPersons.BENSON.getId(), null,
                 VALID_DESCRIPTION,
-                DateUtil.VALID_DATE
+                DateUtil.VALID_DATE,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }
@@ -105,7 +117,8 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), TypicalPersons.BENSON.getId(), jAmt,
                 null,
-                DateUtil.VALID_DATE
+                DateUtil.VALID_DATE,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }
@@ -115,7 +128,8 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), TypicalPersons.BENSON.getId(), jAmt,
                 VALID_DESCRIPTION,
-                null
+                null,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }
@@ -125,7 +139,8 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), TypicalPersons.BENSON.getId(), jAmt,
                 VALID_DESCRIPTION,
-                DateUtil.INVALID_DATE
+                DateUtil.INVALID_DATE,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }
@@ -135,7 +150,8 @@ public class JsonAdaptedTransactionTest {
         JsonAdaptedAmount jAmt = new JsonAdaptedAmount("-10.00");
         JsonAdaptedTransaction jTrans = new JsonAdaptedTransaction(IdUtil.getId(), TypicalPersons.BENSON.getId(), jAmt,
                 INVALID_DESCRIPTION,
-                DateUtil.VALID_DATE
+                DateUtil.VALID_DATE,
+                TEST_CAT
         );
         assertThrows(IllegalValueException.class, () -> jTrans.toModelType(addressBookModel));
     }

@@ -7,6 +7,7 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_TXN;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -32,7 +33,7 @@ public class RemoveCategoryCommand extends Command {
                     + PREFIX_TXN + "1 " + PREFIX_CATEGORY + "Transport";
 
     private final Transaction transaction;
-    private final String category;
+    private final Category category;
 
     /**
      * Creates an RemoveCategoryCommand to remove tag to specified {@code Transaction}.
@@ -40,7 +41,7 @@ public class RemoveCategoryCommand extends Command {
      * @param transaction The transaction where the category is removed.
      * @param category The category to be removed
      */
-    public RemoveCategoryCommand(Transaction transaction, String category) {
+    public RemoveCategoryCommand(Transaction transaction, Category category) {
         requireNonNull(transaction);
         requireNonNull(category);
 

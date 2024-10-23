@@ -7,7 +7,10 @@
         "amount": "9999999999.99"
       },
       "description": "Sean owes me a lot for a landed property in Sentosa",
-      "date": "10102024"
+      "date": "10102024",
+      "categories": [
+        "FOOD"
+      ]
     },
     {
       "id": "e2c93a3d-44f9-4b4b-8b5f-c5cd6f98e45a",
@@ -16,7 +19,10 @@
         "amount": "1000000.00"
       },
       "description": "Jenkins owed me for a loan of $1,000,000",
-      "date": "11102025"
+      "date": "11102025",
+      "categories": [
+        "FOOD"
+      ]
     }
   ]
 }

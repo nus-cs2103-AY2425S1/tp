@@ -18,6 +18,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -66,7 +67,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+            Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
             transaction.addCategory(category);
         }
 

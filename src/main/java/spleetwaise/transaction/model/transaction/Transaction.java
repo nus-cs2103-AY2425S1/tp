@@ -2,6 +2,8 @@ package spleetwaise.transaction.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
+
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.IdUtil;
@@ -17,7 +19,7 @@ public class Transaction {
     private final Amount amount;
     private final Description description;
     private final Date date;
-    private Categories cats = new Categories();
+    private final HashSet<Category> categories;
 
     /**
      * Represents a Transaction in the transaction book.
@@ -27,14 +29,17 @@ public class Transaction {
      * @param amount      The amount involved in this transaction.
      * @param description The description of the transaction.
      * @param date        The date the transaction has taken place.
+     * @param categories        The categories the transaction has.
      */
-    public Transaction(String id, Person person, Amount amount, Description description, Date date) {
-        CollectionUtil.requireAllNonNull(person, amount, description, date);
+    public Transaction(String id, Person person, Amount amount, Description description, Date date,
+                       HashSet<Category> categories) {
+        CollectionUtil.requireAllNonNull(person, amount, description, date, categories);
         this.id = id;
         this.person = person;
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.categories = categories;
     }
 
     /**
@@ -44,19 +49,21 @@ public class Transaction {
      * @param amount      The amount involved in this transaction.
      * @param description The description of the transaction.
      * @param date        The date the transaction has taken place.
-     * @param cats        The categories the transaction has.
      */
-    public Transaction(Person person, Amount amount, Description description, Date date, Categories cats) {
-        this(IdUtil.getId(), person, amount, description, date);
-        this.cats = cats;
+    public Transaction(Person person, Amount amount, Description description, Date date, HashSet<Category> categories) {
+        this(IdUtil.getId(), person, amount, description, date, categories);
     }
 
     public Transaction(Person person, Amount amount, Description description, Date date) {
-        this(IdUtil.getId(), person, amount, description, date);
+        this(IdUtil.getId(), person, amount, description, date, new HashSet<>());
+    }
+
+    public Transaction(Person person, Amount amount, Description description, HashSet<Category> categories) {
+        this(IdUtil.getId(), person, amount, description, Date.getNowDate(), categories);
     }
 
     public Transaction(Person person, Amount amount, Description description) {
-        this(IdUtil.getId(), person, amount, description, Date.getNowDate());
+        this(IdUtil.getId(), person, amount, description, Date.getNowDate(), new HashSet<>());
     }
 
     public String getId() {
@@ -79,16 +86,30 @@ public class Transaction {
         return date;
     }
 
-    public void addCategory(String cat) {
-        cats.add(cat);
+    public HashSet<Category> getCategories() {
+        return categories;
     }
 
-    public void removeCategory(String cat) {
-        cats.remove(cat);
+    /**
+     * Add a categories into the transaction's categories hashset
+     * @param cat
+     */
+    public void addCategory(Category cat) {
+        requireNonNull(cat);
+        categories.add(cat);
     }
 
-    public boolean containsCategory(String cat) {
-        return cats.contains(cat);
+    /**
+     * Remove a categories from the transaction's categories hashset
+     * @param cat
+     */
+    public void removeCategory(Category cat) {
+        requireNonNull(cat);
+        categories.remove(cat);
+    }
+
+    public boolean containsCategory(Category cat) {
+        return categories.contains(cat);
     }
 
     /**
@@ -110,7 +131,8 @@ public class Transaction {
         return this.person.equals(otherTransaction.getPerson())
                 && this.amount.equals(otherTransaction.getAmount())
                 && this.description.equals(otherTransaction.getDescription())
-                && this.date.equals(otherTransaction.getDate());
+                && this.date.equals(otherTransaction.getDate())
+                && this.categories.equals(otherTransaction.getCategories());
     }
 
     /**
@@ -136,8 +158,8 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s(%s): %s on %s for $%s", id, person.getName(), person.getPhone(), description,
-                date, amount
+        return String.format("[%s] %s(%s): %s on %s for $%s with categories: %s", id, person.getName(),
+                person.getPhone(), description, date, amount, categories
         );
     }
 }

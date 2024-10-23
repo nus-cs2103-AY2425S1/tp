@@ -2,6 +2,10 @@ package spleetwaise.transaction.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
@@ -11,6 +15,7 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -82,12 +87,28 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String catStr} into a {@code String} that represents the category.
+     * Parses a {@code String catStr} into a {@code Category} that represents the category.
      * Leading and trailing whitespaces will be trimmed and capitalized
      */
-    public static String parseCategory(String catStr) {
+    public static Category parseCategory(String catStr) throws ParseException {
         requireNonNull(catStr);
-        return catStr.trim().toUpperCase();
+        String trimmedCategory = catStr.trim().toUpperCase();
+        if (!Category.isValidTagName(trimmedCategory)) {
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
+        }
+        return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses {@code Collection<String> Category} into a {@code Set<Category>}.
+     */
+    public static Set<Category> parseTags(Collection<String> categoryStrs) throws ParseException {
+        requireNonNull(categoryStrs);
+        final Set<Category> categories = new HashSet<>();
+        for (String categoryStr : categoryStrs) {
+            categories.add(parseCategory(categoryStr));
+        }
+        return categories;
     }
 
     /**
@@ -110,12 +131,13 @@ public class ParserUtil {
 
     public static Transaction getTransactionFromIndex(int index) throws ParseException {
         index--;
-        ReadOnlyTransactionBook ab = CommonModel.getInstance().getTransactionBook();
-        ObservableList<Transaction> transactionList = ab.getTransactionList();
+        ReadOnlyTransactionBook tb = CommonModel.getInstance().getTransactionBook();
+        ObservableList<Transaction> transactionList = tb.getTransactionList();
         if (index < 0 || index >= transactionList.size()) {
             throw new ParseException("Invalid index");
         }
         return transactionList.get(index);
     }
+
 
 }

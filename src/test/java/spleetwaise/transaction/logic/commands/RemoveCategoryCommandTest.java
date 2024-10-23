@@ -5,38 +5,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.transaction.Amount;
-import spleetwaise.transaction.model.transaction.Categories;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
+
 
 public class RemoveCategoryCommandTest {
     private static final Person testPerson = TypicalPersons.ALICE;
     private static final Amount testAmount = new Amount("1.23");
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date("01012024");
-    private static final Categories cat = new Categories("FOOD");
-    private static final Transaction testTxn = new Transaction(testPerson, testAmount, testDescription, testDate, cat);
-    private static final String category = "FOOD";
+    private static final Category category = new Category("FOOD");
+    private static final HashSet<Category> testCategories = new HashSet<>(Arrays.asList(category));
+    private static final String testId = "";
+    private static final Transaction testTxn = new Transaction(testId, testPerson, testAmount, testDescription,
+            testDate, testCategories);
     @Test
     public void constructor_null_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new RemoveCategoryCommand(null, null));
-    }
-
-    @Test
-    public void execute_invalidCategory_failure() {
-        String category = "";
-
-        RemoveCategoryCommand cmd = new RemoveCategoryCommand(testTxn, category);
-
-        assertThrows(CommandException.class, cmd::execute);
     }
 
     @Test

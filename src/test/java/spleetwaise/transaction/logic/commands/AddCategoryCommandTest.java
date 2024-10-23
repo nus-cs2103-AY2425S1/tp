@@ -10,11 +10,12 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
-import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
+import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class AddCategoryCommandTest {
     private static final Person testPerson = TypicalPersons.ALICE;
@@ -22,36 +23,26 @@ public class AddCategoryCommandTest {
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date("01012024");
     private static final Transaction testTxn = new Transaction(testPerson, testAmount, testDescription, testDate);
-    private static final String category = "Food";
+    private static final Category category = new Category("FOOD");
+    private static final Transaction testTxn1 = TypicalTransactions.CARLBUYING;
     @Test
     public void constructor_null_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new AddCategoryCommand(null, null));
     }
 
     @Test
-    public void execute_invalidCategory_failure() {
-        String category = "";
-
-        AddCategoryCommand cmd = new AddCategoryCommand(testTxn, category);
-
-        assertThrows(CommandException.class, cmd::execute);
-    }
-
-    @Test
     public void execute_validCategory_success() {
-        String category = "FOOD";
-
-        AddCategoryCommand cmd = new AddCategoryCommand(testTxn, category);
+        AddCategoryCommand cmd = new AddCategoryCommand(testTxn1, category);
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
         String expectedString = String.format("Category added to transaction: [%s] with [%s]",
-                testTxn.getId(), category);
+                testTxn1.getId(), category);
         assertEquals(expectedString, cmdRes.getFeedbackToUser());
     }
 
     @Test
     public void equals_diffTransaction_returnsFalse() {
-        AddCategoryCommand cmd1 = new AddCategoryCommand(testTxn, category);
+        AddCategoryCommand cmd1 = new AddCategoryCommand(testTxn1, category);
         Transaction testTxn2 = new Transaction(TypicalPersons.BOB, testAmount, testDescription, testDate);
         AddCategoryCommand cmd2 = new AddCategoryCommand(testTxn2, category);
 
@@ -60,7 +51,7 @@ public class AddCategoryCommandTest {
 
     @Test
     public void equals_null_returnsFalse() {
-        AddCategoryCommand cmd1 = new AddCategoryCommand(testTxn, category);
+        AddCategoryCommand cmd1 = new AddCategoryCommand(testTxn1, category);
 
         assertNotEquals(null, cmd1);
     }

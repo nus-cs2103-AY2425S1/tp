@@ -7,6 +7,7 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_TXN;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -32,7 +33,7 @@ public class AddCategoryCommand extends Command {
                     + PREFIX_CATEGORY + "Transport";
 
     private final Transaction transaction;
-    private final String category;
+    private final Category category;
 
     /**
      * Creates an AddCategoryCommand to add tag to specified {@code Transaction}.
@@ -40,7 +41,7 @@ public class AddCategoryCommand extends Command {
      * @param transaction The transaction where the category is added.
      * @param category The category to be added
      */
-    public AddCategoryCommand(Transaction transaction, String category) {
+    public AddCategoryCommand(Transaction transaction, Category category) {
         requireNonNull(transaction);
         requireNonNull(category);
 
@@ -50,10 +51,6 @@ public class AddCategoryCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        if (category.length() <= 0) {
-            throw new CommandException(MESSAGE_EMPTY_CATEGORY);
-        }
-
         transaction.addCategory(category);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.getId(), category));

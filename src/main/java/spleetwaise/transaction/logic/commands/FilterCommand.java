@@ -21,7 +21,6 @@ import spleetwaise.transaction.model.transaction.Transaction;
 /**
  * This class represents a command for filtering transactions.
  */
-
 public class FilterCommand extends Command {
 
     /**

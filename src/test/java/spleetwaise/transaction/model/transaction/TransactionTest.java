@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.person.Person;
@@ -21,10 +23,16 @@ public class TransactionTest {
 
     @Test
     public void constructor_nullParams_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> new Transaction(null, testAmount, testDescription, testDate));
-        assertThrows(NullPointerException.class, () -> new Transaction(testPerson, null, testDescription, testDate));
-        assertThrows(NullPointerException.class, () -> new Transaction(testPerson, testAmount, null, testDate));
-        assertThrows(NullPointerException.class, () -> new Transaction(testPerson, testAmount, testDescription, null));
+        assertThrows(NullPointerException.class, () -> new Transaction(null, testAmount,
+                testDescription, testDate));
+        assertThrows(NullPointerException.class, () -> new Transaction(testPerson, null,
+                testDescription, testDate));
+        assertThrows(NullPointerException.class, () -> new Transaction(testPerson, testAmount,
+                null, testDate));
+        assertThrows(NullPointerException.class, () -> new Transaction(testPerson, testAmount,
+                testDescription, (Date) null));
+        assertThrows(NullPointerException.class, () -> new Transaction(testPerson, testAmount,
+                testDescription, (HashSet<Category>) null));
     }
 
     @Test
@@ -90,10 +98,12 @@ public class TransactionTest {
 
     @Test
     public void toString_success() {
-        Transaction txn1 = new Transaction(testPerson, testAmount, testDescription, testDate);
+        Transaction txn1 = new Transaction(testPerson, testAmount, testDescription, testDate,
+                TransactionBuilder.DEFAULT_CATEGORY_SET);
 
         assertEquals(
-                String.format("[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23", txn1.getId()),
+                String.format("[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23 with categories: "
+                        + "[FOOD]", txn1.getId()),
                 txn1.toString()
         );
     }
