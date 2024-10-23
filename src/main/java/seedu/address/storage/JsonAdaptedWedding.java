@@ -74,7 +74,7 @@ public class JsonAdaptedWedding {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     WeddingDate.class.getSimpleName()));
         }
-        if (!WeddingDate.isValidWeddingDate(name)) {
+        if (!WeddingDate.isValidWeddingDate(dateString)) {
             throw new IllegalValueException(WeddingDate.MESSAGE_CONSTRAINTS);
         }
         final WeddingDate modelDate = ParserUtil.parseWeddingDate(dateString);

@@ -110,8 +110,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return id.equals(otherPerson.id)
-                && name.equals(otherPerson.name)
+        return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -135,5 +134,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }

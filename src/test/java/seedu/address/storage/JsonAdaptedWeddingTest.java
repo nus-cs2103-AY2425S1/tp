@@ -28,8 +28,8 @@ public class JsonAdaptedWeddingTest {
 
     @Test
     public void toModelType_validWeddingDetails_returnsWedding() throws Exception {
-        JsonAdaptedWedding person = new JsonAdaptedWedding(WEDDING_ONE);
-        assertEquals(WEDDING_ONE, person.toModelType());
+        JsonAdaptedWedding wedding = new JsonAdaptedWedding(VALID_WEDDING_NAME, VALID_WEDDING_DATE, VALID_ASSIGNEES);
+        assertEquals(WEDDING_ONE, wedding.toModelType());
     }
 
     @Test
