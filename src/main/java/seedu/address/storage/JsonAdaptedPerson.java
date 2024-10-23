@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +23,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,6 +43,7 @@ class JsonAdaptedPerson {
     private final Double income;
     private final JsonAdaptedAppointment appointment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String updatedAt;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -55,7 +59,8 @@ class JsonAdaptedPerson {
             @JsonProperty("dateOfBirth") String dateOfBirth,
             @JsonProperty("income") Double income,
             @JsonProperty("appointment") JsonAdaptedAppointment appointment,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("updatedAt") String updatedAt) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -68,6 +73,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -88,6 +94,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
+        updatedAt = source.getUpdatedAt().getValue().toString();
     }
 
     /**
@@ -169,7 +176,21 @@ class JsonAdaptedPerson {
                 .orElse(null);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        final UpdatedAt modelUpdatedAt = Optional.ofNullable(updatedAt)
+                .flatMap(JsonAdaptedPerson::parseDateTime)
+                .map(UpdatedAt::new)
+                .orElseGet(UpdatedAt::now);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority,
-                modelRemark, modelDateOfBirth, modelIncome, modelAppointment, modelTags);
+                modelRemark, modelDateOfBirth, modelIncome, modelAppointment, modelTags, modelUpdatedAt);
+    }
+
+    private static Optional<LocalDateTime> parseDateTime(String datetime) {
+        try {
+            return Optional.of(LocalDateTime.parse(datetime));
+        } catch (DateTimeParseException e) {
+            return Optional.empty();
+        }
     }
 }

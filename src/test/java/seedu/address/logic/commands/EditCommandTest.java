@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
@@ -204,6 +205,25 @@ public class EditCommandTest {
         assertEquals(expected, editCommand.toString());
     }
 
+    @Test
+    public void execute_updatedAtFieldsAreNotEqual() {
+        Person personToBeEdited = model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+
+        Model expectedModel = generateExpectedModel(personToBeEdited, personToBeEdited);
+
+        String expectedMessage = generateExpectedSuccessMessage(personToBeEdited);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        Person editedPerson = model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+
+        assertNotEquals(personToBeEdited.getUpdatedAt(), editedPerson.getUpdatedAt());
+    }
+
     private class Helper {
 
         public void execute_specifiedRemarkField_shouldModifyRemark(String remarkString) {
@@ -222,7 +242,8 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
-                    personToBeEdited.getTags());
+                    personToBeEdited.getTags(),
+                    personToBeEdited.getUpdatedAt());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                     .withRemark(remark.value)
@@ -253,7 +274,8 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
-                    personToBeEdited.getTags());
+                    personToBeEdited.getTags(),
+                    personToBeEdited.getUpdatedAt());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                     .withPriority(priority)

@@ -30,21 +30,22 @@ public class Person {
     private final DateOfBirth dateOfBirth;
     private final Income income;
     private final Appointment appointment;
+    private final UpdatedAt updatedAt;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, Set<Tag> tags) {
-        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, tags);
+                  DateOfBirth dateOfBirth, Income income, Set<Tag> tags, UpdatedAt updatedAt) {
+        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, tags, updatedAt);
     }
 
     /**
      * Every field must be present and not null, except the appointment.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, Appointment appointment, Set<Tag> tags) {
+                  DateOfBirth dateOfBirth, Income income, Appointment appointment, Set<Tag> tags, UpdatedAt updatedAt) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -56,10 +57,15 @@ public class Person {
         this.income = income;
         this.appointment = appointment;
         this.tags.addAll(tags);
+        this.updatedAt = updatedAt;
     }
 
+    /**
+     * Returns a new {@code Person} with the specified {@code appointment}.
+     */
     public Person withAppointment(Appointment appointment) {
-        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
+        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags,
+                updatedAt);
     }
 
     public Name getName() {
@@ -104,6 +110,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public UpdatedAt getUpdatedAt() {
+        return updatedAt;
     }
 
     /**

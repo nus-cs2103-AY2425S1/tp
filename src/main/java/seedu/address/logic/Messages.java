@@ -36,6 +36,11 @@ public class Messages {
 
     /**
      * Formats the {@code person} for display to the user.
+     *
+     * The updatedAt field is not included due to its nondeterministic nature.
+     * It is impossible to predict the value of the updatedAt field.
+     * This ensures that unit testing for {@link seedu.address.logic.commands.EditCommand}
+     * is not affected.
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();

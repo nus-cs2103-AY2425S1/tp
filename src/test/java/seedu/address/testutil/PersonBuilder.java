@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -31,6 +33,8 @@ public class PersonBuilder {
     public static final String DEFAULT_REMARK = "";
     public static final double DEFAULT_INCOME = 0;
     public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
+    public static final LocalDateTime DEFAULT_UPDATED_AT =
+            LocalDateTime.of(2024, 1, 1, 0, 0);
 
     private Name name;
     private Phone phone;
@@ -42,6 +46,7 @@ public class PersonBuilder {
     private Income income;
     private Appointment appointment;
     private Set<Tag> tags;
+    private UpdatedAt updatedAt;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -57,6 +62,7 @@ public class PersonBuilder {
         income = new Income(DEFAULT_INCOME);
         appointment = null;
         tags = new HashSet<>();
+        updatedAt = new UpdatedAt(DEFAULT_UPDATED_AT);
     }
 
     /**
@@ -73,6 +79,7 @@ public class PersonBuilder {
         income = personToCopy.getIncome();
         appointment = personToCopy.getAppointment();
         tags = new HashSet<>(personToCopy.getTags());
+        updatedAt = personToCopy.getUpdatedAt();
     }
 
     /**
@@ -164,7 +171,19 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code UpdatedAt} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withUpdateAt(LocalDateTime updatedAt) {
+        this.updatedAt = new UpdatedAt(updatedAt);
+        return this;
+    }
+
+    /**
+     * Builds the {@code Person}.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
+        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags,
+                updatedAt);
     }
 }
