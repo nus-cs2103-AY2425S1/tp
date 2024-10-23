@@ -69,7 +69,6 @@ public class CommandStack implements Serializable {
         if (commandGetterResult.getIsModifiedSinceLastArrowKey()) {
             return commandGetterResult;
         }
-        //checkIsModifiedTrue(commandGetterResult);
         forceArrayIndexWithinBounds();
         if (commandArrayList.isEmpty()) {
             return commandGetterResult
