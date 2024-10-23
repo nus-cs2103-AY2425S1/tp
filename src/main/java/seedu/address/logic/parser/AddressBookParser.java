@@ -9,14 +9,23 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AssignWeddingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.CreateWeddingCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.DeleteWeddingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListWeddingsCommand;
+import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UnassignWeddingCommand;
+import seedu.address.logic.commands.UntagCommand;
+import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -51,36 +60,29 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        default:
+        return switch (commandWord) {
+        case AddCommand.COMMAND_WORD -> new AddCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD -> new EditCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD -> new DeleteCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD -> new ClearCommand();
+        case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD -> new ListCommand();
+        case ListWeddingsCommand.COMMAND_WORD -> new ListWeddingsCommand();
+        case ExitCommand.COMMAND_WORD -> new ExitCommand();
+        case HelpCommand.COMMAND_WORD -> new HelpCommand();
+        case CreateTagCommand.COMMAND_WORD -> new CreateTagCommandParser().parse(arguments);
+        case DeleteTagCommand.COMMAND_WORD -> new DeleteTagCommandParser().parse(arguments);
+        case CreateWeddingCommand.COMMAND_WORD -> new CreateWeddingCommandParser().parse(arguments);
+        case DeleteWeddingCommand.COMMAND_WORD -> new DeleteWeddingCommandParser().parse(arguments);
+        case TagCommand.COMMAND_WORD -> new TagCommandParser().parse(arguments);
+        case UntagCommand.COMMAND_WORD -> new UntagCommandParser().parse(arguments);
+        case AssignWeddingCommand.COMMAND_WORD -> new AssignWeddingCommandParser().parse(arguments);
+        case UnassignWeddingCommand.COMMAND_WORD -> new UnassignWeddingCommandParser().parse(arguments);
+        default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+        };
     }
 
 }

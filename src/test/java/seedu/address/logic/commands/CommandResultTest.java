@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandResult.SwitchView;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -15,6 +17,12 @@ public class CommandResultTest {
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false,
+                SwitchView.NONE)));
+
+        // same object -> returns true
+        assertEquals(commandResult.isSwitchView(), new CommandResult("feedback", false, false,
+                SwitchView.NONE).isSwitchView());
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +37,22 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false,
+                SwitchView.NONE)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true,
+                SwitchView.NONE)));
+
+        // different switchView value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
+                SwitchView.WEDDING)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
+                SwitchView.PERSON)));
+
+        // different switchView value -> returns false
+        assertNotEquals(commandResult.isSwitchView(), new CommandResult("feedback", false, false,
+                SwitchView.PERSON).isSwitchView());
     }
 
     @Test
@@ -50,6 +70,10 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+
+        // different exit value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false,
+                SwitchView.PERSON).hashCode());
     }
 
     @Test
@@ -57,7 +81,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit() + ", switchView=" + commandResult.getView() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * A utility class to help with building Person objects.
@@ -17,15 +18,19 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    // default address is blank string as address is optional
+    public static final String DEFAULT_ADDRESS = "";
+    // default phone number is blank string as phone number is optional
+    public static final String DEFAULT_PHONE = "";
+    // default email is blank string as email is optional
+    public static final String DEFAULT_EMAIL = "";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Wedding> weddings;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +41,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        weddings = new HashSet<>();
     }
 
     /**
@@ -47,6 +53,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        weddings = new HashSet<>(personToCopy.getWeddings());
     }
 
     /**
@@ -62,6 +69,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code weddings} into a {@code Set<Wedding>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withWeddings(String ... weddings) {
+        this.weddings = SampleDataUtil.getWeddingSet(weddings);
         return this;
     }
 
@@ -90,7 +105,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, weddings);
     }
 
 }

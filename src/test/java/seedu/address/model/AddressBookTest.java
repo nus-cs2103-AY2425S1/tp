@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTags.FLORIST;
+import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +22,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -49,7 +53,9 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Tag> tags = Arrays.asList(FLORIST);
+        List<Wedding> weddings = Arrays.asList(AMY_WEDDING);
+        AddressBookStub newData = new AddressBookStub(newPersons, tags, weddings);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -94,14 +100,28 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<Wedding> weddings = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Tag> tags, Collection<Wedding> weddings) {
             this.persons.setAll(persons);
+            this.tags.setAll(tags);
+            this.weddings.setAll(weddings);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Tag> getTagList() {
+            return tags;
+        }
+
+        @Override
+        public ObservableList<Wedding> getWeddingList() {
+            return weddings;
         }
     }
 
