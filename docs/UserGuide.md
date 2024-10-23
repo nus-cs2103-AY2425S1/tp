@@ -16,29 +16,29 @@ tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases) (not updated).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases) (not updated).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `:list` : Lists all contacts.
 
-   * `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01` : Adds a contact named `John 
+   * `:add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01` : Adds a contact named `John 
      Doe` to the Address Book.
 
-   * `:rm 3` : Deletes the 3rd contact shown in the current list.
+   * `:rm -i 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -142,17 +142,44 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `:rm -i INDEX` or `:remove -i INDEX`
+Format: `:rm -i INDEX1, INDEX2, ...` or `:remove -i INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `:list` followed by `:rm -i 2` deletes the 2nd person in the address book.
-* `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `:find` command.
+
+* `:list` followed by `:rm -i 2, 3` deletes the 2nd and 3rd person in the address book.
+* `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `find` command.
+
+
+### Undoing the last change: `:undo`
+
+Reverts the address book to the state before the last change.\
+User can undo up to 10 changes.\
+Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
+
+Format: `:undo`
+
+Examples:
+* If we add a new contact with `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`, 
+using `:undo` will remove John Doe from the address book.
+* If we delete a contact with `:rm -i 3`, using `:undo` will restore the deleted contact.
+
+### Redoing the last undone change: `:redo`
+
+Reapplies the last undone change to the address book.\
+User can redo up to 10 undo changes.
+
+Format: `:redo`
+
+Examples:
+* After using `:undo` to revert the addition of John Doe, using `:redo` will add John Doe back to the address book.
+* After using `:undo` to revert the deletion of a contact, using `:redo` will delete the contact again.
 
 ### Clearing all entries : `:clear`
+
 
 Clears all entries from the address book.
 

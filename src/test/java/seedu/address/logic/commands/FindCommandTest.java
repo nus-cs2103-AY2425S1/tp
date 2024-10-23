@@ -70,7 +70,7 @@ public class FindCommandTest {
         //i.e. if there are no filters for any parameters, all persons should be returned
 
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                model.getAddressBook().getPersonList().size());
+                model.getVersionedAddressBook().getPersonList().size());
         List<FieldQuery> emptyQuery = List.of(
                 new FieldQuery(SearchField.NAME, ""));
         PersonSearchPredicate predicate = new PersonSearchPredicate(emptyQuery);
