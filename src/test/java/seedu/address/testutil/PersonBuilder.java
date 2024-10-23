@@ -24,6 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SCHEDULE = "2024-11-11 1400";
     public static final String DEFAULT_REMINDER = "1 hour";
+    public static final double DEFAULT_PAYMENT_AMOUNT = 0.0;
+    public static final boolean DEFAULT_PAYMENT_IS_PAID = true;
 
     private Name name;
     private Phone phone;
@@ -114,6 +116,7 @@ public class PersonBuilder {
         this.reminder = new Reminder(reminderTime);
         return this;
     }
+
 
     public Person build() {
         return new Person(name, phone, email, address, schedules, reminder, tags);

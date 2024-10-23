@@ -41,7 +41,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
              @JsonProperty("email") String email, @JsonProperty("address") String address,
              @JsonProperty("schedules") List<JsonAdaptedSchedule> schedules,
-            @JsonProperty("reminderTime") String reminderTime, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+             @JsonProperty("reminderTime") String reminderTime, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +53,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+
     }
 
     /**
@@ -128,6 +129,7 @@ class JsonAdaptedPerson {
         final Reminder modelReminder = new Reminder(reminderTime);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelReminder, modelTags);
     }
 

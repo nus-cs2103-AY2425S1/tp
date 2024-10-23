@@ -17,6 +17,8 @@ public class Schedule {
     private final String dateTime;
     private final String notes;
 
+    private boolean isPaid;
+
     /**
      * Constructs a {@code Schedule} object with the given date and time.
      *
@@ -26,6 +28,7 @@ public class Schedule {
     public Schedule(String dateTime, String notes) {
         this.dateTime = dateTime == null ? "" : dateTime;
         this.notes = notes;
+        this.isPaid = false;
     }
 
     /**
@@ -42,6 +45,24 @@ public class Schedule {
      */
     public String getNotes() {
         return notes;
+    }
+
+    public boolean getPaymentStatus() {
+        return isPaid;
+    }
+
+    /**
+     * Marks the payment as paid.
+     */
+    public void markPaymentAsPaid() {
+        this.isPaid = true;
+    }
+
+    /**
+     * Marks the payment as unpaid.
+     */
+    public void markPaymentAsUnpaid() {
+        this.isPaid = false;
     }
 
     /**
