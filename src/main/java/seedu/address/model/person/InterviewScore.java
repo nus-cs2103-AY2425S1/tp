@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class InterviewScore {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Error: Invalid interview score. Please enter a valid interview score.";
+            "Error: Invalid interview score. Please enter a valid interview score from 0 to 10.";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
