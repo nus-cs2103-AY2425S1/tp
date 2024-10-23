@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-<h1>
+<h1 id="internbuddy-developer-guide">
     <img src="images/InternBuddyLogo.png" alt="Logo" width="40" height="40" style="vertical-align:middle;">
     InternBuddy Developer Guide
 </h1>
@@ -155,6 +155,8 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.internBuddy.commons` package.
 
+[back to top](#internbuddy-developer-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
@@ -258,6 +260,8 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+
+[back to top](#internbuddy-developer-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -504,6 +508,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CSV**: Comma Separated Values, a text file format that uses commas to separate values, and newlines to separate records.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange [format](https://www.json.org/json-en.html).
 
+[back to top](#internbuddy-developer-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -558,3 +564,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+[back to top](#internbuddy-developer-guide)
