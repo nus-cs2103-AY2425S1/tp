@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -81,6 +82,20 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void getGitHubUsername_personExists_success() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(ALICE);
+        assertEquals(ALICE.getGithub(), addressBook.getGitHubUsername(ALICE.getName()));
+    }
+
+    @Test
+    public void getGitHubUsername_personDoesNotExist_nullReturned() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(ALICE);
+        assertEquals(null, addressBook.getGitHubUsername(BOB.getName()));
     }
 
     @Test

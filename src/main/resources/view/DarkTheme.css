@@ -132,6 +132,17 @@
     -fx-text-fill: #010504;
 }
 
+.hyperlink {
+    -fx-font-family: "Segoe UI"; /* Inherit font-family */
+    -fx-font-size: 13px;        /* Inherit font-size */
+    -fx-text-fill: #E2F1E7;     /* Change to a lighter color for hyperlinks */
+    -fx-underline: true;        /* Ensure hyperlink is underlined */
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #2b4274;     /* Change color on hover */
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -349,4 +360,16 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.viewWindow Label {
+-fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+}
+
+.viewWindow #name  {
+-fx-font-family: "Segoe UI";
+    -fx-font-size: 35px;
+    -fx-text-fill: white;
 }

@@ -1,16 +1,30 @@
-#copyButton, #helpMessage {
+#copyButton, #openLinkButton {
     -fx-text-fill: white;
+    -fx-min-width: 80px;
 }
 
-#copyButton {
+ #helpMessage {
+     -fx-text-fill: white;
+     -fx-min-width: 100px;
+ }
+
+#copyButton , #openLinkButton {
     -fx-background-color: dimgray;
 }
 
-#copyButton:hover {
+#copyButton:hover , #openLinkButton:hover {
     -fx-background-color: gray;
+    -fx-border-color: white;
+    -fx-border-width: 0.5px;
 }
 
-#copyButton:armed {
+#copyButton:focused , #openLinkButton:focused {
+    -fx-background-color: gray;
+    -fx-border-color: white;
+    -fx-border-width: 0.5px;
+}
+
+#copyButton:focused:armed , #openLinkButton:focused:armed {
     -fx-background-color: darkgray;
 }
 

@@ -4,13 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.PredefinedAssignmentsData;
+import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,35 +29,48 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
+    private final PredefinedAssignmentsData predefinedAssignmentsData;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook               the address book
+     * @param userPrefs                 the user prefs
+     * @param predefinedAssignmentsData the predefined assignments data
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyPredefinedAssignmentsData predefinedAssignmentsData) {
+        requireAllNonNull(addressBook, userPrefs, predefinedAssignmentsData);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
+        this.predefinedAssignmentsData = new PredefinedAssignmentsData(predefinedAssignmentsData);
     }
 
+    /**
+     * Instantiates a new Model manager.
+     */
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new PredefinedAssignmentsData());
     }
 
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -78,13 +98,13 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public ReadOnlyAddressBook getAddressBook() {
+        return addressBook;
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
     }
 
     @Override
@@ -119,13 +139,19 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        sortedPersons.setComparator(comparator);
     }
 
     @Override
@@ -145,4 +171,35 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Predefined assignments accessors =============================================================
+
+    public boolean hasAssignment(String name) {
+        return predefinedAssignmentsData.hasAssignment(name);
+    }
+
+    public float maxScore(String assignment) {
+        return predefinedAssignmentsData.maxScore(assignment);
+    }
+
+    public String getAssignmentName(String name) {
+        return predefinedAssignmentsData.getAssignmentName(name);
+    }
+
+    public boolean hasName(Name name) {
+        return addressBook.hasName(name);
+    }
+
+    public Github getGitHubUsername(Name name) {
+        return addressBook.getGitHubUsername(name);
+    }
+
+    /**
+     * Replace all person in currently with new data
+     */
+    public void replaceAllPersons(List<Person> persons) {
+        AddressBook updatedList = new AddressBook();
+        updatedList.setPersons(persons);
+        addressBook.resetData(updatedList);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 }
