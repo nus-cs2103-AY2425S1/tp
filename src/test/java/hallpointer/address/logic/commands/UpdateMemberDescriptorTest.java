@@ -36,7 +36,8 @@ public class UpdateMemberDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        UpdateMemberDescriptor updatedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        UpdateMemberDescriptor updatedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY)
+                .withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different telegram -> returns false
