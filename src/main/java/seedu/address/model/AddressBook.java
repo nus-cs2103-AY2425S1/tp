@@ -91,7 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code person} must not already exist in the address book.
      * {@code index} must be within range of the address book.
      */
-    void insertPerson(Person person, int index){
+    void insertPerson(Person person, int index) {
         requireNonNull(person);
 
         persons.insert(person, index);

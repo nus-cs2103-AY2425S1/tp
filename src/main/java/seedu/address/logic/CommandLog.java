@@ -8,7 +8,7 @@ import seedu.address.logic.commands.Command;
  * Keeps track of Commands given by user
  */
 public class CommandLog {
-    private Stack<Command> log =  new Stack<>();
+    private Stack<Command> log = new Stack<>();
 
     public void add(Command command) {
         log.push(command);

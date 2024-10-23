@@ -70,7 +70,7 @@ public class FavouriteGameCommand extends Command {
     }
 
     public void undo(Model model) {
-        
+
     }
 
     @Override
