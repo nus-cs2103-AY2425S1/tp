@@ -15,6 +15,10 @@ public enum PriceCategory {
     EXPENSIVE(40, "$$$"),
     LUXURY(Integer.MAX_VALUE, "$$$$");
 
+    public static final String MESSAGE_CONSTRAINTS = "Price categories should be one of the " 
+            + "following: $, $$, $$$, $$$$";
+    public static final String MESSAGE_MULTIPLE_PRICE_TAGS = "Multiple price tags found in the "
+            + "set of tags";
     private final int maxValue;
     private final String symbol;
 
@@ -65,7 +69,7 @@ public enum PriceCategory {
                 return category.getSymbol();
             }
         }
-        throw new IllegalArgumentException("Invalid price value: " + value);
+        throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -82,9 +86,27 @@ public enum PriceCategory {
             if (isSymbol(tag.tagName) && priceTag == null) {
                 priceTag = tag;
             } else if (isSymbol(tag.tagName) && priceTag != null) {
-                throw new IllegalArgumentException("Multiple price tags found in the set of tags");
+                throw new IllegalArgumentException(MESSAGE_MULTIPLE_PRICE_TAGS);
+            } else {
+                otherTags.add(tag);
             }
         }
         return new Pair<>(priceTag, otherTags);
+    }
+
+    /**
+     * Returns true if the set of tags has multiple price tags.
+     * 
+     * @param tags the set of tags
+     * @return true if the set of tags has multiple price tags
+     */
+    public static boolean hasMultiplePriceTags(Set<Tag> tags) {
+        int count = 0;
+        for (Tag tag : tags) {
+            if (isSymbol(tag.tagName)) {
+                count++;
+            }
+        }
+        return count > 1;
     }
 }

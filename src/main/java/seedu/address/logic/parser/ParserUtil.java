@@ -1,9 +1,8 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Collection;
 import java.util.HashSet;
+import static java.util.Objects.requireNonNull;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -13,6 +12,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.PriceCategory;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -118,6 +118,10 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
+        }
+
+        if (PriceCategory.hasMultiplePriceTags(tagSet)) {
+            throw new ParseException(PriceCategory.MESSAGE_MULTIPLE_PRICE_TAGS);
         }
         return tagSet;
     }
