@@ -16,7 +16,7 @@ public class SessionLogCard extends UiPart<Region> {
 
     public SessionLogCard(Log log) {
         super(FXML);
-        this.appointmentDate.setText(log.getAppointmentDate());
+        this.appointmentDate.setText(log.getAppointmentDateString());
         this.sessionEntry.setText(log.getEntry());
     }
 }
