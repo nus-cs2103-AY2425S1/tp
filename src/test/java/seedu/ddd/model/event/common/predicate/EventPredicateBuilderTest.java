@@ -44,7 +44,7 @@ public class EventPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainDescription_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainDescriptionReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_DESC, "Alice Millow");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
@@ -55,7 +55,7 @@ public class EventPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainDescription_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainDescriptionReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_DESC, "Alice Millow");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
@@ -66,7 +66,7 @@ public class EventPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainId_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainIdReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ID, "1");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
@@ -78,7 +78,7 @@ public class EventPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainId_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainIdReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ID, "2");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
@@ -90,7 +90,7 @@ public class EventPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainDescription_throwsParseException() {
+    public void testArgumentMultimapDoesNotContainDescriptionThrowsParseException() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_DESC, "");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
@@ -98,7 +98,7 @@ public class EventPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainId_throwsParseException() {
+    public void testArgumentMultimapDoesNotContainIdThrowsParseException() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ID, "");
         EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);

@@ -65,7 +65,8 @@ public class DescriptionContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        DescriptionContainsKeywordsPredicate predicate = new DescriptionContainsKeywordsPredicate(Collections.emptyList());
+        DescriptionContainsKeywordsPredicate predicate =
+                new DescriptionContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new EventBuilder().withDescription("Alice").build()));
 
         // Non-matching keyword
@@ -73,14 +74,15 @@ public class DescriptionContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new EventBuilder().withDescription("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
-        predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        predicate = new DescriptionContainsKeywordsPredicate(Arrays.asList("Main", "Street"));
         assertFalse(predicate.test(new EventBuilder().withDescription("Alice").build()));
     }
 
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        DescriptionContainsKeywordsPredicate predicate = new DescriptionContainsKeywordsPredicate(keywords);
+        DescriptionContainsKeywordsPredicate predicate =
+                new DescriptionContainsKeywordsPredicate(keywords);
 
         String expected = DescriptionContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());

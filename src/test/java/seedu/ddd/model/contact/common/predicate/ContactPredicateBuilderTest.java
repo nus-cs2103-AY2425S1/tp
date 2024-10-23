@@ -15,8 +15,6 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ddd.testutil.TypicalContacts.ALICE;
 import static seedu.ddd.testutil.TypicalContacts.BENSON;
 
-
-
 import org.junit.jupiter.api.Test;
 
 import seedu.ddd.logic.parser.ArgumentMultimap;
@@ -54,7 +52,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainName_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainsNameReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_NAME, "Alice Millow");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -65,7 +63,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainName_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainNameReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_NAME, "Alice Millow");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -76,7 +74,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainsClient_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainsClientReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(FLAG_CLIENT, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -84,7 +82,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainClient_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainClientReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(FLAG_CLIENT, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -92,7 +90,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainsVendor_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainsVendorReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(FLAG_VENDOR, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -100,7 +98,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainVendor_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainVendorReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(FLAG_VENDOR, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -108,7 +106,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainPhone_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainPhoneReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_PHONE, "8123");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -119,7 +117,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainPhone_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainPhoneReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_PHONE, "1092");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -130,7 +128,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainAddress_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainAddressReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ADDRESS, "Main Street");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -141,7 +139,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainAddress_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainAddressReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ADDRESS, "Main Street");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -152,7 +150,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainId_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainIdReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ID, "1");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -164,7 +162,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainId_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainIdReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ID, "2");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -176,7 +174,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapContainTags_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainTagsReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
         // empty tags
@@ -190,7 +188,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainTags_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainTagsReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_TAG, "friend");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -201,7 +199,7 @@ public class ContactPredicateBuilderTest {
         assertFalse(predicateBuilder.build().test(BENSON));
     }
     @Test
-    public void test_ArgumentMultimapContainEmail_returnsTrue() throws ParseException {
+    public void testArgumentMultimapContainEmailReturnsTrue() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_EMAIL, "alice@example.com");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -213,7 +211,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainEmail_returnsFalse() throws ParseException {
+    public void testArgumentMultimapDoesNotContainEmailReturnsFalse() throws ParseException {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_EMAIL, "alice@example.com");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -226,7 +224,7 @@ public class ContactPredicateBuilderTest {
 
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainName_throwsParseException() {
+    public void testArgumentMultimapDoesNotContainNameThrowsParseException() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_NAME, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -234,7 +232,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainId_throwsParseException() {
+    public void testArgumentMultimapDoesNotContainIdThrowsParseException() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ID, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -242,7 +240,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainAddress_throwsParseException() {
+    public void testArgumentMultimapDoesNotContainAddressThrowsParseException() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_ADDRESS, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
@@ -250,7 +248,7 @@ public class ContactPredicateBuilderTest {
     }
 
     @Test
-    public void test_ArgumentMultimapDoesNotContainPhone_throwsParseException() {
+    public void testArgumentMultimapDoesNotContainPhoneThrowsParseException() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_PHONE, "");
         ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);

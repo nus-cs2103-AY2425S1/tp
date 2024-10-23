@@ -1,12 +1,13 @@
 package seedu.ddd.model.event.common.predicate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.ddd.model.contact.common.predicate.ContactIdPredicate;
 import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.testutil.EventBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class EventIdPredicateTest {
     @Test
