@@ -93,7 +93,7 @@ public class AddressBookParser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-            
+
         case FavouriteGameCommand.COMMAND_WORD:
             return new FavouriteGameCommandParser().parse(arguments);
 
