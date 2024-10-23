@@ -59,7 +59,7 @@ public class AddNoteCommand extends Command {
             return true;
         }
 
-        // Check if the other object is an instance of AddAppointmentCommand
+        // Check if the other object is an instance of AddNoteCommand
         if (!(other instanceof AddNoteCommand)) {
             return false;
         }
