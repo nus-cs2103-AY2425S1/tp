@@ -21,12 +21,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 

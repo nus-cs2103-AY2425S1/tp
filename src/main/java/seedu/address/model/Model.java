@@ -12,7 +12,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
-
 import seedu.address.model.tag.Tag;
 
 /**

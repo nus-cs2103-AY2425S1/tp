@@ -27,10 +27,10 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
