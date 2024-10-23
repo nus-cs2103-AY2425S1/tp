@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_DATEOFLASTVISIT + "DATEOFLASTVISIT " + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_CONTACT \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com " + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends " + PREFIX_TAG + "owesMoney " + PREFIX_DATEOFLASTVISIT + "01-03-2024"
+            + PREFIX_TAG + "friends " + PREFIX_TAG + "owesMoney " + PREFIX_DATEOFLASTVISIT + "01-03-2024 "
             + PREFIX_EMERGENCY_CONTACT + "92137920";
 
     public static final String MESSAGE_SUCCESS = "Person successfully added. New person: %1$s";
