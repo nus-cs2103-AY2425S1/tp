@@ -19,10 +19,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      */
     public AddLessonCommand parse(String args) throws ParseException {
         try {
-            String[] parts = args.split(" ");
-            Index tutorIndex = ParserUtil.parseIndex(parts[1]);
-            Index tuteeIndex = ParserUtil.parseIndex(parts[2]);
-            return new AddLessonCommand(tutorIndex, tuteeIndex);
+            Index[] indices = ParserUtil.parseIndices(args);
+            return new AddLessonCommand(indices[0], indices[1]);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), pe);

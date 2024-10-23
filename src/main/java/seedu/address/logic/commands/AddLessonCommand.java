@@ -17,7 +17,7 @@ import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
 /**
- * Adds a lesson to the address book.
+ * Adds a Lesson to the address book.
  */
 public class AddLessonCommand extends Command {
 
@@ -35,12 +35,17 @@ public class AddLessonCommand extends Command {
 
     public static final String MESSAGE_INVALID_TUTEE_INDEX = "The person index provided is not a Tutee";
 
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
+
     private final Index tutorIndex;
 
     private final Index tuteeIndex;
 
     /**
      * Creates an AddLessonCommand to add the specified {@code Tutor} and {@code Tutee}.
+     *
+     * @param tutorIndex Index of the tutor
+     * @param tuteeIndex Index of the tutee
      */
     public AddLessonCommand(Index tutorIndex, Index tuteeIndex) {
         this.tutorIndex = tutorIndex;
@@ -67,6 +72,10 @@ public class AddLessonCommand extends Command {
 
         Lesson lesson = new Lesson((Tutor) tutorToAdd, (Tutee) tuteeToAdd);
 
+        if (model.hasLesson(lesson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
         model.addLesson(lesson);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, Messages.format(lesson)));
@@ -88,9 +97,10 @@ public class AddLessonCommand extends Command {
     }
 
     @Override
-    public String toString() { // TODO
+    public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", 10000)
+                .add("tutorIndex", tutorIndex)
+                .add("tuteeIndex", tuteeIndex)
                 .toString();
     }
 }

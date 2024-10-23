@@ -42,6 +42,16 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
         super(id, name, phone, email, address, hours, tags, "Tutee", subjects);
     }
 
+    @JsonCreator
+    public JsonAdaptedTutee(@JsonProperty("name") String name,
+                            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                            @JsonProperty("address") String address, @JsonProperty("hours") String hours,
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
+
+        super(name, phone, email, address, hours, tags, "Tutee", subjects);
+    }
+
     /**
      * Converts a given {@code Tutee} into this class for Jackson use.
      */
