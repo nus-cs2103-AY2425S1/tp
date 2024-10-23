@@ -107,6 +107,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deletePersonTag(Person p, Tag t) {
+        campusConnect.removePersonTag(p, t);
+        refreshTagList();
+    }
+
+    @Override
     public void addPerson(Person person) {
         campusConnect.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

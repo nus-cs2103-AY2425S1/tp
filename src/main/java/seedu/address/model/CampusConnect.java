@@ -124,6 +124,13 @@ public class CampusConnect implements ReadOnlyCampusConnect {
         persons.remove(key);
     }
 
+    /**
+     * Delete a tag from a person.
+     */
+    public void removePersonTag(Person p, Tag t) {
+        persons.deletePersonTag(p, t);
+    }
+
     //// util methods
 
     @Override

@@ -89,6 +89,18 @@ public class CampusConnectTest {
         assertEquals(expected, campusConnect.toString());
     }
 
+    @Test
+    public void insertPersonTest() {
+        int ind = campusConnect.getPersonList().size();
+        CampusConnect expected = new CampusConnect();
+        expected.resetData(campusConnect);
+
+        campusConnect.addPerson(ALICE, ind);
+        expected.addPerson(ALICE);
+        assertEquals(expected.toString(), campusConnect.toString());
+    }
+
+
     /**
      * A stub ReadOnlyCampusConnect whose persons list can violate interface constraints.
      */
