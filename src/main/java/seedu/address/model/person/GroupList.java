@@ -94,6 +94,21 @@ public class GroupList {
     }
 
     /**
+     * Returns the names of every {@code Group} in the {@code GroupList}.
+     */
+    public String getNames() {
+        StringBuilder names = new StringBuilder();
+        for (Group group : groups) {
+            names.append(group.getName());
+            names.append(", ");
+        }
+        // delete the last ", "
+        names.deleteCharAt(names.length() - 1);
+        names.deleteCharAt(names.length() - 1);
+        return names.toString();
+    }
+
+    /**
      * Returns this list as a list of {@code JsonAdaptedGroup}s suitable for storage.
      */
     public List<JsonAdaptedGroup> toJson() {

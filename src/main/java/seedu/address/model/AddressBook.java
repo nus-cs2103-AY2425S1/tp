@@ -121,6 +121,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.get(groupName);
     }
 
+    /**
+     * Returns the names of every {@code Group} in the {@code AddressBook}.
+     */
+    public String getGroupNames() {
+        return groups.getNames();
+    }
+
     //// util methods
 
     @Override

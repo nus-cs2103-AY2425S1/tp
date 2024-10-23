@@ -22,6 +22,7 @@ import seedu.address.logic.commands.SetVolunteerHoursCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.group.CreateGroupCommand;
 import seedu.address.logic.commands.group.DeleteGroupCommand;
+import seedu.address.logic.commands.group.ListGroupsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.group.CreateGroupCommandParser;
 import seedu.address.logic.parser.group.DeleteGroupCommandParser;
@@ -92,6 +93,9 @@ public class AddressBookParser {
 
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);
+
+        case ListGroupsCommand.COMMAND_WORD:
+            return new ListGroupsCommand();
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);

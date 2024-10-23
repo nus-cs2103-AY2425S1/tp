@@ -100,6 +100,11 @@ public interface Model {
     void removeGroup(String groupName) throws GroupNotFoundException;
 
     /**
+     * Returns the names of every {@code Group} in the {@code AddressBook}.
+     */
+    String getGroupNames();
+
+    /**
      * Updates the sort order of the person list to the given {@code comparator}.
      * @throws NullPointerException if {@code predicate} is null.
      */
