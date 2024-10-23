@@ -160,8 +160,9 @@
     -fx-font-size: 13px;
     -fx-text-fill: -ab3-label;
     -fx-text-overrun: ellipsis;
-    -fx-max-width: 200px;
+    -fx-max-width: 300px;
 }
+
 
 .stack-pane {
      -fx-background-color: derive(-ab3-background, 20%);

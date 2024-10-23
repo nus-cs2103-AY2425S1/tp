@@ -12,7 +12,7 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -28,27 +28,21 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <HBox spacing = "3" GridPane.columnIndex="0">
-        <Label text="Phone:" styleClass="cell_small_label" />
         <Label fx:id="phone" styleClass="cell_small_label" text="$phone" />
       </HBox>
       <HBox spacing="3" GridPane.columnIndex="0">
-        <Label text="Address:" styleClass="cell_small_label" />
         <Label fx:id="address" styleClass="cell_small_label" text="$address" />
       </HBox>
       <HBox spacing="3" GridPane.columnIndex="0">
-        <Label text="Email:" styleClass="cell_small_label" />
         <Label fx:id="email" styleClass="cell_small_label" text="$email" />
       </HBox>
       <HBox spacing="3" GridPane.columnIndex="0">
-        <Label text="Fees:" styleClass="cell_small_label" />
         <Label fx:id="fees" styleClass="cell_small_label" text="$fees" />
       </HBox>
       <HBox spacing="3" GridPane.columnIndex="0">
-        <Label text="Class ID:" styleClass="cell_small_label" />
         <Label fx:id="classId" styleClass="cell_small_label" text="$classId" />
       </HBox>
     <HBox spacing="3" GridPane.columnIndex="0">
-      <Label text="Months Paid:" styleClass="cell_small_label" />
       <Label fx:id="monthsPaid" styleClass="cell_small_label" text="$monthsPaid" />
     </HBox>
     </VBox>
