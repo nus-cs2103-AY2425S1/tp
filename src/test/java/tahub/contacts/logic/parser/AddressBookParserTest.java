@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tahub.contacts.logic.commands.CommandTestUtil.COURSE_NAME_DESC;
+import static tahub.contacts.logic.commands.CommandTestUtil.VALID_COURSE_CODE;
+import static tahub.contacts.logic.commands.CommandTestUtil.VALID_COURSE_NAME;
 import static tahub.contacts.testutil.Assert.assertThrows;
 import static tahub.contacts.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -16,15 +19,19 @@ import org.junit.jupiter.api.Test;
 import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.DeleteCommand;
+import tahub.contacts.logic.commands.DeleteCourseCommand;
 import tahub.contacts.logic.commands.EditCommand;
 import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
+import tahub.contacts.logic.commands.EditCourseCommand;
 import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
+import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.testutil.EditCourseDescriptorBuilder;
 import tahub.contacts.testutil.EditPersonDescriptorBuilder;
 import tahub.contacts.testutil.PersonBuilder;
 import tahub.contacts.testutil.PersonUtil;
@@ -60,6 +67,21 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editCourse() throws Exception {
+        CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
+        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder().withCourseName(VALID_COURSE_NAME).build();
+        EditCourseCommand command = (EditCourseCommand) parser.parseCommand(EditCourseCommand.COMMAND_WORD + " c/" + courseCode + COURSE_NAME_DESC);
+        assertEquals(new EditCourseCommand(courseCode, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_deleteCourse() throws Exception {
+        CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
+        DeleteCourseCommand command = (DeleteCourseCommand) parser.parseCommand(DeleteCourseCommand.COMMAND_WORD + " c/" + courseCode);
+        assertEquals(new DeleteCourseCommand(courseCode), command);
     }
 
     @Test
