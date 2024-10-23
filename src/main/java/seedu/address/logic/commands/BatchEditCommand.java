@@ -79,7 +79,6 @@ public class BatchEditCommand extends Command {
                 .getTags()
                 .stream()
                 .filter(tag -> !tag.equals(oldTag)).collect(Collectors.toSet());
-        System.out.println(withoutOldTag);
         withoutOldTag.add(newTag);
         return new Person(
                 person.getName(),
