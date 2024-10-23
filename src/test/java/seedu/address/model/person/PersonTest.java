@@ -92,8 +92,24 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName()
+                + ", company=" + ALICE.getCompany()
+                + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", transactions=" + ALICE.getTransactions() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void updateBalance() {
+        // update balance by adding
+        Person person1 = new PersonBuilder().build();
+        person1.updateBalance(20);
+        assertEquals(20, person1.getBalance());
+
+        // update balance by deducting
+        Person person2 = new PersonBuilder().build();
+        person2.updateBalance(-20);
+        assertEquals(-20, person2.getBalance());
     }
 }

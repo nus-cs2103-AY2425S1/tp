@@ -31,6 +31,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label company;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -40,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label balance;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +53,19 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        company.setText(person.getCompany().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person.getBalance() < 0) {
+            balance.setText("Balance: -$" + person.getBalance() * -1);
+            balance.setStyle("-fx-background-color: red");
+        } else {
+            balance.setText("Balance: $" + person.getBalance());
+            balance.setStyle("-fx-background-color: green");
+        }
     }
 }

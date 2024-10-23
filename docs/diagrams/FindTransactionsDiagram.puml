@@ -1,0 +1,95 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindTransactionCommandParser" as FindTransactionCommandParser LOGIC_COLOR
+participant ":TransactionContainsKeywordsPredicate" as TransactionContainsKeywordsPredicate LOGIC_COLOR
+participant "f:FindTransactionCommand" as FindTransactionCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute(findt 1 ...)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(findt 1 ...))
+activate AddressBookParser
+create FindTransactionCommandParser
+AddressBookParser -> FindTransactionCommandParser
+activate FindTransactionCommandParser
+
+FindTransactionCommandParser --> AddressBookParser
+deactivate FindTransactionCommandParser
+
+AddressBookParser -> FindTransactionCommandParser : parse(1 ...)
+activate FindTransactionCommandParser
+
+create TransactionContainsKeywordsPredicate
+FindTransactionCommandParser -> TransactionContainsKeywordsPredicate : ...
+activate TransactionContainsKeywordsPredicate
+
+TransactionContainsKeywordsPredicate --> FindTransactionCommandParser : predicate
+deactivate TransactionContainsKeywordsPredicate
+
+create FindTransactionCommand
+FindTransactionCommandParser -> FindTransactionCommand
+activate FindTransactionCommand
+
+FindTransactionCommand --> FindTransactionCommandParser
+deactivate FindTransactionCommand
+
+FindTransactionCommandParser --> AddressBookParser : f
+deactivate FindTransactionCommandParser
+
+FindTransactionCommandParser -[hidden]-> AddressBookParser : f
+destroy FindTransactionCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> FindTransactionCommand : execute()
+activate FindTransactionCommand
+
+FindTransactionCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> FindTransactionCommand : filteredPersonList
+deactivate Model
+
+FindTransactionCommand -> Model : updateFilteredPersonList()
+activate Model
+
+Model --> FindTransactionCommand
+deactivate Model
+
+FindTransactionCommand -> Model : setViewTransactions(true)
+activate Model
+
+Model --> FindTransactionCommand
+deactivate Model
+
+FindTransactionCommand -> Model : updateTransactionList()
+activate Model
+
+Model --> FindTransactionCommand
+deactivate Model
+
+FindTransactionCommand -> Model : updateTransactionListPredicate(predicate)
+activate Model
+
+Model --> FindTransactionCommand
+deactivate Model
+
+FindTransactionCommand --> LogicManager : result
+deactivate FindTransactionCommand
+
+FindTransactionCommand -[hidden]-> LogicManager : result
+destroy FindTransactionCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
