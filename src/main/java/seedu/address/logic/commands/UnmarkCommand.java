@@ -14,6 +14,7 @@ import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
@@ -72,4 +73,17 @@ public class UnmarkCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UnmarkCommand)) {
+            return false;
+        }
+
+        return Objects.equals(targetIndex, ((UnmarkCommand) other).targetIndex);
+    }
 }

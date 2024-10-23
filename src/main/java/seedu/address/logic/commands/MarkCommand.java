@@ -14,6 +14,7 @@ import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
@@ -61,9 +62,23 @@ public class MarkCommand extends Command {
         Email email = selectedPerson.getEmail();
         Address address = selectedPerson.getAddress();
         Set<Tag> tags = selectedPerson.getTags();
-        AttendanceCount attendenceCount = selectedPerson.getAttendanceCount().increment();
-        return new Person(name, role, phone, email, address, tags, attendenceCount);
+        AttendanceCount attendanceCount = selectedPerson.getAttendanceCount().increment();
+        return new Person(name, role, phone, email, address, tags, attendanceCount);
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MarkCommand)) {
+            return false;
+        }
+
+        return Objects.equals(targetIndex, ((MarkCommand) other).targetIndex);
     }
 
 }
