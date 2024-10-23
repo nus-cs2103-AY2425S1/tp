@@ -18,6 +18,8 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class PriorityLevel
+Class EmergencyContact
 Class Tag
 
 Class I #FFFFFF
@@ -41,6 +43,8 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> "1..3" PriorityLevel
+Person *--> EmergencyContact
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
@@ -49,6 +53,8 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> PriorityLevel
+PriorityLevel -[hidden]right-> EmergencyContact
 
 ModelManager --> "~* filtered" Person
 @enduml
