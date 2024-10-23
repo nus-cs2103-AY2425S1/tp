@@ -93,7 +93,7 @@ public class Person implements Appointmentable {
             String time = "DateTime: " + dateTime.format(formatter);
             return time + " " + appointment.toString();
         } catch (AppNotFoundException e) {
-            return "No appointment found for the given date, patient, and doctor.";
+            return e.getMessage();
         }
     }
 
@@ -103,12 +103,7 @@ public class Person implements Appointmentable {
     }
 
     public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
-        try {
-            String appointments = history.getDoctorAppointmentsForDay(date, doctorId);
-            return appointments; // Assuming the Appointment class has a toString() method for formatting
-        } catch (AppNotFoundException e) {
-            return "No appointment found for the given date and doctor.";
-        }
+        return history.getDoctorAppointmentsForDay(date, doctorId);
     }
 
 

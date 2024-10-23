@@ -220,14 +220,14 @@ public class History {
      */
     public String getPatientAppointmentsForDay(LocalDate date, Id patientId, Id doctorId)
             throws AppNotFoundException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         StringBuilder sb = new StringBuilder();
         for (LocalDateTime appointmentDateTime : appointments) {
             Appointment appointment = appointmentDatabase.get(appointmentDateTime);
             if (appointmentDateTime.toLocalDate().equals(date)
                     && appointment.getPatientId().equals(patientId)
                     && appointment.getDoctorId().equals(doctorId)) {
-                sb.append(appointment)
-                        .append(System.lineSeparator());
+                sb.append("DateTime: " + date.format(formatter) + " " + appointment).append("\n");
             }
         }
         if (sb.isEmpty()) {
@@ -242,21 +242,31 @@ public class History {
      * @param date The date to check.
      * @param doctorId The ID of the doctor.
      * @return A list of appointments on the specified day.
-     * @throws AppNotFoundException if no appointments are found for the specified date.
      */
-    public String getDoctorAppointmentsForDay(LocalDate date, Id doctorId)
-            throws AppNotFoundException {
+    public String getDoctorAppointmentsForDay(LocalDate date, Id doctorId) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         StringBuilder sb = new StringBuilder();
-        for (LocalDateTime appointmentDateTime : appointments) {
-            Appointment appointment = appointmentDatabase.get(appointmentDateTime);
-            if (appointmentDateTime.toLocalDate().equals(date)
+//        for (LocalDateTime appointmentDateTime : appointments) {
+//            Appointment appointment = appointmentDatabase.get(appointmentDateTime);
+//            if (appointmentDateTime.toLocalDate().equals(date)
+//                    && appointment.getDoctorId().equals(doctorId)) {
+//                sb.append("DateTime: " + appointmentDateTime.format(formatter) + " " + appointment).append("\n");
+//            }
+//        }
+
+        for (Map.Entry<LocalDateTime, Appointment> entry : appointmentDatabase.entrySet()) {
+            Appointment appointment = entry.getValue();
+            LocalDate appointmentDate = entry.getKey().toLocalDate();
+            LocalDateTime appointmentDateTime = entry.getKey();
+
+            if (appointmentDate.equals(date)
                     && appointment.getDoctorId().equals(doctorId)) {
-                sb.append(appointment)
-                        .append(System.lineSeparator());
+                sb.append("DateTime: " + appointmentDateTime.format(formatter) + " " + appointment).append("\n");
             }
         }
+
         if (sb.isEmpty()) {
-            throw new AppNotFoundException("No appointments found for the specified date.");
+            return null;
         }
         return sb.toString();
     }
