@@ -153,7 +153,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void saveAddressBook(ReadOnlyAddressBook<InternshipApplication> addressBook, Path filePath)
                     throws IOException {
                 throw e;
             }

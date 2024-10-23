@@ -1,6 +1,7 @@
 package seedu.hireme.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -27,6 +28,7 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_typicalInternshipsFile_success() throws Exception {
+        assertTrue(JsonUtil.readJsonFile(TYPICAL_INTERNSHIPS_FILE, JsonSerializableAddressBook.class).isPresent());
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_INTERNSHIPS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook<InternshipApplication> addressBookFromFile = dataFromFile.toModelType();
@@ -37,6 +39,7 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_invalidInternshipFile_throwsIllegalValueException() throws Exception {
+        assertTrue(JsonUtil.readJsonFile(INVALID_INTERNSHIP_FILE, JsonSerializableAddressBook.class).isPresent());
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_INTERNSHIP_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
@@ -44,6 +47,7 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_duplicateInternship_throwsIllegalValueException() throws Exception {
+        assertTrue(JsonUtil.readJsonFile(DUPLICATE_INTERNSHIP_FILE, JsonSerializableAddressBook.class).isPresent());
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_INTERNSHIP_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_INTERNSHIP_APPLICATION,

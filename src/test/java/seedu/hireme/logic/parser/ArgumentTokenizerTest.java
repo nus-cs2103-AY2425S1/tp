@@ -36,7 +36,7 @@ public class ArgumentTokenizerTest {
      * and only the last value is returned upon calling {@code ArgumentMultimap#getValue(Prefix)}.
      */
     private void assertArgumentPresent(ArgumentMultimap argMultimap, Prefix prefix, String... expectedValues) {
-
+        assertTrue(argMultimap.getValue(prefix).isPresent());
         // Verify the last value is returned
         assertEquals(expectedValues[expectedValues.length - 1], argMultimap.getValue(prefix).get());
 

@@ -2,6 +2,7 @@ package seedu.hireme.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -44,6 +45,7 @@ public class StorageManagerTest {
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
         storageManager.saveUserPrefs(original);
+        assertTrue(storageManager.readUserPrefs().isPresent());
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);
     }
@@ -57,6 +59,7 @@ public class StorageManagerTest {
          */
         AddressBook<InternshipApplication> original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
+        assertTrue(storageManager.readAddressBook().isPresent());
         ReadOnlyAddressBook<InternshipApplication> retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook<InternshipApplication>(retrieved));
     }
