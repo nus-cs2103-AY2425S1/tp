@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tutorease.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -58,7 +59,7 @@ public class CommandTestUtil {
 
 
     public static final String VALID_STUDENT_ID = "1";
-    public static final String VALID_LOCATION_INDEX = "1";
+    public static final String VALID_FEE = "10";
     public static final String VALID_START_DATE = "01-01-2024 12:00";
     public static final String VALID_END_DATE = "01-01-2024 13:00";
 
@@ -84,6 +85,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_SUPPORTIVE = " " + PREFIX_TAG + VALID_TAG_SUPPORTIVE;
     public static final String TAG_DESC_MENTOR = " " + PREFIX_TAG + VALID_TAG_MENTOR;
     public static final String STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID;
+    public static final String FEE_DESC = " " + PREFIX_FEE + VALID_FEE;
     public static final String START_DATE_TIME_DESC = " " + PREFIX_START_DATE + VALID_START_DATE;
     public static final String DURATION_DESC = " " + PREFIX_DURATION + VALID_DURATION;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -94,6 +96,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_STUDENT_ID_CHAR = " " + PREFIX_STUDENT_ID + "a";
     public static final String INVALID_STUDENT_ID_ZERO = " " + PREFIX_STUDENT_ID + "0";
+    public static final String INVALID_FEE = " " + PREFIX_FEE + "-1";
     public static final String INVALID_DAY = "00-03-2000 12:00";
     public static final String INVALID_START_DATE_DAY = " " + PREFIX_START_DATE + INVALID_DAY;
     public static final String INVALID_MONTH = "03-00-2000 12:00";
