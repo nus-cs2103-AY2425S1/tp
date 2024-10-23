@@ -25,7 +25,7 @@ public class DeliveryStatusMatchInputPredicate implements Predicate<Delivery> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeliveryIsUpcomingPredicate)) {
+        if (!(other instanceof DeliveryStatusMatchInputPredicate)) {
             return false;
         }
 

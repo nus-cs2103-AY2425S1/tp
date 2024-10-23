@@ -24,7 +24,7 @@ public class JsonAdaptedDeliveryTest {
     private static final String INVALID_TIME = "1-1-1 10:00";
     private static final String INVALID_COST = "100.";
     private static final String INVALID_QUANTITY = "500 PCS";
-    private static final String INVALID_SUPPLIER_INDEX ="abc";
+    private static final String INVALID_SUPPLIER_INDEX = "abc";
     private static final String VALID_PRODUCT = BREAD.getDeliveryProduct().toString();
     private static final JsonAdaptedPerson VALID_SENDER = new JsonAdaptedPerson(CARL);
     private static final String VALID_TIME = APPLE.getDeliveryDate().toString();
@@ -58,7 +58,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_invalidTime_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), INVALID_TIME,
-                VALID_COST, VALID_QUANTITY,VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -82,7 +82,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_nullCost_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                null, VALID_QUANTITY,VALID_SUPPLIER_INDEX, VALID_SENDER);
+                null, VALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
@@ -90,7 +90,7 @@ public class JsonAdaptedDeliveryTest {
     @Test
     public void toModelType_invalidQuantity_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(VALID_PRODUCT, Status.PENDING.toString(), VALID_TIME,
-                VALID_COST, INVALID_QUANTITY,VALID_SUPPLIER_INDEX, VALID_SENDER);
+                VALID_COST, INVALID_QUANTITY, VALID_SUPPLIER_INDEX, VALID_SENDER);
         String expectedMessage = Quantity.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
