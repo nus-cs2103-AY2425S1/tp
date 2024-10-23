@@ -3,6 +3,8 @@ package seedu.address.ui;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ViewToggler;
+import seedu.address.model.link.Link;
 
 /**
  * Manages the list views (owners, pets, combined) based on the command result.
@@ -13,6 +15,8 @@ public class ListCommandViewManager {
     private VBox petList;
     private StackPane combinedListPanelPlaceholder;
 
+    private StackPane linkListPanelPlaceholder;
+
     /**
      * Constructs a {@code ListCommandViewManager} with the relevant view elements.
      *
@@ -20,10 +24,12 @@ public class ListCommandViewManager {
      * @param petList                    The pet list view (VBox).
      * @param combinedListPanelPlaceholder The combined list view placeholder (StackPane).
      */
-    public ListCommandViewManager(VBox ownerList, VBox petList, StackPane combinedListPanelPlaceholder) {
+    public ListCommandViewManager(VBox ownerList, VBox petList, StackPane combinedListPanelPlaceholder,
+                                  StackPane linkListPanelPlaceholder) {
         this.ownerList = ownerList;
         this.petList = petList;
         this.combinedListPanelPlaceholder = combinedListPanelPlaceholder;
+        this.linkListPanelPlaceholder = linkListPanelPlaceholder;
     }
 
     /**
@@ -32,13 +38,48 @@ public class ListCommandViewManager {
      * @param commandResult The result of the command that determines which list to show.
      */
     public void toggleListView(CommandResult commandResult) {
-        if (commandResult.isOwnerListCommand()) {
+        if (commandResult.getCommandType() == null) {
+
+        } else if (commandResult.getCommandType().equals(ViewToggler.LIST_OWNER_COMMAND)) {
             changeToOwnersOnly();
-        } else if (commandResult.isPetListCommand()) {
+        } else if (commandResult.getCommandType().equals(ViewToggler.LIST_PET_COMMAND)) {
             changeToPetsOnly();
-        } else if (commandResult.isCombinedListCommand()) {
+        } else if (commandResult.getCommandType().equals(ViewToggler.LIST_BOTH_COMMAND)) {
             changeToCombinedList();
+        } else if (commandResult.getCommandType().equals(ViewToggler.LINK_OWNER_TO_PET_COMMAND)) {
+            showLinks();
         }
+    }
+
+    /**
+     * Changes the view to show the newly created link from an owner to a pet.
+     *
+     */
+    public void showLinks() {
+        // Clear the current lists
+        ownerList.setVisible(false);
+        ownerList.setManaged(false);
+        petList.setVisible(false);
+        petList.setManaged(false);
+        combinedListPanelPlaceholder.setVisible(false);
+        combinedListPanelPlaceholder.setManaged(false);
+        linkListPanelPlaceholder.setVisible(true);
+        linkListPanelPlaceholder.setManaged(true);
+
+        /*
+        // Create a new LinkCard for the link
+        LinkCard linkCard = new LinkCard(link, 1); // Assuming 1 is the index for the first card
+
+        // Add the LinkCard to the combinedListPanelPlaceholder or a new VBox
+        VBox linkList = new VBox();
+        linkList.getChildren().add(linkCard.getRoot());
+        combinedListPanelPlaceholder.getChildren().clear(); // Clear previous content
+        combinedListPanelPlaceholder.getChildren().add(linkList);
+
+        // Show the LinkCard
+        combinedListPanelPlaceholder.setVisible(true);
+        combinedListPanelPlaceholder.setManaged(true);
+         */
     }
 
     /**

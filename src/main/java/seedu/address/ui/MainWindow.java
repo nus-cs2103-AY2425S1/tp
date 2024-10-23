@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private CombinedListPanel combinedListPanel;
     private PetListPanel petListPanel;
     private OwnerListPanel ownerListPanel;
+    private LinkListPanel linkListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -54,6 +55,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane ownerListPanelPlaceholder;
+
+    @FXML
+    private StackPane linkListPanelPlaceholder;
 
     @FXML
     private VBox ownerList;
@@ -78,7 +82,8 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Create the list command view manager
-        this.listCommandViewManager = new ListCommandViewManager(ownerList, petList, combinedListPanelPlaceholder);
+        this.listCommandViewManager = new ListCommandViewManager(ownerList, petList,
+                combinedListPanelPlaceholder, linkListPanelPlaceholder);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -137,6 +142,10 @@ public class MainWindow extends UiPart<Stage> {
 
         ownerListPanel = new OwnerListPanel(logic.getFilteredOwnerList());
         ownerListPanelPlaceholder.getChildren().add(ownerListPanel.getRoot());
+
+        linkListPanel = new LinkListPanel(logic.getFilteredLinkList());
+        System.out.println(logic.getFilteredLinkList());
+        linkListPanelPlaceholder.getChildren().add(linkListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
