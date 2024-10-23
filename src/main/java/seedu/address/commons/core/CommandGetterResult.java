@@ -11,29 +11,28 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class CommandGetterResult {
     private final String stringToDisplay;
-    private final String originalTypedString;
+    private final boolean isModifiedSinceLastArrowKey;
 
     /**
-     * Constructs a CommandGetterResult with provided {@code stringToDisplay} and {@code originalTypedString}.
-     * @param stringToDisplay
-     * @param originalTypedString
+     * Constructs a CommandGetterResult with provided {@code stringToDisplay} and {@code isModifiedHistoricalCommand}.
      */
-    public CommandGetterResult(String stringToDisplay, String originalTypedString) {
+    public CommandGetterResult(String stringToDisplay, boolean isModifiedSinceLastArrowKey) {
         this.stringToDisplay = stringToDisplay;
-        this.originalTypedString = originalTypedString;
+        this.isModifiedSinceLastArrowKey = isModifiedSinceLastArrowKey;
     }
     public CommandGetterResult updateStringToDisplay(String newStringToDisplay) {
-        return new CommandGetterResult(newStringToDisplay, originalTypedString);
+        return new CommandGetterResult(newStringToDisplay, isModifiedSinceLastArrowKey);
     }
-    public CommandGetterResult updateOriginalTypedString(String newOriginalTypedString) {
-        return new CommandGetterResult(stringToDisplay, newOriginalTypedString);
+
+    public CommandGetterResult updateIsModified(boolean isModifiedSinceLastArrowKey) {
+        return new CommandGetterResult(stringToDisplay, isModifiedSinceLastArrowKey);
     }
 
     public String getStringToDisplay() {
         return stringToDisplay;
     }
-    public String getOriginalTypedString() {
-        return originalTypedString;
+    public boolean getIsModifiedSinceLastArrowKey() {
+        return isModifiedSinceLastArrowKey;
     }
 
     @Override
@@ -47,13 +46,13 @@ public class CommandGetterResult {
         }
         CommandGetterResult otherResult = (CommandGetterResult) other;
         return Objects.equals(stringToDisplay, otherResult.stringToDisplay)
-                && Objects.equals(originalTypedString, otherResult.originalTypedString);
+                && isModifiedSinceLastArrowKey == otherResult.isModifiedSinceLastArrowKey;
     }
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("stringToDisplay", stringToDisplay)
-                .add("originalTypedString", originalTypedString)
+                .add("isModifiedSinceLastArrowKey", isModifiedSinceLastArrowKey)
                 .toString();
     }
 }

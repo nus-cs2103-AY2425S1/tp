@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Deque;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -38,7 +37,7 @@ public class CollectionUtil {
     /**
      * Returns true if {@code dequeA} has the same items in the same ordering as {@code dequeB}.
      */
-    public static boolean isDequeEqual(Deque<?> dequeA, Deque<?> dequeB) {
+    public static boolean isCollectionEqual(Collection<?> dequeA, Collection<?> dequeB) {
         requireAllNonNull(dequeA, dequeB);
         if (dequeA.size() != dequeB.size()) {
             return false;

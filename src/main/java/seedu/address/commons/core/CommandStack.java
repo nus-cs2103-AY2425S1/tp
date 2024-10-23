@@ -1,66 +1,105 @@
 package seedu.address.commons.core;
 
-import static seedu.address.commons.util.CollectionUtil.isDequeEqual;
+import static seedu.address.commons.util.CollectionUtil.isCollectionEqual;
 
 import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * A Serializable class that contains command history data and command history max size.
- * Guarantees: immutable.
  */
 public class CommandStack implements Serializable {
-    private static final int DEFAULT_COMMAND_STACK_MAX_SIZE = 2000;
-    private final Deque<String> commandDeque;
-    private final int commandDequeMaxSize;
-    private Iterator<String> commandDequeIterator;
+    private static final int DEFAULT_COMMAND_ARRAY_LIST_MAX_SIZE = 2000;
+    private final ArrayList<String> commandArrayList;
+    private final int commandArrayListMaxSize;
+    @JsonIgnore
+    private int commandArrayIndex; //represents index of currently displayed element
 
     /**
      * Constructs a {@code CommandStack} with default max size, and empty history.
      */
     public CommandStack() {
-        commandDequeMaxSize = DEFAULT_COMMAND_STACK_MAX_SIZE;
-        commandDeque = new ArrayDeque<>();
+        this.commandArrayList = new ArrayList<>();
+        this.commandArrayListMaxSize = DEFAULT_COMMAND_ARRAY_LIST_MAX_SIZE;
+        this.commandArrayIndex = DEFAULT_COMMAND_ARRAY_LIST_MAX_SIZE;
     }
 
     /**
      * Creates a {@code CommandStack} with specified max size, and specified history.
      */
-    public CommandStack(Deque<String> commandDeque, int commandDequeMaxSize) {
-        this.commandDeque = commandDeque;
-        this.commandDequeMaxSize = commandDequeMaxSize;
+    public CommandStack(ArrayList<String> commandArrayList, int commandArrayListMaxSize) {
+        this.commandArrayList = commandArrayList;
+        this.commandArrayListMaxSize = commandArrayListMaxSize;
+        this.commandArrayIndex = commandArrayListMaxSize;
     }
-    public Deque<String> getCommandDeque() {
-        return commandDeque;
+    public ArrayList<String> getCommandArrayList() {
+        return commandArrayList;
     }
-    public int getCommandDequeMaxSize() {
-        return commandDequeMaxSize;
+    public int getCommandArrayListMaxSize() {
+        return commandArrayListMaxSize;
+    }
+
+    private void forceArrayIndexWithinBounds() {
+        commandArrayIndex = Math.min(commandArrayList.size(), Math.max(0, commandArrayIndex));
     }
 
     public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
-        return commandGetterResult.updateStringToDisplay("earlier");
+        if (commandGetterResult.getIsModifiedSinceLastArrowKey()) {
+            commandArrayIndex = commandArrayListMaxSize; // set to latest
+        }
+        forceArrayIndexWithinBounds();
+        if (commandArrayList.isEmpty()) {
+            return commandGetterResult
+                    .updateStringToDisplay("")
+                    .updateIsModified(false);
+        }
+        if (commandArrayIndex > 0) {
+            commandArrayIndex--;
+        }
+        return commandGetterResult
+                .updateStringToDisplay(commandArrayList.get(commandArrayIndex))
+                .updateIsModified(false);
     }
-
     public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
-        return commandGetterResult.updateStringToDisplay("later");
+        if (commandGetterResult.getIsModifiedSinceLastArrowKey()) {
+            return commandGetterResult;
+        }
+        //checkIsModifiedTrue(commandGetterResult);
+        forceArrayIndexWithinBounds();
+        if (commandArrayList.isEmpty()) {
+            return commandGetterResult
+                    .updateStringToDisplay("")
+                    .updateIsModified(false);
+        }
+        if (commandArrayIndex < commandArrayList.size()) {
+            commandArrayIndex++;
+        }
+        if (commandArrayIndex >= commandArrayList.size()) {
+            return commandGetterResult
+                    .updateStringToDisplay("")
+                    .updateIsModified(false);
+        }
+        return commandGetterResult
+                .updateStringToDisplay(commandArrayList.get(commandArrayIndex))
+                .updateIsModified(false);
     }
-
     /**
      * Adds an executed command string to the front of {@code commandDeque}.
      * If size of the command stack exceeds {@code commandStackMaxSize},
      * removes the earliest added command string in history.
      */
-    public void addCommand(String commandString) {
-        assert(commandDeque.size() <= commandDequeMaxSize);
-        commandDeque.addFirst(commandString);
-        if (commandDeque.size() == commandDequeMaxSize + 1) {
-            commandDeque.removeLast();
+    public CommandStack addCommand(String commandString) {
+        assert(commandArrayList.size() <= commandArrayListMaxSize);
+        commandArrayList.add(commandString);
+        if (commandArrayList.size() == commandArrayListMaxSize + 1) {
+            commandArrayList.remove(commandArrayListMaxSize);
         }
+        return new CommandStack(this.commandArrayList, this.commandArrayListMaxSize);
     }
     @Override
     public boolean equals(Object other) {
@@ -72,18 +111,20 @@ public class CommandStack implements Serializable {
             return false;
         }
         CommandStack otherCommandStack = (CommandStack) other;
-        return isDequeEqual(commandDeque, otherCommandStack.commandDeque)
-                && commandDequeMaxSize == otherCommandStack.commandDequeMaxSize;
+        return isCollectionEqual(commandArrayList, otherCommandStack.commandArrayList)
+                && commandArrayListMaxSize == otherCommandStack.commandArrayListMaxSize
+                && commandArrayIndex == otherCommandStack.commandArrayIndex;
     }
     @Override
     public int hashCode() {
-        return Objects.hash(commandDeque, commandDequeMaxSize);
+        return Objects.hash(commandArrayList, commandArrayListMaxSize, commandArrayIndex);
     }
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("commandDeque", commandDeque)
-                .add("commandDequeMaxSize", commandDequeMaxSize)
+                .add("commandArrayList", commandArrayList)
+                .add("commandArrayListMaxSize", commandArrayListMaxSize)
+                .add("commandArrayIndex", commandArrayIndex)
                 .toString();
     }
 
