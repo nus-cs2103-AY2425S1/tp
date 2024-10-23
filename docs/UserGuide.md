@@ -145,7 +145,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding an Emergency contact's name : `addEcName` 
+### Adding an Emergency contact's name : `addEcName`
 
 Adds an emergency contact's name to the specified person in the address book.
 

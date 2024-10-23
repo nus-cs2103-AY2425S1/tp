@@ -45,5 +45,4 @@ class JsonAdaptedExam {
         }
         return new Exam(examName);
     }
-
 }
