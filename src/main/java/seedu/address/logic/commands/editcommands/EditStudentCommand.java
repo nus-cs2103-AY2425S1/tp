@@ -39,14 +39,14 @@ public class EditStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Edits the student identified by the student number used.\n"
-        + "Fields including group and student number should not be modified."
+        + "Fields including group and student number should not be modified.\n"
         + "Parameters: "
-        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER"
+        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
         + "[" + PREFIX_STUDENT_NAME + "NAME] "
         + "[" + PREFIX_EMAIL + "EMAIL] "
         + "[" + PREFIX_TAG + "TAG]... \n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_STUDENT_NUMBER + "A0123456P"
+        + PREFIX_STUDENT_NUMBER + "A0123456P "
         + PREFIX_STUDENT_NAME + "John Doe "
         + PREFIX_EMAIL + "johnd@u.nus.edu "
         + PREFIX_TAG + "good at UI ";
