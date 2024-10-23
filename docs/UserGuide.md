@@ -24,7 +24,7 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 | **Clear**    | `clear`                                                                                                                                                                           |
 | **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
 | **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
-| **Withdraw** | `withdraw INDEX APPLICATION_INDEX`<br> e.g., `withdraw 3 1`                                                                                                                       |
+| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
 | **List**     | `list`                                                                                                                                                                            |
 | **Help**     | `help`                                                                                                                                                                            |
@@ -154,9 +154,9 @@ and will take be `APPLIED` if not specified.
 
 Removes an internship record for an existing company in the address book.
 
-Format: `withdraw INDEX APPLICATION_INDEX`
+Format: `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`
 
-* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
+* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `COMPANY_INDEX`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
