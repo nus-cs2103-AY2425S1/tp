@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
