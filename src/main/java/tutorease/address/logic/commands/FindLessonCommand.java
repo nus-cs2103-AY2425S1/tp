@@ -3,6 +3,7 @@ package tutorease.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.logging.Logger;
+
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.logic.Messages;
@@ -23,10 +24,10 @@ public class FindLessonCommand extends LessonCommand {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " alice bob charlie";
 
-    private final LessonContainsNamesPredicate predicate;
-
     // Get the logger specific to FindLessonCommand
     private static final Logger logger = LogsCenter.getLogger(FindLessonCommand.class);
+
+    private final LessonContainsNamesPredicate predicate;
 
     public FindLessonCommand(LessonContainsNamesPredicate predicate) {
         this.predicate = predicate;
