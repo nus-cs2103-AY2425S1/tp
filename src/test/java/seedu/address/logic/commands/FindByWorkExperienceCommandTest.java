@@ -69,7 +69,7 @@ public class FindByWorkExperienceCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         WorkExperienceContainsKeywordsPredicate predicate = new WorkExperienceContainsKeywordsPredicate("Intern",
-        "Google", "2024");
+                "Google", "2024");
         FindByWorkExperienceCommand command = new FindByWorkExperienceCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
