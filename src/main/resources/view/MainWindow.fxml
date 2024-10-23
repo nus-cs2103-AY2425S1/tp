@@ -23,8 +23,8 @@
     <Scene>
       <stylesheets>
         <URL value="@CommandBox.css" />
-        <URL value="@ContactCard.css" />
-        <URL value="@ContactListPanel.css" />
+        <URL value="@DisplayableCard.css" />
+        <URL value="@DisplayedListPanel.css" />
         <URL value="@MainWindow.css" />
         <URL value="@ResultDisplay.css" />
         <URL value="@Sidebar.css" />

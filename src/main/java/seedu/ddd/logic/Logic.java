@@ -7,9 +7,11 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * API of the Logic component
@@ -33,6 +35,12 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of contacts */
     ObservableList<Contact> getFilteredContactList();
+
+    /** Returns an unmodifiable view of the filtered list of contacts */
+    ObservableList<Event> getFilteredEventList();
+
+    /** Returns an unmodifiable view of the list of items to display */
+    ObservableList<Displayable> getDisplayedList();
 
     /**
      * Returns the user prefs' address book file path.
