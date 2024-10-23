@@ -101,6 +101,7 @@ public class ModelManager implements Model {
     @Override
     public void addCompany(Company company) {
         addressBook.addCompany(company);
+
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
     }
 

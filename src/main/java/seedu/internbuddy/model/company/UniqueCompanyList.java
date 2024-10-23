@@ -3,6 +3,7 @@ package seedu.internbuddy.model.company;
 import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,6 +25,10 @@ import seedu.internbuddy.model.company.exceptions.DuplicateCompanyException;
  * @see Company#isSameCompany(Company)
  */
 public class UniqueCompanyList implements Iterable<Company> {
+
+    /* Comparator to sort the list by favourites first when updating the list */
+    private static final Comparator<Company> SORT_BY_FAVOURITES = (company1, company2) ->
+            company2.getIsFavourite().compareTo(company1.getIsFavourite());
 
     private final ObservableList<Company> internalList = FXCollections.observableArrayList();
     private final ObservableList<Company> internalUnmodifiableList =
@@ -47,6 +52,7 @@ public class UniqueCompanyList implements Iterable<Company> {
             throw new DuplicateCompanyException();
         }
         internalList.add(toAdd);
+        internalList.sort(SORT_BY_FAVOURITES);
     }
 
     /**
@@ -67,6 +73,7 @@ public class UniqueCompanyList implements Iterable<Company> {
         }
 
         internalList.set(index, editedCompany);
+        internalList.sort(SORT_BY_FAVOURITES);
     }
 
     /**
