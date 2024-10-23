@@ -12,6 +12,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.UniqueCompanyList;
 import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
+import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.UniqueJobList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -121,9 +122,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The existence of the company referenced by the job creation is checked here.
      */
     public void addJob(Job j) {
+        JobCompany c = j.getCompany();
         boolean companyExists = StreamSupport
                 .stream(companies.spliterator(), false)
-                .anyMatch(x -> j.getCompany().matchesCompanyName(x.getName()));
+                .anyMatch(x -> c.matchesCompanyName(x.getName()));
         if (!companyExists) {
             throw new CompanyNotFoundException();
         }
