@@ -2,7 +2,7 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "role" : "teacher",
+    "role" : "student",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
@@ -16,14 +16,14 @@
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
-    "role" : "staff",
+    "role" : "student",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ]
   }, {
     "name" : "Carl Meier",
-    "role" : "parent",
+    "role" : "student",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
@@ -37,14 +37,14 @@
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "role" : "parent",
+    "role" : "student",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
     "name" : "George Best",
-    "role" : "teacher",
+    "role" : "parent",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
