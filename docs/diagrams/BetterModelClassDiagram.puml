@@ -19,4 +19,6 @@ Student *--> Phone
 Student *--> Email
 Student *--> Address
 Student *--> Schedule
+Student *--> Subject
+Student *--> PaidAmount
 @enduml
