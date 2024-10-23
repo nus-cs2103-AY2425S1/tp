@@ -140,19 +140,18 @@ public class ModelManager implements Model {
 
     @Override
     public boolean addTags(List<Tag> tags) {
+        boolean isSuccessful = true;
         for (Tag tag : tags) {
-            if (!addTag(tag)) {
-                return false;
-            }
+            isSuccessful &= addressBook.addTag(tag);
         }
-        return true;
+        return isSuccessful;
     }
 
     @Override
     public boolean deleteTags(List<Tag> tags) {
         boolean isSuccessful = true;
         for (Tag tag : tags) {
-            isSuccessful = addressBook.deleteTag(tag);
+            isSuccessful &= addressBook.deleteTag(tag);
         }
         return isSuccessful;
     }
@@ -168,8 +167,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean checkAcceptableTagListSize() {
-        return addressBook.checkAcceptableTagListSize();
+    public boolean checkAcceptableTagListSize(int additionalTags) {
+        return addressBook.checkAcceptableTagListSize(additionalTags);
     }
 
     @Override

@@ -134,11 +134,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if the size of the tag list is below
-     * or equal to the maximum size allowed.
+     * Returns true if the size of the tag list will be below
+     * or equal to the maximum size allowed, after adding a number of new tags.
+     * @param additionalTags the number of new tags to be added.
      */
-    public boolean checkAcceptableTagListSize() {
-        return tags.checkAcceptableSize();
+    public boolean checkAcceptableTagListSize(int additionalTags) {
+        return tags.checkAcceptableSize(additionalTags);
     }
 
     public String tagsToString() {

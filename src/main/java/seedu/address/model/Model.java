@@ -125,7 +125,7 @@ public interface Model {
      *
      * @return true if the size is acceptable, false otherwise.
      */
-    boolean checkAcceptableTagListSize();
+    boolean checkAcceptableTagListSize(int additionalSize);
 
     /**
      * Returns the String representation of the

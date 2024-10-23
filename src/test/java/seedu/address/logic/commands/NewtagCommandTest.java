@@ -74,11 +74,14 @@ public class NewtagCommandTest {
     @Test
     public void execute_tooManyTags_failure() {
         Tag newTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
+        List<Tag> newTags = new ArrayList<>();
+        newTags.add(newTag);
+
         for (int i = 0; i < TagList.MAXIMUM_TAGLIST_SIZE; i++) {
             model.addTag(new Tag(String.valueOf(i)));
         }
 
-        NewtagCommand newTagCommand = new NewtagCommand(newTag);
+        NewtagCommand newTagCommand = new NewtagCommand(newTags);
         String expectedMessage = NewtagCommand.MESSAGE_TOO_MANY_TAGS;
 
         assertCommandFailure(newTagCommand, model, expectedMessage);

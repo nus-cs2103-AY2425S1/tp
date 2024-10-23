@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -10,7 +12,7 @@ import javafx.collections.ObservableList;
  */
 public class TagList {
     private final ObservableList<Tag> tags;
-    public static int MAXIMUM_TAGLIST_SIZE = 3;
+    public static int MAXIMUM_TAGLIST_SIZE = 30;
 
     public TagList() {
         tags = FXCollections.observableArrayList();
@@ -46,6 +48,7 @@ public class TagList {
      * @param tags The tags to add.
      */
     public void setTags(List<Tag> tags) {
+        requireNonNull(tags);
         this.tags.setAll(tags);
     }
 
@@ -60,8 +63,8 @@ public class TagList {
      * Returns true if the size of the tag list is below
      * or equal to the maximum size allowed.
      */
-    public boolean checkAcceptableSize() {
-        return tags.size() <= MAXIMUM_TAGLIST_SIZE;
+    public boolean checkAcceptableSize(int additionalTags) {
+        return tags.size() + additionalTags <= MAXIMUM_TAGLIST_SIZE;
     }
 
     /**

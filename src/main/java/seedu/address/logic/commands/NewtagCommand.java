@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-<<<<<<< HEAD
-import javax.swing.text.html.HTML;
-=======
 import java.util.List;
->>>>>>> feature-mass-newtag
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -41,14 +37,12 @@ public class NewtagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
-<<<<<<< HEAD
-        if (!model.checkAcceptableTagListSize()) {
+        if (!model.checkAcceptableTagListSize(tags.size())) {
             throw new CommandException(MESSAGE_TOO_MANY_TAGS);
         }
-        boolean isSuccessful = model.addTag(tag);
-=======
+
         boolean isSuccessful = model.addTags(tags);
->>>>>>> feature-mass-newtag
+
         if (!isSuccessful) {
             throw new CommandException(MESSAGE_DUPLICATE);
         }

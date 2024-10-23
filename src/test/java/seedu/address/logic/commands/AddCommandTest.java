@@ -194,7 +194,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean checkAcceptableTagListSize() {
+        public boolean checkAcceptableTagListSize(int additionalTags) {
             throw new AssertionError("This method should not be called.");
         }
     }
