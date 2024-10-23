@@ -4,7 +4,10 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.ParserUtil.SortAttribute;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -31,9 +34,10 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SORTED_SUCCESS = "Sorted the list based on %1$s";
     public static final String MESSAGE_UNSORTED_SUCCESS = "Your list is now unsorted and back to the original!";
-
+    private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
     private final SortAttribute sortAttribute;
     private Comparator<Person> comparator;
+
 
     /**
      * @param sortAttribute attribute to sort the persons in the list
@@ -48,6 +52,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         this.comparator = this.getComparator();
         model.sortFilteredPersonList(this.comparator);
+        logger.log(Level.INFO, "SortCommand has been executed");
         return new CommandResult(this.generateSuccessMessage());
     }
 
@@ -60,7 +65,7 @@ public class SortCommand extends Command {
      * Returns null to unsort.
      */
     public Comparator<Person> getComparator() {
-
+        assert sortAttribute != null;
         switch (sortAttribute) {
 
         case NAME:
