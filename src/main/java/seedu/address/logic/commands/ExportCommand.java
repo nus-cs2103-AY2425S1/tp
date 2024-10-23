@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,10 +33,13 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Exported %1$d students to %2$s";
     public static final String MESSAGE_FAILURE = "Failed to export students: %1$s";
     public static final String MESSAGE_FILE_EXISTS = "File %1$s already exists. Use -f flag to overwrite.";
+    public static final String MESSAGE_HOME_FILE_EXISTS =
+            "File %1$s already exists in home directory. Use -f flag to overwrite.";
+    public static final String MESSAGE_SUCCESS_WITH_COPY = "Exported %1$d students to %2$s and %3$s";
 
     private final String filename;
     private final boolean isForceExport;
-    private final Path baseDir; // New field for base directory
+    private final Path baseDir;
 
     /**
      * Creates an ExportCommand to export data to the specified filename in the default directory
@@ -67,6 +72,10 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Student> studentList = model.getFilteredStudentList();
 
+        // Get project data directory path and home directory path
+        Path dataFilePath = baseDir.resolve(filename + ".csv");
+        Path homeFilePath = Paths.get(System.getProperty("user.home"), filename + ".csv");
+
         // Create directories if they don't exist
         try {
             Files.createDirectories(baseDir);
@@ -74,13 +83,61 @@ public class ExportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FAILURE, "Could not create directory: " + e.getMessage()));
         }
 
-        Path filePath = baseDir.resolve(filename + ".csv");
-
-        // Check if file exists and force flag is not set
-        if (!isForceExport && Files.exists(filePath)) {
-            throw new CommandException(String.format(MESSAGE_FILE_EXISTS, filePath));
+        // Check both locations for existing files when force flag is not set
+        if (!isForceExport) {
+            if (Files.exists(dataFilePath)) {
+                throw new CommandException(String.format(MESSAGE_FILE_EXISTS, dataFilePath));
+            }
+            if (Files.exists(homeFilePath)) {
+                throw new CommandException(String.format(MESSAGE_HOME_FILE_EXISTS, homeFilePath));
+            }
         }
 
+        try {
+            // Write to data directory
+            writeCsvFile(dataFilePath, studentList);
+
+            // Copy to home directory
+            try {
+                if (isForceExport) {
+                    Files.copy(dataFilePath, homeFilePath, StandardCopyOption.REPLACE_EXISTING);
+                } else {
+                    Files.copy(dataFilePath, homeFilePath);
+                }
+                return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_COPY,
+                        studentList.size(), dataFilePath, homeFilePath),
+                        COMMAND_TYPE);
+            } catch (FileAlreadyExistsException e) {
+                // If file exists in home directory and force flag is not set
+                // Delete the data directory file and throw exception
+                Files.deleteIfExists(dataFilePath);
+                throw new CommandException(String.format(MESSAGE_HOME_FILE_EXISTS, homeFilePath));
+            } catch (IOException e) {
+                // If home directory copy fails for other reasons, return success with data file only
+                return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), dataFilePath),
+                        COMMAND_TYPE);
+            }
+        } catch (IOException e) {
+            // Clean up any partially created files
+            try {
+                Files.deleteIfExists(dataFilePath);
+            } catch (IOException ignored) {
+                // Ignore cleanup errors
+            }
+            throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
+        }
+    }
+
+    private String escapeSpecialCharacters(String data) {
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        return escapedData;
+    }
+
+    private void writeCsvFile(Path filePath, List<Student> studentList) throws IOException {
         try (FileWriter csvWriter = new FileWriter(filePath.toFile())) {
             // Write CSV header
             csvWriter.append("Name,Phone,Email,Courses\n");
@@ -95,20 +152,7 @@ public class ExportCommand extends Command {
             }
 
             csvWriter.flush();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), filePath),
-                    COMMAND_TYPE);
-        } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
         }
-    }
-
-    private String escapeSpecialCharacters(String data) {
-        String escapedData = data.replaceAll("\\R", " ");
-        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-            data = data.replace("\"", "\"\"");
-            escapedData = "\"" + data + "\"";
-        }
-        return escapedData;
     }
 
     private String coursesToString(Set<Course> courses) {
