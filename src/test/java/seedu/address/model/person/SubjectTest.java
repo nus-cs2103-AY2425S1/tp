@@ -2,12 +2,16 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
+
 
 public class SubjectTest {
 
