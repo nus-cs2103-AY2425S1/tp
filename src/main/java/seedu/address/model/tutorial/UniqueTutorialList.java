@@ -79,6 +79,19 @@ public class UniqueTutorialList implements Iterable<Tutorial> {
         }
     }
 
+    /**
+     * Retrieves the equivalent tutorial from the list.
+     * The tutorial must exist in the list.
+     */
+    public Tutorial getTutorial(Tutorial toGet) {
+        requireNonNull(toGet);
+        int index = internalList.indexOf(toGet);
+        if (index == -1) {
+            throw new TutorialNotFoundException();
+        }
+        return internalList.get(index);
+    }
+
     public void setTutorials(UniqueTutorialList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
