@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.FilterPaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.StudentHasPaidPredicate;
+import seedu.address.model.predicate.StudentHasPaidPredicate;
 
 /**
  * Parses input arguments and creates a new FilterPaidCommand object
