@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
+import seedu.address.model.person.Person;
 
 /**
  * Lists all persons in the address book to the user.
@@ -15,12 +18,14 @@ public class ListLogsCommand extends Command {
     public static final String COMMAND_WORD = "logs";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
-    public static final String MESSAGE_SUCCESS = "Listed all logs for: ";
+    public static final String MESSAGE_LIST_LOG_SUCCESS = "Listed all logs for: %1$s [%2$s]";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all logs of a person identified by the NRIC.\n"
-            + "Parameters: NRIC\n"
-            + "Example: " + COMMAND_WORD + " S1234567A";
+            + ": Lists the log entries.\n"
+            + "Parameters: i/NRIC\n"
+            + "Example: " + COMMAND_WORD + " i/S6285715C";
+
     private final IdentityNumber identityNumber;
 
     /**
@@ -35,20 +40,38 @@ public class ListLogsCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        //TODO: Handle behaviour later
         requireNonNull(model);
-        model.updateFilteredLogListById(this.identityNumber);
 
+        ObservableList<Person> personList = model.getAddressBook().getPersonList();
+        int personIndex = -1;
+        Person person = null;
+
+        for (Person p: personList) {
+            if (identityNumber.equals(p.getIdentityNumber())) {
+                personIndex = personList.indexOf(p);
+                person = p;
+                break;
+            }
+        }
+
+        if (personIndex == -1 || person == null) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, identityNumber));
+        }
+
+        // Note: this sb is temporary for the duration that the command is not properly hooked up to the gui.
         StringBuilder sb = new StringBuilder();
-        sb.append("The NRIC you inputted is: ").append(this.identityNumber.toString()).append("\n");
+        sb.append("The NRIC you inputted is: ").append(this.identityNumber).append("\n");
         sb.append("The logs for this person are:\n");
 
-        for (Log log : model.getFilteredLogList()) {
+        for (Log log : model.getSessionLog(personIndex)) {
             sb.append("Appointment Date: ").append(log.getAppointmentDate())
                     .append(", Entry: ").append(log.getEntry()).append("\n");
         }
 
-        return new CommandResult(sb.toString());
+        model.getSessionLog(personIndex);
+        return new CommandResult(String.format(MESSAGE_LIST_LOG_SUCCESS + sb.toString(),
+                identityNumber, person.getName()),
+                false, false, true, personIndex);
     }
 
     @Override
@@ -64,5 +87,12 @@ public class ListLogsCommand extends Command {
 
         // Since ListLogsCommand relies soley on id, last check to compare only id
         return identityNumber.equals(e.identityNumber);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("identityNumber", identityNumber)
+                .toString();
     }
 }
