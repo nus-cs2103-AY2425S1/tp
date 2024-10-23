@@ -56,4 +56,8 @@ public class Goods {
     public String convertToCsvWrite() {
         return goodsName + "," + category;
     }
+
+    public GoodsCategories getCategory() {
+        return category;
+    }
 }

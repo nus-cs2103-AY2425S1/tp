@@ -3,11 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,14 +30,38 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    private final GoodsCategories goodsCategory;
+
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
+        this.goodsCategory = null;
+    }
+
+    public FindCommand(Predicate<Person> predicate, GoodsCategories goodsCategory) {
+        this.predicate = predicate;
+        this.goodsCategory = goodsCategory;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        if (goodsCategory == null) {
+            model.updateFilteredPersonList(predicate);
+
+        } else {
+            Predicate<Person> hasCategory = person -> model
+                    .getGoods()
+                    .getReceiptList()
+                    .stream()
+                    .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
+                    .anyMatch(goodsReceipt -> goodsReceipt
+                            .getGoods()
+                            .getCategory()
+                            .equals(goodsCategory));
+            model.updateFilteredPersonList(person -> predicate.test(person) || hasCategory.test(person));
+        }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -52,13 +78,15 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return predicate.equals(otherFindCommand.predicate)
+                && Objects.equals(goodsCategory, otherFindCommand.goodsCategory);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("predicate", predicate)
+                .add("goodsCategory", goodsCategory)
                 .toString();
     }
 }
