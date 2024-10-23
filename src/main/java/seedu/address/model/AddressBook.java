@@ -88,6 +88,10 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new IllegalArgumentException("Person not found in the address book.");
         }
 
+        if (persons.contains(person)) {
+            person.addModule(module);
+        }
+
         Person updatedPerson = person.addModule(module);
         setPerson(person, updatedPerson);
     }
@@ -123,6 +127,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         if (!hasPerson(person)) {
             throw new IllegalArgumentException("Person not found in the address book.");
         }
+
+        if (!person.getModules().contains(module)) {
+            throw new IllegalArgumentException("Module not found in person's list.");
+        }
+
         Person updatedPerson = person.deleteModule(module);
         setPerson(person, updatedPerson);
     }

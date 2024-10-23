@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -55,6 +56,11 @@ public class AddressBookTest {
     }
 
     @Test
+    public void addPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addPerson(null));
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
     }
@@ -76,6 +82,25 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTag(VALID_TAG_TUTOR)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void addModule_personNotInAddressBook_throwsIllegalArgumentException() {
+        Module module = new Module("CS2101");
+        assertThrows(IllegalArgumentException.class, () -> addressBook.addModule(ALICE, module));
+    }
+
+    @Test
+    public void removeModule_personNotInAddressBook_throwsIllegalArgumentException() {
+        Module module = new Module("CS2101");
+        assertThrows(IllegalArgumentException.class, () -> addressBook.removeModule(ALICE, module));
+    }
+
+    @Test
+    public void removeModule_moduleNotInPerson_throwsIllegalArgumentException() {
+        addressBook.addPerson(ALICE);
+        Module module = new Module("CS2101");
+        assertThrows(IllegalArgumentException.class, () -> addressBook.removeModule(ALICE, module));
     }
 
     @Test

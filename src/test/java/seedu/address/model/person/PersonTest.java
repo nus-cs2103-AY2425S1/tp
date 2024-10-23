@@ -132,6 +132,50 @@ public class PersonTest {
     }
 
     @Test
+    public void deleteModule_moduleExists_moduleRemoved() {
+        Person person = new PersonBuilder().build();
+        Module module = new Module(CommandTestUtil.VALID_MODULE_AMY);
+        person = person.addModule(module);
+
+        Person personAfterDeletion = person.deleteModule(module);
+
+        assertFalse(personAfterDeletion.hasModule(module));
+        assertEquals(0, personAfterDeletion.getModules().size());
+    }
+
+    @Test
+    public void setModules_updatesModulesCorrectly() {
+        Person person = new PersonBuilder().build();
+        Module module1 = new Module(CommandTestUtil.VALID_MODULE_AMY);
+        Module module2 = new Module(CommandTestUtil.VALID_MODULE_BOB);
+        ArrayList<Module> newModules = new ArrayList<>();
+        newModules.add(module1);
+        newModules.add(module2);
+
+        person.setModules(newModules);
+
+        assertEquals(newModules.size(), person.getModules().size());
+        assertTrue(person.hasModule(module1));
+        assertTrue(person.hasModule(module2));
+    }
+    @Test
+    public void hasModule_moduleExists_returnsTrue() {
+        Person person = new PersonBuilder().build();
+        Module module = new Module(CommandTestUtil.VALID_MODULE_AMY);
+        person = person.addModule(module);
+
+        assertTrue(person.hasModule(module));
+    }
+
+    @Test
+    public void hasModule_moduleDoesNotExist_returnsFalse() {
+        Person person = new PersonBuilder().build();
+        Module module = new Module(CommandTestUtil.VALID_MODULE_AMY);
+
+        assertFalse(person.hasModule(module));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{studentId=" + ALICE.getStudentId() + ", name="
                 + ALICE.getName() + ", phone=" + ALICE.getPhone()
