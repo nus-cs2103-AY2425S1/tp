@@ -71,9 +71,9 @@ public class Person {
         return Collections.unmodifiableSet(emergencyContacts);
     }
 
-    public EmergencyContact getEmergencyContact(Index index)
+    public EmergencyContact getEmergencyContact(Index oneBasedIndex)
             throws EmergencyContactNotFoundException {
-        int i = index.getZeroBased();
+        int i = oneBasedIndex.getZeroBased();
         for (EmergencyContact emergencyContact : emergencyContacts) {
             if (i == 0) {
                 return emergencyContact;
@@ -83,6 +83,11 @@ public class Person {
         throw new EmergencyContactNotFoundException();
     }
 
+    /**
+     * Returns a copy of emergencyContacts with
+     * @param emergencyContactToRemove removed
+     * @return a copy of emergencyContacts with {@code emergencyContactToRemove} removed
+     */
     public Set<EmergencyContact> removeEmergencyContact(EmergencyContact emergencyContactToRemove) {
         Set<EmergencyContact> updatedEmergencyContacts = new LinkedHashSet<>();
         for (EmergencyContact emergencyContact : emergencyContacts) {
