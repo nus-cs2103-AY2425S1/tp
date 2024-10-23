@@ -22,6 +22,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_THEME = "There is only light and dark theme.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -136,5 +137,25 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String newTheme} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code newTheme} is invalid.
+     */
+    public static String parseTheme(String newTheme) throws ParseException {
+        requireNonNull(newTheme);
+        String theme = newTheme.trim().toUpperCase();
+        String[] validThemes = {"LIGHT", "DARK"};
+
+        for (String validTheme : validThemes) {
+            if (validTheme.equals(theme)) {
+                return theme;
+            }
+        }
+
+        throw new ParseException(MESSAGE_INVALID_THEME);
     }
 }
