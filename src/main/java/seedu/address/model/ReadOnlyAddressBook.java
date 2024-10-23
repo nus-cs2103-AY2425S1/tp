@@ -13,5 +13,9 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Person> getPersonList();
-
+    /**
+     * Returns an unmodifiable view of the OwnedAppointments, tagging each Appointment to its Person owner.
+     * This list will not contain any duplicate appointments.
+     */
+    ObservableList<OwnedAppointment> getOwnedAppointmentList();
 }

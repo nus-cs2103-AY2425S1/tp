@@ -8,15 +8,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddAllergyCommand;
+import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddMedConCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DelAllergyCommand;
+import seedu.address.logic.commands.DelMedConCommand;
+import seedu.address.logic.commands.DeleteApptCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindMedConCommand;
+import seedu.address.logic.commands.FindNricCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPrioCommand;
+import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -68,6 +78,9 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindNricCommand.COMMAND_WORD:
+            return new FindNricCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -77,10 +90,36 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case PriorityCommand.COMMAND_WORD:
+            return new PriorityCommandParser().parse(arguments);
+
+        case AddApptCommand.COMMAND_WORD:
+            return new AddApptCommandParser().parse(arguments);
+
+        case DeleteApptCommand.COMMAND_WORD:
+            return new DeleteApptCommandParser().parse(arguments);
+
+        case AddMedConCommand.COMMAND_WORD:
+            return new AddMedConCommandParser().parse(arguments);
+
+        case DelMedConCommand.COMMAND_WORD:
+            return new DelMedConCommandParser().parse(arguments);
+
+        case FindMedConCommand.COMMAND_WORD:
+            return new FindMedConCommandParser().parse(arguments);
+
+        case AddAllergyCommand.COMMAND_WORD:
+            return new AddAllergyCommandParser().parse(arguments);
+
+        case DelAllergyCommand.COMMAND_WORD:
+            return new DelAllergyCommandParser().parse(arguments);
+
+        case ListPrioCommand.COMMAND_WORD:
+            return new ListPrioCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

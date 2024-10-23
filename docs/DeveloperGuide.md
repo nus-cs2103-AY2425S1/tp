@@ -2,33 +2,31 @@
 layout: page
 title: Developer Guide
 ---
+
+## Table of Contents
+
 * Table of Contents
 {:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
+{: .alert .alert-primary}
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
+[Back to Table of Contents](#table-of-contents)
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+![](images/ArchitectureDiagram.png){:width="280"}
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![](images/ArchitectureSequenceDiagram.png){:width="574"}
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,10 +60,11 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+![](images/ComponentManagers.png){:width="300"}
 
 The sections below give more details of each component.
 
+[Back to Table of Contents](#table-of-contents)
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -81,43 +80,46 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `OwnedAppointment` objects residing in the `Model`.
 
+[Back to Table of Contents](#table-of-contents)
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+![](images/LogicClassDiagram.png){:width="550"}
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete S1234567A")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete S1234567A` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+{: .alert .alert-info}
+:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+![](images/ParserClasses.png){:width="600"}
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+[Back to Table of Contents](#table-of-contents)
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![](images/ModelClassDiagram.png){:width="450"}
 
 
 The `Model` component,
@@ -127,36 +129,36 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+{: .alert .alert-info}
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+![](images/BetterModelClassDiagram.png){:width="450"}
 
-</div>
-
-
+[Back to Table of Contents](#table-of-contents)
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![](images/StorageClassDiagram.png){:width="550"}
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+[Back to Table of Contents](#table-of-contents)
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
 ### \[Proposed\] Undo/redo feature
 
+[Back to Table of Contents](#table-of-contents)
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -181,26 +183,29 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+{: .alert .alert-info}
+:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-</div>
+
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+{: .alert .alert-info}
+:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+{: .alert .alert-info}
+:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-</div>
+
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
@@ -208,9 +213,10 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+{: .alert .alert-info}
+:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-</div>
+
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
@@ -222,8 +228,9 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![](images/CommitActivityDiagram.png){:width="250"}
 
+[Back to Table of Contents](#table-of-contents)
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -239,13 +246,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+[Back to Table of Contents](#table-of-contents)
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -254,91 +261,292 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Appendix: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* doctors who are busy managing their patients and appointments
+* doctors who need to know their patient's status
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage patients and appointments faster than a typical mouse/GUI driven app
 
 
+[Back to Table of Contents](#table-of-contents)
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​               | I want to …​                                 | So that I can…​                                       |
+|----------|-----------------------|----------------------------------------------|-------------------------------------------------------|
+| `* * *`  | time-sensitive doctor | have relevant contacts ready at fingertips   | no time is wasted tending to a patient's urgent needs |
+| `* * *`  | organised doctor      | able to add new contacts                     | keep track of my patients' details                    |
+| `* * *`  | busy doctor           | search for a patient by name                 | quickly access their records                          |
+| `* * *`  | doctor                | schedule an appointment with a patient       | manage their daily workload effectively               |
+| `* * *`  | doctor                | delete outdated or incorrect records         | keep the database clean and organised                 |
+| `* *`    | doctor                | view all my appointments                     | know the appointments I have on a certain day         |
+| `* *`    | meticulous doctor     | assign a specific condition to a patient     | locate a person easily                                |
+| `*`      | focused doctor        | want to search patients by medical condition | focus on those with similar treatment plans           |
+| `*`      | doctor                | assign a priority level to a patient         | manage urgent cases effectively                       |
+| `*`      | doctor                | update the contact information of a patient  | maintain accurate records                             |
+| `*`      | busy doctor           | view all my urgent cases                     | attend to those with urgent needs first               |
+| `*`      | doctor                | see a patient’s allergy information          | avoid prescribing harmful medications                 |
 
-*{More to be added}*
-
+[Back to Table of Contents](#table-of-contents)
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Medibase 3` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case:** UC1 - Add Patient
 
-**MSS**
+**MSS:**
+1. User keys in the patient details.
+2. MB3 adds the patient and displays a success message.  
+   Use case ends.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Extensions:**
+1a. MB3 detects an error when adding patient data.  
+1a1. MB3 does not add patient data and shows an error message.  
+Use case ends.
 
+---
+
+**Use case:** UC2 - Edit Patient
+
+**MSS:**
+1. User requests MB3 to edit the patient data.
+2. MB3 updates the patient data and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when editing patient data.
+  * 1a1. MB3 does not update patient data and shows an error message.  
     Use case ends.
 
-**Extensions**
+---
 
-* 2a. The list is empty.
+**Use case:** UC3 - Find Patient by Name
 
-  Use case ends.
+**MSS:**
+1. User keys in the patient name.
+2. MB3 prints the selected patient information and displays a success message.  
+   Use case ends.
 
-* 3a. The given index is invalid.
+**Extensions:**
+* 1a. MB3 detects an error when finding patient data.  
+  * 1a1. MB3 does not print patient data and shows an error message.  
+        Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+---
+ 
+**Use case:** UC4 - List Patients
 
-      Use case resumes at step 2.
+**MSS:**
+1. User requests MB3 to list patients.
+2. MB3 lists the patient data sequentially and displays a success message.  
+   Use case ends.
 
-*{More to be added}*
+**Extensions:**
+* 1a. MB3 detects an error when listing patient data.  
+  * 1a1. MB3 does not list patient data and shows an error message.  
+Use case ends.
 
+---
+ 
+**Use case:** UC5 - Add Appointment
+
+**MSS:**
+1. User keys in the appointment details.
+2. MB3 adds the appointment and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when adding an appointment.  
+  * 1a1. MB3 does not add the appointment and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC6 - Add Medical Condition
+
+**MSS:**
+1. User keys in the patient’s medical condition.
+2. MB3 adds the medical condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when adding the patient’s medical condition.  
+  * 1a1. MB3 does not add the medical condition and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC7 - Update Patient’s Priority
+
+**MSS:**
+1. User requests MB3 to update a selected patient’s priority.
+2. MB3 updates the patient’s priority and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when updating the patient’s priority.  
+  * 1a1. MB3 does not update the patient’s priority and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC8 - Add Allergies to Patients
+
+**MSS:**
+1. User keys in the patient’s allergies to MB3.
+2. MB3 adds the allergies and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when adding the patient’s allergies.  
+  * 1a1. MB3 does not add the allergies and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC9 - Delete Patient Contact
+
+**MSS:**
+1. User requests MB3 to delete a selected patient’s contact.
+2. MB3 deletes the patient’s contact and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s contact.  
+  * 1a1. MB3 does not delete the patient’s contact and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC10 - Delete Patient Condition   
+
+**MSS:**
+1. User requests MB3 to delete a selected patient’s condition.
+2. MB3 deletes the patient’s condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s condition.  
+  * 1a1. MB3 does not delete the patient’s condition and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC11 - Delete Patient Allergies
+
+**MSS:**
+1. User requests MB3 to delete a selected patient’s allergies.
+2. MB3 deletes the allergies and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s allergies.  
+  * 1a1. MB3 does not delete the allergies and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC12 - Delete Patient Appointment
+
+**MSS:**
+1. User requests MB3 to delete a selected patient’s appointment.
+2. MB3 deletes the appointment and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when deleting a patient’s appointment.  
+  * 1a1. MB3 does not delete the appointment and shows an error message.  
+Use case ends.
+
+---
+ 
+**Use case:** UC13 - List Patients By Condition
+
+**MSS:**
+1. User requests MB3 to list patients’ details by condition.
+2. MB3 lists patients' details by condition and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when listing patients by condition.  
+  * 1a1. MB3 does not list the patients by condition and shows an error message.  
+Use case ends.
+
+---
+
+**Use case:** UC14 - List Patients By Priority
+
+**MSS:**
+1. User requests MB3 to list patients’ details by priority.
+2. MB3 lists patients' details by priority and displays a success message.  
+   Use case ends.
+
+**Extensions:**
+* 1a. MB3 detects an error when listing patients by priority.  
+  * 1a1. MB3 does not list the patients by priority and shows an error message.  
+Use case ends.
+
+
+[Back to Table of Contents](#table-of-contents)
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The programme should be able to startup within 3s (minimum startup time)
+5.  Error messages and prompts should be clear and easy to understand for users of all technical skill levels.
+6. Data stored locally should be encrypted and only accessible via the app with correct authentication.
 
-*{More to be added}*
 
+[Back to Table of Contents](#table-of-contents)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+  **Patient Contact**:  
+  Refers to the personal and medical information of an individual being treated, including name, NRIC, phone number, and medical details.
 
---------------------------------------------------------------------------------------------------------------------
+* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
+* **Appointment**: A scheduled meeting between a patient and a medical professional, stored with details like date, time, and purpose.
+
+* **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient or medical worker.
+
+* **Priority Level**: Indicates the urgency of a patient’s condition, with values like low, medium, or high to assist medical professionals in managing urgent cases.
+
+* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
+
+* **Contact List**: A list of all patients and their associated information, which can be searched or filtered by various criteria like name or condition.
+
+* **Doctor**: A medical professional who uses MediBase3 to manage patient information, schedule appointments, and track medical conditions.
+
+* **Appointment Date and Time**: The specific day and time when a patient is scheduled to see a doctor, formatted as `YYYY-MM-DD` and `HH:MM`.
+
+* **Medical History**: A chronological record of a patient’s past medical conditions, treatments, allergies, and appointments.
+
+* **Search by Condition**: A feature that allows users to filter and display patients based on specific medical conditions.
+
+
+[Back to Table of Contents](#table-of-contents)
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+{: .alert .alert-info}
+> :information_source: **Note:** These instructions only provide a starting point for testers to work on;
+> testers are expected to do more *exploratory* testing.
 
-</div>
-
+[Back to Table of Contents](#table-of-contents)
 ### Launch and shutdown
 
 1. Initial launch
@@ -351,28 +559,33 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by double-clicking the jar file.
+   
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
+[Back to Table of Contents](#table-of-contents)
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete 1`
+   
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete 0`
+   
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
+[Back to Table of Contents](#table-of-contents)
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -380,3 +593,6 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+   
+
+[Back to Table of Contents](#table-of-contents)

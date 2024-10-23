@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<OwnedAppointment> filteredAppts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredAppts = new FilteredList<>(this.addressBook.getOwnedAppointmentList());
     }
 
     public ModelManager() {
@@ -123,9 +129,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<OwnedAppointment> getFilteredAppointmentList() {
+        return filteredAppts;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+
+        Predicate<OwnedAppointment> convertedPredicate = new Predicate<OwnedAppointment>() {
+            @Override
+            public boolean test(OwnedAppointment ownedAppointment) {
+                return predicate.test(ownedAppointment.appointment());
+            }
+        };
+
+        filteredAppts.setPredicate(convertedPredicate);
     }
 
     @Override
@@ -143,6 +168,16 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Unfiltered Person List Accessors =============================================================
+    @Override
+    public Optional<Person> fetchPersonIfPresent(NricMatchesPredicate nricPredicate) {
+        List<Person> allPersonList = addressBook.getPersonList();
+
+        return allPersonList.stream()
+                .filter(nricPredicate::test)
+                .findFirst();
     }
 
 }
