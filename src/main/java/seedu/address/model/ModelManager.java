@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,16 +13,17 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ObservableList<Tag> tagList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        tagList = this.addressBook.getTagList();
     }
 
     public ModelManager() {
@@ -122,10 +125,68 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the full list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    public ObservableList<Person> getFullPersonList() {
+        return addressBook.getPersonList();
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Tags ================================================================================
+
+    @Override
+    public boolean addTag(Tag tag) {
+        return addressBook.addTag(tag);
+    }
+
+    @Override
+    public boolean addTags(List<Tag> tags) {
+        boolean isSuccessful = true;
+        for (Tag tag : tags) {
+            isSuccessful &= addressBook.addTag(tag);
+        }
+        return isSuccessful;
+    }
+
+    @Override
+    public boolean deleteTags(List<Tag> tags) {
+        boolean isSuccessful = true;
+        for (Tag tag : tags) {
+            isSuccessful &= addressBook.deleteTag(tag);
+        }
+        return isSuccessful;
+    }
+
+    @Override
+    public boolean hasTag(Tag tag) {
+        return addressBook.hasTag(tag);
+    }
+
+    @Override
+    public String getTagList() {
+        return addressBook.tagsToString();
+    }
+
+    @Override
+    public boolean checkAcceptableTagListSize(int additionalTags) {
+        return addressBook.checkAcceptableTagListSize(additionalTags);
+    }
+
+    @Override
+    public ObservableList<Tag> getTagListAsObservableList() {
+        return addressBook.getTagList();
+    }
+
+    @Override
+    public void updateTagList() {
+        tagList = this.addressBook.getTagList();
     }
 
     @Override

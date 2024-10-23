@@ -18,7 +18,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-
+    public static final String MESSAGE_INPUT_LENGTH_EXCEEDED = "The input length cannot exceed 50 characters";
+    public static final String MESSAGE_INVALID_FILTER_CRITERIA = "This is not a valid field to filter";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -41,8 +42,6 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
