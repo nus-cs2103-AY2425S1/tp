@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -90,6 +93,30 @@ public class SortCommandTest {
         List<Person> personsBeforeSort = model.getFilteredPersonList();
         assert personsBeforeSort.equals(personsAfterSort)
                 : "List should remain unchanged after sorting without appointment dates!";
+    }
+
+    @Test
+    public void equals() {
+        SortCommand sortCommand = new SortCommand();
+
+        // Same object -> returns true
+        assertTrue(sortCommand.equals(sortCommand));
+
+        // Different types -> returns false
+        assertFalse(sortCommand.equals(1));
+
+        // Null -> returns false
+        assertFalse(sortCommand.equals(null));
+
+        // Same command type -> returns true
+        assertTrue(sortCommand.equals(new SortCommand()));
+    }
+
+    @Test
+    public void toString_returnsCommandWord() {
+        SortCommand sortCommand = new SortCommand();
+        String expectedString = SortCommand.COMMAND_WORD;
+        assertEquals(expectedString, sortCommand.toString());
     }
 
 }
