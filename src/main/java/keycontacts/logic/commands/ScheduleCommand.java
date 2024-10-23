@@ -7,13 +7,14 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.List;
+import java.util.Optional;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
-import keycontacts.model.lesson.ClashResult;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
@@ -71,11 +72,11 @@ public class ScheduleCommand extends Command {
         Student studentToUpdateWithoutRegularLesson = studentToUpdate.withoutRegularLesson();
         model.setStudent(studentToUpdate, studentToUpdateWithoutRegularLesson);
 
-        ClashResult clashResult = model.checkClashingLesson(regularLesson);
-        if (clashResult.hasClash()) {
+        Optional<Lesson> clashResult = model.getClashingLesson(regularLesson);
+        if (clashResult.isPresent()) {
             model.setStudent(studentToUpdateWithoutRegularLesson, studentToUpdate); // revert change if clash
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
-                    clashResult.getClashingLesson().toDisplay()));
+                    clashResult.get().toDisplay()));
         }
 
         model.setStudent(studentToUpdateWithoutRegularLesson, updatedStudent);

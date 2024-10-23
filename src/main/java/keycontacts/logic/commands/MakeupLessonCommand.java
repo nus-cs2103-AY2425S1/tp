@@ -7,12 +7,13 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.List;
+import java.util.Optional;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
-import keycontacts.model.lesson.ClashResult;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.student.Student;
 
@@ -62,10 +63,10 @@ public class MakeupLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        ClashResult clashResult = model.checkClashingLesson(makeupLesson);
-        if (clashResult.hasClash()) {
+        Optional<Lesson> clashResult = model.getClashingLesson(makeupLesson);
+        if (clashResult.isPresent()) {
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
-                    clashResult.getClashingLesson().toDisplay()));
+                    clashResult.get().toDisplay()));
         }
 
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
@@ -83,7 +84,5 @@ public class MakeupLessonCommand extends Command {
                 || (other instanceof MakeupLessonCommand // instanceof handles nulls
                         && makeupLesson.equals(((MakeupLessonCommand) other).makeupLesson));
     }
-
-
 
 }

@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,6 @@ import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
 import keycontacts.model.StudentDirectory;
-import keycontacts.model.lesson.ClashResult;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.StudentBuilder;
@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ClashResult checkClashingLesson(Lesson lesson) {
+        public Optional<Lesson> getClashingLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
     }

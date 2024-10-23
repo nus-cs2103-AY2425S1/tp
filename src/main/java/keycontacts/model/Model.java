@@ -1,11 +1,11 @@
 package keycontacts.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.core.GuiSettings;
-import keycontacts.model.lesson.ClashResult;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 
@@ -55,6 +55,11 @@ public interface Model {
     ReadOnlyStudentDirectory getStudentDirectory();
 
     /**
+     * Returns a {@Code ClashResult} object containing details of lesson clashes.
+     */
+    Optional<Lesson> getClashingLesson(Lesson lessonToCheck);
+
+    /**
      * Returns true if a student with the same identity as {@code student} exists in the student directory.
      */
     boolean hasStudent(Student student);
@@ -88,8 +93,4 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
-    /**
-     * Returns a {@Code ClashResult} object containing details of lesson clashes.
-     */
-    public ClashResult checkClashingLesson(Lesson lessonToCheck);
 }

@@ -1,16 +1,18 @@
 package keycontacts.model;
 
 import static java.util.Objects.requireNonNull;
-import static keycontacts.model.lesson.Lesson.lessonsClash;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+
+import javax.swing.text.html.Option;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.util.ToStringBuilder;
-import keycontacts.model.lesson.ClashResult;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 import keycontacts.model.student.UniqueStudentList;
 
@@ -100,38 +102,62 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
         students.remove(key);
     }
 
+    public boolean hasClashingLessons() {
+        ObservableList<Student> students = this.getStudentList();
+        for (Student student : students) {
+            RegularLesson regularLesson = student.getRegularLesson();
+            Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
+
+            if (getClashingLesson(regularLesson).isPresent()) {
+                return true;
+            }
+
+            for (MakeupLesson makeupLesson : makeupLessons) {
+                if (getClashingLesson(makeupLesson).isPresent()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Checks for any clashing lessons in the existing student directory.
      * @param lessonToCheck Lesson to check for clashes with.
      * @return A {@code ClashResult} object containing the results of the clash check.
      */
-    public ClashResult checkClashingLesson(Lesson lessonToCheck) {
+    public Optional<Lesson> getClashingLesson(Lesson lessonToCheck) {
         ObservableList<Student> students = this.getStudentList();
         for (Student student : students) {
             Lesson clashLesson = findClashingLesson(student, lessonToCheck);
             if (clashLesson != null) {
-                return new ClashResult(true, clashLesson);
+                return Optional.of(clashLesson);
             }
         }
-        return new ClashResult(false, null); // No clashes found
+        return Optional.empty(); // no clashes found
     }
 
     private Lesson findClashingLesson(Student student, Lesson lessonToCheck) {
-        Lesson regularLesson = student.getRegularLesson();
+        if (lessonToCheck == null) {
+            return null;
+        }
+        
+        RegularLesson regularLesson = student.getRegularLesson();
         Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
 
-        // Check for clashes with the provided lesson against the current student's lessons
-        if (lessonsClash(lessonToCheck, regularLesson)) {
-            return regularLesson; // Clash with the student's regular lesson
+        // check for clashes with the provided lesson against the current student's lessons
+        if (regularLesson != null && lessonToCheck.isClash(regularLesson) && regularLesson != lessonToCheck) {
+            return regularLesson; // clash with the student's regular lesson
         }
 
         for (MakeupLesson ml : makeupLessons) {
-            if (lessonsClash(lessonToCheck, ml)) {
-                return ml; // Clash with the student's makeup lesson
+            if (lessonToCheck.isClash(ml) && ml != lessonToCheck) {
+                return ml; // clash with the student's makeup lesson
             }
         }
 
-        return null; // No clashes found
+        return null; // no clashes found
     }
 
     //// util methods

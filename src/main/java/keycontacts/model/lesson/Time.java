@@ -75,16 +75,16 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Returns if the other {@code Time} object is not after this time.
+     * Returns if the other {@code Time} object is after this time.
      */
-    public boolean isNotAfter(Time other) {
-        return !time.isAfter(other.time);
+    public boolean isAfter(Time other) {
+        return time.isAfter(other.time);
     }
 
     /**
-     * Returns if the other {@code Time} object is not before this time.
+     * Returns if the other {@code Time} object is before this time.
      */
-    public boolean isNotBefore(Time other) {
-        return !time.isBefore(other.time);
+    public boolean isBefore(Time other) {
+        return time.isBefore(other.time);
     }
 }

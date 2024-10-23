@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
-import keycontacts.model.lesson.ClashResult;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 
@@ -114,9 +114,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ClashResult checkClashingLesson(Lesson lesson) {
+    public Optional<Lesson> getClashingLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return studentDirectory.checkClashingLesson(lesson);
+        return studentDirectory.getClashingLesson(lesson);
     }
 
     //=========== Filtered Student List Accessors =============================================================
