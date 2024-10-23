@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
 
 class PutOrderCommandTest {
@@ -21,6 +22,7 @@ class PutOrderCommandTest {
 
     @Test
     void execute_putOrder_success() {
+
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         String name = "cake";
@@ -28,6 +30,8 @@ class PutOrderCommandTest {
         expectedModel.addOrder(new Order(name));
         assertCommandSuccess(new PutOrderCommand(new Order(name), TypicalPersons.ALICE.getName()), model,
                 PutOrderCommand.MESSAGE_SUCCESS, expectedModel);
+        // temp solution
+        TypicalPersons.ALICE.clearOrder();
     }
 
     @Test

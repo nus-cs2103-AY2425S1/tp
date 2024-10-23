@@ -174,4 +174,7 @@ public class Person implements Comparable<Person> {
                 .toString();
     }
 
+    public void clearOrder() {
+        this.tracker.clear();
+    }
 }
