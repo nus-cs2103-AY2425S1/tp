@@ -30,7 +30,7 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
     protected ModuleRoleMap execute(ModuleRoleMap moduleRoleMapToEdit) {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
         ModuleRoleMap ret = new ModuleRoleMap(roles);
-        // ret.putAll(moduleRoleMapToDelete);
+        ret.removeAll(moduleRoleMapToDelete);
         return ret;
     }
 
