@@ -18,7 +18,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         assert !isExecuted : "This command has already been executed";
         requireNonNull(model);
-        CommandResult undoResult = model.undo();
+        CommandResult undoResult = model.undoAddressBook();
 
         if (undoResult == null) {
             throw new CommandException(MESSAGE_NO_COMMANDS);
