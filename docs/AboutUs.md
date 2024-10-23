@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1155908@u.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ahmad Syu'aib
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ahmadsyuaib.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/ahmadsyuaib)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Developing
 
-### James Doe
+### Harith Nurhisham
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/harithhh06.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Harithhh06)]
 [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Developing
+
+### Jeremy
+
+<img src="images/jereeemyyyy.png" width="200px">
+
+[[github](http://github.com/jereeemyyyy)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
+
+### Liu Rui
+
+<img src="images/l-rrrr.png" width="200px">
+
+[[github](http://github.com/L-rrrr)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: No work required
+
+### Rubin
+
+<img src="images/rubinnn.png" width="200px">
+
+[[github](http://github.com/rubinnn)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Developing

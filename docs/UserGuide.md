@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClientHub is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClientHub can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,11 +14,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F10-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ClientHub.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clienthub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -27,9 +27,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/likes ramen` : Adds a contact named `John Doe` to the Client Hub.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes John Doe from the Client Hub.
 
    * `clear` : Deletes all contacts.
 
@@ -49,10 +49,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [c/CLIENT_TYPE]` can be used as `n/John Doe c/Plan A` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[c/CLIENT_TYPE]…​` can be used as ` ` (i.e. 0 times), `c/Plan A`, `c/Plan A c/Plan B` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -74,76 +74,216 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the Client Hub.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION [c/CLIENT_TYPE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of Client Type (including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe c/Plan A c/Plan B e/betsycrowe@example.com a/Newgate Prison p/1234567 d/criminal`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the Client Hub.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the Client Hub.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/CLIENT_TYPE]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing client types, the existing client types of the person will be removed i.e adding of client type is not cumulative.
+* You can remove all the contact’s client types by typing `c/` without
+    specifying any client typess after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing client types.
 
-### Locating persons by name: `find`
+### Locating persons by key information: `find`
+
+Finds persons by name, phone number, address or client type.
+
+Format: `find KEYWORD`
+
+* `find n/KEYWORD` will search for persons by name.
+* `find p/KEYWORD` will search for persons by phone number.
+* `find a/KEYWORD` will search for persons by address.
+* `find c/KEYWORD` will search for persons by client type.
+
+
+Examples:
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex yeo` returns `Alex Yeoh`
+* `find p/8433` returns `8433 4567`
+* `find a/Blk 47` returns `Blk 47 Tampines Street 20`
+* `find c/Investment` returns `Investment Plan`
+
+Result for `find alex david`:
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating persons by name: `fn`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `fn KEYWORD`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
+* Persons matching all keyword prefix will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `fn John` returns `john` and `John Doe`
+* `fn Ale Yeo` returns `Alex Yeoh`
+* `fn Yeoh Alex` returns `Alex Yeoh`
+
+Result for `fn alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating persons by phone number: `fp`
+
+Finds persons whose phone number begins with the given keyword.
+
+Format: `fp KEYWORD`
+
+* Only numbers are allowed.
+* Only the phone number is searched.
+* Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
+
+Examples:
+* `fp 9` returns every contact that has phone number beginning with `9`
+* `fp 9123` returns every contact that has phone number beginning with `9123`
+* `fp 98765432` returns every contact that has phone number `98765432`
+
+Result for `fp 9234`:
+  ![result for 'find 9234'](images/find9234Result.png)
+
+
+### Locating persons by address : `fa`
+
+Finds persons whose address matches any part of the given keyword(s).
+
+Format `fa KEYWORD(s)`
+
+* The search is case-insensitive. e.g `tampines` will match `Tampines`
+* Only the address of the contact is searched.
+* Persons with address with any matching substring to the keyword will be returned.
+
+Examples:
+* `fa Blk` returns `Blk 45` and `Blk 35`
+* `fa tampines` returns `Blk 47 Tampines Street 20`
+
+Result for `fa tampines`:
+  ![result for 'fa tampines`](images/findTampines.png)
+
+### Locating persons by client type: `fc`
+
+Finds persons whose address matches any part of the given keyword(s).
+
+Format `fc CLIENT_TYPE`
+* The search is case-insensitive. e.g `investment` will match `Investment`
+* Only the `CLIENT_TYPE` of the person is searched.
+* Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
+* Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
+
+ A **valid** `KEYWORD` should:
+  * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
+    * `client_type` will always be in alphanumeric format.
+  * Not be empty. 
+    * For eg. Just typing `fc` without providing any `CLIENT TYPE` will throw an error.
+
+Examples:
+* `fc Investment` returns every contact that has a `client_type` beginning with `Investment`
+* `fc Invest` returns every contact that has `client_type` beginning with `Invest`
+* `fc Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` AND `Healthcare`
+
+Result for `fc Investment Plan`:
+  ![result for 'fc Investment Plan`](images/FindClientType.png)
+
+### Sort by name : `sort`
+
+Sort the current list on ClientHub according to their name.
+
+Format: `sort n/`
+
+* Sorts the list according to their name
+* n/ is used to indicate that the sort is according to their name
+
+A **valid** `n/` for delete should:
+* Not be empty.
+* For eg. Just typing `sort` without providing `n/` will throw an error.
+
+Examples:
+* `sort n/` sorts the list
+* `sort` throws an error
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from ClientHub.
 
-Format: `delete INDEX`
+Format: `delete NAME` or `d NAME` or `delete NAME/`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with specified NAME
+* / is used to indicate specific name to delete
+    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li/` will delete the contact with the name "David Li".
+    * Name written before / must be **EXACT** name of the contact to be deleted.
+    * Order matters when using / to delete a contact.
+
+A **valid** `NAME` for delete should:
+    * Not be empty. 
+        * For eg. Just typing `delete` without providing any `NAME` will throw an error.
+    * Be a valid name that exists in the list of contacts.
+        * For eg. Typing `delete John Doe` when there is no contact with the name `John Doe` will throw an error.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete John Doe` deletes the person named `John Doe`
+* `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
+
+### Viewing a client: `view`
+
+Creates a popup view of the specified client from ClientHub.
+
+Format: `view CLIENT_NAME`
+* The command is case-insensitive. eg. `alice` will match `Alice`
+* The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
+* If duplicates are found, `view` will throw an error telling user to specify the name further.
+  * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
+
+A **valid** `CLIENT_NAME` for view should:
+* Not be empty. 
+  * For eg. Just typing `view` without providing any `CLIENT_NAME` will throw an error.
+* Be a valid name that exists in the list of contacts.
+    * For eg. Typing `view John Doe` when there is no contact with the name `John Doe` will throw an error.
+* Be *specific* and the exact name of the contact to be viewed.
+    
+* Be a prefix match of the contact name.
+  * Typing `view John Doe` will **create a popup view* of `John Doe` if there is `John Doe` and `John Doey`in the contact list.
+  * Typing `view John` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
+  * Typing `view John` if there is only `John Doe` in the contact list will **create a popup view** of `John Doe`.
+
+Examples:
+* `view John Doe` shows the contact named `John Doe`
+* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
+
+Result for `view Liurui`:
+    ![result for 'view Liurui`](images/viewCommandExample.png)
+
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from ClientHub.
 
 Format: `clear`
 
@@ -155,15 +295,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClientHub data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ClientHub data is saved automatically as a JSON file `[JAR file location]/data/clienthub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ClientHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ClientHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -175,7 +315,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClientHub home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,12 +328,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action                | Format, Examples                                                                                                                                                                                          |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CLIENT_TYPE]…​ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` | 
+| **Clear**             | `clear`                                                                                                                                                                                                   |
+| **Delete**            | `delete NAME`<br> e.g., `delete JAMES`                                                                                                                                                                    |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​ [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                       | 
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                |
+| **Find Name*8         | `fn NAME(s)`                                                                                                                                                                                              |
+| **Find Phone Number** | `fp KEYWORD`                                                                                                                                                                                              |
+| **Find Address**      | `fa KEYWORD(s)`                                                                                                                                                                                           |
+| **Find Client Type**  | `fc CLIENT_TYPE`                                                                                                                                                                                          |
+| **Sort Name**         | `sort n/`                                                                                                                                                                                                 |
+| **List**              | `list`                                                                                                                                                                                                    |
+| **Help**              | `help`                                                                                                                                                                                                    |

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.clienttype.ClientType;
 
 /**
  * Represents a Person in the address book.
@@ -20,21 +20,24 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Description description;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<ClientType> clientTypes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<ClientType> clientTypes, Description description) {
+        requireAllNonNull(name, phone, email, address, clientTypes, description);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.clientTypes.addAll(clientTypes);
+        this.description = description;
     }
 
     public Name getName() {
@@ -53,12 +56,16 @@ public class Person {
         return address;
     }
 
+    public Description getDescription() {
+        return description;
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable client type set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<ClientType> getClientTypes() {
+        return Collections.unmodifiableSet(clientTypes);
     }
 
     /**
@@ -94,13 +101,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && clientTypes.equals(otherPerson.clientTypes)
+                && description.equals(otherPerson.description);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, clientTypes, description);
     }
 
     @Override
@@ -110,7 +118,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("clientTypes", clientTypes)
+                .add("description", description)
                 .toString();
     }
 

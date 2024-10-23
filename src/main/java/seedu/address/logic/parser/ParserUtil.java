@@ -9,11 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.clienttype.ClientType;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,29 +97,46 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String clientType} into a {@code ClientType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code clientType} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static ClientType parseClientType(String clientType) throws ParseException {
+        requireNonNull(clientType);
+        String trimmedClientType = clientType.trim();
+        if (!ClientType.isValidClientTypeName(trimmedClientType)) {
+            throw new ParseException(ClientType.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new ClientType(trimmedClientType);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> clientTypes} into a {@code Set<ClientType>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<ClientType> parseClientTypes(Collection<String> clientTypes) throws ParseException {
+        requireNonNull(clientTypes);
+        final Set<ClientType> clientTypeSet = new HashSet<>();
+        for (String clientTypeName : clientTypes) {
+            clientTypeSet.add(parseClientType(clientTypeName));
         }
-        return tagSet;
+        return clientTypeSet;
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param description the string representation of a description
+     * @return a {@code Description} corresponding to the given string
+     * @throws ParseException if the given {@code description} is invalid
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 }

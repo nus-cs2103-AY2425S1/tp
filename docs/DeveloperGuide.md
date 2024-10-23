@@ -122,12 +122,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the client hub data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _sorted_ list composed using a _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Client Type` list in the `ClientHub`, which `Person` references. This allows `ClientHub` to only require one `CientType` object per unique client type, instead of each `Person` needing their own `ClientType` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -262,71 +262,138 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Tech-savvy Independent Financial Advisors who manage more than 50 clients.
+* Have a need to efficiently manage a large volume of client details, such as insurance policies and financial plans.
+* Prefer desktop apps over other types of interfaces for their daily work.
+* Can type quickly and are comfortable using CLI applications, favoring typing over mouse-based interactions for efficiency.
+* Require a simple and streamlined tool that makes it easy to access and track client information with minimal clicks.
+* Value simplicity and efficiency in their tools to save time and focus on client relationships.
+* Need a system that provides quick access to relevant client information, including financial plans, policy expiration dates, and contact details.
+* Often handle tasks that involve tracking insurance policies, renewals, and financial documents.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies). Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information for their clients.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​             | I want to …​                                                              | So that I can…​                               |
+|----------|---------------------|---------------------------------------------------------------------------|-----------------------------------------------|
+| `* * *`  | financial advisor   | add a new client’s contact details                                        | easily manage my client base                  |
+| `* * *`  | financial advisor   | view all of a client’s details on one screen                              | have all necessary information in one place.  |
+| `* * *`  | financial advisor   | delete outdated client contact information                                | keep my database clean and relevant           |
+| `* *`    | financial advisor   | search for a client by name or company                                    | ensure that I always have the latest details  |
+| `* *`    | financial advisor   | categorize my clients (e.g., VIP, standard)                               | prioritize my communication with them         |
+| `*`      | financial advisor   | update a client’s contact information                                     | ensure that I always have the latest details  |
+| `*`      | financial advisor   | tag clients with specific keywords (e.g., investor, retiree)              | segment them for different services           |
+| `*`      | financial advisor   | add notes to a client’s profile                                           | track important interactions or discussions   |
+| `*`      | financial advisor   | assign tasks related to each client (e.g., "Review investment portfolio") | stay organized and focused                    |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClientHub` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a new contact**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a client's contact
+2. ClientHub adds the contact to the list of contacts
+3. ClientHub shows successful output message
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. ClientHub detects invalid input format
 
-  Use case ends.
+  * 1a1. ClientHub shows an error message and shows the correct format for the wrong input
+    
+      Step 1 is repeated until user inputs the correct format.
+  
+* 1b. ClientHub detects missing fields
 
-* 3a. The given index is invalid.
+  * 1b1. ClientHub shows an error message informing user that required field(s) are missing
 
-    * 3a1. AddressBook shows an error message.
+    Step 1 is repeated until user inputs all required fields.
+       
 
-      Use case resumes at step 2.
+* 1c. ClientHub detects a duplicate contact
+
+  * 1c1. ClientHub informs user that there is more than one contact with the same name and prompts for confirmation
+  
+  * 1c2. User confirms the addition of contact 
+  
+    Use case resumes at step 2.
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1. User requests to delete a contact
+2. ClientHub deletes the person 
+3. ClientHub shows successful output message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. ClientHub detects invalid input format 
+
+    * 1a1. ClientHub shows an error message that the input is in the wrong format
+
+      Step 1 is repeated until user inputs the correct format.
+  
+* 1b. ClientHub detects that the given name is not in the list
+    
+    * 1b1. ClientHub shows an error message that the name is not in the list
+
+        Use case ends.
+
+* 1c. ClientHub detects multiple contacts of the same name 
+
+    * 1c1. ClientHub informs the user that there are multiple contacts with the same name and requests the user to input the full name of the contact
+
+        Step 1 is repeated until user inputs full name of the contact.
+  
+**Use case: List contacts**
+
+**MSS**
+1. User requests to list all contacts
+2. ClientHub shows the list of all contacts saved
+
+**Extensions**
+
+* 1a. ClientHub detects invalid input format
+  
+  * 1a1. ClientHub shows an error message 
+  
+    Step 1 is repeated until user inputs the correct format.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 client's contact without a noticeable sluggishness in performance for typical usage.
+3.  Should be able to load client's contact within 2 seconds to provide a smooth user experience.
+4.  As the number of clients increases, the app should be able to handle the increased data load without significant degradation in performance.
+5.  A financial advisor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The application should have an intuitive and easy-to-navigate UI so that financial advisors can quickly find clients and input data without much training.
+7.  The system should be designed to easily accommodate new features or updates.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private Contact Detail**: A contact detail that is not meant to be shared with others
+* **Client**: A person or company that is in the contact list
+* **Client Type**: A category used to describe the relationship or status of a client, such as VIP and standard.
+* **Contact**: A client's information saved in the system, which includes details such as name, phone number, email, address, client type, and optional descriptions.
+* **Financial Advisor**: The primary user of ClientHub, responsible for managing a large number of client contacts and using the system to track details, tasks, and interactions with clients.
+* **Tag**: Keywords assigned to clients, such as "investor" or "retiree," used to categorize and segment clients for better management and service delivery.
 
 --------------------------------------------------------------------------------------------------------------------
 
