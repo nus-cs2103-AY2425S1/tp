@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -28,7 +27,7 @@ public class TypicalPersons {
             .withMedication("gluten-free diet").withNotes("some notes")
             .withAppointment("surgery",
                     LocalDateTime.of(2024, 11, 11, 11, 0),
-                    LocalDateTime.of(2024,11, 11, 11, 50))
+                    LocalDateTime.of(2024, 11, 11, 11, 50))
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withId("P73443").withWard("B3").withDiagnosis("Celiac Disease")
@@ -38,7 +37,7 @@ public class TypicalPersons {
             .withMedication("gluten-free diet")
             .withAppointment("surgery",
                     LocalDateTime.of(2024, 11, 13, 11, 0),
-                    LocalDateTime.of(2024,11, 13, 11, 50))
+                    LocalDateTime.of(2024, 11, 13, 11, 50))
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withId("P27346").withWard("I5").withDiagnosis("Celiac Disease")

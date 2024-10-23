@@ -27,7 +27,7 @@ public class ScheduleAllCommandTest {
     }
 
     @Test
-    public void execute_ScheduleIsNotFiltered_showsSameList() {
+    public void execute_scheduleIsNotFiltered_showsSameList() {
         expectedModel.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
         assertCommandSuccess(new ScheduleAllCommand(), model, ScheduleAllCommand.MESSAGE_SUCCESS, expectedModel);
     }
