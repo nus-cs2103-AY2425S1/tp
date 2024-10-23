@@ -74,14 +74,17 @@ public class AggGradeCommand extends Command {
         requireNonNull(model);
 
         SmartList filteredList =
-                new SmartList(model.getFilteredPersonList().stream().map(Person::getGradeList).toList());
+                SmartList.createFromGradeLists(
+                        model.getFilteredPersonList().stream().map(Person::getGradeList).toList());
 
         if (examName != null) {
             Predicate<Grade> match = (grade) -> grade.getTestName().equalsIgnoreCase(this.examName);
 
             filteredList =
-                    new SmartList(model.getFilteredPersonList().stream().map(Person::getGradeList)
-                                          .map(gradeList -> gradeList.filter(match)).toList(), true);
+                    SmartList.createFromGrades(model.getFilteredPersonList().stream().map(Person::getGradeList)
+                                                       .flatMap(gradeList -> gradeList.filter(match).getMap().values()
+                                                               .stream())
+                                                       .toList());
         }
 
         switch (this.operation) {
@@ -96,17 +99,21 @@ public class AggGradeCommand extends Command {
 
     private static class SmartList extends ArrayList<Float> {
 
-        public SmartList(List<GradeList> gradeListList, boolean ignoreWeight) {
-            super(
-                    gradeListList.stream().map(gradeList -> gradeList.getMap().values().stream()
-                            .reduce(0F, (
-                                            total, grade) -> grade.getScore() * (!ignoreWeight
-                                            ? grade.getWeightage() / 100 : 1),
-                                    Float::sum)).toList());
+        private SmartList(List<Float> convertedList) {
+            super(convertedList);
         }
 
-        public SmartList(List<GradeList> gradeListList) {
-            this(gradeListList, false);
+        public static SmartList createFromGrades(List<Grade> grades) {
+            return new SmartList(grades.stream().map(Grade::getScore).toList());
+        }
+
+        public static SmartList createFromGradeLists(List<GradeList> gradeLists) {
+            return new SmartList(
+                    gradeLists.stream().map(gradeList -> gradeList.getMap().values().stream()
+                            .reduce(0F, (
+                                            total, grade) -> grade.getScore() *
+                                            grade.getWeightage() / 100,
+                                    Float::sum)).toList());
         }
 
         public float getMedian() {
