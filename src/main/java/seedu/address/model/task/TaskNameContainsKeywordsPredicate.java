@@ -4,12 +4,9 @@ import static seedu.address.model.UserPrefs.MATCH_RATIO;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.findcommands.FindTaskCommand;
 
 /**
  * Tests that a {@code Task}'s {@code TaskName} matches any of the keywords given.

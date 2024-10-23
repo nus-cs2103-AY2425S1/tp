@@ -15,6 +15,10 @@ import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
 import seedu.address.model.task.TaskNameContainsKeywordsPredicate;
 
+/**
+ * Finds and lists all tasks in address book whose name contains any of the argument keywords.
+ * Keyword matching is case insensitive.
+ */
 public class FindTaskCommand extends Command {
     public static final String COMMAND_WORD = "find_t";
     public static final String COMMAND_WORD_ALIAS = "ft";
