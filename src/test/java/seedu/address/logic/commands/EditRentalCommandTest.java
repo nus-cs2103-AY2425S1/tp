@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_RENTAL_ONE;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_RENTAL_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.EDIT_RENTAL_DESCRIPTOR_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.EDIT_RENTAL_DESCRIPTOR_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MONTHLY_RENT_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -153,10 +153,10 @@ public class EditRentalCommandTest {
     @Test
     public void equals() {
         final EditRentalCommand standardCommand =
-                new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL, DESC_RENTAL_ONE);
+                new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL, EDIT_RENTAL_DESCRIPTOR_ONE);
 
         // same values -> returns true
-        EditRentalDescriptor copyDescriptor = new EditRentalDescriptor(DESC_RENTAL_ONE);
+        EditRentalDescriptor copyDescriptor = new EditRentalDescriptor(EDIT_RENTAL_DESCRIPTOR_ONE);
         EditRentalCommand commandWithSameValues =
                 new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
@@ -172,11 +172,11 @@ public class EditRentalCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_SECOND_RENTAL,
-                DESC_RENTAL_ONE)));
+                EDIT_RENTAL_DESCRIPTOR_ONE)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditRentalCommand(INDEX_FIRST_PERSON, INDEX_FIRST_RENTAL,
-                DESC_RENTAL_TWO)));
+                EDIT_RENTAL_DESCRIPTOR_TWO)));
     }
 
     @Test

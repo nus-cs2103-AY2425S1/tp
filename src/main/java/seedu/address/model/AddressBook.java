@@ -98,15 +98,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Returns true if a rental information with the same details as {@code rentalInformation} exists
      * for the specified client in the address book.
      *
-     * @param client The client to check for existence of rental information.
+     * @param client The client to be added with new rental information.
      * @param rentalInformation The rental information to be compared.
      */
     public boolean hasRentalInformation(Client client, RentalInformation rentalInformation) {
         requireNonNull(client);
         requireNonNull(rentalInformation);
 
-        if (persons.contains(client)) {
-            return client.getRentalInformation().contains(rentalInformation);
+        if (hasPerson(client)) {
+            for (Client person : persons) {
+                List<RentalInformation> currentRentalInformationList = person.getRentalInformation();
+                if (currentRentalInformationList.contains(rentalInformation)) {
+                    return true;
+                }
+            }
         }
 
         return false;

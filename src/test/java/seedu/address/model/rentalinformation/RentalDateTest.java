@@ -68,6 +68,16 @@ public class RentalDateTest {
 
         // different values -> returns false
         assertFalse(rentalDate.equals(new RentalDate("31/12/2024")));
+
+        // value is null
+        // one null
+        assertFalse(rentalDate.equals(new RentalDate()));
+
+        rentalDate = new RentalDate();
+        assertFalse(rentalDate.equals(new RentalDate("31/12/2024")));
+
+        // both null
+        assertTrue(rentalDate.equals(new RentalDate()));
     }
 
     @Test
@@ -82,7 +92,7 @@ public class RentalDateTest {
     }
 
     @Test
-    public void isSameToString() {
+    public void toStringMethod() {
         RentalDate rentalDate = new RentalDate("01/01/2024");
 
         // same rental date
@@ -91,5 +101,9 @@ public class RentalDateTest {
         // different rental date
         assertNotEquals(rentalDate.toString(), new RentalDate("02/01/2024").toString());
         assertNotEquals(rentalDate.toString(), new RentalDate("01/01/2023").toString());
+
+        // null value in rental date
+        rentalDate = new RentalDate();
+        assertEquals("null", rentalDate.toString());
     }
 }

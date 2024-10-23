@@ -30,6 +30,13 @@ public class CustomerList {
     }
 
     /**
+     * Constructs an {@code CustomerList} with customerList as null (not provided).
+     */
+    public CustomerList() {
+        customerList = null;
+    }
+
+    /**
      * Validates a customer list string against a predefined regex pattern.
      *
      * @param test The string to be validated as a customer list.
@@ -46,6 +53,10 @@ public class CustomerList {
 
     @Override
     public String toString() {
+        if (customerList == null) {
+            return "null";
+        }
+
         StringBuilder allNames = new StringBuilder();
         for (int i = 0; i < customerList.size(); i++) {
             if (i < customerList.size() - 1) {
@@ -70,6 +81,12 @@ public class CustomerList {
         }
 
         CustomerList otherCustomerList = (CustomerList) other;
+        if (this.customerList == null && otherCustomerList.customerList == null) {
+            return true;
+        } else if (this.customerList == null || otherCustomerList.customerList == null) {
+            return false;
+        }
+
         return RentalUtil.isCustomerListSame(this, otherCustomerList);
     }
 

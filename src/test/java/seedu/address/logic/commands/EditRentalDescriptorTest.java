@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_RENTAL_ONE;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_RENTAL_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.EDIT_RENTAL_DESCRIPTOR_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.EDIT_RENTAL_DESCRIPTOR_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_LIST_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPOSIT_TWO;
@@ -22,55 +22,55 @@ public class EditRentalDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditRentalDescriptor descriptorWithSameValues = new EditRentalDescriptor(DESC_RENTAL_ONE);
-        assertTrue(DESC_RENTAL_ONE.equals(descriptorWithSameValues));
+        EditRentalDescriptor descriptorWithSameValues = new EditRentalDescriptor(EDIT_RENTAL_DESCRIPTOR_ONE);
+        assertTrue(EDIT_RENTAL_DESCRIPTOR_ONE.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(DESC_RENTAL_ONE.equals(DESC_RENTAL_ONE));
+        assertTrue(EDIT_RENTAL_DESCRIPTOR_ONE.equals(EDIT_RENTAL_DESCRIPTOR_ONE));
 
         // null -> returns false
-        assertFalse(DESC_RENTAL_ONE.equals(null));
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_RENTAL_ONE.equals(5));
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_RENTAL_ONE.equals(DESC_RENTAL_TWO));
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(EDIT_RENTAL_DESCRIPTOR_TWO));
 
         // different address -> returns false
-        EditRentalDescriptor editedOne = new EditRentalDescriptorBuilder(DESC_RENTAL_ONE).withAddress(VALID_ADDRESS_TWO)
-                .build();
-        assertFalse(DESC_RENTAL_ONE.equals(editedOne));
+        EditRentalDescriptor editedOne = new EditRentalDescriptorBuilder(EDIT_RENTAL_DESCRIPTOR_ONE)
+                .withAddress(VALID_ADDRESS_TWO).build();
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(editedOne));
 
         // different rental start date -> returns false
-        editedOne = new EditRentalDescriptorBuilder(DESC_RENTAL_ONE).withRentalStartDate(VALID_RENTAL_START_DATE_TWO)
-                .build();
-        assertFalse(DESC_RENTAL_ONE.equals(editedOne));
+        editedOne = new EditRentalDescriptorBuilder(EDIT_RENTAL_DESCRIPTOR_ONE)
+                .withRentalStartDate(VALID_RENTAL_START_DATE_TWO).build();
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(editedOne));
 
         // different rental end date -> returns false
-        editedOne = new EditRentalDescriptorBuilder(DESC_RENTAL_ONE).withRentalEndDate(VALID_RENTAL_END_DATE_TWO)
-                .build();
-        assertFalse(DESC_RENTAL_ONE.equals(editedOne));
+        editedOne = new EditRentalDescriptorBuilder(EDIT_RENTAL_DESCRIPTOR_ONE)
+                .withRentalEndDate(VALID_RENTAL_END_DATE_TWO).build();
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(editedOne));
 
         // different rent due date -> returns false
-        editedOne = new EditRentalDescriptorBuilder(DESC_RENTAL_ONE).withRentDueDate(VALID_RENT_DUE_DATE_TWO)
-                .build();
-        assertFalse(DESC_RENTAL_ONE.equals(editedOne));
+        editedOne = new EditRentalDescriptorBuilder(EDIT_RENTAL_DESCRIPTOR_ONE)
+                .withRentDueDate(VALID_RENT_DUE_DATE_TWO).build();
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(editedOne));
 
         // different monthly rent -> returns false
-        editedOne = new EditRentalDescriptorBuilder(DESC_RENTAL_ONE).withMonthlyRent(VALID_MONTHLY_RENT_TWO)
-                .build();
-        assertFalse(DESC_RENTAL_ONE.equals(editedOne));
+        editedOne = new EditRentalDescriptorBuilder(EDIT_RENTAL_DESCRIPTOR_ONE)
+                .withMonthlyRent(VALID_MONTHLY_RENT_TWO).build();
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(editedOne));
 
         // different deposit -> returns false
-        editedOne = new EditRentalDescriptorBuilder(DESC_RENTAL_ONE).withDeposit(VALID_DEPOSIT_TWO)
+        editedOne = new EditRentalDescriptorBuilder(EDIT_RENTAL_DESCRIPTOR_ONE).withDeposit(VALID_DEPOSIT_TWO)
                 .build();
-        assertFalse(DESC_RENTAL_ONE.equals(editedOne));
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(editedOne));
 
         // different customer list -> returns false
-        editedOne = new EditRentalDescriptorBuilder(DESC_RENTAL_ONE).withCustomerList(VALID_CUSTOMER_LIST_TWO)
-                .build();
-        assertFalse(DESC_RENTAL_ONE.equals(editedOne));
+        editedOne = new EditRentalDescriptorBuilder(EDIT_RENTAL_DESCRIPTOR_ONE)
+                .withCustomerList(VALID_CUSTOMER_LIST_TWO).build();
+        assertFalse(EDIT_RENTAL_DESCRIPTOR_ONE.equals(editedOne));
     }
 
     @Test

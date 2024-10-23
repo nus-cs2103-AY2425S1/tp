@@ -26,6 +26,14 @@ public class RentDueDate {
     }
 
     /**
+     * Constructs an {@code RentDueDate} with rentDueDate as null (not provided).
+     */
+    public RentDueDate() {
+        rentDueDate = null;
+    }
+
+
+    /**
      * Validates a rent due date string against a predefined regex pattern.
      *
      * @param test The string to be validated as a rent due date.
@@ -38,7 +46,7 @@ public class RentDueDate {
 
     @Override
     public String toString() {
-        return rentDueDate;
+        return rentDueDate == null ? "null" : rentDueDate;
     }
 
     @Override
@@ -53,6 +61,12 @@ public class RentDueDate {
         }
 
         RentDueDate otherRentDueDate = (RentDueDate) other;
+        if (this.rentDueDate == null && otherRentDueDate.rentDueDate == null) {
+            return true;
+        } else if (this.rentDueDate == null || otherRentDueDate.rentDueDate == null) {
+            return false;
+        }
+
         return rentDueDate.equals(otherRentDueDate.rentDueDate);
     }
 

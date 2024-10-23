@@ -10,7 +10,7 @@ import seedu.address.model.rentalinformation.RentalDate;
 import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
- * A utility class to help with building EditRentalInformation objects.
+ * A utility class to help with building EditRentalDescriptor objects.
  */
 public class EditRentalDescriptorBuilder {
     private EditRentalDescriptor descriptor;
