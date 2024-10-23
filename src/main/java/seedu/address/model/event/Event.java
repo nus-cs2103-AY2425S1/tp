@@ -182,16 +182,9 @@ public class Event {
 
     }
     @Override
-    public boolean equals(Object other) {
+    public boolean equals(Object other) { // equality of 2 events defined only by the event name
         return other == this // short circuit if same object
                 || (other instanceof Event // instanceof handles nulls
-                && name.equals(((Event) other).name)
-                && attendees.equals(((Event) other).attendees)
-                && vendors.equals(((Event) other).vendors)
-                && sponsors.equals(((Event) other).sponsors)
-                && volunteers.equals(((Event) other).volunteers));
+                && name.equals(((Event) other).name));
     }
-
-
-
 }

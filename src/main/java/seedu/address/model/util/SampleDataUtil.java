@@ -71,13 +71,13 @@ public class SampleDataUtil {
         Person[] samplePersons = getSamplePersons(); // Reuse sample persons for the event participants
 
         return new Event[] {
-            new Event("Tech Conference 2024",
+            new Event("NUS Student Life Fair 2024",
                     getPersonSet(samplePersons[0], samplePersons[1]),
                     getPersonSet(samplePersons[2]),
                     getPersonSet(samplePersons[3]),
                     getPersonSet(samplePersons[4])
             ),
-            new Event("Art Exhibition 2024",
+            new Event("NUS Open House 2024",
                     getPersonSet(samplePersons[1]),
                     getPersonSet(samplePersons[0], samplePersons[2]),
                     getPersonSet(samplePersons[3]),

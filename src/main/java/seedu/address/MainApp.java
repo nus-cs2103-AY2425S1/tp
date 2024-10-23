@@ -68,9 +68,7 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        eventManager = new EventManager();
-
-        logic = new LogicManager(model, storage, eventManager);
+        logic = new LogicManager(model, storage, model.getEventManager());
 
         ui = new UiManager(logic);
     }
@@ -111,8 +109,8 @@ public class MainApp extends Application {
             }
             initialEventManagerData = eventManagerOptional.orElseGet(SampleDataUtil::getSampleEventManager);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+            logger.warning("Data file at " + storage.getEventManagerFilePath() + " could not be loaded."
+                    + " Will be starting with an empty EventManager.");
             initialEventManagerData = new EventManager();
         }
 

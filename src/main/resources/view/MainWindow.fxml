@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="PlanPal" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -33,11 +35,26 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+
+        <HBox VBox.vgrow="ALWAYS">
+          <VBox styleClass="pane-with-border" minWidth="350" prefWidth="350" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets right="10" bottom="10" left="10" />
+            </padding>
+            <VBox alignment="CENTER">
+              <Label text="Events" styleClass="label-eventHeader" />
+            </VBox>
+            <StackPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS"
+                HBox.hgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+        </HBox>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="100" prefHeight="100" maxHeight="100">
@@ -46,14 +63,11 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        </StackPane>
       </VBox>
     </Scene>
   </scene>
