@@ -18,6 +18,7 @@ public class Level {
         S2,
         S3,
         S4,
+        S5,
     }
 
     enum Track {
@@ -31,7 +32,8 @@ public class Level {
 
     public static final String MESSAGE_CONSTRAINTS = "Level must be in the format 'Year Track' "
             + "where Year is one of: " + Arrays.toString(Year.values())
-            + " and Track is one of: " + Arrays.toString(Track.values());
+            + " and Track is one of: " + Arrays.toString(Track.values())
+            + "with the exception of S5 which is only allowed to have the Track NA";
 
     public final String levelName;
 
@@ -65,6 +67,10 @@ public class Level {
 
         requireNonNull(year);
         requireNonNull(track);
+
+        if (year.equals("S5")) {
+            return track.equals("NA");
+        }
 
         return isValidYear(year) && isValidTrack(track);
     }

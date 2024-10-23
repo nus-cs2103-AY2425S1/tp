@@ -47,7 +47,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else if (isByLevel) {
             String toFind = argMultimap.getValue(PREFIX_LEVEL).get();
-            //String[] levelKeywords = toFind.split("\\s+");
             String[] levelKeywords = {toFind};
 
             if (Arrays.stream(levelKeywords).anyMatch(level -> !Level.isValidLevelName(level))) {

@@ -91,7 +91,6 @@ public class Subject {
         return validSubjectsByLevel
                 .get(level)
                 .contains(Subjects.valueOf(subjectName.toUpperCase()));
-
     }
 
     public static String getValidSubjectMessage() {

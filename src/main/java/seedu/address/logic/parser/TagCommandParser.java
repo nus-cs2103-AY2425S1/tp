@@ -50,8 +50,6 @@ public class TagCommandParser implements Parser<TagCommand> {
                             argMultiMap.getAllValues(PREFIX_SUBJECT)));
         }
 
-
-
         if (argMultiMap.getValue(PREFIX_SUBJECT).isEmpty()) {
             if (argMultiMap.getValue(PREFIX_LEVEL).isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
@@ -59,6 +57,5 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         return new TagCommand(personToTag, editPersonTags);
-
     }
 }
