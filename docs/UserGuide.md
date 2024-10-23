@@ -256,6 +256,8 @@ Example:
 >
 > User can add more than 1 Medical Condition through using `c/CONDITION` multiple times
 
+[Back to Table of Contents](#table-of-contents)
+
 #### Deleting Medical Conditions : `delMedCon`
 
 Deletes Medical Condition from an existing patient in MediBase3.
@@ -277,6 +279,8 @@ Example:
 > :bulb: **Tip:**
 >
 > User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Managing Allergies
 [To be filled up]
