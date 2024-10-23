@@ -98,6 +98,30 @@ public class EditPolicyCommandTest {
     }
 
     @Test
+    public void execute_invalidPolicyType_failure() {
+        PolicyType existingPolicyType = PolicyType.HEALTH;
+        Policy existingPolicy = Policy.makePolicy(existingPolicyType, new PremiumAmount(1500),
+                new CoverageAmount(10000.50), new ExpiryDate("09/14/2024"));
+        PolicySet policies = new PolicySet();
+        policies.add(existingPolicy);
+        Person personWithPolicy = new Person(new Name("Jane Doe"), new Phone("98765432"),
+                new Email("jane@example.com"), new Address("456 Another St"), Set.of(), policies);
+
+        model.addPerson(personWithPolicy);
+
+        // Attempt to edit a non-existent policy type
+        PolicyType nonExistentPolicyType = PolicyType.LIFE; // This policy type does not exist for the person
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptor(nonExistentPolicyType);
+
+        EditPolicyCommand editPolicyCommand = new EditPolicyCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editPolicyCommand, model, EditPolicyCommand.MESSAGE_POLICY_NOT_FOUND);
+    }
+
+
+
+
+    @Test
     public void equals() {
         EditPolicyDescriptor descriptor = new EditPolicyDescriptor(validPolicyType);
         descriptor.setPremiumAmount(validPremiumAmount);
