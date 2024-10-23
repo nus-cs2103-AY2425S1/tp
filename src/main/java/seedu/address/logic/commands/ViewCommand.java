@@ -98,7 +98,7 @@ public class ViewCommand extends Command {
      * Manually close the current window if it's still open.
      */
     public static void closeCurrentWindow() {
-        if(currentStage == null) {
+        if (currentStage == null) {
             throw new NoWindowException(NO_WINDOWS_OPEN);
         }
         if (currentStage.isShowing()) {

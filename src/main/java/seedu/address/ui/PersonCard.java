@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -66,11 +65,5 @@ public class PersonCard extends UiPart<Region> {
                     }
                     tags.getChildren().add(tagLabel);
                 });
-//        person.getHistory().getHistoryEntries().forEach((date, activities) -> {
-//            StringBuilder historyText = new StringBuilder(date.toString() + ": \n");
-//            historyText.append(String.join(", \n", activities));
-//            Label historyLabel = new Label(historyText.toString());
-//            history.getChildren().add(historyLabel);
-//        });
     }
 }

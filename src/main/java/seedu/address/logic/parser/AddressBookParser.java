@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BirthdayCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CloseCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -23,7 +24,6 @@ import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.CloseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

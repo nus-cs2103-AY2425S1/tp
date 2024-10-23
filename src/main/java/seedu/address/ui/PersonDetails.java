@@ -1,29 +1,29 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
+
 
 /**
  * Controller class for displaying a person's details in the UI. Encapsulates
  * all features for the person object, and displays the details line by line.
  */
 public class PersonDetails {
-    private static final String SEPARATOR = "______________________________" +
-            "_________________________________\n\n";
+    private static final String SEPARATOR = "______________________________"
+            + "_________________________________\n\n";
     @FXML
-    public Label birthdayLabel;
+    private Label birthdayLabel;
     @FXML
-    public Label historyLabel;
+    private Label historyLabel;
     @FXML
-    public Label remarkLabel;
+    private Label remarkLabel;
     @FXML
-    public FlowPane tags;
+    private FlowPane tags;
     @FXML
     private Label nameLabel;
 
@@ -35,11 +35,8 @@ public class PersonDetails {
 
     @FXML
     private Label addressLabel;
-    @FXML
-    private ScrollPane historyScrollPane;
 
-//    @FXML
-//    private FlowPane tags;
+
 
 
     /**
