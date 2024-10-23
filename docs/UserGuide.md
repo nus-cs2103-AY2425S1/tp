@@ -175,14 +175,31 @@ Examples:
 
 Clears all entries from the address book.
 
-Format: `clear`
+Command Instructions: `clear`
+
+Upon entering the command, all entries will be cleared from the address book. A message 
+"Address book has been cleared!" will be displayed in the command box.
+
+![Ui](images/clearcommand.png)
+
 
 
 ### 2.8 Exiting the Program : `exit`
 
 Exits the program.
 
-Format: `exit`
+Exiting the programme can be done by separate ways
+Method 1:
+1. Clicking the `File` button at the top right corner of the window.
+   ![Ui](images/exitcommand.png)
+
+2. Next click on the `Exit` button.
+3. The program will close.
+
+Method 2:
+1. Type the command `exit` in the command box and press Enter.
+2. The program will close.
+
 
 ---
 
@@ -200,6 +217,21 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### 2.12 Displaying pie chart of class distribution : `piechart`
+Creates a pie chart of the distribution of students in each class. Such a feature is meant to give tuition centre 
+administrators quick visualisation of the number of students in each class, thus allowing them to efficiently allocate class sizes.
+
+For instance, we have this following data set with 4 students; 1 students in class 1 and 2 students in class 2 and 1 student in class 3.
+![Ui](images/piecommand.png)
+
+Upon entering the command pie, a pie chart will be displayed showing the distribution of students in each class.
+![Ui](images/piechart.png)
+
+
+
+Format: `pie`
+
 
 --------------------------------------------------------------------------------------------------------------------
 
