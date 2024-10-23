@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * The API of the Model component.
@@ -114,6 +114,11 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
+    /**
+     * Returns the size of the filtered contact list.
+     * @return an integer denoting the size of the filtered contact list.
+     */
+    int getFilteredContactListSize();
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

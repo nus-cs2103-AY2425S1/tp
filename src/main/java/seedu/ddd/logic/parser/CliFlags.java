@@ -8,4 +8,5 @@ public class CliFlags {
     /* Flag definitions */
     public static final Prefix FLAG_CLIENT = new Prefix("-c");
     public static final Prefix FLAG_VENDOR = new Prefix("-v");
+    public static final Prefix FLAG_EVENT = new Prefix("-e");
 }

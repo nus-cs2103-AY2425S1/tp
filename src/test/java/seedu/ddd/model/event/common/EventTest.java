@@ -1,4 +1,4 @@
-package seedu.ddd.model.event;
+package seedu.ddd.model.event.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
+
 
 public class EventTest {
     public static final EventId DUMMY_EVENTID = new EventId(0);
