@@ -68,13 +68,21 @@ public class ExportCommand extends Command {
         return COMMAND_TYPE;
     }
 
+    /**
+     * Gets the home file path. Protected for testing purposes.
+     * @param filename The name of the file (without extension)
+     * @return The full path to the file in the home directory
+     */
+    protected Path getHomeFilePath(String filename) {
+        return Paths.get(System.getProperty("user.home"), filename + ".csv");
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> studentList = model.getFilteredStudentList();
 
-        // Get project data directory path and home directory path
         Path dataFilePath = baseDir.resolve(filename + ".csv");
-        Path homeFilePath = Paths.get(System.getProperty("user.home"), filename + ".csv");
+        Path homeFilePath = getHomeFilePath(filename);
 
         // Create directories if they don't exist
         try {

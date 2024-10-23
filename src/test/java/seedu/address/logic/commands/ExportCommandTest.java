@@ -222,6 +222,52 @@ public class ExportCommandTest {
         assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
     }
 
+    @Test
+    public void execute_homeDirectoryCopyFails_returnsSuccessWithDataFileOnly() throws Exception {
+        // Add a sample student
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        filesToCleanup.add(dataFile);
+
+        // Create a read-only home directory to force copy failure
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        testHomeDir.toFile().setReadOnly();
+
+        // Create command with test home directory
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message only mentions data file
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS,
+                1, dataFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify data file exists and contains correct content
+        assertTrue(Files.exists(dataFile));
+        verifyExportedFileContent(dataFile, sampleStudent);
+
+        // Clean up: Reset directory permissions
+        testHomeDir.toFile().setWritable(true);
+    }
+
+    // You may also want to add a direct test for getHomeFilePath
+    @Test
+    public void getHomeFilePathGeneratesCorrectPath() {
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+        Path expected = Paths.get(System.getProperty("user.home"), "test.csv");
+        assertEquals(expected, exportCommand.getHomeFilePath("test"));
+    }
+
     // Helper methods
     private Student createSampleStudent() {
         return new StudentBuilder()
