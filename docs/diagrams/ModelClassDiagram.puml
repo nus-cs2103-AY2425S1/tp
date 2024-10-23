@@ -19,6 +19,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Schedule
 
 Class I #FFFFFF
 }
@@ -41,6 +42,7 @@ Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> Address
+Student *--> Schedule
 Student *--> "*" Tag
 
 Student -[hidden]up--> I
