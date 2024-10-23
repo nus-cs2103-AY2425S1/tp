@@ -27,7 +27,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EMPTY = "No participants to export";
     public static final String FILE_WRITE_ERROR = "Unable export participants' emails due to unexpected I/O error";
     public static final String FILE_WRITE_PERMISSION_ERROR =
-            "Unable export participants' emails due to denied export file access";
+            "Unable to export participants' emails due to denied export file access";
 
     private final File exportFile;
 
