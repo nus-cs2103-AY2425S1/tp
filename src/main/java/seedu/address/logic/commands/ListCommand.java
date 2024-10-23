@@ -12,8 +12,19 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String ARGUMENT_WORD = "all";
 
+    public static final String MESSAGE_PURPOSE = "Lists the contents of StaffSync.";
+
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " (e/ph/all)";
+
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " e";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
+            + "\nFormat: " + MESSAGE_FORMAT
+            + "\nExample: " + MESSAGE_EXAMPLE;
+
+    public static final String MESSAGE_SUCCESS = "Listed all persons";
 
     @Override
     public CommandResult execute(Model model) {

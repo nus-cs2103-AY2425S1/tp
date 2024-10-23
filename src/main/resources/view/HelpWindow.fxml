@@ -1,44 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
+<?import javafx.scene.layout.GridPane?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <icons>
-    <Image url="@/images/help_icon.png" />
-  </icons>
-  <scene>
-    <Scene>
-      <stylesheets>
-        <URL value="@HelpWindow.css" />
-      </stylesheets>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<fx:root minHeight="600" minWidth="460" title="Help" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/help_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@HelpWindow.css" />
+            </stylesheets>
 
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
-        <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
-        </children>
-        <opaqueInsets>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </opaqueInsets>
-        <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </padding>
-      </HBox>
-    </Scene>
-  </scene>
+            <VBox styleClass="helpVBox" HBox.hgrow="ALWAYS">
+                <ToolBar>
+                    <items>
+                        <MenuButton mnemonicParsing="false" text="List of Commands">
+                            <items>
+                                <MenuItem fx:id="clearMenuItem" mnemonicParsing="false" text="clear"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" text="delete"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="demoteMenuItem" mnemonicParsing="false" text="demote"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="editMenuItem" mnemonicParsing="false" text="edit"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="employeeMenuItem" mnemonicParsing="false" text="employee"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="exit"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="findMenuItem" mnemonicParsing="false" text="find"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" text="help"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="listMenuItem" mnemonicParsing="false" text="list"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="potentialMenuItem" mnemonicParsing="false" text="potential"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="promoteMenuItem" mnemonicParsing="false" text="promote"/>
+                                <SeparatorMenuItem />
+                                <MenuItem fx:id="sortMenuItem" mnemonicParsing="false" text="sort"/>
+                            </items>
+                        </MenuButton>
+                    </items>
+                </ToolBar>
+                <ScrollPane fx:id="scrollPane" styleClass="helpScrollPane" fitToHeight="true" fitToWidth="true"
+                            prefHeight="493.0" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox HBox.hgrow="ALWAYS" fx:id="textVBox">
+                            <GridPane HBox.hgrow="ALWAYS">
+                                <VBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
+                                      GridPane.columnIndex="0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="clearText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="deleteText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="demoteText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="editText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <Text fx:id="employeeText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <Text fx:id="exitText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <Text fx:id="findText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <Text fx:id="helpText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <Text fx:id="listText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <Text fx:id="potentialText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box">
+                                        <Text fx:id="promoteText" styleClass="text-command"/>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
+                                        <Text fx:id="sortText" styleClass="text-command"/>
+                                    </HBox>
+                                </VBox>
+                            </GridPane>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </VBox>
+        </Scene>
+    </scene>
 </fx:root>

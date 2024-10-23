@@ -8,16 +8,16 @@
 'T1 through T4 are shades of the original color from lightest to darkest
 
 !define UI_COLOR #1D8900
-!define UI_COLOR_T1 #83E769
-!define UI_COLOR_T2 #3FC71B
+!define UI_COLOR_T1 #83E768
+!define UI_COLOR_T2 #3FC71A
 !define UI_COLOR_T3 #166800
 !define UI_COLOR_T4 #0E4100
 
-!define LOGIC_COLOR #3333C4
-!define LOGIC_COLOR_T1 #C8C8FA
-!define LOGIC_COLOR_T2 #6A6ADC
-!define LOGIC_COLOR_T3 #1616B0
-!define LOGIC_COLOR_T4 #101086
+!define LOGIC_COLOR #3333C3
+!define LOGIC_COLOR_T1 #C8C8FB
+!define LOGIC_COLOR_T2 #6A6ADB
+!define LOGIC_COLOR_T3 #1616B1
+!define LOGIC_COLOR_T4 #101085
 
 !define MODEL_COLOR #9D0012
 !define MODEL_COLOR_T1 #F97181

@@ -1,15 +1,20 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# StaffSync Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +26,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +62,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,14 +89,20 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+The sequence diagram below illustrates another interaction within the `Logic` component, taking `execute("demote 1")` API call as an example. 
+
+<puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
 
 How the `Logic` component works:
 
@@ -108,7 +114,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -117,7 +123,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -127,18 +133,20 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -171,58 +179,67 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `employee n/David …​` to add a new employee. The `employee` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<box type="info" seamless>
 
-</div>
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
-</div>
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<box type="info" seamless>
 
-</div>
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `employee n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -262,42 +279,54 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* has a need to manage a significant number of employees and potential hires
+* has a need to match potential hires with available job openings
+* has a need to find details about an employee or potential hire quickly
+* has a need to search for employees or potential hires with relevant details
+* forgets commands and requires a list of commands to use the application
+* prefer desktop applications over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app
+* find details about an employee or potential hire faster than a spreadsheet
+* matches potential hires with available job openings faster than a spreadsheet
+* for organizations seeking to manage employees and potential hires, our application offers a more specialized solution than an address book application
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| Priority             | As a …​    | I want to …​                                                     | So that I can…​                                                   |
+|----------------------|------------|------------------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`              | HR Manager | View phone number of my employees/potential hire                 | I can easily contact them if required                             |
+| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their phone number if required                     |
+| `* * *`              | HR Manager | View email addresses of employees/potential hire                 | I can contact them if its not an emergency                        |
+| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their email address if required                    |
+| `* * *`              | HR Manager | Delete data through the UI                                       | I can delete users who are incorrectly added                      |
+| `* * *`              | HR Manager | View address of employees/potential hire                         | I can view the address of the user to decide where to deploy them |
+| `* *`                | New user   | Be shown some basic functions                                    | I can learn the basic functions of the product                    |
+| `* *`                | New user   | View the user guide easily                                       | I can learn more functions of the product whenever I want         |
+| `* *`                | New user   | Purge the sample data in the tutorial                            | I can input my own data to use                                    |
+| `*`                  | HR Manager | View the emergency contact details of employees                  | I can quickly respond in case of an emergency                     |
+| `*`                  | HR Manager | Sort the employee information by when their contract will expire | I can better plan out when to resign contracts                    |
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `StaffSync` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  StaffSync shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  StaffSync deletes the person
 
     Use case ends.
 
@@ -309,24 +338,101 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. StaffSync shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use Case: Add an employee**
+
+**MSS**
+
+1. User requests to add an employee.
+2. StaffSync saves the employee's information.
+
+    Use case ends.
+
+**Extensions**
+
+*1a. The input syntax is invalid.
+
+    * 1a1. StaffSync shows an error message.
+
+    Use case resumes at step 1.
+
+*1b. The user requests to add a potential hire.
+
+    *1b1. StaffSync saves the potential hire's information.
+
+    Use case ends.
+
+**Use case: Find a person**
+
+**MSS**
+
+1. User requests to find based on name.
+2. StaffSync displays a list of people who have the name.
+
+Use case ends.
+
+**Extensions**
+
+*1a. The input syntax is invalid
+
+    *1a1. StaffSync shows an error message.
+
+    Use case resumes at step 1.
+
+*1b. There is no name that fits the search.
+
+    *1b1. The list is empty.
+
+    Use case ends.
+
+**Use case: Ask for help**
+
+**MSS**
+
+1. User requests for help.
+2. StaffSync gives a list of commands.
+
+Use case ends.
+
+**Use case: Exit the program**
+
+**MSS**
+
+1. User requests to exit the program.
+2. StaffSync closes.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ on either 32-bit or 64-bit systems as long as it has Java `17` or above installed.
+2. Should be able to hold up and deal with up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A user should be able to run the software without the need to install libraries or other dependencies. They should only need Java to run the program and the program should be self contained.
+5. The software should be resizable and by default, be of a size that is usable on a 1920x1080 screen.
+6. The software should be backward compatible for version changes and previous saved data should be able to be loaded without any issues.
+7. Our software should have an _MVP_ by the end of v1.3, around the end of week 9.
+8. Our software should have an _Alpha Release_ by the end of v1.4, around the end of week 10.
+9. Our software should have a _Release Candidate_ by the end of v1.5, around the end of week 11.
+10. Our software should have a _Public Release_ by the end of v1.6, around the end of week 12.
+11. Our software will NOT handle any security or privacy related to data inserted into the software. It is the user's responsibility to ensure that the data is not sensitive or private and that it will not be leaked.
+12. Our software should not have any memory leaks and should not consume more memory than necessary.
+13. Our software should not crash with any user input.
+14. A user should not need to use their mouse for over 50% of the time when using the software.
+15. Our software should be usable 100% of the time without an internet connection.
+16. Our software should be able to process all commands under 1 second within our limitations above.
 
 ### Glossary
 
+* **GUI**: Graphical User Interface - User interface which allows users interact with the application through components such as icons, buttons and menus
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **MVP**: Minimum Viable Product - The minimum set of features that is required to make the product usable by the target user
+* **Alpha Release**: A version of the software that is feature complete but may have bugs
+* **Release Candidate**: A version of the software that is feature complete and has no known bugs
+* **Public Release**: A version of the software that is released to the public with any bugs squashed after Release Candidate
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,10 +440,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
@@ -345,38 +453,259 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding an employee
+
+1. Add an employee
+
+   1. Prerequisites: List all employees using the `list e` command.
+
+   2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: John Doe is added into the list
+
+   3. Test case: `employee n/John@Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   4. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   5. Test case: `employee n/John Doe p/98765a432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   6. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/ d/IT r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   7. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/I@T r/SWE ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   8. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SW-E ced/2024-10-09`<br>
+      Expected: No employee added, error details shown in the status message
+
+   9. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/01-09-2023`<br>
+      Expected: No employee added, error details shown in the status message
+
+2. Adding a duplicate employee
+
+    1. Prerequisites: The employee `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added
+
+    2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe should not be added since he already exists
+
+    3. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: John Doe should not be added since he already exists in employee
+
+    4. Test case: `employee n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe2 should be added as he has a different name
+
+### Adding a potential hire
+
+1. Add a potential hire
+
+    1. Prerequisites: List all potential hires using the `list ph` command.
+
+    2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: John Doe is added into the list
+
+    3. Test case: `potential n/John@Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    4. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    5. Test case: `potential n/John Doe p/98765a432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    6. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/ d/IT r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    7. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/I@T r/SWE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+    8. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/S-WE`<br>
+       Expected: No potential hire added, error details shown in the status message
+
+2. Adding a duplicate potential hire
+
+    1. Prerequisites: The potential hire `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added
+
+    2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe should not be added since he already exists
+
+    3. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
+       Expected: John Doe should not be added since he already exists in potential hire
+
+    4. Test case: `potential n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
+       Expected: John Doe2 should be added as he has a different name
+
+### Listing the contents of StaffSync
+
+1. Listing all persons
+
+   1. Prerequisites: StaffSync is not empty. Persons have been added using either `employee` or `potential`.
+
+   2. Test case: `list all` <br>
+      Expected: All persons in the application are listed regardless of if they are employees or potential hires.
+
+   3. Test case: `list` <br>
+      Expected: No change to the current list. Error details shown in the status message.
+
+   4. Test case `list all asdfg` <br>
+      Expected: All persons in the application are listed regardless of if they are employees or potential hires.
+
+   5. Test case `list asdfg` <br>
+      Expected: No change to the current displayed list. Error details shown in the status message.
+
+2. Listing all employees
+
+   1. Prerequisites: StaffSync is not empty. Employees have been added using `employee`.
+
+   2. Test case: `list e` <br>
+      Expected: All employees in the application are listed.
+
+   3. Test case: `list` <br>
+      Expected: No change to the current list. Error details shown in the status message.
+
+   4. Test case `list e asdfg` <br>
+      Expected: All employees in the application are listed.
+
+   5. Test case `list asdfg` <br>
+      Expected: No change to the current displayed list. Error details shown in the status message.
+
+2. Listing all potential hires
+
+   1. Prerequisites: StaffSync is not empty. Potential hires have been added using `potential`.
+
+   2. Test case: `list ph` <br>
+      Expected: All potential hires in the application are listed.
+
+   3. Test case: `list` <br>
+      Expected: No change to the current list. Error details shown in the status message.
+
+   4. Test case `list ph asdfg` <br>
+      Expected: All potential hires in the application are listed.
+
+   5. Test case `list asdfg` <br>
+      Expected: No change to the current displayed list. Error details shown in the status message.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all potential hires/employees are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all potential hires/employees using the `list ph` or `list e` command. potential hires/employees persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete ph 1`<br>
+      Expected: First potential hire is deleted from the list. Details of the deleted potential hires/employees shown in the status message. Timestamp in the status bar is updated. The numbering system is 1 based indexing.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete ph 0`<br>
+      Expected: No potential hire is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Test case: `Delete E 1`<br>
+      Expected: Unrecognised command. Error is due to capitalisation of `Delete` and/or `E` instead of `delete` and/or `e`. Capitalisation matters.
 
-1. _{ more test cases …​ }_
+   5. Test case: `delete e`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-### Saving data
+   6. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`, `delete e    1     `,  `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
-1. Dealing with missing/corrupted data files
+2. Deleting a person with no potential hires/employees
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: List all potential hires/employees using the `list ph` or `list e` command. No potential hires/employees is shown.
 
-1. _{ more test cases …​ }_
+   2. Test case: `delete ph 1`<br>
+      Expected: No potential hires/employees are deleted. The error message will show that there are no potential hires/employees to delete.
+
+### Finding a person
+
+1. Finding a person
+   1. Test case: `find all john`<br>
+      Expected: Number of people listed found shown in the status message. Displays the list of people found.
+
+   2. Test case: `find ph john`<br>
+            Expected: Number of potential hires listed found shown in the status message. Displays the list of potential hires found.
+
+   3. Test case: `find e john`<br>
+            Expected: Number of employees listed shown in the status message. Displays the list of employees found.
+
+   4. Test case: `Find all john`, `Find e john`, `Find ph john`<br>
+            Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
+
+   5. Test case: `find all`, `find e`, `find ph`<br>
+      Expected: Incorrect command format. Status message shows the correct usage of Find command.
+
+   6. Test case: `find ALL john`, `find E john`, `find PH john`<br>
+            Expected: Incorrect command format. Status message shows the correct usage of Find command.
+
+   7. Other incorrect find commands to try: `find aLL john`, `find pH john`, `find a`, `...`<br>
+            Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
+
+### Demoting an employee
+
+1. Demoting an employee while all employees are being shown
+
+   Prerequisites: List all employees using the `list e` command. Employees are in the list.
+
+    1. Test case: `demote 1`<br>
+      Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
+
+    2. Test case: `demote 0`<br> 
+     Expected: Invalid index found. No employees demoted. Error details shown in the status message.
+
+    3. Test case: `Demote 1`<br>
+     Excepted: Unrecognised command. Error is due to capitalization of `Demote` instead of `demote`. Capitalisation matters.
+
+    4. Test case: `demote`<br>
+     Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+    5. Other incorrect demote commands to try: `demote randomstring`,`demote x`, `demote 1 2` (where x is larger than the list size)<br>
+       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
+
+2. Demoting a person while no employees are being shown (due to having 0 entries or only potential hire entries)
+
+    1. Test case: `demote 1`<br>
+     Expected: No employees are demoted. Error details shown in the status message
+
+### Promoting a potential hire
+
+1. Promoting a potential hire while all potential hires are being shown
+
+   Prerequisites: List all potential hire using the `list ph` command. Potential hires are in the list.
+
+    1. Test case: `promote 1 2024-12-20`<br>
+       Expected: First person in the list is promoted to an employee. Details of the promoted potential hire is shown in the status message.
+
+    2. Test case: `promote 0 2024-12-20`<br>
+       Expected: Invalid index found. No potential hire promoted. Error details shown in the status message.
+
+    3. Test case: `Promote 1 2024-12-20`<br>
+       Excepted: Unrecognised command. Error is due to capitalization of `Promote` instead of `promote`. Capitalisation matters.
+
+    4. Test case: `promote 1`<br>
+       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+    5. Test case: `promote`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+    6. Test case: `promote 0 20-12-2024`<br>
+      Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
+
+    7. Test case: `promote 0 2024-20-12`<br>
+      Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
+
+       8. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`, `promote a b`  (where x is larger than the list size)<br>
+          Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
+
+2. Promoting a person while no potential hires are being shown (due to having 0 entries or only employee entries)
+
+    1. Test case: `promote 1 2024-12-20`<br>
+       Expected: No potential hires are promoted. Error details shown in the status message

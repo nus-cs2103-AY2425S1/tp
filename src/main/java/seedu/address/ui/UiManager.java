@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
@@ -38,6 +39,14 @@ public class UiManager implements Ui {
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
+        Font.loadFont(getClass().getResourceAsStream("/fonts/DMSans/DMSans-Black.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/DMSans/DMSans-ExtraBold.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/DMSans/DMSans-SemiBold.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/DMSans/DMSans-Bold.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/DMSans/DMSans-Medium.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/DMSans/DMSans-Regular.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/DMSans/DMSans-Light.ttf"), 14);
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);

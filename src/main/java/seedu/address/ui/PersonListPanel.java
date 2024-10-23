@@ -46,4 +46,8 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    public void setPersonList(ObservableList<Person> personList) {
+        personListView.setItems(personList);
+    }
+
 }
