@@ -1,0 +1,46 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "<<interface>>\nParser" as Parser {
+  +parse(String args): AddTaskCommand
+}
+
+Class AddTaskCommandParser {
+  +parse(String args): AddTaskCommand
+}
+
+Class AddTaskCommand {
+  +AddTaskCommand(Index, String)
+}
+
+Class ArgumentMultimap {
+  +getValue(): Optional<String>
+  +getPreamble(): String
+}
+
+Class ArgumentTokenizer {
+  +tokenize(String, Prefix): ArgumentMultimap
+}
+
+Class ParserUtil {
+  +parseIndex(String): Index
+}
+
+Class ParseException {
+  +ParseException(String)
+}
+
+Class IllegalValueException {
+  +IllegalValueException(String)
+}
+
+AddTaskCommandParser .up.|> Parser
+AddTaskCommandParser .down.> AddTaskCommand
+AddTaskCommandParser .down.> ArgumentMultimap
+AddTaskCommandParser .down.> ArgumentTokenizer
+AddTaskCommandParser .down.> ParserUtil
+AddTaskCommandParser .left.> ParseException : throws
+AddTaskCommandParser .left.> IllegalValueException : catches and throws ParseException
+
+@enduml
