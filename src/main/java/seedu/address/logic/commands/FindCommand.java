@@ -53,7 +53,7 @@ public class FindCommand extends Command {
      *                         a predicate which returns true only when all the keywords match, is loaded.
      */
     public FindCommand(ContainsSpecificKeywordsPredicate specificPredicate) {
-        requireNonNull(specificPredicate);
+        assert specificPredicate != null;
         this.specificPredicate = specificPredicate;
         this.generalPredicate = null;
     }
@@ -64,6 +64,7 @@ public class FindCommand extends Command {
      *                         a predicate which returns true when at least one of the keywords match, is loaded.
      */
     public FindCommand(ContainsGeneralKeywordsPredicate generalPredicate) {
+        assert generalPredicate != null;
         requireNonNull(generalPredicate);
         this.generalPredicate = generalPredicate;
         this.specificPredicate = null;
