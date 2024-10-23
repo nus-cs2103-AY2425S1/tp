@@ -14,6 +14,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -124,6 +126,32 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses string alias into Alias class
+     * @throws ParseException when alias string is not valid
+     */
+    public static Alias parseAlias(String alias) throws ParseException {
+        requireNonNull(alias);
+        String trimmedAlias = alias.trim();
+        if (!Alias.isValidAlias(trimmedAlias)) {
+            throw new ParseException(Alias.MESSAGE_CONSTRAINTS);
+        }
+        return new Alias(trimmedAlias);
+    }
+
+    /**
+     * Parses string fullTagName to FullTagName class
+     * @throws ParseException when fullTagName is not valid
+     */
+    public static FullTagName parseFullTagName(String fullTagName) throws ParseException {
+        requireNonNull(fullTagName);
+        String trimmedFullTagName = fullTagName.trim();
+        if (!FullTagName.isValidTagName(trimmedFullTagName)) {
+            throw new ParseException(FullTagName.MESSAGE_CONSTRAINTS);
+        }
+        return new FullTagName(trimmedFullTagName);
     }
 
     /**

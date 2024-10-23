@@ -10,8 +10,10 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddOrderCommand;
+import seedu.address.logic.commands.AddShortCutCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DelShortCutCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteOrderCommand;
 import seedu.address.logic.commands.DeletePostalCodeCommand;
@@ -23,6 +25,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListOrderCommand;
+import seedu.address.logic.commands.ListShortCutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -95,8 +98,14 @@ public class AddressBookParser {
             return new AddOrderCommandParser().parse(arguments);
         case DeleteOrderCommand.COMMAND_WORD:
             return new DeleteOrderCommandParser().parse(arguments);
+        case DelShortCutCommand.COMMAND_WORD:
+            return new DelShortCutCommandParser().parse(arguments);
         case ListOrderCommand.COMMAND_WORD:
             return new ListOrderCommand();
+        case ListShortCutCommand.COMMAND_WORD:
+            return new ListShortCutCommand();
+        case AddShortCutCommand.COMMAND_WORD:
+            return new AddShortCutCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

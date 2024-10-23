@@ -27,8 +27,10 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.ShortCut;
+import seedu.address.model.tag.Tag;
 
 public class AddCommandTest {
 
@@ -189,6 +191,25 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
+        public void removeShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasAlias(Alias shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public ObservableList<ShortCut> getShortCutList() {
+            throw new AssertionError("This method should not be called.");
+        }
         public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
             throw new AssertionError("This method should not be called.");
         }
@@ -236,7 +257,6 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-
     }
 
 }

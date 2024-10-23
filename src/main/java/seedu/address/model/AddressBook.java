@@ -14,6 +14,9 @@ import seedu.address.model.order.UniqueOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.ShortCut;
+import seedu.address.model.shortcut.UniqueShortCutList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueOrderList orders;
+    private final UniqueShortCutList shortcuts;
 
 
     /*
@@ -36,6 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         orders = new UniqueOrderList();
+        shortcuts = new UniqueShortCutList();
     }
 
     public AddressBook() {}
@@ -48,7 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    // list overwrite operations
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -61,6 +66,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setOrders(List<Order> orders) {
         this.orders.setOrders(orders);
     }
+    public void setShortcuts(List<ShortCut> shortcuts) {
+        this.shortcuts.setShortCuts(shortcuts);
+    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -70,9 +78,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setOrders(newData.getOrderList());
+        setShortcuts(newData.getShortCutList());
     }
 
-    //// person-level operations
+    // person-level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -121,13 +130,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasOrder(Order order) {
         return orders.contains(order);
     }
-
-    //// util methods
+    // shortcuts methods
+    public void addShortCut(ShortCut shortcut) {
+        shortcuts.add(shortcut);
+    }
+    public void removeShortCut(ShortCut shortcut) {
+        shortcuts.remove(shortcut);
+    }
+    public boolean hasShortCut(ShortCut shortcut) {
+        return shortcuts.contains(shortcut);
+    }
+    public boolean hasAlias(Alias alias) {
+        return shortcuts.containsAlias(alias);
+    }
+    // util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("shortcuts", shortcuts)
                 .toString();
     }
 
@@ -160,6 +182,11 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .collect(Collectors.toList());
     }
     @Override
+    public ObservableList<ShortCut> getShortCutList() {
+        return shortcuts.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -177,6 +204,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, orders);
+        return Objects.hash(persons, orders, shortcuts);
     }
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,5 +22,6 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getFilteredPersonList(Set<Tag> tagList);
 
     ObservableList<Order> getOrderList();
+    ObservableList<ShortCut> getShortCutList();
 
 }
