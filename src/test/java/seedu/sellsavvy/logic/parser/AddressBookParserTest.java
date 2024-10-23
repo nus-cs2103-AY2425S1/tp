@@ -130,17 +130,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-<<<<<<< HEAD
     public void parseCommand_unmarkOrder() throws Exception {
         UnmarkOrderCommand command = (UnmarkOrderCommand) parser.parseCommand(
                 UnmarkOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
         assertEquals(new UnmarkOrderCommand(INDEX_FIRST_ORDER), command);
-=======
+    }
+
+    @Test
     public void parseCommand_filterOrder() throws Exception {
         FilterOrderCommand command = (FilterOrderCommand) parser.parseCommand(
                 FilterOrderCommand.COMMAND_WORD + " Completed");
         assertEquals(new FilterOrderCommand(new StatusEqualsKeywordPredicate(Status.COMPLETED)), command);
->>>>>>> bfd228733a94ba3399bbf07afb3f493f2f1e67e0
     }
 
     @Test
