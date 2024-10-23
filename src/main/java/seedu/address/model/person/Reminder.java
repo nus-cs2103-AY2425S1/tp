@@ -1,12 +1,15 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
+/**
+ * Represents a reminder in NetBook
+ */
 public class Reminder {
     public static final String MESSAGE_CONSTRAINTS_DATE = "Date should be in the format DD-MM-YYYY";
     public static final String MESSAGE_CONSTRAINTS_DESCRIPTION = "Description should not be empty";
@@ -33,6 +36,12 @@ public class Reminder {
         this.personToMeet = personToMeet;
     }
 
+    /**
+     * Checks if string is a valid date.
+     *
+     * @param test String to check.
+     * @return Whether date is valid.
+     */
     public static boolean isValidDate(String test) {
         try {
             LocalDate.parse(test, formatter);
@@ -42,6 +51,12 @@ public class Reminder {
         }
     }
 
+    /**
+     * Checks if string is a valid description.
+     *
+     * @param test String to check.
+     * @return Whether description is valid.
+     */
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
     }
