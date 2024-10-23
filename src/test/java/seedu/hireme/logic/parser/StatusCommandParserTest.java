@@ -27,7 +27,7 @@ public class StatusCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_differentIndex_returnsStatusCommand() {
+    public void parse_validArgsDifferentIndex_returnsStatusCommand() {
         // Create the parser with the valid status 'REJECTED'
         StatusCommandParser parser = new StatusCommandParser(Status.REJECTED);
 
@@ -77,7 +77,7 @@ public class StatusCommandParserTest {
     }
 
     @Test
-    public void parse_extraWhitespace_validArgs_returnsStatusCommand() {
+    public void parse_extraWhitespaceValidArgs_returnsStatusCommand() {
         // Create the parser with the valid status 'ACCEPTED'
         StatusCommandParser parser = new StatusCommandParser(Status.ACCEPTED);
 

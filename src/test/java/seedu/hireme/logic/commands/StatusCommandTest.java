@@ -88,7 +88,8 @@ public class StatusCommandTest {
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         StatusCommand statusCommand = new StatusCommand(targetIndex, Status.ACCEPTED);
-        String expected = StatusCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + ", newStatus=" + Status.ACCEPTED + "}";
+        String expected = StatusCommand.class.getCanonicalName()
+                + "{targetIndex=" + targetIndex + ", newStatus=" + Status.ACCEPTED + "}";
         assertEquals(expected, statusCommand.toString());
     }
 

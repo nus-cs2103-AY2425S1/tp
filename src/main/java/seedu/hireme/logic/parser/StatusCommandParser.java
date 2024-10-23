@@ -29,7 +29,8 @@ public class StatusCommandParser implements Parser<StatusCommand> {
             Index index = ParserUtil.parseIndex(args.trim());
 
             // Ensure the status is one of the allowed values (PENDING, ACCEPTED, REJECTED)
-            if (status == null || !(status == Status.PENDING || status == Status.ACCEPTED || status == Status.REJECTED)) {
+            if (status == null || !(status == Status.PENDING || status == Status.ACCEPTED
+                    || status == Status.REJECTED)) {
                 throw new ParseException(Status.MESSAGE_CONSTRAINTS);
             }
 

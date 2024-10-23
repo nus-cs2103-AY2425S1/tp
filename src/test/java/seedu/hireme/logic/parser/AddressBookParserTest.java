@@ -20,13 +20,14 @@ import seedu.hireme.logic.commands.ExitCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
 import seedu.hireme.logic.commands.ListCommand;
-import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.logic.commands.StatusCommand;
-import seedu.hireme.model.internshipapplication.Status;
+import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 import seedu.hireme.testutil.InternshipApplicationUtil;
+
 
 public class AddressBookParserTest {
 

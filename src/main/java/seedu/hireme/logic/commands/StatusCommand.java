@@ -16,25 +16,51 @@ import seedu.hireme.model.internshipapplication.Status;
  */
 public class StatusCommand extends Command<InternshipApplication> {
 
+    /** Command word for accepting an application. */
     public static final String COMMAND_WORD_ACCEPT = "/accept";
+
+    /** Command word for marking an application as pending. */
     public static final String COMMAND_WORD_PENDING = "/pending";
+
+    /** Command word for rejecting an application. */
     public static final String COMMAND_WORD_REJECT = "/reject";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_ACCEPT + " / " + COMMAND_WORD_PENDING + " / " + COMMAND_WORD_REJECT
-            + ": Changes the status of the internship application identified by the index number used in the displayed list.\n"
+    /**
+     * Message to display for command usage instructions.
+     */
+    public static final String MESSAGE_USAGE = COMMAND_WORD_ACCEPT
+            + " / " + COMMAND_WORD_PENDING + " / " + COMMAND_WORD_REJECT
+            + ": Changes the status of the internship application identified by "
+            + "the index number used in the displayed list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD_ACCEPT + " 1";
 
+    /**
+     * Message to display upon successful status update.
+     */
     public static final String MESSAGE_STATUS_CHANGE_SUCCESS = "Updated status of internship application: %1$s to %2$s";
 
     private final Index targetIndex;
     private final Status newStatus;
 
+    /**
+     * Constructs a {@code StatusCommand}.
+     *
+     * @param targetIndex The index of the internship application to update.
+     * @param newStatus The new status to set for the internship application.
+     */
     public StatusCommand(Index targetIndex, Status newStatus) {
         this.targetIndex = targetIndex;
         this.newStatus = newStatus;
     }
 
+    /**
+     * Executes the command to update the status of an internship application.
+     *
+     * @param model The model containing the list of internship applications.
+     * @return A {@code CommandResult} indicating the result of the status update.
+     * @throws CommandException If the target index is invalid.
+     */
     @Override
     public CommandResult execute(Model<InternshipApplication> model) throws CommandException {
         requireNonNull(model);
@@ -50,6 +76,12 @@ public class StatusCommand extends Command<InternshipApplication> {
                 Messages.format(internshipApplicationToUpdate), newStatus.getValue()));
     }
 
+    /**
+     * Checks if this command is equal to another object.
+     *
+     * @param other The other object to compare.
+     * @return True if both objects are the same or have the same target index and new status, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -65,8 +97,14 @@ public class StatusCommand extends Command<InternshipApplication> {
                 && newStatus.equals(otherStatusCommand.newStatus);
     }
 
+    /**
+     * Returns the string representation of this command.
+     *
+     * @return A string representing this {@code StatusCommand}.
+     */
     @Override
     public String toString() {
-        return StatusCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + ", newStatus=" + newStatus.getValue() + "}";
+        return StatusCommand.class.getCanonicalName()
+                + "{targetIndex=" + targetIndex + ", newStatus=" + newStatus.getValue() + "}";
     }
 }
