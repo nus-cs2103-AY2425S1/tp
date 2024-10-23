@@ -7,7 +7,6 @@ import java.util.Comparator;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.Model;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,7 +56,7 @@ public class SortCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof  SortCommand)) {
+        if (!(other instanceof SortCommand)) {
             return false;
         }
 
