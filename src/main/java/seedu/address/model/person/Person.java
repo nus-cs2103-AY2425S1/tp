@@ -22,18 +22,16 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
     }
 
@@ -47,10 +45,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -75,6 +69,54 @@ public class Person {
     }
 
     /**
+     * Checks for duplicates in emails in the contact list.
+     * @param otherPerson The Person object to compare against.
+     * @return True if both persons have the same email address.
+     */
+    public boolean hasSameEmail(Person otherPerson) {
+        return otherPerson != null && otherPerson.getEmail().equals(this.getEmail());
+    }
+
+    /**
+     * Checks for duplicates in phone numbers in the contact list.
+     * @param otherPerson The Person object to compare against.
+     * @return True if both persons have the same phone number.
+     */
+    public boolean hasSamePhoneNumber(Person otherPerson) {
+        return otherPerson != null && otherPerson.getPhone().equals(this.getPhone());
+    }
+
+    /**
+     * Checks for duplicated contact information between Person instances.
+     * This is to avoid adding duplicate contacts in the contact list.
+     * Checked fields: name, phone, email.
+     * @param otherPerson The Person object to compare against.
+     * @return True if two contacts are considered as duplicates.
+     */
+    public boolean hasDuplicateInfo(Person otherPerson) {
+        return this.isSamePerson(otherPerson)
+                || this.hasSameEmail(otherPerson)
+                || this.hasSamePhoneNumber(otherPerson);
+    }
+
+    /**
+     * Checks whether the person has the tags
+     */
+    public boolean hasTag(Tag t) {
+        return this.getTags().contains(t);
+    }
+
+    /**
+     * Remove a tag from a person
+     */
+    public Person removeTag(Tag t) {
+        Set<Tag> newTagSet = new HashSet<>();
+        newTagSet.addAll(this.getTags());
+        newTagSet.remove(t);
+        return new Person(this.name, this.phone, this.email, newTagSet);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -93,14 +135,13 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -109,7 +150,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }

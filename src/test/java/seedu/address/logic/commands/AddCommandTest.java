@@ -18,11 +18,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CampusConnect;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCampusConnect;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -109,12 +110,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getCampusConnectFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setCampusConnectFilePath(Path campusConnectFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,12 +125,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setCampusConnect(ReadOnlyCampusConnect campusConnect) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyCampusConnect getCampusConnect() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,6 +145,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deletePersonTag(Person p, Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -154,8 +160,28 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Tag> getListOfCurrentTags() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void insertPerson(Person p, int ind) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void undoCampusConnect() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void saveCurrentCampusConnect() {
+            throw new AssertionError("This method should not be called");
         }
     }
 
@@ -196,8 +222,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyCampusConnect getCampusConnect() {
+            return new CampusConnect();
         }
     }
 
