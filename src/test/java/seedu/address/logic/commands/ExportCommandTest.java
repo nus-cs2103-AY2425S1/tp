@@ -4,22 +4,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class ExportCommandTest {
 
-    @TempDir
-    Path temporaryFolder;
     @Test
     public void execute_validDestination_success() {
         Model model = new ModelManager();
-        File destinationFile = temporaryFolder.resolve("exported_addressbook.json").toFile();
+        Path tempFilePath = null;
+        try {
+            tempFilePath = Files.createTempFile("exported_addressbook", ".json");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        File destinationFile = tempFilePath.toFile();
         ExportCommand exportCommand = new ExportCommand(destinationFile);
 
         // Act
@@ -30,6 +34,12 @@ public class ExportCommandTest {
                 result.getFeedbackToUser());
         assertTrue(destinationFile.exists());
         assertTrue(destinationFile.length() > 0, "Exported file should not be empty.");
+        // Clean up
+        try {
+            Files.deleteIfExists(tempFilePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
