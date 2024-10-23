@@ -24,8 +24,8 @@ public class AddSubmissionStatusCommandParser implements Parser<AddSubmissionSta
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SUBMISSION, PREFIX_SUBMISSION_STATUS);
 
-        if (!argMultimap.getValue(PREFIX_SUBMISSION).isPresent() ||
-                !argMultimap.getValue(PREFIX_SUBMISSION_STATUS).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_SUBMISSION).isPresent()
+                || !argMultimap.getValue(PREFIX_SUBMISSION_STATUS).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddSubmissionStatusCommand.MESSAGE_USAGE));
         }

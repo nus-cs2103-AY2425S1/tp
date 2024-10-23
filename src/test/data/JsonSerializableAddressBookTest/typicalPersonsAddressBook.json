@@ -10,6 +10,13 @@
     "class": "1A",
     "emergency contact name": "Joe Hardy",
     "emergency contact number": "26283728",
+    "submissions" : [ {
+      "submissionName" : "Assignment 1",
+      "submissionStatus" : "NIL"
+    }, {
+      "submissionName" : "Tutorial 1",
+      "submissionStatus" : "NIL"
+    } ],
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -21,6 +28,10 @@
     "class": "2B",
     "emergency contact name": "John Boone",
     "emergency contact number": "92837201",
+    "submissions" : [ {
+      "submissionName" : "Assignment 1",
+      "submissionStatus" : "NIL"
+    } ],
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -32,6 +43,10 @@
     "class": "3C",
     "emergency contact name": "James Dol",
     "emergency contact number": "",
+    "submissions" : [ {
+      "submissionName" : "Assignment 1",
+      "submissionStatus" : "NIL"
+    } ],
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -43,6 +58,10 @@
     "class": "4D",
     "emergency contact name": "",
     "emergency contact number": "",
+    "submissions" : [ {
+      "submissionName" : "Assignment 1",
+      "submissionStatus" : "NIL"
+    } ],
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -54,6 +73,10 @@
     "class": "3E",
     "emergency contact name": "",
     "emergency contact number": "",
+    "submissions" : [ {
+      "submissionName" : "Assignment 1",
+      "submissionStatus" : "NIL"
+    } ],
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -65,6 +88,10 @@
     "class": "2A",
     "emergency contact name": "",
     "emergency contact number": "",
+    "submissions" : [ {
+      "submissionName" : "Assignment 1",
+      "submissionStatus" : "NIL"
+    } ],
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -76,6 +103,10 @@
     "class": "1A",
     "emergency contact name": "",
     "emergency contact number": "",
+    "submissions" : [ {
+      "submissionName" : "Assignment 1",
+      "submissionStatus" : "NIL"
+    } ],
     "tags" : [ ]
   } ]
 }

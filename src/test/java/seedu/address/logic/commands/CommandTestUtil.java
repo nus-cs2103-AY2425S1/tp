@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBMISSION_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -49,6 +51,12 @@ public class CommandTestUtil {
     public static final String VALID_ECNAME_BOB = "Sally";
     public static final String VALID_ECNUMBER_AMY = "91234567";
     public static final String VALID_ECNUMBER_BOB = "98765432";
+    public static final String VALID_SUBMISSION_ASSIGNMENT_1 = "Assignment 1";
+    public static final String VALID_SUBMISSION_ASSIGNMENT_2 = "Assignment 2";
+    public static final String VALID_SUBMISSION_TUTORIAL_1 = "Tutorial 1";
+    public static final String VALID_SUBMISSION_TUTORIAL_2 = "Tutorial 2";
+    public static final String VALID_SUBMISSION_STATUS_AMY = "Y";
+    public static final String VALID_SUBMISSION_STATUS_BOB = "N";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -70,6 +78,9 @@ public class CommandTestUtil {
     public static final String ECNAME_DESC_BOB = " " + PREFIX_ECNAME + VALID_ECNAME_BOB;
     public static final String ECNUMBER_DESC_AMY = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_AMY;
     public static final String ECNUMBER_DESC_BOB = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_BOB;
+    public static final String SUBMISSION_DESC_ASSIGNMENT = " " + PREFIX_SUBMISSION + VALID_SUBMISSION_ASSIGNMENT_1;
+    public static final String SUBMISSION_STATUS_DESC_AMY = " " + PREFIX_SUBMISSION_STATUS
+            + VALID_SUBMISSION_STATUS_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -84,6 +95,7 @@ public class CommandTestUtil {
             + "A1"; // wrong format used for student class
     public static final String INVALID_ECNAME_DESC = " " + PREFIX_ECNAME + "John%"; // "%" not allowed in ecname
     public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "1234"; // 4 digit number
+    public static final String INVALID_SUBMISSION_DESC = " " + PREFIX_SUBMISSION + "Assignment #"; // "#" not allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

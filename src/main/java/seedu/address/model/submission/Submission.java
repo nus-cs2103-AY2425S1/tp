@@ -20,7 +20,7 @@ public class Submission {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String STATUS_VALIDATION_REGEX = "^[YN]$";
+    public static final String STATUS_VALIDATION_REGEX = "^[YN]|NIL$";
 
     public final String submissionName;
     public final String submissionStatus;
@@ -34,7 +34,7 @@ public class Submission {
         requireNonNull(submissionName);
         checkArgument(isValidSubmissionName(submissionName), NAME_MESSAGE_CONSTRAINTS);
         this.submissionName = submissionName;
-        this.submissionStatus = null;
+        this.submissionStatus = "NIL";
     }
 
     /**

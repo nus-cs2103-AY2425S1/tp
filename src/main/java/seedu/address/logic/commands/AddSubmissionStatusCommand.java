@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -12,9 +15,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.submission.Submission;
 
-import java.util.List;
-import java.util.Set;
-
 /**
  * Adds a status for an existing submission to an existing person in the address book.
  */
@@ -22,9 +22,10 @@ public class AddSubmissionStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "addSubmissionStatus";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an submission status to a student identified by index.\n"
-            + "Parameters: [INDEX] ex/SUBMISSION_NAME sc/SUBMISSION_STATUS\n"
-            + "Submissionple: " + COMMAND_WORD + " 1 ex/Midterm sc/70";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a submission status to a student identified by index.\n"
+            + "Parameters: [INDEX] sm/SUBMISSION_NAME ss/SUBMISSION_STATUS\n"
+            + "Example: " + COMMAND_WORD + " 1 sm/Assignment 1 ss/Y";
 
     public static final String MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS = "Added submission status for person: %1$s";
     public static final String MESSAGE_SUBMISSION_NOT_FOUND = "This submission does not exist.";

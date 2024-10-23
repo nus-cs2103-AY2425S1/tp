@@ -13,6 +13,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -40,6 +41,7 @@ public class PersonBuilder {
     private StudentClass studentClass;
     private EcName ecName;
     private EcNumber ecNumber;
+    private Set<Submission> submissions;
     private Set<Tag> tags;
 
     /**
@@ -55,6 +57,7 @@ public class PersonBuilder {
         studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
         ecName = new EcName(DEFAULT_ECNAME);
         ecNumber = new EcNumber(DEFAULT_ECNUMBER);
+        submissions = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -71,6 +74,7 @@ public class PersonBuilder {
         studentClass = personToCopy.getStudentClass();
         ecName = personToCopy.getEcName();
         ecNumber = personToCopy.getEcNumber();
+        submissions = new HashSet<>(personToCopy.getSubmissions());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -79,6 +83,32 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code submissions} into a {@code Set<Submission>} and set it to the {@code Person} that we are
+     * building.
+     */
+    public PersonBuilder withSubmissions(String ... submissions) {
+        this.submissions = SampleDataUtil.getSubmissionSet(submissions);
+        return this;
+    }
+
+    /**
+     * Sets the {@code String submissionStatus} for a specified {@code Submission} of the {@code Person} that we are
+     * building.
+     */
+    public PersonBuilder withSubmissionStatus(String submissionName, String submissionStatus) {
+        Set<Submission> updatedSubmissions = new HashSet<>();
+        for (Submission submission : this.submissions) {
+            Submission updatedSubmission = submission;
+            if (submission.submissionName.equals(submissionName)) {
+                updatedSubmission = new Submission(submissionName, submissionStatus);
+            }
+            updatedSubmissions.add(updatedSubmission);
+        }
+        this.submissions = updatedSubmissions;
         return this;
     }
 
@@ -158,7 +188,8 @@ public class PersonBuilder {
      * Builds a new Person with all the required attributes.
      */
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber,
+                submissions, tags);
     }
 
 }
