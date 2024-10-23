@@ -183,6 +183,26 @@ Examples:
 * `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
 * `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
 
+### Adding Attendance : `addAttendance`
+
+Adds the date and reason as to why the specified person in the address book is absent.
+
+Format: `addAttendance INDEX aa/[DATE] ar/[REASON]`
+
+<box type="tip" seamless>
+
+**Tip:** You can delete the attendance by leaving the `REASON` field empty.
+</box>
+
+* Adds the date where student is absent `DATE` and the reason `REASON` to the person at the specified `INDEX`
+* Deletes the attendance at the specified `INDEX`
+* The index **must be a positive integer** 1, 2, 3, …​
+* The date **must be in the form of DD-MM-YYYY**.
+
+Examples:
+* `addAttendance 1 aa/[24-09-2024] ar/[Sick]` to add the date where the 1st person in the list is absent and the reason.
+* `addAttendance 1 aa/[24-09-2024] ar/` to delete the attendance from the 1st person in the list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -241,4 +261,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Add Emergency Phone Number**  | `EcNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`
+**Add Emergency contact's namer**  | `addEcName INDEX en/[ECNAME]`<br> e.g., `addEcName 1 en/John Doe`
+**Add Emergency contact's number**  | `addEcNumber INDEX [ep/ECNUMBER]`<br> e.g., `addEcNumber 1 ep/91234567`
+**Add Attendance**  | `addAttendance INDEX aa/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 aa/[24-09-2024] ar/[Sick]`
