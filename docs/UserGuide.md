@@ -72,7 +72,7 @@ Shows a list of all internship applications in HireMe.
 
 Format: `/list`
 
-### Locating applications by company name: `/f`
+### Finding applications by company name: `/f`
 
 Finds applications whose company names contain the given pattern of characters.
 
@@ -87,6 +87,20 @@ Examples:
 * `/f Goo` returns `Google` and `Google 2`
 * `/f face` returns `Facebook`
 * `/f oO` returns `Google`, `Google 2`, `Facebook`
+
+### Filtering internship applications by status: `/filter`
+
+Filters internship applications with specified status.
+
+Format: `/filter STATUS`
+
+* Valid statuses are pending, accepted or rejected.
+* The status is case-insensitive. e.g. `"Pending"`, `"pending"` and `"PENDING"` are all allowed.
+
+Examples:
+* `/filter Pending`
+* `/filter Accepted`
+* `/filter Rejected`
 
 ### Deleting an internship application : `/d`
 

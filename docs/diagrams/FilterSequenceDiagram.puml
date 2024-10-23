@@ -5,41 +5,66 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
 participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(filter)
+
+[-> LogicManager : execute(...)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(filter)
+LogicManager -> AddressBookParser : parseCommand(...)
 activate AddressBookParser
 
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser
+activate FilterCommandParser
+
+FilterCommandParser --> AddressBookParser
+deactivate FilterCommandParser
+
+AddressBookParser -> FilterCommandParser : parse(...)
+activate FilterCommandParser
+
 create FilterCommand
-AddressBookParser -> FilterCommand
+FilterCommandParser -> FilterCommand
 activate FilterCommand
 
-FilterCommand --> AddressBookParser
+FilterCommand --> FilterCommandParser : f
 deactivate FilterCommand
+
+FilterCommandParser --> AddressBookParser : f
+deactivate FilterCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterCommandParser -[hidden]-> AddressBookParser
+destroy FilterCommandParser
 
 AddressBookParser --> LogicManager : f
 deactivate AddressBookParser
 
-LogicManager -> FilterCommand : execute()
+LogicManager -> FilterCommand : execute(m)
 activate FilterCommand
 
-FilterCommand -> Model : filterAddressBook()
+FilterCommand -> Model : updateFilteredList(...)
 activate Model
 
 Model --> FilterCommand
 deactivate Model
 
-FilterCommand --> LogicManager : result
+create CommandResult
+FilterCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterCommand
+deactivate CommandResult
+
+FilterCommand --> LogicManager : r
 deactivate FilterCommand
-FilterCommand -[hidden]-> LogicManager : result
-destroy FilterCommand
 
 [<--LogicManager
 deactivate LogicManager
