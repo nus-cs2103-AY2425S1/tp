@@ -50,7 +50,7 @@ public class EditEventCommand extends EditCommand {
             + PREFIX_EVENT_CELEBRITY + "Jack Black "
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Event: %1$s";
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
 
     private final Index index;
@@ -99,7 +99,7 @@ public class EditEventCommand extends EditCommand {
 
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.eventFormat(editedEvent)),
+        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, Messages.eventFormat(editedEvent)),
                                 false, false, CommandTabChange.EVENT, CommandDetailChange.NONE);
     }
 
