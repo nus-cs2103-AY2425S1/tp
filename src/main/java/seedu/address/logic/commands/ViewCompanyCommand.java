@@ -38,13 +38,13 @@ public class ViewCompanyCommand extends Command {
     }
 
     /**
-     * Executes the ViewCompanyCommand to display all jobs and persons linked to a company.
-     * <p>
-     * @param model The {@code Model} in which the command operates, containing the
-     * company list and job-person linkage data.
-     * @return A {@code CommandResult} containing feedback that shows the jobs and persons
-     * linked to the target company.
-     * @throws CommandException If the specified index is invalid or out of bounds.
+     * Executes the ViewCompanyCommand to display jobs and persons linked to the specified company.
+     * Retrieves the company by index, filters jobs and persons linked to it, and shows the results.
+     * Throws {@code CommandException} if the index is out of bounds.
+     *
+     * @param model The {@code Model} containing the company list and job-person links.
+     * @return A {@code CommandResult} with feedback on the displayed jobs and persons.
+     * @throws CommandException If the index is invalid.
      */
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
