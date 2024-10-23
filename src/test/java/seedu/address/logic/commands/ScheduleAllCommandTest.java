@@ -28,14 +28,14 @@ public class ScheduleAllCommandTest {
 
     @Test
     public void execute_scheduleIsNotFiltered_showsSameList() {
-        expectedModel.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+        expectedModel.filterAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
         assertCommandSuccess(new ScheduleAllCommand(), model, ScheduleAllCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showAppointmentAtIndex(model, INDEX_FIRST_PERSON);
-        expectedModel.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+        expectedModel.filterAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
         assertCommandSuccess(new ScheduleAllCommand(), model, ScheduleAllCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
