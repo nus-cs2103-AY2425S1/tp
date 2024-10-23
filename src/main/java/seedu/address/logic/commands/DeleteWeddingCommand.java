@@ -3,12 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -28,9 +30,24 @@ public class DeleteWeddingCommand extends Command {
     public static final String MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND = "The Wedding: %1$s does not exist";
 
     private final Wedding targetWedding;
+    private boolean force = false;
 
+    /**
+     * Initialises a DeleteWeddingCommand object with default force is false
+     * @param wedding A wedding object as the target
+     */
     public DeleteWeddingCommand(Wedding wedding) {
         targetWedding = wedding;
+    }
+
+    /**
+     * Initialises a DeleteWeddingCommand object with a specific force
+     * @param wedding A wedding object as the target
+     * @param force A boolean representing if the command should be forced
+     */
+    public DeleteWeddingCommand(Wedding wedding, boolean force) {
+        this.targetWedding = wedding;
+        this.force = force;
     }
 
     @Override
@@ -45,8 +62,31 @@ public class DeleteWeddingCommand extends Command {
                     return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
                             Messages.format(targetWedding)));
                 } else {
-                    throw new CommandException(
-                            String.format(MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED, Messages.format(targetWedding)));
+                    if (this.force) {
+                        for (Person person : model.getFilteredPersonList()) {
+                            HashSet<Wedding> personWeddings = new HashSet<>(person.getWeddings());
+                            if (personWeddings.contains(wedding)) {
+                                personWeddings.remove(wedding);
+                                Person newPerson = new Person(
+                                        person.getName(),
+                                        person.getPhone(),
+                                        person.getEmail(),
+                                        person.getAddress(),
+                                        person.getTags(),
+                                        personWeddings
+                                );
+                                model.setPerson(person, newPerson);
+                                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+                            }
+                        }
+                        model.deleteWedding(wedding);
+                        return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
+                                Messages.format(targetWedding)));
+                    } else {
+                        throw new CommandException(
+                                String.format(MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED,
+                                        Messages.format(targetWedding)));
+                    }
                 }
             }
         }

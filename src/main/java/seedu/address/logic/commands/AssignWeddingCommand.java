@@ -92,6 +92,7 @@ public class AssignWeddingCommand extends Command {
                             MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
             }
+            wedding.increasePeopleCount();
         }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());

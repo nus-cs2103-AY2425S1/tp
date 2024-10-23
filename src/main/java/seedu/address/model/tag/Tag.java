@@ -60,6 +60,9 @@ public class Tag {
         taggedCount--;
     }
 
+    public int getTagCount() {
+        return taggedCount;
+    }
     /**
      * Returns true if the tag can be deleted.
      * The tag can be deleted if TaggedCount is 0.

@@ -205,8 +205,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Person person : persons) {
             Set<Tag> tagForPerson = person.getTags();
             for (Tag tag : tagForPerson) {
+                tag.increaseTaggedCount();
                 if (!this.hasTag(tag)) {
                     this.addTag(tag);
+                } else {
+                    this.setTag(tag, tag);
                 }
             }
         }
