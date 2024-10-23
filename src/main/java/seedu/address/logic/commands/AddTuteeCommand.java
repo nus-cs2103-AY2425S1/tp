@@ -22,14 +22,15 @@ public class AddTuteeCommand extends Command {
 
     public static final String COMMAND_WORD = "addTutee";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutee to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutee to the address book. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_HOURS + "HOURS "
-            + PREFIX_SUBJECT + "SUBJECT"
+            + PREFIX_SUBJECT + "SUBJECT \n"
+
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

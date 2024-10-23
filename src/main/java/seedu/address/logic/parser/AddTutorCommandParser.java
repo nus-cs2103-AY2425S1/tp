@@ -58,7 +58,6 @@ public class AddTutorCommandParser implements Parser<AddTutorCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
-
         Tutor tutor = new Tutor(name, phone, email, address, hours, tagList, subjects);
 
         return new AddTutorCommand(tutor);

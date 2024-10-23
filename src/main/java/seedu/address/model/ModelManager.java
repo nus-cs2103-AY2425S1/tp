@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -109,6 +111,34 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         versionedAddressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return versionedAddressBook.hasLesson(lesson);
+    }
+
+    @Override
+    public void deleteLesson(Lesson target) {
+        versionedAddressBook.removeLesson(target);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        versionedAddressBook.addLesson(lesson);
+    }
+
+    @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+
+        versionedAddressBook.setLesson(target, editedLesson);
+    }
+
+    @Override
+    public List<Person> getAssociatedPeople(Person person) {
+        return versionedAddressBook.getAssociatedPeople(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
