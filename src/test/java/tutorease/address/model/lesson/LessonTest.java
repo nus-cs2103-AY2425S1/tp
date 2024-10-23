@@ -16,6 +16,7 @@ import tutorease.address.model.person.Person;
 
 public class LessonTest {
     private final Person person = getTypicalStudents().get(0);
+    private final Fee fee = new Fee("10");
     private final StartDateTime startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
     private final EndDateTime endDateTime = EndDateTime.createEndDateTime(startDateTime, VALID_DURATION);
     private final StartDateTime startDateTimeOverlap = StartDateTime.createStartDateTime(VALID_START_DATE);
@@ -23,16 +24,16 @@ public class LessonTest {
     private final StartDateTime startDateTimeNoOverlap = StartDateTime.createStartDateTime(
             DateTimeUtil.dateTimeToString(startDateTime.getDateTime().plusDays(1)));
 
-    private final Lesson lesson = new Lesson(person, startDateTime, endDateTime);
-    private final Lesson lessonOverlap = new Lesson(person, startDateTimeOverlap, endDateTimeOverlap);
-    private final Lesson lessonNoOverlap = new Lesson(person, startDateTimeNoOverlap, endDateTimeOverlap);
+    private final Lesson lesson = new Lesson(person, fee, startDateTime, endDateTime);
+    private final Lesson lessonOverlap = new Lesson(person, fee, startDateTimeOverlap, endDateTimeOverlap);
+    private final Lesson lessonNoOverlap = new Lesson(person, fee, startDateTimeNoOverlap, endDateTimeOverlap);
 
     public LessonTest() throws ParseException {
     }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null));
+        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null, null));
     }
 
     @Test
@@ -43,7 +44,7 @@ public class LessonTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Lesson lessonCopy = new Lesson(person, startDateTime, endDateTime);
+        Lesson lessonCopy = new Lesson(person, fee, startDateTime, endDateTime);
         assertTrue(lesson.equals(lessonCopy));
 
         // same object -> returns true
@@ -61,6 +62,10 @@ public class LessonTest {
     @Test
     public void getStudent() {
         assertTrue(lesson.getStudent().equals(person));
+    }
+    @Test
+    public void getFee() {
+        assertEquals(lesson.getFee(), fee);
     }
     @Test
     public void getStartDateTime() {
@@ -90,9 +95,19 @@ public class LessonTest {
     public void toStringTest() {
         assertEquals("Student: "
                 + person.getName().toString()
+                + " Fee: "
+                + fee
                 + " Start: "
-                + startDateTime.toString()
+                + startDateTime
                 + " End: "
-                + endDateTime.toString(), lesson.toString());
+                + endDateTime, lesson.toString());
+    }
+    @Test
+    public void compareTo() {
+        assertTrue(lesson.compareTo(lesson) == 0);
+    }
+    @Test
+    public void getAmountPerHour() {
+        assertEquals("$10/hr", lesson.getAmountPerHour());
     }
 }

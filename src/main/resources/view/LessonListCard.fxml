@@ -30,6 +30,8 @@
          <Label fx:id="endDateTime" styleClass="cell_small_label bold" text="\$endDateTime" />
       <Label fx:id="student" styleClass="cell_small_label" text="\$student" wrapText="true" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
+      <Label fx:id="fee" styleClass="cell_small_label" text="\$fee" wrapText="true" />
+
     </VBox>
       <rowConstraints>
          <RowConstraints />
