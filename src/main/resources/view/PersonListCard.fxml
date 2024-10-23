@@ -35,6 +35,7 @@
       <Label fx:id="emergencyContact" styleClass="cell_medium_label" text="Emergency contact:" />
       <Label fx:id="emergencyContactName" styleClass="cell_small_label" text="\$emergencyContactName" />
       <Label fx:id="emergencyContactPhone" styleClass="cell_small_label" text="\$emergencyContactPhone" />
+      <Label fx:id="gradYear" styleClass="cell_small_label" text="\$gradYear" />
     </VBox>
   </GridPane>
 </HBox>

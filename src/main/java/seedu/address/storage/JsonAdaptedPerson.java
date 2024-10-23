@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.GradYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String roomNumber;
     private final String emergencyName;
     private final String emergencyPhone;
+    private final String gradYear;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -42,7 +44,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("room number") String roomNumber,
             @JsonProperty("address") String address, @JsonProperty("emergency name") String emergencyName,
-            @JsonProperty("emergency phone") String emergencyPhone, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("emergency phone") String emergencyPhone, @JsonProperty("graduation year") String gradYear,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +53,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.emergencyName = emergencyName;
         this.emergencyPhone = emergencyPhone;
+        this.gradYear = gradYear;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -66,6 +70,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         emergencyName = source.getEmergencyContactName().map(en -> en.fullName).orElse(null);
         emergencyPhone = source.getEmergencyContactPhone().map(ep -> ep.value).orElse(null);
+        gradYear = source.getGradYear().map(gy -> gy.value).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -137,6 +142,15 @@ class JsonAdaptedPerson {
         return new EmergencyContact(emergencyName, emergencyPhone);
     }
 
+    private GradYear parseGradYear(String gradYear) throws IllegalValueException {
+        // room number is optional
+        boolean hasGradYear = gradYear != null;
+        if (hasGradYear && !GradYear.isValidGradYear(gradYear)) {
+            throw new IllegalValueException(GradYear.MESSAGE_CONSTRAINTS);
+        }
+        return hasGradYear ? new GradYear(gradYear) : null;
+    }
+
     private Set<Tag> parseTags(List<JsonAdaptedTag> tags) throws IllegalValueException {
         final Set<Tag> personTags = new HashSet<>();
         for (JsonAdaptedTag tag : tags) {
@@ -157,9 +171,10 @@ class JsonAdaptedPerson {
         final RoomNumber modelRoomNumber = parseRoomNumber(roomNumber);
         final Address modelAddress = parseAddress(address);
         final EmergencyContact modelEmergencyContact = parseEmergencyContact(emergencyName, emergencyPhone);
+        final GradYear modelGradYear = parseGradYear(gradYear);
         final Set<Tag> modelTags = parseTags(tags);
         return new Person(modelName, modelPhone, modelEmail, modelRoomNumber, modelAddress,
-                modelEmergencyContact, modelTags);
+                modelEmergencyContact, modelGradYear, modelTags);
     }
 
 }

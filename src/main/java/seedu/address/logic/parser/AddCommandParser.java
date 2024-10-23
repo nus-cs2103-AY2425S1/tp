@@ -56,7 +56,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // Allow setting optional parameter roomNumber in add command
         // Do not allow setting optional parameter emergencyContact in add command
-        Person person = new Person(name, phone, email, roomNumber, address, null, tagList);
+        // Do not allow setting optional parameter gradYear in add command
+        Person person = new Person(name, phone, email, roomNumber, address, null, null, tagList);
 
         return new AddCommand(person);
     }
