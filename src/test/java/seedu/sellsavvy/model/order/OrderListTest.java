@@ -8,7 +8,6 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
 
@@ -90,13 +89,13 @@ public class OrderListTest {
 
     @Test
     public void remove_orderDoesNotExist_throwsOrderNotFoundException() {
-        assertThrows(OrderNotFoundException.class, () -> orderList.remove(INDEX_FIRST_ORDER));
+        assertThrows(OrderNotFoundException.class, () -> orderList.remove(ATLAS));
     }
 
     @Test
     public void remove_existingOrder_removesOrder() {
         orderList.add(ATLAS);
-        orderList.remove(INDEX_FIRST_ORDER);
+        orderList.remove(ATLAS);
         OrderList expectedOrderList = new OrderList();
         assertEquals(expectedOrderList, orderList);
     }

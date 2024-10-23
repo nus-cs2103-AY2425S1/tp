@@ -19,6 +19,7 @@ import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.DeleteOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.UnmarkOrderCommand;
@@ -30,6 +31,8 @@ import seedu.sellsavvy.logic.commands.personcommands.FindPersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.ListPersonCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
+import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.EditPersonDescriptorBuilder;
@@ -127,10 +130,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void parseCommand_unmarkOrder() throws Exception {
         UnmarkOrderCommand command = (UnmarkOrderCommand) parser.parseCommand(
                 UnmarkOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
         assertEquals(new UnmarkOrderCommand(INDEX_FIRST_ORDER), command);
+=======
+    public void parseCommand_filterOrder() throws Exception {
+        FilterOrderCommand command = (FilterOrderCommand) parser.parseCommand(
+                FilterOrderCommand.COMMAND_WORD + " Completed");
+        assertEquals(new FilterOrderCommand(new StatusEqualsKeywordPredicate(Status.COMPLETED)), command);
+>>>>>>> bfd228733a94ba3399bbf07afb3f493f2f1e67e0
     }
 
     @Test

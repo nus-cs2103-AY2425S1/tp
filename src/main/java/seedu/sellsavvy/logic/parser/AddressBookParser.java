@@ -14,6 +14,7 @@ import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.DeleteOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.UnmarkOrderCommand;
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case ListOrderCommand.COMMAND_WORD:
             return new ListOrderCommandParser().parse(arguments);
+
+        case FilterOrderCommand.COMMAND_WORD:
+            return new FilterOrderCommandParser().parse(arguments);
 
         case AddOrderCommand.COMMAND_WORD:
             return new AddOrderCommandParser().parse(arguments);

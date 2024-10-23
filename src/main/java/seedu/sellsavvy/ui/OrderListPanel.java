@@ -54,7 +54,7 @@ public class OrderListPanel extends UiPart<Region> {
             return;
         }
 
-        orderListView.setItems(person.getOrderUnmodifiableObservableList());
+        orderListView.setItems(person.getFilteredOrderList());
         orderListView.setCellFactory(listView -> new OrderListViewCell());
         toggleOrderListVisibility(true);
         orderListTitle.setText(String.format(TITLE_WITH_SELECTED_PERSON, person.getName().fullName));
