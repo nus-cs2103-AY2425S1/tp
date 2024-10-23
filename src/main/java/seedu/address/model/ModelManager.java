@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -244,6 +245,23 @@ public class ModelManager implements Model {
         addressBook.removeGroup(groupToBeDeleted);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void sortPersonList(Comparator<Student> comparator) {
+        requireAllNonNull(comparator);
+        addressBook.setStudents(filteredStudents.sorted(comparator));
+    }
+
+    @Override
+    public void sortGroupList(Comparator<Group> comparator) {
+        requireAllNonNull(comparator);
+        addressBook.setGroups(filteredGroups.sorted(comparator));
+    }
+
+    @Override
+    public void sortTaskList(Comparator<Task> comparator) {
+        requireAllNonNull(comparator);
     }
 
     //=========== Filtered Student List Accessors =============================================================
