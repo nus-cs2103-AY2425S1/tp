@@ -14,6 +14,7 @@ import seedu.edulog.logic.parser.exceptions.ParseException;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
+import seedu.edulog.model.student.Fee;
 import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Phone;
 import seedu.edulog.model.tag.Tag;
@@ -143,6 +144,20 @@ public class ParserUtil {
         }
 
         return trimmed;
+    }
+
+    /**
+     * Parse the provided String into a {@code Fee}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the string is invalid.
+     */
+    public static Fee parseFee(String fee) throws ParseException {
+        requireNonNull(fee);
+        if (!Fee.isValidFee(fee)) {
+            throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
+        }
+        return new Fee(Integer.parseInt(fee));
     }
 
     /**

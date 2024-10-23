@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
+import seedu.edulog.model.student.Fee;
 import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Phone;
 import seedu.edulog.model.student.Student;
@@ -21,6 +22,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final boolean DEFAULT_PRESENT = false;
+    public static final int DEFAULT_FEE = 0;
 
     private Name name;
     private Phone phone;
@@ -28,6 +30,7 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private boolean isPresent;
+    private Fee fee;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -39,6 +42,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         isPresent = DEFAULT_PRESENT;
+        fee = new Fee(DEFAULT_FEE);
     }
 
     /**
