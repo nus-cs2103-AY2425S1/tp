@@ -16,7 +16,7 @@ With BridalBuddy, you can easily:
 * Add a guest to the wedding that you are planning.
 * Separately, add a vendor you are collaborating with for that wedding.
 
-To discover more about what BridalBuddy has to offer, keep reading the rest of this comprehensive user guide.
+To discover more about what BridalBuddy has to offer, continue reading the rest of this comprehensive user guide.
 
 ## Table of Contents
 1. [**User Guide Tips**](#user-guide-tips)
