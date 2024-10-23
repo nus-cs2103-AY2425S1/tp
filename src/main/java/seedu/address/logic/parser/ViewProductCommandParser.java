@@ -11,7 +11,7 @@ import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new ViewSupplierCommand object
  */
-public class ViewCommandParser implements Parser<ViewProductCommand> {
+public class ViewProductCommandParser implements Parser<ViewProductCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewSupplierCommand

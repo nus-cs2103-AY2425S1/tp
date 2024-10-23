@@ -77,9 +77,6 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case ViewSupplierCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -90,7 +87,10 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case ViewProductCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+            return new ViewProductCommandParser().parse(arguments);
+
+        case ViewSupplierCommand.COMMAND_WORD:
+            return new ViewSupplierCommandParser().parse(arguments);
 
         case AssignProductCommand.COMMAND_WORD:
             return new AssignProductCommandParser().parse(arguments);
