@@ -98,6 +98,18 @@ public class Appointment {
     }
 
     /**
+     * Returns true if appointment is on the specified date
+     */
+    public boolean isOn(LocalDate date) {
+        if (dateTime.equals("-")) {
+            return false;
+        }
+        return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
+                .toLocalDate().isEqual(date);
+    }
+
+
+    /**
      * Returns true if appointment has passed.
      */
     public boolean hasPassed() {
