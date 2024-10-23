@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 
 import java.util.List;
@@ -22,21 +23,22 @@ public class DeleteConcertContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: PERSONINDEX (must be a positive integer) "
-            + PREFIX_CONCERT + "CONCERTINDEX (must be a positive integer)\n"
+            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + PREFIX_CONCERT + "CONCERT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_CONCERT + "2";
 
     public static final String MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS = "Deleted Person: %1$s from Concert: %1$s";
 
-    private final Index concertIndex;
-    private final Index personIndex;
+    private final Index indexC;
+    private final Index indexP;
 
     /**
-     * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specifed {@code Concert}.
+     * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specified {@code Concert}.
      */
-    public DeleteConcertContactCommand(Index personIndex, Index concertIndex) {
-        this.personIndex = personIndex;
-        this.concertIndex = concertIndex;
+    public DeleteConcertContactCommand(Index indexP, Index indexC) {
+        requireAllNonNull(indexP, indexC);
+        this.indexP = indexP;
+        this.indexC = indexC;
     }
 
     @Override
@@ -44,17 +46,19 @@ public class DeleteConcertContactCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         List<Concert> lastShownConcertList = model.getFilteredConcertList();
+        assert lastShownPersonList != null : "Person list must not be null";
+        assert lastShownConcertList != null : "Concert list must not be null";
 
-        if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
+        if (indexP.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (concertIndex.getZeroBased() >= lastShownConcertList.size()) {
+        if (indexC.getZeroBased() >= lastShownConcertList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
         }
 
-        Concert concertToEdit = lastShownConcertList.get(concertIndex.getZeroBased());
-        Person personToDelete = lastShownPersonList.get(personIndex.getZeroBased());
+        Concert concertToEdit = lastShownConcertList.get(indexC.getZeroBased());
+        Person personToDelete = lastShownPersonList.get(indexP.getZeroBased());
 
         if (!model.hasConcertContact(personToDelete, concertToEdit)) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_CONTACT);
@@ -77,16 +81,16 @@ public class DeleteConcertContactCommand extends Command {
         }
 
         DeleteConcertContactCommand otherDeleteConcertContactCommand = (DeleteConcertContactCommand) other;
-        boolean sameConcertIndex = concertIndex.equals(otherDeleteConcertContactCommand.concertIndex);
-        boolean samePersonIndex = personIndex.equals(otherDeleteConcertContactCommand.personIndex);
+        boolean sameConcertIndex = indexC.equals(otherDeleteConcertContactCommand.indexC);
+        boolean samePersonIndex = indexP.equals(otherDeleteConcertContactCommand.indexP);
         return samePersonIndex && sameConcertIndex;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("indexP", personIndex)
-                .add("indexC", concertIndex)
+                .add("indexP", indexP)
+                .add("indexC", indexC)
                 .toString();
     }
 }

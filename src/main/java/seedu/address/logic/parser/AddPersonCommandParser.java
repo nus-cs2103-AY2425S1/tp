@@ -42,12 +42,25 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+
+        assert argMultimap.getValue(PREFIX_NAME).isPresent() : "Prefix for name should be present";
+        assert argMultimap.getValue(PREFIX_ADDRESS).isPresent() : "Prefix for address should be present";
+        assert argMultimap.getValue(PREFIX_PHONE).isPresent() : "Prefix for phone should be present";
+        assert argMultimap.getValue(PREFIX_EMAIL).isPresent() : "Prefix for email should be present";
+        assert argMultimap.getValue(PREFIX_ROLE).isPresent() : "Prefix for role should be present";
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        assert Name.isValidName(argMultimap.getValue(PREFIX_NAME).get()) : "Name must be valid";
+        assert Address.isValidAddress(argMultimap.getValue(PREFIX_ADDRESS).get()) : "Address must be valid";
+        assert Phone.isValidPhone(argMultimap.getValue(PREFIX_PHONE).get()) : "Phone must be valid";
+        assert Email.isValidEmail(argMultimap.getValue(PREFIX_EMAIL).get()) : "Email must be valid";
+        assert Role.isValidRole(argMultimap.getValue(PREFIX_ROLE).get()) : "Role must be valid";
 
         Person person = new Person(name, phone, email, address, role, tagList);
 

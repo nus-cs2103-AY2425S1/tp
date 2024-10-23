@@ -28,8 +28,6 @@ public class AddConcertCommand extends Command {
             + PREFIX_ADDRESS + "81800 51st Ave, Indio, Southern California, United States "
             + PREFIX_DATE + "2024-12-20 1010";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Add concert command not implemented yet";
     public static final String MESSAGE_SUCCESS = "New concert added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONCERT = "This concert already exists";
     private final Concert toAdd;
