@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -9,9 +8,8 @@ import java.util.Objects;
  * It extends the Task class and adds LocalDate fields to store the start and end dates of the event.
  */
 public class Event extends Task {
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private LocalDate from;
-    private LocalDate to;
+    private Date from;
+    private Date to;
 
 
     /**
@@ -23,8 +21,8 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        this.from = LocalDate.parse(from, FORMATTER);
-        this.to = LocalDate.parse(to, FORMATTER);
+        this.from = new Date(from);
+        this.to = new Date(to);
     }
 
     /**
@@ -37,16 +35,16 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to, boolean isDone) {
         super(description);
-        this.from = LocalDate.parse(from, FORMATTER);
-        this.to = LocalDate.parse(to, FORMATTER);
+        this.from = new Date(from);
+        this.to = new Date(to);
         this.isDone = isDone;
     }
 
-    public LocalDate getFrom() {
+    public Date getFrom() {
         return from;
     }
 
-    public LocalDate getTo() {
+    public Date getTo() {
         return to;
     }
 
@@ -70,7 +68,7 @@ public class Event extends Task {
         return description.equals(otherEvent.description)
                 && isDone == otherEvent.isDone
                 && from.equals(otherEvent.from)
-                && to.equals(equals(otherEvent.to));
+                && to.equals(otherEvent.to);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -11,7 +10,7 @@ import java.util.Objects;
 public class Deadline extends Task {
 
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private LocalDate by;
+    private Date by;
 
 
     /**
@@ -22,7 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by, FORMATTER);
+        this.by = new Date(by);
     }
 
     /**
@@ -34,11 +33,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description);
-        this.by = LocalDate.parse(by, FORMATTER);
+        this.by = new Date(by);
         this.isDone = isDone;
     }
 
-    public LocalDate getBy() {
+    public Date getBy() {
         return by;
     }
 

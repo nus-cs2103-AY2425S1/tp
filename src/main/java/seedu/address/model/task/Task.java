@@ -7,7 +7,7 @@ import java.util.Objects;
  * It serves as the base class for more specific types of tasks such as Todo, Deadline, and Event.
  */
 public class Task {
-    protected String description;
+    protected Description description;
     protected boolean isDone;
 
     /**
@@ -17,6 +17,11 @@ public class Task {
      * @param description The description of the task.
      */
     public Task(String description) {
+        this.description = new Description(description);
+        this.isDone = false;
+    }
+
+    public Task(Description description) {
         this.description = description;
         this.isDone = false;
     }
@@ -37,7 +42,7 @@ public class Task {
      * @return The description of the task as a String.
      */
     public String getDescription() {
-        return this.description;
+        return this.description.toString();
     }
 
     /**
@@ -73,7 +78,7 @@ public class Task {
      */
     public boolean hasKeywordInPartialDescription(String keyword) {
         String lowerCaseKeyword = keyword.toLowerCase();
-        String[] descriptionArray = description.split(" ");
+        String[] descriptionArray = description.toString().split(" ");
         for (String word : descriptionArray) {
             String lowerCaseWord = word.toLowerCase();
             if (lowerCaseWord.contains(lowerCaseKeyword)) {

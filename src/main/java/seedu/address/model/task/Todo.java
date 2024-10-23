@@ -16,6 +16,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(Description description) {
+        super(description);
+    }
+
     /**
      * Constructs a Todo task with the specified description and isDone status.
      *
@@ -23,6 +27,11 @@ public class Todo extends Task {
      * @param isDone      The completion status of the event.
      */
     public Todo(String description, boolean isDone) {
+        super(description);
+        this.isDone = isDone;
+    }
+
+    public Todo(Description description, boolean isDone) {
         super(description);
         this.isDone = isDone;
     }
