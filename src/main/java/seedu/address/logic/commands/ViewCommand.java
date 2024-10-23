@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
@@ -34,8 +36,10 @@ public class ViewCommand extends Command {
         if (targetIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person personToView = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView)));
+        List<Person> associatedPeople = model.getAssociatedPeople(personToView);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView, associatedPeople)));
     }
 
     @Override
