@@ -16,7 +16,7 @@ import spleetwaise.transaction.model.transaction.Transaction;
  */
 public class TransactionBookModelManager implements TransactionBookModel {
 
-    private static final Logger logger = LogsCenter.getLogger(AddressBookModelManager.class);
+    private static final Logger logger = LogsCenter.getLogger(TransactionBookModelManager.class);
 
     private final TransactionBook transactionBook;
     private final FilteredList<Transaction> filteredTransactions;
