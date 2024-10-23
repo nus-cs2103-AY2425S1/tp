@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
@@ -29,15 +30,16 @@ public class DeleteConcertContactCommand extends Command {
 
     public static final String MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS = "Deleted Person: %1$s from Concert: %2$s";
 
-    private final Index indexP;
     private final Index indexC;
+    private final Index indexP;
 
     /**
-     * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specifed {@code Concert}.
+     * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specified {@code Concert}.
      */
-    public DeleteConcertContactCommand(Index index1, Index index2) {
-        this.indexP = index1;
-        this.indexC = index2;
+    public DeleteConcertContactCommand(Index indexP, Index indexC) {
+        requireAllNonNull(indexP, indexC);
+        this.indexP = indexP;
+        this.indexC = indexC;
     }
 
     @Override
@@ -45,6 +47,8 @@ public class DeleteConcertContactCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         List<Concert> lastShownConcertList = model.getFilteredConcertList();
+        assert lastShownPersonList != null : "Person list must not be null";
+        assert lastShownConcertList != null : "Concert list must not be null";
 
         if (indexP.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

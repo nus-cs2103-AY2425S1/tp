@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -27,6 +28,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindPersonCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -40,6 +42,9 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE);
+
+        assert argMultimap.getValue(PREFIX_NAME).isPresent() || argMultimap.getValue(PREFIX_ROLE).isPresent()
+                : "Both name and role prefixes cannot be missing at the same time";
 
         Optional<String[]> nameKeywords = argMultimap.getValue(PREFIX_NAME).map(arg-> arg.split("\\s+"));
         Optional<Boolean> isValidNamesArg = nameKeywords.map(names -> Arrays.stream(names).allMatch(Name::isValidName));

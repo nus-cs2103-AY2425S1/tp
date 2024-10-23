@@ -202,6 +202,22 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows the list of {@code ConcertContact}.
+     *
+     */
+    public void handleShowConcertContactView() {
+        concertContactListContainer.visibleProperty().setValue(true);
+    }
+
+    /**
+     * Hides the list of {@code ConcertContact}.
+     *
+     */
+    public void handleHideConcertContactView() {
+        concertContactListContainer.visibleProperty().setValue(false);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -218,6 +234,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowConcertContacts()) {
+                handleShowConcertContactView();
+            } else {
+                handleHideConcertContactView();
             }
 
             return commandResult;
