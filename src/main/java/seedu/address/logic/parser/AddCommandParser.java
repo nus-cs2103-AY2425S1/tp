@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseOptionalValue;
 
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_TAG,
                 PREFIX_REMARK);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LOCATION, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -44,28 +44,26 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
                 PREFIX_REMARK);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Phone phone = parseOptionalValue(
+                argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone, new Phone("")
+        );
 
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_LOCATION).get());
-        //needed because Remark is optional
-        Optional<String> possibleRemark = argMultimap.getValue(PREFIX_REMARK);
-        Remark remark = null;
-        if (possibleRemark.isEmpty()) {
-            remark = new Remark("");
-        } else {
-            remark = ParserUtil.parseRemark(possibleRemark.get());
-        }
+        Email email = parseOptionalValue(
+                argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail, new Email("")
+        );
 
-        System.out.println(remark.value);
+        Address address = parseOptionalValue(
+                argMultimap.getValue(PREFIX_LOCATION), ParserUtil::parseAddress, new Address("")
+        );
+
+        Remark remark = parseOptionalValue(
+                argMultimap.getValue(PREFIX_REMARK), ParserUtil::parseRemark, new Remark("")
+        );
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, remark, tagList);
 
         return new AddCommand(person);
     }
-
-
-
 
 }
