@@ -74,7 +74,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the address book. People with same names are allowed.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -84,8 +84,8 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe, Alexander p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy d/o Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/+651234567 t/criminal`
-* `add n/Mary Jane t/friend p/+651234567`
+* `add n/Betsy d/o Crowe t/boss e/betsycrowe@example.com a/Jurong West Street p/+651234567 t/golf`
+* `add n/Mary Jane t/client p/+651234567`
 
 ### Listing all persons : `list`
 
