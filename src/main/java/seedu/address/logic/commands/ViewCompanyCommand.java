@@ -26,7 +26,7 @@ public class ViewCompanyCommand extends Command {
             + ": Displays all jobs and persons linked to the company identified by the index number "
             + "used in the displayed company list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " " + ENTITY_WORD + " 1";
 
 
 
