@@ -1,0 +1,14 @@
+.result-display {
+    -fx-background-color: #1C1C1C;
+    -fx-control-inner-background: #1C1C1C;
+    -fx-highlight-text-fill: #1C1C1C;
+    -fx-faint-focus-color: #1C1C1C;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+}
+
+#resultDisplay .content {
+    -fx-background-color: #1C1C1C, #1C1C1C, #1C1C1C, #1C1C1C;
+    -fx-background-radius: 0;
+}

@@ -1,0 +1,55 @@
+#commandTextContainer {
+    -fx-background-color: #1C1C1C;
+    -fx-border-color: #1C1C1C;
+    -fx-border-width: 1px;
+
+    -fx-padding: 10 15 10 15;
+
+    -fx-pref-height: 50px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+}
+
+#commandTextIcon {
+    -fx-icon-size: 15;
+    -fx-icon-color: white;
+}
+
+#commandTextArea {
+
+    -fx-background-color: #1C1C1C;
+    -fx-control-inner-background: #1C1C1C;
+
+    -fx-font-family: "Jetbrains Mono";
+    -fx-font-size: 13pt;
+    -fx-prompt-text-fill: #656565;
+    -fx-text-fill: white;
+
+    -fx-pref-height: 35px;
+    -fx-max-height: 35px;
+    -fx-min-height: 35px;
+    -fx-padding: 0 0 0 -5px;
+
+    -fx-border-width: 0;
+
+}
+
+#commandTextArea .content {
+    -fx-background-radius: 0;
+    -fx-background-color: #1C1C1C;
+    -fx-border-width: 0;
+}
+
+#commandTextArea .viewport {
+    -fx-background-color: #1C1C1C;
+    -fx-border-width: 0;
+}
+
+#commandTextArea:focused {
+    -fx-prompt-text-fill: grey;
+    -fx-border-width: 0;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
