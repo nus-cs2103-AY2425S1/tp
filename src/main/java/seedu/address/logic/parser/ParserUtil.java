@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -212,6 +213,22 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(AddAppointmentCommand.MESSAGE_INVALID_TIME);
         }
+    }
+
+    /**
+     * Parses a {@code String input} into a {@code Note}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param input the note content to be parsed
+     * @return the parsed {@code Note} object
+     * @throws ParseException if the input is empty
+     */
+    public static Note parseNote(String input) throws ParseException {
+        String trimmedInput = input.trim();
+        if (trimmedInput.equals("")) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return new Note(trimmedInput);
     }
 
 }

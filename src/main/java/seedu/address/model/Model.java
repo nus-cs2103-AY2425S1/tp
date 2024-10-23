@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -112,4 +113,6 @@ public interface Model {
     Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime);
 
     boolean hasAppointment(Appointment appointment);
+
+    void addNoteToPerson(Note note, Person person);
 }
