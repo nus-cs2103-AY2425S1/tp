@@ -39,8 +39,8 @@ public class CommandHistory implements ReadOnlyCommandHistory {
      * of the command stack if size exceeds {@code commandStackMaxSize}.
      */
     public void addCommand(String commandString) {
-        //TODO: assert commandString is a valid and executed command
-        commandStack = commandStack.addCommand(commandString);
+        //TODO: assert commandString is a valid and executed command?
+        setCommandStack(commandStack.addCommand(commandString));
     }
     public CommandStack getCommandStack() {
         return commandStack;
