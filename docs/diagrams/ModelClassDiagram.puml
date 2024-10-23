@@ -18,6 +18,7 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Subject
 Class Tag
 
 Class I #FFFFFF
@@ -42,6 +43,7 @@ Student *--> Phone
 Student *--> Email
 Student *--> Address
 Student *--> "*" Tag
+Student *--> Subject
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I
