@@ -31,4 +31,26 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_singleVrn_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("SJH9514P")));
+        assertParseSuccess(parser, " \n SJH9514P ", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_mixedArgs_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "SJH9514P")));
+        assertParseSuccess(parser, " \n Alice \n \t SJH9514P  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_multipleVrn_returnsFindCommand() {
+        // Multiple quoted phrases
+        FindCommand expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("SJH9514P", "SH8942L")));
+        assertParseSuccess(parser, " \n SJH9514P \n \t SH8942L  \t", expectedFindCommand);
+    }
+
 }

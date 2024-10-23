@@ -75,6 +75,41 @@ public class NameContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void test_vrnMatchesExactly_returnsTrue() {
+        // VRN matches exactly
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("SJH9514P"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice")
+                .withCar("SJH9514P", "11111111111111111", "Toyota", "Corolla")
+                .build()));
+
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("sjh9514p"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice")
+                .withCar("SJH9514P", "11111111111111111", "Toyota", "Corolla")
+                .build()));
+    }
+
+    @Test
+    public void test_vrnPartialMatch_returnsFalse() {
+        // VRN partial match should return false
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("SJH9514"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice")
+                .withCar("SJH9514P", "11111111111111111", "Toyota", "Corolla")
+                .build()));
+    }
+
+    @Test
+    public void test_nameAndVrnMatch_returnsTrue() {
+        // Keyword matches both name and VRN
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Arrays.asList("Alice", "SJH9514P"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Bob")
+                .withCar("SJH9514P", "11111111111111111", "Toyota", "Corolla")
+                .build()));
+    }
+
+    @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);

@@ -43,8 +43,23 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Issues: ");
+        person.getIssues().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code person}'s car for display to the user.
+     */
+    public static String formatCar(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(person.getCar().getVrn())
+                .append("; VIN: ")
+                .append(person.getCar().getVin())
+                .append("; Car Make: ")
+                .append(person.getCar().getCarMake())
+                .append("; Car Model: ")
+                .append(person.getCar().getCarModel());
         return builder.toString();
     }
 
