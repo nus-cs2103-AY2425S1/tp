@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_NUMBER_OF_BOOKINGS = "There are %s persons with bookings on %s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "Person does not have this appointment";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

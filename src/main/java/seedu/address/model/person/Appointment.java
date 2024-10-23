@@ -157,4 +157,9 @@ public class Appointment {
     public String toString() {
         return dateTime;
     }
+
+    public static void main(String[] args) {
+        Appointment a = new Appointment("2024-01-01 12:30");
+        System.out.println(a);
+    }
 }

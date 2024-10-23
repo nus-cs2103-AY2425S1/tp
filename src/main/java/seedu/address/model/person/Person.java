@@ -26,7 +26,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Appointment appointment;
+    private Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -77,6 +77,14 @@ public class Person {
 
     public Appointment getAppointment() {
         return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public void deleteAppointment() {
+        appointment = new Appointment(null);
     }
 
     /**
