@@ -66,7 +66,14 @@ public class MarkPaidCommand extends Command {
                 Person markedPerson = createMarkedPerson(person, monthsPaid);
                 model.setPerson(person, markedPerson);
             }
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredPersonList(person -> {
+                for (MonthPaid month : monthsPaid) {
+                    if (!person.getMonthsPaid().contains(month)) {
+                        return false;
+                    }
+                }
+                return true;
+            });
             return new CommandResult(String.format(MESSAGE_MARKPAID_ALL_SUCCESS, monthsPaid));
         }
 
