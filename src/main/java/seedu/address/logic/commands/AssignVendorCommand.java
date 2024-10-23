@@ -35,6 +35,7 @@ public class AssignVendorCommand extends Command {
      * Creates an AssignVendorCommand to assign the specified {@code Person} as a vendor.
      */
     public AssignVendorCommand(Index targetIndex) {
+        assert targetIndex != null : "Target index must not be null";
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
@@ -50,6 +51,7 @@ public class AssignVendorCommand extends Command {
         }
 
         Person personToAssign = lastShownList.get(targetIndex.getZeroBased());
+        assert personToAssign != null : "Person to assign must not be null";
 
         // need to change to check if model already has vendor
         if (model.hasVendor(personToAssign)) {
@@ -57,6 +59,7 @@ public class AssignVendorCommand extends Command {
         }
 
         model.assignVendor(personToAssign);
+        assert model.hasVendor(personToAssign) : "Vendor was not assigned correctly";
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToAssign.getName()));
     }
 

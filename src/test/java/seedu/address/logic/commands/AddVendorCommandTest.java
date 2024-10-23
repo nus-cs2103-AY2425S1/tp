@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -25,8 +26,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.VendorBuilder;
-
-import javafx.collections.ObservableList;
 
 public class AddVendorCommandTest {
 
@@ -41,7 +40,8 @@ public class AddVendorCommandTest {
         AddVendorCommand addVendorCommand = new AddVendorCommand(validVendor);
         AddVendorCommandTest.ModelStub modelStub = new AddVendorCommandTest.ModelStubWithPerson(validVendor);
 
-        assertThrows(CommandException.class, AddVendorCommand.MESSAGE_DUPLICATE_PERSON, () -> addVendorCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddVendorCommand.MESSAGE_DUPLICATE_PERSON, () -> addVendorCommand.execute(modelStub));
     }
 
     @Test

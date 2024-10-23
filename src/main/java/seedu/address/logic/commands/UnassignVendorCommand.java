@@ -38,6 +38,7 @@ public class UnassignVendorCommand extends Command {
      * Creates an UnassignVendorCommand to assign the specified {@code Person} as a vendor.
      */
     public UnassignVendorCommand(Index targetIndex) {
+        assert targetIndex != null : "Target index must not be null";
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
@@ -52,6 +53,8 @@ public class UnassignVendorCommand extends Command {
         }
 
         Person personToUnassign = lastShownList.get(targetIndex.getZeroBased());
+        assert personToUnassign != null : "Person to assign must not be null";
+
 
         // need to change to check if model has the vendor already existing
         if (!model.hasVendor(personToUnassign)) {
@@ -60,6 +63,8 @@ public class UnassignVendorCommand extends Command {
         }
 
         model.unassignVendor(personToUnassign);
+        assert !model.hasVendor(personToUnassign) : "Vendor was not unassigned correctly";
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToUnassign)));
     }
 
