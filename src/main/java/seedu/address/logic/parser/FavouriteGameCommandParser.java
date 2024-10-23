@@ -7,6 +7,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FavouriteGameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses inputs arguments and creates a new FavouriteGameCommand object
+ */
 public class FavouriteGameCommandParser implements Parser<FavouriteGameCommand> {
 
     @Override

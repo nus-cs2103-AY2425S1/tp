@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.game.Game;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a command to set a game to "favourite" status.
+ */
 public class FavouriteGameCommand extends Command {
     public static final String COMMAND_WORD = "favgame";
 
@@ -29,15 +32,16 @@ public class FavouriteGameCommand extends Command {
     public static final String MESSAGE_GAME_NOT_SPECIFIED = "Please specify a game!";
     public static final String MESSAGE_GAME_NOT_FOUND = "Game not found!";
 
-
-    public Index index;
-    public String gameName;
-
+    private Index index;
+    private String gameName;
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param gameName name of the game to be favourited
+     */
     public FavouriteGameCommand(Index index, String gameName) {
         this.index = index;
         this.gameName = gameName;
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
