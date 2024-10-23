@@ -239,12 +239,12 @@ to `91234567` and `johndoe@example.com` respectively.
 
 Adds medical condition to an existing patient in MediBase3.
 
-Format: `addMedCon i/NRIC c/CONDITION`
+Format: `addMedCon i/NRIC c/CONDITION...`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
-> * Adds medical condition to the patient with the specified `NRIC` in MediBase3.
+> * Adds Medical Condition to the patient with the specified `NRIC` in MediBase3.
 > * You can add a medical condition to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been added.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
@@ -262,7 +262,7 @@ Example:
 
 Deletes Medical Condition from an existing patient in MediBase3.
 
-Format: `delMedCon i/NRIC c/CONDITION`
+Format: `delMedCon i/NRIC c/CONDITION...`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
