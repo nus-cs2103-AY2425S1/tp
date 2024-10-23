@@ -8,7 +8,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.function.Predicate;
@@ -23,6 +22,7 @@ import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
@@ -43,16 +43,17 @@ public class AddGroupCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+        Model model = new ModelManager();
 
         Student validStudent = new PersonBuilder().build();
         Group validGroup = new Group(VALID_GROUPNAME, new HashSet<>(), new HashSet<>());
+        model.addPerson(validStudent);
 
-        CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
+        CommandResult commandResult = new AddGroupCommand(validGroup).execute(model);
 
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, Messages.format(validGroup)),
             commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
+        assertTrue(model.hasGroup(validGroup));
     }
 
     @Test
