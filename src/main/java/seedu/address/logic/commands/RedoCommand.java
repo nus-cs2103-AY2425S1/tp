@@ -14,6 +14,20 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.redoCampusConnect();
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof RedoCommand)) {
+            return false;
+        }
+
+        return true;
     }
 }
