@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rsvp;
+import seedu.address.model.person.Relation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -112,6 +113,17 @@ public class ParserUtil {
             throw new ParseException(Rsvp.MESSAGE_CONSTRAINTS);
         }
         return new Rsvp(trimmedRsvp);
+    }
+
+    public static Relation parseRelation(String relation) throws ParseException {
+        if (relation == null) {
+            return null;
+        }
+        String trimmedRelation = relation.trim();
+        if (!Relation.isValidRelation(trimmedRelation)) {
+            throw new ParseException(Relation.MESSAGE_CONSTRAINTS);
+        }
+        return new Relation(trimmedRelation);
     }
 
     /**

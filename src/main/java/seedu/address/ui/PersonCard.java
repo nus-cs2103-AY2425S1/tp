@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.Vendor;
 
 /**
@@ -60,13 +61,17 @@ public class PersonCard extends UiPart<Region> {
 
         Label extraLabel;
         if (person instanceof Guest g) {
-            extraLabel = new Label("RSVP: " + g.getRsvp().value);
+            Label rsvpLabel = new Label("RSVP: " + g.getRsvp());
+            Label relationLabel = new Label("Relation: " + g.getRelation());
+            relationLabel.getStyleClass().add("cell_small_label");
+            rsvpLabel.getStyleClass().add("cell_small_label");
+            cardPaneContents.getChildren().add(rsvpLabel);
+            cardPaneContents.getChildren().add(relationLabel);
         } else {
             Vendor v = (Vendor) person;
             extraLabel = new Label("Company: " + v.getCompany().value);
+            cardPaneContents.getChildren().add(extraLabel);
         }
-        extraLabel.getStyleClass().add("cell_small_label");
-        cardPaneContents.getChildren().add(extraLabel);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
