@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
@@ -26,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,6 +40,8 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final String UP_COMMAND = "upCommand";
+    private static final String DOWN_COMMAND = "downCommand";
 
     private static final ObservableList<String> COMMANDS = FXCollections.observableArrayList(
             "cadd", "cedit", "clear", "exit", "find", "radd", "redit", "rview"
@@ -66,7 +71,6 @@ public class CommandBox extends UiPart<Region> {
     );
 
     private final CommandExecutor commandExecutor;
-
     @FXML
     private TextField commandTextField;
 
@@ -84,6 +88,7 @@ public class CommandBox extends UiPart<Region> {
 
         addKeyPressedEventForCommandTextField();
         addKeyReleasedEventForCommandTextField();
+        commandTextField.setOnKeyPressed(event -> handleKeyPressed(event.getCode()));
     }
 
     /**
@@ -315,6 +320,29 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    private void handleKeyPressed(KeyCode keyCode) {
+        String commandText;
+        if (keyCode.isArrowKey() && keyCode == KeyCode.UP) {
+            commandText = UP_COMMAND;
+        } else if (keyCode.isArrowKey() && keyCode == KeyCode.DOWN) {
+            commandText = DOWN_COMMAND;
+        } else {
+            //Do nothing
+            return;
+        }
+
+        try {
+            commandExecutor.execute(commandText);
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
+    public void setFeedbackToUser(String feedbackToUser) {
+        requireNonNull(feedbackToUser);
+        commandTextField.setText(feedbackToUser);
+    }
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -332,6 +360,8 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
         }
     }
+
+    //TODO: Clear txt file after exit app
 
     /**
      * Sets the command box style to use the default style.

@@ -6,7 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_WITH_RENTAL;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
+import static seedu.address.testutil.TypicalRentalInformation.RENTAL_ONE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,12 +19,17 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.rentalinformation.RentalInformation;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.RentalInformationBuilder;
 
 public class ModelManagerTest {
-
     private ModelManager modelManager = new ModelManager();
 
     @Test
@@ -94,8 +104,94 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasRentalInformation_nullClientAndRentalInformation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasRentalInformation(null, null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasRentalInformation(ALICE_WITH_RENTAL, null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasRentalInformation(null, RENTAL_ONE));
+    }
+
+    @Test
+    public void hasRentalInformation_clientNotExist_returnsFalse() {
+        assertFalse(modelManager.hasRentalInformation(CARL, RENTAL_ONE));
+    }
+
+    @Test
+    public void hasRentalInformation_rentalInformationNotInClientInAddressBook_returnsFalse() {
+        modelManager.addPerson(ALICE_WITH_RENTAL);
+        assertFalse(modelManager.hasRentalInformation(ALICE_WITH_RENTAL, RENTAL_ONE));
+
+        modelManager.deletePerson(ALICE_WITH_RENTAL);
+        assertFalse(modelManager.hasPerson(ALICE_WITH_RENTAL));
+    }
+
+    @Test
+    public void hasRentalInformation_rentalInformationInClientInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE_WITH_RENTAL);
+        RentalInformation rentalInformation = new RentalInformationBuilder().withAddress("BLK 10 Ang Mo Kio")
+                .withRentalStartDate("01/01/2024").withRentalEndDate("31/12/2024").withRentDueDate("10")
+                .withMonthlyRent("3000").withDeposit("9000").withCustomerList("David").build();
+        assertTrue(modelManager.hasRentalInformation(ALICE_WITH_RENTAL, rentalInformation));
+
+        modelManager.deletePerson(ALICE_WITH_RENTAL);
+        assertFalse(modelManager.hasPerson(ALICE_WITH_RENTAL));
+    }
+
+    @Test
+    public void getLastViewClientAsObjectProperty_nil_lastViewedClientAsObjectProperty() {
+        modelManager.setLastViewedClient(null);
+        ObjectProperty<Client> lastViewedClient = modelManager.getLastViewedClientAsObjectProperty();
+        ObjectProperty<Client> expectedClient = new SimpleObjectProperty<>();
+
+        expectedClient.set(null);
+        assertEquals(expectedClient.get(), lastViewedClient.get());
+
+        expectedClient.set(ALICE_WITH_RENTAL);
+        modelManager.setLastViewedClient(ALICE_WITH_RENTAL);
+        lastViewedClient = modelManager.getLastViewedClientAsObjectProperty();
+        assertEquals(expectedClient.get(), lastViewedClient.get());
+    }
+
+    @Test
+    public void setPerson_updatedPerson_success() {
+        Client updatedClient = new PersonBuilder(FIONA).withPhone("88888888").build();
+        modelManager.addPerson(FIONA);
+        assertTrue(modelManager.hasPerson(FIONA));
+        modelManager.setPerson(FIONA, updatedClient);
+        assertTrue(modelManager.hasPerson(updatedClient));
+        assertFalse(modelManager.hasPerson(FIONA));
+    }
+
+    @Test
+    public void setAddressBook_addressBookTobeSet_success() {
+        AddressBook newAddressBook = getTypicalAddressBookWithRental();
+        modelManager.setAddressBook(newAddressBook);
+        assertEquals(newAddressBook, modelManager.getAddressBook());
+    }
+
+    @Test
+    public void getLastViewClient_nil_lastViewedClient() {
+        modelManager.setLastViewedClient(null);
+        Client lastViewedClient = modelManager.getLastViewedClient();
+        assertEquals(null, lastViewedClient);
+
+        modelManager.setLastViewedClient(ALICE_WITH_RENTAL);
+        lastViewedClient = modelManager.getLastViewedClient();
+        assertEquals(ALICE_WITH_RENTAL, lastViewedClient);
+    }
+
+    @Test
     public void getVisibleRentalInformationList_initialContents_empty() {
         assertEquals(0, modelManager.getVisibleRentalInformationList().size());
+    }
+
+    @Test
+    public void getPreviousCommand_initial_empty() {
+        assertEquals("", modelManager.getPreviousCommand());
+    }
+
+    @Test
+    public void getNextCommand_initial_empty() {
+        assertEquals("", modelManager.getPreviousCommand());
     }
 
     @Test

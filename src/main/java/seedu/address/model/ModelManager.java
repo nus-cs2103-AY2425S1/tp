@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.rentalinformation.RentalInformation;
+import seedu.address.storage.CommandHistoryStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Client> filteredClients;
     private final ObservableList<RentalInformation> visibleRentalInformationList;
     private final ObjectProperty<Client> lastViewedClient = new SimpleObjectProperty<>();
+    private final CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -115,7 +117,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
-
         addressBook.setPerson(target, editedClient);
     }
 
@@ -176,6 +177,15 @@ public class ModelManager implements Model {
         this.lastViewedClient.set(client);
     }
 
+    //=========== Command History =================================================================
+    @Override
+    public String getPreviousCommand() {
+        return commandHistoryStorage.getPreviousCommand();
+    }
+    @Override
+    public String getNextCommand() {
+        return commandHistoryStorage.getNextCommand();
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

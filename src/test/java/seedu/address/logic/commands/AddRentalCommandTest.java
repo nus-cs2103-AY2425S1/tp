@@ -204,6 +204,15 @@ public class AddRentalCommandTest {
         public void setLastViewedClient(Client client) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public String getPreviousCommand() {
+            return null;
+        }
+
+        @Override
+        public String getNextCommand() {
+            return null;
+        }
     }
 
     /**
