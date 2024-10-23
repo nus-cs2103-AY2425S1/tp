@@ -22,4 +22,5 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 
+password.txt
 key.txt
