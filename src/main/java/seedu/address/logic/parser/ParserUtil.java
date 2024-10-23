@@ -85,6 +85,9 @@ public class ParserUtil {
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        if (!Address.isWithinCharLimit(trimmedAddress)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
         return new Address(trimmedAddress);
     }
 
@@ -117,6 +120,9 @@ public class ParserUtil {
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (!Tag.isWithinCharLimit(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CHAR_LIMIT);
         }
         return new Tag(trimmedTag);
     }

@@ -39,6 +39,10 @@ public class Address {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public static boolean isWithinCharLimit(String test) {
+        return test.length() <= ADDRESS_MAX_LEN;
+    }
+
     @Override
     public String toString() {
         return value;
