@@ -132,82 +132,60 @@ public class HelpWindow extends UiPart<Stage> {
         ));
 
         contentMap.put("Introduction", """
-                Introduction
-                
+                Introduction\n
                 Financial Assurance Revolutionary Telemarketer (FART) is a desktop app for managing contacts just for you.
-                Financial Advisors, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FART can get your contact management tasks done faster than traditional GUI apps.
-                
+                Financial Advisors, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FART can get your contact management tasks done faster than traditional GUI apps.\n
                 Navigate to the appropriate issue via the panel on the left.
                 """);
 
         contentMap.put("Quick Start", """
-            Quick start
-    
+            Quick start\n
             1. Ensure you have Java `17` or above installed in your Computer.
-            (Visit the Oracle website for Java 17 installation.)
-    
-            2. Download the latest `.jar` file from the GitHub releases page.
-    
-            3. Copy the `.jar` file to your desired folder and open a terminal.
-    
-            4. Run the application using `java -jar fart_in_a.jar`.
-    
+            (Visit the Oracle website for Java 17 installation.)\n
+            2. Download the latest `.jar` file from the GitHub releases page.\n
+            3. Copy the `.jar` file to your desired folder and open a terminal.\n
+            4. Run the application using `java -jar fart_in_a.jar`.\n
             5. Type commands in the command box and press Enter.
             """);
 
         contentMap.put("Command Format Guidelines", """
-                Command Format Guidelines
-                        
+                Command Format Guidelines\n
                 1. Words in UPPER_CASE are parameters to be supplied by the user.
-                 For example, in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-                        
+                 For example, in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.\n
                 2. Items in square brackets are optional.
-                For example, `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-                        
+                For example, `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.\n
                 3. Items with …​ after them can be used multiple times, including zero times.
-                For example, `[t/TAG]…​` can be used zero times (i.e. `add n/John Doe`), or multiple times, such as `t/friend`, `t/friend t/family`, etc.
-                        
+                For example, `[t/TAG]…​` can be used zero times (i.e. `add n/John Doe`), or multiple times, such as `t/friend`, `t/friend t/family`, etc.\n
                 4. Parameters can be in any order.
-                For example, if the command specifies `n/NAME p/PHONE_NUMBER`, it can also be written as `p/PHONE_NUMBER n/NAME`.
-                        
+                For example, if the command specifies `n/NAME p/PHONE_NUMBER`, it can also be written as `p/PHONE_NUMBER n/NAME`.\n
                 5. Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.
-                For example, if the command specifies `help 123`, it will be interpreted as `help`.
-                        
+                For example, if the command specifies `help 123`, it will be interpreted as `help`.     
                 """);
 
         contentMap.put("Adding a Contact", """
-                Adding a Contact
-                        
-                Adds a person to the FART book.
-                        
-                Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​`
-                        
-                Tip: A person can have any number of tags, including 0.
-                        
+                Adding a Contact\n
+                Adds a person to the FART book.\n
+                Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​`\n
+                Tip: A person can have any number of tags, including 0.\n
                 Examples:
                 `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001`
                 `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/11 09 2001 t/criminal`
                 """);
 
         contentMap.put("Listing All Contacts", """
-                Listing All Contacts
-
+                Listing All Contacts\n
                 Use the `list` command to display all contacts.
                 """);
 
         contentMap.put("Editing a Contact", """
-                Editing a Contact
-                        
-                Edits an existing person in the FART book.
-                        
-                Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`
-                        
+                Editing a Contact\n
+                Edits an existing person in the FART book.\n
+                Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`\n
                 INDEX refers to the index number shown in the displayed person list. The index must be a positive integer (1, 2, 3, …​).
                 At least one of the optional fields must be provided.
                 Existing values will be updated to the new input values.
                 When editing tags, the existing tags of the person will be removed (i.e., adding tags is not cumulative).
-                You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-                        
+                You can remove all the person’s tags by typing `t/` without specifying any tags after it.\n
                 Examples:
                 `edit 1 p/91234567 e/johndoe@example.com`: Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com`, respectively.
                 `edit 2 n/Betsy Crower t/`: Edits the name of the 2nd person to `Betsy Crower` and clears all existing tags.
@@ -215,18 +193,14 @@ public class HelpWindow extends UiPart<Stage> {
 
 
         contentMap.put("Finding Contacts", """
-                Finding Contacts
-                        
-                Finds persons whose attributes contain any of the given keywords.
-                        
-                Format: `find KEYWORD [MORE_KEYWORDS]`
-                        
+                Finding Contacts\n
+                Finds persons whose attributes contain any of the given keywords.\n
+                Format: `find KEYWORD [MORE_KEYWORDS]`\n
                 The search is case-insensitive. For example, `hans` will match `Hans`.
                 Keywords are matched against Name, Phone, Address, Email, Birthday, and Tag.
                 The order of the keywords does not matter. For example, `Hans Bo` will match `Bo Hans`.
                 Persons matching at least one keyword will be returned (i.e., OR search). For example, `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-                Partial matches of a keyword will also be returned. For example, `9123` will return the person with the phone number `91234567`.
-                        
+                Partial matches of a keyword will also be returned. For example, `9123` will return the person with the phone number `91234567`.\n
                 Examples:
                 `find John` returns `john` and `John Doe`.
                 `find alex david` returns `Alex Yeoh`, `David Li`.
@@ -234,45 +208,32 @@ public class HelpWindow extends UiPart<Stage> {
 
 
         contentMap.put("Deleting a Contact", """
-                Deleting a Contact
-                        
-                Deletes the specified person from the FART book.
-                        
-                Format: `delete INDEX`
-                        
+                Deleting a Contact\n
+                Deletes the specified person from the FART book.\n
+                Format: `delete INDEX`\n
                 Deletes the person at the specified INDEX.
                 The **INDEX** refers to the index number shown in the displayed person list.
-                The index must be a positive integer (1, 2, 3, …​).
-                        
+                The index must be a positive integer (1, 2, 3, …​).\n
                 Examples:
                 `list` followed by `delete 2` deletes the 2nd person in the FART book.
-                `find Betsy` followed by `delete 1` deletes the 1st person in the results of the find command.
-                        
+                `find Betsy` followed by `delete 1` deletes the 1st person in the results of the find command.\n
                 Note: As the delete command cannot be undone, the FART Book will first prompt you to confirm that the contact you want to delete is correct. If you select Cancel, the deletion will be aborted.
                 """);
 
         contentMap.put("Clearing All Entries", """
-                Clearing All Entries
-                        
-                Clears all entries from the FART book.
-                        
-                Format: `clear`
-                        
+                Clearing All Entries\n
+                Clears all entries from the FART book.\n
+                Format: `clear`\n
                 This command will remove all contacts from the FART book.
-                        
                 """);
 
         contentMap.put("Marking a Person as Paid/Unpaid", """
-                Marking a Person as Paid/Unpaid
-                        
-                Marks the specified person from the FART book as paid/unpaid.
-                        
-                Format: `paid INDEX` / `unpaid INDEX`
-                        
+                Marking a Person as Paid/Unpaid\n
+                Marks the specified person from the FART book as paid/unpaid.\n
+                Format: `paid INDEX` / `unpaid INDEX`\n
                 Marks the person at the specified INDEX as paid/unpaid.
                 The INDEX refers to the index number shown in the displayed person list.
-                The index must be a positive integer (1, 2, 3, …​).
-                        
+                The index must be a positive integer (1, 2, 3, …​).\n
                 Examples:
                 `list` followed by `paid 2` marks the 2nd person in the FART book as paid.
                 `find Betsy` followed by `paid 1` marks the 1st person in the results of the find command as paid.
@@ -282,21 +243,18 @@ public class HelpWindow extends UiPart<Stage> {
 
 
         contentMap.put("Saving and Editing Data", """
-                Saving and Editing Data
-
+                Saving and Editing Data\n
                 FART data is automatically saved after any command.
                 Data is stored in a JSON file at `[JAR file location]/data/addressbook.json`.
                 """);
 
         contentMap.put("Exiting the Program", """
-                Exiting the Program
-
+                Exiting the Program\n
                 Use the `exit` command to quit the application.
                 """);
 
         contentMap.put("Command Summary", """
-                Command Summary
-                        
+                Command Summary\n
                 | Action | Format | Examples |
                 |--------|--------|----------|
                 | Add    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]…​` | `add n/James Ho 
