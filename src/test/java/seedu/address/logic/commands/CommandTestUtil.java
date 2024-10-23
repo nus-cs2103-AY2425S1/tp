@@ -42,8 +42,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_PROJECT_STATUS_IN_PROGRESS = "in progress";
     public static final String VALID_PROJECT_STATUS_COMPLETE = "completed";
-    public static final String VALID_PAYMENT_STATUS_UNPAID = "unpaid";
+    public static final String VALID_PAYMENT_STATUS_LATE = "late";
     public static final String VALID_PAYMENT_STATUS_PAID = "paid";
+    public static final String VALID_PAYMENT_STATUS_PARTIAL = "partial";
+    public static final String VALID_PAYMENT_STATUS_PENDING = "pending";
     public static final String VALID_CLIENT_STATUS_ACTIVE = "active";
     public static final String VALID_CLIENT_STATUS_UNRESPONSIVE = "unresponsive";
     public static final String VALID_CLIENT_STATUS_POTENTIAL = "potential";
@@ -67,10 +69,14 @@ public class CommandTestUtil {
             + PREFIX_PROJECT_STATUS + VALID_PROJECT_STATUS_IN_PROGRESS;
     public static final String PROJECT_STATUS_DESC_COMPLETE = " "
             + PREFIX_PROJECT_STATUS + VALID_PROJECT_STATUS_COMPLETE;
-    public static final String PAYMENT_STATUS_DESC_UNPAID = " "
-            + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_UNPAID;
+    public static final String PAYMENT_STATUS_DESC_PENDING = " "
+            + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_PENDING;
     public static final String PAYMENT_STATUS_DESC_PAID = " "
             + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_PAID;
+    public static final String PAYMENT_STATUS_DESC_PARTIAL = " "
+            + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_PARTIAL;
+    public static final String PAYMENT_STATUS_DESC_LATE = " "
+            + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS_LATE;
     public static final String CLIENT_STATUS_ACTIVE = " "
             + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_ACTIVE;
     public static final String CLIENT_STATUS_UNRESPONSIVE = " "
@@ -104,14 +110,14 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
-                .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID)
+                .withPaymentStatus(VALID_PAYMENT_STATUS_PENDING)
                 .withClientStatus(VALID_CLIENT_STATUS_ACTIVE)
                 .withDeadline(VALID_DEADLINE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
-                .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID)
+                .withPaymentStatus(VALID_PAYMENT_STATUS_PENDING)
                 .withClientStatus(VALID_CLIENT_STATUS_ACTIVE)
                 .withDeadline(VALID_DEADLINE_BOB).build();
     }

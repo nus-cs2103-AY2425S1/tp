@@ -43,7 +43,7 @@ public class Person {
         this.projectStatus = (projectStatus != null)
                 ? projectStatus : new ProjectStatus("in progress"); // Default value
         this.paymentStatus = (paymentStatus != null)
-                ? paymentStatus : new PaymentStatus("unpaid");
+                ? paymentStatus : new PaymentStatus("pending");
         this.clientStatus = (clientStatus != null)
                 ? clientStatus : new ClientStatus("active"); //default
         this.deadline = deadline;
@@ -87,6 +87,19 @@ public class Person {
 
     public Deadline getDeadline() {
         return deadline;
+    }
+
+    /**
+     * Returns a string representation of the project deadline.
+     * If the deadline has passed and the project is not completed,
+     * then the [OVERDUE] flag is added
+     */
+    public String checkAndGetDeadline() {
+        if (deadline.isOverdue() && !projectStatus.isComplete) {
+            return deadline.toString() + " [OVERDUE]";
+        } else {
+            return deadline.toString();
+        }
     }
 
 
