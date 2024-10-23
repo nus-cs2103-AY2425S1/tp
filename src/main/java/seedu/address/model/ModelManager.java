@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.profile.Profile;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -73,6 +75,16 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public HashSet<Profile> getProfiles() {
+        return userPrefs.getProfiles();
+    }
+
+    @Override
+    public void addToProfiles(Profile profileName) {
+        userPrefs.addToProfiles(profileName);
     }
 
     //=========== AddressBook ================================================================================

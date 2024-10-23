@@ -2,13 +2,16 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.role.Role;
 
 /**
  * Represents a Person in the address book.
@@ -20,21 +23,24 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Telegram telegram;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
+    private final Set<Attendance> attendance = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Telegram telegram,
+                  Set<Role> roles, Set<Attendance> attendance) {
+        requireAllNonNull(name, phone, email, telegram, roles);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.telegram = telegram;
+        this.roles.addAll(roles);
+        this.attendance.addAll(attendance);
     }
 
     public Name getName() {
@@ -49,16 +55,74 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    /**
+     * Returns an immutable attendance set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted
+     * @return the attendance set encapsulated by Person
+     */
+    public Set<Attendance> getAttendance() {
+        return Collections.unmodifiableSet(attendance);
+    }
+
+    /**
+     * Generates the string representation of the instance's specified field of type 'c'
+     * @param c class that corresponds with a field of the instance
+     * @return string representation of that field
+     */
+    public String getString(Class c) {
+        if (c.equals(Name.class)) {
+            return this.getName().toString();
+        } else if (c.equals(Phone.class)) {
+            return this.getPhone().toString();
+        } else if (c.equals(Email.class)) {
+            return this.getEmail().toString();
+        } else if (c.equals(Telegram.class)) {
+            return this.getTelegram().toString();
+        } else if (c.equals(Role.class)) {
+            StringBuilder r = new StringBuilder("| ");
+            Set<Role> roles = this.getRoles();
+            for (Role role : roles) {
+                r.append(" " + role + " |");
+            }
+            return r.toString();
+            // code for this method is currently not very elegant...
+        } else if (c.equals(Attendance.class)) {
+            StringBuilder a = new StringBuilder("| ");
+            Set<Attendance> sessions = this.getAttendance();
+            for (Attendance sesh : sessions) {
+                a.append(" " + sesh + " |");
+            }
+            return a.toString();
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * Formulates a message that displays all information of the specified contact
+     * @return String message which contains all the information of the specified contact
+     */
+    public String generateContactInformation() {
+        Field[] fields = Person.class.getDeclaredFields();
+        StringBuilder contactInfo = new StringBuilder("");
+        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES")
+                ? field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n"
+                : field.getName().toUpperCase().equals("ATTENDANCE")
+                        ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
+                        : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
+        return contactInfo.toString();
     }
 
     /**
@@ -71,7 +135,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getTelegram().equals(getTelegram());
     }
 
     /**
@@ -93,14 +157,14 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && telegram.equals(otherPerson.telegram)
+                && roles.equals(otherPerson.roles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, telegram, roles);
     }
 
     @Override
@@ -109,8 +173,8 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("telegram", telegram)
+                .add("roles", roles)
                 .toString();
     }
 

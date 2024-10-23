@@ -1,0 +1,11 @@
+#personInfo {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+#personTitle {
+    -fx-underline: true;
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: bolder;
+}

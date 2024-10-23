@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -18,6 +19,26 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+
+    private boolean isView = false;
+
+    private Person person = null;
+
+    private boolean profileSwitched = false;
+
+    /**
+     * Constructs a {@code CommandResult} that's specifically a 'view' command
+     * @param feedbackToUser
+     * @param isView boolean value that's always initialised to 'true'
+     * @param person Person object initialised to 'person' field
+     */
+    public CommandResult(String feedbackToUser, boolean isView, Person person) {
+        this.feedbackToUser = feedbackToUser;
+        this.isView = isView;
+        this.showHelp = false;
+        this.exit = false;
+        this.person = person;
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -46,6 +67,28 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isView() {
+        return this.isView;
+    }
+
+    public Person getViewPerson() {
+        return this.person;
+    }
+
+    public boolean isProfileSwitched() {
+        return this.profileSwitched;
+    }
+
+    /**
+     * Marks that a profile switch has occurred and returns the updated {@code CommandResult}.
+     *
+     * @return The updated {@code CommandResult} with the profile switch marked.
+     */
+    public CommandResult markProfileSwitched() {
+        this.profileSwitched = true;
+        return this;
     }
 
     @Override

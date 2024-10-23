@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `cs2103t_f11_2[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Caleb Ang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/superb-sushi.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/superb-sushi)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Shi Ziyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shizy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/shizy)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Wei Lian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weiliann.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/weiliann)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Cai Runxin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rachelcoll.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Rachelcoll)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Yi Hao
 
-[[github](http://github.com/johndoe)]
+<img src="images/yyihaoc.png" width="200px">
+
+[[github](http://github.com/yyihaoc)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality, Integration

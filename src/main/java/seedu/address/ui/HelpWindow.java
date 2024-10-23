@@ -11,12 +11,43 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a help page
+ * Controller for a help page.
  */
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Copy the link for the complete user guide  ---> ";
+
+    public static final String HELP_USAGE = "===============================\n"
+            + "         Quick Command Summary\n"
+            + "===============================\n"
+            + "1. Help\n"
+            + "   Displays help information.\n"
+            + "   Format: help\n\n"
+            + "2. Add a Person\n"
+            + "   Adds a new contact to the record.\n"
+            + "   Format: add n/NAME p/PHONE e/EMAIL t/TELEGRAM r/ROLEn\n\n"
+            + "3. List All Persons\n"
+            + "   Displays all contacts.\n"
+            + "   Format: list\n\n"
+            + "4. Edit a Person\n"
+            + "   Edits an existing contact by index.\n"
+            + "   Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TELEGRAM] [r/ROLE]\n\n"
+            + "5. Find by Name or Role\n"
+            + "   Finds contacts whose names or roles contain the specified keywords.\n"
+            + "   Format: find [n/NAME] [r/ROLE]\n\n"
+            + "6. View contact by telegram handle\n"
+            + "   View detailed information of a contact with the specified telegram handle\n"
+            + "   Format: view t/TELEGRAM\n\n"
+            + "7. Delete a Person\n"
+            + "   Deletes a contact by index.\n"
+            + "   Format: delete INDEX\n\n"
+            + "8. Clear All Entries\n"
+            + "   Clears all contacts from the address book.\n"
+            + "   Format: clear\n\n"
+            + "9. Exit\n"
+            + "   Exits the application.\n"
+            + "   Format: exit";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -27,6 +58,9 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private Label helpUsage;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -35,6 +69,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        helpUsage.setText(HELP_USAGE);
     }
 
     /**
