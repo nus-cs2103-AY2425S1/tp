@@ -25,7 +25,7 @@ class JsonAdaptedMonthPaid {
      * Converts a given {@code MonthPaid} into this class for Jackson use.
      */
     public JsonAdaptedMonthPaid(MonthPaid source) {
-        monthPaidValue = source.value;
+        monthPaidValue = source.monthPaidValue;
     }
 
     @JsonValue

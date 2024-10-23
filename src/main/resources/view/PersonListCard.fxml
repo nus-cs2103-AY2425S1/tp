@@ -27,13 +27,31 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="fees" styleClass="cell_small_label" text="\$fees" />
-      <Label fx:id="classId" styleClass="cell_small_label" text="\$classId" />
-      <Label fx:id="monthsPaid" styleClass="cell_small_label" text="\$monthsPaid" />
+      <HBox spacing = "3" GridPane.columnIndex="0">
+        <Label text="Phone:" styleClass="cell_small_label" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="$phone" />
+      </HBox>
+      <HBox spacing="3" GridPane.columnIndex="0">
+        <Label text="Address:" styleClass="cell_small_label" />
+        <Label fx:id="address" styleClass="cell_small_label" text="$address" />
+      </HBox>
+      <HBox spacing="3" GridPane.columnIndex="0">
+        <Label text="Email:" styleClass="cell_small_label" />
+        <Label fx:id="email" styleClass="cell_small_label" text="$email" />
+      </HBox>
+      <HBox spacing="3" GridPane.columnIndex="0">
+        <Label text="Fees:" styleClass="cell_small_label" />
+        <Label fx:id="fees" styleClass="cell_small_label" text="$fees" />
+      </HBox>
+      <HBox spacing="3" GridPane.columnIndex="0">
+        <Label text="Class ID:" styleClass="cell_small_label" />
+        <Label fx:id="classId" styleClass="cell_small_label" text="$classId" />
+      </HBox>
+    <HBox spacing="3" GridPane.columnIndex="0">
+      <Label text="Months Paid:" styleClass="cell_small_label" />
+      <Label fx:id="monthsPaid" styleClass="cell_small_label" text="$monthsPaid" />
+    </HBox>
     </VBox>
+    <FlowPane fx:id="tags" alignment="CENTER_RIGHT" GridPane.columnIndex="1" />
   </GridPane>
 </HBox>
