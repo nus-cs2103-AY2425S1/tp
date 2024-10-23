@@ -12,7 +12,8 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
@@ -23,17 +24,22 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final EmergencyContact emergencyContact;
+    private final Doctor doctor;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+            EmergencyContact emergencyContact, Doctor doctor, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, emergencyContact, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.emergencyContact = emergencyContact;
+        this.doctor = doctor;
         this.tags.addAll(tags);
     }
 
@@ -53,8 +59,17 @@ public class Person {
         return address;
     }
 
+    public EmergencyContact getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
@@ -94,13 +109,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && emergencyContact.equals(otherPerson.emergencyContact)
+                && doctor.equals(otherPerson.doctor)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, emergencyContact, doctor, tags);
     }
 
     @Override
@@ -110,6 +127,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("emergency contact", emergencyContact)
+                .add("doctor", doctor)
                 .add("tags", tags)
                 .toString();
     }

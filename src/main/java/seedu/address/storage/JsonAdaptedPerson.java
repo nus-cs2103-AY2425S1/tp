@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,6 +30,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final JsonAdaptedEmergencyContact emergencyContact;
+    private final JsonAdaptedDoctor doctor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,11 +40,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("emergency contact") JsonAdaptedEmergencyContact emergencyContact,
+            @JsonProperty("doctor") JsonAdaptedDoctor doctor,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.emergencyContact = emergencyContact;
+        this.doctor = doctor;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +62,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        emergencyContact = new JsonAdaptedEmergencyContact(source.getEmergencyContact());
+        doctor = new JsonAdaptedDoctor(source.getDoctor());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +112,19 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (emergencyContact == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "EmergencyContact"));
+        }
+        final EmergencyContact modelEmergencyContact = emergencyContact.toModelType();
+
+        if (doctor == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Doctor"));
+        }
+        final Doctor modelDoctor = doctor.toModelType();
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEmergencyContact, modelDoctor,
+                            modelTags);
     }
 
 }
