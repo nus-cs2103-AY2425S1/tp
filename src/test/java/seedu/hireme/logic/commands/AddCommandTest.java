@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_APPLE;
-import static seedu.hireme.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
 import static seedu.hireme.logic.commands.CommandTestUtil.VALID_ROLE_APPLE;
 import static seedu.hireme.testutil.Assert.assertThrows;
-import static seedu.hireme.testutil.TypicalInternshipApplications.APPLE;
 import static seedu.hireme.testutil.TypicalInternshipApplications.GOOGLE;
 
 import java.nio.file.Path;

@@ -36,7 +36,8 @@ public class AppUtilTest {
     }
 
     /**
-     * Tests that {@code AppUtil.checkArgument} throws an {@code IllegalArgumentException} when the condition is false, without a custom error message.
+     * Tests that {@code AppUtil.checkArgument} throws an {@code IllegalArgumentException}
+     * when the condition is false, without a custom error message.
      */
     @Test
     public void checkArgument_falseWithoutErrorMessage_throwsIllegalArgumentException() {
@@ -44,12 +45,13 @@ public class AppUtilTest {
     }
 
     /**
-     * Tests that {@code AppUtil.checkArgument} throws an {@code IllegalArgumentException} with the provided custom error message when the condition is false.
+     * Tests that {@code AppUtil.checkArgument} throws an {@code IllegalArgumentException}
+     * with the provided custom error message when the condition is false.
      */
     @Test
     public void checkArgument_falseWithErrorMessage_throwsIllegalArgumentException() {
         String errorMessage = "error message";
-        assertThrows(IllegalArgumentException.class, errorMessage,
-                () -> AppUtil.checkArgument(false, errorMessage));
+        assertThrows(IllegalArgumentException.class,
+                     errorMessage, () -> AppUtil.checkArgument(false, errorMessage));
     }
 }

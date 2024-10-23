@@ -123,7 +123,8 @@ public class CollectionUtilTest {
     }
 
     /**
-     * Asserts that {@code CollectionUtil.requireAllNonNull(Collection<?>)} does not throw a {@code NullPointerException}
+     * Asserts that {@code CollectionUtil.requireAllNonNull(Collection<?>)}
+     * does not throw a {@code NullPointerException}
      * if {@code collection} or any element of {@code collection} is non-null.
      */
     private void assertNullPointerExceptionNotThrown(Collection<?> collection) {

@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 public class CommandResultTest {
     @Test
     public void nullFeedbackToUser_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                     () -> new CommandResult(null, false, false));
+        assertThrows(NullPointerException.class, () -> new CommandResult(null, false, false));
     }
 
     @Test

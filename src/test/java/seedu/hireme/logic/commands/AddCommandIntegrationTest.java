@@ -8,7 +8,6 @@ import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddr
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.hireme.commons.exceptions.IllegalValueException;
 import seedu.hireme.logic.Messages;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.ModelManager;
