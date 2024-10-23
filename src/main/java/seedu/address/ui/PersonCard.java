@@ -50,9 +50,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane roles;
 
-    private final Image studentIcon = new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
-    private final Image tutorIcon = new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
-    private final Image professorIcon = new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
+    private final Image studentIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
+    private final Image tutorIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
+    private final Image professorIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
 
 
     /**
@@ -94,9 +97,9 @@ public class PersonCard extends UiPart<Region> {
 
                     if (roleType != null) {
                         Image image =
-                            roleType == RoleType.STUDENT ? studentIcon :
-                            roleType == RoleType.TUTOR ? tutorIcon :
-                            professorIcon;
+                            roleType == RoleType.STUDENT ? studentIcon
+                            : roleType == RoleType.TUTOR ? tutorIcon
+                            : professorIcon;
 
                         // Scale height but preserve aspect ratio
                         ImageView imageView = new ImageView(image);
