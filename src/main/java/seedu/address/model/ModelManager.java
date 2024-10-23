@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> filteredArchivedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredArchivedPersons = new FilteredList<>(this.addressBook.getArchivedPersonList());
     }
 
     public ModelManager() {
@@ -125,6 +127,37 @@ public class ModelManager implements Model {
     public void sortByPin() {
         addressBook.sortByPin();
     }
+
+    //=========== Archive Feature ================================================================================
+
+    @Override
+    public void archivePerson(Person person) {
+        requireNonNull(person);
+        addressBook.archivePerson(person); // Move person to the archived list in the AddressBook
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Update filtered list of active persons
+    }
+
+    // Add method to unarchive a person
+    @Override
+    public void unarchivePerson(Person person) {
+        requireNonNull(person);
+        addressBook.unarchivePerson(person); // Move person back to the active list in the AddressBook
+        updateFilteredArchivedPersonList(PREDICATE_SHOW_ALL_PERSONS); // Update filtered list of archived persons
+    }
+
+    // Return the filtered list of archived persons
+    @Override
+    public ObservableList<Person> getFilteredArchivedPersonList() {
+        return filteredArchivedPersons;
+    }
+
+    // Update the filtered list of archived persons
+    @Override
+    public void updateFilteredArchivedPersonList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredArchivedPersons.setPredicate(predicate);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

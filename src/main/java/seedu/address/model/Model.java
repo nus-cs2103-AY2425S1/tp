@@ -99,4 +99,28 @@ public interface Model {
      * Sorts the person list to put all pinned persons at the top of the list.
      */
     void sortByPin();
+
+    // Archive-related Methods
+
+    /** Returns an unmodifiable view of the archived person list */
+    ObservableList<Person> getFilteredArchivedPersonList();
+
+    /**
+     * Updates the filter of the filtered archived person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredArchivedPersonList(Predicate<Person> predicate);
+
+    /**
+     * Archives the given person by moving them to the archived person list.
+     * The person must exist in the active address book person list.
+     */
+    void archivePerson(Person person);
+
+    /**
+     * Unarchives the given person by moving them back to the active person list.
+     * The person must exist in the archived person list.
+     */
+    void unarchivePerson(Person person);
+
 }
