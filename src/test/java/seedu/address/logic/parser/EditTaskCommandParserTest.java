@@ -48,7 +48,7 @@ public class EditTaskCommandParserTest {
         assertParseFailure(parser, userInputMissingIndex, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             EditTaskCommand.MESSAGE_USAGE));
 
-        String userInputMissingGroupName = " " + PREFIX_INDEX + "1";
+        String userInputMissingGroupName = " " + PREFIX_INDEX + "2";
         assertParseFailure(parser, userInputMissingGroupName,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE));
     }
