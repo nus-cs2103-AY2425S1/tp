@@ -29,7 +29,7 @@ public class AddTuteeCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_HOURS + "HOURS "
-            + PREFIX_SUBJECT + "SUBJECT"
+            + PREFIX_SUBJECT + "SUBJECT \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
