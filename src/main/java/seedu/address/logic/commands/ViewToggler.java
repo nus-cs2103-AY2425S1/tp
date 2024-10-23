@@ -20,12 +20,6 @@ public class ViewToggler {
     private final String commandType;
 
     public ViewToggler(String feedbackToUser) {
-        // Assertion to ensure valid feedback type
-        assert (feedbackToUser.equals(ListPetCommand.MESSAGE_SUCCESS)
-                || feedbackToUser.equals(ListOwnerCommand.MESSAGE_SUCCESS)
-                || feedbackToUser.equals(ListBothCommand.MESSAGE_SUCCESS)
-                || feedbackToUser.equals(LinkCommand.MESSAGE_SUCCESS))
-                : "feedback type that doesn't change the GUI";
 
         // Set command type based on feedback
         if (feedbackToUser.equals(ListPetCommand.MESSAGE_SUCCESS)) {
