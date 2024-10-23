@@ -100,6 +100,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseSortingOrder_invalidNumberOfArguments_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(VALID_SORTING_ORDER + " " + "extra"));
+    }
+
+    @Test
     public void parseSortingOrder_validValueWithoutWhitespace_returnsSortingOrder() throws Exception {
         assertEquals(true, ParserUtil.parseSortingOrder(VALID_SORTING_ORDER));
     }
