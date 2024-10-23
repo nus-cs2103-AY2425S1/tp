@@ -20,13 +20,6 @@ public class Group extends UniquePersonList {
     }
 
     /**
-     * Renames the group to the specified {@code newName}.
-     */
-    public void rename(String newName) {
-        name = newName;
-    }
-
-    /**
      * @return Name of the group.
      */
     public String getName() {
@@ -37,7 +30,7 @@ public class Group extends UniquePersonList {
      * Checks if {@code group} has the same name as this group.
      * @return True if the groups have the same name, false otherwise.
      */
-    public boolean sameName(Group group) {
+    public boolean isSameName(Group group) {
         requireNonNull(group);
         return name.equals(group.name);
     }

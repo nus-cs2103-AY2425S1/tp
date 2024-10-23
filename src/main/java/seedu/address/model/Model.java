@@ -100,6 +100,16 @@ public interface Model {
     void removeGroup(String groupName) throws GroupNotFoundException;
 
     /**
+     * Edits the group's name from the old name to the new name.
+     */
+    void setGroup(Group oldGroup, Group newGroup) throws GroupNotFoundException, DuplicateGroupException;
+
+    /**
+     * Gets the group with name {@code groupName} from the groups in the {@code AddressBook}
+     */
+    Group getGroup(String groupName) throws GroupNotFoundException;
+
+    /**
      * Updates the sort order of the person list to the given {@code comparator}.
      * @throws NullPointerException if {@code predicate} is null.
      */

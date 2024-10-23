@@ -130,6 +130,19 @@ public class ModelManager implements Model {
         addressBook.removeGroup(group);
     }
 
+    @Override
+    public void setGroup(Group oldGroup, Group newGroup) {
+        requireNonNull(oldGroup);
+        requireNonNull(newGroup);
+        addressBook.setGroup(oldGroup, newGroup);
+    }
+
+    @Override
+    public Group getGroup(String groupName) {
+        requireNonNull(groupName);
+        return addressBook.getGroup(groupName);
+    }
+
     //=========== Person List Accessors ======================================================================
 
     /**
