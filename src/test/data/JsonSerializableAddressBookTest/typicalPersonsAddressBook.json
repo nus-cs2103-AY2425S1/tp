@@ -6,6 +6,8 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "skills": [ "python", "java" ],
+    "interviewScore": "5.0",
     "tags" : [ "friends", "pending" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +15,8 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "skills": [ "python" ],
+    "interviewScore": "6.0",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +24,8 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "skills": [ "python" ],
+    "interviewScore": "5.0",
     "tags" : [ "hired" ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +33,8 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "skills": [ "python", "java", "ruby" ],
+    "interviewScore": "4.0",
     "tags" : [ "friends", "rejected" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +42,8 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "skills": [ "python" ],
+    "interviewScore": "9.1",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +51,8 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "skills": [ "html", "css" ],
+    "interviewScore": "4.4",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +60,8 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "skills": [ "python", "java", "C" ],
+    "interviewScore": "9.9",
     "tags" : [ ]
   } ]
 }

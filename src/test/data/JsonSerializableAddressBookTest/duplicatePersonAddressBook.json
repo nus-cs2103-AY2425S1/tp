@@ -5,12 +5,16 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "skills": ["python", "java"],
+    "interviewScore": "5.0",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "job" : "Software Engineer L1",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "interviewScore": "5.0",
+    "skills": ["python", "java"]
   } ]
 }

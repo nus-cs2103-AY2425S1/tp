@@ -41,6 +41,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane skills;
+    @FXML
+    private Label interviewScore;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,6 +59,10 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        interviewScore.setText("Interview Score: " + person.getInterviewScore().interviewScore);
+        person.getSkills().stream()
+                .sorted(Comparator.comparing(skill -> skill.skillName))
+                .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

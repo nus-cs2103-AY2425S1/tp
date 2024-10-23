@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,10 +24,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 public class ViewStatusCommandTest {
@@ -100,6 +103,8 @@ public class ViewStatusCommandTest {
                 new Phone("85355255"),
                 new Email("alice@example.com"),
                 new Address("123, Jurong West Ave 6, #08-111"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Arrays.asList(new Tag("friends"), new Tag("colleagues")))
         );
         model.addPerson(personWithMultipleTags);
@@ -122,6 +127,8 @@ public class ViewStatusCommandTest {
                 new Phone("85355255"),
                 new Email("alice@example.com"),
                 new Address("123, Jurong West Ave 6, #08-111"),
+                new HashSet<>(Set.of(new Skill("python"))),
+                new InterviewScore("6"),
                 new HashSet<>(Arrays.asList(new Tag("friends")))
         );
         model.addPerson(personWithDifferentJob);

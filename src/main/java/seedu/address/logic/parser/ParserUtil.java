@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -151,7 +152,7 @@ public class ParserUtil {
     public static InterviewScore parseInterviewScore(String interviewScore) throws ParseException {
         requireNonNull(interviewScore);
         String trimmedInterviewScore = interviewScore.trim();
-        if (!Tag.isValidInterviewScore(trimmedInterviewScore)) {
+        if (!InterviewScore.isValidInterviewScore(trimmedInterviewScore)) {
             throw new ParseException(InterviewScore.MESSAGE_CONSTRAINTS);
         }
         return new InterviewScore(trimmedInterviewScore);
