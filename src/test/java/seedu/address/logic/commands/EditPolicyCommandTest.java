@@ -46,7 +46,8 @@ public class EditPolicyCommandTest {
         EditPolicyDescriptor descriptor = new EditPolicyDescriptor(validPolicyType);
 
         assertThrows(NullPointerException.class, () -> new EditPolicyCommand(null, descriptor));
-        assertThrows(NullPointerException.class, () -> new EditPolicyCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () ->
+                new EditPolicyCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
@@ -60,6 +61,21 @@ public class EditPolicyCommandTest {
         EditPolicyCommand editPolicyCommand = new EditPolicyCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editPolicyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_nonExistentPolicy_failure() {
+        // Set up a person without any policies
+        Person personWithoutPolicies = new Person(new Name("Bob"), new Phone("87654321"),
+                new Email("bob@example.com"), new Address("456 Another St"), Set.of(), new PolicySet());
+
+        model.addPerson(personWithoutPolicies);
+
+        // Attempt to edit a policy that does not exist
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptor(PolicyType.LIFE);
+        EditPolicyCommand editPolicyCommand = new EditPolicyCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editPolicyCommand, model, EditPolicyCommand.MESSAGE_POLICY_NOT_FOUND);
     }
 
     @Test
