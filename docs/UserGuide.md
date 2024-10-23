@@ -147,7 +147,8 @@ Examples:
 
 ### Viewing person by name: `view person`
 
-Views the details of a specific person whose name exactly matches the given keywords.
+Views the comprehensive details, which includes address and email address, of a specific person 
+whose name exactly matches the given keywords.
 
 Format: `view person KEYWORD [MORE_KEYWORDS]`
 
@@ -165,7 +166,8 @@ Examples:
 
 ### Viewing event by name: `view event`
 
-Views the details of a specific event whose name exactly matches the given keywords.
+Views the comprehensive details, which includes points of contact, of a specific event whose 
+name exactly matches the given keywords.
 
 Format: `view event KEYWORD [MORE_KEYWORDS]`
 
