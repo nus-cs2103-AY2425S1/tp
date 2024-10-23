@@ -74,7 +74,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         parseMonthsPaidForEdit(argMultimap.getAllValues(PREFIX_MONTHPAID))
-                .ifPresent(editPersonDescriptor::setMonthPaid);
+                .ifPresent(editPersonDescriptor::setMonthsPaid);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

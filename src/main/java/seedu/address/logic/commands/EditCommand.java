@@ -112,7 +112,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Fees updatedFees = editPersonDescriptor.getFees().orElse(personToEdit.getFees());
         ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId());
-        Set<MonthPaid> updatedMonthPaid = editPersonDescriptor.getMonthPaid().orElse(personToEdit.getMonthsPaid());
+        Set<MonthPaid> updatedMonthPaid = editPersonDescriptor.getMonthsPaid().orElse(personToEdit.getMonthsPaid());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFees, updatedClassId,
@@ -153,7 +153,7 @@ public class EditCommand extends Command {
         private Address address;
         private Fees fees;
         private ClassId classId;
-        private Set<MonthPaid> monthPaid;
+        private Set<MonthPaid> monthsPaid;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -169,7 +169,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setFees(toCopy.fees);
             setClassId(toCopy.classId);
-            setMonthPaid(toCopy.monthPaid);
+            setMonthPaid(toCopy.monthsPaid);
             setTags(toCopy.tags);
         }
 
@@ -177,7 +177,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, fees, classId, monthPaid, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, fees, classId, monthsPaid, tags);
         }
 
         public void setName(Name name) {
@@ -228,12 +228,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(classId);
         }
 
-        public void setMonthPaid(Set<MonthPaid> monthsPaid) {
-            this.monthPaid = (monthsPaid != null) ? new HashSet<>(monthsPaid) : null;
+        public void setMonthsPaid(Set<MonthPaid> monthsPaid) {
+            this.monthsPaid = (monthsPaid != null) ? new HashSet<>(monthsPaid) : null;
         }
 
-        public Optional<Set<MonthPaid>> getMonthPaid() {
-            return (monthPaid != null) ? Optional.of(Collections.unmodifiableSet(monthPaid)) : Optional.empty();
+        public Optional<Set<MonthPaid>> getMonthsPaid() {
+            return (monthsPaid != null) ? Optional.of(Collections.unmodifiableSet(monthsPaid)) : Optional.empty();
         }
 
         /**
@@ -271,7 +271,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(fees, otherEditPersonDescriptor.fees)
                     && Objects.equals(classId, otherEditPersonDescriptor.classId)
-                    && Objects.equals(monthPaid, otherEditPersonDescriptor.monthPaid)
+                    && Objects.equals(monthsPaid, otherEditPersonDescriptor.monthsPaid)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -284,7 +284,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("fees", fees)
                     .add("classId", classId)
-                    .add("monthPaid", monthPaid)
+                    .add("monthsPaid", monthsPaid)
                     .add("tags", tags)
                     .toString();
         }

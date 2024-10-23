@@ -96,9 +96,9 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code monthsPaid} into a {@code Set<MonthPaid>} and sets it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withMonthPaid(String... monthsPaid) {
+    public EditPersonDescriptorBuilder withMonthsPaid(String... monthsPaid) {
         Set<MonthPaid> monthPaidSet = Stream.of(monthsPaid).map(MonthPaid::new).collect(Collectors.toSet());
-        descriptor.setMonthPaid(monthPaidSet);
+        descriptor.setMonthsPaid(monthPaidSet);
         return this;
     }
 
