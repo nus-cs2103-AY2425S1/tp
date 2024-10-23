@@ -231,12 +231,12 @@ _Details coming soon ..._
 
 Action           | Format, Examples
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**        | `clear`
-**Delete**       | `delete INDEXES`<br> e.g., `delete 2,3`
+**Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`
 **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Get**          | `get PARAMETERS`<br> e.g.,`get e/ p/`
+**Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
 **List**         | `list`
-**Statistics**   | `statistics`
+**Statistics**   | `statistics` <br> Shows general statistics
 **Help**         | `help`
