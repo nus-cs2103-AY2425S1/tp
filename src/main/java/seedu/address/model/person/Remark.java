@@ -20,7 +20,7 @@ public class Remark {
     /**
      * Constructs a {@code Email}.
      *
-     * @param remark A valid email address.
+     * @param remark A valid remark.
      */
     public Remark(String remark) {
         requireNonNull(remark);

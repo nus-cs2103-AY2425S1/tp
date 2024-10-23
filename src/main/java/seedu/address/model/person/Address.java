@@ -20,7 +20,7 @@ public class Address {
     public final String value;
 
     /**
-     * Constructs a {@code Address}.
+     * Constructs an {@code Address}.
      *
      * @param address A valid address.
      */
