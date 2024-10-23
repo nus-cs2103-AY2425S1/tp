@@ -69,16 +69,16 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         ContainsKeywordsPredicate otherContainsKeywordsPredicate = (ContainsKeywordsPredicate) other;
-        boolean IsEqualNameKeywords = nameKeywords.equals(otherContainsKeywordsPredicate.nameKeywords);
-        boolean IsEqualTelegramHandleKeywords =
+        boolean isEqualNameKeywords = nameKeywords.equals(otherContainsKeywordsPredicate.nameKeywords);
+        boolean isEqualTelegramHandleKeywords =
                 telegramHandleKeywords.equals(otherContainsKeywordsPredicate.telegramHandleKeywords);
-        boolean IsEqualEmailKeywords = emailKeywords.equals(otherContainsKeywordsPredicate.emailKeywords);
-        boolean IsEqualStudentStatusKeywords =
+        boolean isEqualEmailKeywords = emailKeywords.equals(otherContainsKeywordsPredicate.emailKeywords);
+        boolean isEqualStudentStatusKeywords =
                 studentStatusKeywords.equals(otherContainsKeywordsPredicate.studentStatusKeywords);
-        boolean IsEqualRoleKeywords = roleKeywords.equals(otherContainsKeywordsPredicate.roleKeywords);
-        boolean IsEqualNicknameKeywords = nicknameKeywords.equals(otherContainsKeywordsPredicate.nicknameKeywords);
-        return IsEqualNameKeywords && IsEqualTelegramHandleKeywords && IsEqualEmailKeywords
-                && IsEqualStudentStatusKeywords && IsEqualRoleKeywords && IsEqualNicknameKeywords;
+        boolean isEqualRoleKeywords = roleKeywords.equals(otherContainsKeywordsPredicate.roleKeywords);
+        boolean isEqualNicknameKeywords = nicknameKeywords.equals(otherContainsKeywordsPredicate.nicknameKeywords);
+        return isEqualNameKeywords && isEqualTelegramHandleKeywords && isEqualEmailKeywords
+                && isEqualStudentStatusKeywords && isEqualRoleKeywords && isEqualNicknameKeywords;
     }
 
     @Override
