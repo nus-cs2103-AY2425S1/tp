@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/sumomomomomo.png" width="200px">
 
-[[github](http://github.com/sumomomomomo)] 
+[[github](http://github.com/sumomomomomo)]
 [[portfolio](https://www.linkedin.com/in/matthew-ho-803a41192/)]
 
 * Role: Code Quality

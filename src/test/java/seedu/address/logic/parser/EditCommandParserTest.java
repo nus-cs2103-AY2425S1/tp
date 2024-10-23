@@ -40,6 +40,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -204,4 +205,67 @@ public class EditCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_allFieldsWithMonthPaidAndFees_success() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + NAME_DESC_AMY + " f/500" + " m/2024-12" + TAG_DESC_FRIEND;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withFees("500").withMonthsPaid("2024-12").withTags(VALID_TAG_FRIEND).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidMonthPaidFormat_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " m/20-24";
+
+        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidMonthPaidCombination_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " m/2024-13";
+
+        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_nonNumericMonthPaid_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " m/abcd-ef";
+
+        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_partialDateInput_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " m/2024";
+
+        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+
+        userInput = INDEX_FIRST_PERSON.getOneBased() + " m/-01";
+
+        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_multipleInvalidMonthPaidInputs_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " m/2024-13" + " m/abcd-ef";
+
+        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_emptyMonthPaidInput_failure() {
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + " m/";
+
+        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+    }
+
+
+
 }

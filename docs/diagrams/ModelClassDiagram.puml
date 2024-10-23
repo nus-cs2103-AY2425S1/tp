@@ -19,6 +19,9 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class ClassId
+Class Fees
+Class MonthsPaid
 
 Class I #FFFFFF
 }
@@ -42,6 +45,9 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> ClassId
+Person *--> Fees
+Person *--> MonthsPaid
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

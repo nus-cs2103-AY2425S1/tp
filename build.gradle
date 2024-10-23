@@ -69,4 +69,13 @@ shadowJar {
     archiveFileName = 'addressbook.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked"
+}
+
+
 defaultTasks 'clean', 'test'

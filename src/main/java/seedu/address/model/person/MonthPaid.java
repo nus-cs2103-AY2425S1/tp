@@ -1,25 +1,27 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
 /**
  * Represents a Person's months paid in the address book.
  */
-public class MonthPaid {
+public class MonthPaid implements Comparable<MonthPaid> {
     public static final String MESSAGE_CONSTRAINTS = "MonthPaid should take a string with the pattern"
-            + " YYYY-MM, where one or of such patterns can be included if separated by a space.";
-    public static final String SPLIT_VALIDATION_REGEX = "^[0-9]{4}-[0-9]{2}$";
-    public final String value;
+            + " YYYY-MM, where YYYY should be between 1900 and 2100, and MM should be between 01 and 12.";
+    public static final String SPLIT_VALIDATION_REGEX = "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])$";
+    public final String monthPaidValue;
 
-    public MonthPaid(String monthsPaid) {
-        this.value = monthsPaid;
+    /**
+     * @param monthPaidValue Raw String value of monthPaid that follows YYYY-MM format.
+     */
+    public MonthPaid(String monthPaidValue) {
+        requireNonNull(monthPaidValue);
+        checkArgument(isValidMonthPaid(monthPaidValue), MESSAGE_CONSTRAINTS);
+        this.monthPaidValue = monthPaidValue;
     }
-
-    @Override
-    public String toString() {
-        return value;
-    }
-
     /**
      * Returns true if a given string is a valid monthsPaid.
      */
@@ -38,11 +40,36 @@ public class MonthPaid {
             return false;
         }
 
-        return Objects.equals(value, otherMonthPaid.value);
+        return Objects.equals(monthPaidValue, otherMonthPaid.monthPaidValue);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return monthPaidValue.hashCode();
+    }
+
+    @Override
+    public int compareTo(MonthPaid other) {
+        // Split the value into year and month
+        String[] currentMonthYearParts = this.monthPaidValue.split("-");
+        String[] otherMonthYearParts = other.monthPaidValue.split("-");
+
+        int currentYear = Integer.parseInt(currentMonthYearParts[0]);
+        int otherYear = Integer.parseInt(otherMonthYearParts[0]);
+
+        // Compare by year first (descending order)
+        if (currentYear != otherYear) {
+            return Integer.compare(otherYear, currentYear);
+        }
+
+        // Compare by month if years are the same (descending order)
+        int currentMonth = Integer.parseInt(currentMonthYearParts[1]);
+        int otherMonth = Integer.parseInt(otherMonthYearParts[1]);
+        return Integer.compare(otherMonth, currentMonth);
+    }
+
+    @Override
+    public String toString() {
+        return '[' + monthPaidValue + ']';
     }
 }

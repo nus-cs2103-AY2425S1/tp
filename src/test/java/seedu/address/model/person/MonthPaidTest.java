@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ public class MonthPaidTest {
     @Test
     public void isValidMonthPaid() {
         assertTrue(MonthPaid.isValidMonthPaid("2024-12"));
-        assertTrue(MonthPaid.isValidMonthPaid("0000-00"));
+        assertFalse(MonthPaid.isValidMonthPaid("0000-00"));
     }
 
     @Test
@@ -19,7 +20,7 @@ public class MonthPaidTest {
         Person[] samplePersons = SampleDataUtil.getSamplePersons();
         for (Person person : samplePersons) {
             for (MonthPaid monthPaid : person.getMonthsPaid()) {
-                assertTrue(MonthPaid.isValidMonthPaid(monthPaid.value));
+                assertTrue(MonthPaid.isValidMonthPaid(monthPaid.monthPaidValue));
             }
         }
     }

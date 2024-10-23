@@ -15,12 +15,14 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCommandHistory;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -99,6 +101,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addCommand(String commandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCommandHistory(ReadOnlyCommandHistory commandHistory) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyCommandHistory getCommandHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,6 +172,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
             throw new AssertionError("This method should not be called.");
         }
     }

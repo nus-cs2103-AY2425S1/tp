@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene stylesheets="@PieChart.css">
+            <HBox HBox.hgrow = "ALWAYS" style="-fx-alignment: center; -fx-padding: 10px;">
+                <PieChart fx:id="piChart" prefHeight="600.0" prefWidth="800.0" />
+            </HBox>
+        </Scene>
+    </scene>
+</fx:root>
