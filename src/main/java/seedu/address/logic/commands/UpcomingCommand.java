@@ -73,6 +73,4 @@ public class UpcomingCommand extends Command {
                 .add("completionDateTime", this.predicate)
                 .toString();
     }
-
-
 }

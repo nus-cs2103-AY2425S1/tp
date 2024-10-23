@@ -25,7 +25,7 @@ public class DeliveryBuilder {
     private DateTime deliveryDateTime;
     private Cost cost;
     private Quantity quantity;
-    private SupplierIndex supplierIndex = new SupplierIndex("1");
+    private SupplierIndex supplierIndex;
 
     /**
      * Creates a {@code DeliveryBuilder} with the default details.
@@ -37,6 +37,7 @@ public class DeliveryBuilder {
         status = Status.PENDING;
         cost = new Cost(DEFAULT_COST);
         quantity = new Quantity(DEFAULT_QUANTITY);
+        supplierIndex = new SupplierIndex("1");
     }
 
     /**
@@ -49,7 +50,7 @@ public class DeliveryBuilder {
         status = deliveryToCopy.getDeliveryStatus();
         cost = deliveryToCopy.getDeliveryCost();
         quantity = deliveryToCopy.getDeliveryQuantity();
-
+        supplierIndex = deliveryToCopy.getSupplierIndex();
     }
 
     /**
@@ -57,6 +58,13 @@ public class DeliveryBuilder {
      */
     public DeliveryBuilder withProduct(String product) {
         this.product = new Product(product);
+        return this;
+    }
+    /**
+     * Sets the {@code SupplierIndex} of the {@code Delivery} that we are building.
+     */
+    public DeliveryBuilder withSupplierIndex(String supplierIndex) {
+        this.supplierIndex = new SupplierIndex(supplierIndex);
         return this;
     }
 
@@ -101,7 +109,7 @@ public class DeliveryBuilder {
     }
 
     public Delivery build() {
-        return new Delivery(product, sender, status, deliveryDateTime, cost, quantity);
+        return new Delivery(product, sender, status, deliveryDateTime, cost, quantity, supplierIndex);
     }
 
     public Delivery buildWithNullSender() {
