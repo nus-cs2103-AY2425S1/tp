@@ -73,6 +73,10 @@ public class PreferredTime {
         return LocalTime.parse(start, TIME_FORMATTER).isBefore(LocalTime.parse(end, TIME_FORMATTER));
     }
 
+    public boolean overlaps(PreferredTime other) {
+        return !(end.isBefore(other.start) || start.isAfter(other.end));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
