@@ -2,7 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -13,7 +19,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import java.util.Set;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -39,30 +44,30 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         switch (argumentType) {
 
-            case "PHONE":
-                Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-                return new DeleteCommand(phone);
+        case "PHONE":
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            return new DeleteCommand(phone);
 
-            case "INDEX":
-                Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-                return new DeleteCommand(index);
+        case "INDEX":
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            return new DeleteCommand(index);
 
-            case "NAME":
-                NameContainsKeywordsPredicate predicate =
-                        new NameContainsKeywordsPredicate(argMultimap.getValue(PREFIX_NAME).get());
-                return new DeleteCommand(predicate);
-            case "ADDRESS":
-                Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-                return new DeleteCommand(address);
-            case "EMAIL":
-                Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-                return new DeleteCommand(email);
-            case "TAG":
-                Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-                return new DeleteCommand(tags);
-            default:
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        case "NAME":
+            NameContainsKeywordsPredicate predicate =
+                    new NameContainsKeywordsPredicate(argMultimap.getValue(PREFIX_NAME).get());
+            return new DeleteCommand(predicate);
+        case "ADDRESS":
+            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+            return new DeleteCommand(address);
+        case "EMAIL":
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            return new DeleteCommand(email);
+        case "TAG":
+            Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            return new DeleteCommand(tags);
+        default:
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
 
 
         }
