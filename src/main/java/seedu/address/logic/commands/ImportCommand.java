@@ -31,7 +31,8 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports person data from a CSV file.\n"
-        + "Parameters: FILE_PATH\n"
+        + "Parameters: FILE_PATH"
+        + "[" + PREFIX_PATH + "FILE_PATH]\n"
         + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
 
     private final String csvFilePath;

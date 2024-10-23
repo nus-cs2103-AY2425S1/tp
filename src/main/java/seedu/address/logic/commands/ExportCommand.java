@@ -21,8 +21,8 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports person data to a CSV file.\n"
-        + "Parameters: FILE_PATH\n"
-        + "[" + PREFIX_PATH + "NAME] "
+        + "Parameters: FILE_PATH"
+        + "[" + PREFIX_PATH + "FILE_PATH]\n"
         + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
 
     private final String filePath;
