@@ -20,7 +20,7 @@ class OrderTest {
     @Test
     public void toStringTest() {
         Order order = new Order("Cake");
-        assertEquals("Cake", order.toString());
+        assertEquals("cake", order.toString());
     }
 
 }

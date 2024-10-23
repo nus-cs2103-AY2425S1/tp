@@ -27,6 +27,10 @@ public class OrderTracker {
         return sum;
     }
 
+    public ArrayList<OrderHistory> get() {
+        return this.history;
+    }
+
     /**
      * Clear all order tracked
      */
@@ -62,6 +66,5 @@ public class OrderTracker {
             msg.append(orderHistory.toString()).append('\n');
         }
         return msg.toString();
-
     }
 }
