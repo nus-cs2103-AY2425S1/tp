@@ -43,9 +43,9 @@ public class UniqueMemberListTest {
     @Test
     public void contains_memberWithSameIdentityFieldsInList_returnsTrue() {
         uniqueMemberList.add(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
+        Member updatedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(uniqueMemberList.contains(editedAlice));
+        assertTrue(uniqueMemberList.contains(updatedAlice));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class UniqueMemberListTest {
     }
 
     @Test
-    public void setMember_nullEditedMember_throwsNullPointerException() {
+    public void setMember_nullUpdatedMember_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueMemberList.setMember(ALICE, null));
     }
 
@@ -75,7 +75,7 @@ public class UniqueMemberListTest {
     }
 
     @Test
-    public void setMember_editedMemberIsSameMember_success() {
+    public void setMember_updatedMemberIsSameMember_success() {
         uniqueMemberList.add(ALICE);
         uniqueMemberList.setMember(ALICE, ALICE);
         UniqueMemberList expectedUniqueMemberList = new UniqueMemberList();
@@ -84,18 +84,18 @@ public class UniqueMemberListTest {
     }
 
     @Test
-    public void setMember_editedMemberHasSameIdentity_success() {
+    public void setMember_updatedMemberHasSameIdentity_success() {
         uniqueMemberList.add(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
+        Member updatedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueMemberList.setMember(ALICE, editedAlice);
+        uniqueMemberList.setMember(ALICE, updatedAlice);
         UniqueMemberList expectedUniqueMemberList = new UniqueMemberList();
-        expectedUniqueMemberList.add(editedAlice);
+        expectedUniqueMemberList.add(updatedAlice);
         assertEquals(expectedUniqueMemberList, uniqueMemberList);
     }
 
     @Test
-    public void setMember_editedMemberHasDifferentIdentity_success() {
+    public void setMember_updatedMemberHasDifferentIdentity_success() {
         uniqueMemberList.add(ALICE);
         uniqueMemberList.setMember(ALICE, BOB);
         UniqueMemberList expectedUniqueMemberList = new UniqueMemberList();
@@ -104,7 +104,7 @@ public class UniqueMemberListTest {
     }
 
     @Test
-    public void setMember_editedMemberHasNonUniqueIdentity_throwsDuplicateMemberException() {
+    public void setMember_updatedMemberHasNonUniqueIdentity_throwsDuplicateMemberException() {
         uniqueMemberList.add(ALICE);
         uniqueMemberList.add(BOB);
         assertThrows(DuplicateMemberException.class, () -> uniqueMemberList.setMember(ALICE, BOB));

@@ -36,22 +36,22 @@ public class MemberTest {
         assertFalse(ALICE.isSameMember(null));
 
         // same name, all other attributes different -> returns true
-        Member editedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
+        Member updatedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
                 .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameMember(editedAlice));
+        assertTrue(ALICE.isSameMember(updatedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameMember(editedAlice));
+        updatedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSameMember(updatedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Member editedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameMember(editedBob));
+        Member updatedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertFalse(BOB.isSameMember(updatedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new MemberBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameMember(editedBob));
+        updatedBob = new MemberBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        assertFalse(BOB.isSameMember(updatedBob));
     }
 
     @Test
@@ -114,20 +114,20 @@ public class MemberTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Member editedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Member updatedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.equals(updatedAlice));
 
         // different telegram -> returns false
-        editedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        updatedAlice = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertFalse(ALICE.equals(updatedAlice));
 
         // different room -> returns false
-        editedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        updatedAlice = new MemberBuilder(ALICE).withRoom(VALID_ROOM_BOB).build();
+        assertFalse(ALICE.equals(updatedAlice));
 
         // different tags -> returns false
-        editedAlice = new MemberBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        updatedAlice = new MemberBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(updatedAlice));
     }
 
     @Test

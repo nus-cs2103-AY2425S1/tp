@@ -78,11 +78,11 @@ public interface Model {
     void addMember(Member member);
 
     /**
-     * Replaces the given member {@code target} with {@code editedMember}.
+     * Replaces the given member {@code target} with {@code updatedMember}.
      * {@code target} must exist in the address book.
-     * The member identity of {@code editedMember} must not be the same as another existing member in the address book.
+     * The member identity of {@code updatedMember} must not be the same as another existing member in the address book.
      */
-    void setMember(Member target, Member editedMember);
+    void setMember(Member target, Member updatedMember);
 
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();

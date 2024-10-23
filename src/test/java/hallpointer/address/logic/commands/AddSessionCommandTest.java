@@ -222,7 +222,7 @@ class AddSessionCommandTest {
         }
 
         @Override
-        public void setMember(Member target, Member editedMember) {
+        public void setMember(Member target, Member updatedMember) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -254,8 +254,8 @@ class AddSessionCommandTest {
             return members.asUnmodifiableObservableList();
         }
         @Override
-        public void setMember(Member target, Member editedMember) {
-            members.setMember(target, editedMember);
+        public void setMember(Member target, Member updatedMember) {
+            members.setMember(target, updatedMember);
         }
         @Override
         public ReadOnlyAddressBook getAddressBook() {

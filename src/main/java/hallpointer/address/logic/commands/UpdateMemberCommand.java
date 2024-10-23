@@ -92,7 +92,7 @@ public class UpdateMemberCommand extends Command {
 
     /**
      * Creates and returns a {@code Member} with the details of {@code memberToUpdate}
-     * edited with {@code updateMemberDescriptor}.
+     * updated with {@code updateMemberDescriptor}.
      */
     private static Member createUpdatedMember(Member memberToUpdate, UpdateMemberDescriptor updateMemberDescriptor) {
         assert memberToUpdate != null;
