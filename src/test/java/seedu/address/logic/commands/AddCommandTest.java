@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -224,8 +225,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
-
+        @Override
+        public Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime) {
+            throw new AssertionError("This method should not be called.");
+        }
 
     }
 
