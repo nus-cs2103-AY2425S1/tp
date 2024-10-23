@@ -238,6 +238,7 @@ In order to select a student to be displayed on the detail's panel, the student 
 #### Example invocation sequence for ViewStudentCommand
 <puml src="diagrams/ViewStudentSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `view_student` Command" />
 
+## Adding a remark to a student
 
 ### \[Proposed\] Undo/redo feature
 
