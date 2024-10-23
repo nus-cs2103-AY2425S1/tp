@@ -130,6 +130,11 @@ public class ModelManager implements Model {
         addressBook.removeGroup(group);
     }
 
+    @Override
+    public String getGroupNames() {
+        return addressBook.getGroupNames();
+    }
+
     //=========== Person List Accessors ======================================================================
 
     /**

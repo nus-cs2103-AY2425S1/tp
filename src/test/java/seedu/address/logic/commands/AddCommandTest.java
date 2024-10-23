@@ -171,6 +171,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public String getGroupNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updatePersonListSort(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
