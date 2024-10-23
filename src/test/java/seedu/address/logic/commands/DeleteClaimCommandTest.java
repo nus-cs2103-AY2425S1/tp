@@ -22,10 +22,10 @@ import seedu.address.model.client.insurance.claim.Claim;
 
 class DeleteClaimCommandTest {
 
-    public static int VALID_INSURANCE_ID_FIRST = 0;
-    public static int VALID_INSURANCE_ID_SECOND = 1;
-    public static String VALID_CLAIM_ID_FIRST = "A1001";
-    public static String VALID_CLAIM_ID_SECOND = "B1234";
+    public static final int VALID_INSURANCE_ID_FIRST = 0;
+    public static final int VALID_INSURANCE_ID_SECOND = 1;
+    public static final String VALID_CLAIM_ID_FIRST = "A1001";
+    public static final String VALID_CLAIM_ID_SECOND = "B1234";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -64,14 +64,17 @@ class DeleteClaimCommandTest {
 
     @Test
     public void equals() {
-        DeleteClaimCommand deleteClaimFirstCommand = new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_FIRST, VALID_CLAIM_ID_FIRST);
-        DeleteClaimCommand deleteClaimSecondCommand = new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_SECOND, VALID_CLAIM_ID_SECOND);
+        DeleteClaimCommand deleteClaimFirstCommand =
+                new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_FIRST, VALID_CLAIM_ID_FIRST);
+        DeleteClaimCommand deleteClaimSecondCommand =
+                new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_SECOND, VALID_CLAIM_ID_SECOND);
 
         // same object -> returns true
         assertEquals(deleteClaimFirstCommand, deleteClaimFirstCommand);
 
         // same values -> returns true
-        DeleteClaimCommand deleteClaimFirstCommandCopy = new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_FIRST, VALID_CLAIM_ID_FIRST);
+        DeleteClaimCommand deleteClaimFirstCommandCopy =
+                new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_FIRST, VALID_CLAIM_ID_FIRST);
         assertEquals(deleteClaimFirstCommand, deleteClaimFirstCommandCopy);
 
         // different types -> returns false
