@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
  * Represents a Note in the address book.
  */
 public class Note {
+
+    public static final String MESSAGE_CONSTRAINTS = "Note must not be blank";
+
     private final String content;
 
     private final LocalDateTime timestamp;
@@ -36,6 +39,18 @@ public class Note {
     @Override
     public String toString() {
         return "[" + timestamp + "] " + content;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Note)) {
+            return false;
+        }
+        Note otherNote = (Note) other;
+        return otherNote.content.equals(this.content);
     }
 
 

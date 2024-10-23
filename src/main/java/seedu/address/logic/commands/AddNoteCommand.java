@@ -29,15 +29,15 @@ public class AddNoteCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
     public static final String MESSAGE_NOTE_TEXT_EMPTY = "Note text cannot be empty";
 
-    private final String noteText;
+    private final Note note;
     private final Nric nric;
 
     /**
      * @param nric the nric of the person to add the note to
      * @param noteText the text of the note
      */
-    public AddNoteCommand(Nric nric, String noteText) {
-        this.noteText = noteText;
+    public AddNoteCommand(Nric nric, Note noteText) {
+        this.note = noteText;
         this.nric = nric;
     }
 
@@ -49,14 +49,8 @@ public class AddNoteCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
-        if (noteText.isEmpty()) {
-            throw new CommandException(MESSAGE_NOTE_TEXT_EMPTY);
-        }
-
-        Note note = new Note(noteText);
-
         model.addNoteToPerson(note, person);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, nric, noteText));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, nric, note.getContent()));
     }
 
     @Override
@@ -73,7 +67,7 @@ public class AddNoteCommand extends Command {
         // Cast and check if the fields are equal
         AddNoteCommand otherCommand = (AddNoteCommand) other;
         return nric.equals(otherCommand.nric)
-                && noteText.equals(otherCommand.noteText);
+                && note.equals(otherCommand.note);
     }
 
 }
