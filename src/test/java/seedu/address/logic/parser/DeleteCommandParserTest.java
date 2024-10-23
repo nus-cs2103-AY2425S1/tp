@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteConfirmCommand;
+import seedu.address.logic.commands.DeleteCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -14,7 +14,7 @@ import seedu.address.logic.commands.DeleteConfirmCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class DeleteConfirmCommandParserTest {
+public class DeleteCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 
@@ -28,6 +28,6 @@ public class DeleteConfirmCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "invalid_id", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteConfirmCommand.MESSAGE_USAGE));
+                DeleteCommand.MESSAGE_USAGE));
     }
 }

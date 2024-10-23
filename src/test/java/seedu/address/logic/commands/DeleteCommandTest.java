@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
-public class DeleteConfirmCommandTest {
+public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -31,15 +31,15 @@ public class DeleteConfirmCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         IdentityNumber identityNumber = personToDelete.getIdentityNumber();
-        DeleteConfirmCommand deleteConfirmCommand = new DeleteConfirmCommand(identityNumber);
+        DeleteCommand deleteCommand = new DeleteCommand(identityNumber);
 
-        String expectedMessage = String.format(DeleteConfirmCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(deleteConfirmCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     // TODO: Add test for invalid identity number once message constraints are updated, change to invalid IdentityNumber
@@ -58,16 +58,16 @@ public class DeleteConfirmCommandTest {
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         IdentityNumber identityNumber = personToDelete.getIdentityNumber();
-        DeleteConfirmCommand deleteConfirmCommand = new DeleteConfirmCommand(identityNumber);
+        DeleteCommand deleteCommand = new DeleteCommand(identityNumber);
 
-        String expectedMessage = String.format(DeleteConfirmCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
-        assertCommandSuccess(deleteConfirmCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     // TODO: Add test for invalid identity number once message constraints are updated
@@ -91,14 +91,14 @@ public class DeleteConfirmCommandTest {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         IdentityNumber firstIdentityNumber = firstPerson.getIdentityNumber();
         IdentityNumber secondIdentityNumber = secondPerson.getIdentityNumber();
-        DeleteConfirmCommand deleteFirstCommand = new DeleteConfirmCommand(firstIdentityNumber);
-        DeleteConfirmCommand deleteSecondCommand = new DeleteConfirmCommand(secondIdentityNumber);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(firstIdentityNumber);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(secondIdentityNumber);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteConfirmCommand deleteFirstCommandCopy = new DeleteConfirmCommand(firstIdentityNumber);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstIdentityNumber);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -116,9 +116,9 @@ public class DeleteConfirmCommandTest {
         Index targetIndex = Index.fromOneBased(1);
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         IdentityNumber identityNumber = person.getIdentityNumber();
-        DeleteConfirmCommand deleteConfirmCommand = new DeleteConfirmCommand(identityNumber);
-        String expected = DeleteConfirmCommand.class.getCanonicalName() + "{identityNumber=" + identityNumber + "}";
-        assertEquals(expected, deleteConfirmCommand.toString());
+        DeleteCommand deleteCommand = new DeleteCommand(identityNumber);
+        String expected = DeleteCommand.class.getCanonicalName() + "{identityNumber=" + identityNumber + "}";
+        assertEquals(expected, deleteCommand.toString());
     }
 
     /**
