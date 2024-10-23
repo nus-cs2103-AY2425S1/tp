@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CreateTutorialCommand;
@@ -21,13 +21,15 @@ public class CreateTutorialCommandParser implements Parser<CreateTutorialCommand
     @Override
     public CreateTutorialCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT);
-        if (!argMultimap.getValue(PREFIX_SUBJECT).isPresent()
+                ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL);
+        if (!argMultimap.getValue(PREFIX_TUTORIAL).isPresent()
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT,
+                    CreateTutorialCommand.MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBJECT);
-        Tutorial tutorial = ParserUtil.parseTutorial(argMultimap.getValue(PREFIX_SUBJECT).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL);
+        Tutorial tutorial = ParserUtil.parseTutorial(argMultimap.getValue(PREFIX_TUTORIAL).get());
         return new CreateTutorialCommand(tutorial);
     }
 }
