@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,9 +41,35 @@ public class DeleteTagCommand extends Command {
         if (!isSuccessful) {
             throw new CommandException(MESSAGE_NONEXISTENT);
         }
+
+        for (Tag tag : tags) {
+            removeTagFromPersons(model, tag);
+        }
+
         String successMessage = MESSAGE_SUCCESS + tags + "\n";
         String currentTags = YOUR_TAGS_PREFIX + model.getTagList();
         return new CommandResult(successMessage + currentTags);
+    }
+
+    /**
+     * Removes the deleted {@code Tag} from all persons in the address book.
+     */
+    private void removeTagFromPersons(Model model, Tag tag) {
+        List<Person> persons = model.getFullPersonList();
+        for (Person person : persons) {
+            if (person.hasTag(tag)) {
+                replacePerson(model, person, tag);
+            }
+        }
+    }
+
+    private void replacePerson(Model model, Person person, Tag tag) {
+        Set<Tag> newTags = new HashSet<>(person.getTags());
+        newTags.remove(tag);
+
+        Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                person.getEmail(), person.getRsvpStatus(), newTags);
+        model.setPerson(person, updatedPerson);
     }
 
     @Override

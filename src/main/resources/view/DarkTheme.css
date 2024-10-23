@@ -8,7 +8,6 @@
     -color-dark: #232730;
     -color-display-light: #b7becb;
     -color-prompt-text: #3B4252;
-    -color-tag: #457b7a;
 }
 
 
@@ -150,6 +149,12 @@
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
+    -fx-text-fill: -color-text-dark;
+}
+
+.cell_rsvp_status_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 11px;
     -fx-text-fill: -color-text-dark;
 }
 
@@ -381,7 +386,6 @@
 }
 
 .tag-label {
-    -fx-background-color: #3e7b91;
     -fx-text-fill: white;
     -fx-padding: 5;
     -fx-background-radius: 5;
@@ -389,7 +393,7 @@
 }
 
 .tags-title-label {
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: -color-dark;
+    -fx-font-size: 18px;
 }

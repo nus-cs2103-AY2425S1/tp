@@ -37,7 +37,7 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
-        String trimmedTagName = argMultimap.getValue(PREFIX_TAG).get().trim();
+        String trimmedTagName = argMultimap.getValue(PREFIX_TAG).get().trim().toLowerCase();
         boolean isEmpty = trimmedTagName.isEmpty();
         boolean isTooLong = trimmedTagName.length() > MAX_LENGTH;
 

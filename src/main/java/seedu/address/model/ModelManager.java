@@ -125,6 +125,14 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the full list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    public ObservableList<Person> getFullPersonList() {
+        return addressBook.getPersonList();
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -135,22 +143,25 @@ public class ModelManager implements Model {
 
     @Override
     public boolean addTag(Tag tag) {
-        if (this.hasTag(tag)) {
-            return false;
+        return addressBook.addTag(tag);
+    }
+
+    @Override
+    public boolean addTags(List<Tag> tags) {
+        boolean isSuccessful = true;
+        for (Tag tag : tags) {
+            isSuccessful &= addressBook.addTag(tag);
         }
-        addressBook.addTag(tag);
-        return true;
+        return isSuccessful;
     }
 
     @Override
     public boolean deleteTags(List<Tag> tags) {
+        boolean isSuccessful = true;
         for (Tag tag : tags) {
-            if (!this.hasTag(tag)) {
-                return false;
-            }
-            addressBook.deleteTag(tag);
+            isSuccessful &= addressBook.deleteTag(tag);
         }
-        return true;
+        return isSuccessful;
     }
 
     @Override
@@ -161,6 +172,11 @@ public class ModelManager implements Model {
     @Override
     public String getTagList() {
         return addressBook.tagsToString();
+    }
+
+    @Override
+    public boolean checkAcceptableTagListSize(int additionalTags) {
+        return addressBook.checkAcceptableTagListSize(additionalTags);
     }
 
     @Override

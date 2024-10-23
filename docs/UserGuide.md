@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AB3-My-Guest is a **desktop app for managing wedding guests, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AB3 My Guest is a **desktop app for managing wedding guests, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 My Guest can get your guest management tasks done faster than traditional methods of managing guest lists!
 
 * Table of Contents
 {:toc}
@@ -16,14 +16,14 @@ AB3-My-Guest is a **desktop app for managing wedding guests, optimized for use v
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AB3 My Guest application.
 
-4. To open the application,
+   4. To open the application,
 
-    * Open a command terminal
-    * `cd` into the folder you put the jar file in
-    * Use the `java -jar addressbook.jar` command to run the application.<br>
-    * A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+       * Open a command terminal
+       * `cd` into the folder you put the jar file in (e.g If the jar file is stored in `/Desktop/TestFile`, then the command should be `cd /Desktop/TestFile`)
+       * Use the `java -jar ab3myguest.jar` command to run the application.<br>
+       * A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
       ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -31,9 +31,9 @@ AB3-My-Guest is a **desktop app for managing wedding guests, optimized for use v
 
    * `list` : Lists all guests.
 
-   * `add n/John Doe c/98765432` : Adds a guest named `John Doe` to the guest list.
+   * `add n/John Doe p/98765432 e/johndoe@example.com` : Adds a guest named `John Doe` to the guest list.
 
-   * `delete 3` : Deletes the 3rd guest shown in the current list.
+   * `delete 3` : Deletes the 3rd guest shown in the **current** list.
 
    * `clear` : Deletes all contacts.
 
@@ -49,17 +49,17 @@ AB3-My-Guest is a **desktop app for managing wedding guests, optimized for use v
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be written by the user.<br>
+  e.g. in `add n/NAME p/PHONE_NUMBER e/EMAIL`, `NAME`, `PHONE_NUMBER` and `EMAIL` are parameters which are user inputs, such as `add n/John Doe p/91234567 e/johndoe@example.com`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Bride's Side` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. the `add` command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the guest list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
@@ -90,51 +90,70 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com t/Groom's Side`
-* `add n/Betsy Crowe t/Bride's Side e/betsycrowe@example.com p/12345678`
+* `add n/Betsy Crowe p/81234567 e/betsycrowe@example.com t/bride's side`
+![img_1.png](img_1.png)
+
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of **all** persons in the guest list.
 
 Format: `list`
 
 ### Creating a new tag: `newtag`
 
-Creates a new tag.
+Creates new tag(s) that can be used to tag guests with.
 
-Format: `newtag TAG_NAME`
-* Tag name cannot be more than 50 characters long.
+Format: `newtag t/TAG_NAME1 t/TAG_NAME2...`
+* Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Tag names are case-insensitive.
+* Leading and trailing spaces are ignored. e.g `newtag t/ bride's side  t/ groom's side  ` is the same as `newtag t/bride's side t/groom's side`.
+* Duplicate tags (with the same name) are **not** allowed.
+* Tag names are **case-insensitive**. e.g `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
+* Only 30 (or fewer) of such tags can exist at any point.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tip: You may add any number of tags at once (as long as the total number does not exceed 30).
+</div>
 
 Examples:
-* `newtag Bride's Side`
+* `newtag t/bride's side`
+* `newtag t/bride's side t/groom's side`
+
+![img.png](img.png)
 
 ### Deleting a defined tag: `deletetag`
 
-Deletes an existing tag.
+Deletes existing tag(s) defined previously.
 
 Format: `deletetag t/TAG_NAME1 t/TAG_NAME2...`
 * Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Tag names are case-insensitive.
+* Leading and trailing spaces are ignored. e.g `deletetag t/ bride's side  t/ groom's side` is the same as `deletetag t/bride's side t/groom's side`.
 * User cannot delete a tag that has not been added via `newtag` before.
-* Any number of tag arguments is accepted, as long as all of them have been defined before.
+* Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tip: You may delete any number of tags at once.
+</div>
 
 Examples:
-* `deletetag t/Bride's Side`
+* `deletetag t/bride's side`
+* `deletetag t/bride's side t/Groom's side`
+![img_2.png](img_2.png)
 
 ### Tagging a person: `tag`
 
 Tags a person with the given tag.
 
 Format: `tag INDEX t/TAG`
-* Tag must already exist before tagging it to a person.
+* Tag must have already been defined using `newtag` before tagging it to a person.
 
 Examples:
 * `tag 1 t/Bride's Side` Adds the tag "Bride's Side" to the 1st person in the list.
+![img_3.png](img_3.png)
 
 ### Removing a tag from a person: `untag`
 
@@ -144,7 +163,8 @@ Format: `untag INDEX t/TAG`
 * A person must already have the tag for it to be removed.
 
 Examples:
-* `untag 2 t/Groom's Side`
+* `untag 1 t/Bride's Side`
+![img_4.png](img_4.png)
 
 ### Setting RSVP status for a guest : `rsvp` and `unrsvp`
 
@@ -156,17 +176,13 @@ Example:
 * `rsvp 2` marks the 2nd person as RSVPed.
 * `unrsvp 1` marks the 1st person as not yet RSVPed.
 
-### Listing all persons who have RSVPed: `rsvplist`
+### Listing persons based on RSVP status : `rsvplist` and `unrsvplist`
 
-Shows a list of all persons in the address book who have already RSVPed.
+Shows a list of all persons in the address book who have already RSVPed or those who have not.
 
-Format: `rsvplist`
-
-### Listing all persons who have not yet RSVPed: `notrsvplist`
-
-Shows a list of all persons in the address book who have not yet RSVPed.
-
-Format: `rsvplist`
+Format: `rsvplist` or `notrsvplist`
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
 
 ### Editing a person : `edit`
 
@@ -183,7 +199,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 4 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+![img_7.png](img_7.png)
 
 ### Locating persons by name: `find`
 
@@ -200,8 +217,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+![img_8.png](img_8.png)
+
+* `find john betsy` returns `John Doe`, `Betsy Crower`
+![img_9.png](img_9.png)
 
 ### Deleting a person : `delete`
 
@@ -215,7 +234,8 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Jacob` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+![img_10.png](img_10.png)
 
 ### Clearing all entries : `clear`
 
@@ -231,15 +251,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AB3 My Guest data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AB3 My Guest data are saved automatically as a JSON file `[JAR file location]/data/ab3myguest.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, AB3 My Guest will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AB3 My Guest application to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -266,13 +286,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, t/Groom's Side`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/John Doe p/91234567 e/johndoe@example.com t/Groom's Side`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
-**Newtag** | `newtag TAG_NAME` <br> e.g. `newtag Bride's Side`
+**NewTag** | `newtag TAG_NAME` <br> e.g. `newtag Bride's Side`
+**DeleteTag** | `deletetag t/TAG_NAME...` <br> e.g. `deletetag t/Bride's Side`
 **Tag** | `tag INDEX t/TAG` <br> e.g. `tag 2 t/Groom's Side`
 **Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/Bride's Side`
 **RSVP** | `rsvp INDEX`
@@ -280,4 +301,5 @@ Action | Format, Examples
 **RSVPList** | `rsvplist`
 **NotRSVPList** | `notrsvplist`
 **Help** | `help`
+**Exit** | `exit`
 
