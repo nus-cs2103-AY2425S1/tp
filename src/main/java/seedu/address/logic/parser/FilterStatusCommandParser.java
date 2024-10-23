@@ -11,7 +11,7 @@ import seedu.address.model.person.StatusContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FilterStatusCommand object
  */
-public class FilterStatusCommandPaser implements Parser<FilterStatusCommand> {
+public class FilterStatusCommandParser implements Parser<FilterStatusCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterStatusCommand

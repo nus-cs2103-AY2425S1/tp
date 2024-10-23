@@ -78,6 +78,17 @@ public class TypicalPersons {
         .withExperience("Intern at SUSS from 2022-2023").withStatus("Applied").withNote("")
         .withDesiredRole("Data Scientist").build();
 
+    // Manually added - Person's details found in {@code FilterStatusCommandTest}
+    public static final Person ADIADI = new PersonBuilder().withName("Adiadi Hih").withPhone("99119911")
+            .withEmail("adiadin@example.com").withAddress("little india 2").withSkills("DevOps, python, C")
+            .withExperience("Intern at IMH from 2022-2023").withStatus("Rejected").withNote("Funny")
+            .withDesiredRole("Network Engineer").build();
+
+    public static final Person DOMI = new PersonBuilder().withName("Domi Tan").withPhone("83323323")
+            .withEmail("domidomi@example.com").withAddress("20th street").withSkills("DevOps, Duolingo")
+            .withExperience("Intern at DSTA from 2022-2023").withStatus("Rejected").withNote("Smart")
+            .withDesiredRole("Business Specialist").build();
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
         .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withSkills(VALID_SKILLS_AMY)
@@ -105,6 +116,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, ADIADI, DOMI));
     }
 }

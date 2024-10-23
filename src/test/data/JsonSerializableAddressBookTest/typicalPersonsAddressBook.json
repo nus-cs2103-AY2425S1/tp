@@ -84,6 +84,31 @@
       "note": "",
       "desiredRole": "Business Analyst",
       "tags": []
+    },
+    {
+      "name": "Adiadi Hih",
+      "phone": "99119911",
+      "email": "adiadin@example.com",
+      "address": "little india 2",
+      "skills": "DevOps, python, C",
+      "experience": "Intern at IMH from 2022-2023",
+      "status": "Rejected",
+      "note": "Funny",
+      "desiredRole": "Network Engineer",
+      "tags": []
+    },
+    {
+      "name": "Domi Tan",
+      "phone": "83323323",
+      "email": "domidomi@example.com",
+      "address": "20th street",
+      "skills": "DevOps, Duolingo",
+      "experience": "Intern at DSTA from 2022-2023",
+      "status": "Rejected",
+      "note": "Smart",
+      "desiredRole": "Business Specialist",
+      "tags": []
     }
+
   ]
 }
