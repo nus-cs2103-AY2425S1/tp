@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 
 
 /**
@@ -17,6 +18,10 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String PENDING_STYLE = "-fx-background-color: #eba250; -fx-background-radius: 2";
+    private static final String COMING_STYLE = "-fx-background-color: #85bd80; -fx-background-radius: 2";
+    private static final String NOT_COMING_STYLE = "-fx-background-color: #DD0000; -fx-background-radius: 2; "
+           + "-fx-text-fill: white";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -27,6 +32,8 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+
+
 
     @FXML
     private HBox cardPane;
@@ -42,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label isRsvp;
+
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -68,11 +77,24 @@ public class PersonCard extends UiPart<Region> {
                     tags.getChildren().add(tagLabel);
                 });
         isRsvp.setText(person.getRsvpStatusCard());
-        isRsvp.backgroundProperty().addListener((observable, oldValue, newValue) -> {
-            if (!person.getRsvpStatus().equals("Coming")) {
 
-                isRsvp.setStyle("-fx-background-color: #eba250; -fx-background-radius: 2");
-            }
-        });
+        // set colour of rsvp status
+        RsvpStatus rsvpStatus = person.getRsvpStatus();
+        switch (rsvpStatus) {
+
+        case COMING:
+            isRsvp.setStyle(COMING_STYLE);
+            break;
+
+        case NOT_COMING:
+            isRsvp.setStyle(NOT_COMING_STYLE);
+            break;
+
+        default:
+            isRsvp.setStyle(PENDING_STYLE);
+            break;
+
+        }
+
     }
 }
