@@ -40,6 +40,13 @@ public class CreateTaskCommand extends Command {
         tasksToAdd = task;
     }
 
+    /**
+     * Returns the set of tasks to be added.
+     */
+    public HashSet<Task> getTaskToAdd() {
+        return tasksToAdd;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
