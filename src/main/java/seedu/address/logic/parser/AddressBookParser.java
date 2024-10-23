@@ -8,15 +8,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddProductCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
+import seedu.address.logic.commands.AssignProductCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteProductCommand;
+import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SetThresholdCommand;
+import seedu.address.logic.commands.UnassignProductCommand;
+import seedu.address.logic.commands.ViewProductCommand;
+import seedu.address.logic.commands.ViewSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -53,19 +59,25 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddSupplierCommand.COMMAND_WORD:
+            return new AddSupplierCommandParser().parse(arguments);
+
+        case AddProductCommand.COMMAND_WORD:
+            return new AddProductCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteSupplierCommand.COMMAND_WORD:
+            return new DeleteSupplierCommandParser().parse(arguments);
+
+        case DeleteProductCommand.COMMAND_WORD:
+            return new DeleteProductCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case ViewSupplierCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
@@ -76,6 +88,18 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ViewProductCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        case AssignProductCommand.COMMAND_WORD:
+            return new AssignProductCommandParser().parse(arguments);
+
+        case UnassignProductCommand.COMMAND_WORD:
+            return new UnassignProductCommandParser().parse(arguments);
+
+        case SetThresholdCommand.COMMAND_WORD:
+            return new SetThresholdCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

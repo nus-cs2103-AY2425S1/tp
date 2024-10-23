@@ -1,33 +1,70 @@
 ---
-layout: page
-title: User Guide
+## Quick start
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# InvenTrack User Guide
 
-* Table of Contents
-{:toc}
+InvenTrack is a simple desktop app designed to help you manage the products and suppliers for your convenience store. The app is fast and easy to use, especially if you’re comfortable typing.
+
+With InvenTrack, you can:
+
+- Add products and suppliers to your inventory system.
+- Easily keep track of which suppliers provide which products.
+- Monitor stock levels and get alerts when a product is running low.
+
+InvenTrack simulates an ongoing software project for a desktop application dedicated to managing suppliers, product, and stock details within a convenience store setting. It is developed using object-oriented programming (OOP) principles, providing a robust and maintainable code base. The application also includes comprehensive user and developer documentation for ease of use and understanding.
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Getting Started
+### Step 1: Install Java
+Before you can use InvenTrack, ensure you have Java `17` or above installed in your Computer.
+- To check if Java is installed:
+  1. Open a command terminal (Command Prompt on Windows, Terminal on macOS/Linux).
+  2. Type the following command and press Enter:
+    ```
+    java -version
+    ```
+     If Java is installed, you should see the version number. If Java is not installed, download it from the [official website](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Step 2: Download InvenTrack
+1. Get the latest version of InvenTrack by downloading the `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Move the .jar file into the folder where you want to store your InvenTrack data (this will be your "home folder").
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+### Step 3: Navigate to the Folder
+To run InvenTrack, you need to open your command terminal and navigate to the folder where you saved the .jar file:
+1. Open a terminal (Command Prompt on Windows or Terminal on macOS/Linux).
+2. Use the `cd` command to change to the folder containing the `.jar` file. For example:
+   - On **Windows:**
+     ```
+     cd Desktop\InvenTrack
+     ```
+   - On **macOS/Linux:**
+     ```
+     cd ~/Desktop/InvenTrack
+     ```
+   Verify that your terminal is now pointing to the correct directory. The terminal prompt should show the folder name `(e.g. InvenTrack)`
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+### Step 4: Run the Application
+To launch the application:
+1. In the terminal, type the following command and press Enter:
+    ```
+    java -jar addressbook.jar
+    ```
+2. After a few seconds, the InvenTrack application should open. A window similar to the one below should appear (note that some sample data may be pre-loaded in the app):
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
+### Step 5: Start Using InvenTrack
+You can now start using the application by typing commands into the command box. For example:
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a supplier named `John Doe` to the InvenTrack.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -35,15 +72,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -61,85 +98,135 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Stuck on how to use the app?
 
-![help message](images/helpMessage.png)
+The Help command simplifies the process for you!
+
+It opens a pop-up window containing a message to copy the link to the user guide, allowing you to learn more about the application.
 
 Format: `help`
 
+![help message](images/helpWindow.png)
 
-### Adding a person: `add`
+### Adding a supplier: `add`
 
-Adds a person to the address book.
+Adds a supplier to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+<box type="tip" seamless>
+
+**Tip:** A supplier can have any number of tags (including 0)
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all suppliers : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all suppliers in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a supplier : `edit`
 
-Edits an existing person in the address book.
+Edits an existing supplier in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
+* You can remove all the supplier’s tags by typing `t/` without
     specifying any tags after it.
 
+
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st supplier to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Deleting a supplier : `delete`
+Deletes the specified supplier from the address book.
 
-Finds persons whose names contain any of the given keywords.
+Format: `delete INDEX`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+* Deletes the supplier at the specified `INDEX`.
+* The index refers to the index number shown in the displayed supplier list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd supplier in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st supplier in the results of the `find` command.
+
+### Adding a product : `ADD_PRODUCT`
+
+Add a product.
+
+Format: `ADD_PRODUCT n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
+
+### Assigning a product to supplier: `ASSIGN`
+The **Assign** feature allows you to connect products with their current supplier. This makes it easier to track which supplier is responsible for each product in your store.
+
+Format: `ASSIGN pr/PRODUCT_NAME su/SUPPLIER_NAME`
+
+Example Commands:
+- `ASSIGN Tissue Paper Jacob Smith` assigns product named `Tissue paper` to supplier named `Jacob Smith`
+
+> **Important**:  
+> The product and supplier must already exist in the system before you can assign them.  
+> Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
+
+> **Note:**
+> If product has already been assigned to supplier, the system will notify you.
+
+### Un-assigning a product to supplier: `ASSIGN`
+Allows the user to remove or "unassign" products from their current supplier, useful if the store manager decides to stop sourcing a particular product from a supplier or switch to a new one.
+
+Format: `UNASSIGN pr/PRODUCT_NAME su/SUPPLIER_NAME`
+
+Example Commands:
+- `UNASSIGN Tissue Paper Jacob Smith` Unassigns product named `Tissue paper` to supplier named `Jacob Smith`
+
+> **Important**:  
+> The product and supplier must already exist in the system before you can assign them.  
+> Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
+
+> **Note:**
+> If product was not assigned to supplier, the system will notify you.
+
+### Setting threshold for a product: `threshold`
+
+Updates the minimum stock level for a product.
+
+Format: `threshold pr/PRODUCT_NAME stk/STOCK_LEVEL`
+
+Examples:
+* `threshold pr/sweater stk/1000`
+* `threshold apr/chocolates stk/2623900`
+
+### Locating suppliers and products by name: `view`
+
+Finds suppliers or products whose names contain any of the given keywords.
+
+Format: `VIEW_SUPPLIER KEYWORD`, `VIEW_PRODUCT KEYWORD`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Suppliers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Same goes for the product names
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `VIEW_SUPPLIER Smith`
+* `VIEW_PRODUCT Chocolate`
 
 ### Clearing all entries : `clear`
 
@@ -161,10 +248,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -188,12 +277,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**   | `list`
+**Help**   | `help`
