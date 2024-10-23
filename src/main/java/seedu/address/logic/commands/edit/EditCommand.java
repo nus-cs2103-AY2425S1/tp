@@ -145,7 +145,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Optional<Address> address;
         private Set<Tag> tags;
         private EditModuleRoleOperation editModuleRoleOperation;
 
@@ -195,12 +195,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
+        public void setAddress(Optional<Address> address) {
             this.address = address;
         }
 
         public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+            return address;
         }
 
         /**
