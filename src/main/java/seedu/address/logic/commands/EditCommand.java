@@ -137,17 +137,13 @@ public class EditCommand extends Command {
     private static Set<EmergencyContact> updateEmergencyContacts(Set<EmergencyContact> personEmergencyContacts,
                                                                   EmergencyContact updatedEmergencyContact,
                                                                   Index index) {
+        assert !personEmergencyContacts.isEmpty();
+
         Set<EmergencyContact> updatedEmergencyContacts = new LinkedHashSet<>();
         int i = index.getZeroBased();
 
-        if (personEmergencyContacts.isEmpty()) {
-            updatedEmergencyContacts.add(updatedEmergencyContact);
-            return updatedEmergencyContacts;
-        }
-
         for (EmergencyContact emergencyContact : personEmergencyContacts) {
             if (i == 0) {
-                updatedEmergencyContacts.remove(emergencyContact);
                 updatedEmergencyContacts.add(updatedEmergencyContact);
             } else {
                 updatedEmergencyContacts.add(emergencyContact);
@@ -193,12 +189,7 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = null;
-        try {
-            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        } catch (EmergencyContactNotFoundException e) {
-            throw new CommandException(MESSAGE_EMERGENCY_CONTACT_NOT_FOUND);
-        }
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

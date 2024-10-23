@@ -58,7 +58,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE, PREFIX_EMERGENCY_CONTACT_RELATIONSHIP,
                 PREFIX_DOC_NAME, PREFIX_DOC_PHONE, PREFIX_DOC_EMAIL);
 
-        if (!isEmergencyContactFieldsValid(args, argMultimap)) {
+        if (!isEmergencyContactIndexProvided(args, argMultimap)) {
             throw new ParseException(EditCommand.MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID);
         }
 
@@ -127,7 +127,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         return true;
     }
 
-    private Boolean isEmergencyContactFieldsValid(String args, ArgumentMultimap argMultimap) {
+    private Boolean isEmergencyContactIndexProvided(String args, ArgumentMultimap argMultimap) {
         if (!argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()
                && (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent()
                 || argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent()

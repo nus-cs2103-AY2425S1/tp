@@ -1,19 +1,27 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_TO_EDIT;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -23,8 +31,10 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) [EMERGENCY CONTACT INDEX (must be a positive integer)]\n"
+            + ": Deletes the person by the index number used in the displayed person list or emergency contact "
+            + "identified by the index number used in the displayed emergency contact list.\n"
+            + "Parameters: INDEX (must be a positive integer) [" + PREFIX_EMERGENCY_CONTACT_TO_EDIT
+            + "EMERGENCY CONTACT INDEX (must be a positive integer)]\n"
             + "Example: " + COMMAND_WORD + " 1 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
@@ -36,11 +46,25 @@ public class DeleteCommand extends Command {
 
     /**
      * @param targetIndex of the person in the filtered person list to delete
-     * @param emergencyContactIndex of the emergency contact in the person's emergency contact list to delete
+     * @param deleteCommandDescriptor carries emergency contact index, if present
      */
     public DeleteCommand(Index targetIndex, DeleteCommandDescriptor deleteCommandDescriptor) {
         this.targetIndex = targetIndex;
         this.deleteCommandDescriptor = deleteCommandDescriptor;
+    }
+
+    private static Person createEditedPerson(Person personToEdit, Set<EmergencyContact> updatedEmergencyContacts)
+            throws CommandException {
+        assert personToEdit != null;
+
+        Name name = personToEdit.getName();
+        Phone phone = personToEdit.getPhone();
+        Email email = personToEdit.getEmail();
+        Address address = personToEdit.getAddress();
+        Doctor doctor = personToEdit.getDoctor();
+        Set<Tag> tagSet = personToEdit.getTags();
+
+        return new Person(name, phone, email, address, updatedEmergencyContacts, doctor, tagSet);
     }
 
     private CommandResult executeDeleteEmergencyContact(Index emergencyContactIndex,
@@ -49,9 +73,17 @@ public class DeleteCommand extends Command {
         if (personToDelete.hasOnlyOneEmergencyContact()) {
             throw new CommandException(Messages.MESSAGE_LAST_EMERGENCY_CONTACT_INDEX);
         }
+
         EmergencyContact deletedEmergencyContact =
-                personToDelete.getAndRemoveEmergencyContact(emergencyContactIndex);
-        model.setPerson(personToDelete, personToDelete);
+                personToDelete.getEmergencyContact(emergencyContactIndex);
+
+        Set<EmergencyContact> updatedEmergencyContacts =
+                personToDelete.removeEmergencyContact(deletedEmergencyContact);
+
+        Person updatedPerson = createEditedPerson(personToDelete, updatedEmergencyContacts);
+
+        // Refreshes model
+        model.setPerson(personToDelete, updatedPerson);
         return new CommandResult(String.format(MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
                 Messages.formatEmergencyContact(deletedEmergencyContact)));
     }
@@ -97,6 +129,11 @@ public class DeleteCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will
+     * replace the
+     * corresponding field value of the person.
+     */
     public static class DeleteCommandDescriptor {
         private Index emergencyContactIndex;
 

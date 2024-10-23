@@ -27,6 +27,8 @@ public class Person {
 
     // Data fields
     private final Address address;
+    // LinkedHashSet preserves the order of emergency contacts such that
+    // the index of the emergency contact can be reliably access by the Delete command.
     private final Set<EmergencyContact> emergencyContacts = new LinkedHashSet<>();
     private final Doctor doctor;
     private final Set<Tag> tags = new HashSet<>();
@@ -69,7 +71,8 @@ public class Person {
         return Collections.unmodifiableSet(emergencyContacts);
     }
 
-    public EmergencyContact getEmergencyContact(Index index) throws EmergencyContactNotFoundException {
+    public EmergencyContact getEmergencyContact(Index index)
+            throws EmergencyContactNotFoundException {
         int i = index.getZeroBased();
         for (EmergencyContact emergencyContact : emergencyContacts) {
             if (i == 0) {
@@ -80,16 +83,16 @@ public class Person {
         throw new EmergencyContactNotFoundException();
     }
 
-    public EmergencyContact getAndRemoveEmergencyContact(Index index) throws EmergencyContactNotFoundException {
-        int i = index.getZeroBased();
+    public Set<EmergencyContact> removeEmergencyContact(EmergencyContact emergencyContactToRemove) {
+        Set<EmergencyContact> updatedEmergencyContacts = new LinkedHashSet<>();
         for (EmergencyContact emergencyContact : emergencyContacts) {
-            if (i == 0) {
-                emergencyContacts.remove(emergencyContact);
-                return emergencyContact;
+            if (emergencyContact.equals(emergencyContactToRemove)) {
+                continue;
+            } else {
+                updatedEmergencyContacts.add(emergencyContact);
             }
-            i = i - 1;
         }
-        throw new EmergencyContactNotFoundException();
+        return updatedEmergencyContacts;
     }
 
     public Boolean hasOnlyOneEmergencyContact() {
