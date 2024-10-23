@@ -19,6 +19,7 @@ import seedu.address.testutil.PersonBuilder;
 class DownloadCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    Set<Tag> emptyTagSet = new HashSet<>();
     private DownloadCommand downloadCommand;
 
     @Test
@@ -44,7 +45,7 @@ class DownloadCommandTest {
     @Test
     public void execute_downloadWithoutTags_success() {
         // Test scenario where no tags are used
-        downloadCommand = new DownloadCommand(); // No tags specified
+        downloadCommand = new DownloadCommand(emptyTagSet); // No tags specified
 
         // Prepare test data
         Person alice = new PersonBuilder().withName("Alice").build();
@@ -76,7 +77,7 @@ class DownloadCommandTest {
     @Test
     public void execute_emptyPersonList_noCsvSaved() {
         // Test scenario with no persons in the model
-        downloadCommand = new DownloadCommand(); // No tags specified
+        downloadCommand = new DownloadCommand(emptyTagSet); // No tags specified
 
         // Execute the command
         CommandResult result = downloadCommand.execute(model);

@@ -31,10 +31,6 @@ public class DownloadCommandParser implements Parser<DownloadCommand> {
 
         List<String> allValues = argMultimap.getAllValues(PREFIX_TAG);
 
-        if (allValues.isEmpty()) {
-            return new DownloadCommand();
-        }
-
         Set<Tag> tagList = ParserUtil.parseTags(allValues);
 
         return new DownloadCommand(tagList);

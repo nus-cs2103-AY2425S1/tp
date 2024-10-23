@@ -42,10 +42,6 @@ public class DownloadCommand extends Command {
         this.tagList = tags;
     }
 
-    public DownloadCommand() {
-        this.tagList = null;
-    }
-
 
     @Override
     public CommandResult execute(Model model) {
@@ -55,4 +51,21 @@ public class DownloadCommand extends Command {
         StorageManager.saveCsvToFile(addressBookCsv);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DownloadCommand otherDownloadCommand)) {
+            return false;
+        }
+
+
+        assert tagList != null;
+        return tagList.equals(otherDownloadCommand.tagList);
+    }
+
 }

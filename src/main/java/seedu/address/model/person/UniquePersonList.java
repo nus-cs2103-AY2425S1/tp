@@ -110,7 +110,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns the backing list as an unmodifiable {@code ObservableList} filtered by the given tag list.
      */
     public ObservableList<Person> asUnmodifiableFilteredObservableList(Set<Tag> tagList) {
-        if (tagList == null) {
+        if (tagList.isEmpty()) {
             return asUnmodifiableObservableList();
         }
 
