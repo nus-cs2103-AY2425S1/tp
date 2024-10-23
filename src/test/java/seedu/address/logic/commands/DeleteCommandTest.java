@@ -60,14 +60,9 @@ public class DeleteCommandTest {
     @Test
     public void execute_validNricUnfilteredList_success() throws IOException {
 
-        // Assume the NRIC to delete is "S1234567A"
         String nricInput = "S1234567Z";
         Nric nric = new Nric(nricInput);
 
-        System.out.println("Available NRICs in the list:");
-        for (Person person : model.getAddressBook().getPersonList()) {
-            System.out.println(person.getNric().toString());
-        }
 
         // Find the person to delete based on their NRIC from the list
         Person personToDelete = null;
@@ -83,7 +78,6 @@ public class DeleteCommandTest {
             throw new AssertionError("Person with NRIC " + nricInput + " not found in the list");
         }
 
-        // Update the DeleteCommand to use NRIC instead of index
         DeleteCommand deleteCommand = new DeleteCommand(nric);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
