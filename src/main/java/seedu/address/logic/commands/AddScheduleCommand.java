@@ -13,17 +13,18 @@ import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
 
 /**
- * Adds a new schedule to the specified person in the address book.
+ * Adds a new schedule to the specified persons in the address book.
  * The schedule contains an event name, date, and time.
  */
 public class AddScheduleCommand extends Command {
     public static final String COMMAND_WORD = "add-schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to a contact. "
-            + "Parameters: c/CONTACT_INDEX n/NAME d/DATE t/TIME\n"
-            + "Example: " + COMMAND_WORD + " c/1 n/Dinner d/10-10-2024 t/1800";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to contacts. "
+            + "Parameters: c/CONTACT_INDEXES n/NAME d/DATE t/TIME\n"
+            + "Example: " + COMMAND_WORD + " c/1 2 n/Dinner d/10-10-2024 t/1800";
 
     public static final String MESSAGE_SUCCESS = "New schedule added: %1$s";
+    public static final String MESSAGE_INVALID_CONTACT_INDEX = "One or more contact indices provided are invalid.";
     public static final String MESSAGE_INVALID_DATE = "Date must be in the format DD-MM-YYYY.";
     public static final String MESSAGE_INVALID_TIME = "Time must be in the format HHmm (24-hour).";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule conflicts with an existing schedule.";
@@ -34,16 +35,15 @@ public class AddScheduleCommand extends Command {
     private final LocalTime time;
 
     /**
-     * Creates an AddScheduleCommand to add a schedule for a specified person.
+     * Creates an AddScheduleCommand to add a schedule for specified persons.
      * The schedule includes an event name, date, and time.
      *
-     * @param contactIndexes    The index of the person in the filtered person list.
+     * @param contactIndexes    The indices of the persons in the filtered person list.
      * @param name              The name or description of the event.
      * @param date              The date of the event in LocalDate format.
      * @param time              The time of the event in LocalTime format.
      */
-    public AddScheduleCommand(List<Index> contactIndexes, String name,
-            LocalDate date, LocalTime time) {
+    public AddScheduleCommand(List<Index> contactIndexes, String name, LocalDate date, LocalTime time) {
         this.contactIndexes = contactIndexes;
         this.name = name;
         this.date = date;
@@ -54,15 +54,14 @@ public class AddScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        // check index within range of current observable list
+        // Check if all contact indices are valid
         for (Index i : contactIndexes) {
-            assert(i.getZeroBased() >= 0);
-            if (i.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException("The contact index provided is invalid.");
+            if (i.getZeroBased() >= lastShownList.size() || i.getZeroBased() < 0) {
+                throw new CommandException("One or more contact indexes are invalid.");
             }
         }
 
-        // Retrieve the person involved
+        // Retrieve the UUIDs of the persons involved
         List<UUID> contactsList = contactIndexes.stream()
                 .map(index -> lastShownList.get(index.getZeroBased()).getUid())
                 .collect(Collectors.toList());
@@ -80,5 +79,4 @@ public class AddScheduleCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, name + " on " + date + " at " + time));
     }
-
 }
