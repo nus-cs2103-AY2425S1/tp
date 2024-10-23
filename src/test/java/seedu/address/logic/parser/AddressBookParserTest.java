@@ -4,11 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,12 +25,15 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonMeetsCriteriaPredicate;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -76,6 +84,31 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords), searchString), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        String phoneCriteria = "+65";
+        String emailCriteria = "example.com";
+        String addressCriteria = "Clementi";
+        String tagCriteria = "Inactive";
+
+        String userInput = String.format("%s %s%s %s%s %s%s %s%s",
+                FilterCommand.COMMAND_WORD,
+                PREFIX_PHONE, phoneCriteria,
+                PREFIX_EMAIL, emailCriteria,
+                PREFIX_ADDRESS, addressCriteria,
+                PREFIX_TAG, tagCriteria);
+
+        PersonMeetsCriteriaPredicate predicate = new PersonMeetsCriteriaPredicate(
+                Arrays.asList(phoneCriteria),
+                Arrays.asList(emailCriteria),
+                Arrays.asList(addressCriteria),
+                new HashSet<>(Arrays.asList(new Tag(tagCriteria)))
+        );
+
+        FilterCommand command = (FilterCommand) parser.parseCommand(userInput);
+        assertEquals(new FilterCommand(predicate), command);
     }
 
     @Test
