@@ -1,8 +1,11 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
+
+import java.util.Arrays;
 
 /**
  * Unmodifiable view of an address book
@@ -20,5 +23,11 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate tutorials.
      */
     ObservableList<Tutorial> getTutorialList();
+
+    /**
+     * Returns an unmodifiable view of the participations list.
+     * This list will not contain any duplicate tutorials.
+     */
+    ObservableList<Participation> getParticipationList();
 
 }

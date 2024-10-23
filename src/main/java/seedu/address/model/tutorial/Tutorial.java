@@ -49,7 +49,7 @@ public class Tutorial {
      */
     public boolean hasParticipation(Participation participation) {
         return participationList.stream()
-                .anyMatch(currentParticipation -> currentParticipation.equals(participation));
+                .anyMatch(currentParticipation -> currentParticipation.isSameParticipation(participation));
 
     }
 

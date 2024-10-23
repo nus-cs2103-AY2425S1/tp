@@ -8,17 +8,17 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.participation.exceptions.DuplicateParticipationException;
 import seedu.address.model.participation.exceptions.ParticipationNotFoundException;
-import seedu.address.model.tutorial.exceptions.DuplicateTutorialException;
 
 /**
  * A list of participation that enforces uniqueness between its elements and does not allow nulls.
- * A participation is considered unique by comparing using {@code Tutorial#isSameParticipation(Tutorial)}.
- * As such, adding and updating of tutorials uses Tutorial#isSameParticipation(Tutorial)
- * for equality so as to ensure that the tutorial being
- * added or updated is unique in terms of identity in the UniqueParticipationList. However, the removal of a tutorial
- * uses
- * Participation#equals(Object) so as to ensure that the tutorial with exactly the same fields will be removed.
+ * A participation is considered unique by comparing using {@code Participation#isSameParticipation(Participation)}.
+ * As such, adding and updating of participations uses Participation#isSameParticipation(Participation)
+ * for equality so as to ensure that the participation being
+ * added or updated is unique in terms of identity in the UniqueParticipationList. However, the removal of a
+ * participation uses Participation#equals(Object) so as to ensure that the participation with exactly the same fields
+ * will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -47,7 +47,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     public void add(Participation toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateTutorialException();
+            throw new DuplicateParticipationException();
         }
         internalList.add(toAdd);
     }
@@ -55,8 +55,8 @@ public class UniqueParticipationList implements Iterable<Participation> {
     /**
      * Replaces the participation {@code target} in the list with {@code editedParticipation}.
      * {@code target} must exist in the list.
-     * The participation identity of {@code editedTutorial} must not be the same as another existing participation in
-     * the list.
+     * The participation identity of {@code editedParticipation} must not be the same as another existing participation
+     * in the list.
      */
     public void setParticipation(Participation target, Participation editedParticipation) {
         requireAllNonNull(target, editedParticipation);
@@ -67,7 +67,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
         }
 
         if (!target.isSameParticipation(editedParticipation) && contains(editedParticipation)) {
-            throw new DuplicateTutorialException();
+            throw new DuplicateParticipationException();
         }
 
         internalList.set(index, editedParticipation);
@@ -80,12 +80,12 @@ public class UniqueParticipationList implements Iterable<Participation> {
 
     /**
      * Replaces the contents of this list with {@code participation}.
-     * {@code tutorials} must not contain duplicate participation.
+     * {@code participations} must not contain duplicate participation.
      */
     public void setParticipation(List<Participation> participation) {
         requireAllNonNull(participation);
         if (!participationAreUnique(participation)) {
-            throw new DuplicateTutorialException();
+            throw new DuplicateParticipationException();
         }
 
         internalList.setAll(participation);
@@ -140,7 +140,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     }
 
     /**
-     * Returns true if {@code participation} contains only unique tutorials.
+     * Returns true if {@code participation} contains only unique participations.
      */
     private boolean participationAreUnique(List<Participation> participation) {
         for (int i = 0; i < participation.size() - 1; i++) {

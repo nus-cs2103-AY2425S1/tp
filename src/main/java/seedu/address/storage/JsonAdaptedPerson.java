@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,7 +32,6 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String payment;
-    private final List<Participation> participationList;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -41,14 +41,12 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("payment") String payment,
-                             List<Participation> participationList,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.payment = payment;
-        this.participationList = participationList;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -63,7 +61,6 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         payment = source.getPayment().overdueAmount;
-        participationList = new ArrayList<Participation>();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -120,10 +117,6 @@ class JsonAdaptedPerson {
         }
         final Payment modelPayment = new Payment(payment);
 
-        if (participationList == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Participation.class.getSimpleName()));
-        }
         final List<Participation> modelParticipationList = new ArrayList<Participation>();
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
