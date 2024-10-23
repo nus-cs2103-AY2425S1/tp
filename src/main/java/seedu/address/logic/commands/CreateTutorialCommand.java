@@ -35,7 +35,7 @@ public class CreateTutorialCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TUTORIAL);
         }
 
-        model.addTutorial(toAdd);
+        model.createTutorial(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS_TUTORIAL, Messages.formatTutorial(toAdd)));
     }
 }
