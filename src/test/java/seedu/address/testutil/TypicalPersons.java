@@ -49,8 +49,8 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432").withRegisterNumber("4").withSex("M")
             .withStudentClass("2B").withEcName("John Boone").withEcNumber("92837201").withExams("Midterm")
             .withTags("owesMoney", "friends").withAttendance(new HashMap<>() {{
-                put(new AbsentDate("16-10-2024"), new AbsentReason("Family Emergency"));
-            }}).build();
+                    put(new AbsentDate("16-10-2024"), new AbsentReason("Family Emergency"));
+                    }}).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRegisterNumber("5").withSex("M")
             .withStudentClass("3C").withEcName("James Dol").withEcNumber("").withExams("Midterm")
