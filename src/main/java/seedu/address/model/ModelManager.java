@@ -13,9 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PriorityHighToLowComparator;
-import seedu.address.model.person.PriorityLowToHighComparator;
+import seedu.address.model.person.*;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -78,6 +76,12 @@ public class ModelManager implements Model {
             break;
         case "low":
             updateSortedPersonList(new PriorityLowToHighComparator());
+            break;
+        case "distant":
+            updateSortedPersonList(new DateDistantToRecentComparator());
+            break;
+        case "recent":
+            updateSortedPersonList(new DateRecentToDistantComparator());
             break;
         default:
             break;

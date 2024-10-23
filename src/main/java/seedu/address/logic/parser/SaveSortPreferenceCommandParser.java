@@ -21,8 +21,11 @@ public class SaveSortPreferenceCommandParser implements Parser<SaveSortPreferenc
             return new SaveSortPreferenceCommand("high");
         case "low":
             return new SaveSortPreferenceCommand("low");
+        case "distant":
+            return new SaveSortPreferenceCommand("distant");
+        case "recent":
+            return new SaveSortPreferenceCommand("recent");
         case "default":
-            // empty string denotes the original
             return new SaveSortPreferenceCommand("default");
         default:
             throw new ParseException(

@@ -17,7 +17,7 @@ public class SaveSortPreferenceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves your desired sorting preference as priority "
             + "or by last seen date based on the parameter.\n"
-            + "Parameters: high/low\n"
+            + "Parameters: high/low/recent/distant\n"
             + "Example: " + COMMAND_WORD + " high";
 
     private final String sortPreference;
@@ -50,25 +50,3 @@ public class SaveSortPreferenceCommand extends Command {
         return sortPreference.equals(e.sortPreference);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
