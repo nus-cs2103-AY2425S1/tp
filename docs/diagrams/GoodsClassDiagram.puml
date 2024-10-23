@@ -27,7 +27,7 @@ Class GoodsReceipt {
 }
 }
 
-Person "1" -- "0..*" Goods : supplies > 
+Person "1" -- "0..*" Goods : supplies >
 (Person, Goods) .. GoodsReceipt
 Goods "1" *-- "1" GoodsName
 Goods "1" --> "1" GoodsCategories
