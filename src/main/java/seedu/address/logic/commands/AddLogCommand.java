@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
@@ -37,10 +36,9 @@ public class AddLogCommand extends Command {
     /**
      * Creates an AddLogCommand to add the specified log to the person.
      */
-    public AddLogCommand(IdentityNumber identityNumber, String date, String entry) {
+    public AddLogCommand(IdentityNumber identityNumber, Log log) {
         this.identityNumber = identityNumber;
-        AppointmentDate appointmentDate = new AppointmentDate(date);
-        this.log = new Log(appointmentDate, entry); // Assuming Log class has a constructor accepting date and entry
+        this.log = log;
     }
 
     @Override
