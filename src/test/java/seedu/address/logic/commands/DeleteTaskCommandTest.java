@@ -65,6 +65,7 @@ public class DeleteTaskCommandTest {
         TaskList updatedTaskList = updatedPerson.getTaskList();
         updatedTaskList.remove(targetTask);
         expectedModel.setPerson(targetPerson, updatedPerson);
+        assertEquals(expectedModel, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
         assertNotEquals(model, expectedModel);
 
         assertCommandSuccess(deleteTaskCommand, model, expectedMessage, expectedModel);

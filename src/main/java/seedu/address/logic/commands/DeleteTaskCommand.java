@@ -48,15 +48,16 @@ public class DeleteTaskCommand extends Command {
     /**
      * Creates an DeleteTaskCommand to delete a task from specified User at the specified Displayed Index{@code Person}
      */
-    public DeleteTaskCommand(Name name, Index targetIndex) {
-        this.targetName = name;
+    public DeleteTaskCommand(Name targetName, Index targetIndex) {
+        requireNonNull(targetName);
+        requireNonNull(targetIndex);
+        this.targetName = targetName;
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        requireNonNull(targetName);
 
         // Get the person we are looking for
         ObservableList<Person> personList = model.getAddressBook().getPersonList();

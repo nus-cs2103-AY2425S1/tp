@@ -133,18 +133,6 @@ public class CommandTestUtil {
     }
 
     /**
-     * Simulates adding a task to a person without executing the command,
-     * confirms that the {@code actualModel} matches the {@code expectedModel} after the task addition.
-     */
-    public static void assertAddTaskCommandSuccess(Model actualModel, Model expectedModel,
-                                                   Person originalPerson, Task addedTask) {
-        Person updatedPerson = new PersonBuilder(originalPerson).build();
-        updatedPerson.getTaskList().add(addedTask);
-        expectedModel.setPerson(originalPerson, updatedPerson);
-        assertEquals(expectedModel, actualModel);
-    }
-
-    /**
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
