@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
@@ -74,6 +76,15 @@ public class AddTransactionCommandParserTest {
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/ string" + userInputWithNoIndex, MESSAGE_INVALID_FORMAT);
     }
+
+    @Test
+    public void parse_invalidDate_failure() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInputWithInvalidDate = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
+                + VALID_OTHER_PARTY_INPUT + INVALID_DATE_INPUT;
+        assertParseFailure(parser, userInputWithInvalidDate, MESSAGE_INVALID_DATE_FORMAT);
+    }
+
 
     @Test
     public void parse_allFieldsSpecified_success() {

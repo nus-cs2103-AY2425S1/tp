@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Transaction;
+import seedu.address.model.person.TransactionDateComparator;
 
 /**
  * Adds a transaction to an existing person in the address book.
@@ -54,7 +56,7 @@ public class AddTransactionCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        //to be implemented
+
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -62,8 +64,10 @@ public class AddTransactionCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        List<Transaction> transactions = personToEdit.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(toAdd);
+        transactions.sort(new TransactionDateComparator());
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
 
