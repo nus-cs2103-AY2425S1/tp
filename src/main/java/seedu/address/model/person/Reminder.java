@@ -51,8 +51,8 @@ public class Reminder {
      *
      * @return reminderDate of Reminder
      */
-    public LocalDate getReminderDate() {
-        return reminderDate;
+    public String getReminderDateAsString() {
+        return reminderDate.format(formatter);
     }
 
     /**
