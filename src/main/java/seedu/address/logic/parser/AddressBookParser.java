@@ -22,6 +22,7 @@ import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateTaskCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -106,6 +107,9 @@ public class AddressBookParser {
 
         case UpdateTaskCommand.COMMAND_WORD:
             return new UpdateTaskCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         case ViewTasksCommand.COMMAND_WORD:
             return new ViewTasksCommand();

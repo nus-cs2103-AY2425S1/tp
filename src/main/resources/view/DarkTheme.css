@@ -132,6 +132,12 @@
     -fx-text-fill: #010504;
 }
 
+.custom-separator {
+    -fx-background-color: white;
+    -fx-padding: 0.001 0 0.001 0;
+    -fx-border-width: 1;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

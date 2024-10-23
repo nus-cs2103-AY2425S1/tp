@@ -46,12 +46,10 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+        <SplitPane fx:id="mainSplitPane" dividerPositions="1" VBox.vgrow="ALWAYS">
+          <StackPane fx:id="personListPanelPlaceholder" minWidth="200" />
+          <StackPane fx:id="detailsDisplayPlaceholder" visible="false" /> <!-- Initially hidden -->
+        </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
