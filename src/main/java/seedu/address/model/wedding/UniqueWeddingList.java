@@ -8,10 +8,20 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+/**
+ * A list of wedding that enforces uniqueness between its elements and does not allow nulls.
+ * A wedding is considered unique by comparing using {@code Wedding#isSameWedding(Wedding)}.
+ * As such, adding and updating of persons uses Wedding#isSameWedding(Wedding) for equality
+ * so as to ensure that the person being added or updated is unique in terms of identity in the UniquePersonList.
+ * However, the removal of a person uses Wedding#isSameWedding(Object)
+ * so as to ensure that the person with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Wedding#isSameWedding(Wedding)
+ */
 
 public class UniqueWeddingList implements Iterable<Wedding> {
 
@@ -20,73 +30,72 @@ public class UniqueWeddingList implements Iterable<Wedding> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent wedding as the given argument.
      */
     public boolean contains(Wedding toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameWedding);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a wedding to the list.
+     * The wedding must not already exist in the list.
      */
     public void add(Wedding toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            // throw new DuplicateWeddingException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the wedding {@code target} in the list with {@code editedWedding}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The wedding identity of {@code editedWedding} must not be the same as another existing wedding in the list.
      */
-    public void setWeddings(Wedding target, Wedding editedWedding) {
+    public void setWedding(Wedding target, Wedding editedWedding) {
         requireAllNonNull(target, editedWedding);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            // throw new WeddingNotFoundException();
         }
 
         if (!target.isSameWedding(editedWedding) && contains(editedWedding)) {
-            throw new DuplicatePersonException();
+            // throw new DuplicateWeddingException();
         }
 
         internalList.set(index, editedWedding);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent wedding from the list.
+     * The wedding must exist in the list.
      */
     public void remove(Wedding toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            // throw new WeddingNotFoundException();
         }
     }
 
-    public void setWeddings(List<Wedding> weddings) {
-        requireAllNonNull(weddings);
-        if (!weddingsAreUnique(weddings)) {
-            throw new DuplicatePersonException();
+    public void setWeddings(UniqueWeddingList replacement) {
+        requireNonNull(replacement);
+        if (!weddingsAreUnique(replacement)) {
+            //throw new DuplicateWeddingException();
         }
-
-        internalList.setAll(weddings);
+        internalList.setAll(replacement.internalList);
     }
 
     /**
      * Replaces the contents of this list with {@code weddings}.
      * {@code weddings} must not contain duplicate weddings.
      */
-    public void setWedding(List<Wedding> weddings) {
+    public void setWeddings(List<Wedding> weddings) {
         requireAllNonNull(weddings);
         if (!weddingsAreUnique(weddings)) {
-            throw new DuplicatePersonException();
+            // throw new DuplicateWeddingException();
         }
 
         internalList.setAll(weddings);

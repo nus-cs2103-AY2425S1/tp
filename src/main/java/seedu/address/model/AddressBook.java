@@ -8,8 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.wedding.UniqueWeddingList;
-import seedu.address.model.wedding.Wedding;
 
 /**
  * Wraps all data at the address-book level
@@ -54,6 +52,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the weddings list with {@code weddings}.
+     * {@code weddings} must not contain duplicate weddings.
+     */
+    public void setWeddings(List<Wedding> weddings) {
+        this.weddings.setWeddings(weddings);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -61,8 +67,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         setWeddings(newData.getWeddingList());
         setPersons(newData.getPersonList());
     }
-
-    public void setWeddings(List<Wedding> weddings) {this.weddings.setWeddings(weddings); }
 
     //// person-level operations
 
@@ -117,32 +121,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
-
-
-    //// wedding-level operations
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Returns true if a wedding with the same identity as {@code wedding} exists in the address book.
+     */
+    public boolean hasWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return weddings.contains(wedding);
+    }
+
+    /**
+     * Adds a wedding to the address book.
+     * The wedding must not already exist in the address book.
      */
     public void addWedding(Wedding w) {
         weddings.add(w);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given person {@code target} in the list with {@code editedWedding}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The wedding identity of {@code editedWedding} must not be the same as
+     * another existing wedding in the address book.
      */
-    public void setWeddings(Wedding target, Wedding editedWedding) {
+    public void setWedding(Wedding target, Wedding editedWedding) {
         requireNonNull(editedWedding);
 
-        weddings.setWeddings(target, editedWedding);
-    }
-
-    public boolean hasWedding(Wedding wedding) {
-        requireNonNull(wedding);
-        return weddings.contains(wedding);
+        weddings.setWedding(target, editedWedding);
     }
 
     /**
@@ -152,7 +156,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeWedding(Wedding key) {
         weddings.remove(key);
     }
-
 
 
     //// util methods
