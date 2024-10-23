@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -157,6 +157,20 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Proposed\] Add Buyer Feature
+
+#### Proposed Implementation
+The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
+The sequence diagram is shown as such:
+<puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
+
+### \[Proposed\] Delete Buyer Feature
+
+#### Proposed Implementation
+The deletebuyer command takes in the phone number of the buyer and deletes the buyer from the client book based on the phone number.
+The sequence diagram is shown as such:
+<puml src="diagrams/DeleteBuyerSequenceDiagram.puml" alt="DeleteBuyer" />
 
 ### \[Proposed\] Filter property feature
 

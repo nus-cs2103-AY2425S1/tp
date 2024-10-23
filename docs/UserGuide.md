@@ -205,16 +205,16 @@ Examples:
 
 Deletes a specified meeting from the meeting book of ClientGrid.
 
-Format: `deletemeeting t/MEETING_TITLE d/MEETING_DATE`
+Format: `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
 
 * Deletes a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
 * The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
 * The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
 
 Examples:
-* `deletemeeting t/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
+* `deletemeeting mt/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
 
-  ![result for 'deletemeeting t/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
+  ![result for 'deletemeeting mt/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
 
 ### Clearing all entries : `clear`
 
@@ -276,4 +276,4 @@ Action     | Format, Examples
 **Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
 **Delete Property** | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
 **Filtering Clients** | `filterclient n/NAME`
-**Delete Meeting** | `deletemeeting t/MEETING_TITLE d/MEETING_DATE`
+**Delete Meeting** | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`

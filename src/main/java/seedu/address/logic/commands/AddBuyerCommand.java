@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,6 +36,9 @@ public class AddBuyerCommand extends AddClientCommand {
     /** Error message shown when attempting to add a duplicate buyer. */
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
 
+    /** Logger to log relevant information for debugging purposes. */
+    private static final Logger logger = LogsCenter.getLogger(AddBuyerCommand.class);
+
     /**
      * Constructs an {@code AddBuyerCommand} to add the specified {@code Buyer}.
      *
@@ -40,6 +46,9 @@ public class AddBuyerCommand extends AddClientCommand {
      */
     public AddBuyerCommand(Buyer buyer) {
         super(buyer);
+        // Defensive programming: Ensure that the buyer is not null
+        assert buyer != null : "Buyer should not be null";
+        logger.info("AddBuyerCommand created for buyer: " + buyer);
     }
 
     /**
@@ -53,10 +62,19 @@ public class AddBuyerCommand extends AddClientCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Ensure that toAdd is a valid buyer and not null
+        assert toAdd != null : "Buyer to be added cannot be null";
+        logger.info("Executing AddBuyerCommand for buyer: " + toAdd);
+
         if (model.hasClient(toAdd) && toAdd instanceof Buyer) {
+            logger.warning("Attempted to add a duplicate buyer: " + toAdd);
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
+
         model.addClient(toAdd);
+
+        logger.info("Successfully added buyer: " + toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS_BUYER, Messages.format(toAdd)));
     }
 

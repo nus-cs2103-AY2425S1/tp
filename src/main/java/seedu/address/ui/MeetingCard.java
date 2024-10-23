@@ -11,7 +11,7 @@ import seedu.address.model.meeting.Meeting;
  */
 public class MeetingCard extends UiPart<Region> {
 
-    private static final String FXML = "MeetingListCard.fxml";
+    private static final String FXML = "MeetingCard.fxml";
 
     public final Meeting meeting;
 
