@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.event.ReadOnlyEventManager;
 
 /**
  * Represents an abstract command that can be executed within a model and event management context.

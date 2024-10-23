@@ -137,7 +137,7 @@ public class ModelManager implements Model {
     }
     //=========== Event Manager ==============================================================================
     @Override
-    public ReadOnlyEventManager getEventManager() {
+    public EventManager getEventManager() {
         return eventManager;
     }
     //=========== Filtered Person List Accessors =============================================================
