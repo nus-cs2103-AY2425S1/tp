@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -132,6 +133,8 @@ public class ModelManagerTest {
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
         EventManager eventManager = new EventManager();
+        EventManager differentEventManager = new EventManager();
+        differentEventManager.addEvent(new Event("Different Event"));
 
         // same values -> returns true
         modelManager = new ModelManager(addressBook, eventManager, userPrefs);
@@ -162,5 +165,13 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, eventManager, differentUserPrefs)));
+
+        // same eventManager -> returns true
+        ModelManager sameEventManagerModel = new ModelManager(addressBook, eventManager, userPrefs);
+        assertTrue(modelManager.equals(sameEventManagerModel));
+
+        // different eventManager -> returns false
+        ModelManager differentEventManagerModel = new ModelManager(addressBook, differentEventManager, userPrefs);
+        assertFalse(modelManager.equals(differentEventManagerModel));
     }
 }

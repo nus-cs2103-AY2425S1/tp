@@ -61,6 +61,6 @@
     "address" : "4th street",
     "telegramUsername" : "george",
     "uniqueid": "ab2605cd-c764-4d76-a38a-39575ecce1b0",
-    "roles" : ["attendee"]
+    "roles" : ["vendor"]
   } ]
 }

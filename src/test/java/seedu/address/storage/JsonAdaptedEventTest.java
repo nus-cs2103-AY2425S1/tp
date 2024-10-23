@@ -39,7 +39,7 @@ public class JsonAdaptedEventTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedEvent event = new JsonAdaptedEvent(INVALID_NAME, VALID_ATTENDEES,
+        JsonAdaptedEvent event = new JsonAdaptedEvent(null, VALID_ATTENDEES,
                                                     VALID_VENDORS, VALID_SPONSORS, VALID_VOLUNTEERS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Name");
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);

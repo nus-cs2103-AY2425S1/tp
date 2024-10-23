@@ -104,7 +104,17 @@ public class EventList implements Iterable<Event> {
         }
 
         EventList otherEventList = (EventList) other;
-        return internalList.equals(otherEventList.internalList);
+        if (internalList.size() != otherEventList.internalList.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (!internalList.get(i).equals(otherEventList.internalList.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

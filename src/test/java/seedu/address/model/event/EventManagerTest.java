@@ -87,5 +87,41 @@ public class EventManagerTest {
         eventManager.addEvent(event3);
         assertTrue(this.eventManager.hasEvent(new Event("event3")));
     }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        // Test where other == this
+        assertTrue(eventManager.equals(eventManager));
+    }
+
+    @Test
+    public void equals_nullObject_returnsFalse() {
+        // Test where other is null
+        assertFalse(eventManager.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        // Test where other is not an instance of EventManager
+        assertFalse(eventManager.equals("not an event manager"));
+    }
+
+    @Test
+    public void equals_sameContent_returnsTrue() {
+        // Test where two EventManager objects have the same content
+        EventManager anotherEventManager = new EventManager();
+        anotherEventManager.addEvent(event1);
+        eventManager.addEvent(event1);
+        assertTrue(eventManager.equals(anotherEventManager));
+    }
+
+    @Test
+    public void equals_differentContent_returnsFalse() {
+        // Test where two EventManager objects have different content
+        EventManager anotherEventManager = new EventManager();
+        anotherEventManager.addEvent(event2);
+        eventManager.addEvent(event1);
+        assertFalse(eventManager.equals(anotherEventManager));
+    }
 }
 

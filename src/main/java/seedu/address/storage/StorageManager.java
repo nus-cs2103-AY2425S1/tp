@@ -23,7 +23,8 @@ public class StorageManager implements Storage {
     private EventManagerStorage eventManagerStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage}
+     * and {@code EventManagerStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage,
                           UserPrefsStorage userPrefsStorage,
@@ -104,8 +105,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveEventManager(ReadOnlyEventManager eventManager, Path filePath) {
+    public void saveEventManager(ReadOnlyEventManager eventManager, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        saveEventManager(eventManager, filePath);
+        eventManagerStorage.saveEventManager(eventManager, filePath);
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -14,6 +15,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.EventManager;
+import seedu.address.model.event.ReadOnlyEventManager;
 
 public class StorageManagerTest {
 
@@ -64,6 +67,23 @@ public class StorageManagerTest {
     @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void eventManagerReadSave() throws Exception {
+        /*
+         * This is an integration test that verifies the StorageManager is properly wired to the
+         * JsonEventManagerStorage class.
+         */
+        EventManager original = getTypicalEventManager();
+        storageManager.saveEventManager(original);
+        ReadOnlyEventManager retrieved = storageManager.readEventManager().get();
+        assertEquals(original, new EventManager(retrieved));
+    }
+
+    @Test
+    public void getEventManagerFilePath() {
+        assertNotNull(storageManager.getEventManagerFilePath());
     }
 
 }

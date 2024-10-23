@@ -82,17 +82,17 @@ public class JsonAdaptedEvent {
 
         final Set<Person> modelVendors = new HashSet<>();
         for (JsonAdaptedPerson vendor : vendors) {
-            modelAttendees.add(vendor.toModelType());
+            modelVendors.add(vendor.toModelType());
         }
 
         final Set<Person> modelSponsors = new HashSet<>();
         for (JsonAdaptedPerson sponsor : sponsors) {
-            modelAttendees.add(sponsor.toModelType());
+            modelSponsors.add(sponsor.toModelType());
         }
 
         final Set<Person> modelVolunteers = new HashSet<>();
         for (JsonAdaptedPerson volunteer : volunteers) {
-            modelAttendees.add(volunteer.toModelType());
+            modelVolunteers.add(volunteer.toModelType());
         }
         return new Event(modelName, modelAttendees,
                         modelVendors, modelSponsors, modelVolunteers);

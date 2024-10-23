@@ -31,9 +31,24 @@ public class TypicalEvents {
 
     // Manually added events
     public static final Event SPORTS_FESTIVAL = new EventBuilder().withName("Sports Festival")
-            .withAttendees(getPersonSet(TypicalPersons.CARL))
+            .withAttendees(getPersonSet(TypicalPersons.ALICE))
             .withVendors(getPersonSet(TypicalPersons.DANIEL))
-            .withSponsors(getPersonSet(TypicalPersons.GEORGE))
+            .withSponsors(getPersonSet(TypicalPersons.BENSON))
+            .withVolunteers(getPersonSet(TypicalPersons.ELLE))
+            .build();
+
+    // Manually added events
+    public static final Event TEST_EVENT = new EventBuilder().withName("Test Event")
+            .withAttendees(getPersonSet(TypicalPersons.ALICE))
+            .withVendors(getPersonSet(TypicalPersons.DANIEL))
+            .withSponsors(getPersonSet(TypicalPersons.BENSON))
+            .withVolunteers(getPersonSet(TypicalPersons.ELLE))
+            .build();
+
+    public static final Event TEST_EVENT_2 = new EventBuilder().withName("Test Event 2")
+            .withAttendees(getPersonSet(TypicalPersons.ALICE))
+            .withVendors(getPersonSet(TypicalPersons.DANIEL))
+            .withSponsors(getPersonSet(TypicalPersons.BENSON))
             .withVolunteers(getPersonSet(TypicalPersons.ELLE))
             .build();
 
