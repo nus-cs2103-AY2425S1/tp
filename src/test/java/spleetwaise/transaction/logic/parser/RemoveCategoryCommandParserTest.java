@@ -5,11 +5,12 @@ import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertP
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.commands.RemoveCategoryCommand;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -23,7 +24,7 @@ public class RemoveCategoryCommandParserTest {
 
     @BeforeEach
     void setup() {
-        CommonModel.initialise(new ModelManager(), new spleetwaise.transaction.model.ModelManager());
+        CommonModel.initialise(new AddressBookModelManager(), new TransactionBookModelManager());
     }
 
     @Test
