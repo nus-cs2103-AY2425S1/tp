@@ -9,7 +9,6 @@ import static seedu.hireme.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLIC
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +20,15 @@ import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
 import seedu.hireme.logic.commands.ListCommand;
 import seedu.hireme.logic.commands.SortCommand;
+import seedu.hireme.logic.commands.StatusCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.model.internshipapplication.DateComparator;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.testutil.InternshipApplicationBuilder;
 import seedu.hireme.testutil.InternshipApplicationUtil;
+
 
 public class AddressBookParserTest {
 
@@ -64,7 +66,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -96,5 +98,23 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_statusAccept_success() throws Exception {
+        StatusCommand command = (StatusCommand) parser.parseCommand("/accept 1");
+        assertEquals(new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.ACCEPTED), command);
+    }
+
+    @Test
+    public void parseCommand_statusPending_success() throws Exception {
+        StatusCommand command = (StatusCommand) parser.parseCommand("/pending 1");
+        assertEquals(new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.PENDING), command);
+    }
+
+    @Test
+    public void parseCommand_statusReject_success() throws Exception {
+        StatusCommand command = (StatusCommand) parser.parseCommand("/reject 1");
+        assertEquals(new StatusCommand(INDEX_FIRST_INTERNSHIP_APPLICATION, Status.REJECTED), command);
     }
 }

@@ -85,6 +85,14 @@ public class InternshipApplicationBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code status} of the {@code InternshipApplication} that we are building.
+     */
+    public InternshipApplicationBuilder withStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
     public InternshipApplication build() {
         return new InternshipApplication(company, date, role);
     }

@@ -72,7 +72,8 @@ public class AddressBookTest {
     @Test
     public void hasItem_itemWithSameIdentityFieldsInAddressBook_returnsFalse() {
         addressBook.addItem(APPLE);
-        InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withRole(VALID_ROLE_BOFA).build();
+        InternshipApplication editedApple = new
+                InternshipApplicationBuilder(APPLE).withRole(VALID_ROLE_BOFA).build();
         assertFalse(addressBook.hasItem(editedApple));
     }
 
