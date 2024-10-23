@@ -17,9 +17,9 @@ import seedu.address.model.tag.Tag;
  */
 public class CampusConnect implements ReadOnlyCampusConnect {
 
-    private static final Stack<ReadOnlyCampusConnect> prev = new Stack<>();
-    private static final Stack<ReadOnlyCampusConnect> future = new Stack<>();
     private final UniquePersonList persons;
+    private final Stack<ReadOnlyCampusConnect> prev = new Stack<>();
+    private final Stack<ReadOnlyCampusConnect> future = new Stack<>();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
