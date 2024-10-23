@@ -28,7 +28,7 @@ public class SexTest {
         assertFalse(Sex.isValidSex("")); // empty string
         assertFalse(Sex.isValidSex(" ")); // spaces only
 
-        // valid addresses
+        // valid sexes
         assertTrue(Sex.isValidSex("Female"));
         assertTrue(Sex.isValidSex("Male"));
         assertTrue(Sex.isValidSex("Unknown gender"));

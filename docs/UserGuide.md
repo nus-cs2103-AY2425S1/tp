@@ -72,11 +72,15 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows you a help window with useful resources which includes:
+- A URL to the User Guide displayed at the top. You can copy the URL directly to your clipboard by clicking the “Copy URL” button.
+- A command summary table below the URL, displaying available commands, their formats, and examples.
+- You can copy the command format or example from the table and paste it into the command box.
+- You can click on the table headers to sort commands in ascending or descending order.
 
 Format: `help`
+
+![helpwindow.png](images%2Fhelpwindow.png)
 
 
 ### Adding a person: `add`
@@ -109,6 +113,15 @@ Format: `list`
 
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
+### Listing starred persons : `list *`
+
+Shows a list of all starred persons in the address book.
+
+Format: `list *`
+
+* No other parameters should be supplied aside from `*`.
+* You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -118,7 +131,7 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/
 * Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 * You can remove all the person’s appointments by typing `ap/` without
@@ -169,6 +182,26 @@ Examples:
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 
 
+### Editing a person's notes : `note`
+
+Edits an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
+
+Format: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
+
+* Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
+* At least one of the fields must be provided.
+* When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
+* You can remove all the person’s appointments by typing `ap/` without
+  specifying any appointments after it.
+* You can remove all the person’s medications by typing `m/` without
+    specifying any medications after it.
+* You can remove all the person’s remarks by typing `r/` without
+    specifying any remarks after it.
+
+Examples:
+*  `note John Doe ap/01/01/2025 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
+*  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -185,11 +218,53 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Starring a person : `star`
+
+Stars the specified person from the address book into favourites.
+
+Format: `star INDEX` / `star NAME`
+
+* Stars the person at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `star Alex Yeoh` stars the person with name `Alex Yeoh` in the address book.
+* `list` followed by `star 2` stars the 2nd person in the address book.
+* `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
+
+### Unstarring a person : `unstar`
+
+Unstars the specified person from the address book removing them from favourites.
+
+Format: `unstar INDEX` / `unstar NAME`
+
+* Unstars the person at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `unstar Alex Yeoh` unstars the person with name `Alex Yeoh` in the address book.
+* `list` followed by `unstar 2` unstars the 2nd person in the address book.
+* `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Exporting the contacts : `export`
+
+Exports contact info in file path `data/addressbook.json`.
+
+Format: `export`
+
+- Locate file `addressbook.json` under the folder `data` that will be added to the current folder of `addressbook.jar` upon executing `export`.
 
 ### Exiting the program : `exit`
 
@@ -239,7 +314,11 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` 
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
-**Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
+**Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com` 
+**Export** | `export` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
-**List**   | `list`
+**Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`
 **Help**   | `help`
+**List**   | `list` <br/>`list *` (to list starred contacts) 
+**Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
+**Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` 

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 /**
  * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidAppointment(String)}
+ * Guarantees: immutable; date is valid as declared in {@link #isValidAppointment(String)}
  */
 public class Appointment {
 

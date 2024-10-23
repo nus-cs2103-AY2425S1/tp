@@ -6,13 +6,25 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "age" : "24",
     "sex" : "Female",
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "note": {
+      "medication": ["med1", "med2"],
+      "appointments": ["01/01/2023 0000"],
+      "remark": ["remark1", "remark2"]
+    },
+    "starredStatus" : "false"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
     "age" : "24",
-    "sex" : "Female"
+    "sex" : "Female",
+    "note": {
+      "medication": ["med1", "med2"],
+      "appointments": ["01/01/2023 0000"],
+      "remark": ["remark1", "remark2"]
+    },
+    "starredStatus" : "false"
   } ]
 }

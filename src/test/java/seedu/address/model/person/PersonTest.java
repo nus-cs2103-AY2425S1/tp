@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TWO
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -104,6 +105,10 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different note -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNote(null, VALID_REMARK_ONE, null).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -111,7 +116,8 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", age="
                 + ALICE.getAge() + ", sex=" + ALICE.getSex()
-                + ", appointments=" + ALICE.getAppointment() + ", tags=" + ALICE.getTags() + "}";
+                + ", appointments=" + ALICE.getAppointment() + ", tags=" + ALICE.getTags()
+                + ", starredStatus=" + ALICE.getStarredStatus() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

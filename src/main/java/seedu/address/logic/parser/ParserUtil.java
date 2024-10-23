@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -180,5 +181,59 @@ public class ParserUtil {
             appointmentSet.add(parseAppointment(appointmentDates));
         }
         return appointmentSet;
+    }
+
+    /**
+     * Parses a {@code String medications} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Medication} is invalid.
+     */
+    public static String parseMedication(String medication) throws ParseException {
+        requireNonNull(medication);
+        String trimmedMedication = medication.trim();
+        if (!Note.isValidString(trimmedMedication)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedMedication;
+    }
+
+    /**
+     * Parses {@code Collection<String> Medications} into a {@code Set<String>}.
+     */
+    public static Set<String> parseMedications(Collection<String> medications) throws ParseException {
+        requireNonNull(medications);
+        final Set<String> medicationSet = new HashSet<>();
+        for (String medication : medications) {
+            medicationSet.add(parseMedication(medication));
+        }
+        return medicationSet;
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Remark} is invalid.
+     */
+    public static String parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Note.isValidString(trimmedRemark)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedRemark;
+    }
+
+    /**
+     * Parses {@code Collection<String> Remarks} into a {@code Set<String>}.
+     */
+    public static Set<String> parseRemarks(Collection<String> remarks) throws ParseException {
+        requireNonNull(remarks);
+        final Set<String> remarkSet = new HashSet<>();
+        for (String remark : remarks) {
+            remarkSet.add(parseRemark(remark));
+        }
+        return remarkSet;
     }
 }
