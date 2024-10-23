@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_SCORE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEcNameCommand;
 import seedu.address.logic.commands.AddEcNumberCommand;
 import seedu.address.logic.commands.AddExamCommand;
+import seedu.address.logic.commands.AddExamScoreCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -164,6 +166,22 @@ public class AddressBookParserTest {
         AddExamCommand command = (AddExamCommand) parser.parseCommand(
                 AddExamCommand.COMMAND_WORD + " "
                         + PREFIX_EXAM + exam);
+
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_addExamScore() throws Exception {
+
+        final String exam = "Midterm";
+        final String score = "85";
+
+        AddExamScoreCommand expected = new AddExamScoreCommand(INDEX_FIRST_PERSON, new Exam(exam), score);
+        AddExamScoreCommand command = (AddExamScoreCommand) parser.parseCommand(
+                AddExamScoreCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_EXAM + exam + " "
+                        + PREFIX_EXAM_SCORE + score);
 
         assertEquals(expected, command);
     }
