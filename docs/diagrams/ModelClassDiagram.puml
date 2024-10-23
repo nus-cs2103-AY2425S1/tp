@@ -19,6 +19,14 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class BuyingProperties
+Class SellingProperties
+
+Class Property
+Class "<<enumeration>>\nHousingType" as HousingType
+Class PostalCode
+Class UnitNumber
+Class Price
 
 Class I #FFFFFF
 }
@@ -42,13 +50,27 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> BuyingProperties
+Person *--> SellingProperties
+
+SellingProperties --> "*" Property
+BuyingProperties --> "*" Property
+
+Property *--> HousingType
+Property *--> PostalCode
+Property *--> UnitNumber
+Property *--> Price
+Property *--> "*" Tag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+ModelManager -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> BuyingProperties
+BuyingProperties -[hidden]right-> SellingProperties
 
-ModelManager --> "~* filtered" Person
+ModelManager -----> "~* filtered" Person
 @enduml
