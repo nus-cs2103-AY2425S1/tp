@@ -20,6 +20,8 @@ Class Name
 Class Phone
 Class Subject
 Class Tag
+Class "{abstract}\nFee" as Fee
+Class PaidAmount
 
 Class I #FFFFFF
 }
@@ -44,6 +46,9 @@ Student *--> Email
 Student *--> Address
 Student *--> "*" Tag
 Student *--> Subject
+Student *--> PaidAmount
+PaidAmount -up-|> Fee
+
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I
