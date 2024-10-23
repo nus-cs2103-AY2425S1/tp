@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.JsonAdaptedPerson;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -27,7 +28,7 @@ public class JsonAdaptedTransactionTest {
 
     @BeforeEach
     public void setUp() {
-        addressBookModel = new spleetwaise.address.model.ModelManager();
+        addressBookModel = new AddressBookModelManager();
         for (Person p : TEST_PEOPLE) {
             addressBookModel.addPerson(p);
         }

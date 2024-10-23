@@ -3,8 +3,8 @@ package spleetwaise.transaction.logic.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.transaction.model.ModelManager;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.testutil.TypicalIndexes;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
@@ -18,8 +18,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalTransactions.getTypicalTransactionBook());
-        expectedModel = new ModelManager(model.getTransactionBook());
+        model = new TransactionBookModelManager(TypicalTransactions.getTypicalTransactionBook());
+        expectedModel = new TransactionBookModelManager(model.getTransactionBook());
     }
 
     @Test

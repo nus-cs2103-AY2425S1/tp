@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -20,14 +21,15 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+        model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+        CommonModel.initialise(model, null);
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        AddressBookModel expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
         CommandTestUtil.assertCommandSuccess(new AddCommand(validPerson), model,

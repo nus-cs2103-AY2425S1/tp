@@ -121,6 +121,14 @@ public class Transaction {
         return otherTxn.getId().equals(getId());
     }
 
+    /**
+     * Returns true if txn has person with personId.
+     */
+    public boolean isByPersonId(String personId) {
+        requireNonNull(personId);
+        return this.person.getId().equals(personId);
+    }
+
     @Override
     public int hashCode() {
         return this.id.hashCode();

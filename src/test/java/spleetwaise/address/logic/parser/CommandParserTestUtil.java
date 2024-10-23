@@ -19,7 +19,7 @@ public class CommandParserTestUtil {
             Command expectedCommand
     ) {
         try {
-            spleetwaise.commons.logic.commands.Command command = parser.parse(userInput);
+            Command command = parser.parse(userInput);
             assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);

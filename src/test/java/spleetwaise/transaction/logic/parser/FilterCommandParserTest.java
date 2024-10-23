@@ -7,13 +7,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.commands.FilterCommand;
-import spleetwaise.transaction.model.ModelManager;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -25,8 +26,8 @@ public class FilterCommandParserTest {
     private static final Amount testAmount = TypicalTransactions.SEANOWESME.getAmount();
     private static final Description testDescription = TypicalTransactions.SEANOWESME.getDescription();
     private static final Date testDate = TypicalTransactions.SEANOWESME.getDate();
-    private static final AddressBookModel abModel = new spleetwaise.address.model.ModelManager();
-    private static final TransactionBookModel txnModel = new ModelManager();
+    private static final AddressBookModel abModel = new AddressBookModelManager();
+    private static final TransactionBookModel txnModel = new TransactionBookModelManager();
 
     private final FilterCommandParser parser = new FilterCommandParser();
 

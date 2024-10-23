@@ -7,7 +7,7 @@ import static spleetwaise.transaction.logic.parser.CommandParserTestUtil.assertP
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -29,7 +29,7 @@ public class AddCommandParserTest {
 
     @BeforeEach
     void setup() {
-        CommonModel.initialise(new ModelManager(), null);
+        CommonModel.initialise(new AddressBookModelManager(), null);
     }
 
     @Test

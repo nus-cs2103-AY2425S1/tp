@@ -12,12 +12,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.transaction.model.ModelManager;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -29,8 +30,8 @@ public class FilterCommandTest {
     private static final Amount testAmount = TypicalTransactions.SEANOWESME.getAmount();
     private static final Description testDescription = TypicalTransactions.SEANOWESME.getDescription();
     private static final Date testDate = TypicalTransactions.SEANOWESME.getDate();
-    private static final AddressBookModel abModel = new spleetwaise.address.model.ModelManager();
-    private static final TransactionBookModel txnModel = new ModelManager();
+    private static final AddressBookModel abModel = new AddressBookModelManager();
+    private static final TransactionBookModel txnModel = new TransactionBookModelManager();
 
     @BeforeAll
     public static void setUp() {
@@ -87,7 +88,8 @@ public class FilterCommandTest {
     @Test
     public void execute_descriptionDifferentCaseOnly_success() {
         FilterCommand cmd = new FilterCommand(null, null,
-                new Description(testDescription.toString().toLowerCase()), null);
+                new Description(testDescription.toString().toLowerCase()), null
+        );
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
         assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
@@ -159,9 +161,11 @@ public class FilterCommandTest {
     @Test
     public void toString_success() {
         FilterCommand cmd = new FilterCommand(null, null, testDescription, null);
-        assertEquals("spleetwaise.transaction.logic.commands.FilterCommand{contact=null, amount=null, "
-                + "description=Sean owes me a lot for a landed property in Sentosa, date=null}",
-                cmd.toString());
+        assertEquals(
+                "spleetwaise.transaction.logic.commands.FilterCommand{contact=null, amount=null, "
+                        + "description=Sean owes me a lot for a landed property in Sentosa, date=null}",
+                cmd.toString()
+        );
     }
 }
 
