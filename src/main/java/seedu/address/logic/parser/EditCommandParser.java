@@ -15,7 +15,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,7 +36,26 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        String target;
+        Index index = null;
+        NameMatchesKeywordPredicate predicate = null;
+
+        try {
+            String target = argMultimap.getPreamble();
+
+            if (target.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+
+            if (isNumeric(target)) {
+                index = ParserUtil.parseIndex(target);
+            } else {
+                String[] nameKeywords = target.split("\\s+");
+                predicate = new NameMatchesKeywordPredicate(Arrays.asList(nameKeywords));
+            }
+
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
@@ -61,23 +79,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        try {
-            target = argMultimap.getPreamble();
+        return new EditCommand(index, predicate, editPersonDescriptor);
 
-            if (isNumeric(target)) {
-                Index index = ParserUtil.parseIndex(target);
-                return new EditCommand(index, null, editPersonDescriptor);
-            } else {
-                String[] nameKeywords = target.split("\\s+");
-                NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(
-                        Arrays.asList(nameKeywords));
-
-                return new EditCommand(null, predicate, editPersonDescriptor);
-            }
-
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
     }
 
     /**

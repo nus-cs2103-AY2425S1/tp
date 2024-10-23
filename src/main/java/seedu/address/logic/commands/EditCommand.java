@@ -106,6 +106,13 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
+    /**
+     * Performs edit command logic when the input is an index.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return the person to be edited
+     * @throws CommandException if an invalid index is given
+     */
     public Person editWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -121,11 +128,19 @@ public class EditCommand extends Command {
         return lastShownList.get(index.getZeroBased());
     }
 
+    /**
+     * Performs edit command logic when the input is a {@code String}.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return the person to be edited
+     * @throws CommandException if the filtered list using {@code predicate} is empty or contains more than 1 element
+     */
     public Person editWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
         List<Person> filteredList = model.getFilteredPersonList();
 
         if (filteredList.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_EDIT_EMPTY_LIST_ERROR);
         } else if (filteredList.size() == 1) {
             return filteredList.get(0);

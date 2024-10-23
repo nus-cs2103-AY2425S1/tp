@@ -138,7 +138,7 @@ public class DeleteCommandTest {
         Model actualModel = model;
         showNoPerson(actualModel);
 
-        assertCommandFailure(deleteCommand, actualModel, String.format(DeleteCommand.DELETE_EMPTY_LIST_ERROR_MESSAGE));
+        assertCommandFailure(deleteCommand, actualModel, String.format(DeleteCommand.MESSAGE_DELETE_EMPTY_LIST_ERROR));
     }
 
     @Test

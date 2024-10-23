@@ -91,7 +91,7 @@ public class DeleteCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on
      * @return the person deleted
-     * @throws CommandException if the list filtered using {@code targetKeyword} is empty
+     * @throws CommandException if the filtered list using {@code predicate} is empty
      */
     public Person deleteWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
