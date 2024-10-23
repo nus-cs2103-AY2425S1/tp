@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
@@ -29,6 +32,9 @@ public class ModelManager implements Model {
     // FilteredLogs should be final? Note that it is not initalised,
     // may cause run time error. TODO: Improve on stability
     private FilteredList<Log> filteredLogs;
+
+    // Dangerous, find a better way to implement this.
+    private Command savedCommand = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -178,6 +184,28 @@ public class ModelManager implements Model {
 
         // Update the FilteredLogs to the logs of the targetPerson
         filteredLogs = new FilteredList<>(loglist);
+    }
+
+    //===============Saved Commands=====================================================================================
+
+    @Override
+    public void setSaveCommand(Command command) {
+        this.savedCommand = command;
+    }
+
+    @Override
+    public boolean hasSavedCommand() {
+        return this.savedCommand != null;
+    }
+
+    @Override
+    public void clearSavedCommand() {
+        this.savedCommand = null;
+    }
+
+    @Override
+    public CommandResult executeSavedCommand() throws CommandException {
+        return this.savedCommand.execute(this);
     }
 
     @Override
