@@ -241,4 +241,5 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Add Emergency Phone Number**  | `EcNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`
+**Add Emergency Contact Name**  | `addEcName INDEX [en/EMERGENCY CONTACT NAME]` <br> e.g., `addEcName 1 en/John Doe`  
+**Add Emergency Contact Number**  | `EcNumber INDEX [ep/EMERGENCY_CONTACT_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`
