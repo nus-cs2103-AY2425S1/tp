@@ -29,6 +29,15 @@ public class OrderTracker {
         this.frequency.merge(order, 1, Integer::sum);
     }
 
+    /**
+     * Add an order with specified time
+     * @param order to add
+     */
+    public void add(OrderHistory order) {
+        this.history.add(order);
+        this.frequency.merge(order.getOrder(), 1, Integer::sum);
+    }
+
     public int getTotalOrder() {
         int sum = 0;
         for (Map.Entry<Order, Integer> entry: this.frequency.entrySet()) {
