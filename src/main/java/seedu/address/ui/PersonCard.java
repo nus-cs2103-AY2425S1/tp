@@ -51,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private Label householdIncome;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label updatedAt;
 
     @FXML
     private Label date;
@@ -103,6 +105,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        updatedAt.setText(String.format("Last updated: %s", person.getUpdatedAt()));
     }
 
     private static int getPersonAge(Person person) {

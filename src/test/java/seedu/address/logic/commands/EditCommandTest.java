@@ -221,6 +221,7 @@ public class EditCommandTest {
         Person editedPerson = model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased());
 
+        assertEquals(personToBeEdited, editedPerson); // ensure we are comparing the same person for updateAt
         assertNotEquals(personToBeEdited.getUpdatedAt(), editedPerson.getUpdatedAt());
     }
 

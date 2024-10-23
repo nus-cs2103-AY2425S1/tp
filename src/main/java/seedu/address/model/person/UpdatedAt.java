@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the time at which the Person was last modified.
@@ -29,7 +30,8 @@ public class UpdatedAt {
 
     @Override
     public String toString() {
-        return value.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
+        return value.format(formatter);
     }
 
     @Override
