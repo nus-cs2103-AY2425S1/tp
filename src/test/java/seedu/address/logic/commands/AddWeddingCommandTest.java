@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
 import static seedu.address.testutil.TypicalWeddings.WEDDING_TWO;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +29,8 @@ public class AddWeddingCommandTest {
     @Test
     public void execute_newWedding_success() throws Exception {
         Wedding validWedding = WEDDING_ONE;
-        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(validWedding);
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(new Wedding(WEDDING_ONE.getWeddingName(),
+                WEDDING_ONE.getWeddingDate()), new HashSet<>());
 
         CommandResult commandResult = addWeddingCommand.execute(model);
 
@@ -40,7 +43,8 @@ public class AddWeddingCommandTest {
         Wedding duplicateWedding = WEDDING_ONE;
         model.addWedding(duplicateWedding);
 
-        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(duplicateWedding);
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(new Wedding(WEDDING_ONE.getWeddingName(),
+                WEDDING_ONE.getWeddingDate()), new HashSet<>());
 
         assertThrows(CommandException.class, AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () ->
                 addWeddingCommand.execute(model));
@@ -49,14 +53,17 @@ public class AddWeddingCommandTest {
     @Test
     public void equals() {
 
-        AddWeddingCommand addWeddingCommand1 = new AddWeddingCommand(WEDDING_ONE);
-        AddWeddingCommand addWeddingCommand2 = new AddWeddingCommand(WEDDING_TWO);
+        AddWeddingCommand addWeddingCommand1 = new AddWeddingCommand(new Wedding(WEDDING_ONE.getWeddingName(),
+                WEDDING_ONE.getWeddingDate()), new HashSet<>());
+        AddWeddingCommand addWeddingCommand2 = new AddWeddingCommand(new Wedding(WEDDING_TWO.getWeddingName(),
+                WEDDING_TWO.getWeddingDate()), new HashSet<>());
 
         // Same object -> returns true
         assertTrue(addWeddingCommand1.equals(addWeddingCommand1));
 
         // Same values -> returns true
-        AddWeddingCommand addWeddingCommand1Copy = new AddWeddingCommand(WEDDING_ONE);
+        AddWeddingCommand addWeddingCommand1Copy = new AddWeddingCommand(new Wedding(WEDDING_ONE.getWeddingName(),
+                WEDDING_ONE.getWeddingDate()), new HashSet<>());
         assertTrue(addWeddingCommand1.equals(addWeddingCommand1Copy));
 
         // Different types -> returns false

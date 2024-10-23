@@ -83,11 +83,11 @@ public class EditWeddingCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY + " " + PREFIX_DATE + "10/10/2010";
+        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY + " " + PREFIX_DATE + "10/10/2027";
 
         EditWeddingDescriptor descriptor =
                 new EditWeddingDescriptorBuilder().withWeddingName(VALID_NAME_AMY)
-                .withWeddingDate("10/10/2010").build();
+                .withWeddingDate("10/10/2027").build();
         EditWeddingCommand expectedCommand = new EditWeddingCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -104,8 +104,8 @@ public class EditWeddingCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // date
-        userInput = targetIndex.getOneBased() + " " + PREFIX_DATE + "10/10/2010";
-        descriptor = new EditWeddingDescriptorBuilder().withWeddingDate("10/10/2010").build();
+        userInput = targetIndex.getOneBased() + " " + PREFIX_DATE + "10/10/2025";
+        descriptor = new EditWeddingDescriptorBuilder().withWeddingDate("10/10/2025").build();
         expectedCommand = new EditWeddingCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
