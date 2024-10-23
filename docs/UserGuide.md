@@ -206,6 +206,21 @@ Examples:
 * `markOrder 1` marks the order with index 1 from the displayed order list as completed.
 * `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
 
+### Reverts an order to pending status : `unmarkOrder`
+
+Reverts an order under the person whose orders are displayed as pending.
+
+Format: `unmarkOrder ORDER_INDEX`
+
+* A person's order list must be selected using `listOrder` before marking an order from that person.
+* Reverts an order under the selected person at the specified `ORDER_INDEX` as pending.
+* The order index refers to the index number shown in the **displayed order list**.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `unmarkOrder 1` reverts the order with index 1 from the displayed order list as pending.
+* `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and reverts the 2nd order under the 1st person as pending.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -267,4 +282,5 @@ Action                | Format, Examples
 **List all orders**             | `listOrder INDEX`<br> e.g., `listOrder 3`
 **Delete an order**             | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
 **Mark an order as completed**  | `markOrder ORDER_INDEX`<br> e.g., `markOrder 2`
+**Unmark an order as completed**| `unmarkOrder ORDER_INDEX`<br> e.g., `unmarkOrder 2`
 **Help**                        | `help`
