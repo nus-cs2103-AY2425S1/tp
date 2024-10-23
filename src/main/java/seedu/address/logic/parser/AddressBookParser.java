@@ -113,7 +113,7 @@ public class AddressBookParser {
 
         case ScheduleAllCommand.COMMAND_WORD:
             logger.fine(String.format("Schedule All command identified, parsing args..."));
-            return new ScheduleAllCommandParser().parse(arguments);
+            return new ScheduleAllCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
