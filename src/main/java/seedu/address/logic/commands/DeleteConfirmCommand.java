@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteConfirmCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
 
     private final IdentityNumber identityNumber;
 
-    public DeleteCommand(IdentityNumber identityNumber) {
+    public DeleteConfirmCommand(IdentityNumber identityNumber) {
         this.identityNumber = identityNumber;
     }
 
@@ -61,12 +61,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteConfirmCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return identityNumber.equals(otherDeleteCommand.identityNumber);
+        DeleteConfirmCommand otherDeleteConfirmCommand = (DeleteConfirmCommand) other;
+        return identityNumber.equals(otherDeleteConfirmCommand.identityNumber);
     }
 
     @Override
