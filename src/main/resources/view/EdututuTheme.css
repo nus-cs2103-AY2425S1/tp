@@ -169,6 +169,8 @@
      -fx-background-color: derive(-ab3-background, 20%);
      -fx-border-color: derive(-ab3-background, 10%);
      -fx-border-top-width: 1px;
+     -fx-border-radius: 10;
+
 }
 
 .status-bar {
@@ -229,7 +231,7 @@
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: menubar-text;
+    -fx-text-fill: -ab3-menubar-text;
     -fx-opacity: 0.9;
 }
 
@@ -284,6 +286,7 @@
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color, 30%);
+    -fx-border-radius: 10;
 }
 
 .dialog-pane {
@@ -313,11 +316,13 @@
 
 .scroll-bar {
     -fx-background-color: -ab3-background;
+    -fx-border-radius: 20;
 }
 
 .scroll-bar .thumb {
     -fx-background-color: derive(-ab3-background, 90%);
     -fx-background-insets: 3;
+    -fx-border-radius: 20;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -352,15 +357,17 @@
     -fx-background-insets: 0;
     -fx-border-color: -ab3-background -ab3-background -ab3-white -ab3-background;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
+    -fx-border-width: 0;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: -ab3-darkerText;
+    -fx-border-radius: 15;
 }
 
 #commandTextField:focused {
-    -fx-background-color: derive(-ab3-background, 40%);
+    -fx-background-color: -ab3-white;
     -fx-border-color: -ab3-button-border;
+    -fx-broder-radius: 15;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -389,5 +396,6 @@
 #saveLocationStatus {
     -fx-text-fill: black;
 }
+
 
 

@@ -1,0 +1,16 @@
+.VBox-rounded {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
+
+.HBox-rounded {
+    -fx-background-color: #D2C0BD;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+}
+
