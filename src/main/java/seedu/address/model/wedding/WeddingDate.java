@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 /**
  * Class for WeddingDate
@@ -24,6 +23,9 @@ public class WeddingDate {
         fullDate = date;
     }
 
+    /**
+     * Returns true if a given string is a valid wedding date.
+     */
     public static boolean isValidWeddingDate(String dateString) {
         requireNonNull(dateString);
         try {
