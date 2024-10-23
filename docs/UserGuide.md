@@ -118,6 +118,8 @@ the constraints of each parameter when used in a command.
 |`EMAIL` | Email address of the patient. | - Should be in the format `local-part@domain`. <br> - Should not be blank. | :white_check_mark:`raj@gmail.com`<br>:x:`raj@gmail` |
 |`ADDRESS` | Address of the patient. | - Any value is allowed. <br> - Should not be blank. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
 |`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
+|`PRIORITY`  | Priority of the patient. | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. | :white_check_mark:`NONE` <br> :white_check_mark:`high` <br> :x: `Highpriority` |
+|`CONDITION`| Medical Condition of the patient. | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. | :white_check_mark: `Arthritis` <br> :x: `@highbloodpressure` <br> :x: `abcdefghijklmnopqrstuvwxyzabcde` |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -232,7 +234,56 @@ to `91234567` and `johndoe@example.com` respectively.
 ### Managing Appointments
 [To be filled up]
 ### Managing Medical Conditions
-[To be filled up]
+
+#### Adding Medical Conditions : `addMedCon`
+
+Adds medical condition to an existing patient in MediBase3.
+
+Format: `addMedCon i/NRIC c/CONDITION...`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Adds Medical Condition to the patient with the specified `NRIC` in MediBase3.
+> * You can add a medical condition to a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been added.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+
+Example: 
+* `addMedCon i/S1234567A c/High Blood Pressure` will add medical condition `High Blood Pressure` to patient with NRIC `S1234567A`.   
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> User can add more than 1 Medical Condition through using `c/CONDITION` multiple times:
+> `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Deleting Medical Conditions : `delMedCon`
+
+Deletes Medical Condition from an existing patient in MediBase3.
+
+Format: `delMedCon i/NRIC c/CONDITION...`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Deletes Medical Condition from the patient with the specified `NRIC` in MediBase3.
+> * You can delete a Medical Condition from a patient even if they are not being currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after medical condition has been removed.
+> * Patient must have the Medical Condition in order to be able to be deleted, else an error message will show.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
+
+Example:
+* `delMedCon i/S1234567A c/High Blood Pressure` will delete medical condition `High Blood Pressure` from patient with NRIC `S1234567A`.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times:
+> `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+
+[Back to Table of Contents](#table-of-contents)
+
 ### Managing Allergies
 [To be filled up]
 ### Managing Priority
