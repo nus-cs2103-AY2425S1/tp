@@ -26,7 +26,13 @@ public class PinCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a PinCommand to pin the specified person.
+     *
+     * @param targetIndex of the person in the filtered person list to be pinned
+     */
     public PinCommand(Index targetIndex) {
+        assert targetIndex != null;
         this.targetIndex = targetIndex;
     }
 
