@@ -44,7 +44,7 @@ public class ResetCommandParserTest {
     @Test
     public void parse_missingTutorial_failure() {
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TUTORIAL,
-                Tutorial.MESSAGE_CONSTRAINTS);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tutorial.MESSAGE_INVALID_FORMAT));
     }
 
     @Test

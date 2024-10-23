@@ -50,14 +50,12 @@ public class ResetCommandTest {
         ResetCommand resetCommand = new ResetCommand(INDEX_FIRST_PERSON, new Tutorial(VALID_TUTORIAL_ONE));
         try {
             resetCommand.execute(markedModel);
-
+            resetCommand.execute(markedModel);
+        } catch (CommandException e) {
             // Second execution should fail
             assertCommandFailure(resetCommand, markedModel, String.format(Messages.MESSAGE_RESET_UNNECESSARY,
-                    Messages.format(markedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())),
+                    markedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName(),
                     new Tutorial(VALID_TUTORIAL_ONE).tutorial));
-        } catch (CommandException e) {
-            // Should not get here
-            throw new RuntimeException();
         }
     }
 
