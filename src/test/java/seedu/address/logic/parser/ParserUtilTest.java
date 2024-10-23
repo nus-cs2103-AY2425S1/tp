@@ -176,7 +176,7 @@ public class ParserUtilTest {
         Relation expectedRelation = new Relation(VALID_RELATION);
         assertEquals(expectedRelation, ParserUtil.parseRelation(relationWithWhitespace));
     }
-//
+
     @Test
     public void parseRsvp_null_returnsNull() throws ParseException {
         assertEquals(null, ParserUtil.parseRsvp(null));

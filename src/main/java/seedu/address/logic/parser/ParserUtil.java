@@ -14,8 +14,8 @@ import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.Relation;
+import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,7 +102,7 @@ public class ParserUtil {
      * Parses a {@code String rsvp} into an {@code Rsvp}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code rsvp} is invalid.
      */
     public static Rsvp parseRsvp(String rsvp) throws ParseException {
         if (rsvp == null) {
@@ -115,6 +115,12 @@ public class ParserUtil {
         return new Rsvp(trimmedRsvp);
     }
 
+    /**
+     * Parses a {@code String relation} into an {@code Relation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code relation} is invalid.
+     */
     public static Relation parseRelation(String relation) throws ParseException {
         if (relation == null) {
             return null;

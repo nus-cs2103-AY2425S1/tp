@@ -86,7 +86,7 @@ public class Guest extends Person {
         this.relation = new Relation("U");
     }
 
-     /**
+    /**
      * Returns true if the guest is coming, i.e., if their RSVP status is "ACCEPTED".
      *
      * @return true if the guest's RSVP status is "ACCEPTED"; false otherwise.

@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.Relation;
+import seedu.address.model.person.Rsvp;
 
 /**
  * Stores the details to edit the guest with. Each non-empty field value will replace the

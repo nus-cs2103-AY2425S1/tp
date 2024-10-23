@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Rsvp;
 import seedu.address.model.person.Vendor;
 
 /**

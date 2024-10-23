@@ -74,7 +74,8 @@ public class CommandTestUtil {
     public static final String INVALID_RSVP_DESC = " " + PREFIX_RSVP; // empty string not allowed for rsvp
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY; // empty string not allowed for company
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_RELATION_DESC = " " + PREFIX_RELATION + "Hi"; // only one character allowed for relation
+    public static final String INVALID_RELATION_DESC =
+            " " + PREFIX_RELATION + "Hi"; // only one character allowed for relation
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

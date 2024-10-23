@@ -54,7 +54,8 @@ public class GuestUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getRsvp().ifPresent(rsvp -> sb.append(PREFIX_RSVP).append(rsvp.value).append(" "));
-        descriptor.getRelation().ifPresent(relation -> sb.append(PREFIX_RELATION).append(relation.relation).append(" "));
+        descriptor.getRelation().ifPresent(relation -> sb.append(PREFIX_RELATION)
+                .append(relation.relation).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

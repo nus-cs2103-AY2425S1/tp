@@ -15,6 +15,14 @@ public class Rsvp {
     public static final String MESSAGE_CONSTRAINTS =
             "RSVP Status should be 'PENDING', 'ACCEPTED' or 'DECLINED'";
 
+    /**
+     * Represents the RSVP status of a guest.
+     *
+     * The possible statuses are:
+     * - PENDING
+     * - ACCEPTED
+     * - DECLINED
+     */
     public enum Status {
         PENDING, ACCEPTED, DECLINED
     }

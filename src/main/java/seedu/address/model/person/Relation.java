@@ -15,6 +15,14 @@ public class Relation {
     public static final String MESSAGE_CONSTRAINTS =
             "Relation should be 'H' for husband, 'W' for wife or 'U' for unknown!";
 
+    /**
+     * Represents the relation of a guest to the wedding.
+     *
+     * The possible statuses are:
+     * - H: Husband
+     * - W: Wife
+     * - U: Unknown
+     */
     public enum Status {
         H, W, U
     }
