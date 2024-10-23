@@ -50,10 +50,9 @@ A screen (User Interface) similar to the below should appear in a few seconds. N
 
 
 6. Refer to the [Features](#features) below for details of each command.
+ 
 
-## 
-
-## **Features**
+# **Features**
 
 <box type="info" seamless> 
 
@@ -82,9 +81,9 @@ A screen (User Interface) similar to the below should appear in a few seconds. N
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 
-### **General commands**
+## **General commands**
 
-#### **Viewing help : `help`**
+### **Viewing help : `help`**
 
 Shows a message explaining how to access the help page.
 
@@ -92,17 +91,15 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-#### **Exiting the program : `exit`**
+### **Exiting the program : `exit`**
 
 Exits the program.
 
 Format: `exit`
 
-### 
+## Student Commands
 
-### Student Commands
-
-#### Adding a student: `add`
+### Adding a student: `add`
 
 Adds a student to the edulog.
 
@@ -117,13 +114,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-#### Listing all students : `list`
+### Listing all students : `list`
 
 Shows a list of all students in the edulog.
 
 Format: `list`
 
-#### Editing a student : `edit`
+### Editing a student : `edit`
 
 Edits an existing student in the edulog.
 
@@ -140,7 +137,7 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-#### Locating students by name: `find`
+### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
 
@@ -159,7 +156,7 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### Deleting a student : `delete`
+### Deleting a student : `delete`
 
 Deletes the specified student from the edulog.
 
@@ -174,7 +171,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the edulog.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-#### Deleting a student by Name: `delete`
+### Deleting a student by Name: `delete`
 
 Deletes the specified student from the edulog.
 
@@ -189,13 +186,13 @@ Examples:
 * `list` followed by `delete Nikhil` deletes student named “Nikhil” in the edulog.
 * `find Betsy` followed by `delete Betsy` deletes the student in the results of the `find` command.
 
-#### Clearing all entries : `clear`
+### Clearing all entries : `clear`
 
 Clears all entries from the edulog.
 
 Format: `clear`
 
-### Marking a student's attendance: `mark'
+## Marking a student's attendance: `mark'
 
 Denotes an existing student as paid. The student may either be identified by index number
 in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
@@ -206,7 +203,7 @@ Examples:
 * `mark 3`
 * `mark Alex Yeoh`
 
-### Marking all students' attendance: `markall'
+## Marking all students' attendance: `markall'
 
 	@@ -171,39 +210,46 @@ Examples:
 Denotes an existing student as unpaid. The student may either be identified by index number
@@ -218,7 +215,7 @@ Examples:
 * `unmark 3`
 * `unmark Alex Yeoh`
 
-### Unmarking all students' attendance: `unmarkall'
+## Unmarking all students' attendance: `unmarkall'
 
 Denotes all existing students as unpaid.
 
@@ -228,9 +225,9 @@ Examples:
 * `unmarkall`
 * `unmarkall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
 
-### Calendar Commands
+## Calendar Commands
 
-#### Adding a lesson: `addc`
+### Adding a lesson: `addc`
 
 Adds a lesson to the edulog.
 
@@ -240,13 +237,13 @@ Examples:
 
 * `addc d/Sec 4 Math Class day/Monday from/2230 to/0030`
 
-#### Listing all lessons : `dc`
+### Listing all lessons : `dc`
 
 Shows a list of all lessons in the edulog.
 
 Format: `dc`
 
-#### Deleting a lesson : `deletec`
+### Deleting a lesson : `deletec`
 
 Deletes the student identified by the description used in the displayed calendar.
 
@@ -259,13 +256,13 @@ Examples:
 
 * `deletec Secondary 4 Chemistry Class`
 
-### Data Files
+## Data Files
 
-#### Saving the data
+### Saving the data
 
 EduLog data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### Editing the data file
+### Editing the data file
 
 EduLog data are saved automatically as a JSON file `[JAR file location]/data/edulog.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -275,7 +272,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-#### Archiving data files `[coming in v2.0]`
+### Archiving data files `[coming in v2.0]`
 
 *Details coming soon ...*
 
