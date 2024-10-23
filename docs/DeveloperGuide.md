@@ -130,7 +130,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 {: .alert .alert-info}
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has an `Allergy` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Allergy` object per unique Allergy, instead of each `Person` needing their own `Allergy` objects.
 
 ![](images/BetterModelClassDiagram.png){:width="450"}
 
