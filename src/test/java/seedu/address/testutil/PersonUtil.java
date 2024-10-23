@@ -64,7 +64,7 @@ public class PersonUtil {
         if (descriptor.getAppointments().isPresent()) {
             Set<Appointment> appointments = descriptor.getAppointments().get();
             if (appointments.isEmpty()) {
-                 sb.append(PREFIX_APPOINTMENT).append(" ");
+                sb.append(PREFIX_APPOINTMENT).append(" ");
             } else {
                 appointments.forEach(ap -> sb.append(PREFIX_APPOINTMENT).append(ap.toString()).append(" "));
             }
