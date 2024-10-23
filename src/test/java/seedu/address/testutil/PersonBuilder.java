@@ -93,23 +93,6 @@ public class PersonBuilder {
         return this;
     }
 
-
-    //    public PersonBuilder withRoles(String ... roles) {
-    //        Set<Role> newRoles = new HashSet<>();
-    //        for (String role : roles) {
-    //            try {
-    //                Role nextRole = RoleHandler.getRole(role);
-    //                newRoles.add(nextRole);
-    //                this.roles = newRoles;
-    //            } catch (InvalidRoleException e) {
-    //                //TODO: Handle this exception
-    //                continue;
-    //            }
-    //        }
-    //
-    //        return this;
-    //    }
-
     /**
      * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
@@ -129,19 +112,6 @@ public class PersonBuilder {
         this.telegramUsername = new TelegramUsername(telegramUsername);
         return this;
     }
-
-
-
-    //    public Person build() {
-    //        Role[] roleArray = roles.toArray(new Role[0]);
-    //
-    //        return new Person(name, phone, email, address, tags, telegramUsername, roleArray);
-    //    }
-
-    //    public PersonBuilder withRoles(String ... roles) {
-    //        this.roles = SampleDataUtil.getRoleSet(roles);
-    //        return this;
-    //    }
 
     /**
      * Builds a {@code Person} object with the given parameters.

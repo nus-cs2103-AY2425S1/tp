@@ -1,5 +1,9 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.collections.ObservableList;
 
 /**
@@ -16,6 +20,14 @@ public class EventManager implements ReadOnlyEventManager {
      */
     public EventManager() {
         eventList = new EventList();
+    }
+
+    /**
+     * Creates an EventManager using the Events in the {@code toBeCopied}
+     */
+    public EventManager(ReadOnlyEventManager toBeCopied) {
+        this();
+        resetData(toBeCopied);
     }
 
     // Minimal Functions needed to deal with Events
@@ -51,6 +63,14 @@ public class EventManager implements ReadOnlyEventManager {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setEvents(List<Event> events) {
+        this.eventList.setEvents(events);
+    }
+
+    /**
      * Checks if the {@code EventManager} contains the specified {@code Event}.
      *
      * @param event The {@code Event} to check.
@@ -64,5 +84,28 @@ public class EventManager implements ReadOnlyEventManager {
     @Override
     public ObservableList<Event> getEventList() {
         return eventList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Resets the existing data of this {@code EventManager} with {@code newData}.
+     */
+    public void resetData(ReadOnlyEventManager newData) {
+        requireNonNull(newData);
+
+        setEvents(newData.getEventList());
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventManager)) {
+            return false;
+        }
+
+        EventManager otherEventManager = (EventManager) other;
+        return eventList.equals(otherEventManager.eventList);
     }
 }

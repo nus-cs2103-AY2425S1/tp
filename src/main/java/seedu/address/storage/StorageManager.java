@@ -10,6 +10,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.ReadOnlyEventManager;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,13 +20,18 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private EventManagerStorage eventManagerStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage}
+     * and {@code EventManagerStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage,
+                          UserPrefsStorage userPrefsStorage,
+                          EventManagerStorage eventManagerStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.eventManagerStorage = eventManagerStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,4 +81,32 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ EventManager methods ==============================
+
+    @Override
+    public Path getEventManagerFilePath() {
+        return eventManagerStorage.getEventManagerFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyEventManager> readEventManager() throws DataLoadingException {
+        return readEventManager(eventManagerStorage.getEventManagerFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyEventManager> readEventManager(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return eventManagerStorage.readEventManager(filePath);
+    }
+
+    @Override
+    public void saveEventManager(ReadOnlyEventManager eventManager) throws IOException {
+        saveEventManager(eventManager, eventManagerStorage.getEventManagerFilePath());
+    }
+
+    @Override
+    public void saveEventManager(ReadOnlyEventManager eventManager, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        eventManagerStorage.saveEventManager(eventManager, filePath);
+    }
 }

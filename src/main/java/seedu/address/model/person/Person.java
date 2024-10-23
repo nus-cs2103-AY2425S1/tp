@@ -46,6 +46,23 @@ public class Person implements Comparable<Person> {
         this.uniqueId = UUID.randomUUID(); // Generate a unique ID
     }
 
+    /**
+     * Constructor to create Person from memory using UUID
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  TelegramUsername telegramUsername, Set<Role> roles,
+                   UUID uniqueId) {
+        requireAllNonNull(name, phone, email, address, telegramUsername, roles);
+
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.telegramUsername = telegramUsername;
+        this.roles.addAll(roles);
+        this.uniqueId = uniqueId; // use pre-existing UUID
+    }
+
     public Name getName() {
         return name;
     }
@@ -64,7 +81,9 @@ public class Person implements Comparable<Person> {
     public TelegramUsername getTelegramUsername() {
         return telegramUsername;
     }
-
+    public UUID getUniqueId() {
+        return uniqueId;
+    }
 
     /**
      * Returns an immutable role set, which throws {@code UnsupportedOperationException}

@@ -1,9 +1,11 @@
 package seedu.address.storage;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -33,33 +35,32 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String telegramUsername;
+    private final String uniqueId;
 
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
-
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-
-            @JsonProperty("telegramUsername") String telegramUsername,
-            @JsonProperty("roles") JsonAdaptedRole... roles) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("telegramUsername") String telegramUsername,
+                             @JsonProperty("uniqueid") String uniqueId,
+                             @JsonProperty("roles") JsonAdaptedRole... roles) {
 
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.telegramUsername = telegramUsername;
+        this.uniqueId = uniqueId;
 
         if (roles != null) {
             for (JsonAdaptedRole role : roles) {
                 this.roles.add(role);
             }
         }
-
-
     }
 
     /**
@@ -71,7 +72,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         telegramUsername = source.getTelegramUsername().telegramUsername;
-
+        uniqueId = source.getUniqueId().toString();
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
@@ -123,9 +124,16 @@ class JsonAdaptedPerson {
 
         final TelegramUsername modelTelegramUsername = new TelegramUsername(telegramUsername);
 
+        if (uniqueId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UUID.class.getSimpleName()));
+        }
+
+        // As UUID takes in a byte[], the uniqueId string needs to be converted
+        final byte[] bytes = uniqueId.getBytes(StandardCharsets.UTF_8);
+        final UUID modelUniqueId = UUID.nameUUIDFromBytes(bytes);
+
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelTelegramUsername, modelRoles);
+                modelTelegramUsername, modelRoles, modelUniqueId);
     }
-
 }

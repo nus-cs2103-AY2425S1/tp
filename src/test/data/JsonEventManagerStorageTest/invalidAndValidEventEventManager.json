@@ -1,0 +1,36 @@
+{
+  "events": [
+    {
+      "name": "Valid Event",
+      "attendees": [
+        {
+          "name": "Valid Attendee",
+          "phone": "9482424",
+          "email": "valid@example.com",
+          "address": "5th street",
+          "telegramUsername": "validuser",
+          "roles": ["attendee"]
+        }
+      ],
+      "vendors": [],
+      "sponsors": [],
+      "volunteers": []
+    },
+    {
+      "name": "Invalid Event with Invalid Phone",
+      "attendees": [],
+      "vendors": [
+        {
+          "name": "Vendor with Invalid Phone",
+          "phone": "948asdf2424",
+          "email": "vendor@example.com",
+          "address": "6th street",
+          "telegramUsername": "vendoruser",
+          "roles": ["vendor"]
+        }
+      ],
+      "sponsors": [],
+      "volunteers": []
+    }
+  ]
+}

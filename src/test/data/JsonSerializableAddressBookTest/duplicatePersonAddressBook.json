@@ -6,12 +6,14 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ],
     "telegramUsername" : "alice",
+    "uniqueid": "f24a2843-2e74-4948-a084-0f20112556c2",
     "roles" : ["attendee"]
 
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "uniqueid": "f24a2843-2e74-4948-a084-0f20112556c2"
   } ]
 }
