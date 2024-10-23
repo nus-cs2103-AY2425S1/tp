@@ -24,8 +24,8 @@ public class AddLogCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a log to the person identified by the Identification Number in the person list.\n"
             + "Parameters: i/ IDENTIFICATION NUMBER (must be 9 characters long) l/ APPT DATE|ENTRY\n"
-            + "Format of APPT DATE: yyyy-MM-dd\n"
-            + "Example: " + COMMAND_WORD + " i/S6285715C l/ 2024-10-17|Doctor's appointment\n";
+            + "Format of APPT DATE: dd MMM yyyy\n"
+            + "Example: " + COMMAND_WORD + " /i S1234567Z /l 2024-10-17|Doctor's appointment\n";
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";

@@ -26,6 +26,10 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    // FilteredLogs should be final? Note that it is not initalised,
+    // may cause run time error. TODO: Improve on stability
+    private FilteredList<Log> filteredLogs;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -125,10 +129,24 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Log} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Log> getFilteredLogList() {
+        return filteredLogs;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+    @Override
+    public void updateFilteredLogList(Predicate<Log> predicate) {
+        requireNonNull(predicate);
+        filteredLogs.setPredicate(predicate);
     }
 
     /**
@@ -143,17 +161,24 @@ public class ModelManager implements Model {
         updateFilteredPersonList(predicate);
     }
 
-    //=========== Session Log ================================================================================
+    /**
+     * Updates logs list to show logs identified by the given {@code identityNumber}.
+     *
+     * @param identityNumber
+     */
+    public void updateFilteredLogListById(IdentityNumber identityNumber) {
+        requireNonNull(identityNumber);
 
-    @Override
-    public ObservableList<Log> getSessionLog(int personIndex) {
-        return addressBook.getSessionLog(personIndex);
+        // Get the person with matching identity number
+        updateFilteredPersonListById(identityNumber);
+        Person targetPerson = filteredPersons.get(0);
+
+        // Convert Set<Log> to an ObservableList<Log>
+        ObservableList<Log> loglist = FXCollections.observableArrayList(targetPerson.getLogs());
+
+        // Update the FilteredLogs to the logs of the targetPerson
+        filteredLogs = new FilteredList<>(loglist);
     }
-
-
-    //========== Util Methods ================================================================================
-
-
 
     @Override
     public boolean equals(Object other) {
