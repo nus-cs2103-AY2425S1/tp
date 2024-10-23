@@ -81,6 +81,14 @@ public class FindDeliveryCommand extends Command {
                 && supplierIndex.equals(((FindDeliveryCommand) other).supplierIndex));
     }
 
+    public Optional<SupplierIndex> getSupplierIndex() {
+        return this.supplierIndex;
+    }
+
+    public Predicate<Delivery> getPredicate() {
+        return this.predicate;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

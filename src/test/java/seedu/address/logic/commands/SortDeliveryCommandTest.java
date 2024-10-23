@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalDeliveries.BREAD;
 import static seedu.address.testutil.TypicalDeliveries.CAN;
+import static seedu.address.testutil.TypicalDeliveries.DURIAN;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -57,33 +58,33 @@ public class SortDeliveryCommandTest {
 
     @Test
     public void execute_ascendingCost_sortedByAscendingCost() {
-        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 3, "cost", "ascending");
+        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 4, "cost", "ascending");
         DeliverySortCostComparator comparator = new DeliverySortCostComparator(new SortOrder("a"));
         SortDeliveryCommand command = new SortDeliveryCommand(comparator);
         expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BREAD, CAN, APPLE), model.getSortedDeliveryList());
+        assertEquals(Arrays.asList(BREAD, CAN, DURIAN, APPLE), model.getSortedDeliveryList());
     }
 
     @Test
     public void execute_descendingDateTime_sortedByDescendingDateTime() {
-        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 3, "date time", "descending");
+        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 4, "date time", "descending");
         DeliverySortDateTimeComparator comparator = new DeliverySortDateTimeComparator(new SortOrder("d"));
         SortDeliveryCommand command = new SortDeliveryCommand(comparator);
         expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CAN, BREAD, APPLE), model.getSortedDeliveryList());
+        assertEquals(Arrays.asList(CAN, DURIAN, BREAD, APPLE), model.getSortedDeliveryList());
     }
 
     @Test
     public void execute_ascendingStatus_sortedByAscendingStatus() {
-        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 3,
+        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 4,
                 "status, followed by date time", "ascending");
         DeliverySortStatusComparator comparator = new DeliverySortStatusComparator(new SortOrder("a"));
         SortDeliveryCommand command = new SortDeliveryCommand(comparator);
         expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(APPLE, BREAD, CAN), model.getSortedDeliveryList());
+        assertEquals(Arrays.asList(APPLE, BREAD, CAN, DURIAN), model.getSortedDeliveryList());
     }
 
     @Test

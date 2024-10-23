@@ -37,7 +37,7 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_STATUS, PREFIX_PRODUCT, PREFIX_SUPPLIER_INDEX);
 
-        // Ensure that at least one filter (date or status) is provided
+        // Ensure that at least one filter is provided
         if (!argMultimap.getValue(PREFIX_DATETIME).isPresent()
                 && !argMultimap.getValue(PREFIX_STATUS).isPresent()
                 && !argMultimap.getValue(PREFIX_PRODUCT).isPresent()
