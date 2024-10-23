@@ -117,8 +117,8 @@ public class AddressBookParserTest {
             ExportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
         ExportCommand commandUpperCase = (ExportCommand) parser.parseCommand(
             ExportCommand.COMMAND_WORD.toUpperCase() + " " + CliSyntax.PREFIX_FILE + FILE_TYPE_CSV);
-        assertEquals(new ExportCommand("CSV") , command);
-        assertEquals(new ExportCommand("CSV"), commandUpperCase);
+        assertEquals(new ExportCommand(FILE_TYPE_CSV), command);
+        assertEquals(new ExportCommand(FILE_TYPE_CSV), commandUpperCase);
     }
 
     @Test

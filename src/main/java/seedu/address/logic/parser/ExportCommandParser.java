@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.ExportCommand.FileType;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -23,17 +24,13 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FILE);
 
-        String fileType;
-
-        fileType = argMultimap.getValue(PREFIX_FILE).orElse("");
-
         try {
-            fileType = ParserUtil.parseFileType(fileType);
+            String arg = argMultimap.getValue(PREFIX_FILE).orElse("");
+            FileType fileType = ParserUtil.parseFileType(arg);
+            return new ExportCommand(fileType);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE), pe);
         }
-
-        return new ExportCommand(fileType);
     }
 }

@@ -3,10 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,10 +11,13 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Exports contact list to a csv file.
@@ -32,21 +32,28 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
     public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file";
+    public static final String MESSAGE_CONSTRAINTS = "This file type is not supported, we only support CSV and VCF.";
 
-    public final String fileTypeCsv = "CSV";
-
-    private final String csvHeaders = "Name,Phone No,Email,Address,Tags,Notes\n";
+    private final String csvHeaders = "Name,Phone No,Email,Address,Tags,Notes";
 
     private final Path exportCsvPath = Paths.get("exports" , "bizbook.csv");
 
-    private final String fileType;
+    private final FileType fileType;
+
+    /**
+     * Enum of supported file types to export.
+     */
+    public static enum FileType {
+        CSV,
+        VCF
+    }
 
     /**
      * Creates an ExportCsvCommand.
      *
      * @param fileType to export the data into.
      */
-    public ExportCommand(String fileType) {
+    public ExportCommand(FileType fileType) {
         requireNonNull(fileType);
         this.fileType = fileType;
     }
@@ -56,8 +63,12 @@ public class ExportCommand extends Command {
         requireNonNull(model);
 
         try {
-            if (fileType.equals(fileTypeCsv)) {
-                exportToCsv(model);
+            switch (fileType) {
+            case CSV:
+                this.exportToCsv(model);
+                break;
+            default:
+                throw new CommandException(String.format(MESSAGE_CONSTRAINTS));
             }
         } catch (IOException io) {
             throw new CommandException(String.format(MESSAGE_FAILURE, fileType));
@@ -72,25 +83,26 @@ public class ExportCommand extends Command {
      * write into the csv file.
      *
      * @throws IOException if an error occurs when creating the csv file.
-     * @throws CommandException if an error occurs during command execution..
+     * @throws CommandException if an error occurs during command execution.
      */
     private void exportToCsv(Model model) throws CommandException, IOException {
-        if (!Files.exists(exportCsvPath.getParent())) {
-            Files.createDirectories(exportCsvPath.getName(0));
+
+        // Check if the directory and file exists
+        if (!FileUtil.isFileExists(exportCsvPath)) {
+            // Create a csv file to save the tasks
+            FileUtil.createFile(exportCsvPath);
         }
-        // Create a csv file to save the tasks
-        File dataFile = new File(exportCsvPath.toString());
 
-        FileWriter fw = new FileWriter(dataFile);
-
-        fw.write(this.csvHeaders);
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add(csvHeaders);
 
         ObservableList<Person> personList = model.getFilteredPersonList();
         for (Person person : personList) {
             String personData = this.toCsvString(person);
-            fw.write(personData + "\n");
+            sj.add(personData);
         }
-        fw.close();
+
+        FileUtil.writeToFile(exportCsvPath, sj.toString());
     }
 
     /**
@@ -106,7 +118,7 @@ public class ExportCommand extends Command {
         sj.add(person.getPhone().value);
         sj.add(person.getEmail().value);
 
-        // Prevent excel from sepreating entries due to commas
+        // Prevent excel from separating entries due to commas
         String address = "\"" + person.getAddress().value + "\"";
         sj.add(address);
 
@@ -114,12 +126,10 @@ public class ExportCommand extends Command {
         List<String> notes = new ArrayList<>();
 
         tags.addAll(person.getTags().stream()
-            .map((tag) -> tag.toString())
-            .toList());
+            .map(Tag::toString).toList());
 
         notes.addAll(person.getNotes().stream()
-            .map((note) -> note.toString())
-            .toList());
+            .map(Note::toString).toList());
 
         sj.add("\"" + tags.toString().replaceAll("[\\[\\]]", "") + "\"");
         sj.add("\"" + notes.toString().replaceAll("[\\[\\]]", "") + "\"");

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_CONSTRAINTS;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ExportCommand.FileType;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -22,13 +24,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_FILETYPE = "This file type is not supported.";
-
-    /* Enum of supported file types to export */
-    enum FileType {
-        CSV,
-        VCF
-    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -147,20 +142,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String fileType} into a valid {@code String FileType}.
+     * Parses a {@code String fileType} into a valid {@code FileType}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code fileType} is invalid.
      */
-    public static String parseFileType(String fileType) throws ParseException {
+    public static FileType parseFileType(String fileType) throws ParseException {
         requireNonNull(fileType);
         String trimmedFileType = fileType.trim().toUpperCase();
 
-        for (FileType type : FileType.values()) {
-            if (type.name().equals(trimmedFileType)) {
-                return type.name();
-            }
+        try {
+            FileType type = FileType.valueOf(trimmedFileType);
+            return type;
+        } catch (IllegalArgumentException argex) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        } catch (NullPointerException nullex) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
-        throw new ParseException(MESSAGE_INVALID_FILETYPE);
     }
 }

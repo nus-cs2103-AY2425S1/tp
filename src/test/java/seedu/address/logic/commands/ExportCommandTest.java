@@ -9,9 +9,6 @@ import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_VCF;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -26,32 +23,20 @@ public class ExportCommandTest {
 
     @Test
     public void execute_export_success() {
-        CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, "CSV"),
+        CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_SUCCESS, FILE_TYPE_CSV),
             false, false);
-        assertCommandSuccess(new ExportCommand("CSV"), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ExportCommand(FILE_TYPE_CSV), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void toCsvStringMethod() {
         ExportCommand exportCommand = new ExportCommand(FILE_TYPE_CSV);
 
-        // Preprocess the tags and notes to remove the square backets
-        List<String> tags = new ArrayList<>();
-        List<String> notes = new ArrayList<>();
-
-        tags.addAll(ALICE.getTags().stream()
-            .map((tag) -> tag.toString())
-            .toList());
-
-        notes.addAll(ALICE.getNotes().stream()
-            .map((note) -> note.toString())
-            .toList());
-
-        String tag = tags.toString().replaceAll("[\\[\\]]", "");
-        String note = notes.toString().replaceAll("[\\[\\]]", "");
+        String tag = "\"friends\"";
+        String note = "\"High profile client, Likes dumplings\"";
 
         String expected = ALICE.getName() + "," + ALICE.getPhone() + "," + ALICE.getEmail() + ",\""
-            + ALICE.getAddress() + "\",\"" + tag + "\",\"" + note + "\"";
+            + ALICE.getAddress() + "\"" + "," + tag + "," + note;
 
         assertEquals(expected, exportCommand.toCsvString(ALICE));
     }
