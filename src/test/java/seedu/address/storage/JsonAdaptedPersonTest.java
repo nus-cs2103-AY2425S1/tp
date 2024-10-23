@@ -118,19 +118,4 @@ public class JsonAdaptedPersonTest {
                         VALID_IS_FAVORITE);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
-
-    /*@Test
-    public void toModelType_validFavoriteStatus_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, VALID_IS_FAVORITE);
-        assertEquals(BENSON.isFavorite(), person.toModelType().isFavorite());
-    }
-
-    @Test
-    public void toModelType_invalidFavoriteStatus_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, INVALID_IS_FAVORITE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "favorite status");
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }*/
 }
