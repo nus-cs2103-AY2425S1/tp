@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 import seedu.address.model.person.Volunteer;
@@ -36,9 +35,9 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SORT_HOURS_NO_VOLUNTEERS =
             "No volunteers found. The list remains unsorted.";
 
-    public final SortOption sortOption;
-
     private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
+
+    public final SortOption sortOption;
 
     /**
      * Constructs a SortCommand with no sort option, which will reset the list to the default order.
