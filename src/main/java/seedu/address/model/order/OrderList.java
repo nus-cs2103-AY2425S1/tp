@@ -1,6 +1,7 @@
 package seedu.address.model.order;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class OrderList<T extends Order> {
@@ -55,16 +56,20 @@ public abstract class OrderList<T extends Order> {
     }
 
     /**
-     * View all orders.
+     * View all orders, with pending orders first, each order numbered, and status displayed.
      *
      * @return A string representing all the orders in the list.
      */
     public String viewOrders() {
         StringBuilder sb = new StringBuilder();
+
+        // Sort orders: PENDING first, followed by others (e.g., COMPLETED, CANCELLED)
+        orders.sort(Comparator.comparing(Order::getStatus));
+
+        // Generate output
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
-            sb.append(String.format("Order %d:", i + 1));
-            sb.append("\n");
+            sb.append(String.format("Order %d: [Status: %s]\n", i + 1, order.getStatus()));
             sb.append(order.viewOrder());
             sb.append("\n");
         }
