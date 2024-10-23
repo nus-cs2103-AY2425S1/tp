@@ -101,12 +101,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && uiState == otherCommandResult.uiState;
+                && uiState == otherCommandResult.uiState
+                && personToView == otherCommandResult.personToView;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, uiState);
+        return Objects.hash(feedbackToUser, showHelp, exit, uiState, personToView);
     }
 
     @Override
@@ -116,6 +117,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("uiState", uiState)
+                .add("personToView", personToView)
                 .toString();
     }
 

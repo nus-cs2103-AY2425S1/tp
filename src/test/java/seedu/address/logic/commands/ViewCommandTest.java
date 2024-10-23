@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewCommand.
@@ -26,10 +25,11 @@ public class ViewCommandTest {
 
     @Test
     public void execute_showsSameList() {
+        CommandResult expectedCommandResult = new CommandResult(String.format(ViewCommand.MESSAGE_VIEW_SUCCESS,
+                model.getAddressBook().getPersonList().get(0).getName()),
+                model.getAddressBook().getPersonList().get(0));
         assertCommandSuccess(new ViewCommand(model.getAddressBook().getPersonList().get(0).getName()),
-                model, String.format(ViewCommand.MESSAGE_VIEW_SUCCESS,
-                        model.getAddressBook().getPersonList().get(0).getName()),
-                UiState.SPECIFIC_DETAILS, expectedModel);
+                model, expectedCommandResult, expectedModel);
     }
 
 }
