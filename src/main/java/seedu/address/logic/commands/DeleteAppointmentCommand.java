@@ -53,7 +53,7 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         Person personWithAppointmentToDelete = lastShownList.get(index);
-        
+
         Schedule appointmentToDelete = new Schedule("","");
         for (Schedule schedule : personWithAppointmentToDelete.getSchedules()) {
             if (schedule.equals(appointment)) {
@@ -62,7 +62,7 @@ public class DeleteAppointmentCommand extends Command {
             }
         }
 
-        if (appointmentToDelete.getDateTime() == "") {
+        if (appointmentToDelete.getDateTime().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED);
         }
 

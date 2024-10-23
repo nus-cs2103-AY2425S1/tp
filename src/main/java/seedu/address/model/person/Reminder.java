@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a Person's reminder for scheduled appointment in the address book.
  */
@@ -13,6 +15,7 @@ public class Reminder {
      * @throws NullPointerException if the {@code appointmentDateTime} or {@code reminderTime} is null.
      */
     public Reminder(String reminderTime) {
+        requireNonNull(reminderTime);
         reminder = reminderTime;
     }
 
