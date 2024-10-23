@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -76,6 +77,54 @@ public class EditPolicyCommandTest {
         EditPolicyCommand editPolicyCommand = new EditPolicyCommand(INDEX_FIRST_PERSON, descriptor);
 
         assertCommandFailure(editPolicyCommand, model, EditPolicyCommand.MESSAGE_POLICY_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_validEditCommand_policyUpdated() throws Exception {
+        // Create a policy for the person
+        Policy existingPolicy = Policy.makePolicy(PolicyType.LIFE, new PremiumAmount(2500),
+                new CoverageAmount(60000), new ExpiryDate("12/31/2025"));
+        PolicySet policy = new PolicySet();
+        policy.add(existingPolicy);
+
+        // Create the person with the existing policy
+        Person personWithPolicy = new Person(new Name("Alice"), new Phone("98765432"),
+                new Email("alice@example.com"), new Address("123 Main St"),
+                Set.of(), policy);
+
+        // Prepare the model with the person
+        Model model = new ModelManager();
+        model.addPerson(personWithPolicy);
+        Index index = Index.fromOneBased(1); // Index for the person is 1
+
+        // Create an EditPolicyDescriptor with new values
+        PolicyType newPolicyType = PolicyType.LIFE; // Same policy type
+        PremiumAmount newPremiumAmount = new PremiumAmount(3000); // New premium amount
+        CoverageAmount newCoverageAmount = new CoverageAmount(80000); // New coverage amount
+        ExpiryDate newExpiryDate = new ExpiryDate("12/31/2030"); // New expiry date
+
+        EditPolicyDescriptor editPolicyDescriptor = new EditPolicyDescriptor(newPolicyType);
+        editPolicyDescriptor.setPremiumAmount(newPremiumAmount);
+        editPolicyDescriptor.setCoverageAmount(newCoverageAmount);
+        editPolicyDescriptor.setExpiryDate(newExpiryDate);
+
+        // Create the EditPolicyCommand
+        EditPolicyCommand editPolicyCommand = new EditPolicyCommand(index, editPolicyDescriptor);
+
+        // Execute the command
+        CommandResult result = editPolicyCommand.execute(model);
+
+        // Debugging: Print the updated person and policies after command execution
+        Person updatedPerson = model.getFilteredPersonList().get(0);
+
+        // Create the expected edited policy
+        Policy updatedPolicy = Policy.makePolicy(newPolicyType, newPremiumAmount,
+                newCoverageAmount, newExpiryDate);
+
+        // Check the command result message
+        String expectedMessage = String.format("Updated policy\n\n%s policy for %s has been changed to:\n%s ",
+                newPolicyType, personWithPolicy.getName(), updatedPolicy);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test
