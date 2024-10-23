@@ -1,106 +1,190 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
 
-//import seedu.address.logic.commands.exceptions.CommandException;
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.Time;
-import seedu.address.model.doctor.Doctor;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.shared.Date;
-import seedu.address.testutil.DoctorBuilder;
-import seedu.address.testutil.PatientBuilder;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.AppointmentBuilder;
 
 /**
  * Unit tests for {@code DeleteAppointmentCommand}.
  */
 public class DeleteAppointmentCommandTest {
-
-    private Model model;
-    private Appointment appointmentToDelete;
-    private Doctor doctor;
-    private Patient patient;
-
-    /**
-     * Sets up the testing environment with an appointment, doctor, and patient.
-     */
-    @BeforeEach
-    public void setUp() {
-        model = new ModelManager();
-        doctor = new DoctorBuilder().build();
-        patient = new PatientBuilder().build();
-
-        appointmentToDelete = new Appointment(doctor, patient, new Date("23-04-2023"), new Time("1100"));
+    @Test
+    public void constructor_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteAppointmentCommand(null));
     }
 
-    /**
-     * Tests the successful execution of a valid delete appointment command.
-     * Ensures the correct success message is returned.
-     *
-     * @throws Exception if the appointment cannot be deleted.
-     */
     @Test
-    public void execute_validAppointment_success() throws Exception {
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(appointmentToDelete);
+    public void execute_appointmentAcceptedByModel_deleteSuccessful() throws Exception {
+        ModelStubAcceptingAppointmentDeleted modelStub = new ModelStubAcceptingAppointmentDeleted();
+        Appointment validAppointment = new AppointmentBuilder().build();
 
-        // CommandResult result = deleteAppointmentCommand.execute(model);
+        CommandResult commandResult = new DeleteAppointmentCommand(validAppointment).execute(modelStub);
 
-        // Checking the success message after the deletion
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                appointmentToDelete.getPatient().getName(),
-                appointmentToDelete.getDoctor().getName(),
-                appointmentToDelete.getDate().toString(),
-                appointmentToDelete.getTime().toString());
+                Messages.format(validAppointment.getPatient()),
+                Messages.format(validAppointment.getDoctor()),
+                validAppointment.getDate().toString(),
+                validAppointment.getTime().toString());
 
-        // assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validAppointment), modelStub.appointmentsDeleted);
+    }
+
+    @Test
+    public void execute_nonExistingAppointment_throwsCommandException() {
+        Appointment validAppointment = new AppointmentBuilder().build();
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(validAppointment);
+        ModelStub modelStub = new ModelStubWithNoAppointment();
+
+        assertThrows(CommandException.class, DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID, () ->
+                deleteAppointmentCommand.execute(modelStub));
     }
 
     /**
-     * Tests the behavior when attempting to delete an invalid appointment.
-     * Expects a {@code CommandException} to be thrown.
+     * A default model stub that has all methods failing.
      */
-    @Test
-    public void execute_invalidAppointment_throwsCommandException() {
-        // Creating an invalid appointment
-        Appointment invalidAppointment = new Appointment(new DoctorBuilder().build(),
-                new PatientBuilder().build(), new Date("12-12-2023"), new Time("0900"));
+    private class ModelStub implements Model {
 
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(invalidAppointment);
+        @Override
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
 
-        // Asserting that a CommandException is thrown with the expected message
-        // assertThrows(CommandException.class, () -> deleteAppointmentCommand.execute(model),
-        // DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID);
+        @Override
+        public ReadOnlyUserPrefs getUserPrefs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public GuiSettings getGuiSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+
+        }
+
+        public void addAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public boolean hasAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void deleteAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPerson(Person person) {
+
+        }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
-     * Tests the equality of {@code DeleteAppointmentCommand} objects.
+     * A Model stub that contains no appointment.
      */
-    @Test
-    public void equals() {
-        // Creating another appointment for comparison
-        Appointment otherAppointment = new Appointment(new DoctorBuilder().build(),
-                new PatientBuilder().build(), new Date("23-05-2023"), new Time("1200"));
+    private class ModelStubWithNoAppointment extends ModelStub {
 
-        DeleteAppointmentCommand deleteFirstAppointmentCommand = new DeleteAppointmentCommand(appointmentToDelete);
-        DeleteAppointmentCommand deleteSecondAppointmentCommand = new DeleteAppointmentCommand(otherAppointment);
+        @Override
+        public boolean hasAppointment(Appointment appointment) {
+            requireNonNull(appointment);
+            return false; // No appointment exists in this stub
+        }
 
-        // same object -> returns true
-        assertEquals(deleteFirstAppointmentCommand, deleteFirstAppointmentCommand);
+        @Override
+        public void deleteAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+    }
 
-        // same appointment -> returns true
-        DeleteAppointmentCommand deleteFirstAppointmentCommandCopy = new DeleteAppointmentCommand(appointmentToDelete);
-        assertEquals(deleteFirstAppointmentCommand, deleteFirstAppointmentCommandCopy);
+    /**
+     * A Model stub that always accepts the appointment being deleted.
+     */
+    private class ModelStubAcceptingAppointmentDeleted extends ModelStub {
+        final ArrayList<Appointment> appointmentsDeleted = new ArrayList<>();
 
-        // different appointment -> returns false
-        assertEquals(false, deleteFirstAppointmentCommand.equals(deleteSecondAppointmentCommand));
+        @Override
+        public boolean hasAppointment(Appointment appointment) {
+            requireNonNull(appointment);
+            return appointmentsDeleted.stream().anyMatch(appt -> appt.isSameAppointment(appointment));
+        }
 
-        // different type -> returns false
-        assertEquals(false, deleteFirstAppointmentCommand.equals(1));
+        @Override
+        public void deleteAppointment(Appointment appointment) {
+            requireNonNull(appointment);
+            appointmentsDeleted.add(appointment);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
     }
 }
