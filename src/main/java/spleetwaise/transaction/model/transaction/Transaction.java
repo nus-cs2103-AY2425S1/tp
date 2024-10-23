@@ -80,6 +80,7 @@ public class Transaction {
     }
 
     public void addCategory(String cat) {
+
         cats.add(cat);
     }
 

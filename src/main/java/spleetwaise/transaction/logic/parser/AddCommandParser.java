@@ -4,6 +4,7 @@ import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
@@ -59,9 +60,15 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
             transaction = new Transaction(person, amount, description, date);
         } else {
             transaction = new Transaction(person, amount, description);
+        }
+
+        if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
+            String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+            transaction.addCategory(category);
         }
 
         return new AddCommand(transaction);

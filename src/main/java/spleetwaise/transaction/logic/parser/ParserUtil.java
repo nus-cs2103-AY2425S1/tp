@@ -9,9 +9,12 @@ import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.model.CommonModel;
+import spleetwaise.transaction.model.ReadOnlyTransactionBook;
+import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -62,6 +65,33 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String indexStr} into a {@code int}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code indexStr} is invalid.
+     */
+    public static int parseIndex(String indexStr) throws ParseException {
+        requireNonNull(indexStr);
+        indexStr = indexStr.trim();
+        int index;
+        try {
+            index = Integer.parseInt(indexStr);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Index is not in integer form");
+        }
+
+        return index;
+    }
+
+    /**
+     * Parses a {@code String catStr} into a {@code String} that represents the category.
+     * Leading and trailing whitespaces will be trimmed and capitalized
+     */
+    public static String parseCategory(String catStr) {
+        requireNonNull(catStr);
+        return catStr.trim().toUpperCase();
+    }
+
+    /**
      * Finds the corresponding Person who has the provided phone number.
      *
      * @param phone The phone to search using.
@@ -79,5 +109,14 @@ public class ParserUtil {
         return filteredPersonList.get(0);
     }
 
+    public static Transaction getTransactionFromIndex(int index) throws ParseException {
+        index--;
+        ReadOnlyTransactionBook ab = CommonModel.getInstance().getTransactionBook();
+        ObservableList<Transaction> transactionList = ab.getTransactionList();
+        if (index < 0 || index >= transactionList.size()) {
+            throw new ParseException("Invalid index");
+        }
+        return transactionList.get(index);
+    }
 
 }

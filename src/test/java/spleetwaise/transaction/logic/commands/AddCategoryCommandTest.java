@@ -7,11 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.logic.commands.CommandResult;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.transaction.logic.commands.exceptions.CommandException;
-import spleetwaise.transaction.model.ModelManager;
+import spleetwaise.commons.logic.commands.CommandResult;
+import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -31,21 +30,19 @@ public class AddCategoryCommandTest {
 
     @Test
     public void execute_invalidCategory_failure() {
-        ModelManager modelManager = new ModelManager();
         String category = "";
 
         AddCategoryCommand cmd = new AddCategoryCommand(testTxn, category);
 
-        assertThrows(CommandException.class, () -> cmd.execute(modelManager));
+        assertThrows(CommandException.class, cmd::execute);
     }
 
     @Test
     public void execute_validCategory_success() {
-        ModelManager modelManager = new ModelManager();
-        String category = "Food";
+        String category = "FOOD";
 
         AddCategoryCommand cmd = new AddCategoryCommand(testTxn, category);
-        CommandResult cmdRes = assertDoesNotThrow(() -> cmd.execute(modelManager));
+        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
         String expectedString = String.format("Category added to transaction: [%s] with [%s]",
                 testTxn.getId(), category);

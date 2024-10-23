@@ -7,11 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.logic.commands.CommandResult;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.transaction.logic.commands.exceptions.CommandException;
-import spleetwaise.transaction.model.ModelManager;
+import spleetwaise.commons.logic.commands.CommandResult;
+import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Categories;
 import spleetwaise.transaction.model.transaction.Date;
@@ -23,9 +22,9 @@ public class RemoveCategoryCommandTest {
     private static final Amount testAmount = new Amount("1.23");
     private static final Description testDescription = new Description("description");
     private static final Date testDate = new Date("01012024");
-    private static final Categories cat = new Categories("Food");
+    private static final Categories cat = new Categories("FOOD");
     private static final Transaction testTxn = new Transaction(testPerson, testAmount, testDescription, testDate, cat);
-    private static final String category = "Food";
+    private static final String category = "FOOD";
     @Test
     public void constructor_null_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new RemoveCategoryCommand(null, null));
@@ -33,20 +32,17 @@ public class RemoveCategoryCommandTest {
 
     @Test
     public void execute_invalidCategory_failure() {
-        ModelManager modelManager = new ModelManager();
         String category = "";
 
         RemoveCategoryCommand cmd = new RemoveCategoryCommand(testTxn, category);
 
-        assertThrows(CommandException.class, () -> cmd.execute(modelManager));
+        assertThrows(CommandException.class, cmd::execute);
     }
 
     @Test
     public void execute_validCategory_success() {
-        ModelManager modelManager = new ModelManager();
-
         RemoveCategoryCommand cmd = new RemoveCategoryCommand(testTxn, category);
-        CommandResult cmdRes = assertDoesNotThrow(() -> cmd.execute(modelManager));
+        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
         String expectedString = String.format("Category removed from transaction: [%s] with [%s]",
                 testTxn.getId(), category);

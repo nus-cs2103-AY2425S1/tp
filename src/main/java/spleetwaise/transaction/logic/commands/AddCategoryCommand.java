@@ -1,12 +1,13 @@
 package spleetwaise.transaction.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TXN;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_TXN;
 
-import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.transaction.logic.commands.exceptions.CommandException;
-import spleetwaise.transaction.model.Model;
+
+import spleetwaise.commons.logic.commands.Command;
+import spleetwaise.commons.logic.commands.CommandResult;
+import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.transaction.Categories;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -50,9 +51,7 @@ public class AddCategoryCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
+    public CommandResult execute() throws CommandException {
         if (!Categories.isValidCategory(category)) {
             throw new CommandException(MESSAGE_NO_SUCH_CATEGORY);
         }
@@ -60,5 +59,18 @@ public class AddCategoryCommand extends Command {
         transaction.addCategory(category);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.getId(), category));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddCategoryCommand otherCommand)) {
+            return false;
+        }
+
+        return transaction.equals(otherCommand.transaction) && category.equals(otherCommand.category);
     }
 }

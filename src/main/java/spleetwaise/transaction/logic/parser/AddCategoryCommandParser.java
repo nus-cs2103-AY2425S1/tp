@@ -1,8 +1,8 @@
 package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TXN;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_TXN;
 import static spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_USAGE;
 
 import java.util.stream.Stream;
@@ -12,6 +12,7 @@ import spleetwaise.address.logic.parser.ArgumentTokenizer;
 import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.transaction.logic.commands.AddCategoryCommand;
+import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Parses input arguments and add a category to a transaction object.
@@ -35,11 +36,12 @@ public class AddCategoryCommandParser implements Parser<AddCategoryCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TXN, PREFIX_CATEGORY);
-        //Transaction txn = ParserUtil.getTransactionFromIndex(argMultimap.getValue(PREFIX_TXN).get());
-        String category = argMultimap.getValue(PREFIX_CATEGORY).get();
+        int index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TXN).get());
 
-        //return new AddCategoryCommand(txn, category);
-        return null;
+        Transaction txn = ParserUtil.getTransactionFromIndex(index);
+        String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());                                                                                       ;
+
+        return new AddCategoryCommand(txn, category);
     }
 
     /**

@@ -3,6 +3,7 @@ package spleetwaise.transaction.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
@@ -37,7 +38,7 @@ public class AddCommand extends Command {
             COMMAND_WORD + ": Add a new transaction.\n" + "Parameters: " + PREFIX_PHONE + "CONTACT " + PREFIX_AMOUNT
                     + "AMOUNT " + PREFIX_DESCRIPTION + "DESCRIPTION " + "[" + PREFIX_DATE + "DATE ]\n" + "Example: "
                     + COMMAND_WORD + " " + PREFIX_PHONE + "88888888 " + PREFIX_AMOUNT + "10.00 " + PREFIX_DESCRIPTION
-                    + "Paid John for lunch" + PREFIX_DATE + "23012024 ";
+                    + "Paid John for lunch" + PREFIX_DATE + "23012024 " + PREFIX_CATEGORY + "FOOD";
 
 
     private final Transaction transactionToAdd;

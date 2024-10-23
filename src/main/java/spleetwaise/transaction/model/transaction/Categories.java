@@ -3,14 +3,16 @@ package spleetwaise.transaction.model.transaction;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
  * Represents a Transaction's categories in the transaction book.
  */
 public class Categories {
-    private static final String[] CAT_VALUES = new String[] { "Food", "Transport" };
-    private static final HashSet<String> ALL_CATEGORIES = new HashSet<>(Arrays.asList(CAT_VALUES));
+    private static final String[] CAT_VALUES = new String[] { "FOOD", "TRANSPORT" };
+    private static final HashSet<String>  ALL_CATEGORIES = new HashSet<>(Arrays.asList(CAT_VALUES));
+    //private static final HashMap<String, Integer> ALL_CATEGORIES = new HashMap<>();
     private final HashSet<String> catSet;
 
     /**
@@ -40,6 +42,11 @@ public class Categories {
      */
     public boolean add(String cat) {
         requireNonNull(cat);
+        /*
+        if (!ALL_CATEGORIES.containsKey(cat)) {
+            ALL_CATEGORIES.put(cat, 1);
+        }*/
+
         return catSet.add(cat);
     }
 
