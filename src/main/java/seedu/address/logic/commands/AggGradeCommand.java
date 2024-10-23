@@ -23,6 +23,9 @@ public class AggGradeCommand extends Command {
             Map.of("median", Operation.MEDIAN));
 
 
+    /**
+     * Operations that can be done with the aggGrade command.
+     */
     public enum Operation {
         MEDIAN
     }
@@ -30,6 +33,12 @@ public class AggGradeCommand extends Command {
     private final Operation operation;
     private final String examName;
 
+    /**
+     * Constructs a {@code AggGradeCommand} to perform aggregate functions on grade.
+     *
+     * @param operation The respective operation to be performed.
+     * @param examName The (optional) exam name to filter exams.
+     */
     public AggGradeCommand(Operation operation, String examName) {
         requireNonNull(operation);
 
@@ -62,8 +71,9 @@ public class AggGradeCommand extends Command {
         switch (this.operation) {
         case MEDIAN:
             return executeMedian(model, filteredList);
+        default:
+            throw new IllegalStateException();
         }
-        throw new IllegalStateException();
     }
 
     private static class SmartList extends ArrayList<Float> {
@@ -71,9 +81,9 @@ public class AggGradeCommand extends Command {
         public SmartList(List<GradeList> gradeListList, boolean ignoreWeight) {
             super(
                     gradeListList.stream().map(gradeList -> gradeList.getMap().values().stream()
-                            .reduce(0F,
-                                    (total, grade) -> grade.getScore() * (!ignoreWeight ?
-                                            grade.getWeightage() / 100 : 1),
+                            .reduce(0F, (
+                                            total, grade) -> grade.getScore() * (!ignoreWeight
+                                            ? grade.getWeightage() / 100 : 1),
                                     Float::sum)).toList());
         }
 

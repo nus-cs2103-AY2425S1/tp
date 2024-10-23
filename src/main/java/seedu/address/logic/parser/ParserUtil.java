@@ -240,6 +240,12 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parsers {@code String value} into a valid AggGrade operation.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if operation is invalid
+     */
     public static AggGradeCommand.Operation parseAggGradeOperation(String value) throws ParseException {
         requireNonNull(value);
         String trimmedValue = value.trim();

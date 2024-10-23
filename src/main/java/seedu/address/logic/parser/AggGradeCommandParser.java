@@ -9,6 +9,9 @@ import java.util.Optional;
 import seedu.address.logic.commands.AggGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new {@code AggGradeCommand} object.
+ */
 public class AggGradeCommandParser implements Parser<AggGradeCommand> {
     @Override
     public AggGradeCommand parse(String args) throws ParseException {
