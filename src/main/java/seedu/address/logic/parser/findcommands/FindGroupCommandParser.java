@@ -1,11 +1,16 @@
 package seedu.address.logic.parser.findcommands;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.findcommands.FindGroupCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
@@ -21,16 +26,22 @@ public class FindGroupCommandParser implements Parser<FindGroupCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindGroupCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.strip();
-        // might update to take in multiple terms that can have spaces between in the future
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE));
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUERY);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_QUERY) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] queryList = argMultimap.getAllValues(PREFIX_QUERY).toArray(new String[0]);
+        return new FindGroupCommand(new GroupNameContainsKeywordsPredicate(Arrays.asList(queryList)));
+    }
 
-        return new FindGroupCommand(new GroupNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

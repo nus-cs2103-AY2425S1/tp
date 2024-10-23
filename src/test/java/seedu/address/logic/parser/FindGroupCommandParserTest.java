@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUERY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -18,7 +19,7 @@ public class FindGroupCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             FindGroupCommand.MESSAGE_USAGE));
     }
 
@@ -26,10 +27,7 @@ public class FindGroupCommandParserTest {
     public void parse_validArgs_returnsFindGroupCommand() {
         // no leading and trailing whitespace
         FindGroupCommand expectedFindGroupCommand =
-            new FindGroupCommand(new GroupNameContainsKeywordsPredicate(Arrays.asList("Group", "TD")));
-        assertParseSuccess(parser, "Group TD", expectedFindGroupCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "\n Group \n \t TD  \t", expectedFindGroupCommand);
+            new FindGroupCommand(new GroupNameContainsKeywordsPredicate(Arrays.asList("Group TD")));
+        assertParseSuccess(parser, " " + PREFIX_QUERY + "Group TD", expectedFindGroupCommand);
     }
 }
