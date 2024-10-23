@@ -113,6 +113,21 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void pinPerson(Person person) {
+        person.setPinned(true);
+    }
+
+    @Override
+    public void unpinPerson(Person person) {
+        person.setPinned(false);
+    }
+
+    @Override
+    public void sortByPin() {
+        addressBook.sortByPin();
+    }
+
     //=========== Archive Feature ================================================================================
 
     @Override

@@ -144,4 +144,20 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the people at the given {@code targetIndices} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonAtIndices(Model model, List<Index> targetIndices) {
+        List<String> result = new ArrayList<>();
+        for (Index targetIndex : targetIndices) {
+            assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+
+            Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+            final String[] splitName = person.getName().fullName.split("\\s+");
+            result.addAll(Arrays.asList(splitName[0]));
+        }
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(result));
+        assertEquals(targetIndices.size(), model.getFilteredPersonList().size());
+    }
 }

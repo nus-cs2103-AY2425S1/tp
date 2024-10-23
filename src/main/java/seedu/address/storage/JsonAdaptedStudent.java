@@ -37,8 +37,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("parentEmail") String parentEmail, @JsonProperty("grade") String grade,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        super(name, phone, email, address, tags);
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned) {
+        super(name, phone, email, address, tags, isPinned);
         this.parentName = parentName;
         this.parentEmail = parentEmail;
         this.parentPhone = parentPhone;
@@ -64,6 +64,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         String email = this.getEmail();
         String address = this.getAddress();
         List<JsonAdaptedTag> tags = this.getTags();
+        boolean isPinned = this.getPinned();
 
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
@@ -131,11 +132,11 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             if (!Grade.isValidGradeName(grade)) {
                 throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
             }
-            modelGrade = new Grade("0");
+            modelGrade = new Grade(grade);
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelParentName, modelParentPhone,
-                modelParentEmail, modelGrade, modelTags);
+                modelParentEmail, modelGrade, modelTags, isPinned);
     }
 }

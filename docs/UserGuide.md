@@ -181,6 +181,36 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `list` followed by `delete 2 3 4 5` deletes the 2nd, 3rd, 4th and 5th people in the address book.
 
+### Pinning a person : `pin`
+
+Pins the specified people to the top of the list in the address book.
+
+Format: `pin INDEX [MORE_INDICES]`
+
+* Pins the person at the specified `INDICES`.
+* The indices refer to the index numbers shown in the displayed person list.
+* The indices **must be positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `pin 2` pins the 2nd person in the address book.
+* `find Betsy` followed by `pin 1` pins the 1st person in the results of the `find` command.
+* `list` followed by `pin 2 3 4 5` pins the 2nd, 3rd, 4th and 5th people in the address book.
+
+### Unpinning a person : `unpin`
+
+Unpins the specified people in the address book.
+
+Format: `unpin INDEX [MORE_INDICES]`
+
+* Unpins the person at the specified `INDICES`.
+* The indices refer to the index numbers shown in the displayed person list.
+* The indices **must be positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `unpin 2` unpins the 2nd person in the address book.
+* `find Betsy` followed by `unpin 1` unpins the 1st person in the results of the `find` command.
+* `list` followed by `unpin 2 3 4 5` unpins the 2nd, 3rd, 4th and 5th people in the address book.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

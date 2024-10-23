@@ -97,6 +97,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public void sortByPin() {
+        persons.sortByPin();
+    }
+
     //// archive-related operations
 
     /**
