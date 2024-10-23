@@ -83,7 +83,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered log list */
-    ObservableList<Log> getFilteredLogList();
+    ObservableList<Log> getSessionLog(int personIndex);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -96,9 +96,4 @@ public interface Model {
      * @param identityNumber
      */
     void updateFilteredPersonListById(IdentityNumber identityNumber);
-
-    void updateFilteredLogListById(IdentityNumber identityNumber);
-
-    // DO NOT USE, added by ZR to prepare for future abstraction
-    void updateFilteredLogList(Predicate<Log> predicate);
 }

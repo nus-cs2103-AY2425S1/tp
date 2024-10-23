@@ -155,14 +155,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * Returns an unmodifiable view of the filtered log list
-         */
-        @Override
-        public ObservableList<Log> getFilteredLogList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
@@ -179,12 +171,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredLogList(Predicate<Log> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredLogListById(IdentityNumber identityNumber) {
+        public ObservableList<Log> getSessionLog(int personIndex) {
             throw new AssertionError("This method should not be called.");
         }
 
