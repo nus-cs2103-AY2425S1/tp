@@ -1,12 +1,9 @@
 package seedu.hireme.logic.parser;
 
 import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.hireme.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import seedu.hireme.logic.commands.FilterCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
-import seedu.hireme.logic.validator.StatusValidator;
-import seedu.hireme.model.internshipapplication.Email;
 import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.model.internshipapplication.StatusPredicate;
 
