@@ -30,25 +30,24 @@ For any additional information or queries, you can refer to the [FAQ](#faq) sect
 ### Glossary
 As you read the user guide, you might encounter some unfamiliar technical terms. The table below provides the definitions for the key terms we will be using throughout the guide.
 
-Term | Definition
----- | ----------
-Command |An input that is given to the application to perform a specific action. Commands are typically entered via the command box in the application.
-CLI | Command Line Interface(CLI) is a type of text-based interface that is used to interact with software via commands.
-GUI | Graphical User Interface(GUI) is a type of interface that allows users to interact with electronic devices through graphical icons and visual indicators.
-JAR | Java ARchive(JAR) is a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.
-JSON | JavaScript Object Notation(JSON) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
-Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.
-Prefix | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter.
-
+| Term      | Definition                                                                                                                                                                         |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Command   | An input that is given to the application to perform a specific action. Commands are typically entered via the command box in the application.                                     |
+| CLI       | Command Line Interface(CLI) is a type of text-based interface that is used to interact with software via commands.                                                                 |
+| GUI       | Graphical User Interface(GUI) is a type of interface that allows users to interact with electronic devices through graphical icons and visual indicators.                          |
+| JAR       | Java ARchive(JAR) is a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                 |
+| JSON      | JavaScript Object Notation(JSON) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.                   |
+| Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.                                   |
+| Prefix    | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter. |
 
 ### Text Formatting Conventions
 We will be using different text formatting styles to help you better understand the content of the user guide.
 
-Format | Description
------- | -----------
-[hyperlink](#how-to-use-this-user-guide) | Blue hyperlinks are used to bring you to external websites or another section of the User Guide for more information.
-**Bold** | Bold text is used to highlight important information or key points.
-`Monospace` | Text with a monospace font and a gray background is used to represent commands, parameters, code snippets and other technical terms.
+| Format                                   | Description                                                                                                                          |
+|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| [hyperlink](#how-to-use-this-user-guide) | Blue hyperlinks are used to bring you to external websites or another section of the User Guide for more information.                |
+| **Bold**                                 | Bold text is used to highlight important information or key points.                                                                  |
+| `Monospace`                              | Text with a monospace font and a gray background is used to represent commands, parameters, code snippets and other technical terms. |
 
 ### Annotated Text-Box Conventions
 The following annotated text-boxes are used throught this guide to provide useful insights on MediBase3 and its features:
@@ -109,17 +108,17 @@ the constraints of each parameter when used in a command.
 > Ensure that all parameters adhere to the constraints mentioned below. 
 > Otherwise, the command will not be executed, and an error message will be displayed.
 
-|Parameter | Definition | Constraints | Examples |
-|-|-|-|
-|`NAME` | Name of the patient | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of`| :white_check_mark:`John Doe`<br>:x:`$ally`|
-|`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter. | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A` |
-|`DOB` | Date of birth (DOB) of the patient. | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future. | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32` |
-|`GENDER` | Gender of the patient. | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). | :white_check_mark:`m`<br>:white_check_mark:`F`<br>:x:`Male` |
-|`EMAIL` | Email address of the patient. | - Should be in the format `local-part@domain`. <br> - Should not be blank. | :white_check_mark:`raj@gmail.com`<br>:x:`raj@gmail` |
-|`ADDRESS` | Address of the patient. | - Any value is allowed. <br> - Should not be blank. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
-|`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
-|`PRIORITY`  | Priority of the patient. | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. | :white_check_mark:`NONE` <br> :white_check_mark:`high` <br> :x: `Highpriority` |
-|`CONDITION`| Medical Condition of the patient. | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. | :white_check_mark: `Arthritis` <br> :x: `@highbloodpressure` <br> :x: `abcdefghijklmnopqrstuvwxyzabcde` |
+| Parameter      | Definition                                                                                                                                 | Constraints                                                                                                                                                                                                                                                                          | Examples                                                                                                            |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Name of the patient                                                                                                                        | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of` | :white_check_mark:`John Doe`<br>:x:`$ally`                                                                          |
+| `NRIC`         | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients.                                 | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter.                                                                                                                                       | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A`                                |
+| `DOB`          | Date of birth (DOB) of the patient.                                                                                                        | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future.                                                                                                                                                                           | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32`                                                                 |
+| `GENDER`       | Gender of the patient.                                                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female).                                                                                                                                                                                                         | :white_check_mark:`m`<br>:white_check_mark:`F`<br>:x:`Male`                                                         |
+| `EMAIL`        | Email address of the patient.                                                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                                                                           | :white_check_mark:`raj@gmail.com`<br>:x:`raj@gmail`                                                                 |
+| `ADDRESS`      | Address of the patient.                                                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                  | :white_check_mark:`Orchard Road, Block 124, #02-01`                                                                 |
+| `PHONE_NUMBER` | Phone number of the patient.                                                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed.                                                                                                                                         | :white_check_mark:`98765432`<br>:x:`+65 9876 5432`                                                                  |
+| `PRIORITY`     | Priority of the patient.                                                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive.                                                                                                                                                                                                    | :white_check_mark:`NONE` <br> :white_check_mark:`high` <br> :x: `Highpriority`                                      |
+| `CONDITION`    | Medical Condition of the patient.                                                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters.                                                                                                                                                                                      | :white_check_mark: `High Blood Pressure` <br> :x: `@highbloodpressure` <br>:x:`abcdefghi jklmn opqrst uvwx yzabcde` |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -507,18 +506,18 @@ MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/
 ## Command summary
 
 
-| Action     | Format                                                                | Examples                                                                                                       |
-|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **Clear**  | `clear`                                                               | -                                                                                                              |
-| **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                             |
-| **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
-| **FindNric**| `findNric NRIC`| `findNric S1234567A`                                                                                           |                                                                                                                                              |
-| **FindMedCon**| `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`                                                                                |                                                                                                           |
-| **List**   | `list`                                                                | -                                                                                                              |
-| **ListPrio**| `listPrio !/PRIORITY` | `listPrio !/High`                                                                                              |
-| **Help**   | `help`                                                                | -                                                                                                              |
+| Action         | Format                                                                                  | Examples                                                                                                       |
+|----------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`                     | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
+| **Clear**      | `clear`                                                                                 | -                                                                                                              |
+| **Delete**     | `delete NRIC`                                                                           | `delete S1234567A`                                                                                             |
+| **Edit**       | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]`                                                          | `find James Jake`                                                                                              |
+| **FindNric**   | `findNric NRIC`                                                                         | `findNric S1234567A`                                                                                           |
+| **FindMedCon** | `findMedCon KEYWORD [MORE_KEYWORDS]`                                                    | `findMedCon diabetes arthritis`                                                                                |
+| **List**       | `list`                                                                                  | -                                                                                                              |
+| **ListPrio**   | `listPrio !/PRIORITY`                                                                   | `listPrio !/High`                                                                                              |
+| **Help**       | `help`                                                                                  | -                                                                                                              |
 
 
 
