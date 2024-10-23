@@ -16,13 +16,17 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.Wedding;
 
+/**
+ * This UnassignContactFromWeddingCommand class unassigns contacts in the addressbook
+ * from the wedding at the specified index.
+ */
 public class UnassignContactFromWeddingCommand extends Command {
 
-    public static final String COMMAND_WORD = "unassignw";
+    public static final String COMMAND_WORD = "unassign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns contacts from a specific wedding "
             + "where the wedding and contacts are identified by their index number. \n"
-            + "Parameters: unassignw WeddingIndex (must be a positive integer) "
+            + "Parameters: unassign WeddingIndex (must be a positive integer) "
             + PREFIX_CONTACT + "(specify at least 1 person index to assign)... \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_CONTACT + "1 2 3";

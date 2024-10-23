@@ -23,11 +23,11 @@ import seedu.address.model.wedding.Wedding;
 
 public class AssignContactToWeddingCommand extends Command {
 
-    public static final String COMMAND_WORD = "assignw";
+    public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns contacts to a specific wedding "
             + "where the wedding and contacts are identified by their index number. \n"
-            + "Parameters: assignw WeddingIndex (must be a positive integer) "
+            + "Parameters: assign WeddingIndex (must be a positive integer) "
             + PREFIX_CONTACT + "(specify at least 1 person index to assign)... \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_CONTACT + "1 2 3";
