@@ -16,13 +16,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeletePostalCommand}.
  */
 public class DeletePostalCodeCommandTest {
 
-    private String postalCodeToDelete = "123456";
+    private PostalCode postalCodeToDelete = new PostalCode("123456");
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
@@ -45,28 +46,23 @@ public class DeletePostalCodeCommandTest {
 
     @Test
     public void execute_validPostalCode_noPersonFound() {
-        String validPostalCode = "999999";
+        PostalCode validPostalCode = new PostalCode("999999");
         DeletePostalCodeCommand deletePostalCommand = new DeletePostalCodeCommand(validPostalCode);
 
         assertCommandFailure(deletePostalCommand, model, Messages.MESSAGE_NO_MATCH);
     }
     @Test
-    public void execute_invalidPostalCode_throwsCommandException() {
-        String invalidPostalCode = "12345";
-        DeletePostalCodeCommand deleteCommand = new DeletePostalCodeCommand(invalidPostalCode);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_POSTAL);
-    }
-    @Test
     public void equals() {
-        DeletePostalCodeCommand deleteFirstCommand = new DeletePostalCodeCommand("123456");
-        DeletePostalCodeCommand deleteSecondCommand = new DeletePostalCodeCommand("654321");
+        PostalCode first = new PostalCode("123456");
+        PostalCode second = new PostalCode("654321");
+        DeletePostalCodeCommand deleteFirstCommand = new DeletePostalCodeCommand(first);
+        DeletePostalCodeCommand deleteSecondCommand = new DeletePostalCodeCommand(second);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeletePostalCodeCommand deleteFirstCommandCopy = new DeletePostalCodeCommand("123456");
+        DeletePostalCodeCommand deleteFirstCommandCopy = new DeletePostalCodeCommand(first);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

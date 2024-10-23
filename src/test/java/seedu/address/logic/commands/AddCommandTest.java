@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -180,7 +181,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public List<Person> getPeopleByPostalCode(String postalCode) {
+        public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -134,7 +135,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Person> getPeopleByPostalCode(String postalCode) {
+    public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
         requireNonNull(postalCode);
         return addressBook.getPersonsByPostalCode(postalCode);
     }

@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 /**
  * Deletes all customers with given postal code
  */
@@ -24,9 +25,9 @@ public class DeletePostalCodeCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted customer(s) with postal code %1$s: %2$s";
 
-    private final String postalCode;
+    private final PostalCode postalCode;
 
-    public DeletePostalCodeCommand(String postalCode) {
+    public DeletePostalCodeCommand(PostalCode postalCode) {
         this.postalCode = postalCode;
     }
 
@@ -58,8 +59,9 @@ public class DeletePostalCodeCommand extends Command {
      * @param postalCode The postal code to validate.
      * @return true if the postal code is valid; false otherwise.
      */
-    private boolean isValidPostalCode(String postalCode) {
-        return Pattern.matches("\\d{6}", postalCode);
+    private boolean isValidPostalCode(PostalCode postalCode) {
+
+        return Pattern.matches("\\d{6}", postalCode.toString());
     }
     @Override
     public boolean equals(Object other) {

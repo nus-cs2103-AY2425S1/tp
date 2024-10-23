@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.UniqueOrderList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -139,12 +140,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns a list of persons matching the given postal code.
+     * Returns a list of persons in the address book that match the given postal code.
+     *
+     * @param postalCode The postal code to match against the persons' postal codes.
+     * @return A list of persons whose postal code matches the specified postal code.
+     *         The list is unmodifiable and contains all matching persons in the address book.
      */
-    public List<Person> getPersonsByPostalCode(String postalCode) {
+    public List<Person> getPersonsByPostalCode(PostalCode postalCode) {
         requireNonNull(postalCode);
         return persons.asUnmodifiableObservableList().stream()
-                .filter(person -> person.getPostalCode().toString().equals(postalCode))
+                .filter(person -> person.getPostalCode().equals(postalCode))
                 .collect(Collectors.toList());
     }
     @Override

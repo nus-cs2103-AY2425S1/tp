@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.DeletePostalCodeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.PostalCode;
 
 /**
  * Parses input arguments and creates a new DeletePostalCommand object.
@@ -28,7 +29,7 @@ public class DeletePostalCodeCommandParser implements Parser<DeletePostalCodeCom
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePostalCodeCommand.MESSAGE_USAGE));
         }
 
-        return new DeletePostalCodeCommand(trimmedArgs);
+        return new DeletePostalCodeCommand(new PostalCode(trimmedArgs));
     }
 
     /**

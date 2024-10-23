@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeletePostalCodeCommand;
+import seedu.address.model.person.PostalCode;
 
 public class DeletePostalCodeCommandParserTest {
     private DeletePostalCodeCommandParser parser = new DeletePostalCodeCommandParser();
@@ -14,9 +15,9 @@ public class DeletePostalCodeCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeletePostalCodeCommand() {
         // Test with a valid postal code
-        String validPostalCode = "123456";
+        PostalCode validPostalCode = new PostalCode("123456");
         DeletePostalCodeCommand expectedCommand = new DeletePostalCodeCommand(validPostalCode);
-        assertParseSuccess(parser, validPostalCode, expectedCommand);
+        assertParseSuccess(parser, validPostalCode.toString(), expectedCommand);
     }
     @Test
     public void parse_invalidArgs_throwsParseException() {
