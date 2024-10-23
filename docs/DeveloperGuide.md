@@ -169,6 +169,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Flow**
+
+The activity diagram shows the general sequence of steps when a user interacts with DocTrack.
+
+<puml src="diagrams/OverallFlowActivityDiagram.puml" width="700"></puml>
+
+1. The user types a command in the `CommandBox`.
+2. The `AddressBookParser` parses the command.
+3. If the command is a known command and is in a valid format, a parser creates the corresponding 
+   `Command` object. Else, an error is displayed. 
+4. The `Command` object is executed.
+5. The `UI` displays the result of the command execution to the user.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
