@@ -21,7 +21,6 @@ import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.model.client.insurance.InvalidInsurancePlan;
 import seedu.address.model.client.insurance.claim.Claim;
 import seedu.address.model.client.insurance.claim.ClaimStub;
-import seedu.address.testutil.Assert;
 
 class CloseClaimCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -60,7 +59,7 @@ class CloseClaimCommandTest {
     }
 
     @Test
-    void execute_InvalidClaim_exceptionHandled() {
+    void execute_invalidClaim_exceptionHandled() {
 
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
         try {
@@ -77,7 +76,7 @@ class CloseClaimCommandTest {
     }
 
     @Test
-    void execute_InvalidInsurancePlan_exceptionHandled() {
+    void execute_invalidInsurancePlan_exceptionHandled() {
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
 
         InsurancePlan fakeInsurancePlan = new InvalidInsurancePlan();
@@ -91,7 +90,5 @@ class CloseClaimCommandTest {
         } catch (ClaimException | InsurancePlanException e) {
             fail();
         }
-
-
     }
 }
