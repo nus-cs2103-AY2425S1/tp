@@ -49,8 +49,8 @@ public class CheckAppointmentCommandTest {
         validDoctor.addAppointment(appointmentTime1, validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
         // Execute the ViewHistoryCommand
-        CheckAppointmentCommand checkAppointmentCommand
-                = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
+        CheckAppointmentCommand checkAppointmentCommand =
+                new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
         CommandResult commandResult = checkAppointmentCommand.execute(modelStub);
 
         // Validate that the appointment was retrieved correctly
@@ -77,8 +77,8 @@ public class CheckAppointmentCommandTest {
         validPatient.addAppointment(appointmentTime2, validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
         // Create a CheckAppointmentCommand and execute it
-        CheckAppointmentCommand checkAppointmentCommand
-                = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
+        CheckAppointmentCommand checkAppointmentCommand =
+                new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
         CommandResult commandResult = checkAppointmentCommand.execute(modelStub);
 
         // Expected output message
@@ -102,8 +102,8 @@ public class CheckAppointmentCommandTest {
         modelStub.addPersonToList(validDoctor);
 
         // Create a CheckAppointmentCommand for a nonexistent appointment
-        CheckAppointmentCommand checkAppointmentCommand
-                = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
+        CheckAppointmentCommand checkAppointmentCommand =
+                new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
 
         // Verify that an exception is thrown when no appointment is found
         assertThrows(CommandException.class, String.format(MESSAGE_NO_APPOINTMENT_FOUND, validDoctor.getName()), () ->
