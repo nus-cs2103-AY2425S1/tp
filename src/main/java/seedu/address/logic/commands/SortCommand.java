@@ -23,7 +23,11 @@ public class SortCommand extends Command {
 
     private final String parameter;
 
+    /**
+     * Creates a SortCommand to sort the person list using the given {@code parameter}
+     */
     public SortCommand(String parameter) {
+        assert parameter != null : "Parameter cannot be null";
         this.parameter = parameter;
     }
 
@@ -40,7 +44,8 @@ public class SortCommand extends Command {
         }
 
         if (parameter.equals(SortCommandParser.PRIORITY)) {
-            model.updateSortingOrder(Comparator.comparing(Person::getPriority));
+            model.updateSortingOrder(Comparator.comparing(Person::getPriority)
+                    .thenComparing(person -> person.getName().toString()));
         }
 
         if (parameter.equals(SortCommandParser.INCOME)) {
