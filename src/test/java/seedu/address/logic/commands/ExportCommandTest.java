@@ -2,11 +2,15 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_FILE_EXISTS;
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_HOME_FILE_EXISTS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,20 +32,29 @@ public class ExportCommandTest {
 
     private Path dataDir;
     private Model model;
+    private Path homeDir;
+    private List<Path> filesToCleanup;
 
     @BeforeEach
     public void setUp() throws IOException {
         dataDir = temporaryFolder.resolve("data");
         Files.createDirectories(dataDir);
         model = new ModelManager();
+        homeDir = Paths.get(System.getProperty("user.home"));
+        filesToCleanup = new ArrayList<>();
     }
 
     @AfterEach
     public void tearDown() throws IOException {
-        // Clean up any files created during tests
+        // Clean up all created files
+        for (Path file : filesToCleanup) {
+            Files.deleteIfExists(file);
+        }
+
+        // Clean up the data directory
         if (Files.exists(dataDir)) {
             Files.walk(dataDir)
-                    .sorted((a, b) -> b.compareTo(a)) // Reverse order to delete files before directories
+                    .sorted((a, b) -> b.compareTo(a))
                     .forEach(path -> {
                         try {
                             Files.delete(path);
@@ -98,65 +111,6 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void execute_fileExistsWithForceFlag_success() throws IOException, CommandException {
-        // Add a sample student to the model
-        Student sampleStudent = new StudentBuilder().withName("John Doe")
-                .withPhone("12345678")
-                .withEmail("johndoe@example.com")
-                .withCourses("CS2103T").build();
-        model.addStudent(sampleStudent);
-
-        // Create a file that already exists
-        Path existingFile = dataDir.resolve("test.csv");
-        Files.createFile(existingFile);
-
-        ExportCommand exportCommand = new ExportCommand("test", true, dataDir);
-        CommandResult result = exportCommand.execute(model);
-
-        // Verify success message
-        assertTrue(result.getFeedbackToUser().contains("Exported"));
-
-        // Verify file contents
-        List<String> lines = Files.readAllLines(existingFile);
-        assertEquals(2, lines.size()); // Header + 1 student
-        assertEquals("Name,Phone,Email,Courses", lines.get(0));
-
-        String expectedLine = String.format("%s,%s,%s,%s",
-                sampleStudent.getName().fullName,
-                sampleStudent.getPhone().value,
-                sampleStudent.getEmail().value,
-                sampleStudent.getCourses().stream()
-                        .map(course -> course.toString())
-                        .collect(Collectors.joining(";")));
-        assertEquals(expectedLine, lines.get(1));
-    }
-
-    @Test
-    public void execute_normalExport_success() throws CommandException, IOException {
-        // Add a sample student to the model
-        Student sampleStudent = new StudentBuilder().withName("John Doe")
-                .withPhone("12345678")
-                .withEmail("johndoe@example.com")
-                .withCourses("CS2103T").build();
-        model.addStudent(sampleStudent);
-
-        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
-        CommandResult result = exportCommand.execute(model);
-
-        // Verify success message
-        assertTrue(result.getFeedbackToUser().contains("Exported"));
-
-        // Verify that the file was created
-        Path exportPath = dataDir.resolve("test.csv");
-        assertTrue(Files.exists(exportPath));
-
-        // Verify file contents
-        List<String> lines = Files.readAllLines(exportPath);
-        assertEquals(2, lines.size()); // Header + 1 student
-        assertEquals("Name,Phone,Email,Courses", lines.get(0));
-    }
-
-    @Test
     public void execute_directoryCreationFails_throwsCommandException() throws IOException {
         // Create a read-only parent directory
         Path readOnlyDir = temporaryFolder.resolve("readonly");
@@ -182,5 +136,114 @@ public class ExportCommandTest {
         }
 
         assertTrue(actualErrorMsg.contains(expectedErrorMsg));
+    }
+
+    @Test
+    public void execute_normalExport_success() throws CommandException, IOException {
+        // Add a sample student to the model
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+
+        // Track files for cleanup
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Path homeFile = homeDir.resolve(filename + ".csv");
+        filesToCleanup.add(dataFile);
+        filesToCleanup.add(homeFile);
+
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS_WITH_COPY,
+                1, dataFile, homeFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify file contents
+        verifyExportedFileContent(dataFile, sampleStudent);
+        verifyExportedFileContent(homeFile, sampleStudent);
+    }
+
+    @Test
+    public void execute_fileExistsWithForceFlag_success() throws CommandException, IOException {
+        // Add a sample student to the model
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Path homeFile = homeDir.resolve(filename + ".csv");
+
+        // Create existing files
+        Files.createFile(dataFile);
+        Files.createFile(homeFile);
+
+        // Track files for cleanup
+        filesToCleanup.add(dataFile);
+        filesToCleanup.add(homeFile);
+
+        ExportCommand exportCommand = new ExportCommand(filename, true, dataDir);
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS_WITH_COPY,
+                1, dataFile, homeFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify file contents
+        verifyExportedFileContent(dataFile, sampleStudent);
+        verifyExportedFileContent(homeFile, sampleStudent);
+    }
+
+    @Test
+    public void execute_fileExistsWithoutForceFlag_throwsCommandException() throws IOException {
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Files.createFile(dataFile);
+        filesToCleanup.add(dataFile);
+
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+
+        String expectedMessage = String.format(MESSAGE_FILE_EXISTS, dataFile);
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void execute_homeFileExistsWithoutForceFlag_throwsCommandException() throws IOException {
+        String filename = "test";
+        Path homeFile = homeDir.resolve(filename + ".csv");
+        Files.createFile(homeFile);
+        filesToCleanup.add(homeFile);
+
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+
+        String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, homeFile);
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
+    }
+
+    // Helper methods
+    private Student createSampleStudent() {
+        return new StudentBuilder()
+                .withName("John Doe")
+                .withPhone("12345678")
+                .withEmail("johndoe@example.com")
+                .withCourses("CS2103T")
+                .build();
+    }
+
+    private void verifyExportedFileContent(Path filePath, Student student) throws IOException {
+        List<String> lines = Files.readAllLines(filePath);
+        assertEquals(2, lines.size());
+        assertEquals("Name,Phone,Email,Courses", lines.get(0));
+
+        String expectedLine = String.format("%s,%s,%s,%s",
+                student.getName().fullName,
+                student.getPhone().value,
+                student.getEmail().value,
+                student.getCourses().stream()
+                        .map(course -> course.toString())
+                        .collect(Collectors.joining(";")));
+        assertEquals(expectedLine, lines.get(1));
     }
 }
