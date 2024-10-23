@@ -11,7 +11,7 @@ import java.util.Objects;
 public class MonthPaid implements Comparable<MonthPaid> {
     public static final String MESSAGE_CONSTRAINTS = "MonthPaid should take a string with the pattern"
             + " YYYY-MM, where YYYY should be between 1900 and 2200, and MM should be between 01 and 12.";
-    public static final String SPLIT_VALIDATION_REGEX = "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])$";
+    public static final String SPLIT_VALIDATION_REGEX = "^(19|20|21|22)[0-9]{2}-(0[1-9]|1[0-2])$";
     public final String monthPaidValue;
 
     /**
