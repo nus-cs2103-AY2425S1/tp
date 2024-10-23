@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.List;
 
 /**
- * Contains valid sorting options for the list command.
+ * Contains valid sorting options for the sort command.
  */
 public class SortOption {
     public static final String SORT_NAME = "name";
