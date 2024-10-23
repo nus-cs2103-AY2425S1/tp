@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -34,6 +35,10 @@ public class ModelManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook               the address book
+     * @param userPrefs                 the user prefs
+     * @param predefinedAssignmentsData the predefined assignments data
      */
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyUserPrefs userPrefs,
@@ -49,6 +54,9 @@ public class ModelManager implements Model {
         this.predefinedAssignmentsData = new PredefinedAssignmentsData(predefinedAssignmentsData);
     }
 
+    /**
+     * Instantiates a new Model manager.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), new PredefinedAssignmentsData());
     }
@@ -195,5 +203,15 @@ public class ModelManager implements Model {
 
     public Github getGitHubUsername(Name name) {
         return addressBook.getGitHubUsername(name);
+    }
+
+    /**
+     * Replace all person in currently with new data
+     */
+    public void replaceAllPersons(List<Person> persons) {
+        AddressBook updatedList = new AddressBook();
+        updatedList.setPersons(persons);
+        addressBook.resetData(updatedList);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 }

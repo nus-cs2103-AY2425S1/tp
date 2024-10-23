@@ -114,6 +114,8 @@ public class Person {
         this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
     }
 
+
+
     public Name getName() {
         return name;
     }
@@ -242,5 +244,6 @@ public class Person {
                 .add("weeks present", weeksPresent)
                 .toString();
     }
+
 
 }

@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -193,6 +194,10 @@ public class AddCommandTest {
         }
 
         public Github getGitHubUsername(Name name) {
+            throw new AssertionError("This method should not be called");
+        }
+        @Override
+        public void replaceAllPersons(List<Person> persons) {
             throw new AssertionError("This method should not be called");
         }
 
