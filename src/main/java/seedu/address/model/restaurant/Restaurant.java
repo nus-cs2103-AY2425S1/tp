@@ -71,7 +71,7 @@ public class Restaurant {
 
     // I Suppress the Compilation Error Here
     // Original:
-    // public Tag getPrice() {
+    // public Price getPrice() {
     //     return price;
     // }
     // Current:
