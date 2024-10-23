@@ -16,6 +16,7 @@ import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
+import seedu.address.model.company.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,7 @@ class JsonAdaptedCompany {
     private final String email;
     private final String address;
     private final String careerPageUrl;
+    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -39,12 +41,14 @@ class JsonAdaptedCompany {
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("careerPageUrl") String careerPageUrl,
+                              @JsonProperty("remark") String remark,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.careerPageUrl = careerPageUrl;
         this.address = address;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -59,6 +63,7 @@ class JsonAdaptedCompany {
         email = source.getEmail().value;
         careerPageUrl = source.getCareerPageUrl().value;
         address = source.getAddress().value;
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -72,9 +77,9 @@ class JsonAdaptedCompany {
      *                               the adapted company.
      */
     public Company toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> companyTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            companyTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -113,14 +118,17 @@ class JsonAdaptedCompany {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CareerPageUrl.class.getSimpleName()));
         }
-        if (!CareerPageUrl.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!CareerPageUrl.isValidAddress(careerPageUrl)) {
+            throw new IllegalValueException(CareerPageUrl.MESSAGE_CONSTRAINTS);
         }
         final CareerPageUrl modelCareerPageUrl = new CareerPageUrl(careerPageUrl);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(companyTags);
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl, modelTags, modelRemark);
     }
-
 }
