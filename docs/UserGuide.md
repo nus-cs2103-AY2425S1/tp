@@ -100,9 +100,19 @@ Shows a list of all persons in the address book.
 
 Format: `list person`
 
-Example: 
+Example: Calling `list person` would yield the following output
 
+![result for 'list person'](images/list_person.png)
 
+### Listing all events: `list event`
+
+Shows a list of all events in the address book.
+
+Format: `list event`
+
+Example: Calling `list event` would yield the following output
+
+![result for 'list event'](images/list_event.png)
 
 ### Editing a person : `edit`
 
@@ -136,8 +146,9 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find person John` returns `john` and `John Doe`
-* `find person john betsy` returns `John Doe`, `Betsy Crowe`<br>
-  ![result for 'find john betsy'](images/findJohnBetsyResult.png)
+* `find person john betsy` returns `John Doe`, `Betsy Crowe`
+
+<br>![result for 'find john betsy'](images/findJohnBetsyResult.png)
 
 ### Locating events by name: `find event`
 
@@ -154,8 +165,9 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find event Hiking` returns `Hiking` and `Park Hiking`
-* `find event Hair Oscars` returns `Hair Cut`, `Oscars`<br>
-  ![result for 'find hair oscars'](images/findHairOscarsResult.png)
+* `find event Hair Oscars` returns `Hair Cut`, `Oscars`
+
+<br>![result for 'find hair oscars'](images/findHairOscarsResult.png)
 
 ### Viewing person by name: `view person`
 
@@ -174,7 +186,8 @@ Examples:
 
 * `view person Betsy Crowe` returns the details for `Betsy Crowe`<br>
 * `view person John Doe` returns the details for `John Doe`
-  ![result for 'view john doe'](images/viewJohnDoeResult.png)
+
+![result for 'view john doe'](images/viewJohnDoeResult.png)
 
 ### Viewing event by name: `view event`
 
@@ -194,7 +207,8 @@ Examples:
 
 * `view event Oscars` returns the details for `Oscars`
 * `view event Hair Cut` returns the details for `Hair Cut`<br>
-  ![result for 'view hair cut'](images/viewHairCutResult.png)
+  
+![result for 'view hair cut'](images/viewHairCutResult.png)
 
 ### Filtering person by tag: `filter person`
 
@@ -210,7 +224,8 @@ Examples:
 
 * `filter person Hairdresser` returns the persons with tag `HairDresser`.
 * `filter person Celcbrity` returns the persons with tag `Celebrity`.
-  ![result for 'filter celebrity'](images/filterCelebrityResult.png)
+
+![result for 'filter celebrity'](images/filterCelebrityResult.png)
 
 ### Filtering events by celebrity name: `filter event`
 
@@ -230,7 +245,8 @@ Examples:
 
 * `filter event Jim Bob` returns the events for celebrity `Jim Bob`
 * `filter event Betsy Crowe` returns the events for celebrity `Betsy Crowe`
-  ![result for 'filter betsy crowe'](images/filterBetsyCroweResult.png)
+
+![result for 'filter betsy crowe'](images/filterBetsyCroweResult.png)
 
 
 ### Deleting a person : `delete`
@@ -259,9 +275,20 @@ Exits the program.
 
 Format: `exit`
 
+### More information on Commands : `help`
+
+Provides users with a link to the application's user guide. This link can be copied using the copy URL button to access
+the user guide online.
+
+Format: `help`
+
+Example:
+
+![result for 'help'](images/help.png)
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TalentHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
