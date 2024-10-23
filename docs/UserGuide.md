@@ -25,10 +25,10 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 4. [**Features**](#features)
     * [**General Commands**](#general-commands)
         * [`help` Viewing help](#viewing-help--help)
-        * [`stats` Viewing the total number of guests and vendors](#view-total-number-of-people--stats)
         * [`list` Listing all persons](#listing-all-persons--list)
         * [`find` Finding a guest/vendor](#finding-a-person--find)
         * [`clear` Clears all entries from the guest list and the vendor list](#clearing-all-entries--clear)
+        * [`stats` Viewing the wedding statistics](#view-statistics--stats)
         * [`exit` Exiting the program](#exiting-the-program--exit)
     * [**Guest Related Commands**](#guest-related-commands)
         * [`add_guest` Adding a new guest to the guest list](#adding-a-guest--add_guest)
@@ -153,6 +153,8 @@ This section will walk you through all the basic features of BridalBuddy and wil
 
 :information_source: Commands listed in this section are applicable to both guest management and vendor management.
 
+[_Back to Top_](#table-of-contents)
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -162,6 +164,22 @@ Shows a message explaining how to access the help page.
 Entering the `help` command returns the following result on your screen:
 
 ![help message](images/helpMessage.png)
+
+[_Back to Top_](#table-of-contents)
+
+### Listing all persons : `list`
+
+Shows a guest list consisting of all invited guests and a vendor list consisting of all vendors involved.
+    
+* The guest list will be on the left of your screen while the vendor list will be on the right of your screen.
+
+**Format:** `list`
+
+Entering the `list` command returns the following result on your screen:
+
+![list command](images/listCommand.png)
+
+[_Back to Top_](#table-of-contents)
 
 ### **Guest Related Commands**
 
