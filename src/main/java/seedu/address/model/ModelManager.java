@@ -11,7 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.order.*;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Supplier;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Pastry;
+import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.*;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +29,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
+    private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
+    private final CustomerOrderList customerOrderList = new CustomerOrderList();
+    private final SupplierOrderList supplierOrderList = new SupplierOrderList();
+    private final Inventory inventory = new Inventory(ingredientCatalogue);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -29,11 +41,12 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -105,10 +118,55 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPastry(Pastry pastry) {
+        pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+    }
+
+    @Override
+    public PastryCatalogue getPastryCatalogue() {
+        return pastryCatalogue;
+    }
+
+    @Override
+    public void addIngredient(Ingredient ingredient) {
+        ingredientCatalogue.addIngredient(ingredient);
+    }
+
+    @Override
+    public IngredientCatalogue getIngredientCatalogue() {
+        return ingredientCatalogue;
+    }
+
+    @Override
+    public void addCustomerOrder(CustomerOrder customerOrder) {
+        customerOrderList.addOrder(customerOrder);
+    }
+
+    @Override
+    public void addSupplyOrder(SupplyOrder supplyOrder) {
+        supplierOrderList.addOrder(supplyOrder);
+    }
+
+    @Override
+    public CustomerOrderList getCustomerOrderList() {
+        return customerOrderList;
+    }
+
+    @Override
+    public SupplierOrderList getSupplierOrderList() {
+        return supplierOrderList;
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
     }
 
     //=========== Filtered Person List Accessors =============================================================
