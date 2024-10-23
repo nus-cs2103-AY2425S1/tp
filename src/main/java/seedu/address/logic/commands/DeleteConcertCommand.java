@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.concert.Concert;
 
 /**
- * Deletes a concert indentified using it's displated index from the address book.
+ * Deletes a concert indentified using it's displayed index from the address book.
  */
 public class DeleteConcertCommand extends Command {
 
