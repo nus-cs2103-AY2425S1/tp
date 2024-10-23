@@ -74,6 +74,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets an empty {@code Address} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmptyAddress() {
+        this.address = Address.createEmpty();
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -86,6 +94,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets an empty {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmptyEmail() {
+        this.email = Email.createEmpty();
         return this;
     }
 

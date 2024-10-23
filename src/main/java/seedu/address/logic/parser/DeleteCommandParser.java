@@ -14,16 +14,23 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
-        }
-    }
+        String trimmedArgs = args.trim();
 
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        // Attempt to parse the input as an index
+        try {
+            Index targetIndex = ParserUtil.parseIndex(trimmedArgs);
+            return new DeleteCommand(targetIndex); // Index-based deletion
+        } catch (ParseException e) {
+            // If parsing as an index fails, continue to check for name
+        }
+        return new DeleteCommand(trimmedArgs); // Name-based deletion
+    }
 }

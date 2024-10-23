@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class Address implements OptionalField {
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
@@ -31,6 +31,28 @@ public class Address {
     }
 
     /**
+     * Constructs an empty {@code Address}.
+     * Package-private.
+     */
+    Address() {
+        value = null;
+    }
+
+    /**
+     * Returns an empty {@code Address}.
+     */
+    public static Address createEmpty() {
+        return EmptyAddress.get();
+    }
+
+    /**
+     * Returns false
+     */
+    public boolean isEmpty() {
+        return false;
+    }
+
+    /**
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
@@ -39,6 +61,14 @@ public class Address {
 
     @Override
     public String toString() {
+        return value;
+    }
+
+    /**
+     * Returns the String to be presented on the UI.
+     */
+    @Override
+    public String getValueForUI() {
         return value;
     }
 

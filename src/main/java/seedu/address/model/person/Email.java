@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
-public class Email {
+public class Email implements OptionalField {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
@@ -45,6 +45,28 @@ public class Email {
     }
 
     /**
+     * Constructs an empty {@code Email}.
+     * Package-private.
+     */
+    Email() {
+        value = null;
+    }
+
+    /**
+     * Returns an empty {@code Email}.
+     */
+    public static Email createEmpty() {
+        return EmptyEmail.get();
+    }
+
+    /**
+     * Returns false
+     */
+    public boolean isEmpty() {
+        return false;
+    }
+
+    /**
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
@@ -53,6 +75,14 @@ public class Email {
 
     @Override
     public String toString() {
+        return value;
+    }
+
+    /**
+     * Returns the String to be presented on the UI.
+     */
+    @Override
+    public String getValueForUI() {
         return value;
     }
 

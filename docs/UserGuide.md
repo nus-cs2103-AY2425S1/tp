@@ -29,7 +29,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete John Doe` : Deletes the John Doe contact.
 
    * `clear` : Deletes all contacts.
 
@@ -74,17 +74,18 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the address book. People with same names are allowed.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe, Alexander p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy d/o Crowe t/boss e/betsycrowe@example.com a/Jurong West Street p/+651234567 t/golf`
+* `add n/Mary Jane t/client p/+651234567`
 
 ### Listing all persons : `list`
 
@@ -111,35 +112,71 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partial words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
 
 Examples:
-* `find John` returns `john` and `John Doe`
+* `find John` returns `john`, `John Doe`, and `Johnny`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find Ifan` sorts other names by decreasing similarity to `Ifan` (e.g. Irfan, Isolde, Ayush, ...)
+
+### Filtering persons by criteria: `filter`
+
+Filters the displayed list of persons in the address book to include all persons who meet the specified criteria and displays them with index numbers.
+
+Format: `filter p/PHONE e/EMAIL a/ADDRESS t/TAG...`
+
+Parameters:
+* p/PHONE: The phone number criteria to filter by.
+* e/EMAIL: The email criteria to filter by.
+* a/ADDRESS: The address criteria to filter by.
+* t/TAG...: The tags to filter by.
+
+Examples:
+* `filter p/+65 e/example.com a/Clementi t/Inactive`: Filters the list to include all persons whose phone number contains `+65`, email contains `example.com`, address contains `Clementi`, and have the tag Inactive.
+* `filter p/987 e/johndoe@example.com a/Street`: Filters the list to include all persons whose phone number contains `987`, email is `johndoe@example.com`, and address contains `Street`.
+
+Notes:
+* At least one of p/PHONE, e/EMAIL, or a/ADDRESS must be provided.
+* Multiple criteria for phone, email, address and tags can be specified, separated by spaces.
+* The criteria for phone, email, and address are case-insensitive and can be partial matches.
+* The criteria for tags only checks for exact matches.
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the person with the specified `NAME` or the person at the specified `INDEX`
 
-Format: `delete INDEX`
+Format: `delete NAME` or `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* For deletion by `NAME`:
+  * Deletes the person with the specified `NAME`.
+  * Only delete if `NAME` is exact match with contact full name.
+  * Delete is case-insensitive. e.g `hans` will delete `Hans`.
+  * If no exact match, list will be filtered based on given `NAME`.
+    AddressBook will then prompt user to use fullname or `INDEX`.
+  * If no exact and partial match,
+    AddressBook will then prompt user to use another `NAME` or `INDEX`.
+  * If more than 1 exact match, list will be filtered based on given `NAME`.
+    AddressBook will then prompt user to use `INDEX` instead.
+
+* For deletion by `INDEX`:
+  * Deletes the person at the specified INDEX.
+  * The index refers to the index number shown in the displayed person list.
+  * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete Alice`: Deletes the person named Alice from the address book.
+* `delete 1`: Deletes the first person in the currently displayed list.
 
 ### Clearing all entries : `clear`
 
@@ -190,7 +227,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
