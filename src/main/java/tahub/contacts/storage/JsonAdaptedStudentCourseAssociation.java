@@ -18,7 +18,7 @@ class JsonAdaptedStudentCourseAssociation {
     private final JsonAdaptedPerson student;
     private final JsonAdaptedCourse course;
     private final JsonAdaptedTutorial tutorial;
-    // private final GradingSystem grades;
+    //private final JsonSerializableGradingSystem grades;
 
     /**
      * Constructs a {@code JsonAdaptedStudentCourseAssociation} with the given {@code StudentClassAssociation}.
@@ -31,7 +31,7 @@ class JsonAdaptedStudentCourseAssociation {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
-        // this.grades = new GradingSystem();
+        //this.grades = grades;
     }
 
 
@@ -42,7 +42,7 @@ class JsonAdaptedStudentCourseAssociation {
         this.student = new JsonAdaptedPerson(source.getStudent());
         this.course = new JsonAdaptedCourse(source.getCourse());
         this.tutorial = new JsonAdaptedTutorial(source.getTutorial());
-        // this.grades = new GradingSystem();
+        //this.grades = new JsonSerializableGradingSystem(source.getGrades());
     }
 
     /**
@@ -76,7 +76,6 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
 
-
-        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel);
+        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel, null);
     }
 }
