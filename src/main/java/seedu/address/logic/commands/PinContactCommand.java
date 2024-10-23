@@ -27,9 +27,9 @@ public class PinContactCommand extends Command {
 
     public static final String MESSAGE_PIN_PERSON_SUCCESS = "Pinned Person: %1$s";
 
-    private final Index targetIndex;
-
     private static Logger logger = LogsCenter.getLogger(PinContactCommand.class);
+
+    private final Index targetIndex;
 
     /**
      * Creates a PinContactCommand to pin contact at {@code Index}
