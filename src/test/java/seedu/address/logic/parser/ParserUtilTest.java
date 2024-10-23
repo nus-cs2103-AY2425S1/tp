@@ -29,7 +29,10 @@ public class ParserUtilTest {
     private static final String INVALID_SORT_ORDER = "2";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_TUTORIAL = "0";
-    private static final String INVALID_TUTORIAL_13 = "13";
+    private static final String INVALID_TUTORIAL_FORMAT = "1-2-4";
+    private static final String INVALID_TUTORIAL_NUMBER_IN_LIST = "[1,13]";
+    private static final String INVALID_TUTORIAL_NUMBER_IN_RANGE = "1-13";
+    private static final String INVALID_TUTORIAL_RANGE = "5-3";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -227,24 +230,24 @@ public class ParserUtilTest {
     // 1. Test for invalid range (start > end)
     @Test
     public void parseTutorial_invalidRangeStartGreaterThanEnd_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials("5-3"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_RANGE));
     }
 
     // 2. Test for invalid format (e.g., mark 1 tut/1-2-4)
     @Test
     public void parseTutorial_invalidFormatMultipleDashes_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials("1-2-4"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_FORMAT));
     }
 
     // 3. Test for invalid tutorial number in list (e.g., [1, 13])
     @Test
     public void parseTutorial_invalidTutorialNumberInList_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials("[1, 13]"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_LIST));
     }
 
     // 4. Test for invalid tutorial number in range (e.g., 1-13)
     @Test
     public void parseTutorial_invalidTutorialNumberInRange_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials("1-13"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_RANGE));
     }
 }

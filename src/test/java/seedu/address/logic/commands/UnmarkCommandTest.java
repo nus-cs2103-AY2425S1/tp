@@ -64,7 +64,7 @@ public class UnmarkCommandTest {
      * Unmark a person using tutorial that is already unmarked.
      */
     @Test
-    public void execute_invalidTutorialNumber_failure() {
+    public void execute_tutorialAlreadyUnmarked_failure() {
         UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, new Tutorial("1"));
         try {
             unmarkCommand.execute(model);
