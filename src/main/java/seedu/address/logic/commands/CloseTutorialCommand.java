@@ -16,6 +16,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tutorial.Tutorial;
 
+/**
+ * Closes a tutorial in the system by unenrolling all students and marking the tutorial as closed.
+ */
 public class CloseTutorialCommand extends Command {
 
     public static final String COMMAND_WORD = "closetut";
@@ -30,11 +33,25 @@ public class CloseTutorialCommand extends Command {
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "No tutorial class with the name %1$s is found.";
 
     private final Tutorial toClose;
+
+    /**
+     * Constructs a {@code CloseTutorialCommand} with the specified tutorial to close.
+     *
+     * @param tutorial The tutorial to close.
+     */
     public CloseTutorialCommand(Tutorial tutorial) {
         requireNonNull(tutorial);
         toClose = tutorial;
     }
 
+    /**
+     * Executes the command to close a tutorial. If the tutorial exists, all students will be unenrolled,
+     * and the tutorial will be marked as closed. (Check UnEnrollCommand to see its implementation)
+     *
+     * @param model {@code Model} which the command operates on.
+     * @return CommandResult which indicates the success of the tutorial closure.
+     * @throws CommandException if the tutorial does not exist.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -53,6 +70,13 @@ public class CloseTutorialCommand extends Command {
         );
     }
 
+    /**
+     * Unenrolls all students from the given tutorial by executing {@code UnEnrollCommand} for each student.
+     *
+     * @param model    The {@code Model} on which the command operates.
+     * @param tutorial The tutorial from which students will be unenrolled.
+     * @throws CommandException if an error occurs during the unenrollment process.
+     */
     private void removeStudentsFromTutorialParticipation(Model model, Tutorial tutorial) throws CommandException {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownStudentList = model.getFilteredPersonList();
@@ -64,7 +88,14 @@ public class CloseTutorialCommand extends Command {
         }
     }
 
-    private Index getIndexOfPerson(List<Person> allPersons, Person student) throws CommandException {
+    /**
+     * Finds the index of the given student in a list of all students.
+     *
+     * @param allPersons The list of all persons in the system.
+     * @param student    The student whose index is to be found.
+     * @return The index of the student.
+     */
+    private Index getIndexOfPerson(List<Person> allPersons, Person student) {
         int index = allPersons.indexOf(student);
         if (index == -1) {
             throw new PersonNotFoundException();

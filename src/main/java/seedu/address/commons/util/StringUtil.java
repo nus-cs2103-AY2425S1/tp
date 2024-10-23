@@ -77,6 +77,15 @@ public class StringUtil {
         return wordFromPerson.toLowerCase(Locale.ROOT).contains(wordToCheck.toLowerCase(Locale.ROOT));
     }
 
+    /**
+     * Compares two strings for equality, ignoring case and leading/trailing whitespaces.
+     *
+     * @param firstString The first string to compare. Must be non-null and non-empty.
+     * @param secondString The second string to compare. Must be non-null and non-empty.
+     * @return {@code true} if the trimmed strings are equal ignoring case, otherwise {@code false}.
+     * @throws NullPointerException If either string is null.
+     * @throws IllegalArgumentException If either string is empty after trimming.
+     */
     public static boolean areMatchingStringsIgnoreCase(String firstString, String secondString) {
         requireNonNull(firstString);
         requireNonNull(secondString);

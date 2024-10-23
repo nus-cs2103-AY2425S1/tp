@@ -7,12 +7,20 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests a {@code Person}'s hasAttended status
+ * Predicate to test if a {@code Person} has attended a tutorial within a specified date range.
+ * It checks if the attendance date of the student's participation in a tutorial
+ * falls between (or is equal to) the given start and end dates.
  */
 public class StudentAttendedTutorialPredicate implements Predicate<Person> {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
+    /**
+     * Constructs a {@code StudentAttendedTutorialPredicate} with the given start and end dates.
+     *
+     * @param startDate The start date for the attendance period.
+     * @param endDate The end date for the attendance period.
+     */
     public StudentAttendedTutorialPredicate(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
