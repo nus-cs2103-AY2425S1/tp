@@ -139,6 +139,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean addTags(List<Tag> tags) {
+        for (Tag tag : tags) {
+            if (!addTag(tag)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
     public boolean deleteTags(List<Tag> tags) {
         boolean isSuccessful = true;
         for (Tag tag : tags) {
