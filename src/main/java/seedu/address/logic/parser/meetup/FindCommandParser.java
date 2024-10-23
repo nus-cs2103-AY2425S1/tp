@@ -13,8 +13,8 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
+import seedu.address.model.meetup.Name;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -34,18 +34,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-//        String trimmedArgs = args.trim();
-//        if (trimmedArgs.isEmpty()) {
-//            throw new ParseException(
-//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-//        }
-
         Name extractedName = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
         String trimmedExtractedName = extractedName.toString().trim();
 
         if (trimmedExtractedName.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         String[] keywords = trimmedExtractedName.split("\\s+");
