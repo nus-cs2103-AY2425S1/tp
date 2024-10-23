@@ -14,7 +14,7 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts list in ascending or descending alphabetical order\n"
+            + ": Sorts list in ascending or descending by schedule time or by name in alphabetical order\n"
             + "If order is not provided, it will sort in ascending order by default.\n"
             + "Only accepts one prefix.\n"
             + "Parameters: "
