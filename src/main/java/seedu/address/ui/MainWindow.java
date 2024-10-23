@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private HistoryListPanel historyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -52,9 +53,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
-
-    private CallHistoryPanel callHistoryPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -129,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
                 logic::getNextCommandTextFromHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        callHistoryPanel = new CallHistoryPanel();
+        historyListPanel = new HistoryListPanel();
     }
 
     /**
@@ -199,9 +197,9 @@ public class MainWindow extends UiPart<Stage> {
             personListPanel = new PersonListPanel(logic.getSortedFilteredPersonList());
 
             if (commandResult.getFeedbackToUser().contains(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personName))) {
-                switchMainPanel(personListPanel, callHistoryPanel);
+                switchMainPanel(personListPanel, historyListPanel);
             } else {
-                switchMainPanel(callHistoryPanel, personListPanel);
+                switchMainPanel(historyListPanel, personListPanel);
             }
 
             return commandResult;
@@ -217,10 +215,10 @@ public class MainWindow extends UiPart<Stage> {
             mainListPanelPlaceholder.getChildren().remove(fromPanel.getRoot());
         }
 
-        if (callHistoryPanel.getRoot().getParent() != null) {
-            mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
+        if (historyListPanel.getRoot().getParent() != null) {
+            mainListPanelPlaceholder.getChildren().remove(historyListPanel.getRoot());
         }
-        callHistoryPanel.initializeCallHistory(logic.getDisplayedCallHistory());
+        historyListPanel.initializeCallHistory(logic.getDisplayedCallHistory());
         mainListPanelPlaceholder.getChildren().remove(toPanel.getRoot());
         mainListPanelPlaceholder.getChildren().add(toPanel.getRoot());
     }

@@ -8,8 +8,8 @@ import seedu.address.model.contactrecord.ContactRecord;
 /**
  * An UI component that displays information of a {@code CallHistory}.
  */
-public class CallHistoryCard extends UiPart<HBox> {
-    private static final String FXML = "CallHistoryCard.fxml";
+public class HistoryCard extends UiPart<HBox> {
+    private static final String FXML = "HistoryListCard.fxml";
 
     public final ContactRecord contactRecord;
 
@@ -22,9 +22,9 @@ public class CallHistoryCard extends UiPart<HBox> {
     private Label notesLabel;
 
     /**
-     * Creates a {@code CallHistoryCard} with the given {@code ContactRecord} and index to display.
+     * Creates a {@code HistoryCard} with the given {@code ContactRecord} and index to display.
      */
-    public CallHistoryCard(ContactRecord contactRecord, int index) {
+    public HistoryCard(ContactRecord contactRecord, int index) {
         super(FXML);
         this.contactRecord = contactRecord;
         indexLabel.setText(index + ". ");
