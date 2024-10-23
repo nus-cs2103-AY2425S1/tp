@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseInvalidVariants;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -94,30 +95,8 @@ public class AddressBookParser {
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
-            if (AddCommand.INVALID_VARIANTS.contains(commandWord)) {
-                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                        AddCommand.SHORT_COMMAND_WORD, AddCommand.LONG_COMMAND_WORD));
-            } else if (DeleteCommand.INVALID_VARIANTS.contains(commandWord)) {
-                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                        DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD));
-            } else if (EditCommand.INVALID_VARIANTS.contains(commandWord)) {
-                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                        EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD));
-            } else if (ExitCommand.INVALID_VARIANTS.contains(commandWord)) {
-                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                        ExitCommand.COMMAND_WORD));
-            } else if (FindCommand.INVALID_VARIANTS.contains(commandWord)) {
-                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                        FindCommand.COMMAND_WORD));
-            } else if (HelpCommand.INVALID_VARIANTS.contains(commandWord)) {
-                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                        HelpCommand.COMMAND_WORD));
-            } else if (ListCommand.INVALID_VARIANTS.contains(commandWord)) {
-                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
-                        ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD));
-            } else {
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-            }
+            parseInvalidVariants(commandWord);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 
         }
     }
