@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default.md
 title: KNikhil's Project Portfolio Page
 ---
 

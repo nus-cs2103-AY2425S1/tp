@@ -1,6 +1,7 @@
 package seedu.edulog.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.edulog.logic.commands.MarkCommand.MESSAGE_MARK_STUDENT_SUCCESS;
 
 import java.util.List;
 
@@ -12,13 +13,13 @@ import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Student;
 
 /**
- * Unmarks a student identified using their displayed name from the edulog book.
+ * Marks a student identified using its displayed name from the edulog book.
  */
-public class UnmarkNameCommand extends UnmarkCommand {
+public class MarkNameCommand extends MarkCommand {
 
     private final Name targetName;
 
-    public UnmarkNameCommand(Name targetName) {
+    public MarkNameCommand(Name targetName) {
         this.targetName = targetName;
     }
 
@@ -39,9 +40,9 @@ public class UnmarkNameCommand extends UnmarkCommand {
          * Hence, we can directly access the student using studentId.
          */
         int studentId = studentNames.indexOf(targetName);
-        Student studentToUnmark = lastShownList.get(studentId);
-        model.unmarkStudent(studentToUnmark);
-        return new CommandResult(String.format(MESSAGE_UNMARK_STUDENT_SUCCESS, Messages.format(studentToUnmark)));
+        Student studentToMark = lastShownList.get(studentId);
+        model.markStudent(studentToMark);
+        return new CommandResult(String.format(MESSAGE_MARK_STUDENT_SUCCESS, Messages.format(studentToMark)));
     }
 
     @Override
@@ -51,12 +52,12 @@ public class UnmarkNameCommand extends UnmarkCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UnmarkNameCommand)) {
+        if (!(other instanceof MarkNameCommand)) {
             return false;
         }
 
-        UnmarkNameCommand otherUnmarkCommand = (UnmarkNameCommand) other;
-        return targetName.equals(otherUnmarkCommand.targetName);
+        MarkNameCommand otherMarkCommand = (MarkNameCommand) other;
+        return targetName.equals(otherMarkCommand.targetName);
     }
 
     @Override

@@ -66,7 +66,18 @@ public interface Model {
     void deleteStudent(Student target);
 
     /**
-     * Marks the given student as absent.
+     * Marks the given student as paid.
+     * The student must exist in the address book.
+     */
+    void markStudent(Student target);
+
+    /**
+     * Mark all students
+     */
+    void markAllStudents();
+
+    /**
+     * Marks the given student as unpaid.
      * The student must exist in the address book.
      */
     void unmarkStudent(Student target);

@@ -104,10 +104,30 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Marks the given student as absent.
+     * Marks the given student as paid.
      * The student must exist in the address book.
      *
-     * @param target the student to mark as absent.
+     * @param target the student to mark as paid.
+     */
+    @Override
+    public void markStudent(Student target) {
+        requireNonNull(target);
+        eduLog.markStudent(target);
+    }
+
+    /**
+     * Mark all students
+     */
+    @Override
+    public void markAllStudents() {
+        eduLog.markAllStudents();
+    }
+
+    /**
+     * Marks the given student as unpaid.
+     * The student must exist in the address book.
+     *
+     * @param target the student to mark as unpaid.
      */
     @Override
     public void unmarkStudent(Student target) {
@@ -115,6 +135,9 @@ public class ModelManager implements Model {
         eduLog.unmarkStudent(target);
     }
 
+    /**
+     * Unmark all students
+     */
     @Override
     public void unmarkAllStudents() {
         eduLog.unmarkAllStudents();

@@ -5,7 +5,7 @@ import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
 
 /**
- * Unmark all students, usually after attendance is taken
+ * Unmark all students, usually when students have not paid.
  */
 public class UnmarkAllCommand extends Command {
     public static final String COMMAND_WORD = "unmarkall";

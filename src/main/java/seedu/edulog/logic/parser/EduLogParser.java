@@ -20,6 +20,8 @@ import seedu.edulog.logic.commands.ExitCommand;
 import seedu.edulog.logic.commands.FindCommand;
 import seedu.edulog.logic.commands.HelpCommand;
 import seedu.edulog.logic.commands.ListCommand;
+import seedu.edulog.logic.commands.MarkAllCommand;
+import seedu.edulog.logic.commands.MarkCommand;
 import seedu.edulog.logic.commands.UnmarkAllCommand;
 import seedu.edulog.logic.commands.UnmarkCommand;
 import seedu.edulog.logic.parser.exceptions.ParseException;
@@ -73,8 +75,17 @@ public class EduLogParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case MarkAllCommand.COMMAND_WORD:
+            return new MarkAllCommand();
+
         case UnmarkCommand.COMMAND_WORD:
             return new UnmarkCommandParser().parse(arguments);
+
+        case UnmarkAllCommand.COMMAND_WORD:
+            return new UnmarkAllCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -93,9 +104,6 @@ public class EduLogParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
-        case UnmarkAllCommand.COMMAND_WORD:
-            return new UnmarkAllCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

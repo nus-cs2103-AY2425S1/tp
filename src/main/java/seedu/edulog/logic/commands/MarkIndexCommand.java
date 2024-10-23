@@ -1,7 +1,7 @@
 package seedu.edulog.logic.commands;
 
-
 import static java.util.Objects.requireNonNull;
+import static seedu.edulog.logic.commands.MarkCommand.MESSAGE_MARK_STUDENT_SUCCESS;
 
 import java.util.List;
 
@@ -13,15 +13,13 @@ import seedu.edulog.model.Model;
 import seedu.edulog.model.student.Student;
 
 /**
- * Marks a student as unpaid identified using their displayed index from the edulog book.
+ * Marks a student as has paid, identified using their displayed index from the edulog book.
  */
-public class UnmarkIndexCommand extends UnmarkCommand {
-
-    public static final String COMMAND_WORD = "unmark";
+public class MarkIndexCommand extends MarkCommand {
 
     private final Index targetIndex;
 
-    public UnmarkIndexCommand(Index targetIndex) {
+    public MarkIndexCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -34,9 +32,9 @@ public class UnmarkIndexCommand extends UnmarkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        model.unmarkStudent(studentToUnmark);
-        return new CommandResult(String.format(MESSAGE_UNMARK_STUDENT_SUCCESS, Messages.format(studentToUnmark)));
+        Student studentToMark = lastShownList.get(targetIndex.getZeroBased());
+        model.markStudent(studentToMark);
+        return new CommandResult(String.format(MESSAGE_MARK_STUDENT_SUCCESS, Messages.format(studentToMark)));
     }
 
     @Override
@@ -46,12 +44,12 @@ public class UnmarkIndexCommand extends UnmarkCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UnmarkIndexCommand)) {
+        if (!(other instanceof MarkIndexCommand)) {
             return false;
         }
 
-        UnmarkIndexCommand otherUnmarkCommand = (UnmarkIndexCommand) other;
-        return targetIndex.equals(otherUnmarkCommand.targetIndex);
+        MarkIndexCommand otherMarkCommand = (MarkIndexCommand) other;
+        return targetIndex.equals(otherMarkCommand.targetIndex);
     }
 
     @Override
