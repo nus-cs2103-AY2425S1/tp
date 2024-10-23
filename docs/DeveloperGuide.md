@@ -167,13 +167,13 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The `ApplyCommand` is responsible for adding a new application to a specified company. It is invoked when a user applies for a position at a company and wants to track the application in the system. This command operates on the `Model`, updating the target company by appending a new application to its list of applications.
+The `apply` command is responsible for adding a new application to a specified company. It is invoked when a user applies for a position at a company and wants to track the application in the system. This command operates on the `Model`, updating the target company by appending a new application to its list of applications.
 
 The following methods and operations are involved:
 
-* `ApplyCommand#execute()` — Adds a new `Application` to the specified `Company`.
+* `ApplyCommand#execute(Model model)` — Adds a new `Application` to the specified `Company`.
 * `Model#setCompany(Company targetCompany, Company updatedCompany)` — Replaces the existing company in the model with an updated one, which contains the new application.
-* `Model#commitAddressBook()` — Commits the changes to the address book.
+* `AddressBook#setCompany(Company target, Company editedCompany)` — Commits the changes to the address book.
 
 ##### Example usage scenario:
 
@@ -183,7 +183,7 @@ Step 2. A copy of the company's current list of applications is made, and the ne
 
 Step 3. The `ApplyCommand` creates an updated `Company` object containing the newly added application and calls `Model#setCompany()` to replace the old company in the model with the updated one.
 
-Step 4. The changes are committed to the address book by calling `Model#commitAddressBook()`.
+Step 4. The changes are committed to the address book by calling `AddressBook#setCompany()`.
 
 <puml src="diagrams/ApplyCommandSequence.puml" alt="ApplyCommandSequence" />
 
@@ -205,13 +205,13 @@ Step 4. The changes are committed to the address book by calling `Model#commitAd
 
 #### Implementation
 
-The `UpdateCommand` is responsible for updating the status of an existing application for a specific company. When a user wants to modify the application status (e.g., changing from "APPLIED" to "INTERVIEWED"), this command is invoked.
+The `update` command is responsible for updating the status of an existing application for a specific company. When a user wants to modify the application status (e.g., changing from "APPLIED" to "INTERVIEWED"), this command is invoked.
 
 The following methods and operations are involved:
 
-* `UpdateCommand#execute()` — Updates the status of the specified `Application` for a particular `Company`.
+* `UpdateCommand#execute(Model model)` — Updates the status of the specified `Application` for a particular `Company`.
 * `Model#setCompany(Company targetCompany, Company updatedCompany)` — Replaces the old company in the model with the updated company containing the modified application.
-* `Model#commitAddressBook()` — Commits the modified address book state.
+* `AddressBook#setCompany(Company target, Company editedCompany)` — Commits the changes to the address book.
 
 ##### Example usage scenario:
 
@@ -221,7 +221,7 @@ Step 2. A copy of the company's current list of applications is made, and the re
 
 Step 3. The `UpdateCommand` creates an updated `Company` object containing the modified application list and calls `Model#setCompany()` to replace the old company with the updated one.
 
-Step 4. The changes are committed to the address book using `Model#commitAddressBook()`.
+Step 4. The changes are committed to the address book using `AddressBook#setCompany()`.
 
 <puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
 
