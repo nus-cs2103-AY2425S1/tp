@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
@@ -92,7 +91,7 @@ public class CommandResultTest {
     void showPerson_shouldReturnPerson_whenViewIsSet() {
         Set<Tag> tags = new HashSet<>();
         Person person = new Person(new Name("John"), new Job("Software Engineer"), new Phone("12345678"),
-                new Email("helloworld123@gmail.com"), new Address("hello blk 123"), tags);
+                new Email("helloworld123@gmail.com"), tags);
         CommandResult commandResult = new CommandResult("Feedback", true, person);
         Person result = commandResult.showPerson();
         assertTrue(person.equals(result),

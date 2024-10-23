@@ -36,6 +36,7 @@ public class ViewPersonPanel extends UiPart<Region> {
     public ViewPersonPanel(Person person) {
         super(FXML);
         this.person = person;
+        assert person != null : "Person should not be null";
         setPersonDetails(person);
     }
 
