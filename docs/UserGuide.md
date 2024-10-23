@@ -254,7 +254,8 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> User can add more than 1 Medical Condition through using `c/CONDITION` multiple times
+> User can add more than 1 Medical Condition through using `c/CONDITION` multiple times:
+> `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -278,7 +279,8 @@ Example:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times
+> User can delete more than 1 Medical Condition through using `c/CONDITION` multiple times:
+> `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
