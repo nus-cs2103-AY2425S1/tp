@@ -172,6 +172,7 @@ Examples:
 
 #### **Deleting a student by Name: `delete`**
 
+
 Deletes the specified student from the edulog.
 
 Format: `delete Name`
@@ -185,11 +186,31 @@ Examples:
 * `list` followed by `delete Nikhil` deletes student named “Nikhil” in the edulog.
 * `find Betsy` followed by `delete Betsy` deletes the student in the results of the `find` command.
 
+Denotes an existing student as paid. The student may either be identified by index number
+in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
+
 #### **Clearing all entries : `clear`**
 
 Clears all entries from the edulog.
 
 Format: `clear`
+
+### Marking all students' attendance: `markall'
+
+Denotes all existing students as paid.
+
+Format: `markall`
+
+Examples:
+* `markall`
+* `markall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
+
+### Unmarking a student's attendance: `unmark'
+
+Denotes an existing student as unpaid. The student may either be identified by index number
+in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
+
+Denotes all existing students as unpaid.
 
 ### **Calendar Commands**
 
