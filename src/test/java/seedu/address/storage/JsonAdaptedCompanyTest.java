@@ -34,14 +34,15 @@ public class JsonAdaptedCompanyTest {
     private static final String VALID_ADDRESS = META.getAddress().toString();
     private static final String VALID_URL = META.getCareerPageUrl().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = META.getTags().stream()
-            .map(JsonAdaptedTag::new)
+            .map(tag -> new JsonAdaptedTag(tag.toString())) // Use lambda to call toString()
             .collect(Collectors.toList());
 
     private static final Bookmark VALID_BOOKMARK = META.getIsBookmark();
 
     @Test
     public void toModelType_validCompanyDetails_returnsCompany() throws Exception {
-        JsonAdaptedCompany company = new JsonAdaptedCompany(META);
+        JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_URL, VALID_TAGS, VALID_BOOKMARK);
         assertEquals(META, company.toModelType());
     }
 
@@ -110,12 +111,12 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
+    public void toModelType_invalidTags_throwsIllegalArgumentException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_URL, invalidTags, VALID_BOOKMARK);
-        assertThrows(IllegalValueException.class, company::toModelType);
+        assertThrows(IllegalArgumentException.class, company::toModelType);
     }
 
     @Test
