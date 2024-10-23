@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddScheduleCommand;
@@ -27,25 +28,25 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_CONTACT, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME);
 
+        // Validate that all required prefixes are present
         if (!arePrefixesPresent(argMultimap, PREFIX_CONTACT, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
         }
 
         try {
-            // input index must be one-based
+            // Parse multiple contact indices from the input
             List<Index> contactIndexes = argMultimap.getAllValues(PREFIX_CONTACT).stream()
-                    .map(s -> {
+                    .flatMap(value -> Stream.of(value.split("\\s+"))) // Split multiple indices by spaces
+                    .map(contactIndexStr -> {
                         try {
-                            return ParserUtil.parseIndex(s);
-                        } catch (Exception e) {
-                            // you see nothing :>
-                            throw new RuntimeException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                    AddScheduleCommand.MESSAGE_USAGE));
+                            return ParserUtil.parseIndex(contactIndexStr);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e); // Wrap ParseException to unchecked exception
                         }
                     }).collect(Collectors.toList());
 
-            // name of the schedule
+            // Parse the schedule name
             String name = argMultimap.getValue(PREFIX_NAME).get().trim();
 
             // Parse and validate the date
@@ -66,9 +67,9 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                 throw new ParseException(AddScheduleCommand.MESSAGE_INVALID_TIME);
             }
 
-            // Convert contactIndex to its zero-based integer value if needed.
+            // Return AddScheduleCommand with the parsed contact indexes, name, date, and time
             return new AddScheduleCommand(contactIndexes, name, date, time);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
         }
     }
