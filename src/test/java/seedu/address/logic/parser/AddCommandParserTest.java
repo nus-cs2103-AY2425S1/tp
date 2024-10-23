@@ -122,7 +122,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
-        // invalid address
+        // invalid birthday
         assertParseFailure(parser, INVALID_BIRTHDAY_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDAY));
 
@@ -184,7 +184,7 @@ public class AddCommandParserTest {
 
         // missing birthday prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + BIRTHDAY_DESC_BOB + VALID_BIRTHDAY_BOB,
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_BIRTHDAY_BOB,
                 expectedMessage);
 
         // all prefixes missing
