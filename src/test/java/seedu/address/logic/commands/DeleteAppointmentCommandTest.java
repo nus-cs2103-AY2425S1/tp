@@ -18,6 +18,9 @@ import seedu.address.model.shared.Date;
 import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.PatientBuilder;
 
+/**
+ * Unit tests for {@code DeleteAppointmentCommand}.
+ */
 public class DeleteAppointmentCommandTest {
 
     private Model model;
@@ -25,6 +28,9 @@ public class DeleteAppointmentCommandTest {
     private Doctor doctor;
     private Patient patient;
 
+    /**
+     * Sets up the testing environment with an appointment, doctor, and patient.
+     */
     @BeforeEach
     public void setUp() {
         model = new ModelManager();
@@ -34,6 +40,12 @@ public class DeleteAppointmentCommandTest {
         appointmentToDelete = new Appointment(doctor, patient, new Date("23-04-2023"), new Time("1100"));
     }
 
+    /**
+     * Tests the successful execution of a valid delete appointment command.
+     * Ensures the correct success message is returned.
+     *
+     * @throws Exception if the appointment cannot be deleted.
+     */
     @Test
     public void execute_validAppointment_success() throws Exception {
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(appointmentToDelete);
@@ -48,19 +60,29 @@ public class DeleteAppointmentCommandTest {
                 appointmentToDelete.getTime()), result.getFeedbackToUser());
     }
 
+    /**
+     * Tests the behavior when attempting to delete an invalid appointment.
+     * Expects a {@code CommandException} to be thrown.
+     */
     @Test
     public void execute_invalidAppointment_throwsCommandException() {
+        // Creating an invalid appointment
         Appointment invalidAppointment = new Appointment(new DoctorBuilder().build(),
                 new PatientBuilder().build(), new Date("12-12-2023"), new Time("0900"));
 
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(invalidAppointment);
 
+        // Asserting that a CommandException is thrown with the expected message
         assertThrows(CommandException.class, () -> deleteAppointmentCommand.execute(model),
                 DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID);
     }
 
+    /**
+     * Tests the equality of {@code DeleteAppointmentCommand} objects.
+     */
     @Test
     public void equals() {
+        // Creating another appointment for comparison
         Appointment otherAppointment = new Appointment(new DoctorBuilder().build(),
                 new PatientBuilder().build(), new Date("23-05-2023"), new Time("1200"));
 
