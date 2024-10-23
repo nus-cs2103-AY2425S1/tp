@@ -1,10 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +87,41 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns a person that satisfies the predicate.
+     */
+    Optional<Person> findPerson(Predicate<Person> predicate);
+
+    /**
+     * Returns a list of person
+     */
+    List<Person> getPersonList();
+
+    /**
+     * TODO: Add ReadOnly Feature to the parameter
+     * Replaces goods data with the data in {@code goodsReceipt}.
+     */
+    void setGoods(ReadOnlyReceiptLog goodsReceipts);
+
+
+    /**
+     * TODO: Add ReadOnly Feature to the parameter
+     * Returns the goods list.
+     */
+    ReadOnlyReceiptLog getGoods();
+
+    /**
+     * Adds the given goods.
+     * {@code goodsReceipt} must not already exist in the address book.
+     */
+    void addGoods(GoodsReceipt goodsReceipt);
+
+    /** Returns an unmodifiable view of the filtered goodsReceipt list */
+    ObservableList<GoodsReceipt> getFilteredReceiptsList();
+
+    /**
+     * Filters a list of goods by the given {@code predicate}.
+     */
+    public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate);
 }

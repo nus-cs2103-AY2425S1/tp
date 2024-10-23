@@ -5,18 +5,25 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGoods.getTypicalGoodsReceipts;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.goods.Goods;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.GoodsBuilder;
+import seedu.address.testutil.GoodsReceiptBuilder;
 
 public class ModelManagerTest {
 
@@ -89,6 +96,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deletePerson_supplierHasGoods_removedGoods() {
+        Goods goods = new GoodsBuilder().build();
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .build();
+        modelManager.addPerson(ALICE);
+        modelManager.addGoods(goodsReceipt);
+        modelManager.deletePerson(ALICE);
+        List<GoodsReceipt> goodsList = modelManager
+                .getFilteredGoods(r -> r.isFromSupplier(ALICE.getName()));
+        assertEquals(goodsList.size(), 0);
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -98,10 +119,11 @@ public class ModelManagerTest {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
+        ArrayList<GoodsReceipt> goodsReceiptList = new ArrayList<>();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs, getTypicalGoodsReceipts());
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, getTypicalGoodsReceipts());
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,12 +136,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, getTypicalGoodsReceipts())));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, getTypicalGoodsReceipts())));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -127,6 +149,36 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, getTypicalGoodsReceipts())));
+    }
+
+    @Test
+    public void setGoods_nullGoods_throwsNullPointerException() {
+        // TODO: Implement this
+    }
+
+    @Test
+    public void setGoods_validGoods_setsGoods() {
+        // TODO: Implement this
+    }
+
+    @Test
+    public void getGoods_modifyList_throwsUnsupportedOperationException() {
+        // TODO: Implement this
+    }
+
+    @Test
+    public void addGoods_nullGoods_throwsNullPointerException() {
+        // TODO: Implement this
+    }
+
+    @Test
+    public void addGoods_validGoods_addsGoods() {
+        // TODO: Implement this
+    }
+
+    @Test
+    public void getFilteredGoods() {
+        // TODO: Implement this
     }
 }

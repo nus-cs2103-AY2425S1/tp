@@ -1,12 +1,17 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -19,15 +24,35 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY);
+
+        String name = argMultimap.getPreamble().trim();
+
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(List.of(name.split("\\s+")));
+
+        GoodsCategories category = parseGoodsCategory(argMultimap);
+
+        if (name.isEmpty() && category == null) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        Predicate<Person> predicate = name.isEmpty() ? p -> false : nameContainsKeywordsPredicate;
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(predicate, category);
     }
 
+    private GoodsCategories parseGoodsCategory(ArgumentMultimap argMultimap) throws ParseException {
+        Optional<String> categoryArg = argMultimap.getValue(PREFIX_CATEGORY);
+        if (categoryArg.isEmpty()) {
+            return null;
+        }
+        try {
+            return ParserUtil.parseGoodsCategory(categoryArg.get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), pe);
+        }
+    }
 }
