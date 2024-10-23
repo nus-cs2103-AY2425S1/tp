@@ -37,8 +37,8 @@ public abstract class Order {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
+    public String getOrderDate() {
+        return orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     public void setOrderDate(LocalDateTime orderDate) {
@@ -82,8 +82,9 @@ public abstract class Order {
             sb.append("\n");
         }
 
-        return "Phone Number: " + phoneNumber + "\n" +
-                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
-                "Items: \n" + sb.toString();
+        return sb.toString();
+//        return "Phone Number: " + phoneNumber + "\n" +
+//                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
+//                "Items: \n" + sb.toString();
     }
 }

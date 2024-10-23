@@ -40,7 +40,11 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return String.format("Product ID: %d, Name: %s, Cost: $%.2f", productId, name, cost);
+        return String.format("Product ID: %d\n     Name: %s\n     Cost: $%.2f", productId, name, cost);
+    }
+
+    public String toShortString() {
+        return String.format("%d, %s, $%.2f", productId, name, cost);
     }
 
     public String viewProduct() {

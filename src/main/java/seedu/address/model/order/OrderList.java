@@ -1,25 +1,31 @@
 package seedu.address.model.order;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * Class to manage a list of orders, including both supply and customer orders.
  */
 public class OrderList {
-    private List<SupplyOrder> supplyOrders;
-    private List<CustomerOrder> customerOrders;
+    private ObservableList<SupplyOrder> supplyOrders = FXCollections.observableArrayList();;
+    private ObservableList<SupplyOrder> internalUnmodifiableSupplyOrders =
+            FXCollections.unmodifiableObservableList(supplyOrders);
+    private ObservableList<CustomerOrder> customerOrders = FXCollections.observableArrayList();;
+    private ObservableList<CustomerOrder> internalUnmodifiableCustomerOrders =
+            FXCollections.unmodifiableObservableList(customerOrders);
 
     /**
      * Constructor for OrderList.
      * Initializes the lists of supply and customer orders.
      */
     public OrderList() {
-        this.supplyOrders = new ArrayList<>();
-        this.customerOrders = new ArrayList<>();
     }
 
     /**
@@ -45,8 +51,8 @@ public class OrderList {
      *
      * @return A list of all supply orders.
      */
-    public List<SupplyOrder> getSupplyOrders() {
-        return new ArrayList<>(supplyOrders);  // Return a copy of the list to avoid modification
+    public ObservableList<SupplyOrder> getSupplyOrders() {
+        return internalUnmodifiableSupplyOrders;  // Return a copy of the list to avoid modification
     }
 
     /**
@@ -54,8 +60,8 @@ public class OrderList {
      *
      * @return A list of all customer orders.
      */
-    public List<CustomerOrder> getCustomerOrders() {
-        return new ArrayList<>(customerOrders);  // Return a copy of the list to avoid modification
+    public ObservableList<CustomerOrder> getCustomerOrders() {
+        return internalUnmodifiableCustomerOrders;  // Return a copy of the list to avoid modification
     }
 
     /**
