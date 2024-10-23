@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class AttendanceCountTest {
     @Test
@@ -19,8 +19,8 @@ public class AttendanceCountTest {
     }
 
     @Test
-    public void isValidRole() {
-        // null role
+    public void isValidAttendanceCount() {
+        // null count
         assertThrows(NullPointerException.class, () -> AttendanceCount.isValidAttendanceCount(null));
 
         // invalid attendance count
@@ -30,28 +30,26 @@ public class AttendanceCountTest {
 
         // valid attendance count
         assertTrue(AttendanceCount.isValidAttendanceCount("1"));
-        assertTrue(AttendanceCount.isValidAttendanceCount("STUDENT"));
-        assertTrue(AttendanceCount.isValidAttendanceCount("ParENt"));
+        assertTrue(AttendanceCount.isValidAttendanceCount("123"));
     }
 
     @Test
     public void equals() {
-        Role role = new Role("student");
+        AttendanceCount count = new AttendanceCount("3");
 
         // same values -> returns true
-        assertTrue(role.equals(new Role("student")));
-        assertTrue(role.equals(new Role("STUDENT")));
+        assertTrue(count.equals(new AttendanceCount("3")));
 
         // same object -> returns true
-        assertTrue(role.equals(role));
+        assertTrue(count.equals(count));
 
         // null -> returns false
-        assertFalse(role.equals(null));
+        assertFalse(count.equals(null));
 
         // different types -> returns false
-        assertFalse(role.equals(5.0f));
+        assertFalse(count.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(role.equals(new Role("parent")));
+        assertFalse(count.equals(new AttendanceCount("4")));
     }
 }

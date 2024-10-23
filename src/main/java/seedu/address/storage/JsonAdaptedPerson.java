@@ -120,7 +120,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (attendanceCount == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, AttendanceCount.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AttendanceCount.class.getSimpleName()));
         }
         if (!AttendanceCount.isValidAttendanceCount(attendanceCount)) {
             throw new IllegalValueException(AttendanceCount.MESSAGE_CONSTRAINTS);

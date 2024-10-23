@@ -110,6 +110,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code AttendanceCount of the {@code Person} that we are building}
+     */
     public PersonBuilder withAttendanceCount(String attendanceCount) {
         this.attendanceCount = new AttendanceCount(attendanceCount);
         return this;

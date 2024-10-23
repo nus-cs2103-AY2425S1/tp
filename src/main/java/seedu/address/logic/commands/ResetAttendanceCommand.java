@@ -17,7 +17,7 @@ import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Resets the AttendanceCount of a person to 0.
  */
 public class ResetAttendanceCommand extends Command {
 
@@ -44,7 +44,7 @@ public class ResetAttendanceCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Person} with AttendanceCount of 0.
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createNewPerson(Person personToEdit) {
@@ -52,12 +52,10 @@ public class ResetAttendanceCommand extends Command {
 
         Name name = personToEdit.getName();
         Role role = personToEdit.getRole();
-        Phone phone= personToEdit.getPhone();
+        Phone phone = personToEdit.getPhone();
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
         Set<Tag> tags = personToEdit.getTags();
         return new Person(name, role, phone, email, address, tags);
     }
-
-
 }

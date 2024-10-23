@@ -1,5 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,13 +20,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
+/**
+ * Unmarks the attendance of an existing person.
+ */
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
@@ -31,10 +34,14 @@ public class UnmarkCommand extends Command {
     public static final String MESSAGE_CANNOT_UNMARK_FURTHER = "attendance count is already at 0";
     private final Index targetIndex;
 
+    /**
+     * @param targetIndex of the person in the filtered person list to edit
+     */
     public UnmarkCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -46,9 +53,9 @@ public class UnmarkCommand extends Command {
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
         if (personToUnmark.getRole().equals(new Role("Parent"))) {
             return new CommandResult(String.format(MESSAGE_CANNOT_MARK_PARENT));
-        } else if (personToUnmark.getAttendanceCount().count == 0) {
+        } else if (personToUnmark.getAttendanceCount().integerCount() == 0) {
             return new CommandResult(Messages.getNameOnly(personToUnmark) + "'s "
-                    +String.format(MESSAGE_CANNOT_UNMARK_FURTHER));
+                    + String.format(MESSAGE_CANNOT_UNMARK_FURTHER));
         } else {
             Person unmarkedPerson = createNewPerson(personToUnmark);
 
@@ -60,7 +67,7 @@ public class UnmarkCommand extends Command {
         }
     }
 
-    private Person createNewPerson (Person selectedPerson) {
+    private Person createNewPerson(Person selectedPerson) {
         assert selectedPerson != null;
         Name name = selectedPerson.getName();
         Role role = selectedPerson.getRole();

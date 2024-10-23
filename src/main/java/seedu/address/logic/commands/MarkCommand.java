@@ -1,5 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,13 +20,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
+/**
+ * Marks attendance of a person. Increments their AttendanceCount by 1.
+ */
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
@@ -31,10 +34,10 @@ public class MarkCommand extends Command {
     private final Index targetIndex;
 
     public MarkCommand(Index targetIndex) {
-            this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex;
     }
 
-
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -54,7 +57,7 @@ public class MarkCommand extends Command {
     }
 
 
-    private Person createNewPerson (Person selectedPerson) {
+    private Person createNewPerson(Person selectedPerson) {
         assert selectedPerson != null;
         Name name = selectedPerson.getName();
         Role role = selectedPerson.getRole();

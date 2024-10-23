@@ -28,6 +28,7 @@ public class Person {
     private final AttendanceCount attendanceCount;
 
     /**
+     * Constructs a new Person.
      * Every field must be present and not null.
      */
     public Person(Name name, Role role, Phone phone, Email email, Address address,
@@ -42,7 +43,9 @@ public class Person {
         this.attendanceCount = attendanceCount;
     }
 
-
+    /**
+     * Constructs a new Person with the attendance count of 0.
+     */
     public Person(Name name, Role role, Phone phone, Email email, Address address,
                   Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);

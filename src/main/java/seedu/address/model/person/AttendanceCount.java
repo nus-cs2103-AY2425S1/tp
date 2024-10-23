@@ -3,15 +3,22 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's Attendance Count in the address book.
+ */
 public class AttendanceCount {
-    public Integer count;
+    public static final String MESSAGE_CONSTRAINTS = "The attendance count is invalid.";
     public static final String VALIDATION_REGEX = "\\d+";
-    public static final String MESSAGE_CONSTRAINTS =
-            "The attendance count is invalid.";
+    private Integer count;
 
 
-
+    /**
+     * Constructs a {@code AttendanceCount}.
+     *
+     * @param count A valid attendance count.
+     */
     public AttendanceCount(String count) {
+        requireNonNull(count);
         checkArgument(isValidAttendanceCount(count), MESSAGE_CONSTRAINTS);
         this.count = Integer.parseInt(count);
     }
@@ -20,11 +27,17 @@ public class AttendanceCount {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns a new AttendanceCount object with incremented attendance count.
+     */
     public AttendanceCount increment() {
         Integer newCount = this.count + 1;
         return new AttendanceCount(newCount.toString());
     }
 
+    /**
+     * Returns a new AttendanceCount object with decremented attendance count.
+     */
     public AttendanceCount decrement() {
         if (this.count == 0) {
             return this;
@@ -32,6 +45,13 @@ public class AttendanceCount {
             Integer newCount = this.count - 1;
             return new AttendanceCount(newCount.toString());
         }
+    }
+
+    /**
+     * Returns count as an int.
+     */
+    public int integerCount() {
+        return this.count;
     }
 
     @Override
