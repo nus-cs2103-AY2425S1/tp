@@ -1,5 +1,7 @@
 package seedu.address.model.job;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +28,9 @@ public class Job {
      */
     public Job(Name name, JobCompany company, JobSalary salary,
             JobDescription description, Set<Tag> requirements, Set<String> matches) {
+        requireAllNonNull(name, company, salary, description);
+        requireAllNonNull(requirements);
+        requireAllNonNull(matches);
         this.name = name;
         this.company = company;
         this.salary = salary;
