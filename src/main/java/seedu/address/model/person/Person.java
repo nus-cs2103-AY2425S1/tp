@@ -15,7 +15,8 @@ import seedu.address.model.healthservice.HealthService;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
@@ -51,7 +52,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices,
-                  Phone phone, Email email) {
+            Phone phone, Email email) {
         requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
         this.name = name;
         this.nric = nric;
@@ -76,8 +77,8 @@ public class Person {
      * The other fields can be null
      */
     public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone,
-                  Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
-                  HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
+            Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
+            HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
         requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
         this.name = name;
         this.nric = nric;
@@ -156,6 +157,7 @@ public class Person {
     /**
      * Adds an appointment to the person's list of appointments.
      * The appointments will be sorted by date and time.
+     *
      * @param appt
      */
     public void addAppt(Appt appt) {
@@ -166,6 +168,7 @@ public class Person {
     /**
      * Returns an immutable list of appointments.
      * This list will not contain any duplicate appointments.
+     *
      * @return List of appointments.
      */
     public List<Appt> getAppts() {
@@ -175,6 +178,7 @@ public class Person {
     /**
      * Returns a string representation of the appointments
      * in the form of a list of strings.
+     *
      * @return String representation of the appointments.
      */
     public String getApptsString() {
@@ -186,7 +190,8 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<HealthService> getHealthServices() {
@@ -205,6 +210,10 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getNric().equals(getNric());
     }
+
+    // public void showDetails() {
+
+    // }
 
     /**
      * Returns true if both persons have the same identity and data fields.
