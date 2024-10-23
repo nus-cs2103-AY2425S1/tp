@@ -97,7 +97,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…
 > **Tip:** A person can have any number of tags (including 0).
 
 Examples:
-* 'add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/250 c/1'
+* 'add n/Ryan p/82154565 e/Ryan@gmail.com a/3 Padang Chancery f/550 c/1'
+  ![Ui](images/addcommandinput.png)
+* After Using the Command, this will be displayed in the UI
+  ![Ui](images/afteraddcommand.png)
+
 
 ---
 
@@ -122,7 +126,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91088511 e/wongwaihin7@gmail.com` Edits the phone number and email address of the 1st person to be `91088511` and `wongwaihin7@example.com` respectively.
+   ![Ui](images/editcommandinput.png)
+* After using the command, this will be displayed in the UI
+  ![Ui](images/aftereditcommand.png)
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ---
@@ -161,7 +168,11 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 3` deletes the 2nd person in the address book.
+![Ui](images/deletecommandinput.png)
+* After using the command, this will be displayed in the UI
+  ![Ui](images/deletecommandafter.png)
+
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ---
@@ -252,6 +263,7 @@ Displays a bar chart showing the number of students who made payments for each m
 * The x-axis representing the months (e.g., 2024-01, 2024-02, etc.).
 * The y-axis showing the number of students who made their payments during each month.
 * If no payments were made in a given month, the value for that month will be zero.
+  ![Ui](images/bar.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
