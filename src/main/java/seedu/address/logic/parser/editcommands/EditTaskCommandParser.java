@@ -39,11 +39,11 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     @Override
     public EditTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_TASK_NAME,
-            PREFIX_TASK_DEADLINE, PREFIX_INDEX, PREFIX_TASK_STATUS));
+        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_INDEX, PREFIX_GROUP_NAME,
+            PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE, PREFIX_TASK_STATUS));
         List<Prefix> invalidPrefixes = ALL_PREFIX;
         invalidPrefixes.removeAll(allowedPrefix);
-        if (!containsInvalidPrefix(args, invalidPrefixes)) {
+        if (containsInvalidPrefix(args, invalidPrefixes)) {
             throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditTaskCommand.MESSAGE_USAGE);
         }
         ArgumentMultimap argMultimap =
@@ -86,10 +86,10 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes) {
         for (Prefix prefix : invalidPreFixes) {
             if (arg.contains(prefix.getPrefix())) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
 
