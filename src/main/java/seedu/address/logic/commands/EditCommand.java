@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFLASTVISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -25,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -47,6 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_DATEOFLASTVISIT + "DATEOFLASTVISIT] \n"
+            + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_CONTACT] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -92,8 +95,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
+     * {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -101,12 +104,16 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Optional<Email> updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Optional<Address> updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Optional<Address> updatedAddress = editPersonDescriptor.getAddress()
+                .orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<DateOfLastVisit> updatedDateOfLastVisit = editPersonDescriptor.getDateOfLastVisit()
                 .orElse(personToEdit.getDateOfLastVisit());
+        Optional<EmergencyContact> updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
+                .orElse(personToEdit.getEmergencyContact());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedDateOfLastVisit);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedDateOfLastVisit, updatedEmergencyContact);
     }
 
     @Override
@@ -127,15 +134,13 @@ public class EditCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+        return new ToStringBuilder(this).add("index", index).add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value will replace the corresponding
+     * field value of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -144,12 +149,12 @@ public class EditCommand extends Command {
         private Optional<Address> address;
         private Set<Tag> tags;
         private Optional<DateOfLastVisit> dateOfLastVisit;
+        private Optional<EmergencyContact> emergencyContact;
 
         public EditPersonDescriptor() {}
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copy constructor. A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -158,13 +163,15 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setDateOfLastVisit(toCopy.dateOfLastVisit);
+            setEmergencyContact(toCopy.emergencyContact);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, dateOfLastVisit);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, dateOfLastVisit,
+                    emergencyContact);
         }
 
         public void setName(Name name) {
@@ -200,17 +207,16 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tags} to this object's {@code tags}. A defensive copy of {@code tags} is used
+         * internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException} if modification
+         * is attempted. Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
@@ -222,6 +228,21 @@ public class EditCommand extends Command {
 
         public Optional<Optional<DateOfLastVisit>> getDateOfLastVisit() {
             return Optional.ofNullable(dateOfLastVisit);
+        }
+
+        /**
+         * Sets {@code emergencyContact} to this object's {@code emergencyContact}.
+         */
+        public void setEmergencyContact(Optional<EmergencyContact> emergencyContact) {
+            this.emergencyContact = emergencyContact;
+        }
+
+        /**
+         * Returns an unmodifiable emergency contact, which throws {@code UnsupportedOperationException} if
+         * modification is attempted. Returns {@code Optional#empty()} if {@code emergencyContact} is null.
+         */
+        public Optional<Optional<EmergencyContact>> getEmergencyContact() {
+            return Optional.ofNullable(emergencyContact);
         }
 
         @Override
@@ -241,19 +262,15 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(dateOfLastVisit, otherEditPersonDescriptor.dateOfLastVisit);
+                    && Objects.equals(dateOfLastVisit, otherEditPersonDescriptor.dateOfLastVisit)
+                    && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact);
         }
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .add("dateOfLastVisit", dateOfLastVisit)
-                    .toString();
+            return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
+                    .add("address", address).add("tags", tags).add("dateOfLastVisit", dateOfLastVisit)
+                    .add("emergencyContact", emergencyContact).toString();
         }
     }
 }
