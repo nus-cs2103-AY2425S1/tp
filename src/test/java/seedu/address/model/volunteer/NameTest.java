@@ -56,4 +56,28 @@ public class NameTest {
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
     }
+
+    @Test
+    public void isSameName() {
+        // Same object -> returns true
+        Name name = new Name("Bob Tan");
+        assertTrue(name.isSameName(name));
+
+        // Same name, different case -> returns true
+        Name lowerCaseName = new Name("bob tan");
+        Name upperCaseName = new Name("Bob Tan");
+        assertTrue(lowerCaseName.isSameName(upperCaseName));
+
+        // Same name, with leading/trailing spaces -> returns true
+        Name nameWithSpaces = new Name("  Bob Tan  ");
+        assertTrue(name.isSameName(nameWithSpaces));
+
+        // Different names -> returns false
+        Name differentName = new Name("Alice Tan");
+        assertFalse(name.isSameName(differentName));
+
+        // Null -> returns false
+        assertFalse(name.isSameName(null));
+    }
+
 }

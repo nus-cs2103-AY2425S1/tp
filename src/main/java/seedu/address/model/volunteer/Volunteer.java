@@ -92,7 +92,7 @@ public class Volunteer {
             return true;
         }
         return otherVolunteer != null
-                && otherVolunteer.getName().equals(getName());
+                && otherVolunteer.getName().isSameName(getName());
     }
 
     /**

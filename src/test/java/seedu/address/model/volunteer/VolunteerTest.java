@@ -41,13 +41,13 @@ public class VolunteerTest {
         Volunteer editedAliceWithDifferentName = new VolunteerBuilder(ALICE).withName("Alice Ong").build();
         assertFalse(ALICE.isSameVolunteer(editedAliceWithDifferentName));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Volunteer editedBob = new VolunteerBuilder(BOB).withName("bob tan").build();
-        assertFalse(BOB.isSameVolunteer(editedBob));
+        assertTrue(BOB.isSameVolunteer(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         Volunteer editedBobWithTrailingSpaces = new VolunteerBuilder(BOB).withName("Bob Tan ").build();
-        assertFalse(BOB.isSameVolunteer(editedBobWithTrailingSpaces));
+        assertTrue(BOB.isSameVolunteer(editedBobWithTrailingSpaces));
     }
 
     @Test
