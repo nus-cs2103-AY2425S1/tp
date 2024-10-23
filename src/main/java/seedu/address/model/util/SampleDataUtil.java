@@ -27,7 +27,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         Game sampleGame = new Game("LoL",
-                new Username("LeagueGamer"), new SkillLevel("bad"), new Role("Support"));
+                new Username("LeagueGamer"), new SkillLevel("bad"), new Role("Support"), false);
         HashMap<String, Game> sample = new HashMap<String, Game>();
         sample.put("LoL", sampleGame);
         return new Person[] {
@@ -82,7 +82,7 @@ public class SampleDataUtil {
         Map<String, Game> gameMap = new HashMap<>();
         Arrays.stream(strings)
                 .forEach((gameName) -> gameMap.put(gameName, new Game(gameName, new Username("nil"),
-                        new SkillLevel("nil"), new Role("nil"))));
+                        new SkillLevel("nil"), new Role("nil"), false)));
         return gameMap;
     }
 

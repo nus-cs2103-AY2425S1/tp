@@ -24,7 +24,6 @@ public class Game {
     public final Role role;
     private boolean isFavourite;
 
-
     /**
      * Constructs a {@code Game}.
      *
@@ -32,14 +31,16 @@ public class Game {
      * @param username A username.
      * @param skillLevel A skill level.
      * @param role A role.
+     * @param isFavourite favourite status of the game
      */
-    public Game(String gameName, Username username, SkillLevel skillLevel, Role role) {
+    public Game(String gameName, Username username, SkillLevel skillLevel, Role role, boolean isFavourite) {
         requireNonNull(gameName);
         checkArgument(isValidGameName(gameName), MESSAGE_CONSTRAINTS);
         this.gameName = gameName;
         this.username = username;
         this.skillLevel = skillLevel;
         this.role = role;
+        this.isFavourite = isFavourite;
     }
 
     /**
@@ -53,6 +54,7 @@ public class Game {
         this.username = null;
         this.skillLevel = null;
         this.role = null;
+        this.isFavourite = false;
     }
 
     /**
