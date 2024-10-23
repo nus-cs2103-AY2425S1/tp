@@ -34,7 +34,7 @@ public class AppointmentTest {
     @Test
     public void getDate_validDate_returnsCorrectDate() {
         LocalDateTime expectedDate = LocalDateTime.of(2025, 11, 11, 11, 0);
-        Appointment appointment = new Appointment("11/11/2025 1100");  // assuming the constructor accepts a string
+        Appointment appointment = new Appointment("11/11/2025 1100");
         assertEquals(expectedDate, appointment.getDate());
     }
     @Test
