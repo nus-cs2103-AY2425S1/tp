@@ -23,8 +23,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTagsCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.UnassignContactFromWeddingCommand;
+import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

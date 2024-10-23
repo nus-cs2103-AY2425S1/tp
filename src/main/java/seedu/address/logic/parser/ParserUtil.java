@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +11,11 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingDate;
@@ -159,6 +162,13 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String personIndexString} into a {@code Set<Index>}
+     * @param personIndexString
+     * @return Set<Index>
+     * @throws ParseException
+     */
+
     public static Set<Index> parsePersonIndexString(String personIndexString) throws ParseException {
         Set<Index> personIndexSet;
         try {
@@ -174,6 +184,11 @@ public class ParserUtil {
         return personIndexSet;
     }
 
+    /**
+     * Parses a {@code ArrayList<Person> personArrayList} into a {@code String parsedPersonNames}
+     * @param personArrayList
+     * @return String
+     */
     public static String parsePersonListToString(ArrayList<Person> personArrayList) {
         String parsedPersonNames = personArrayList.stream()
                 .map(person -> person.getName().toString())
