@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.PersonTag;
+import seedu.address.model.tag.PersonTagType;
+import seedu.address.model.tag.PropertyTag;
+import seedu.address.model.tag.PropertyTagType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,7 +44,13 @@ class JsonAdaptedTag {
      */
     public Tag toModelType() throws IllegalValueException {
         if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Tag.TAG_CONSTRAINTS);
+        }
+        if (PersonTagType.isValidPersonTag(tagName)) {
+            return new PersonTag(tagName);
+        }
+        if (PropertyTagType.isValidPropertyTag(tagName)) {
+            return new PropertyTag(tagName);
         }
         return new Tag(tagName);
     }

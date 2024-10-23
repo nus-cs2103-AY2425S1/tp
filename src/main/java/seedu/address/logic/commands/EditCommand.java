@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -26,6 +28,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +46,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "ADD_TAG] "
+            + "[" + PREFIX_DELETE_TAG + "DELETE_TAG] "
+            + "[" + PREFIX_REMARK + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -51,7 +56,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
+    public static final String HELP_EDIT_COMMAND = "Edit Command \n"
+            + "- Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [dt/TAG] [r/REMARK]\n"
+            + "- Example: edit 1 p/87654321 t/Tutor dt/Student"
+            + "- INDEX is the index of the customer displayed. Items in the [square brackets] are optional"
+            + " and can be input in any order! TAG can be both a tag to be added or removed, depending on"
+            + " the prefix for the item.";
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -99,9 +109,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedTags = editPersonDescriptor.computeTags(personToEdit.getTags());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags, updatedRemark, personToEdit.getListings());
     }
 
     @Override
@@ -137,7 +149,9 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Tag> addTags;
+        private Set<Tag> deleteTags;
+        private Remark remark;
 
         public EditPersonDescriptor() {}
 
@@ -150,14 +164,16 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setAddTags(toCopy.addTags);
+            setDeleteTags(toCopy.deleteTags);
+            setRemark(toCopy.remark);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, addTags, deleteTags, remark);
         }
 
         public void setName(Name name) {
@@ -192,12 +208,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAddTags(Set<Tag> addTags) {
+            this.addTags = (addTags != null) ? new HashSet<>(addTags) : null;
         }
 
         /**
@@ -205,8 +229,34 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Tag>> getAddTags() {
+            return (addTags != null) ? Optional.of(Collections.unmodifiableSet(addTags)) : Optional.empty();
+        }
+
+        public void setDeleteTags(Set<Tag> deleteTags) {
+            this.deleteTags = (deleteTags != null) ? new HashSet<>(deleteTags) : null;
+        }
+
+        public Optional<Set<Tag>> getDeleteTags() {
+            return (deleteTags != null) ? Optional.of(Collections.unmodifiableSet(deleteTags)) : Optional.empty();
+        }
+
+        /**
+         * Computes the updated set of tags for {@code personToEdit} with given tag list,
+         * and returns an unmodifiable tag set.
+         */
+        public Set<Tag> computeTags(Set<Tag> tags) {
+            Optional<Set<Tag>> addTags = getAddTags();
+            if (addTags.isPresent() && addTags.get().isEmpty()) {
+                // empty add tags set, which means to remove all tags
+                return Collections.emptySet();
+            }
+
+            Set<Tag> newTags = new HashSet<>(tags);
+            addTags.ifPresent(newTags::addAll);
+            getDeleteTags().ifPresent(newTags::removeAll); // ignores tag silently if tag to be deleted not found
+
+            return Collections.unmodifiableSet(newTags);
         }
 
         @Override
@@ -225,7 +275,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(addTags, otherEditPersonDescriptor.addTags)
+                    && Objects.equals(deleteTags, otherEditPersonDescriptor.deleteTags)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark);
         }
 
         @Override
@@ -235,7 +287,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
+                    .add("add-tags", addTags)
+                    .add("delete-tags", deleteTags)
+                    .add("remark", remark)
                     .toString();
         }
     }

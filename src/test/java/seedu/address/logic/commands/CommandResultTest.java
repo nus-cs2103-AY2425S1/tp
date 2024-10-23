@@ -7,7 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
+
 public class CommandResultTest {
+    private final Person person = new PersonBuilder().withName("John Doe").build();
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
@@ -55,9 +59,18 @@ public class CommandResultTest {
     @Test
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
-        String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
+
+        // Without personToShow
+        String expectedWithoutPerson = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
-        assertEquals(expected, commandResult.toString());
+                + ", exit=" + commandResult.isExit() + ", personToShow=null}";
+        assertEquals(expectedWithoutPerson, commandResult.toString());
+
+        // With personToShow
+        CommandResult commandResultWithPerson = new CommandResult("feedback", person);
+        String expectedWithPerson = CommandResult.class.getCanonicalName() + "{feedbackToUser="
+                + commandResultWithPerson.getFeedbackToUser() + ", showHelp=" + commandResultWithPerson.isShowHelp()
+                + ", exit=" + commandResultWithPerson.isExit() + ", personToShow=" + person + "}";
+        assertEquals(expectedWithPerson, commandResultWithPerson.toString());
     }
 }
