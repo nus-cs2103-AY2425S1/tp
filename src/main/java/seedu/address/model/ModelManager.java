@@ -223,6 +223,10 @@ public class ModelManager implements Model {
         }
         tutorials.unassignStudent(student, tutorialId);
     }
+    @Override
+    public void setTutorials(TutorialList tutorials) {
+        this.tutorials.resetData(tutorials);
+    }
 
     //=========== Assignment ================================================================================
 
@@ -268,6 +272,11 @@ public class ModelManager implements Model {
     @Override
     public String listAssignments() {
         return assignmentList.toString();
+    }
+
+    @Override
+    public void setAssignments(AssignmentList assignments) {
+        this.assignmentList.resetData(assignments);
     }
 
     //=========== Filtered Student List (student ID)

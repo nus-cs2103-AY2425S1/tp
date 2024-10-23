@@ -25,15 +25,15 @@ public class AssignmentTest {
     @Test
     public void constructor_withStatus_initializesCorrectly() {
         LocalDateTime date = LocalDateTime.of(2024, 10, 14, 23, 59);
-        HashMap<Integer, Boolean> statuses = new HashMap<>();
-        statuses.put(1, true);
-        statuses.put(2, false);
+        HashMap<String, Boolean> statuses = new HashMap<>();
+        statuses.put("1", true);
+        statuses.put("2", false);
         Assignment assignment = new Assignment("Assignment 1", date, statuses);
 
-        assertEquals(true, assignment.getStatuses().get(1));
-        assertEquals(false, assignment.getStatuses().get(2));
-        assertFalse(assignment.getStatus(100));
-        assertTrue(assignment.getStatus(1));
+        assertEquals(true, assignment.getStatuses().get("1"));
+        assertEquals(false, assignment.getStatuses().get("2"));
+        assertFalse(assignment.getStatus("100"));
+        assertTrue(assignment.getStatus("1"));
         assertEquals(2, assignment.getStatuses().size());
     }
 
@@ -43,16 +43,16 @@ public class AssignmentTest {
         Assignment assignment = new Assignment("Assignment 1", date);
 
         // Mark student 1 as complete
-        assignment.markStatus(1, true);
-        assertTrue(assignment.getStatus(1));
+        assignment.markStatus("1", true);
+        assertTrue(assignment.getStatus("1"));
 
         // Mark student 2 as incomplete
-        assignment.markStatus(2, false);
-        assertFalse(assignment.getStatus(2));
+        assignment.markStatus("2", false);
+        assertFalse(assignment.getStatus("2"));
 
         // Change status of student 1 to incomplete
-        assignment.markStatus(1, false);
-        assertFalse(assignment.getStatus(1));
+        assignment.markStatus("1", false);
+        assertFalse(assignment.getStatus("1"));
     }
 
     @Test
@@ -78,13 +78,13 @@ public class AssignmentTest {
     public void markStatus_updatesNumCorrectly() {
         LocalDateTime date = LocalDateTime.of(2024, 10, 14, 23, 59);
         Assignment assignment = new Assignment("Assignment 1", date);
-        assignment.markStatus(1, true);
+        assignment.markStatus("1", true);
         assertEquals(1, assignment.getNumOfCompletedStudents());
-        assignment.markStatus(2, false);
+        assignment.markStatus("2", false);
         assertEquals(1, assignment.getNumOfCompletedStudents());
-        assignment.markStatus(1, false);
+        assignment.markStatus("1", false);
         assertEquals(0, assignment.getNumOfCompletedStudents());
-        assignment.markStatus(2, true);
+        assignment.markStatus("2", true);
         assertEquals(1, assignment.getNumOfCompletedStudents());
     }
 }

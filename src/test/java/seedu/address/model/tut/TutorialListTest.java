@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
+import seedu.address.testutil.Assert;
 
 
 public class TutorialListTest {
@@ -135,5 +136,19 @@ public class TutorialListTest {
         assertFalse(tutorialList.equals(null));
 
         assertFalse(tutorialList.equals(tutorialList1));
+    }
+
+    @Test
+    public void resetData_null_throwsNullPointerException() {
+        TutorialList tutorials = new TutorialList();
+        Assert.assertThrows(NullPointerException.class, () -> tutorials.resetData(null));
+    }
+
+    @Test
+    public void resetData_withValidTutorials_replacesData() {
+        TutorialList tutorials = new TutorialList();
+        TutorialList newData = getTypicalTutorialList();
+        tutorials.resetData(newData);
+        assertEquals(newData, tutorials);
     }
 }
