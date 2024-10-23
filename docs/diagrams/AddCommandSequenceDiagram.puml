@@ -1,5 +1,5 @@
-//@@author chiageng-reused
-//Reused from https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/diagrams/AddCommandSequenceDiagram.puml
+// @@author Darren
+// Reused from https://github.com/AY2324S2-CS2103T-W10-1/tp/blob/master/docs/diagrams/AddCommandSequenceDiagram.puml
 // with minor modifications
 @startuml
 !include style.puml
