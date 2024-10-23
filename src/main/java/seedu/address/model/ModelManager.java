@@ -125,6 +125,14 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the full list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    public ObservableList<Person> getFullPersonList() {
+        return addressBook.getPersonList();
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
