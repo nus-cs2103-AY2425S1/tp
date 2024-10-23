@@ -74,7 +74,8 @@ public class MarkPaidCommand extends Command {
                 }
                 return true;
             });
-            return new CommandResult(String.format(MESSAGE_MARKPAID_ALL_SUCCESS, monthsPaid));
+            String monthsPaidStr = monthsPaid.toString().replaceAll("^\\[|\\]$", "");
+            return new CommandResult(String.format(MESSAGE_MARKPAID_ALL_SUCCESS, monthsPaidStr));
         }
 
         Index index = target.getIndex();
