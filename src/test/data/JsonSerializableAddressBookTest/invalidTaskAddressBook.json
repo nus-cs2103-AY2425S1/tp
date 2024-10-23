@@ -1,0 +1,27 @@
+{
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "tags": []
+    }
+  ],
+  "tasks": [
+    {
+      "description": "",
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "tags": []
+      }
+    },
+    {
+      "description": "Visit doctor",
+      "patient": null
+    }
+  ]
+}

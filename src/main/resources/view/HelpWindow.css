@@ -1,4 +1,4 @@
-#copyButton, #helpMessage {
+#copyButton, #helpMessage, #userGuideLink, #helpCommands {
     -fx-text-fill: white;
 }
 
@@ -16,4 +16,13 @@
 
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#helpMessage, #userGuideLink, #helpCommands {
+    -fx-font-size: 12pt;
+}
+
+#userGuideLink {
+    -fx-focus-color: transparent;
+    -fx-underline: true;
 }

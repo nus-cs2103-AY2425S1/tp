@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,4 +122,56 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String priorityLevel} into a {@code PriorityLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param priorityLevel The string to parse.
+     * @return The parsed PriorityLevel object.
+     * @throws ParseException if the given {@code priorityLevel} is invalid.
+     */
+    public static PriorityLevel parsePriorityLevel(String priorityLevel) throws ParseException {
+        requireNonNull(priorityLevel);
+        String trimmedPriorityLevel = priorityLevel.trim();
+
+        if (trimmedPriorityLevel.isEmpty() || trimmedPriorityLevel.equalsIgnoreCase("delete")) {
+            return new PriorityLevel(3); // default level if none provided or "delete" keyword used
+        }
+
+        if (trimmedPriorityLevel.isEmpty()) {
+            return new PriorityLevel(3); // default level if none provided
+        }
+        int level;
+        try {
+            level = Integer.parseInt(trimmedPriorityLevel);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Priority level must be a number.");
+        }
+
+        if (level < 1 || level > 3) {
+            throw new ParseException("Invalid priority level. Please enter 1, 2, or 3.");
+        }
+        return new PriorityLevel(level);
+    }
+
+    /**
+     * Parses a {@code String argument} to determine if it indicates a command to delete the priority level.
+     * If the argument is "delete", it returns a default PriorityLevel of 3.
+     *
+     * @param argument The string argument to parse.
+     * @return The PriorityLevel of 3 if the argument indicates deletion.
+     * @throws ParseException if the argument is not "delete" or a valid priority level.
+     */
+    public static PriorityLevel parseDeletePriorityLevel(String argument) throws ParseException {
+        requireNonNull(argument);
+        String trimmedArgument = argument.trim();
+
+        if (trimmedArgument.equalsIgnoreCase("deletelevel")) {
+            return new PriorityLevel(3); // default priority level upon deletion
+        }
+
+        throw new ParseException("Invalid argument for deleting priority level. Expected 'deletelevel'.");
+    }
+
 }

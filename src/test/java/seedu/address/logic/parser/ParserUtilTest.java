@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PriorityLevel;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -35,6 +36,12 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String VALID_PRIORITY_LEVEL_1 = "1";
+    private static final String VALID_PRIORITY_LEVEL_2 = "2";
+    private static final String VALID_PRIORITY_LEVEL_3 = "3";
+    private static final String INVALID_PRIORITY_LEVEL = "4";
+    private static final String NON_NUMERIC_PRIORITY_LEVEL = "abc";
+
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -193,4 +200,65 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    // Tests for parsePriorityLevel
+    @Test
+    public void parsePriorityLevel_validLevel1_returnsPriorityLevel() throws Exception {
+        assertEquals(new PriorityLevel(1), ParserUtil.parsePriorityLevel(VALID_PRIORITY_LEVEL_1));
+    }
+
+    @Test
+    public void parsePriorityLevel_validLevel2_returnsPriorityLevel() throws Exception {
+        assertEquals(new PriorityLevel(2), ParserUtil.parsePriorityLevel(VALID_PRIORITY_LEVEL_2));
+    }
+
+    @Test
+    public void parsePriorityLevel_validLevel3_returnsPriorityLevel() throws Exception {
+        assertEquals(new PriorityLevel(3), ParserUtil.parsePriorityLevel(VALID_PRIORITY_LEVEL_3));
+    }
+
+    @Test
+    public void parsePriorityLevel_invalidLevel_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePriorityLevel(INVALID_PRIORITY_LEVEL));
+    }
+
+    @Test
+    public void parsePriorityLevel_nonNumericLevel_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePriorityLevel(NON_NUMERIC_PRIORITY_LEVEL));
+    }
+
+    @Test
+    public void parsePriorityLevel_emptyString_returnsDefaultPriorityLevel() throws Exception {
+        assertEquals(new PriorityLevel(3), ParserUtil.parsePriorityLevel("   "));
+    }
+
+    @Test
+    public void parsePriorityLevel_deleteKeyword_returnsDefaultPriorityLevel() throws Exception {
+        assertEquals(new PriorityLevel(3), ParserUtil.parsePriorityLevel("delete"));
+    }
+
+    // Tests for parseDeletePriorityLevel
+    @Test
+    public void parseDeletePriorityLevel_validDeleteCommand_returnsDefaultPriorityLevel() throws Exception {
+        PriorityLevel expectedPriorityLevel = new PriorityLevel(3);
+        assertEquals(expectedPriorityLevel, ParserUtil.parseDeletePriorityLevel("deletelevel"));
+    }
+
+    @Test
+    public void parseDeletePriorityLevel_validDeleteCommandWithWhitespace_returnsDefaultPriorityLevel()
+            throws Exception {
+        PriorityLevel expectedPriorityLevel = new PriorityLevel(3);
+        assertEquals(expectedPriorityLevel, ParserUtil.parseDeletePriorityLevel("   deletelevel   "));
+    }
+
+    @Test
+    public void parseDeletePriorityLevel_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeletePriorityLevel(null));
+    }
+
+    @Test
+    public void parseDeletePriorityLevel_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeletePriorityLevel("invalid"));
+    }
+
 }

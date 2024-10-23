@@ -18,7 +18,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,6 +30,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -86,6 +89,40 @@ public class LogicManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
+
+    @Test
+    public void execute_validTaskCommand_success() throws Exception {
+        Person amy = new PersonBuilder(AMY).build();
+        model.addPerson(amy);
+
+        String addTaskCommand = AddTaskCommand.COMMAND_WORD + " 1" + " d/Buy medication";
+        Task expectedTask = new Task(amy, "Buy medication");
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(amy);
+        expectedModel.addTask(expectedTask);
+
+        assertCommandSuccess(addTaskCommand,
+                String.format(AddTaskCommand.MESSAGE_SUCCESS, "Buy medication"), expectedModel);
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        // Create a task to add
+        Person amy = new PersonBuilder(AMY).build();
+        model.addPerson(amy);
+        Task task = new Task(amy, "Buy medication");
+        model.addTask(task);
+
+        // Ensure the task is added correctly
+        ObservableList<Task> filteredTaskList = logic.getFilteredTaskList();
+        assertEquals(1, filteredTaskList.size());
+        assertEquals(task, filteredTaskList.get(0));
+
+        // Try to modify the list, which should throw an UnsupportedOperationException
+        assertThrows(UnsupportedOperationException.class, () -> filteredTaskList.remove(0));
+    }
+
+
 
     /**
      * Executes the command and confirms that
@@ -167,9 +204,10 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withPriorityLevel(3).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
 }

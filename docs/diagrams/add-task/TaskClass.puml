@@ -1,0 +1,31 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class Person {
+  +getName(): String
+  +getPhone(): String
+  +getEmail(): String
+  // Other fields and methods
+}
+
+Class Task {
+  +Task(Person, String)
+  +Task(Person, String, boolean)
+  +getPatient(): Person
+  +getDescription(): String
+  +getStatus(): boolean
+  +isCompleteProperty(): SimpleBooleanProperty
+  +getStatusString(): String
+  +markTaskComplete(): void
+}
+
+Class SimpleBooleanProperty {
+  +getValue(): boolean
+  +set(boolean): void
+}
+
+Task --> "1" Person
+Task --> "1" SimpleBooleanProperty
+
+@enduml
