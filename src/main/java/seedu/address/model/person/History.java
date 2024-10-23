@@ -246,14 +246,6 @@ public class History {
     public String getDoctorAppointmentsForDay(LocalDate date, Id doctorId) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         StringBuilder sb = new StringBuilder();
-//        for (LocalDateTime appointmentDateTime : appointments) {
-//            Appointment appointment = appointmentDatabase.get(appointmentDateTime);
-//            if (appointmentDateTime.toLocalDate().equals(date)
-//                    && appointment.getDoctorId().equals(doctorId)) {
-//                sb.append("DateTime: " + appointmentDateTime.format(formatter) + " " + appointment).append("\n");
-//            }
-//        }
-
         for (Map.Entry<LocalDateTime, Appointment> entry : appointmentDatabase.entrySet()) {
             Appointment appointment = entry.getValue();
             LocalDate appointmentDate = entry.getKey().toLocalDate();
