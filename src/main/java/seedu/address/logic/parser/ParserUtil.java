@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -24,6 +25,8 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+
+    private static final Logger logger = Logger.getLogger(ParserUtil.class.getName());
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
@@ -181,6 +184,7 @@ public class ParserUtil {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
         if (!Deadline.isValidDeadline(trimmedDeadline)) {
+            logger.warning("Invalid deadline format detected: " + trimmedDeadline);
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(trimmedDeadline);
