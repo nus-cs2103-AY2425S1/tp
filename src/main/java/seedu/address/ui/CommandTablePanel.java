@@ -130,7 +130,8 @@ public class CommandTablePanel extends UiPart<Region> {
                 setGraphic(null);
             } else {
                 text.setText(item);
-                text.wrappingWidthProperty().bind(getTableColumn().widthProperty().subtract(10)); // Wrap text based on column width
+                text.wrappingWidthProperty()
+                        .bind(getTableColumn().widthProperty().subtract(10));
                 setGraphic(text);
             }
         }
