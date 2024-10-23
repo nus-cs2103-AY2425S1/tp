@@ -25,6 +25,7 @@ import seedu.address.logic.commands.FindPhoneNumberCommand;
 import seedu.address.logic.commands.FindSellCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SoldPropertyCommand;
 import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -111,6 +112,9 @@ public class AddressBookParser {
 
         case BoughtPropertyCommand.COMMAND_WORD:
             return new BoughtPropertyCommandParser().parse(arguments);
+
+        case SoldPropertyCommand.COMMAND_WORD:
+            return new SoldPropertyCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

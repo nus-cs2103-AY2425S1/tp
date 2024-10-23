@@ -18,33 +18,33 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 /**
  * Adds a property to the list of properties to buy for a specific contact.
  */
-public class BoughtPropertyCommand extends Command {
-    public static final String COMMAND_WORD = "bought";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records the property that has been purchased "
-            + "using the index number of the person and index number of the property-to-buy in the displayed "
-            + "persons list. Removes this property from the property-to-buy list.\n"
+public class SoldPropertyCommand extends Command {
+    public static final String COMMAND_WORD = "sold";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records the property that has been sold "
+            + "using the index number of the person and index number of the property-to-sell in the displayed "
+            + "persons list. Removes this property from the property-to-sell list.\n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "PROPERTY_TO_BUY_INDEX (must be a positive integer) "
+            + "PROPERTY_TO_SELL_INDEX (must be a positive integer) "
             + PREFIX_ACTUAL_PRICE + "[ACTUAL_PRICE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 1 "
             + PREFIX_ACTUAL_PRICE + "1100000";
 
-    public static final String MESSAGE_SUCCESS = "Record property as bought: %1$s";
+    public static final String MESSAGE_SUCCESS = "Record property as sold: %1$s";
 
     private final Index personIndex;
     private final Index propertyIndex;
     private final Optional<Price> actualPrice;
 
     /**
-     * Creates an BoughtPropertyCommand to record and remove the specified {@code Property}
-     * in the list of properties to buy of the specified contact {@code Index}.
+     * Creates an SoldPropertyCommand to record and remove the specified {@code Property}
+     * in the list of properties to sell of the specified contact {@code Index}.
      *
      * @param personIndex of the person in the filtered person list to edit
-     * @param propertyIndex of the property to be marked as bought in the list of properties to buy
-     * @param actualPrice An {@code Optional} of the actual price of the property bought if provided by the user
+     * @param propertyIndex of the property to be marked as sold in the list of properties to sell
+     * @param actualPrice An {@code Optional} of the actual price of the property sold if provided by the user
      */
-    public BoughtPropertyCommand(Index personIndex, Index propertyIndex, Optional<Price> actualPrice) {
+    public SoldPropertyCommand(Index personIndex, Index propertyIndex, Optional<Price> actualPrice) {
         requireNonNull(personIndex);
         requireNonNull(propertyIndex);
 
@@ -64,12 +64,12 @@ public class BoughtPropertyCommand extends Command {
 
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
-        if (!personToEdit.isValidBuyingPropertyIndex(propertyIndex)) {
+        if (!personToEdit.isValidSellingPropertyIndex(propertyIndex)) {
             throw new CommandException((Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX));
         }
 
-        Property updatedProperty = personToEdit.getBoughtProperty(personIndex, actualPrice);
-        personToEdit.updateBoughtProperty(updatedProperty, propertyIndex);
+        Property updatedProperty = personToEdit.getSoldProperty(personIndex, actualPrice);
+        personToEdit.updateSoldProperty(updatedProperty, propertyIndex);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatProperty(updatedProperty)));
@@ -78,9 +78,9 @@ public class BoughtPropertyCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BoughtPropertyCommand // instanceof handles nulls
-                && personIndex.equals(((BoughtPropertyCommand) other).personIndex)
-                && propertyIndex.equals(((BoughtPropertyCommand) other).propertyIndex)
-                && actualPrice.equals(((BoughtPropertyCommand) other).actualPrice));
+                || (other instanceof SoldPropertyCommand // instanceof handles nulls
+                && personIndex.equals(((SoldPropertyCommand) other).personIndex)
+                && propertyIndex.equals(((SoldPropertyCommand) other).propertyIndex)
+                && actualPrice.equals(((SoldPropertyCommand) other).actualPrice));
     }
 }

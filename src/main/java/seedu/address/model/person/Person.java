@@ -229,15 +229,30 @@ public class Person {
     }
 
     /**
-     * Records a {@code Property} as sold and removes it from the list of properties to sell.
+     * Returns the {@code Property} sold with its updated price.
      *
-     * @param index One based Index of property to record and delete.
+     * @param index One based Index of property sold in the list of properties to sell.
+     * @param actualPrice {@code Optional<Price>} of the actual price of the property provided by the user.
      */
-    public void soldProperty(Index index) {
+    public Property getSoldProperty(Index index, Optional<Price> actualPrice) {
         Property propertyToBeUpdated = sellingProperties.get(index.getZeroBased());
-        propertiesSold.add(propertyToBeUpdated);
-        sellingProperties.remove(propertyToBeUpdated);
+        propertyToBeUpdated.setActualPrice(actualPrice);
+        return propertyToBeUpdated;
     }
+
+    /**
+     * Updates the properties to sell list and sold properties list with the {@code Property} purchased.
+     *
+     * @param updatedProperty Property sold with the updated actual price.
+     * @param oldPropertyIndex One based Index of property bought in the list of properties to sell.
+     */
+    public void updateSoldProperty(Property updatedProperty, Index oldPropertyIndex) {
+        requireAllNonNull(updatedProperty, oldPropertyIndex);
+        propertiesSold.add(updatedProperty);
+        sellingProperties.remove(oldPropertyIndex.getZeroBased());
+    }
+
+
 
     /**
      * Returns True if the propertyIndex {@code Index} is within the range of the list of selling properties.
