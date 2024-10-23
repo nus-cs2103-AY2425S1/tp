@@ -26,7 +26,11 @@ public class FindConcertCommand extends Command {
 
     private final Predicate<Concert> predicate;
 
+    /**
+     * Creates a FindConcertCommand to find all concerts who satisfy the {@code predicate}.
+     */
     public FindConcertCommand(NameContainsKeywordsPredicate<Concert> predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Concert's date and time in the address book. Guarantees: immutable; is valid as
- * declared in {@link #isValidDate(String)}
+ * declared in {@link #isValidDate(String, DateTimeFormatter)}
  */
 public class ConcertDate {
 

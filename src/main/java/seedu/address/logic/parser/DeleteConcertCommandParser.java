@@ -7,7 +7,7 @@ import seedu.address.logic.commands.DeleteConcertCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteConcertComnnad object.
+ * Parses input arguments and creates a new DeleteConcertCommand object
  */
 public class DeleteConcertCommandParser implements Parser<DeleteConcertCommand> {
 
