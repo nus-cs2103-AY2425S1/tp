@@ -28,6 +28,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        requireNonNull(person);
         return switch (this.field) {
         case "name" -> keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().toString(), keyword));
