@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 
@@ -17,7 +18,7 @@ import seedu.address.model.restaurant.Restaurant;
  * Provide rating for restaurants in the address book.
  */
 public class RatingCommand extends Command {
-    public static final String COMMAND_WORD = "rating";
+    public static final String COMMAND_WORD = "rate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set or edit the rating of the restaurant identified "
             + "by the index number used in the last restaurant listing. "
@@ -27,11 +28,11 @@ public class RatingCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_RATING + "10";
 
-    public static final String MESSAGE_ADD_RATING_SUCCESS = "Added rating to Restaurant: %1$s";
-    public static final String MESSAGE_DELETE_RATING_SUCCESS = "Removed rating from Restaurant: %1$s";
+    public static final String MESSAGE_ADD_RATING_SUCCESS = "Restaurant's rating changed: %1$s";
 
     private final Index index;
     private final Rating rating;
+    private Name name;
 
     /**
      * @param index of the restaurant in the filtered restaurant list to edit the rating
@@ -42,6 +43,7 @@ public class RatingCommand extends Command {
 
         this.index = index;
         this.rating = rating;
+        this.name = null;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -56,6 +58,7 @@ public class RatingCommand extends Command {
                 restaurantToEdit.getPhone(), restaurantToEdit.getEmail(),
                 restaurantToEdit.getAddress(), rating, restaurantToEdit.getTags());
 
+        this.name = restaurantToEdit.getName();
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
@@ -67,7 +70,7 @@ public class RatingCommand extends Command {
      * {@code restaurantToEdit}.
      */
     private String generateSuccessMessage(Restaurant restaurantToEdit) {
-        return String.format(MESSAGE_ADD_RATING_SUCCESS, restaurantToEdit);
+        return String.format(MESSAGE_ADD_RATING_SUCCESS, this);
     }
 
     @Override
@@ -86,5 +89,10 @@ public class RatingCommand extends Command {
         RatingCommand e = (RatingCommand) other;
         return index.equals(e.index)
                 && rating.equals(e.rating);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, Rating= %s", name, rating.getStringValue());
     }
 }
