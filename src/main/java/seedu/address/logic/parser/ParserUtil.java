@@ -162,8 +162,11 @@ public class ParserUtil {
      * @param label
      * @return
      */
-    public static String parsePublicAddressLabel(String label) {
+    public static String parsePublicAddressLabel(String label) throws ParseException {
         requireNonNull(label);
+        if (!PublicAddress.isValidPublicAddressLabel(label)) {
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
         return label.strip();
     }
 
