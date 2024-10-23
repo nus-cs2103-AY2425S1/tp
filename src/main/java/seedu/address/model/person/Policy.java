@@ -127,11 +127,15 @@ public class Policy {
     }
 
     public void updateNextPaymentDate() {
-        payment.updatePaymentDueDate();
+        payment.updatePaymentDueDate(this);
     }
 
     public LocalDate getPolicyPaymentDueDate() {
         return payment.getPaymentDueDate();
+    }
+
+    public boolean isExpiringSoon() {
+        return payment.getPaymentDueDate().plusYears(1).isAfter(endDate);
     }
 
     public static Comparator<Policy> getPolicyPaymentDueDateComparator() {
@@ -200,4 +204,5 @@ public class Policy {
     public String toString() {
         return policyName + " (" + startDate + " to " + endDate + ") " + payment.toString();
     }
+
 }

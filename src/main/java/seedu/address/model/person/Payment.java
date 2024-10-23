@@ -62,7 +62,10 @@ public class Payment {
         }
     }
 
-    public void updatePaymentDueDate() {
+    public void updatePaymentDueDate(Policy policy) {
+        if (policy.isExpiringSoon()) {
+            return;
+        }
         paymentDueDate = paymentDueDate.plusYears(1);
     }
 
@@ -84,6 +87,5 @@ public class Payment {
     public int hashCode() {
         return value.hashCode();
     }
-
 
 }

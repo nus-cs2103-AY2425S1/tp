@@ -24,6 +24,8 @@ public class PaidCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Policy %1$s marked as paid for %2$s. Next payment date updated.";
     public static final String MESSAGE_INVALID_POLICY = "The policy %1$s does not exist for %2$s.";
 
+    public static final String MESSAGE_INVALID_PAYDATE = "The policy %1$s coverage for %2$s ends after this year.";
+
     private final Index targetIndex;
     private final String policyName;
 
@@ -51,6 +53,10 @@ public class PaidCommand extends Command {
 
         if (policyToUpdate == null) {
             throw new CommandException(String.format(MESSAGE_INVALID_POLICY, policyName, personToUpdate.getName()));
+        }
+
+        if (policyToUpdate.isExpiringSoon()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_PAYDATE, policyName, personToUpdate.getName()));
         }
 
         policyToUpdate.updateNextPaymentDate();
