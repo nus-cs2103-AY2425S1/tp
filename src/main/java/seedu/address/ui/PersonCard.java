@@ -63,7 +63,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         projectStatus.setText("Project status: " + person.getProjectStatus().toString());
-//        paymentStatus.setText("Payment status: " + person.getPaymentStatus().toString());
         clientStatus.setText("Client Status: " + person.getClientStatus().toString());
         deadline.setText("Deadline: " + person.checkAndGetDeadline());
         person.getTags().stream()
@@ -76,7 +75,6 @@ public class PersonCard extends UiPart<Region> {
         Tooltip paymentTooltip = new Tooltip();
         paymentTooltip.setShowDelay(Duration.seconds(0.01));
 
-        // Apply color based on payment status
         switch (payStatus) {
         case "pending":
             paymentStatus.getStyleClass().add("payment_status_pending");
