@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import seedu.address.model.person.Name;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -55,4 +57,7 @@ public class Nickname {
         return value;
     }
 
+    public int compareTo(Nickname otherNickname) {
+        return value.toLowerCase().compareTo(otherNickname.value.toLowerCase());
+    }
 }
