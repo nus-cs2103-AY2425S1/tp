@@ -58,18 +58,26 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        Label extraLabel;
-        if (person instanceof Guest g) {
-            extraLabel = new Label("RSVP: " + g.getRsvp().value);
+        if (person instanceof Guest) {
+            Guest g = (Guest) person;
+            Label rsvpLabel = new Label("RSVP: " + g.getRsvp().value);
+            addLabel(rsvpLabel);
         } else {
             Vendor v = (Vendor) person;
-            extraLabel = new Label("Company: " + v.getCompany().value);
+            Label companyLabel = new Label("Company: " + v.getCompany().value);
+            addLabel(companyLabel);
+
+            Label budgetLabel = new Label("Budget: " + v.getBudget().value);
+            addLabel(budgetLabel);
         }
-        extraLabel.getStyleClass().add("cell_small_label");
-        cardPaneContents.getChildren().add(extraLabel);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    public void addLabel(Label label) {
+        label.getStyleClass().add("cell_small_label");
+        cardPaneContents.getChildren().add(label);
     }
 }
