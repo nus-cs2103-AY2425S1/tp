@@ -108,7 +108,7 @@ public class ParserUtil {
         }
         Integer trimmedRating = Integer.parseInt(rating.trim());
         if (!Rating.isValidRating(trimmedRating)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
         }
         return new Rating(trimmedRating);
     }

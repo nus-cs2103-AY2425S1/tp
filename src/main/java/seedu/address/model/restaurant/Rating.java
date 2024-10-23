@@ -59,4 +59,13 @@ public class Rating {
             throw new IllegalArgumentException("Invalid price format: " + ratingString, e);
         }
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    public int hashCode() {
+        return value.hashCode();
+    }
 }
