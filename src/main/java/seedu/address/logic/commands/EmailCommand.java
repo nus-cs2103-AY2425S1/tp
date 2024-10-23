@@ -18,16 +18,25 @@ public class EmailCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        String emails = collateEmails(model);
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent url = new ClipboardContent();
+        url.putString(emails);
+        clipboard.setContent(url);
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    /**
+     * Collates emails from all persons in the current list into a {@code String}, separated by commas.
+     * @return The string representing the collated emails.
+     */
+    private String collateEmails(Model model) {
         StringBuilder emails = new StringBuilder();
         for (Person p : model.getPersonList()) {
             emails.append(p.getEmail().toString());
             emails.append(',');
         }
         emails.deleteCharAt(emails.length() - 1);
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(emails.toString());
-        clipboard.setContent(url);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return emails.toString();
     }
 }
