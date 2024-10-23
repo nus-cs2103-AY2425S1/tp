@@ -35,16 +35,6 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-
-    public static final AbsentDate VALID_ABSENT_DATE_BENSON = new AbsentDate("16-10-2024");
-    public static final AbsentReason VALID_ABSENT_REASON_BENSON = new AbsentReason("Family Emergency");
-
-    public static final HashMap<AbsentDate, AbsentReason> ATTENDANCE_BENSON;
-    static {
-        ATTENDANCE_BENSON = new HashMap<>();
-        ATTENDANCE_BENSON.put(VALID_ABSENT_DATE_BENSON, VALID_ABSENT_REASON_BENSON);
-    }
-
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com").withPhone("94351253")
@@ -60,7 +50,9 @@ public class TypicalPersons {
             .withRegisterNumber("4").withSex("M")
             .withStudentClass("2B").withEcName("John Boone")
             .withEcNumber("92837201").withTags("owesMoney", "friends")
-            .withAttendance(ATTENDANCE_BENSON)
+            .withAttendance(new HashMap<>() {{
+                    put(new AbsentDate("16-10-2024"), new AbsentReason("Family Emergency"));
+                    }})
             .build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")

@@ -23,7 +23,7 @@
     "emergency contact name": "John Boone",
     "emergency contact number": "92837201",
     "tags" : [ "owesMoney", "friends" ],
-    "attendances" : {}
+    "attendances" : {"16-10-2024": "Family Emergency"}
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",

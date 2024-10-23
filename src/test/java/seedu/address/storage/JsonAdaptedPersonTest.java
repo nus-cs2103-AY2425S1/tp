@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.VALID_ABSENT_DATE_BENSON;
-import static seedu.address.testutil.TypicalPersons.VALID_ABSENT_REASON_BENSON;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,8 +52,10 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final String VALID_ABSENT_DATE = VALID_ABSENT_DATE_BENSON.value;
-    private static final String VALID_ABSENT_REASON = VALID_ABSENT_REASON_BENSON.value;
+    private static final String VALID_ABSENT_DATE = BENSON.getAttendances().keySet()
+            .toArray(new AbsentDate[0])[0].value;
+    private static final String VALID_ABSENT_REASON = BENSON.getAttendances()
+            .get(new AbsentDate(VALID_ABSENT_DATE)).value;
     private static final HashMap<AbsentDate, AbsentReason> VALID_ATTENDANCE = BENSON.getAttendances();
     private static final Map<String, String> VALID_ATTENDANCE_MAP = convertAttendanceToStringMap(VALID_ATTENDANCE);
 
