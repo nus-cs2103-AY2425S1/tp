@@ -147,6 +147,19 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_invalidEmergencyContactIndexFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        assertTrue(outOfBoundIndex.getOneBased() > model.getAddressBook().getPersonList().get(0)
+                .getEmergencyContacts().size());
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB).withEmergencyContactIndex(outOfBoundIndex).build());
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_EMERGENCY_CONTACT_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
