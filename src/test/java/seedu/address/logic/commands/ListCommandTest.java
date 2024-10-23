@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalPawPatrol;
 
@@ -59,6 +60,8 @@ public class ListCommandTest {
         assertEquals(listPetCommand, new ListPetCommand());
 
         assertEquals(listPetCommand, listPetCommand);
+
+        assertNotEquals(listPetCommand, listOwnerCommand);
 
         assertEquals(listOwnerCommand, listOwnerCommand);
     }

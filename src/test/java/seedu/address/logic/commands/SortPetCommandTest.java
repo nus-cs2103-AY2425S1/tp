@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +55,8 @@ public class SortPetCommandTest {
         SortPetCommand sortPetCommand = new SortPetCommand();
 
         assertEquals(sortPetCommand, new SortPetCommand());
+
+        assertNotEquals(sortPetCommand, new SortOwnerCommand());
 
         assertEquals(sortPetCommand, sortPetCommand);
     }
