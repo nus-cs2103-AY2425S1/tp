@@ -44,22 +44,12 @@ public class Log {
     public String getEntry() {
         return entry;
     }
-
     /**
      * Returns the appointmentDate of the session.
      */
     public AppointmentDate getAppointmentDate() {
         return appointmentDate;
     }
-
-    /**
-     * Returns the string representation appointmentDate of the session.
-     */
-    public String getAppointmentDateString() {
-        return appointmentDate.toString();
-    }
-
-
 
     /**
      * Return to string in the format "date|description" for JsonStorage
