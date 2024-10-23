@@ -12,6 +12,16 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
+Class Delivery
+Class DeliveryId
+Class ItemName
+Class Cost
+Class Date
+Class Time
+Class Eta
+Class Status
+Class Archive
+
 Class UniquePersonList
 Class Person
 Class Address
@@ -43,6 +53,16 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+Delivery .left.>ItemName
+Delivery *--> DeliveryId
+Delivery *----> Address
+Delivery *--> Cost
+Delivery *--> Date
+Delivery *--> Time
+Delivery *--> Eta
+Delivery *--> Status
+Delivery *--> Archive
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
@@ -51,4 +71,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "adds" Delivery
 @enduml
