@@ -89,12 +89,9 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            logger.warning("Failed to " + COMMAND_WORD + "\n" + personToEdit
-                    + "\nReason:" + MESSAGE_DUPLICATE_PERSON);
-
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        // Cannot modify employeeId via CLI; Person must have the same employeeId
+        // ie, personToEdit and editedPerson must still be same person
+        assert personToEdit.isSamePerson(editedPerson);
 
         model.setPerson(personToEdit, editedPerson);
 
