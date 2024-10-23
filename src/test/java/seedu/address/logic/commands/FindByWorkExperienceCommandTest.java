@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
@@ -61,7 +65,6 @@ public class FindByWorkExperienceCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
-    /*
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
@@ -71,9 +74,8 @@ public class FindByWorkExperienceCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
-        // Assuming ALICE and BENSON have matching work experience
+
     }
-    */
     /**
      * Parses {@code role}, {@code company}, and {@code year} into a {@code WorkExpContainsKeywordsPredicate}.
      */
