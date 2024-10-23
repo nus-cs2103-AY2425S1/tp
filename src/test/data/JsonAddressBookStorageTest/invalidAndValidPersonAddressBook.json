@@ -5,6 +5,7 @@
     "email": "hans@example.com",
     "address": "4th street",
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   }, {
     "name": "This is_also_a v@lid name",
@@ -12,6 +13,7 @@
     "email": "name@email.com",
     "address": "4th street",
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   }, {
     "name": "Person With Invalid Phone Field",
@@ -19,6 +21,7 @@
     "email": "hans@example.com",
     "address": "4th street",
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   } ]
 }

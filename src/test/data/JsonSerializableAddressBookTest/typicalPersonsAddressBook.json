@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "92173902",
     "remark" : ""
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
     "dateOfLastVisit" : "01-02-2024",
+    "emergencyContact" : "92173902",
     "remark" : ""
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "address" : "wall street",
     "tags" : [ ],
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "address" : "10th street",
     "tags" : [ "friends" ],
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "address" : "michegan ave",
     "tags" : [ ],
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "address" : "little tokyo",
     "tags" : [ ],
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "tags" : [ ],
     "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "",
     "remark" : ""
   } ]
 }

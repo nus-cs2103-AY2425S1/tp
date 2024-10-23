@@ -28,8 +28,8 @@ public class Messages {
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
         assert duplicatePrefixes.length > 0;
 
-        Set<String> duplicateFields =
-                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+        Set<String> duplicateFields = Stream.of(duplicatePrefixes).map(Prefix::toString)
+                .collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
@@ -45,6 +45,7 @@ public class Messages {
         addAddress(builder, person);
         addTags(builder, person);
         addDateOfLastVisit(builder, person);
+        addEmergencyContact(builder, person);
         addRemark(builder, person);
 
         return builder.toString();
@@ -85,6 +86,13 @@ public class Messages {
         }
         sb.append("; Tags: ");
         person.getTags().forEach(sb::append);
+    }
+
+    private static void addEmergencyContact(StringBuilder sb, Person person) {
+        if (!person.hasEmergencyContact()) {
+            return;
+        }
+        sb.append("; Emergency Contact: ").append(person.getEmergencyContact().get());
     }
 
     private static void addRemark(StringBuilder sb, Person person) {

@@ -18,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_LONG_PHONE = "123456789";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_EMERGENCY_CONTACT = INVALID_PHONE;
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATEOFLASTVISIT = "13/13/2024";
 
@@ -36,6 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_EMERGENCY_CONTACT = "12345678";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_DATEOFLASTVISIT = "02-02-2024";
@@ -130,7 +133,8 @@ public class ParserUtilTest {
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(Optional.of(expectedAddress), ParserUtil.parseAddress(Optional.of(addressWithWhitespace)));
+        assertEquals(Optional.of(expectedAddress),
+                ParserUtil.parseAddress(Optional.of(addressWithWhitespace)));
     }
 
     @Test
@@ -204,9 +208,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateOfLastVisit_null_throwsNullPointerException() throws Exception {
-        assertEquals(Optional.empty(),
-                ParserUtil.parseDateOfLastVisit(Optional.ofNullable((String) null)));
+        assertEquals(Optional.empty(), ParserUtil.parseDateOfLastVisit(Optional.ofNullable((String) null)));
     }
+
     @Test
     public void parseDateOfLastVisit_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () ->
@@ -221,10 +225,29 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDateOfLastVisit_validValueWithWhitespace_returnsTrimmedDateOfLastVisit() throws Exception {
+    public void parseDateOfLastVisit_validValueWithWhitespace_returnsTrimmedDateOfLastVisit()
+            throws Exception {
         String dateOfLastVisitWithWhitespace = WHITESPACE + VALID_DATEOFLASTVISIT + WHITESPACE;
         DateOfLastVisit expectedDateOfLastVisit = new DateOfLastVisit(VALID_DATEOFLASTVISIT);
         assertEquals(Optional.of(expectedDateOfLastVisit),
                 ParserUtil.parseDateOfLastVisit(Optional.of(dateOfLastVisitWithWhitespace)));
+    }
+
+    @Test
+    public void parseEmergencyContact_null_optionalEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseEmergencyContact(Optional.ofNullable((String) null)));
+    }
+
+    @Test
+    public void parseEmergencyContact_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseEmergencyContact(Optional.of(INVALID_EMERGENCY_CONTACT)));
+    }
+
+    @Test
+    public void parseEmergencyContact_validValueWithoutWhitespace_returnsEmergencyContact() throws Exception {
+        EmergencyContact expectedEmergencyContact = new EmergencyContact(VALID_EMERGENCY_CONTACT);
+        assertEquals(Optional.of(expectedEmergencyContact),
+                ParserUtil.parseEmergencyContact(Optional.of(VALID_EMERGENCY_CONTACT)));
     }
 }
