@@ -18,7 +18,7 @@ public class Remark {
     public final String value;
 
     /**
-     * Constructs a {@code Email}.
+     * Constructs a {@code Remark}.
      *
      * @param remark A valid remark.
      */
