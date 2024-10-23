@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -167,6 +168,21 @@ public class MainWindow extends UiPart<Stage> {
         return studentListPanel;
     }
 
+
+    /**
+     * Displays reminder on start.
+     * @throws CommandException when error executing the command.
+     * @throws ParseException when the error meets an error.
+     */
+    public void showReminder() throws CommandException, ParseException {
+        try {
+            CommandResult commandResult = logic.execute(RemindCommand.COMMAND_WORD);
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
     /**
      * Executes the command and returns the result.
      *

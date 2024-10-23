@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.predicates.AttributeContainsKeywordsPredicate;
 
@@ -105,6 +106,12 @@ public class ModelManager implements Model {
     public List<Student> getClashingStudents(Student student) {
         requireNonNull(student);
         return addressBook.getClashingStudents(student);
+    }
+
+    @Override
+    public List<Student> getScheduledStudents(Days day) {
+        requireNonNull(day);
+        return addressBook.getScheduledStudents(day);
     }
 
     @Override

@@ -68,6 +68,7 @@ public class UniqueStudentListTest {
     public void getClashingStudents_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.getClashes(null));
     }
+
     @Test
     public void getClashes_noClashes_returnsEmptyList() {
         uniqueStudentList.add(ALICE);
@@ -80,6 +81,25 @@ public class UniqueStudentListTest {
         ArrayList<Student> testList = new ArrayList<>();
         testList.add(ALICE);
         assertEquals(uniqueStudentList.getClashes(HOON), testList);
+    }
+
+    @Test
+    public void getScheduledOnDay_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.getScheduledOnDay(null));
+    }
+
+    @Test
+    public void getScheduledOnDay_noScheduledLesson_returnsEmptyList() {
+        uniqueStudentList.add(ALICE);
+        assertEquals(uniqueStudentList.getScheduledOnDay(Days.FRIDAY), new ArrayList<>());
+    }
+
+    @Test
+    public void getScheduledOnDay_someScheduled_returnsCorrectList() {
+        uniqueStudentList.add(ALICE);
+        ArrayList<Student> testList = new ArrayList<>();
+        testList.add(ALICE);
+        assertEquals(uniqueStudentList.getScheduledOnDay(Days.SUNDAY), testList);
     }
 
     @Test

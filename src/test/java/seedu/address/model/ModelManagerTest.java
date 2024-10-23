@@ -18,6 +18,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -127,6 +128,26 @@ public class ModelManagerTest {
         testList.add(ALICE);
         assertEquals(modelManager.getClashingStudents(HOON), testList);
     }
+
+    @Test
+    public void getScheduledStudents_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getScheduledStudents(null));
+    }
+
+    @Test
+    public void getScheduledStudents_noLessonScheduled_returnsEmptyList() {
+        modelManager.addStudent(ALICE);
+        assertEquals(modelManager.getScheduledStudents(Days.SATURDAY), new ArrayList<>());
+    }
+
+    @Test
+    public void getScheduledStudents_someLessons_returnsCorrectList() {
+        modelManager.addStudent(ALICE);
+        ArrayList<Student> testList = new ArrayList<>();
+        testList.add(ALICE);
+        assertEquals(modelManager.getScheduledStudents(Days.SUNDAY), testList);
+    }
+
 
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
