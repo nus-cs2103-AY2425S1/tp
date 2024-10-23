@@ -39,7 +39,7 @@ public class ExportCommandTest {
         ExportCommand exportCommand = new ExportCommand(FILE_TYPE_CSV);
 
         String expected = VALID_NAME_CHARLIE + "," + VALID_PHONE_CHARLIE + "," + VALID_EMAIL_CHARLIE + ",\""
-            + VALID_ADDRESS_CHARLIE + "\",\"" + VALID_TAG_FRIEND + "\",\"" + VALID_NOTE_LIKES_CATS + "\"";
+            + VALID_ADDRESS_CHARLIE + "\",\"[" + VALID_TAG_FRIEND + "]\",\"" + VALID_NOTE_LIKES_CATS + "\"";
 
         assertEquals(expected, exportCommand.toCsvString(CHARLIE));
     }

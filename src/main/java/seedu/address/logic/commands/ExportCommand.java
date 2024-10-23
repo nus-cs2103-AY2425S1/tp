@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
