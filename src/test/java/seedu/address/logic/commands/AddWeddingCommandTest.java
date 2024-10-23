@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalWeddings.WEDDING_TWO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -30,7 +31,7 @@ public class AddWeddingCommandTest {
 
         CommandResult commandResult = addWeddingCommand.execute(model);
 
-        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, validWedding.getWeddingName()),
+        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, Messages.formatWedding(validWedding)),
                 commandResult.getFeedbackToUser());
     }
 

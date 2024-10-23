@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.wedding.Wedding;
@@ -43,7 +44,7 @@ public class AddWeddingCommand extends Command {
         }
 
         model.addWedding(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getWeddingName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatWedding(toAdd)));
     }
 
     public Wedding getWedding() {
