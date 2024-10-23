@@ -42,6 +42,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                         args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_PRIORITY, PREFIX_REMARK, PREFIX_TAG, PREFIX_INCOME, PREFIX_DATE_OF_BIRTH);
 
+        assert argMultimap != null : "Argument Multimap should not be null";
+
         // Check for filtering by invalid prefixes
         if (hasPrefixes(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_REMARK, PREFIX_TAG, PREFIX_DATE_OF_BIRTH)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -52,6 +54,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> addresses = argMultimap.getAllValues(PREFIX_ADDRESS);
         List<String> priorities = argMultimap.getAllValues(PREFIX_PRIORITY);
         List<String> incomes = argMultimap.getAllValues(PREFIX_INCOME);
+
+        assert names != null : "List of names should not be null";
+        assert addresses != null : "List of addresses should not be null";
+        assert priorities != null : "List of priorities should not be null";
+        assert incomes != null : "List of incomes should not be null";
 
         if (!areValidKeywords(names, Name.VALIDATION_REGEX)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
