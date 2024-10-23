@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -156,7 +157,8 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new PersonPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new PersonPredicate(Arrays.asList(splitName[0]), emptyList(), emptyList(),
+                emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList()));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }

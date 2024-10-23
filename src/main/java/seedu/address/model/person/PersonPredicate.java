@@ -21,9 +21,24 @@ public class PersonPredicate implements Predicate<Person> {
     private final List<String> ecNumbers;
     private final List<String> tags;
 
+    /**
+     * Constructs a {@code PersonPredicate} with the given attributes to filter persons.
+     * Each attribute is represented as a list, and the predicate will test if a person matches
+     * any of the specified values for each attribute.
+     * @param names
+     * @param phones
+     * @param emails
+     * @param addresses
+     * @param registerNumbers
+     * @param sexes
+     * @param classes
+     * @param ecNames
+     * @param ecNumbers
+     * @param tags
+     */
     public PersonPredicate(List<String> names, List<String> phones, List<String> emails,
-                           List<String> addresses, List<String> registerNumbers, List<String> sexes,
-                           List<String> classes, List<String> ecNames, List<String> ecNumbers, List<String> tags) {
+                   List<String> addresses, List<String> registerNumbers, List<String> sexes,
+                   List<String> classes, List<String> ecNames, List<String> ecNumbers, List<String> tags) {
         this.names = names;
         this.phones = phones;
         this.emails = emails;
@@ -36,41 +51,48 @@ public class PersonPredicate implements Predicate<Person> {
         this.tags = tags;
     }
 
-        @Override
+    @Override
     public boolean test(Person person) {
-            boolean matchName = names.isEmpty() || names.stream()
-                    .anyMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name));
 
-            boolean matchPhone = phones.isEmpty() || phones.stream()
-                    .anyMatch(phone -> person.getPhone().value.contains(phone));
+        boolean matchName = names.isEmpty() || names.stream()
+                .anyMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name));
 
-            boolean matchEmail = emails.isEmpty() || emails.stream()
-                    .anyMatch(email -> person.getEmail().value.equalsIgnoreCase(email));
+        boolean matchPhone = phones.isEmpty() || phones.stream()
+                .anyMatch(phone -> person.getPhone().value.contains(phone));
 
-            boolean matchAddress = addresses.isEmpty() || addresses.stream()
-                    .anyMatch(address -> StringUtil.containsWordIgnoreCase(person.getAddress().value, address));
+        boolean matchEmail = emails.isEmpty() || emails.stream()
+                .anyMatch(email -> person.getEmail().value.equalsIgnoreCase(email));
 
-            boolean matchRegisterNumber = registerNumbers.isEmpty() || registerNumbers.stream()
-                    .anyMatch(r -> person.getRegisterNumber().value.equals(r));
+        boolean matchAddress = addresses.isEmpty() || addresses.stream()
+                .anyMatch(address -> StringUtil.containsWordIgnoreCase(person.getAddress().value, address));
 
-            boolean matchSex = sexes.isEmpty() || sexes.stream()
-                    .anyMatch(sex -> person.getSex().value.equalsIgnoreCase(sex));
+        boolean matchRegisterNumber = registerNumbers.isEmpty() || registerNumbers.stream()
+                .anyMatch(r -> person.getRegisterNumber().value.equals(r));
 
-            boolean matchClass = classes.isEmpty() || classes.stream()
-                    .anyMatch(studentClass -> person.getStudentClass().value.equals(studentClass));
+        boolean matchSex = sexes.isEmpty() || sexes.stream()
+                .anyMatch(sex -> person.getSex().value.equalsIgnoreCase(sex));
 
-            boolean matchEcName = ecNames.isEmpty() || ecNames.stream()
-                    .anyMatch(ecName -> StringUtil.containsWordIgnoreCase(person.getEcName().value, ecName));
+        boolean matchClass = classes.isEmpty() || classes.stream()
+                .anyMatch(studentClass -> person.getStudentClass().value.equals(studentClass));
 
-            boolean matchEcNumber = ecNumbers.isEmpty() || ecNumbers.stream()
-                    .anyMatch(ecNum -> person.getEcNumber().value.contains(ecNum));
+        boolean matchEcName = ecNames.isEmpty() || ecNames.stream()
+                .anyMatch(ecName -> StringUtil.containsWordIgnoreCase(person.getEcName().value, ecName));
 
-            boolean matchtag = tags.isEmpty() || tags.stream().anyMatch(tag -> person.getTags().stream()
-                            .anyMatch(personTag -> personTag.tagName.equalsIgnoreCase(tag)));
+        boolean matchEcNumber = ecNumbers.isEmpty() || ecNumbers.stream()
+                .anyMatch(ecNum -> person.getEcNumber().value.contains(ecNum));
 
-            return matchName && matchPhone && matchEmail && matchAddress && matchRegisterNumber && matchSex
-                    && matchClass && matchEcName && matchEcNumber && matchtag;
+        boolean matchtag = tags.isEmpty() || tags.stream().anyMatch(tag -> person.getTags().stream()
+                        .anyMatch(personTag -> personTag.tagName.equalsIgnoreCase(tag)));
+
+        System.out.println("Match result: " + matchName);
+
+        if (this.isEmpty()) {
+            return false;
         }
+
+        return matchName && matchPhone && matchEmail && matchAddress && matchRegisterNumber && matchSex
+                && matchClass && matchEcName && matchEcNumber && matchtag;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -84,16 +106,22 @@ public class PersonPredicate implements Predicate<Person> {
         }
 
         PersonPredicate otherPersonPredicate = (PersonPredicate) other;
-        return names.equals(otherPersonPredicate.names) &&
-                phones.equals(otherPersonPredicate.phones) &&
-                emails.equals(otherPersonPredicate.emails) &&
-                addresses.equals(otherPersonPredicate.addresses) &&
-                registerNumbers.equals(otherPersonPredicate.registerNumbers) &&
-                sexes.equals(otherPersonPredicate.sexes) &&
-                classes.equals(otherPersonPredicate.classes) &&
-                ecNames.equals(otherPersonPredicate.ecNames) &&
-                ecNumbers.equals(otherPersonPredicate.ecNumbers) &&
-                tags.equals(otherPersonPredicate.tags);
+        return names.equals(otherPersonPredicate.names)
+                && phones.equals(otherPersonPredicate.phones)
+                && emails.equals(otherPersonPredicate.emails)
+                && addresses.equals(otherPersonPredicate.addresses)
+                && registerNumbers.equals(otherPersonPredicate.registerNumbers)
+                && sexes.equals(otherPersonPredicate.sexes)
+                && classes.equals(otherPersonPredicate.classes)
+                && ecNames.equals(otherPersonPredicate.ecNames)
+                && ecNumbers.equals(otherPersonPredicate.ecNumbers)
+                && tags.equals(otherPersonPredicate.tags);
+    }
+
+    public boolean isEmpty() {
+        return names.isEmpty() && phones.isEmpty() && emails.isEmpty() && addresses.isEmpty()
+                && registerNumbers.isEmpty() && sexes.isEmpty() && classes.isEmpty()
+                && ecNames.isEmpty() && ecNumbers.isEmpty() && tags.isEmpty();
     }
 
     @Override

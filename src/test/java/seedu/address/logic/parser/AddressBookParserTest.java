@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -11,7 +12,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,11 +75,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FilterCommand(new PersonPredicate(keywords)), command);
+    public void parseCommand_filter() throws Exception {
+        List<String> names = Arrays.asList("foo", "bar");
+        List<String> phones = Arrays.asList("123", "456");
+
+        String commandInput = FilterCommand.COMMAND_WORD + " " + "n/foo n/bar " + "p/123 p/456";
+
+        FilterCommand command = (FilterCommand) parser.parseCommand(commandInput);
+        FilterCommand expectedCommand = new FilterCommand(new PersonPredicate(names, phones, emptyList(),
+                emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList()));
+
+        assertEquals(expectedCommand, command);
     }
 
     @Test
