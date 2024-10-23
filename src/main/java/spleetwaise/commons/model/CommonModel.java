@@ -180,4 +180,10 @@ public class CommonModel implements Model {
         requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
         transactionBookModel.updateFilteredTransactionList(predicate);
     }
+
+    @Override
+    public void deleteTransactionsOfPersonId(String personId) {
+        requireNonNull(personId);
+        transactionBookModel.deleteTransactionsOfPersonId(personId);
+    }
 }

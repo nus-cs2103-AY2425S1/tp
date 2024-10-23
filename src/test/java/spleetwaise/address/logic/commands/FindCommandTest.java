@@ -7,22 +7,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
 
-    private AddressBookModel model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
-    private AddressBookModel expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private AddressBookModel model = new AddressBookModelManager(
+            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private AddressBookModel expectedModel = new AddressBookModelManager(
+            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    void setUp() {
+        CommonModel.initialise(model, null);
+    }
 
     @Test
     public void equals() {

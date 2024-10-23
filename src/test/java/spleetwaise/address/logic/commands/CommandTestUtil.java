@@ -18,7 +18,6 @@ import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
-import spleetwaise.commons.model.CommonModel;
 
 /**
  * Contains helper methods for testing commands.
@@ -85,7 +84,6 @@ public class CommandTestUtil {
             AddressBookModel expectedModel
     ) {
         try {
-            CommonModel.initialise(actualModel, null);
             CommandResult result = command.execute();
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
@@ -117,7 +115,6 @@ public class CommandTestUtil {
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
-        CommonModel.initialise(actualModel, null);
         Assert.assertThrows(CommandException.class, expectedMessage, command::execute);
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());

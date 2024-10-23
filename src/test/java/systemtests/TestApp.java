@@ -15,7 +15,7 @@ import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.exceptions.DataLoadingException;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
@@ -132,7 +132,7 @@ public class TestApp extends MainApp {
      * @return A {@code Model} object representing the current state of the address book.
      */
     public AddressBookModel getAddrModel() {
-        AddressBookModel copy = new ModelManager((addressBookModel.getAddressBook()), new UserPrefs());
+        AddressBookModel copy = new AddressBookModelManager((addressBookModel.getAddressBook()), new UserPrefs());
         List<Person> toDisplay = addressBookModel.getFilteredPersonList();
         Optional<Predicate<Person>> predicate = toDisplay.stream()
                 .map(person -> (Predicate<Person>) other -> other.equals(person)).reduce(Predicate::or);

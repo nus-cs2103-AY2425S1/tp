@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 
 public class CommonModelTest {
     @Test
     void shouldBeSingleton() {
-        TransactionBookModel tbModel = new spleetwaise.transaction.model.ModelManager();
-        AddressBookModel abModel = new spleetwaise.address.model.ModelManager();
+        TransactionBookModel tbModel = new TransactionBookModelManager();
+        AddressBookModel abModel = new AddressBookModelManager();
 
         CommonModel.initialise(abModel, tbModel);
 

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
@@ -39,7 +40,7 @@ public class StorageManagerTest {
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
         // Set up StorageUtil for transaction storage
-        addressBookModel = new spleetwaise.address.model.ModelManager();
+        addressBookModel = new AddressBookModelManager();
         for (Person p : TEST_PEOPLE) {
             addressBookModel.addPerson(p);
         }
