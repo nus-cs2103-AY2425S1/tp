@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
  * API of the Logic component
  */
 public interface Logic {
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -47,4 +48,5 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
 }

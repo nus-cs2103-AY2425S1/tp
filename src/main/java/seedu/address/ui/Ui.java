@@ -7,6 +7,13 @@ import javafx.stage.Stage;
  */
 public interface Ui {
 
+    /**
+     * States of UI display.
+     */
+    public enum UiState {
+        DETAILS, TASKS
+    }
+
     /** Starts the UI (and the App).  */
     void start(Stage primaryStage);
 

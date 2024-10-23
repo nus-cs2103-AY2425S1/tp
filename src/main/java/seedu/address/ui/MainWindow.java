@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -163,6 +164,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Changes state of the UI based on type of command.
+     */
+    @FXML
+    private void handleUiState(UiState uiState) {
+        personListPanel.updateUiState(uiState);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -185,6 +194,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            handleUiState(commandResult.getUiState());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

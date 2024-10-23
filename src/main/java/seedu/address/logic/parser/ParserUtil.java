@@ -10,10 +10,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.Task;
+import seedu.address.model.person.task.TaskDeadline;
+import seedu.address.model.person.task.TaskDescription;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -43,7 +49,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = String.join(" ", name.trim().split("\\s+"));
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -66,6 +72,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String phone} into a {@code Phone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static EmergencyContact parseEmergencyContact(String phone) throws ParseException {
+        requireNonNull(phone);
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new EmergencyContact(trimmedPhone);
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -81,44 +102,148 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String note} into an {@code Note}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Note parseNote(String note) {
+        requireNonNull(note);
+        String trimmedNote = note.trim();
+
+        return new Note(trimmedNote);
+    }
+
+
+    /**
+     * Parses a {@code String level} into a {@code Level}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code level} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Level parseLevel(String level) throws ParseException {
+        requireNonNull(level);
+        String trimmedLevel = level.trim();
+        if (!Level.isValidLevelName(trimmedLevel)) {
+            throw new ParseException(Level.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Level(trimmedLevel);
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String subject} into a {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code subject} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubjectName(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Subject(trimmedSubject);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+        requireNonNull(subjects);
+        final Set<Subject> subjectSet = new HashSet<>();
+        for (String subjectName : subjects) {
+            subjectSet.add(parseSubject(subjectName));
         }
-        return tagSet;
+        return subjectSet;
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubjectByLevel(Level level, String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubjectNameByLevel(level, trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
+     */
+    public static Set<Subject> parseSubjectsByLevel(Level level, Collection<String> subjects) throws ParseException {
+        requireNonNull(level);
+        requireNonNull(subjects);
+        final Set<Subject> subjectSet = new HashSet<>();
+        for (String subjectName : subjects) {
+            subjectSet.add(parseSubjectByLevel(level, subjectName));
+        }
+        return subjectSet;
+    }
+
+    /**
+     * Parses a {@code String desc} into an {@code TaskDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code desc} is invalid.
+     */
+    public static TaskDescription parseTaskDescription(String desc) throws ParseException {
+        requireNonNull(desc);
+        String trimmedTDesc = desc.trim();
+        if (!TaskDescription.isValidTaskDescription(trimmedTDesc)) {
+            throw new ParseException(TaskDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDescription(trimmedTDesc);
+    }
+
+    /**
+     * Parses a {@code String deadline} into an {@code TaskDeadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deadline} is invalid.
+     */
+    public static TaskDeadline parseTaskDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedTDeadline = deadline.trim();
+        if (!TaskDeadline.isValidTaskDeadline(trimmedTDeadline)) {
+            throw new ParseException(TaskDeadline.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDeadline(trimmedTDeadline);
+    }
+
+    /**
+     * Parses a {@code String desc} and {@code String deadline} into a {@code Task}.
+     */
+    public static Task parseTask(String desc, String deadline) throws ParseException {
+        requireNonNull(desc);
+        requireNonNull(deadline);
+        return new Task(parseTaskDescription(desc), parseTaskDeadline(deadline));
+    }
+
+    /**
+     * Parses a {@code String lt} into a {@code LessonTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static LessonTime parseLessonTime(String lt) throws ParseException {
+        requireNonNull(lt);
+        String trimmedLt = lt.trim();
+        if (!LessonTime.isValidLessonTime(trimmedLt)) {
+            throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonTime(trimmedLt);
+    }
+
+    /**
+     * Parses {@code Collection<String> lts} into a {@code Set<LessonTime>}.
+     */
+    public static Set<LessonTime> parseLessonTimes(Collection<String> lts) throws ParseException {
+        requireNonNull(lts);
+        final Set<LessonTime> lessonTimes = new HashSet<>();
+        for (String lt : lts) {
+            lessonTimes.add(parseLessonTime(lt));
+        }
+        return lessonTimes;
     }
 }
