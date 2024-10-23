@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTNERSHIP_END_DATE;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ParserUtil;
@@ -26,13 +26,19 @@ import seedu.address.model.tag.Tag;
  * {@code ArgumentMultimap} to supply role-specific fields.
  */
 public class PersonFactory {
-
     private static final String MISSING_HOURS_MESSAGE = "Missing hours! For a Volunteer, you must specify hours "
             + "contributed by the volunteer using the h/ prefix.";
     private static final String MISSING_DONATED_AMOUNT_MESSAGE = "Missing donated amount! "
             + "For a Donor, you must specify a donated amount using the d/ prefix.";
     private static final String MISSING_END_DATE_MESSAGE = "Missing partnership end date! "
             + "For a Partner, you must specify a partnership end date using the ped/ prefix.";
+    private static final String HOURS = "hours";
+    private static final String DONATED_AMOUNT = "donatedAmount";
+    private static final String END_DATE = "partnershipEndDate";
+
+    private static final String HOURS_EXIST_ERROR = "Hours field should not exist for role: ";
+    private static final String AMOUNT_EXIST_ERROR = "Donated Amount field should not exist for role: ";
+    private static final String END_DATE_EXIST_ERROR = "Partnership End Date field should not exist for role: ";
     /**
      * Creates a {@code Person} instance based on the specified {@code Role}.
      *
@@ -89,26 +95,58 @@ public class PersonFactory {
      * @throws CommandException If a required field for the specified role is missing or if the role is unknown.
      */
     public static Person createPerson(Role role, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                                      EditCommand.EditPersonDescriptor editPersonDescriptor, Person personToEdit)
+                                      EditPersonDescriptor editPersonDescriptor, Person personToEdit)
             throws CommandException {
         switch (role) {
         case VOLUNTEER:
+            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor);
+            checkDoesNotExist(role, END_DATE, editPersonDescriptor);
             Hours hours = retrieveVolunteerHours(editPersonDescriptor, personToEdit);
             return new Volunteer(name, phone, email, address, tags, hours);
 
         case DONOR:
+            checkDoesNotExist(role, HOURS, editPersonDescriptor);
+            checkDoesNotExist(role, END_DATE, editPersonDescriptor);
             DonatedAmount donatedAmount = retrieveDonorAmount(editPersonDescriptor, personToEdit);
             return new Donor(name, phone, email, address, tags, donatedAmount);
 
         case PARTNER:
+            checkDoesNotExist(role, HOURS, editPersonDescriptor);
+            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor);
             Date endDate = retrievePartnerEndDate(editPersonDescriptor, personToEdit);
             return new Partner(name, phone, email, address, tags, endDate);
 
         case PERSON:
+            checkDoesNotExist(role, HOURS, editPersonDescriptor);
+            checkDoesNotExist(role, DONATED_AMOUNT, editPersonDescriptor);
+            checkDoesNotExist(role, END_DATE, editPersonDescriptor);
             return new Person(name, phone, email, address, tags);
 
         default:
             throw new CommandException("Unknown role: " + role);
+        }
+    }
+
+    private static void checkDoesNotExist(Role role, String field, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
+        switch(field) {
+        case "hours":
+            if (!editPersonDescriptor.getHours().isEmpty()) {
+                throw new CommandException(HOURS_EXIST_ERROR + role);
+            }
+            break;
+        case "donatedAmount":
+            if (!editPersonDescriptor.getDonatedAmount().isEmpty()) {
+                throw new CommandException(AMOUNT_EXIST_ERROR + role);
+            }
+            break;
+        case "partnershipEndDate":
+            if (!editPersonDescriptor.getEndDate().isEmpty()) {
+                throw new CommandException(END_DATE_EXIST_ERROR + role);
+            }
+            break;
+        default:
+            throw new CommandException("Unknown field: " + field);
         }
     }
 
@@ -140,7 +178,7 @@ public class PersonFactory {
      * @return The {@code Hours} for the new or updated {@code Volunteer}.
      * @throws CommandException If the hours field is missing and no default is available.
      */
-    private static Hours retrieveVolunteerHours(EditCommand.EditPersonDescriptor descriptor, Person person)
+    private static Hours retrieveVolunteerHours(EditPersonDescriptor descriptor, Person person)
             throws CommandException {
         if (person instanceof Volunteer) {
             Volunteer volunteer = (Volunteer) person;
@@ -160,7 +198,7 @@ public class PersonFactory {
      * @return The {@code DonatedAmount} for the new or updated {@code Donor}.
      * @throws CommandException If the donated amount field is missing and no default is available.
      */
-    private static DonatedAmount retrieveDonorAmount(EditCommand.EditPersonDescriptor descriptor, Person person)
+    private static DonatedAmount retrieveDonorAmount(EditPersonDescriptor descriptor, Person person)
             throws CommandException {
         if (person instanceof Donor) {
             Donor donor = (Donor) person;
@@ -180,7 +218,7 @@ public class PersonFactory {
      * @return The {@code Date} for the new or updated {@code Partner}.
      * @throws CommandException If the end date field is missing and no default is available.
      */
-    private static Date retrievePartnerEndDate(EditCommand.EditPersonDescriptor descriptor, Person person)
+    private static Date retrievePartnerEndDate(EditPersonDescriptor descriptor, Person person)
             throws CommandException {
         if (person instanceof Partner) {
             Partner partner = (Partner) person;
