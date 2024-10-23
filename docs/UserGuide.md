@@ -86,9 +86,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
+* Phone number, following Singaporean convention, must have 8 digits, start with a 6, 8 or 9 and only have numbers.
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/92345672 t/criminal`
 
 ### Listing all persons : `list`
 
