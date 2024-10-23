@@ -1,23 +1,19 @@
 package seedu.address.logic.commands;
 
-import java.time.LocalDate;
+import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW;
-
 /**
  * Displays all appointments for the specified date from the address book.
  */
 public class ScheduleDateCommand extends Command {
 
-    public static final String COMMAND_WORD = "schedule";
+    public static final String COMMAND_WORD = "schedule_date";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays all medical appointments for a particular date.\n"
@@ -26,6 +22,9 @@ public class ScheduleDateCommand extends Command {
 
     private final AppointmentContainsDatePredicate predicate;
 
+    /**
+     * @param predicate used to filter appointment by specified date
+     */
     public ScheduleDateCommand(AppointmentContainsDatePredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
