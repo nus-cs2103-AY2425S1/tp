@@ -13,6 +13,35 @@ import seedu.address.testutil.VolunteerBuilder;
 
 public class VolunteerTest {
 
+    // Test for the constructor with empty events list
+    @Test
+    public void constructor_withoutEvents_createsVolunteerWithEmptyEvents() {
+        Name name = ALICE.getName();
+        Phone phone = ALICE.getPhone();
+        Email email = ALICE.getEmail();
+        Date availableDate = ALICE.getAvailableDate();
+
+        Volunteer volunteer = new Volunteer(name, phone, email, availableDate);
+
+        assertEquals(name, volunteer.getName());
+        assertEquals(phone, volunteer.getPhone());
+        assertEquals(email, volunteer.getEmail());
+        assertEquals(availableDate, volunteer.getAvailableDate());
+        assertTrue(volunteer.getInvolvedIn().isEmpty()); // Ensure the involvedIn list is empty
+    }
+
+    // Test for the getId() method
+    @Test
+    public void getId_uniqueIdAssigned() {
+        Volunteer volunteer1 = new Volunteer(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
+                ALICE.getAvailableDate());
+        Volunteer volunteer2 = new Volunteer(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
+                ALICE.getAvailableDate());
+
+        // Check if both volunteers have unique IDs
+        assertTrue(volunteer1.getId() != volunteer2.getId()); // IDs should be different
+    }
+
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Volunteer volunteer = new VolunteerBuilder().build();
