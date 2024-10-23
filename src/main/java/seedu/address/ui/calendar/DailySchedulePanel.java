@@ -1,5 +1,8 @@
 package seedu.address.ui.calendar;
 
+import java.time.DayOfWeek;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -13,9 +16,9 @@ import seedu.address.model.schedule.Meeting;
 import seedu.address.ui.PersonListPanel;
 import seedu.address.ui.UiPart;
 
-import java.time.DayOfWeek;
-import java.util.logging.Logger;
-
+/**
+ * Panel containing the list of meetings for each day.
+ */
 public class DailySchedulePanel extends UiPart<Region> {
     private static final String FXML = "DailyCalendarPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
@@ -29,6 +32,9 @@ public class DailySchedulePanel extends UiPart<Region> {
     @FXML
     private Label dayLabel;
 
+    /**
+     * Creates a {@code DailySchedulePanel} with the given {@code ObservableList}.
+     */
     public DailySchedulePanel(ObservableList<Meeting> calendarList, ReadOnlyAddressBook addressBook, int day) {
         super(FXML);
         this.addressBook = addressBook;
@@ -51,7 +57,7 @@ public class DailySchedulePanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new CalendarCard(meeting,
-                        originalList.getSourceIndex(getIndex())+1,
+                        originalList.getSourceIndex(getIndex()) + 1,
                         addressBook).getRoot());
             }
         }

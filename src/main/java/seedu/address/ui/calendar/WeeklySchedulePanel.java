@@ -1,7 +1,5 @@
 package seedu.address.ui.calendar;
 
-import java.time.DayOfWeek;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -12,7 +10,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.schedule.Meeting;
 import seedu.address.ui.PersonListPanel;
@@ -38,7 +35,7 @@ public class WeeklySchedulePanel extends UiPart<Region> {
         this.addressBook = addressBook;
 
         ObservableList<ObservableList<Meeting>> weeklyMeetingList = FXCollections.observableArrayList();
-        for (int i = 1; i < 8; i++){
+        for (int i = 1; i < 8; i++) {
             weeklyMeetingList.add(calendarList);
         }
         weeklyCalendarView.setItems(weeklyMeetingList);
@@ -53,14 +50,14 @@ public class WeeklySchedulePanel extends UiPart<Region> {
         @Override
         protected void updateItem(ObservableList<Meeting> meeting, boolean empty) {
             super.updateItem(meeting, empty);
-            int i = getIndex()+1;
+            int i = getIndex() + 1;
             if (empty || meeting == null) {
                 setGraphic(null);
                 setText(null);
             } else {
                 FilteredList<Meeting> dailySchedule = new FilteredList<>(meeting);
                 dailySchedule.setPredicate(m -> m.getMeetingDate().getDayOfWeek().getValue() == i);
-                setGraphic(new DailySchedulePanel(dailySchedule, addressBook, getIndex()+1).getRoot());
+                setGraphic(new DailySchedulePanel(dailySchedule, addressBook, getIndex() + 1).getRoot());
             }
         }
     }

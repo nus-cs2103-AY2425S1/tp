@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
@@ -44,7 +43,7 @@ public class CalendarCard extends UiPart<Region> {
         date.setText(meeting.getMeetingDate().toString());
         time.setText(meeting.getMeetingTime().toString());
         meeting.getContactUids()
-            .forEach(contact ->  {
+            .forEach(contact -> {
                 FilteredList<Person> filteredList = addressBook.getPersonList()
                         .filtered(p -> p.getUid().equals(contact));
                 if (!filteredList.isEmpty()) {
