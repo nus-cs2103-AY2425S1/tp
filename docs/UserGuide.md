@@ -55,9 +55,8 @@ This app is a desktop app for managing candidates and job roles, **optimized for
       java -jar TalentSg.jar
       ```
 ![launch instruction.png](images%2Flaunch%20instruction.png)
-      A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data. 🎉
-
-![Ui.png](images%2FUi.png)
+<br><br>A GUI similar to the one below should appear in a few seconds. <br>Note how the app contains some sample data. 🎉
+<br><img src="images/MainUiPage.png" width = "400">
 
 5. **Interact with TalentSG**:
     - Type your command into the command box and press **Enter** to execute it.
@@ -165,6 +164,16 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STAT
 - `edit 1 p/91234567 e/johndoe@example.com`: Updates phone and email of the first candidate.
 - `edit 2 n/Betsy Crower t/`: Changes the name and clears all tags of the second candidate.
 
+**Image Example**
+
+Command: ` edit 1 st/Rejected note/arrogant `
+
+Before the edit command ran:
+<br><img src="images/EditCommandBefore.png" width = "300">
+
+After the edit command ran:
+<br><img src="images/EditCommandAfter.png" width = "300">
+
 [⚠️ **Caution**]: You cannot edit a candidate to be a duplicate of another existing candidate.
 
 ---
@@ -185,8 +194,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+
+**Image Example**
+
+Command: ` find John Stanley `
+
+Before the find command ran:
+<br><img src="images/FindCommandBefore.png" width = "300">
+
+After the find command ran:
+<br><img src="images/FindCommandAfter.png" width = "300">
 ---
 
 ### ❌ Deleting a Person: `delete`
@@ -276,10 +294,10 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: Help! Double-clicking TalentSG.jar does not launch the application - what should I do?
+**Q**: Help! Double-clicking TalentSG.jar does not launch the application - what should I do?<br>
 **A**: Trying running the application from the command line using the following command: `java -jar TalentSg.jar`. Windows users can use the Command Prompt application to do this while Mac users can use the Terminal application.
 
-**Q**: When I minimise the application, the entire application has shrunk and now it is gone! Help!
+**Q**: When I minimise the application, the entire application has shrunk and now it is gone! Help!<br>
 **A**: Currently our application do not allow diagonal or vertical resizing of the it. It is best not to resize the application at all and leave it as the maximized mode. For the this problem, we suggest that you try to maximise the application from the task manager or try to split the screen with another application so that StudyBuddyPro will resize back to normal. If the mentioned solutions fail, please do download TalentSg again!
 
 **Q**: How do I save my data?<br>
