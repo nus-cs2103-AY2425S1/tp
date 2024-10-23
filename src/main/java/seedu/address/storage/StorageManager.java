@@ -108,4 +108,14 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         scheduleStorage.saveScheduleList(scheduleList, filePath);
     }
+
+    @Override
+    public void handleCorruptedFile() {
+        scheduleStorage.handleCorruptedFile();
+    }
+
+    @Override
+    public void handleCorruptedAddressbookFile() {
+        addressBookStorage.handleCorruptedAddressbookFile();
+    }
 }

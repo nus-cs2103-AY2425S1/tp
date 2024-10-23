@@ -56,4 +56,9 @@ public interface ScheduleStorage {
      * @throws IOException If there is an issue writing to the file.
      */
     void saveScheduleList(ReadOnlyScheduleList scheduleList, Path filePath) throws IOException;
+
+    /**
+     * Handles the case when the schedule data file is corrupted.
+     */
+    void handleCorruptedFile();
 }

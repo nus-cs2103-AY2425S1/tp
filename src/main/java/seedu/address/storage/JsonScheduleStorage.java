@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -102,5 +103,16 @@ public class JsonScheduleStorage implements ScheduleStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableScheduleStorage(scheduleList), filePath);
+    }
+
+    @Override
+    public void handleCorruptedFile() {
+        try {
+            FileUtil.copyFile(this.filePath,
+                    Path.of(this.filePath.toString() + "." + new Random().nextInt() + ".bak"));
+            logger.info("Corrupted schedule.json file backed up");
+        } catch (IOException e) {
+            logger.warning("unable to back up corrupted schedule file");
+        }
     }
 }
