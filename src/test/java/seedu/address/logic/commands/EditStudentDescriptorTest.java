@@ -12,9 +12,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+
+
 
 public class EditStudentDescriptorTest {
 
@@ -71,7 +75,7 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getPhone().orElse(null) + ", email="
                 + editStudentDescriptor.getEmail().orElse(null) + ", tags="
                 + editStudentDescriptor.getTags().orElse(null) + ", assignments="
-                + editStudentDescriptor.getAssignmentList().orElse(null) + ", remark="
+                + editStudentDescriptor.getAssignmentList().orElse(new ArrayList<>()) + ", remark="
                 + editStudentDescriptor.getRemark().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }

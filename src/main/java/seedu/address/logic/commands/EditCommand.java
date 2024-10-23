@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -136,7 +137,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
-        private List<Assignment> assignmentList;
+        private List<Assignment> assignmentList = new ArrayList<>();
         private String remark;
 
         public EditStudentDescriptor() {}
@@ -151,7 +152,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setAssignmentList(toCopy.assignmentList);
-            setRemark(toCopy.remark);
+            // SetRemark is not yet called in EditStudentDescriptorBuilder to wait until editing remark is implemented
         }
 
         /**
