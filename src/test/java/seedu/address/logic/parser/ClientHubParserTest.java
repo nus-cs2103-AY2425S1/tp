@@ -153,6 +153,10 @@ public class ClientHubParserTest {
         SortCommand command = (SortCommand) parser.parseCommand(
                 SortCommand.COMMAND_WORD + " " + criteria);
         assertEquals(new SortCommand(new NameComparator()), command);
+
+        SortCommand shortCommand = (SortCommand) parser.parseCommand(
+                SortCommand.SHORT_COMMAND_WORD + " " + criteria);
+        assertEquals(new SortCommand(new NameComparator()), command);
     }
 
     @Test
