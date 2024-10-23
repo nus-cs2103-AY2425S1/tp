@@ -80,6 +80,13 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(mediumTagOnlyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(List.of(), model.getFilteredPersonList());
+
+        //Phone only
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        command = new FilterCommand(phoneOnlyPredicate);
+        expectedModel.updateFilteredPersonList(phoneOnlyPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(List.of(ALICE, CARL), model.getFilteredPersonList());
     }
 
     @Test
@@ -91,12 +98,6 @@ public class FilterCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(List.of(ALICE), model.getFilteredPersonList());
 
-        //Phone only
-        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        command = new FilterCommand(phoneOnlyPredicate);
-        expectedModel.updateFilteredPersonList(phoneOnlyPredicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE, CARL), model.getFilteredPersonList());
     }
 
     @Test
