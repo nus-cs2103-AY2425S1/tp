@@ -41,6 +41,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> RsvpStatus
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
