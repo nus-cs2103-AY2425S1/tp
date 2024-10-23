@@ -443,8 +443,6 @@ delete <INDEX>
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
-<img src="images/DeleteActivityDiagram.png" width="550" />
-
 **Examples:**
 - Remove a customer with a specific index (e.g. at index 12):
     ```

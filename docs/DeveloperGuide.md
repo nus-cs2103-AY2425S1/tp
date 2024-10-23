@@ -303,12 +303,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U1 - Delete a person**
 
+<img src="images/DeleteActivityDiagram.png" width="550" />
+
 **MSS**
 
 1.  User requests to list persons.
 2.  AgentAssist shows a list of persons.
-3.  User requests to delete a specific person in the list.
-4.  AgentAssist deletes the person.
+3.  User requests to delete a specific person in the list. 
+4.  AgentAssist asks user for confirmation.
+5.  User confirms. 
+6.  AgentAssist deletes the person.
 
     Use case ends.
 
