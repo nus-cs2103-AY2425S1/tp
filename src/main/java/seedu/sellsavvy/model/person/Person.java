@@ -1,13 +1,16 @@
 package seedu.sellsavvy.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
@@ -18,6 +21,7 @@ import seedu.sellsavvy.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    private static final Predicate<Order> PREDICATE_SHOW_ALL_ORDERS = unused -> true;
 
     // Identity fields
     private final Name name;
@@ -28,6 +32,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final OrderList orders;
+    private final FilteredList<Order> filteredOrders;
 
     /**
      * Every field must be present and not null.
@@ -40,6 +45,7 @@ public class Person {
         this.address = address;
         this.orders = orders;
         this.tags.addAll(tags);
+        this.filteredOrders = new FilteredList<>(this.orders.asUnmodifiableObservableList());
     }
 
     public Name getName() {
@@ -90,7 +96,30 @@ public class Person {
      * Returns the order list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Order> getOrderUnmodifiableObservableList() {
-        return orders.asUnmodifiableObservableList();
+        return filteredOrders;
+    }
+
+    /**
+     * Returns the order list as an unmodifiable {@code FilteredList}.
+     */
+    public FilteredList<Order> getFilteredOrderList() {
+        return filteredOrders;
+    }
+
+    /**
+     * Updates the filter of the order list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredOrderList(Predicate<Order> predicate) {
+        requireNonNull(predicate);
+        filteredOrders.setPredicate(predicate);
+    }
+
+    /**
+     * Resets the filter of the order list to display all orders.
+     */
+    public void resetFilteredOrderList() {
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     /**

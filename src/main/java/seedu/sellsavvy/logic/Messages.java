@@ -22,6 +22,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_ORDER_DISPLAYED_INDEX = "The order index provided is invalid";
     public static final String MESSAGE_ORDERLIST_DOES_NOT_EXIST =
             "No orders displayed in displayed list. Please use listOrder show a person's order list";
+    public static final String MESSAGE_ORDERS_LISTED_OVERVIEW = "%1$d orders listed!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
