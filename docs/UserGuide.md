@@ -74,7 +74,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the address book. People with same names are allowed.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -84,8 +84,8 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe, Alexander p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy d/o Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/+651234567 t/criminal`
-* `add n/Mary Jane t/friend p/+651234567`
+* `add n/Betsy d/o Crowe t/boss e/betsycrowe@example.com a/Jurong West Street p/+651234567 t/golf`
+* `add n/Mary Jane t/client p/+651234567`
 
 ### Listing all persons : `list`
 
@@ -129,6 +129,28 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 * `find Ifan` sorts other names by decreasing similarity to `Ifan` (e.g. Irfan, Isolde, Ayush, ...)
+
+### Filtering persons by criteria: `filter`
+
+Filters the displayed list of persons in the address book to include all persons who meet the specified criteria and displays them with index numbers.
+
+Format: `filter p/PHONE e/EMAIL a/ADDRESS t/TAG...`
+
+Parameters:
+* p/PHONE: The phone number criteria to filter by.
+* e/EMAIL: The email criteria to filter by.
+* a/ADDRESS: The address criteria to filter by.
+* t/TAG...: The tags to filter by.
+
+Examples:
+* `filter p/+65 e/example.com a/Clementi t/Inactive`: Filters the list to include all persons whose phone number contains `+65`, email contains `example.com`, address contains `Clementi`, and have the tag Inactive.
+* `filter p/987 e/johndoe@example.com a/Street`: Filters the list to include all persons whose phone number contains `987`, email is `johndoe@example.com`, and address contains `Street`.
+
+Notes:
+* At least one of p/PHONE, e/EMAIL, or a/ADDRESS must be provided.
+* Multiple criteria for phone, email, address and tags can be specified, separated by spaces.
+* The criteria for phone, email, and address are case-insensitive and can be partial matches.
+* The criteria for tags only checks for exact matches.
 
 ### Deleting a person : `delete`
 
