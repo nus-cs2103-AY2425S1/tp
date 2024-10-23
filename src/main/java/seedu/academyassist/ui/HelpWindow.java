@@ -39,6 +39,8 @@ public class HelpWindow extends UiPart<Stage> {
             + "   Format: clear\n\n"
             + "9. exit: Exits the program\n"
             + "   Format: exit\n\n"
+            + "10. filter: Filters contacts based on specified field\n"
+            + "   Format: filter f/FIELD [field]\n\n"
             + "For more detailed information, click the buttons below to open:\n"
             + "- User Guide\n"
             + "- README";

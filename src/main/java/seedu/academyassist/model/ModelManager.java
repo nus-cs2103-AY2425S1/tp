@@ -3,6 +3,7 @@ package seedu.academyassist.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -119,13 +120,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean personDuplicateClass(Subject subject, Person student) {
-        return academyAssist.personDuplicateClass(subject, student);
+    public boolean personDuplicateClass(Set<Subject> subjects, Person student) {
+        return academyAssist.personDuplicateClass(subjects, student);
     }
 
     @Override
-    public void addSubjectToPerson(Subject subject, Person person) {
-        academyAssist.addSubjectToPerson(subject, person);
+    public void addSubjectsToPerson(Set<Subject> subjects, Person person) {
+        academyAssist.addSubjectsToPerson(subjects, person);
     }
 
     @Override

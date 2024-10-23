@@ -1,6 +1,7 @@
 package seedu.academyassist.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -72,14 +73,14 @@ public interface Model {
     boolean hasPersonWithStudentId(StudentId studentId);
 
     /**
-     * Returns true if {@code Person} already is taking this {@code subject}
+     * Returns true if {@code Person} already is taking any of {@code subjects}
      */
-    boolean personDuplicateClass(Subject subject, Person student);
+    boolean personDuplicateClass(Set<Subject> subjects, Person student);
 
     /**
-     * Adds {@code subject} to {@code person} in Academy Assist management system.
+     * Adds {@code subject(s)} to {@code person} in Academy Assist management system.
      */
-    void addSubjectToPerson(Subject subject, Person person);
+    void addSubjectsToPerson(Set<Subject> subjects, Person person);
 
     /**
      * Deletes the given person.

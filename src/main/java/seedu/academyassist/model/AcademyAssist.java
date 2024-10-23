@@ -3,6 +3,7 @@ package seedu.academyassist.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.academyassist.commons.util.ToStringBuilder;
@@ -145,16 +146,25 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     /**
      * Returns true if {@code Person} is already taking this {@code subject}
      */
-    public boolean personDuplicateClass(Subject subject, Person student) {
-        return student.getSubjects().contains(subject);
+    public boolean personDuplicateClass(Set<Subject> subjects, Person student) {
+        for (Subject s : subjects) {
+            if (student.getSubjects().contains(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * Adds {@code subject} to {@code person}
      */
-    public void addSubjectToPerson(Subject subject, Person person) {
+    public void addSubjectsToPerson(Set<Subject> subjects, Person person) {
         persons.remove(person);
-        persons.add(person.addSubject(subject));
+        for (Subject s: subjects) {
+            person = person.addSubject(s);
+        }
+        persons.add(person);
+
     }
 
     //// student count operations
