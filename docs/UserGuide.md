@@ -232,8 +232,26 @@ to `91234567` and `johndoe@example.com` respectively.
 [To be filled up]
 ### Managing Medical Conditions
 [To be filled up]
+
 ### Managing Allergies
-[To be filled up]
+
+#### Adding an allergy: `addAllergy`
+
+Adds an allergy or multiple allergies to an existing patient in MediBase3.
+
+Format: `addAllergy i/NRIC al/ALLERGY…`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+> 
+> * You can add multiple allergies to a patient by using multiple al/ALLERGY parameters.
+> * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
 ### Managing Priority
 [To be filled up]
 ### Finding Patients
