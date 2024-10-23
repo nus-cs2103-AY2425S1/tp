@@ -19,7 +19,7 @@ public class SearchPersonCommand extends SearchCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all people who have tags containing any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " friends work";
+            + "Example: " + COMMAND_WORD + " p friends work";
 
     private final PersonTagContainsKeywordsPredicate predicate;
 
