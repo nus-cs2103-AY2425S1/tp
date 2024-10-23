@@ -12,6 +12,12 @@ import javafx.scene.paint.Paint;
  * Represents a labelled field in the PersonCard
  */
 public class PersonCardField extends HBox {
+    public static final String ICON_LITERAL_PHONE = "fas-phone-alt";
+    public static final String ICON_LITERAL_ADDRESS = "fas-building";
+    public static final String ICON_LITERAL_EMAIL = "fas-envelope";
+    public static final String ICON_LITERAL_JOB = "fas-briefcase";
+    public static final String ICON_LITERAL_INCOME = "fas-dollar-sign";
+
     private FontIcon icon;
     private Label value;
 
