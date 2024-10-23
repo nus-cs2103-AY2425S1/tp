@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("del", "delete", "rm", ":del",
-            "remove", ":remove");
+            "remove");
 
     private final Index targetIndex;
 
