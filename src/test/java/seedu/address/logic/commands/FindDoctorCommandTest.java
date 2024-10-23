@@ -76,7 +76,8 @@ public class FindDoctorCommandTest {
 
     @Test
     public void toStringMethod() {
-        DoctorNameContainsKeywordsPredicate predicate = new DoctorNameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        DoctorNameContainsKeywordsPredicate predicate = new DoctorNameContainsKeywordsPredicate(
+            Arrays.asList("keyword"));
         FindDoctorCommand findDoctorCommand = new FindDoctorCommand(predicate);
         String expected = FindDoctorCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findDoctorCommand.toString());

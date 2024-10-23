@@ -19,7 +19,8 @@ public class DoctorNameContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getDoctor().getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                    person.getDoctor().getName().fullName, keyword));
     }
 
     @Override
