@@ -73,7 +73,7 @@ public class DeleteCommand extends ConcreteCommand {
     public CommandResult undo(Model model) {
         assert isExecuted : "This command has not been executed";
         requireAllNonNull(model, personToDelete);
-        model.addPerson(personToDelete);
+        model.insertPerson(personToDelete, targetIndex);
         isExecuted = false;
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete)));
     }

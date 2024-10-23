@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ConcreteCommand;
 import seedu.address.model.person.Person;
@@ -75,6 +76,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Inserts the given person at the specified index.
+     * {@code person} must not already exist in the address book.
+     */
+    void insertPerson(Person person, Index index);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
