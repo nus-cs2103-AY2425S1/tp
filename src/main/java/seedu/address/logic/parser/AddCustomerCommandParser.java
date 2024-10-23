@@ -12,14 +12,14 @@ import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCustomerCommand object
+ * Parses input arguments and creates a new AddCustomerCommand object.
  */
 public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCustomerCommand
      * and returns an AddCustomerCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AddCustomerCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -39,6 +39,9 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         Information information = ParserUtil.parseInformation(argMultimap.getValue(PREFIX_INFORMATION).get());
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        // Add the "customer" tag explicitly
+        tagList.add(new Tag("customer"));
 
         Customer customer = new Customer(name, phone, email, address, preference, information, remark, tagList);
 
