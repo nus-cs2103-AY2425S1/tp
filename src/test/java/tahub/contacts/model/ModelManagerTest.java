@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.commons.core.GuiSettings;
@@ -20,6 +21,7 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.course.exceptions.CourseNotFoundException;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
 import tahub.contacts.testutil.AddressBookBuilder;
 
@@ -144,6 +146,64 @@ public class ModelManagerTest {
         Course course = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
         modelManager.addCourse(course);
         assertTrue(modelManager.hasCourse(course));
+    }
+
+    @Test
+    public void setCourse_nullTargetCourse_throwsNullPointerException() {
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.setCourse(null, course));
+    }
+
+    @Test
+    public void setCourse_nullEditedCourse_throwsNullPointerException() {
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        modelManager.addCourse(course);
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.setCourse(course, null));
+    }
+
+    @Test
+    public void setCourse_targetCourseNotInCourseList_throwsCourseNotFoundException() {
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        Course editedCourse = new Course(new CourseCode("CS1020"), new CourseName("Data Structures"));
+        Assertions.assertThrows(CourseNotFoundException.class, () -> modelManager.setCourse(course, editedCourse));
+    }
+
+    @Test
+    public void setCourse_editedCourseIsSameCourse_success() {
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        modelManager.addCourse(course);
+        modelManager.setCourse(course, course);
+        
+        ModelManager expectedModelManager = new ModelManager();
+        expectedModelManager.addCourse(course);
+        
+        assertEquals(expectedModelManager, modelManager);
+    }
+
+    @Test
+    public void setCourse_editedCourseHasSameIdentity_success() {
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        modelManager.addCourse(course);
+        Course editedCourse = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        modelManager.setCourse(course, editedCourse);
+        
+        ModelManager expectedModelManager = new ModelManager();
+        expectedModelManager.addCourse(course);
+        
+        assertEquals(expectedModelManager, modelManager);
+    }
+
+    @Test
+    public void setCourse_editedCourseHasDifferentIdentity_success() {
+        Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
+        modelManager.addCourse(course);
+        Course editedCourse = new Course(new CourseCode("CS1020"), new CourseName("Data Structures"));
+        modelManager.setCourse(course, editedCourse);
+        
+        ModelManager expectedModelManager = new ModelManager();
+        expectedModelManager.addCourse(course);
+        
+        assertEquals(expectedModelManager, modelManager);
     }
 
     @Test
