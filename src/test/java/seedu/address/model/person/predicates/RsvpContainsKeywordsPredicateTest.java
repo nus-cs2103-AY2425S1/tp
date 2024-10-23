@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.GuestBuilder;
+import seedu.address.testutil.VendorBuilder;
 
 public class RsvpContainsKeywordsPredicateTest {
 
@@ -67,6 +68,10 @@ public class RsvpContainsKeywordsPredicateTest {
                 Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new GuestBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").withRsvp("accepted").build()));
+
+        // Non-guest
+        predicate = new RsvpContainsKeywordsPredicate(Arrays.asList("accepted"));
+        assertFalse(predicate.test(new VendorBuilder().build()));
     }
 
     @Test

@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.VendorBuilder;
 
 public class CompanyContainsKeywordsPredicateTest {
@@ -77,6 +78,10 @@ public class CompanyContainsKeywordsPredicateTest {
                 Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new VendorBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").withCompany("The Florist").build()));
+
+        // Non-vendor
+        predicate = new CompanyContainsKeywordsPredicate(Arrays.asList("The Florist"));
+        assertFalse(predicate.test(new GuestBuilder().build()));
     }
 
     @Test

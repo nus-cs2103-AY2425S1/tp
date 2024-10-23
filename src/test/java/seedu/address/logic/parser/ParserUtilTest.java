@@ -26,6 +26,7 @@ import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.RsvpContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -349,5 +350,29 @@ public class ParserUtilTest {
         CompanyContainsKeywordsPredicate expectedCompanyPredicate =
                 new CompanyContainsKeywordsPredicate(Arrays.asList(VALID_COMPANY.split(" ")));
         assertEquals(expectedCompanyPredicate, ParserUtil.parseCompanyPredicate(companyWithWhitespace));
+    }
+
+    @Test
+    public void parseTagPredicate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTagPredicate(null));
+    }
+
+    @Test
+    public void parseTagPredicate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagPredicate(Arrays.asList(INVALID_TAG)));
+    }
+
+    @Test
+    public void parseTagPredicate_validValueWithoutWhitespace_returnsTag() throws Exception {
+        TagContainsKeywordsPredicate expectedTagPredicate =
+                new TagContainsKeywordsPredicate(Arrays.asList(VALID_TAG_1));
+        assertEquals(expectedTagPredicate, ParserUtil.parseTagPredicate(Arrays.asList(VALID_TAG_1)));
+    }
+
+    @Test
+    public void parseTagPredicate_multipleTags_returnsTags() throws Exception {
+        TagContainsKeywordsPredicate expectedTagPredicate =
+                new TagContainsKeywordsPredicate(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        assertEquals(expectedTagPredicate, ParserUtil.parseTagPredicate(Arrays.asList(VALID_TAG_1, VALID_TAG_2)));
     }
 }
