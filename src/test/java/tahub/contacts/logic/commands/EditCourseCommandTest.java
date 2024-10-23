@@ -37,6 +37,23 @@ public class EditCourseCommandTest {
         assertCommandSuccess(editCourseCommand, model, expectedMessage, expectedModel);
     }
     
+    // No fields specified success
+    @Test
+    public void execute_noFieldsSpecifiedUnfilteredList_success() {
+        Course currentCourse = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
+        model.addCourse(currentCourse);
+        
+        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder().build();
+        EditCourseCommand editCourseCommand = new EditCourseCommand(new CourseCode("CS1101S"), descriptor);
+        String expectedMessage = String.format(EditCourseCommand.MESSAGE_EDIT_COURSE_SUCCESS, currentCourse);
+        
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UniqueCourseList());
+        Course currentCourseCopy = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
+        expectedModel.addCourse(currentCourseCopy);
+        
+        assertCommandSuccess(editCourseCommand, model, expectedMessage, expectedModel);
+    }
+    
     @Test
     public void execute_courseNotExisting_failure() {
         EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder().withCourseName("Software Engineering").build();
