@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -73,15 +74,13 @@ public class LogicManagerTest {
         assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, expectedModel);
     }
 
-    /*
     @Test
     public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
         String[] deleteCommand = {"delete 9", "y"};
-        assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, model);
+        logic.execute(deleteCommand[0]);
         assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
                 logic.execute(deleteCommand[1]));
     }
-    */
 
     @Test
     public void execute_validCommand_success() throws Exception {

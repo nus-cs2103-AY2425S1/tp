@@ -439,6 +439,7 @@ delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
 * Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of customers in the list**.
+* After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -447,12 +448,21 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
     ```
     delete 12
     ```
+  Confirmation prompt:
+    ```
+    This will permanently delete this contact.  Are you sure you want to execute this command? (y/n)
+    ```
   
 **What to Expect:**
-- **On Success:**
+- **On Success (after confirming with y/yes):**
     - Message:
       ```
       Customer <INDEX> has been deleted.
+      ```
+- **On Cancellation (if confirmation is declined):**
+    - Message:
+      ```
+      Command has been cancelled.
       ```
 - **On Error:**
     - Invalid index error message:
@@ -474,19 +484,28 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 ```
 clear
 ```
+Confirmation prompt:
+```
+This will permanently clear all contacts. Are you sure you want to execute this command? (y/n)
+```
 
 **What to Expect:**
-- **On Success:**
+- **On Success (after confirming with y/yes):**
   - Message:
     ```
     Address book has been cleared!
     ```
     The application will remove all client data from the list, effectively resetting the client database.
+- **On Cancellation (if confirmation is declined):**
+    - Message:
+      ```
+      Command has been cancelled.
+      ```
 - **On Error:**
   - This command does not typically produce errors but will have no effect if there are no clients in the database to clear.
 
 > ⛔ **Danger:**  
-> The `clear` command is **irreversible** and does not provide a confirmation message before clearing all records. Once executed, all client data is **permanently deleted**.
+> The `clear` command is **irreversible**. Once executed, all client data is **permanently deleted**.
 >
 > It is highly recommended to **avoid using this command** unless absolutely necessary.
 
@@ -678,7 +697,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 ### How do I change the remarks or credit card tier of an existing customer?
-Use the [`edit` command](#feature-4-edit-the-existing-customer), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remarks.
+Use the [`edit` command](#feature-4-edit-the-existing-customer), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remarks. If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
 
 ### Why am I getting an error when trying to edit the remark of an existing customer?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark, while `ra/` appends to the current remark.
