@@ -69,5 +69,6 @@ public class AttendanceContainer extends UiPart<Region> {
         } else {
             tutorial.setText(tutorials.toString());
         }
+        attendanceList.layout();
     }
 }

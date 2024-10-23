@@ -26,8 +26,8 @@ public class SampleDataUtil {
             new ArrayList<Participation>(), getTagSet("friends"));
 
     public static Person[] getSamplePersons() {
-        alex.getParticipation().add(new Participation(alex, new Tutorial("Math"), new ArrayList<>()));
-        alex.getParticipation().add(new Participation(alex, new Tutorial("Math"), new ArrayList<>()));
+        alex.getParticipation().add(new Participation(alex, new Tutorial("Math")));
+        alex.getParticipation().add(new Participation(alex, new Tutorial("Math")));
         return new Person[] {
             alex, 
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),

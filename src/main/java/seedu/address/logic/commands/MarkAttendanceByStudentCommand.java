@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -27,9 +28,11 @@ public class MarkAttendanceByStudentCommand extends Command {
             + ": Marks the attendance of the student identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]\n"
+            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]"
+            + "[" + PREFIX_TUTORIAL + "TUTORIAL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ATTENDANCE + "20/10/2024";
+            + PREFIX_ATTENDANCE + "20/10/2024"
+            + PREFIX_TUTORIAL + "Math";
 
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS = "Marked attendance of student: %1$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
@@ -61,8 +64,9 @@ public class MarkAttendanceByStudentCommand extends Command {
         }
 
         Person studentToMarkAttendance = lastShownList.get(targetIndex.getZeroBased());
-        Participation tutorialAttended = getParticipationOfTutorial(
-                studentToMarkAttendance.getParticipation(), tutorial);
+        List<Participation> participationList = studentToMarkAttendance.getParticipation();
+
+        Participation tutorialAttended = getParticipationOfTutorial(participationList, tutorial);
 
         if (tutorialAttended == null) {
             throw new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial));
