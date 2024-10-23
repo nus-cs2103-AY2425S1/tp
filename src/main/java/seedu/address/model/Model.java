@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
 
@@ -97,7 +98,15 @@ public interface Model {
     ObservableList<Meeting> getWeeklySchedule();
 
     void changeWeeklySchedule(Predicate<Meeting> predicate);
+
     ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate);
+
+    /**
+     * @param i Index of the meeting to be retrieved
+     * @return The meeting at the given index with respect to the currently displayed
+     *     weekly schedule
+     */
+    Meeting getMeeting(Index i);
 
     /**
      * Returns an unmodifiable view of the filtered person list

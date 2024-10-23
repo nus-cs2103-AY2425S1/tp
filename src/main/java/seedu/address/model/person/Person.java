@@ -115,6 +115,15 @@ public class Person {
     }
 
     /**
+     * This defines a weaker notion of equality between two persons based on UUID.
+     * @param uid The UUID to compare with.
+     * @return True if the UUID is the same as the person's UUID.
+     */
+    public boolean isSamePersonUid(UUID uid) {
+        return this.uid.equals(uid);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
