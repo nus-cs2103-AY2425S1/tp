@@ -55,9 +55,8 @@ This app is a desktop app for managing candidates and job roles, **optimized for
       java -jar TalentSg.jar
       ```
 ![launch instruction.png](images%2Flaunch%20instruction.png)
-      A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data. 🎉
-
-![Ui.png](images%2FUi.png)
+<br><br>A GUI similar to the one below should appear in a few seconds. <br>Note how the app contains some sample data. 🎉
+<br><img src="images/MainUiPage.png" width = "400">
 
 5. **Interact with TalentSG**:
     - Type your command into the command box and press **Enter** to execute it.
