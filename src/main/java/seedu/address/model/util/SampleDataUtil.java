@@ -63,7 +63,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Helps Formats the Strings in Set<Tag> to a buildable string inpute
+     * Helps Formats the Strings in Set<Tag> to a buildable string input
      */
     private static String tagFormatter(String tagValue) {
         String[] parts = tagValue.split(":");
