@@ -13,12 +13,12 @@ public class CourseTest {
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Course(null, null));
     }
-    
+
     @Test
     public void isConflictCourse() {
         Course course1 = new Course(new CourseCode("CS1011"), new CourseName("Programming"));
         Course course2 = new Course(new CourseCode("CS1011"), new CourseName("Data Structures"));
-        Course course3 = new Course(new CourseCode("CS1021"), new CourseName("Programming"));  
+        Course course3 = new Course(new CourseCode("CS1021"), new CourseName("Programming"));
         Course course4 = new Course(new CourseCode("CS1021"), new CourseName("Data Structures"));
 
         // same course code

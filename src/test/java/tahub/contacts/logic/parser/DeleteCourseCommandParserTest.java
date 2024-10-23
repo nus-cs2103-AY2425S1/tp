@@ -35,6 +35,7 @@ public class DeleteCourseCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no course code
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCourseCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCourseCommand.MESSAGE_USAGE));
     }
 }

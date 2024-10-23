@@ -1,6 +1,13 @@
 package tahub.contacts.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tahub.contacts.logic.commands.CommandTestUtil.assertCommandFailure;
+import static tahub.contacts.logic.commands.CommandTestUtil.assertCommandSuccess;
+
 import org.junit.jupiter.api.Test;
+
 import tahub.contacts.logic.Messages;
 import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
@@ -10,12 +17,6 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tahub.contacts.logic.commands.CommandTestUtil.assertCommandFailure;
-import static tahub.contacts.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 public class DeleteCourseCommandTest {
 
@@ -29,7 +30,8 @@ public class DeleteCourseCommandTest {
 
         String expectedMessage = String.format(DeleteCourseCommand.MESSAGE_DELETE_COURSE_SUCCESS, courseToDelete);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UniqueCourseList());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new UserPrefs(), new UniqueCourseList());
 
         assertCommandSuccess(deleteCourseCommand, model, expectedMessage, expectedModel);
     }

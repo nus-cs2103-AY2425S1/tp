@@ -23,7 +23,8 @@ public class JsonAdaptedCourseTest {
     @Test
     public void toModelType_validCourseDetails_returnsCourse() throws Exception {
         JsonAdaptedCourse course = new JsonAdaptedCourse(VALID_COURSE_CODE, VALID_COURSE_NAME);
-        assertEquals(new Course(new CourseCode(VALID_COURSE_CODE), new CourseName(VALID_COURSE_NAME)), course.toModelType());
+        assertEquals(new Course(new CourseCode(VALID_COURSE_CODE),
+                new CourseName(VALID_COURSE_NAME)), course.toModelType());
     }
 
     @Test

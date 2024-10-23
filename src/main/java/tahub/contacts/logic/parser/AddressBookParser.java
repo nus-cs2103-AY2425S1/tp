@@ -61,10 +61,10 @@ public class AddressBookParser {
 
         case CourseCommand.COMMAND_WORD:
             return new CourseCommandParser().parse(arguments);
-            
+
         case EditCourseCommand.COMMAND_WORD:
             return new EditCourseCommandParser().parse(arguments);
-            
+
         case DeleteCourseCommand.COMMAND_WORD:
             return new DeleteCourseCommandParser().parse(arguments);
 

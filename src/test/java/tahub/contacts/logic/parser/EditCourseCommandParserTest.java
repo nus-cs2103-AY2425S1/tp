@@ -25,7 +25,8 @@ public class EditCourseCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
-        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder().withCourseName(VALID_COURSE_NAME).build();
+        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder()
+                .withCourseName(VALID_COURSE_NAME).build();
         EditCourseCommand expectedCommand = new EditCourseCommand(courseCode, descriptor);
 
         // whitespace only preamble
@@ -35,7 +36,8 @@ public class EditCourseCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no course code
-        assertParseFailure(parser, COURSE_NAME_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCourseCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, COURSE_NAME_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCourseCommand.MESSAGE_USAGE));
     }
 
     @Test

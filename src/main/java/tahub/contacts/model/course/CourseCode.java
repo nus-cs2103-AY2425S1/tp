@@ -34,7 +34,7 @@ public class CourseCode {
     public static boolean isValidCourseCode(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-    
+
     @Override
     public String toString() {
         return courseCode;

@@ -173,10 +173,10 @@ public class ModelManagerTest {
         Course course = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         modelManager.addCourse(course);
         modelManager.setCourse(course, course);
-        
+
         ModelManager expectedModelManager = new ModelManager();
         expectedModelManager.addCourse(course);
-        
+
         assertEquals(expectedModelManager, modelManager);
     }
 
@@ -186,10 +186,10 @@ public class ModelManagerTest {
         modelManager.addCourse(course);
         Course editedCourse = new Course(new CourseCode("CS1010"), new CourseName("Programming Methodology"));
         modelManager.setCourse(course, editedCourse);
-        
+
         ModelManager expectedModelManager = new ModelManager();
         expectedModelManager.addCourse(course);
-        
+
         assertEquals(expectedModelManager, modelManager);
     }
 
@@ -199,10 +199,10 @@ public class ModelManagerTest {
         modelManager.addCourse(course);
         Course editedCourse = new Course(new CourseCode("CS1020"), new CourseName("Data Structures"));
         modelManager.setCourse(course, editedCourse);
-        
+
         ModelManager expectedModelManager = new ModelManager();
         expectedModelManager.addCourse(course);
-        
+
         assertEquals(expectedModelManager, modelManager);
     }
 

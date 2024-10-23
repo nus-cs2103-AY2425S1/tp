@@ -1,13 +1,12 @@
 package tahub.contacts.model.course;
 
-import static tahub.contacts.commons.util.AppUtil.checkArgument;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Course in the address book.
  */
 public class Course {
-    
+
     public final CourseCode courseCode;
     public final CourseName courseName;
 
@@ -32,7 +31,7 @@ public class Course {
         }
         return courseCode.equals(otherCourse.courseCode) || courseName.equals(otherCourse.courseName);
     }
-    
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

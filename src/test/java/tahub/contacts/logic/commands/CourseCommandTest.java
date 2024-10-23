@@ -81,7 +81,8 @@ public class CourseCommandTest {
 
     @Test
     public void toStringMethod() {
-        CourseCommand command = new CourseCommand(new Course(new CourseCode("CS2103T"), new CourseName("Software Engineering")));
+        CourseCommand command = new CourseCommand(new Course(new CourseCode("CS2103T"),
+                new CourseName("Software Engineering")));
         String expected = "tahub.contacts.logic.commands.CourseCommand{toAdd=[CS2103T: Software Engineering]}";
         assertEquals(expected, command.toString());
     }

@@ -26,10 +26,10 @@ public class DeleteCourseCommand extends Command {
     public static final String MESSAGE_DELETE_COURSE_SUCCESS = "Deleted Course: %1$s";
 
     private final CourseCode courseCode;
-    
+
     /**
      * Creates a DeleteCourseCommand to delete the specified {@code Course}
-     * 
+     *
      * @param courseCode of the course to be deleted
      */
     public DeleteCourseCommand(CourseCode courseCode) {
@@ -44,7 +44,7 @@ public class DeleteCourseCommand extends Command {
         if (!courseList.containsCourseWithCourseCode(courseCode)) {
             throw new CommandException(Messages.MESSAGE_NO_EXISTING_COURSE);
         }
-        
+
         Course courseToDelete = courseList.getCourseWithCourseCode(courseCode);
         model.deleteCourse(courseToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_COURSE_SUCCESS, Messages.format(courseToDelete)));

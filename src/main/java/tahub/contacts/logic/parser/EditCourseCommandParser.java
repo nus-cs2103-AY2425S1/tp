@@ -1,18 +1,20 @@
 package tahub.contacts.logic.parser;
 
-import tahub.contacts.logic.commands.EditCourseCommand;
-import tahub.contacts.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
-
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.stream.Stream;
+
+import tahub.contacts.logic.commands.EditCourseCommand;
 import tahub.contacts.logic.commands.EditCourseCommand.EditCourseDescriptor;
+import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;
 
+/**
+ * Parses input arguments and creates a new EditCourseCommand object
+ */
 public class EditCourseCommandParser implements Parser<EditCourseCommand> {
 
     /**
@@ -26,33 +28,33 @@ public class EditCourseCommandParser implements Parser<EditCourseCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CODE, PREFIX_NAME);
-        
+
         if (!arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCourseCommand.MESSAGE_USAGE));
         }
-        
+
         assert argMultimap.getValue(PREFIX_CODE).isPresent();
         assert argMultimap.getValue(PREFIX_NAME).isPresent();
-        
+
         CourseCode courseCodeToEdit;
         EditCourseDescriptor editCourseDescriptor = new EditCourseDescriptor();
-        
+
         try {
             courseCodeToEdit = new CourseCode(argMultimap.getValue(PREFIX_CODE).get());
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage(), e);
         }
-        
+
         try {
             editCourseDescriptor.setCourseName(ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get()));
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage(), e);
         }
-        
+
         if (!editCourseDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCourseCommand.MESSAGE_COURSE_NOT_EDITED);
         }
-        
+
         return new EditCourseCommand(courseCodeToEdit, editCourseDescriptor);
     }
 

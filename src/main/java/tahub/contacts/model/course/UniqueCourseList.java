@@ -126,7 +126,7 @@ public class UniqueCourseList implements Iterable<Course> {
 
         internalList.setAll(courses);
     }
-    
+
     public Course getCourseWithCourseCode(CourseCode courseCode) {
         requireNonNull(courseCode);
         return internalList.stream().filter(course -> course.courseCode

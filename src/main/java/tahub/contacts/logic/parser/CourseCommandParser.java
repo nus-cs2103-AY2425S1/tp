@@ -29,13 +29,13 @@ public class CourseCommandParser implements Parser<CourseCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
         }
-        
+
         assert argMultimap.getValue(PREFIX_CODE).isPresent();
         assert argMultimap.getValue(PREFIX_NAME).isPresent();
-        
+
         CourseCode courseCode;
         CourseName courseName;
-        
+
         try {
             courseCode = ParserUtil.parseCourseCode(argMultimap.getValue(PREFIX_CODE).get());
         } catch (IllegalArgumentException e) {
@@ -47,7 +47,7 @@ public class CourseCommandParser implements Parser<CourseCommand> {
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage(), e);
         }
-        
+
         Course course = new Course(courseCode, courseName);
 
         return new CourseCommand(course);

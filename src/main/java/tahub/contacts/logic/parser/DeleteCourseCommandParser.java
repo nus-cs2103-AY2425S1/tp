@@ -1,14 +1,14 @@
 package tahub.contacts.logic.parser;
 
-import tahub.contacts.logic.commands.DeleteCourseCommand;
-import tahub.contacts.logic.parser.exceptions.ParseException;
-import tahub.contacts.model.course.CourseCode;
-
-import java.util.stream.Stream;
-
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+
+import java.util.stream.Stream;
+
+import tahub.contacts.logic.commands.DeleteCourseCommand;
+import tahub.contacts.logic.parser.exceptions.ParseException;
+import tahub.contacts.model.course.CourseCode;
 
 /**
  * Parses input arguments and creates a new DeleteCourseCommand object

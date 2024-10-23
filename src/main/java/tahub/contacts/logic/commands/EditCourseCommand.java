@@ -1,6 +1,13 @@
 package tahub.contacts.logic.commands;
 
-import tahub.contacts.commons.core.index.Index;
+import static java.util.Objects.requireNonNull;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
+import static tahub.contacts.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.Objects;
+import java.util.Optional;
+
 import tahub.contacts.commons.util.CollectionUtil;
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
@@ -10,24 +17,6 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
-import tahub.contacts.model.person.Address;
-import tahub.contacts.model.person.Email;
-import tahub.contacts.model.person.Name;
-import tahub.contacts.model.person.Person;
-import tahub.contacts.model.person.Phone;
-import tahub.contacts.model.tag.Tag;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
-import static tahub.contacts.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Edits the details of an existing course in the unique course list of the address book.
@@ -88,10 +77,9 @@ public class EditCourseCommand extends Command {
         assert courseToEdit != null;
 
         CourseName updatedCourseName = editCourseDescriptor.getCourseName().orElse(courseToEdit.courseName);
-        
+
         return new Course(courseToEdit.courseCode, updatedCourseName);
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -134,12 +122,12 @@ public class EditCourseCommand extends Command {
         }
 
         /**
-         * Returns true if at least course  name is edited.
+         * Returns true if at least course name is edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(courseName);
         }
-        
+
         public void setCourseName(CourseName courseName) {
             this.courseName = courseName;
         }
@@ -147,7 +135,7 @@ public class EditCourseCommand extends Command {
         public Optional<CourseName> getCourseName() {
             return Optional.ofNullable(courseName);
         }
-        
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {

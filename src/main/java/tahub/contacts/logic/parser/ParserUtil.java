@@ -138,7 +138,7 @@ public class ParserUtil {
         }
         return tagSet;
     }
-    
+
     /**
      * Parses a {@code String courseCode} into a {@code CourseCode}.
      * Leading and trailing whitespaces will be trimmed.
@@ -153,7 +153,7 @@ public class ParserUtil {
         }
         return new CourseCode(trimmedCourseCode);
     }
-    
+
     /**
      * Parses a {@code String courseName} into a {@code CourseName}.
      * Leading and trailing whitespaces will be trimmed.

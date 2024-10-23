@@ -72,15 +72,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_editCourse() throws Exception {
         CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
-        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder().withCourseName(VALID_COURSE_NAME).build();
-        EditCourseCommand command = (EditCourseCommand) parser.parseCommand(EditCourseCommand.COMMAND_WORD + " c/" + courseCode + COURSE_NAME_DESC);
+        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder()
+                .withCourseName(VALID_COURSE_NAME).build();
+        EditCourseCommand command = (EditCourseCommand) parser
+                .parseCommand(EditCourseCommand.COMMAND_WORD + " c/" + courseCode + COURSE_NAME_DESC);
         assertEquals(new EditCourseCommand(courseCode, descriptor), command);
     }
 
     @Test
     public void parseCommand_deleteCourse() throws Exception {
         CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
-        DeleteCourseCommand command = (DeleteCourseCommand) parser.parseCommand(DeleteCourseCommand.COMMAND_WORD + " c/" + courseCode);
+        DeleteCourseCommand command = (DeleteCourseCommand) parser.parseCommand(DeleteCourseCommand
+                .COMMAND_WORD + " c/" + courseCode);
         assertEquals(new DeleteCourseCommand(courseCode), command);
     }
 
