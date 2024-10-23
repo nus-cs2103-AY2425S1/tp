@@ -27,7 +27,18 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        Index indexToView = ParserUtil.parseIndex(splitArgs[0]);
+        Index indexToView = parseViewIndex(splitArgs[0]);
         return new ViewCommand(indexToView);
+    }
+
+    /**
+     * Catches possible parse exceptions and provides them the correct error message.
+     */
+    private Index parseViewIndex(String inputIndex) throws ParseException {
+        try {
+            return ParserUtil.parseIndex(inputIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        }
     }
 }
