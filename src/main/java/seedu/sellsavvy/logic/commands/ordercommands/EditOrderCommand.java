@@ -79,12 +79,14 @@ public class EditOrderCommand extends Command {
         Order orderToEdit = lastShownList.get(index.getZeroBased());
         Order editedOrder = createEditedOrder(orderToEdit, editOrderDescriptor);
 
-        String feedbackToUser = !orderToEdit.isSameOrder(editedOrder) && lastShownList.contains(orderToEdit)
+        String feedbackToUser = !orderToEdit.isSameOrder(editedOrder)
+                && model.getSelectedPerson2().getOrderList().contains(editedOrder) // TODO refactor this to follow LoD
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
 
         model.setOrder(orderToEdit, editedOrder);
-        return new CommandResult(feedbackToUser + String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
+        return new CommandResult(feedbackToUser
+                + String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
     }
 
     /**
