@@ -31,7 +31,6 @@ public class SearchCommandParser implements Parser<Command> {
         // Check if the command starts with a recognized prefix
         if (trimmedArgs.contains(PREFIX_BIRTHDAY)) {
             String date = trimmedArgs.substring(PREFIX_BIRTHDAY.length()).trim();
-            System.out.println(date);
             return parseBirthdayCommand(date);
         } else if (trimmedArgs.contains(PREFIX_APPOINTMENT)) {
             String dateTime = trimmedArgs.substring(PREFIX_APPOINTMENT.length()).trim();
@@ -54,7 +53,7 @@ public class SearchCommandParser implements Parser<Command> {
             return new SearchBirthdayCommand(date);
         } catch (CommandException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchBirthdayCommand.MESSAGE_USAGE));
+                    String.format(e.getMessage() + "\n" + SearchBirthdayCommand.MESSAGE_USAGE));
         }
     }
 
