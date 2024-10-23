@@ -138,14 +138,18 @@ View the contact of a specified person from the address book.
 Format: `view KEYWORD`
 
 * This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* The keyword can be either the full name (consisting multiple words) or partial name (consisting of only one word).
-* Viewing the full name will match the exact name given e.g. `Alex Tan` will only give `Alex Tan`
-* Viewing partial name will find all contacts that has names containing the keyword e.g. `Alex` will give `Alex Tan` and `Alex Yeo`
+* The keyword can be either the full name or partial name (consisting of only one word).
 * Only the name can be used for viewing
+
+Examples:
+* `view John` returns `john` and `John Doe`
+* `view Alex Yeo` return `Alex Yeo` and `Alex Yeo Jun Jie`
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
+
+If you know the index of the specific contact you want to delete:
 
 Format: `delete INDEX`
 
@@ -155,7 +159,21 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+If you do not know the index but know the name of the contact you want to delete:
+
+Format: `delete KEYWORD`
+
+* This command is case-insensitive. e.g. `alex tan` will match `Alex Tan`
+* The keyword can be either the full name or partial name.
+* When there are more than one contact, of which name contains the keyword, a filtered list containing those contacts 
+  will be given. From that list, you can obtain the index of the specific contact you want to delete. With that index, 
+  you can do a `delete INDEX` to delete that specific contact.
+
+Example:
+
+* `delete Betsy` will delete the contact of Betsy Tan directly if there are no duplicates.
+* `delete Alex` will give a list of contacts named `Alex`, and user can choose which contact from filtered list to deleted from.
 
 ### Clearing all entries : `clear`
 
