@@ -26,16 +26,12 @@
       </stylesheets>
 
       <SplitPane orientation="HORIZONTAL" dividerPositions="0.4" prefWidth="800" prefHeight="500">
-
         <ListView fx:id="tocListView" minWidth="150.0" prefWidth="180.0" maxWidth="210.0" />
-
         <VBox alignment="TOP_LEFT" spacing="15" styleClass="vbox">
           <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
           </padding>
-
           <StackPane VBox.vgrow="ALWAYS">
-
             <ScrollPane fitToWidth="true" StackPane.alignment="TOP_LEFT">
               <content>
                 <TableView fx:id="commandSummaryTable" visible="false" VBox.vgrow="ALWAYS">
@@ -47,19 +43,14 @@
                 </TableView>
               </content>
             </ScrollPane>
-            
             <TextFlow fx:id="helpContentFlow" StackPane.alignment="TOP_LEFT">
               <padding>
                 <Insets top="10" right="15" bottom="10" left="15" />
               </padding>
             </TextFlow>
-
           </StackPane>
-
         </VBox>
-
       </SplitPane>
-
     </Scene>
   </scene>
 </fx:root>
