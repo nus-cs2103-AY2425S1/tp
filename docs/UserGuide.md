@@ -192,17 +192,17 @@ Result for `fa tampines`:
 
 Finds persons whose address matches any part of the given keyword(s).
 
-Format `fc KEYWORD [MORE_KEYWORDS]`
+Format `fc CLIENT_TYPE`
 * The search is case-insensitive. e.g `investment` will match `Investment`
-* Only the `client_type` of the person is searched.
-* Persons whose `client_type` contains a substring that matches the provided `KEYWORD` will be returned.
-* Person with `client_type` that has a prefix matching the keyword will be returned (i.e. `AND` search).
+* Only the `CLIENT_TYPE` of the person is searched.
+* Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
+* Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
 
  A **valid** `KEYWORD` should:
   * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `client_type` will always be in alphanumeric format.
   * Not be empty. 
-    * For eg. Just typing `fc` without providing any `KEYWORD` will throw an error.
+    * For eg. Just typing `fc` without providing any `CLIENT TYPE` will throw an error.
 
 Examples:
 * `fc Investment` returns every contact that has a `client_type` beginning with `Investment`
@@ -233,6 +233,36 @@ A **valid** `NAME` for delete should:
 Examples:
 * `delete John Doe` deletes the person named `John Doe`
 * `delete John Doe/` deletes the person named `John Doe` and not `John Doey`
+
+### Viewing a client: `view`
+
+Creates a popup view of the specified client from ClientHub.
+
+Format: `view CLIENT_NAME`
+* The command is case-insensitive. eg. `alice` will match `Alice`
+* The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
+* If duplicates are found, `view` will throw an error telling user to specify the name further.
+  * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
+
+A **valid** `CLIENT_NAME` for view should:
+* Not be empty. 
+  * For eg. Just typing `view` without providing any `CLIENT_NAME` will throw an error.
+* Be a valid name that exists in the list of contacts.
+    * For eg. Typing `view John Doe` when there is no contact with the name `John Doe` will throw an error.
+* Be *specific* and the exact name of the contact to be viewed.
+    
+* Be a prefix match of the contact name.
+  * Typing `view John Doe` will **create a popup view* of `John Doe` if there is `John Doe` and `John Doey`in the contact list.
+  * Typing `view John` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
+  * Typing `view John` if there is only `John Doe` in the contact list will **create a popup view** of `John Doe`.
+
+Examples:
+* `view John Doe` shows the contact named `John Doe`
+* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
+
+Result for `view Liurui`:
+    ![result for 'view Liurui`](images/viewCommandExample.png)
+
 
 ### Clearing all entries : `clear`
 
