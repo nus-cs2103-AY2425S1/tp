@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -50,7 +51,27 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePhone_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        Person otherPerson = new PersonBuilder().withName("Alice").build();
+        ModelStub modelStub = new ModelStubWithPerson(otherPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_PHONE_EXIST, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        Person otherPerson = new PersonBuilder().withName("Alice").withPhone("91234567").build();
+        ModelStub modelStub = new ModelStubWithPerson(otherPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_EMAIL_EXIST, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -139,6 +160,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,6 +188,35 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteWedding(Wedding target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWedding(Wedding target, Wedding editedWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -175,6 +237,16 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return this.person.hasSamePhone(person);
+        }
+
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return this.person.hasSameEmail(person);
+        }
     }
 
     /**
@@ -187,6 +259,16 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::hasSamePhone);
+        }
+
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::hasSameEmail);
         }
 
         @Override

@@ -4,9 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
@@ -40,11 +45,43 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_personWithSameIdentityFieldsInList_returnsFalse() {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+        assertFalse(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
+    public void containsPhone_personWithSamePhoneInList_returnsTrue() {
+        uniquePersonList.add(AMY);
+        Person editedBenson = new PersonBuilder(BENSON).withPhone(VALID_PHONE_AMY)
+                .build();
+        assertFalse(uniquePersonList.contains(editedBenson));
+    }
+
+    @Test
+    public void containsPhone_personWithDifferentPhoneInList_returnsFalse() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertFalse(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
+    public void containsEmail_personWithSameEmailInList_returnsTrue() {
+        uniquePersonList.add(BOB);
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB)
+                .build();
+        assertTrue(uniquePersonList.contains(editedBob));
+    }
+
+    @Test
+    public void containsEmail_personWithDifferentEmailInList_returnsFalse() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertFalse(uniquePersonList.contains(editedAlice));
     }
 
     @Test

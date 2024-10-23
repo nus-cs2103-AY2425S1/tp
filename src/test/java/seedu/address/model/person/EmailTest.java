@@ -73,6 +73,9 @@ public class EmailTest {
         // same values -> returns true
         assertTrue(email.equals(new Email("valid@email")));
 
+        // same letters in capital -> returns true
+        assertTrue(email.equals(new Email("VALID@EMAIL")));
+
         // same object -> returns true
         assertTrue(email.equals(email));
 

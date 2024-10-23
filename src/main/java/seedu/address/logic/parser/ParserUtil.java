@@ -115,9 +115,13 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tagToAdd = parseTag(tagName);
+            if (!tagSet.contains(tagToAdd)) {
+                tagSet.add(tagToAdd);
+            }
         }
         return tagSet;
     }
