@@ -51,15 +51,17 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 ## Helpful Guidelines for the User Guide
 
 ### Interpreting symbols
+
 This section explains the symbols that you will find in the rest of the User Guide.
 
-| Symbol               | Meaning                                                |
-|----------------------|--------------------------------------------------------|
-| :warning:            | Warning or some important information for you to know. |
-| :information_source: | Information that you should take note of.              |
-| :bulb:               | Tips from us.                                          |
+| Symbol               | Meaning                                            |
+|----------------------|----------------------------------------------------|
+| :warning:            | Important information! Please read them carefully. |
+| :information_source: | Information that you should take note of.          |
+| :bulb:               | Additional useful tips.                            |
 
 ### Searching for what you need
+
 This section tells you what information you will find in each of the sections of this guide. Feel free to skip to the sections which you need most.
 
 1. [Quick Start](#quick-start) teaches you how to set up BridalBuddy.
@@ -74,38 +76,44 @@ This section tells you what information you will find in each of the sections of
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Tutorial for Beginners
-
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java 17 if you do not already have it installed.
+    > To check 
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F09-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
+
+[_Back to Top_](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Tutorial for Beginners
+
+This section will walk you through all the basic features of BridalBuddy and will make sure you know everything you need to get started.
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
