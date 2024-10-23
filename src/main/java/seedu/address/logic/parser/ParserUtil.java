@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
+import seedu.address.model.delivery.DeliverySortBy;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.person.Address;
@@ -244,5 +245,35 @@ public class ParserUtil {
             throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
+    }
+
+    /**
+     * Parses a {@code String sortOrder } into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortOrder} is invalid.
+     */
+    public static SortOrder parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim();
+        if (!(SortOrder.isValidSortOrder(trimmedSortOrder))) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortOrder);
+    }
+
+    /**
+     * Parses a {@code String sortBy } into a {@code SortBy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortBy} is invalid.
+     */
+    public static DeliverySortBy parseDeliverySortBy(String sortBy) throws ParseException {
+        requireNonNull(sortBy);
+        String trimmedSortBy = sortBy.trim();
+        if (!(DeliverySortBy.isValidSortBy(trimmedSortBy))) {
+            throw new ParseException(DeliverySortBy.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliverySortBy(trimmedSortBy);
     }
 }

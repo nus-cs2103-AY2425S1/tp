@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -22,6 +23,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortDeliveryCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -104,12 +107,22 @@ public class AddressBookParser {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MarkSupplierCommand.MESSAGE_USAGE + "\nOR\n" + MarkDeliveryCommand.MESSAGE_USAGE));
             }
+
+        case SortCommand.COMMAND_WORD:
+            if (arguments.trim().startsWith(PREFIX_DELIVERY.getPrefix())) {
+                return new SortDeliveryCommandParser().parse(arguments.trim());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SortDeliveryCommand.MESSAGE_USAGE));
+            }
+
         case UpcomingCommand.COMMAND_WORD:
             if (arguments.equals("")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         UpcomingCommand.MESSAGE_USAGE));
             }
             return new UpcomingCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

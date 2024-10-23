@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -122,4 +123,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
+
+    /**
+     * Returns an unmodifiable view of the sorted delivery list.
+     */
+    ObservableList<Delivery> getSortedDeliveryList();
+
+    /**
+     * Updates the comparator of the sorted delivery list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedDeliveryList(Comparator<Delivery> comparator);
+
+    /**
+     * Returns an unmodifiable view of the modified delivery list.
+     */
+    ObservableList<Delivery> getModifiedDeliveryList();
 }
