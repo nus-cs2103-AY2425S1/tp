@@ -1,9 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
@@ -111,19 +110,19 @@ class DownloadCommandTest {
         DownloadCommand commandWithDifferentTags = new DownloadCommand(tags3);
 
         // Same object
-        assertTrue(commandWithTags1.equals(commandWithTags1));
+        assertEquals(commandWithTags1, commandWithTags1);
 
         // Same tags
-        assertTrue(commandWithTags1.equals(commandWithTags2));
+        assertEquals(commandWithTags1, commandWithTags2);
 
         // Different tags
-        assertFalse(commandWithTags1.equals(commandWithDifferentTags));
+        assertNotEquals(commandWithTags1, commandWithDifferentTags);
 
         // Different types
-        assertFalse(commandWithTags1.equals("Some String"));
+        assertNotEquals("Some String", commandWithTags1);
 
         // Null comparison
-        assertFalse(commandWithTags1.equals(null));
+        assertNotEquals(null, commandWithTags1);
     }
 
 }

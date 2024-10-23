@@ -63,8 +63,6 @@ public class DownloadCommand extends Command {
             return false;
         }
 
-
-        assert tagList != null;
         return tagList.equals(otherDownloadCommand.tagList);
     }
 
