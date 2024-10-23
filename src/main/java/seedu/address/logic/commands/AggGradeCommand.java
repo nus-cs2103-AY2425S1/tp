@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.GradeList;
@@ -21,7 +22,8 @@ import seedu.address.model.person.Person;
 public class AggGradeCommand extends Command {
     public static final String COMMAND_WORD = "aggGrade";
     public static final Map<String, Operation> OPERATION_TRANSLATE = Collections.unmodifiableMap(
-            Map.of("median", Operation.MEDIAN, "mean", Operation.MEAN));
+            Map.of("median", Operation.MEDIAN, "mean", Operation.MEAN, "max", Operation.MAX,
+                   "min", Operation.MIN));
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Performs aggregation operationson the displayed "
             + "person list.\n"
             + "Parameters: OPERATION " + PREFIX_NAME + "EXAM_NAME\n"
@@ -30,13 +32,16 @@ public class AggGradeCommand extends Command {
 
     public static final String MESSAGE_OPERATION_CONSTRAINTS = "Invalid operations passed. The available operations "
             + "are: \n" + String.join(", ", OPERATION_TRANSLATE.keySet());
+    public static final String MESSAGE_EMPTY_LIST = "No exam matches your criteria.";
 
     /**
      * Operations that can be done with the aggGrade command.
      */
     public enum Operation {
         MEDIAN,
-        MEAN
+        MEAN,
+        MAX,
+        MIN
     }
 
     private final Operation operation;
@@ -69,8 +74,22 @@ public class AggGradeCommand extends Command {
         return new CommandResult(String.format("%.2f%%", filteredList.getMean()));
     }
 
+    private CommandResult executeMax(Model model, SmartList filteredList) {
+        requireNonNull(model);
+        requireNonNull(filteredList);
+
+        return new CommandResult(String.format("%.2f%%", filteredList.getMax()));
+    }
+
+    private CommandResult executeMin(Model model, SmartList filteredList) {
+        requireNonNull(model);
+        requireNonNull(filteredList);
+
+        return new CommandResult(String.format("%.2f%%", filteredList.getMin()));
+    }
+
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         SmartList filteredList =
@@ -87,11 +106,19 @@ public class AggGradeCommand extends Command {
                                                        .toList());
         }
 
+        if (filteredList.isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_LIST);
+        }
+
         switch (this.operation) {
         case MEDIAN:
             return executeMedian(model, filteredList);
         case MEAN:
             return executeMean(model, filteredList);
+        case MAX:
+            return executeMax(model, filteredList);
+        case MIN:
+            return executeMin(model, filteredList);
         default:
             throw new IllegalStateException();
         }
@@ -121,7 +148,7 @@ public class AggGradeCommand extends Command {
             int mid = list.size() / 2;
 
             if (list.isEmpty()) {
-                return 0;
+                throw new IllegalStateException();
             }
 
             list.sort(Comparator.naturalOrder());
@@ -135,7 +162,33 @@ public class AggGradeCommand extends Command {
 
         public float getMean() {
             List<Float> list = new ArrayList<>(this);
+
+            if (list.isEmpty()) {
+                throw new IllegalStateException();
+            }
+
             return list.stream().reduce(0F, Float::sum, Float::sum) / list.size();
+        }
+
+        public float getMax() {
+            List<Float> list = new ArrayList<>(this);
+
+            if (list.isEmpty()) {
+            }
+
+            list.sort(Comparator.reverseOrder());
+            return list.get(0);
+        }
+
+        public float getMin() {
+            List<Float> list = new ArrayList<>(this);
+
+            if (list.isEmpty()) {
+                throw new IllegalStateException();
+            }
+
+            list.sort(Comparator.naturalOrder());
+            return list.get(0);
         }
     }
 }
