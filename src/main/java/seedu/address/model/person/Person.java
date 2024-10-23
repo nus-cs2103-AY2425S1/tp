@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,18 +19,18 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private final Optional<Phone> phone;
+    private final Optional<Email> email;
 
     // Data fields
     private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
     private final ModuleRoleMap moduleRoleMap;
-    
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Optional<Address> address, Set<Tag> tags,
+    public Person(Name name, Optional<Phone> phone, Optional<Email> email, Optional<Address> address, Set<Tag> tags,
                   ModuleRoleMap moduleRoleMap) {
         requireAllNonNull(name, phone, email, tags, moduleRoleMap);
         this.name = name;
@@ -46,11 +45,11 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
+    public Optional<Phone> getPhone() {
         return phone;
     }
 
-    public Email getEmail() {
+    public Optional<Email> getEmail() {
         return email;
     }
 
@@ -116,15 +115,29 @@ public class Person {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email);
+                .add("name", name);
 
+        phone.ifPresent(phone -> builder.add("phone", phone));
+        email.ifPresent(email -> builder.add("email", email));
         address.ifPresent(addr -> builder.add("address", addr));
         builder.add("tags", tags)
                 .add("roles", moduleRoleMap);
 
         return builder.toString();
+    }
+
+    /**
+     * Returns true if this person has a non-null phone.
+     */
+    public boolean hasPhone() {
+        return this.phone.isPresent();
+    }
+
+    /**
+     * Returns true if this person has a non-null email.
+     */
+    public boolean hasEmail() {
+        return this.email.isPresent();
     }
 
     /**
