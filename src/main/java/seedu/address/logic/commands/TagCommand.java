@@ -24,6 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.task.TaskList;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Tags an existing student in the address book with a subject, school level or both.
@@ -83,7 +84,8 @@ public class TagCommand extends Command {
         model.setPerson(personToTag, personWithTags);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_TAG_STUDENT_SUCCESS, Messages.format(personWithTags)));
+        return new CommandResult(String.format(MESSAGE_TAG_STUDENT_SUCCESS, Messages.format(personWithTags)),
+                UiState.DETAILS);
 
     }
 
