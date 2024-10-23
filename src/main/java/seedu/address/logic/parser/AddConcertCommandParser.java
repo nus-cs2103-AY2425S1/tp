@@ -15,7 +15,7 @@ import seedu.address.model.concert.Concert;
 import seedu.address.model.concert.ConcertDate;
 
 /**
- * Parses input argements and create a new AddConcertCommand object
+ * Parses input arguments and create a new AddConcertCommand object
  */
 public class AddConcertCommandParser implements Parser<AddConcertCommand> {
 
@@ -35,14 +35,21 @@ public class AddConcertCommandParser implements Parser<AddConcertCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddConcertCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_DATE);
+
         assert argMultimap.getValue(PREFIX_NAME).isPresent() : "Prefix for name should be present";
         assert argMultimap.getValue(PREFIX_ADDRESS).isPresent() : "Prefix for address should be present";
         assert argMultimap.getValue(PREFIX_DATE).isPresent() : "Prefix for date should be present";
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_DATE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         ConcertDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+
+        assert Name.isValidName(argMultimap.getValue(PREFIX_NAME).get()) : "Name must be valid";
+        assert Address.isValidAddress(argMultimap.getValue(PREFIX_ADDRESS).get()) : "Address must be valid";
+        assert ConcertDate.isValidDate(argMultimap.getValue(PREFIX_DATE).get(), ConcertDate.INPUT_DATE_FORMATTER)
+                : "Date must be valid";
 
         Concert concert = new Concert(name, address, date);
 

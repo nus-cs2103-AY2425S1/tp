@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 
 import java.util.List;
@@ -32,11 +33,10 @@ public class DeleteConcertContactCommand extends Command {
     private final Index personIndex;
 
     /**
-     * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specifed {@code Concert}.
+     * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specified {@code Concert}.
      */
     public DeleteConcertContactCommand(Index personIndex, Index concertIndex) {
-        requireNonNull(personIndex);
-        requireNonNull(concertIndex);
+        requireAllNonNull(personIndex, concertIndex);
         this.personIndex = personIndex;
         this.concertIndex = concertIndex;
     }

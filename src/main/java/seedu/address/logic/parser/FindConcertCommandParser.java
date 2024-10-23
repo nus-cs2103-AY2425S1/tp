@@ -33,9 +33,10 @@ public class FindConcertCommandParser implements Parser<FindConcertCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindConcertCommand.MESSAGE_USAGE));
         }
-        assert argMultimap.getValue(PREFIX_NAME).isPresent() : "Prefix for name must be present";
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+
+        assert argMultimap.getValue(PREFIX_NAME).isPresent() : "Prefix for name must be present";
 
         String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).map(arg-> arg.split("\\s+")).get();
         if (!Arrays.stream(nameKeywords).allMatch(Name::isValidName)) {

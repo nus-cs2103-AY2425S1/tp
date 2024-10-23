@@ -40,10 +40,11 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_ROLE).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
-        assert argMultimap.getValue(PREFIX_NAME).isPresent() || argMultimap.getValue(PREFIX_ROLE).isPresent()
-                : "Both name and role prefixes cannot be missing at the same time";
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ROLE);
+
+        assert argMultimap.getValue(PREFIX_NAME).isPresent() || argMultimap.getValue(PREFIX_ROLE).isPresent()
+                : "Both name and role prefixes cannot be missing at the same time";
 
         Optional<String[]> nameKeywords = argMultimap.getValue(PREFIX_NAME).map(arg-> arg.split("\\s+"));
         Optional<Boolean> isValidNamesArg = nameKeywords.map(names -> Arrays.stream(names).allMatch(Name::isValidName));
