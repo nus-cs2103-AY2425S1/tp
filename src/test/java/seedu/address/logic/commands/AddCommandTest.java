@@ -85,7 +85,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing except addCommandToLog
      */
     private class ModelStub implements Model {
         @Override
@@ -165,7 +165,7 @@ public class AddCommandTest {
 
         @Override
         public void addCommandToLog(Command command) {
-            throw new AssertionError("This method should not be called.");
+
         }
 
         @Override
