@@ -57,7 +57,7 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 ![launch instruction.png](images%2Flaunch%20instruction.png)
       A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data. 🎉
 
-      ![Ui](images/Ui.png)
+![Ui.png](images%2FUi.png)
 
 5. **Interact with TalentSG**:
     - Type your command into the command box and press **Enter** to execute it.
