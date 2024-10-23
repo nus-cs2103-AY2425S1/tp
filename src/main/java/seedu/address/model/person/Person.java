@@ -24,10 +24,10 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Tag tag;
+    private final Tag role;
 
     private final Set<Tag> tags = new HashSet<>(); // to remove
-    private final Wedding wedding;
+    private final Wedding ownWedding;
     private final Set<Wedding> weddingJobs = new HashSet<>();
 
     /**
@@ -40,21 +40,21 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.tag = null;
-        this.wedding = null;
+        this.role = null;
+        this.ownWedding = null;
     }
 
     /**
      * Every field, except tag and wedding, must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Wedding wedding) {
-        requireAllNonNull(name, phone, email, address, tag);
+    public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
+        requireAllNonNull(name, phone, email, address, role);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tag = tag;
-        this.wedding = wedding;
+        this.role = role;
+        this.ownWedding = ownWedding;
     }
 
     public Name getName() {
@@ -73,8 +73,8 @@ public class Person {
         return address;
     }
 
-    public Tag getTag() {
-        return tag;
+    public Tag getRole() {
+        return role;
     }
 
     /**
@@ -83,10 +83,10 @@ public class Person {
      */
     public Set<Tag> getTags() { // to remove
         return Collections.unmodifiableSet(tags);
-    }
+    } // to remove
 
-    public Wedding getWedding() {
-        return wedding;
+    public Wedding getOwnWedding() {
+        return ownWedding;
     }
 
     public Set<Wedding> getWeddingJobs() {
@@ -145,24 +145,28 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tag.equals(otherPerson.tag)
+                && role.equals(otherPerson.role)
+                && ownWedding.equals(otherPerson.ownWedding)
                 && weddingJobs.equals(otherPerson.weddingJobs);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tag, weddingJobs);
+        return Objects.hash(name, phone, email, address, role, ownWedding, weddingJobs);
     }
 
     @Override
     public String toString() {
+        String nullString = "";
+
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tag", tag)
+                .add("tag", role == null ? nullString : role)
+                .add("wedding", ownWedding == null ? nullString : ownWedding)
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }

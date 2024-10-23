@@ -66,13 +66,12 @@ public class Wedding {
             throw new IllegalArgumentException("This person is a client and cannot have another role.");
         }
 
-        if (person.getTag() == null) {
+        if (person.getRole() == null) {
             throw new IllegalArgumentException("This person does not have a role.");
         }
 
-        contactMap.addToMap(person.getTag(), person);
+        contactMap.addToMap(person.getRole(), person);
     }
-
 
     @Override
     public String toString() {
