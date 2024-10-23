@@ -1,15 +1,19 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# AB-3 Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +25,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +61,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -70,9 +69,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -89,26 +88,28 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -117,28 +118,30 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -171,58 +174,67 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<box type="info" seamless>
 
-</div>
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+</box>
 
-![UndoRedoState3](images/UndoRedoState3.png)
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
-</div>
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<box type="info" seamless>
 
-</div>
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -234,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -261,72 +273,182 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+* is a full time university student with fixed schedule
+* is giving private tuition to a significant number of students
+* has a need to manage a significant number of tutees' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Empower undergraduate private tutors to efficiently manage payments, track student performance, and organize schedules using CLI.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                  | So that I can…​                                                         |
+|----------|--------------------------------------------|-------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions        | refer to instructions when I forget how to use the App                  |
+| `* * *`  | tutor                                      | add a new student             | keep track of my tutee's information                                    |
+| `* * *`  | user                                       | delete an entry               | remove entries that I no longer need                                    |
+| `* * *`  | private tutor                              | view all my students' details | have an overview of how many tutees I am managing                       |
+| `* * *`  | tutor with many students                   | find a student by name        | locate details of tutees without having to go through the entire list   |
+| `* *`    | busy undergraduate tutor                   | find students by date         | locate details of tutees that has tuition on a specific date            |
+| `* *`    | new user                                   | see sample entries            | understand how the interface will look like with entries added          |
+| `* *`    | user                                       | edit contact details                                       | keep my information up-to-date                 |
+| `* *`    | busy undergraduate tutor                   | check who owes me tuition fee                              | identify and remind them to pay                |
+| `* *`    | busy undergraduate tutor                   | be reminded of my tuitions for today                       | remember to teach for today (if any)           |
+| `* *`    | busy undergraduate tutor                   | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive |
+| `* *`    | forgetful user                             | detect duplicates                                          | avoid manually finding and deleting the duplicates |
+| `* *`    | forgetful user                             | tag users with date and time of tuition                    | differentiate between different contacts    |
+| `*`      | user                                       | hide private contact details  | minimize chance of someone else seeing them by accident                 |
+| `*`      | user with many students in the address book | sort students by name          | locate a student easily                                                  |
+| `*`      | user that types fast                       | be able to undo my actions    | revert back if I have made a mistake                                    |
+| `*`      | user with many students in the address book | sort students by name                                       | locate a student easily                         |
+| `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
+| `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UGTeach` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Adding a student**
 
 **MSS**
+1. User enters command to create new student entry.
+2. System displays success message and command line is cleared.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+
+* 1b. System detects error in parameters.
+    * 1b1. System displays error message and does not clear command line.
+    * 1b2. User enters command with correct parameters.
+* Steps 1b1-1b2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+
+**Use case: UC02 - Read all entries**
+
+**MSS**
+1. User enters command to view all entries.
+2. System displays list with all entries to the user.
+
+   Use case ends.
+
+**Extension**
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+* 1b. System detects the list is empty.
+    * 1b1. System shows an empty list.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC03 - Read total earnings**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User enters command to read total earnings and total money owed.
+2. System displays total earnings and total money owed to the user.
+
+   Use case ends.
+
+**Extension**
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.
+* Steps 1a1-1a2 are repeated until all details entered are correct.
+* Use cases resumes from step 2.
+
+
+**Use case: UC04 - Delete a student entry**
+
+**MSS**
+
+1. User requests to <ins>list students(UC01)</ins>.
+2. User enters command to delete a specific student.
+3. System displays list with specified student deleted from the list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. System displays error message and does not clear command line.
+    * 2a2. User enters command with new index.
+* Steps 2a1-2a2 are repeated until index entered is correct.
+* Use cases resumes from step 3.
+
+* 2b. System detects error in format of entered command.
+    * 2b1. System displays error message and does not clear command line.
+    * 2b2. User enters new command.
+* Steps 2b1-2b2 are repeated until all details entered are correct.
+* Use cases resumes from step 3.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
+**Environment Requirements**
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+**Data Requirements**
+1. All the data should be stored in human-editable files and must not be stored using DBMS. 
+2. Data should be saved permanently and not affected by any sudden accidents e.g., power outage, hardware breakdown.
 
-*{More to be added}*
+**Performance Requirements**
+1. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage. 
+2. For any simple usage, the application should be able to respond within 2 seconds.
+
+**Accessibility**
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+2. The user interface should be easy to navigate and intuitive, with clear labels, large enough texts, and highlighted error messages. 
+3. The application should provide clear help sections for users, explaining how to use its features.
+
+**Concurrency Control**
+1. Should only be used by one student at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
+
+**Testability**
+1. The software should not depend on any remote server and should be able to run at any time. 
+2. The application should be able to launch without an installer.
+3. Features should be testable without any external installation or access e.g., remote APIs, audio players, user accounts, internet connection. 
+
+**Security Requirements**
+1. The application is assumed to be used locally without creating any user account.
+2. Data stored in human-editable files is assumed to be highly secured and not damaged.
+
+**Maintainability Requirements**
+1. The codebase should be modular and well-documented (i.e. JavaDoc, following abstraction and cohesion) to ensure ease of maintenance and updates.
+2. The application must use a version control system to track changes and maintain multiple versions of the software.
+
+**Logging**
+1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **DBMS**: Database Management System, a software providing tools for structural data storage.
+* **CLI**: Command-line interface where you interact with the system using your keyboard
+* **API**: Application Programming Interface, a set of programming code that enables data transmission between one software and another
+* **Abstraction and Cohesion**: Abstraction is hiding all but relevant data in order to reduce complexity and increase efficiency. Cohesion is the degree which elements belong together
+* **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,10 +456,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
@@ -356,17 +480,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
