@@ -15,12 +15,13 @@ import java.util.logging.Logger;
  */
 public class Deadline {
 
-    private static final Logger logger = Logger.getLogger(Deadline.class.getName());
-
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the format dd-MM-yyyy, and it should be a valid date.";
     public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+
+    private static final Logger logger = Logger.getLogger(Deadline.class.getName());
+
     public final LocalDate value;
 
     /**
