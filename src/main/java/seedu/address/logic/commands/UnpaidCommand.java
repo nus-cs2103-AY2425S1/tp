@@ -26,7 +26,7 @@ public class UnpaidCommand extends Command {
             + ": Marks the person identified by the index number to have "
             + "not made payment and updates the policy renewal frequency to zero.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNPAID_PERSON_SUCCESS = "Marked Person: %1$s";
 
@@ -57,7 +57,6 @@ public class UnpaidCommand extends Command {
 
         Person originalPerson = lastShownList.get(index.getZeroBased());
         Person unpaidPerson = createUnpaidPerson(originalPerson, unpaidPersonDescriptor);
-        System.out.println(unpaidPerson);
 
         model.setPerson(originalPerson, unpaidPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
