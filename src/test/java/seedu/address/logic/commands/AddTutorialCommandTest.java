@@ -221,6 +221,11 @@ public class AddTutorialCommandTest {
         }
 
         @Override
+        public void setAssignments(AssignmentList assignments) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
@@ -247,6 +252,11 @@ public class AddTutorialCommandTest {
 
         @Override
         public void assignStudent(Student student, TutorialId tutorialId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTutorials(TutorialList tutorials) {
             throw new AssertionError("This method should not be called.");
         }
     }

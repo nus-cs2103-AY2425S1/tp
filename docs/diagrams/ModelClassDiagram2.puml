@@ -19,7 +19,9 @@ Class Name
 Class TutorialClass
 Class Assignment
 Class AssignmentList
-Class Tutorial
+abstract Class Tutorial
+Class Exist
+Class None
 Class TutorialList
 
 Class TutDate
@@ -59,4 +61,6 @@ AssignmentList --> "~* all" Assignment
 TutorialList --> "~* all" Tutorial
 Tutorial *--> "~* all" TutDate
 Tutorial *--> TutName
+Tutorial <|-- Exist
+Tutorial <|-- None
 @enduml
