@@ -13,6 +13,7 @@ public class Wedding {
     private final WeddingDate date;
     private final List<PersonId> assignees; //Stores a list of UserIDs
 
+    public static final String MESSAGE_CONSTRAINTS = "You can only reference contacts through their index.";
     /**
      * Initialize with empty assignee list
      * @param name

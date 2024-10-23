@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ListTagsCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
+import seedu.address.logic.commands.UnassignContactFromWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -96,6 +97,8 @@ public class AddressBookParser {
             return new AssignContactToWeddingCommandParser().parse(arguments);
         case AddWeddingCommand.COMMAND_WORD:
             return new AddWeddingCommandParser().parse(arguments);
+        case UnassignContactFromWeddingCommand.COMMAND_WORD:
+            return new UnassignContactFromWeddingCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
