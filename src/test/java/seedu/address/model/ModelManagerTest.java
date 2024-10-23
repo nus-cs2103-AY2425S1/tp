@@ -137,7 +137,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getLastViewClientAsObjectProperty_nil_LastViewedClientAsObjectProperty() {
+    public void getLastViewClientAsObjectProperty_nil_lastViewedClientAsObjectProperty() {
         modelManager.setLastViewedClient(null);
         ObjectProperty<Client> lastViewedClient = modelManager.getLastViewedClientAsObjectProperty();
         ObjectProperty<Client> expectedClient = new SimpleObjectProperty<>();
@@ -152,7 +152,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setPerson_updatedPerson_Success() {
+    public void setPerson_updatedPerson_success() {
         Client updatedClient = new PersonBuilder(FIONA).withPhone("88888888").build();
         modelManager.addPerson(FIONA);
         assertTrue(modelManager.hasPerson(FIONA));
@@ -162,14 +162,14 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBook_addressBookTobeSet_Success() {
+    public void setAddressBook_addressBookTobeSet_success() {
         AddressBook newAddressBook = getTypicalAddressBookWithRental();
         modelManager.setAddressBook(newAddressBook);
         assertEquals(newAddressBook, modelManager.getAddressBook());
     }
 
     @Test
-    public void getLastViewClient_nil_LastViewedClient() {
+    public void getLastViewClient_nil_lastViewedClient() {
         modelManager.setLastViewedClient(null);
         Client lastViewedClient = modelManager.getLastViewedClient();
         assertEquals(null, lastViewedClient);

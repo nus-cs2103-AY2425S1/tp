@@ -39,7 +39,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void constructor_addressBookTobeCopied_AddressBookWithCopiedData() {
+    public void constructor_addressBookTobeCopied_addressBookWithCopiedData() {
         AddressBook addressBookToBeCopied = getTypicalAddressBookWithRental();
         AddressBook latestAddressBook = new AddressBook(addressBookToBeCopied);
         assertEquals(addressBookToBeCopied, latestAddressBook);
@@ -91,7 +91,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removePerson_personToRemove_Success() {
+    public void removePerson_personToRemove_success() {
         addressBook.addPerson(FIONA);
         assertTrue(addressBook.hasPerson(FIONA));
         addressBook.removePerson(FIONA);
@@ -99,7 +99,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void setPerson_updatedPerson_Success() {
+    public void setPerson_updatedPerson_success() {
         Client updatedClient = new PersonBuilder(FIONA).withPhone("88888888").build();
         addressBook.addPerson(FIONA);
         assertTrue(addressBook.hasPerson(FIONA));
