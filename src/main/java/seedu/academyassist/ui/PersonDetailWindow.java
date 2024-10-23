@@ -14,7 +14,7 @@ import seedu.academyassist.model.person.Person;
  */
 public class PersonDetailWindow extends UiPart<Stage> {
 
-    public static final Logger logger = LogsCenter.getLogger(PersonDetailWindow.class);
+    public static final Logger LOGGER = LogsCenter.getLogger(PersonDetailWindow.class);
     public static final String FXML = "PersonDetailWindow.fxml";
 
     @FXML
@@ -74,7 +74,7 @@ public class PersonDetailWindow extends UiPart<Stage> {
      */
     public void show(Person person) {
         // log the progress
-        logger.fine(String.format("Showing details of student %s", studentId));
+        LOGGER.fine(String.format("Showing details of student %s", studentId));
 
         // Display the student details
         studentId.setText("Student ID: " + person.getStudentId().value);
