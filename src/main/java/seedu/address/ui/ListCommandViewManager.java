@@ -38,9 +38,7 @@ public class ListCommandViewManager {
      * @param commandResult The result of the command that determines which list to show.
      */
     public void toggleListView(CommandResult commandResult) {
-        if (commandResult.getCommandType() == null) {
-
-        } else if (commandResult.getCommandType().equals(ViewToggler.LIST_OWNER_COMMAND)) {
+        if (commandResult.getCommandType().equals(ViewToggler.LIST_OWNER_COMMAND)) {
             changeToOwnersOnly();
         } else if (commandResult.getCommandType().equals(ViewToggler.LIST_PET_COMMAND)) {
             changeToPetsOnly();
@@ -48,6 +46,8 @@ public class ListCommandViewManager {
             changeToCombinedList();
         } else if (commandResult.getCommandType().equals(ViewToggler.LINK_OWNER_TO_PET_COMMAND)) {
             showLinks();
+        } else {
+            // do nothing as command does not change GUI
         }
     }
 
