@@ -25,6 +25,7 @@ import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
 import seedu.address.logic.commands.editcommands.EditTaskCommand;
 import seedu.address.logic.commands.findcommands.FindCommand;
+import seedu.address.logic.commands.findcommands.FindStudentCommand;
 import seedu.address.logic.commands.listcommands.ListGroupCommand;
 import seedu.address.logic.commands.listcommands.ListStudentCommand;
 import seedu.address.logic.commands.listcommands.ListTaskCommand;
@@ -42,6 +43,8 @@ import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
 import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.findcommands.FindCommandParser;
+import seedu.address.logic.parser.findcommands.FindStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
 import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListTaskCommandParser;
@@ -81,9 +84,13 @@ public class AddressBookParser {
         switch (commandWord) {
 
         // Student
-        case ListStudentCommand.COMMAND_WORD_ALIS:
+        case ListStudentCommand.COMMAND_WORD_ALIAS:
         case ListStudentCommand.COMMAND_WORD:
             return new ListStudentCommandParser().parse(arguments);
+
+        case FindStudentCommand.COMMAND_WORD_ALIAS:
+        case FindStudentCommand.COMMAND_WORD:
+            return new FindStudentCommandParser().parse(arguments);
 
         case AddStudentCommand.COMMAND_WORD_ALIAS:
         case AddStudentCommand.COMMAND_WORD:
@@ -155,9 +162,7 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-            // will implement in v1.4
-            //return new FindCommandParser().parse(arguments);
+            return new FindCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
