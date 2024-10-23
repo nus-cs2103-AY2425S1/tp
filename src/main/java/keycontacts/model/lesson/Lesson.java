@@ -42,8 +42,8 @@ public abstract class Lesson {
             MakeupLesson ml1 = (MakeupLesson) lesson1;
             MakeupLesson ml2 = (MakeupLesson) lesson2;
             return ml1.getLessonDate().equals(ml2.getLessonDate())
-                    && ml1.getStartTime().notAfter(ml2.getEndTime())
-                    && ml1.getEndTime().notBefore(ml2.getStartTime());
+                    && ml1.getStartTime().isNotAfter(ml2.getEndTime())
+                    && ml1.getEndTime().isNotBefore(ml2.getStartTime());
         }
 
         // Handle clash between two RegularLessons
@@ -51,8 +51,8 @@ public abstract class Lesson {
             RegularLesson rl1 = (RegularLesson) lesson1;
             RegularLesson rl2 = (RegularLesson) lesson2;
             return rl1.getLessonDay().equals(rl2.getLessonDay())
-                    && rl1.getStartTime().notAfter(rl2.getEndTime())
-                    && rl1.getEndTime().notBefore(rl2.getStartTime());
+                    && rl1.getStartTime().isNotAfter(rl2.getEndTime())
+                    && rl1.getEndTime().isNotBefore(rl2.getStartTime());
         }
 
         // Handle clash between MakeupLesson and RegularLesson
@@ -60,16 +60,16 @@ public abstract class Lesson {
             MakeupLesson ml = (MakeupLesson) lesson1;
             RegularLesson rl = (RegularLesson) lesson2;
             return ml.getLessonDate().convertToDay().equals(rl.getLessonDay())
-                    && ml.getStartTime().notAfter(rl.getEndTime())
-                    && ml.getEndTime().notBefore(rl.getStartTime());
+                    && ml.getStartTime().isNotAfter(rl.getEndTime())
+                    && ml.getEndTime().isNotBefore(rl.getStartTime());
         }
 
         if (lesson1 instanceof RegularLesson && lesson2 instanceof MakeupLesson) {
             RegularLesson rl = (RegularLesson) lesson1;
             MakeupLesson ml = (MakeupLesson) lesson2;
             return rl.getLessonDay().equals(ml.getLessonDate().convertToDay())
-                    && rl.getStartTime().notAfter(ml.getEndTime())
-                    && rl.getEndTime().notBefore(ml.getStartTime());
+                    && rl.getStartTime().isNotAfter(ml.getEndTime())
+                    && rl.getEndTime().isNotBefore(ml.getStartTime());
         }
 
         return false;
