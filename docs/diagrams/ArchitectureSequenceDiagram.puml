@@ -7,6 +7,7 @@ Participant ":UI" as ui UI_COLOR
 Participant ":Logic" as logic LOGIC_COLOR
 Participant ":Model" as model MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
+Participant "StaticContext" as staticContext STATIC_COLOR
 
 user -[USER_COLOR]> ui : "delete n/Alex"
 activate ui UI_COLOR
@@ -14,7 +15,30 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("delete n/Alex")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : deletePerson(p)
+logic -[LOGIC_COLOR]> model : findPersonByName("Alex")
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> logic : return person
+deactivate model
+
+logic -[LOGIC_COLOR]> staticContext : setPersonToDelete(person)
+activate staticContext STATIC_COLOR
+staticContext --[STATIC_COLOR]> logic
+deactivate staticContext
+
+logic --[LOGIC_COLOR]> ui :
+deactivate logic
+
+ui--[UI_COLOR]> user
+deactivate ui
+
+user -[USER_COLOR]> ui : "delete-y"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : execute("delete-y")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model : deletePerson(person)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic
@@ -32,6 +56,23 @@ storage --[STORAGE_COLOR]> logic
 deactivate storage
 
 logic --[LOGIC_COLOR]> ui
+deactivate logic
+
+ui--[UI_COLOR]> user
+deactivate ui
+
+user -[USER_COLOR]> ui : "delete-n"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : execute("delete-n")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> staticContext : setPersonToDelete(null)
+activate staticContext STATIC_COLOR
+staticContext --[STATIC_COLOR]> logic
+deactivate staticContext
+
+logic --[LOGIC_COLOR]> ui :
 deactivate logic
 
 ui--[UI_COLOR]> user
