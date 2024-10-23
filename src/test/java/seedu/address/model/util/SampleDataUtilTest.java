@@ -36,7 +36,7 @@ public class SampleDataUtilTest {
     }
 
     @Test
-    public void getSampleAddressBook_nil_addressbookContainingSampleClients() {
+    public void getSampleAddressBook_nil_addressBookContainingSampleClients() {
         ReadOnlyAddressBook addressBook = SampleDataUtil.getSampleAddressBook();
         AddressBook myAddressBook = new AddressBook();
         Client[] clients = SampleDataUtil.getSamplePersons();
