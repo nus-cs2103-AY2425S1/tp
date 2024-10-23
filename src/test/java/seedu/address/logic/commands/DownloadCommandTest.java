@@ -94,6 +94,18 @@ class DownloadCommandTest {
     }
 
     @Test
+    public void equals_differentTypes_returnsFalse() {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("tag1"));
+        DownloadCommand commandWithTags = new DownloadCommand(tags);
+
+        // Check that the command does not equal an object of a different type
+        assertNotEquals("Some String", commandWithTags);
+        assertNotEquals(123, commandWithTags);
+    }
+
+
+    @Test
     public void equals() {
         Set<Tag> tags1 = new HashSet<>();
         tags1.add(new Tag("tag1"));
@@ -124,5 +136,7 @@ class DownloadCommandTest {
         // Null comparison
         assertNotEquals(null, commandWithTags1);
     }
+
+
 
 }
