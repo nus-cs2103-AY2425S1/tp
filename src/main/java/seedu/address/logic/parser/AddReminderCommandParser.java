@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new AddReminderCommand object
  */
-public class AddReminderCommandParser {
+public class AddReminderCommandParser implements Parser<AddReminderCommand>{
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddReminderCommand
