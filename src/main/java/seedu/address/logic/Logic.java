@@ -45,7 +45,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of pets */
     ObservableList<Pet> getFilteredPetList();
 
-    /** Returns an unmodifiable view of the filtered list of pets */
+    /** Returns an unmodifiable view of the filtered list of links */
     ObservableList<Link> getFilteredLinkList();
 
     /**

@@ -54,8 +54,8 @@ public class LinkListPanel extends UiPart<Region> {
      */
     private void updateListView() {
         ObservableList<Link> reversedList = FXCollections.observableArrayList(originalLinkList);
-        FXCollections.reverse(reversedList);  // Reverse the list for display
-        linkListView.setItems(reversedList);  // Set the reversed list to the view
+        FXCollections.reverse(reversedList); // Reverse the list for display
+        linkListView.setItems(reversedList); // Set the reversed list to the view
         linkListView.setCellFactory(listView -> new LinkListViewCell());
     }
 
