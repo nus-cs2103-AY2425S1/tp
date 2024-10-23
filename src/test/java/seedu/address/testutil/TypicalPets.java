@@ -15,13 +15,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.PawPatrol;
 import seedu.address.model.pet.Pet;
 
 /**
  * A utility class containing a list of {@code Pet} objects to be used in tests.
  */
 public class TypicalPets {
+
+    public static final Pet AARFUL = new PetBuilder().withName("Aarful")
+            .withSpecies("Dog").withBreed("Golden Retriever")
+            .withAge("8").withSex("M").build();
 
     public static final Pet MAX = new PetBuilder().withName("Max")
             .withSpecies("Dog").withBreed("Golden Retriever")
@@ -53,10 +57,10 @@ public class TypicalPets {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical pets.
+     * Returns an {@code PawPatrol} with all the typical pets.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static PawPatrol getTypicalPawPatrol() {
+        PawPatrol ab = new PawPatrol();
         for (Pet pet : getTypicalPets()) {
             ab.addPet(pet);
         }

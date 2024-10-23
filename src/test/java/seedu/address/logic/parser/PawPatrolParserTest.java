@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_OWNER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,29 +23,33 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteOwnerCommand;
 import seedu.address.logic.commands.DeletePetCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditOwnerCommand;
+import seedu.address.logic.commands.EditOwnerCommand.EditOwnerDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindOwnerCommand;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.FindPetCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOwnerCommand;
+import seedu.address.logic.commands.ListPetCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditOwnerDescriptorBuilder;
 import seedu.address.testutil.OwnerBuilder;
 import seedu.address.testutil.OwnerUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class PawPatrolParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final PawPatrolParser parser = new PawPatrolParser();
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -57,6 +63,22 @@ public class AddressBookParserTest {
         Owner owner = new OwnerBuilder().build();
         AddOwnerCommand command = (AddOwnerCommand) parser.parseCommand(OwnerUtil.getAddOwnerCommand(owner));
         assertEquals(new AddOwnerCommand(owner), command);
+    }
+
+    @Test
+    public void parseCommand_link() throws Exception {
+        LinkCommand command = (LinkCommand) parser.parseCommand(
+            LinkCommand.COMMAND_WORD + " o" + INDEX_FIRST_OWNER.getOneBased() + " " + PREFIX_TO + "p"
+            + INDEX_FIRST_PET.getOneBased());
+        assertEquals(new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))), command);
+    }
+
+    @Test
+    public void parseCommand_unlink() throws Exception {
+        UnlinkCommand command = (UnlinkCommand) parser.parseCommand(
+                UnlinkCommand.COMMAND_WORD + " o" + INDEX_FIRST_OWNER.getOneBased() + " " + PREFIX_TO + "p"
+                        + INDEX_FIRST_PET.getOneBased());
+        assertEquals(new UnlinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))), command);
     }
 
     @Test
@@ -80,12 +102,12 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-            + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    public void parseCommand_editOwner() throws Exception {
+        Owner owner = new OwnerBuilder().build();
+        EditOwnerDescriptor descriptor = new EditOwnerDescriptorBuilder(owner).build();
+        EditOwnerCommand command = (EditOwnerCommand) parser.parseCommand(EditOwnerCommand.COMMAND_WORD + " "
+            + INDEX_FIRST_PERSON.getOneBased() + " " + OwnerUtil.getEditOwnerDescriptorDetails(descriptor));
+        assertEquals(new EditOwnerCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -125,9 +147,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_listOwners() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " owners") instanceof ListOwnerCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(ListCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parseCommand_listPets() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " pets") instanceof ListPetCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(ListCommand.COMMAND_WORD));
     }
 
     @Test

@@ -18,10 +18,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -116,7 +117,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setPawPatrolPath(Path addressBookFilePath) {
+        public void setPawPatrolPath(Path pawPatrolFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -136,12 +137,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void addLink(Link link) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setPawPatrol(ReadOnlyPawPatrol pawPatrol) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyPawPatrol getPawPatrol() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -161,6 +167,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasLink(Link link) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -172,6 +183,26 @@ public class AddCommandTest {
 
         @Override
         public void deletePet(Pet target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortOwners() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPets() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLink(Link link) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLinksWithId(String id) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -258,8 +289,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPawPatrol getPawPatrol() {
+            return new PawPatrol();
         }
     }
 

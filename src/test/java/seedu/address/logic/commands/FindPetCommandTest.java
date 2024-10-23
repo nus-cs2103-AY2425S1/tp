@@ -21,8 +21,8 @@ import seedu.address.testutil.TypicalPets;
  * Contains integration tests (interaction with the Model) for {@code FindPetsCommand}.
  */
 public class FindPetCommandTest {
-    private Model model = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalPets.getTypicalPawPatrol(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalPets.getTypicalPawPatrol(), new UserPrefs());
 
     @Test
     public void equals() {

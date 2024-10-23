@@ -21,8 +21,8 @@ import seedu.address.testutil.TypicalOwners;
  * Contains integration tests (interaction with the Model) for {@code FindOwnerCommand}.
  */
 public class FindOwnerCommandTest {
-    private Model ownerModel = new ModelManager(TypicalOwners.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedOwnerModel = new ModelManager(TypicalOwners.getTypicalAddressBook(), new UserPrefs());
+    private Model ownerModel = new ModelManager(TypicalOwners.getTypicalPawPatrol(), new UserPrefs());
+    private Model expectedOwnerModel = new ModelManager(TypicalOwners.getTypicalPawPatrol(), new UserPrefs());
 
     @Test
     public void equals() {

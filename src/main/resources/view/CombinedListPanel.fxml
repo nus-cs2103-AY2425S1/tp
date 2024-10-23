@@ -10,8 +10,7 @@
   <!-- Owner List -->
   <ListView fx:id="ownerListView" VBox.vgrow="ALWAYS"
             style="-fx-border-color: red; -fx-border-width: 2; -fx-background-color: lightgray;" />
-
-  <!-- Label for Pets -->
+    <!-- Label for Pets -->
   <Label text="Pets" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-opacity: 1;"/>
   <!-- Pet List -->
   <ListView fx:id="petListView" VBox.vgrow="ALWAYS"

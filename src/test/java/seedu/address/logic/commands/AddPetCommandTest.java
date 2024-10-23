@@ -18,10 +18,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -91,7 +92,6 @@ public class AddPetCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class PetModelStub implements Model {
-
         @Override
         public void addPet(Pet pet) {
             throw new AssertionError("This method should not be called.");
@@ -133,17 +133,17 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public void setPawPatrolPath(Path addressBookFilePath) {
+        public void setPawPatrolPath(Path pawPatrolFilePath) {
 
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        public void setPawPatrol(ReadOnlyPawPatrol pawPatrol) {
 
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPawPatrol getPawPatrol() {
             return null;
         }
 
@@ -163,6 +163,11 @@ public class AddPetCommandTest {
         }
 
         @Override
+        public boolean hasLink(Link link) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
 
         }
@@ -178,6 +183,16 @@ public class AddPetCommandTest {
         }
 
         @Override
+        public void deleteLink(Link link) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLinksWithId(String id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
 
         }
@@ -185,6 +200,21 @@ public class AddPetCommandTest {
         @Override
         public void addOwner(Owner owner) {
 
+        }
+
+        @Override
+        public void sortOwners() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPets() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLink(Link link) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -242,8 +272,8 @@ public class AddPetCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPawPatrol getPawPatrol() {
+            return new PawPatrol();
         }
     }
 

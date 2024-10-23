@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -41,92 +42,125 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' PawPatrol file path.
      */
     Path getPawPatrolFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' PawPatrol file path.
      */
-    void setPawPatrolPath(Path addressBookFilePath);
+    void setPawPatrolPath(Path pawPatrolFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces PawPatrol data with the data in {@code pawPatrol}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setPawPatrol(ReadOnlyPawPatrol pawPatrol);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the PawPatrol */
+    ReadOnlyPawPatrol getPawPatrol();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in PawPatrol.
      */
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if an owner with the same identity as {@code person} exists in the address book.
+     * Returns true if an owner with the same identity as {@code person} exists in PawPatrol.
      */
     boolean hasOwner(Owner owner);
 
     /***
-     * Returns true if a pet with the same identity as {@code pet} exists in the address book.
+     * Returns true if a pet with the same identity as {@code pet} exists in PawPatrol.
      */
     boolean hasPet(Pet pet);
 
+    /***
+     * Returns true if a pet with the same identity as {@code pet} exists in PawPatrol.
+     */
+    boolean hasLink(Link pet);
+
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in PawPatrol.
      */
     void deletePerson(Person target);
 
     /**
      * Deletes the given owner.
-     * The owner must exist in the address book.
+     * The owner must exist in PawPatrol.
      */
     void deleteOwner(Owner target);
 
     /**
      * Deletes the given pet.
-     * The pet must exist in the address book.
+     * The pet must exist in PawPatrol.
      */
     void deletePet(Pet target);
 
     /**
+     * Sorts the list of pets in PawPatrol
+     */
+    void sortPets();
+
+    /**
+     * Sorts the list of owners in PawPatrol
+     */
+    void sortOwners();
+
+    /**
+     * Deletes the given link.
+     * The link must exist in PawPatrol.
+     */
+    void deleteLink(Link target);
+
+    /**
+     * Deletes links with unique ID.
+     * @param id
+     */
+    void deleteLinksWithId(String id);
+
+    /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in PawPatrol.
      */
     void addPerson(Person person);
 
     /**
      * Adds the given owner.
-     * {@code owner} must not already exist in the address book.
+     * {@code owner} must not already exist in PawPatrol.
      */
     void addOwner(Owner owner);
 
     /**
      * Adds the given pet.
-     * {@code pet} must not already exist in the address book.
+     * {@code pet} must not already exist in PawPatrol.
      */
     void addPet(Pet pet);
 
     /**
+     * Adds the given link.
+     * {@code link} must not already exist in PawPatrol.
+     */
+    void addLink(Link link);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in PawPatrol.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in PawPatrol.
      */
     void setPerson(Person target, Person editedPerson);
 
     /**
      * Replaces the given person {@code target} with {@code editedOwner}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedOwner} must not be the same as another existing owner in the address book.
+     * {@code target} must exist in PawPatrol.
+     * The person identity of {@code editedOwner} must not be the same as another existing owner in PawPatrol.
      */
     void setOwner(Owner target, Owner editedOwner);
 
     /**
      * Replaces the given pet {@code target} with {@code editedPet}.
-     * {@code target} must exist in the address book.
-     * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
+     * {@code target} must exist in the PawPatrol.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in PawPatrol.
      */
     void setPet(Pet target, Pet editedPet);
 

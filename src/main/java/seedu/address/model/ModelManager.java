@@ -11,39 +11,40 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of PawPatrol data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final PawPatrol pawPatrol;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Owner> filteredOwners;
     private final FilteredList<Pet> filteredPets;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given pawPatrol and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyPawPatrol pawPatrol, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(pawPatrol, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with PawPatrol: " + pawPatrol + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.pawPatrol = new PawPatrol(pawPatrol);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredOwners = new FilteredList<>(this.addressBook.getOwnerList());
-        filteredPets = new FilteredList<>(this.addressBook.getPetList());
+        filteredPersons = new FilteredList<>(this.pawPatrol.getPersonList());
+        filteredOwners = new FilteredList<>(this.pawPatrol.getOwnerList());
+        filteredPets = new FilteredList<>(this.pawPatrol.getPetList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new PawPatrol(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -72,104 +73,130 @@ public class ModelManager implements Model {
 
     @Override
     public Path getPawPatrolFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getPawPatrolFilePath();
     }
 
     @Override
-    public void setPawPatrolPath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setPawPatrolPath(Path pawPatrolFilePath) {
+        requireNonNull(pawPatrolFilePath);
+        userPrefs.setPawPatrolFilePath(pawPatrolFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== PawPatrol ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setPawPatrol(ReadOnlyPawPatrol pawPatrol) {
+        this.pawPatrol.resetData(pawPatrol);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyPawPatrol getPawPatrol() {
+        return pawPatrol;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return pawPatrol.hasPerson(person);
     }
 
     @Override
     public boolean hasOwner(Owner owner) {
         requireNonNull(owner);
-        return addressBook.hasOwner(owner);
+        return pawPatrol.hasOwner(owner);
     }
 
     @Override
     public boolean hasPet(Pet pet) {
         requireNonNull(pet);
-        return addressBook.hasPet(pet);
+        return pawPatrol.hasPet(pet);
+    }
+
+    @Override
+    public boolean hasLink(Link link) {
+        requireNonNull(link);
+        return pawPatrol.hasLink(link);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        pawPatrol.removePerson(target);
     }
 
     @Override
     public void deleteOwner(Owner target) {
-        addressBook.removeOwner(target);
+        pawPatrol.removeOwner(target);
     }
 
     @Override
     public void deletePet(Pet target) {
-        addressBook.removePet(target);
+        pawPatrol.removePet(target);
+    }
+
+    @Override
+    public void sortPets() {
+        pawPatrol.sortPets();
+    }
+
+    @Override
+    public void sortOwners() {
+        pawPatrol.sortOwners();
+    }
+
+    @Override
+    public void deleteLink(Link link) {
+        pawPatrol.removeLink(link);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        pawPatrol.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void addOwner(Owner owner) {
-        addressBook.addOwner(owner);
+        pawPatrol.addOwner(owner);
         updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
     }
 
     @Override
     public void addPet(Pet pet) {
-        addressBook.addPet(pet);
+        pawPatrol.addPet(pet);
         updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+    }
+
+    @Override
+    public void addLink(Link link) {
+        pawPatrol.addLink(link);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        pawPatrol.setPerson(target, editedPerson);
     }
 
     @Override
     public void setOwner(Owner target, Owner editedOwner) {
         requireAllNonNull(target, editedOwner);
 
-        addressBook.setOwner(target, editedOwner);
+        pawPatrol.setOwner(target, editedOwner);
     }
 
     @Override
     public void setPet(Pet target, Pet editedPet) {
         requireAllNonNull(target, editedPet);
 
-        addressBook.setPet(target, editedPet);
+        pawPatrol.setPet(target, editedPet);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedPawPatrol}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -178,7 +205,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Owner} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedPawPatrol}
      */
     @Override
     public ObservableList<Owner> getFilteredOwnerList() {
@@ -187,7 +214,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedPawPatrol}
      */
     @Override
     public ObservableList<Pet> getFilteredPetList() {
@@ -196,7 +223,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedPawPatrol}
      */
 
     @Override
@@ -207,7 +234,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Owner} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedPawPatrol}
      */
     @Override
     public void updateFilteredOwnerList(Predicate<Owner> predicate) {
@@ -217,12 +244,17 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedPawPatrol}
      */
     @Override
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
         filteredPets.setPredicate(predicate);
+    }
+
+    @Override
+    public void deleteLinksWithId(String id) {
+        pawPatrol.deleteLinksWithId(id);
     }
 
     @Override
@@ -238,7 +270,7 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
 
-        return addressBook.equals(otherModelManager.addressBook)
+        return pawPatrol.equals(otherModelManager.pawPatrol)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredOwners.equals(otherModelManager.filteredOwners)

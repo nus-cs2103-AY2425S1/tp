@@ -9,15 +9,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.owner.Owner;
-import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
  * Panel containing two lists: one for owners and one for pets.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class CombinedListPanel extends UiPart<Region> {
+    private static final String FXML = "CombinedListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(CombinedListPanel.class);
 
     @FXML
     private ListView<Owner> ownerListView;
@@ -26,32 +25,15 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<Pet> petListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code CombinedListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Owner> ownerList, ObservableList<Pet> petList) {
+    public CombinedListPanel(ObservableList<Owner> ownerList, ObservableList<Pet> petList) {
         super(FXML);
         ownerListView.setItems(ownerList);
         ownerListView.setCellFactory(listView -> new OwnerListViewCell());
 
         petListView.setItems(petList);
         petListView.setCellFactory(listView -> new PetListViewCell());
-    }
-
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
-     */
-    class PersonListViewCell extends ListCell<Person> {
-        @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
-
-            if (empty || person == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
-            }
-        }
     }
 
     /**

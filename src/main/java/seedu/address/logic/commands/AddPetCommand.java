@@ -15,13 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 
 /**
- * Adds a pet to the address book.
+ * Adds a pet to PawPatrol.
  */
 public class AddPetCommand extends Command {
 
     public static final String COMMAND_WORD = "pet";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to PawPatrol. "
         + "Parameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_SPECIES + "SPECIES "
@@ -39,7 +39,7 @@ public class AddPetCommand extends Command {
         + PREFIX_TAG + "cute";
 
     public static final String MESSAGE_SUCCESS = "New pet added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in PawPatrol";
 
     private final Pet toAdd;
 
