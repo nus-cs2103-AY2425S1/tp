@@ -33,6 +33,26 @@ public class SaveSortPreferenceCommandParserTest {
     }
 
     @Test
+    public void parse_distant_returnsCommand() {
+        assertParseSuccess(parser, "distant", new SaveSortPreferenceCommand("distant"));
+    }
+
+    @Test
+    public void parse_distantInvalid_returnsCommand() {
+        assertParseSuccess(parser, " distant ", new SaveSortPreferenceCommand("distant"));
+    }
+
+    @Test
+    public void parse_recent_returnsCommand() {
+        assertParseSuccess(parser, "recent", new SaveSortPreferenceCommand("recent"));
+    }
+
+    @Test
+    public void parse_recentInvalid_returnsCommand() {
+        assertParseSuccess(parser, " recent ", new SaveSortPreferenceCommand("recent"));
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseExcpetion() {
         assertParseFailure(parser, "CS2103T",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveSortPreferenceCommand.MESSAGE_USAGE));
