@@ -31,7 +31,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
    * `list` : Lists all contacts.
 
    * `add r/volunteer h/30 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
-     contact of type `volunteer` and named `John Doe` to the Address Book.
+     contact of type `volunteer` and name `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -95,6 +95,12 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
   - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
   - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date.
 
+Note:
+Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of 
+`Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT` 
+is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+If the specified role does not match with the specified field, the add command will be deemed invalid.
+
 
 <box type="tip" seamless>
 
@@ -145,7 +151,7 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
     specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
   For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
-  Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` (k USD) is required,  
+  Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
   and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
   If the resulting role does not have the specified field, the edit will be invalid.
 
@@ -263,7 +269,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add [r/ROLWE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` <br> e.g., `add r/volunteer h/19 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` <br> e.g., `add r/volunteer h/19 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
