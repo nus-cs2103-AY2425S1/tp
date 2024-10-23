@@ -4,7 +4,7 @@ import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
 
 /**
- * Marks a student identified using it's displayed index from the edulog book.
+ * Marks a student identified using their displayed index from the edulog book.
  */
 public abstract class MarkCommand extends Command {
 

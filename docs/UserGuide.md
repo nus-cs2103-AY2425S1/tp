@@ -147,7 +147,7 @@ Examples:
 
 ### Marking a student's attendance: `mark'
 
-Denotes an existing student as present. The student may either be identified by index number
+Denotes an existing student as paid. The student may either be identified by index number
 in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
 
 Format: `mark <INDEX - must be a positive integer>` OR `mark <STUDENT NAME>`
@@ -156,9 +156,19 @@ Examples:
 * `mark 3`
 * `mark Alex Yeoh`
 
+### Marking all students' attendance: `markall'
+
+Denotes all existing students as paid.
+
+Format: `markall`
+
+Examples:
+* `markall`
+* `markall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
+
 ### Unmarking a student's attendance: `unmark'
 
-Denotes an existing student as absent. The student may either be identified by index number
+Denotes an existing student as unpaid. The student may either be identified by index number
 in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
 
 Format: `unmark <INDEX - must be a positive integer>` OR `unmark <STUDENT NAME>`
@@ -169,7 +179,7 @@ Examples:
 
 ### Unmarking all students' attendance: `unmarkall'
 
-Denotes all existing students as absent.
+Denotes all existing students as unpaid.
 
 Format: `unmarkall`
 
