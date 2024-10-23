@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -163,4 +164,39 @@ public class UniqueTaskListTest {
         assertThrows(UnsupportedOperationException.class, () ->
                 uniqueTaskList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void hashCode_sameInternalList_returnsSameHashCode() {
+        uniqueTaskList.add(TODO_TASK);
+        UniqueTaskList anotherUniqueTaskList = new UniqueTaskList();
+        anotherUniqueTaskList.add(TODO_TASK);
+        assertEquals(uniqueTaskList.hashCode(), anotherUniqueTaskList.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentInternalList_returnsDifferentHashCode() {
+        uniqueTaskList.add(TODO_TASK);
+        UniqueTaskList anotherUniqueTaskList = new UniqueTaskList();
+        anotherUniqueTaskList.add(EVENT_TASK);
+        assertFalse(uniqueTaskList.hashCode() == anotherUniqueTaskList.hashCode());
+    }
+
+    @Test
+    public void toString_returnsCorrectStringRepresentation() {
+        uniqueTaskList.add(TODO_TASK);
+        assertEquals(Collections.singletonList(TODO_TASK).toString(), uniqueTaskList.toString());
+    }
+
+    @Test
+    public void iterator_iterateOverList_returnsCorrectOrder() {
+        uniqueTaskList.add(TODO_TASK);
+        uniqueTaskList.add(EVENT_TASK);
+        List<Task> taskList = Arrays.asList(TODO_TASK, EVENT_TASK);
+        Iterator<Task> iterator = uniqueTaskList.iterator();
+        for (Task task : taskList) {
+            assertTrue(iterator.hasNext());
+            assertEquals(task, iterator.next());
+        }
+    }
 }
+

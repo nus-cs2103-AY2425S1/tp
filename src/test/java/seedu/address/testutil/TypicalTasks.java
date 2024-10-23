@@ -19,6 +19,7 @@ public class TypicalTasks {
     public static final String VALID_TODO_DESCRIPTION = "Buy groceries";
     public static final String VALID_DEADLINE_DESCRIPTION = "Submit report";
     public static final String VALID_EVENT_DESCRIPTION = "Project meeting";
+    public static final String VALID_SUBMIT_ASSIGNMENT_DESCRIPTION = "Submit assignment";
 
     // Dates for Deadline and Event tasks
     public static final String VALID_DEADLINE_DATE = "2024-12-31";
@@ -41,6 +42,7 @@ public class TypicalTasks {
     public static final Deadline DEADLINE_TASK = new Deadline(VALID_DEADLINE_DESCRIPTION, VALID_DEADLINE_DATE);
     public static final Event EVENT_TASK = new Event(VALID_EVENT_DESCRIPTION,
             VALID_EVENT_START_DATE, VALID_EVENT_END_DATE);
+    public static final Todo SUBMIT_ASSIGNMENT_TASK = new Todo(VALID_SUBMIT_ASSIGNMENT_DESCRIPTION); // New Task
 
 
     /**
