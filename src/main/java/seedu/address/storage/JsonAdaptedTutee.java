@@ -33,20 +33,20 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedTutee} with the given tutee details.
      */
     @JsonCreator
-    public JsonAdaptedTutee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("hours") String hours,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
+    public JsonAdaptedTutee(@JsonProperty("id") int id, @JsonProperty("name") String name,
+                            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                            @JsonProperty("address") String address, @JsonProperty("hours") String hours,
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
 
-        super(name, phone, email, address, hours, tags, "Tutee", subjects);
+        super(id, name, phone, email, address, hours, tags, "Tutee", subjects);
     }
 
     /**
      * Converts a given {@code Tutee} into this class for Jackson use.
      */
     public JsonAdaptedTutee(Person source) {
-        super(source.getName().fullName, source.getPhone().value, source.getEmail().value,
+        super(source.getId(), source.getName().fullName, source.getPhone().value, source.getEmail().value,
                 source.getAddress().value, source.getHours().value,
                         source.getTags().stream()
                         .map(JsonAdaptedTag::new)

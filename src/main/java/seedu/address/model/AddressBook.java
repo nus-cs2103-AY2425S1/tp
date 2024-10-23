@@ -11,6 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -112,6 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        removeAssociatedLessons(key);
         indicateModified();
     }
 
@@ -153,6 +156,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeLesson(Lesson key) {
         lessons.remove(key);
         indicateModified();
+    }
+
+    /**
+     * Removes all lessons associated with this {@code person} from this {@code AddressBook}.
+     * {@code person} must exist in the address book.
+     */
+    public void removeAssociatedLessons(Person person) {
+        List<Person> associations = getAssociatedPeople(person);
+        for (Person associate : associations) {
+            if (person.isTutor()) {
+                removeLesson(new Lesson((Tutor) person, (Tutee) associate));
+            } else {
+                removeLesson(new Lesson((Tutor) associate, (Tutee) person));
+            }
+        }
     }
 
     @Override

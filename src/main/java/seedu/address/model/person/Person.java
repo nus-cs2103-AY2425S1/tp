@@ -44,6 +44,23 @@ public abstract class Person {
         this.id = ++index;
     }
 
+    /**
+     * Alternate constructor for creating Person from addressbook.json
+     */
+    public Person(int id, Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
+                  Set<Subject> subjects) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.hours = hours;
+        this.tags.addAll(tags);
+        this.subjects.addAll(subjects);
+        this.id = id;
+        index = id++;
+    }
+
     public abstract boolean isTutor();
 
     public abstract boolean isTutee();
@@ -84,6 +101,10 @@ public abstract class Person {
         return id;
     }
 
+    public static void initialiseIndex(int index) {
+        Person.index = index;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -94,8 +115,7 @@ public abstract class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getId() == getId();
+                && otherPerson.getName().equals(getName());
     }
 
     /**
