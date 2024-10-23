@@ -66,7 +66,7 @@ public class UntagCommand extends Command {
         newTags.remove(tag);
 
         Person updatedPerson = new Person(personToUntag.getName(), personToUntag.getPhone(),
-                personToUntag.getEmail(), personToUntag.getRsvp(), newTags);
+                personToUntag.getEmail(), personToUntag.getRsvpStatus(), newTags);
         model.setPerson(personToUntag, updatedPerson);
 
         return new CommandResult(String.format(MESSAGE_UNTAG_PERSON_SUCCESS, Messages.format(updatedPerson)));

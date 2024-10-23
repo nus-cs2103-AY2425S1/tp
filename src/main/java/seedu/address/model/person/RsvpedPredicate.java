@@ -14,6 +14,6 @@ public class RsvpedPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getRsvp() == statusToCheck;
+        return person.getRsvpStatus().equals(statusToCheck);
     }
 }

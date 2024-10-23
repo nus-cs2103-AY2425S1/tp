@@ -55,7 +55,7 @@ public class Person {
         return email;
     }
 
-    public RsvpStatus getRsvp() {
+    public RsvpStatus getRsvpStatus() {
         return rsvpStatus;
     }
 

@@ -19,8 +19,9 @@ public class SetRsvpCommandParser implements Parser<SetRsvpCommand> {
     public SetRsvpCommand parse(String args) throws ParseException {
         try {
             String[] parts = args.trim().split("\\s+");
+            int validArgLength = 2;
 
-            if (parts.length != 2) {
+            if (parts.length != validArgLength) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetRsvpCommand.MESSAGE_USAGE));
             }
 
