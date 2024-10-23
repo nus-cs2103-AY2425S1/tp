@@ -50,11 +50,11 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete n/Alex`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+The four main components (also shown in the diagram above, staticContext is not a main component),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
@@ -176,7 +176,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete n/Alex` command to delete the person named Alex in the address book. The `delete` command calls `StaticContext#setPersonToDelete(person)`, storing the person to be deleted in a static context. The user then confirms the deletion with `delete-y`, causing the person to be removed from the address book and the modified state to be saved.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
@@ -297,14 +297,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Wedding Planner | List the weddings I am planning                                        | I can access relevant information about particular wedding easily            |
 | `* *`    | Wedding Planner | Edit contact details                                                   | I can keep information as up-to-date and accurate as possible.               |
 | `* *`    | Wedding Planner | Search for contacts by name, tags, or number                           | I can quickly find the contact I need                                        |
-| `* *`    | Wedding Planner | Mark guests as attending or not attending                              | I can provide accurate headcounts to vendors                                 |
 | `* *`    | Wedding Planner | Store different methods of contact (phone number, email address, etc.) | I can reach them in more than one way                                        |
 | `* *`    | Wedding Planner | Tag contacts with custom labels                                        | I can categorize vendors based on unique criteria for my clients.            |
 | `* *`    | Wedding Planner | Filter based on type of contractor                                     | It is easier to find the right people for the right job.                     |
 | `* *`    | Wedding Planner | Create an event for each wedding                                       | I can manage all details specific to that event.                             |
 | `*`      | Wedding Planner | Show my clients all the contacts they need to know about the wedding   | My clients don't need to worry about finding the contacts themselves         |
 | `*`      | Wedding Planner | Assign contacts to specific events                                     | I can keep track of all parties involved in a wedding                        |
-| `*`      | Wedding Planner | Send out a PSA to all parties involved                                 | I can conveniently send out important updates to relevant people when needed |
 | `*`      | Wedding Planner | Create and manage guest lists for each wedding                         | I can track RSVPs and dietary preferences                                    |
 | `*`      | Wedding Planner | Track vendor bookings for each wedding                                 | I can ensure all necessary services are confirmed                            |
 | `*`      | Wedding Planner | Rate or review vendors after each event                                | I can assess their performance for future recommendations                    |
@@ -325,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contacts
 2.  KnottyPlanner shows a list of contacts
-3.  User requests to delete a specific contact in the list
+3.  User requests to delete a specific contact in the list and receives a confirmation prompt
 4.  KnottyPlanner deletes the contact
 
     Use case ends.
@@ -348,8 +346,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list contact
 2.  KnottyPlaner shows a list of contact
-3.  User requests to add a tag to a specific contact in the list
-4.  KnottyPlanner adds the tag to that contact
+3.  User requests to add a wedding tag to a specific contact in the list
+4.  KnottyPlanner adds the wedding tag to that contact
 
     Use case ends.
 
