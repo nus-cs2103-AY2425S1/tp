@@ -16,7 +16,6 @@ import java.util.List;
 import keycontacts.model.StudentDirectory;
 import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.MakeupLesson;
-import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.student.Student;
 
