@@ -15,7 +15,7 @@ public class ViewAllProductCommand extends ViewProductCommand {
     public static final String MESSAGE_SUCCESS = "Showing all products";
 
     public ViewAllProductCommand() {
-        super(null);
+        super(PREDICATE_SHOW_ALL_PRODUCTS);
     }
 
     @Override

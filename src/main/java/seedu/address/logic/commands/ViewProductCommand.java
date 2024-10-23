@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
+import seedu.address.model.product.Product;
+
+import java.util.function.Predicate;
 
 /**
  * Finds and lists all suppliers in address book whose name contains any of the argument keywords.
@@ -20,9 +22,9 @@ public class ViewProductCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " chocolate ice cream";
 
-    private final ProductNameContainsKeywordsPredicate predicate;
+    private final Predicate<Product> predicate;
 
-    public ViewProductCommand(ProductNameContainsKeywordsPredicate predicate) {
+    public ViewProductCommand(Predicate<Product> predicate) {
         this.predicate = predicate;
     }
 

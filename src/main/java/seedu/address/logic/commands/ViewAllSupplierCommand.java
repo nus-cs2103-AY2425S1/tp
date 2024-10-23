@@ -15,7 +15,7 @@ public class ViewAllSupplierCommand extends ViewSupplierCommand {
     public static final String MESSAGE_SUCCESS = "Showing all suppliers";
 
     public ViewAllSupplierCommand() {
-        super(null);
+        super(PREDICATE_SHOW_ALL_SUPPLIERS);
     }
 
     @Override
