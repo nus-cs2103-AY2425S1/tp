@@ -39,6 +39,9 @@ public class JsonAdaptedPersonId {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public PersonId toModelType() throws IllegalValueException {
+        if (!PersonId.isValidPersonId(idString)) {
+            throw new IllegalValueException(PersonId.MESSAGE_CONSTRAINTS);
+        }
         return new PersonId(idString);
     }
 
