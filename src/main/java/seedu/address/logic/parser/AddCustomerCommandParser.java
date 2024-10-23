@@ -40,15 +40,6 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        // Add print statements to log the parsed values
-        System.out.println("Parsed name: " + name);
-        System.out.println("Parsed phone: " + phone);
-        System.out.println("Parsed email: " + email);
-        System.out.println("Parsed address: " + address);
-        System.out.println("Parsed preference: " + preference);
-        System.out.println("Parsed information: " + information);
-        System.out.println("Parsed tags: " + tagList);
-
         Customer customer = new Customer(name, phone, email, address, preference, information, remark, tagList);
 
         return new AddCustomerCommand(customer);
