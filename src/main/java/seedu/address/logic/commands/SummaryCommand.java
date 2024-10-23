@@ -48,18 +48,13 @@ public class SummaryCommand extends Command {
         LocalDate startDate = startMonth.atDay(1);
         LocalDate endDate = endMonth.atEndOfMonth();
 
-        double summary = model.getFilteredTransactionList().stream()
-                .filter(transaction -> (
-                        transaction.getDate().isEqual(startDate) || transaction.getDate().isAfter(startDate))
-                        && (transaction.getDate().isEqual(endDate) || transaction.getDate().isBefore(endDate)))
-                .mapToDouble(Transaction::getAmount)
-                .sum();
-        List<Transaction> listToShow = model.getFilteredTransactionList().stream()
+        List<Transaction> transactionsInRange = model.getFilteredTransactionList().stream()
                 .filter(transaction -> (
                         transaction.getDate().isEqual(startDate) || transaction.getDate().isAfter(startDate))
                         && (transaction.getDate().isEqual(endDate) || transaction.getDate().isBefore(endDate)))
                 .collect(Collectors.toList());
-        model.updateTransactionList(listToShow);
+        model.updateTransactionList(transactionsInRange);
+        double summary = transactionsInRange.stream().mapToDouble(Transaction::getAmount).sum();
         return new CommandResult(String.format(MESSAGE_SUCCESS, startDate.format(DEFAULT_DATE_FORMATTER),
                 endDate.format(DEFAULT_DATE_FORMATTER), summary));
     }
