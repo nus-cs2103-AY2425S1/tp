@@ -98,6 +98,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Inserts the person into the given index.
+     * {@code person} must not already exist in the address book.
+     * {@code index} must be within range of the address book.
+     */
+    public void insert(Person person, int index){
+        requireNonNull(person);
+
+        internalList.add(index, person);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

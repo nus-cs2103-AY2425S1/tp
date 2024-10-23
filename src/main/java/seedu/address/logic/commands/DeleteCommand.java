@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         assert !model.hasPerson(deletedPerson) : "Deleted person should not be in AddressBook";
 
-        model.addPerson(deletedPerson);
+        model.insertPerson(deletedPerson, targetIndex.getZeroBased());
     }
 
     @Override
