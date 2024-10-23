@@ -73,8 +73,6 @@ The following annotated text-boxes are used throught this guide to provide usefu
 
 In this section, lets learn how to set up MediBase3 on your computer.
 
----
-
 ## Installing MediBase3
 
 ### Step 1: Install JDK 17
@@ -138,17 +136,15 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
----
-
 {: .alert .alert-info}
 >:information_source: **Note**
 >Depending on your system setup, you may need to install JavaFX separately. You can refer to the [OpenJFX installation guide](https://openjfx.io/openjfx-docs/#install-javafx) for detailed instructions.
 
 {: .alert .alert-info}
->:information_source: **Note**
->For users of other operating systems, as long as you have the following installed, you can use MediBase3:
->- Java/OpenJDK 17
->- JavaFX/OpenJFX 17
+> :information_source: **Note**
+> For users of other operating systems, as long as you have the following installed, you can use MediBase3:
+> - Java/OpenJDK 17
+> - JavaFX/OpenJFX 17
 
 {: .alert .alert-info}
 >:information_source: **Note**
@@ -164,8 +160,6 @@ This means that your machine is running Java version 17.0.11, which means that J
 1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
 2. Save the file to a location of your choice (e.g., `Downloads` folder).
 
----
-
 ## Launching MediBase3
 
 1. Open **Command Prompt** (Windows) or **Terminal** (macOS).
@@ -180,8 +174,6 @@ cd Downloads
 
 You should be greeted by the UI, which you will see in the next section.
 
----
-
 ## Overview of the GUI
 
 Once MediBase3 is running, you will see the main interface. Here’s an overview of the key parts:
@@ -194,8 +186,6 @@ Once MediBase3 is running, you will see the main interface. Here’s an overview
 - **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
 
 ![GUIOverview.jpg](images%2FGUIOverview.jpg)
-
----
 
 ## Overview of CLI
 
@@ -221,8 +211,6 @@ add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311
 - **Command:** `add`
 - **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
 - **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
-
----
 
 ## A First Look at MediBase3
 
@@ -270,8 +258,6 @@ Here’s a basic tutorial on how to start using the application:
      ```
      clear
      ```
-
----
 
 Now you’re ready to use MediBase3!
 For a comprehensive list of features and how to use them, [click here!](#features).
