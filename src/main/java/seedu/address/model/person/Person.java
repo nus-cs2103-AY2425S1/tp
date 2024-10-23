@@ -66,9 +66,12 @@ public class Person {
     }
 
     public void setPublicAddressesByNetwork(Network network, Set<PublicAddress> addresses) {
-        if (publicAddresses.containsKey(network)) {
-            this.publicAddresses.put(network, new HashSet<>(addresses));
+        requireAllNonNull(network, addresses);
+        if (addresses.isEmpty()) {
+            this.publicAddresses.remove(network);
+            return;
         }
+        this.publicAddresses.put(network, new HashSet<>(addresses));
     }
 
 

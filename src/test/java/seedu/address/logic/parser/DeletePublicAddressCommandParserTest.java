@@ -16,7 +16,25 @@ public class DeletePublicAddressCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteAddressCommand() {
-        assertParseSuccess(parser, "1 pa/BTC", new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC));
+        assertParseSuccess(
+                parser,
+                "1 pa/BTC",
+                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC)
+        );
+
+        // multiple whitespaces between preamble and prefix
+        assertParseSuccess(
+                parser,
+                "  1   pa/BTC",
+                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC)
+        );
+
+        // with label
+        assertParseSuccess(
+                parser,
+                "1 pa/BTC l/default",
+                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "default")
+        );
     }
 
     @Test

@@ -144,7 +144,6 @@ public class ParserUtil {
 
             String network = addressArgs[0];
             String address = addressArgs[1];
-            // TODO: END of tokenizer
 
             Network parsedNetwork = parseNetwork(network);
             PublicAddress parsedPublicAddress = parsePublicAddress(address, PublicAddress.DEFAULT_LABEL, network);
@@ -155,6 +154,20 @@ public class ParserUtil {
             publicAddressesMap.get(parsedNetwork).add(parsedPublicAddress);
         }
         return publicAddressesMap;
+    }
+
+    /**
+     * Parses Label for BTC Address by cleaning the string input given by the user
+     *
+     * @param label
+     * @return
+     */
+    public static String parsePublicAddressLabel(String label) throws ParseException {
+        requireNonNull(label);
+        if (!PublicAddress.isValidPublicAddressLabel(label)) {
+            throw new ParseException(PublicAddress.MESSAGE_CONSTRAINTS);
+        }
+        return label.strip();
     }
 
     /**
