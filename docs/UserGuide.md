@@ -118,7 +118,7 @@ These tags represent qualitative levels. The valid values for these tags are:
 - **MEDIUM**
 - **HIGH**
 
-These tags must be written using the following format(note the underscore):
+These tags must be written using the following format (note the underscore):
 
 Salary tag : `t/salary_[value]`
 
