@@ -4,14 +4,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_DATE_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_EMAIL_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_END_TIME_ALICE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_END_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_PHONE_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_START_TIME_ALICE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VOLUNTEER_START_TIME_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,33 +23,31 @@ public class TypicalVolunteers {
 
     public static final Volunteer ALICE = new VolunteerBuilder().withName(VALID_VOLUNTEER_NAME_ALICE)
             .withPhone(VALID_VOLUNTEER_PHONE_ALICE).withEmail(VALID_VOLUNTEER_EMAIL_ALICE)
-            .withAvailableDate(VALID_VOLUNTEER_DATE_ALICE).withStartTimeAvailability(VALID_VOLUNTEER_START_TIME_ALICE)
-            .withEndTimeAvailability(VALID_VOLUNTEER_END_TIME_ALICE).build();
+            .withAvailableDate(VALID_VOLUNTEER_DATE_ALICE).build();
 
     public static final Volunteer BOB = new VolunteerBuilder().withName(VALID_VOLUNTEER_NAME_BOB)
             .withPhone(VALID_VOLUNTEER_PHONE_BOB).withEmail(VALID_VOLUNTEER_EMAIL_BOB)
-            .withAvailableDate(VALID_VOLUNTEER_DATE_BOB).withStartTimeAvailability(VALID_VOLUNTEER_START_TIME_BOB)
-            .withEndTimeAvailability(VALID_VOLUNTEER_END_TIME_BOB).build();
+            .withAvailableDate(VALID_VOLUNTEER_DATE_BOB).build();
 
     public static final Volunteer CHARLIE = new VolunteerBuilder().withName("Charlie Lee")
             .withPhone("92345678").withEmail("charlielee@example.com")
-            .withAvailableDate("2023-07-22").withStartTimeAvailability("08:00").withEndTimeAvailability("15:00")
+            .withAvailableDate("2023-07-22")
             .build();
 
     public static final Volunteer DAVE = new VolunteerBuilder().withName("Dave Lim")
             .withPhone("93456789").withEmail("davelim@example.com")
-            .withAvailableDate("2023-08-12").withStartTimeAvailability("12:00").withEndTimeAvailability("17:00")
+            .withAvailableDate("2023-08-12")
             .build();
 
     // Manually added
     public static final Volunteer EVE = new VolunteerBuilder().withName("Eve Tan")
             .withPhone("91234512").withEmail("evetan@example.com")
-            .withAvailableDate("2023-09-14").withStartTimeAvailability("11:00").withEndTimeAvailability("16:00")
+            .withAvailableDate("2023-09-14")
             .build();
 
     public static final Volunteer FAYE = new VolunteerBuilder().withName("Faye Koh")
             .withPhone("93451245").withEmail("fayekoh@example.com")
-            .withAvailableDate("2023-10-22").withStartTimeAvailability("09:00").withEndTimeAvailability("14:00")
+            .withAvailableDate("2023-10-22")
             .build();
 
     // Keyword for testing search

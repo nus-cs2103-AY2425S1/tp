@@ -6,7 +6,6 @@ import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
-import seedu.address.model.volunteer.Time;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -25,8 +24,6 @@ public class VolunteerBuilder {
     private Phone phone;
     private Email email;
     private Date availableDate;
-    private Time startTimeAvailability;
-    private Time endTimeAvailability;
     private ObservableList<String> involvedIn;
 
     /**
@@ -37,8 +34,6 @@ public class VolunteerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         availableDate = new Date(DEFAULT_DATE);
-        startTimeAvailability = new Time(DEFAULT_START_TIME);
-        endTimeAvailability = new Time(DEFAULT_END_TIME);
         involvedIn = FXCollections.observableArrayList();
     }
 
@@ -50,8 +45,6 @@ public class VolunteerBuilder {
         phone = volunteerToCopy.getPhone();
         email = volunteerToCopy.getEmail();
         availableDate = volunteerToCopy.getAvailableDate();
-        startTimeAvailability = volunteerToCopy.getStartTimeAvailability();
-        endTimeAvailability = volunteerToCopy.getEndTimeAvailability();
         involvedIn = volunteerToCopy.getInvolvedIn();
     }
 
@@ -88,27 +81,10 @@ public class VolunteerBuilder {
     }
 
     /**
-     * Sets the {@code Time} for the start of availability of the {@code Volunteer} that we are building.
-     */
-    public VolunteerBuilder withStartTimeAvailability(String startTime) {
-        this.startTimeAvailability = new Time(startTime);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Time} for the end of availability of the {@code Volunteer} that we are building.
-     */
-    public VolunteerBuilder withEndTimeAvailability(String endTime) {
-        this.endTimeAvailability = new Time(endTime);
-        return this;
-    }
-
-
-    /**
      * Builds the {@code Volunteer} object.
      */
     public Volunteer build() {
-        return new Volunteer(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability, involvedIn);
+        return new Volunteer(name, phone, email, availableDate, involvedIn);
     }
 
     /**

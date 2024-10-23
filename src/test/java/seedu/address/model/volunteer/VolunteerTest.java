@@ -33,7 +33,7 @@ public class VolunteerTest {
 
         // same name, all other attributes different -> returns true
         Volunteer editedAlice = new VolunteerBuilder(ALICE).withPhone("87654321").withEmail("alice@example.com")
-                .withAvailableDate("2023-12-12").withStartTimeAvailability("07:00").withEndTimeAvailability("17:00")
+                .withAvailableDate("2023-12-12")
                 .build();
         assertTrue(ALICE.isSameVolunteer(editedAlice));
 
@@ -92,9 +92,7 @@ public class VolunteerTest {
         String expected = "Volunteer{name=" + ALICE.getName()
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
-                + ", availableDate=" + ALICE.getAvailableDate()
-                + ", startTimeAvailability=" + ALICE.getStartTimeAvailability()
-                + ", endTimeAvailability=" + ALICE.getEndTimeAvailability() + "}";
+                + ", availableDate=" + ALICE.getAvailableDate() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

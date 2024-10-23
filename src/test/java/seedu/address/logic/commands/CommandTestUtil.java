@@ -10,10 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,15 +26,11 @@ public class CommandTestUtil {
     public static final String VALID_VOLUNTEER_PHONE_ALICE = "91234567";
     public static final String VALID_VOLUNTEER_EMAIL_ALICE = "alicewong@example.com";
     public static final String VALID_VOLUNTEER_DATE_ALICE = "2023-05-10";
-    public static final String VALID_VOLUNTEER_START_TIME_ALICE = "09:00";
-    public static final String VALID_VOLUNTEER_END_TIME_ALICE = "18:00";
 
     public static final String VALID_VOLUNTEER_NAME_BOB = "Bob Tan";
     public static final String VALID_VOLUNTEER_PHONE_BOB = "98765432";
     public static final String VALID_VOLUNTEER_EMAIL_BOB = "bobtan@example.com";
     public static final String VALID_VOLUNTEER_DATE_BOB = "2023-06-15";
-    public static final String VALID_VOLUNTEER_START_TIME_BOB = "10:00";
-    public static final String VALID_VOLUNTEER_END_TIME_BOB = "16:00";
 
     // Valid values for events
     public static final String VALID_EVENT_NAME_BEACH_CLEANUP = "Beach Cleanup";
@@ -59,20 +53,11 @@ public class CommandTestUtil {
     public static final String VOLUNTEER_EMAIL_DESC_ALICE = " " + VOLUNTEER_PREFIX_EMAIL + VALID_VOLUNTEER_EMAIL_ALICE;
     public static final String VOLUNTEER_DATE_DESC_ALICE = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE
             + VALID_VOLUNTEER_DATE_ALICE;
-    public static final String VOLUNTEER_START_TIME_DESC_ALICE = " " + VOLUNTEER_PREFIX_START_TIME
-            + VALID_VOLUNTEER_START_TIME_ALICE;
-    public static final String VOLUNTEER_END_TIME_DESC_ALICE = " " + VOLUNTEER_PREFIX_END_TIME
-            + VALID_VOLUNTEER_END_TIME_ALICE;
-
     public static final String VOLUNTEER_NAME_DESC_BOB = " " + VOLUNTEER_PREFIX_NAME + VALID_VOLUNTEER_NAME_BOB;
     public static final String VOLUNTEER_PHONE_DESC_BOB = " " + VOLUNTEER_PREFIX_PHONE + VALID_VOLUNTEER_PHONE_BOB;
     public static final String VOLUNTEER_EMAIL_DESC_BOB = " " + VOLUNTEER_PREFIX_EMAIL + VALID_VOLUNTEER_EMAIL_BOB;
     public static final String VOLUNTEER_DATE_DESC_BOB = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE
             + VALID_VOLUNTEER_DATE_BOB;
-    public static final String VOLUNTEER_START_TIME_DESC_BOB = " " + VOLUNTEER_PREFIX_START_TIME
-            + VALID_VOLUNTEER_START_TIME_BOB;
-    public static final String VOLUNTEER_END_TIME_DESC_BOB = " " + VOLUNTEER_PREFIX_END_TIME
-            + VALID_VOLUNTEER_END_TIME_BOB;
 
     // CLI descriptor strings for events
     public static final String EVENT_NAME_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_NAME + VALID_EVENT_NAME_BEACH_CLEANUP;
@@ -106,11 +91,6 @@ public class CommandTestUtil {
             + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_VOLUNTEER_DATE_DESC = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE
             + "32/13/2023"; // Invalid date
-    public static final String INVALID_VOLUNTEER_START_TIME_DESC = " " + VOLUNTEER_PREFIX_START_TIME
-            + "25:00"; // Invalid time
-    public static final String INVALID_VOLUNTEER_END_TIME_DESC = " " + VOLUNTEER_PREFIX_END_TIME
-            + "99:99"; // Invalid time
-
     public static final String INVALID_EVENT_NAME_DESC = " " + EVENT_PREFIX_NAME
             + "Beach Cleanup@"; // '@' not allowed in event names
     public static final String INVALID_EVENT_DATE_DESC = " " + EVENT_PREFIX_DATE
