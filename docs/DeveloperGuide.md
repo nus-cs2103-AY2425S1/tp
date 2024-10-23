@@ -307,6 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
 | `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                            |
 | `* *`    | sales rep        | export a list of contact emails                                             | add them to a mailing list                                             |
+| `* *`    | sales rep        | export my contacts                                                          | send it to my coworker who needs it for his work                       |
 | `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                            |
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
@@ -424,6 +425,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3b. The note name is invalid.
 
     - 3b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC7 - Export contact list**
+
+**MSS**
+1.  Actor requests to export contact list to a specific file.
+2.  System exports the contact information into the file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. System detects that the directory does not exist.
+
+    - 1a1. System creates the directory.
+
+      Use case resumes from step 2.
+
+- 2b. System detects that the file is used by another process.
+
+    - 2b1. System shows an error message.
 
       Use case ends.
 

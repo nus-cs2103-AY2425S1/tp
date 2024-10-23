@@ -186,6 +186,19 @@ Format: `view INDEX`
 Examples:
 - `view 1` shows the contact details of the first person shown on the displayed person list.
 
+### Exporting the contact list : `export`
+
+Exports every contact in the contact list into the specified file type.
+
+Format: `export f/FILETYPE`
+
+- Exports the contact list into the specified `FILETYPE`.
+- The file type must be **either csv or vcf**.
+
+Examples:
+- `export f/csv` exports the contact list into a csv file.
+- `export f/vcf` exports the contact list into a vcf file.
+
 ### Exiting the program : `exit`
 
 Exits the program.
