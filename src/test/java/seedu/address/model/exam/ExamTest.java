@@ -49,7 +49,7 @@ public class ExamTest {
         assertFalse(Exam.isValidExamScore("100a")); // numbers mixed with letters
         assertFalse(Exam.isValidExamScore("101")); // out of range
 
-        // valid register score
+        // valid exam score
         assertTrue(Exam.isValidExamScore("0")); // min
         assertTrue(Exam.isValidExamScore("100")); // max
         assertTrue(Exam.isValidExamScore("5")); // single digit
