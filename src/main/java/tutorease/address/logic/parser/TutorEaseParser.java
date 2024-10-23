@@ -54,7 +54,7 @@ public class TutorEaseParser {
             return new ContactCommandParser().parse(arguments);
 
         case EditContactCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditContactCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

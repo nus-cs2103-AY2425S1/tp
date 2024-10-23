@@ -32,7 +32,7 @@ import tutorease.address.testutil.StudentBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
-public class EditCommandTest {
+public class EditContactCommandTest {
 
     private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
 
@@ -42,7 +42,8 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
@@ -65,7 +66,8 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditContactCommand editCommand = new EditContactCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
@@ -80,7 +82,8 @@ public class EditCommandTest {
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
@@ -97,7 +100,8 @@ public class EditCommandTest {
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new TutorEase(model.getTutorEase()), new UserPrefs(),
                 getTypicalLessons());
