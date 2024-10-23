@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_OWESMONEY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWeddings.getTypicalWeddingBook;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,13 +27,14 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.WeddingBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class TagDeleteCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalWeddingBook());
     private Set<Tag> stubTagList = new HashSet<>();
 
     @BeforeEach
@@ -56,7 +58,8 @@ public class TagDeleteCommandTest {
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.tagSetToString(stubTagList), Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagDeleteCommand, model, expectedMessage, expectedModel);
@@ -81,7 +84,8 @@ public class TagDeleteCommandTest {
         String expectedMessage2 = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
                 VALID_TAG_FRIENDS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagDeleteCommand, model, expectedMessage1 + expectedMessage2,
@@ -103,7 +107,8 @@ public class TagDeleteCommandTest {
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_TAG_DOESNT_EXIST,
                 Messages.tagSetToString(stubTagList), Messages.format(originalPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, originalPerson);
 
         assertCommandSuccess(tagDeleteCommand, model, expectedMessage, expectedModel);
@@ -126,7 +131,8 @@ public class TagDeleteCommandTest {
         String expectedMessage = String.format(TagDeleteCommand.MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.tagSetToString(stubTagList), Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new WeddingBook(model.getWeddingBook()));
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(tagDeleteCommand, model, expectedMessage, expectedModel);

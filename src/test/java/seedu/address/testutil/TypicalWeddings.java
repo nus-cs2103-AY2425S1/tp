@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.WeddingBook;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -33,5 +34,16 @@ public class TypicalWeddings {
 
     public static List<Wedding> getTypicalWeddings() {
         return new ArrayList<>(Arrays.asList(WEDDING_ONE, WEDDING_TWO, WEDDING_THREE));
+    }
+
+    /**
+     * Returns an {@code WeddingBook} with all the typical weddings.
+     */
+    public static WeddingBook getTypicalWeddingBook() {
+        WeddingBook wb = new WeddingBook();
+        for (Wedding wedding : getTypicalWeddings()) {
+            wb.addWedding(wedding);
+        }
+        return wb;
     }
 }

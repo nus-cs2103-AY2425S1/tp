@@ -10,7 +10,7 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 <!-- * Table of Contents -->
 ## Table of Contents
-- [Quick Start](#quick-start)        
+- [Quick Start](#quick-start)
 - [Features](#features)
 - [FAQ](#FAQ)
 - [Known issues](#Known-issues)
