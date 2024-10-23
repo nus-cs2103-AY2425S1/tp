@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -102,6 +104,15 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the session log list of a person.
+     */
+    public ObservableList<Log> asUnmodifiableSessionLog(int personIndex) {
+        Set<Log> sessionLogs = internalUnmodifiableList.get(personIndex).getLogs();
+        ObservableList<Log> observableSessionLogs = FXCollections.observableArrayList(sessionLogs);
+        return FXCollections.unmodifiableObservableList(observableSessionLogs);
     }
 
     @Override
