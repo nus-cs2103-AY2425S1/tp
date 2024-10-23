@@ -11,17 +11,17 @@ import seedu.address.model.contactrecord.ContactRecord;
 /**
  * Panel containing the list of call history.
  */
-public class CallHistoryPanel extends UiPart<Region> {
-    private static final String FXML = "CallHistoryPanel.fxml";
+public class HistoryListPanel extends UiPart<Region> {
+    private static final String FXML = "HistoryListPanel.fxml";
 
     @FXML
     private ListView<ContactRecord> callHistoryView;
     private ObservableList<ContactRecord> items;
 
     /**
-     * Creates a {@code CallHistoryPanel}.
+     * Creates a {@code HistoryListPanel}.
      */
-    public CallHistoryPanel() {
+    public HistoryListPanel() {
         super(FXML);
         items = FXCollections.observableArrayList();
         callHistoryView.setItems(items);
@@ -34,7 +34,7 @@ public class CallHistoryPanel extends UiPart<Region> {
                     setText(null);
                 } else {
                     int index = getIndex() + 1;
-                    CallHistoryCard card = new CallHistoryCard(contactRecord, index);
+                    HistoryCard card = new HistoryCard(contactRecord, index);
                     setGraphic(card.getRoot());
                 }
             }
