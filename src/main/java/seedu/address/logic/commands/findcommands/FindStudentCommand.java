@@ -19,6 +19,7 @@ public class FindStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "find_s";
     public static final String COMMAND_WORD_ALIAS = "fs";
+    public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Finds all students whose fields contain any of "
@@ -38,11 +39,13 @@ public class FindStudentCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        model.setStateStudents();
         if (model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(NO_STUDENTS_FOUND);
+            return new CommandResult(NO_STUDENTS_FOUND, LIST_STUDENT_MARKER);
         }
         return new CommandResult(
-            String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+            String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+            LIST_STUDENT_MARKER);
     }
 
     @Override
