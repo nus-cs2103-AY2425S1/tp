@@ -92,13 +92,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the Campus Connect.
+Shows a list of all persons in the CampusConnect.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the Campus Connect.
+Edits an existing person in the CampusConnect.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
