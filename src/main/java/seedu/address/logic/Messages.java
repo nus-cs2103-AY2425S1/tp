@@ -19,6 +19,16 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EMPTY_INPUT =
+            "Some inputs are missing! Please ensure all prefixes are followed by valid inputs. \n%1$s";
+    public static final String MESSAGE_INVALID_WITH_SPACES = "At least one of the inputs should not contain spaces. "
+            + "Please check the correct usage. \n%1$s";
+    public static final String MESSAGE_INVALID_NUMBER_OF_INPUTS = "Please input exactly two words after attend/ prefix."
+            + " Please check the correct usage. \n%1$s";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "Start date must be before or equal to end date."
+            + " Please check the correct usage. \n%1$s";
+    public static final String MESSAGE_INVALID_DATE = "At least one of the dates is not in the right format."
+            + " Please check the correct usage. \n%1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
