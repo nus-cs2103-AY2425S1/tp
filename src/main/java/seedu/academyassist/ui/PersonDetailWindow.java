@@ -1,9 +1,9 @@
 package seedu.academyassist.ui;
 
-import java.awt.Label;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.academyassist.commons.core.LogsCenter;
@@ -20,7 +20,7 @@ public class PersonDetailWindow extends UiPart<Stage> {
     @FXML
     private VBox detailPane;
     @FXML
-    private Label studentID;
+    private Label studentId;
     @FXML
     private Label name;
     @FXML
@@ -74,11 +74,12 @@ public class PersonDetailWindow extends UiPart<Stage> {
      */
     public void show(Person person) {
         // log the progress
-        logger.fine(String.format("Showing details of student %s", studentID));
+        logger.fine(String.format("Showing details of student %s", studentId));
 
         // Display the student details
-        studentID.setText("Student ID: " + person.getStudentId().value);
+        studentId.setText("Student ID: " + person.getStudentId().value);
         name.setText("Name: " + person.getName().fullName);
+        ic.setText("IC: " + person.getIc().value);
         yearGroup.setText("Year: " + person.getYearGroup().value);
         phone.setText("Phone: " + person.getPhone().value);
         email.setText("Email: " + person.getEmail().value);

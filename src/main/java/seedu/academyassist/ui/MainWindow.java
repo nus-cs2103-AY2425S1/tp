@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PersonDetailWindow personDetailWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -67,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        personDetailWindow = new PersonDetailWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -170,8 +172,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDetailWindow(Person person) {
-        PersonDetailWindow detailWindow = new PersonDetailWindow();
-        detailWindow.show(person);
+        if (!personDetailWindow.isShowing()) {
+            personDetailWindow.show(person);
+        } else {
+            personDetailWindow.focus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {

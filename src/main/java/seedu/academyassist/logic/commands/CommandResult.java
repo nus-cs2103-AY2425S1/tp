@@ -32,6 +32,11 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showDetailWindow,
                          Person personToShow) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+
+        if (showDetailWindow) {
+            requireNonNull(personToShow, "Person cannot be null when showing detail window");
+        }
+
         this.showHelp = showHelp;
         this.exit = exit;
         this.showDetailWindow = showDetailWindow;
@@ -43,7 +48,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null);
+        this(feedbackToUser, false, false,
+                false, null);
     }
 
     public String getFeedbackToUser() {
@@ -80,7 +86,8 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showDetailWindow == otherCommandResult.showDetailWindow;
     }
 
     @Override
