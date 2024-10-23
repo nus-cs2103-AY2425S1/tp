@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -155,6 +157,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new FieldContainsKeywordsPredicate(Arrays.asList(splitName[0]), "name"));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered Appointment list to show only the persons with appointments with the same
+     * starting date as the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showAppointmentAtIndex(Model model, Index targetIndex) {
+        model.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAppointmentList().size());
+
+        Person person = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
+        final LocalDate date = person.getAppointment().getStart().toLocalDate();
+        model.updateFilteredAppointmentList(new AppointmentContainsDatePredicate(date));
     }
 
 }
