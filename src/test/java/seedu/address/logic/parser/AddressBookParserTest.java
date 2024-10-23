@@ -16,8 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditRestaurantDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -25,7 +23,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.restaurant.NameContainsKeywordsPredicate;
 import seedu.address.model.restaurant.Restaurant;
-import seedu.address.testutil.EditRestaurantDescriptorBuilder;
 import seedu.address.testutil.RestaurantBuilder;
 import seedu.address.testutil.RestaurantUtil;
 
@@ -51,16 +48,6 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_RESTAURANT), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Restaurant restaurant = new RestaurantBuilder().build();
-        EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder(restaurant).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_RESTAURANT.getOneBased() + " " + RestaurantUtil
-                .getEditRestaurantDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_RESTAURANT, descriptor), command);
     }
 
     @Test

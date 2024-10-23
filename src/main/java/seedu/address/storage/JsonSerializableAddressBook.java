@@ -19,16 +19,16 @@ import seedu.address.model.restaurant.Restaurant;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_RESTAURANT = "Restaurants list contains duplicate restaurant(s).";
 
-    private final List<JsonAdaptedRestaurant> persons = new ArrayList<>();
+    private final List<JsonAdaptedRestaurant> restaurants = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given restaurants.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedRestaurant> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("restaurants") List<JsonAdaptedRestaurant> restaurants) {
+        this.restaurants.addAll(restaurants);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source
+        restaurants.addAll(source
                 .getRestaurantList()
                 .stream()
                 .map(JsonAdaptedRestaurant::new)
@@ -51,10 +51,10 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedRestaurant jsonAdaptedRestaurant : persons) {
+        for (JsonAdaptedRestaurant jsonAdaptedRestaurant : restaurants) {
             Restaurant restaurant = jsonAdaptedRestaurant.toModelType();
             if (addressBook.hasRestaurant(restaurant)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_RESTAURANT);
             }
             addressBook.addRestaurant(restaurant);
         }

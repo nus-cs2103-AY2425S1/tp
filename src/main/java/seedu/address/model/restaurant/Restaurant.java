@@ -24,6 +24,7 @@ public class Restaurant {
 
     // Data fields
     private final Address address;
+    private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
     private boolean isFavourite;
     private final Tag price;
@@ -31,12 +32,13 @@ public class Restaurant {
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, rating, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.rating = rating;
 
         // Extract the price tag and other tags
         Pair<Tag, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
@@ -61,6 +63,14 @@ public class Restaurant {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public Price getPrice() {
+        return price;
     }
 
     /**

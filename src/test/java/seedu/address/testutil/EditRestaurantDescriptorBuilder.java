@@ -9,6 +9,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.tag.Tag;
 
@@ -36,6 +37,7 @@ public class EditRestaurantDescriptorBuilder {
         descriptor.setPhone(restaurant.getPhone());
         descriptor.setEmail(restaurant.getEmail());
         descriptor.setAddress(restaurant.getAddress());
+        descriptor.setRating(restaurant.getRating());
         descriptor.setTags(restaurant.getTags());
     }
 
@@ -68,6 +70,14 @@ public class EditRestaurantDescriptorBuilder {
      */
     public EditRestaurantDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rating} of the {@code EditRestaurantDescriptor} that we are building.
+     */
+    public EditRestaurantDescriptorBuilder withRating(Integer rating) {
+        descriptor.setRating(new Rating(rating));
         return this;
     }
 

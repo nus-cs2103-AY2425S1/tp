@@ -37,6 +37,8 @@ public class RestaurantCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
+    private Label rating;
+    @FXML
     private Label address;
     @FXML
     private Label email;
@@ -58,6 +60,7 @@ public class RestaurantCard extends UiPart<Region> {
         phone.setText(restaurant.getPhone().value);
         address.setText(restaurant.getAddress().value);
         email.setText(restaurant.getEmail().value);
+        rating.setText(restaurant.getRating().getStringValue());
         restaurant.getTagsWithoutPrice().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
