@@ -253,6 +253,16 @@ Filters candidates based on their status.
 - `filter st/Active`: Displays all active candidates.
 - `filter st/Shortlisted`: Shows candidates marked as shortlisted.
 
+**Image Example**
+
+Command: ` filter screening `
+
+Before the find command ran:
+<br><img src="images/FilterCommandBefore.png" width = "300">
+
+After the find command ran:
+<br><img src="images/FilterCommandAfter.png" width = "300">
+
 ---
 
 ### 🧹 Clearing All Entries: `clear`
