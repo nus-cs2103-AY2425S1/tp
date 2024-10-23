@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -36,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setParticipation(person.getParticipation());
         descriptor.setTags(person.getTags());
     }
 

@@ -11,12 +11,18 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CreateTutorialCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EnrollCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterPaidCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.MarkPaidCommand;
+import seedu.address.logic.commands.UnEnrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -76,6 +82,24 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case MarkPaidCommand.COMMAND_WORD:
+            return new MarkPaidCommandParser().parse(arguments);
+
+        case MarkAttendanceCommand.COMMAND_WORD:
+            return new MarkAttendanceCommandParser().parse(arguments);
+
+        case FilterPaidCommand.COMMAND_WORD:
+            return new FilterPaidCommandParser().parse(arguments);
+
+        case EnrollCommand.COMMAND_WORD:
+            return new EnrollCommandParser().parse(arguments);
+
+        case UnEnrollCommand.COMMAND_WORD:
+            return new UnEnrollCommandParser().parse(arguments);
+
+        case CreateTutorialCommand.COMMAND_WORD:
+            return new CreateTutorialCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -4,10 +4,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +25,22 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Payment payment;
+    private final List<Participation> participationList;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Payment payment, List<Participation> participationList, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, payment, participationList, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.payment = payment;
+        this.participationList = participationList;
         this.tags.addAll(tags);
     }
 
@@ -53,12 +60,62 @@ public class Person {
         return address;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public List<Participation> getParticipation() {
+        return participationList;
+    }
+    public String getFullName() {
+        return name.fullName;
+    }
+
+    public String getPhoneValue() {
+        return phone.value;
+    }
+
+    public String getEmailValue() {
+        return email.value;
+    }
+
+    public String getAddressValue() {
+        return address.value;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Checks if the person already contains a participation
+     * @param participation the participation object to check
+     * @return true if it already contains the participation. false otherwise
+     */
+    public boolean hasParticipation(Participation participation) {
+        return participationList.stream()
+                .anyMatch(currentParticipation -> currentParticipation.equals(participation));
+
+    }
+
+    /**
+     * Adds a participation object to the participation list
+     * @param participation object to be added
+     */
+    public void addParticipation(Participation participation) {
+        participationList.add(participation);
+    }
+
+    /**
+     * Removes a participation object from the participation list
+     * @param participation object to be removed
+     */
+    public void removeParticipation(Participation participation) {
+        participationList.remove(participation);
     }
 
     /**
@@ -94,13 +151,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && payment.equals(otherPerson.payment)
+                && participationList.equals(otherPerson.participationList)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, payment, participationList, tags);
     }
 
     @Override
@@ -110,6 +169,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("payment", payment)
+                .add("participation", participationList)
                 .add("tags", tags)
                 .toString();
     }

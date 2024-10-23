@@ -262,71 +262,209 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+This product is for admin at tuition centres and has to track a large number of student records. Besides requiring to manage a large number of records, the admin also:
+
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+Enable easy management and fast access to student records for administrators working at tuition centres. We aim to provide easy tracking of payments to send reminders, learning progress of students and shifting of classes etc. This also helps tuition centres save time by reducing administrative burdens on their staff.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                     | So that I can…​                                                                                                                |
+| -------- |-----------------| ------------------------------ |--------------------------------------------------------------------------------------------------------------------------------|
+|`* * *`|admin|search for students' information using their name| quickly access students' information when needed                                                                               |
+|`* * *`|admin|remove ex-students' information from the address book| clean and organise the database                                                                                                |
+|`* * *`|admin|check for student's attendance for past weeks| send reminders to remind them to attend classes                                                                                |
+|`* * *`|admin|record how much a student have paid| check the remaining overdue amount                                                                                             |
+|`* * *`|admin|check when the is the payment deadline for the student| send reminders for student to get ready to pay/pay before the deadline                                                         |
+|`* * *`|admin|see the students' contacts(telegram, whatsapp, email)| chase/remind the students for payment                                                                                          |
+|`* * *`|admin|login to the address book| prevent other people from accessing and modifying the information                                                              |
+|`* * *`|admin|input student information| keep track of new students joining the center                                                                                  |
+|`* * *`|admin |mark attendance of the students for that week| arrange makeup lessons for students if necessary                                                                               |
+|`* * *`|new admin|be disallowed from keying in invalid grade| not enter invalid information                                                                                                  |
+|`* * *`|new admin|be disallowed from keying in invalid student contact information| not enter invalid information                                                                                                  |
+|`* * *`|new admin |see all students' contact information under their profile| easily contact students when required without having to learn how the database is organised and searching for required details |
+|`* *`|admin|check the number of students referred by a student | determine which referral reward the student is entitled to if the maximum limit has not been reached                           |
+|`* *`|admin|check the grades of students| make marketing posters through quick statistics                                                                                |
+|`* *`|admin|track the homework submitted by each students| keep track of their progress and inform tutor's easily as required                                                             |
+|`* *`|admin|access a help sheet of commands| be reminded of the commands                                                                                                    |
+|`* *`|admin|archive records of past students| make the data cleaner and easier to manage                                                                                     |
+|`* *`|admin|see which student have the most overdue amount| chase/remind the students for payment                                                                                          |
+|`* *`|admin|change the status of the student from existing to past-student| focus on tracking the exisiting students                                                                                       |
+|`* *`|expert admin|have a way to mass input new students into the system| enter a bigger influx of students more easily                                                                                  |
+|`* *`|expert admin|create shortcuts for mass marking student's attendance| speed up repetitive tasks                                                                                                      |
+|`* *`|new admin|be shown a template example for valid input| learn the proper input format                                                                                                  |
+|`* *`|tutor|track the grades of students| monitor the learning progess of my students                                                                                    |
+|`* *`|tutor |check the availability of the classrooms | schedule makeup lessons or consultations                                                                                       |
+|`*`|admin|see the availability of slots per class for a subject | easily shift students around to different available time slots if they were to make requests to attend different slots         |
+|`*`|admin|see all available classes for different subjects and the respective availabilities| inform new students of available classes easily                                                                                |
+|`*`|admin|view the week's class schedule and which student is inside| be clear on who is attending class and when, know who I am teaching, and if there are any conflicts in scheduling              |
+|`*`|admin |check students who are entitled to but have not received referral rewards| keep track and give out referral rewards to students more easily                                                               |
+|`*`|expert admin|can categorise students' profiles into different groups for different actions to be taken like those who need to pay fees, take tests, submit homework, etc| send appropriate reminders in a more organised manner                                                                          |
+|`*`|expert admin|automate admin tasks like sending reminders for payment, homework, etc| saved time from not doing these repetitive tasks every month                                                                   |
+|`*`|expert admin|do mass tracking for student counts or revenue| see if the tuition centre is doing well                                                                                        |
+|`*`|part-time admin|see specific categories of students that I am in charge in| focus on only managing the relevant student records without distractions                                                       |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** refers to the `Eduvault` application and the **Actor** is the `Administrators` at tuition centers, unless specified otherwise)
 
-**Use case: Delete a person**
+<br><br>
+**UC01 - View all students’ details**
 
-**MSS**
+**Actor: Admin**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Preconditions:** Admin is logged in (UC03).
+
+**MSS:**
+1. Admin prompts the system to list all students' details.
+2. System returns a list of all students with their respective details with their names.
+
+Use case ends.
+
+<br><br>
+**UC02 - Add student**
+
+**Actor: Admin**
+
+**Preconditions:** Admin is logged in (UC03).
+
+**MSS:**
+1. Admin prompts the system to add a student.
+2. System prompts the admin to key in details of the student.
+3. Admin key in details.
+4. System adds the student and display success status.
+
+Use case ends.
+
+**Extensions:**
+* 3a. Admin keyed in the information in the wrong format.
+    * 3a1. System display wrong format status.
+    * 3a2. System prompt admin to key in information again.
+    * 3a3. Admin key in information again.
+
+        Repeat 3a1 to 3a3 until Admin key in the right information.
+    * 3a4. System adds the student and display success status.
 
     Use case ends.
 
-**Extensions**
+<br><br>
+**UC03 - Log into system**
 
-* 2a. The list is empty.
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin enters username.
+2. Admin enters password.
+3. Admin gets logged in.
+
+Use case ends.
+
+**Extensions:**
+* 3a. System detects mismatch in either username or password or both.
+    * 3a1. System notifies user of wrong username or password.
+    * 3a2. System requests for correct username and password.
+    * 3a3. User enters new username and password.
+
+        Repeat 3a1 to 3a3 until the data entered is correct.
+
+    Use case ends.
+
+<br><br>
+**UC04 - Mark payment of students**
+
+**Actor: Admin**
+
+**Preconditions:** Admin is logged in (UC03).
+
+**MSS:**
+
+1. Admin prompts the system to mark payment.
+2. System prompts the admin to key in details of this student.
+3. Admin key in details.
+4. System marks the payment for the student and returns a success message.
+
+Use case ends.
+
+**Extensions:**
+
+* 3a. Admin keyed in the information in the wrong format.
+  * 3a1. System display wrong format status.
+  * 3a2. System prompt admin to key in information again.
+  * 3a3. Admin key in information again.
+
+    Repeat 3a1 to 3a3 until Admin key in the right information.
+  * 3a4. System adds the student and display success status
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 4a. Payment of the student has already being marked.
+  * 4a1. System returns a message on payment of student being marked already.
+  * 4a2. System returns a fail status.
 
-    * 3a1. AddressBook shows an error message.
+  Use case ends.
 
-      Use case resumes at step 2.
+<br><br>
+**UC05 - Delete student from system**
 
-*{More to be added}*
+**Actor: Admin**
 
+**Preconditions:** Admin is logged in (UC03).
+
+**MSS:**
+
+1. Admin decides student to be deleted from the system.
+2. Admin selects that student.
+3. System requests for confirmation.
+4. Admin confirms.
+5. System deletes the student information.
+
+Use case ends.
+
+**Extensions:**
+
+* *a. At any time, user chooses to cancel the deletion.
+    * *a1. System requests to confirm the cancellation.
+    * *a2. Admin confirms the cancellation.
+
+  Use case ends.
+
+<br><br>
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should retrieve and display student information for typical queries within 2 seconds.
+5. The system must be available 99.9% of the time, excluding scheduled maintenance.
+6. Data should be stored in a local human text editable file.
+7. Should contain an easy-to-read and detailed User and Developer Guides.
+8. The System should be run on the user's own computer.
+9. Users should be able to run the application directly from the downloaded JAR file without an installer.
+10. The code should follow coding standard and be well-documented with clear comments for ease of understanding.
+11. The code architecture should allow for the addition of new features without restructuring components.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Admin**: Admin at the tuition center who is in charge of all administrative processes
+* **System**: The Eduvault application
+* **Student**: Current and pat students who attended the tuition centre
+
 
 --------------------------------------------------------------------------------------------------------------------
 

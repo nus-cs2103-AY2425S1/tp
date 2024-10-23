@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Tutorial> filteredTutorials;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTutorials = new FilteredList<>(this.addressBook.getTutorialList());
     }
 
     public ModelManager() {
@@ -87,6 +91,7 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //// person-level operations
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -107,12 +112,58 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
+    //// participation-level operations
+
+    @Override
+    public boolean hasParticipation(Participation participation) {
+        requireNonNull(participation);
+        return addressBook.hasParticipation(participation);
+    }
+
+    @Override
+    public void addParticipation(Participation participation) {
+        addressBook.addParticipation(participation);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deleteParticipation(Participation target) {
+        addressBook.removeParticipation(target);
+    }
+
+    //// tutorial-level operations
+
+    @Override
+    public boolean hasTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        return addressBook.hasTutorial(tutorial);
+    }
+
+    //    @Override
+    //    public void deleteTutorial(Tutorial tutorial) {
+    //        addressBook.remove(tutorial);
+    //    }
+
+    @Override
+    public void addTutorial(Tutorial tutorial) {
+        addressBook.addTutorial(tutorial);
+        updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
+    }
+
+    //    @Override
+    //    public void setTutorial(Tutorial target,  editedPerson) {
+    //        requireAllNonNull(target, editedPerson);
+    //
+    //        addressBook.setPerson(target, editedPerson);
+    //    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
+    //// Persons
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -126,6 +177,23 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Tutorial List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Tutorial} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Tutorial> getFilteredTutorialList() {
+        return filteredTutorials;
+    }
+
+    @Override
+    public void updateFilteredTutorialList(Predicate<Tutorial> predicate) {
+        requireNonNull(predicate);
+        filteredTutorials.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +210,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredTutorials.equals(otherModelManager.filteredTutorials);
     }
 
 }
