@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.logic.handler;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,6 +26,7 @@ public class DuplicatePhoneTagger {
      * @param model that represents the current state of the address book
      */
     public void tagPhoneDuplicates(Model model) {
+        assert model != null : "Model must exist";
         List<Person> persons = model.getFilteredPersonList();
         updateFrequenciesOfPhones(persons);
         updatePersonsList(model, persons);

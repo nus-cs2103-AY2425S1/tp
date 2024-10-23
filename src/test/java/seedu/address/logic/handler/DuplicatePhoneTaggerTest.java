@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.logic.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
