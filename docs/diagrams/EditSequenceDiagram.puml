@@ -36,8 +36,13 @@ activate ArgumentMultimap
 ArgumentMultimap --> EditCommandParser
 deactivate ArgumentMultimap
 
-EditCommandParser -> EditPersonDescriptor : setName(a.getName())
+create EditPersonDescriptor
+EditCommandParser -> EditPersonDescriptor
 activate EditPersonDescriptor
+
+EditPersonDescriptor --> EditCommandParser
+EditCommandParser -> EditPersonDescriptor : setName(a.getName())
+
 EditPersonDescriptor --> EditCommandParser
 deactivate EditPersonDescriptor
 
