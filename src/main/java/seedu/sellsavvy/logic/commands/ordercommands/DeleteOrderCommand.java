@@ -4,7 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.sellsavvy.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 
-import javafx.collections.ObservableList;
+import java.util.List;
+
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.logic.Messages;
@@ -48,15 +49,15 @@ public class DeleteOrderCommand extends Command {
         if (selectedPerson == null) {
             throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
         }
-        ObservableList<Order> unmodifiableOrderList = selectedPerson.getOrderUnmodifiableObservableList();
-        OrderList orderList = selectedPerson.getOrderList();
 
-        if (index.getZeroBased() >= orderList.size()) {
+        List<Order> lastShownOrderList = selectedPerson.getFilteredOrderList();
+        if (index.getZeroBased() >= lastShownOrderList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
+        Order orderToDelete = lastShownOrderList.get(this.index.getZeroBased());
 
-        Order orderToDelete = unmodifiableOrderList.get(this.index.getZeroBased());
-        orderList.remove(this.index);
+        OrderList orderList = selectedPerson.getOrderList();
+        orderList.remove(orderToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ORDER_SUCCESS, Messages.format(orderToDelete)));
     }
 

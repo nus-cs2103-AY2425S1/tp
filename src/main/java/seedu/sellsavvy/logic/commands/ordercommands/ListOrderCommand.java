@@ -47,6 +47,7 @@ public class ListOrderCommand extends Command {
         }
         Person selectedPerson = lastShownList.get(index.getZeroBased());
         model.updateSelectedPerson(selectedPerson);
+        selectedPerson.resetFilteredOrderList();
         return new CommandResult(String.format(MESSAGE_LIST_ORDER_SUCCESS, selectedPerson.getName().fullName));
     }
 

@@ -99,8 +99,8 @@ public class PersonTest {
     }
 
     @Test
-    public void getOrderUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredOrderList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> ALICE.getOrderUnmodifiableObservableList().remove(0));
+                -> ALICE.getFilteredOrderList().remove(0));
     }
 }
