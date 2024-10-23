@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,7 +16,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyWeddingBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.storage.Storage;
 
 /**
@@ -51,7 +54,12 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            // need help to do this in a more elegant way!!!
+            if (commandText.contains(AddWeddingCommand.COMMAND_WORD)) {
+                storage.saveWeddingBook(model.getWeddingBook());
+            } else {
+                storage.saveAddressBook(model.getAddressBook());
+            }
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -84,5 +92,20 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ReadOnlyWeddingBook getWeddingBook() {
+        return model.getWeddingBook();
+    }
+
+    @Override
+    public ObservableList<Wedding> getFilteredWeddingList() {
+        return model.getFilteredWeddingList();
+    }
+
+    @Override
+    public Path getWeddingBookFilePath() {
+        return model.getWeddingBookFilePath();
     }
 }
