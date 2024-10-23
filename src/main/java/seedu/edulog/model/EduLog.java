@@ -118,6 +118,13 @@ public class EduLog implements ReadOnlyEduLog {
     }
 
     /**
+     * Marks all students as present.
+     */
+    public void markAllStudents() {
+        students.forEach(Student::mark);
+    }
+
+    /**
      * Marks given student as absent.
      *
      * @param student the student to mark as absent.
@@ -127,6 +134,9 @@ public class EduLog implements ReadOnlyEduLog {
         student.unmark();
     }
 
+    /**
+     * Marks all students as absent.
+     */
     public void unmarkAllStudents() {
         students.forEach(Student::unmark);
     }
