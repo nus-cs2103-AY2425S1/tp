@@ -4,7 +4,10 @@
   pageNav: 3
 ---
 
-# InternBuddy Developer Guide
+<h1 id="internbuddy-developer-guide">
+    <img src="images/InternBuddyLogo.png" alt="Logo" width="40" height="40" style="vertical-align:middle;">
+    InternBuddy Developer Guide
+</h1>
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -71,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `companyListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CompanyListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +83,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `company` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Company` object residing in the `Model`.
 
 ### Logic component
 
@@ -123,14 +126,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `company` objects (which are contained in a `UniqueCompanyList` object).
-* stores the currently 'selected' `company` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Company>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object).
+* stores the currently 'selected' `Company` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Company>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `company` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `company` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Company` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Company` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -151,6 +154,8 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.internbuddy.commons` package.
+
+[back to top](#internbuddy-developer-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,6 +260,8 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+
+[back to top](#internbuddy-developer-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -501,6 +508,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CSV**: Comma Separated Values, a text file format that uses commas to separate values, and newlines to separate records.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange [format](https://www.json.org/json-en.html).
 
+[back to top](#internbuddy-developer-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -555,3 +564,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+[back to top](#internbuddy-developer-guide)
