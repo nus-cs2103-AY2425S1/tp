@@ -23,3 +23,7 @@
     -fx-text-fill: white;
     -fx-font-size: 22px;
 }
+
+#tags .tag-property {
+    -fx-background-color: #3e917e;
+}
