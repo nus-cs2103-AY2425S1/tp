@@ -4,13 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,10 +27,14 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
+import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.student.predicates.ScheduleContainsKeywordsPredicate;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
@@ -108,19 +115,31 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
+        // keywords for each prefix
+        Collection<String> nameKeywords = Set.of("foo", "bar", "baz");
+        Collection<String> dayKeywords = Set.of("Monday", "Tuesday", "Wednesday");
 
-    @Test
-    public void parseCommand_findRandomCase() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD_RANDOM_CASE + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        // Collection of keyword for day
+        Collection<Days> daySet = Set.of(Days.MONDAY, Days.TUESDAY, Days.WEDNESDAY);
+
+        // Predicates for prefixes
+        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+        ScheduleContainsKeywordsPredicate dayPredicate = new ScheduleContainsKeywordsPredicate(daySet);
+        FindCommand expectedFindCommand = new FindCommand(List.of(dayPredicate, namePredicate));
+
+        // Constructing the input string
+        String nameInput = PREFIX_NAME + String.join(" ", nameKeywords);
+        String dayInput = PREFIX_DAY + String.join(" ", dayKeywords);
+        String userInput = FindCommand.COMMAND_WORD + " " + nameInput + " " + dayInput;
+        String userInputRandomCase = FindCommand.COMMAND_WORD_RANDOM_CASE + " " + dayInput + " " + nameInput;
+
+        // Parsing the input string
+        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+        FindCommand commandRandomCase = (FindCommand) parser.parseCommand(userInputRandomCase);
+
+        // Random case allowed
+        assertEquals(expectedFindCommand, command);
+        assertEquals(expectedFindCommand, commandRandomCase);
     }
 
     @Test
@@ -174,6 +193,20 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_owe() throws Exception {
+        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        assertEquals(new OweCommand(INDEX_FIRST_STUDENT, 1), command);
+    }
+
+    @Test
+    public void parseCommand_oweRandomCase() throws Exception {
+        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD_RANDOM_CASE + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        assertEquals(new OweCommand(INDEX_FIRST_STUDENT, 1), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -182,5 +215,33 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_settle() throws Exception {
+        // Example index and amount
+        double amount = 100.0; // Example amount
+
+        // Assuming the command format is "settle i/1 a/100.0"
+        SettleCommand command = (SettleCommand) parser.parseCommand(
+                SettleCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + PREFIX_AMOUNT + amount);
+
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
+    }
+
+    @Test
+    public void parseCommand_settleRandomCase() throws Exception {
+        // Example index and amount
+        double amount = 100.0; // Example amount
+
+        // Test for random case command
+        SettleCommand command = (SettleCommand) parser.parseCommand(
+                SettleCommand.COMMAND_WORD_RANDOM_CASE + " "
+                        + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + PREFIX_AMOUNT + amount);
+
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
     }
 }

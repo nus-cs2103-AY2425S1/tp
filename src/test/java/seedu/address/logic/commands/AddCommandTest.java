@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicates.AttributeContainsKeywordsPredicate;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandTest {
@@ -68,6 +69,7 @@ public class AddCommandTest {
                         1,
                         "Name: " + ALICE.getName() + " | Schedule: " + ALICE.getSchedule() + "\n")));
     }
+
 
 
     @Test
@@ -182,6 +184,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredStudentList(List<AttributeContainsKeywordsPredicate<?>> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
