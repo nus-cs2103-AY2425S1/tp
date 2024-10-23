@@ -30,10 +30,12 @@ public abstract class Date {
     /**
      * Constructs a {@code Date}.
      *
-     * @param date A valid date string
+     * @param date A case-insensitive valid date string
      */
     public Date(String date) {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        // additional parsing required to ensure string format of month is consistent
+        // i.e. 30 Jun 2019, not 30 jun 2019
         value = parseLocalDate(date).format(DATE_TIME_FORMATTER);
     }
 
@@ -100,7 +102,7 @@ public abstract class Date {
     /**
      * Parses date string to LocalDate.
      *
-     * @param date A date string with the format "d MMM yyyy"
+     * @param date A case-insensitive date string with the format "d MMM yyyy"
      * @return LocalDate
      * @throws DateTimeParseException if string is invalid
      */
