@@ -117,6 +117,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasVendor(Person person) {
+        requireNonNull(person);
+        return addressBook.hasVendor(person);
+    }
+
+    @Override
+    public void assignVendor(Person person) {
+        requireNonNull(person);
+        addressBook.addVendor(person);
+    }
+
+    @Override
+    public void unassignVendor(Person person) {
+
+    }
+
+    @Override
+    public void deleteVendor(Person person) {
+
+    }
+
+    @Override
     public void addTag(Tag tag) {
         addressBook.addTag(tag);
         updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);

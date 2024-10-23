@@ -216,6 +216,26 @@ public class CreateTagCommandTest {
         public void deleteTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasVendor(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void assignVendor(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignVendor(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteVendor(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -74,6 +74,27 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Returns true if a vendor with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasVendor(Person person);
+
+    /**
+     * Assigns the given person to be a vendor.
+     * {@code vendor} must not already exist as a vendor in the address book.
+     */
+    void assignVendor(Person person);
+
+    /**
+     * Unassigns the vendor to just be a normal person in the WedLinker.
+     */
+    void unassignVendor(Person person);
+
+    /**
+     * Deletes vendor from the WedLinker.
+     */
+    void deleteVendor(Person person);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueVendorList;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.wedding.UniqueWeddingList;
@@ -21,6 +23,7 @@ import seedu.address.model.wedding.Wedding;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueVendorList vendors;
     private final UniqueTagList tags;
     private final UniqueWeddingList weddings;
 
@@ -33,6 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        vendors = new UniqueVendorList();
         tags = new UniqueTagList();
         weddings = new UniqueWeddingList();
     }
@@ -68,6 +72,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+    }
+
+    /**
+     * Replaces the contents of the vendor list with {@code vendors}.
+     * {@code vendors} must not contain duplicate vendors.
+     */
+    public void setVendors(List<Vendor> vendors) {
+        this.vendors.setVendors(vendors);
     }
 
     /**
@@ -113,6 +125,41 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    //// vendor-level operations
+    /**
+     * Returns true if a vendor with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasVendor(Person person) {
+        requireNonNull(person);
+        return vendors.contains(person);
+    }
+
+    /**
+     * Adds a person as a vendor to the vendor list.
+     * The person must not already exist in the vendor list.
+     */
+    public void addVendor(Person p) {
+        vendors.add(p);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedVendor}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setVendor(Vendor target, Vendor editedVendor) {
+        requireNonNull(editedVendor);
+        vendors.setVendor(target, editedVendor);
+    }
+
+    /**
+     * Removes {@code key} from this {@code vendors}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeVendor(Vendor key) {
+        vendors.remove(key);
     }
 
     //// tag-level operations
