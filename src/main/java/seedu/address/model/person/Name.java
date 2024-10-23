@@ -13,10 +13,10 @@ public class Name {
             + "and it should include given name and surname";
 
     /*
-     * The name must only contain alphanumeric characters and spaces.
+     * The name must only contain alphabetical characters and spaces.
      * It must contain at least two words, for given name and surname.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}]+ [\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[a-zA-z]+ [a-zA-z][a-zA-z ]*";
 
     public final String fullName;
 
