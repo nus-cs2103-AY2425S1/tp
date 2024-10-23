@@ -20,7 +20,6 @@ import seedu.address.logic.commands.ClearEventCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.EditPersonCommandTest;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPersonCommand;
