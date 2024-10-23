@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,10 +18,9 @@ import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingDate;
 import seedu.address.model.wedding.WeddingName;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
+/**
+ * Edits a wedding in the address book.
+ */
 public class EditWeddingCommand extends Command {
 
     public static final String COMMAND_WORD = "editw";
@@ -35,6 +38,11 @@ public class EditWeddingCommand extends Command {
     private final Index index;
     private final EditWeddingDescriptor editWeddingDescriptor;
 
+    /**
+     * Constructor.
+     * @param index
+     * @param editWeddingDescriptor
+     */
     public EditWeddingCommand(Index index, EditWeddingDescriptor editWeddingDescriptor) {
         requireNonNull(index);
         requireNonNull(editWeddingDescriptor);
@@ -45,6 +53,12 @@ public class EditWeddingCommand extends Command {
         this.editWeddingDescriptor = new EditWeddingDescriptor(editWeddingDescriptor);
     }
 
+    /**
+     * Executes edit wedding command
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult
+     * @throws CommandException with invalid input
+     */
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(index);
         List<Wedding> lastShownList = model.getFilteredWeddingList();
@@ -100,11 +114,15 @@ public class EditWeddingCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editWeddingDescriptor)
+                .add("editWeddingDescriptor", editWeddingDescriptor)
                 .toString();
     }
 
 
+    /**
+     * Stores the details to edit the wedding with. Each non-empty field value will replace the
+     * corresponding field value of the wedding.
+     */
     public static class EditWeddingDescriptor {
         private WeddingName weddingName;
         private WeddingDate weddingDate;

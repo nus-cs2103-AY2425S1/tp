@@ -53,6 +53,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code wedding} for display to the user.
+     */
     public static String formatWedding(Wedding wedding) {
         final StringBuilder builder = new StringBuilder();
         builder.append(wedding.getWeddingName())

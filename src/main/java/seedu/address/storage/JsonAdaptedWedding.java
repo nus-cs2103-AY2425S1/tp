@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import static seedu.address.logic.parser.ParserUtil.parseWeddingDate;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
