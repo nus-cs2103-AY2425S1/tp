@@ -3,16 +3,16 @@ package seedu.address.model.person;
 import java.time.LocalDateTime;
 
 public class Log {
-    private final String log;
+    private final String logString;
     private final LocalDateTime timestamp;
 
-    public Log(String log, LocalDateTime timestamp) {
-        this.log = log;
+    public Log(String logString, LocalDateTime timestamp) {
+        this.logString = logString;
         this.timestamp = timestamp;
     }
 
-    public String getLog() {
-        return log;
+    public String getLogString() {
+        return logString;
     }
 
     public LocalDateTime getTimestamp() {
@@ -21,7 +21,7 @@ public class Log {
 
     @Override
     public String toString() {
-        return log + " at " + timestamp;
+        return "[" + timestamp + "] " + logString;
     }
 
     @Override
@@ -35,12 +35,12 @@ public class Log {
         }
 
         Log otherLog = (Log) other;
-        return otherLog.getLog().equals(getLog())
+        return otherLog.getLogString().equals(getLogString())
                 && otherLog.getTimestamp().equals(getTimestamp());
     }
 
     @Override
     public int hashCode() {
-        return log.hashCode() + timestamp.hashCode();
+        return logString.hashCode() + timestamp.hashCode();
     }
 }

@@ -12,16 +12,8 @@ public class LogList {
         logs = new ArrayList<>();
     }
 
-    public LogList(List<Log> logs) {
-        this.logs = new ArrayList<>(logs);
-    }
-
     public void addLog(Log log) {
         logs.add(log);
-    }
-
-    public void removeLog(Log log) {
-        logs.remove(log);
     }
 
     public List<Log> getLogs() {
