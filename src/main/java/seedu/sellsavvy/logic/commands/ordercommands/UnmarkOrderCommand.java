@@ -38,8 +38,8 @@ public class UnmarkOrderCommand extends Command {
     private final Index index;
 
     /**
-     * Creates a UnmarkOrderCommand to revert the order of the
-     * specified index to the pending status.
+     * Creates a UnmarkOrderCommand to revert the order of an order
+     * at the specified index to the pending status.
      *
      * @param index of the order in the displayed order list to mark.
      */
