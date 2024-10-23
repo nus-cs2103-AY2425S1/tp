@@ -9,52 +9,27 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseAddressPredicate;
+import static seedu.address.logic.parser.ParserUtil.parseCompanyPredicate;
+import static seedu.address.logic.parser.ParserUtil.parseEmailPredicate;
+import static seedu.address.logic.parser.ParserUtil.parseNamePredicate;
+import static seedu.address.logic.parser.ParserUtil.parsePhonePredicate;
+import static seedu.address.logic.parser.ParserUtil.parseRsvpPredicate;
+import static seedu.address.logic.parser.ParserUtil.parseTagPredicate;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.RsvpContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public FindCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY);
-
-        if (!isOnlyOneDistinctPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RSVP,
-                PREFIX_COMPANY);
-
-        return new FindCommand(getPredicate(argMultimap));
-    }
 
     /**
      * Constructs a {@code Predicate} based on the provided {@code ArgumentMultimap}.
@@ -73,19 +48,19 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> tags = argMultimap.getAllValues(PREFIX_TAG);
 
         if (name.isPresent()) {
-            return new NameContainsKeywordsPredicate(parseKeywords(name.get()));
+            return parseNamePredicate(name.get());
         } else if (phone.isPresent()) {
-            return new PhoneContainsKeywordsPredicate(parseKeywords(phone.get()));
+            return parsePhonePredicate(phone.get());
         } else if (email.isPresent()) {
-            return new EmailContainsKeywordsPredicate(parseKeywords(email.get()));
+            return parseEmailPredicate(email.get());
         } else if (address.isPresent()) {
-            return new AddressContainsKeywordsPredicate(parseKeywords(address.get()));
+            return parseAddressPredicate(address.get());
         } else if (rsvp.isPresent()) {
-            return new RsvpContainsKeywordsPredicate(parseKeywords(rsvp.get()));
+            return parseRsvpPredicate(rsvp.get());
         } else if (company.isPresent()) {
-            return new CompanyContainsKeywordsPredicate(parseKeywords(company.get()));
+            return parseCompanyPredicate(company.get());
         } else if (!tags.isEmpty()) {
-            return new TagContainsKeywordsPredicate(parseTags(tags));
+            return parseTagPredicate(tags);
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -96,7 +71,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Checks if exactly one distinct prefix is present in the given {@code ArgumentMultimap}.
      *
      * @param argumentMultimap The {@code ArgumentMultimap} containing the argument prefixes and values.
-     * @param prefixes Varargs of {@code Prefix} to check for presence in the {@code argumentMultimap}.
+     * @param prefixes         Varargs of {@code Prefix} to check for presence in the {@code argumentMultimap}.
      * @return true if exactly one distinct prefix is present, false otherwise.
      */
     private static boolean isOnlyOneDistinctPrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
@@ -108,29 +83,26 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Parses a given string into a list of trimmed keywords.
+     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * and returns a FindCommand object for execution.
      *
-     * @param inputString The input string to be parsed into keywords.
-     * @return A {@code List<String>} containing the trimmed and non-empty keywords.
+     * @throws ParseException if the user input does not conform the expected format
      */
-    private static List<String> parseKeywords(String inputString) {
-        return Arrays.stream(inputString.split(" "))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toList());
-    }
+    public FindCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY);
 
-    /**
-     * Parses a list of tags, splitting each tag by spaces and returning a flattened list of individual tags.
-     *
-     * @param tags the list of tags to be parsed, where each tag may contain multiple words separated by spaces
-     * @return a list of individual tags, with no empty strings and no leading or trailing whitespace
-     */
-    private static List<String> parseTags(List<String> tags) {
-        return tags.stream()
-                .flatMap(tag -> Arrays.stream(tag.split(" ")))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toList());
+        if (!isOnlyOneDistinctPrefixPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_TAG, PREFIX_RSVP, PREFIX_COMPANY) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RSVP,
+                PREFIX_COMPANY);
+
+        return new FindCommand(getPredicate(argMultimap));
     }
 }
