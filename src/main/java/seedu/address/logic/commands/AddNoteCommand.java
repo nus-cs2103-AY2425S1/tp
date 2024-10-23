@@ -52,5 +52,21 @@ public class AddNoteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, nric, noteText));
     }
     
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // Check if the other object is an instance of AddAppointmentCommand
+        if (!(other instanceof AddNoteCommand)) {
+            return false;
+        }
+
+        // Cast and check if the fields are equal
+        AddNoteCommand otherCommand = (AddNoteCommand) other;
+        return nric.equals(otherCommand.nric)
+                && noteText.equals(otherCommand.noteText);
+    }
 
 }

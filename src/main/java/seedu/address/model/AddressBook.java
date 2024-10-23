@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -131,6 +132,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void deleteLink(Person patient, Person caregiver) {
         persons.deleteLink(patient, caregiver);
+    }
+
+    public void addNoteToPerson(Note note, Person person) {
+        persons.addNoteToPerson(note, person);
     }
 
     //// util methods
