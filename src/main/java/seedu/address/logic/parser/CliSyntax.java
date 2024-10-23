@@ -25,5 +25,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_HEALTHRISK = new Prefix("rl/");
     public static final Prefix PREFIX_APPOINTMENT = new Prefix("appt/");
     public static final Prefix PREFIX_DATETIME = new Prefix("dt/");
+    public static final Prefix PREFIX_STARTDATE = new Prefix("sd/");
+    public static final Prefix PREFIX_ENDDATE = new Prefix("ed/");
 
 }
