@@ -25,6 +25,7 @@ Class JsonAdaptedSchedule
 
 }
 
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
