@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -105,4 +106,6 @@ public interface Model {
     List<Appointment> getAllAppointments();
 
     List<Appointment> getAppointmentsForPerson(Person person);
+
+    Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime);
 }

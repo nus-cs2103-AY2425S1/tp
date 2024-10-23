@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -196,6 +197,17 @@ public class ModelManager implements Model {
         temp.sort(Comparator.comparing(Appointment::getStartTime));
         return temp;
     }
+
+    public Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime) {
+        List<Appointment> temp = this.getAppointmentsForPerson(person);
+        for (Appointment appointment : temp) {
+            if (appointment.getStartTime().equals(startTime)) {
+                return appointment;
+            }
+        }
+        return null;
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
