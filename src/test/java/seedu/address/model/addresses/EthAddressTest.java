@@ -66,8 +66,8 @@ public class EthAddressTest {
 
     @Test
     public void testGetNetwork() {
-        EthAddress EthAddress = new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1);
-        assertEquals(Network.ETH, EthAddress.getNetwork());
+        EthAddress ethAddress = new EthAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1);
+        assertEquals(Network.ETH, ethAddress.getNetwork());
     }
 
 }

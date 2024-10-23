@@ -66,8 +66,8 @@ public class SolAddressTest {
 
     @Test
     public void testGetNetwork() {
-        SolAddress SolAddress = new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1);
-        assertEquals(Network.SOL, SolAddress.getNetwork());
+        SolAddress solAddress = new SolAddress(VALID_PUBLIC_ADDRESS_1, VALID_LABEL_1);
+        assertEquals(Network.SOL, solAddress.getNetwork());
     }
 
 }
