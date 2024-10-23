@@ -86,6 +86,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        logger.info("Address book data has been reset.");
     }
 
     @Override
@@ -180,11 +181,13 @@ public class ModelManager implements Model {
     public void updatePersonListSort(Comparator<Person> comparator) {
         requireNonNull(comparator);
         sortedPersons.setComparator(comparator);
+        logger.fine("Person list sorted with new comparator.");
     }
 
     @Override
     public void clearPersonSort() {
         sortedPersons.setComparator(null);
+        logger.fine("Cleared person list sort. Reset to default order.");
     }
 
     @Override
