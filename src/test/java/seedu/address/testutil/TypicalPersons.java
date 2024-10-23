@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
@@ -73,7 +74,24 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with all the typical persons in random order.
+     */
+    public static AddressBook getShuffledTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getShuffledTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getShuffledTypicalPersons() {
+        List<Person> shuffledList = new ArrayList<>(getTypicalPersons());
+        Collections.shuffle(shuffledList);
+        return shuffledList;
     }
 }
