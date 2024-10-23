@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -23,10 +25,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INCOMPLETE_INDEX = "Index is incomplete.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -35,6 +39,28 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a list of {@code Index} and returns it. Leading and trailing whitespaces will
+     * be trimmed.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static ArrayList<Index> parseMultipleIndexSeperatedByComma(String oneBasedIndexes) throws ParseException {
+        String trimmedIndexes = oneBasedIndexes.trim();
+        if (trimmedIndexes.endsWith(",")) {
+            throw new ParseException(MESSAGE_INCOMPLETE_INDEX);
+        }
+        String[] indexes = trimmedIndexes.split(",");
+        LinkedHashSet<Index> indexSet = new LinkedHashSet<>();
+        for (String index : indexes) {
+            if (!StringUtil.isNonZeroUnsignedInteger(index.trim())) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            indexSet.add(Index.fromOneBased(Integer.parseInt(index.trim())));
+        }
+        return new ArrayList<>(indexSet);
     }
 
     /**
@@ -100,6 +126,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code remark} is invalid.
      */
     public static Remark parseRemark(String remark) throws ParseException {
@@ -137,6 +164,7 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -144,4 +172,5 @@ public class ParserUtil {
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
 }
