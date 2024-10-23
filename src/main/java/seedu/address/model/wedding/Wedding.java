@@ -72,6 +72,12 @@ public class Wedding {
 
         contactMap.addToMap(person.getRole(), person);
     }
+    /**
+     * Returns true if both weddings have the same identity.
+     */
+    public boolean isSameWedding(Wedding otherWedding) {
+        return this.equals(otherWedding);
+    }
 
     @Override
     public String toString() {
