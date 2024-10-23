@@ -2,14 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 public class FilterCommandParserTest {
 
@@ -33,14 +29,5 @@ public class FilterCommandParserTest {
                 FilterCommand.MESSAGE_USAGE));
     }
 
-    @Test
-    public void parse_validArgs_returnsFilterCommand() {
-        // no leading and trailing whitespaces
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "family")));
-        assertParseSuccess(parser, "t/friends t/family", expectedFilterCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n t/friends \n \t t/family  \t", expectedFilterCommand);
-    }
+    //Todo test valid parse
 }

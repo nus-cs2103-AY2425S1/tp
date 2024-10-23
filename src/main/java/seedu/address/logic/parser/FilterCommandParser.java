@@ -2,42 +2,47 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FilterCommand object
+ * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
-
-    private static final Prefix TAG_PREFIX = CliSyntax.PREFIX_TAG;
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FilterCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args.trim(), CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TAG,
+                        CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_ADDRESS);
+
+        // Check if any valid prefixes are present
+        if (!areAnyPrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TAG,
+                CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_ADDRESS)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        String[] tagKeywords = Arrays.stream(trimmedArgs.split("\\s+"))
-                .filter(arg -> arg.startsWith(TAG_PREFIX.getPrefix()))
-                .map(arg -> arg.substring(TAG_PREFIX.getPrefix().length()))
-                .toArray(String[]::new);
+        // Get values, defaulting to empty string if not present
+        String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).orElse("").trim();
+        String tag = argMultimap.getValue(CliSyntax.PREFIX_TAG).orElse("").trim();
+        String email = argMultimap.getValue(CliSyntax.PREFIX_EMAIL).orElse("").trim();
+        String phone = argMultimap.getValue(CliSyntax.PREFIX_PHONE).orElse("").trim();
+        String address = argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).orElse("").trim();
 
-        // Check if keywords are empty
-        if (tagKeywords.length == 0 || Arrays.stream(tagKeywords).anyMatch(String::isEmpty)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
+        return new FilterCommand(name, tag, email, phone, address);
+    }
 
-        return new FilterCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
+    /**
+     * Returns true if at least one of the prefixes contains values in the argument multimap.
+     */
+    private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
