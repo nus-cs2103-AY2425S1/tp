@@ -35,6 +35,7 @@ public class ShowCommand extends Command {
      * @param targetIndex The index of the person to show.
      */
     public ShowCommand(Index targetIndex) {
+        assert targetIndex != null : "Target index should not be null";
         this.targetIndex = targetIndex;
     }
 
@@ -50,6 +51,8 @@ public class ShowCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert model != null : "Model should not be null";
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
