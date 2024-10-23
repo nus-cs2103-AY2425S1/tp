@@ -82,17 +82,45 @@ In this comprehensive user guide, we will take you to experience a full journey 
 ### 1.1 What is TrackMate
 <a id="what-is-trackmate"></a>
 
-TO BE DONE
+TrackMate is a desktop application specifically designed for teaching assistants (TAs) who work at the School of 
+Computing (SoC) of National University of Singapore (NUS). By providing an efficient solution to manage student data, 
+TrackMate simplifies the process of tracking assignments, tutorials, and attendance. With its powerful Command Line 
+Interface (CLI), TrackMate allows TAs to efficiently manage student information while enhancing productivity in their 
+administrative tasks.
+
+Overview of Main Features:
+* Tutorial Management: Track student tutorial groups for each session.
+* Attendance Monitoring: Record attendance effortlessly to ensure that student participation is logged accurately.
+* Assignment Tracking: Easily add, update, and manage assignment submissions and statuses for students.
 
 ### 1.2 User Proficiency and Expectations
 <a id="user-proficiency-and-expectations"></a>
 
-TO BE DONE
+* Level of Relatedness: Users of TrackMate are TAs within SoC who are actively involved in managing students’ 
+academic progress, particularly in tutorials, assignments, and attendance tracking.
+
+
+* Comprehension: Users are expected to have a working knowledge of academic processes such as student grading, 
+tutorial scheduling, and attendance monitoring within the context of NUS.
+
+
+* Prior Knowledge: TrackMate assumes users have basic computer proficiency, particularly in navigating CLI 
+environments, and are comfortable managing data related to student performance.
+
+
+* Desire for Efficiency: Users of TrackMate prioritize streamlined workflows, allowing them to manage student 
+data effectively while reducing the time spent on repetitive tasks.
 
 ### 1.3 Why This Guide Matters
 <a id="why-this-guide-matters"></a>
 
-TO BE DONE
+This guide is crafted to ensure that you make the most of TrackMate's functionality. Whether you are just starting 
+out or are an experienced TA, the guide will walk you through using the tool efficiently, offering shortcuts and tips 
+to enhance your experience. By following the steps outlined here, you'll be able to simplify your workflow, allowing 
+you to focus more on teaching and less on administrative tasks.
+
+We’re here to help you make the most out of your TA experience with TrackMate. Let’s dive in and explore how TrackMate 
+can transform the way you manage student data at SoC!
 
 --------------------------------------------------------------------------------------------------------------------
 
