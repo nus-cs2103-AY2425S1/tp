@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.client.exceptions.ClaimException;
 import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.claim.Claim;
 import seedu.address.model.client.insurance.claim.ClaimStub;
@@ -142,6 +143,14 @@ class InsurancePlansManagerTest {
 
         // Act and Assert
         assertNotEquals(manager1, manager2);
+    }
+
+    @Test
+    public void checkIfCopyIsIdentical_success() throws ClaimException, InsurancePlanException {
+        InsurancePlansManager manager1 = new InsurancePlansManager();
+        InsurancePlansManager manager2 = manager1.createCopy();
+
+        assertEquals(manager1, manager2);
     }
 
 

@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
@@ -75,7 +76,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -90,7 +91,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -111,6 +112,39 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
     }
+
+    /**
+     * Checks if the {@code InsurancePlansManager} object works as intended when a command is called. This assert method
+     * is required as the {@code InsurancePlansManager} is mutable and has no equals method in {@code Client} to check
+     * for changes using the {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} method.
+     *
+     * @param command                      command to be checked, must be only for Insurance or Claims related objects.
+     * @param actualModel                  Model that the command is to be checked on.
+     * @param expectedMessage              the expected success message.
+     * @param actualInsurancePlansManager  the actual state of the insurance plan manager.
+     * @param expectedInsurancePlansManager the expected state of the insurance plan manager.
+     */
+    public static void assertInsuranceCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                     InsurancePlansManager actualInsurancePlansManager,
+                                                     InsurancePlansManager expectedInsurancePlansManager) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertInsuranceCommandSuccess(command, actualModel, expectedCommandResult,
+                actualInsurancePlansManager, expectedInsurancePlansManager);
+    }
+
+    private static void assertInsuranceCommandSuccess(Command command, Model actualModel,
+                                                      CommandResult expectedCommandResult,
+                                                      InsurancePlansManager actualInsurancePlansManager,
+                                                      InsurancePlansManager expectedInsurancePlansManager) {
+        try {
+            CommandResult result = command.execute(actualModel);
+            assertEquals(expectedCommandResult, result);
+            assertEquals(expectedInsurancePlansManager, actualInsurancePlansManager);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
      * {@code model}'s address book.
