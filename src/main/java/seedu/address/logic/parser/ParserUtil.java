@@ -14,10 +14,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.pet.Age;
-import seedu.address.model.pet.Breed;
-import seedu.address.model.pet.Sex;
-import seedu.address.model.pet.Species;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -227,13 +223,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code age} is invalid.
      */
-    public static Age parseAge(String age) throws ParseException {
+    public static seedu.address.model.pet.Age parseAge(String age) throws ParseException {
         requireNonNull(age);
         String trimmedAge = age.trim();
-        if (!Age.isValidAge(trimmedAge)) {
-            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.pet.Age.isValidAge(trimmedAge)) {
+            throw new ParseException(seedu.address.model.pet.Age.MESSAGE_CONSTRAINTS);
         }
-        return new Age(trimmedAge);
+        return new seedu.address.model.pet.Age(trimmedAge);
     }
 
     /**
@@ -242,13 +238,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code breed} is invalid.
      */
-    public static Breed parseBreed(String breed) throws ParseException {
+    public static seedu.address.model.pet.Breed parseBreed(String breed) throws ParseException {
         requireNonNull(breed);
         String trimmedBreed = breed.trim();
-        if (!Breed.isValidBreed(trimmedBreed)) {
-            throw new ParseException(Breed.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.pet.Breed.isValidBreed(trimmedBreed)) {
+            throw new ParseException(seedu.address.model.pet.Breed.MESSAGE_CONSTRAINTS);
         }
-        return new Breed(trimmedBreed);
+        return new seedu.address.model.pet.Breed(trimmedBreed);
     }
 
     /**
@@ -257,13 +253,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code sex} is invalid.
      */
-    public static Sex parseSex(String sex) throws ParseException {
+    public static seedu.address.model.pet.Sex parseSex(String sex) throws ParseException {
         requireNonNull(sex);
         String trimmedSex = sex.trim();
-        if (!Sex.isValidSex(trimmedSex)) {
-            throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.pet.Sex.isValidSex(trimmedSex)) {
+            throw new ParseException(seedu.address.model.pet.Sex.MESSAGE_CONSTRAINTS);
         }
-        return new Sex(trimmedSex);
+        return new seedu.address.model.pet.Sex(trimmedSex);
     }
 
     /**
@@ -272,13 +268,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code species} is invalid.
      */
-    public static Species parseSpecies(String species) throws ParseException {
+    public static seedu.address.model.pet.Species parseSpecies(String species) throws ParseException {
         requireNonNull(species);
         String trimmedSpecies = species.trim();
-        if (!Species.isValidSpecies(trimmedSpecies)) {
-            throw new ParseException(Species.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.pet.Species.isValidSpecies(trimmedSpecies)) {
+            throw new ParseException(seedu.address.model.pet.Species.MESSAGE_CONSTRAINTS);
         }
-        return new Species(trimmedSpecies);
+        return new seedu.address.model.pet.Species(trimmedSpecies);
     }
 
     /**
@@ -307,6 +303,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
 
 }

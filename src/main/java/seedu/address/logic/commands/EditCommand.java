@@ -28,8 +28,8 @@ public abstract class EditCommand<T> extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the owner or pet identified "
         + "by the index number used in the displayed owner or pet list. "
         + "Existing values will be overwritten by the input values.\n"
-        + "To edit owners: edit owner INDEX (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
-        + "To edit pets: edit pet INDEX (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
+        + "To edit owners: edit o[INDEX] (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
+        + "To edit pets: edit p[INDEX] (must be a positive integer) KEYWORD [MORE_KEYWORDS]...\n"
         + "Example: edit o1 n/bobby, edit p1 n/tom";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

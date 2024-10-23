@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -103,6 +105,7 @@ public class EditPetCommand extends EditCommand<Pet> {
         private Breed breed;
         private Age age;
         private Sex sex;
+        private Set<Tag> tags;
 
         public EditPetDescriptor() {}
 
@@ -116,13 +119,14 @@ public class EditPetCommand extends EditCommand<Pet> {
             setBreed(toCopy.breed);
             setAge(toCopy.age);
             setSex(toCopy.sex);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, species, breed, age, sex);
+            return CollectionUtil.isAnyNonNull(name, species, breed, age, sex, tags);
         }
 
         public void setName(Name name) {
@@ -163,6 +167,23 @@ public class EditPetCommand extends EditCommand<Pet> {
 
         public Optional<Sex> getSex() {
             return Optional.ofNullable(sex);
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override

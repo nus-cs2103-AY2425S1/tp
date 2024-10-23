@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BREED;
@@ -16,8 +15,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditOwnerCommand;
-import seedu.address.logic.commands.EditPetCommand;
 import seedu.address.logic.commands.EditOwnerCommand.EditOwnerDescriptor;
+import seedu.address.logic.commands.EditPetCommand;
 import seedu.address.logic.commands.EditPetCommand.EditPetDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -45,8 +44,8 @@ public class EditCommandParser implements Parser<EditCommand<?>> {
 
         String[] splitArgs = arguments.split("\\s+");
 
-        if (splitArgs.length < 2) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        if (splitArgs.length < 1) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         switch (entityType.toLowerCase()) {
@@ -135,16 +134,16 @@ public class EditCommandParser implements Parser<EditCommand<?>> {
             editPetDescriptor.setName(ParserUtil.parsePetName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_SPECIES).isPresent()) {
-            editPetDescriptor.setSpecies(ParserUtil.parsePetSpecies(argMultimap.getValue(PREFIX_SPECIES).get()));
+            editPetDescriptor.setSpecies(ParserUtil.parseSpecies(argMultimap.getValue(PREFIX_SPECIES).get()));
         }
         if (argMultimap.getValue(PREFIX_BREED).isPresent()) {
-            editPetDescriptor.setBreed(ParserUtil.parsePetBreed(argMultimap.getValue(PREFIX_BREED).get()));
+            editPetDescriptor.setBreed(ParserUtil.parseBreed(argMultimap.getValue(PREFIX_BREED).get()));
         }
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
-            editPetDescriptor.setAge(ParserUtil.parsePetAge(argMultimap.getValue(PREFIX_AGE).get()));
+            editPetDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
         }
         if (argMultimap.getValue(PREFIX_SEX).isPresent()) {
-            editPetDescriptor.setSex(ParserUtil.parsePetSex(argMultimap.getValue(PREFIX_SEX).get()));
+            editPetDescriptor.setSex(ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get()));
         }
 
         if (!editPetDescriptor.isAnyFieldEdited()) {

@@ -19,7 +19,7 @@ public class Pet implements Linkable {
     private static final String ID_PREFIX = "p";
 
     // Identity fields
-    private static int uid_counter = 0;
+    private static int uidCounter = 0;
     private final String uid;
     private final Name name;
     private final Species species;
@@ -35,7 +35,7 @@ public class Pet implements Linkable {
      */
     public Pet(Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> modelTags) {
         requireAllNonNull(name, species, breed, age, sex);
-        this.uid = name.name + uid_counter++;
+        this.uid = name.name + uidCounter++;
         this.name = name;
         this.species = species;
         this.breed = breed;

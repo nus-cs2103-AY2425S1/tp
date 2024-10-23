@@ -19,12 +19,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddOwnerCommand;
+import seedu.address.logic.commands.AddPetCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteOwnerCommand;
 import seedu.address.logic.commands.DeletePetCommand;
 import seedu.address.logic.commands.EditOwnerCommand;
 import seedu.address.logic.commands.EditOwnerCommand.EditOwnerDescriptor;
+import seedu.address.logic.commands.EditPetCommand;
+import seedu.address.logic.commands.EditPetCommand.EditPetDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindOwnerCommand;
 import seedu.address.logic.commands.FindPersonCommand;
@@ -40,12 +43,16 @@ import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditOwnerDescriptorBuilder;
+import seedu.address.testutil.EditPetDescriptorBuilder;
 import seedu.address.testutil.OwnerBuilder;
 import seedu.address.testutil.OwnerUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PetBuilder;
+import seedu.address.testutil.PetUtil;
 
 public class PawPatrolParserTest {
 
@@ -63,6 +70,13 @@ public class PawPatrolParserTest {
         Owner owner = new OwnerBuilder().build();
         AddOwnerCommand command = (AddOwnerCommand) parser.parseCommand(OwnerUtil.getAddOwnerCommand(owner));
         assertEquals(new AddOwnerCommand(owner), command);
+    }
+
+    @Test
+    public void parseCommand_addPet() throws Exception {
+        Pet pet = new PetBuilder().build();
+        AddPetCommand command = (AddPetCommand) parser.parseCommand(PetUtil.getAddPetCommand(pet));
+        assertEquals(new AddPetCommand(pet), command);
     }
 
     @Test
@@ -108,6 +122,15 @@ public class PawPatrolParserTest {
         EditOwnerCommand command = (EditOwnerCommand) parser.parseCommand(EditOwnerCommand.COMMAND_WORD + " "
             + INDEX_FIRST_PERSON.getOneBased() + " " + OwnerUtil.getEditOwnerDescriptorDetails(descriptor));
         assertEquals(new EditOwnerCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editPet() throws Exception {
+        Pet pet = new PetBuilder().build();
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder(pet).build();
+        EditPetCommand command = (EditPetCommand) parser.parseCommand(EditPetCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PetUtil.getEditPetDescriptorDetails(descriptor));
+        assertEquals(new EditPetCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
