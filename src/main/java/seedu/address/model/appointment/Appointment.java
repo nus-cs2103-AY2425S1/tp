@@ -85,6 +85,15 @@ public class Appointment {
         return true;
     }
 
+    /**
+     * Retrieves an appointment by its ID.
+     * @param id The ID of the appointment to retrieve.
+     * @return The appointment with the given ID, or null if it doesn't exist.
+     */
+    public static Appointment getAppointmentById(Integer id) {
+        return appointmentById.get(id); // returns null if ID doesn't exist
+    }
+
     public Integer getId() {
         return id;
     }
@@ -156,14 +165,5 @@ public class Appointment {
                 .add("date", date)
                 .add("time", time)
                 .toString();
-    }
-
-    /**
-     * Retrieves an appointment by its ID.
-     * @param id The ID of the appointment to retrieve.
-     * @return The appointment with the given ID, or null if it doesn't exist.
-     */
-    public static Appointment getAppointmentById(Integer id) {
-        return appointmentById.get(id); // returns null if ID doesn't exist
     }
 }

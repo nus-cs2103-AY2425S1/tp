@@ -26,10 +26,22 @@ public class DeleteAppointmentCommand extends Command {
 
     private final Appointment appointmentToDelete;
 
+    /**
+     * Constructs a {@code DeleteAppointmentCommand} with the appointment to delete.
+     *
+     * @param appointmentToDelete The appointment object that should be deleted.
+     */
     public DeleteAppointmentCommand(Appointment appointmentToDelete) {
         this.appointmentToDelete = appointmentToDelete;
     }
 
+    /**
+     * Executes the command to delete the specified appointment.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return A {@code CommandResult} message indicating the success or failure of the operation.
+     * @throws CommandException If the specified appointment ID does not exist.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
