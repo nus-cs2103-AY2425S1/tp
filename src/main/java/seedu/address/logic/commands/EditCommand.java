@@ -57,18 +57,35 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "One of the fields you want to add conflict with another person.";
 
-    private final Index index;
+    private static final int invalidTargetIndex = -1;
+
+    private Index targetIndex;
+    private final Name targetName;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param targetIndex of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(Index targetIndex, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(targetIndex);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.targetIndex = targetIndex;
+        this.targetName = null;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    /**
+     * @param targetName of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public EditCommand(Name targetName, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(targetName);
+        requireNonNull(editPersonDescriptor);
+
+        this.targetIndex = null;
+        this.targetName = targetName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -77,11 +94,19 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
+
+        if (targetIndex == null) {
+            setTargetIndex(lastShownList);
+            System.out.println("Have set Target Index: " + targetIndex);
+        }
+        assert(targetIndex != null);
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -96,6 +121,18 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private void setTargetIndex(List<Person> lastShownList) throws CommandException {
+        int temp = lastShownList.stream()
+                .filter(person -> person.getName().equalsIgnoreCase(targetName))
+                .map(lastShownList::indexOf)
+                .reduce(invalidTargetIndex, (x, y) -> y);
+        System.out.println("temp = " + temp);
+        if (temp == invalidTargetIndex) {
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK);
+        }
+        this.targetIndex = Index.fromZeroBased(temp);
     }
 
     /**
@@ -129,14 +166,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
+        return targetIndex.equals(otherEditCommand.targetIndex)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("targetIndex", targetIndex)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
