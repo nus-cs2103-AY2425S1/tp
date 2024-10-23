@@ -70,7 +70,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void notNull_InSampleAddressBook_returnsTrue() {
+    public void notNull_inSampleAddressBook_returnsTrue() {
         AddressBook addressBook1 = (AddressBook) SampleDataUtil.getSampleAddressBook();
         assertTrue(addressBook1 != null);
     }
