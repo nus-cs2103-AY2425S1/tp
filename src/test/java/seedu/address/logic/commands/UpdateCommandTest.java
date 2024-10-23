@@ -77,7 +77,8 @@ public class UpdateCommandTest {
         UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(editedPerson).build();
         UpdateCommand updateCommand = new UpdateCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getStorage());
@@ -99,7 +100,8 @@ public class UpdateCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         UpdateCommand updateCommand = new UpdateCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getStorage());
@@ -113,7 +115,8 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(INDEX_FIRST_PERSON, new UpdateCommand.UpdatePersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getStorage());
@@ -130,7 +133,8 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(INDEX_FIRST_PERSON,
                 new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getStorage());
@@ -163,7 +167,8 @@ public class UpdateCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB).build();
         UpdateCommand updateCommand = new UpdateCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

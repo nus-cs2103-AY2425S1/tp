@@ -129,7 +129,6 @@ public class UpdateCommand extends Command {
         Person personToEdit;
 
         if (nric != null) {
-//            System.out.println("OK");
             List<Person> matchingPersons = lastShownList.stream()
                     .filter(person -> person.getNric().equals(nric))
                     .toList();

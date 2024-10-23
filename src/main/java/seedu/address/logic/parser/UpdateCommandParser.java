@@ -92,7 +92,8 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             updatePersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
-            updatePersonDescriptor.setAppointment(ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get()));
+            updatePersonDescriptor.setAppointment(ParserUtil
+                    .parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updatePersonDescriptor::setTags);
 
