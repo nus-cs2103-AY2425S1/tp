@@ -48,7 +48,7 @@ public class MarkAttendanceByStudentCommand extends Command {
      * @param tutorial Tutorial the student attended
      */
     public MarkAttendanceByStudentCommand(Index targetIndex, Attendance attendance, String tutorial) {
-        requireAllNonNull(targetIndex, attendance);
+        requireAllNonNull(targetIndex, attendance, tutorial);
         this.targetIndex = targetIndex;
         this.attendance = attendance;
         this.tutorial = tutorial;
