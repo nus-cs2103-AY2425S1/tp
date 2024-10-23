@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,6 +20,11 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_CONCURRENT_RN_RA_FIELDS = "Both remark new and remark append fields are "
+            + "specified, please only use one.";
+
+    public static final String MESSAGE_COMMAND_CANCELLED = "Command has been cancelled.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -26,7 +32,7 @@ public class Messages {
         assert duplicatePrefixes.length > 0;
 
         Set<String> duplicateFields =
-                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toCollection(LinkedHashSet::new));
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
@@ -43,8 +49,16 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Job: ")
+                .append(person.getJob())
+                .append("; Income: ")
+                .append(person.getIncome())
+                .append("; Tier: ")
+                .append(person.getTier())
+                .append("; Remark: ")
+                .append(person.getRemark())
+                .append("; Status: ")
+                .append(person.getStatus());
         return builder.toString();
     }
 

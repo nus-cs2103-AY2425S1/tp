@@ -1,21 +1,20 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Remark;
+import seedu.address.model.status.Status;
+import seedu.address.model.tier.Tier;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -28,22 +27,32 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String job;
+    private final String incomeString;
+    private final String remark;
+    private final JsonAdaptedTier assignedTier;
+    private final JsonAdaptedStatus assignedStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("job") String job, @JsonProperty("income") String incomeString,
+                             @JsonProperty("assignedTier") JsonAdaptedTier assignedTier,
+                             @JsonProperty("remark") String remark,
+                             @JsonProperty("assignedStatus") JsonAdaptedStatus assignedStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+        this.job = job;
+        this.incomeString = incomeString;
+        this.assignedTier = assignedTier != null ? assignedTier : new JsonAdaptedTier("");
+        this.remark = remark;
+        this.assignedStatus = assignedStatus != null ? assignedStatus
+                : new JsonAdaptedStatus(CommandCommons.DEFAULT_STATUS);
     }
 
     /**
@@ -54,9 +63,15 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        job = source.getJob().value;
+        incomeString = Integer.toString(source.getIncome().value);
+        remark = source.getRemark().value;
+        Tier tier = source.getTier();
+        assignedTier = tier != null ? new JsonAdaptedTier(tier) : new JsonAdaptedTier("");
+        Status status = source.getStatus();
+        assignedStatus = status != null ? new JsonAdaptedStatus(status)
+                : new JsonAdaptedStatus(CommandCommons.DEFAULT_STATUS);
+
     }
 
     /**
@@ -65,11 +80,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -102,8 +112,35 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (job == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Job.class.getSimpleName()));
+        }
+        if (!Job.isValidJob(job)) {
+            throw new IllegalValueException(Job.MESSAGE_CONSTRAINTS);
+        }
+        final Job modelJob = new Job(job);
+
+        if (!Income.isValidIncome(incomeString)) {
+            throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
+        }
+        final Income modelIncome = new Income(Integer.parseInt(incomeString));
+
+        if (assignedTier == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tier.class.getSimpleName()));
+        }
+        final Tier modelTier = assignedTier.toModelType();
+
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
+        if (assignedStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
+        }
+        final Status modelStatus = assignedStatus.toModelType();
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJob,
+                modelIncome, modelTier, modelRemark, modelStatus);
     }
 
 }

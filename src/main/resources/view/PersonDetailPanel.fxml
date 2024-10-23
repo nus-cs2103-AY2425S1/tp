@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox spacing="10" alignment="TOP_CENTER">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+        </padding>
+
+        <ImageView fx:id="personImage" fitWidth="150" fitHeight="150" preserveRatio="true">
+            <Image url="@/images/agent_assist_logo.png"/>
+        </ImageView>
+
+        <Label fx:id="nameLabel" styleClass="cell_big_label, name-label" alignment="CENTER" maxWidth="Infinity" />
+
+        <FlowPane fx:id="tierPane" alignment="CENTER" />
+
+        <VBox spacing="5">
+            <HBox spacing="10">
+                <Label text="Phone:" styleClass="cell_small_label" minWidth="100" />
+                <Label fx:id="phoneLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Address:" styleClass="cell_small_label" minWidth="100" />
+                <Label fx:id="addressLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Email:" styleClass="cell_small_label" minWidth="100" />
+                <Label fx:id="emailLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Job:" styleClass="cell_small_label" minWidth="100" />
+                <Label fx:id="jobLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Income:" styleClass="cell_small_label" minWidth="100" />
+                <Label fx:id="incomeLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10" alignment="TOP_LEFT">
+                <Label text="Remark:" styleClass="cell_small_label" minWidth="100" />
+                <Label fx:id="remarkLabel" styleClass="cell_small_label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+        </VBox>
+    </VBox>
+</ScrollPane>

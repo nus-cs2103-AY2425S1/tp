@@ -3,13 +3,15 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -127,13 +129,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -229,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -260,12 +255,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Banking Agents, that sell credit cards**:
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
+* needs a fast way to access data, and see relevant customer information at a glance while on a call with the customer
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
@@ -275,29 +271,44 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                                               | So that I can…​                                                                                                                     |
+|----------|-----------------|----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user            | save current data                                                          | when I close & open the app, details I have added persist                                                                           |
+| `* * *`  | user            | be able to edit data of my customer                                        | I can change customer details without having to delete a contact and re-add it with the new details                                 |
+| `* * *`  | banking agent   | add a customer                                                             | I can save the records and details of the new customer                                                                              |
+| `* * *`  | banking agent   | remove a customer                                                          | I can remove a customer that is no longer going to use our credit card services or is blacklisted                                   |
+| `* * *`  | banking agent   | view details of a customer                                                 | I need not ask customers for details again                                                                                          |
+| `* * *`  | banking agent   | save contact details of the customers                                      | I can contact customers who are more willing to spend money and call back customers with updates                                    |
+| `* * *`  | banking agent   | edit contact details of the customers                                      | I need not delete and re-add a customer just for a small change in detail (i.e. moved house)                                        |
+| `* * *`  | banking agent   | delete contact details                                                     | I can remove customers who are no longer valid or for whatever reason are not worth saving                                          |
+| `* * *`  | banking agent   | save a note/remarks about the customers                                    | I can recall any particular notable details about the customer (for e.g. This customer is very concerned about pricing)             |
+| `* *`    | banking agent   | check which credit card services or plans a customer has/had               | I avoid selling products that the customer already has                                                                              |
+| `* *`    | banking agent   | filter using details like occupation and income                            | I can target a group of customers more quickly                                                                                      |
+| `* *`    | first time user | have a walkthrough guide to show me the user interface                     | I am familiar with the features available and how I can find and use them                                                           |
+| `*`      | user            | export current data                                                        | I can backup the data regularly                                                                                                     |
+| `*`      | user            | import data from a backup                                                  | I can use my data backed up in case of data loss, or initialise the app with a set of data if I am transferring from a prior source |
+| `*`      | banking agent   | view common urls/card information                                          | I can read/send them to the customer quickly when inquired                                                                          |
+| `*`      | banking agent   | be reminded to call back a client when I open the application              | I can immediately know which client I need to follow up today                                                                       |
+| `*`      | impatient user  | get the results that falls into a specific group/category                  | I don’t waste time querying all the result in that category one by one                                                              |
+| `*`      | impatient user  | enter details quickly using a user-friendly interface                      | I can quickly add/view data and not get mad because it’s fast                                                                       |
+| `*`      | long time user  | access my most frequently used features easily                             | I can save time when accessing my most used features                                                                                |
+| `*`      | beginner user   | have a help menu                                                           | I know how to perform a particular task                                                                                             |
+| `*`      | beginner user   | have some sample customer data that has already been inputted into the app | I can find out information can be saved in the application                                                                          |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AgentAssist` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: U1 - Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons.
+2.  AgentAssist shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  AgentAssist deletes the person.
 
     Use case ends.
 
@@ -309,25 +320,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. AgentAssist shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: U2 - Add a Person**
+
+**MSS**
+
+1.  User requests to add a user.
+2.  AgentAssist adds a person.
+3.  AgentAssist returns the unique user ID assigned to the new user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given parameters are invalid.
+    * 1a1. AgentAssist shows an invalid parameter error message.
+
+      Use case resumes at step 1.
+
+**Use case: U3 - Filter for a person**
+
+**MSS**
+
+1.  User requests to view a person using an attribute like name to filter for the person.
+2.  AgentAssist returns a list of users which match the filter set in step 1.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given filter option is invalid.
+    * 1a1. AgentAssist shows an invalid parameter error message.
+
+      Use case resumes at step 1.
+* 1b. No users in the existing data pass the filter
+    * 1b1. AgentAssist shows a blank list.
+
+**Use case: U4 - Add remarks about a person**
+
+**MSS**
+
+1.  User performs <u>Filter for a person (U3)</u> .
+2.  AgentAssist returns a list of people, with the person in it.
+3.  User requests to add a remark about the person, using the index of the person in the list.
+4.  AgentAssist adds a remark for the person.
+
+    Use case ends.
+
+**Use case: U5 - Exit**
+
+**MSS**
+
+1.  User requests to exit.
+2.  AgentAssist exits.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+#### Platform Compatibility
+- **Description**: AgentAssist must be operational on any mainstream operating system (Windows, macOS, Linux) as long as Java 17 or newer is installed.
 
-*{More to be added}*
+#### Performance and Capacity
+- **Description**: The system should efficiently handle up to 1000 customer records without noticeable sluggishness in typical usage scenarios.
+- **Performance Goal**: All commands should execute and return a response within two seconds to maintain a fluid user experience.
+
+#### User Efficiency
+- **Description**: Designed for users with above-average typing speed in regular English text; such users should find executing tasks via commands faster than using a mouse.
+
+#### System Architecture
+- **Description**: AgentAssist is designed for single-user scenarios, ensuring personalized and secure data management without the complexities of multi-user capabilities.
+
+#### Data Management
+- **Description**: All customer data should be stored locally in a human-editable text file format, allowing for easy access and manual modifications if required.
+
+#### Documentation
+- **Description**: Provide comprehensive, easy-to-read User and Developer Guides detailing functionality, usage, and system requirements.
+- **Additional**: Both guides should be formatted to be printer-friendly, particularly in PDF format, facilitating easy distribution and referencing.
+
+#### Installation and Distribution
+- **Description**: AgentAssist should be accessible without the need for a traditional installer. The application should be distributable as a single JAR file, simplifying setup and use.
+- **Dependency**: The software should operate independently without requiring connections to any remote servers owned or managed by the developer.
+
+#### User Interface
+- **Description**: While the primary interface is command-line based, any graphical user interface (GUI) elements should be optimized for standard screen resolutions (1920x1080 and higher) and screen scales (100% and 125%), ensuring clarity and usability across various devices.
+
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Mainstream OS**: Common operating systems like Windows, Linux, Unix, and macOS supported by the application.
+* **CLI (Command Line Interface)**: A text-based interface where users interact with the app by typing commands instead of using a graphical interface (mouse-driven).
+* **Banking Agent**: A user of the system responsible for selling credit cards to customers.
+* **Contact**: A record in the AgentAssist system that contains personal and financial details of a customer.
+* **Customer**: A person whose details are managed within the AgentAssist system. This could be a potential or existing client of the banking agent interested in or already using credit card services.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -343,15 +431,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -360,23 +448,26 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a person after having filtered based on a criteria
+    1. Prerequisites: Use the `filter` command with a suitable flag. Multiple persons in the list.
+
+    1. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
