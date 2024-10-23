@@ -101,8 +101,8 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone().orElse(null));
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail().orElse(null));
+        Phone updatedPhone = editPersonDescriptor.getPhone().or(() ->personToEdit.getPhone()).orElse(null);
+        Email updatedEmail = editPersonDescriptor.getEmail().or(personToEdit :: getEmail).orElse(null);
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress().orElse(null));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ModuleRoleMap updatedModuleRoleMap = editPersonDescriptor.getModuleRoleOperation()
@@ -143,9 +143,9 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Optional<Phone> phone;
-        private Optional<Email> email;
-        private Optional<Address> address;
+        private Phone phone;
+        private Email email;
+        private Address address;
         private Set<Tag> tags;
         private EditModuleRoleOperation editModuleRoleOperation;
 
@@ -179,28 +179,28 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Optional<Phone> phone) {
+        public void setPhone(Phone phone) {
             this.phone = phone;
         }
 
         public Optional<Phone> getPhone() {
-            return phone;
+            return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Optional<Email> email) {
+        public void setEmail(Email email) {
             this.email = email;
         }
 
         public Optional<Email> getEmail() {
-            return email;
+            return Optional.ofNullable(email);
         }
 
-        public void setAddress(Optional<Address> address) {
+        public void setAddress(Address address) {
             this.address = address;
         }
 
         public Optional<Address> getAddress() {
-            return address;
+            return Optional.ofNullable(address);
         }
 
         /**

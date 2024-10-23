@@ -38,9 +38,9 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setPhone(person.getPhone().orElse(null));
+        descriptor.setEmail(person.getEmail().orElse(null));
+        descriptor.setAddress(person.getAddress().orElse(null));
         descriptor.setTags(person.getTags());
     }
 
@@ -56,7 +56,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(Optional.of(new Phone(phone)));
+        descriptor.setPhone(new Phone(phone));
         return this;
     }
 
@@ -64,7 +64,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(Optional.of(new Email(email)));
+        descriptor.setEmail(new Email(email));
         return this;
     }
 
@@ -72,7 +72,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(Optional.of(new Address(address)));
+        descriptor.setAddress(new Address(address));
         return this;
     }
 
