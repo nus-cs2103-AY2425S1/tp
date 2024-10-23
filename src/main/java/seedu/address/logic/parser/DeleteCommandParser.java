@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_NAME_FIELD_MISSING;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -21,24 +21,27 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = getArgMultimapByArgs(args);
+        String str = "";
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCommand(index);
-        } catch (ParseException pe) {
-            ArgumentMultimap argMultimap = checkValidity(args);
-
-            try {
-                String str = argMultimap.getValue(PREFIX_NAME).orElseThrow(() -> new Exception("shouldnt be thrown"));
-                Name name = ParserUtil.parseName(str);
-                return new DeleteCommand(name);
-            } catch (Exception ex) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), ex);
+        } catch (ParseException unusedException) {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                str = argMultimap.getValue(PREFIX_NAME).get();
             }
+        }
+
+        try {
+            Name name = ParserUtil.parseName(str);
+            return new DeleteCommand(name);
+        } catch (Exception ex) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), ex);
         }
     }
 
-    private ArgumentMultimap checkValidity(String args) throws ParseException {
+    private ArgumentMultimap getArgMultimapByArgs(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
