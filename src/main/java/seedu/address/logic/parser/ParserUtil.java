@@ -157,6 +157,9 @@ public class ParserUtil {
         if (!WeddingName.isValidWeddingName(trimmedName)) {
             throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
         }
+        if (!WeddingName.isWithinCharLimit(trimmedName)) {
+            throw new ParseException(WeddingName.MESSAGE_LENGTH_LIMIT);
+        }
         return new WeddingName(trimmedName);
     }
 
