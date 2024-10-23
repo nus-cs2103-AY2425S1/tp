@@ -4,10 +4,13 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,6 +21,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhonePredicate;
 import seedu.address.model.person.RoomNumber;
 import seedu.address.model.person.RoomNumberPredicate;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Parser for Find commands.
@@ -44,7 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer
-                .tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ROOM_NUMBER);
+                .tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ROOM_NUMBER, PREFIX_TAG);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -53,6 +57,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         Optional<String> name = parseName(argMultimap.getValue(PREFIX_NAME).orElse(null));
         Optional<String> contactNumber = parseContactNumber(argMultimap.getValue(PREFIX_PHONE).orElse(null));
         Optional<String> roomNumber = parseRoomNumber(argMultimap.getValue(PREFIX_ROOM_NUMBER).orElse(null));
+        Optional<List<String>> tagList = parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Predicate<Person> combinedPredicate = p -> true;
 
@@ -65,6 +70,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (roomNumber.isPresent()) {
             combinedPredicate = combinedPredicate.and(new RoomNumberPredicate(roomNumber.get()));
+        }
+        if (tagList.isPresent()) {
+            combinedPredicate = combinedPredicate.and(new TagContainsKeywordsPredicate(tagList.get()));
         }
 
         return new FindCommand(combinedPredicate);
@@ -120,6 +128,25 @@ public class FindCommandParser implements Parser<FindCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoomNumber.MESSAGE_CONSTRAINTS));
             }
             return Optional.of(roomNumber.trim());
+        }
+        return Optional.empty();
+    }
+
+
+    /**
+     * Parses and validates the list of tags from the input arguments.
+     * Returns an Optional containing the list of tags if it is valid, otherwise throws ParseException.
+     * @param tags The list of tags to validate.
+     * @return Optional Containing the validated list of tags, or empty if no list of tags is provided.
+     * @throws ParseException If the list of tags does not meet the validation criteria.
+     */
+    private Optional<List<String>> parseTags(List<String> tags) throws ParseException {
+        if (!tags.isEmpty()) {
+            // Split all entries by space and flatten into a single list
+            List<String> tagList = tags.stream()
+                    .flatMap(tag -> Arrays.stream(tag.split("\\s+")))
+                    .collect(Collectors.toList());
+            return Optional.of(tagList);
         }
         return Optional.empty();
     }

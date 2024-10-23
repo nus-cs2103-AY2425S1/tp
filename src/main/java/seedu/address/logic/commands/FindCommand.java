@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
 
@@ -26,7 +27,8 @@ public class FindCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME \n"
             + PREFIX_PHONE + "PHONE \n"
-            + PREFIX_ROOM_NUMBER + "ROOM_NUMBER";
+            + PREFIX_ROOM_NUMBER + "ROOM_NUMBER \b"
+            + PREFIX_TAG + "TAGS";
 
     private final Predicate<Person> combinedPredicate;
 
