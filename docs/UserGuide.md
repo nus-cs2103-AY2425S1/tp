@@ -7,33 +7,26 @@ efficiency. Whether you’re handling student registrations, updating records, o
 you complete these tasks more quickly than traditional applications, making it an ideal solution for tuition center 
 administrators.
 ---
-# Table of Contents
+## Table of Contents
 
-1. [Installation/Setup](#installationsetup)
-2. [Main Features](#main-features)
-    - [Dashboard Overview](#dashboard-overview)
-    - [Student Management](#student-management)
-    - [Payment Tracking](#payment-tracking)
-        - [Mark Paid Feature](#mark-paid-feature)
-    - [Task Management](#task-management)
-3. [Command Instructions](#command-instructions)
-    - [Adding/Deleting/Editing a New Student](#addingdeletingediting-a-new-student)
-        - [Command](#command)
-        - [Example](#example)
-    - [Managing Payments](#managing-payments)
-        - [Command](#command-1)
-        - [Example](#example-1)
-    - [Marking Tasks as Completed](#marking-tasks-as-completed)
-        - [Command](#command-2)
-        - [Example](#example-2)
-    - [Advanced Features (Filtering by Class ID and Name, Pie Chart)](#advanced-features-filtering-by-class-id-and-name-pie-chart)
-        - [Command](#command-3)
-        - [Example](#example-3)
-4. [FAQs](#faqs)
+1. [Installation](#1-installation)
+2. [Main Features](#2-main-features)
+    - [2.1 Viewing Help](#21-viewing-help)
+    - [2.2 Adding a Person](#22-adding-a-person)
+    - [2.3 Listing All Persons](#23-listing-all-persons)
+    - [2.4 Editing a Person](#24-editing-a-person)
+    - [2.5 Locating Persons by Name](#25-locating-persons-by-name)
+    - [2.6 Deleting a Person](#26-deleting-a-person)
+    - [2.7 Clearing All Entries](#27-clearing-all-entries)
+    - [2.8 Exiting the Program](#28-exiting-the-program)
+    - [2.9 Saving the Data](#29-saving-the-data)
+    - [2.10 Editing the Data File](#210-editing-the-data-file)
+3. [FAQs](#3-faqs)
 
 ---
 
-# 1.Installation/Setup
+
+## 1. Installation
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -62,11 +55,9 @@ administrators.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2. Features
+## 2. Command Instructions
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+### Command Format Guidelines
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -84,18 +75,20 @@ administrators.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
 
-### Viewing help : `help`
+---
 
-Shows a message explaning how to access the help page.
+### 2.1 Viewing Help : `help`
+
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+---
 
-### Adding a person: `add`
+### 2.2 Adding a Person : `add`
 
 Adds a person to the address book.
 
@@ -109,13 +102,17 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+---
+
+### 2.3 Listing All Persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+---
+
+### 2.4 Editing a Person : `edit`
 
 Edits an existing person in the address book.
 
@@ -125,14 +122,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+---
+
+### 2.5 Locating Persons by Name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -147,10 +145,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex david` returns `Alex Yeoh`, `David Li`
 
-### Deleting a person : `delete`
+![result for 'find alex david'](images/findAlexDavidResult.png)
+
+---
+
+### 2.6 Deleting a Person : `delete`
 
 Deletes the specified person from the address book.
 
@@ -164,23 +165,31 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+---
+
+### 2.7 Clearing All Entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+---
+
+### 2.8 Exiting the Program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+---
+
+### 2.9 Saving the Data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+---
+
+### 2.10 Editing the Data File
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -188,10 +197,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -219,4 +224,4 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
-**Help** | `help`
+**Mark Paid** | `mark INDEX`<br> e.g., `mark 1` (Marks the 1st student's payment as completed)
