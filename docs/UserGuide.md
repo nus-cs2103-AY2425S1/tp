@@ -148,6 +148,7 @@ This section will walk you through all the basic features of BridalBuddy and wil
 
 [_Back to Top_](#table-of-contents)
 
+---
 
 ### **General Commands**
 
@@ -155,7 +156,6 @@ Commands listed in this section are applicable to both guest management and vend
 
 [_Back to Top_](#table-of-contents)
 
----
 
 ### Viewing help : `help`
 
@@ -234,6 +234,7 @@ Format: `exit`
 
 [_Back to Top_](#table-of-contents)
 
+---
 
 ### **Guest Related Commands**
 
@@ -241,7 +242,6 @@ Commands listed in this section are applicable to managing your guest list (gues
 
 [_Back to Top_](#table-of-contents)
 
----
 
 ### Adding a guest : `add_guest`
 
@@ -289,12 +289,12 @@ Entering the `delete_guest` command returns the following result on your screen:
 
 [_Back to Top_](#table-of-contents)
 
+---
 
 ### **Vendor Related Commands**
 
 Commands listed in this section are applicable to managing your vendor list.
 
----
 
 ### Adding a vendor : `add_vendor`
 
