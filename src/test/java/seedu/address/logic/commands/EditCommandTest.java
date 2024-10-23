@@ -8,6 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_NEW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_DUPLICATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALID_NEW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALID_NONEXISTENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -50,31 +54,6 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new AssignmentList(), new TutorialList());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
-        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
-
-        StudentBuilder studentInList = new StudentBuilder(lastStudent);
-        Student editedStudent = studentInList.withName(VALID_NAME_BOB)
-                .withStudentId(VALID_STUDENTID_BOB)
-                .withTutorialId(VALID_TUTORIALID_BOB)
-                .build();
-
-        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withStudentId(VALID_STUDENTID_BOB).withTutorialId(VALID_TUTORIALID_BOB).build();
-        EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
-                Messages.format(editedStudent));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new AssignmentList(), new TutorialList());
-        expectedModel.setStudent(lastStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -158,6 +137,61 @@ public class EditCommandTest {
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editStudentIdUnfilteredList_success() {
+        Index indexFirstStudent = Index.fromOneBased(1);
+        Student firstStudent = model.getFilteredStudentList().get(indexFirstStudent.getZeroBased());
+
+        StudentBuilder studentInList = new StudentBuilder(firstStudent);
+        Student editedStudent = studentInList.withStudentId(VALID_STUDENTID_NEW).build();
+
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+                .withStudentId(VALID_STUDENTID_NEW).build();
+        EditCommand editCommand = new EditCommand(indexFirstStudent, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                Messages.format(editedStudent));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+        expectedModel.setStudent(firstStudent, editedStudent);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editDuplicateStudentIdUnfilteredList_failure() {
+        Index indexFirstStudent = Index.fromOneBased(1);
+        Index indexSecondStudent = Index.fromOneBased(2);
+        Student firstStudent = model.getFilteredStudentList().get(indexFirstStudent.getZeroBased());
+        Student secondStudent = model.getFilteredStudentList().get(indexSecondStudent.getZeroBased());
+
+        // Attempt to change first student's id to second student's id
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+                .withStudentId(secondStudent.getStudentId().value).build();
+        EditCommand editCommand = new EditCommand(indexFirstStudent, descriptor);
+
+        String expectedMessage = EditCommand.MESSAGE_DUPLICATE_STUDENTID;
+
+        assertCommandFailure(editCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_editNonExistentTutorialIdUnfilteredList_failure() {
+        Index indexFirstStudent = Index.fromOneBased(1);
+
+        // Use a tutorial id that does not exist in the model
+        String nonExistentTutorialId = VALID_TUTORIALID_NONEXISTENT;
+
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+                .withTutorialId(nonExistentTutorialId).build();
+        EditCommand editCommand = new EditCommand(indexFirstStudent, descriptor);
+
+        String expectedMessage = EditCommand.MESSAGE_TUTORIAL_NOT_FOUND + nonExistentTutorialId;
+
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test

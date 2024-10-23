@@ -81,11 +81,11 @@ public class EditCommand extends Command {
 
         // Check for duplicate student IDs if student ID is changed
 
-        /*if (!editedStudent.getStudentId().equals(studentToEdit.getStudentId())) {
+        if (!editedStudent.getStudentId().equals(studentToEdit.getStudentId())) {
             if (model.hasStudentWithId(editedStudent.getStudentId())) {
-                throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + editedStudent.getStudentId());
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENTID);
             }
-        }*/
+        }
 
         // Check if new tutorial exists if tutorial ID is changed
         if (!editedStudent.getTutorialId().equals(studentToEdit.getTutorialId())) {
