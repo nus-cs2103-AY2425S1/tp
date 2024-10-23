@@ -20,7 +20,7 @@ public class SortCommand extends Command {
             + ": Sorts all persons in the address book according to the given parameter.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons";
+    public static final String MESSAGE_SUCCESS = "Sorted all persons by %s";
 
     private final String parameter;
 
@@ -48,14 +48,20 @@ public class SortCommand extends Command {
             model.updateSortingOrder(Comparator.comparing(person -> person.getIncome().getValue()));
         }
 
-        if (parameter.equals(SortCommandParser.APPOINTMENT)) {
-            // For appointments, put those without appointments to the back, and sort by earliest appointment first
-            Comparator<Person> comparator = Comparator.comparing(Person::getAppointment,
-                    Comparator.nullsLast(
-                            Comparator.comparing(Appointment::date).thenComparing(Appointment::startTime)));
-            model.updateSortingOrder(comparator);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, parameter));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
         }
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (!(other instanceof  SortCommand)) {
+            return false;
+        }
+
+        SortCommand otherSortCommand = (SortCommand) other;
+        return this.parameter.equals(otherSortCommand.parameter);
     }
 }
