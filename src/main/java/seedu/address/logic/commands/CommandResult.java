@@ -50,17 +50,19 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with feedback and view to switch to, with default help and exit values.
-     */
-    public CommandResult(String feedbackToUser, SwitchView view) {
-        this(feedbackToUser, false, false, view);
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with specified feedback, help, and exit status but with no view switch.
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showHelp}, and
+     * {@code exit} with {@code switchView} set to none.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this(feedbackToUser, showHelp, exit, SwitchView.NONE);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, the view the user wants
+     * to switch to and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, SwitchView view) {
+        this(feedbackToUser, false, false, view);
     }
 
     public String getFeedbackToUser() {
@@ -72,15 +74,19 @@ public class CommandResult {
     }
 
     /**
-     * Checks if the command requires switching views.
+     * Checks if the command requires switching view.
      */
     public boolean isSwitchView() {
-        return switchView != SwitchView.NONE;
+        return switch (switchView) {
+        case PERSON, WEDDING, TASK -> true;
+        default -> false;
+        };
     }
 
     public SwitchView getView() {
         return switchView;
     }
+
     public boolean isExit() {
         return exit;
     }
