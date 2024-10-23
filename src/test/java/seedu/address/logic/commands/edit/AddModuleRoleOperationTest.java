@@ -72,7 +72,7 @@ public class AddModuleRoleOperationTest {
     }
 
     @Test
-    public void execute_addsModuleRolePairs_partialsuccess() {
+    public void execute_addsModuleRolePairs_partialSuccess() {
         // Add multiple module role pairs, some already exist
         ModuleRoleMap initialMap = new ModuleRoleMap(
                 new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
