@@ -157,7 +157,7 @@ public class Person {
     /**
      * Adds an appointment to the person's list of appointments.
      * The appointments will be sorted by date and time.
-     * 
+     *
      * @param appt
      */
     public void addAppt(Appt appt) {
@@ -168,7 +168,7 @@ public class Person {
     /**
      * Returns an immutable list of appointments.
      * This list will not contain any duplicate appointments.
-     * 
+     *
      * @return List of appointments.
      */
     public List<Appt> getAppts() {
@@ -178,7 +178,7 @@ public class Person {
     /**
      * Returns a string representation of the appointments
      * in the form of a list of strings.
-     * 
+     *
      * @return String representation of the appointments.
      */
     public String getApptsString() {
