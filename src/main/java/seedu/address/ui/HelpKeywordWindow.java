@@ -62,26 +62,26 @@ public class HelpKeywordWindow extends UiPart<Stage> {
 
     private void setHelpKeywordContent(String keyword) {
         switch (keyword.toLowerCase()) {
-            case "add":
-                setTextAddCommand();
-                break;
-            case "addf":
-                setTextAddfCommand();
-                break;
-            case "appt":
-                setTextApptCommand();
-                break;
-            case "delete":
-                setTextDeleteCommand();
-                break;
-            case "view":
-                setViewCommand();
-                break;
-            case "filter":
-                setFilterCommand();
-                break;
-            default:
-                break;
+        case "add":
+            setTextAddCommand();
+            break;
+        case "addf":
+            setTextAddfCommand();
+            break;
+        case "appt":
+            setTextApptCommand();
+            break;
+        case "delete":
+            setTextDeleteCommand();
+            break;
+        case "view":
+            setViewCommand();
+            break;
+        case "filter":
+            setFilterCommand();
+            break;
+        default:
+            break;
         }
     }
 
