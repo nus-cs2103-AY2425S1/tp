@@ -100,8 +100,8 @@ class DownloadCommandTest {
         DownloadCommand commandWithTags = new DownloadCommand(tags);
 
         // Check that the command does not equal an object of a different type
-        assertNotEquals("Some String", commandWithTags);
-        assertNotEquals(123, commandWithTags);
+        assertNotEquals(commandWithTags, "Some String");
+        assertNotEquals(commandWithTags, 123);
     }
 
 
