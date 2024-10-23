@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,7 +9,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,13 +50,13 @@ public class DeleteStudentFromGroupCommandTest {
         Model model = new ModelManager();
         model.addPerson(validStudent);
         model.addGroup(validGroup);
-        model.addPersonToGroup(validStudent,validGroup);
+        model.addPersonToGroup(validStudent, validGroup);
         DeleteStudentFromGroupCommand command = new DeleteStudentFromGroupCommand(validGroup.getGroupName(),
             validStudent.getStudentNumber());
         CommandResult commandResult = command.execute(model);
         assertEquals(String.format(DeleteStudentFromGroupCommand.MESSAGE_DELETE_PERSON_SUCCESS,
             validStudent.getStudentNumber(), validGroup.getGroupName()), commandResult.getFeedbackToUser());
-        assertFalse(model.hasPersonInGroup(validStudent,validGroup));
+        assertFalse(model.hasPersonInGroup(validStudent, validGroup));
     }
 
     @Test
