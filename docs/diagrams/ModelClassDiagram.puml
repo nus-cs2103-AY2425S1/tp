@@ -20,6 +20,7 @@ Class Name
 Class Phone
 Class Subject
 Class Tag
+Class Schedule
 Class "{abstract}\nFee" as Fee
 Class PaidAmount
 
@@ -44,6 +45,7 @@ Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> Address
+Student *--> Schedule
 Student *--> "*" Tag
 Student *--> Subject
 Student *--> PaidAmount
