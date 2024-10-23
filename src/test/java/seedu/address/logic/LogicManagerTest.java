@@ -92,20 +92,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_sameCommandTypes_returnsSameUiState() throws CommandException {
-        new AddCommand(AMY).execute(expectedModel);
-        new HelpCommand().execute(model);
-        assertEquals(expectedLogic.getUiState(), logic.getUiState());
-    }
-
-    @Test
-    public void execute_differentCommandTypes_returnsDifferentUiState() throws CommandException {
-        new AddCommand(AMY).execute(expectedModel);
-        new ViewTasksCommand().execute(model);
-        assertNotEquals(expectedLogic.getUiState(), logic.getUiState());
-    }
-
-    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }

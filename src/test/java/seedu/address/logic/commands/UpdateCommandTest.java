@@ -31,6 +31,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for UpdateCommand.
@@ -62,7 +63,7 @@ public class UpdateCommandTest {
             throw new IllegalStateException("Person to update not found");
         }
 
-        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -84,7 +85,7 @@ public class UpdateCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, updatedPerson);
 
-        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -97,7 +98,7 @@ public class UpdateCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -115,7 +116,7 @@ public class UpdateCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), updatedPerson);
 
-        assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test

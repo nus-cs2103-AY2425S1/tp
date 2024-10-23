@@ -27,6 +27,7 @@ import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.task.Task;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains helper methods for testing commands.
@@ -127,8 +128,8 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            UiState expectedUiState, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, expectedUiState);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
