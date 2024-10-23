@@ -1,16 +1,23 @@
 package seedu.address.model.util;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyScheduleList;
+import seedu.address.model.ScheduleList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.schedule.Meeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,4 +64,56 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Meeting[] getSampleMeetings(ReadOnlyAddressBook addressBook) {
+        List<Person> persons = addressBook.getPersonList();
+        assert(persons.size() > 0);
+        Random random = new Random();
+        LocalDate nowDate = LocalDate.now();
+        LocalTime nowTime = LocalTime.now();
+        return new Meeting[] {
+            new Meeting(
+            List.of(persons.get(random.nextInt(persons.size())).getUid()),
+            "Meeting 1",
+            nowDate,
+            nowTime),
+            new Meeting(
+            List.of(persons.get(random.nextInt(persons.size())).getUid()),
+            "Meeting 2",
+            nowDate.plusDays(1),
+            nowTime.plusHours(1)),
+            new Meeting(
+            List.of(persons.get(random.nextInt(persons.size())).getUid()),
+            "Meeting 3",
+            nowDate.plusDays(2),
+            nowTime.plusHours(2)),
+            new Meeting(
+            List.of(persons.get(random.nextInt(persons.size())).getUid()),
+            "Meeting 4",
+            nowDate.plusDays(3),
+            nowTime.plusHours(3)),
+            new Meeting(
+            List.of(persons.get(random.nextInt(persons.size())).getUid()),
+            "Meeting 5",
+            nowDate.plusDays(4),
+            nowTime.plusHours(4)),
+            new Meeting(
+            List.of(persons.get(random.nextInt(persons.size())).getUid()),
+            "Meeting 6",
+            nowDate.plusDays(5),
+            nowTime.plusHours(5)),
+            new Meeting(
+            List.of(persons.get(random.nextInt(persons.size())).getUid()),
+            "Meeting 7",
+            nowDate.plusDays(6),
+            nowTime.plusHours(6))
+        };
+    }
+
+    public static ReadOnlyScheduleList getSampleScheduleList(ReadOnlyAddressBook addressBook) {
+        ScheduleList sampleSl = new ScheduleList();
+        for (Meeting sampleMeeting : getSampleMeetings(addressBook)) {
+            sampleSl.addMeeting(sampleMeeting);
+        }
+        return sampleSl;
+    }
 }
