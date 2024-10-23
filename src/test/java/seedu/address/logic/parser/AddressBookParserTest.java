@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
@@ -31,8 +32,12 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
+import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.SupplierStatus;
@@ -60,7 +65,20 @@ public class AddressBookParserTest {
                 .getDeliveryCommand(delivery));
         assertEquals(new AddDeliveryCommand(delivery), command);
     }
+    @Test
+    public void parseCommand_upcoming() throws Exception {
+        DateTime time = new DateTime(VALID_DATE_APPLE);
+        DeliveryIsUpcomingPredicate predicate = new DeliveryIsUpcomingPredicate(time, Status.PENDING);
+        UpcomingCommand command = (UpcomingCommand) parser.parseCommand(
+                UpcomingCommand.COMMAND_WORD + " " + VALID_DATE_APPLE);
+        assertEquals(new UpcomingCommand(predicate), command);
+    }
 
+    @Test
+    public void parseCommand_upcomingWithNoarguments() throws Exception {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                UpcomingCommand.MESSAGE_USAGE), () -> parser.parseCommand(UpcomingCommand.COMMAND_WORD));
+    }
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);

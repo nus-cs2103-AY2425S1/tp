@@ -25,6 +25,7 @@ import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortDeliveryCommand;
+import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -111,11 +112,19 @@ public class AddressBookParser {
                         SortDeliveryCommand.MESSAGE_USAGE));
             }
 
+        case UpcomingCommand.COMMAND_WORD:
+            if (arguments.equals("")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        UpcomingCommand.MESSAGE_USAGE));
+            }
+            return new UpcomingCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

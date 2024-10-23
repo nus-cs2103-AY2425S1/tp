@@ -14,12 +14,13 @@ import seedu.address.model.delivery.Status;
 public class TypicalDeliveries {
 
     public static final Delivery APPLE = new DeliveryBuilder().build();
-    public static final Delivery BREAD = new DeliveryBuilder().withProduct("sunshineBread")
+    public static final Delivery BREAD = new DeliveryBuilder().withProduct("bread")
             .withSender(TypicalPersons.BENSON)
             .withDeliveryTime("12-10-2024 17:30")
-            .withStatus(Status.DELIVERED)
+            .withStatus(Status.PENDING)
             .withCost("150")
             .withQuantity("100 units")
+            .withSupplierIndex("2")
             .build();
 
     public static final Delivery CAN = new DeliveryBuilder().withProduct("cannedDrinks")

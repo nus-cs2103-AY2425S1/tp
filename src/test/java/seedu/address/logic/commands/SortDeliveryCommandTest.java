@@ -83,7 +83,7 @@ public class SortDeliveryCommandTest {
         SortDeliveryCommand command = new SortDeliveryCommand(comparator);
         expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(APPLE, CAN, BREAD), model.getSortedDeliveryList());
+        assertEquals(Arrays.asList(APPLE, BREAD, CAN), model.getSortedDeliveryList());
     }
 
     @Test
