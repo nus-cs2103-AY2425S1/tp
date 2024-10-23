@@ -14,11 +14,12 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
+Class Telegram
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Role
+Class Attendance
 
 Class I #FFFFFF
 }
@@ -40,15 +41,16 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> Telegram
+Person *--> "*" Role
+Person *--> "*" Attendance
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Telegram -[hidden]right-> Telegram
 
 ModelManager --> "~* filtered" Person
 @enduml

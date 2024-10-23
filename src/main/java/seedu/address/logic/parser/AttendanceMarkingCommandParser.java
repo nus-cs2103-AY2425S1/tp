@@ -47,14 +47,6 @@ public class AttendanceMarkingCommandParser implements Parser<AttendanceMarkingC
         Attendance attendance = ParserUtil.parseAttendance(argumentMultimap.getValue(PREFIX_DATE).get());
 
 
-        boolean hasEmptyInput = telegramKeywords.stream().anyMatch(str -> str.trim().isEmpty());
-
-        if (hasEmptyInput) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
-        }
-
-
         List<Telegram> telegrams = new ArrayList<>();
         for (String telegramStr : telegramKeywords) {
             String trimmedTelegram = telegramStr.trim();
