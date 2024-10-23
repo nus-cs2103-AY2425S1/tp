@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.function.Predicate;
 
@@ -254,6 +255,21 @@ public class AddGroupCommandTest {
 
         @Override
         public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonList(Comparator<Student> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortGroupList(Comparator<Group> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortTaskList(Comparator<Task> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
