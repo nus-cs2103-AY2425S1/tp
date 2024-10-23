@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,9 +17,9 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Sorts alphabetically by name. ";
 
-    private static final Logger logger = Logger.getLogger(SortCommand.class.getName());
-
     public static final String MESSAGE_SORT_LIST_SUCCESS = "Sorted by name";
+
+    private static final Logger logger = Logger.getLogger(SortCommand.class.getName());
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
