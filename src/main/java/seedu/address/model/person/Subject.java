@@ -9,7 +9,7 @@ public class Subject {
     public static final String MESSAGE_CONSTRAINTS =
             "Subjects should be string format and of those valid ones(english, math, science).";
 
-    public static final String[] AVAILABLE_SUBJECTS = {"english", "math", "science"};
+    public static final String[] AVAILABLE_SUBJECTS = {"English", "Math", "Science"};
     public final String subject;
 
 

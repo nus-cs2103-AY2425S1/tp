@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.capitalizeFirstLetter;
 
 import java.io.File;
 import java.util.Collection;
@@ -157,17 +158,7 @@ public class ParserUtil {
         return new Subject(capitalizeFirstLetter(trimmedSubject.toLowerCase()));
     }
 
-    /**
-     * Capitalizes the first letter of the input string.
-     * @param input The string to be formatted.
-     * @return The string with the first letter capitalized and the rest in lowercase.
-     */
-    private static String capitalizeFirstLetter(String input) {
-        if (input == null || input.isEmpty()) {
-            return input;
-        }
-        return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
-    }
+
 
     /**
      * Parses a collection of subject names into a {@code Set<Subject>}.
