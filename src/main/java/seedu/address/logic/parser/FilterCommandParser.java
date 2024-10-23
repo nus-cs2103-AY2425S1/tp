@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_FILTER_CRITERIA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FilterTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
@@ -14,6 +18,8 @@ import seedu.address.model.tag.Tag;
  * @throws ParseException if the user input does not conform the expected format
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
+
+    private final Set<Predicate<Person>> predicateSet = new HashSet<>();
 
     /**
      * Parses the user's input based on the prefix provided and returns the matching FilterCommand object
@@ -25,12 +31,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
-        String[] parsedArgs = trimmedArgs.trim().split("/", 2);
-        switch (parsedArgs[0]) {
-        case "t":
-            return new FilterTagCommand(new TagContainsKeywordsPredicate(new Tag(parsedArgs[1].trim())));
-        default:
-            throw new ParseException(MESSAGE_INVALID_FILTER_CRITERIA);
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        for (Tag tag: tagList) {
+            predicateSet.add(new TagContainsKeywordsPredicate(tag));
         }
+
+        return new FilterCommand(predicateSet);
+    }
+
+    public Set<Predicate<Person>> getPredicateSet() {
+        return this.predicateSet;
     }
 }
