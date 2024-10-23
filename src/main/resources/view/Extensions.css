@@ -1,6 +1,11 @@
+@font-face {
+    font-family: Poppins;
+    src: url('Poppins-Regular.ttf');
+}
 
 .error {
     -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
+    -fx-font-family: "Poppins";
 }
 
 .list-cell:empty {
@@ -17,4 +22,5 @@
 
 .tooltip-text {
     -fx-text-fill: white;
+    -fx-font-family: "Poppins";
 }

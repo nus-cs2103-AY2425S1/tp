@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyWeddingBook;
+import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -41,7 +45,7 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
     }
 
     @Test
@@ -119,6 +123,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getWeddingBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWeddingBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -157,6 +171,57 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredPersonList(JobContainsKeywordsPredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWeddingBook(ReadOnlyWeddingBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyWeddingBook getWeddingBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWedding(Wedding target, Wedding editedWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

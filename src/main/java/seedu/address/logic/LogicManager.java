@@ -15,7 +15,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyWeddingBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.storage.Storage;
 
 /**
@@ -51,6 +53,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
+            storage.saveWeddingBook(model.getWeddingBook());
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
@@ -84,5 +87,20 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ReadOnlyWeddingBook getWeddingBook() {
+        return model.getWeddingBook();
+    }
+
+    @Override
+    public ObservableList<Wedding> getFilteredWeddingList() {
+        return model.getFilteredWeddingList();
+    }
+
+    @Override
+    public Path getWeddingBookFilePath() {
+        return model.getWeddingBookFilePath();
     }
 }

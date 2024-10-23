@@ -20,14 +20,18 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyWeddingBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.WeddingBook;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.JsonWeddingBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.WeddingBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        WeddingBookStorage weddingBookStorage = new JsonWeddingBookStorage(userPrefs.getWeddingBookFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, weddingBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,29 +73,41 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, wedding book and
+     * {@code userPrefs}. <br> The data from the sample address book and sample wedding book will be used
+     * instead if {@code storage}'s address book and/or wedding book is not found,or an empty address and
+     * wedding book will be used instead if errors occur when reading {@code storage}'s address and/or wedding book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialAddressData;
+        Optional<ReadOnlyWeddingBook> weddingBookOptional;
+        ReadOnlyWeddingBook initialWeddingData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+
+            weddingBookOptional = storage.readWeddingBook();
+            if (!weddingBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getWeddingBookFilePath()
+                        + " populated with a sample WeddingBook.");
+            }
+            initialWeddingData = weddingBookOptional.orElseGet(SampleDataUtil::getSampleWeddingBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getAddressBookFilePath() + " and/or "
+                    + storage.getWeddingBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty AddressBook and WeddingBook.");
+            initialAddressData = new AddressBook();
+            initialWeddingData = new WeddingBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialAddressData, userPrefs, initialWeddingData);
     }
 
     private void initLogging(Config config) {
@@ -170,13 +187,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting KnottyPlanner " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping KnottyPlanner ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

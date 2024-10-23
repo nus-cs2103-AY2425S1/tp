@@ -8,15 +8,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteNCommand;
+import seedu.address.logic.commands.DeleteYCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterByJobCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TagAddCommand;
+import seedu.address.logic.commands.TagDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,11 +63,20 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddWeddingCommand.COMMAND_WORD:
+            return new AddWeddingCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteYCommand.COMMAND_WORD:
+            return new DeleteYCommand(StaticContext.getPersonToDelete());
+
+        case DeleteNCommand.COMMAND_WORD:
+            return new DeleteNCommand();
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -76,6 +92,15 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case TagAddCommand.COMMAND_WORD:
+            return new TagAddCommandParser().parse(arguments);
+
+        case TagDeleteCommand.COMMAND_WORD:
+            return new TagDeleteCommandParser().parse(arguments);
+
+        case FilterByJobCommand.COMMAND_WORD:
+            return new FilterByJobCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

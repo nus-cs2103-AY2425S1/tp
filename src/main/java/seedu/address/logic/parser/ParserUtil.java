@@ -11,9 +11,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Tag;
+import seedu.address.model.wedding.Datetime;
+import seedu.address.model.wedding.Venue;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,6 +100,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String job} into an {@code Job}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static Job parseJob(String job) throws ParseException {
+        requireNonNull(job);
+        String trimmedJob = job.trim();
+        if (!Job.isValidJob(trimmedJob)) {
+            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        }
+        return new Job(trimmedJob);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -103,11 +122,10 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTagName(tag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(tag);
     }
 
     /**
@@ -121,4 +139,51 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String name} into an {@code WeddingName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static WeddingName parseWeddingName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!WeddingName.isValidWeddingName(trimmedName)) {
+            throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
+        }
+        return new WeddingName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String venue} into an {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
+    public static Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(trimmedVenue);
+    }
+
+    /**
+     * Parses a {@code String datetime} into an {@code Datetime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code datetime} is invalid.
+     */
+    public static Datetime parseDatetime(String datetime) throws ParseException {
+        requireNonNull(datetime);
+        String trimmedDatetime = datetime.trim();
+        if (!Datetime.isValidDatetime(trimmedDatetime)) {
+            throw new ParseException(Datetime.MESSAGE_CONSTRAINTS);
+        }
+        return new Datetime(trimmedDatetime);
+    }
+
+
 }
