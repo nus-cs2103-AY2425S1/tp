@@ -3,6 +3,7 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Class for WeddingDate
@@ -34,6 +35,10 @@ public class WeddingDate {
 
         WeddingDate otherDate = (WeddingDate) other;
         return fullDate.equals(otherDate.fullDate);
+    }
+
+    public String toString() {
+        return fullDate.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
     }
 
     @Override

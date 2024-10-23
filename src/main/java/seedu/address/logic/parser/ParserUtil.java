@@ -154,14 +154,14 @@ public class ParserUtil {
     public static WeddingName parseWeddingName(String weddingName) throws ParseException {
         requireNonNull(weddingName);
         String trimmedName = weddingName.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!WeddingName.isValidWeddingName(trimmedName)) {
+            throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
         }
         return new WeddingName(trimmedName);
     }
 
     /**
-     * Parses a {@code String date} into a {@code LocalDate}.
+     * Parses a {@code String date} into a {@code WeddingDate}.
      * Leading and trailing whitespaces will be trimmed.
      * The expected format is "dd/MM/yyyy".
      *
