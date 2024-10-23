@@ -33,7 +33,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY_GROUP_TAG ...]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
 
-    public static final String MESSAGE_NO_CRITERIA = "At least one criteria to find by must be provided.";
+    public static final String MESSAGE_NO_CRITERIA = "Provide at least one criteria to find!";
 
     private final PredicateGroup predicates;
 

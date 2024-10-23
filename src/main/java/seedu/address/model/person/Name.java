@@ -13,11 +13,10 @@ public class Name {
             + "and it should include given name and surname";
 
     /*
-     * The first character of the address must not be a whitespace, otherwise " " (a
-     * blank string) becomes a valid input. The name must contain at least two
-     * words, for first and last name.
+     * The name must only contain alphabetical characters and spaces.
+     * It must contain at least two words, for given name and surname.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}]+ [\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "([a-zA-Z]+ )+[a-zA-Z]+";
 
     public final String fullName;
 
