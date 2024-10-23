@@ -7,7 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventCelebrityMatchesKeywordPredicate;
 
 /**
- * Parses input arguments and creates a new ViewEventCommand object
+ * Parses input arguments and creates a new FilterEventCommand object
  */
 public class FilterEventCommandParser implements Parser<FilterEventCommand> {
 

@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FilterEventCommand;
+import seedu.address.logic.commands.FilterPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -35,6 +36,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         final String commandField = matcher.group("commandField");
         final String keywords = matcher.group("keywords");
+
+        if (commandField.equals(FilterPersonCommand.COMMAND_FIELD)) {
+            return new FilterPersonCommandParser().parse(keywords);
+        }
 
         if (commandField.equals(FilterEventCommand.COMMAND_FIELD)) {
             return new FilterEventCommandParser().parse(keywords);
