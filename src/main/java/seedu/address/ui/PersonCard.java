@@ -50,11 +50,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane roles;
 
-    private final Image studentIcon =
+    private static final Image studentIcon =
         new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
-    private final Image tutorIcon =
+    private static final Image tutorIcon =
         new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
-    private final Image professorIcon =
+    private static final Image professorIcon =
         new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
 
 
