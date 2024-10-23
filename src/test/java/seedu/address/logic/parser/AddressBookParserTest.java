@@ -30,6 +30,9 @@ import seedu.address.logic.commands.FindConcertCommand;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListConcertCommand;
+import seedu.address.logic.commands.ListConcertContactCommand;
+import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
 import seedu.address.model.concert.Concert;
@@ -141,6 +144,25 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listConcert() throws Exception {
+        assertTrue(parser.parseCommand(ListConcertCommand.COMMAND_WORD) instanceof ListConcertCommand);
+        assertTrue(parser.parseCommand(ListConcertCommand.COMMAND_WORD + " 3") instanceof ListConcertCommand);
+    }
+
+    @Test
+    public void parseCommand_listPerson() throws Exception {
+        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD) instanceof ListPersonCommand);
+        assertTrue(parser.parseCommand(ListPersonCommand.COMMAND_WORD + " 3") instanceof ListPersonCommand);
+    }
+
+    @Test
+    public void parseCommand_listConcertContact() throws Exception {
+        assertTrue(parser.parseCommand(ListConcertContactCommand.COMMAND_WORD) instanceof ListConcertContactCommand);
+        assertTrue(parser.parseCommand(ListConcertContactCommand.COMMAND_WORD + " 3")
+                instanceof ListConcertContactCommand);
     }
 
     @Test

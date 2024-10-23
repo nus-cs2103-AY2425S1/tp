@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,6 +38,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of concerts */
     ObservableList<Concert> getFilteredConcertList();
 
+    /** Returns an unmodifiable view of the filtered list of concert contacts */
+    ObservableList<ConcertContact> getFilteredConcertContactList();
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -51,4 +55,5 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
 }

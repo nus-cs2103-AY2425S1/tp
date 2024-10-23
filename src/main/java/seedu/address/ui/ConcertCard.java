@@ -35,7 +35,7 @@ public class ConcertCard extends UiPart<Region> {
     private Label date;
 
     /**
-     * Creates a {@code ConcertCode} with the given {@code Concert} and index to display.
+     * Creates a {@code ConcertCard} with the given {@code Concert} and index to display.
      */
     public ConcertCard(Concert concert, int displayedIndex) {
         super(FXML);

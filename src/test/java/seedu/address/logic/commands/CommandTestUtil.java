@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditConcertDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -173,5 +174,18 @@ public class CommandTestUtil {
         model.updateFilteredConcertList(v -> v.equals(concert));
 
         assertEquals(1, model.getFilteredConcertList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the concert contact at the given
+     * {@code targetIndex} in the {@code model}'s address book.
+     */
+    public static void showConcertContactAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredConcertContactList().size());
+
+        ConcertContact concertContact = model.getFilteredConcertContactList().get(targetIndex.getZeroBased());
+        model.updateFilteredConcertContactList(v -> v.equals(concertContact));
+
+        assertEquals(1, model.getFilteredConcertContactList().size());
     }
 }
