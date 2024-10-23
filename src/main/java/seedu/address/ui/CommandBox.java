@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
@@ -28,7 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
-
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -88,13 +86,13 @@ public class CommandBox extends UiPart<Region> {
 
         addKeyPressedEventForCommandTextField();
         addKeyReleasedEventForCommandTextField();
-        commandTextField.setOnKeyPressed(event -> handleKeyPressed(event.getCode()));
     }
 
     /**
      * Adds an event filter to the commandTextField (TextField) to handle key pressed events.
      */
     private void addKeyPressedEventForCommandTextField() {
+        commandTextField.setOnKeyPressed(event -> handleKeyPressed(event.getCode()));
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.TAB) {
                 event.consume(); // Prevent the default tab behavior
