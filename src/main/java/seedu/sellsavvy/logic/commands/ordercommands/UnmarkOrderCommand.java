@@ -19,29 +19,30 @@ import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.Person;
 
 /**
- * Marks an order as completed.
+ * Reverts an order to the pending status.
  */
-public class MarkOrderCommand extends Command {
+public class UnmarkOrderCommand extends Command {
 
-    public static final String COMMAND_WORD = "markOrder";
+    public static final String COMMAND_WORD = "unmarkOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an order as completed."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverts an order to the pending status."
             + "Parameters: ORDER_INDEX (must be positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
 
-    public static final String MESSAGE_MARK_ORDER_SUCCESS = "The order has been marked as completed: %1$s";
-    public static final String MESSAGE_ORDER_ALREADY_MARKED_WARNING = "Note: "
-            + "This order is already marked as completed";
+    public static final String MESSAGE_UNMARK_ORDER_SUCCESS =
+            "The order has been reverted to the pending status: %1$s";
+    public static final String MESSAGE_ORDER_ALREADY_UNMARKED_WARNING = "Note: "
+            + "This order is already in the pending status";
 
     private final Index index;
 
     /**
-     * Creates a MarkOrderCommand to mark the order under the
-     * specified index as completed.
+     * Creates a UnmarkOrderCommand to revert the order of an order
+     * at the specified index to the pending status.
      *
      * @param index of the order in the displayed order list to mark.
      */
-    public MarkOrderCommand(Index index) {
+    public UnmarkOrderCommand(Index index) {
         requireNonNull(index);
         this.index = index;
     }
@@ -59,25 +60,25 @@ public class MarkOrderCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
 
-        Order orderToMark = orderList.get(index.getZeroBased());
-        Order newOrder = createMarkedOrder(orderToMark);
-        orderList.setOrder(orderToMark, newOrder);
-        String feedbackToUser = (orderToMark.getStatus() == Status.COMPLETED)
-                ? MESSAGE_ORDER_ALREADY_MARKED_WARNING : "";
+        Order orderToUnmark = orderList.get(index.getZeroBased());
+        Order newOrder = createUnmarkedOrder(orderToUnmark);
+        orderList.setOrder(orderToUnmark, newOrder);
+        String feedbackToUser = (orderToUnmark.getStatus() == Status.PENDING)
+                ? MESSAGE_ORDER_ALREADY_UNMARKED_WARNING : "";
         return new CommandResult(
-                feedbackToUser + String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
+                feedbackToUser + String.format(MESSAGE_UNMARK_ORDER_SUCCESS, Messages.format(newOrder)));
     }
 
     /**
-     * Creates a marked version of the given {@code Order}.
+     * Creates an unmarked version of the given {@code Order}.
      */
-    public static Order createMarkedOrder(Order order) {
+    public static Order createUnmarkedOrder(Order order) {
         assert order != null;
 
         Item item = order.getItem();
         Date date = order.getDate();
         Count count = order.getCount();
-        Status status = Status.COMPLETED;
+        Status status = Status.PENDING;
 
         return new Order(item, count, date, status);
     }
@@ -89,11 +90,11 @@ public class MarkOrderCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkOrderCommand)) {
+        if (!(other instanceof UnmarkOrderCommand)) {
             return false;
         }
 
-        MarkOrderCommand otherMarkOrderCommand = (MarkOrderCommand) other;
+        UnmarkOrderCommand otherMarkOrderCommand = (UnmarkOrderCommand) other;
         return index.equals(otherMarkOrderCommand.index);
     }
 
