@@ -39,7 +39,7 @@ If you can type fast and you need to manage celebrities and their schedules, **T
 
    * `delete person 3` : Deletes the 3rd person shown in the current list.
 
-   * `clear all` : Deletes all events and contacts.
+   * `clear all` : Deletes all events and persons.
 
    * `exit` : Exits the app.
 
