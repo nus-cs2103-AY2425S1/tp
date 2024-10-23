@@ -12,10 +12,12 @@ import careconnect.commons.core.LogsCenter;
 import careconnect.logic.autocompleter.Autocompleter;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.AddCommand;
+import careconnect.logic.commands.AddLogCommand;
 import careconnect.logic.commands.ClearCommand;
 import careconnect.logic.commands.Command;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.DeleteCommand;
+import careconnect.logic.commands.DeleteLogCommand;
 import careconnect.logic.commands.EditCommand;
 import careconnect.logic.commands.ExitCommand;
 import careconnect.logic.commands.FindCommand;
@@ -36,10 +38,12 @@ import javafx.collections.ObservableList;
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
-    public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
+    public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following "
+            + "error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
-            "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+            "Could not save data to file %s due to insufficient permissions to write to the file "
+                    + "or the folder.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -56,7 +60,9 @@ public class LogicManager implements Logic {
             FindCommand.COMMAND_WORD,
             HelpCommand.COMMAND_WORD,
             ListCommand.COMMAND_WORD,
-            ViewCommand.COMMAND_WORD
+            ViewCommand.COMMAND_WORD,
+            AddLogCommand.COMMAND_WORD,
+            DeleteLogCommand.COMMAND_WORD
     ));
 
     /**
@@ -80,7 +86,8 @@ public class LogicManager implements Logic {
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
-            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT,
+                    e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
@@ -90,7 +97,7 @@ public class LogicManager implements Logic {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * In this implementation, ties for autocomplete suggestions will be broken by
      * lexicographical order.
      */
