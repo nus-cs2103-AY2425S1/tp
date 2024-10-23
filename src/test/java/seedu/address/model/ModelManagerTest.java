@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONSULTATIONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalConsultations.DEFAULT_CONSULTATION;
+import static seedu.address.testutil.TypicalConsultations.CONSULT_1;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 
@@ -102,13 +102,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasConsultation_consultationNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasConsult(DEFAULT_CONSULTATION));
+        assertFalse(modelManager.hasConsult(CONSULT_1));
     }
 
     @Test
     public void hasConsultation_consultationInAddressBook_returnsTrue() {
-        modelManager.addConsult(DEFAULT_CONSULTATION);
-        assertTrue(modelManager.hasConsult(DEFAULT_CONSULTATION));
+        modelManager.addConsult(CONSULT_1);
+        assertTrue(modelManager.hasConsult(CONSULT_1));
     }
 
     @Test
@@ -120,7 +120,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder()
                 .withStudent(ALICE).withStudent(BENSON)
-                .withConsultation(DEFAULT_CONSULTATION).build();
+                .withConsultation(CONSULT_1).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

@@ -103,7 +103,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addConsult(Consultation consult) {
         consults.add(consult);
-        consults.sort((c1, c2) -> c1.getDate().compareTo(c2.getDate())); // Sort consultations by date
+
+        // Sort by date first, and by time if the dates are the same
+        consults.sort((c1, c2) -> {
+            int dateComparison = c1.getDate().compareTo(c2.getDate());
+            if (dateComparison == 0) {
+                return c1.getTime().compareTo(c2.getTime()); // Compare by time if dates are the same
+            }
+            return dateComparison; // Otherwise, compare by date
+        });
     }
 
     /**

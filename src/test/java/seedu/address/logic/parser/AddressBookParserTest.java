@@ -29,6 +29,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
 import seedu.address.logic.commands.consultation.DeleteConsultCommand;
+import seedu.address.logic.commands.consultation.ListConsultsCommand;
 import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
@@ -86,6 +87,27 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void addConsult_consultationsSortedByDateAndTime() {
+        AddressBook addressBook = new AddressBook();
+
+        // Consultations with different dates and times
+        Consultation consult1 = new Consultation(new Date("2024-07-20"), new Time("14:00"), List.of());
+        Consultation consult2 = new Consultation(new Date("2024-07-20"), new Time("09:00"), List.of());
+        Consultation consult3 = new Consultation(new Date("2024-07-19"), new Time("15:00"), List.of());
+
+        // Add consultations
+        addressBook.addConsult(consult1);
+        addressBook.addConsult(consult2);
+        addressBook.addConsult(consult3);
+
+        // Ensure consultations are sorted by date, and by time within the same date
+        ObservableList<Consultation> sortedConsults = addressBook.getConsultList();
+        assertEquals(sortedConsults.get(0), consult3); // Earliest date first
+        assertEquals(sortedConsults.get(1), consult2); // Same date, earlier time
+        assertEquals(sortedConsults.get(2), consult1); // Same date, later time
+    }
+
+    @Test
     public void parseCommand_addToConsult() throws Exception {
         // Construct the input arguments for the AddToConsultCommand
         Index index = Index.fromOneBased(1);
@@ -103,6 +125,13 @@ public class AddressBookParserTest {
 
         // Assert that the parsed command is equal to the expected command
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_listconsults() throws Exception {
+        // Ensure the parser returns an instance of ListConsultsCommand when "listconsults" is input
+        assertTrue(parser.parseCommand(ListConsultsCommand.COMMAND_WORD) instanceof ListConsultsCommand);
+        assertTrue(parser.parseCommand(ListConsultsCommand.COMMAND_WORD + " extraArgs") instanceof ListConsultsCommand);
     }
 
     @Test

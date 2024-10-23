@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalConsults.getTypicalConsults;
+import static seedu.address.testutil.TypicalConsultations.getTypicalConsultations;
 import static seedu.address.testutil.TypicalStudents.getTypicalStudents;
 
 import seedu.address.model.AddressBook;
@@ -22,7 +22,7 @@ public class TypicalAddressBook {
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }
-        for (Consultation consult : getTypicalConsults()) {
+        for (Consultation consult : getTypicalConsultations()) {
             ab.addConsult(consult);
         }
         return ab;
