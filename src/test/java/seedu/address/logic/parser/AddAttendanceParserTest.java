@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.awt.font.GlyphMetrics.WHITESPACE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDANCE_DESC;
@@ -68,6 +69,16 @@ public class AddAttendanceParserTest {
         userInput = targetIndex.getOneBased() + " " + PREFIX_ABSENT_DATE + "20-10-2024" + " "
                 + PREFIX_ABSENT_REASON + ""; // No reason
         expectedCommand = new AddAttendanceCommand(targetIndex,
+                new AbsentDate("20-10-2024"), new AbsentReason(""));
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void absentDateSpecified_success() {
+        // absent reason is missing
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_ABSENT_DATE + "20-10-2024"; // No reason
+        AddAttendanceCommand expectedCommand = new AddAttendanceCommand(targetIndex,
                 new AbsentDate("20-10-2024"), new AbsentReason(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
