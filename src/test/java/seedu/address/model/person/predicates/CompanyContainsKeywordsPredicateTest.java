@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.GuestBuilder;
 import seedu.address.testutil.VendorBuilder;
 
 public class CompanyContainsKeywordsPredicateTest {
@@ -29,7 +28,8 @@ public class CompanyContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        CompanyContainsKeywordsPredicate firstPredicateCopy = new CompanyContainsKeywordsPredicate(firstPredicateKeywordList);
+        CompanyContainsKeywordsPredicate firstPredicateCopy =
+                new CompanyContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
