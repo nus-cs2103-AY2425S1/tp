@@ -127,7 +127,6 @@ public class Person {
         return Objects.hash(name, phone, email, tags);
     }
 
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
