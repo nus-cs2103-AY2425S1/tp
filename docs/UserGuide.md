@@ -133,8 +133,8 @@ Examples:
 
 Updates an existing person in the address book by searching for their Name or NRIC.
 
-Format: `update NAME [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​ `<p>
-OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`</p>
+Format: `update NAME [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​ `
+OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `NAME` or `NRIC`. The name and nric refers to the name and nric shown in the displayed person list respectively.
 * At least one of the optional fields must be provided.
