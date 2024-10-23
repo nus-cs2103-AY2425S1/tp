@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's register value in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRegisterNumber(String)}
  */
-public class RegisterNumber {
+public class RegisterNumber implements Comparable<RegisterNumber> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Register value should be a value between 1 and 40.";
@@ -34,6 +34,12 @@ public class RegisterNumber {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the integer representation of RegisterNumber
+     */
+    public Integer toInt() {
+        return Integer.valueOf(this.value);
+    }
 
     @Override
     public String toString() {
@@ -58,6 +64,11 @@ public class RegisterNumber {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(RegisterNumber r) {
+        return this.toInt().compareTo(r.toInt());
     }
 
 }

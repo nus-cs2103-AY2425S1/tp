@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a person's emergency contact name in the address book
  * The name can be empty or contain only alphanumeric characters and spaces.
  */
-public class EcName {
+public class EcName implements Comparable<EcName> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Emergency contact names should only contain alphanumeric characters and spaces, "
@@ -64,4 +64,8 @@ public class EcName {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(EcName e) {
+        return this.toString().compareTo(e.toString());
+    }
 }

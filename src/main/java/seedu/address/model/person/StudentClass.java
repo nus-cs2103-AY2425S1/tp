@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's class in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidStudentClass(String)}
  */
-public class StudentClass {
+public class StudentClass implements Comparable<StudentClass> {
 
     public static final String MESSAGE_CONSTRAINTS = "Classes should a non-zero digit followed by an alphabet";
 
@@ -62,4 +62,8 @@ public class StudentClass {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(StudentClass s) {
+        return this.toString().compareTo(s.toString());
+    }
 }
