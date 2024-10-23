@@ -106,7 +106,7 @@ public class SearchBirthdayCommandTest {
     @Test
     public void execute_zeroMatches_noPersonFound() {
         String date = "2000-12-31";
-        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS,  "on " + date);
+        String expectedMessage = String.format(SearchBirthdayCommand.MESSAGE_SUCCESS, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
             expectedModel.updateFilteredPersonList(person -> false); // No one matches
