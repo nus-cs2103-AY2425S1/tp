@@ -48,7 +48,7 @@ public class JsonAdaptedWedding {
      */
     public JsonAdaptedWedding(Wedding source) {
         name = source.getWeddingName().fullName;
-        dateString = source.getFormattedWeddingDate();
+        dateString = source.getWeddingDate().toString();
 
         assignees.addAll(source.getAssignees().stream()
                 .map(JsonAdaptedPersonId::new)

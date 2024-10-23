@@ -56,7 +56,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(wedding.getWeddingName())
                 .append("; Date: ")
-                .append(wedding.getFormattedWeddingDate());
+                .append(wedding.getWeddingDate());
         return builder.toString();
     }
 

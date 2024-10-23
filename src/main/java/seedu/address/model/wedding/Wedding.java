@@ -1,6 +1,5 @@
 package seedu.address.model.wedding;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +42,6 @@ public class Wedding {
 
     public WeddingDate getWeddingDate() {
         return this.date;
-    }
-
-    public String getFormattedWeddingDate() {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return this.date.fullDate.format(formatter);
     }
 
     public List<PersonId> getAssignees() {
