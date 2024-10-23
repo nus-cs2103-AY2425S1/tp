@@ -30,6 +30,7 @@ import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -111,9 +112,11 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getDateOfLastVisit());
         Optional<EmergencyContact> updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
                 .orElse(personToEdit.getEmergencyContact());
+        // remark not edited in edit command; Use remark command to edit remarks
+        Remark remark = personToEdit.getRemark();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedDateOfLastVisit, updatedEmergencyContact);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, updatedDateOfLastVisit, updatedEmergencyContact, remark);
     }
 
     @Override

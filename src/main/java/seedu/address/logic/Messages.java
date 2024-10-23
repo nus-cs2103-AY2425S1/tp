@@ -46,6 +46,7 @@ public class Messages {
         addTags(builder, person);
         addDateOfLastVisit(builder, person);
         addEmergencyContact(builder, person);
+        addRemark(builder, person);
 
         return builder.toString();
     }
@@ -92,6 +93,13 @@ public class Messages {
             return;
         }
         sb.append("; Emergency Contact: ").append(person.getEmergencyContact().get());
+    }
+
+    private static void addRemark(StringBuilder sb, Person person) {
+        if (!person.hasRemark()) {
+            return;
+        }
+        sb.append("; Remark: ").append(person.getRemark().value);
     }
 
 }

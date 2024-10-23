@@ -6,14 +6,16 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
     "dateOfLastVisit" : "01-01-2024",
-    "emergencyContact" : "92173902"
+    "emergencyContact" : "92173902",
+    "remark": ""
     }, {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "pauline@example.com",
     "address" : "4th street",
     "dateOfLastVisit" : "01-01-2024",
-    "emergencyContact" : "92173902"
+    "emergencyContact" : "92173902",
+    "remark": ""
     }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -21,20 +23,23 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
     "dateOfLastVisit" : "01-02-2024",
-    "emergencyContact" : "92173902"
+    "emergencyContact" : "92173902",
+    "remark": ""
     }, {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "aclice3@example.com",
     "address" : "4th street",
     "dateOfLastVisit" : "01-02-2024",
-    "emergencyContact" : "92173902"
+    "emergencyContact" : "92173902",
+    "remark": ""
     }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "benson@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "dateOfLastVisit" : "01-02-2024",
-    "emergencyContact" : "92173902"
+    "emergencyContact" : "92173902",
+    "remark": ""
     } ]
 }

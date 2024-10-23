@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     private Label dateOfLastVisit;
     @FXML
     private Label emergencyContact;
+    @FXML
+    private Label remark;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -74,6 +76,9 @@ public class PersonCard extends UiPart<Region> {
                         : "");
         emergencyContact.setText(person.hasEmergencyContact()
                 ? "Emergency Contact: " + person.getEmergencyContact().get().value
+                : "");
+        remark.setText(person.hasRemark()
+                ? "Remarks: " + person.getRemark().value
                 : "");
     }
 }

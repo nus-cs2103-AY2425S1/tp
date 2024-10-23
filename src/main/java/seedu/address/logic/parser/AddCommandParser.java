@@ -22,6 +22,7 @@ import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,7 +57,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<EmergencyContact> emergencyContact = ParserUtil
                 .parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT));
 
-        Person person = new Person(name, phone, email, address, tagList, dateOfLastVisit, emergencyContact);
+        // Remark set to empty when adding new contacts; Use Remark command to add remarks
+        Remark remark = new Remark("");
+
+        Person person = new Person(name, phone, email, address, tagList, dateOfLastVisit, emergencyContact, remark);
 
         return new AddCommand(person);
     }

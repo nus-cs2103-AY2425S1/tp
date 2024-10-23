@@ -18,6 +18,7 @@ import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String dateOfLastVisit;
     private final String emergencyContact;
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,7 +46,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("dateOfLastVisit") String dateOfLastVisit,
-            @JsonProperty("emergencyContact") String emergencyContact) {
+            @JsonProperty("emergencyContact") String emergencyContact,
+            @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,6 +57,7 @@ class JsonAdaptedPerson {
         }
         this.dateOfLastVisit = dateOfLastVisit;
         this.emergencyContact = emergencyContact;
+        this.remark = remark;
     }
 
     /**
@@ -69,6 +73,7 @@ class JsonAdaptedPerson {
                 : EMPTY_DATA_FIELD_STRING;
         emergencyContact = source.hasEmergencyContact() ? source.getEmergencyContact().get().value.toString()
                 : EMPTY_DATA_FIELD_STRING;
+        remark = source.hasRemark() ? source.getRemark().value : EMPTY_DATA_FIELD_STRING;
     }
 
     /**
@@ -153,8 +158,13 @@ class JsonAdaptedPerson {
             modelEmergencyContact = Optional.of(new EmergencyContact(emergencyContact));
         }
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDateOfLastVisit,
-                modelEmergencyContact);
+                modelEmergencyContact, modelRemark);
     }
 
 }

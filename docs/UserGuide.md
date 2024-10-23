@@ -159,7 +159,19 @@ Format: `delete INDEX` `delete INDEX INDEX ...`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `list` followed by `delete 1 2` deletes the 1st and 2nd person in the address book. 
+* `list` followed by `delete 1 2` deletes the 1st and 2nd person in the address book.
+
+### Adding remarks to person : `remark`
+
+Add remarks to an existing person in the address book. 
+
+Format: `remark INDEX r/REMARK`
+
+* Adds remarks to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `remark 1 r/Financial Issues` Adds the remark of the 1st person to be `Financial Issues`.
+* `remark 1 r/` Clears remarks (if any) of the 1st person.
 
 ### Clearing all entries : `clear`
 
@@ -226,3 +238,4 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Seed**   | `seed`
+**Remark** | `remark INDEX r/REMARK`
