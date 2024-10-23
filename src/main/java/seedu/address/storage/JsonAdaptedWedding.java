@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingDate;
@@ -21,8 +23,6 @@ import seedu.address.model.wedding.WeddingName;
  */
 public class JsonAdaptedWedding {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Wedding's %s field is missing!";
-    public static final String NAME_FIELD = "Name";
-    public static final String DATE_FIELD = "Date";
 
     private final String name;
     private final String dateString;
@@ -61,18 +61,26 @@ public class JsonAdaptedWedding {
     /**
      * Converts this Jackson-friendly adapted wedding object into the model's {@code Wedding} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted wedding.
      */
     public Wedding toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NAME_FIELD));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    WeddingName.class.getSimpleName()));
+        }
+        if (!WeddingName.isValidWeddingName(name)) {
+            throw new IllegalValueException(WeddingName.MESSAGE_CONSTRAINTS);
         }
         final WeddingName modelName = new WeddingName(name);
 
         if (dateString == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DATE_FIELD));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    WeddingDate.class.getSimpleName()));
         }
-        final WeddingDate modelDate = parseWeddingDate(dateString);
+        if (!WeddingDate.isValidWeddingDate(name)) {
+            throw new IllegalValueException(WeddingDate.MESSAGE_CONSTRAINTS);
+        }
+        final WeddingDate modelDate = ParserUtil.parseWeddingDate(dateString);
 
         final List<PersonId> modelAssignees = new ArrayList<>();
         for (JsonAdaptedPersonId assignee : assignees) {

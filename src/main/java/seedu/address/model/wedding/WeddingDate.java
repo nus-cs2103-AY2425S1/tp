@@ -3,6 +3,9 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * Class for WeddingDate
@@ -19,6 +22,17 @@ public class WeddingDate {
     public WeddingDate(LocalDate date) {
         requireNonNull(date);
         fullDate = date;
+    }
+
+    public static boolean isValidWeddingDate(String dateString) {
+        requireNonNull(dateString);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate.parse(dateString, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override
@@ -41,6 +55,10 @@ public class WeddingDate {
         return fullDate.hashCode();
     }
 
-
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return fullDate.format(formatter);
+    }
 
 }

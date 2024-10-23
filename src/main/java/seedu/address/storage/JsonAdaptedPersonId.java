@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
 
 /**
@@ -39,6 +40,9 @@ public class JsonAdaptedPersonId {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public PersonId toModelType() throws IllegalValueException {
+        if (!PersonId.isValidPersonId(idString)) {
+            throw new IllegalValueException(PersonId.MESSAGE_CONSTRAINTS);
+        }
         return new PersonId(idString);
     }
 
