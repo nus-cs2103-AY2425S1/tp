@@ -1,7 +1,7 @@
 @startuml
 skin rose
-skinparam ActivityFontSize 15
-skinparam ArrowFontSize 12
+skinparam ActivityFontSize 16
+skinparam ArrowFontSize 13
 start
 :User executes command;
 
