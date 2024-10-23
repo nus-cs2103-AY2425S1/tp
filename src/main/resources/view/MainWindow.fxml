@@ -18,12 +18,16 @@
   </icons>
   <scene>
     <Scene>
+      <!--Initialising the CSS files used for MainWindow-->
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
+      <!-- The main Vertical Box that contains the other JavaFX components of the UI -->
+      <VBox styleClass="background">
+
+        <!-- Menu Bar at the top of the application -->
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -33,12 +37,14 @@
           </Menu>
         </MenuBar>
 
+        <!-- Command Bar Component -->
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
 
+        <!-- The box that contains the output messages of the commands-->
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="100" prefHeight="100" maxHeight="100">
           <padding>
@@ -46,6 +52,7 @@
           </padding>
         </StackPane>
 
+        <!-- A vertical container (grows downwards) containing person list panel-->
         <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
