@@ -12,6 +12,7 @@ import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.ContactCommand;
 import tutorease.address.logic.commands.DeleteContactCommand;
+import tutorease.address.logic.commands.EditContactCommand;
 import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.HelpCommand;
 import tutorease.address.logic.commands.ListContactCommand;
@@ -44,6 +45,8 @@ public class ContactCommandParser implements Parser<Command> {
             return new ListContactCommand();
         case FindContactCommand.COMMAND_WORD:
             return new FindContactCommandParser().parse(subArguments);
+        case EditContactCommand.COMMAND_WORD:
+            return new EditContactCommandParser().parse(subArguments);
         // Future sub-commands like add, edit can be handled here
         default:
             logger.finer("This user input caused a ParseException: "
