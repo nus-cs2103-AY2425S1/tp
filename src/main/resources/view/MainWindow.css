@@ -1,0 +1,19 @@
+.background {
+    -fx-background-color: #eeeeee;;
+}
+
+.padding-4 {
+    -fx-padding: 4;
+}
+
+.padding-8 {
+    -fx-padding: 8;
+}
+
+.padding-32 {
+    -fx-padding: 32;
+}
+
+.error {
+    -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
+}

@@ -1,0 +1,19 @@
+.sidebar {
+    -fx-background-color: d9d9d9;
+    -fx-padding: 16 16 16 16;
+}
+
+.sidebar-title {
+    -fx-font-size: 48px;
+    -fx-line-spacing: -0.5;
+    -fx-text-alignment: left;
+}
+
+.sidebar-text {
+    -fx-font-size: 32px;
+    -fx-text-alignment: left;
+}
+
+.sidebar-pane {
+    -fx-padding: 0 4 8 4;
+}

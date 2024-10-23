@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="sidebar" styleClass="sidebar"
+      HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" maxWidth="Infinity"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <StackPane fx:id="appTitleContainer" styleClass="sidebar-pane"
+             maxWidth="320" minWidth="140" prefWidth="320">
+    <ImageView fx:id="appTitle" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/title.png" />
+      </image>
+    </ImageView>
+  </StackPane>
+  <Separator />
+</VBox>
