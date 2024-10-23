@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents a Person's deadline in the address book.
@@ -17,6 +19,9 @@ public class Deadline {
             "Deadlines should be in the format dd-MM-yyyy, and it should be a valid date.";
     public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+
+    private static final Logger logger = Logger.getLogger(Deadline.class.getName());
+
     public final LocalDate value;
 
     /**
@@ -42,6 +47,7 @@ public class Deadline {
             String reformattedDate = parsedDate.format(INPUT_FORMATTER);
             return reformattedDate.equals(test);
         } catch (DateTimeParseException e) {
+            logger.log(Level.WARNING, "Invalid deadline format: {0}", test);
             return false;
         }
     }
