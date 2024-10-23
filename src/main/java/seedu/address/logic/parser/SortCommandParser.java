@@ -9,8 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonComparator;
@@ -19,7 +17,7 @@ import seedu.address.model.person.PersonComparator;
  * Parses input arguments and creates a new SortCommand Object.
  */
 public class SortCommandParser implements Parser<SortCommand> {
-    private final Prefix[] INVALID_PREFIXES = {PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_TAG};
+    private static final Prefix[] INVALID_PREFIXES = {PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_TAG};
 
     /**
      * Checks if the given {@code String} of arguments is valid
@@ -38,8 +36,8 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATEOFLASTVISIT);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() &&
-                argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()
+                && argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 

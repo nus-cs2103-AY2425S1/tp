@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.PersonComparator;
 
 
 /**
@@ -40,6 +41,8 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert (sortParameter.equals(PersonComparator.NAME)
+                || sortParameter.equals(PersonComparator.DATE_OF_LAST_VISIT));
         requireNonNull(model);
         model.sortPersonList(sortParameter, isAscendingOrder);
         return new CommandResult(MESSAGE_SUCCESS);
@@ -57,15 +60,7 @@ public class SortCommand extends Command {
         }
 
         SortCommand otherSortCommand = (SortCommand) other;
-        return (sortParameter.equals(otherSortCommand.sortParameter) &&
-                (isAscendingOrder == otherSortCommand.isAscendingOrder));
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("sortParameter", sortParameter)
-                .add("sortOrder", isAscendingOrder ? "ascending" : "descending")
-                .toString();
+        return (sortParameter.equals(otherSortCommand.sortParameter)
+                && (isAscendingOrder == otherSortCommand.isAscendingOrder));
     }
 }
