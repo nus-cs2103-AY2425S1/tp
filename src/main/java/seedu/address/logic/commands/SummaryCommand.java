@@ -63,4 +63,16 @@ public class SummaryCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, startDate.format(DEFAULT_DATE_FORMATTER),
                 endDate.format(DEFAULT_DATE_FORMATTER), summary));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof SummaryCommand)) {
+            return false;
+        }
+        SummaryCommand otherCommand = (SummaryCommand) other;
+        return this.startMonth.equals(otherCommand.startMonth) && this.endMonth.equals(otherCommand.endMonth);
+    }
 }
