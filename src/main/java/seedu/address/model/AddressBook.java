@@ -6,6 +6,10 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderList;
+import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,7 +20,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    private final OrderList orders;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -26,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        orders = new OrderList();
     }
 
     public AddressBook() {}
@@ -47,6 +52,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
+
+
+    public void setOrders(List<Order> orders) {}
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -106,6 +114,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public OrderList getOrderList() {
+        return orders;
+    }
+
+    public ObservableList<SupplyOrder> getSupplyOrderList() {
+        return orders.getSupplyOrders();
+    }
+    public ObservableList<CustomerOrder> getCustomerOrderList() {
+        return orders.getCustomerOrders();
     }
 
     @Override

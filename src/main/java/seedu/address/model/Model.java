@@ -105,4 +105,9 @@ public interface Model {
     void addSupplyOrder(SupplyOrder supplyOrder);
 
     OrderList getOrderList();
+
+    ObservableList<SupplyOrder> getSupplyOrderList();
+
+    ObservableList<CustomerOrder> getCustomerOrderList();
+
 }

@@ -31,7 +31,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
-    private final OrderList orderList = new OrderList();
+    private final OrderList orderList;
+    private final ObservableList<SupplyOrder> supplyOrderList;
+    private final ObservableList<CustomerOrder> customerOrderList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -45,6 +47,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.orderList = this.addressBook.getOrderList();
+        this.supplyOrderList = this.addressBook.getSupplyOrderList();
+        this.customerOrderList = this.addressBook.getCustomerOrderList();
     }
 
     public ModelManager() {
@@ -148,6 +153,14 @@ public class ModelManager implements Model {
     @Override
     public OrderList getOrderList() {
         return orderList;
+    }
+
+    public ObservableList<SupplyOrder> getSupplyOrderList() {
+        return supplyOrderList;
+    }
+
+    public ObservableList<CustomerOrder> getCustomerOrderList() {
+        return customerOrderList;
     }
 
     @Override
