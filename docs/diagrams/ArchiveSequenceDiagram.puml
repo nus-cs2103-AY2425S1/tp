@@ -1,0 +1,32 @@
+@startuml
+actor User
+participant ArchiveCommand
+participant Model
+participant ModelManager
+participant Filename
+
+User -> ArchiveCommand: execute(Model)
+activate ArchiveCommand
+
+ArchiveCommand -> Model: archiveAddressBook(Filename)
+activate Model
+
+Model -> ModelManager: archiveAddressBook(Filename)
+activate ModelManager
+
+ModelManager -> Filename: toString()
+activate Filename
+Filename --> ModelManager: filename string
+deactivate Filename
+
+ModelManager -> ModelManager: create archive filename
+ModelManager -> Files: createDirectories(destination.getParent())
+ModelManager -> Files: copy(source, destination, REPLACE_EXISTING)
+deactivate ModelManager
+
+Model --> ArchiveCommand:
+deactivate Model
+
+ArchiveCommand --> User: CommandResult(MESSAGE_SUCCESS)
+deactivate ArchiveCommand
+@enduml
