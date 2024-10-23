@@ -31,7 +31,7 @@ public class BatchEditCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "OLDTAG " + PREFIX_TAG + "NEWTAG";
 
-    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS = "Tag changed: %1$s\n";
+    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS = "Tag changed from: %1$s\n";
 
     private final Tag oldTag;
     private final Tag newTag;
