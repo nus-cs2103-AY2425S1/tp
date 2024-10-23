@@ -51,11 +51,13 @@ public class HireCommand extends Command {
         }
 
         if (personToHire.isHired()) {
-            throw new CommandException(String.format(MESSAGE_ALREADY_HIRED, this.name));
+            throw new CommandException(String.format(MESSAGE_ALREADY_HIRED,
+                    personToHire.getName()));
         }
 
         personToHire.markAsHired();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.name));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                personToHire.getName()));
     }
 
     public Name getName() {
