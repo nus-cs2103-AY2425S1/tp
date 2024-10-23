@@ -26,12 +26,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static final String EVENT_LIST_HEADER = "Events List";
+    private static final String VENDOR_LIST_HEADER = "Vendors List";
+    private static final String ASSIGNABLE_EVENT_HEADER = "Assignable Events";
+    private static final String ASSIGNABLE_VENDOR_HEADER = "Assignable Vendors";
     private final Logger logger = LogsCenter.getLogger(getClass());
-
-    private final String eventListHeader = "Events List";
-    private final String vendorListHeader = "Vendors List";
-    private final String assignableEventHeader = "Assignable Events";
-    private final String assignableVendorHeader = "Assignable Vendors";
 
     private Stage primaryStage;
     private Logic logic;
@@ -147,10 +146,10 @@ public class MainWindow extends UiPart<Stage> {
         eventDetailsPanel = new EventDetailsPanel(logic.getViewedEvent(), logic.getAssociations());
         vendorDetailsPanel = new VendorDetailsPanel(logic.getViewedVendor(), logic.getAssociations());
 
-        vendorListPanel = new VendorListPanel(logic.getFilteredVendorList(), vendorListHeader);
+        vendorListPanel = new VendorListPanel(logic.getFilteredVendorList(), VENDOR_LIST_HEADER);
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredEventList(), eventListHeader);
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), EVENT_LIST_HEADER);
         rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -184,10 +183,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void setDefaultView() {
         splitView();
-        eventListPanel.setHeader(eventListHeader);
+        eventListPanel.setHeader(EVENT_LIST_HEADER);
         rightPanelPlaceholder.getChildren().clear();
         rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
-        vendorListPanel.setHeader(vendorListHeader);
+        vendorListPanel.setHeader(VENDOR_LIST_HEADER);
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
@@ -199,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
         splitView();
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(vendorDetailsPanel.getRoot());
-        eventListPanel.setHeader(assignableEventHeader);
+        eventListPanel.setHeader(ASSIGNABLE_EVENT_HEADER);
         rightPanelPlaceholder.getChildren().clear();
         rightPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
@@ -211,7 +210,7 @@ public class MainWindow extends UiPart<Stage> {
         splitView();
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(eventDetailsPanel.getRoot());
-        vendorListPanel.setHeader(assignableVendorHeader);
+        vendorListPanel.setHeader(ASSIGNABLE_VENDOR_HEADER);
         rightPanelPlaceholder.getChildren().clear();
         rightPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
@@ -221,7 +220,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void setVendorList() {
         singleView();
-        vendorListPanel.setHeader(vendorListHeader);
+        vendorListPanel.setHeader(VENDOR_LIST_HEADER);
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
@@ -231,7 +230,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void setEventList() {
         singleView();
-        eventListPanel.setHeader(eventListHeader);
+        eventListPanel.setHeader(EVENT_LIST_HEADER);
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
