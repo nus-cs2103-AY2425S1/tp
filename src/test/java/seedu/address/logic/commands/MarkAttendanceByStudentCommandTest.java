@@ -28,7 +28,7 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code MarkAttendanceByStudentCommand}.
  */
-public class MarkAttendanceCommandTest {
+public class MarkAttendanceByStudentCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -37,9 +37,10 @@ public class MarkAttendanceCommandTest {
         Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMarkAttendance)
                 .withAttendance(LocalDate.now().format(Attendance.VALID_DATE_FORMAT)).build();
-        MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON);
+        MarkAttendanceByStudentCommand markAttendanceCommand =
+                new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, new Attendance(LocalDate.now()), "Math");
 
-        String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
+        String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
                 Messages.format(markedPerson));
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());

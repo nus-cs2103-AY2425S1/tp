@@ -5,17 +5,25 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
+import seedu.address.model.person.Attendance;
 
-public class MarkAttendanceCommandParserTest {
+public class MarkAttendanceByStudentCommandParserTest {
 
     private MarkAttendanceByStudentCommandParser parser = new MarkAttendanceByStudentCommandParser();
 
     @Test
-    public void parse_validArgs_returnsMarkAttendanceCommand() {
-        assertParseSuccess(parser, "1", new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgs_returnsMarkAttendanceByStudentCommand() {
+        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024",
+                Attendance.VALID_DATE_FORMAT));
+        MarkAttendanceByStudentCommand expectedCommand =
+                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, "Math");
+        assertParseSuccess(parser, "12/12/2024 Math", expectedCommand);
+
     }
 
     @Test
