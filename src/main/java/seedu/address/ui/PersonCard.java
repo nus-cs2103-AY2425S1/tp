@@ -61,11 +61,33 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         projectStatus.setText("Project status: " + person.getProjectStatus().toString());
-        paymentStatus.setText("Payment status: " + person.getPaymentStatus().toString());
+//        paymentStatus.setText("Payment status: " + person.getPaymentStatus().toString());
         clientStatus.setText("Client Status: " + person.getClientStatus().toString());
         deadline.setText("Deadline: " + person.checkAndGetDeadline());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+
+        String payStatus = person.getPaymentStatus().toString();
+        paymentStatus.setText("$");
+
+        // Apply color based on payment status
+        switch (payStatus) {
+        case "pending":
+            paymentStatus.getStyleClass().add("payment_status_pending");
+            break;
+        case "late":
+            paymentStatus.getStyleClass().add("payment_status_late");
+            break;
+        case "paid":
+            paymentStatus.getStyleClass().add("payment_status_paid");
+            break;
+        case "partial":
+            paymentStatus.getStyleClass().add("payment_status_partial");
+            break;
+        default:
+            break;
+        }
     }
 }
