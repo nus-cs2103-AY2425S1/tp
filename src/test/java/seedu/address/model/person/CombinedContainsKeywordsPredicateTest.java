@@ -21,7 +21,7 @@ public class CombinedContainsKeywordsPredicateTest {
                 new NameContainsKeywordsPredicate(Arrays.asList("first")));
         List<Predicate<Person>> secondPredicateList = Arrays.asList(
                 new NameContainsKeywordsPredicate(Arrays.asList("first")),
-                new PhoneContainsKeywordsPredicate(Arrays.asList("12345")));
+                new PhoneContainsKeywordsPredicate(Arrays.asList("63251562")));
 
         CombinedContainsKeywordsPredicate firstPredicate =
                 new CombinedContainsKeywordsPredicate(firstPredicateList);
@@ -50,12 +50,12 @@ public class CombinedContainsKeywordsPredicateTest {
     public void test_combinedPredicateReturnsTrue() {
         // Single matching predicate
         Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice"));
-        Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345"));
+        Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(Arrays.asList("87223543"));
         CombinedContainsKeywordsPredicate combinedPredicate = new CombinedContainsKeywordsPredicate(
                 Arrays.asList(namePredicate, phonePredicate));
 
         // Both must match
-        Person person = new PersonBuilder().withName("Alice").withPhone("12345").build();
+        Person person = new PersonBuilder().withName("Alice").withPhone("87223543").build();
         assertTrue(combinedPredicate.test(person));
     }
 
@@ -63,11 +63,11 @@ public class CombinedContainsKeywordsPredicateTest {
     public void test_combinedPredicateReturnsFalse() {
         // Single matching predicate, but not all
         Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice"));
-        Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(Arrays.asList("54321"));
+        Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(Arrays.asList("84563215"));
         CombinedContainsKeywordsPredicate combinedPredicate = new CombinedContainsKeywordsPredicate(
                 Arrays.asList(namePredicate, phonePredicate));
 
-        Person person = new PersonBuilder().withName("Alice").withPhone("12345").build();
+        Person person = new PersonBuilder().withName("Alice").withPhone("94651326").build();
         assertFalse(combinedPredicate.test(person));
 
         // No predicates matching
@@ -83,7 +83,7 @@ public class CombinedContainsKeywordsPredicateTest {
     public void toStringMethod() {
         List<Predicate<Person>> predicates = List.of(
                 new NameContainsKeywordsPredicate(List.of("keyword1")),
-                new PhoneContainsKeywordsPredicate(List.of("12345")),
+                new PhoneContainsKeywordsPredicate(List.of("96541224")),
                 new TagContainsKeywordsPredicate(List.of("friend")),
                 new EmailContainsKeywordsPredicate(List.of("keyword1@example.com"))
         );

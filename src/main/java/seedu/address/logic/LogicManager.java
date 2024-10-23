@@ -99,6 +99,6 @@ public class LogicManager implements Logic {
     }
 
     private boolean shouldSaveCampusConnect(Command c) {
-        return !(c.equals(new UndoCommand()) || c instanceof ListCommand || c instanceof SuperFindCommand);
+        return !(c instanceof UndoCommand || c instanceof ListCommand || c instanceof SuperFindCommand);
     }
 }
