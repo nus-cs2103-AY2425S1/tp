@@ -159,7 +159,8 @@ public class PersonBuilder {
      */
     public Person buildForEditCommand() {
         if (this.emergencyContact == null) {
-            this.emergencyContact = new EmergencyContact(new Name(DEFAULT_EMERGENCY_NAME), new Phone(DEFAULT_EMERGENCY_PHONE));
+            this.emergencyContact = new EmergencyContact(new Name(DEFAULT_EMERGENCY_NAME),
+                    new Phone(DEFAULT_EMERGENCY_PHONE));
         }
         if (this.gradYear == null) {
             this.gradYear = new GradYear(DEFAULT_GRAD_YEAR);
@@ -173,5 +174,4 @@ public class PersonBuilder {
     public Person build() {
         return new Person(name, phone, email, roomNumber, address, emergencyContact, gradYear, tags);
     }
-
 }
