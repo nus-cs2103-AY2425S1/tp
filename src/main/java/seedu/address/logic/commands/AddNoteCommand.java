@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Note;
@@ -25,9 +28,10 @@ public class AddNoteCommand extends Command {
             + PREFIX_NOTE + "Note text";
 
     public static final String MESSAGE_SUCCESS = "Added note to %1$s: %2$s";
-
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
     public static final String MESSAGE_NOTE_TEXT_EMPTY = "Note text cannot be empty";
+
+    private static final Logger logger = LogsCenter.getLogger(AddNoteCommand.class);
 
     private final Note note;
     private final Nric nric;
@@ -50,6 +54,7 @@ public class AddNoteCommand extends Command {
         }
 
         model.addNoteToPerson(note, person);
+        logger.info("Added note to appointment: " + note);
         return new CommandResult(String.format(MESSAGE_SUCCESS, nric, note.getContent()));
     }
 
