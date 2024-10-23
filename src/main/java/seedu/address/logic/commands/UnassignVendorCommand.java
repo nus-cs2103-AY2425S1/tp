@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -32,6 +34,8 @@ public class UnassignVendorCommand extends Command {
 
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
 
+    private static final Logger logger = Logger.getLogger("Foo");
+
     private final Index targetIndex;
 
     /**
@@ -45,26 +49,34 @@ public class UnassignVendorCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.log(Level.INFO, "Executing UnassignVendorCommand with index: {0}", targetIndex);
+
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        logger.log(Level.INFO, "Validating index: {0}", targetIndex);
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToUnassign = lastShownList.get(targetIndex.getZeroBased());
-        assert personToUnassign != null : "Person to assign must not be null";
+        logger.log(Level.INFO, "Attempting to unassign person: {0}", personToUnassign.getName());
+        assert personToUnassign != null : "Person to unassign must not be null";
 
 
         // need to change to check if model has the vendor already existing
         if (!model.hasVendor(personToUnassign)) {
+            logger.log(Level.WARNING, "Cannot unassign {0}: not a vendor.", personToUnassign.getName());
             throw new CommandException(String.format(MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR,
                     personToUnassign.getName()));
         }
 
+        logger.log(Level.INFO, "Unassigning vendor: {0}", personToUnassign.getName());
         model.unassignVendor(personToUnassign);
         assert !model.hasVendor(personToUnassign) : "Vendor was not unassigned correctly";
 
+        logger.log(Level.INFO, "Successfully unassigned vendor: {0}", personToUnassign.getName());
+        logger.log(Level.INFO, "Finished executing UnassignVendorCommand for index: {0}", targetIndex);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToUnassign)));
     }
 
