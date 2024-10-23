@@ -35,6 +35,9 @@ public class AddConcertContactCommandParser implements Parser<AddConcertContactC
                     AddConcertContactCommand.MESSAGE_USAGE), pe);
         }
 
+        assert indexP != null : "Person index cannot be null";
+        assert indexC != null : "Concert index cannot be null";
+
         return new AddConcertContactCommand(indexP, indexC);
     }
 
