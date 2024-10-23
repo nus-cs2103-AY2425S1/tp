@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,6 +17,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -23,12 +26,23 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    public static final String DARK_THEME = "dark";
+    public static final String LIGHT_THEME = "light";
+
     private static final String FXML = "MainWindow.fxml";
+
+    private static final String DARK_THEME_PATH = "/view/DarkTheme.css";
+    private static final String LIGHT_THEME_PATH = "/view/LightTheme.css";
+    private static final String THEME_CHANGE_MESSAGE = "Theme changed to %1$s mode.";
+    private static final String THEME_ALREADY_SET_MESSAGE = "Theme is already set to %1$s mode.";
+
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+    private String theme;
+    private Scene scene;
 
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
@@ -60,12 +74,20 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        // Initialize scene
+        this.scene = primaryStage.getScene();
+
+        ReadOnlyUserPrefs userPrefs = logic.getUserPrefs();
+        this.theme = userPrefs.getTheme(); // Load saved theme from user preferences
+        applyTheme();
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -165,6 +187,60 @@ public class MainWindow extends UiPart<Stage> {
 
     public ClientListPanel getClientListPanel() {
         return clientListPanel;
+    }
+
+    /**
+     * Applies the appropriate theme (light or dark) to the scene based on the current theme setting.
+     *
+     * If the theme is "light", the LIGHT_THEME stylesheet is applied.
+     * Otherwise, the DARK_THEME stylesheet is applied.
+     */
+    public void applyTheme() {
+        scene.getStylesheets().clear(); // Clear any previously applied styles
+
+        if (theme.equalsIgnoreCase(LIGHT_THEME)) {
+            scene.getStylesheets().add(getClass().getResource(LIGHT_THEME_PATH).toExternalForm());
+        } else {
+            scene.getStylesheets().add(getClass().getResource(DARK_THEME_PATH).toExternalForm());
+        }
+    }
+
+    /**
+     * Toggles between light and dark themes based on the current theme.
+     * Updates user preferences and notifies the user of the change.
+     */
+    @FXML
+    private void toggleTheme(String newTheme, String oldTheme, String newThemePath, String oldThemePath) {
+        if (theme.equals(oldTheme)) {
+            scene.getStylesheets().remove(getClass().getResource(oldThemePath).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(newThemePath).toExternalForm());
+            theme = newTheme;
+
+            // Get user prefs, set the theme, and update
+            UserPrefs updatedPrefs = (UserPrefs) logic.getUserPrefs();
+            logic.setUserPrefs(updatedPrefs.setTheme(newTheme));
+
+            // Notify user
+            resultDisplay.setFeedbackToUser(String.format(THEME_CHANGE_MESSAGE, theme));
+        } else {
+            resultDisplay.setFeedbackToUser(String.format(THEME_ALREADY_SET_MESSAGE, theme));
+        }
+    }
+
+    /**
+     * Handles switching to the light theme by calling toggleTheme with the appropriate parameters.
+     */
+    @FXML
+    private void handleLightTheme() {
+        toggleTheme(LIGHT_THEME, DARK_THEME, LIGHT_THEME_PATH, DARK_THEME_PATH);
+    }
+
+    /**
+     * Handles switching to the dark theme by calling toggleTheme with the appropriate parameters.
+     */
+    @FXML
+    private void handleDarkTheme() {
+        toggleTheme(DARK_THEME, LIGHT_THEME, DARK_THEME_PATH, LIGHT_THEME_PATH);
     }
 
     /**
