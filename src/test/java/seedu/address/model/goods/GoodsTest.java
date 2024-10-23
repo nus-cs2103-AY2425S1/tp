@@ -46,4 +46,11 @@ public class GoodsTest {
         Goods otherGoods = new Goods(new GoodsName("Other Bread"), GoodsCategories.CONSUMABLES);
         assertNotEquals(testGoods, otherGoods);
     }
+
+    @Test
+    public void equals_differentTypes_failure() {
+        Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
+        GoodsName otherGoods = new GoodsName("Other Bread");
+        assertNotEquals(testGoods, otherGoods);
+    }
 }
