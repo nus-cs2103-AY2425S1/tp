@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Pair;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
@@ -30,7 +31,7 @@ public class VendorDetailsPanel extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label description;
+    private Text description;
     @FXML
     private Label noVendorMsg;
     @FXML
