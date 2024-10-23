@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
