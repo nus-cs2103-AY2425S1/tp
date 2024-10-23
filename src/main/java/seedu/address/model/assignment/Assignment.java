@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Assignment {
     private final String title;
     private final LocalDateTime dueDate;
-    private final HashMap<Integer, Boolean> statuses;
+    private final HashMap<String, Boolean> statuses;
     private int numOfCompletedStudents = 0;
 
     /**
@@ -32,7 +32,7 @@ public class Assignment {
      * @param dueDate  The due dueDate of the assignment.
      * @param statuses The hashmap mapping student indexes to statuses
      */
-    public Assignment(String title, LocalDateTime dueDate, HashMap<Integer, Boolean> statuses) {
+    public Assignment(String title, LocalDateTime dueDate, HashMap<String, Boolean> statuses) {
         this.title = title;
         this.dueDate = dueDate;
         this.statuses = statuses;
@@ -75,7 +75,7 @@ public class Assignment {
      * @param index  The index of the student.
      * @param status The completion status of the student (true if completed).
      */
-    public void markStatus(int index, boolean status) {
+    public void markStatus(String index, boolean status) {
         if (statuses.containsKey(index)) {
             if (status && !statuses.get(index)) {
                 numOfCompletedStudents++;
@@ -98,7 +98,7 @@ public class Assignment {
      * @param index The index of the student.
      * @return True if the student has completed the assignment, false otherwise.
      */
-    public boolean getStatus(int index) {
+    public boolean getStatus(String index) {
         if (!statuses.containsKey(index)) {
             return false;
         }
@@ -110,7 +110,7 @@ public class Assignment {
      *
      * @return The hashmap of indexes to booleans.
      */
-    public HashMap<Integer, Boolean> getStatuses() {
+    public HashMap<String, Boolean> getStatuses() {
         return statuses;
     }
 

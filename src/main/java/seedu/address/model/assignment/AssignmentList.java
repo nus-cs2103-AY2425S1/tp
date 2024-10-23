@@ -96,7 +96,7 @@ public class AssignmentList {
         StringBuilder completedList = new StringBuilder("Students who have completed: \n");
         StringBuilder uncompletedList = new StringBuilder("Students who have not completed: \n");
         for (Student student : studentList) {
-            if (targetAssignment.getStatus(Integer.parseInt(student.getStudentId().value))) {
+            if (targetAssignment.getStatus(student.getStudentId().value)) {
                 completedList.append(student.getName()).append(", ");
             } else {
                 uncompletedList.append(student.getName()).append(", ");
@@ -117,7 +117,7 @@ public class AssignmentList {
     public void setStatus(Assignment assignment, Student targetStudent, boolean newStatus)
             throws AssignmentNotFoundException {
         Assignment targetAssignment = getAssignment(assignment);
-        int studentId = Integer.parseInt(targetStudent.getStudentId().value);
+        String studentId = targetStudent.getStudentId().value;
         targetAssignment.markStatus(studentId, newStatus);
     }
 
