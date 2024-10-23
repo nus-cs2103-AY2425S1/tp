@@ -72,20 +72,20 @@ public class EditVendorDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Company} of the {@code EditVendorDescriptor} that we are building.
+     */
+    public EditVendorDescriptorBuilder withCompany(String company) {
+        descriptor.setCompany(new Company(company));
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditVendorDescriptor}
      * that we are building.
      */
     public EditVendorDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Company} of the {@code EditVendorDescriptor} that we are building.
-     */
-    public EditVendorDescriptorBuilder withCompany(String company) {
-        descriptor.setCompany(new Company(company));
         return this;
     }
 
