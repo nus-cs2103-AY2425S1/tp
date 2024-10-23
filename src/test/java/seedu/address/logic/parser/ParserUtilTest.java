@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_SORT_ORDER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,25 +15,29 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Tutorial;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_SORT_ORDER = "2";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TUTORIAL = "0";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_SORT_ORDER_1 = "1";
+    private static final String VALID_SORT_ORDER_MINUS_1 = "-1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TUTORIAL_1 = "1";
+    private static final String VALID_TUTORIAL_2 = "2";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -103,29 +108,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    }
-
-    @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
@@ -192,5 +174,51 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(null));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_SORT_ORDER, () ->
+                ParserUtil.parseSortOrder(INVALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithoutWhitespace_returnsInteger() throws Exception {
+        assertEquals(1, ParserUtil.parseSortOrder(VALID_SORT_ORDER_1));
+        assertEquals(-1, ParserUtil.parseSortOrder(VALID_SORT_ORDER_MINUS_1));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithWhitespace_returnsTrimmedInteger() throws Exception {
+        String sortOrderWithWhitespace = WHITESPACE + VALID_SORT_ORDER_1 + WHITESPACE;
+        assertEquals(1, ParserUtil.parseSortOrder(sortOrderWithWhitespace));
+    }
+
+    @Test
+    public void parseTutorial_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorial(null));
+    }
+
+    @Test
+    public void parseTutorial_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorial(INVALID_TUTORIAL));
+    }
+
+    @Test
+    public void parseTutorial_validValueWithoutWhitespace_returnsTutorial() throws Exception {
+        Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
+        assertEquals(expectedTutorial, ParserUtil.parseTutorial(VALID_TUTORIAL_1));
+    }
+
+    @Test
+    public void parseTutorial_validValueWithWhitespace_returnsTrimmedTutorial() throws Exception {
+        String tutWithWhitespace = WHITESPACE + VALID_TUTORIAL_1 + WHITESPACE;
+        Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
+        assertEquals(expectedTutorial, ParserUtil.parseTutorial(tutWithWhitespace));
     }
 }

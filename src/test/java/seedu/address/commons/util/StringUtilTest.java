@@ -45,10 +45,10 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
-
-    //---------------- Tests for containsWordIgnoreCase --------------------------------------
+    //---------------- Tests for prepareSearch --------------------------------------
 
     /*
+     * Indirectly tests the private method prepareSearch by calling containsWordIgnoreCase.
      * Invalid equivalence partitions for word: null, empty, multiple words
      * Invalid equivalence partitions for sentence: null
      * The four test cases below test one invalid input at a time.
@@ -100,7 +100,6 @@ public class StringUtilTest {
      *
      * The test method below tries to verify all above with a reasonably low number of test cases.
      */
-
     @Test
     public void containsWordIgnoreCase_validInputs_correctResult() {
 
@@ -109,8 +108,11 @@ public class StringUtilTest {
         assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
 
         // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+
+        // Query word is substring of sentence word
+        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb"));
+        // Sentence word is substring of query word
+        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb"));
 
         // Matches word in the sentence, different upper/lower case letters
         assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
@@ -121,6 +123,66 @@ public class StringUtilTest {
 
         // Matches multiple words in sentence
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+    }
+
+    /*
+     * Valid equivalence partitions for word:
+     *   - any word
+     *   - word containing symbols/numbers
+     *   - word with leading/trailing spaces
+     *
+     * Valid equivalence partitions for sentence:
+     *   - empty string
+     *   - one word
+     *   - multiple words
+     *   - sentence with extra spaces
+     *
+     * Possible scenarios returning true:
+     *   - matches first word in sentence
+     *   - last word in sentence
+     *   - middle word in sentence
+     *   - matches multiple words
+     *   - sentence contains all characters in word (in order)
+     *
+     * Possible scenarios returning false:
+     *   - sentence word matches part of the query word
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+    @Test
+    public void containsCharactersInWordIgnoreCase_validInputs_correctResult() {
+
+        // Empty sentence
+        assertFalse(StringUtil.containsCharactersInWordIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsCharactersInWordIgnoreCase("    ", "123"));
+
+        // Matches a partial word only
+
+        // Query word is substring of sentence word
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase("aaa bbb ccc", "bb"));
+        // Sentence word is substring of query word
+        assertFalse(StringUtil.containsCharactersInWordIgnoreCase("aaa bbb ccc", "bbbb"));
+
+        // Matches word in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase(
+                "aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase(
+                "  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase(
+                "Aaa", "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+
+        // Matches characters of word in the sentence
+        assertFalse(StringUtil.containsCharactersInWordIgnoreCase("abc aaa bbb", "ad")); // does not contains ad
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase("abc aaa bbb", "ac")); // abc contains ac
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase("aabc", "ac")); // duplicate letters in sentence
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase("acbc", "ab")); // duplicate letters in sentence
+        assertFalse(StringUtil.containsCharactersInWordIgnoreCase("abc", "aac")); // duplicate letters in word
+        assertFalse(StringUtil.containsCharactersInWordIgnoreCase("abc", "ca")); // order matters
+
+        // Matches multiple words in sentence
+        assertTrue(StringUtil.containsCharactersInWordIgnoreCase("Abc aac  bbb", "ac"));
     }
 
     //---------------- Tests for getDetails --------------------------------------

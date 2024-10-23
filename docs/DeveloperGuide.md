@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This document is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -260,44 +260,75 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: NUS CS TAs who are adept and prefer CLI to GUI, 
+and have to keep track of their tutorial students’ contact and progress.
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: offers a streamlined tool for TAs to efficiently manage student contacts and work progress, 
+optimized for users who are fast typers, it’s portable, battery-efficient(light-weight), easy to learn and use.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                              | I want to …​                                                        | So that I can…​                                        |
+|----------|------------------------------------------------------|---------------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | new user                                             | be able to see the list of commands I can use                       | learn the CLI much faster                              |
+| `* * *`  | new user                                             | be able to see a sample command                                     | easily follow the format to test out how it works      |
+| `* * *`  | user                                                 | add contacts                                                        | save the trouble of remembering every contact          |
+| `* * *`  | user                                                 | delete contacts                                                     | remove incorrect or unnecessary entries                |
+| `* * *`  | user                                                 | view contacts                                                       | access the contacts' details                           |
+| `* * *`  | user                                                 | mark attendance for each tutorial session                           | easily keep a record of student participation          |
+| `* *`    | user with many persons in my address book            | search for a student by keywords (e.g. name/student ID)             | quickly access their details                           |
+| `* *`    | user with a large address book with diverse contacts | be able to sort my contacts using specific attributes               | find contacts based on the attributes more easily      |
+| `* *`    | user                                                 | filter students by their performance                                | identify those that need additional help               |
+| `* *`    | user                                                 | update a student's contact information                              | maintain accurate records                              |
+| `* *`    | user                                                 | flag students that have missed several tutorials                    | follow up on their well-being                          |
+| `* *`    | user                                                 | keep track of class participation                                   | award marks accordingly easily                         |
+| `* *`    | user                                                 | add additional notes to each contact                                | write important information and remarks I might forget |
+| `*`      | user                                                 | add multiple phone numbers to a contact                             | accommodate people who have more than 1 contact number |
+| `*`      | user                                                 | assign and manage student project groups                            | track group work and collaboration effectively         |
+| `*`      | user                                                 | generate weekly or monthly reports of student attendance and grades | review their progress over time                        |
+| `*`      | frequent user                                        | have shorter commands                                               | type faster and execute more commands                  |
+| `*`      | user                                                 | track each student’s individual attributes                          | provide personalised feedback                          |
+| `*`      | forgetful user                                       | set reminders for upcoming tutorials or deadlines                   | stay on track with my schedule                         |
+| `*`      | user                                                 | export attendance and grades data to a CSV file                     | share or analyze student data further                  |
+| `*`      | new user                                             | customize the CLI interface                                         | use it according to my personal preferences            |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ConTActs` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Add contact**
+
+**MSS**
+1. User requests to add a person
+2. ConTActs adds the contact to the list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Parameters contain unacceptable values.
+
+    * 1a1. ConTActs shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. Contact already exists.
+
+    * 1b1. ConTActs shows an error message.
+
+      Use case resumes at step 1.
+
+**UC02: Delete contact**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ConTActs shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ConTActs deletes the person
 
     Use case ends.
 
@@ -309,24 +340,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ConTActs shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**UC03: View contacts**
+
+**MSS**
+
+1. User requests to list persons with parameters e.g. number of contacts, reset sorting order
+2. ConTActs displays the list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Parameters contain unacceptable values.
+
+    * 1a1. ConTActs shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+    
+  * 2a1. ConTActs shows a message that the list is empty.
+    
+    Use case ends.
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+3.  The user interface should be optimized for CLI interaction. Users should be able to accomplish tasks more efficiently using commands than using the mouse.
+4.  Should provide clear, informative error messages in the event of invalid inputs or commands to provide sufficient guidance on how to correct it.
+5.  The contacts data, such as student details and tutorial attendance, should be stored in a durable format that supports easy retrieval.
+6.  Should only discard the affected contact in the event of corrupted data, to keep impact to a minimum.
+7.  Should work without internet connection.
+8.  All commands should run under 2 seconds.
+9.  Contact data stored should be secure and adhere to local laws such as PDPA.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface, a text-based user interface used to interact with the app by typing commands.
+* **Contact**: A student's information stored in the system, including name, NUS Net ID, phone number, email address and tutorial attendance.
+* **NUS Net ID**: A unique username and identifier for NUS students associated with most of NUS platforms such as Canvas, EduRec. It should follow the format “eXXXXXXX” (one letter 'e' followed by seven digits).
+* **Invalid Commands**: Commands entered into the CLI that do not match any recognized system commands.
+* **Invalid Inputs**: Data provided by the user that does not meet the required format or validation criteria for the specific command.
+* **Corrupted Data**: Data stored in the wrong format or with missing/invalid mandatory information.
 
 --------------------------------------------------------------------------------------------------------------------
 

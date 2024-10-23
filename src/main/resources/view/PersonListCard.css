@@ -1,0 +1,23 @@
+.tutorial-label {
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+    -fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+}
+
+.tutorial-not-taken-place {
+    -fx-background-color: #6d727a;
+}
+
+.tutorial-present {
+    -fx-background-color: #32cf39;
+}
+
+.tutorial-absent {
+    -fx-background-color: #e03841;
+}

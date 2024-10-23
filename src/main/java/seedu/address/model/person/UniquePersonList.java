@@ -37,6 +37,18 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person equivalent to {@code targetPerson}, excluding {@code excludePerson}.
+     *
+     * @param excludePerson The person to exclude from the check.
+     * @param targetPerson The person to check for in the list.
+     */
+    public boolean containsExcluding(Person excludePerson, Person targetPerson) {
+        requireAllNonNull(excludePerson, targetPerson);
+        return internalList.stream().anyMatch(
+                person -> !person.isSamePerson(excludePerson) && person.isSamePerson(targetPerson));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
