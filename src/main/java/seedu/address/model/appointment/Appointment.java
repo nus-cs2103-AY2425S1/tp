@@ -86,6 +86,7 @@ public class Appointment {
         return person;
     }
 
+
     public int getPersonId() {
         return person.getPersonId();
     }
