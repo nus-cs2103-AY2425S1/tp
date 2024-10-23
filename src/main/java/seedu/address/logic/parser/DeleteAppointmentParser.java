@@ -13,8 +13,16 @@ import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Nric;
 
+/**
+ *  Parses input arguments and creates a new DeleteAppointmentCommand object
+ */
 public class DeleteAppointmentParser implements Parser<DeleteAppointmentCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteAppointmentCommand
+     * and returns a DeleteAppointmentCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DeleteAppointmentCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NRIC,
             PREFIX_DATE, PREFIX_START_TIME);
@@ -29,11 +37,11 @@ public class DeleteAppointmentParser implements Parser<DeleteAppointmentCommand>
         LocalTime startTime = ParserUtil.parseTime(argumentMultimap.getValue(PREFIX_START_TIME).get());
 
         return new DeleteAppointmentCommand(nric, date, startTime);
-        
+
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-    
+
 }
