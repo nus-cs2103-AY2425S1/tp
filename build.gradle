@@ -69,4 +69,8 @@ shadowJar {
     archiveFileName = 'TalentSG.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
