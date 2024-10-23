@@ -2,6 +2,7 @@ package keycontacts.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.lesson.MakeupLesson;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -20,6 +23,7 @@ import keycontacts.model.student.Student;
 class JsonSerializableStudentDirectory {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_CLASHING_LESSONS = "Students list contains clashing lesson(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
@@ -49,9 +53,22 @@ class JsonSerializableStudentDirectory {
         StudentDirectory studentDirectory = new StudentDirectory();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
+            RegularLesson regularLesson = student.getRegularLesson();
+            Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
             if (studentDirectory.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
+
+            for (MakeupLesson makeupLesson : makeupLessons) {
+                if (studentDirectory.checkClashingLesson(makeupLesson).hasClash()) {
+                    throw new IllegalValueException(MESSAGE_CLASHING_LESSONS);
+                }
+            }
+
+            if (studentDirectory.checkClashingLesson(regularLesson).hasClash()) {
+                throw new IllegalValueException(MESSAGE_CLASHING_LESSONS);
+            }
+
             studentDirectory.addStudent(student);
         }
         return studentDirectory;

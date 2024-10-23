@@ -70,4 +70,5 @@ public class RegularLesson extends Lesson {
     public boolean isOnDayAndTime(Day day, Time time) {
         return this.getStartTime().equals(time) && this.getLessonDay().equals(day);
     }
+
 }

@@ -193,6 +193,13 @@ public class Student {
     }
 
     /**
+     * Returns a new student with an remove {@Code RegularLesson}.
+     */
+    public Student withoutRegularLesson() {
+        return new Updater().withoutRegularLesson().update();
+    }
+
+    /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
      */
@@ -312,6 +319,11 @@ public class Student {
 
         private Updater withMakeupLessons(Set<MakeupLesson> makeupLessons) {
             this.makeupLessons = makeupLessons;
+            return this;
+        }
+
+        private Updater withoutRegularLesson() {
+            this.regularLesson = null;
             return this;
         }
 

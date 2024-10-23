@@ -13,6 +13,7 @@ import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.ClashResult;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
@@ -38,7 +39,7 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson at %1$s for student: %2$s";
     public static final String MESSAGE_LESSON_UNCHANGED = "Lesson for the student is already at that time!";
-    public static final String MESSAGE_LESSON_CLASH = "There is a clashing lesson at that time!";
+    public static final String MESSAGE_CLASHING_LESSON = "Could not create lesson due to clash with lesson: %1$s.";
 
     private final Index index;
     private final RegularLesson regularLesson;
@@ -66,7 +67,18 @@ public class ScheduleCommand extends Command {
         if (studentToUpdate.equals(updatedStudent)) {
             throw new CommandException(MESSAGE_LESSON_UNCHANGED);
         }
-        model.setStudent(studentToUpdate, updatedStudent);
+
+        Student studentToUpdateWithoutRegularLesson = studentToUpdate.withoutRegularLesson();
+        model.setStudent(studentToUpdateWithoutRegularLesson, updatedStudent);
+
+        ClashResult clashResult = model.checkClashingLesson(regularLesson);
+        if (clashResult.hasClash()) {
+            model.setStudent(studentToUpdateWithoutRegularLesson, studentToUpdate); // revert change if clash
+            throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
+                    Messages.format(clashResult.getClashingLesson())));
+        }
+
+        model.setStudent(studentToUpdateWithoutRegularLesson, updatedStudent);
 
         return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, regularLesson.toDisplay(),
                 Messages.format(studentToUpdate)));

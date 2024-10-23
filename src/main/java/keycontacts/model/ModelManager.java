@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
+import keycontacts.model.lesson.ClashResult;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -109,6 +111,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
 
         studentDirectory.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public ClashResult checkClashingLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return studentDirectory.checkClashingLesson(lesson);
     }
 
     //=========== Filtered Student List Accessors =============================================================

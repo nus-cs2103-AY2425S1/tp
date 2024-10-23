@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import keycontacts.logic.parser.Prefix;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -52,5 +53,9 @@ public class Messages {
      */
     public static <T> String format(Collection<T> collection) {
         return collection.stream().map(T::toString).collect(Collectors.joining(", "));
+    }
+
+    public static String format(Lesson lesson) {
+        return lesson.toDisplay();
     }
 }

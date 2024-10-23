@@ -22,6 +22,8 @@ import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.lesson.ClashResult;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.StudentBuilder;
 
@@ -155,6 +157,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ClashResult checkClashingLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
     }

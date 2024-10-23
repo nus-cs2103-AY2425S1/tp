@@ -29,6 +29,52 @@ public abstract class Lesson {
         this.endTime = endTime;
     }
 
+    /**
+     * Returns true if any 2 lessons clash.
+     */
+    public static boolean lessonsClash(Lesson lesson1, Lesson lesson2) {
+        if (lesson1 == null || lesson2 == null) {
+            return false;
+        }
+
+        // Handle clash between two MakeupLessons
+        if (lesson1 instanceof MakeupLesson && lesson2 instanceof MakeupLesson) {
+            MakeupLesson ml1 = (MakeupLesson) lesson1;
+            MakeupLesson ml2 = (MakeupLesson) lesson2;
+            return ml1.getLessonDate().equals(ml2.getLessonDate())
+                    && ml1.getStartTime().isBefore(ml2.getEndTime())
+                    && ml1.getEndTime().isAfter(ml2.getStartTime());
+        }
+
+        // Handle clash between two RegularLessons
+        if (lesson1 instanceof RegularLesson && lesson2 instanceof RegularLesson) {
+            RegularLesson rl1 = (RegularLesson) lesson1;
+            RegularLesson rl2 = (RegularLesson) lesson2;
+            return rl1.getLessonDay().equals(rl2.getLessonDay())
+                    && rl1.getStartTime().isBefore(rl2.getEndTime())
+                    && rl1.getEndTime().isAfter(rl2.getStartTime());
+        }
+
+        // Handle clash between MakeupLesson and RegularLesson
+        if (lesson1 instanceof MakeupLesson && lesson2 instanceof RegularLesson) {
+            MakeupLesson ml = (MakeupLesson) lesson1;
+            RegularLesson rl = (RegularLesson) lesson2;
+            return ml.getLessonDate().convertToDay().equals(rl.getLessonDay())
+                    && ml.getStartTime().isBefore(rl.getEndTime())
+                    && ml.getEndTime().isAfter(rl.getStartTime());
+        }
+
+        if (lesson1 instanceof RegularLesson && lesson2 instanceof MakeupLesson) {
+            RegularLesson rl = (RegularLesson) lesson1;
+            MakeupLesson ml = (MakeupLesson) lesson2;
+            return rl.getLessonDay().equals(ml.getLessonDate().convertToDay())
+                    && rl.getStartTime().isBefore(ml.getEndTime())
+                    && rl.getEndTime().isAfter(ml.getStartTime());
+        }
+
+        return false;
+    }
+
     public static boolean isValidTimePair(Time startTime, Time endTime) {
         return startTime.getTime().isBefore(endTime.getTime());
     }

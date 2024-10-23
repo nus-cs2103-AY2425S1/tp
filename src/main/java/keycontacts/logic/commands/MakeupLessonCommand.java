@@ -12,6 +12,7 @@ import keycontacts.commons.core.index.Index;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.ClashResult;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.student.Student;
 
@@ -36,6 +37,7 @@ public class MakeupLessonCommand extends Command {
             + PREFIX_END_TIME + "13:00";
 
     public static final String MESSAGE_SUCCESS = "Makeup lesson created at %1$s for student: %2$s.";
+    public static final String MESSAGE_CLASHING_LESSON = "Could not create lesson due to clash with lesson: %1$s.";
 
     private final Index targetIndex;
     private final MakeupLesson makeupLesson;
@@ -60,6 +62,12 @@ public class MakeupLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
+        ClashResult clashResult = model.checkClashingLesson(makeupLesson);
+        if (clashResult.hasClash()) {
+            throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
+                    Messages.format(clashResult.getClashingLesson())));
+        }
+
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
         Student updatedStudent = studentToUpdate.withAddedMakeupLesson(makeupLesson);
 
@@ -75,5 +83,7 @@ public class MakeupLessonCommand extends Command {
                 || (other instanceof MakeupLessonCommand // instanceof handles nulls
                         && makeupLesson.equals(((MakeupLessonCommand) other).makeupLesson));
     }
+
+
 
 }

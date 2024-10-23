@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.core.GuiSettings;
+import keycontacts.model.lesson.ClashResult;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -85,4 +87,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Returns a {@Code ClashResult} object containing details of lesson clashes.
+     */
+    public ClashResult checkClashingLesson(Lesson lessonToCheck);
 }
