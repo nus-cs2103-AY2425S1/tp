@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,9 +9,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import static java.util.Objects.requireNonNull;
 
 /**
  * Tests that a {@code Person}'s arguments matches all the requirements

@@ -3,14 +3,21 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
-import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
+import seedu.address.model.person.ProjectStatus;
+import seedu.address.model.person.PaymentStatus;
+import seedu.address.model.person.Deadline;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ArgumentPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -74,8 +81,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      * {@code ArgumentMultimap}.
      */
     private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent() &&
-                !argumentMultimap.getValue(prefix).get().isEmpty());
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent()
+                && !argumentMultimap.getValue(prefix).get().isEmpty());
     }
 
 }
