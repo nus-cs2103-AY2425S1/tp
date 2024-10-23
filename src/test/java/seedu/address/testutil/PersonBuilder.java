@@ -1,14 +1,16 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentStatus;
+import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -17,25 +19,29 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_TELEGRAM = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_STUDENT_STATUS = "undergraduate 1";
+    public static final String[] DEFAULT_ROLES = {"Admin"};
+    public static final String DEFAULT_NICKNAME = "";
 
     private Name name;
-    private Phone phone;
+    private TelegramHandle telegramHandle;
     private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    private StudentStatus studentStatus;
+    private Set<Role> roles;
+    private Nickname nickname;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        studentStatus = new StudentStatus(DEFAULT_STUDENT_STATUS);
+        roles = new HashSet<>(Arrays.stream(DEFAULT_ROLES).map(Role::new).toList());
+        nickname = new Nickname(DEFAULT_NICKNAME);
     }
 
     /**
@@ -43,10 +49,11 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone();
+        telegramHandle = personToCopy.getTelegramHandle();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        studentStatus = personToCopy.getStudentStatus();
+        roles = new HashSet<>(personToCopy.getRoles());
+        nickname = personToCopy.getNickname();
     }
 
     /**
@@ -58,26 +65,26 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withRoles(String ... tags) {
+        this.roles = SampleDataUtil.getRoleSet(tags);
         return this;
     }
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withStudentStatus(String studentStatus) {
+        this.studentStatus = new StudentStatus(studentStatus);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code TelegramHandle} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public PersonBuilder withTelegramHandle(String telegramHandle) {
+        this.telegramHandle = new TelegramHandle(telegramHandle);
         return this;
     }
 
@@ -89,8 +96,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Nickname} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNickname(String nickname) {
+        this.nickname = new Nickname(nickname);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, telegramHandle, email, studentStatus, roles, nickname);
     }
 
 }

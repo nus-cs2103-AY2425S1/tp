@@ -9,11 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentStatus;
+import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -51,18 +52,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String telegramHandle} into a {@code TelegramHandle}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code telegramHandle} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
+        requireNonNull(telegramHandle);
+        String trimmedTelegramHandle = telegramHandle.trim();
+        if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
+            throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new TelegramHandle(trimmedTelegramHandle);
     }
 
     /**
@@ -71,13 +72,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static StudentStatus parseStudentStatus(String studentStatus) throws ParseException {
+        requireNonNull(studentStatus);
+        String trimmedStudentStatus = studentStatus.trim();
+        if (!StudentStatus.isValidStudentStatus(trimmedStudentStatus)) {
+            throw new ParseException(StudentStatus.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new StudentStatus(trimmedStudentStatus);
     }
 
     /**
@@ -96,29 +97,41 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String role} into a {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code role} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Role.isValidRoleName(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Role(trimmedRole);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(parseRole(roleName));
         }
-        return tagSet;
+        return roleSet;
+    }
+
+    /**
+     * Parses a {@code String nickname} into a {@code Nickname}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Nickname} is invalid.
+     */
+    public static Nickname parseNickname(String nickname) throws ParseException {
+        requireNonNull(nickname);
+        String trimmedNickname = nickname.trim();
+        return new Nickname(trimmedNickname);
     }
 }

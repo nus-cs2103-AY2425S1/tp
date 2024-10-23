@@ -59,9 +59,31 @@ public class Name {
         return fullName.equals(otherName.fullName);
     }
 
+    /**
+     * Identifies if the name is the same ignoring case sensitivity
+     * @param other - the other Name in question
+     * @return true or false
+     */
+    public boolean equalsIgnoreCase(Name other) {
+        if (other == null) {
+            return false;
+        }
+        return fullName.equalsIgnoreCase(other.fullName);
+    }
+
     @Override
     public int hashCode() {
         return fullName.hashCode();
+    }
+
+    /**
+     * Compares the name of another person contact in alphabetical order.
+     *
+     * @param otherName Name of another person contact
+     * @return Integer status of the comparison
+     */
+    public int compareTo(Name otherName) {
+        return fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
     }
 
 }

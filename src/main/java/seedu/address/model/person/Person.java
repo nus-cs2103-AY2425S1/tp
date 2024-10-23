@@ -8,7 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Represents a Person in the address book.
@@ -18,47 +19,54 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final TelegramHandle telegramHandle;
     private final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final StudentStatus studentStatus;
+    private final Set<Role> roles = new HashSet<>();
+    private final Nickname nickname;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, TelegramHandle telegramHandle, Email email, StudentStatus studentStatus,
+                  Set<Role> roles, Nickname nickname) {
+        requireAllNonNull(name, telegramHandle, email, studentStatus, roles, nickname);
         this.name = name;
-        this.phone = phone;
+        this.telegramHandle = telegramHandle;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.studentStatus = studentStatus;
+        this.roles.addAll(roles);
+        this.nickname = nickname;
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public StudentStatus getStudentStatus() {
+        return studentStatus;
     }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    public Nickname getNickname() {
+        return nickname;
     }
 
     /**
@@ -71,7 +79,30 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getNickname().equals(getNickname());
+    }
+
+    /**
+     * Returns true if both persons have the same fields.
+     * This defines a weaker notion of equality between two persons.
+     * This is called after isSamePerson, will return true if
+     * - TelegramHandle field already exist
+     * - Email field already exist
+     * - Nickname already exist for the same Name
+     */
+    public boolean hasSameFields(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        if (otherPerson == null) {
+            return false;
+        }
+
+        return otherPerson.getTelegramHandle().equals(getTelegramHandle())
+                || otherPerson.getEmail().equals(getEmail())
+                || (otherPerson.getNickname().equals(getNickname()) && otherPerson.getName().equals(getName()));
     }
 
     /**
@@ -91,26 +122,28 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+                && telegramHandle.equals(otherPerson.telegramHandle)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && studentStatus.equals(otherPerson.studentStatus)
+                && roles.equals(otherPerson.roles)
+                && nickname.equals(otherPerson.nickname);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, telegramHandle, email, studentStatus, roles, nickname);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("telegram handle", telegramHandle)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("studentStatus", studentStatus)
+                .add("roles", roles)
+                .add("nickname", nickname)
                 .toString();
     }
 

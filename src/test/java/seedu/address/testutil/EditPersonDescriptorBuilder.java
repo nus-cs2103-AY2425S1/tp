@@ -5,12 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentStatus;
+import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
+
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -33,10 +35,11 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
+        descriptor.setTelegramHandle(person.getTelegramHandle());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setStudentStatus(person.getStudentStatus());
+        descriptor.setRoles(person.getRoles());
+        descriptor.setNickname(person.getNickname());
     }
 
     /**
@@ -48,10 +51,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code TelegramHandle} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+    public EditPersonDescriptorBuilder withTelegramHandle(String telegramHandle) {
+        descriptor.setTelegramHandle(new TelegramHandle(telegramHandle));
         return this;
     }
 
@@ -64,20 +67,29 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code StudentStatus} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withStudentStatus(String studentStatus) {
+        descriptor.setStudentStatus(new StudentStatus(studentStatus));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withRoles(String... roles) {
+        Set<Role> roleSet = Stream.of(roles).map(Role::new).collect(Collectors.toSet());
+        descriptor.setRoles(roleSet);
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code Nickname} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNickname(String nickname) {
+        descriptor.setNickname(new Nickname(nickname));
         return this;
     }
 

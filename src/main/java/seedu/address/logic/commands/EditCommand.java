@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,12 +22,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentStatus;
+import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.tag.Nickname;
+import seedu.address.model.tag.Role;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -40,30 +42,50 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_TELEGRAM_HANDLE + "telegramHandle] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_STUDENT_STATUS + "STUDENT_STATUS] "
+            + "[" + PREFIX_ROLE + "ROLE]"
+            + "[" + PREFIX_NICKNAME + "NICKNAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_TELEGRAM_HANDLE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_FIELDS =
+            "One of the fields you want to add conflict with another person.";
 
-    private final Index index;
+    private static final int invalidTargetIndex = -1;
+
+    private Index targetIndex;
+    private final Name targetName;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param targetIndex of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(Index targetIndex, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(targetIndex);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.targetIndex = targetIndex;
+        this.targetName = null;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    /**
+     * @param targetName of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public EditCommand(Name targetName, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(targetName);
+        requireNonNull(editPersonDescriptor);
+
+        this.targetIndex = null;
+        this.targetName = targetName;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -72,20 +94,45 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
+
+        if (targetIndex == null) {
+            setTargetIndex(lastShownList);
+            System.out.println("Have set Target Index: " + targetIndex);
+        }
+        assert(targetIndex != null);
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (!personToEdit.isSamePerson(editedPerson)
+                && model.hasDuplicateFieldsWithException(personToEdit, editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_FIELDS);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private void setTargetIndex(List<Person> lastShownList) throws CommandException {
+        int temp = lastShownList.stream()
+                .filter(person -> person.getName().equalsIgnoreCase(targetName))
+                .map(lastShownList::indexOf)
+                .reduce(invalidTargetIndex, (x, y) -> y);
+        System.out.println("temp = " + temp);
+        if (temp == invalidTargetIndex) {
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK);
+        }
+        this.targetIndex = Index.fromZeroBased(temp);
     }
 
     /**
@@ -96,12 +143,15 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        StudentStatus updatedStudentStatus =
+                editPersonDescriptor.getStudentStatus().orElse(personToEdit.getStudentStatus());
+        Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
+        Nickname updatedNickname = editPersonDescriptor.getNickname().orElse(personToEdit.getNickname());
+        return new Person(updatedName, updatedTelegramHandle, updatedEmail, updatedStudentStatus, updatedRoles,
+                updatedNickname);
     }
 
     @Override
@@ -116,14 +166,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
+        return targetIndex.equals(otherEditCommand.targetIndex)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("targetIndex", targetIndex)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
@@ -134,30 +184,32 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
+        private TelegramHandle telegramHandle;
         private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private StudentStatus studentStatus;
+        private Set<Role> roles;
+        private Nickname nickname;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code roles} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setTelegramHandle(toCopy.telegramHandle);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setStudentStatus(toCopy.studentStatus);
+            setRoles(toCopy.roles);
+            setNickname(toCopy.nickname);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, telegramHandle, email, studentStatus, roles, nickname);
         }
 
         public void setName(Name name) {
@@ -168,12 +220,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
         }
 
         public void setEmail(Email email) {
@@ -184,29 +236,37 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setStudentStatus(StudentStatus studentStatus) {
+            this.studentStatus = studentStatus;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<StudentStatus> getStudentStatus() {
+            return Optional.ofNullable(studentStatus);
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code roles} to this object's {@code roles}.
+         * A defensive copy of {@code roles} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setRoles(Set<Role> roles) {
+            this.roles = (roles != null) ? new HashSet<>(roles) : null;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code roles} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Role>> getRoles() {
+            return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
+        }
+
+        public void setNickname(Nickname nickname) {
+            this.nickname = nickname;
+        }
+
+        public Optional<Nickname> getNickname() {
+            return Optional.ofNullable(nickname);
         }
 
         @Override
@@ -222,20 +282,22 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(studentStatus, otherEditPersonDescriptor.studentStatus)
+                    && Objects.equals(roles, otherEditPersonDescriptor.roles)
+                    && Objects.equals(nickname, otherEditPersonDescriptor.nickname);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("phone", phone)
+                    .add("telegramHandle", telegramHandle)
                     .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
+                    .add("studentStatus", studentStatus)
+                    .add("roles", roles)
+                    .add("nickname", nickname)
                     .toString();
         }
     }

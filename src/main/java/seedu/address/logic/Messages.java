@@ -12,12 +12,19 @@ import seedu.address.model.person.Person;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unrecognised command. "
+            + "Only the following will be accepted as the first word of the command:\n"
+            + "add, edit, delete, find, list, help, clear, exit";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_NAME_FIELD_MISSING = "Invalid command format! MISSING 'n/' \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK =
+            "This person is not in address book, please use Full Name";
+    public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";
+    public static final String MESSAGE_EMPTY_PREFIX_FIELD = "Fields cannot be empty";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -37,14 +44,18 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
+                .append("; Telegram: ")
+                .append(person.getTelegramHandle())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Student Status: ")
+                .append(person.getStudentStatus());
+        if (!person.getNickname().isEmpty()) {
+            builder.append("; Nickname: ");
+            builder.append(person.getNickname());
+        }
+        builder.append("; Roles: ");
+        person.getRoles().forEach(builder::append);
         return builder.toString();
     }
 
