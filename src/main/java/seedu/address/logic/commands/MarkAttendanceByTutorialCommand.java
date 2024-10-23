@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDate;
@@ -26,8 +27,10 @@ public class MarkAttendanceByTutorialCommand extends Command {
             + ": Marks the attendance of the all the students in the specified tutorial.\n"
             + "Parameters: "
             + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_ATTENDANCE + "20/10/2024";
+            + "[" + PREFIX_TUTORIAL + "TUTORIAL]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_ATTENDANCE + "20/10/2024"
+            + PREFIX_TUTORIAL + "Math";
 
     public static final String MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS =
             "Marked attendance of all students in tutorial: %1$s";
