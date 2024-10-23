@@ -28,7 +28,7 @@ public class LinkListPanel extends UiPart<Region> {
         super(FXML);
         System.out.println(linkList);
         ObservableList<Link> reversedList = FXCollections.observableArrayList(linkList);
-        FXCollections.reverse(reversedList);
+        FXCollections.reverse(reversedList); // display the most recently created link first
         linkListView.setItems(reversedList);
         linkListView.setCellFactory(listView -> new LinkListViewCell());
     }
