@@ -62,12 +62,12 @@ public class LessonTest {
         }
 
         @Override
-        public boolean isClash(RegularLesson other) {
+        public boolean isClashing(RegularLesson other) {
             throw new AssertionError("This method should not be called!");
         }
 
         @Override
-        public boolean isClash(MakeupLesson other) {
+        public boolean isClashing(MakeupLesson other) {
             throw new AssertionError("This method should not be called!");
         }
     }

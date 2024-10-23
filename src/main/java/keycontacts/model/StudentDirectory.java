@@ -149,17 +149,41 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
         Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
 
         // check for clashes with the provided lesson against the current student's lessons
-        if (regularLesson != null && lessonToCheck.isClash(regularLesson) && regularLesson != lessonToCheck) {
+        if (regularLesson != null
+                && lessonToCheck.isClashing(regularLesson)
+                && regularLesson != lessonToCheck
+                && !isOnCancelledLessonDay(lessonToCheck)) { // check if regular lesson on the day is cancelled
             return regularLesson; // clash with the student's regular lesson
         }
 
         for (MakeupLesson ml : makeupLessons) {
-            if (lessonToCheck.isClash(ml) && ml != lessonToCheck) {
+            if (lessonToCheck.isClashing(ml)
+                    && ml != lessonToCheck) {
                 return ml; // clash with the student's makeup lesson
             }
         }
 
         return null; // no clashes found
+    }
+
+    private boolean isOnCancelledLessonDay(Lesson lesson) {
+        if (lesson instanceof MakeupLesson) {
+            MakeupLesson makeupLesson = (MakeupLesson) lesson;
+            return this.getStudentList()
+                    .stream()
+                    .flatMap(student -> student.getCancelledLessons().stream())
+                    .anyMatch(cl -> makeupLesson.getLessonDate().equals(cl.getLessonDate()));
+        }
+
+        if (lesson instanceof RegularLesson) {
+            RegularLesson regularLesson = (RegularLesson) lesson;
+            return this.getStudentList()
+                    .stream()
+                    .flatMap(student -> student.getCancelledLessons().stream())
+                    .anyMatch(cl -> regularLesson.getLessonDay().equals(cl.getLessonDate().convertToDay()));
+        }
+
+        return false;
     }
 
     //// util methods

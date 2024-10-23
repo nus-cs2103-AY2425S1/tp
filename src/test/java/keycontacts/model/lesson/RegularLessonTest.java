@@ -99,9 +99,9 @@ public class RegularLessonTest {
         RegularLesson regularLesson = ALICE.getRegularLesson();
         MakeupLesson makeupLesson = new MakeupLesson(new Date("14-10-2024"), new Time("14:00"), new Time("16:00"));
         MakeupLesson aliceMakeupLesson = ALICE.getMakeupLessons().stream().findFirst().get();
-        assertTrue(regularLesson.isClash(ALICE.getRegularLesson()));
-        assertFalse(regularLesson.isClash(makeupLesson));
-        assertFalse(makeupLesson.isClash(regularLesson));
-        assertFalse(regularLesson.isClash(aliceMakeupLesson));
+        assertTrue(regularLesson.isClashing(ALICE.getRegularLesson()));
+        assertFalse(regularLesson.isClashing(makeupLesson));
+        assertFalse(makeupLesson.isClashing(regularLesson));
+        assertFalse(regularLesson.isClashing(aliceMakeupLesson));
     }
 }

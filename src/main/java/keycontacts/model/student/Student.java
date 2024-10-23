@@ -193,6 +193,16 @@ public class Student {
     }
 
     /**
+     * Creates and returns a new {@code Student} with the {@code makeupLesson} removed.
+     */
+    public Student withoutMakeupLesson(MakeupLesson makeupLesson) {
+        Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
+        updatedMakeupLessons.remove(makeupLesson);
+
+        return new Updater().withoutMakeupLesson(updatedMakeupLessons).update();
+    }
+
+    /**
      * Returns a new student with an remove {@Code RegularLesson}.
      */
     public Student withoutRegularLesson() {
@@ -269,6 +279,16 @@ public class Student {
     }
 
     /**
+     * Returns an {@code Optional<MakeupLesson>} if the student has a makeup lesson matching the paramters.
+     */
+    public Optional<MakeupLesson> findMakeupLesson(Date date, Time startTime) {
+        return this.getMakeupLessons()
+                .stream()
+                .filter(ml -> ml.getLessonDate().equals(date) && ml.getStartTime().equals(startTime))
+                .findFirst();
+    }
+
+    /**
      *  Inner private class for updating the student object.
      *  {@code with...} methods in {@code Student} serve as an abstraction over the inner methods.
      */
@@ -318,6 +338,11 @@ public class Student {
         }
 
         private Updater withMakeupLessons(Set<MakeupLesson> makeupLessons) {
+            this.makeupLessons = makeupLessons;
+            return this;
+        }
+
+        private Updater withoutMakeupLesson(Set<MakeupLesson> makeupLessons) {
             this.makeupLessons = makeupLessons;
             return this;
         }

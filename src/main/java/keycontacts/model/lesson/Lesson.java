@@ -29,8 +29,8 @@ public abstract class Lesson {
         this.endTime = endTime;
     }
 
-    public abstract boolean isClash(RegularLesson regularLesson);
-    public abstract boolean isClash(MakeupLesson makeupLesson);
+    public abstract boolean isClashing(RegularLesson regularLesson);
+    public abstract boolean isClashing(MakeupLesson makeupLesson);
 
     public static boolean isValidTimePair(Time startTime, Time endTime) {
         return startTime.getTime().isBefore(endTime.getTime());
