@@ -1,14 +1,11 @@
 package seedu.address.ui;
 
-import java.awt.Desktop;
-import java.net.URI;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
+
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -47,7 +44,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         this.contentManager = new HelpContentManager();
         this.logicManager = new HelpLogicManager(contentManager);
-        initializeUIComponents();
+        initializeUiComponents();
     }
 
     public HelpWindow() {
@@ -72,7 +69,8 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    private void initializeUIComponents() {
+    /** Initializes the UI components such as the Table of Contents and command summary. */
+    private void initializeUiComponents() {
         setupTocListView();
         setupCommandSummary();
         updateTextFlow(contentManager.getContent("Introduction"));
@@ -84,6 +82,10 @@ public class HelpWindow extends UiPart<Stage> {
         });
     }
 
+    /**
+     * Updates the TextFlow with the given help content.
+     * @param content The content to display in the TextFlow.
+     */
     public void updateTextFlow(String content) {
         helpContentFlow.getChildren().clear();
         logicManager.formatTextFlow(content, helpContentFlow);
@@ -93,6 +95,7 @@ public class HelpWindow extends UiPart<Stage> {
         tocListView.setItems(contentManager.getTableOfContents());
     }
 
+    /** Sets up the command summary TableView with its columns. */
     public void setupCommandSummary() {
         contentManager.initializeCommandSummaryData(commandSummaryTable, actionColumn, formatColumn, exampleColumn);
         commandSummaryTable.setVisible(false);
@@ -103,6 +106,10 @@ public class HelpWindow extends UiPart<Stage> {
         commandSummaryTable.setVisible(true);
     }
 
+    /**
+     * Displays the help content for the specified key.
+     * @param key The key representing the help topic.
+     */
     public void displayHelpContent(String key) {
         commandSummaryTable.setVisible(false);
         updateTextFlow(contentManager.getContent(key));

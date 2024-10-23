@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.awt.Desktop;
 import java.net.URI;
+
 import javafx.scene.control.Hyperlink;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -17,6 +18,11 @@ public class HelpLogicManager {
         this.contentManager = contentManager;
     }
 
+    /**
+     * Handles the Table of Contents (TOC) selection to display appropriate content in the HelpWindow.
+     * @param selectedItem The selected item from the TOC.
+     * @param helpWindow The HelpWindow where the content will be displayed.
+     */
     public void handleTocSelection(String selectedItem, HelpWindow helpWindow) {
         if ("Command Summary".equals(selectedItem)) {
             helpWindow.displayCommandSummary();
@@ -40,7 +46,7 @@ public class HelpLogicManager {
         helpContentFlow.getChildren().add(title);
 
         if (content.contains("Quick start")) {
-            addQuickStartHyperlinks(helpContentFlow);  // Handles hyperlinks specific to "Quick Start"
+            addQuickStartHyperlinks(helpContentFlow); // Handles hyperlinks specific to "Quick Start"
         } else {
             processTextWithBackticks(bodyText, helpContentFlow);
         }

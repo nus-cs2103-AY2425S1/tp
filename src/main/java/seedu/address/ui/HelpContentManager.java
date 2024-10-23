@@ -1,12 +1,12 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Handles the management of help content such as table of contents, command summaries, and individual help entries.
@@ -20,6 +20,7 @@ public class HelpContentManager {
         initializeContents();
     }
 
+    /** Initializes the help content sections and populates the content map with predefined help content. */
     public void initializeContents() {
         contentMap.put("Introduction", """
                 Introduction\n
@@ -197,10 +198,19 @@ public class HelpContentManager {
                 """);
     }
 
+    /**
+     * Retrieves the content for a specific section.
+     * @param key The key representing the section title.
+     * @return The content for the given section.
+     */
     public String getContent(String key) {
         return contentMap.get(key);
     }
 
+    /**
+     * Returns an observable list containing the help topics (Table of Contents).
+     * @return An observable list with the section titles for the help window.
+     */
     public ObservableList<String> getTableOfContents() {
         return FXCollections.observableArrayList(
                 "Introduction",
@@ -219,6 +229,13 @@ public class HelpContentManager {
         );
     }
 
+    /**
+     * Initializes and populates the command summary data in the TableView.
+     * @param table The TableView for displaying the command summary data.
+     * @param actionColumn The column representing the command action.
+     * @param formatColumn The column representing the command format.
+     * @param exampleColumn The column representing the command example.
+     */
     public void initializeCommandSummaryData(TableView<String[]> table, TableColumn<String[],
             String> actionColumn, TableColumn<String[],
             String> formatColumn, TableColumn<String[], String> exampleColumn) {
