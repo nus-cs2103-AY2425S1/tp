@@ -1,17 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.address.logic.commands.util.PredicateDryRunUtil.filterVendorsDryRun;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import javafx.collections.transformation.FilteredList;
-
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.vendor.Vendor;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
+import seedu.address.model.vendor.Vendor;
 
 /**
  * Finds and lists all vendors in address book whose name contains any of the argument keywords.
@@ -37,7 +36,7 @@ public class FindVendorCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        FilteredList<Vendor> vendors =  filterVendorsDryRun(model, predicate);
+        FilteredList<Vendor> vendors = filterVendorsDryRun(model, predicate);
 
         if (vendors.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_VENDORS_FOUND);

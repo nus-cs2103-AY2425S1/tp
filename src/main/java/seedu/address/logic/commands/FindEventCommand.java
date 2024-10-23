@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;

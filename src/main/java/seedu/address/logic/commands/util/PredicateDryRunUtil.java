@@ -1,13 +1,15 @@
 package seedu.address.logic.commands.util;
 
 import javafx.collections.transformation.FilteredList;
-
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
-import seedu.address.model.vendor.Vendor;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
+import seedu.address.model.vendor.Vendor;
 
+/**
+ * Contains utility methods for filtering vendors and events using predicates.
+ */
 public class PredicateDryRunUtil {
 
     /**
