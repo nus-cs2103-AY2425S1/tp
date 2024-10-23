@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AggGradeCommand.OPERATION_TRANSLATE;
 import static seedu.address.model.person.Grade.MESSAGE_SCORE_CONSTRAINTS;
 import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AggGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
@@ -236,5 +238,17 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
         }
+    }
+
+    public static AggGradeCommand.Operation parseAggGradeOperation(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+
+        if (!OPERATION_TRANSLATE.containsKey(trimmedValue)) {
+            // TODO
+            throw new ParseException("todo");
+        }
+
+        return OPERATION_TRANSLATE.get(trimmedValue);
     }
 }
