@@ -3,7 +3,7 @@
   title: "User Guide"
   pageNav: 3
 ---
-# GamerBook PRO MAX User Guide
+# GamerBook Pro Max User Guide
 
 GamerBook Pro Max is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 This app is useful for gamers who have many friends online across different games.
