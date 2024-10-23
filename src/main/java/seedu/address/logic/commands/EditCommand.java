@@ -20,7 +20,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in PawPatrol.
  */
 public abstract class EditCommand<T> extends Command {
     public static final String COMMAND_WORD = "edit";

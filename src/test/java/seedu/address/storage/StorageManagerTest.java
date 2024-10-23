@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPawPatrol;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonPawPatrolStorage addressBookStorage = new JsonPawPatrolStorage(getTempFilePath("ab"));
+        JsonPawPatrolStorage pawPatrolStorage = new JsonPawPatrolStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(pawPatrolStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,20 +48,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void pawPatrolReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonPawPatrolStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonPawPatrolStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readPawPatrol().get();
-        assertEquals(original, new AddressBook(retrieved));
+        PawPatrol original = getTypicalPawPatrol();
+        storageManager.savePawPatrol(original);
+        ReadOnlyPawPatrol retrieved = storageManager.readPawPatrol().get();
+        assertEquals(original, new PawPatrol(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getPawPatrolFilePath() {
         assertNotNull(storageManager.getPawPatrolFilePath());
     }
 

@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -30,6 +31,7 @@ public class OwnerUtil {
         sb.append(PREFIX_PHONE + owner.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + owner.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + owner.getAddress().value + " ");
+        sb.append(PREFIX_IC_NUMBER + owner.getIdentificationNumber().value + " ");
         return sb.toString();
     }
 

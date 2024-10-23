@@ -7,6 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.owner.Address;
 import seedu.address.model.owner.Email;
+import seedu.address.model.owner.IdentificationCardNumber;
 import seedu.address.model.owner.Name;
 import seedu.address.model.owner.Phone;
 
@@ -89,5 +90,20 @@ public class ParserOwnerUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String icNumber} into an {@code IdentificationCardNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code icNumber} is invalid.
+     */
+    public static IdentificationCardNumber parseIcNumber(String icNumber) throws ParseException {
+        requireNonNull(icNumber);
+        String trimmedIcNumber = icNumber.trim();
+        if (!IdentificationCardNumber.isValidIcNumber(trimmedIcNumber)) {
+            throw new ParseException(IdentificationCardNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new IdentificationCardNumber(trimmedIcNumber);
     }
 }

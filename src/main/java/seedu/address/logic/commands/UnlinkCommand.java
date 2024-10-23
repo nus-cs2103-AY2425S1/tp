@@ -20,7 +20,7 @@ import seedu.address.model.owner.Owner;
 import seedu.address.model.pet.Pet;
 
 /**
- * Unlinks a pet from an owner in the address book.
+ * Unlinks a pet from an owner in PawPatrol.
  */
 public class UnlinkCommand extends Command {
     public static final String COMMAND_WORD = "unlink";

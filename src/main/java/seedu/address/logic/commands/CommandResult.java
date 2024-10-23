@@ -30,13 +30,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        // insert assertion that the booleans start off as false
         this.viewToggler = new ViewToggler(feedbackToUser);
-        /*
-        this.isPetListCommand = false;
-        this.isOwnerListCommand = false;
-        this.isCombinedListCommand = false;
-         */
     }
 
     /**

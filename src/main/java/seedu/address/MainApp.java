@@ -15,10 +15,10 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -57,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        PawPatrolStorage addressBookStorage = new JsonPawPatrolStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        PawPatrolStorage pawPatrolStorage = new JsonPawPatrolStorage(userPrefs.getPawPatrolFilePath());
+        storage = new StorageManager(pawPatrolStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,26 +68,26 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s PawPatrol and {@code userPrefs}. <br>
+     * The data from the sample PawPatrol will be used instead if {@code storage}'s PawPatrol is not found,
+     * or an empty PawPatrol will be used instead if errors occur when reading {@code storage}'s PawPatrol.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getPawPatrolFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyPawPatrol> pawPatrolOptional;
+        ReadOnlyPawPatrol initialData;
         try {
-            addressBookOptional = storage.readPawPatrol();
-            if (!addressBookOptional.isPresent()) {
+            pawPatrolOptional = storage.readPawPatrol();
+            if (!pawPatrolOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getPawPatrolFilePath()
-                        + " populated with a sample AddressBook.");
+                        + " populated with a sample PawPatrol.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = pawPatrolOptional.orElseGet(SampleDataUtil::getSamplePawPatrol);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getPawPatrolFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+                    + " Will be starting with an empty PawPatrol.");
+            initialData = new PawPatrol();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,13 +170,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting PawPatrol " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping PawPatrol ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

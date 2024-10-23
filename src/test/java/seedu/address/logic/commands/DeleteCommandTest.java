@@ -30,8 +30,8 @@ import seedu.address.testutil.TypicalPets;
  */
 public class DeleteCommandTest {
 
-    private Model modelWithOwners = new ModelManager(TypicalOwners.getTypicalAddressBook(), new UserPrefs());
-    private Model modelWithPets = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithOwners = new ModelManager(TypicalOwners.getTypicalPawPatrol(), new UserPrefs());
+    private Model modelWithPets = new ModelManager(TypicalPets.getTypicalPawPatrol(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredOwnerList_success() {
@@ -41,7 +41,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteOwnerCommand.MESSAGE_DELETE_OWNER_SUCCESS,
                 Messages.format(ownerToDelete));
 
-        ModelManager expectedModel = new ModelManager(modelWithOwners.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(modelWithOwners.getPawPatrol(), new UserPrefs());
         expectedModel.deleteOwner(ownerToDelete);
 
         assertCommandSuccess(deleteOwnerCommand, modelWithOwners, expectedMessage, expectedModel);
@@ -55,7 +55,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS,
                 Messages.format(petToDelete));
 
-        ModelManager expectedModel = new ModelManager(modelWithPets.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(modelWithPets.getPawPatrol(), new UserPrefs());
         expectedModel.deletePet(petToDelete);
 
         assertCommandSuccess(deletePetCommand, modelWithPets, expectedMessage, expectedModel);
@@ -87,7 +87,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteOwnerCommand.MESSAGE_DELETE_OWNER_SUCCESS,
                 Messages.format(ownerToDelete));
 
-        Model expectedModel = new ModelManager(modelWithOwners.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(modelWithOwners.getPawPatrol(), new UserPrefs());
         expectedModel.deleteOwner(ownerToDelete);
         showNoOwner(expectedModel);
 
@@ -104,7 +104,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS,
                 Messages.format(petToDelete));
 
-        Model expectedModel = new ModelManager(modelWithPets.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(modelWithPets.getPawPatrol(), new UserPrefs());
         expectedModel.deletePet(petToDelete);
         showNoPet(expectedModel);
 
@@ -116,8 +116,8 @@ public class DeleteCommandTest {
         showOwnerAtIndex(modelWithOwners, INDEX_FIRST_OWNER);
 
         Index outOfBoundIndex = INDEX_SECOND_OWNER;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < modelWithOwners.getAddressBook().getOwnerList().size());
+        // ensures that outOfBoundIndex is still in bounds of PawPatrol list
+        assertTrue(outOfBoundIndex.getZeroBased() < modelWithOwners.getPawPatrol().getOwnerList().size());
 
         DeleteCommand deleteCommand = new DeleteOwnerCommand(outOfBoundIndex);
 
@@ -129,8 +129,8 @@ public class DeleteCommandTest {
         showPetAtIndex(modelWithPets, INDEX_FIRST_PET);
 
         Index outOfBoundIndex = INDEX_SECOND_PET;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < modelWithPets.getAddressBook().getPetList().size());
+        // ensures that outOfBoundIndex is still in bounds of PawPatrol list
+        assertTrue(outOfBoundIndex.getZeroBased() < modelWithPets.getPawPatrol().getPetList().size());
 
         DeleteCommand deleteCommand = new DeletePetCommand(outOfBoundIndex);
 

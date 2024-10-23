@@ -206,6 +206,22 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String icNumber} into an {@code IdentificationCardNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code icNumber} is invalid.
+     */
+    public static seedu.address.model.owner.IdentificationCardNumber parseOwnerIcNumber(String icNumber)
+            throws ParseException {
+        requireNonNull(icNumber);
+        String trimmedIcNumber = icNumber.trim();
+        if (!seedu.address.model.owner.IdentificationCardNumber.isValidIcNumber(trimmedIcNumber)) {
+            throw new ParseException(seedu.address.model.owner.IdentificationCardNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.owner.IdentificationCardNumber(trimmedIcNumber);
+    }
+
+    /**
      * Parses a {@code String age} into an {@code Age}.
      * Leading and trailing whitespaces will be trimmed.
      *

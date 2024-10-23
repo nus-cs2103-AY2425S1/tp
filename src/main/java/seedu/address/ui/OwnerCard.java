@@ -18,13 +18,15 @@ public class OwnerCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on PawPatrol level 4</a>
      */
 
     public final Owner owner;
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private Label icNumber;
     @FXML
     private Label name;
     @FXML
@@ -43,6 +45,7 @@ public class OwnerCard extends UiPart<Region> {
         super(FXML);
         this.owner = owner;
         id.setText(displayedIndex + ". ");
+        icNumber.setText(owner.getIdentificationNumber().getRedacted());
         name.setText(owner.getName().fullName);
         phone.setText(owner.getPhone().value);
         address.setText(owner.getAddress().value);

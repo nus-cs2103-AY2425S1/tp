@@ -59,7 +59,6 @@ public class ListCommandViewManager {
      *
      */
     public void showLinks() {
-        // Clear the current lists
         ownerList.setVisible(false);
         ownerList.setManaged(false);
         petList.setVisible(false);

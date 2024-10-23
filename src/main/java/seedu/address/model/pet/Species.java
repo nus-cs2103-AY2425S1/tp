@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Pet's species in the address book.
+ * Represents a Pet's species in PawPatrol.
  * Guarantees: immutable; is valid as declared in {@link #isValidSpecies(String)}
  */
 public class Species {

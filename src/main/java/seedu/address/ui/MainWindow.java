@@ -146,13 +146,14 @@ public class MainWindow extends UiPart<Stage> {
         ownerListPanel = new OwnerListPanel(logic.getFilteredOwnerList());
         ownerListPanelPlaceholder.getChildren().add(ownerListPanel.getRoot());
 
+
         linkListPanel = new LinkListPanel(logic.getFilteredLinkList());
         linkListPanelPlaceholder.getChildren().add(linkListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getPawPatrolFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);

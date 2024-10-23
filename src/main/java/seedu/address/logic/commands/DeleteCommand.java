@@ -5,7 +5,7 @@ import seedu.address.model.Model;
 
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from PawPatrol.
  */
 public abstract class DeleteCommand extends Command {
 

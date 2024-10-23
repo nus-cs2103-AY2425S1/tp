@@ -14,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.owner.Address;
 import seedu.address.model.owner.Email;
+import seedu.address.model.owner.IdentificationCardNumber;
 import seedu.address.model.owner.Name;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.Phone;
@@ -26,7 +27,7 @@ public class EditOwnerCommand extends EditCommand<Owner> {
 
     public static final String MESSAGE_EDIT_OWNER_SUCCESS = "Edited Owner: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in PawPatrol.";
 
     private final EditOwnerDescriptor editOwnerDescriptor;
 
@@ -78,12 +79,14 @@ public class EditOwnerCommand extends EditCommand<Owner> {
     private static Owner createEditedOwner(Owner ownerToEdit, EditOwnerDescriptor editOwnerDescriptor) {
         assert ownerToEdit != null;
 
+        IdentificationCardNumber updatedIdentificationNumber = editOwnerDescriptor.getIdentificationNumber()
+            .orElse(ownerToEdit.getIdentificationNumber());
         Name updatedName = editOwnerDescriptor.getName().orElse(ownerToEdit.getName());
         Phone updatedPhone = editOwnerDescriptor.getPhone().orElse(ownerToEdit.getPhone());
         Email updatedEmail = editOwnerDescriptor.getEmail().orElse(ownerToEdit.getEmail());
         Address updatedAddress = editOwnerDescriptor.getAddress().orElse(ownerToEdit.getAddress());
 
-        return new Owner(updatedName, updatedPhone, updatedEmail, updatedAddress);
+        return new Owner(updatedIdentificationNumber, updatedName, updatedPhone, updatedEmail, updatedAddress);
     }
 
     /**
@@ -93,6 +96,7 @@ public class EditOwnerCommand extends EditCommand<Owner> {
      * @throws CommandException If the index is invalid or the edited owner is a duplicate.
      */
     public static class EditOwnerDescriptor {
+        private IdentificationCardNumber identificationNumber;
         private Name name;
         private Phone phone;
         private Email email;
@@ -105,6 +109,7 @@ public class EditOwnerCommand extends EditCommand<Owner> {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditOwnerDescriptor(EditOwnerDescriptor toCopy) {
+            setIdentificationNumber(toCopy.identificationNumber);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -116,6 +121,14 @@ public class EditOwnerCommand extends EditCommand<Owner> {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address);
+        }
+
+        public void setIdentificationNumber(IdentificationCardNumber identificationNumber) {
+            this.identificationNumber = identificationNumber;
+        }
+
+        public Optional<IdentificationCardNumber> getIdentificationNumber() {
+            return Optional.ofNullable(identificationNumber);
         }
 
         public void setName(Name name) {

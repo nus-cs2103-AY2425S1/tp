@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.testutil.TypicalOwners.getTypicalOwners;
 import static seedu.address.testutil.TypicalPets.getTypicalPets;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.PawPatrol;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.pet.Pet;
 
@@ -13,10 +13,10 @@ import seedu.address.model.pet.Pet;
 public class TypicalPawPatrol {
 
     /**
-     * Returns an {@code AddressBook} with all the typical owners and pets.
+     * Returns an {@code PawPatrol} with all the typical owners and pets.
      */
-    public static AddressBook getTypicalPawPatrol() {
-        AddressBook ab = new AddressBook();
+    public static PawPatrol getTypicalPawPatrol() {
+        PawPatrol ab = new PawPatrol();
         for (Owner owner : getTypicalOwners()) {
             ab.addOwner(owner);
         }

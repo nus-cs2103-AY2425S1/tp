@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPawPatrol;
 import static seedu.address.testutil.TypicalPets.BELLA;
 
 import java.util.Arrays;
@@ -27,25 +27,25 @@ import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalOwners;
 
-public class AddressBookTest {
+public class PawPatrolTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final PawPatrol pawPatrol = new PawPatrol();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), pawPatrol.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> pawPatrol.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyPawPatrol_replacesData() {
+        PawPatrol newData = getTypicalPawPatrol();
+        pawPatrol.resetData(newData);
+        assertEquals(newData, pawPatrol);
     }
 
     @Test
@@ -54,33 +54,33 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
             .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        PawPatrolStub newData = new PawPatrolStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> pawPatrol.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> pawPatrol.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInPawPatrol_returnsFalse() {
+        assertFalse(pawPatrol.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInPawPatrol_returnsTrue() {
+        pawPatrol.addPerson(ALICE);
+        assertTrue(pawPatrol.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInPawPatrol_returnsTrue() {
+        pawPatrol.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
             .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(pawPatrol.hasPerson(editedAlice));
     }
 
     @Test
@@ -94,48 +94,48 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasLink_linkNotInAddressBook_returnsFalse() {
+    public void hasLink_linkNotInPawPatrol_returnsFalse() {
         Owner owner = TypicalOwners.ALICE;
         Pet pet = BELLA;
         Link link = new Link(owner, pet);
 
-        assertFalse(addressBook.hasLink(link));
+        assertFalse(pawPatrol.hasLink(link));
     }
 
     @Test
-    public void hasLink_linkInAddressBook_returnsTrue() {
+    public void hasLink_linkInPawPatrol_returnsTrue() {
         Owner owner = TypicalOwners.ALICE;
         Pet pet = BELLA;
         Link link = new Link(owner, pet);
 
-        addressBook.addLink(link);
-        assertTrue(addressBook.hasLink(link));
+        pawPatrol.addLink(link);
+        assertTrue(pawPatrol.hasLink(link));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> pawPatrol.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
-            + ", owners=" + addressBook.getOwnerList() + ", pets=" + addressBook.getPetList()
-            + ", links=" + addressBook.getLinkList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = PawPatrol.class.getCanonicalName() + "{persons=" + pawPatrol.getPersonList()
+            + ", owners=" + pawPatrol.getOwnerList() + ", pets=" + pawPatrol.getPetList()
+            + ", links=" + pawPatrol.getLinkList() + "}";
+        assertEquals(expected, pawPatrol.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface
+     * A stub ReadOnlyPawPatrol whose persons list can violate interface
      * constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class PawPatrolStub implements ReadOnlyPawPatrol {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Owner> owners = FXCollections.observableArrayList();
         private final ObservableList<Pet> pets = FXCollections.observableArrayList();
         private final ObservableList<Link> links = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        PawPatrolStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

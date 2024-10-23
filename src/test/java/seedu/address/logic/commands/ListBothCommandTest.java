@@ -22,7 +22,7 @@ public class ListBothCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(TypicalPawPatrol.getTypicalPawPatrol(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getPawPatrol(), new UserPrefs());
     }
 
     @Test

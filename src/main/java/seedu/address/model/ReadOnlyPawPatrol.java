@@ -7,9 +7,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of PawPatrol
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyPawPatrol {
     /**
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.

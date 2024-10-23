@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents an Owner in the address book.
+ * Represents an Owner in PawPatrol.
  * Guarantees: details are present and not null, field values are validated,
  * immutable.
  */
@@ -34,7 +34,8 @@ public class Link {
     }
 
     public String description() {
-        return "Link from owner " + from.getUniqueID() + " to pet " + to.getUniqueID();
+        assert(to.getUniqueID().length() > 1);
+        return "Link from owner " + from.getUniqueID()+ " to pet " + to.getUniqueID().substring(1);
     }
 
     /**

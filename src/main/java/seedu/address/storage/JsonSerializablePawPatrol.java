@@ -9,18 +9,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PawPatrol;
+import seedu.address.model.ReadOnlyPawPatrol;
 import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable PawPatrol that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "pawpatrol")
+class JsonSerializablePawPatrol {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
@@ -36,13 +36,13 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedLink> links = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given owners and pets.
+     * Constructs a {@code JsonSerializablePawPatrol} with the given owners and pets.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("pets") List<JsonAdaptedPet> pets,
-                                       @JsonProperty("owners") List<JsonAdaptedOwner> owners,
-                                       @JsonProperty("links") List<JsonAdaptedLink> links) {
+    public JsonSerializablePawPatrol(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                     @JsonProperty("pets") List<JsonAdaptedPet> pets,
+                                     @JsonProperty("owners") List<JsonAdaptedOwner> owners,
+                                     @JsonProperty("links") List<JsonAdaptedLink> links) {
         if (persons != null) {
             this.persons.addAll(persons);
         }
@@ -58,11 +58,11 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyPawPatrol} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializablePawPatrol}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializablePawPatrol(ReadOnlyPawPatrol source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
         pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
@@ -70,41 +70,41 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this PawPatrol into the model's {@code PawPatrol} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public PawPatrol toModelType() throws IllegalValueException {
+        PawPatrol pawPatrol = new PawPatrol();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (pawPatrol.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            pawPatrol.addPerson(person);
         }
         for (JsonAdaptedOwner jsonAdaptedOwner : owners) {
             Owner owner = jsonAdaptedOwner.toModelType();
-            if (addressBook.hasOwner(owner)) {
+            if (pawPatrol.hasOwner(owner)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_OWNER);
             }
-            addressBook.addOwner(owner);
+            pawPatrol.addOwner(owner);
         }
         for (JsonAdaptedPet jsonAdaptedPet : pets) {
             Pet pet = jsonAdaptedPet.toModelType();
-            if (addressBook.hasPet(pet)) {
+            if (pawPatrol.hasPet(pet)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PET);
             }
-            addressBook.addPet(pet);
+            pawPatrol.addPet(pet);
         }
         for (JsonAdaptedLink jsonAdaptedLink : links) {
-            Link link = jsonAdaptedLink.toModelType(addressBook.getOwnerList(), addressBook.getPetList());
-            if (addressBook.hasLink(link)) {
+            Link link = jsonAdaptedLink.toModelType(pawPatrol.getOwnerList(), pawPatrol.getPetList());
+            if (pawPatrol.hasLink(link)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PET);
             }
-            addressBook.addLink(link);
+            pawPatrol.addLink(link);
         }
-        return addressBook;
+        return pawPatrol;
     }
 
 }
