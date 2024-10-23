@@ -5,7 +5,7 @@ import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
 
 /**
- * Mark all students, usually after attendance is taken
+ * Mark all students, usually after student has paid
  */
 public class MarkAllCommand extends Command {
     public static final String COMMAND_WORD = "markall";

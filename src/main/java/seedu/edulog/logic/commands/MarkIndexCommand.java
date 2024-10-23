@@ -13,7 +13,7 @@ import seedu.edulog.model.Model;
 import seedu.edulog.model.student.Student;
 
 /**
- * Marks a student as present identified using its displayed index from the edulog book.
+ * Marks a student as has paid, identified using their displayed index from the edulog book.
  */
 public class MarkIndexCommand extends MarkCommand {
 

@@ -108,9 +108,9 @@ public class EduLog implements ReadOnlyEduLog {
     }
 
     /**
-     * Marks given student as present.
+     * Marks given student as paid.
      *
-     * @param student the student to mark as present.
+     * @param student the student to mark as paid.
      */
     public void markStudent(Student student) {
         requireNonNull(student);
@@ -118,16 +118,16 @@ public class EduLog implements ReadOnlyEduLog {
     }
 
     /**
-     * Marks all students as present.
+     * Marks all students as paid.
      */
     public void markAllStudents() {
         students.forEach(Student::mark);
     }
 
     /**
-     * Marks given student as absent.
+     * Marks given student as unpaid.
      *
-     * @param student the student to mark as absent.
+     * @param student the student to mark as unpaid.
      */
     public void unmarkStudent(Student student) {
         requireNonNull(student);
@@ -135,7 +135,7 @@ public class EduLog implements ReadOnlyEduLog {
     }
 
     /**
-     * Marks all students as absent.
+     * Marks all students as unpaid.
      */
     public void unmarkAllStudents() {
         students.forEach(Student::unmark);

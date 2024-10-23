@@ -12,7 +12,7 @@ import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Student;
 
 /**
- * Unmarks a student identified using its displayed name from the edulog book.
+ * Unmarks a student identified using their displayed name from the edulog book.
  */
 public class UnmarkNameCommand extends UnmarkCommand {
 

@@ -4,7 +4,7 @@ import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
 
 /**
- * Unmarks a student identified using its displayed index from the edulog book.
+ * Unmarks a student identified using their displayed index from the edulog book.
  */
 public abstract class UnmarkCommand extends Command {
 
