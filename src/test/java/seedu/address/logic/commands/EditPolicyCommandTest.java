@@ -12,6 +12,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -45,6 +47,31 @@ public class EditPolicyCommandTest {
 
         assertThrows(NullPointerException.class, () -> new EditPolicyCommand(null, descriptor));
         assertThrows(NullPointerException.class, () -> new EditPolicyCommand(INDEX_FIRST_PERSON, null));
+    }
+
+    @Test
+    public void execute_invalidPersonIndex_failure() {
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptor(validPolicyType);
+        descriptor.setPremiumAmount(validPremiumAmount);
+
+        // Index larger than size of person list
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+
+        EditPolicyCommand editPolicyCommand = new EditPolicyCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(editPolicyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals_differentObjects_false() {
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptor(validPolicyType);
+        EditPolicyCommand editPolicyCommand = new EditPolicyCommand(INDEX_FIRST_PERSON, descriptor);
+
+        // Different objects, same values
+        assertFalse(editPolicyCommand.equals(new Object()));
+
+        // Same command but different index
+        assertFalse(editPolicyCommand.equals(new EditPolicyCommand(INDEX_SECOND_PERSON, descriptor)));
     }
 
     @Test
