@@ -247,7 +247,7 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 >
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
-> * `ALLERGY` is case-insensitive and will be stored as **upper case** in the patient's details.
+> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S123457A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 > * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
 
 
@@ -256,6 +256,28 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > 
 > * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
+#### Deleting an allergy: `delAllergy`
+
+Deletes an allergy or multiple allergies to an existing patient in MediBase3.
+
+Format: `delAllergy i/NRIC al/ALLERGY…`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Deletes the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
+> * **At least one** `ALLERGY` must be provided. e.g. `delAllergy i/S1234567A` is invalid.
+> * `ALLERGY` is case-insensitive. e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
+> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
+
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> * You can delete multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
+> * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
 
 ### Managing Priority
 [To be filled up]
@@ -281,7 +303,7 @@ Format: `list`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Listing all patients by their priority: `list`
+#### Listing all patients by their priority: `listPrio`
 
 Shows a list of all patients with a specific `PRIORITY` in MediBase3.
 
@@ -374,8 +396,6 @@ You can navigate between previous successful commands and your current command b
 #### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
 
 Format: `help`
 
