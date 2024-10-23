@@ -1,8 +1,12 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortOwnerCommand;
 import seedu.address.logic.commands.SortPetCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses user input for the 'list' command and returns the appropriate command
@@ -17,14 +21,14 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @param userInput The input from the user to be parsed.
      * @return A {@code SortCommand} based on the user input.
      */
-    public SortCommand parse(String userInput) {
+    public SortCommand parse(String userInput) throws ParseException{
         userInput = userInput.trim();
         if (userInput.equals("pets")) {
             return new SortPetCommand();
         } else if (userInput.equals("owners")) {
             return new SortOwnerCommand();
         } else {
-            return null; //fix later
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
     }
 }
