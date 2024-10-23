@@ -30,6 +30,10 @@ public class Goods {
     public String getReadableGoodsName() {
         return goodsName.toString();
     }
+  
+    public GoodsCategories getCategory() {
+        return category;
+    }
 
     /**
      * Returns True if the goods name is valid.
@@ -57,7 +61,16 @@ public class Goods {
         return goodsName + "," + category;
     }
 
-    public GoodsCategories getCategory() {
-        return category;
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+
+        if (!(object instanceof Goods otherGoods)) {
+            return false;
+        }
+
+        return otherGoods.goodsName.equals(this.goodsName) && otherGoods.category.equals(this.category);
     }
 }
