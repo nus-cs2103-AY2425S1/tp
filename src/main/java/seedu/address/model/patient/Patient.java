@@ -60,6 +60,10 @@ public class Patient extends Person {
             return false;
         }
 
+        if (!(other instanceof Patient)) {
+            return false;
+        }
+
         Patient otherPatient = (Patient) other;
         return super.getDateOfBirth().equals(otherPatient.getDateOfBirth())
                 && super.getGender().equals(otherPatient.getGender());

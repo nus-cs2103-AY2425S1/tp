@@ -52,6 +52,10 @@ public class Doctor extends Person {
             return false;
         }
 
+        if (!(other instanceof Doctor)) {
+            return false;
+        }
+
         Doctor otherDoctor = (Doctor) other;
         return super.getSpeciality().equals(otherDoctor.getSpeciality());
     }
