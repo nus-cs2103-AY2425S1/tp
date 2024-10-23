@@ -118,16 +118,16 @@ public class ModelManager implements Model {
     @Override
     public void archivePerson(Person person) {
         requireNonNull(person);
-        addressBook.archivePerson(person);  // Move person to the archived list in the AddressBook
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);  // Update filtered list of active persons
+        addressBook.archivePerson(person); // Move person to the archived list in the AddressBook
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Update filtered list of active persons
     }
 
     // Add method to unarchive a person
     @Override
     public void unarchivePerson(Person person) {
         requireNonNull(person);
-        addressBook.unarchivePerson(person);  // Move person back to the active list in the AddressBook
-        updateFilteredArchivedPersonList(PREDICATE_SHOW_ALL_PERSONS);  // Update filtered list of archived persons
+        addressBook.unarchivePerson(person); // Move person back to the active list in the AddressBook
+        updateFilteredArchivedPersonList(PREDICATE_SHOW_ALL_PERSONS); // Update filtered list of archived persons
     }
 
     // Return the filtered list of archived persons

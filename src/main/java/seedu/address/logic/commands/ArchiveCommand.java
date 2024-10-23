@@ -38,9 +38,9 @@ public class ArchiveCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList(); // Get the list of currently shown persons.
 
         List<Person> peopleToArchive = new ArrayList<>();
-        for (Index index : targetIndices) {  // Assuming targetIndices is a list of indices to archive.
+        for (Index index : targetIndices) { // Assuming targetIndices is a list of indices to archive.
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);  // Handle invalid index.
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX); // Handle invalid index.
             }
 
             Person personToArchive = lastShownList.get(index.getZeroBased());
@@ -49,8 +49,8 @@ public class ArchiveCommand extends Command {
 
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToArchive) {
-            model.archivePerson(person);  // Archive the person by moving them to the archived list in the model.
-            resultMessages.add(Messages.format(person));  // Format the success message for each archived person.
+            model.archivePerson(person); // Archive the person by moving them to the archived list in the model.
+            resultMessages.add(Messages.format(person)); // Format the success message for each archived person.
         }
 
         if (resultMessages.size() == 1) {

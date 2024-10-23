@@ -11,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new ArchiveCommand object
  */
-public class ArchiveCommandParser implements Parser<ArchiveCommand>{
+public class ArchiveCommandParser implements Parser<ArchiveCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ArchiveCommand
