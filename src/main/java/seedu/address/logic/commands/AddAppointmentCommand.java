@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_NAME;
@@ -12,7 +13,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Time;
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.shared.Date;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Adds an appointment to an existing person in the address book.
@@ -38,22 +47,39 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the address book";
 
-    private final Appointment appointmentToAdd;
+    private final Name patientName;
+    private final Name doctorName;
+    private final Date date;
+    private final Time time;
+    private Appointment appointmentToAdd;
 
     /**
      * Creates an AddAppointmentCommand to add the specified {@code Appointment}
      */
-    public AddAppointmentCommand(Appointment appointment) {
-        requireNonNull(appointment);
-        this.appointmentToAdd = appointment;
+    public AddAppointmentCommand(Name patientName, Name doctorName, Date date, Time time) {
+        requireAllNonNull(patientName, doctorName, date, time);
+        this.patientName = patientName;
+        this.doctorName = doctorName;
+        this.date = date;
+        this.time = time;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person patientToEdit = appointmentToAdd.getPatient();
-        Person doctorToEdit = appointmentToAdd.getDoctor();
+        Optional<Person> patient = lastShownList.stream()
+                .filter(person -> person.getName().equals(patientName))
+                .findAny();
+        Optional<Person> doctor = lastShownList.stream()
+                .filter(person -> person.getName().equals(doctorName))
+                .findAny();
+
+        Person patientToEdit = patient.get();
+        Person doctorToEdit = doctor.get();
+        this.appointmentToAdd = new Appointment((Doctor)doctorToEdit, (Patient)patientToEdit, this.date, this.time);
+
         Person editedPatient;
         Person editedDoctor;
 
