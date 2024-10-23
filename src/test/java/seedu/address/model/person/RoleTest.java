@@ -30,9 +30,9 @@ public class RoleTest {
 
 
         // valid roles
-        assertTrue(Role.isValidRole("student")); //
+        assertTrue(Role.isValidRole("student"));
         assertTrue(Role.isValidRole("STUDENT"));
-        assertTrue(Role.isValidRole("ParENt")); // long phone numbers
+        assertTrue(Role.isValidRole("ParENt"));
     }
 
     @Test
