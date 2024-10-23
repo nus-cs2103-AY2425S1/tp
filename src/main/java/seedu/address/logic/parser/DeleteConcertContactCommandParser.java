@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteConcertContactCommand;
@@ -19,13 +20,18 @@ public class DeleteConcertContactCommandParser implements Parser<DeleteConcertCo
      */
     public DeleteConcertContactCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CONCERT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON, PREFIX_CONCERT);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CONCERT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON);
 
         Index indexP;
         Index indexC;
         try {
-            indexP = ParserUtil.parseIndex(argMultimap.getPreamble());
+            if (argMultimap.getValue(PREFIX_PERSON).isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+            indexP = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
+
             if (argMultimap.getValue(PREFIX_CONCERT).isEmpty()) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }

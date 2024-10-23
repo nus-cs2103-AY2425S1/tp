@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -95,7 +96,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_link() throws Exception {
         AddConcertContactCommand command = (AddConcertContactCommand) parser
-                .parseCommand(AddConcertContactCommand.COMMAND_WORD + " "
+                .parseCommand(AddConcertContactCommand.COMMAND_WORD + " " + " " + PREFIX_PERSON
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased());
         assertEquals(new AddConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT), command);
     }
@@ -103,8 +104,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteConcertContact() throws Exception {
         DeleteConcertContactCommand command = (DeleteConcertContactCommand) parser.parseCommand(
-                DeleteConcertContactCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PREFIX_CONCERT + INDEX_FIRST_PERSON.getOneBased());
+                DeleteConcertContactCommand.COMMAND_WORD + " " + " " + PREFIX_PERSON
+                        + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_CONCERT + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON), command);
     }
 
