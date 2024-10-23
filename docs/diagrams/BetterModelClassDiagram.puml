@@ -20,4 +20,5 @@ Person *--> Email
 Person *--> Address
 Person *--> EmergencyContact
 Person *--> DateOfLastVisit
+Person *--> Remark
 @enduml
