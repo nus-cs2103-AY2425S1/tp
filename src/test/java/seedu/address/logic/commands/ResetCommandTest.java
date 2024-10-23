@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PERSON_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -30,14 +33,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
 public class ResetCommandTest {
-    private static final String TUTORIAL_TO_TEST = "1";
-    private Model markedModel = new ModelManager(getMarkedAddressBook(TUTORIAL_TO_TEST), new UserPrefs());
+    private Model markedModel = new ModelManager(getMarkedAddressBook(VALID_TUTORIAL_ONE), new UserPrefs());
 
     @Test
     public void constructor_invalidIndex_throwsParseException() {
         assertThrows(ParseException.class, () ->
-                new ResetCommand(ParserUtil.parseIndex("-1"),
-                        new Tutorial(TUTORIAL_TO_TEST)).execute(markedModel));
+                new ResetCommand(ParserUtil.parseIndex(INVALID_PERSON_INDEX),
+                        new Tutorial(VALID_TUTORIAL_ONE)).execute(markedModel));
     }
 
     /**
@@ -45,14 +47,14 @@ public class ResetCommandTest {
      */
     @Test
     public void execute_tutorialAlreadyReset_failure() {
-        ResetCommand resetCommand = new ResetCommand(INDEX_FIRST_PERSON, new Tutorial(TUTORIAL_TO_TEST));
+        ResetCommand resetCommand = new ResetCommand(INDEX_FIRST_PERSON, new Tutorial(VALID_TUTORIAL_ONE));
         try {
             resetCommand.execute(markedModel);
 
             // Second execution should fail
             assertCommandFailure(resetCommand, markedModel, String.format(Messages.MESSAGE_RESET_UNNECESSARY,
                     Messages.format(markedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())),
-                    new Tutorial("1").tutorial));
+                    new Tutorial(VALID_TUTORIAL_ONE).tutorial));
         } catch (CommandException e) {
             // Should not get here
             throw new RuntimeException();
@@ -61,7 +63,7 @@ public class ResetCommandTest {
 
     @Test
     public void execute_success() {
-        Tutorial tutorialToBeAdded = new Tutorial(TUTORIAL_TO_TEST);
+        Tutorial tutorialToBeAdded = new Tutorial(VALID_TUTORIAL_ONE);
 
         Person personToEdit = markedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ResetCommand resetCommand = new ResetCommand(INDEX_FIRST_PERSON, tutorialToBeAdded);
@@ -91,7 +93,7 @@ public class ResetCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(markedModel.getAddressBook()), new UserPrefs());
         String expectedMessage = String.format(Messages.MESSAGE_RESET_SUCCESS, Messages.format(editedPerson),
                 tutorialToBeAdded.tutorial);
-        Model typicalModel = new ModelManager(getMarkedAddressBook(TUTORIAL_TO_TEST), new UserPrefs());
+        Model typicalModel = new ModelManager(getMarkedAddressBook(VALID_TUTORIAL_ONE), new UserPrefs());
         assertCommandSuccess(resetCommand, typicalModel, expectedMessage, expectedModel);
     }
 
@@ -100,9 +102,9 @@ public class ResetCommandTest {
      */
     @Test
     public void execute_shouldResetAll_success() {
-        Tutorial tutorialToBeAdded = new Tutorial(TUTORIAL_TO_TEST);
+        Tutorial tutorialToBeReset = new Tutorial(VALID_TUTORIAL_ONE);
 
-        ResetCommand resetCommand = new ResetCommand(INDEX_ALL, tutorialToBeAdded);
+        ResetCommand resetCommand = new ResetCommand(INDEX_ALL, tutorialToBeReset);
 
         try {
             resetCommand.execute(markedModel);
@@ -113,7 +115,7 @@ public class ResetCommandTest {
         // Ensure all are edited and marked as reset
         for (Person person : markedModel.getFilteredPersonList()) {
             Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(person.getTutorials());
-            newTutorials.put(tutorialToBeAdded, AttendanceStatus.NOT_TAKEN_PLACE);
+            newTutorials.put(tutorialToBeReset, AttendanceStatus.NOT_TAKEN_PLACE);
             Person expectedEditedPerson = new Person(
                     person.getName(),
                     person.getStudentId(),
@@ -131,14 +133,14 @@ public class ResetCommandTest {
         String expectedMessage = String.join("\n",
                 markedModel.getFilteredPersonList().stream()
                         .map(personToEdit -> String.format(Messages.MESSAGE_RESET_SUCCESS,
-                                Messages.format(personToEdit), tutorialToBeAdded.tutorial)).toArray(String[]::new));
-        Model typicalModel = new ModelManager(getMarkedAddressBook(TUTORIAL_TO_TEST), new UserPrefs());
+                                Messages.format(personToEdit), tutorialToBeReset.tutorial)).toArray(String[]::new));
+        Model typicalModel = new ModelManager(getMarkedAddressBook(VALID_TUTORIAL_ONE), new UserPrefs());
         assertCommandSuccess(resetCommand, typicalModel, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
-        Tutorial tutorial = new Tutorial(TUTORIAL_TO_TEST);
+        Tutorial tutorial = new Tutorial(VALID_TUTORIAL_ONE);
         ResetCommand resetCommand = new ResetCommand(INDEX_FIRST_PERSON, tutorial);
 
         // same object -> returns true
@@ -151,7 +153,7 @@ public class ResetCommandTest {
         assertFalse(resetCommand.equals(1));
 
         // same values -> return true
-        Tutorial duplicateTutorial = new Tutorial(TUTORIAL_TO_TEST);
+        Tutorial duplicateTutorial = new Tutorial(VALID_TUTORIAL_ONE);
         ResetCommand duplicateResetCommand = new ResetCommand(INDEX_FIRST_PERSON, duplicateTutorial);
         assertTrue(resetCommand.equals(duplicateResetCommand));
 
@@ -160,7 +162,7 @@ public class ResetCommandTest {
         assertFalse(resetCommand.equals(otherIndexResetCommand));
 
         // different tutorial -> return false
-        Tutorial otherTutorial = new Tutorial("2");
+        Tutorial otherTutorial = new Tutorial(VALID_TUTORIAL_TWO);
         ResetCommand otherTutResetCommand = new ResetCommand(INDEX_FIRST_PERSON, otherTutorial);
         assertFalse(resetCommand.equals(otherTutResetCommand));
     }

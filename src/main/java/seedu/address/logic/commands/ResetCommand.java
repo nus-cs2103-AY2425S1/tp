@@ -40,6 +40,7 @@ public class ResetCommand extends Command {
     }
 
     /**
+     * Takes a person and tutorial and resets the specified tutorial and returns that person with the new tutorials.
      * @param personToEdit The person whose attendance will be reset.
      * @param tutorial The tutorial to reset attendance for.
      */
@@ -77,8 +78,7 @@ public class ResetCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether
-     * the tutorial was marked as not taken place.
+     * Generates a command execution success message for the tutorials that were marked as not taken place.
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(List<Person> personListToEdit) {
