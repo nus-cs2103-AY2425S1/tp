@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.event.Event;
 
 /**
@@ -60,6 +61,16 @@ public interface Model {
     boolean hasContact(Contact contact);
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasClientId(Id id);
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasVendorId(Id id);
+
+    /**
      * Returns true if a event with the same identity as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
@@ -75,6 +86,12 @@ public interface Model {
      * The event must exist in the address book.
      */
     void deleteEvent(Event event);
+
+    /**
+     * Get the contact of the given id.
+     * The contact must exist in the address book.
+     */
+    Contact getContact(Id id);
 
     /**
      * Adds the given person.

@@ -8,6 +8,7 @@ import seedu.ddd.logic.parser.Prefix;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
+import seedu.ddd.model.event.Event;
 
 /**
  * Container for user visible messages.
@@ -103,6 +104,32 @@ public class Messages {
         vendor.getTags().forEach(builder::append);
         builder.append("; ID: ")
                 .append(vendor.getId());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code event} for display to the user.
+     */
+    public static String format(Event event) {
+        final StringBuilder builder = new StringBuilder();
+        // Add client names, separating with a comma
+        String clients = event.getClients().stream()
+                .map(client -> client.getName() != null ? client.getName().toString() : "Unknown Client")
+                .collect(Collectors.joining(", "));
+
+        // Add vendor names, separating with a comma
+        String vendors = event.getVendors().stream()
+                .map(vendor -> vendor.getName() != null ? vendor.getName().toString() : "Unknown Vendor")
+                .collect(Collectors.joining(", "));
+
+        builder.append(event.getEventId())
+                .append("; Description: ")
+                .append(event.getDescription())
+                .append("; Clients: ")
+                .append(clients)
+                .append("; Vendors: ")
+                .append(vendors);
+
         return builder.toString();
     }
 }
