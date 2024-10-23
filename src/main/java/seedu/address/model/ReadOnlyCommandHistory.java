@@ -1,10 +1,10 @@
 package seedu.address.model;
 
-import java.util.Deque;
+import seedu.address.commons.core.CommandStack;
 
 /**
  * Unmodifiable view of command history
  */
 public interface ReadOnlyCommandHistory {
-    Deque<String> getCommandStack();
+    CommandStack getCommandStack();
 }

@@ -1,19 +1,17 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.isDequeEqual;
 
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Objects;
 
+import seedu.address.commons.core.CommandStack;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents history of successfully executed commands.
  */
 public class CommandHistory implements ReadOnlyCommandHistory {
-    private Deque<String> commandStack = new LinkedList<>();
+    private CommandStack commandStack = new CommandStack();
 
     /**
      * Creates a {@code CommandHistory} with default values.
@@ -24,7 +22,6 @@ public class CommandHistory implements ReadOnlyCommandHistory {
      * Creates a {@code CommandHistory} with the data in {@code CommandHistory}.
      */
     public CommandHistory(ReadOnlyCommandHistory commandHistory) {
-        this();
         resetData(commandHistory);
     }
 
@@ -37,15 +34,16 @@ public class CommandHistory implements ReadOnlyCommandHistory {
     }
 
     /**
-     * Pushes a command to the command stack.
+     * Pushes a command to the command stack. Removes the last command
+     * of the command stack if size exceeds {@code commandStackMaxSize}.
      */
     public void addCommand(String commandString) {
-        commandStack.add(commandString);
+        commandStack.addCommand(commandString);
     }
-    public Deque<String> getCommandStack() {
+    public CommandStack getCommandStack() {
         return commandStack;
     }
-    public void setCommandStack(Deque<String> commandStack) {
+    public void setCommandStack(CommandStack commandStack) {
         requireNonNull(commandStack);
         this.commandStack = commandStack;
     }
@@ -61,7 +59,7 @@ public class CommandHistory implements ReadOnlyCommandHistory {
         }
 
         CommandHistory otherCommandHistory = (CommandHistory) other;
-        return isDequeEqual(commandStack, otherCommandHistory.getCommandStack());
+        return commandStack.equals(otherCommandHistory.commandStack);
     }
 
     @Override
