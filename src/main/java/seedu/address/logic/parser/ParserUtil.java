@@ -107,6 +107,7 @@ public class ParserUtil {
      */
     public static WorkExp parseWorkExp(String workExp) throws ParseException {
         String trimmedWorkExp = workExp.trim();
+        System.out.println(trimmedWorkExp);
         if (!WorkExp.isValidWorkExp(trimmedWorkExp)) {
             throw new ParseException(WorkExp.MESSAGE_CONSTRAINTS);
         }
