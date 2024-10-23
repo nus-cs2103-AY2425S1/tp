@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.owner.Owner;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from PawPatrol.
  */
 public class DeleteOwnerCommand extends DeleteCommand {
 

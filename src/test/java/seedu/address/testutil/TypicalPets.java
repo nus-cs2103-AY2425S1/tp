@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.PawPatrol;
 import seedu.address.model.pet.Pet;
 
 /**
@@ -53,10 +53,10 @@ public class TypicalPets {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical pets.
+     * Returns an {@code PawPatrol} with all the typical pets.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static PawPatrol getTypicalPawPatrol() {
+        PawPatrol ab = new PawPatrol();
         for (Pet pet : getTypicalPets()) {
             ab.addPet(pet);
         }

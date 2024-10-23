@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.PawPatrol;
 import seedu.address.model.owner.Owner;
 
 /**
@@ -56,10 +56,10 @@ public class TypicalOwners {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical owners.
+     * Returns an {@code PawPatrol} with all the typical owners.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static PawPatrol getTypicalPawPatrol() {
+        PawPatrol ab = new PawPatrol();
         for (Owner owner : getTypicalOwners()) {
             ab.addOwner(owner);
         }

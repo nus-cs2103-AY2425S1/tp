@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.link.Linkable;
 
 /**
- * Represents an Owner in the address book.
+ * Represents an Owner in PawPatrol.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Owner implements Linkable {
