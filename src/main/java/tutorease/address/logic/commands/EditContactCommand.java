@@ -111,10 +111,10 @@ public class EditContactCommand extends ContactCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        if (role.equals(Role.STUDENT)) {
+        if (role.getRoleString().equals(Role.STUDENT)) {
             return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
         }
-        if (role.equals(Role.GUARDIAN)) {
+        if (role.getRoleString().equals(Role.GUARDIAN)) {
             return new Guardian(updatedName, updatedPhone, updatedEmail, updatedAddress, role, updatedTags);
         }
 
