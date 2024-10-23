@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.DeleteGoodsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.goods.GoodsName;
 
 /**
  * Parses input arguments and creates a new DeleteGoodsCommand object with the given goodsName.
@@ -27,9 +28,10 @@ public class DeleteGoodsCommandParser implements Parser<DeleteGoodsCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GOODS_NAME);
-        String goodsName = argMultimap.getValue(PREFIX_GOODS_NAME).get();
+        // Initialize goodsname for the regex validation
+        GoodsName goodsName = new GoodsName(argMultimap.getValue(PREFIX_GOODS_NAME).get());
 
-        return new DeleteGoodsCommand(goodsName);
+        return new DeleteGoodsCommand(goodsName.toString());
     }
 
     /**
