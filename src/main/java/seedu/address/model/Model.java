@@ -120,6 +120,13 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Replaces the given job {@code target} with {@code editedJob}.
+     * {@code target} must exist in the address book.
+     * The job identity of {@code editedJob} must not be the same as another existing job in the address book.
+     */
+    void setJob(Job target, Job editedJob);
+
+    /**
      * Replaces the target company with an edited version of itself.
      *
      * @param target Company to be replaced.
