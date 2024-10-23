@@ -1,13 +1,14 @@
 ---
-layout: page
-title: DevOps guide
+  layout: default.md
+  title: "DevOps guide"
+  pageNav: 3
 ---
 
-* Table of Contents
-{:toc}
+# DevOps guide
 
---------------------------------------------------------------------------------------------------------------------
-
+<!-- * Table of Contents -->
+<page-nav-print />
+<!-- -------------------------------------------------------------------------------------------------------------------- -->
 ## Build automation
 
 This project uses Gradle for **build automation and dependency management**. **You are recommended to read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html)**.
