@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_PREFIX_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETER_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -34,9 +36,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                         PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
-                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
+                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_ROLE, PREFIX_NICKNAME);
 
-        if (args.trim().isEmpty() || !argMultimap.getPreamble().isEmpty()) {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_NO_PARAMETER_FOUND, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -88,7 +94,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (trimmedArg.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_EMPTY_PREFIX_FIELD, FindCommand.MESSAGE_USAGE));
         }
         String[] keywords = trimmedArg.split("\\s+");
         return Arrays.asList(keywords);
