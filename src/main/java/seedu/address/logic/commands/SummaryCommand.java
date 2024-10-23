@@ -17,12 +17,12 @@ import seedu.address.model.person.Transaction;
  * Summarizes the transactions whose dates range between the first day of start month and the last day of end month.
  * Shows the transactions whose dates are in the specified range.
  */
-public class SumCommand extends Command {
+public class SummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "summary";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Summarizes the transactions whose dates "
-            + "range between the first day of start month and the last day of end month.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Summarizes the transactions in the current list"
+            + "whose dates range between the first day of start month and the last day of end month.\n"
             + "Parameters: " + PREFIX_START_MONTH + "START_MONTH " + PREFIX_END_MONTH + "END_MONTH\n"
             + "START_MONTH and END_MONTH must follow the yyyy-mm format.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_START_MONTH + "2024-09 " + PREFIX_END_MONTH + "2024-12";
@@ -32,12 +32,12 @@ public class SumCommand extends Command {
     private final YearMonth endMonth;
 
     /**
-     * Creates a SumCommand to summarize the transactions in the range between start month and end month inclusive.
+     * Creates a SummaryCommand to summarize the transactions in the range between start month and end month inclusive.
      *
      * @param start the start month.
      * @param end the end month.
      */
-    public SumCommand(YearMonth start, YearMonth end) {
+    public SummaryCommand(YearMonth start, YearMonth end) {
         this.startMonth = start;
         this.endMonth = end;
     }

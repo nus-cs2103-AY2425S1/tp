@@ -21,7 +21,7 @@ import seedu.address.logic.commands.FindTransactionCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTransactionCommand;
-import seedu.address.logic.commands.SumCommand;
+import seedu.address.logic.commands.SummaryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -86,8 +86,8 @@ public class AddressBookParser {
 
         case DeleteTransactionCommand.COMMAND_WORD:
             return new DeleteTransactionCommandParser().parse(arguments);
-        case SumCommand.COMMAND_WORD:
-            return new SumCommandParser().parse(arguments);
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommandParser().parse(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
