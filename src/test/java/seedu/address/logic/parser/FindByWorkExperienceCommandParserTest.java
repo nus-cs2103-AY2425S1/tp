@@ -16,7 +16,8 @@ public class FindByWorkExperienceCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         FindByWorkExperienceCommand expectedCommand =
-                new FindByWorkExperienceCommand(new WorkExperienceContainsKeywordsPredicate("Intern", "Google", "2024"));
+                new FindByWorkExperienceCommand(new WorkExperienceContainsKeywordsPredicate("Intern",
+                        "Google", "2024"));
         assertParseSuccess(parser, " w/Intern, Google, 2024", expectedCommand);
     }
 
