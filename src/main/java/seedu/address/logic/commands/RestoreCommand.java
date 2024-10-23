@@ -24,7 +24,8 @@ public class RestoreCommand extends Command {
             + "Example: " + COMMAND_WORD + " [optional file path]";
 
     public static final String MESSAGE_RESTORE_SUCCESS = "ClinicBuddy restored successfully from %s";
-    public static final String MESSAGE_RESTORE_FAILURE = "Failed to restore ClinicBuddy from backup.";
+    public static final String MESSAGE_RESTORE_FAILURE =
+            "Failed to restore ClinicBuddy from backup. Format: restore backups/<backup file name>.";
 
     protected final Optional<Path> filePath;
 
