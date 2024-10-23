@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -13,7 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PersonComparator;
-import seedu.address.model.util.SampleDataUtil;
 
 public class SortCommandTest {
     private Model modelAscendingName = new ModelManager(getTypicalAddressBook(PersonComparator
@@ -46,7 +43,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_DateOfLastVisitAscending_success() {
+    public void execute_dateOfLastVisitAscending_success() {
         SortCommand sortCommand = new SortCommand(PersonComparator.DATE_OF_LAST_VISIT, true);
         String expectedMessage = SortCommand.MESSAGE_SUCCESS;
         Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator
@@ -56,7 +53,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_DateOfLastVisitDescending_success() {
+    public void execute_dateOfLastVisitDescending_success() {
         SortCommand sortCommand = new SortCommand(PersonComparator.DATE_OF_LAST_VISIT, false);
         String expectedMessage = SortCommand.MESSAGE_SUCCESS;
         Model expectedModel = new ModelManager(getTypicalAddressBook(PersonComparator

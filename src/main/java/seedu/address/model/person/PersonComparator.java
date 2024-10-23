@@ -26,14 +26,22 @@ public class PersonComparator {
      * @param parameter
      * @return Comparator
      */
-    public Comparator<Person> getComparator(String parameter) throws CommandException {
+    public Comparator<Person> getComparator(String parameter, boolean isAscending) throws CommandException {
         switch (parameter) {
 
         case NAME:
-            return new PersonNameComparator();
+            if (isAscending) {
+                return new PersonNameComparator();
+            } else {
+                return new PersonNameComparator().reversed();
+            }
 
         case DATE_OF_LAST_VISIT:
-            return new PersonDateOfLastVisitComparator();
+            if (isAscending) {
+                return new PersonDateOfLastVisitAscendingComparator();
+            } else {
+                return new PersonDateOfLastVisitDescendingComparator().reversed();
+            }
 
         default:
             throw new CommandException(SORT_EXCEPTION);
@@ -58,11 +66,25 @@ class PersonNameComparator implements Comparator<Person> {
  * Where the person has no date of last visit they will be in the back
  * of the list given ascending order.
  */
-class PersonDateOfLastVisitComparator implements Comparator<Person> {
+class PersonDateOfLastVisitAscendingComparator implements Comparator<Person> {
     @Override
     public int compare(Person p1, Person p2) {
         return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE))
                 .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE)));
     }
+}
 
+/**
+ * Represents a class for comparing persons by DateOfLastVisit.
+ * Where the person has no date of last visit they will be in the front
+ * of the list given ascending order, therefore reversing this comparator
+ * gives a descending order whereby persons with no date of last visit
+ * are in the back.
+ */
+class PersonDateOfLastVisitDescendingComparator implements Comparator<Person> {
+    @Override
+    public int compare(Person p1, Person p2) {
+        return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.EARLIEST_VALID_DATE))
+                .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.EARLIEST_VALID_DATE)));
+    }
 }

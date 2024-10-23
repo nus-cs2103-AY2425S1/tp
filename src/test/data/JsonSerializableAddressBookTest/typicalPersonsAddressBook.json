@@ -20,34 +20,34 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024"
+    "dateOfLastVisit" : "01-01-2025"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "dateOfLastVisit" : "01-01-2024"
+    "dateOfLastVisit" : "02-01-2024"
   }, {
     "name" : "Elle Meyer",
     "phone" : "94822249",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024"
+    "dateOfLastVisit" : "10-10-2024"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "94824270",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024"
+    "dateOfLastVisit" : "23-08-2024"
   }, {
     "name" : "George Best",
     "phone" : "94824421",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024"
+    "dateOfLastVisit" : "05-06-2024"
   } ]
 }
