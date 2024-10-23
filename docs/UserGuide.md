@@ -20,21 +20,24 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 
 | Action       | Format, Examples                                                                                                                                                                  |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
-| **Clear**    | `clear`                                                                                                                                                                           |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
+| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software`  |
 | **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
-| **Withdraw** | `withdraw INDEX APPLICATION_INDEX`<br> e.g., `withdraw 3 1`                                                                                                                       |
+| **Clear**    | `clear`                                                                                                                                                                           |
+| **Delete**   | `delete INDEX`                                                                                                                                                                    |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                          |
+| **Exit**     | `exit`                                                                                                                                                                            |
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
-| **List**     | `list`                                                                                                                                                                            |
 | **Help**     | `help`                                                                                                                                                                            |
+| **List**     | `list`                                                                                                                                                                            |
+| **Update**   | `update INDEX APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update 1 1 as/OA`                                                                                                |
+| **Withdraw** | `withdraw INDEX APPLICATION_INDEX`<br> e.g., `withdraw 3 1`                                                                                                                       |
 
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer by opening up your terminal (MacOS: Terminal, Windows: Command Prompt), followed by executing `java -version`.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases).
 
@@ -87,15 +90,6 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
 ### Adding a company: `add`
 
 Adds a company to the address book.
@@ -112,11 +106,45 @@ Examples:
 * `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
 * `add n/Google LLC t/FAANG e/contact@google.com p/1234567 t/tech`
 
-### Listing all companies : `list`
+### Adding application record for a company: `apply`
 
-Shows a list of all companies in the address book.
+Adds an internship application record to an existing company in the address book.
 
-Format: `list`
+Format: `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`
+
+* Adds an application record for the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
+and will take be `APPLIED` if not specified.
+
+<box type="tip" seamless>
+
+**tip:** applying to a company automatically changes the company's status to `applied`.
+</box>
+
+Examples:
+* `apply 1 n/Software Engineer Intern d/Requires knowledge of ReactJS and ExpressJS`
+* `apply 2 n/Product Management Intern d/Requires Figma as/OA`
+* `apply 3 n/Devops Engineer Intern d/Requires knowledge in networks as/OFFERED`
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+### Deleting a company : `delete`
+
+Deletes the specified company from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the company at the specified `INDEX`.
+* The index refers to the index number shown in the displayed company list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd company in the address book.
+* `find Apple` followed by `delete 1` deletes the 1st company in the results of the `find` command.
 
 ### Editing a company : `edit`
 
@@ -135,34 +163,11 @@ Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
 
-### Adding application record for a company: `apply`
+### Exiting the program : `exit`
 
-Adds an internship application record to an existing company in the address book.
+Exits the program.
 
-Format: `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`
-
-* Adds an application record for the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
-* `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
-and will take be `APPLIED` if not specified.
-
-<box type="tip" seamless>
-
-**tip:** applying to a company automatically changes the company's status to `applied`.
-</box>
-
-### Withdrawing application for a company: `withdraw`
-
-Removes an internship record for an existing company in the address book.
-
-Format: `withdraw INDEX APPLICATION_INDEX`
-
-* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
-The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
-
-<box type="tip" seamless>
-
-**tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
-</box>
+Format: `exit`
 
 ### Locating companies by name: `find`
 
@@ -182,31 +187,47 @@ Examples:
 * `find apple facebook` returns `Apple`, `Facebook`<br>
   ![result for 'find apple facebook'](images/findAppleFacebookResult.png)
 
-### Deleting a company : `delete`
+### Viewing help : `help`
 
-Deletes the specified company from the address book.
+Shows a message explaning how to access the help page.
 
-Format: `delete INDEX`
+![help message](images/helpMessage.png)
 
-* Deletes the company at the specified `INDEX`.
-* The index refers to the index number shown in the displayed company list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `help`
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd company in the address book.
-* `find Apple` followed by `delete 1` deletes the 1st company in the results of the `find` command.
+### Listing all companies : `list`
 
-### Clearing all entries : `clear`
+Shows a list of all companies in the address book.
 
-Clears all entries from the address book.
+Format: `list`
 
-Format: `clear`
+### Updating an application for a company: `update`
 
-### Exiting the program : `exit`
+Updates the application status of an application for an existing company in the address book.
 
-Exits the program.
+Format: `update INDEX APPLICATION_INDEX as/APPLICATION_STATUS`
 
-Format: `exit`
+* Updates the application status of application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX` to `APPLICATION_STATUS`.
+The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
+</box>
+
+### Withdrawing application for a company: `withdraw`
+
+Removes an internship record for an existing company in the address book.
+
+Format: `withdraw INDEX APPLICATION_INDEX`
+
+* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
+The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
+</box>
 
 ### Saving the data
 
