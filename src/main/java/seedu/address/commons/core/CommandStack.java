@@ -105,7 +105,7 @@ public class CommandStack implements Serializable {
         assert(commandArrayList.size() <= commandArrayListMaxSize);
         commandArrayList.add(commandString);
         if (commandArrayList.size() == commandArrayListMaxSize + 1) {
-            commandArrayList.remove(commandArrayListMaxSize);
+            commandArrayList.remove(0);
         }
         return new CommandStack(this.commandArrayList, this.commandArrayListMaxSize);
     }
