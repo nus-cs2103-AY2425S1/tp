@@ -81,7 +81,6 @@ public class JsonAdaptedPerson {
     /**
      * Alternative constructor for a {@code JsonAdaptedPerson} without the id.
      */
-    @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address, @JsonProperty("hours") String hours,

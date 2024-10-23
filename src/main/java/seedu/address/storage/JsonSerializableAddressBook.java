@@ -1,10 +1,12 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -20,6 +22,7 @@ import seedu.address.model.person.Tutor;
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
@@ -37,7 +40,12 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.persons.addAll(persons);
-        this.lessons.addAll(lessons);
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
+        } else {
+            this.lessons.addAll(Collections.emptyList());
+        }
+
     }
 
     /**
