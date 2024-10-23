@@ -15,6 +15,10 @@ import seedu.address.model.participation.Participation;
  */
 public class Tutorial {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Subjects should only contain alphanumeric characters only.";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
+
     private final String subject;
     private final List<Participation> participationList = new ArrayList<>();
 
@@ -26,12 +30,43 @@ public class Tutorial {
         this.subject = subject;
     }
 
+    public static boolean isValidTutorial(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
     public String getSubject() {
         return subject;
     }
 
     public List<Participation> getParticipationList() {
         return participationList;
+    }
+
+    /**
+     * Checks if the tutorial already contains a participation
+     * @param participation the participation object to check
+     * @return true if it already contains the participation. false otherwise
+     */
+    public boolean hasParticipation(Participation participation) {
+        return participationList.stream()
+                .anyMatch(currentParticipation -> currentParticipation.equals(participation));
+
+    }
+
+    /**
+     * Adds a participation object to the participation list in tutorial
+     * @param participation object to be added
+     */
+    public void addParticipation(Participation participation) {
+        participationList.add(participation);
+    }
+
+    /**
+     * Removes a participation object from the participation list
+     * @param participation object to be removed
+     */
+    public void removeParticipation(Participation participation) {
+        participationList.remove(participation);
     }
 
     /**
