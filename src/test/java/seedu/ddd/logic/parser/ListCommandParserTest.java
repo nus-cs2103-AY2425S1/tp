@@ -10,8 +10,8 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.contact.common.ContactPredicateBuilder;
-import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.Predicate.ContactPredicateBuilder;
+import seedu.ddd.model.contact.common.Predicate.NameContainsKeywordsPredicate;
 
 public class ListCommandParserTest {
 

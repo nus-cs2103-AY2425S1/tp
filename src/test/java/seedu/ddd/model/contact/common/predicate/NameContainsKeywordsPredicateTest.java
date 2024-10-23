@@ -1,4 +1,4 @@
-package seedu.ddd.model.contact.common;
+package seedu.ddd.model.contact.common.predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -35,7 +35,7 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different name list -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

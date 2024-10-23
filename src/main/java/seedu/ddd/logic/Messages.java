@@ -8,7 +8,7 @@ import seedu.ddd.logic.parser.Prefix;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * Container for user visible messages.
@@ -26,6 +26,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX = "The client index provided is invalid";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid";
     public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
+    public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
     public static final String MESSAGE_CLIENTS_LISTED_OVERVIEW = "%1$d clients listed!";
     public static final String MESSAGE_VENDORS_LISTED_OVERVIEW = "%1$d vendors listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =

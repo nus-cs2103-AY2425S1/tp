@@ -10,8 +10,8 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.UniqueContactList;
-import seedu.ddd.model.event.Event;
-import seedu.ddd.model.event.UniqueEventList;
+import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.UniqueEventList;
 
 /**
  * Wraps all data at the address-book level
@@ -74,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setEvents(newData.getEventList());
     }
 
-    //// person-level operations
+    //// contact-level operations
 
     /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.
