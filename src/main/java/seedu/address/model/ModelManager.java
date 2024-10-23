@@ -134,6 +134,11 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    public ObservableList<Person> getOnlyClientList() {
+        filteredPersons.setPredicate(PREDICATE_SHOW_ONLY_CLIENTS);
+        return filteredPersons;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
