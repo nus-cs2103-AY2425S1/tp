@@ -13,11 +13,18 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SetVolunteerHoursCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.group.CreateGroupCommand;
+import seedu.address.logic.commands.group.DeleteGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.group.CreateGroupCommandParser;
+import seedu.address.logic.parser.group.DeleteGroupCommandParser;
 
 /**
  * Parses user input.
@@ -65,8 +72,8 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case SearchCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -76,6 +83,21 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SetVolunteerHoursCommand.COMMAND_WORD:
+            return new SetVolunteerHoursCommandParser().parse(arguments);
+
+        case CreateGroupCommand.COMMAND_WORD:
+            return new CreateGroupCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case EmailCommand.COMMAND_WORD:
+            return new EmailCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -6,8 +6,12 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.GroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.DuplicateGroupException;
+import seedu.address.model.person.exceptions.GroupNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +20,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final GroupList groups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        groups = new GroupList();
         persons = new UniquePersonList();
     }
 
@@ -55,6 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        groups.set(newData.getGroupList());
     }
 
     //// person-level operations
@@ -94,6 +101,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    // group methods
+
+    /**
+     * Adds {@code group} to the groups in this {@code AddressBook}.
+     */
+    public void addGroup(Group group) throws DuplicateGroupException {
+        groups.add(group);
+    }
+
+    /**
+     * Removes {@code group} from the groups in this {@code AddressBook}.
+     */
+    public void removeGroup(Group group) throws GroupNotFoundException {
+        groups.remove(group);
+    }
+
+    public Group getGroup(String groupName) throws GroupNotFoundException {
+        return groups.get(groupName);
+    }
+
     //// util methods
 
     @Override
@@ -109,6 +136,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public GroupList getGroupList() {
+        return groups;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -120,7 +152,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons) && groups.equals(otherAddressBook.groups);
     }
 
     @Override

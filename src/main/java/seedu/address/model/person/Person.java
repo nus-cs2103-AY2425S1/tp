@@ -17,13 +17,13 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    protected final Name name;
+    protected final Phone phone;
+    protected final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    protected final Address address;
+    protected final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -99,7 +99,6 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
     }
 
@@ -114,4 +113,19 @@ public class Person {
                 .toString();
     }
 
+    public Role getRole() {
+        return Role.PERSON;
+    }
+
+    /**
+     * Compares this person's name with another person's name lexicographically, ignoring case considerations.
+     *
+     * @param otherPerson The other person whose name is to be compared.
+     * @return A negative integer, zero, or a positive integer as this person's name
+     *         is less than, equal to, or greater than the specified person's name, ignoring case.
+     * @throws NullPointerException if {@code otherPerson} is null or if {@code otherPerson.name} is null.
+     */
+    public int compareNamesIgnorecase(Person otherPerson) {
+        return name.compareToIgnoreCase(otherPerson.name);
+    }
 }

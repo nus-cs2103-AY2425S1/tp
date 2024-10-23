@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Volunteer;
 
 /**
  * Container for user visible messages.
@@ -18,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_COMMAND_FOR_PERSON_TYPE =
+            "This command cannot be used on this category of contacts!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,4 +51,14 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the updated {@code volunteer}'s new hours for display to the user.
+     */
+    public static String formatSetVolunteerHours(Volunteer volunteer) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(volunteer.getName())
+                .append("; Hours Contributed: ")
+                .append(volunteer.getHours());
+        return builder.toString();
+    }
 }
