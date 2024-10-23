@@ -11,8 +11,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Interest;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.University;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +100,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String workExp} into a {@code WorkExp}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code workExp} is invalid.
+     */
+    public static WorkExp parseWorkExp(String workExp) throws ParseException {
+        String trimmedWorkExp = workExp.trim();
+        System.out.println(trimmedWorkExp);
+        if (!WorkExp.isValidWorkExp(trimmedWorkExp)) {
+            throw new ParseException(WorkExp.MESSAGE_CONSTRAINTS);
+        }
+        return new WorkExp(trimmedWorkExp);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +139,47 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String university} into a {@code University}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code university} is invalid.
+     */
+    public static University parseUniversity(String university) throws ParseException {
+        requireNonNull(university);
+        String trimmedUniversity = university.trim();
+        if (!University.isValidUniversity(trimmedUniversity)) {
+            throw new ParseException(University.MESSAGE_CONSTRAINTS);
+        }
+        return new University(trimmedUniversity);
+    }
+
+    /**
+     * Parses a {@code String major} into a {@code Major}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code major} is invalid.
+     */
+    public static Major parseMajor(String major) throws ParseException {
+        requireNonNull(major);
+        String trimmedMajor = major.trim();
+        if (!Major.isValidMajor(trimmedMajor)) {
+            throw new ParseException(Major.MESSAGE_CONSTRAINTS);
+        }
+        return new Major(trimmedMajor);
+    }
+
+    /**
+     * Parses a {@code String interest} into an {@code Interest}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interest} is invalid.
+     */
+    public static Interest parseInterest(String interest) throws ParseException {
+        requireNonNull(interest);
+        String trimmedInterest = interest.trim();
+        return new Interest(trimmedInterest);
     }
 }
