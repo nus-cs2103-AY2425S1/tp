@@ -137,6 +137,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortPets() {
+        pawPatrol.sortPets();
+    }
+
+    @Override
+    public void sortOwners() {
+        pawPatrol.sortOwners();
+    }
+
+    @Override
     public void deleteLink(Link link) {
         pawPatrol.removeLink(link);
     }
