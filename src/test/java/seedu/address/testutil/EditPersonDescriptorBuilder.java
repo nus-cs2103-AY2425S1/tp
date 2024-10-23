@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -16,7 +17,6 @@ import seedu.address.model.person.role.Role;
  * A utility class to help with building EditPersonDescriptor objects.
  */
 public class EditPersonDescriptorBuilder {
-
     private EditPersonDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
@@ -28,7 +28,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details.
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
@@ -40,7 +40,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@link Name} of the {@link EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -78,7 +78,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withEvents(String... events) {
-        Set<Event> eventSet = Stream.of(events).map(Event::new).collect(Collectors.toSet());
+        Set<Event> eventSet = Stream.of(events).map(EventName::new).map(Event::new).collect(Collectors.toSet());
         descriptor.setEvents(eventSet);
         return this;
     }

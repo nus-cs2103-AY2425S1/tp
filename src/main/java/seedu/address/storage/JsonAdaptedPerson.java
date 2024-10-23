@@ -20,7 +20,6 @@ import seedu.address.model.person.role.Role;
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
-
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
@@ -33,9 +32,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("events") List<JsonAdaptedEvent> events,
-            @JsonProperty("roles") List<JsonAdaptedRole> roles) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("personEvents") List<JsonAdaptedEvent> events,
+                             @JsonProperty("roles") List<JsonAdaptedRole> roles) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,11 +52,11 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
+        name = source.getName().toString();
         phone = source.getPhone().value;
         email = source.getEmail().value;
         events.addAll(source.getEvents().stream()
-                .map(JsonAdaptedEvent::new)
+                .map((JsonAdaptedEvent::new))
                 .toList());
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
@@ -111,5 +112,4 @@ class JsonAdaptedPerson {
 
         return new Person(modelName, modelPhone, modelEmail, modelEvents, modelRoles);
     }
-
 }
