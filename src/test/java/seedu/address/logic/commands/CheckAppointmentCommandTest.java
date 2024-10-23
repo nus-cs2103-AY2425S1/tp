@@ -277,4 +277,5 @@ public class CheckAppointmentCommandTest {
             personList.add(person);
         }
     }
+
 }
