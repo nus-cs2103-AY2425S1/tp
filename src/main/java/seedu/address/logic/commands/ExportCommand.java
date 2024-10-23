@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports person data to a CSV file.\n"
         + "Parameters: FILE_PATH\n"
         + "[" + PREFIX_PATH + "NAME] "
-        + "Example: " + COMMAND_WORD + " data/persons.csv";
+        + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
 
     private final String filePath;
 
@@ -32,8 +33,19 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> persons = model.getFilteredPersonList();
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
+        List<Person> persons = model.getAddressBook().getPersonList();
+
+        // Create directories if they don't exist
+        File file = new File(filePath);
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            boolean dirCreated = parentDir.mkdirs();
+            if (!dirCreated) {
+                throw new CommandException("Failed to create directory structure for: " + filePath);
+            }
+        }
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(file))) {
             // Write CSV Header
             String[] header = {"Name", "Phone", "Email", "Address", "Telegram", "Tags", "Github",
                 "Assignment", "Grade"};
@@ -64,7 +76,6 @@ public class ExportCommand extends Command {
             throw new CommandException("Error writing to the CSV file: " + e.getMessage());
         }
     }
-
 
     @Override
     public boolean equals(Object other) {

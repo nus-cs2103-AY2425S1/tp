@@ -21,6 +21,13 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Returns true if any of the prefixes appears more than once.
+     */
+    private static boolean hasDuplicatePrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getAllValues(prefix).size() > 1);
+    }
+
     @Override
     public ExportCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -38,6 +45,21 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         if (filePath.isEmpty()) {
             throw new ParseException("File path cannot be empty.");
         }
+
+
+        // Check for duplicate prefixes
+        if (hasDuplicatePrefixes(argMultimap, CliSyntax.PREFIX_PATH)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+        }
+
+
+        // Check if preamble is empty (no extra text before the first prefix)
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+        }
+
+
+
 
         return new ExportCommand(filePath);
     }

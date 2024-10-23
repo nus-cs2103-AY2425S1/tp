@@ -14,7 +14,7 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() throws ParseException {
-        String userInput = "import path/C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
+        String userInput = " path/C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
         ImportCommand expectedCommand = new ImportCommand(
             "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv");
         assertEquals(parser.parse(userInput), expectedCommand);
@@ -22,16 +22,31 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_notAllFieldSpecified_error() throws ParseException {
-        String userInput = "import C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
+        String userInput = " C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
-    public void parse_notAllFileSpecified_error() throws ParseException {
-        String userInput = "import path/";
+    public void parse_emptyPath_error() throws ParseException {
+        String userInput = " path/";
         String expectedMessage = "CSV file path cannot be empty.";
         assertParseFailure(parser, userInput, expectedMessage);
     }
+
+    @Test
+    public void parse_duplicatePrefix_error() throws ParseException {
+        String userInput = " path/yyy path/yyy";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_duplicatePrefixEmpty_error() throws ParseException {
+        String userInput = " path/yyy path/";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
 
 }
