@@ -23,7 +23,6 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-    vmArgs '-ea'
 }
 
 task coverage(type: JacocoReport) {
