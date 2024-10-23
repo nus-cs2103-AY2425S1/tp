@@ -1,6 +1,7 @@
 package tahub.contacts.logic.parser;
 
 import tahub.contacts.logic.commands.CourseCommand;
+import tahub.contacts.logic.commands.EditCommand;
 import tahub.contacts.logic.commands.EditCourseCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.Course;
@@ -15,7 +16,7 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import tahub.contacts.logic.commands.EditCourseCommand.EditCourseDescriptor;
 import tahub.contacts.model.course.CourseCode;
 
-public class EditCourseCommandParser {
+public class EditCourseCommandParser implements Parser<EditCourseCommand>{
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCourseCommand
@@ -38,9 +39,18 @@ public class EditCourseCommandParser {
         
         CourseCode courseCodeToEdit;
         EditCourseDescriptor editCourseDescriptor = new EditCourseDescriptor();
-
-        courseCodeToEdit = new CourseCode(argMultimap.getValue(PREFIX_CODE).get());
-        editCourseDescriptor.setCourseName(ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get()));
+        
+        try {
+            courseCodeToEdit = new CourseCode(argMultimap.getValue(PREFIX_CODE).get());
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), e);
+        }
+        
+        try {
+            editCourseDescriptor.setCourseName(ParserUtil.parseCourseName(argMultimap.getValue(PREFIX_NAME).get()));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), e);
+        }
         
         if (!editCourseDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCourseCommand.MESSAGE_COURSE_NOT_EDITED);

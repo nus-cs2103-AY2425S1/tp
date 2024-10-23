@@ -34,11 +34,12 @@ public class DeleteCourseCommandParser implements Parser<DeleteCourseCommand> {
 
         assert argMultimap.getValue(PREFIX_CODE).isPresent();
 
-        assert argMultimap.getValue(PREFIX_CODE).isPresent();
-
-        CourseCode courseCodeToEdit = new CourseCode(argMultimap.getValue(PREFIX_CODE).get());
-        
-        return new DeleteCourseCommand(courseCodeToEdit);
+        try {
+            CourseCode courseCodeToEdit = new CourseCode(argMultimap.getValue(PREFIX_CODE).get());
+            return new DeleteCourseCommand(courseCodeToEdit);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage(), e);
+        }
     }
 
     /**
