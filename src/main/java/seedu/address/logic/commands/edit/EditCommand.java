@@ -1,8 +1,9 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,6 +20,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -44,7 +47,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]+\n"
+            + "[" + PREFIX_TAG + "TAG]+ "
+            + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -101,9 +105,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress().orElse(null));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ModuleRoleMap updatedModuleRoleMap = editPersonDescriptor.getModuleRoleOperation()
+                .map(o -> o.execute(personToEdit.getModuleRoleMap())).orElse(personToEdit.getModuleRoleMap());
 
-        // Editing modules not supported
-        ModuleRoleMap updatedModuleRoleMap = personToEdit.getModuleRoleMap();
         return new Person(updatedName, updatedPhone, updatedEmail, Optional.ofNullable(updatedAddress),
                 updatedTags, updatedModuleRoleMap);
     }
@@ -142,6 +146,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private EditModuleRoleOperation editModuleRoleOperation;
 
         public EditPersonDescriptor() {}
 
@@ -155,13 +160,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setModuleRoleOperation(toCopy.editModuleRoleOperation);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, editModuleRoleOperation);
         }
 
         public void setName(Name name) {
@@ -213,6 +219,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setModuleRoleOperation(EditModuleRoleOperation editModuleRoleOperation) {
+            this.editModuleRoleOperation = editModuleRoleOperation;
+        }
+
+        public Optional<EditModuleRoleOperation> getModuleRoleOperation() {
+            return Optional.ofNullable(editModuleRoleOperation);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -229,7 +243,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(editModuleRoleOperation, otherEditPersonDescriptor.editModuleRoleOperation);
         }
 
         @Override
@@ -240,6 +255,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("editModuleRoleOperation", editModuleRoleOperation)
                     .toString();
         }
     }

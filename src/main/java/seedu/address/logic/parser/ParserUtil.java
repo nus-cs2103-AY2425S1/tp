@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,6 +13,8 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.edit.AddModuleRoleOperation;
+import seedu.address.logic.commands.edit.EditModuleRoleOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -236,5 +239,30 @@ public class ParserUtil {
      */
     public static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses a {@code String moduleRoleOperations} into an {@code EditModuleRoleOperation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param moduleRoleOperations the string representing the module role operations.
+     *                             The first character must be a '+'.
+     * @return the corresponding {@code EditModuleRoleOperation}.
+     * @throws ParseException if the given {@code moduleRoleOperations} is invalid.
+     */
+    public static EditModuleRoleOperation parseEditModuleRoleOperation(String moduleRoleOperations)
+            throws ParseException {
+        if (!EditModuleRoleOperation.isValidModuleRoleOperation(moduleRoleOperations)) {
+            throw new ParseException(EditModuleRoleOperation.MESSAGE_VALID_OPERATION_CONSTRAINT);
+        }
+        moduleRoleOperations = moduleRoleOperations.trim();
+        switch (moduleRoleOperations.charAt(0)) {
+        case '+':
+            List<String> moduleRolesToAdd =
+                    Arrays.asList(moduleRoleOperations.substring(1).split("\\s+"));
+            return new AddModuleRoleOperation(parseModuleRolePairs(moduleRolesToAdd));
+        default:
+            throw new RuntimeException();
+        }
     }
 }

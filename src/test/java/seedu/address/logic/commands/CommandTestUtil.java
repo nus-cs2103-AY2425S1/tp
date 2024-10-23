@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -46,6 +47,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_MODULE_ROLE = "CS1101S-student";
+    public static final String VALID_ADD_MODULE_ROLE = "+CS1101S-student";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_ANDY = " " + PREFIX_NAME + VALID_NAME_ANDY;
@@ -65,6 +67,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String MODULE_ROLE_DESC = " " + PREFIX_MODULE + VALID_MODULE_ROLE;
+    public static final String ADD_MODULE_ROLE_DESC = " " + PREFIX_MODULE + "+" + VALID_MODULE_ROLE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -75,6 +78,7 @@ public class CommandTestUtil {
         " " + PREFIX_MODULE + "module"; // invalid module code
     public static final String INVALID_MODULE_ROLE_DESC_ROLE_TYPE =
         " " + PREFIX_MODULE + "CS1101S-role"; // invalid role type
+    public static final String INVALID_ADD_MODULE_ROLE_DESC = " " + PREFIX_MODULE + "=" + VALID_MODULE_ROLE;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
