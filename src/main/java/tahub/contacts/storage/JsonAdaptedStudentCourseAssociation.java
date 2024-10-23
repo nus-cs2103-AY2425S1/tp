@@ -21,8 +21,8 @@ class JsonAdaptedStudentCourseAssociation {
     private final JsonAdaptedPerson student;
     private final JsonAdaptedCourse course;
     private final JsonAdaptedTutorial tutorial;
-    // private final GradingSystem grades;
     private final JsonAdaptedAttendance attendance;
+    private final JsonSerializableGradingSystem grades;
 
     /**
      * Constructs a {@code JsonAdaptedStudentCourseAssociation} with the given
@@ -38,8 +38,8 @@ class JsonAdaptedStudentCourseAssociation {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
-        // this.grades = ;
         this.attendance = attendance;
+        this.grades = grades;
     }
 
     /**
@@ -50,8 +50,8 @@ class JsonAdaptedStudentCourseAssociation {
         this.student = new JsonAdaptedPerson(source.getStudent());
         this.course = new JsonAdaptedCourse(source.getCourse());
         this.tutorial = new JsonAdaptedTutorial(source.getTutorial());
-        // this.grades = ;
         this.attendance = new JsonAdaptedAttendance(source.getAttendance());
+        this.grades = new JsonSerializableGradingSystem(source.getGrades());
     }
 
     /**
@@ -85,17 +85,22 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
 
+
         // Checks if the attendance is valid
         if (this.attendance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    JsonAdaptedTutorial.class.getSimpleName()));
+                    JsonAdaptedAttendance.class.getSimpleName()));
         }
         final Attendance attendanceModel = this.attendance.toModelType();
-
-        // Note that the toModelType must create the model object with the given grading system details as well
-        // Divya please note it here :)
-        // I am just returning a new GradingSystem object here to fit the expected constructor first.
+      
+        // Checks if the gradingsystem is valid
+        if (this.grades == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                JsonSerializableGradingSystem.class.getSimpleName()));
+        }
+        final GradingSystem gradesModel = this.attendance.toModelType();
+      
         return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,
-                new GradingSystem(), attendanceModel);
+                gradesModel, attendanceModel);
     }
 }
