@@ -75,7 +75,7 @@ public class UpdateCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (name.equals("")) {
+        if (name.toString().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
         }
 

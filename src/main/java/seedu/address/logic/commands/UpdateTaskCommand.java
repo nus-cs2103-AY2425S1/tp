@@ -38,7 +38,7 @@ public class UpdateTaskCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_TASK_INDEX + "TASK_INDEX "
             + "[" + PREFIX_TASK_DESCRIPTION + "TASK] "
-            + "[" + PREFIX_TASK_DEADLINE + "DEADLINE] "
+            + "[" + PREFIX_TASK_DEADLINE + "DEADLINE] \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Cristiano Ronaldo "
             + PREFIX_TASK_INDEX + "1 " + PREFIX_TASK_DESCRIPTION + "Handle MC";
 
@@ -68,6 +68,10 @@ public class UpdateTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (name.toString().isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
+        }
 
         Person personToUpdate = lastShownList.stream()
                 .filter(person -> person.getName().equals(name))
