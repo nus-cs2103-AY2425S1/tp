@@ -66,6 +66,6 @@ public class ContactIdPredicateTest {
         ContactIdPredicate predicate = new ContactIdPredicate(id);
 
         String expected = ContactIdPredicate.class.getCanonicalName() + "{id=" + id + "}";
-        assertEquals(expected,predicate.toString());
+        assertEquals(expected, predicate.toString());
     }
 }

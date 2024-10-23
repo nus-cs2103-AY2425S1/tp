@@ -2,6 +2,7 @@ package seedu.ddd.model.contact.common.predicate;
 
 import java.util.function.Predicate;
 
+import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
 
@@ -32,5 +33,10 @@ public class ContactEmailPredicate implements Predicate<Contact> {
         }
         ContactEmailPredicate otherContactEmailPredicate = (ContactEmailPredicate) other;
         return this.email.equals(otherContactEmailPredicate.email);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("email", email).toString();
     }
 }
