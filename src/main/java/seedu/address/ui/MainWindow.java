@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -17,6 +18,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -32,8 +35,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PersonDetailsWindow personDetailsWindow;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ImportWindow importWindow;
+    private ExportWindow exportWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -64,8 +70,10 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
+        personDetailsWindow = new PersonDetailsWindow(logic);
         helpWindow = new HelpWindow();
+        importWindow = new ImportWindow(this.logic);
+        exportWindow = new ExportWindow(this.logic);
     }
 
     public Stage getPrimaryStage() {
@@ -110,13 +118,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetailsWindow);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getFilteredPersonList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -147,6 +156,33 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+
+
+    /**
+     * Opens the import window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleImport() {
+        if (!importWindow.isShowing()) {
+            importWindow.show();
+        } else {
+            importWindow.focus();
+        }
+    }
+
+
+    /**
+     * Opens the export window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleExport() {
+        if (!exportWindow.isShowing()) {
+            exportWindow.show();
+        } else {
+            exportWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -159,8 +195,12 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        personDetailsWindow.hide();
+        importWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
+
+
     }
 
     public PersonListPanel getPersonListPanel() {

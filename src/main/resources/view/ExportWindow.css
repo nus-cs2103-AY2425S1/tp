@@ -1,0 +1,19 @@
+#exportMessage {
+    -fx-text-fill: white;
+}
+
+#fileDirectory {
+    -fx-text-fill: black;
+}
+
+#importMessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#fileDirectoryContainer {
+    -fx-background-color: derive(#1d1d1d, 20%); /* Change to your desired background color */
+    -fx-padding: 5px; /* Add some padding */
+    -fx-background-radius: 5px; /* Make it box-shaped */
+    -fx-border-color: gray; /* Optional: add a border */
+    -fx-border-width: 1px; /* Set the width of the border */
+}

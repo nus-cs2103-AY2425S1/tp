@@ -24,6 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
+    private LoginWindow loginWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -44,6 +45,26 @@ public class UiManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
+        } catch (Throwable e) {
+            logger.severe(StringUtil.getDetails(e));
+            showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+        }
+    }
+
+    /**
+     * Start Authentication.
+     * @param primaryStage
+     */
+    @Override
+    public void startAuthentication(Stage primaryStage) {
+        logger.info("Starting Authentication...");
+
+        //Set the application icon.
+        primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
+        try {
+            loginWindow = new LoginWindow(primaryStage);
+            loginWindow.show();
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
