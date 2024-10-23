@@ -42,7 +42,6 @@ public class Student extends Person {
     public StudentID getStudentID() {
         return studentID;
     }
-    
     /**
      * Return null as student does not have an industry
      * @return null
