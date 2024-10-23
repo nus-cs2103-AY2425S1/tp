@@ -6,11 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
 import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.address.model.appointment.AppointmentDescriptor;
@@ -45,13 +44,17 @@ public class AppointmentUtil {
     public static String getEditAppointmentDescriptorDetails(EditAppointmentDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getAppointmentType().ifPresent(type -> sb.append(PREFIX_APPOINTMENT_TYPE).append(type).append(" "));
-        descriptor.getAppointmentDateTime().ifPresent(datetime -> sb.append(PREFIX_DATETIME).append(formatDateTime(datetime)).append(" "));
+        descriptor.getAppointmentDateTime()
+                .ifPresent(datetime -> sb.append(PREFIX_DATETIME).append(formatDateTime(datetime)).append(" "));
         descriptor.getSickness().ifPresent(sickness -> sb.append(PREFIX_SICKNESS).append(sickness.value).append(" "));
         descriptor.getMedicine().ifPresent(medicine -> sb.append(PREFIX_MEDICINE).append(medicine.value).append(" "));
         descriptor.getPersonId().ifPresent(id -> sb.append(PREFIX_PERSON_ID).append(String.valueOf(id)).append(" "));
         return sb.toString();
     }
 
+    /**
+     * Returns a formatted local date that is used for edit appointment command input.
+     */
     public static String formatDateTime(LocalDateTime appointmentDateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return appointmentDateTime.format(formatter);
