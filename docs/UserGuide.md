@@ -196,7 +196,7 @@ Format: `view [n/NAME]`
 
 Examples:
 * `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
-* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`. 
+* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`.
 
 ### Marking a student as present : `mark`
 
