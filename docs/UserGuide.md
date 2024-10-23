@@ -67,13 +67,13 @@ tasks done faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help : `:help`
 
 Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `:help`
 
 
 ### Adding a person: `:add` or `:a`
@@ -115,11 +115,11 @@ Examples:
    `91234567` and `johndoe@example.com` respectively.
 *  `:edit 2 -n Betsy Crower -t ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `:find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `:find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -129,8 +129,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `:find John` returns `john` and `John Doe`
+* `:find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `:rm`
@@ -145,7 +145,7 @@ Format: `:rm -i INDEX` or `:remove -i INDEX`
 
 Examples:
 * `:list` followed by `:rm -i 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `find` command.
+* `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `find` command.
 
 ### Undoing the last change: `:undo`
 
@@ -171,17 +171,18 @@ Examples:
 * After using `:undo` to revert the addition of John Doe, using `:redo` will add John Doe back to the address book.
 * After using `:undo` to revert the deletion of a contact, using `:redo` will delete the contact again.
 
-### Clearing all entries : `clear`
+### Clearing all entries : `:clear`
+
 
 Clears all entries from the address book.
 
-Format: `clear`
+Format: `:clear`
 
-### Exiting the program : `exit`
+### Exiting the program : `:exit`
 
 Exits the program.
 
-Format: `exit`
+Format: `:exit`
 
 ### Saving the data
 
