@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +27,6 @@ public class UnmarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "tut/1";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
-
-    public static final String MESSAGE_UNMARK_SUCCESS = "Marked absent from Tutorial %s for Person: %s";
-    public static final String MESSAGE_UNMARK_UNNECESSARY = "Person: %2$s is already marked absent from Tutorial %1$s";
-
     private final Index index;
     private final Tutorial tutorial;
 
@@ -43,24 +39,20 @@ public class UnmarkCommand extends Command {
         this.tutorial = tutorial;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> currDisplayedList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= currDisplayedList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = currDisplayedList.get(index.getZeroBased());
+    /**
+     * @param personToEdit person whose attendance will be unmarked
+     * @param tutorial tutorial to unmark attendance for
+     */
+    private Person generateUnmarkedPerson(Person personToEdit, Tutorial tutorial) throws CommandException {
         Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
         if (newTutorials.get(tutorial) == AttendanceStatus.ABSENT) {
             throw new CommandException(
-                    String.format(MESSAGE_UNMARK_UNNECESSARY, tutorial.tutorial, Messages.format(personToEdit)));
+                    String.format(Messages.MESSAGE_UNMARK_UNNECESSARY,
+                            tutorial.tutorial, Messages.format(personToEdit)));
         }
-
         newTutorials.put(tutorial, AttendanceStatus.ABSENT);
 
-        Person editedPerson = new Person(
+        return new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),
                 personToEdit.getPhone(),
@@ -68,19 +60,31 @@ public class UnmarkCommand extends Command {
                 personToEdit.getTags(),
                 newTutorials
         );
+    }
 
-        model.setPerson(personToEdit, editedPerson);
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        List<Person> currDisplayedList = model.getFilteredPersonList();
+        List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, index);
+        List<Person> editedPersonList = new ArrayList<>();
+        for (Person personToEdit : personToEditList) {
+            Person editedPerson = this.generateUnmarkedPerson(personToEdit, this.tutorial);
+            editedPersonList.add(editedPerson);
+            model.setPerson(personToEdit, editedPerson);
+        }
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedPersonList));
     }
 
     /**
      * Generates a command execution success message for removing attendance
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_UNMARK_SUCCESS, tutorial.tutorial, Messages.format(personToEdit));
+    private String generateSuccessMessage(List<Person> personListToEdit) {
+        return String.join("\n", personListToEdit.stream()
+                .map(personToEdit -> String.format(Messages.MESSAGE_UNMARK_SUCCESS,
+                        Messages.format(personToEdit), tutorial.tutorial))
+                .toArray(String[]::new));
     }
 
     @Override

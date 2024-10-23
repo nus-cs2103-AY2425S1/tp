@@ -138,12 +138,13 @@ Marks attendance as present of the person by the index number.
 
 Format: `mark INDEX tut/TUTORIAL`
 
-- Marks the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Marks the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ or a **wildcard** *.
 - The tutorial number (week number) must be specified.
 
 Examples:
 
 - `mark 1 tut/1` Marks the 1st person in the address book as attended for tutorial 1.
+- `mark * tut/1` Marks all persons in the address book as attended for tutorial 1.
 
 ### Marking person as absent : `unmark`
 
@@ -151,12 +152,13 @@ Marks attendance as absent of the person by the index number.
 
 Format: `unmark INDEX tut/TUTORIAL`
 
-- Marks the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Marks the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ or a **wildcard** *.
 - The tutorial number (week number) must be specified.
 
 Examples:
 
-- `unmark 1 tut/1` Marks the 1st person in the address book as attended for tutorial 1.
+- `unmark 1 tut/1` Marks the 1st person in the address book as absent for tutorial 1.
+- `unmark * tut/1` Marks all persons in the address book as absent for tutorial 1.
 
 ### Locating persons by name : `find`
 

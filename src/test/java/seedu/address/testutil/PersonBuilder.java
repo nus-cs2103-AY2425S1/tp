@@ -104,6 +104,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Amends the stated tutorial and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAmendedTutorial(String tutorialIndex, AttendanceStatus attendanceStatus) {
+        this.tutorials.put(new Tutorial(tutorialIndex), attendanceStatus);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {

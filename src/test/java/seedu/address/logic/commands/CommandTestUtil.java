@@ -39,6 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TUTORIAL_ONE = "1";
     public static final String VALID_TUTORIAL_TWO = "2";
+    public static final String INVALID_PERSON_INDEX = "-1";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

@@ -14,13 +14,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
 /**
- * Marks attendance of an existing person in the address book.
+ * Resets attendance of a person in the address book.
  */
-public class MarkCommand extends Command {
+public class ResetCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "reset";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendance for the contact "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Resets attendance for the contact "
             + "by the index number used in the last person listing and for the tutorial number inputted. "
             + "Parameters: INDEX (must be a positive integer) "
             + "tut/TUTORIAL\n"
@@ -31,25 +31,27 @@ public class MarkCommand extends Command {
     private final Tutorial tutorial;
 
     /**
-     * @param index of the person in the display list
-     * @param tutorial number to mark attendance for
+     * @param index The index of the person to be marked.
+     * @param tutorial The tutorial to set as not taken place.
      */
-    public MarkCommand(Index index, Tutorial tutorial) {
+    public ResetCommand(Index index, Tutorial tutorial) {
         this.index = index;
         this.tutorial = tutorial;
     }
 
     /**
-     * @param personToEdit person whose attendance will be marked
-     * @param tutorial tutorial to mark attendance for
+     * Takes a person and tutorial and resets the specified tutorial and returns that person with the new tutorials.
+     * @param personToEdit The person whose attendance will be reset.
+     * @param tutorial The tutorial to reset attendance for.
      */
-    private Person generateMarkedPerson(Person personToEdit, Tutorial tutorial) throws CommandException {
+    private Person generateResetPerson(Person personToEdit, Tutorial tutorial) throws CommandException {
         Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
-        if (newTutorials.get(tutorial) == AttendanceStatus.PRESENT) {
+        if (newTutorials.get(tutorial) == AttendanceStatus.NOT_TAKEN_PLACE) {
             throw new CommandException(
-                    String.format(Messages.MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
+                    String.format(Messages.MESSAGE_RESET_UNNECESSARY, Messages.format(personToEdit),
+                            tutorial.tutorial));
         }
-        newTutorials.put(tutorial, AttendanceStatus.PRESENT);
+        newTutorials.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
 
         return new Person(
                 personToEdit.getName(),
@@ -67,7 +69,7 @@ public class MarkCommand extends Command {
         List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, index);
         List<Person> editedPersonList = new ArrayList<>();
         for (Person personToEdit : personToEditList) {
-            Person editedPerson = this.generateMarkedPerson(personToEdit, this.tutorial);
+            Person editedPerson = this.generateResetPerson(personToEdit, this.tutorial);
             editedPersonList.add(editedPerson);
             model.setPerson(personToEdit, editedPerson);
         }
@@ -76,13 +78,12 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether
-     * the remark is added to or removed from
+     * Generates a command execution success message for the tutorials that were marked as not taken place.
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(List<Person> personListToEdit) {
         return String.join("\n", personListToEdit.stream()
-                .map(personToEdit -> String.format(Messages.MESSAGE_MARK_SUCCESS,
+                .map(personToEdit -> String.format(Messages.MESSAGE_RESET_SUCCESS,
                         Messages.format(personToEdit), tutorial.tutorial))
                 .toArray(String[]::new));
     }
@@ -95,12 +96,12 @@ public class MarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof ResetCommand)) {
             return false;
         }
 
         // state check
-        MarkCommand e = (MarkCommand) other;
+        ResetCommand e = (ResetCommand) other;
         return index.equals(e.index)
                 && tutorial.equals(e.tutorial);
     }

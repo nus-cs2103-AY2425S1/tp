@@ -19,6 +19,17 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial: %2$s for Person: %1$s";
+    public static final String MESSAGE_MARK_UNNECESSARY =
+            "Person: %1$s is already marked as present for Tutorial: %2$s";
+    public static final String MESSAGE_UNMARK_UNNECESSARY = "Person: %2$s is already marked absent from Tutorial %1$s";
+    public static final String MESSAGE_UNMARK_SUCCESS = "Marked absent from Tutorial %2$s for Person: %1$s";
+
+    public static final String MESSAGE_RESET_UNNECESSARY =
+            "Tutorial: %2$s is already marked as not taken place for Person: %1$s";
+
+    public static final String MESSAGE_RESET_SUCCESS = "Marked not taken place in Tutorial: %2$s for Person: %1$s";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
