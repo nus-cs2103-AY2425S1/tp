@@ -4,17 +4,17 @@
   pageNav: 3
 ---
 
-# Knotty Planner 💍🎀 
+# Knotty Planner 💍🎀
 
 Knotty Planner is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planner can make organising weddings a walk in the park!
 
 <!-- * Table of Contents -->
 ## Table of Contents
-- [Quick Start](#quick-start)              
-- [Features](#features)         
+- [Quick Start](#quick-start)
+- [Features](#features)
 - [FAQ](#FAQ)
 - [Known issues](#Known-issues)
-- [Command summary](#Command-summary)  
+- [Command summary](#Command-summary)
 
 <page-nav-print />
 
