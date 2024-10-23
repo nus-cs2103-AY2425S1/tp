@@ -169,7 +169,13 @@ Examples:
 
 Clears all entries from the address book.
 
-Format: `clear`
+Command Instructions: `clear`
+
+Upon entering the command, all entries will be cleared from the address book. A message 
+"Address book has been cleared!" will be displayed in the command box.
+
+![Ui](images/clearcommand.png)
+
 
 ---
 
@@ -177,7 +183,18 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+Exiting the programme can be done by separate ways
+Method 1:
+1. Clicking the `File` button at the top right corner of the window.
+   ![Ui](images/exitcommand.png)
+
+2. Next click on the `Exit` button.
+3. The program will close.
+
+Method 2:
+1. Type the command `exit` in the command box and press Enter.
+2. The program will close.
+
 
 ---
 
@@ -196,7 +213,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
----
 ### 2.11 Marking a Payment as Completed
 
 Updates the payment status of a student to completed.
@@ -213,7 +229,19 @@ Updates the payment status of a student to completed.
 * `markpaid 1 2024-10` – Marks the payment of the 1st student as completed for October 2024.
 * `markpaid 3 2023-12` – Marks the payment of the 3rd student as completed for December 2023.
 
----
+
+### 2.12 Displaying pie chart of class distribution : `piechart`
+Creates a pie chart of the distribution of students in each class. Such a feature is meant to give tuition centre 
+administrators quick visualisation of the number of students in each class, thus allowing them to efficiently allocate class sizes.
+
+For instance, we have this following data set with 4 students; 1 students in class 1 and 2 students in class 2 and 1 student in class 3.
+![Ui](images/piecommand.png)
+
+Upon entering the command pie, a pie chart will be displayed showing the distribution of students in each class.
+![Ui](images/piechart.png)
+
+Format: `pie`
+
 ### 2.13 Bar Chart
 
 Displays a bar chart showing the number of students who made payments for each month. This feature allows you to visually track the payment trends.
