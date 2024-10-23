@@ -6,10 +6,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.InterviewScore;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +38,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setJob(person.getJob());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setSkills(person.getSkills());
+        descriptor.setInterviewScore(person.getInterviewScore());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +72,24 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Parses the {@code skills} into a {@code Set<Skill>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withSkills(String... skills) {
+        Set<Skill> skillSet = Stream.of(skills).map(Skill::new).collect(Collectors.toSet());
+        descriptor.setSkills(skillSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code InterviewScore} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withInterviewScore(String interviewScore) {
+        descriptor.setInterviewScore(new InterviewScore(interviewScore));
         return this;
     }
 
