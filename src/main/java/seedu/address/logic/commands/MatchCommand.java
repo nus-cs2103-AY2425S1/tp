@@ -53,23 +53,23 @@ public class MatchCommand extends Command {
         this.jobIndex = jobIndex;
     }
 
-    private static Person matchContactToJob(Person contact, String jobName) {
+    private static Person matchContactToJob(Person contact, String jobIdentifier) {
         Name name = contact.getName();
         Phone phone = contact.getPhone();
         Email email = contact.getEmail();
         Role role = contact.getRole();
         Set<Skill> skills = contact.getSkills();
-        return new Person(name, phone, email, role, skills, jobName);
+        return new Person(name, phone, email, role, skills, jobIdentifier);
     }
 
-    private static Job matchJobToContact(Job job, String contactName) {
+    private static Job matchJobToContact(Job job, String contactIdentifier) {
         Name name = job.getName();
         JobCompany company = job.getCompany();
         JobSalary salary = job.getSalary();
         JobDescription description = job.getDescription();
         Set<Tag> requirements = job.getRequirements();
         Set<String> matches = job.getMatches();
-        matches.add(contactName);
+        matches.add(contactIdentifier);
         return new Job(name, company, salary, description, requirements, matches);
     }
 
