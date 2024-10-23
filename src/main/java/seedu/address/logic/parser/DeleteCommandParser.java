@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
+// import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_NAME_FIELD_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -22,17 +22,18 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        String str = "";
-        // String tempArgs = args.trim();
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
-        } catch (ParseException unusedException) {
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                str = argMultimap.getValue(PREFIX_NAME).get();
+
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            try {
+                Index index = ParserUtil.parseIndex(args);
+                return new DeleteCommand(index);
+            } catch (ParseException ex) {
+                throw new ParseException(
+                        String.format(MESSAGE_NAME_FIELD_MISSING, DeleteCommand.MESSAGE_USAGE), ex);
             }
         }
 
+        String str = argMultimap.getValue(PREFIX_NAME).get();
         try {
             Name name = ParserUtil.parseName(str);
             return new DeleteCommand(name);
@@ -40,18 +41,5 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), ex);
         }
-    }
-
-    private ArgumentMultimap getArgMultimapByArgs(String args) throws ParseException {
-        requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
-
-        if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_NAME_FIELD_MISSING, DeleteCommand.MESSAGE_USAGE));
-        }
-        return argMultimap;
     }
 }

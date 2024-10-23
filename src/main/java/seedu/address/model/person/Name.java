@@ -76,4 +76,14 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * Compares the name of another person contact in alphabetical order.
+     *
+     * @param otherName Name of another person contact
+     * @return Integer status of the comparison
+     */
+    public int compareTo(Name otherName) {
+        return fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
+    }
+
 }

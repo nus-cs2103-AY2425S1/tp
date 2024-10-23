@@ -21,10 +21,11 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";
-    public static final String MESSAGE_EMPTY_PREFIX_FIELD = "Fields cannot be empty";
     public static final String MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK =
             "This person is not in address book, please use Full Name";
+    public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter something for me to search";
+    public static final String MESSAGE_EMPTY_PREFIX_FIELD = "Fields cannot be empty";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
