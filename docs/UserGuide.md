@@ -155,6 +155,7 @@ Commands listed in this section are applicable to both guest management and vend
 
 [_Back to Top_](#table-of-contents)
 
+---
 
 ### Viewing help : `help`
 
@@ -240,6 +241,7 @@ Commands listed in this section are applicable to managing your guest list (gues
 
 [_Back to Top_](#table-of-contents)
 
+---
 
 ### Adding a guest : `add_guest`
 
@@ -292,6 +294,7 @@ Entering the `delete_guest` command returns the following result on your screen:
 
 Commands listed in this section are applicable to managing your vendor list.
 
+---
 
 ### Adding a vendor : `add_vendor`
 
