@@ -35,7 +35,7 @@ public class NewtagCommand extends Command {
         }
         model.updateTagList();
 
-        String successMessage = MESSAGE_SUCCESS + " " + tag + "\n";
+        String successMessage = MESSAGE_SUCCESS + tag + "\n";
         String currentTags = "Your tags: " + model.getTagList();
         return new CommandResult(successMessage + currentTags);
     }
