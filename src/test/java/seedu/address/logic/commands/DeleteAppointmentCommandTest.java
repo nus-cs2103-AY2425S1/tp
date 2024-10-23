@@ -57,4 +57,16 @@ public class DeleteAppointmentCommandTest {
         assertCommandFailure(deleteAppointmentCommand, modelStub, expectedMessage);
     }
 
+    @Test
+    public void execute_invalidAppointment() {
+        Model modelStub = new ModelManager();
+        Person testPerson = new PersonBuilder().build();
+        modelStub.addPerson(testPerson);
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(VALID_NRIC, VALID_DATE,
+            VALID_START_TIME);
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_NO_APPOINTMENT);
+
+        assertCommandFailure(deleteAppointmentCommand, modelStub, expectedMessage);
+    }
+
 }
