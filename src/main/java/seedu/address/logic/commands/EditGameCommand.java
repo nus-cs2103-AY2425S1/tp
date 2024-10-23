@@ -48,7 +48,6 @@ public class EditGameCommand extends Command {
 
     public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited Game: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_GAME = "This game already exists in the address book.";
 
     private final Index index;
     private final String gameName;
@@ -102,8 +101,8 @@ public class EditGameCommand extends Command {
         Username updatedUsername = editGameDescriptor.getUsername().orElse(gameToEdit.getUsername());
         SkillLevel updatedSkillLevel = editGameDescriptor.getSkillLevel().orElse(gameToEdit.getSkillLevel());
         Role updatedRole = editGameDescriptor.getRole().orElse(gameToEdit.getRole());
-
-        return new Game(gameToEdit.gameName, updatedUsername, updatedSkillLevel, updatedRole);
+        boolean updatedFavouriteStatus = gameToEdit.getFavouriteStatus();
+        return new Game(gameToEdit.gameName, updatedUsername, updatedSkillLevel, updatedRole, updatedFavouriteStatus);
     }
 
     /**
@@ -114,6 +113,7 @@ public class EditGameCommand extends Command {
         private Username username;
         private SkillLevel skillLevel;
         private Role role;
+        private boolean isFavourite;
 
         public EditGameDescriptor() {}
 
@@ -154,6 +154,10 @@ public class EditGameCommand extends Command {
 
         public Optional<Role> getRole() {
             return Optional.ofNullable(role);
+        }
+
+        public boolean getFavouriteStatus() {
+            return this.isFavourite;
         }
 
         @Override
