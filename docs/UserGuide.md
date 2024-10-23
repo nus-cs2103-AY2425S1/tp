@@ -322,18 +322,30 @@ Example:
 #### 4.3.1 Adding an assignment: `addAsg`
 <a id="adding-an-assignment-add"></a>
 
-> TO BE DONE
+> Add a new assignment with the given title and due date to the TrackMate application.
+
+Format: `addAsg n/ASSIGNMENT_TITLE d/yyyy-MM-dd HHmm`
+
+Command Details & Constraints:
+* Create a new assignment with title ASSIGNMENT_TITLE and the specified due date.
+* Due date is in the format yyyy-MM-dd HHmm.
+* Duplicate assignment titles are not allowed.
+
+Example:
+1. `addAsg n/CS2103T Assignment 2 d/25-10-2024 2359`
+2. `addAsg n/CS2101 CA1 d/23-09-2024 1200`
+
 
 #### 4.3.2 Delete an assigment: `deleteAsg`
 <a id="deleting-an-assignment-deleteAsg"></a>
 
 > Delete a specified assignment from the TrackMate application.
 
-Format: `deleteAsg CS2101 CA3`
+Format: `deleteAsg ASSIGNMENT_TITLE`
 
 Command Details & Constraints:
-* Deletes the assignment based on the `ASSIGNMENT_NAME`
-    * The `ASSIGNMENT_NAME` must exist in the assignment list.
+* Deletes the assignment based on the `ASSIGNMENT_TITLE`
+    * The `ASSIGNMENT_TITLE` must exist in the assignment list.
 * No prefix is required for `deleteAsg` command.
 * The command should only consist of exactly two words: `deleteAsg` and a valid `ASSIGNMENT_NAME`
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
@@ -345,22 +357,67 @@ Example:
 #### 4.3.3 List assignments: `listAsg`
 <a id="listing-assignments-listAsg"></a>
 
-> TO BE DONE
+> List all assignments tracked in the TrackMate application.
+
+Format: `listAsg`
+
+Command Details & Constraints:
+* This command will display all assignments with details such as:
+  * title
+  * due date
+  * number of students who have completed the assignment
+
 
 #### 4.3.4 Mark an assignment: `markAsg`
 <a id="marking-an-assignment-markAsg"></a>
 
-> TO BE DONE
+> Mark the status of the given assignment for the student at specified index as completed.
+
+Format: `markAsg INDEX n/ASSIGNMENT_TITLE`
+
+Command Details & Constraints:
+* Using the given index of the student, TrackMate will mark his/her assignment status as completed. 
+* Assignment with the given title must exist.
+* Student at the specified index must exist.
+
+Example:
+1. `markAsg 1 n/CS2103T Assignment 2`
+2. `markAsg 12 n/CS2101 CA1`
 
 #### 4.3.5 Unmark an assignment: `unmarkAsg`
 <a id="unmarking-an-assignment-unmarkAsg"></a>
 
-> TO BE DONE
+> Mark the status of the given assignment for the student at specified index as not completed.
+
+Format: `unmarkAsg INDEX n/ASSIGNMENT_TITLE`
+
+Command Details & Constraints:
+* This command is the opposite of mark command.
+* Using the given index of the student, TrackMate will mark his/her assignment status as not completed.
+* Assignment with the given title must exist.
+* Student at the specified index must exist.
+
+Example:
+1. `unmarkAsg 1 n/CS2103T Assignment 2`
+2. `unmarkAsg 10 n/CS2101 CA1`
 
 #### 4.3.6 Check an assignment: `checkAsg`
 <a id="checking-an-assignment-checkAsg"></a>
 
-> TO BE DONE
+> Check the completion statistics of the specified assignment.
+
+Format: `checkAsg n/ASSIGNMENT_TITLE`
+
+Command Details & Constraints:
+* This command will display the statistics for the given assignment. This includes:
+  * Number of students who have completed the assignments
+  * List of students who have completed the assignment.
+  * List of students who have not completed the assignment.
+* Assignment with the given title must exist.
+
+Example:
+1. `checkAsg n/CS2103T Assignment 2`
+2. `checkAsg n/CS2101 CA1`
 
 ### 4.4 Attendance Data Related Commands:
 <a id="assignment-data-commands"></a>
