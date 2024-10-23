@@ -22,7 +22,7 @@ public class DeleteWeddingCommandTest {
     @Test
     public void execute_validDeleteWeddingCommand() {
         Wedding weddingToDelete = model.getFilteredWeddingList().get(0);
-        DeleteWeddingCommand deleteWeddingCommand = new DeleteWeddingCommand(weddingToDelete);
+        DeleteWeddingCommand deleteWeddingCommand = new DeleteWeddingCommand(weddingToDelete, true);
 
         String expectedMessage = String.format(DeleteWeddingCommand.MESSAGE_DELETE_WEDDING_SUCCESS,
                 Messages.format(weddingToDelete));
