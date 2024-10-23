@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
-import seedu.ddd.model.contact.common.ClientTypePredicate;
-import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
-import seedu.ddd.model.contact.common.VendorTypePredicate;
+import seedu.ddd.model.contact.common.predicate.ClientTypePredicate;
+import seedu.ddd.model.contact.common.predicate.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.predicate.VendorTypePredicate;
 
 
 /**
@@ -40,25 +40,25 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        int size = model.getFilteredContactList().size();
         assertCommandSuccess(new ListCommand(Model.PREDICATE_SHOW_ALL_CONTACTS),
-                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), expectedModel);
+                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                        expectedModel.getFilteredContactListSize()), expectedModel);
     }
 
     @Test
     public void executeFilterListByClient() {
         expectedModel.updateFilteredContactList(new ClientTypePredicate());
-        int size = expectedModel.getFilteredContactList().size();
         assertCommandSuccess(new ListCommand(new ClientTypePredicate()),
-                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), expectedModel);
+                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                        expectedModel.getFilteredContactListSize()), expectedModel);
     }
 
     @Test
     public void executeFilterListByVendor() {
         expectedModel.updateFilteredContactList(new VendorTypePredicate());
-        int size = expectedModel.getFilteredContactList().size();
         assertCommandSuccess(new ListCommand(new VendorTypePredicate()),
-                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, size), expectedModel);
+                model, String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                        expectedModel.getFilteredContactListSize()), expectedModel);
     }
 
     @Test

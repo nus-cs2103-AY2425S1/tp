@@ -24,7 +24,7 @@ import seedu.ddd.logic.parser.CliFlags;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.predicate.NameContainsKeywordsPredicate;
 import seedu.ddd.testutil.EditClientDescriptorBuilder;
 import seedu.ddd.testutil.EditContactDescriptorBuilder;
 import seedu.ddd.testutil.EditVendorDescriptorBuilder;

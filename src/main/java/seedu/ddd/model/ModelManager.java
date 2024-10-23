@@ -12,7 +12,7 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -181,6 +181,11 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredContacts.equals(otherModelManager.filteredContacts);
+    }
+
+    @Override
+    public int getFilteredContactListSize() {
+        return getFilteredContactList().size();
     }
 
 }

@@ -1,4 +1,4 @@
-package seedu.ddd.model.event;
+package seedu.ddd.model.event.common;
 
 import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.StringUtil;

@@ -3,6 +3,7 @@ package seedu.ddd.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.ddd.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 
 import java.util.function.Predicate;
 
@@ -12,7 +13,7 @@ import seedu.ddd.model.contact.common.Contact;
 
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all contacts in the address book to the user.
  */
 public class ListCommand extends Command {
 
@@ -24,7 +25,10 @@ public class ListCommand extends Command {
             + ": Lists all clients in the addressbook.\n"
             + "Example: " + COMMAND_WORD + " " + FLAG_CLIENT
             + " n/Jane , lists all clients with name Jane in the addressbook.";
-
+    public static final String MESSAGE_EVENT_USAGE = COMMAND_WORD + " " + FLAG_EVENT
+            + ": Lists all events in the addressbook.\n"
+                    + "Example: " + COMMAND_WORD + " " + FLAG_CLIENT
+            + " des/George and Amy, lists all events with description George and Amy in the addressbook.";
 
 
     private final Predicate<Contact> predicate;

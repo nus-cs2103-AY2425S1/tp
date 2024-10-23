@@ -1,9 +1,11 @@
-package seedu.ddd.model.contact.common;
+package seedu.ddd.model.contact.common.predicate;
 
 import java.util.Set;
 import java.util.function.Predicate;
 
+import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.tag.Tag;
 
 /**
@@ -19,7 +21,8 @@ public class ContactContainsTagPredicate implements Predicate<Contact> {
     @Override
     public boolean test(Contact contact) {
         return tagSet.stream()
-                .anyMatch(tag -> contact.getTags().contains(tag));
+                .anyMatch(tag -> contact.getTags().stream()
+                        .anyMatch(contactTag -> StringUtil.containsWordIgnoreCase(contactTag.tagName, tag.tagName)));
     }
 
     @Override
@@ -39,6 +42,6 @@ public class ContactContainsTagPredicate implements Predicate<Contact> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("tag set", tagSet).toString();
+        return new ToStringBuilder(this).add("tagSet", tagSet).toString();
     }
 }
