@@ -94,6 +94,36 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addContact_validContact_modifyDisplayedLists() {
+        // TODO: check that modifying filteredContacts modifies displayedList
+    }
+
+    @Test
+    public void deleteContact_validContact_modifyDisplayedLists() {
+        // TODO: check that modifying filteredContacts modifies displayedList
+    }
+
+    @Test
+    public void setContact_validContact_modifyDisplayedLists() {
+        // TODO: check that modifying filteredContacts modifies displayedList
+    }
+
+    @Test
+    public void addEvent_validEvent_modifyDisplayedLists() {
+        // TODO: check that modifying filteredEvents modifies displayedList
+    }
+
+    @Test
+    public void deleteEvent_validEvent_modifyDisplayedLists() {
+        // TODO: check that modifying filteredEvents modifies displayedList
+    }
+
+    @Test
+    public void setEvent_validEvent_modifyDisplayedLists() {
+        // TODO: check that modifying filteredEvents modifies displayedList
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withContact(ALICE).withContact(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
