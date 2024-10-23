@@ -46,7 +46,7 @@ public class NewtagCommand extends Command {
         if (!isSuccessful) {
             throw new CommandException(MESSAGE_DUPLICATE);
         }
-        String successMessage = MESSAGE_SUCCESS + " " + tags + "\n";
+        String successMessage = MESSAGE_SUCCESS + tags + "\n";
 
         model.updateTagList();
 
