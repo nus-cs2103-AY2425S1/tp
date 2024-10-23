@@ -247,6 +247,11 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
+Steps 1 to 6 will similarly be implemented for the `Appointment` data. The `VersionedAppointmentBook` will 
+be initialized with the initial appointment book state, and the `currentStatePointer` pointing to that 
+single appointment book state. The `commit`, `undo`, and `redo` operations for `VersionedAppointmentBook` 
+will be implemented in the same way as the `VersionedAddressBook`.
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="550" />
