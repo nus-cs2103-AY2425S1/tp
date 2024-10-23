@@ -7,7 +7,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -65,7 +64,6 @@ public class MarkPaidCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (target.getMarkAll()) {
             markAllPersons(lastShownList, monthsPaid, model);
-            model.updateFilteredPersonList(personHasAllMonthsPaid(monthsPaid));
             String monthsPaidStr = monthsPaid.toString().replaceAll("^\\[|\\]$", "");
             return new CommandResult(String.format(MESSAGE_MARKPAID_ALL_SUCCESS, monthsPaidStr));
         }
@@ -78,13 +76,8 @@ public class MarkPaidCommand extends Command {
             Person markedPerson = createMarkedPerson(person, monthsPaid);
             model.setPerson(person, markedPerson);
         }
+        model.updateFilteredPersonList(person -> person.getMonthsPaid().containsAll(monthsPaid));
     }
-
-    private Predicate<Person> personHasAllMonthsPaid(Set<MonthPaid> monthsPaid) {
-        return person -> person.getMonthsPaid().containsAll(monthsPaid);
-    }
-
-
     private CommandResult executeMarkSingle(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         Index index = target.getIndex();
