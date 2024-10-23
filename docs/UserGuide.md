@@ -198,8 +198,7 @@ Adds a meet-up to the meet-up list.
 Format: `add n/MEETUP_NAME i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_TO`
 
 <div markdown="span" class="alert alert-primary">
-
-`MEETUP_FROM` and `MEETUP_TO` fields should follow the format `YYYY-MM-DD HH:MM`
+MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM
 </div>
 
 Examples:
@@ -225,8 +224,7 @@ Edits an existing meet-up in the meet-up list.
 Format: `edit INDEX i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_FROM`
 
 <div markdown="span" class="alert alert-primary">
-
-`MEETUP_FROM` and `MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
+MEETUP_FROM and MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
 </div>
 
 * Edits the meet-up at the specified `INDEX`. The index refers to the index number shown in the displayed meet-up list. The index **must be a positive integer** 1, 2, 3, …​
@@ -262,18 +260,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd meet-up in the meet-up list.
 * `find meet` followed by `delete 1` deletes the 1st meet-up in the results of the `find` command.
-
-### Filtering meetups : `filter`
-
-Finds all meet-up whose date matches the given date and displays them as a list with index numbers.
-
-Format: `filter KEYWORD`
-
-* The date should be written in the format `yyyy-mm-dd`
-
-Examples:
-
-* `filter 2022-12-12` will find all meetups that are scheduled for 12 December 2022 and show them as a list.
 
 ## Properties
 ### Adding a property: `add`
