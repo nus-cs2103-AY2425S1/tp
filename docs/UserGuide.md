@@ -118,8 +118,10 @@ the constraints of each parameter when used in a command.
 |`EMAIL` | Email address of the patient. | - Should be in the format `local-part@domain`. <br> - Should not be blank. | :white_check_mark:`raj@gmail.com`<br>:x:`raj@gmail` |
 |`ADDRESS` | Address of the patient. | - Any value is allowed. <br> - Should not be blank. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
 |`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
+|`ALLERGY` | Allergy of the patient. | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank. | :white_check_mark:`Peanuts`<br>:x:`Pe@nuts` |
 |`PRIORITY`  | Priority of the patient. | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. | :white_check_mark:`NONE` <br> :white_check_mark:`high` <br> :x: `Highpriority` |
 |`CONDITION`| Medical Condition of the patient. | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. | :white_check_mark: `Arthritis` <br> :x: `@highbloodpressure` <br> :x: `abcdefghijklmnopqrstuvwxyzabcde` |
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -285,7 +287,50 @@ Example:
 [Back to Table of Contents](#table-of-contents)
 
 ### Managing Allergies
-[To be filled up]
+
+#### Adding an allergy: `addAllergy`
+
+Adds an allergy or multiple allergies to an existing patient in MediBase3.
+
+Format: `addAllergy i/NRIC al/ALLERGY…`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
+> * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
+> * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S123457A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
+
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+> 
+> * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
+> * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
+#### Deleting an allergy: `delAllergy`
+
+Deletes an allergy or multiple allergies to an existing patient in MediBase3.
+
+Format: `delAllergy i/NRIC al/ALLERGY…`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> * Deletes the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
+> * **At least one** `ALLERGY` must be provided. e.g. `delAllergy i/S1234567A` is invalid.
+> * `ALLERGY` is case-insensitive. e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
+> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
+
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> * You can delete multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
+> * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
+
 ### Managing Priority
 
 #### Setting Priority : `setPriority`
@@ -329,7 +374,7 @@ Format: `list`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Listing all patients by their priority: `list`
+#### Listing all patients by their priority: `listPrio`
 
 Shows a list of all patients with a specific `PRIORITY` in MediBase3.
 
@@ -355,7 +400,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 {: .alert .alert-info} 
 > :information_source: **Note:**
 > 
-> * The search is case-insensitive. e.g `hans` will match `Hans`
+> * The search is case-insensitive. e.g. `hans` will match `Hans`
 > * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 > * Only the name is searched.
 > * Only **full words** will be matched e.g. `Han` will not match `Hans`
@@ -422,8 +467,6 @@ You can navigate between previous successful commands and your current command b
 #### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
 
 Format: `help`
 
@@ -507,18 +550,20 @@ MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/
 ## Command summary
 
 
-| Action     | Format                                                                | Examples                                                                                                       |
-|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| Action     | Format                                                                | Examples                                                                                            |
+|------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **Clear**  | `clear`                                                               | -                                                                                                              |
-| **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                             |
-| **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
-| **FindNric**| `findNric NRIC`| `findNric S1234567A`                                                                                           |                                                                                                                                              |
-| **FindMedCon**| `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`                                                                                |                                                                                                           |
-| **List**   | `list`                                                                | -                                                                                                              |
-| **ListPrio**| `listPrio !/PRIORITY` | `listPrio !/High`                                                                                              |
-| **Help**   | `help`                                                                | -                                                                                                              |
+| **AddAllergy** | `addAllergy i/NRIC al/ALLERGY…` | `addAllergy i/S1234567A al/Dust al/Pollen` |
+| **Clear**  | `clear`                                                               | -                                                                                                   |
+| **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                  |
+| **DelAllergy** | `delAllergy i/NRIC al/ALLERGY…` | `delAllergy i/S1234567A al/Dust al/Pollen` |
+| **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                   |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                   |
+| **FindNric**| `findNric NRIC`| `findNric S1234567A`                                                                                |                                                                                                                                              |
+| **FindMedCon**| `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`                                                                     |                                                                                                           |
+| **List**   | `list`                                                                | -                                                                                                   |
+| **ListPrio**| `listPrio !/PRIORITY` | `listPrio !/High`                                                                                   |
+| **Help**   | `help`                                                                | -                                                                                                   |
 
 
 
