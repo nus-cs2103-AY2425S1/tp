@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalOwners.ALICE;
 import static seedu.address.testutil.TypicalOwners.BOB;
-import static seedu.address.testutil.TypicalPets.*;
+import static seedu.address.testutil.TypicalPets.AARFUL;
+import static seedu.address.testutil.TypicalPets.FLUFFY;
+import static seedu.address.testutil.TypicalPets.MILO;
 
 import org.junit.jupiter.api.Test;
 
