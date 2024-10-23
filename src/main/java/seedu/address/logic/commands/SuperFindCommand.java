@@ -10,7 +10,7 @@ import seedu.address.model.person.ContainsKeywordsPredicate;
 /**
  * Abstract Find command to house the other find command classes.
  */
-public class AbstractFindCommand extends Command {
+public class SuperFindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final String NAME_COMMAND_WORD = " n/";
@@ -32,7 +32,7 @@ public class AbstractFindCommand extends Command {
 
     private final ContainsKeywordsPredicate predicate;
 
-    public AbstractFindCommand(ContainsKeywordsPredicate predicate) {
+    public SuperFindCommand(ContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -53,6 +53,21 @@ public class AbstractFindCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof SuperFindCommand)) {
+            return false;
+        }
+
+        SuperFindCommand otherCommand = (SuperFindCommand) other;
+        return this.predicate.equals(otherCommand.predicate);
+    }
+
 
     @Override
     public String toString() {

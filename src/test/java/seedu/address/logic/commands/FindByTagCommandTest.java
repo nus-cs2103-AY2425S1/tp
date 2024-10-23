@@ -54,7 +54,7 @@ public class FindByTagCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = AbstractFindCommand.MESSAGE_NO_PERSONS_FOUND;
+        String expectedMessage = SuperFindCommand.MESSAGE_NO_PERSONS_FOUND;
         TagContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindByTagCommand command = new FindByTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

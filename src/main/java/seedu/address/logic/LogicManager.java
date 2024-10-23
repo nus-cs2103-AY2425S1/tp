@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AbstractFindCommand;
+import seedu.address.logic.commands.SuperFindCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -99,6 +99,6 @@ public class LogicManager implements Logic {
     }
 
     private boolean shouldSaveCampusConnect(Command c) {
-        return !(c.equals(new UndoCommand()) || c instanceof ListCommand || c instanceof AbstractFindCommand);
+        return !(c.equals(new UndoCommand()) || c instanceof ListCommand || c instanceof SuperFindCommand);
     }
 }

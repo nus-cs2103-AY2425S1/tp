@@ -5,14 +5,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AbstractFindCommand;
-import seedu.address.logic.commands.FindByEmailCommand;
-import seedu.address.logic.commands.FindByNameCommand;
-import seedu.address.logic.commands.FindByPhoneCommand;
-import seedu.address.logic.commands.FindByTagCommand;
+import seedu.address.logic.commands.SuperFindCommand;
+import seedu.address.model.person.CombinedContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -25,13 +23,17 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AbstractFindCommand.MESSAGE_USAGE));
+                SuperFindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validArgs_returnsFindByNameCommand() {
-        FindByNameCommand expectedFindCommand =
-                new FindByNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+    public void parse_validArgs_returnsAbstractFindCommandWithNames() {
+        NameContainsKeywordsPredicate namePredicate =
+                new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        CombinedContainsKeywordsPredicate expectedPredicate =
+                new CombinedContainsKeywordsPredicate(List.of(namePredicate));
+
+        SuperFindCommand expectedFindCommand = new SuperFindCommand(expectedPredicate);
 
         // no leading and trailing whitespaces
         assertParseSuccess(parser, " n/Alice n/Bob", expectedFindCommand);
@@ -41,10 +43,13 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindByPhoneCommand() {
-        FindByPhoneCommand expectedFindCommand =
-                new FindByPhoneCommand(new PhoneContainsKeywordsPredicate(
-                        Arrays.asList("91234567", "995")));
+    public void parse_validArgs_returnsAbstractFindCommandWithPhones() {
+        PhoneContainsKeywordsPredicate phonePredicate =
+                new PhoneContainsKeywordsPredicate(Arrays.asList("91234567", "995"));
+        CombinedContainsKeywordsPredicate expectedPredicate =
+                new CombinedContainsKeywordsPredicate(List.of(phonePredicate));
+
+        SuperFindCommand expectedFindCommand = new SuperFindCommand(expectedPredicate);
 
         // no leading and trailing whitespaces
         assertParseSuccess(parser, " p/ 91234567 p/ 995", expectedFindCommand);
@@ -54,10 +59,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindByEmailCommand() {
-        FindByEmailCommand expectedFindCommand =
-                new FindByEmailCommand(new EmailContainsKeywordsPredicate(
-                        Arrays.asList("ryan@gmail.com", "tasha@gmail.com")));
+    public void parse_validArgs_returnsAbstractFindCommandWithEmails() {
+        EmailContainsKeywordsPredicate emailPredicate =
+                new EmailContainsKeywordsPredicate(Arrays.asList("ryan@gmail.com", "tasha@gmail.com"));
+
+        CombinedContainsKeywordsPredicate expectedPredicate =
+                new CombinedContainsKeywordsPredicate(List.of(emailPredicate));
+
+        SuperFindCommand expectedFindCommand = new SuperFindCommand(expectedPredicate);
 
         // no leading and trailing whitespaces
         assertParseSuccess(parser, " e/ ryan@gmail.com e/tasha@gmail.com", expectedFindCommand);
@@ -67,10 +76,14 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindByTagCommand() {
-        FindByTagCommand expectedFindCommand =
-                new FindByTagCommand(new TagContainsKeywordsPredicate(
-                        Arrays.asList("PC2174ALecturer", "PC2032classmate")));
+    public void parse_validArgs_returnsAbstractFindCommandWithTags() {
+        TagContainsKeywordsPredicate tagPredicate =
+                new TagContainsKeywordsPredicate(Arrays.asList("PC2174ALecturer", "PC2032classmate"));
+
+        CombinedContainsKeywordsPredicate expectedPredicate =
+                new CombinedContainsKeywordsPredicate(List.of(tagPredicate));
+
+        SuperFindCommand expectedFindCommand = new SuperFindCommand(expectedPredicate);
 
         // no leading and trailing whitespaces
         assertParseSuccess(parser, " t/PC2174ALecturer t/PC2032classmate", expectedFindCommand);
@@ -78,5 +91,4 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " t/ \n PC2174ALecturer \n t/\t PC2032classmate  \t", expectedFindCommand);
     }
-
 }

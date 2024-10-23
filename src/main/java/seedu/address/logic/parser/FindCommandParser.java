@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.logic.commands.AbstractFindCommand;
+import seedu.address.logic.commands.SuperFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CombinedContainsKeywordsPredicate;
 import seedu.address.model.person.ContainsKeywordsPredicate;
@@ -24,13 +24,14 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindCommandParser implements Parser<AbstractFindCommand> {
+public class FindCommandParser implements Parser<SuperFindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AbstractFindCommand parse(String args) throws ParseException {
+    @Override
+    public SuperFindCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer
                 .tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
@@ -58,11 +59,11 @@ public class FindCommandParser implements Parser<AbstractFindCommand> {
         }
 
         if (predicates.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AbstractFindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SuperFindCommand.MESSAGE_USAGE));
         }
 
         // Combine them into a single predicate
         ContainsKeywordsPredicate combinedPredicate = new CombinedContainsKeywordsPredicate(predicates);
-        return new AbstractFindCommand(combinedPredicate);
+        return new SuperFindCommand(combinedPredicate);
     }
 }

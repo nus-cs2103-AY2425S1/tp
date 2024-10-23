@@ -43,6 +43,6 @@ public class CombinedContainsKeywordsPredicate extends ContainsKeywordsPredicate
 
     @Override
     public String toString() {
-        return predicates.toString();
+        return String.format("%s%s", getClass().getCanonicalName(), predicates);
     }
 }
