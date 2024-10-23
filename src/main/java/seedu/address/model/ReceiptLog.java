@@ -84,4 +84,7 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
                 .filter(predicate).toList();
     }
 
+    public void removeIf(Predicate<? super GoodsReceipt> predicate) {
+        receipts.removeIf(predicate);
+    }
 }
