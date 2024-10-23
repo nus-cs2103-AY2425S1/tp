@@ -10,7 +10,6 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Represents a Company in the address book.
  * Guarantees: details are present and not null, field values are validated,
@@ -28,12 +27,14 @@ public class Company {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Company(Name name, Phone phone, Email email, Address address, CareerPageUrl careerPageUrl, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Company(Name name, Phone phone, Email email, Address address,
+                   CareerPageUrl careerPageUrl, Set<Tag> tags, Remark remark) {
+        requireAllNonNull(name, phone, email, address, careerPageUrl, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,8 +42,10 @@ public class Company {
         this.careerPageUrl = careerPageUrl;
         this.tags.addAll(tags);
         this.isBookmark = false;
+        this.remark = remark;
     }
 
+    // Getters
     public Name getName() {
         return name;
     }
@@ -63,9 +66,12 @@ public class Company {
         return careerPageUrl;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
     /**
-     * Returns an immutable tag set, which throws
-     * {@code UnsupportedOperationException}
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
@@ -95,7 +101,6 @@ public class Company {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Company)) {
             return false;
         }
@@ -106,13 +111,13 @@ public class Company {
                 && email.equals(otherCompany.email)
                 && address.equals(otherCompany.address)
                 && careerPageUrl.equals(otherCompany.careerPageUrl)
-                && tags.equals(otherCompany.tags);
+                && tags.equals(otherCompany.tags)
+                && remark.equals(otherCompany.remark);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, careerPageUrl, tags);
+        return Objects.hash(name, phone, email, address, careerPageUrl, tags, remark);
     }
 
     @Override
@@ -122,9 +127,9 @@ public class Company {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("career page url", careerPageUrl)
+                .add("url", careerPageUrl)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
-
 }
