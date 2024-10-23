@@ -102,6 +102,9 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        if (addressBook.hasVendor(target)) {
+            addressBook.removeVendor(target);
+        }
     }
 
     @Override
@@ -130,13 +133,10 @@ public class ModelManager implements Model {
 
     @Override
     public void unassignVendor(Person person) {
-
+        requireNonNull(person);
+        addressBook.removeVendor(person);
     }
 
-    @Override
-    public void deleteVendor(Person person) {
-
-    }
 
     @Override
     public void addTag(Tag tag) {

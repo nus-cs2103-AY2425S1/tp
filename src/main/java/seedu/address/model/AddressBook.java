@@ -62,6 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setVendors(newData.getVendorList());
         setTags(newData.getTagList());
         setWeddings(newData.getWeddingList());
     }
@@ -115,7 +116,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -158,7 +158,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code vendors}.
      * {@code key} must exist in the address book.
      */
-    public void removeVendor(Vendor key) {
+    public void removeVendor(Person key) {
         vendors.remove(key);
     }
 
@@ -286,6 +286,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Vendor> getVendorList() {
+        return vendors.asUnmodifiableObservableList();
     }
 
     @Override

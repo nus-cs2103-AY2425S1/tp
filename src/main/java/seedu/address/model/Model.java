@@ -85,14 +85,10 @@ public interface Model {
     void assignVendor(Person person);
 
     /**
-     * Unassigns the vendor to just be a normal person in the WedLinker.
+     * Unassigns the vendor to just be a normal person contact in the WedLinker.
      */
     void unassignVendor(Person person);
 
-    /**
-     * Deletes vendor from the WedLinker.
-     */
-    void deleteVendor(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

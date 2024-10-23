@@ -44,6 +44,7 @@
     "address" : "4th street",
     "tags" : [ ]
   } ],
+  "vendors": [],
   "tags": ["florist"],
   "weddings": ["Wedding 2", "Carla's Wedding"]
 }

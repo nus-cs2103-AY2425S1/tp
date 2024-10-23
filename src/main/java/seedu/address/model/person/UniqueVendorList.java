@@ -36,18 +36,24 @@ public class UniqueVendorList implements Iterable<Vendor> {
     }
 
     /**
+     * Returns the vendor if the vendor list contains that person as a vendor.
+     */
+    public Vendor checkVendor(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(toCheck::isSamePerson).findFirst().orElse(null);
+    }
+
+    /**
      * Adds a person as a vendor to the vendor list.
      * The person must not already exist in the vendor list.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        // create a vendor object representing the person as a vendor
-        // need to add the task field here
-        Vendor vendor = new Vendor(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(),
-                toAdd.getAddress(), toAdd.getTags(), toAdd.getWeddings());
         if (contains(toAdd)) {
             throw new DuplicateVendorException();
         }
+        Vendor vendor = new Vendor(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(),
+                toAdd.getAddress(), toAdd.getTags(), toAdd.getWeddings());
         internalList.add(vendor);
     }
 
@@ -75,11 +81,12 @@ public class UniqueVendorList implements Iterable<Vendor> {
      * Removes the equivalent vendor from the list.
      * The vendor must exist in the list.
      */
-    public void remove(Vendor toRemove) {
+    public void remove(Person toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!contains(toRemove)) {
             throw new VendorNotFoundException();
         }
+        internalList.remove(checkVendor(toRemove));
     }
 
     public void setVendors(UniqueVendorList replacement) {
