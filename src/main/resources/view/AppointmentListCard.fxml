@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -28,6 +27,7 @@
         <Region HBox.hgrow="ALWAYS"/>
         <Label text="AID:" styleClass="cell_id_prefix_label"/>
         <Label fx:id="appointmentId" text="\$appointmentId" styleClass="cell_id_label" />
+        <Region minWidth="5"/>
         <Label text="PID:" styleClass="cell_id_prefix_label"/>
         <Label fx:id="personId" text="\$personId" styleClass="cell_id_label" />
       </HBox>

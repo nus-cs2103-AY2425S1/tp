@@ -55,7 +55,7 @@ public class AppointmentCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         appointmentId.setText(String.valueOf(appointment.getAppointmentId()));
-        personId.setText(String.valueOf(appointment.getPersonID()));
+        personId.setText(String.valueOf(appointment.getPersonId()));
         appointmentType.setText(appointment.getAppointmentType().value);
         dateTime.setText(appointment.getAppointmentDateTime().format(formatter));
         //TODO: don't talk to strangers
