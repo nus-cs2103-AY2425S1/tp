@@ -1,10 +1,6 @@
 package seedu.address.model.policy;
 
 import java.util.Optional;
-import seedu.address.model.policy.PremiumAmount;
-import seedu.address.model.policy.CoverageAmount;
-import seedu.address.model.policy.ExpiryDate;
-import seedu.address.model.policy.PolicyType;
 
 /**
  * Represents a descriptor used to edit policy details in the policy book.

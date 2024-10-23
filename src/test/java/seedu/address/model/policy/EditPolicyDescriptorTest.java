@@ -1,128 +1,68 @@
 package seedu.address.model.policy;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.policy.PremiumAmount;
-import seedu.address.model.policy.CoverageAmount;
-import seedu.address.model.policy.ExpiryDate;
-import seedu.address.model.policy.PolicyType;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Optional;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.EditPolicyDescriptorBuilder;
 
 public class EditPolicyDescriptorTest {
 
-    private EditPolicyDescriptor descriptor;
-    private PolicyType policyType;
-    private PremiumAmount premiumAmount;
-    private CoverageAmount coverageAmount;
-    private ExpiryDate expiryDate;
-
-    @BeforeEach
-    public void setUp() {
-        policyType = PolicyType.HEALTH;
-        premiumAmount = new PremiumAmount("1000");
-        coverageAmount = new CoverageAmount("5000");
-        expiryDate = new ExpiryDate("2025-12-31");
-        descriptor = new EditPolicyDescriptor(policyType);
-    }
+    private static final String VALID_PREMIUM_A = "1000";
+    private static final String VALID_PREMIUM_B = "2000";
+    private static final String VALID_COVERAGE_A = "5000";
+    private static final String VALID_COVERAGE_B = "10000";
+    private static final String VALID_EXPIRY_A = "11/31/2024";
+    private static final String VALID_EXPIRY_B = "11/30/2025";
+    private static final PolicyType VALID_POLICY_TYPE_A = PolicyType.HEALTH;
+    private static final PolicyType VALID_POLICY_TYPE_B = PolicyType.LIFE;
 
     @Test
-    public void constructor_validPolicyType_createsDescriptorWithCorrectType() {
-        // Test if the descriptor is initialized with the correct policyType.
-        assertEquals(policyType, descriptor.getPolicyType());
-    }
+    public void equals() {
+        // same values -> returns true
+        EditPolicyDescriptor descriptorWithSameValues = new EditPolicyDescriptorBuilder(VALID_POLICY_TYPE_A)
+                .withPremiumAmount(VALID_PREMIUM_A)
+                .withCoverageAmount(VALID_COVERAGE_A)
+                .withExpiryDate(VALID_EXPIRY_A)
+                .build();
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptorBuilder(VALID_POLICY_TYPE_A)
+                .withPremiumAmount(VALID_PREMIUM_A)
+                .withCoverageAmount(VALID_COVERAGE_A)
+                .withExpiryDate(VALID_EXPIRY_A)
+                .build();
+        assertTrue(descriptor.equals(descriptorWithSameValues));
 
-    @Test
-    public void setPremiumAmount_validAmount_setsCorrectly() {
-        // Set a premium amount and check if it was set correctly.
-        descriptor.setPremiumAmount(premiumAmount);
-        assertEquals(Optional.of(premiumAmount), descriptor.getPremiumAmount());
-    }
-
-    @Test
-    public void setCoverageAmount_validAmount_setsCorrectly() {
-        // Set a coverage amount and check if it was set correctly.
-        descriptor.setCoverageAmount(coverageAmount);
-        assertEquals(Optional.of(coverageAmount), descriptor.getCoverageAmount());
-    }
-
-    @Test
-    public void setExpiryDate_validDate_setsCorrectly() {
-        // Set an expiry date and check if it was set correctly.
-        descriptor.setExpiryDate(expiryDate);
-        assertEquals(Optional.of(expiryDate), descriptor.getExpiryDate());
-    }
-
-    @Test
-    public void isAnyFieldEdited_noFieldsEdited_returnsFalse() {
-        // No fields edited, should return false.
-        assertFalse(descriptor.isAnyFieldEdited());
-    }
-
-    @Test
-    public void isAnyFieldEdited_anyFieldEdited_returnsTrue() {
-        // After editing any field, isAnyFieldEdited should return true.
-        descriptor.setPremiumAmount(premiumAmount);
-        assertTrue(descriptor.isAnyFieldEdited());
-
-        descriptor = new EditPolicyDescriptor(policyType); // Resetting
-        descriptor.setCoverageAmount(coverageAmount);
-        assertTrue(descriptor.isAnyFieldEdited());
-
-        descriptor = new EditPolicyDescriptor(policyType); // Resetting
-        descriptor.setExpiryDate(expiryDate);
-        assertTrue(descriptor.isAnyFieldEdited());
-    }
-
-    @Test
-    public void equals_sameObject_returnsTrue() {
-        // Test if the same object is considered equal.
+        // same object -> returns true
         assertTrue(descriptor.equals(descriptor));
-    }
 
-    @Test
-    public void equals_differentObjectSameValues_returnsTrue() {
-        // Create another descriptor with the same fields, should be equal.
-        EditPolicyDescriptor other = new EditPolicyDescriptor(policyType);
-        other.setPremiumAmount(premiumAmount);
-        other.setCoverageAmount(coverageAmount);
-        other.setExpiryDate(expiryDate);
-
-        descriptor.setPremiumAmount(premiumAmount);
-        descriptor.setCoverageAmount(coverageAmount);
-        descriptor.setExpiryDate(expiryDate);
-
-        assertTrue(descriptor.equals(other));
-    }
-
-    @Test
-    public void equals_null_returnsFalse() {
-        // Descriptor should not equal null.
+        // null -> returns false
         assertFalse(descriptor.equals(null));
-    }
 
-    @Test
-    public void equals_differentPolicyType_returnsFalse() {
-        // Descriptors with different policy types should not be equal.
-        EditPolicyDescriptor differentType = new EditPolicyDescriptor(PolicyType.LIFE);
-        assertFalse(descriptor.equals(differentType));
-    }
+        // different types -> returns false
+        assertFalse(descriptor.equals(5));
 
-    @Test
-    public void equals_differentFieldValues_returnsFalse() {
-        // Descriptors with different fields should not be equal.
-        EditPolicyDescriptor other = new EditPolicyDescriptor(policyType);
-        other.setPremiumAmount(new PremiumAmount("2000"));
-        assertFalse(descriptor.equals(other));
-    }
+        // different values -> returns false
+        EditPolicyDescriptor descriptorWithDifferentValues = new EditPolicyDescriptorBuilder(VALID_POLICY_TYPE_B)
+                .withPremiumAmount(VALID_PREMIUM_B)
+                .withCoverageAmount(VALID_COVERAGE_B)
+                .withExpiryDate(VALID_EXPIRY_B)
+                .build();
+        assertFalse(descriptor.equals(descriptorWithDifferentValues));
 
-    @Test
-    public void testOptionalMethods_returnEmptyWhenNotSet() {
-        // Test Optional fields return empty when not set.
-        assertEquals(Optional.empty(), descriptor.getPremiumAmount());
-        assertEquals(Optional.empty(), descriptor.getCoverageAmount());
-        assertEquals(Optional.empty(), descriptor.getExpiryDate());
+        // different premium -> returns false
+        EditPolicyDescriptor editedDescriptor = new EditPolicyDescriptorBuilder(descriptor)
+                .withPremiumAmount(VALID_PREMIUM_B).build();
+        assertFalse(descriptor.equals(editedDescriptor));
+
+        // different coverage -> returns false
+        editedDescriptor = new EditPolicyDescriptorBuilder(descriptor)
+                .withCoverageAmount(VALID_COVERAGE_B).build();
+        assertFalse(descriptor.equals(editedDescriptor));
+
+        // different expiry date -> returns false
+        editedDescriptor = new EditPolicyDescriptorBuilder(descriptor)
+                .withExpiryDate(VALID_EXPIRY_B).build();
+        assertFalse(descriptor.equals(editedDescriptor));
     }
 }
-

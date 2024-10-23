@@ -1,15 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_COVERAGE_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.policy.PolicyType;
 import seedu.address.model.policy.EditPolicyDescriptor;
+import seedu.address.model.policy.PolicyType;
+
 
 /**
  * Parses input arguments and creates a new UpdatePolicyCommand object.
@@ -43,13 +46,16 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
         EditPolicyDescriptor editPolicyDescriptor = new EditPolicyDescriptor(policyType);
 
         if (argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).isPresent()) {
-            editPolicyDescriptor.setPremiumAmount(ParserUtil.parsePremiumAmount(argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).get()));
+            editPolicyDescriptor.setPremiumAmount(ParserUtil.parsePremiumAmount(argMultimap
+                    .getValue(PREFIX_POLICY_PREMIUM_AMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT).isPresent()) {
-            editPolicyDescriptor.setCoverageAmount(ParserUtil.parseCoverageAmount(argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT).get()));
+            editPolicyDescriptor.setCoverageAmount(ParserUtil.parseCoverageAmount(argMultimap
+                    .getValue(PREFIX_POLICY_COVERAGE_AMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).isPresent()) {
-            editPolicyDescriptor.setExpiryDate(ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get()));
+            editPolicyDescriptor.setExpiryDate(ParserUtil.parseExpiryDate(argMultimap
+                    .getValue(PREFIX_POLICY_EXPIRY_DATE).get()));
         }
 
         // Check if any field was edited

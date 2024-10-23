@@ -1,56 +1,105 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.POLICY_TYPE_DESC_LIFE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_TYPE_LIFE;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_COVERAGE_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditPolicyCommand;
-import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicySet;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.EditPolicyDescriptor;
+import seedu.address.model.policy.ExpiryDate;
+import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
+
 
 public class EditPolicyCommandParserTest {
-    private final EditPolicyCommandParser parser = new EditPolicyCommandParser();
-    private final LifePolicy life = new LifePolicy();
 
-    // TODO: Change these testcases when the logic for UpdatePolicyCommandParser is created
+    private static final PolicyType VALID_POLICY_TYPE_HEALTH = PolicyType.HEALTH;
+    private static final PremiumAmount VALID_POLICY_PREMIUM = new PremiumAmount("2000");
+    private static final CoverageAmount VALID_POLICY_COVERAGE = new CoverageAmount("50000");
+    private static final ExpiryDate VALID_POLICY_EXPIRY_DATE = new ExpiryDate("12/31/2025");
+
+    private static final String INVALID_POLICY_TYPE = "HHH";
+    private static final String INVALID_PREMIUM_AMOUNT = "-100";
+    private static final String INVALID_EXPIRY_DATE = "15/31/2025";
+
+    private EditPolicyCommandParser parser = new EditPolicyCommandParser();
+
     @Test
-    public void parse_allFieldsPresent_success() {
-        final PolicySet policies = new PolicySet();
-        String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE;
-        EditPolicyCommand expectedCommand = new EditPolicyCommand(INDEX_FIRST_PERSON, policies);
+    public void parse_allFieldsPresent_success() throws Exception {
+        // All fields provided correctly
+        String userInput = "1 " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH + " "
+                + PREFIX_POLICY_PREMIUM_AMOUNT + "2000" + " "
+                + PREFIX_POLICY_COVERAGE_AMOUNT + "50000" + " "
+                + PREFIX_POLICY_EXPIRY_DATE + "12/31/2025";
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        EditPolicyDescriptor descriptor = new EditPolicyDescriptor(VALID_POLICY_TYPE_HEALTH);
+        descriptor.setPremiumAmount(VALID_POLICY_PREMIUM);
+        descriptor.setCoverageAmount(VALID_POLICY_COVERAGE);
+        descriptor.setExpiryDate(VALID_POLICY_EXPIRY_DATE);
+
+        EditPolicyCommand expectedCommand = new EditPolicyCommand(Index.fromOneBased(1), descriptor);
+
+        assertEquals(expectedCommand, parser.parse(userInput));
     }
 
     @Test
-    public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPolicyCommand.MESSAGE_USAGE);
+    public void parse_optionalFieldsMissing_failure() {
+        // Only policy type provided, no optional fields
+        String userInput = "1 " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH;
 
-        // no parameters
-        assertParseFailure(parser, "", expectedMessage);
-
-        // no index
-        assertParseFailure(parser, POLICY_TYPE_DESC_LIFE, expectedMessage);
-
-        // no policies
-        assertParseFailure(parser, String.valueOf(INDEX_FIRST_PERSON.getOneBased()), expectedMessage);
+        // Expecting a ParseException to be thrown with the "Not Edited" message
+        assertThrows(ParseException.class,
+                EditPolicyCommand.MESSAGE_NOT_EDITED, () -> parser.parse(userInput));
     }
+
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePolicyCommand.MESSAGE_USAGE);
+        // Invalid policy type (in this case, assume UNKNOWN is invalid)
+        String userInputInvalidType = "1 " + PREFIX_POLICY_TYPE + INVALID_POLICY_TYPE;
+        assertThrows(ParseException.class, () -> parser.parse(userInputInvalidType));
 
-        // invalid index
-        assertParseFailure(parser, "foo" + VALID_POLICY_TYPE_LIFE, expectedMessage);
+        // Invalid premium amount (non-numeric or negative)
+        String userInputInvalidPremium = "1 " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH + " "
+                + PREFIX_POLICY_PREMIUM_AMOUNT + INVALID_PREMIUM_AMOUNT;
+        assertThrows(ParseException.class, () -> parser.parse(userInputInvalidPremium));
 
-        // TODO: after implementing logic
-        // invalid policy type
-        // assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
-        //         Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+        // Invalid expiry date (malformed)
+        String userInputInvalidDate = "1 " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH + " "
+                + PREFIX_POLICY_EXPIRY_DATE + INVALID_EXPIRY_DATE;
+        assertThrows(ParseException.class, () -> parser.parse(userInputInvalidDate));
+    }
+
+    @Test
+    public void parse_missingPolicyType_failure() {
+        // Missing policy type field
+        String userInput = "1 " + PREFIX_POLICY_PREMIUM_AMOUNT + "2000";
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
+    public void parse_noFieldEdited_failure() {
+        // No optional fields and no edit descriptor
+        String userInput = "1 " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH;
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
+    public void parse_invalidIndex_failure() {
+        // Invalid index (non-integer input)
+        String userInput = "a " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH;
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+
+        // Index out of bounds
+        String userInputOutOfBounds = "99999 " + PREFIX_POLICY_TYPE + VALID_POLICY_TYPE_HEALTH;
+        assertThrows(ParseException.class, () -> parser.parse(userInputOutOfBounds));
     }
 }

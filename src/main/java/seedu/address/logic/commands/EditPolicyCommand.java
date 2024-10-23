@@ -31,8 +31,10 @@ public class EditPolicyCommand extends Command {
             + "by the index number used in the last person listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + "pt/[POLICY_TYPE] pa/[PREMIUM_AMOUNT] ca/[COVERAGE_AMOUNT] ed/[EXPIRY_DATE]\n"
-            + "Example: " + COMMAND_WORD + " 1 pt/health pa/1500 ca/10000.50 ed/14/09/2024 " +
-            " (The last 3 fields are optional but one of them needs to be updated at all times)\n ";
+            + "Example: "
+            + COMMAND_WORD
+            + " 1 pt/health pa/1500 ca/10000.50 ed/14/09/2024 "
+            + " (The last 3 fields are optional but one of them needs to be updated at all times)\n ";
     public static final String MESSAGE_SUCCESS = "Updated Policy:\n\n%1$s";
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
@@ -78,8 +80,8 @@ public class EditPolicyCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), personPolicies);
 
         model.setPerson(personToEdit, editedPerson);
-        return new CommandResult(String.format("Updated policy\n\n%s policy for %s has been changed to:\n" +
-                "%s ", policyTypeToEdit, personToEdit.getName(), editedPolicy));
+        return new CommandResult(String.format("Updated policy\n\n%s policy for %s has been changed to:\n"
+                + "%s ", policyTypeToEdit, personToEdit.getName(), editedPolicy));
 
     }
 
@@ -102,7 +104,7 @@ public class EditPolicyCommand extends Command {
         PremiumAmount updatedPremiumAmount = descriptor.getPremiumAmount().orElse(policyToEdit.getPremiumAmount());
         CoverageAmount updatedCoverageAmount = descriptor.getCoverageAmount().orElse(policyToEdit.getCoverageAmount());
         ExpiryDate updatedExpiryDate = descriptor.getExpiryDate().orElse(policyToEdit.getExpiryDate());
-        Policy policy = Policy.makePolicy(descriptor.getPolicyType(),updatedPremiumAmount,
+        Policy policy = Policy.makePolicy(descriptor.getPolicyType(), updatedPremiumAmount,
                 updatedCoverageAmount, updatedExpiryDate);
         return policy;
     }
