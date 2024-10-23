@@ -230,6 +230,16 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean hasAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editAppointment(Appointment appointmentToEdit, Person person, Appointment editedAppointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

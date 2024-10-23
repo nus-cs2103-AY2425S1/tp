@@ -38,10 +38,7 @@ public class Person {
 
     private final Set<Appointment> appointments = new HashSet<>();
 
-
     private final List<Note> notes = new ArrayList<>();
-
-
 
     /**
      * Every field must be present and not null.
@@ -117,9 +114,11 @@ public class Person {
     public boolean hasPatient(Nric patient) {
         return patients.contains(patient);
     }
+
     public boolean hasRole(Role role) {
         return this.roles.contains(role);
     }
+
     public boolean hasTag(Tag tag) {
         return this.tags.contains(tag);
     }
@@ -130,9 +129,11 @@ public class Person {
     public boolean hasName(Name name) {
         return this.name.fullName.toUpperCase().contains(name.fullName.toUpperCase());
     }
+
     public boolean hasNric(Nric nric) {
         return this.nric.equals(nric);
     }
+
     public void addCaregiver(Nric caregiver) {
         caregivers.add(caregiver);
     }
@@ -220,7 +221,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same nric.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -266,6 +267,19 @@ public class Person {
      */
     public void removeAppointment(Appointment appointment) {
         appointments.remove(appointment);
+    }
+
+    /**
+     * Edits the specified appointment in the list of appointments if the appointment is present.
+     *
+     * @param oldAppointment The appointment to be edited.
+     * @param newAppointment The new appointment to replace the old appointment.
+     */
+    public void editAppointment(Appointment oldAppointment, Appointment newAppointment) {
+        if (this.hasAppointment(oldAppointment)) {
+            appointments.remove(oldAppointment);
+            appointments.add(newAppointment);
+        }
     }
 
     /**

@@ -104,6 +104,20 @@ public class Appointment {
     }
 
     /**
+     * Returns true if both appointments have the same nric.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameAppointment(Appointment otherAppointment) {
+        if (otherAppointment == this) {
+            return true;
+        }
+
+        return otherAppointment != null
+                && otherAppointment.getNric().equals(getNric())
+                && otherAppointment.getStartTime().equals(getStartTime());
+    }
+
+    /**
      * Returns a string representation of the appointment.
      */
     @Override

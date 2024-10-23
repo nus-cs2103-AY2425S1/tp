@@ -163,7 +163,6 @@ public class ModelManager implements Model {
         return appointmentManager;
     }
 
-
     /**
      * Adds a new appointment to the person's list of appointments if there are no conflicts with existing appointments.
      * If there is a conflict, an IllegalArgumentException is thrown.
@@ -187,6 +186,17 @@ public class ModelManager implements Model {
         appointmentManager.removeAppointment(appointment, person);
     }
 
+    /**
+     * Edits an appointment from the person's list of appointments.
+     *
+     * @param appointment The appointment to be edited.
+     * @param person The person from whom the appointment is edited.
+     * @param newAppointment The new appointment to replace the old appointment.
+     */
+    @Override
+    public void editAppointment(Appointment appointment, Person person, Appointment newAppointment) {
+        appointmentManager.editAppointment(appointment, person, newAppointment);
+    }
 
     public List<Appointment> getAllAppointments() {
         return new ArrayList<>(appointmentManager.getAppointments());
@@ -208,6 +218,12 @@ public class ModelManager implements Model {
         return null;
     }
 
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        appointmentManager.update();
+        return appointmentManager.hasAppointment(appointment);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 

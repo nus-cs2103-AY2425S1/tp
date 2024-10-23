@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -64,7 +66,7 @@ public class AppointmentManager {
     private boolean hasConflict(Appointment newAppointment, List<Appointment> appointments) {
         for (Appointment existingAppointment : appointments) {
             if (newAppointment.getStartTime().isBefore(existingAppointment.getEndTime())
-                && newAppointment.getEndTime().isAfter(existingAppointment.getStartTime())) {
+                    && newAppointment.getEndTime().isAfter(existingAppointment.getStartTime())) {
                 return true;
             }
         }
@@ -100,6 +102,26 @@ public class AppointmentManager {
     public void removeAppointment(Appointment appointment, Person person) {
         person.removeAppointment(appointment);
         update();
+    }
+
+    /**
+     * Edits an appointment from the person's list of appointments.
+     *
+     * @param appointment The appointment to be edited.
+     * @param person The person from whom the appointment is edited.
+     * @param newAppointment The new appointment to replace the old appointment.
+     */
+    public void editAppointment(Appointment appointment, Person person, Appointment newAppointment) {
+        person.editAppointment(appointment, newAppointment);
+        update();
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(appointment);
     }
 
     private List<Appointment> getSortedAppointments() {
