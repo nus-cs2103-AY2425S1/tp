@@ -9,6 +9,13 @@ import java.util.Objects;
  * Represents the sorting order of a sort command.
  */
 public class SortOrder {
+    /**
+     * Represents the sorting order.
+     * 'A' represents ascending and 'D' represents descending.
+     */
+    public enum SortOrderEnum {
+        A, D;
+    }
 
     public static final String MESSAGE_CONSTRAINTS =
             "Sort order should be 'a' for ascending or 'd' for descending, and it should not be blank";
@@ -21,12 +28,22 @@ public class SortOrder {
 
     /**
      * Creates a SortOrder object with the corresponding sorting order.
+     *
      * @param sortOrder Represents ascending with 'a' and descending with 'd'.
      */
     public SortOrder(String sortOrder) {
         requireNonNull(sortOrder);
         checkArgument(isValidSortOrder(sortOrder), MESSAGE_CONSTRAINTS);
-        this.isSortByAscending = sortOrder.equals("a");
+        switch (SortOrderEnum.valueOf(sortOrder.toUpperCase())) {
+        case A:
+            this.isSortByAscending = true;
+            break;
+        case D:
+            this.isSortByAscending = false;
+            break;
+        default:
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

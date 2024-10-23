@@ -23,7 +23,6 @@ public class SortDeliveryCommandParser implements Parser<SortDeliveryCommand> {
      */
     public SortDeliveryCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT_ORDER, PREFIX_SORT_BY);
-        //  if (!arePrefixesPresent(argMultimap, PREFIX_SORT_BY) || !argMultimap.getPreamble().isEmpty()) {
         if (!arePrefixesPresent(argMultimap, PREFIX_SORT_ORDER, PREFIX_SORT_BY)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortDeliveryCommand.MESSAGE_USAGE));
         }

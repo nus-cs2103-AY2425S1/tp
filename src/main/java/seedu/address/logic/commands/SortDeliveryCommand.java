@@ -16,11 +16,15 @@ import seedu.address.model.delivery.DeliverySortComparator;
 public class SortDeliveryCommand extends SortCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
-            + ": Sorts all deliveries by cost, date time or status and "
+            + " : Sorts all deliveries by cost, date time or status and "
             + "displays them as a list with index numbers.\n"
+            + "Parameters:\n"
+            + PREFIX_SORT_ORDER + "SORT ORDER ('a' for ascending and 'd' for descending)\n"
+            + PREFIX_SORT_BY + "SORT BY ('s' for status, 'd' for datetime, 'c' for cost)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
-            + PREFIX_SORT_ORDER + "SORT ORDER ('a' for ascending and 'd' for descending) "
-            + PREFIX_SORT_BY + "SORT BY ('s' for status, 'd' for datetime, 'c' for cost)";
+            + PREFIX_SORT_ORDER + "a "
+            + PREFIX_SORT_BY + "c";
+
 
     private final DeliverySortComparator comparator;
 

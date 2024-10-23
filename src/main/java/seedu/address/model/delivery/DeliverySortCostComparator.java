@@ -32,7 +32,8 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
             return false;
         }
 
-        return super.equals(other);
+        DeliverySortComparator otherDeliverySortComparator = (DeliverySortComparator) other;
+        return super.equals(otherDeliverySortComparator);
     }
 
     @Override
