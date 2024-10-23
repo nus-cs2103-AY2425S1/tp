@@ -11,6 +11,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEcNameCommand;
 import seedu.address.logic.commands.AddEcNumberCommand;
+import seedu.address.logic.commands.AddExamCommand;
+import seedu.address.logic.commands.AddExamScoreCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -85,6 +87,12 @@ public class AddressBookParser {
 
         case AddEcNumberCommand.COMMAND_WORD:
             return new AddEcNumberCommandParser().parse(arguments);
+
+        case AddExamCommand.COMMAND_WORD:
+            return new AddExamCommandParser().parse(arguments);
+
+        case AddExamScoreCommand.COMMAND_WORD:
+            return new AddExamScoreCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
