@@ -5,16 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -33,6 +31,8 @@ public class MarkAttendanceByTutorialCommand extends Command {
 
     public static final String MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS =
             "Marked attendance of all students in tutorial: %1$s";
+    public static final String MESSAGE_INVALID_TUTORIAL =
+            "Tutorial %1$s does not exist";
 
     private final Tutorial tutorial;
     private final String attendance;
@@ -50,20 +50,23 @@ public class MarkAttendanceByTutorialCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Tutorial> tutorialList = model.getFilteredTutorialList();
 
-        Person personToMarkAttendance = lastShownList.get(0);
-        Person markedPerson = new Person(
-                personToMarkAttendance.getName(), personToMarkAttendance.getPhone(),
-                personToMarkAttendance.getEmail(), personToMarkAttendance.getAddress(),
-                personToMarkAttendance.getPayment(), new ArrayList<Participation>(),
-                personToMarkAttendance.getTags());
+        Tutorial tutorialToMarkAttendance = tutorialList
+                .stream()
+                .filter(tutorial -> tutorial.isSameTutorial(this.tutorial))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(
+                        String.format(MESSAGE_INVALID_TUTORIAL, tutorial.getSubject())));
 
-        model.setPerson(personToMarkAttendance, markedPerson);
+        List<Participation> participationList = tutorialToMarkAttendance.getParticipationList();
+        participationList.forEach(participation ->
+                participation.getAttendanceList()
+                        .add(new Attendance(LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT))));
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS,
-                Messages.format(markedPerson)));
+        return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_TUTORIAL_SUCCESS, tutorial));
     }
 
     @Override
