@@ -6,7 +6,7 @@
 
 # Sellsavvy User Guide
 
-Sellsavvy is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your contact management tasks done faster than traditional GUI apps.
+Sellsavvy is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,15 +17,15 @@ Sellsavvy is a **desktop app for managing contacts, optimized for use via a  Lin
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for SellSavvy.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -38,7 +38,7 @@ Sellsavvy is a **desktop app for managing contacts, optimized for use via a  Lin
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -178,11 +178,11 @@ Examples:
 
 ### Deleting an order under a Person : `deleteOrder`
 
-Deletes an order under a selected person whose orders are displayed using `listOrder`.
+Deletes an order under a selected person from their displayed order list.
 
 Format: `deleteOrder ORDER_INDEX`
 
-* A person's order list must be selected using `listOrder` before deleting an order from that person.
+* A person's order list must first be displayed before deleting an order from that person.
 * Deletes an order under the selected person at the specified `ORDER_INDEX`.
 * The order index refers to the index number shown in the displayed **order** list of the selected person.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -193,11 +193,11 @@ Examples:
 
 ### Mark an order as completed : `markOrder`
 
-Marks an order under the person whose orders are displayed as completed.
+Marks an order under a selected person from their displayed order list as completed.
 
 Format: `markOrder ORDER_INDEX`
 
-* A person's order list must be selected using `listOrder` before marking an order from that person.
+* A person's order list must first be displayed before marking an order from that person.
 * Marks an order under the selected person at the specified `ORDER_INDEX` as completed.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -205,6 +205,21 @@ Format: `markOrder ORDER_INDEX`
 Examples:
 * `markOrder 1` marks the order with index 1 from the displayed order list as completed.
 * `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
+
+### Filter orders under a Person by order status : `filterOrder`
+
+Filters orders by the specified order status, under a selected person from their displayed order list.
+
+Format: `filterOrder ORDER_STATUS`
+
+* A person's order list must first be displayed before filtering their order list.
+* Filters the selected person's order list for orders that match the `ORDER_STATUS`.
+* The order status **must be a valid status**. e.g. Completed, Pending.
+* `ORDER_STATUS` is case-insensitive. e.g. `completed` is the same as `Completed`.
+
+Examples:
+* `filterOrder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected person being displayed.
+* `listOrder 1` followed by `filterOrder completed` displays the list of all completed orders under the 1st person in the address book.
 
 ### Clearing all entries : `clear`
 
@@ -255,16 +270,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action                | Format, Examples
-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add a person**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**                       | `clear`
-**Delete a person**             | `delete INDEX`<br> e.g., `delete 3`
-**Edit a person**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find person(s)**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List all persons**            | `list`
-**Add an order**                | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
-**List all orders**             | `listOrder INDEX`<br> e.g., `listOrder 3`
-**Delete an order**             | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
-**Mark an order as completed**  | `markOrder ORDER_INDEX`<br> e.g., `markOrder 2`
-**Help**                        | `help`
+| Action                                 | Format, Examples                                                                                                                                              |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add a person**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**                              | `clear`                                                                                                                                                       |
+| **Delete a person**                    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                           |
+| **Edit a person**                      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`                                   |
+| **Find person(s)**                     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                     |
+| **List all persons**                   | `list`                                                                                                                                                        |
+| **Add an order**                       | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`<br> e.g. `addOrder 2 i/Lamp d/20-11-2024 c/3`                                                                     |
+| **List all orders**                    | `listOrder INDEX`<br> e.g. `listOrder 3`                                                                                                                      |
+| **Delete an order**                    | `deleteOrder ORDER_INDEX`<br> e.g. `deleteOrder 2`                                                                                                            |
+| **Mark an order as completed**         | `markOrder ORDER_INDEX`<br> e.g. `markOrder 2`                                                                                                                |
+| **Filter a person's orders by status** | `filterOrder ORDER_STATUS`<br> e.g. `filterOrder Completed`                                                                                                   |
+| **Help**                               | `help`                                                                                                                                                        |
