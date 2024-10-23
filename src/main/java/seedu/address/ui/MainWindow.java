@@ -35,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private boolean isFindNricCommand = false;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -43,6 +45,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+    @FXML
+    private StackPane findPersonPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -163,6 +167,32 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Handles the view for 'findnric' command by displaying a comprehensive result.
+     */
+    private void handleFindPerson() {
+        personListPanelPlaceholder.setVisible(false);
+        personListPanelPlaceholder.setManaged(false);
+        FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
+        findPersonPanelPlaceholder.getChildren().add(findPersonPanel.getRoot());
+        findPersonPanelPlaceholder.setVisible(true);
+        findPersonPanelPlaceholder.setManaged(true);
+        isFindNricCommand = true;
+    }
+
+    /**
+     * Resets the view back to the original PersonListPanel.
+     */
+    private void resetToOriginal() {
+        if (isFindNricCommand) {
+            findPersonPanelPlaceholder.setVisible(false);
+            findPersonPanelPlaceholder.setManaged(false);
+            personListPanelPlaceholder.setVisible(true);
+            personListPanelPlaceholder.setManaged(true);
+            isFindNricCommand = false;
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -177,6 +207,12 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isFindPerson()) {
+                handleFindPerson();
+            } else {
+                resetToOriginal();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
