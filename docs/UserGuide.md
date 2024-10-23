@@ -32,8 +32,8 @@ benefits of a Graphical User Interface (GUI).
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 t/Patient` :
-      Adds a patient named `John Doe` to ClinicBuddy.
+    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` :
+      Adds a patient named `John Doe` whose appointment is at `02 October 2024 18:30` to ClinicBuddy.
 
     * `delete S1234567Z` : Deletes the patient with the NRIC 'S1234567Z' in the current list.
 
@@ -82,7 +82,7 @@ benefits of a Graphical User Interface (GUI).
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -92,7 +92,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [t/TAG]…​`
+Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -100,8 +100,15 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 t/Patient`
-* `add n/Betsy Crowe a/42 g/F i/T1235678E t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
+* `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient`
+* `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+An appointment can be entered in the following formats : '-' , '02 10 2024 12:30' , '02/10/2024 12:30' , '02-10-2024 12:30'
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Appointments can only be made between '08:30' to '21:30' and only one appointment can be made per timeslot
+</div>
 
 ### Listing all persons : `list`
 
@@ -113,7 +120,7 @@ Format: `list`
 
 Edits an existing person in the address book by searching for their index.
 
-Format: `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -133,8 +140,9 @@ Examples:
 
 Updates an existing person in the address book by searching for their Name or NRIC.
 
-Format: `update NAME [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​ `<p>
-OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`</p>
+Format: 
+`update NAME [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​ `  
+OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
 
 * Edits the person at the specified `NAME` or `NRIC`. The name and nric refers to the name and nric shown in the displayed person list respectively.
 * At least one of the optional fields must be provided.
@@ -203,6 +211,21 @@ Examples:
 
 * `list` followed by `delete S1234567Z` deletes the patient that has NRIC of 'S1234567Z' in the list.
 * `find Betsy` followed by `delete S2345678E` deletes the person with 'S2345678E' in the results of the `find` command.
+
+### Finding all persons with appointments on a specific date : `bookings`
+
+Finds all persons with appointments on the specified date.
+
+Format: `bookings DATE`
+
+* Finds all persons with appointments on `DATE`
+* `DATE` has to be of the format `dd/MM/yyyy` OR `dd-MM-yyyy` OR `dd MM yyyy`
+
+Examples:
+* `bookings 01/02/2024`
+* `bookings 01-02-2024`
+
+  ![result for 'bookings 01/02/2024'](./images/bookings01-02-2024.png)
 
 ### Clearing all entries : `clear`
 
@@ -343,11 +366,11 @@ to any desired location if needed.
 
  Action     | Format, Examples                                                                                                                                 
 ------------|--------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 t/Patient`                                     
+ **Add**    | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`                                     
  **Clear**  | `clear`                                                                                                                                          
  **Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                       
- **Edit**   | `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
- **Update**   | `edit NAME/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
+ **Edit**   | `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
+ **Update**   | `edit NAME/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
  **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       
  **List**   | `list`                                                                                                                                           
  **Help**   | `help`                                                                                                                                           

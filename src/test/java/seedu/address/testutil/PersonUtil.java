@@ -13,7 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -51,7 +51,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(UpdateCommand.UpdatePersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getAge().ifPresent(name -> sb.append(PREFIX_AGE).append(name.value).append(" "));
@@ -59,9 +59,9 @@ public class PersonUtil {
         descriptor.getNric().ifPresent(name -> sb.append(PREFIX_NRIC).append(name.fullNric).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAppointment().ifPresent(appointment -> sb.append(PREFIX_APPOINTMENT)
-                                                            .append(appointment.dateTime).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getAppointment().ifPresent(appointment -> sb.append(PREFIX_APPOINTMENT)
+                .append(appointment.dateTime).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

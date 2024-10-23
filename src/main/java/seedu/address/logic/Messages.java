@@ -17,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_PERSON_NRIC = "The NRIC provided is not found";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_NUMBER_OF_BOOKINGS = "There are %s persons with bookings on %s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "Person does not have this appointment";
@@ -51,6 +52,8 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Appointment: ")
+                .append(person.getAppointment())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

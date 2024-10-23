@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -18,7 +19,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building UpdatePersonDescriptor objects.
  */
 public class UpdatePersonDescriptorBuilder {
 
@@ -44,11 +45,12 @@ public class UpdatePersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setAppointment(person.getAppointment());
         descriptor.setTags(person.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -56,7 +58,7 @@ public class UpdatePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Age} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Age} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withAge(String age) {
         descriptor.setAge(new Age(age));
@@ -64,7 +66,7 @@ public class UpdatePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Gender} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Gender} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withGender(String gender) {
         descriptor.setGender(new Gender(gender));
@@ -72,7 +74,7 @@ public class UpdatePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Nric} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Nric} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withNric(String nric) {
         descriptor.setNric(new Nric(nric));
@@ -80,7 +82,7 @@ public class UpdatePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -88,7 +90,7 @@ public class UpdatePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -96,7 +98,7 @@ public class UpdatePersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -104,7 +106,15 @@ public class UpdatePersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Sets the {@code Appointment} of the {@code UpdatePersonDescriptor} that we are building.
+     */
+    public UpdatePersonDescriptorBuilder withAppointment(String appointment) {
+        descriptor.setAppointment(new Appointment(appointment));
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code UpdatePersonDescriptor}
      * that we are building.
      */
     public UpdatePersonDescriptorBuilder withTags(String... tags) {

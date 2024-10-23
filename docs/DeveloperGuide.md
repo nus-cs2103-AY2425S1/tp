@@ -339,15 +339,15 @@ such as contact information, address and other basic personal data.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​              | I want to …​                            | So that I can…​                                                                                                   |
-|----------|----------------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | user                 | add a new patient                       | I can create new patient records                                                                                  |
-| `* * *`  | user                 | edit a record after submitting it       | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
-| `* * *`  | user                 | delete a patient's record               | remove entries that I no longer need                                                                              |
-| `* * *`  | user                 | search for a patient by name or ID      | I can quickly access their information when needed                                                                |
-| `* * *`  | user                 | backup data 	                           | Patients data can be restored should the records be corrupted                                                     |
-| `* * `   | first-time user      | get help within the application         | I can understand how to use the commmands                                                                         |
-| `* * `   | user who is careless | undo commands                           | I can reverse recently executed commands if the command should not have been executed                             |
+| Priority | As a …​              | I want to …​                       | So that I can…​                                                                                                   |
+|----------|----------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user                 | add a new patient                  | I can create new patient records                                                                                  |
+| `* * *`  | user                 | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
+| `* * *`  | user                 | delete a patient's record          | remove entries that I no longer need                                                                              |
+| `* * *`  | user                 | search for a patient by name or ID | I can quickly access their information when needed                                                                |
+| `* * *`  | user                 | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
+| `* * `   | first-time user      | get help within the application    | I can understand how to use the commands                                                                          |
+| `* * `   | user who is careless | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
 
 ### Use cases
 

@@ -3,8 +3,12 @@ package seedu.address.logic.parser;
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -27,9 +31,24 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not in the following accepted "
+            + "formats:\ndd/MM/yyyy\n"
+            + "dd-MM-yyyy\n"
+            + "dd MM yyyy";
+    public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
+            "dd MMMM yyyy",
+            Locale.ENGLISH);
+    public static final DateTimeFormatter[] FORMATTERS = new DateTimeFormatter[]{
+            DateTimeFormatter.ofPattern("dd/MM/yyyy"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+            DateTimeFormatter.ofPattern("dd MM yyyy")
+    };
+
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -160,6 +179,23 @@ public class ParserUtil {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
         return new Appointment(trimmedAppointment);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        for (DateTimeFormatter formatter : FORMATTERS) {
+            try {
+                return LocalDate.parse(date, formatter);
+            } catch (DateTimeParseException ignored) {
+                continue;
+            }
+        }
+        throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
     }
 
     /**
