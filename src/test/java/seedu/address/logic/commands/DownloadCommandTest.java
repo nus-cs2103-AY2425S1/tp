@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
@@ -91,4 +93,37 @@ class DownloadCommandTest {
         // Test the constructor with null tags
         assertThrows(NullPointerException.class, () -> new DownloadCommand(null));
     }
+
+    @Test
+    public void equals() {
+        Set<Tag> tags1 = new HashSet<>();
+        tags1.add(new Tag("tag1"));
+        tags1.add(new Tag("tag2"));
+        DownloadCommand commandWithTags1 = new DownloadCommand(tags1);
+
+        Set<Tag> tags2 = new HashSet<>();
+        tags2.add(new Tag("tag1"));
+        tags2.add(new Tag("tag2"));
+        DownloadCommand commandWithTags2 = new DownloadCommand(tags2);
+
+        Set<Tag> tags3 = new HashSet<>();
+        tags3.add(new Tag("tag3"));
+        DownloadCommand commandWithDifferentTags = new DownloadCommand(tags3);
+
+        // Same object
+        assertTrue(commandWithTags1.equals(commandWithTags1));
+
+        // Same tags
+        assertTrue(commandWithTags1.equals(commandWithTags2));
+
+        // Different tags
+        assertFalse(commandWithTags1.equals(commandWithDifferentTags));
+
+        // Different types
+        assertFalse(commandWithTags1.equals("Some String"));
+
+        // Null comparison
+        assertFalse(commandWithTags1.equals(null));
+    }
+
 }
