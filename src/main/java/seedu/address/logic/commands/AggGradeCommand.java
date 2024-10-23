@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 public class AggGradeCommand extends Command {
     public static final String COMMAND_WORD = "aggGrade";
     public static final Map<String, Operation> OPERATION_TRANSLATE = Collections.unmodifiableMap(
-            Map.of("median", Operation.MEDIAN));
+            Map.of("median", Operation.MEDIAN, "mean", Operation.MEAN));
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Performs aggregation operationson the displayed "
             + "person list.\n"
             + "Parameters: OPERATION " + PREFIX_NAME + "EXAM_NAME\n"
@@ -35,7 +35,8 @@ public class AggGradeCommand extends Command {
      * Operations that can be done with the aggGrade command.
      */
     public enum Operation {
-        MEDIAN
+        MEDIAN,
+        MEAN
     }
 
     private final Operation operation;
@@ -61,6 +62,13 @@ public class AggGradeCommand extends Command {
         return new CommandResult(String.format("%.2f%%", filteredList.getMedian()));
     }
 
+    private CommandResult executeMean(Model model, SmartList filteredList) {
+        requireNonNull(model);
+        requireNonNull(filteredList);
+
+        return new CommandResult(String.format("%.2f%%", filteredList.getMean()));
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -79,6 +87,8 @@ public class AggGradeCommand extends Command {
         switch (this.operation) {
         case MEDIAN:
             return executeMedian(model, filteredList);
+        case MEAN:
+            return executeMean(model, filteredList);
         default:
             throw new IllegalStateException();
         }
@@ -114,6 +124,11 @@ public class AggGradeCommand extends Command {
             } else {
                 return list.get(mid);
             }
+        }
+
+        public float getMean() {
+            List<Float> list = new ArrayList<>(this);
+            return list.stream().reduce(0F, Float::sum, Float::sum) / list.size();
         }
     }
 }
