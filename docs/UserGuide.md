@@ -198,6 +198,34 @@ Examples:
 * `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
 * Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`. 
 
+### Marking a student as present : `mark`
+
+Marks a student as present for a particular week.
+
+Format: `mark n/NAME w/[WEEK NUMBER]`
+
+* Marks the particular student as present in that week.
+* The name and week number is compulsory.
+* The name is case-sensitive.
+
+Examples:
+* `mark n/Viswa w/1` marks the student named `Viswa` as present for week 1.
+  ![result for mark](images/markViswaPresent.png)
+
+### Unmarking a student as present : `unmark`
+
+Unmarks a student as present for a particular week. In other words, that student is marked absent.
+
+Format: `unmark n/NAME w/[WEEK NUMBER]`
+
+* Unmarks the particular student as present in that week.
+* The name and week number is compulsory.
+* The name is case-sensitive.
+
+Examples:
+* `unmarks n/John Doe w/1` unmarks the student named `JohnDoe` as present for week 1.
+  ![result for unmark](images/unmarkViswa.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -247,15 +275,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                        |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
-| **Clear**  | `clear`                                                                                                                                                                                                                                 |
-| **Delete** | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
-| **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
-| **List**   | `list`                                                                                                                                                                                                                                  |
-| **Help**   | `help`                                                                                                                                                                                                                                  |
-| **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
-| **GitHub** | `github n/NAME`                                                                                                                                                                                                                         |
+| Action      | Format, Examples                                                                                                                                                                                                                        |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
+| **Clear**   | `clear`                                                                                                                                                                                                                                 |
+| **Delete**  | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
+| **Filter**  | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
+| **List**    | `list`                                                                                                                                                                                                                                  |
+| **Help**    | `help`                                                                                                                                                                                                                                  |
+| **View**    | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
+| **GitHub**  | `github n/NAME`                                                                                                                                                                                                                         |
+| **Mark**    | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                             |
+| **Unmark**  | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                         |
