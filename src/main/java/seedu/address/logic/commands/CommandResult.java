@@ -78,7 +78,7 @@ public class CommandResult {
      */
     public boolean isSwitchView() {
         return switch (switchView) {
-        case PERSON, WEDDING -> true;
+        case PERSON, WEDDING, TASK -> true;
         default -> false;
         };
     }
