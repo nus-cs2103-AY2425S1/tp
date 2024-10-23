@@ -11,8 +11,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.TaskNotFoundException;
 import seedu.address.storage.JsonAdaptedTask;
+import seedu.address.testutil.TaskBuilder;
 
 public class TaskListTest {
     private final TaskList taskList = new TaskList();
@@ -102,6 +104,65 @@ public class TaskListTest {
         tl2.setTasks(tasks2);
 
         assertEquals(tl1.toDescription(), tl2.toDescription());
+    }
+
+    @Test
+    public void updateTask_validIndex_success() {
+        TaskList taskList = new TaskList();
+        taskList.add(MARKING_TASK); // Assume this task has a valid deadline
+        Task updatedTask = GRADING_TASK; // Example of updated task
+
+        // Update the task at index 0
+        TaskList updatedTaskList = taskList.updateTask(Index.fromZeroBased(0), updatedTask);
+
+        // Create the expected task list
+        TaskList expectedTaskList = new TaskList();
+        expectedTaskList.add(updatedTask);
+
+        assertEquals(expectedTaskList, updatedTaskList);
+    }
+
+    @Test
+    public void updateTask_nullUpdatedTask_throwsNullPointerException() {
+        TaskList taskList = new TaskList();
+        taskList.add(MARKING_TASK);
+
+        // Ensure NullPointerException is thrown if the updated task is null
+        assertThrows(NullPointerException.class, () -> taskList.updateTask(Index.fromZeroBased(0),
+                null));
+    }
+
+    @Test
+    public void updateTask_indexOutOfRange_throwsIndexOutOfBoundsException() {
+        TaskList taskList = new TaskList();
+        taskList.add(MARKING_TASK); // Only 1 task in the list
+
+        assertThrows(IndexOutOfBoundsException.class, () -> taskList.updateTask(Index.fromZeroBased(1),
+                GRADING_TASK));
+    }
+
+    @Test
+    public void updateTask_emptyTaskList_throwsIndexOutOfBoundsException() {
+        TaskList taskList = new TaskList(); // No tasks in the list
+
+        assertThrows(IndexOutOfBoundsException.class, () -> taskList.updateTask(Index.fromZeroBased(0),
+                GRADING_TASK));
+    }
+
+    @Test
+    public void updateTask_sortedAfterUpdate_taskListSortedByDeadline() {
+        Task task1 = new TaskBuilder().withTaskDescription("Task 1").withTaskDeadline("2024-12-25").build();
+        Task task2 = new TaskBuilder().withTaskDescription("Task 1").withTaskDeadline("2024-11-25").build();
+        TaskList taskList = new TaskList();
+        taskList.add(task1);
+        taskList.add(task2);
+
+        // Update task1 to have an earlier deadline
+        Task updatedTask = new TaskBuilder(task1).withTaskDeadline("2024-01-01").build();
+        TaskList updatedTaskList = taskList.updateTask(Index.fromZeroBased(0), updatedTask);
+
+        // Check that the updated task list is sorted by deadline
+        assertEquals(updatedTask, updatedTaskList.get(0));
     }
 
     @Test

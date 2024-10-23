@@ -23,6 +23,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.task.Task;
 import seedu.address.model.person.task.TaskList;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Deletes a Task  from a Person identified using it's displayed index from the address book.
@@ -80,7 +81,8 @@ public class DeleteTaskCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
                 taskToDelete.getTaskDescription(),
                 targetPerson.getName(),
-                taskToDelete.getTaskDeadline()));
+                taskToDelete.getTaskDeadline()),
+                UiState.DETAILS);
     }
 
     /**

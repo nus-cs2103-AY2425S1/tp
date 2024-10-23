@@ -25,6 +25,7 @@ import seedu.address.model.person.task.TaskDeadline;
 import seedu.address.model.person.task.TaskDescription;
 import seedu.address.model.person.task.TaskList;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -68,7 +69,7 @@ public class DeleteTaskCommandTest {
         assertEquals(expectedModel, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
         assertNotEquals(model, expectedModel);
 
-        assertCommandSuccess(deleteTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test

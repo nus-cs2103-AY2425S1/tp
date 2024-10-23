@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.task.Task;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TaskBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AddTaskCommand.
@@ -59,7 +60,7 @@ public class AddTaskCommandTest {
         assertEquals(model, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
         assertNotEquals(expectedModel, model);
 
-        assertCommandSuccess(addTaskCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test

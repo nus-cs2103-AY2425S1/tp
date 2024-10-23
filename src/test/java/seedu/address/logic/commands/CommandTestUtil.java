@@ -25,6 +25,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.testutil.UpdateTaskDescriptorBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains helper methods for testing commands.
@@ -94,6 +96,8 @@ public class CommandTestUtil {
 
     public static final UpdateCommand.UpdatePersonDescriptor DESC_AMY;
     public static final UpdateCommand.UpdatePersonDescriptor DESC_BOB;
+    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_TASK_AMY;
+    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_TASK_BOB;
 
     static {
         DESC_AMY = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -102,6 +106,10 @@ public class CommandTestUtil {
         DESC_BOB = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH).build();
+        DESC_TASK_AMY = new UpdateTaskDescriptorBuilder().withTaskDescription(VALID_TASK_DESCRIPTION_AMY)
+                .withTaskDeadline(VALID_TASK_DEADLINE_AMY).build();
+        DESC_TASK_BOB = new UpdateTaskDescriptorBuilder().withTaskDescription(VALID_TASK_DESCRIPTION_PROJECT)
+                .withTaskDeadline(VALID_TASK_DEADLINE).build();
     }
 
     /**
@@ -125,8 +133,8 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            UiState expectedUiState, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, expectedUiState);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
