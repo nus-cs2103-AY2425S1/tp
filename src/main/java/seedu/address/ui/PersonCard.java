@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label role;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,8 +54,18 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        role.setText(person.getRole());
+        assignRoleStyle(person.getRole());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void assignRoleStyle(String role) {
+        if (role.equalsIgnoreCase("Tutor")) {
+            cardPane.getStyleClass().add("tutor");
+        } else if (role.equalsIgnoreCase("Tutee")) {
+            cardPane.getStyleClass().add("tutee");
+        }
     }
 }

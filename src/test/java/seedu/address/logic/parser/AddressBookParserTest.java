@@ -13,7 +13,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTuteeCommand;
+import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -21,23 +22,37 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TuteeBuilder;
+import seedu.address.testutil.TutorBuilder;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+    public void parseCommand_addTutor() throws Exception {
+        Tutor tutor = new TutorBuilder().build();
+        AddTutorCommand command = (AddTutorCommand) parser.parseCommand(PersonUtil.getAddTutorCommand(tutor));
+        assertEquals(new AddTutorCommand(tutor), command);
+    }
+
+    @Test
+    public void parseCommand_addTutee() throws Exception {
+        Tutee tutee = new TuteeBuilder().build();
+        AddTuteeCommand command = (AddTuteeCommand) parser.parseCommand(PersonUtil.getAddTuteeCommand(tutee));
+        assertEquals(new AddTuteeCommand(tutee), command);
     }
 
     @Test
@@ -83,9 +98,33 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_history() throws Exception {
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD) instanceof HistoryCommand);
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3") instanceof HistoryCommand);
+
+        try {
+            parser.parseCommand("histories");
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_UNKNOWN_COMMAND, pe.getMessage());
+        }
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+        assertTrue(parser.parseCommand("redo 1") instanceof RedoCommand);
+    }
+    @Test
+    public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+        assertTrue(parser.parseCommand("undo 3") instanceof UndoCommand);
     }
 
     @Test

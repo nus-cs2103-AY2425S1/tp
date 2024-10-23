@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,8 +12,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +36,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code args} into an {@code Index} array and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer)
+     *     or if the format was wrong.
+     */
+    public static Index[] parseIndices(String args) throws ParseException {
+        String trimmedIndices = args.trim();
+        String[] parts = trimmedIndices.split(" ");
+        if (parts.length != 2) {
+            throw new ParseException("no");
+        }
+        return new Index[]{parseIndex(parts[0]), parseIndex(parts[1])};
     }
 
     /**
@@ -63,6 +81,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String hours} into a {@code Hours}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code hours} is invalid.
+     */
+    public static Hours parseHours(String hours) throws ParseException {
+        requireNonNull(hours);
+        String trimmedHours = hours.trim();
+        if (!Hours.isValidHours(trimmedHours)) {
+            throw new ParseException(Hours.MESSAGE_CONSTRAINTS);
+        }
+        return new Hours(trimmedHours);
     }
 
     /**
@@ -120,5 +153,56 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code Subject} object.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param subject The subject name to be parsed.
+     * @return A {@code Subject} object representing the parsed subject name.
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(subject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return new Subject(subject.toLowerCase());
+    }
+
+    /**
+     * Parses a collection of subject names into a {@code Set<Subject>}.
+     * Each subject name in the collection will be parsed individually.
+     *
+     * @param subjects A collection of subject names to be parsed.
+     * @return A {@code Set<Subject>} containing all the parsed subject names.
+     * @throws ParseException if any of the given {@code subjects} are invalid.
+     */
+    public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+
+        final Set<Subject> subjectSet = new HashSet<>();
+        for (String subjectName : subjects) {
+            subjectSet.add(parseSubject(subjectName));
+        }
+        return subjectSet;
+    }
+
+    /**
+     * Parses a {@code String filepath}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filepath} is invalid.
+     */
+    public static String parseFilepath(String filepath) throws ParseException {
+        requireNonNull(filepath);
+        String trimmedFilepath = filepath.trim();
+        String transformedFilePath = trimmedFilepath.replaceFirst("^~", System.getProperty("user.home"));
+
+        if (!new File(transformedFilePath).isFile()) {
+            throw new ParseException("File does not exist!");
+        }
+        return transformedFilePath;
     }
 }

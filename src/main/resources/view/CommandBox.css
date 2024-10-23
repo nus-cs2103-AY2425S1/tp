@@ -1,0 +1,26 @@
+.commandBoxPlaceholder {
+    -fx-background-color: #f0f4f8; /* Light gray background */
+    -fx-padding: 10; /* Padding inside the command box */
+    -fx-border-width: 0; /* Border thickness */
+    -fx-border-radius: 5; /* Rounded corners */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: black; /* Text color */
+    -fx-prompt-text-fill: white;
+}
+
+#commandTextField {
+    -fx-background-color: #98a4b5; /* Light gray background */
+    -fx-padding: 10; /* Padding inside the command box */
+    -fx-border-radius: 5; /* Rounded corners */
+    -fx-background-radius: 5; /* Rounded corners for background */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: white; /* Text color */
+    -fx-prompt-text-fill: white;
+}
+
+#commandTextField .text-field {
+    -fx-background-color: #ffffff; /* White background for text field */
+    -fx-text-fill: white; /* Black text color */
+    -fx-padding: 5; /* Padding inside the text field */
+    -fx-border-radius: 5; /* Rounded corners */
+}

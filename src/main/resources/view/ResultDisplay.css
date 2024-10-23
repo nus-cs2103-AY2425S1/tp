@@ -1,0 +1,7 @@
+.result-display {
+    -fx-background-color: white;
+    -fx-text-fill: #6272b0;
+    -fx-wrap-text: true;
+    -fx-text-alignment: justify;
+    -fx-background-radius: 5;
+}

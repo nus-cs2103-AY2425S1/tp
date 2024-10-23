@@ -1,16 +1,21 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# VolunTier User Guide
 
-* Table of Contents
-{:toc}
+VolunTier is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunTier can get your contact management tasks done faster than traditional GUI apps.
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+
+### Installation of application
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -37,13 +42,37 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Refer to the [Features](#features) below for details of each command.
 
+### CLI tutorial
+
+This tutorial introduces you to the basics of using the Command Line Interface (CLI) on Unix-based systems (Linux/macOS) and Windows. By the end, you’ll be comfortable navigating the file system, managing files, and running basic commands through the terminal.
+
+#### 1. **What is the CLI?**
+The CLI is a text-based interface where users interact with the operating system by typing commands. It allows for:
+- **Efficient operations** compared to GUI
+- **Advanced automation** with scripts and batch commands
+
+#### 2. **Opening the Terminal**
+
+#### On macOS:
+```shell
+Cmd + Space
+```
+
+#### On Windows:
+Search for command prompt or powershell in the start menu.
+
+#### On Linux:
+```shell
+Ctrl + Alt + T
+```
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+#### Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -61,7 +90,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
 ### Viewing help : `help`
 
@@ -78,9 +107,10 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+<box type="tip" seamless>
+
+**Tip:** A person can have any number of tags (including 0)
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -141,6 +171,50 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Viewing a person's details : `view`
+
+Displays the details of a person that might not be shown in their card.
+
+Format: `view INDEX`
+
+* Views the details of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `view 3` displays the details of the 3rd person in the address book.
+* `find Lisa` followed by `view 1` displays the details of the 1st person in the results of the `find` command.
+
+### Undoing a command : `undo`
+
+Reverses the most recent command executed.
+
+Format: `undo`
+
+* You can only undo commands executed during the current session.
+
+Examples:
+* If you accidentally deleted a person, `undo` will add that person back.
+
+### Redoing a command : `redo`
+
+Reapplies a command that was previously undone.
+
+Format: `redo`
+
+* Redo is only available immediately after an undo.
+
+Examples:
+* If you `undo` the addition of a new tutor by mistake, `redo` will restore that entry.
+
+### Viewing command history : `history`
+
+Provides a list of commands executed, from the most recent to the earliest.
+
+Format: `history`
+
+* History displays only commands executed during the current session.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -161,10 +235,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -188,12 +264,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**   | `list`
+**Help**   | `help`

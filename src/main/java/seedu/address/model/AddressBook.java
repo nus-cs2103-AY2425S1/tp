@@ -4,8 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +20,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueLessonList lessons;
+    private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        lessons = new UniqueLessonList();
     }
 
     public AddressBook() {}
@@ -46,6 +53,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the contents of the lesson list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons.setLessons(lessons);
+        indicateModified();
     }
 
     /**
@@ -55,6 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setLessons(newData.getLessonList());
     }
 
     //// person-level operations
@@ -73,6 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        indicateModified();
     }
 
     /**
@@ -84,6 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+        indicateModified();
     }
 
     /**
@@ -92,6 +112,64 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        indicateModified();
+    }
+
+    //// lesson-level operations
+
+    /**
+     * Returns true if a lesson that is identical to {@code lesson} exists in the address book.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.contains(lesson);
+    }
+
+    /**
+     * Adds a lesson to the address book.
+     * The lesson must not already exist in the address book.
+     */
+    public void addLesson(Lesson l) {
+        lessons.add(l);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the given lesson {@code lesson} in the list with {@code editedLesson}.
+     * {@code target} must exist in the address book.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
+     */
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireNonNull(editedLesson);
+
+        lessons.setLesson(target, editedLesson);
+        indicateModified();
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeLesson(Lesson key) {
+        lessons.remove(key);
+        indicateModified();
+    }
+
+    @Override
+    public void addListener(InvalidationListener listener) {
+        invalidationListenerManager.addListener(listener);
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        invalidationListenerManager.removeListener(listener);
+    }
+
+    /**
+     * Notifies listeners that the address book has been modified.
+     */
+    protected void indicateModified() {
+        invalidationListenerManager.callListeners(this);
     }
 
     //// util methods
@@ -106,6 +184,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return lessons.asUnmodifiableObservableList();
+    }
+
+    public List<Person> getAssociatedPeople(Person person) {
+        return lessons.getAssociatedPeople(person);
     }
 
     @Override

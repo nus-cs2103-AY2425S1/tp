@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -16,16 +17,30 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    private final boolean isShowChart;
+
     /** The application should exit. */
     private final boolean exit;
+
+    private final Person[] chartData;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, false, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean isShowChart, Person[] chartData) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.isShowChart = isShowChart;
+        this.chartData = chartData;
     }
 
     /**
@@ -44,8 +59,16 @@ public class CommandResult {
         return showHelp;
     }
 
+    public boolean isShowChart() {
+        return isShowChart;
+    }
+
     public boolean isExit() {
         return exit;
+    }
+
+    public Person[] getChartData() {
+        return chartData;
     }
 
     @Override
