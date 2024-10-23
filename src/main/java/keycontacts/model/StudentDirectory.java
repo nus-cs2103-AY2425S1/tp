@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.swing.text.html.Option;
-
 import javafx.collections.ObservableList;
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.model.lesson.Lesson;
@@ -102,6 +100,10 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
         students.remove(key);
     }
 
+    /**
+     * Used by {@code JsonSerializableStudentDirectory} to check for any clashing lessons throughout
+     * the student directory.
+     */
     public boolean hasClashingLessons() {
         ObservableList<Student> students = this.getStudentList();
         for (Student student : students) {
@@ -142,7 +144,7 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
         if (lessonToCheck == null) {
             return null;
         }
-        
+
         RegularLesson regularLesson = student.getRegularLesson();
         Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
 
