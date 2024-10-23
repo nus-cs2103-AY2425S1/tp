@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
+ * Models an address book through which ResearchRoster handles all contact information
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
