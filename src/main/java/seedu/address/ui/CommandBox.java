@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,9 +18,9 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-
+    private static final String UP_COMMAND = "upCommand";
+    private static final String DOWN_COMMAND = "downCommand";
     private final CommandExecutor commandExecutor;
-
     @FXML
     private TextField commandTextField;
 
@@ -29,6 +32,31 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        commandTextField.setOnKeyPressed(event -> handleKeyPressed(event.getCode()));
+    }
+
+    private void handleKeyPressed(KeyCode keyCode) {
+        String commandText;
+        if (keyCode.isArrowKey() && keyCode == KeyCode.UP) {
+            commandText = UP_COMMAND;
+        } else if (keyCode.isArrowKey() && keyCode == KeyCode.DOWN) {
+            commandText = DOWN_COMMAND;
+        } else {
+            //Do nothing
+            return;
+        }
+
+        try {
+            commandExecutor.execute(commandText);
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
+    public void setFeedbackToUser(String feedbackToUser) {
+        requireNonNull(feedbackToUser);
+        commandTextField.setText(feedbackToUser);
     }
 
     /**
@@ -48,6 +76,8 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
         }
     }
+
+    //TODO: Clear txt file after exit app
 
     /**
      * Sets the command box style to use the default style.

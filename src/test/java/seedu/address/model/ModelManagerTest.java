@@ -185,6 +185,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getPreviousCommand_initial_empty() {
+        assertEquals("", modelManager.getPreviousCommand());
+    }
+
+    @Test
+    public void getNextCommand_initial_empty() {
+        assertEquals("", modelManager.getPreviousCommand());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

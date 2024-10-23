@@ -21,6 +21,8 @@ import seedu.address.logic.commands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NextCommandHistoryCommand;
+import seedu.address.logic.commands.PreviousCommandHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -70,6 +72,19 @@ public class AddressBookParserTest {
     }
 
     //TODO: parseCommand_find()
+
+    @Test
+    public void parsePrevCommandHistory() throws ParseException {
+        PreviousCommandHistoryCommand previousCommandHistoryCommand =
+                (PreviousCommandHistoryCommand) parser.parseCommand("upCommand");
+        assertEquals(new PreviousCommandHistoryCommand(), previousCommandHistoryCommand);
+    }
+    @Test
+    public void parseNextCommandHistory() throws ParseException {
+        NextCommandHistoryCommand nextCommandHistoryCommand =
+                (NextCommandHistoryCommand) parser.parseCommand("downCommand");
+        assertEquals(new NextCommandHistoryCommand(), nextCommandHistoryCommand);
+    }
 
     @Test
     public void parseCommand_exit() throws Exception {
