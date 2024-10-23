@@ -70,6 +70,21 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with all the persons.
+     */
+    public static AddressBook getExtendedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.addPerson(HOON);
+        ab.addPerson(IDA);
+        ab.addPerson(AMY);
+        ab.addPerson(BOB);
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
