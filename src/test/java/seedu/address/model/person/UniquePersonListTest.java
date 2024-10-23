@@ -211,15 +211,15 @@ public class UniquePersonListTest {
     @Test
     public void sortPersons_ascendingOrderBySchedule_success() {
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(FIONA);
-        expectedUniquePersonList.add(GEORGE);
         expectedUniquePersonList.add(BENSON);
         expectedUniquePersonList.add(DANIEL);
         expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.add(CARL);
+        expectedUniquePersonList.add(FIONA);
+        expectedUniquePersonList.add(GEORGE);
         //Sort in ascending order by schedule
-        uniquePersonList.add(BENSON);
         uniquePersonList.add(ALICE);
+        uniquePersonList.add(BENSON);
         uniquePersonList.add(FIONA);
         uniquePersonList.add(CARL);
         uniquePersonList.add(DANIEL);
@@ -235,8 +235,8 @@ public class UniquePersonListTest {
         expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.add(DANIEL);
         expectedUniquePersonList.add(BENSON);
-        expectedUniquePersonList.add(GEORGE);
         expectedUniquePersonList.add(FIONA);
+        expectedUniquePersonList.add(GEORGE);
         //Sort in descending order by schedule
         uniquePersonList.add(BENSON);
         uniquePersonList.add(ALICE);
