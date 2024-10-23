@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
+import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
+
 
 /**
  * Jackson-friendly version of {@link StudentCourseAssociation}.
@@ -18,36 +20,42 @@ class JsonAdaptedStudentCourseAssociation {
     private final JsonAdaptedPerson student;
     private final JsonAdaptedCourse course;
     private final JsonAdaptedTutorial tutorial;
-    //private final JsonSerializableGradingSystem grades;
+    private final JsonAdaptedAttendance attendance;
+    private final JsonSerializableGradingSystem grades;
 
     /**
-     * Constructs a {@code JsonAdaptedStudentCourseAssociation} with the given {@code StudentClassAssociation}.
+     * Constructs a {@code JsonAdaptedStudentCourseAssociation} with the given
+     * Student Course Association details.
      */
     @JsonCreator
     public JsonAdaptedStudentCourseAssociation(
             @JsonProperty("student") JsonAdaptedPerson student,
             @JsonProperty("course") JsonAdaptedCourse course,
-            @JsonProperty("tutorial") JsonAdaptedTutorial tutorial) {
+            @JsonProperty("tutorial") JsonAdaptedTutorial tutorial,
+            @JsonProperty("attendance") JsonAdaptedAttendance attendance,
+            @JsonProperty("grades") JsonSerializableGradingSystem grades) {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
-        //this.grades = grades;
+        this.attendance = attendance;
+        this.grades = grades;
     }
-
 
     /**
      * Converts a given {@code StudentCourseAssociation} into this class for Jackson use.
+     *
      */
     public JsonAdaptedStudentCourseAssociation(StudentCourseAssociation source) {
         this.student = new JsonAdaptedPerson(source.getStudent());
         this.course = new JsonAdaptedCourse(source.getCourse());
         this.tutorial = new JsonAdaptedTutorial(source.getTutorial());
-        //this.grades = new JsonSerializableGradingSystem(source.getGrades());
+        this.attendance = new JsonAdaptedAttendance(source.getAttendance());
+        this.grades = new JsonSerializableGradingSystem(source.getGrades());
     }
 
     /**
      * Converts the JsonAdaptedStudentCourseAssociation object into a StudentCourseAssociation object.
-     * Validates the student, course, and tutorial fields before creating a new StudentCourseAssociation.
+     * Validates all fields for null values before creating a new StudentCourseAssociation.
      * If the student/course/tutorials are invalid, the error is handled in their respective adapted classes.
      *
      * @return a new StudentCourseAssociation object representing the JSON data
@@ -76,6 +84,19 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
 
-        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel, null);
+        // Checks if the attendance is valid
+        if (this.attendance == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JsonAdaptedAttendance.class.getSimpleName()));
+        }
+        final Attendance attendanceModel = this.attendance.toModelType();
+        // Checks if the GradingSystem is valid
+        if (this.grades == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                JsonSerializableGradingSystem.class.getSimpleName()));
+        }
+        final JsonSerializableGradingSystem gradesModel = this.grades;
+        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,
+                gradesModel.toModelType(), attendanceModel);
     }
 }

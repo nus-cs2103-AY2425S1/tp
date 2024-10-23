@@ -13,31 +13,52 @@ import tahub.contacts.model.tutorial.Tutorial;
  * Represents an association between a student, course, grading system, and tutorial
  */
 public class StudentCourseAssociation {
-    private Person student;
-    private Course course;
+    private final Person student;
+    private final Course course;
     /**
      * Represents a Tutorial associated with a Course.
      * May be null, if this TA is not the student's tutorial TA.
      */
-    private Tutorial tutorial;
-    private GradingSystem grades;
+    private final Tutorial tutorial;
+    private final GradingSystem grades;
     private final Attendance attendance;
 
     /**
      * Represents an association between a student, course, grading system, tutorial, and attendance.
      * The TA will view this object in TAHub.
-     * This constructor is to be used if the TA is this student's Tutorial TA.
+     * This constructor is to be used if the TA is first initialising a contact in TAHub.
+     * Must be carefully used, as it will result in the loss of the grades and attendance fields.
      *
      * @param student the student associated with this association
      * @param course the course associated with this association
      * @param tutorial the tutorial associated with this association
-     * @param attendance the attendance associated with this association
      */
-    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial, Attendance attendance) {
+    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial) {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
         this.grades = new GradingSystem();
+        this.attendance = new Attendance();
+    }
+
+    /**
+     * Represents an association between a student, course, grading system, tutorial, and attendance.
+     * The TA will view this object in TAHub.
+     * This constructor is to be used if the SCA has already been prepopulated with GradingSystem and
+     * Attendance (such as when de-serialising an JsonAdaptedSCA from storage to this Model).
+     *
+     * @param student the student associated with this association
+     * @param course the course associated with this association
+     * @param tutorial the tutorial associated with this association
+     * @param gradingSystem the GradingSystem used to manage this student's grades for the associated course
+     * @param attendance the Attendance instance associated with this association
+     */
+    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial,
+                                    GradingSystem gradingSystem, Attendance attendance) {
+        this.student = student;
+        this.course = course;
+        this.tutorial = tutorial;
+        this.grades = gradingSystem;
         this.attendance = attendance;
     }
 
