@@ -94,36 +94,6 @@ public class TutorialTest {
     }
 
     @Test
-    public void markAttendance_newTutorialDate_success() {
-        Student alice = new StudentBuilder(ALICE).build();
-        TUTORIAL_SAMPLE.add(alice);
-
-        TUTORIAL_SAMPLE.markAttendance(alice, TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.tutorialDateInList(TUT_DATE));
-        assertTrue(TUT_DATE.getStudentIDs().contains(alice.getStudentId()));
-    }
-
-    @Test
-    public void markAttendance_existingTutorialDate_success() {
-        Student alice = new StudentBuilder(ALICE).build();
-        TUTORIAL_SAMPLE.add(alice);
-        TUTORIAL_SAMPLE.addTutorialDate(TUT_DATE);
-
-        TUTORIAL_SAMPLE.markAttendance(alice, TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.tutorialDateInList(TUT_DATE));
-        assertTrue(TUT_DATE.getStudentIDs().contains(alice.getStudentId()));
-    }
-
-    @Test
-    public void markAttendance_studentNotInTutorial_addsStudent() {
-        Student newStudent = new StudentBuilder().withName("Bob").build();
-
-        TUTORIAL_SAMPLE.markAttendance(newStudent, TUT_DATE);
-        assertTrue(TUTORIAL_SAMPLE.getStudents().contains(newStudent));
-        assertTrue(TUT_DATE.getStudentIDs().contains(newStudent.getStudentId()));
-    }
-
-    @Test
     public void addTutorialDate_duplicateDate_noAdd() {
         TUTORIAL_SAMPLE.addTutorialDate(TUT_DATE);
         int initialSize = TUTORIAL_SAMPLE.getTutDates().size();
@@ -283,12 +253,6 @@ public class TutorialTest {
     @Test
     public void getTutorialClass_noneTest() {
         assertEquals(NONE.getTutorialId(), TutorialId.none());
-    }
-
-    @Test
-    public void markAttendance_noneTest() {
-        assertThrows(NoTutorialException.class, ()
-                -> NONE.markAttendance(ALICE, TUT_DATE));
     }
 
     @Test

@@ -85,6 +85,10 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
+    /**
+     * Mark the given student as present.
+     * {@code student} must exist in the tutorial class.
+     */
     boolean setStudentAttendance(StudentId target, TutorialId tut, Date date);
 
     /** Returns an unmodifiable view of the filtered student list */
@@ -162,7 +166,13 @@ public interface Model {
     /**
      * Returns true if a student with the specified studentId exists.
      */
-    public boolean hasStudentWithId(StudentId studentId);
+    boolean hasStudentWithId(StudentId studentId);
+
+    /**
+     * Mark the given student as absent.
+     * {@code student} must exist in the tutorial class on the given date.
+     */
+    boolean setStudentAbsent(StudentId studentId, TutorialId tutorialId, Date tutDate);
 
     /**
      * Assign student to specified tutorial.
