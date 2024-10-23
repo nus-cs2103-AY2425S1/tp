@@ -32,22 +32,33 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new EmergencyContact("87438807"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Note(""),
-                getSubjectSet("MATH"), new Level("S1 NA"), tl),
+                getSubjectSet("MATH"), new Level("S1 NA"), tl,
+                getLessonTimeSet("MON-17:00-19:00")),
+
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new EmergencyContact("99272758"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Note(""),
-                getSubjectSet("PHYSICS", "MATH"), new Level("S2 NT"), new TaskList()),
+                getSubjectSet("PHYSICS", "MATH"), new Level("S2 NT"), new TaskList(),
+                getLessonTimeSet("TUE-17:00-19:00", "SUN-17:00-19:00")),
+
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new EmergencyContact("93210283"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Note(""),
-                getSubjectSet("CHEMISTRY"), new Level("S3 NA"), new TaskList()),
+                getSubjectSet("CHEMISTRY"), new Level("S3 NA"), new TaskList(),
+                getLessonTimeSet("WED-17:00-19:00")),
+
             new Person(new Name("David Li"), new Phone("91031282"), new EmergencyContact("93210283"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Note(""),
-                getSubjectSet("BIOLOGY"), new Level("S4 Express"), new TaskList()),
+                getSubjectSet("BIOLOGY"), new Level("S4 Express"), new TaskList(),
+                getLessonTimeSet("MON-11:00-13:00")),
+
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new EmergencyContact("92624417"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Note(""),
-                getSubjectSet("MATH"), new Level("S4 NA"), new TaskList()),
+                getSubjectSet("MATH"), new Level("S4 NA"), new TaskList(),
+                getLessonTimeSet("THU-17:00-19:00")),
+
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new EmergencyContact("92624417"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Note("very disobedient"),
-                getSubjectSet("PHYSICS"), new Level("S4 NA"), new TaskList())
+                getSubjectSet("PHYSICS"), new Level("S4 NA"), new TaskList(),
+                getLessonTimeSet("SAT-17:00-19:00"))
         };
     }
 

@@ -116,7 +116,7 @@ public class TagCommand extends Command {
         Set<LessonTime> updatedLessonTimes = tagsToAdd.getLessonTimes()
                 .orElse(personToTag.getLessonTimes());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList);
+                updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList, updatedLessonTimes);
     }
 
     @Override

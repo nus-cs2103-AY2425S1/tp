@@ -8,7 +8,7 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ "PHYSICS" ],
     "level" : "S3 NA",
-    "taskList" : [ ]
+    "taskList" : [ ],
     "lessonTimes" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -43,7 +43,7 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ "MATH" ],
     "level" : "S1 NT",
-    "taskList" : [ ]
+    "taskList" : [ ],
     "lessonTimes" : [ ]
   }, {
     "name" : "Elle Meyer",
@@ -53,7 +53,7 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
     "level" : "S2 NA",
-    "taskList" : [ ]
+    "taskList" : [ ],
     "lessonTimes" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -63,7 +63,7 @@
     "note" : "Needs Jesus rn",
     "subjects" : [ ],
     "level" : "S2 NT",
-    "taskList" : [ ]
+    "taskList" : [ ],
     "lessonTimes" : [ ]
   }, {
     "name" : "George Best",
@@ -73,7 +73,7 @@
     "note" : "y am i in cs",
     "subjects" : [ ],
     "level" : "S4 NA",
-    "taskList" : [ ]
+    "taskList" : [ ],
     "lessonTimes" : [ ]
   } ]
 }
