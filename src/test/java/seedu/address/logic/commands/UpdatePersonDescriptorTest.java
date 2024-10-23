@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
@@ -51,6 +52,9 @@ public class UpdatePersonDescriptorTest {
         // different subjects -> returns false
         updatedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withSubjects(VALID_SUBJECT_MATH).build();
         assertFalse(DESC_AMY.equals(updatedAmy));
+
+        updatedAmy = new UpdatePersonDescriptorBuilder(DESC_AMY).withLessonTimes(VALID_LESSON_TIME).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
     }
 
     @Test
@@ -64,7 +68,8 @@ public class UpdatePersonDescriptorTest {
                 + updatePersonDescriptor.getNote().orElse(null) + ", level="
                 + updatePersonDescriptor.getLevel().orElse(null) + ", subjects="
                 + updatePersonDescriptor.getSubjects().orElse(null) + ", task list="
-                + updatePersonDescriptor.getTaskList().orElse(null) + "}";
+                + updatePersonDescriptor.getTaskList().orElse(null) + ", lesson times="
+                + updatePersonDescriptor.getLessonTimes().orElse(null) + "}";
         assertEquals(expected, updatePersonDescriptor.toString());
     }
 }

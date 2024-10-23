@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -219,5 +220,30 @@ public class ParserUtil {
         requireNonNull(desc);
         requireNonNull(deadline);
         return new Task(parseTaskDescription(desc), parseTaskDeadline(deadline));
+    }
+
+    /**
+     * Parses a {@code String lt} into a {@code LessonTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static LessonTime parseLessonTime(String lt) throws ParseException {
+        requireNonNull(lt);
+        String trimmedLt = lt.trim();
+        if (!LessonTime.isValidLessonTime(trimmedLt)) {
+            throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonTime(trimmedLt);
+    }
+
+    /**
+     * Parses {@code Collection<String> lts} into a {@code Set<LessonTime>}.
+     */
+    public static Set<LessonTime> parseLessonTimes(Collection<String> lts) throws ParseException {
+        requireNonNull(lts);
+        final Set<LessonTime> lessonTimes = new HashSet<>();
+        for (String lt : lts) {
+            lessonTimes.add(parseLessonTime(lt));
+        }
+        return lessonTimes;
     }
 }

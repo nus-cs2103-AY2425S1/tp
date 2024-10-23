@@ -21,10 +21,10 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UpdateCommand;
+import seedu.address.logic.commands.UpdateTaskCommand;
 import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.ui.UiState;
 
 /**
  * Parses user input.
@@ -69,55 +69,45 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new AddCommandParser().parse(arguments);
 
         case UpdateCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new UpdateCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteTaskCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new DeleteTaskCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new FindCommandParser().parse(arguments);
 
         case NoteCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new NoteCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new HelpCommand();
 
         case TagCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new TagCommandParser().parse(arguments);
 
         case AddTaskCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Details);
             return new AddTaskCommandParser().parse(arguments);
 
+        case UpdateTaskCommand.COMMAND_WORD:
+            return new UpdateTaskCommandParser().parse(arguments);
+
         case ViewTasksCommand.COMMAND_WORD:
-            model.getUiState().setState(UiState.State.Tasks);
             return new ViewTasksCommand();
 
         default:

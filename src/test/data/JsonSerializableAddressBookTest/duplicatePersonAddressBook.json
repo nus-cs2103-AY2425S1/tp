@@ -7,6 +7,7 @@
     "note": "",
     "subjects": [ "MATH" ],
     "level": "S1 Express"
+    "lessonTimes" : [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -14,5 +15,6 @@
     "address": "4th street",
     "note": "",
     "level": "S1 NA"
+    "lessonTimes" : [ ]
   } ]
 }

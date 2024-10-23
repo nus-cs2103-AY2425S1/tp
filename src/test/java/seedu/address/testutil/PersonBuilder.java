@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -34,6 +35,7 @@ public class PersonBuilder {
     private Set<Subject> subjects;
     private Level level;
     private TaskListBuilder taskList;
+    private Set<LessonTime> lessonTimes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,6 +49,7 @@ public class PersonBuilder {
         subjects = new HashSet<>();
         level = new Level(DEFAULT_LEVEL);
         taskList = new TaskListBuilder();
+        lessonTimes = new HashSet<>();
     }
 
     /**
@@ -61,6 +64,7 @@ public class PersonBuilder {
         subjects = new HashSet<>(personToCopy.getSubjects());
         level = personToCopy.getLevel();
         taskList = new TaskListBuilder(personToCopy.getTaskList());
+        lessonTimes = new HashSet<>(personToCopy.getLessonTimes());
     }
 
     /**
@@ -127,8 +131,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code lessonTimes} into a {@code Set<LessonTime>} and
+     * set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLessonTimes(String ... lessonTimes) {
+        this.lessonTimes = SampleDataUtil.getLessonTimeSet(lessonTimes);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, emergencyContact, address, note, subjects, level, taskList.build());
+        return new Person(name, phone, emergencyContact, address, note, subjects, level, taskList.build(), lessonTimes);
     }
 
 }

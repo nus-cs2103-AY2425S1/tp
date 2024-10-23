@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -23,6 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.task.TaskList;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Tags an existing student in the address book with a subject, school level or both.
@@ -82,7 +84,8 @@ public class TagCommand extends Command {
         model.setPerson(personToTag, personWithTags);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_TAG_STUDENT_SUCCESS, Messages.format(personWithTags)));
+        return new CommandResult(String.format(MESSAGE_TAG_STUDENT_SUCCESS, Messages.format(personWithTags)),
+                UiState.DETAILS);
 
     }
 
@@ -110,6 +113,8 @@ public class TagCommand extends Command {
         Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(personToTag.getSubjects());
 
         TaskList updatedTaskList = tagsToAdd.getTaskList().orElse(personToTag.getTaskList());
+        Set<LessonTime> updatedLessonTimes = tagsToAdd.getLessonTimes()
+                .orElse(personToTag.getLessonTimes());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
                 updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList);
     }

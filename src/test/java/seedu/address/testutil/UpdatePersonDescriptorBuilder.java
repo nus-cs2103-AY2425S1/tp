@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -41,6 +42,7 @@ public class UpdatePersonDescriptorBuilder {
         descriptor.setNote(person.getNote());
         descriptor.setLevel(person.getLevel());
         descriptor.setSubjects(person.getSubjects());
+        descriptor.setLessonTimes(person.getLessonTimes());
     }
 
     /**
@@ -98,6 +100,16 @@ public class UpdatePersonDescriptorBuilder {
      */
     public UpdatePersonDescriptorBuilder withLevel(String level) {
         descriptor.setLevel(new Level(level));
+        return this;
+    }
+
+    /**
+     * Parses the {@code lessonTimes} into a {@code Set<LessonTime>} and set it to the {@code UpdatePersonDescriptor}
+     * that we are building.
+     */
+    public UpdatePersonDescriptorBuilder withLessonTimes(String... lessonTimes) {
+        Set<LessonTime> lessonTimeSet = Stream.of(lessonTimes).map(LessonTime::new).collect(Collectors.toSet());
+        descriptor.setLessonTimes(lessonTimeSet);
         return this;
     }
 

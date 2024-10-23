@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -18,6 +19,7 @@ import java.util.Set;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
@@ -35,7 +37,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMERGENCY_CONTACT,
-                        PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_SUBJECT, PREFIX_LEVEL);
+                        PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_SUBJECT, PREFIX_LEVEL, PREFIX_LESSON_TIME);
 
         if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
@@ -74,7 +76,8 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         }
 
         parseSubjectsForUpdate(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(updatePersonDescriptor::setSubjects);
-
+        parseLessonTimesForUpdate(argMultimap.getAllValues(PREFIX_LESSON_TIME))
+                .ifPresent(updatePersonDescriptor::setLessonTimes);
         if (!updatePersonDescriptor.isAnyFieldUpdated()) {
             throw new ParseException(UpdateCommand.MESSAGE_NOT_UPDATED);
         }
@@ -97,6 +100,23 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                 ? Collections.emptySet()
                 : subjects;
         return Optional.of(ParserUtil.parseSubjects(subjectSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> lts} into a {@code Set<LessonTime>} if {@code lts} is non-empty.
+     * If {@code lts} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<LessonTime>} containing zero lesson times.
+     */
+    private Optional<Set<LessonTime>> parseLessonTimesForUpdate(Collection<String> lts) throws ParseException {
+        assert lts != null;
+
+        if (lts.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> ltSet = lts.size() == 1 && lts.contains("")
+                ? Collections.emptySet()
+                : lts;
+        return Optional.of(ParserUtil.parseLessonTimes(ltSet));
     }
 
 }

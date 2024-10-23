@@ -16,5 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TASK_DESCRIPTION = new Prefix("t/");
     public static final Prefix PREFIX_TASK_DEADLINE = new Prefix("d/");
     public static final Prefix PREFIX_TASK_INDEX = new Prefix("ti/");
+    public static final Prefix PREFIX_LESSON_TIME = new Prefix("lt/");
 
 }

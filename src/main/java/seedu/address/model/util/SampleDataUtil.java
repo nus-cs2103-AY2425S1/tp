@@ -8,6 +8,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -64,6 +65,15 @@ public class SampleDataUtil {
     public static Set<Subject> getSubjectSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Subject::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a lesson time set containing the list of strings given.
+     */
+    public static Set<LessonTime> getLessonTimeSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(LessonTime::new)
                 .collect(Collectors.toSet());
     }
 

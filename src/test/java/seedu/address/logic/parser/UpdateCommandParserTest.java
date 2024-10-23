@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEVEL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -23,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -34,6 +36,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -43,6 +46,7 @@ import seedu.address.testutil.UpdatePersonDescriptorBuilder;
 public class UpdateCommandParserTest {
 
     private static final String SUBJECT_EMPTY = " " + PREFIX_SUBJECT;
+    private static final String LESSONTIME_EMPTY = " " + PREFIX_LESSON_TIME;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE);
@@ -84,6 +88,9 @@ public class UpdateCommandParserTest {
         // invalid subject
         assertParseFailure(parser, VALID_NAME_AMY + INVALID_SUBJECT_DESC, Subject.MESSAGE_CONSTRAINTS);
 
+        // invalid lesson time
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_LESSON_TIME_DESC, LessonTime.MESSAGE_CONSTRAINTS);
+
         // invalid level
         assertParseFailure(parser, VALID_NAME_AMY + INVALID_LEVEL_DESC, Level.MESSAGE_CONSTRAINTS);
 
@@ -100,6 +107,14 @@ public class UpdateCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY + SUBJECT_EMPTY
                 + SUBJECT_DESC_ENGLISH + SUBJECT_DESC_MATH, Subject.MESSAGE_CONSTRAINTS);
 
+        // while parsing {@code PREFIX_LESSON_TIME} alone will reset the
+        // LessonTimes of the {@code Person} being updated,
+        // parsing it together with a valid LessonTime results in error
+        assertParseFailure(parser, VALID_NAME_AMY + LESSON_TIME_DESC
+                + LESSONTIME_EMPTY, LessonTime.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NAME_AMY + LESSONTIME_EMPTY
+                + LESSON_TIME_DESC, LessonTime.MESSAGE_CONSTRAINTS);
+
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, VALID_NAME_AMY + INVALID_NAME_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
@@ -108,11 +123,11 @@ public class UpdateCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         String userInput = VALID_NAME_AMY + PHONE_DESC_BOB + SUBJECT_DESC_MATH
-                + ADDRESS_DESC_AMY + NAME_DESC_AMY + SUBJECT_DESC_ENGLISH;
+                + ADDRESS_DESC_AMY + NAME_DESC_AMY + SUBJECT_DESC_ENGLISH + LESSON_TIME_DESC;
 
         UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_AMY)
-                .withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH).build();
+                .withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH).withLessonTimes(VALID_LESSON_TIME).build();
         UpdateCommand expectedCommand = new UpdateCommand(new Name(VALID_NAME_AMY), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -154,6 +169,12 @@ public class UpdateCommandParserTest {
         // subjects
         userInput = targetName + SUBJECT_DESC_ENGLISH;
         descriptor = new UpdatePersonDescriptorBuilder().withSubjects(VALID_SUBJECT_ENGLISH).build();
+        expectedCommand = new UpdateCommand(targetName, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // lesson times
+        userInput = targetName + LESSON_TIME_DESC;
+        descriptor = new UpdatePersonDescriptorBuilder().withLessonTimes(VALID_LESSON_TIME).build();
         expectedCommand = new UpdateCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -202,6 +223,17 @@ public class UpdateCommandParserTest {
         String userInput = targetName + SUBJECT_EMPTY;
 
         UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withSubjects().build();
+        UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetLessonTimes_success() {
+        Name targetName = new Name(VALID_NAME_AMY);
+        String userInput = targetName + LESSONTIME_EMPTY;
+
+        UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder().withLessonTimes().build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

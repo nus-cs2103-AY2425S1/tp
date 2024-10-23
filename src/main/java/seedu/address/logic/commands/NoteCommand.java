@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * * Changes the notes of an existing person in the address book.
@@ -65,12 +66,12 @@ public class NoteCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmergencyContact(),
                 personToEdit.getAddress(), note, personToEdit.getSubjects(), personToEdit.getLevel(),
-                personToEdit.getTaskList());
+                personToEdit.getTaskList(), personToEdit.getLessonTimes());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedPerson), UiState.DETAILS);
     }
 
     /**

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -24,9 +25,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
-import seedu.address.model.person.task.Task;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.testutil.UpdateTaskDescriptorBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains helper methods for testing commands.
@@ -56,6 +57,7 @@ public class CommandTestUtil {
     public static final String VALID_TASK_DEADLINE = "2024-10-15";
     public static final String VALID_TASK_DEADLINE_AMY = "2024-01-01";
     public static final String VALID_TASK_INDEX = "1";
+    public static final String VALID_LESSON_TIME = "SUN-11:00-13:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -77,7 +79,7 @@ public class CommandTestUtil {
     public static final String TASK_DEADLINE_DESC_AMY = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_AMY;
     public static final String TASK_DEADLINE_DESC_BOB = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE;
     public static final String TASK_INDEX_DESC = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
-
+    public static final String LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -89,13 +91,15 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_DESCRIPTION + "   "; // blank task description
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE + "2024-14-23"; // invalid month
     public static final String INVALID_TASK_INDEX = " " + PREFIX_TASK_INDEX + "1!";
-
+    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "every thurs";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final UpdateCommand.UpdatePersonDescriptor DESC_AMY;
     public static final UpdateCommand.UpdatePersonDescriptor DESC_BOB;
+    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_TASK_AMY;
+    public static final UpdateTaskCommand.UpdateTaskDescriptor DESC_TASK_BOB;
 
     static {
         DESC_AMY = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -104,6 +108,10 @@ public class CommandTestUtil {
         DESC_BOB = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH).build();
+        DESC_TASK_AMY = new UpdateTaskDescriptorBuilder().withTaskDescription(VALID_TASK_DESCRIPTION_AMY)
+                .withTaskDeadline(VALID_TASK_DEADLINE_AMY).build();
+        DESC_TASK_BOB = new UpdateTaskDescriptorBuilder().withTaskDescription(VALID_TASK_DESCRIPTION_PROJECT)
+                .withTaskDeadline(VALID_TASK_DEADLINE).build();
     }
 
     /**
@@ -127,21 +135,9 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            UiState expectedUiState, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, expectedUiState);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
-    }
-
-    /**
-     * Simulates adding a task to a person without executing the command,
-     * confirms that the {@code actualModel} matches the {@code expectedModel} after the task addition.
-     */
-    public static void assertAddTaskCommandSuccess(Model actualModel, Model expectedModel,
-                                                   Person originalPerson, Task addedTask) {
-        Person updatedPerson = new PersonBuilder(originalPerson).build();
-        updatedPerson.getTaskList().add(addedTask);
-        expectedModel.setPerson(originalPerson, updatedPerson);
-        assertEquals(expectedModel, actualModel);
     }
 
     /**

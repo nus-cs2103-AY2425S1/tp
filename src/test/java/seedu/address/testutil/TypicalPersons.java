@@ -35,7 +35,7 @@ public class TypicalPersons {
             .withPhone("98765432")
             .withSubjects("CHEMISTRY", "MATH").withLevel("S2 NT").withTaskList(
                     MARKING_TASK, GRADING_TASK
-            ).build();
+            ).withLessonTimes("WED-17:00-19:00", "SUN-11:00-13:00").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withNote("Needs Jesus rn").withAddress("wall street").withEmergencyContact("94351253").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

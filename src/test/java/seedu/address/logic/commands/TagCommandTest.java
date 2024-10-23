@@ -31,6 +31,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.ui.Ui.UiState;
 
 public class TagCommandTest {
 
@@ -64,7 +65,7 @@ public class TagCommandTest {
         } else {
             throw new IllegalStateException("Person to tag not found");
         }
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -93,7 +94,7 @@ public class TagCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, taggedPerson);
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -106,7 +107,7 @@ public class TagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
@@ -124,7 +125,7 @@ public class TagCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), taggedPerson);
 
-        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test

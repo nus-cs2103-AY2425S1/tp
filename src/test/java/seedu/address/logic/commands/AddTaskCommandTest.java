@@ -2,8 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertAddTaskCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -19,6 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.task.Task;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TaskBuilder;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AddTaskCommand.
@@ -43,21 +45,22 @@ public class AddTaskCommandTest {
     public void execute_taskAcceptedByModel_addSuccessful() {
         // Get an existing person from the typical address book
         Person person = new PersonBuilder(model.getAddressBook().getPersonList().get(0)).build(); // Deep copy
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Model copiedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         Task validTask = new TaskBuilder().build();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(person.getName(), validTask);
+        String expectedMessage = String.format(AddTaskCommand.MESSAGE_SUCCESS,
+                validTask.getTaskDescription(), person.getName(), validTask.getTaskDeadline());
 
-        // Create a copy of the person and add the task
-        Person copiedPerson = new PersonBuilder(person).build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Person updatedPerson = new PersonBuilder(person).build(); // Create a deep copy
         updatedPerson.getTaskList().add(validTask); // Modify the deep copy
-
-        // Update the person in expectedModel
         expectedModel.setPerson(person, updatedPerson);
 
-        // Ensure that the original person in copiedModel is not modified
-        assertAddTaskCommandSuccess(expectedModel, copiedModel, copiedPerson, validTask);
+        // Checks that initial and expected state of model is correct
+        assertEquals(model, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
+        assertNotEquals(expectedModel, model);
+
+        assertCommandSuccess(addTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
     }
 
     @Test
