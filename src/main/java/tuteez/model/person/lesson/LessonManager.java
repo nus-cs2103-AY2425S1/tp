@@ -2,6 +2,10 @@ package tuteez.model.person.lesson;
 
 import java.util.HashMap;
 import java.util.TreeSet;
+import java.util.logging.Logger;
+
+import tuteez.commons.core.LogsCenter;
+import tuteez.logic.commands.AddCommand;
 
 /**
  * A container for all Lesson instances
@@ -11,6 +15,7 @@ import java.util.TreeSet;
  */
 public class LessonManager {
     private final HashMap<Day, TreeSet<Lesson>> dayLessonsMap = new HashMap<>(7);
+    private final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     /**
      * Constructs a new {@code lessonManager} and initializes an empty schedule
@@ -62,6 +67,8 @@ public class LessonManager {
         TreeSet<Lesson> lessonsOnDay = dayLessonsMap.get(lessonDay);
         for (Lesson lessonOnDay : lessonsOnDay) {
             if (Lesson.isClashingWithOtherLesson(lessonOnDay, lesson)) {
+                String logMessage = String.format("%s clashes with %s", lessonOnDay, lesson);
+                logger.info(logMessage);
                 return true;
             }
         }
