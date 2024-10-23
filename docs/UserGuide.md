@@ -85,12 +85,14 @@ Before running MediBase3, ensure that **Java 17** is installed on your system.
 2. Download the appropriate installer for your system (e.g., `Windows x64 Installer`).
 3. Run the installer and follow the setup instructions.
 4. Verify the installation by opening **Command Prompt** and typing:
-```
+
+   ```
    java -version
    ```
+   
 You should see something like:
 
-![javaVersionWindows.jpeg](images%2FjavaVersionWindows.jpeg)
+![javaVersionWindows.jpeg](images/javaVersionWindows.jpeg)
 
 This means that your machine is running Java version 17.0.12, which means that Java 17 is installed.
 
@@ -114,7 +116,7 @@ This means that your machine is running Java version 17.0.12, which means that J
    ```
 You should see something like this:
 
-![javaVersionMacOS.png](images%2FjavaVersionMacOS.png)
+![javaVersionMacOS.png](images/javaVersionMacOS.png)
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
@@ -132,7 +134,7 @@ This means that your machine is running Java version 17.0.11, which means that J
    ```
    You should see something like this:
 
-![javaVersionLinux.jpg](images%2FjavaVersionLinux.jpg)
+![javaVersionLinux.jpg](images/javaVersionLinux.jpg)
 
 This means that your machine is running Java version 17.0.11, which means that Java 17 is installed.
 
@@ -156,7 +158,7 @@ This means that your machine is running Java version 17.0.11, which means that J
 ### Step 2: Download the MediBase3 JAR File
 
 1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.3/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this
-![githubAssets.png](images%2FgithubAssets.png)
+![githubAssets.png](images/githubAssets.png)
 1. Click on `medibase3.jar` to download the latest MediBase3 JAR File.
 2. Save the file to a location of your choice (e.g., `Downloads` folder).
 
@@ -164,11 +166,11 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 1. Open **Command Prompt** (Windows) or **Terminal** (macOS).
 2. Navigate to the directory where the `.jar` file is located. For example:
-```
-cd Downloads
-```
+    ```
+    cd Downloads
+    ```
 3. Run the application by typing:
-```
+    ```
    java -jar medibase3.jar
    ```
 
@@ -185,7 +187,7 @@ Once MediBase3 is running, you will see the main interface. Here’s an overview
 - **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
 - **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
 
-![GUIOverview.jpg](images%2FGUIOverview.jpg)
+![GUIOverview.jpg](images/GUIOverview.jpg)
 
 ## Overview of CLI
 
@@ -195,19 +197,22 @@ MediBase3 can be controlled using commands in the **Command Line Interface (CLI)
 
 Each command follows this structure:
 
-![CommandPromptFormat.jpg](images%2FCommandPromptFormat.jpg)
+![CommandPromptFormat.jpg](images/CommandPromptFormat.jpg)
 
 Here’s a breakdown of the parts:
 
-| **Component** | **Description**                                    |
-|---------------|----------------------------------------------------|
-| **Command**   | The action you want to perform (e.g., `add`, `edit`) |
+| **Component** | **Description**                                         |
+|---------------|---------------------------------------------------------|
+| **Command**   | The action you want to perform (e.g., `add`, `edit`)    |
 | **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
 | **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
 
 ### Example:
 
-add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
+    ```
+    add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25
+    ```
+
 - **Command:** `add`
 - **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
 - **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
@@ -218,43 +223,54 @@ Here’s a basic tutorial on how to start using the application:
 
 1. **View the Help Guide:**
    - Once MediBase3 is running, you can type the following command to view the help window:
+   
      ```
      help
      ```
+     
 2. **Add a New Patient:**
    - To add a new patient, use the following command:
+   
      ```
      add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 
      ```
+
    - This will add a patient named John Doe to the system.
 
 
 3. **Edit Patient Information:**
    - If there’s a typo or information changes, use the `edit` command:
+   
      ```
      edit S1234567A p/91234567 e/johndoe@example.com
      ```
+     
    - This will change the phone number and email of the patient with NRIC S1234567A
 
 
 4. **Find a Patient by NRIC:**
    - To find a patient by NRIC, type:
+   
      ```
      findNric T0123456A
      ```
+     
    - This will show the patient with the NRIC `T0123456A`.
 
 
 5. **Delete a Patient:**
    - To remove a patient who is no longer visiting the clinic/hospital, type:
+   
      ```
      delete T0123456A
      ```
+     
    - This deletes the patient with the NRIC `T0123456A`.
 
 
 6. **Clear All Entries:**
    - To remove all patient and appointment data from the system, type:
+   
      ```
      clear
      ```
