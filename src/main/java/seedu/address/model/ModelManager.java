@@ -13,6 +13,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,24 +23,28 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final WeddingBook weddingBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Wedding> filteredWeddings;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, weddingBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyWeddingBook weddingBook) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.weddingBook = new WeddingBook(weddingBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredWeddings = new FilteredList<>(this.weddingBook.getWeddingList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new WeddingBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -74,6 +80,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getWeddingBookFilePath() {
+        return userPrefs.getWeddingBookFilePath();
+    }
+
+    @Override
+    public void setWeddingBookFilePath(Path weddingBookFilePath) {
+        requireNonNull(weddingBookFilePath);
+        userPrefs.setWeddingBookFilePath(weddingBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -135,6 +152,65 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== WeddingBook ================================================================================
+
+    @Override
+    public void setWeddingBook(ReadOnlyWeddingBook weddingBook) {
+        this.weddingBook.resetData(weddingBook);
+    }
+
+    @Override
+    public ReadOnlyWeddingBook getWeddingBook() {
+        return weddingBook;
+    }
+
+    @Override
+    public boolean hasWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return weddingBook.hasWedding(wedding);
+    }
+
+    @Override
+    public void deleteWedding(Wedding target) {
+        weddingBook.removeWedding(target);
+    }
+
+    @Override
+    public void addWedding(Wedding wedding) {
+        weddingBook.addWedding(wedding);
+        updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+    }
+
+    @Override
+    public void setWedding(Wedding target, Wedding editedWedding) {
+        requireAllNonNull(target, editedWedding);
+
+        weddingBook.setWedding(target, editedWedding);
+    }
+
+    //=========== Filtered Wedding List Accessors ============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Wedding} backed by the internal list of
+     * {@code versionedWeddingBook}
+     */
+    @Override
+    public ObservableList<Wedding> getFilteredWeddingList() {
+        return filteredWeddings;
+    }
+
+    @Override
+    public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
+        requireNonNull(predicate);
+        filteredWeddings.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
+        filteredWeddings.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -148,8 +224,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && weddingBook.equals(otherModelManager.weddingBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredWeddings.equals(otherModelManager.filteredWeddings);
     }
 
 }
