@@ -110,7 +110,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 
 ---
 
