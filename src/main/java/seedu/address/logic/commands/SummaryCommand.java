@@ -24,7 +24,8 @@ public class SummaryCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Summarizes the transactions in the current list"
             + "whose dates range between the first day of start month and the last day of end month.\n"
             + "Parameters: " + PREFIX_START_MONTH + "START_MONTH " + PREFIX_END_MONTH + "END_MONTH\n"
-            + "START_MONTH and END_MONTH must follow the yyyy-mm format.\n"
+            + "START_MONTH and END_MONTH must follow the yyyy-mm format. "
+            + "START_MONTH must be before or equal to END_MONTH.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_START_MONTH + "2024-09 " + PREFIX_END_MONTH + "2024-12";
 
     public static final String MESSAGE_SUCCESS = "The total amount of transactions from %s to %s is: $%.2f";
