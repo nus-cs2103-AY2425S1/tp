@@ -18,9 +18,9 @@ class JsonAdaptedModule {
      * Constructs a {@code JsonAdaptedModule} with the given {@code module}.
      */
     @JsonCreator
-    public JsonAdaptedModule(@JsonProperty("module") String module, @JsonProperty("grade") int grade) {
+    public JsonAdaptedModule(@JsonProperty("module") String module, @JsonProperty("grade") Integer grade) {
         this.module = module;
-        this.grade = grade;
+        this.grade = (grade != null) ? grade : 0;
     }
 
     /**
