@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.PersonContainsTagsPredicate;
+import seedu.address.model.person.predicates.PersonContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 class BatchDeleteCommandTest {

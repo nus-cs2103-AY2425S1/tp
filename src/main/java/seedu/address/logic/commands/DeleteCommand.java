@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,11 +14,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PrefixHandler;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FilterListPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.FilterListPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -52,6 +52,7 @@ public class DeleteCommand extends Command {
     private Address address = null;
     private Email email = null;
     private Set<Tag> tags = null;
+    private PrefixHandler prefixHandler = new PrefixHandler();
 
     /**
      * Constructs a {@code DeleteCommand} that deletes a person identified by a name predicate (partial match).
@@ -133,12 +134,7 @@ public class DeleteCommand extends Command {
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
         } else if (phoneNumber != null) {
-            List<Person> personsToDelete = findPersonToDeleteByAttribute(lastShownList, phoneNumber);
-            if (personsToDelete.isEmpty()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PHONE_NUMBER);
-            } else {
-                personToDelete = personsToDelete.get(0);
-            }
+            return deletePersonByAttribute(model, address, Messages.MESSAGE_INVALID_PHONE_NUMBER);
         } else if (predicate != null) {
             model.updateFilteredPersonList(predicate);
             if (model.getFilteredPersonList().size() == 1) {
@@ -174,7 +170,7 @@ public class DeleteCommand extends Command {
     private CommandResult deletePersonByAttribute(Model model, Object attribute,
                                                   String errorMessage) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> personsToDelete = findPersonToDeleteByAttribute(lastShownList, attribute);
+        List<Person> personsToDelete = prefixHandler.findPersonByAttribute(lastShownList, attribute);
         if (personsToDelete.isEmpty()) {
             throw new CommandException(errorMessage);
         } else if (personsToDelete.size() == 1) {
@@ -191,75 +187,6 @@ public class DeleteCommand extends Command {
         }
     }
 
-    /**
-     * Finds persons that match a specified attribute.
-     *
-     * @param lastShownList The list of all persons.
-     * @param attribute The attribute to match against.
-     * @return A list of persons that match the attribute.
-     */
-    private List<Person> findPersonToDeleteByAttribute(List<Person> lastShownList, Object attribute) {
-        String type = getTypeOfAttribute(attribute);
-        List<Person> matchingPersons = new ArrayList<>();
-        for (Person person : lastShownList) {
-            switch(type) {
-            case "PHONE":
-                Phone phoneOfPerson = person.getPhone();
-                Phone phoneNumber = (Phone) attribute;
-                if (phoneOfPerson.equals(phoneNumber)) {
-                    matchingPersons.add(person);
-                }
-                break;
-
-            case "EMAIL":
-                Email emailOfPerson = person.getEmail();
-                Email email = (Email) attribute;
-                if (emailOfPerson.equals(email)) {
-                    matchingPersons.add(person);
-                }
-                break;
-
-            case "ADDRESS":
-                Address addressOfPerson = person.getAddress();
-                Address address = (Address) attribute;
-                if (addressOfPerson.equals(address)) {
-                    matchingPersons.add(person);
-                }
-                break;
-
-            case "TAG":
-                Set<Tag> tagsOfPerson = person.getTags();
-                @SuppressWarnings("unchecked")
-                Set<Tag> tagsSet = (Set<Tag>) attribute;
-                if (tagsOfPerson.containsAll(tagsSet)) {
-                    matchingPersons.add(person);
-                }
-                break;
-
-            default:
-                break;
-            }
-        }
-        return matchingPersons;
-    }
-
-    /**
-     * Determines the type of the attribute.
-     *
-     * @param attribute The attribute object.
-     * @return The type of the attribute as a string.
-     */
-    private String getTypeOfAttribute(Object attribute) {
-        if (attribute instanceof Phone) {
-            return "PHONE";
-        } else if (attribute instanceof Email) {
-            return "EMAIL";
-        } else if (attribute instanceof Address) {
-            return "ADDRESS";
-        } else {
-            return "TAG";
-        }
-    }
 
     /**
      * Checks if this {@code DeleteCommand} is equal to another object.
