@@ -23,6 +23,7 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    vmArgs '-ea'
 }
 
 task coverage(type: JacocoReport) {
@@ -38,6 +39,10 @@ task coverage(type: JacocoReport) {
         html.required = true
         xml.required = true
     }
+}
+
+run {
+    jvmArgs '-ea'
 }
 
 dependencies {
