@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Optional<Person> lastViewedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.lastViewedPerson = Optional.empty();
     }
 
     public ModelManager() {
@@ -103,6 +106,7 @@ public class ModelManager implements Model {
     @Override
     public void displayPerson(Person target) {
         addressBook.displayPerson(target);
+        updateLastViewedPerson(target);
     }
 
     @Override
@@ -144,6 +148,18 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Optional<Person> getLastViewedPerson() {
+        return lastViewedPerson;
+    }
+
+    @Override
+    public void updateLastViewedPerson(Person personOnDisplay) {
+        requireNonNull(personOnDisplay);
+        lastViewedPerson = Optional.of(personOnDisplay);
+        logger.info("Last viewed person updated: " + personOnDisplay.getName().fullName);
     }
 
     @Override
