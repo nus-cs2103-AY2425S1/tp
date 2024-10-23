@@ -43,7 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_AMY = "Loves Taylor Swift.";
     public static final String VALID_REMARK_BOB = "Supports Manchester United.";
     public static final String VALID_DATE_OF_BIRTH_AMY = "1 Jan 2000";
-    public static final String VALID_DATE_OF_BIRTH_BOB = "1 Jan 2000";
+    public static final String VALID_DATE_OF_BIRTH_BOB = "3 Jan 1989";
     public static final double VALID_INCOME_AMY = 1500.32;
     public static final double VALID_INCOME_BOB = 1300;
     public static final String VALID_TAG_HUSBAND = "husband";

@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,14 +21,15 @@ public class StatisticsCommand extends Command {
     public static final String COMMAND_WORD = "statistics";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the overall statistics regarding all the people in SocialBook.\n"
+            + ": Displays the general statistics regarding the current people list in SocialBook.\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_DISPLAY_STATISTICS_SUCCESS = "Here are all the statistics:\n%s";
-    public static final String MESSAGE_DISPLAY_TOTAL_PEOPLE = "Total Number Of People: %s";
-    public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
-    public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
-    public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
-    public static final String MESSAGE_DISPLAY_LOW_INCOME = "Number Of Income < 2500 People: %s";
+    public static final String MESSAGE_DISPLAY_TOTAL_PEOPLE = "Total # Of People: %s";
+    public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "# Of HIGH Priority People: %s";
+    public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "# Of MEDIUM Priority People: %s";
+    public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "# Of LOW Priority People: %s";
+    public static final String MESSAGE_DISPLAY_LOW_INCOME = "# Of People Income <= 800: %s";
+    public static final String MESSAGE_DISPLAY_APPOINTMENTS_SOON = "# Of Appointments In Next 7 Days: %s";
     private String resultMessage = "";
 
     /**
@@ -43,7 +46,8 @@ public class StatisticsCommand extends Command {
         allStats.add(highPriorityPeople(lastShownList));
         allStats.add(mediumPriorityPeople(lastShownList));
         allStats.add(lowPriorityPeople(lastShownList));
-        //  allStats.add(incomeLessThan2500(lastShownList));
+        allStats.add(incomeEightHundredOrLess(lastShownList));
+        allStats.add(appointmentsSoon(lastShownList));
 
         resultMessage = allStats.stream()
                 .collect(Collectors.joining("\n"));
@@ -100,19 +104,46 @@ public class StatisticsCommand extends Command {
         return String.format(MESSAGE_DISPLAY_LOW_PRIORITY, lowPriority);
     }
 
-    //    /**
-    //     * Returns a message with number of people with monthly household income < 2500 in current list.
-    //     *
-    //     * @param currList current list.
-    //     * @return string message of number of people with monthly household income < 2500.
-    //     */
-    //    public static String incomeLessThan2500(List<Person> currList) {
-    //        long lowIncome = currList.stream()
-    //                .map(person -> person.getIncome().toDouble())
-    //                .filter(income -> income < 2500)
-    //                .count();
-    //        return String.format(MESSAGE_DISPLAY_LOW_INCOME, lowIncome);
-    //    }
+    /**
+     * Returns a message with number of people with monthly household income < 800 in current list.
+     *
+     * @param currList current list.
+     * @return string message of number of people with monthly household income < 2500.
+     */
+    public static String incomeEightHundredOrLess(List<Person> currList) {
+        long lowIncome = currList.stream()
+                .map(person -> person.getIncome().getValue())
+                .filter(income -> income <= 800)
+                .count();
+        return String.format(MESSAGE_DISPLAY_LOW_INCOME, lowIncome);
+    }
+
+    /**
+     * Returns a message with number of people with appointments within a week or less from the current time.
+     *
+     * @param currList current list.
+     * @return string message of number of people with appointments within a week or less from current time.
+     */
+    public static String appointmentsSoon(List<Person> currList) {
+        long appointmentsSoon = currList.stream()
+                .map(person -> person.getAppointment() != null
+                        ? person.getAppointment().getUnformattedDate()
+                        : null)
+                .filter(date -> date != null && isWithinAWeek(date))
+                .count();
+        return String.format(MESSAGE_DISPLAY_APPOINTMENTS_SOON, appointmentsSoon);
+    }
+
+    /**
+     * Helper command to check whether date is within 7 days from current time.
+     *
+     * @param date to be checked whether within time range.
+     * @return Whether inputted date is within a week from now.
+     */
+    public static boolean isWithinAWeek(LocalDate date) {
+        LocalDate now = LocalDate.now();
+        return !date.isBefore(now) && ChronoUnit.DAYS.between(now, date) <= 7;
+    }
 
     public String getResultMessage() {
         return this.resultMessage;
