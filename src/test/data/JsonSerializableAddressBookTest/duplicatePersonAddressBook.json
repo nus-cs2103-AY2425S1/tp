@@ -5,13 +5,15 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111 S666123",
     "postalCode": "666123",
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "isArchived": false
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street, #12-345 S123456",
-    "postalCode": "123456"
+    "postalCode": "123456",
+    "isArchived": false
   } ],
   "orders": [ {
       "name": "cake"
