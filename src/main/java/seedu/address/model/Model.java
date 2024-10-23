@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Reminder;
 
 /**
  * The API of the Model component.
@@ -87,4 +88,5 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void updateSortedPersonList(Comparator<Person> comparator);
+    void addReminder(Reminder reminder, Person person);
 }
