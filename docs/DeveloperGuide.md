@@ -236,6 +236,22 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+### Filter internship applications
+
+The implementation of the filter command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+`AddressBookParser` creates `FilterCommandParser` to parse user input string.
+
+<puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram"/>
+
+Refer to AddSequenceDiagram for how `AddressBookParser` creates FilterCommandParser and FilterCommand.
+`FilterCommandParser` obtains the specified status value and ensures that it is valid.
+
+A new filter command is then created with a `StatusPredicate`.
+
+Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
+
+
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**

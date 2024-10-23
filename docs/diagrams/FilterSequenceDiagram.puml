@@ -50,7 +50,7 @@ deactivate AddressBookParser
 LogicManager -> FilterCommand : execute(m)
 activate FilterCommand
 
-FilterCommand -> Model : updateFilteredList(...)
+FilterCommand -> Model : updateFilteredList(f.statusPredicate)
 activate Model
 
 Model --> FilterCommand
