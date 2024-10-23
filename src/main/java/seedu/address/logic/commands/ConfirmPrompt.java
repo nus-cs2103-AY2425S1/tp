@@ -6,11 +6,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 public class ConfirmPrompt extends Command{
-//    public static final String COMMAND_WORD = "confirm";
-//    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Confirms the operation the user tries to do.\n"
-//            + "After the user has entered a important command (delete/clear), the user can confirm the command by typing 'confirm'.\n"
-//            + "Example: " + COMMAND_WORD;
-
     public static final String MESSAGE_CONFIRM_PROMPT = "Please type in command 'confirm' to confirm the operation.\n"
             + "Otherwise, to cancel the operation.";
 
