@@ -56,6 +56,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         telegramHandle.setText(person.getTelegramHandle().value);
+        moduleName.setText(person.getModuleName().toString());
         String contactTypeStr = person.getContactType().value.toString().toLowerCase();
         contactType.setText(contactTypeStr);
         person.getTags().stream()

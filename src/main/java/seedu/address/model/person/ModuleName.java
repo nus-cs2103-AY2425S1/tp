@@ -25,7 +25,7 @@ public class ModuleName {
     public ModuleName(String ModuleName) {
         requireNonNull(ModuleName);
         checkArgument(isValidModName(ModuleName), MESSAGE_CONSTRAINTS);
-        moduleName = ModuleName;
+        moduleName = ModuleName.toUpperCase();
     }
 
     /**
