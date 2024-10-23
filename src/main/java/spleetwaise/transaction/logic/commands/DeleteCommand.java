@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.commons.core.index.Index;
+import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
@@ -44,7 +45,7 @@ public class DeleteCommand extends Command {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             logger.log(Level.WARNING, "Invalid transaction index: {0}", targetIndex.getZeroBased());
-            throw new CommandException("The transaction index provided is invalid.");
+            throw new CommandException("The transaction index provided is invalid");
         }
 
         Transaction transactionToDelete = lastShownList.get(targetIndex.getZeroBased());
@@ -68,6 +69,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return "DeleteCommand{targetIndex=" + targetIndex + "}";
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .toString();
     }
 }
