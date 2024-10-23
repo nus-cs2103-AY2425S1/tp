@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -20,7 +22,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
 
-import java.util.Iterator;
 
 public class DeleteAppointmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -107,14 +108,5 @@ public class DeleteAppointmentCommandTest {
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(name, schedule);
         String expected = DeleteAppointmentCommand.class.getCanonicalName() + "{toDeleteAppointment=" + name + "}";
         assertEquals(expected, deleteAppointmentCommand.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }
