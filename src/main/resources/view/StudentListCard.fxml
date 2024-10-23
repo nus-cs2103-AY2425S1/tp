@@ -2,6 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -9,8 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.control.ScrollPane?>
+
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true" >
     <columnConstraints>
@@ -21,6 +23,9 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
       <HBox spacing="0.5" alignment="CENTER_LEFT">
+        <ImageView fx:id="pinIcon" fitWidth="24" fitHeight="24">
+          <Image url="@/images/pin_icon.png"/>
+        </ImageView>
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
@@ -39,15 +44,14 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
 
-
       <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+      <Label fx:id="grade" />
       <ScrollPane fitToWidth="true" fitToHeight="true"
                   styleClass="scroll-pane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true">
         <content>
           <FlowPane fx:id="tags" prefWidth="200" styleClass="flow-pane"/>
         </content>
       </ScrollPane>
-      <Label fx:id="grade" />
 
     </VBox>
 
