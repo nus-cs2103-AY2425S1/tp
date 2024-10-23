@@ -146,6 +146,9 @@ This section will walk you through all the basic features of BridalBuddy and wil
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+[_Back to Top_](#table-of-contents)
+
+
 ### **General Commands**
 
 :information_source: Commands listed in this section are applicable to both guest management and vendor management.
@@ -164,9 +167,17 @@ Entering the `help` command returns the following result on your screen:
 
 :information_source: Commands listed in this section are applicable to managing your guest list.
 
+
+[_Back to Top_](#table-of-contents)
+
+
 ### **Vendor Related Commands**
 
 :information_source: Commands listed in this section are applicable to managing your vendor list.
+
+
+[_Back to Top_](#table-of-contents)
+
 
 ### Adding a person: `add`
 
@@ -250,24 +261,24 @@ Exits the program.
 
 Format: `exit`
 
+### **Other Useful Features**
+
+:information-source: Other additional features of BridalBuddy that are good to know.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<box type="warning" seamless>
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+:warning: If your changes to the data file makes its format invalid, BridalBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file **only if** you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
