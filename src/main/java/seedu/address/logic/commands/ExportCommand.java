@@ -39,7 +39,7 @@ public class ExportCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
-        final File sourceFile = new File("data/addressbook.json");
+        final File sourceFile = new File("savedcontacts/addressbook.json");
 
         if (destinationFile == null) {
             // If no destination file is set, show file chooser asynchronously
