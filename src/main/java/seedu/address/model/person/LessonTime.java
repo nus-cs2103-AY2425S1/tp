@@ -66,15 +66,15 @@ public class LessonTime {
             return false;
         }
 
-        boolean valid;
+        boolean isValid;
         try {
             LocalTime s = LocalTime.parse(segments[1], timeFormatter);
             LocalTime e = LocalTime.parse(segments[2], timeFormatter);
-            valid = e.isAfter(s);
+            isValid = e.isAfter(s);
         } catch (DateTimeParseException e) {
-            valid = false;
+            isValid = false;
         }
-        return valid;
+        return isValid;
     }
 
     /**
