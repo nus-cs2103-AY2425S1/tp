@@ -3,47 +3,149 @@
   title: "User Guide"
   pageNav: 3
 ---
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=chevron_right" />
 
-# StaffSync User Guide
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-StaffSync is a **desktop app for managing potential hires and employees, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,  StaffSync can get your contact management tasks done faster than traditional GUI apps.
+  :root {
+    --primary-bg-color: #F6F6F6FF;
+    --special-bg-color: #F4F8FFFF;
+    --highlight-bg-color: #E9E9E9FF;
+  }
+
+  * {
+    font-family: 'DM Sans', sans-serif;
+    transition: 0.2s ease;
+  }
+
+  .headers {
+    font-weight: 900;
+  }
+
+  .content {
+    background-color: var(--primary-bg-color);
+    border-radius: 10px;
+    padding: 32px;
+    margin: 16px;
+  }
+
+  .content-special {
+    background-color: var(--special-bg-color);
+  }
+
+  .content-droppable {
+    padding: 16px 32px 8px 32px;
+  }
+
+  summary {
+    padding: 0px 0px 0px 0px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  details[open] > summary > .chevrons {
+    transform: rotate(270deg) translateY(8px);
+  }
+
+  .chevrons {
+    transform: rotate(90deg) translateX(0px);
+    text-decoration: none;
+    background-color: transparent !important;
+  }
+
+  .content-droppable:hover {
+    background-color: var(--highlight-bg-color);
+  }
+
+  .toc-content {
+    padding: 0;
+  }
+
+  .toc-btns {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    border-bottom: none;
+    border-radius: 10px;
+    color: black;
+    padding: 24px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+
+  .toc-btns:hover {
+    background-color: var(--highlight-bg-color);
+  }
+</style>
+
+<h1 class="headers">StaffSync User Guide</h1>
+
+<p class="content content-special">
+  StaffSync is a <strong>desktop app for managing potential hires and employees, optimized for use via a  Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StaffSync can get your contact management tasks done faster than traditional GUI apps.
+</p>
 
 <br>
+
+<h1 class="toc headers">Table of Contents</h1>
+
+<div class="content toc-content">
+  <a href="#installation-and-quick-start">
+    <button class="toc-btns">1. Installation and Quick Start</button>
+  </a>
+  <a href="#commands">
+    <button class="toc-btns">2. Commands</button>
+  </a>
+  <a href="#command-summary">
+    <button class="toc-btns">3. Commands Summary</button>
+  </a>
+  <a href="#features">
+    <button class="toc-btns">4. Features</button>
+  </a>
+  <a href="#faq">
+    <button class="toc-btns">5. FAQ</button>
+  </a>
+  <a href="#known-issues">
+    <button class="toc-btns">6. Known Issues</button>
+  </a>
+</div>
+
 <br>
+
+<h1 class="headers" id="installation-and-quick-start">Installation and Quick Start</h1>
+
+
+<div class="content">
+
+<strong>1. </strong>Ensure you have [Java `17`](https://www.oracle.com/java/technologies/downloads/#java17) installed in your Computer. Higher versions may work but we do not officially support it.
+
 <br>
 
-# Table of Contents
+<strong>2. </strong>Download the latest release `.jar` file from [our Github page](https://github.com/AY2425S1-CS2103T-T10-2/tp/releases).
+
 <br>
 
->### [1. Installation and Quick Start](#installation-and-quick-start)
->### [2. Commands](#commands)
->### [3. Commands Summary](#command-summary)
->### [4. Features](#features)
->### [5. FAQ](#faq)
->### [6. Known Issues](#known-issues)
+<strong>3. </strong>Copy the file to the folder you want to use as the _home folder_ for your StaffSync.
+
 <br>
 
---------------------------------------------------------------------------------------------------------------------
-<br>
-<br>
-<br>
-
-# Installation and Quick Start
-
-1. Ensure you have [Java `17`](https://www.oracle.com/java/technologies/downloads/#java17) installed in your Computer. Higher versions may work but we do not officially support it.
-
-1. Download the latest release `.jar` file from [our Github page](https://github.com/AY2425S1-CS2103T-T10-2/tp/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your StaffSync.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar staffSync.jar` command to run the application.<br>
+<strong>4. </strong>Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar staffSync.jar` command to run the application.<br>
 
    Alternatively, you can double-click the jar file to run the application (though we do not officially support it).
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+<br>
+
+<strong>5. </strong>Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list ph` : Lists all potential hires.
@@ -56,229 +158,264 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 
    * `exit` : Exits the app.
 
-1. Refer to the [Commands](#commands) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-<br>
-<br>
 <br>
 
-# Commands
+<strong>6. </strong>Refer to the [Commands](#commands) below for details of each command.
 
-<box type="info" seamless>
-
->**Notes about the command format:**<br>
->
->* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
->  e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
->
->* Items in square brackets are optional.
->  e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
->
->* Parameters can be in any order.<br>
->  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
->
->* Parameters and commands are case-sensitive
->  e.g. the command `Help` and `edit 1 N/John Doe` will return an error
->
->* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
->  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
->
->* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
-></box>
+</div>
 
 <br>
+
+<h1 class="headers" id="commands">Commands</h1>
+
+
+<div class="content content-special">
+
+**Notes about the command format:**
+
+<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
+
+* Items in square brackets are optional.
+  e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Parameters and commands are case-sensitive
+  e.g. the command `Help` and `edit 1 N/John Doe` will return an error
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
+
+</div>
+
+<br>
+
+<div class="content content-droppable">
+
 <details>
-  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Clearing all entries: <code>clear</code></strong></summary>
+  <summary>
+    &nbsp&nbsp<strong style="font-size:1.25em;">Clearing all entries: <code>clear</code></strong> 
+    <span class="material-symbols-outlined chevrons">
+      chevron_right
+    </span>
+  </summary>
 
->Clears all entries from StaffSync.
->
->Format: `clear`
+  Clears all entries from StaffSync.
+
+Format: `clear`
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Deleting a person: <code>delete</code></strong></summary>
 
-  >Deletes the specified person from StaffSync.
-  >
-  >Format: `delete ph INDEX` or `delete e INDEX` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
-  >
-  >* Deletes the potential hire/employee at the specified `INDEX`.
-  >* The index refers to the index number shown in the displayed person list.
-  >* The index **must be a positive integer** 1, 2, 3, …​
-  >* The index **must be within the size of the list** of potential hires/employees shown.
-  >
-  >Examples:
-  >* `list` followed by `delete e 2` deletes the 2nd person in the employee list.
-  >* `find e Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
+Deletes the specified person from StaffSync.
+
+Format: `delete ph INDEX` or `delete e INDEX` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
+
+* Deletes the potential hire/employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be within the size of the list** of potential hires/employees shown.
+
+Examples:
+* `list` followed by `delete e 2` deletes the 2nd person in the employee list.
+* `find e Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Demoting a person: <code>demote</code></strong></summary>
 
->Demotes the specified employee from StaffSync into a potential hire.
->
->Format: `demote INDEX`
->
->* Demote the employee at the specified `INDEX` to a potential hire.
->* The index refers to the index number shown in the displayed person list.
->* The index **must be a positive integer** 1, 2, 3, …​
->* The index **must be within the size of the list** shown.
->* The person at the index must be an employee
->
->Examples:
->* `list e` followed by `demote 2` demotes the 2nd person in the employee list.
->* `find e Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
->
-><box type="warning" seamless>
->
->**Common Mistakes:**
->* `list ph` followed by `demote 2` - cannot demote a potential hire
->* `demote 0` - invalid index number
->* `demote 3` but only have 2 entries - invalid index number, index out of list size 
-></box>
+  Demotes the specified employee from StaffSync into a potential hire.
+
+Format: `demote INDEX`
+
+* Demote the employee at the specified `INDEX` to a potential hire.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be within the size of the list** shown.
+* The person at the index must be an employee
+
+Examples:
+* `list e` followed by `demote 2` demotes the 2nd person in the employee list.
+* `find e Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
+
+<box type="warning" seamless>
+  
+**Common Mistakes:**
+* `list ph` followed by `demote 2` - cannot demote a potential hire
+* `demote 0` - invalid index number
+* `demote 3` but only have 2 entries - invalid index number, index out of list size 
+</box>
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">[WIP] Editing a person: <code>edit</code></strong></summary>
 
-  >Edits an existing person in the StaffSync.
-  >
-  >Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
-  >
-  >* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-  >* At least one of the optional fields must be provided.
-  >* Existing values will be updated to the input values.
-  >
-  >Examples:
-  >*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-  >*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Edits an existing person in the StaffSync.
+
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding an employee: <code>employee</code></strong></summary>
 
->Adds an employee to StaffSync.
->
->Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
->
-><box type="tip" seamless>
->
->**Tip:** All fields are mandatory
-></box>
->
->Examples:
->* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
+  Adds an employee to StaffSync.
+
+Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
+
+<box type="tip" seamless>
+  
+**Tip:** All fields are mandatory
+</box>
+
+Examples:
+* `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Exiting the program: <code>exit</code></strong></summary>
 
->Exits the program.
->
->Format: `exit`
+  Exits the program.
+
+Format: `exit`
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Locating persons by name: <code>find</code></strong></summary>
 
-  >Finds the employee/potential hire whose names contain any of the given keywords.
-  >
-  >Format: `find (all or e or ph) KEYWORD [MORE_KEYWORDS]`
-  >
-  >* The search is case-insensitive. e.g `hans` will match `Hans`
-  >* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-  >* Only the name is searched.
-  >* Only full words will be matched e.g. `Han` will not match `Hans`
-  >* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  >  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-  >
-  >Examples:
-  >* `find all John` returns people `john` and `John Doe`
-  >* `find e John` returns employees `john` and `John Doe`
-  >* `find ph alex david` returns potential hires `Alex Yeoh`, `David Li`<br>
-  >  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Finds the employee/potential hire whose names contain any of the given keywords.
+
+Format: `find (all or e or ph) KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find all John` returns people `john` and `John Doe`
+* `find e John` returns employees `john` and `John Doe`
+* `find ph alex david` returns potential hires `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Viewing help: <code>help</code></strong></summary>
 
->Displays a help window containing the list of commands, its purpose and the format
->
->![Ui](images/helpWindow.png)
->
->Format:`help`
+  Displays a help window containing the list of commands, its purpose and the format
+
+![Ui](images/helpWindow.png)
+
+Format:`help`
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Listing all persons: <code>list</code></strong></summary>
 
-  >Shows a list of all persons in StaffSync.
-  >
-  >Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
-  >* Lists type of persons based on the parameter given.
+Shows a list of all persons in StaffSync.
+
+Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
+* Lists type of persons based on the parameter given.
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding a potential hire: <code>potential</code></strong></summary>
 
->Adds a potential hire to StaffSync.
->
->Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
->
-><box type="tip" seamless>
->
->**Tip:** All fields are mandatory
-></box>
->
->Examples:
->* `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
+  Adds a potential hire to StaffSync.
+
+Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
+
+<box type="tip" seamless>
+  
+**Tip:** All fields are mandatory
+</box>
+
+Examples:
+* `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 </details>
 
-<br>
+</div>
+<div class="content content-droppable">
+
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Promoting a person: <code>promote</code></strong></summary>
 
->Promotes the specified potential hire from StaffSync into an employee.
->
->Format: `promote INDEX CONTRACT_END_DATE`
->
->* Promote the potential hire at the specified `INDEX` to an employee with the specified `CONTRACT_END_DATE`.
->* The index refers to the index number shown in the displayed person list.
->* The index **must be a positive integer** 1, 2, 3, …​
->* The index **must be within the size of the list** shown.
->* The person at the index must be a potential hire
->* The contract end date must be of **valid format** of yyyy-MM-dd
->
->Examples:
->* `list p` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
->* `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
->
-><box type="warning" seamless>
->
->**Common Mistakes:**
->* `promote 2 12-20-2025` - the contract end date is in the wrong date format
->* `promote 2 2025-20-12` - the day and the month of the contract end date is swapped
->* `list e` followed by `promote 2 2025-12-20` - cannot promote an employee
->* `promote 0 2025-12-20` - invalid index number
->* `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
-></box>
+  Promotes the specified potential hire from StaffSync into an employee.
+
+Format: `promote INDEX CONTRACT_END_DATE`
+
+* Promote the potential hire at the specified `INDEX` to an employee with the specified `CONTRACT_END_DATE`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be within the size of the list** shown.
+* The person at the index must be a potential hire
+* The contract end date must be of **valid format** of yyyy-MM-dd
+
+Examples:
+* `list p` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
+* `find p n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
+
+<box type="warning" seamless>
+  
+**Common Mistakes:**
+* `promote 2 12-20-2025` - the contract end date is in the wrong date format
+* `promote 2 2025-20-12` - the day and the month of the contract end date is swapped
+* `list e` followed by `promote 2 2025-12-20` - cannot promote an employee
+* `promote 0 2025-12-20` - invalid index number
+* `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
+</box>
 </details>
 
-<br>
-<br>
+</div>
+
 <br>
 
-# Commands Summary
+<h1 class="headers" id="command-summary">Commands Summary</h1>
+
+<div class="content">
 
 Action     | Format                                                                                        | Examples
 -----------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
@@ -294,56 +431,59 @@ Action     | Format                                                             
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 **Promote** | `promote INDEX CONTRACT_END_DATE`                                                             | `promote 2 2025-12-20`
 
---------------------------------------------------------------------------------------------------------------------
+
+</div>
 
 <br>
-<br>
-<br>
 
-# Features
+<h1 class="headers" id="features">Features</h1>
+
+<div class="content">
 
 ### **Saving the data**
 
->StaffSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+StaffSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <br>
 
 ### **Editing the data file**
 
->StaffSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
->
-><box type="warning" seamless>
->
->**Caution:**
->If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+StaffSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning" seamless>
+  
+**Caution:**
+If your changes to the data file makes its format invalid, StaffSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the StaffSync to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-></box>
+</box>
 
 <br>
 <br>
 
 ### **Archiving data files `[coming in v2.0]`**
 
->_Details coming soon ..._
+_Details coming soon ..._
+
+</div>
 
 <br>
-<br>
-<br>
 
-# FAQ
+<h1 class="headers" id="faq">FAQ</h1>
+
+<div class="content">
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StaffSync home folder.
 
---------------------------------------------------------------------------------------------------------------------
+</div>
 
 <br>
-<br>
-<br>
 
-# Known Issues
+<h1 class="headers" id="known-issues">Known Issues</h1>
+
+<div class="content">
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
---------------------------------------------------------------------------------------------------------------------
+</div>
