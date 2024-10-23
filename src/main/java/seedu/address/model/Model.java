@@ -102,4 +102,5 @@ public interface Model {
     ObservableList<Order> getOrderList();
 
     List<Person> getPeopleByPostalCode(PostalCode postalCode);
+
 }
