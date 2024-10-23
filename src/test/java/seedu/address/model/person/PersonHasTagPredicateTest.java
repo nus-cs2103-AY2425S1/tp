@@ -55,7 +55,7 @@ public class PersonHasTagPredicateTest {
 
         PersonHasFeaturePredicate phoneAndTagPredicate =
               new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value));
-        assertTrue(highTagOnlyPredicate.test(ALICE));
+        assertTrue(phoneAndTagPredicate.test(ALICE));
 
 
 
