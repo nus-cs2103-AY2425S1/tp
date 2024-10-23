@@ -50,5 +50,4 @@ public class StudentAttendedTutorialPredicate implements Predicate<Person> {
                 .add("endDate", this.endDate.toString())
                 .toString();
     }
-
 }
