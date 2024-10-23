@@ -139,7 +139,7 @@ public class InsurancePlansManager {
     }
 
     /**
-     * Adds a claim to the insurance plan of the client.
+     * Adds a claim to the insurance plan of the client. NOTE: Part of this can be moved to {@code InsurancePlan} later.
      *
      * @param insurancePlan The insurance plan the claim is to be added to.
      * @param claim         The claim that is to be added to the insurance plan.
@@ -151,7 +151,7 @@ public class InsurancePlansManager {
         }
         for (InsurancePlan p : insurancePlans) {
             if (p.equals(insurancePlan)) {
-                p.claims.add(claim);
+                p.addClaim(claim);
                 this.claimIds.add(claim.getClaimId());
             }
         }
