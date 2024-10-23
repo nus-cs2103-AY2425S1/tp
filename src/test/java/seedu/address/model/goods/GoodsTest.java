@@ -1,10 +1,8 @@
 package seedu.address.model.goods;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GoodsTest {
 
@@ -30,5 +28,19 @@ public class GoodsTest {
         Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
         String expected = "Gardenia Bread";
         assertEquals(expected, testGoods.getReadableGoodsName());
+    }
+
+    @Test
+    public void sameGoods_success() {
+        Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
+        Goods otherGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
+        assertEquals(testGoods, otherGoods);
+    }
+
+    @Test
+    public void differentGoods_failure() {
+        Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
+        Goods otherGoods = new Goods(new GoodsName("Other Bread"), GoodsCategories.CONSUMABLES);
+        assertNotEquals(testGoods, otherGoods);
     }
 }
