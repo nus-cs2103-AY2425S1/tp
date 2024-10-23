@@ -14,6 +14,10 @@ public class DeleteLessonCommand extends LessonCommand {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String DELETE_COMMAND_STRING_FORMAT = "DeleteLessonCommand"
+            + "{targetIndex=tutorease.address.commons.core."
+            + "index.Index{zeroBasedIndex=%d}}";
+
     public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD
             + " " + COMMAND_WORD + ": Deletes a lesson from the lesson list. "
             + "Parameters: INDEX (must be a positive integer)";
@@ -64,8 +68,9 @@ public class DeleteLessonCommand extends LessonCommand {
         DeleteLessonCommand otherDeleteLessonCommand = (DeleteLessonCommand) other;
         return targetIndex.equals(otherDeleteLessonCommand.targetIndex);
     }
+
     @Override
     public String toString() {
-        return String.format("DeleteLessonCommand[targetIndex=%s]", targetIndex);
+        return String.format(DELETE_COMMAND_STRING_FORMAT, targetIndex.getZeroBased());
     }
 }

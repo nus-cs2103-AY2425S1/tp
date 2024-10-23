@@ -8,6 +8,7 @@ import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.ROLE_DESC_AMY;
 import static tutorease.address.testutil.Assert.assertThrows;
+import static tutorease.address.testutil.TypicalLessons.MATH_LESSON;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalStudents.AMY;
 
@@ -19,6 +20,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.CommandResult;
 import tutorease.address.logic.commands.ContactCommand;
@@ -28,6 +31,7 @@ import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.UserPrefs;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 import tutorease.address.storage.JsonLessonScheduleStorage;
 import tutorease.address.storage.JsonTutorEaseStorage;
@@ -167,4 +171,28 @@ public class LogicManagerTest {
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addContactCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    /**
+     * Tests that the correct file path for TutorEase data is returned from the model.
+     * Ensures that the LogicManager correctly retrieves the file path for storing TutorEase data.
+     */
+    @Test
+    public void getTutorEaseFilePath_validPath_success() {
+        Path expectedPath = Path.of("data/tutorease.json");
+        assertEquals(expectedPath, logic.getTutorEaseFilePath()); // Ensure the model method was called
+    }
+
+    /**
+     * Tests that the filtered lesson list is updated correctly after adding a lesson.
+     * Ensures that the LogicManager retrieves the correct ObservableList with the added lesson.
+     */
+    @Test
+    public void getFilteredLessonList_addLesson_success() {
+        model.addLesson(MATH_LESSON);
+        ObservableList<Lesson> expectedList = FXCollections.observableArrayList(MATH_LESSON);
+        assertEquals(expectedList, logic.getFilteredLessonList());
+    }
+
+
+
 }

@@ -19,11 +19,11 @@ tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for TutorEase.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar`
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tutorease.jar`
    command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -103,17 +103,17 @@ Examples:
 
 Adds a lesson tied to a student with start and end date time.
 
-Format: `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION`
+Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
 
 * Add a lesson with the student at specified `STUDENTID`.
 * The student ID refers to the index number shown in the displayed person list.
-* The lesson starts at the specified `STARTDATE` in the format `dd-MM-yyyy HH:mm`.
-* The lesson is held at the location specified by the `LOCATIONINDEX`.
-* The location index refers to the index number shown in the displayed location list.
-* The index refers to the index number shown in the displayed lesson schedule.
+* The lesson starts at the specified `STARTDATETIME` in the format `dd-MM-yyyy HH:mm`.
+* The lesson is held at the address of the student.
+* The price per hour refers to the price of the lesson per hour.
+* The price per hour **must be a non-negative integer**.
+* The duration **must be a decimal number or an integer** between 0 and 24 inclusive.
 * The duration of the lesson is specified by the `DURATION` in hours.
-* The duration must be between 0 and 24 hours inclusive.
-* The student ID and location and duration **must be a positive integer** 1, 2, 3, …​
+* The student ID **must be a positive integer** 1, 2, 3, …​
 
 ### Listing all persons : `contact list`
 
@@ -127,11 +127,11 @@ Shows a list of all lessons in the schedule.
 
 Format: `lesson list`
 
-### Editing a person : `edit`
+### Editing a person : `contact edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [/nNAME] [/pPHONE] [/eEMAIL] [/aADDRESS] [/tTAG]…​`
+Format: `contact edit INDEX [/nNAME] [/pPHONE] [/eEMAIL] [/aADDRESS] [/tTAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -140,18 +140,19 @@ Format: `edit INDEX [/nNAME] [/pPHONE] [/eEMAIL] [/aADDRESS] [/tTAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `/t` without
   specifying any tags after it.
+* Role is not editable!
 
 Examples:
 
-* `edit 1 /p91234567 /ejohndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
-  and `johndoe@example.com` respectively.
-* `edit 2 /nBetsy Crower /t` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `contact edit 1 /p91234567 /ejohndoe@example.com` Edits the phone number and email address of the 1st person to 
+  be `91234567` and `johndoe@example.com` respectively.
+* `contact edit 2 /nBetsy Crower /t` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `contact find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `contact find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -162,8 +163,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John` returns `john` and `John Doe`.
-* `find alex david` returns `Alex Yeoh`, `David Li.`<br>
+* `contact find John` returns `john` and `John Doe`.
+* `contact find alex david` returns `Alex Yeoh`, `David Li.`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `contact delete`
@@ -179,7 +180,7 @@ Format: `contact delete INDEX`
 Examples:
 
 * `contact list` followed by `contact delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `contact find Betsy` followed by `contact delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting a lesson : `lesson delete`
 
@@ -281,10 +282,10 @@ the data of your previous AddressBook home folder.
  **Add Contact**    | `contact add /nNAME /pPHONE_NUMBER /eEMAIL /aADDRESS [/tTAG]…​` <br> e.g., `contact add /nJames Ho /p22224444 /ejamesho@example.com /rStudent /a123, Clementi Rd, 1234665 /tfriend /tcolleague` 
  **Clear**          | `clear`                                                                                                                                                               
  **Delete Contact** | `contact delete INDEX`<br> e.g., `contact delete 3`                                                                                                                                   
- **Edit**           | `edit INDEX [/nNAME] [/pPHONE_NUMBER] [/eEMAIL] [/aADDRESS] [/tTAG]…​`<br> e.g.,`edit 2 /nJames Lee /ejameslee@example.com`                                           
- **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
+ **Edit Contact**   | `contact edit INDEX [/nNAME] [/pPHONE_NUMBER] [/eEMAIL] [/aADDRESS] [/tTAG]…​`<br> e.g.,`contact edit 2 /nJames Lee /ejameslee@example.com`                                           
+ **Find Contact**   | `contact find KEYWORD [MORE_KEYWORDS]`<br> e.g., `contact find James Jake`                                                                                                            
  **List Contacts**  | `contact list`                                                                                                                                                                
- **Add Lesson**     | `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION` <br> e.g., `lesson add sid/1 d/15-10-2024 23:47 li/1 h/1`                                         
+ **Add Lesson**     | `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION` <br> e.g., `lesson add sid/1 f/10 d/23-10-2024 12:00 h/1`                                         
  **List Lessons**   | `lesson list`                                                                                                                                                         
  **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`
  **Find Lessons**   | `lesson find KEYWORD [MORE_KEYWORDS]` <br> e.g., `lesson find John Alice`
