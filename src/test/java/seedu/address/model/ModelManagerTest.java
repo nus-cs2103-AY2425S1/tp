@@ -13,13 +13,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.goods.Goods;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.GoodsBuilder;
+import seedu.address.testutil.GoodsReceiptBuilder;
 
 public class ModelManagerTest {
 
@@ -89,6 +93,20 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void deletePerson_supplierHasGoods_removedGoods() {
+        Goods goods = new GoodsBuilder().build();
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .build();
+        modelManager.addPerson(ALICE);
+        modelManager.addGoods(goodsReceipt);
+        modelManager.deletePerson(ALICE);
+        List<GoodsReceipt> goodsList = modelManager
+                .getFilteredGoods(r -> r.isFromSupplier(ALICE.getName()));
+        assertEquals(goodsList.size(), 0);
     }
 
     @Test

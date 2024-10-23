@@ -117,6 +117,9 @@ public interface Model {
      */
     void addGoods(GoodsReceipt goodsReceipt);
 
+    /** Returns an unmodifiable view of the filtered goodsReceipt list */
+    ObservableList<GoodsReceipt> getFilteredReceiptsList();
+
     /**
      * Filters a list of goods by the given {@code predicate}.
      */

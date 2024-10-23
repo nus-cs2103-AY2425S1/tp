@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -157,5 +158,9 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
             }
         }
         return true;
+    }
+
+    public void removeIf(Predicate<? super GoodsReceipt> predicate) {
+        internalList.removeIf(predicate);
     }
 }

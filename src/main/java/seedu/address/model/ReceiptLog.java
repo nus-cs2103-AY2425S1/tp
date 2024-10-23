@@ -16,10 +16,7 @@ import seedu.address.model.goodsreceipt.UniqueGoodsReceiptList;
  */
 public class ReceiptLog implements ReadOnlyReceiptLog {
 
-    private final UniqueGoodsReceiptList receipts;
-    {
-        receipts = new UniqueGoodsReceiptList();
-    }
+    private final UniqueGoodsReceiptList receipts = new UniqueGoodsReceiptList();
 
     public ReceiptLog() {}
 
@@ -84,4 +81,7 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
                 .filter(predicate).toList();
     }
 
+    public void removeIf(Predicate<? super GoodsReceipt> predicate) {
+        receipts.removeIf(predicate);
+    }
 }
