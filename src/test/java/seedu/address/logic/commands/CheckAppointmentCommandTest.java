@@ -28,8 +28,8 @@ import seedu.address.testutil.PersonBuilder;
 
 public class CheckAppointmentCommandTest {
 
-    private final LocalDateTime appointmentTime_1 = LocalDateTime.of(2024, 12, 31, 12, 0);
-    private final LocalDateTime appointmentTime_2 = LocalDateTime.of(2024, 12, 31, 13, 0);
+    private final LocalDateTime appointmentTime1 = LocalDateTime.of(2024, 12, 31, 12, 0);
+    private final LocalDateTime appointmentTime2 = LocalDateTime.of(2024, 12, 31, 13, 0);
     private final LocalDate appointmentDate = LocalDate.of(2024, 12, 31);
     private final String appointmentRemark = "Follow-up check";
 
@@ -46,7 +46,7 @@ public class CheckAppointmentCommandTest {
         modelStub.addPersonToList(validDoctor);
 
         // Add an appointment to the patient
-        validDoctor.addAppointment(appointmentTime_1, validPatient.getId(), validDoctor.getId(), appointmentRemark);
+        validDoctor.addAppointment(appointmentTime1, validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
         // Execute the ViewHistoryCommand
         CheckAppointmentCommand checkAppointmentCommand = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
@@ -54,10 +54,11 @@ public class CheckAppointmentCommandTest {
 
         // Validate that the appointment was retrieved correctly
         String expectedMessage = String.format("DateTime: %s Appointment: %s (patient id) with %s (doctor id). "
-                        + "Remarks: %s" + "\n", appointmentTime_1.format(formatter), validPatient.getId(),
+                        + "Remarks: %s" + "\n", appointmentTime1.format(formatter), validPatient.getId(),
                 validDoctor.getId(), appointmentRemark);
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
+
     @Test
     public void execute_checkMultipleValidAppointment_success() throws Exception {
         // Create a ModelStub that accepts appointments
@@ -71,8 +72,8 @@ public class CheckAppointmentCommandTest {
         modelStub.addPersonToList(validDoctor);
 
         // Add an appointment to patient
-        validPatient.addAppointment(appointmentTime_1, validPatient.getId(), validDoctor.getId(), appointmentRemark);
-        validPatient.addAppointment(appointmentTime_2, validPatient.getId(), validDoctor.getId(), appointmentRemark);
+        validPatient.addAppointment(appointmentTime1, validPatient.getId(), validDoctor.getId(), appointmentRemark);
+        validPatient.addAppointment(appointmentTime2, validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
         // Create a CheckAppointmentCommand and execute it
         CheckAppointmentCommand checkAppointmentCommand = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
@@ -83,8 +84,8 @@ public class CheckAppointmentCommandTest {
                         + "with %s (doctor id). Remarks: %s\n"
                         + "DateTime: %s Appointment: %s (patient id) "
                         + "with %s (doctor id). Remarks: %s\n",
-                appointmentTime_1.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark,
-                appointmentTime_2.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark);
+                appointmentTime1.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark,
+                appointmentTime2.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark);
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
 
@@ -105,7 +106,6 @@ public class CheckAppointmentCommandTest {
         assertThrows(CommandException.class, String.format(MESSAGE_NO_APPOINTMENT_FOUND, validDoctor.getName()), () ->
                 checkAppointmentCommand.execute(modelStub));
     }
-
 
     private class ModelStub implements Model {
         @Override
@@ -279,3 +279,4 @@ public class CheckAppointmentCommandTest {
     }
 
 }
+
