@@ -137,7 +137,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >**Common Mistakes:**
 >* `list ph` followed by `demote 2` - cannot demote a potential hire
 >* `demote 0` - invalid index number
->* `demote 3` but only have 2 entries - invalid index number, index out of list size 
+>* `demote 3` but only have 2 entries - invalid index number, index out of list size
 ></box>
 </details>
 

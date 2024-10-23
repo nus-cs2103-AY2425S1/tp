@@ -104,7 +104,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-The sequence diagram below illustrates another interaction within the `Logic` component, taking `execute("demote 1")` API call as an example. 
+The sequence diagram below illustrates another interaction within the `Logic` component, taking `execute("demote 1")` API call as an example.
 
 <puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
 
@@ -662,7 +662,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `demote 1`<br>
       Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
 
-    2. Test case: `demote 0`<br> 
+    2. Test case: `demote 0`<br>
      Expected: Invalid index found. No employees demoted. Error details shown in the status message.
 
     3. Test case: `Demote 1`<br>
