@@ -1,6 +1,8 @@
 package seedu.internbuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_INDEX;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_COMPANY_INDEX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,9 @@ public class WithdrawCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Withdraws the application identified by the index number used in the displayed application list.\n"
-            + "Parameters: COMPANY_INDEX (must be a positive integer) "
-            + "APPLICATION_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 1";
+            + "Parameters: " + PREFIX_COMPANY_INDEX + "COMPANY_INDEX(must be a positive integer) "
+            + PREFIX_APP_INDEX + "APPLICATION_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " c/1 app/1";
 
     public static final String MESSAGE_WITHDRAW_APPLICATION_SUCCESS = "Withdrawn application: %1$s";
 
@@ -77,5 +79,21 @@ public class WithdrawCommand extends Command {
         } else {
             return companyToEdit.getStatus();
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof WithdrawCommand)) {
+            return false;
+        }
+
+        WithdrawCommand otherWithdrawCommand = (WithdrawCommand) other;
+        return companyIndex.equals(otherWithdrawCommand.companyIndex)
+                && applicationIndex.equals(otherWithdrawCommand.applicationIndex);
     }
 }

@@ -29,8 +29,8 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
 | **Help**     | `help`                                                                                                                                                                            |
 | **List**     | `list`                                                                                                                                                                            |
-| **Update**   | `update INDEX APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update 1 1 as/OA`                                                                                                |
-| **Withdraw** | `withdraw INDEX APPLICATION_INDEX`<br> e.g., `withdraw 3 1`                                                                                                                       |
+| **Update**   | `update COMPANY_INDEX APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update 1 1 as/OA`                                                                                                |
+| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
 
 [back to top](#internbuddy-user-guide)
 
@@ -205,7 +205,7 @@ Format: `list`
 
 Updates the application status of an application for an existing company in the address book.
 
-Format: `update INDEX APPLICATION_INDEX as/APPLICATION_STATUS`
+Format: `update COMPANY_INDEX APPLICATION_INDEX as/APPLICATION_STATUS`
 
 * Updates the application status of application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX` to `APPLICATION_STATUS`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
@@ -219,7 +219,7 @@ The index refers to the index number shown in the displayed company list. The in
 
 Removes an internship record for an existing company in the address book.
 
-Format: `withdraw INDEX APPLICATION_INDEX`
+Format: `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`
 
 * Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
