@@ -6,7 +6,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import org.kordamp.ikonli.javafx.FontIcon;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -50,7 +49,7 @@ public class CommandBox extends UiPart<Region> {
             }
         });
 
-        initaliseEventHandler();
+        initialiseEventHandler();
     }
 
     /**
@@ -76,9 +75,9 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
+        commandTextIcon.setIconColor(Color.WHITE);
         commandTextArea.getStyleClass().remove(ERROR_STYLE_CLASS);
         commandTextArea.setStyle("-fx-text-fill: white;");
-        commandTextIcon.setIconColor(Color.WHITE);
     }
 
     /** Sets the command box style to indicate the command box is focused. */
@@ -92,8 +91,11 @@ public class CommandBox extends UiPart<Region> {
 
     /** Sets the command box style to indicate the command box is not focused. */
     private void setStyleToUnfocused() {
-        commandTextArea.setStyle("-fx-text-fill: grey;");
         commandTextIcon.setIconColor(Color.GREY);
+        if (commandTextArea.getStyleClass().contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
+        commandTextArea.setStyle("-fx-text-fill: grey;");
     }
 
     /**
@@ -123,7 +125,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Initialises the Event Handler for the input of commands.
      */
-    private void initaliseEventHandler() {
+    private void initialiseEventHandler() {
         commandTextArea.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case ENTER:
