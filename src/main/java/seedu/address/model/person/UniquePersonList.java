@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -115,6 +116,13 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toUnarchive);
         archivedPersonList.removeArchivedPerson(toUnarchive);
         internalList.add(toUnarchive);
+    }
+
+    /**
+     * Sorts the list by placing all the pinned people to the top of the list.
+     */
+    public void sortByPin() {
+        FXCollections.sort(internalList, Comparator.comparing(Person::getPinned).reversed());
     }
 
     /**

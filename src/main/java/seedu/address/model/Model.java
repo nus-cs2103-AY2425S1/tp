@@ -76,6 +76,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Pins the given person to the top of the address book.
+     */
+    void pinPerson(Person person);
+
+    /**
+     * Unpins the given person to the top of the address book.
+     */
+    void unpinPerson(Person person);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +94,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sorts the person list to put all pinned persons at the top of the list.
+     */
+    void sortByPin();
 }
