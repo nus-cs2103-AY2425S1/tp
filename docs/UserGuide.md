@@ -82,7 +82,7 @@ administrators.
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/help.png)
 
 Format: `help`
 
@@ -135,18 +135,19 @@ Format 1: `find n/KEYWORD [MORE_KEYWORDS]`
 Format 2: `find c/KEYWORD [MORE_KEYWORDS]`
 Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `kim` will match `Kim`
+* The order of the keywords does not matter. e.g. `Esther Kim` will match `Kim Esther`
 * Only the name is searched.
 * Partially matched words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Esther Kim` will return `Esther Gruber`, `Kim Yang`
 * The priority of the search will be class ID then followed by name.
 
 Examples:
 
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
+* `find Kim` returns `Munhui Kim` and `Esther Kim`
+![find image](images/findBefore.png)
+![find image](images/findAfter.png)
 ---
 
 ### 2.6 Deleting a Person : `delete`
@@ -270,16 +271,16 @@ Displays a bar chart showing the number of students who made payments for each m
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Bar Chart** | `bar`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Exit** | `exit`
-**Help** | `help`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Mark Paid** | `mark INDEX`<br> e.g., `mark 1` (Marks the 1st student's payment as completed)
-**Pie Chart** | `pie`
+| Action        | Format, Examples                                                                                                                                                      |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Bar Chart** | `bar`                                                                                                                                                                 |
+| **Clear**     | `clear`                                                                                                                                                               |
+| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Exit**      | `exit`                                                                                                                                                                |
+| **Help**      | `help`                                                                                                                                                                |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **List**      | `list`                                                                                                                                                                |
+| **Mark Paid** | `mark INDEX`<br> e.g., `mark 1` (Marks the 1st student's payment as completed)                                                                                        |
+| **Pie Chart** | `pie`                                                                                                                                                                 |
