@@ -72,7 +72,7 @@ public abstract class InsurancePlan {
     }
 
     /**
-     * Sorts the claims of this insurance plan only based on claim status then by claim id.
+     * Sorts the claims of this insurance plan only based on claim status then by claim ID.
      */
     public void sortClaims() {
         ClaimComparator claimComparator = new ClaimComparator();
