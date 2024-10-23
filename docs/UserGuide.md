@@ -136,17 +136,30 @@ Examples:
 
 Renames an existing tag in the address book.
 
-Format: `renameTag [ot/OLDTAG] [nt/NEWTAG]`
+Format: `renameTag INDEX ot/OLDTAG nt/NEWTAG`
 
 * Renames the tags called `OLDTAG` to `NEWTAG`.
 * Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed
 * If `OLDTAG` is not an existing tag, `[OLDTAG] tag is not found` will be returned.
 
+### Adding Social Media : `socialMedia`
+
+Adds or updates the social media handle to an existing person.
+
+Format: `socialMedia [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
+
+* Contacts will have their social media handle displayed as `[ig-igusername]` or `[fb-fbusername]` or `[cs-csusername]`.
+* `ig`,`fb`, and `cs` is used to represent Instagram, Facebook, and Carousell handles respectively.
+* If the contact already has an existing social media handle, their handle will be updated.
+* Hence, we can only add one social media handle to each contact.
+
 Examples:
-*  `renameTag ot/manager nt/boss` Renames the tag `colleagues` to be `boss`.
-![result for 'rename tag1'](images/renameTagResult1.png)
-*  `renameTag ot/friends nt/enemies` Edits the tag `friends` to be `enemies`.
-![result for 'rename tag2'](images/renameTagResult2.png)
+*  `socialMedia 3 ig/charlotteo` Adds the handle `[ig-charlotteo]` to the third contact Charlotte.
+![result for 'rename tag1'](images/socialMediaResult1.png)
+*  `socialMedia 1 cs/alexsells` Updates the first contact Alex's social media to `[cs-alexsells]`.
+![result for 'rename tag2'](images/socialMediaResult2.png)
+*  `socialMedia 2 fb/berniceyu` Updates the second contact Bernice's social media to `[fb-berniceyu]`.
+![result for 'social media 3'](images/socialMediaResult3.png)
 
 ### Locating persons by name: `find`
 
@@ -285,6 +298,7 @@ Action | Format, Examples
 **Help** | `help`
 **Restore** | `restore`
 **Sort** | `sort [ORDER]`<br> e.g., `sort asc`
-**Rename Tag** | `renameTag [ot/OLDTAG] [nt/NEWTAG]`<br> e.g., `renameTag ot/manager nt/boss`
+**Rename Tag** | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`
 **Filter** | `filter [t/TAG]`<br> e.g., `filter t/friends`
+**Social Media** | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername` 
 

@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -44,6 +47,10 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_CLEAR_SCHEDULE_SUCCESS = "Cleared scheduled for %s";
     public static final String MESSAGE_FAILURE =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE);
+    public static final String MESSAGE_SCHEDULE_UNCHANGED =
+            "There was no change done to the existing schedule, if any.";
+
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private final Index index;
     private final ScheduleCommand.ScheduleDescriptor scheduleDescriptor;
@@ -77,6 +84,11 @@ public class ScheduleCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
+        if (editedSchedule.equals(scheduleToEdit)) {
+            logger.fine(MESSAGE_SCHEDULE_UNCHANGED);
+            throw new CommandException(MESSAGE_SCHEDULE_UNCHANGED);
+        }
+
         if (editedSchedule.toString().isEmpty()) {
             return new CommandResult(String.format(
                     MESSAGE_CLEAR_SCHEDULE_SUCCESS,
@@ -107,7 +119,9 @@ public class ScheduleCommand extends Command {
         Schedule editedSchedule = new Schedule(updatedName, updatedDateString, updatedTimeString);
 
         // if all fields of the command is empty, refers to a clear schedule command
-        if (editedSchedule.equals(scheduleToEdit)) {
+        if (!(scheduleDescriptor.getDateString().isPresent()
+                || scheduleDescriptor.getScheduleName().isPresent()
+                || scheduleDescriptor.getTimeString().isPresent())) {
             editedSchedule = new Schedule("", "", "");
         }
 

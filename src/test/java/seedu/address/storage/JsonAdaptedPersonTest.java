@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,9 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_SCHEDULE_DATE = "2021-14";
     private static final String INVALID_SCHEDULE_TIME = "12000";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_SOCIALMEDIA_IG = "[ig-usernam$]";
+    private static final String INVALID_SOCIALMEDIA_FB = "[fb-usernam$]";
+    private static final String INVALID_SOCIALMEDIA_CS = "[cs-usernam$]";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -174,6 +179,53 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, invalidTags, VALID_SOCIALMEDIA);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidSocialMediaIg_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, VALID_TAGS,
+                        INVALID_SOCIALMEDIA_IG);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidSocialMediaFb_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, VALID_TAGS,
+                        INVALID_SOCIALMEDIA_FB);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidSocialMediaCs_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, VALID_TAGS,
+                        INVALID_SOCIALMEDIA_CS);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullSocialMedia_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, VALID_TAGS, null);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_validPersonDetails_returnsPersonCarl() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(CARL);
+        assertEquals(CARL, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_validPersonDetails_returnsPersonDaniel() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(DANIEL);
+        assertEquals(DANIEL, person.toModelType());
     }
 
 }

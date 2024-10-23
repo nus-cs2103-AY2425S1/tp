@@ -6,7 +6,8 @@
     "address": "4th street",
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
-    "time" : "16:00"
+    "time" : "16:00",
+    "socialmedia" : " "
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
@@ -14,6 +15,7 @@
     "address": "4th street",
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
-    "time" : "16:00"
+    "time" : "16:00",
+    "socialmedia" : " "
   } ]
 }
