@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.profile.Profile;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -115,6 +117,16 @@ public class AddCommandTest {
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public HashSet<Profile> getProfiles() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToProfiles(Profile profileName) {
             throw new AssertionError("This method should not be called.");
         }
 

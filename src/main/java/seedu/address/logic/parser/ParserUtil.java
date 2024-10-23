@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.profile.Profile;
 import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 
@@ -140,5 +141,17 @@ public class ParserUtil {
             roleSet.add(parseRole(roleName));
         }
         return roleSet;
+    }
+
+    /**
+     * Parses {@code String profile} into a {@code Profile}
+     */
+    public static Profile parseProfileName(String profileName) throws ParseException {
+        requireNonNull(profileName);
+        String trimmedProfileName = profileName.trim();
+        if (!Profile.isValidProfile(trimmedProfileName)) {
+            throw new ParseException(Profile.MESSAGE_CONSTRAINTS);
+        }
+        return new Profile(trimmedProfileName);
     }
 }
