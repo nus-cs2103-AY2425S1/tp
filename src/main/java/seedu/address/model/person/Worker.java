@@ -8,7 +8,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.DeliveryId;
 
 /**
- * Represents a delivery worker's details
+ * Represents a delivery worker's details.
+ * Contains list of DeliveryIds the worker is responsible for
  */
 public class Worker {
     private final Set<DeliveryId> deliveryIds;

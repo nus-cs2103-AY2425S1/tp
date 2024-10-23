@@ -30,7 +30,7 @@ public class Person {
     private final Role role;
 
     //Temporary initialisation for worker
-    private Worker worker = new Worker(new HashSet<>(Arrays.asList(new DeliveryId("1"))));
+    private Worker worker = new Worker(new HashSet<>(Arrays.asList(new DeliveryId())));
 
     // Data fields
     private final Address address;

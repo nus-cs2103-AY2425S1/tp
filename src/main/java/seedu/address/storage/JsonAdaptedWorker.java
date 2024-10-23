@@ -3,11 +3,13 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.person.Worker;
@@ -17,6 +19,7 @@ import seedu.address.model.person.Worker;
  */
 public class JsonAdaptedWorker {
 
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedWorker.class);
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Worker's %s field is missing!";
 
     private final List<String> deliveryIds = new ArrayList<>();
@@ -28,6 +31,9 @@ public class JsonAdaptedWorker {
     public JsonAdaptedWorker(@JsonProperty("deliveryIds") List<String> deliveryIds) {
         if (deliveryIds != null) {
             this.deliveryIds.addAll(deliveryIds);
+            if (deliveryIds.stream().map(DeliveryId::isValidDeliveryId).anyMatch(result -> !result)) {
+                logger.info("Invalid DeliveryId in Worker");
+            }
         }
     }
 
@@ -49,6 +55,7 @@ public class JsonAdaptedWorker {
         final List<DeliveryId> modelDeliveryIds = new ArrayList<>();
         for (String deliveryIdStr : deliveryIds) {
             if (deliveryIdStr == null) {
+                logger.info("Load Worker Failure. Wrong DeliveryId");
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DeliveryId.class.getSimpleName()));
             }
@@ -59,7 +66,6 @@ public class JsonAdaptedWorker {
         if (deliveryIds.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "deliveryIds"));
         }
-
         return new Worker(new HashSet<>(modelDeliveryIds));
     }
 }

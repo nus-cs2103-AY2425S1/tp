@@ -7,12 +7,17 @@ import java.util.Random;
  */
 public class DeliveryId {
     public final String value;
+    public static final String VALIDATION_REGEX = "^\\d{13}-\\d{4}$";
 
     public DeliveryId(String value) {
         this.value = value;
     }
     public DeliveryId() {
         value = System.currentTimeMillis() + "-" + String.format("%04d", new Random().nextInt(1000));
+    }
+
+    public static boolean isValidDeliveryId(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
