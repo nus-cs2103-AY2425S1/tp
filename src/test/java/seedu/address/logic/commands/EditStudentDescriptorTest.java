@@ -60,7 +60,9 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getName().orElse(null) + ", phone="
                 + editStudentDescriptor.getPhone().orElse(null) + ", email="
                 + editStudentDescriptor.getEmail().orElse(null) + ", tags="
-                + editStudentDescriptor.getTags().orElse(null) + "}";
+                + editStudentDescriptor.getTags().orElse(null) + ", assignments="
+                + editStudentDescriptor.getAssignmentList().orElse(null) + ", remark="
+                + editStudentDescriptor.getRemark().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
 }
