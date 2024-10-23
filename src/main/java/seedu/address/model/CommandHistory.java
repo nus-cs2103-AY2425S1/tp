@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.CommandStack;
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -46,6 +47,14 @@ public class CommandHistory implements ReadOnlyCommandHistory {
     public void setCommandStack(CommandStack commandStack) {
         requireNonNull(commandStack);
         this.commandStack = commandStack;
+    }
+
+    public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandStack.getEarlierCommandGetterResult(commandGetterResult);
+    }
+
+    public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandStack.getLaterCommandGetterResult(commandGetterResult);
     }
     @Override
     public boolean equals(Object other) {

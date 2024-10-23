@@ -67,12 +67,12 @@ public class ModelManager implements Model {
 
     @Override
     public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
-        return commandGetterResult.updateStringToDisplay("earlier");
+        return commandHistory.getEarlierCommandGetterResult(commandGetterResult);
     }
 
     @Override
     public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
-        return commandGetterResult.updateStringToDisplay("later");
+        return commandHistory.getLaterCommandGetterResult(commandGetterResult);
     }
 
     //=========== UserPrefs ==================================================================================

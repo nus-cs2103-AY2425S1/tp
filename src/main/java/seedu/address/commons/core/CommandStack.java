@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.isDequeEqual;
 import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,6 +18,7 @@ public class CommandStack implements Serializable {
     private static final int DEFAULT_COMMAND_STACK_MAX_SIZE = 2000;
     private final Deque<String> commandDeque;
     private final int commandDequeMaxSize;
+    private Iterator<String> commandDequeIterator;
 
     /**
      * Constructs a {@code CommandStack} with default max size, and empty history.
@@ -36,8 +38,16 @@ public class CommandStack implements Serializable {
     public Deque<String> getCommandDeque() {
         return commandDeque;
     }
-    public double getCommandDequeMaxSize() {
+    public int getCommandDequeMaxSize() {
         return commandDequeMaxSize;
+    }
+
+    public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandGetterResult.updateStringToDisplay("earlier");
+    }
+
+    public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandGetterResult.updateStringToDisplay("later");
     }
 
     /**
