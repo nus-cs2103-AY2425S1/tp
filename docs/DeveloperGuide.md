@@ -2,8 +2,18 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+* Table of Contents:
+  * Acknowledgements
+  * Setting Up, getting started
+  * Design
+  * Implementation
+  * Documentation, testing, configurations, dev-ops
+  * Appendix:
+    * Product scope
+    * User stories
+    * Use cases
+    * Non-functional Requirements
+    * Glossary
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,42 +272,86 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Managers of smaller eateries/restaurants who need to maintain organised customer details for delivery purposes.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: For restaurants to efficiently and accurately manage customer contact and information
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                               | So that I can…​                                                                                  |
+| -------- | ------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `* * *`  | manager                                    | add a customer’s detail via a one-line CLI command          | quickly add new customers without >1 step                                                         |
+| `* *`    | manager                                    | retrieve a customer’s detail via a one-line CLI command     | view their details without having to scroll through pages                                          |
+| `* * *`  | manager                                    | delete customer data in one-line CLI                        | delete customers that I want to not deliver to anymore                                             |
+| `* * *`  | manager                                    | search for customers by name                                | quickly access customer profiles during phone orders                                               |
+| `* * *`  | manager                                    | search for customers by phone number                        | quickly access customer profiles during phone orders                                               |
+| `* *`    | manager                                    | edit customer data in one-line CLI                          | update any part of user data in 1 step                                                             |
+| `* *`    | manager                                    | bulk-create multiple customers through a file               | quickly populate the system                                                                        |
+| `* *`    | manager                                    | bulk update multiple customers                              | effectively manage large sets of customers                                                         |
+| `*`      | manager                                    | archive customer data instead of a hard delete              | avoid losing this information permanently                                                          |
+| `*`      | manager                                    | unarchive a customer                                        | continue serving this customer                                                                     |
+| `*`      | manager                                    | list customers by recent order dates                        | quickly identify who is a repeat customer                                                          |
+| `*`      | manager                                    | list customers by order frequency                           | identify regular customers for reward programmes                                                   |
+| `*`      | manager                                    | export customer data as a CSV                               | provide the data to other people to use                                                            |
+| `*`      | manager                                    | convert a CSV file into a readable state file               | have a backup                                                                                      |
+| `*`      | manager                                    | export CSV data using specific criteria                     | reduce the effort needed by others to parse the data                                               |
+| `*`      | manager                                    | validate attributes when adding a customer                  | avoid entering invalid data                                                                        |
+| `*`      | manager                                    | validate attributes when updating a customer                | avoid entering invalid data                                                                        |
+| `*`      | manager                                    | categorise customers as VIP, regular, or new                | know who to target for promotions                                                                  |
+| `*`      | manager                                    | tag customers with dietary restrictions                     | personalise orders and maintain customer service                                                   |
+| `*`      | manager                                    | create a tag                                                | tag customers with a different issue                                                               |
+| `*`      | manager                                    | tag customers with multiple different tags                  | store a pattern of customers                                                                       |
+| `*`      | manager                                    | bulk tag customers with dietary restrictions                | save time                                                                                          |
+| `*`      | manager                                    | search for customers by tag                                 | easily find and manage customers for promotions                                                    |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `manager`, unless specified otherwise)
+
+**Use case: Add a customer**
+
+**MSS**
+1. Manager requests to add customer
+2. AddressBook adds the person
+    
+    Use Case Ends
+
+**Extension**
+* 1a. Manager request/invalid/incomplete
+  * 1a1. AddressBook shows an error message
+  * Use Case Ends
+
+**Use case: Search for a customer**
+
+**MSS**
+1. Manager requests to list the customers
+2. AddressBook shows a list of customers
+3. Manager requests to search for customer by name/phone number
+4. AddressBook shows the customer
+
+   Use Case Ends 
+
+**Extension**
+* 1a. Manager request/invalid/incomplete
+  * 1a1. AddressBook shows an error message.
+  * Use Case Ends
+* 2a. The list is empty
+  * User Case Ends
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Manager requests to list customers
+2.  AddressBook shows a list of customers
+3.  Manager requests to delete a specific customers in the list
+4.  AddressBook deletes the customers
 
     Use case ends.
 
@@ -313,21 +367,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. 	Command Response Time: All operations (add, delete, search) should respond within 1 second 
+3. Bulk Operations: Bulk actions (e.g., adding multiple customers) should handle up to 100 records and complete within 2 seconds
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Error Handling: Meaningful error messages should be provided for invalid inputs (e.g., invalid email or phone number).
+   •	Command Documentation: Provide help text for each command and clear usage instructions.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* 	CLI (Command-Line Interface): A text-based interface where users can type commands to interact with the system
+* Customer: An individual whose details (e.g., name, phone number, email) are stored in the system for tracking purposes
+* Tag: A label or keyword that can be associated with a customer to categorize or describe them (e.g., “vegetarian”, “loyalty-programme”)
+* Parameter: Information provided by the user as part of a command, such as name, email, or phone number
+* CSV (Comma-Separated Values): A common format for storing and exchanging tabular data, where each row represents a record, and each field is separated by a comma
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
