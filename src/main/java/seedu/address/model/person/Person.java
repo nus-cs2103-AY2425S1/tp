@@ -48,8 +48,8 @@ public class Person implements Comparable<Person> {
     /**
      * Every field with orderFrequency must be present and not null
      */
-    public Person(Name name, Phone phone, Email email, Address address, PostalCode postalCode, Set<Tag> tags,
-                  HashMap<Order, Integer> orders) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  PostalCode postalCode, Set<Tag> tags, HashMap<Order, Integer> orders) {
         requireAllNonNull(name, phone, email, address, tags, orders);
         this.name = name;
         this.phone = phone;
