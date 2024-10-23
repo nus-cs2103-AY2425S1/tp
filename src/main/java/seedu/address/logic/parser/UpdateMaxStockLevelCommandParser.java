@@ -16,7 +16,7 @@ import seedu.address.model.product.ProductName;
  */
 public class UpdateMaxStockLevelCommandParser implements Parser<UpdateMaxStockLevelCommand> {
 
-    public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a positive integer";
+    public static final String MESSAGE_INVALID_MAXSTOCK_LEVEL = "Maximum stock Level should be at least 10";
     public static final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces,"
             + " and it should not be blank";
     /**
@@ -59,8 +59,8 @@ public class UpdateMaxStockLevelCommandParser implements Parser<UpdateMaxStockLe
         try {
             int maxStockLevel = Integer.parseInt(argMap.getValue(PREFIX_STOCK_LEVEL).get());
 
-            if (maxStockLevel < 0) {
-                throw new ParseException(MESSAGE_INVALID_STOCK_LEVEL);
+            if (maxStockLevel <= 10) {
+                throw new ParseException(MESSAGE_INVALID_MAXSTOCK_LEVEL);
             }
 
             return new UpdateMaxStockLevelCommand(productName, maxStockLevel);
