@@ -2,6 +2,7 @@ package seedu.ddd.model.contact.common.predicate;
 
 import java.util.function.Predicate;
 
+import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.predicate.EventIdPredicate;
@@ -31,5 +32,10 @@ public class VendorTypePredicate implements Predicate<Contact> {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).toString();
     }
 }

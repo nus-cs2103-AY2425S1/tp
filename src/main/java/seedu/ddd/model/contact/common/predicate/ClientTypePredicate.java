@@ -2,6 +2,7 @@ package seedu.ddd.model.contact.common.predicate;
 
 import java.util.function.Predicate;
 
+import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 
@@ -30,5 +31,10 @@ public class ClientTypePredicate implements Predicate<Contact> {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).toString();
     }
 }
