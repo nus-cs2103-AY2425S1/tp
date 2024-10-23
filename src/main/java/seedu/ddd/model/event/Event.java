@@ -36,6 +36,7 @@ public class Event {
     public Event(List<Client> clients, List<Vendor> vendors, Description description, EventId eventId) {
         requireAllNonNull(clients, vendors, description);
         AppUtil.checkArgument(isValidEvent(clients), MESSAGE_CONSTRAINTS);
+        assert !clients.isEmpty();
         this.clients = new ArrayList<>();
         this.clients.addAll(clients);
         this.vendors = new ArrayList<>();
