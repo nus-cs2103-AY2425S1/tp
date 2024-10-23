@@ -46,6 +46,12 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Tutorial for Beginners
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
