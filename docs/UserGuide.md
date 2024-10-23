@@ -208,11 +208,11 @@ Examples:
 
 ### Reverts an order to pending status : `unmarkOrder`
 
-Reverts an order under the person whose orders are displayed as pending.
+Reverts an order under a selected person from their displayed order list as pending.
 
 Format: `unmarkOrder ORDER_INDEX`
 
-* A person's order list must be selected using `listOrder` before marking an order from that person.
+* A person's order list must first be displayed before unmarking an order from that person.
 * Reverts an order under the selected person at the specified `ORDER_INDEX` as pending.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​

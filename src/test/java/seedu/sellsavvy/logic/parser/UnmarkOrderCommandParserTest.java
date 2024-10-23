@@ -16,7 +16,6 @@ import seedu.sellsavvy.logic.commands.ordercommands.UnmarkOrderCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-
 public class UnmarkOrderCommandParserTest {
 
     private UnmarkOrderCommandParser parser = new UnmarkOrderCommandParser();
