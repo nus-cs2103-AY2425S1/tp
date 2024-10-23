@@ -19,6 +19,26 @@ public class DateTimeTest {
     }
 
     @Test
+    public void isEarlierThan_laterDeliveryTimes() {
+        DateTime datetime = new DateTime("18-06-2023 17:00");
+        assertTrue(datetime.isEarlierThan(new DateTime("18-06-2023 17:01"))); //later time by minute
+        assertTrue(datetime.isEarlierThan(new DateTime("18-06-2024 17:00"))); //later by year
+        assertTrue(datetime.isEarlierThan(new DateTime("18-07-2023 17:00"))); //later by month
+        assertTrue(datetime.isEarlierThan(new DateTime("19-06-2023 17:00"))); //later by day
+    }
+
+    @Test
+    public void isEarlierThan_earlierDeliveryTimes() {
+        DateTime datetime = new DateTime("18-06-2023 08:00");
+        assertFalse(datetime.isEarlierThan(new DateTime("18-06-2023 07:59"))); //earlier time by minute
+        assertFalse(datetime.isEarlierThan(new DateTime("18-06-2022 08:00"))); //earlier by year
+        assertFalse(datetime.isEarlierThan(new DateTime("18-05-2023 08:00"))); //earlier by month
+        assertFalse(datetime.isEarlierThan(new DateTime("17-06-2023 08:00"))); //earlier by day
+        assertFalse(datetime.isEarlierThan(new DateTime("18-06-2023 08:00"))); //same date and time
+    }
+
+
+    @Test
     public void isValidDateTime() {
         // null time
         assertThrows(NullPointerException.class, () -> DateTime.isValidTime(null));
