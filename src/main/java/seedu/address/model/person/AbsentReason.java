@@ -16,7 +16,7 @@ public class AbsentReason {
                     + "and it can be blank to delete attendance";
 
     public static final String VALIDATION_REGEX = "[A-Za-z ]*";
-    public final String value;
+    public final String absentReason;
 
     /**
      * Constructs an {@code AbsentDate}
@@ -26,7 +26,7 @@ public class AbsentReason {
     public AbsentReason(String absentReason) {
         requireNonNull(absentReason);
         checkArgument(isValidAbsentReason(absentReason), MESSAGE_CONSTRAINTS);
-        value = absentReason;
+        this.absentReason = absentReason;
     }
 
     /**
@@ -36,10 +36,14 @@ public class AbsentReason {
         return reason != null && (reason.matches(VALIDATION_REGEX) || reason.isEmpty());
     }
 
+    public String getAbsentReason() {
+        return absentReason;
+    }
+
     @JsonValue
     @Override
     public String toString() {
-        return value;
+        return absentReason;
     }
 
     @Override
@@ -54,11 +58,11 @@ public class AbsentReason {
         }
 
         AbsentReason otherReason = (AbsentReason) other;
-        return value.equals(otherReason.value);
+        return absentReason.equals(otherReason.absentReason);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return absentReason.hashCode();
     }
 }

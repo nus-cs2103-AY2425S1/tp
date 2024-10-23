@@ -13,7 +13,7 @@ public class AbsentDate {
             "The absent date should only be in the form of DD-MM-YYYY.";
 
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$";
-    public final String value;
+    public final String absentDate;
 
     /**
      * Constructs an {@code AbsentDate}
@@ -23,7 +23,7 @@ public class AbsentDate {
     public AbsentDate(String absentDate) {
         requireNonNull(absentDate);
         checkArgument(isValidAbsentDate(absentDate), MESSAGE_CONSTRAINTS);
-        value = absentDate;
+        this.absentDate = absentDate;
     }
 
     /**
@@ -36,9 +36,13 @@ public class AbsentDate {
         return absentDate != null && (absentDate.matches(VALIDATION_REGEX));
     }
 
+    public String getAbsentDate() {
+        return absentDate;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return absentDate;
     }
 
     @Override
@@ -53,11 +57,11 @@ public class AbsentDate {
         }
 
         AbsentDate otherDate = (AbsentDate) other;
-        return value.equals(otherDate.value);
+        return absentDate.equals(otherDate.absentDate);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return absentDate.hashCode();
     }
 }

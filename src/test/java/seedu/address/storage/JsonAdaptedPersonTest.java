@@ -53,9 +53,9 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final String VALID_ABSENT_DATE = BENSON.getAttendances().keySet()
-            .toArray(new AbsentDate[0])[0].value;
+            .toArray(new AbsentDate[0])[0].absentDate;
     private static final String VALID_ABSENT_REASON = BENSON.getAttendances()
-            .get(new AbsentDate(VALID_ABSENT_DATE)).value;
+            .get(new AbsentDate(VALID_ABSENT_DATE)).absentReason;
     private static final HashMap<AbsentDate, AbsentReason> VALID_ATTENDANCE = BENSON.getAttendances();
     private static final Map<String, String> VALID_ATTENDANCE_MAP = convertAttendanceToStringMap(VALID_ATTENDANCE);
 

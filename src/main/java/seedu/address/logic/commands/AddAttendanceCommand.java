@@ -60,7 +60,7 @@ public class AddAttendanceCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         HashMap<AbsentDate, AbsentReason> newAttendances = new HashMap<>(personToEdit.getAttendances());
-        if (absentReason.value.isEmpty()) {
+        if (absentReason.absentReason.isEmpty()) {
             newAttendances.remove(this.absentDate);
         } else {
             newAttendances.put(this.absentDate, this.absentReason);
@@ -77,7 +77,7 @@ public class AddAttendanceCommand extends Command {
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !absentReason.value.isEmpty()
+        String message = !absentReason.absentReason.isEmpty()
                 ? MESSAGE_ADD_ATTENDANCE_SUCCESS : MESSAGE_DELETE_ATTENDANCE_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }
