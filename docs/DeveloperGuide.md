@@ -77,7 +77,7 @@ The bulk of the app's work is done by the following four components:
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `deletep 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagramNew.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -94,7 +94,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/UiClassDiagramNew.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `ConcertListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -117,7 +117,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deletep 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramNew.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -143,7 +143,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagramNew.png" width="450" />
 
 The `Model` component,
 
@@ -157,7 +157,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagramNew.png" width="450" />
 
 </div>
 
@@ -165,7 +165,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagramNew.png" width="550" />
 
 The `Storage` component,
 
@@ -304,13 +304,13 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​           | I want to …​                           | So that I can…​                                                        |
-| -------- | ----------------- | -------------------------------------- | ---------------------------------------------------------------------- |
+| -------- | ----------------- |----------------------------------------| ---------------------------------------------------------------------- |
 | `* * *`  | new user          | see usage instructions                 | refer to instructions when I forget how to use the App                 |
 | `* * *`  | concert organiser | add a new person                       |                                                                        |
 | `* * *`  | concert organiser | delete a person                        | remove entries that I no longer need                                   |
 | `* * *`  | concert organiser | view a person by name                  | locate details of persons without having to go through the entire list |
 | `* * *`  | concert organiser | assign roles to people                 | categorise each contact by what they do                                |
-| `* * *`  | concert organiser | delete roles of people                 | have the most updated roles of each contact                            |
+| `* * *`  | concert organiser | edit roles of people                   | have the most updated roles of each contact                            |
 | `* * *`  | concert organiser | view people by their roles             | easily contact the personnel I need for a concert                      |
 | `* * *`  | concert organiser | create a new concert                   | manage the personnel involved in the concert                           |
 | `* * *`  | concert organiser | view a list of personnel for a concert | view everyone involved in a concert easily                             |
@@ -322,7 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | concert organiser | favourite a contact                    | quickly contact the people I favourite                                 |
 | `*`      | concert organiser | write a review for a contact           | describe past experiences with the contact                             |
 | `* `     | concert organiser | leave a rating for a contact           | generalise past experiences with the contact                           |
-| `* `     | concert organiser | find people by their roles             | easily contact the personnel I need for a concert                      |
 | `* `     | concert organiser | find people by their roles             | easily contact the personnel I need for a concert                      |
 
 ### Use cases
@@ -367,9 +366,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 3a. The list contains the person's name.
+- 3a. The list already contains the person's name.
+  
+  - 3a1. AddressBook shows an error message.
 
-  Use case ends.
+    Use case ends.
 
 - 3b. The given contact details is invalid.
 
@@ -394,7 +395,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The list does not contain the person.
 
-  Use case ends.
+    - 2a1. AddressBook shows an error message.
+
+      Use case ends.
 
 - 3a. The given contact details/index is invalid.
 
@@ -547,16 +550,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -564,16 +567,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `deletep 1`<br>
+   2. Test case: `deletep 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `deletep 0`<br>
+   3. Test case: `deletep 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `deletep`, `deletep x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `deletep`, `deletep x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -581,4 +584,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
