@@ -52,6 +52,10 @@ public class WeddingDate {
         return fullDate.equals(otherDate.fullDate);
     }
 
+    public String toString() {
+        return fullDate.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
+    }
+
     @Override
     public int hashCode() {
         return fullDate.hashCode();

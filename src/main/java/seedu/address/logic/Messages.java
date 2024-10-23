@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Container for user visible messages.
@@ -17,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_TAG_LIST_SIZE = "A contact can only have up to 6 tags \n";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
 
+    public static final String MESSAGE_NO_CONTACTS_SPECIFIED = "No contacts specified!";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -48,6 +50,17 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code wedding} for display to the user.
+     */
+    public static String formatWedding(Wedding wedding) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(wedding.getWeddingName())
+                .append("; Date: ")
+                .append(wedding.getWeddingDate());
         return builder.toString();
     }
 

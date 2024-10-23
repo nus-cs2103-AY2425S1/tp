@@ -9,6 +9,8 @@ import seedu.address.model.person.PersonId;
  * Represents a wedding event and tracks the date and people related to the event, immutable
  */
 public class Wedding {
+
+    public static final String MESSAGE_CONSTRAINTS = "You can only reference contacts through their index.";
     private final WeddingName name;
     private final WeddingDate date;
     private final List<PersonId> assignees; //Stores a list of UserIDs

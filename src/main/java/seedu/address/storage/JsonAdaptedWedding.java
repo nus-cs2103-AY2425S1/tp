@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,10 +43,8 @@ public class JsonAdaptedWedding {
      * Converts a given {@code Wedding} into this class for Jackson use.
      */
     public JsonAdaptedWedding(Wedding source) {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         name = source.getWeddingName().fullName;
-        dateString = source.getWeddingDate().fullDate.format(formatter);
+        dateString = source.getWeddingDate().toString();
 
         assignees.addAll(source.getAssignees().stream()
                 .map(JsonAdaptedPersonId::new)

@@ -9,19 +9,18 @@ import static seedu.address.logic.parser.ParserUtil.parsePersonIndexString;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AssignContactToWeddingCommand;
+import seedu.address.logic.commands.UnassignContactFromWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * This AssignContactToWeddingCommandParser parses user inputs starting with "assignw"
+ * This UnssignContactFromWeddingCommandParser parses user inputs starting with "unassignw"
  * where the first index is interpreted as the wedding index and subsequent indexes after
- * the 'c/' prefix are interpreted as the person index's to assign to the wedding
+ * the 'c/' prefix are interpreted as the person index's to unassign from the wedding
  */
-public class AssignContactToWeddingCommandParser implements Parser<AssignContactToWeddingCommand> {
-
+public class UnassignContactFromWeddingCommandParser implements Parser<UnassignContactFromWeddingCommand> {
     @Override
-    public AssignContactToWeddingCommand parse(String args) throws ParseException {
+    public UnassignContactFromWeddingCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap multimap = ArgumentTokenizer.tokenize(args, PREFIX_CONTACT);
 
@@ -36,7 +35,7 @@ public class AssignContactToWeddingCommandParser implements Parser<AssignContact
         // If c/ prefix is missing
         if (multimap.getValue(PREFIX_CONTACT).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AssignContactToWeddingCommand.MESSAGE_USAGE));
+                    UnassignContactFromWeddingCommand.MESSAGE_USAGE));
         }
 
         Index weddingIndex;
@@ -44,7 +43,7 @@ public class AssignContactToWeddingCommandParser implements Parser<AssignContact
             weddingIndex = ParserUtil.parseIndex(multimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AssignContactToWeddingCommand.MESSAGE_USAGE));
+                    UnassignContactFromWeddingCommand.MESSAGE_USAGE));
         }
 
         String personIndexs = multimap.getValue(PREFIX_CONTACT).orElse("");
@@ -56,7 +55,7 @@ public class AssignContactToWeddingCommandParser implements Parser<AssignContact
 
         Set<Index> personIndexSet = parsePersonIndexString(personIndexs);
 
-        return new AssignContactToWeddingCommand(weddingIndex, personIndexSet);
+        return new UnassignContactFromWeddingCommand(weddingIndex, personIndexSet);
     }
 
 }
