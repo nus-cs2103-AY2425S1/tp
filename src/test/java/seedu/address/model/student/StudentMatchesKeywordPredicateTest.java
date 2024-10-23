@@ -36,7 +36,7 @@ public class StudentMatchesKeywordPredicateTest {
     }
 
     @Test
-    public void test_StudentMatchesKeyword_returnsTrue() {
+    public void test_studentMatchesKeyword_returnsTrue() {
         // keyword longer than student field
         StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate("friends");
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("friend").build()));
@@ -47,7 +47,7 @@ public class StudentMatchesKeywordPredicateTest {
     }
 
     @Test
-    public void test_StudentDoesNotMatchKeyword_returnsFalse() {
+    public void test_studentDoesNotMatchKeyword_returnsFalse() {
         // no keyword
         StudentMatchesQueryPredicate predicate = new StudentMatchesQueryPredicate("      ");
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
