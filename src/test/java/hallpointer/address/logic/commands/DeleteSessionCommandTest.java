@@ -178,7 +178,7 @@ public class DeleteSessionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void setMember(Member target, Member editedMember) {
+        public void setMember(Member target, Member updatedMember) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -234,8 +234,8 @@ public class DeleteSessionCommandTest {
         }
 
         @Override
-        public void setMember(Member target, Member editedMember) {
-            members.setMember(target, editedMember);
+        public void setMember(Member target, Member updatedMember) {
+            members.setMember(target, updatedMember);
         }
         @Override
         public void addMember(Member member) {

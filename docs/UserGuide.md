@@ -96,22 +96,22 @@ Shows a list of all members in the address book.
 
 Format: `list_members `
 
-### Editing a member : `update_member`
+### Updating a member : `update_member`
 
-Edits an existing member in the address book.
+Updates an existing member in the address book.
 
 Format: `update_member INDEX [n/NAME] [r/BLOCK/FLOOR/ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
-* Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …​
+* Updates the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the member will be removed i.e adding of tags is not cumulative.
+* When updating tags, the existing tags of the member will be removed i.e adding of tags is not cumulative.
 * You can remove all the member’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `update_member 1 t/johndoe123_updated n/Johnson Doe` Edits the telegram and name of the 1st member to be `johndoe123_updated` and `Johnson Doe` respectively.
-*  `update_member 2 n/Betsy Crower tag/` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing tags.
+*  `update_member 1 t/johndoe123_updated n/Johnson Doe` Updates the telegram and name of the 1st member to be `johndoe123_updated` and `Johnson Doe` respectively.
+*  `update_member 2 n/Betsy Crower tag/` Updates the name of the 2nd member to be `Betsy Crower` and clears all existing tags.
 
 ### Locating members by name: `find_members`
 
@@ -163,7 +163,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit data directly by editing that data file.
 
 <box type="warning" seamless>
 

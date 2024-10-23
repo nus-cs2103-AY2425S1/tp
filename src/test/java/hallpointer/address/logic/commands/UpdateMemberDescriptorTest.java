@@ -36,20 +36,21 @@ public class UpdateMemberDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        UpdateMemberDescriptor editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        UpdateMemberDescriptor updatedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY)
+                .withName(VALID_NAME_BOB).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different telegram -> returns false
-        editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        updatedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different room -> returns false
-        editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ROOM_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        updatedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withRoom(VALID_ROOM_BOB).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
 
         // different tags -> returns false
-        editedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        updatedAmy = new UpdateMemberDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_AMY.equals(updatedAmy));
     }
 
     @Test

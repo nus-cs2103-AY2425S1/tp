@@ -35,13 +35,13 @@ public class SessionTest {
         assertTrue(session.isSameSession(session));
 
         // different session with same name -> returns true
-        Session editedSession = new SessionBuilder(REHEARSAL).withDate("20 Jan 2025").build();
-        assertTrue(session.isSameSession(editedSession));
+        Session updatedSession = new SessionBuilder(REHEARSAL).withDate("20 Jan 2025").build();
+        assertTrue(session.isSameSession(updatedSession));
 
         // different session with different name -> returns false
-        editedSession = new SessionBuilder(REHEARSAL)
+        updatedSession = new SessionBuilder(REHEARSAL)
                 .withSessionName("Rehearsal 2").build();
-        assertFalse(session.isSameSession(editedSession));
+        assertFalse(session.isSameSession(updatedSession));
 
         // null -> returns false
         assertFalse(session.isSameSession(null));
@@ -64,16 +64,16 @@ public class SessionTest {
         assertFalse(MEETING.equals(5.0f));
 
         // different session name -> returns false
-        Session editedSession = new SessionBuilder(MEETING).withSessionName("Meeting W3").build();
-        assertFalse(MEETING.equals(editedSession));
+        Session updatedSession = new SessionBuilder(MEETING).withSessionName("Meeting W3").build();
+        assertFalse(MEETING.equals(updatedSession));
 
         // different dates -> returns false
-        editedSession = new SessionBuilder(MEETING).withDate("01 Aug 2020").build();
-        assertFalse(MEETING.equals(editedSession));
+        updatedSession = new SessionBuilder(MEETING).withDate("01 Aug 2020").build();
+        assertFalse(MEETING.equals(updatedSession));
 
         // different points -> returns false
-        editedSession = new SessionBuilder(MEETING).withPoints("0").build();
-        assertFalse(MEETING.equals(editedSession));
+        updatedSession = new SessionBuilder(MEETING).withPoints("0").build();
+        assertFalse(MEETING.equals(updatedSession));
     }
 
     @Test

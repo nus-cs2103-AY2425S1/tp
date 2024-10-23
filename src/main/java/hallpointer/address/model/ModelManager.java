@@ -106,9 +106,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setMember(Member target, Member editedMember) {
-        requireAllNonNull(target, editedMember);
-        addressBook.setMember(target, editedMember);
+    public void setMember(Member target, Member updatedMember) {
+        requireAllNonNull(target, updatedMember);
+        addressBook.setMember(target, updatedMember);
         updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
