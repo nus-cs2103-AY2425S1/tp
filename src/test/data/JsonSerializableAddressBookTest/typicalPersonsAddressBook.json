@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "preferred times": ["Monday 1200"]
+    "preferred times": ["1200-1400"]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",

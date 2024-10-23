@@ -1,17 +1,10 @@
 package seedu.address.storage;
 
-import static seedu.address.model.preferredtime.PreferredTime.VALIDATED_PATTERN;
-
-import java.util.regex.Matcher;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.preferredtime.Day;
 import seedu.address.model.preferredtime.PreferredTime;
-import seedu.address.model.preferredtime.Time;
-
 
 
 /**
@@ -50,20 +43,6 @@ public class JsonAdaptedPreferredTime {
         if (!PreferredTime.isValidPreferredTime(preferredTime)) {
             throw new IllegalValueException(PreferredTime.MESSAGE_CONSTRAINTS);
         }
-
-        Matcher matcher = VALIDATED_PATTERN.matcher(preferredTime); // should always match as checked
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid preferred time format: " + preferredTime);
-        }
-
-        if (!Day.isValidDay(matcher.group(1))) {
-            throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
-        }
-
-        if (!Time.isValidTime(matcher.group(2))) {
-            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
-        }
-
         return new PreferredTime(preferredTime);
     }
 }
