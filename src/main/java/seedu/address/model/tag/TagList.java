@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
  */
 public class TagList {
     private final ObservableList<Tag> tags;
+    public static int MAXIMUM_TAGLIST_SIZE = 3;
 
     public TagList() {
         tags = FXCollections.observableArrayList();
@@ -56,9 +57,16 @@ public class TagList {
     }
 
     /**
+     * Returns true if the size of the tag list is below
+     * or equal to the maximum size allowed.
+     */
+    public boolean checkAcceptableSize() {
+        return tags.size() <= MAXIMUM_TAGLIST_SIZE;
+    }
+
+    /**
      * Returns the backing set as an observable {@code ObservableList}.
      */
-
     public ObservableList<Tag> asObservableList() {
         return tags;
     }

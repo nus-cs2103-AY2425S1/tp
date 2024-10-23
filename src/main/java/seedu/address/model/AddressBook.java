@@ -110,6 +110,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param t The tag to be added.
      */
     public boolean addTag(Tag t) {
+        if (this.hasTag(t)) {
+            return false;
+        }
         tags.addTag(t);
         return true;
     }
@@ -119,12 +122,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param t The tag to be deleted.
      */
     public boolean deleteTag(Tag t) {
+        if (!this.hasTag(t)) {
+            return false;
+        }
         tags.deleteTag(t);
         return true;
     }
 
     public boolean hasTag(Tag t) {
         return tags.contains(t);
+    }
+
+    /**
+     * Returns true if the size of the tag list is below
+     * or equal to the maximum size allowed.
+     */
+    public boolean checkAcceptableTagListSize() {
+        return tags.checkAcceptableSize();
     }
 
     public String tagsToString() {

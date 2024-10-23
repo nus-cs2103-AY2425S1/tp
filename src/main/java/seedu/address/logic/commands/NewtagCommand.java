@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import javax.swing.text.html.HTML;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagList;
 
 /**
  * Adds a new predefined tag.
@@ -16,6 +19,8 @@ public class NewtagCommand extends Command {
             + "Example: " + COMMAND_WORD + " Bride's Friend";
     public static final String MESSAGE_SUCCESS = "New tag added: ";
     public static final String MESSAGE_DUPLICATE = "This tag already exists.\n";
+    public static final String MESSAGE_TOO_MANY_TAGS = "You have more than " + TagList.MAXIMUM_TAGLIST_SIZE
+            + " tags.\nPlease remove some using deletetag.\n";
     private final Tag tag;
 
     /**
@@ -29,6 +34,9 @@ public class NewtagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+        if (!model.checkAcceptableTagListSize()) {
+            throw new CommandException(MESSAGE_TOO_MANY_TAGS);
+        }
         boolean isSuccessful = model.addTag(tag);
         if (!isSuccessful) {
             throw new CommandException(MESSAGE_DUPLICATE);
