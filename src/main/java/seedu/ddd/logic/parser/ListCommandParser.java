@@ -15,8 +15,8 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.exceptions.ParseException;
-import seedu.ddd.model.contact.common.ContactPredicateBuilder;
-import seedu.ddd.model.event.common.EventPredicateBuilder;
+import seedu.ddd.model.contact.common.predicate.ContactPredicateBuilder;
+import seedu.ddd.model.event.common.predicate.EventPredicateBuilder;
 
 /**
  * Parses input arguments and creates a new ListCommand object

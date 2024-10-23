@@ -1,10 +1,11 @@
-package seedu.ddd.model.event.common;
+package seedu.ddd.model.event.common.predicate;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * Tests that a {@code Contact}'s {@code Description} matches any of the keywords given.

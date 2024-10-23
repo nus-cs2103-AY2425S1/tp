@@ -1,4 +1,4 @@
-package seedu.ddd.model.event.common;
+package seedu.ddd.model.event.common.predicate;
 
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
@@ -10,6 +10,9 @@ import java.util.function.Predicate;
 import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.contact.common.predicate.ContactPredicateBuilder;
+import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.EventId;
 
 /**
  * Builds a chain of predicates to the List event command depending on the PREFIX present in argMultimap.
@@ -31,6 +34,13 @@ public class EventPredicateBuilder {
         Predicate<Event> combinedPredicate = event -> true; // Start with a default predicate (all events).
 
         // Check for each prefix and chain predicates accordingly.
+        combinedPredicate = addDescriptionPredicate(argMultimap, combinedPredicate);
+        combinedPredicate = addIdPredicate(argMultimap, combinedPredicate);
+
+        return combinedPredicate;
+    }
+    private Predicate<Event> addDescriptionPredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
+            throws ParseException {
         if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
             String trimmedArgs = argMultimap.getValue(PREFIX_DESC).get().trim();
             if (trimmedArgs.isEmpty()) {
@@ -41,6 +51,10 @@ public class EventPredicateBuilder {
             combinedPredicate = combinedPredicate.and(
                     new DescriptionContainsKeywordsPredicate(Arrays.asList(descriptionKeywords)));
         }
+        return combinedPredicate;
+    }
+    private Predicate<Event> addIdPredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
+            throws ParseException {
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             String trimmedArgs = argMultimap.getValue(PREFIX_ID).get();
             if (trimmedArgs.isEmpty()) {
@@ -50,7 +64,20 @@ public class EventPredicateBuilder {
             EventId eventId = new EventId(trimmedArgs);
             combinedPredicate = combinedPredicate.and(new EventIdPredicate(eventId));
         }
-
         return combinedPredicate;
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventPredicateBuilder)) {
+            return false;
+        }
+
+        EventPredicateBuilder otherEventPredicateBuilder = (EventPredicateBuilder) other;
+        return argMultimap.equals(otherEventPredicateBuilder.argMultimap);
     }
 }

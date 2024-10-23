@@ -1,10 +1,11 @@
-package seedu.ddd.model.contact.common;
+package seedu.ddd.model.contact.common.predicate;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.StringUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.contact.common.Contact;
 
 /**
  * Tests that a {@code Contact}'s {@code Address} matches any of the keywords given.

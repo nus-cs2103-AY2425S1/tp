@@ -1,9 +1,10 @@
-package seedu.ddd.model.contact.common;
+package seedu.ddd.model.contact.common.predicate;
 
 import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.tag.Tag;
 
 /**

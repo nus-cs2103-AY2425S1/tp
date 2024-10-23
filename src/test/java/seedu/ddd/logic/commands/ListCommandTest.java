@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ModelManager;
 import seedu.ddd.model.UserPrefs;
-import seedu.ddd.model.contact.common.ClientTypePredicate;
-import seedu.ddd.model.contact.common.NameContainsKeywordsPredicate;
-import seedu.ddd.model.contact.common.VendorTypePredicate;
+import seedu.ddd.model.contact.common.predicate.ClientTypePredicate;
+import seedu.ddd.model.contact.common.predicate.NameContainsKeywordsPredicate;
+import seedu.ddd.model.contact.common.predicate.VendorTypePredicate;
 
 
 /**
