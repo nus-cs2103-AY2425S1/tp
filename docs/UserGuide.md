@@ -32,20 +32,21 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
    - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Enter a command:
+   - Type a command in the command box and press **Enter** to send it. For example, typing `help` and pressing Enter will open a help window.
 
-   * `list` : Lists all contacts.
+    Here are some commands you can try:
+    - `list`: Displays all the student and teacher details.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    - `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A`: Adds a new student with the specified details
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    - `delete 3`: Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    - `clear`: Deletes all contacts.
 
-   * `exit` : Exits the app.
+    - `exit`: Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+    For more detailed explanations of each command, see the [Features](#features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
 
