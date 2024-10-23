@@ -3,10 +3,12 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ObjectPropertyBase;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -23,18 +25,21 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags = new LinkedHashSet<>();
+    private final Set<Note> notes = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Note> notes) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.notes.addAll(notes);
+
     }
 
     public Name getName() {
@@ -61,6 +66,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Set<Note> getNotes() {
+        return Collections.unmodifiableSet(notes);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -72,6 +81,29 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Wraps the Person so that it becomes an ObjectProperty
+     *
+     * @param person the person to wrap around
+     * @return an ObjectProperty of the person
+     * @see ObjectProperty
+     */
+    public static ObjectProperty<Person> personProperty(Person person) {
+        ObjectProperty<Person> property = new ObjectPropertyBase<>() {
+            @Override
+            public Object getBean() {
+                return null;
+            }
+
+            @Override
+            public String getName() {
+                return "";
+            }
+        };
+        property.set(person);
+        return property;
     }
 
     /**
@@ -94,13 +126,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && notes.equals(otherPerson.notes);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, notes);
     }
 
     @Override
@@ -111,6 +144,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("notes", notes)
                 .toString();
     }
 

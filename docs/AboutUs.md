@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nicholas Cheng De Fei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicholas-cheng-de-fei.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Nicholas-Cheng-De-Fei)]
+[[linkedin](https://www.linkedin.com/in/nicholas-cheng-)]
 
-* Role: Project Advisor
+- Role: Team Lead
+- Responsibilities: Project Coordination, VScode Expert
 
-### Jane Doe
+### Joel Tio
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joeltio.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[website](https://joelt.io)]
+[[github](https://github.com/joeltio)]
+[[linkedin](https://www.linkedin.com/in/joel-tio)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Code Quality, Git Expert
 
-### Johnny Doe
+### Lim Jia Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/itlimjiawei.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/ITLimJiaWei)]
+[[linkedin](https://www.linkedin.com/in/jiawei88)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Testing, IntelliJ Expert
 
-### Jean Doe
+### Kenneth Teo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kennethteo2002.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/KennethTeo2002)]
+[[linkedin](https://www.linkedin.com/in/kenneth-teo-boon-jun)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Integration, Deliverables and deadlines
 
-### James Doe
+### Sheen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sheenkerr.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/sheenkerr)]
+[[linkedin](https://www.linkedin.com/in/sheenkerr)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Documentation

@@ -2,10 +2,12 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -23,10 +25,29 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, ObjectProperty<Person> focusedPerson) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+
+        // Add event handler
+        personListView.setOnMouseClicked(event -> handleListViewClick(event, focusedPerson));
+    }
+
+    /**
+     * When user clicks on a person, the details plane changes.
+     */
+    private void handleListViewClick(MouseEvent event, ObjectProperty<Person> focusedPerson) {
+        // Get the index of the clicked item
+        int index = personListView.getSelectionModel().getSelectedIndex();
+        Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
+
+        if (index != -1) {
+            focusedPerson.set(selectedPerson);
+            logger.info("Clicked on person: " + selectedPerson + " at index " + index);
+        } else {
+            logger.info("Clicked on an empty area of the ListView");
+        }
     }
 
     /**

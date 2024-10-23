@@ -1,10 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,6 +46,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        // to modify for interaction with GUI
     }
 
     /**
@@ -56,7 +59,10 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+                .toList());
+        notes.addAll(source.getNotes().stream()
+                .map(JsonAdaptedNote::new)
+                .toList());
     }
 
     /**
@@ -70,40 +76,49 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        final List<Note> personNotes = new ArrayList<>();
+        for (JsonAdaptedNote note : notes) {
+            personNotes.add(note.toModelType());
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
+        final Name modelName = new Name(validateField(name, Name.class.getSimpleName(), Name.MESSAGE_CONSTRAINTS,
+                Name::isValidName));
+        final Phone modelPhone = new Phone(validateField(phone, Phone.class.getSimpleName(), Phone.MESSAGE_CONSTRAINTS,
+                Phone::isValidPhone));
+        final Email modelEmail = new Email(validateField(email, Email.class.getSimpleName(), Email.MESSAGE_CONSTRAINTS,
+                Email::isValidEmail));
+        final Address modelAddress = new Address(validateField(address, Address.class.getSimpleName(),
+                Address.MESSAGE_CONSTRAINTS, Address::isValidAddress));
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
+        final Set<Tag> modelTags = new LinkedHashSet<>(personTags);
+        final Set<Note> modelNotes = new LinkedHashSet<>(personNotes);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNotes);
     }
 
+    /**
+     * Validates a field based on its presence and provided constraints.
+     *
+     * @param field the field to be validated.
+     * @param fieldName the name of the field that is used for error messages.
+     * @param constraintMessage the message to show if validation fails.
+     * @param isValid a function that checks if the field meets the validation constraints.
+     * @return the validated field value.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     */
+    private String validateField(String field, String fieldName, String constraintMessage,
+                                 Function<String, Boolean> isValid) throws IllegalValueException {
+        // Check if the field is missing
+        if (field == null) {
+            String errorMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, fieldName);
+            throw new IllegalValueException(errorMessage);
+        }
+
+        // Check if the field violates constraints, if not valid, throw IllegalValueException
+        if (!isValid.apply(field)) {
+            throw new IllegalValueException(constraintMessage);
+        }
+        return field;
+    }
 }

@@ -1,19 +1,25 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
+#openButton,
+#helpMessage {
+  -fx-text-fill: white;
 }
 
-#copyButton {
-    -fx-background-color: dimgray;
+#openButton {
+  -fx-background-color: dimgray;
 }
 
-#copyButton:hover {
-    -fx-background-color: gray;
+#openButton:hover {
+  -fx-background-color: gray;
 }
 
-#copyButton:armed {
-    -fx-background-color: darkgray;
+#openButton:armed {
+  -fx-background-color: darkgray;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+  -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#errorMessageLabel {
+  -fx-text-fill: red; /* Makes the text red */
+  -fx-padding: 0 0 0 10px; /* Adds 10px padding to the left */
 }

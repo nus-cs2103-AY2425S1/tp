@@ -34,9 +34,14 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ContactDetails contactDetailsPanel;
+    private SearchBox searchBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private StackPane searchBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -49,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane contactDetailsPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -78,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,7 +119,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
+        contactDetailsPanel = new ContactDetails(logic.getFocusedPerson());
+        contactDetailsPanelPlaceholder.getChildren().add(contactDetailsPanel.getRoot());
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFocusedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -121,6 +134,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        searchBox = new SearchBox(this::executeFindCommand);
+        searchBoxPlaceholder.getChildren().add(searchBox.getRoot());
     }
 
     /**
@@ -163,10 +179,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -186,10 +198,29 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            searchBox.clearSearchBox();
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Executes the find command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#execute(String)
+     */
+    private CommandResult executeFindCommand(String commandText) throws CommandException, ParseException {
+        try {
+            CommandResult commandResult = logic.execute(commandText);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: " + commandText);
             throw e;
         }
     }
