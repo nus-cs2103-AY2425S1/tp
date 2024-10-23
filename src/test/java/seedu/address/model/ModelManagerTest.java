@@ -3,8 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONSULTATIONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalConsultations.CONSULT_1;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 
@@ -94,8 +96,31 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasConsultation_nullConsultation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasConsult(null));
+    }
+
+    @Test
+    public void hasConsultation_consultationNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasConsult(CONSULT_1));
+    }
+
+    @Test
+    public void hasConsultation_consultationInAddressBook_returnsTrue() {
+        modelManager.addConsult(CONSULT_1);
+        assertTrue(modelManager.hasConsult(CONSULT_1));
+    }
+
+    @Test
+    public void getFilteredConsultationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredConsultationList().remove(0));
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withStudent(ALICE).withStudent(BENSON)
+                .withConsultation(CONSULT_1).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -123,6 +148,7 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        modelManager.updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

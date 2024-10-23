@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -14,6 +15,9 @@ import seedu.address.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -88,14 +92,36 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
+     */
+    boolean hasConsult(Consultation consult);
+
+    /**
      * Adds the given consult.
      * @param consult Consultation to be added.
      */
     void addConsult(Consultation consult);
 
+    /** Returns an unmodifiable view of the filtered consultation list */
+    ObservableList<Consultation> getFilteredConsultationList();
+
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
-     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
+     * Updates the filter of the filtered consultation list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
      */
-    boolean hasConsult(Consultation consult);
+    void updateFilteredConsultationList(Predicate<Consultation> predicate);
+
+    /**
+     * Deletes the given consultation.
+     * The consultation must exist in TAHub.
+     */
+    void deleteConsult(Consultation consult);
+
+    /**
+     * Finds a student by their name.
+     * @param name The name of the student to search for.
+     * @return An Optional containing the student if found, or empty if not.
+     */
+    Optional<Student> findStudentByName(seedu.address.model.student.Name name);
 }

@@ -81,6 +81,16 @@ public class Consultation {
     }
 
     /**
+     * Returns true if the consultation contains the specified student.
+     *
+     * @param student The student to check for.
+     * @return True if the student is attending the consultation, false otherwise.
+     */
+    public boolean hasStudent(Student student) {
+        return students.contains(student);
+    }
+
+    /**
      * Returns true if both consultations have the same date, time, and students.
      *
      * @param other The other consultation to compare.

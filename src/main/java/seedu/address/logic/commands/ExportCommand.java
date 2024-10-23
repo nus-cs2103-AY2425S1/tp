@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,19 +20,37 @@ import seedu.address.model.student.Student;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
+    public static final String FORCE_FLAG = "-f";
     public static final CommandType COMMAND_TYPE = CommandType.EXPORTSTUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the current list of students to a CSV file. "
-            + "Parameters: FILEPATH "
-            + "Example: " + COMMAND_WORD + " data/export.csv";
+            + "Parameters: FILENAME " + "[" + FORCE_FLAG + "] "
+            + "\nExample: " + COMMAND_WORD + " students"
+            + "\nExample with force flag: " + COMMAND_WORD + " " + FORCE_FLAG + " students";
 
     public static final String MESSAGE_SUCCESS = "Exported %1$d students to %2$s";
     public static final String MESSAGE_FAILURE = "Failed to export students: %1$s";
+    public static final String MESSAGE_FILE_EXISTS = "File %1$s already exists. Use -f flag to overwrite.";
 
-    private final Path filePath;
+    private final String filename;
+    private final boolean isForceExport;
+    private final Path baseDir; // New field for base directory
 
-    public ExportCommand(Path filePath) {
-        this.filePath = filePath;
+    /**
+     * Creates an ExportCommand to export data to the specified filename in the default directory
+     */
+    public ExportCommand(String filename, boolean isForceExport) {
+        this(filename, isForceExport, Paths.get("data"));
+    }
+
+    /**
+     * Creates an ExportCommand to export data to the specified filename in the specified directory
+     * This constructor is primarily for testing purposes
+     */
+    public ExportCommand(String filename, boolean isForceExport, Path baseDir) {
+        this.filename = filename;
+        this.isForceExport = isForceExport;
+        this.baseDir = baseDir;
     }
 
     /**
@@ -46,6 +66,20 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> studentList = model.getFilteredStudentList();
+
+        // Create directories if they don't exist
+        try {
+            Files.createDirectories(baseDir);
+        } catch (IOException e) {
+            throw new CommandException(String.format(MESSAGE_FAILURE, "Could not create directory: " + e.getMessage()));
+        }
+
+        Path filePath = baseDir.resolve(filename + ".csv");
+
+        // Check if file exists and force flag is not set
+        if (!isForceExport && Files.exists(filePath)) {
+            throw new CommandException(String.format(MESSAGE_FILE_EXISTS, filePath));
+        }
 
         try (FileWriter csvWriter = new FileWriter(filePath.toFile())) {
             // Write CSV header
@@ -92,6 +126,7 @@ public class ExportCommand extends Command {
             return false;
         }
         ExportCommand otherCommand = (ExportCommand) other;
-        return filePath.equals(otherCommand.filePath);
+        return filename.equals(otherCommand.filename)
+                && isForceExport == otherCommand.isForceExport;
     }
 }

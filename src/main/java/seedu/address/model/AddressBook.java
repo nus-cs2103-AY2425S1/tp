@@ -99,10 +99,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a consultation to TAHub.
+     * Adds a consultation to the address book and sorts the list by date.
      */
-    public void addConsult(Consultation c) {
-        consults.add(c);
+    public void addConsult(Consultation consult) {
+        consults.add(consult);
+
+        // Sort by date first, and by time if the dates are the same
+        consults.sort((c1, c2) -> {
+            int dateComparison = c1.getDate().compareTo(c2.getDate());
+            if (dateComparison == 0) {
+                return c1.getTime().compareTo(c2.getTime()); // Compare by time if dates are the same
+            }
+            return dateComparison; // Otherwise, compare by date
+        });
     }
 
     /**
@@ -123,6 +132,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+    }
+
+    /**
+     * Removes {@code consult} from this {@code AddressBook}.
+     * {@code consult} must exist in TAHub.
+     *
+     * @param consult The consult to be removed.
+     */
+    public void removeConsult(Consultation consult) {
+        consults.remove(consult);
     }
 
     //// util methods

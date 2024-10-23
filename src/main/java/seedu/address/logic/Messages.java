@@ -17,10 +17,12 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX =
             "The student provided at index %1$d is invalid";
-    public static final String MESSAGE_INVALID_INDEX_SHOWN = "The student provided at index/indices %1$s is invalid";
+    public static final String MESSAGE_INVALID_INDEX_SHOWN = "The target provided at index/indices %1$s is invalid";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_CONSULTATION_DISPLAYED_INDEX =
+                "The consultation provided at index %1$d is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

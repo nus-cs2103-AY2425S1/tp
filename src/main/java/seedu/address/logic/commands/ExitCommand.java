@@ -20,6 +20,7 @@ public class ExitCommand extends Command {
     public CommandType getCommandType() {
         return COMMAND_TYPE;
     }
+
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, COMMAND_TYPE);
