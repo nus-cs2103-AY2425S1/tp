@@ -188,7 +188,7 @@ Examples:
 
 ### Exporting the contact list : `export`
 
-Exports every contact in the contact list into the specified file type.
+Exports the contacts in the contact list into the specified file type.
 
 Format: `export f/FILETYPE`
 
