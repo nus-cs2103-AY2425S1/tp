@@ -12,7 +12,7 @@ UniqueStudyGroupTagList -[hidden]down- UniquePersonList
 UniqueStudyGroupTagList -right-> "*" StudyGroupTag
 UniquePersonList -right-> Person
 
-Person -up-> "*" StudyGroupTag   //change to study group tag
+Person -up-> "*" StudyGroupTag
 
 Person *--> Name
 Person *--> Email
