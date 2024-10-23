@@ -11,6 +11,9 @@ import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new DeleteTagCommand object
+ */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTagCommand
@@ -37,6 +40,12 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
         return new DeleteTagCommand(index, tagsToDelete);
     }
 
+    /**
+     * parses the list to a set of tags
+     * @param list of strings that have the prefix 't/'
+     * @return set of tags to be deleted
+     * @throws ParseException
+     */
     private Set<Tag> parseTagsToDelete(List<String> list) throws ParseException {
         assert list != null;
         assert !list.isEmpty();
