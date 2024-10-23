@@ -2,6 +2,7 @@ package seedu.hireme.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.testutil.Assert.assertThrows;
 import static seedu.hireme.testutil.TypicalInternshipApplications.AIRBNB;
 import static seedu.hireme.testutil.TypicalInternshipApplications.FIGMA;
@@ -77,12 +78,14 @@ public class JsonAddressBookStorageTest {
         original.addItem(GOOGLE);
         original.removeItem(FIGMA);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
+        assertTrue(jsonAddressBookStorage.readAddressBook(filePath).isPresent());
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook<InternshipApplication>(readBack));
 
         // Save and read without specifying file path
         original.addItem(AIRBNB);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
+        assertTrue(jsonAddressBookStorage.readAddressBook().isPresent());
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook<InternshipApplication>(readBack));
 

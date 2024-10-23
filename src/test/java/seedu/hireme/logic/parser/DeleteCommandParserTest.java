@@ -18,7 +18,7 @@ import seedu.hireme.logic.commands.DeleteCommand;
  */
 public class DeleteCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private final DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
