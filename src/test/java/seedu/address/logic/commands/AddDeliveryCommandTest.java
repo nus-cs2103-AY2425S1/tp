@@ -198,6 +198,14 @@ public class AddDeliveryCommandTest {
         public ObservableList<Delivery> getModifiedDeliveryList() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public ObservableList<Person> getSortedSupplierList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateSortedSupplierList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

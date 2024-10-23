@@ -185,6 +185,9 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            personListPanel = new PersonListPanel(logic.getSortedSupplierList());
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
             deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
             deliveryListPanelPlaceholder.getChildren().add(deliveryListPanel.getRoot());
 
