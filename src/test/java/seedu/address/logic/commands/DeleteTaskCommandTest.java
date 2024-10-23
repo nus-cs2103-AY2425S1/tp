@@ -54,6 +54,15 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
+    public void toString_validIndex_returnsCorrectString() {
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST_TASK);
+        System.out.println(deleteTaskCommand.toString());
+        String expectedString = "seedu.address.logic.commands." +
+                "DeleteTaskCommand{targetIndex=seedu.address.commons.core.index.Index{zeroBasedIndex=0}}";
+        assertEquals(expectedString, deleteTaskCommand.toString());
+    }
+
+    @Test
     public void equals() {
         DeleteTaskCommand deleteFirstCommand = new DeleteTaskCommand(INDEX_FIRST_TASK);
         DeleteTaskCommand deleteSecondCommand = new DeleteTaskCommand(INDEX_SECOND_TASK);

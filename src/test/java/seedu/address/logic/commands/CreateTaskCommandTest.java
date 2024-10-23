@@ -59,6 +59,27 @@ public class CreateTaskCommandTest {
 
         assertThrows(CommandException.class, () -> command.execute(model), CreateTaskCommand.MESSAGE_DUPLICATE_TASK);
     }
+    @Test
+    public void getTaskToAdd_validTaskSet_returnsCorrectSet() {
+        // Prepare a set of tasks to add
+        HashSet<Task> tasksToAdd = new HashSet<>();
+        tasksToAdd.add(TODO_TASK);
+
+        CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
+
+        assertEquals(tasksToAdd, command.getTaskToAdd());
+    }
+    @Test
+    public void toString_validTaskSet_returnsCorrectString() {
+        // Prepare a set of tasks to add
+        HashSet<Task> tasksToAdd = new HashSet<>();
+        tasksToAdd.add(TODO_TASK);
+
+        CreateTaskCommand command = new CreateTaskCommand(tasksToAdd);
+
+        String expectedString = "seedu.address.logic.commands.CreateTaskCommand{taskToAdd=[[T][ ] Buy groceries]}";
+        assertEquals(expectedString, command.toString());
+    }
 
     @Test
     public void equals() {

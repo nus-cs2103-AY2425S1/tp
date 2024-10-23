@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class DateTest {
     private static final String VALID_DATE = "2023-10-20";
     private static final String INVALID_DATE = "2023-15-45";
     private static final String VALID_DATE_FORMATTED = "Oct 20 2023";
-
+    private static final String DIFFERENT_DATE = "2023-11-20";
     private static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     @Test
@@ -47,6 +48,19 @@ public class DateTest {
         Date date = new Date(VALID_DATE);
         String formattedDate = date.format(CUSTOM_FORMATTER);
         assertEquals(VALID_DATE_FORMATTED, formattedDate);
+    }
+
+    @Test
+    public void getDate_validDate_returnsLocalDate() {
+        Date date = new Date(VALID_DATE);
+        LocalDate expectedLocalDate = LocalDate.parse(VALID_DATE);
+        assertEquals(expectedLocalDate, date.getDate());
+    }
+
+    @Test
+    public void equals_nonDateObject_returnsFalse() {
+        Date date = new Date(VALID_DATE);
+        assertFalse(date.equals("Some String"));
     }
 
     @Test
