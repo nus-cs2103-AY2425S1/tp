@@ -128,6 +128,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(String appointment) {
+        this.appointments.add(new Appointment(appointment));
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, age, sex, appointments, tags);
     }
