@@ -27,6 +27,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -36,7 +37,8 @@ public class EditPersonCommand extends EditCommand {
 
     public static final String COMMAND_FIELD = "person";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FIELD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + COMMAND_FIELD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -87,7 +89,7 @@ public class EditPersonCommand extends EditCommand {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
-                                                        false , false, CommandTabChange.PERSON);
+                                                        false , false, CommandTabChange.PERSON, CommandDetailChange.NONE);
     }
 
     /**

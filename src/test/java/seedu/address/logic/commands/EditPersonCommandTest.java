@@ -162,7 +162,10 @@ public class EditPersonCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearAllCommand()));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearEventCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditPersonCommand(INDEX_SECOND_PERSON, DESC_AMY)));

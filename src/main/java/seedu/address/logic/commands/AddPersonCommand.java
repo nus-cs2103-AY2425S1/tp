@@ -12,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -60,7 +61,7 @@ public class AddPersonCommand extends AddCommand {
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), false,
-                false, CommandTabChange.PERSON);
+                false, CommandTabChange.PERSON, CommandDetailChange.NONE);
     }
 
     @Override

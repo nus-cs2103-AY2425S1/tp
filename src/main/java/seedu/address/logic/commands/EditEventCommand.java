@@ -1,12 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CELEBRITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,6 +20,7 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -31,7 +30,8 @@ public class EditEventCommand extends EditCommand {
 
     public static final String COMMAND_FIELD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FIELD + ": Edits the details of the event identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + COMMAND_FIELD + ": Edits the details of the event identified "
             + "by the index number used in the displayed event list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -42,7 +42,9 @@ public class EditEventCommand extends EditCommand {
             + "Example: " + COMMAND_WORD
             + " " + COMMAND_FIELD + " 1 "
             + PREFIX_EVENT_TIME + "Oct 4th 2022 "
-            + PREFIX_EVENT_VENUE + "Broadway";
+            + PREFIX_EVENT_VENUE + "Broadway "
+            + PREFIX_EVENT_CELEBRITY + "Jack Black "
+            + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
@@ -72,7 +74,16 @@ public class EditEventCommand extends EditCommand {
         }
 
         if (editEventDescriptor.celebrityName != null ) {
-            editEventDescriptor.setCelebrity(model.findPerson(editEventDescriptor.celebrityName));
+            editEventDescriptor.setCelebrity(model.findPerson(editEventDescriptor.celebrityName.trim()));
+        }
+
+        if (editEventDescriptor.contactsNames != null) {
+            String[] newContacts = editEventDescriptor.contactsNames.trim().split(", ", 0);
+            List<Person> newList = new ArrayList<>();
+            for (int i = 0; i < newContacts.length; i++) {
+                newList.add(model.findPerson(newContacts[i]));
+            }
+            editEventDescriptor.setContacts(newList);
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());
@@ -85,7 +96,7 @@ public class EditEventCommand extends EditCommand {
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.eventFormat(editedEvent)),
-                                                            false, false, CommandTabChange.EVENT);
+                                                            false, false, CommandTabChange.EVENT, CommandDetailChange.NONE);
     }
 
     /**
@@ -99,8 +110,9 @@ public class EditEventCommand extends EditCommand {
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Person updatedCelebrity = editEventDescriptor.getCelebrity().orElse(eventToEdit.getCelebrity());
+        List<Person> updatedContacts = editEventDescriptor.getContacts().orElse(eventToEdit.getContacts());
 
-        return new Event(updatedEventName, updatedTime, updatedVenue, updatedCelebrity);
+        return new Event(updatedEventName, updatedTime, updatedVenue, updatedCelebrity, updatedContacts);
     }
 
     @Override
@@ -137,6 +149,8 @@ public class EditEventCommand extends EditCommand {
         private Venue venue;
         private String celebrityName;
         private Person celebrity;
+        private String contactsNames;
+        private List<Person> contacts;
 
         public EditEventDescriptor() {}
 
@@ -150,13 +164,16 @@ public class EditEventCommand extends EditCommand {
             setVenue(toCopy.venue);
             setCelebrityName(toCopy.celebrityName);
             setCelebrity(toCopy.celebrity);
+            setContactsNames(toCopy.contactsNames);
+            setContacts(toCopy.contacts);
+
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, time, venue, celebrity, celebrityName);
+            return CollectionUtil.isAnyNonNull(name, time, venue, celebrity, celebrityName, contactsNames);
         }
 
         public void setEventName(EventName name) {
@@ -195,6 +212,15 @@ public class EditEventCommand extends EditCommand {
             this.celebrityName = celebrityName;
         }
 
+        public void setContactsNames(String contactsNames) {this.contactsNames = contactsNames; }
+
+        public void setContacts(List<Person> contacts) {
+            this.contacts = contacts;
+        }
+
+        public Optional<List<Person>> getContacts() {
+            return Optional.ofNullable(contacts);
+        }
 
         @Override
         public boolean equals(Object other) {

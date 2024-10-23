@@ -25,10 +25,10 @@ import seedu.address.model.tag.Tag;
 public class AddPersonCommandParser implements Parser<AddPersonCommand> {
 
     /**
-     * Parses the given argument in the context of the AddContactCommand
-     * and returns an AddContactCommand object
+     * Parses the given argument in the context of the AddPersonCommand
+     * and returns an AddPersonCommand object
      * @param userInput
-     * @return AddContactCommand object
+     * @return AddPersonCommand object
      * @throws ParseException
      */
     @Override

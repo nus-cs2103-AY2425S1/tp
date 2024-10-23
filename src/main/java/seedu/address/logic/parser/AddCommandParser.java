@@ -23,8 +23,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static final Logger logger = LogsCenter.getLogger(AddCommandParser.class);
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewCommand
-     * and returns a corresponding ViewCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * and returns a corresponding AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddEventCommandParser().parse(keywords);
         }
 
-        logger.finer("This user input caused a ParseException: view " + args);
+        logger.finer("This user input caused a ParseException: add " + args);
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 

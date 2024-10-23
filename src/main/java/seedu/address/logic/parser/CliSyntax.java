@@ -15,5 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_EVENT_TIME = new Prefix("t/");
     public static final Prefix PREFIX_EVENT_VENUE = new Prefix("v/");
     public static final Prefix PREFIX_EVENT_CELEBRITY = new Prefix("c/");
-
+    public static final Prefix PREFIX_EVENT_CONTACTS = new Prefix("p/");
 }

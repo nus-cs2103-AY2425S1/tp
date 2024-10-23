@@ -5,28 +5,28 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.event.EventNameContainsKeywordsPredicate;
+import seedu.address.model.event.EventCelebrityMatchesKeywordPredicate;
 import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
- * Finds and lists all events in address book whose name contains any of the argument keywords.
+ * Filters the events by the specified celebrity and displays it.
  * Keyword matching is case insensitive.
  */
-public class FindEventCommand extends FindCommand {
-
+public class FilterEventCommand extends FilterCommand {
     public static final String COMMAND_FIELD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the events by "
+            + "the specified celebrity (case-insensitive) and displays it.\n"
+            + "Parameters: NAME\n"
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " Lebron James";
 
-    private final EventNameContainsKeywordsPredicate predicate;
+    private final EventCelebrityMatchesKeywordPredicate predicate;
 
-    public FindEventCommand(EventNameContainsKeywordsPredicate predicate) {
+    public FilterEventCommand(EventCelebrityMatchesKeywordPredicate predicate) {
         this.predicate = predicate;
     }
+
 
     @Override
     public CommandResult execute(Model model) {
@@ -35,6 +35,7 @@ public class FindEventCommand extends FindCommand {
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()),
                 false, false, CommandTabChange.EVENT, CommandDetailChange.SIMPLIFIED);
+
     }
 
     @Override
@@ -44,12 +45,12 @@ public class FindEventCommand extends FindCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindEventCommand)) {
+        if (!(other instanceof FilterEventCommand)) {
             return false;
         }
 
-        FindEventCommand otherFindEventCommand = (FindEventCommand) other;
-        return predicate.equals(otherFindEventCommand.predicate);
+        FilterEventCommand otherFilterEventCommand = (FilterEventCommand) other;
+        return predicate.equals(otherFilterEventCommand.predicate);
     }
 
     @Override

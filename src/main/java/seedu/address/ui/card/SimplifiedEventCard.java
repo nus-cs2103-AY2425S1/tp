@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.card;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -6,13 +6,14 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
+import seedu.address.ui.UiPart;
 
 /**
- * An UI component that displays information of a {@code Event}.
+ * An UI component that displays the simplified information of a {@code Event}.
  */
-public class EventCard extends UiPart<Region> {
+public class SimplifiedEventCard extends UiPart<Region> {
 
-    private static final String FXML = "EventListCard.fxml";
+    private static final String FXML = "SimplifiedEventListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,7 +41,7 @@ public class EventCard extends UiPart<Region> {
     /**
      * Creates a {@code EventCard} with the given {@code Event} and index to display.
      */
-    public EventCard(Event event, int displayedIndex) {
+    public SimplifiedEventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
