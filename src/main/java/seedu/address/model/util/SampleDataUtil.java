@@ -103,12 +103,12 @@ public class SampleDataUtil {
                 new BillingDate("1"),
                 new Phone("65218000")
         ), new Company(
-                new Name("Meta"),
+                new Name("YouTube"),
                 new Address("9 Straits View, Marina One, Singapore 018937"),
                 new BillingDate("2"),
                 new Phone("12345678")
         ), new Company(
-                new Name("Amazon"),
+                new Name("Test Company"),
                 new Address("23 Church St, #10-01, Singapore 049481"),
                 new BillingDate("3"),
                 new Phone("67220300")
@@ -118,14 +118,14 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Company sampleCompany : getSampleCompanies()) {
+            sampleAb.addCompany(sampleCompany);
         }
         for (Job sampleJob : getSampleJobs()) {
             sampleAb.addJob(sampleJob);
         }
-        for (Company sampleCompany : getSampleCompanies()) {
-            sampleAb.addCompany(sampleCompany);
+        for (Person samplePerson : getSamplePersons()) {
+            sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
     }

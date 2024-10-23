@@ -2,14 +2,11 @@ package seedu.address.model.job;
 
 import seedu.address.model.common.Name;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Represents a Job's company in the address book.
+ * This extends from the Name class to avoid code duplication.
  */
 public class JobCompany extends Name {
-    public static final String MESSAGE_CONSTRAINTS = "The company provided does not exist";
 
     /**
      * Constructs a {@code JobCompany}.
@@ -22,9 +19,20 @@ public class JobCompany extends Name {
 
     /**
      * Returns true if a given company exists.
+     * Not used in constructor but used in ParserUtil to construct a JobCompany.
      */
     public static boolean isValidCompany(String test) {
         return Name.isValidName(test);
+    }
+
+    /**
+     * Checks if this name is equal to the specified company's name.
+     *
+     * @param name Name of the company specified.
+     * @return true if equal.
+     */
+    public boolean matchesCompanyName(Name name) {
+        return this.fullName.equals(name.fullName);
     }
 
     @Override
