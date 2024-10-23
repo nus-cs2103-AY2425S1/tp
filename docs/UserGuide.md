@@ -146,7 +146,7 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * Role-specific fields must correspond to the resulting role after editing.
   For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
   Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` (k USD) is required,  
-  and for `Partner`, `pe/PARTNERSHIP_END_DATE` must be provided.  
+  and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
   If the resulting role does not have the specified field, the edit will be invalid.
 
 Examples:
