@@ -29,8 +29,7 @@ public class Teacher extends Person {
      */
     public Teacher(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                    Set<Subject> subjects, Set<String> classes) {
-        super(name, gender, phone, email, address, tags, subjects, classes);
-        addTeacherTag(tags);
+        super(name, gender, phone, email, address, addTeacherTag(tags), subjects, classes);
     }
 
     private static Set<Tag> addTeacherTag(Set<Tag> tags) {
