@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,7 @@ import seedu.address.model.tag.StudyGroupTag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_FILE_NAME = "File name should not be empty.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
@@ -39,6 +41,23 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code filePath} into an {@code File} and returns it. Leading
+     * and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified filePath is invalid (empty string filePath or null filePath).
+     */
+    public static File parseFilePath(String filePath) throws ParseException {
+        try {
+            String trimmedFilePath = filePath.trim();
+            if (trimmedFilePath.isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_FILE_NAME);
+            }
+            return new File(trimmedFilePath);
+        } catch (NullPointerException ioe) {
+            throw new ParseException(MESSAGE_INVALID_FILE_NAME);
+        }
+    }
     /**
      * Parses a {@code String name} into a {@code Name}. Leading and trailing
      * whitespaces will be trimmed.
