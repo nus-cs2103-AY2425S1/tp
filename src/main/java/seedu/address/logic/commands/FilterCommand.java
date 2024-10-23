@@ -38,6 +38,9 @@ public class FilterCommand extends Command {
         }
     };
 
+    /**
+     * Creates a FilterCommand with the given set of tags and RSVP statuses to filter by.
+     */
     public FilterCommand(Set<Tag> tagSet, Set<RsvpStatus> statusSet) {
         requireNonNull(tagSet);
         requireNonNull(statusSet);

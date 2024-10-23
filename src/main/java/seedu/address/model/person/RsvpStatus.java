@@ -32,6 +32,9 @@ public enum RsvpStatus {
         return status;
     }
 
+    /**
+     * Returns an RsvpStatus with the given input status from the user (1, 2, 3)
+     */
     public static RsvpStatus of(String status) {
         requireNonNull(status);
         checkArgument(checkValidStatus(status), MESSAGE_CONSTRAINTS);
@@ -47,6 +50,9 @@ public enum RsvpStatus {
         }
     }
 
+    /**
+     * Returns true if the given status is a valid status (1, 2 or 3)
+     */
     public static boolean checkValidStatus(String status) {
         requireNonNull(status);
         switch (status) {

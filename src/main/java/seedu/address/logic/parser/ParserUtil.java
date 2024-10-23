@@ -107,6 +107,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String status} into a {@code RsvpStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
     public static RsvpStatus parseRsvpStatus(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();
@@ -118,6 +124,9 @@ public class ParserUtil {
 
     }
 
+    /**
+     * Parses {@code Collection<String> statuses} into a {@code Set<RsvpStatus>}.
+     */
     public static Set<RsvpStatus> parseStatuses(Collection<String> statuses) throws ParseException {
         requireNonNull(statuses);
         final Set<RsvpStatus> statusSet = new HashSet<>();
