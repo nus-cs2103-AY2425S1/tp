@@ -34,7 +34,7 @@ create DeleteCommand
 DeleteCommandParser -> DeleteCommand
 activate DeleteCommand
 
-DeleteCommand --> DeleteCommandParser :
+DeleteCommand --> DeleteCommandParser
 deactivate DeleteCommand
 
 DeleteCommandParser --> AddressBookParser : d
@@ -51,7 +51,6 @@ activate DeleteCommand
 
 alt Person not found
     DeleteCommand -> LogicManager : throw CommandException
-    LogicManager -> MainWindow : showError("Invalid person name")
 else Duplicate person detected
     DeleteCommand -> Model : updateFilteredPersonListWithDuplicates("John")
         activate Model
@@ -59,8 +58,7 @@ else Duplicate person detected
         Model --> DeleteCommand
         deactivate Model
 
-        DeleteCommand -> LogicManager : return CommandResult("Duplicate persons found. Please delete by index.")
-        LogicManager -> MainWindow : showResult("Duplicate persons found. Please delete by index.")
+        DeleteCommand -> LogicManager : CommandResult("Duplicate persons found. Please delete by index.")
 else Valid person
     DeleteCommand -> Model : deletePerson("John")
     activate Model
@@ -77,10 +75,6 @@ else Valid person
 
     DeleteCommand --> LogicManager : r
     deactivate DeleteCommand
-
-
-
-    LogicManager -> MainWindow : showResult("Deleted Person: John Doe")
 end
 
 [<--LogicManager
