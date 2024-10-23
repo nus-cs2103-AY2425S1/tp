@@ -10,46 +10,46 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * A Serializable class that contains command history and command history max size.
+ * A Serializable class that contains command history data and command history max size.
  * Guarantees: immutable.
  */
 public class CommandStack implements Serializable {
     private static final int DEFAULT_COMMAND_STACK_MAX_SIZE = 2000;
-    private final Deque<String> commandStack;
-    private final int commandStackMaxSize;
+    private final Deque<String> commandDeque;
+    private final int commandDequeMaxSize;
 
     /**
      * Constructs a {@code CommandStack} with default max size, and empty history.
      */
     public CommandStack() {
-        commandStackMaxSize = DEFAULT_COMMAND_STACK_MAX_SIZE;
-        commandStack = new ArrayDeque<>();
+        commandDequeMaxSize = DEFAULT_COMMAND_STACK_MAX_SIZE;
+        commandDeque = new ArrayDeque<>();
     }
 
     /**
      * Creates a {@code CommandStack} with specified max size, and specified history.
      */
-    public CommandStack(Deque<String> commandStack, int commandStackMaxSize) {
-        this.commandStack = commandStack;
-        this.commandStackMaxSize = commandStackMaxSize;
+    public CommandStack(Deque<String> commandDeque, int commandDequeMaxSize) {
+        this.commandDeque = commandDeque;
+        this.commandDequeMaxSize = commandDequeMaxSize;
     }
-    public Deque<String> getCommandStack() {
-        return commandStack;
+    public Deque<String> getCommandDeque() {
+        return commandDeque;
     }
-    public double getCommandStackMaxSize() {
-        return commandStackMaxSize;
+    public double getCommandDequeMaxSize() {
+        return commandDequeMaxSize;
     }
 
     /**
-     * Adds an executed command string to the front.
+     * Adds an executed command string to the front of {@code commandDeque}.
      * If size of the command stack exceeds {@code commandStackMaxSize},
      * removes the earliest added command string in history.
      */
     public void addCommand(String commandString) {
-        assert(commandStack.size() <= commandStackMaxSize);
-        commandStack.addFirst(commandString);
-        if (commandStack.size() == commandStackMaxSize + 1) {
-            commandStack.removeLast();
+        assert(commandDeque.size() <= commandDequeMaxSize);
+        commandDeque.addFirst(commandString);
+        if (commandDeque.size() == commandDequeMaxSize + 1) {
+            commandDeque.removeLast();
         }
     }
     @Override
@@ -62,18 +62,18 @@ public class CommandStack implements Serializable {
             return false;
         }
         CommandStack otherCommandStack = (CommandStack) other;
-        return isDequeEqual(commandStack, otherCommandStack.commandStack)
-                && commandStackMaxSize == otherCommandStack.commandStackMaxSize;
+        return isDequeEqual(commandDeque, otherCommandStack.commandDeque)
+                && commandDequeMaxSize == otherCommandStack.commandDequeMaxSize;
     }
     @Override
     public int hashCode() {
-        return Objects.hash(commandStack, commandStackMaxSize);
+        return Objects.hash(commandDeque, commandDequeMaxSize);
     }
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("commandStack", commandStack)
-                .add("commandStackMaxSize", commandStackMaxSize)
+                .add("commandDeque", commandDeque)
+                .add("commandDequeMaxSize", commandDequeMaxSize)
                 .toString();
     }
 
