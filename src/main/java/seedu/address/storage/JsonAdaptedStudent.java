@@ -129,7 +129,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
         Grade modelGrade = null;
         if (grade != null) {
-            if (!Grade.isValidGradeName(grade)) {
+            if (!Grade.isValidGradeIndex(grade)) {
                 throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
             }
             modelGrade = new Grade(grade);

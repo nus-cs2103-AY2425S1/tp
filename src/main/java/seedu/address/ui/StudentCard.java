@@ -41,16 +41,16 @@ public class StudentCard extends PersonCard {
         grade.getStyleClass().add("grade-label");
         switch (person.getGrade().gradeIndex) {
         case "1":
-            grade.getStyleClass().add("excellent");
+            grade.getStyleClass().add("failing");
             break;
         case "2":
-            grade.getStyleClass().add("good");
-            break;
-        case "3":
             grade.getStyleClass().add("satisfactory");
             break;
+        case "3":
+            grade.getStyleClass().add("good");
+            break;
         case "4":
-            grade.getStyleClass().add("failing");
+            grade.getStyleClass().add("excellent");
             break;
         default:
             // Don't change anything

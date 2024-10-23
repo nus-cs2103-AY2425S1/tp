@@ -29,13 +29,13 @@ public class GradeTest {
     @Test
     public void isValidGradeName() {
         // null grade index
-        assertThrows(NullPointerException.class, () -> Grade.isValidGradeName(null));
+        assertThrows(NullPointerException.class, () -> Grade.isValidGradeIndex(null));
 
         // grade index too small
-        assertFalse(Grade.isValidGradeName("-1"));
+        assertFalse(Grade.isValidGradeIndex("-1"));
 
         // grade index too big
-        assertFalse(Grade.isValidGradeName("5"));
+        assertFalse(Grade.isValidGradeIndex("5"));
     }
 
     @Test
@@ -60,6 +60,6 @@ public class GradeTest {
 
     @Test
     public void testToString() {
-        assertEquals("[4]", new Grade("4").toString());
+        assertEquals("4", new Grade("4").toString());
     }
 }
