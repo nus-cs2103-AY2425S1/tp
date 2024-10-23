@@ -18,7 +18,10 @@
 #commandTextArea {
     -fx-background-color: #1C1C1C;
     -fx-control-inner-background: #1C1C1C;
-    -fx-faint-focus-color: #1C1C1C;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent; /* Remove the main focus outline */
+    -fx-border-color: transparent; /* Ensure there is no border color */
+    -fx-border-width: 0px; /* Remove any border width */
 
     -fx-font-family: "Jetbrains Mono";
     -fx-font-size: 13pt;
