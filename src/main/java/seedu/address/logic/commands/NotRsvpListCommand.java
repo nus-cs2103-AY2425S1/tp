@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.person.RsvpedPredicate;
 
 /**
@@ -19,7 +20,7 @@ public class NotRsvpListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons who have not yet RSVPed.";
 
-    public static final Predicate<Person> SHOW_ALL_NOT_RSVPED_PERSONS = new RsvpedPredicate().negate();
+    public static final Predicate<Person> SHOW_ALL_NOT_RSVPED_PERSONS = new RsvpedPredicate(RsvpStatus.PENDING);
 
     @Override
     public CommandResult execute(Model model) {

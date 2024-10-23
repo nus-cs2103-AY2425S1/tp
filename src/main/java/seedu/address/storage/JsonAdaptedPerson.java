@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,19 +28,19 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final boolean isRsvp;
+    private final RsvpStatus rsvpStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty ("isRsvp") boolean isRsvp,
+            @JsonProperty("email") String email, @JsonProperty ("rsvpStatus") RsvpStatus rsvpStatus,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.isRsvp = isRsvp;
+        this.rsvpStatus = rsvpStatus;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -52,7 +53,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        isRsvp = source.getRsvp();
+        rsvpStatus = source.getRsvpStatus();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -96,7 +97,7 @@ class JsonAdaptedPerson {
 
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, isRsvp, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, rsvpStatus, modelTags);
     }
 
 }
