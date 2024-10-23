@@ -9,16 +9,16 @@ import seedu.hireme.model.internshipapplication.DateComparator;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 
 /**
- * Sorts the internship applications list by date in either ascending or descending order.
+ * Sorts the internship applications list by either the earliest or latest application dates.
  */
 public class SortCommand extends Command<InternshipApplication> {
     public static final String COMMAND_WORD = "/sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the internship applications list by date in either ascending or descending order based on "
-            + "the specified order (case-insensitive) and displays the sorted list with index numbers.\n"
-            + "Parameters: ORDER (asc or desc)\n"
-            + "Example: " + COMMAND_WORD + " desc";
+            + ": Sorts the internship applications list by the specified order (case-insensitive and either by "
+            + "earliest or latest application dates) and displays the sorted list with index numbers.\n"
+            + "Parameters: ORDER (earliest or latest)\n"
+            + "Example: " + COMMAND_WORD + " latest";
 
     private final DateComparator comparator;
 

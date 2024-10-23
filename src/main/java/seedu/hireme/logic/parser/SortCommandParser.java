@@ -21,18 +21,16 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        boolean isInvalidCommand = trimmedArgs.isEmpty() || trimmedArgs.split("\\s+").length > 1;
-        if (isInvalidCommand) {
+        try {
+            boolean isEarliestOrder = ParserUtil.parseSortingOrder(args);
+            String order = isEarliestOrder ? "earliest" : "latest";
+            logger.info(String.format("Sorting list by %s applications!", order));
+
+            return new SortCommand(new DateComparator(isEarliestOrder));
+        } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE), pe);
         }
-
-        boolean isEarliestOrder = ParserUtil.parseSortingOrder(trimmedArgs);
-        String order = isEarliestOrder ? "ascending" : "descending";
-        logger.info(String.format("Sorting list in %s order!", order));
-
-        return new SortCommand(new DateComparator(isEarliestOrder));
     }
 
 }
