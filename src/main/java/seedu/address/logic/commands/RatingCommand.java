@@ -18,7 +18,7 @@ import seedu.address.model.restaurant.Restaurant;
  * Provide rating for restaurants in the address book.
  */
 public class RatingCommand extends Command {
-    public static final String COMMAND_WORD = "rating";
+    public static final String COMMAND_WORD = "rate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set or edit the rating of the restaurant identified "
             + "by the index number used in the last restaurant listing. "
