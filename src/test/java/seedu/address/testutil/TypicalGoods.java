@@ -70,16 +70,16 @@ public class TypicalGoods {
         ReceiptLog receiptLog = new ReceiptLog();
 
         List<GoodsReceipt> g = new ArrayList<>(Arrays.asList(
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Apple")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Banana")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Carrot")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Dragonfruit")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Eggplant")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Fish")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Grape")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Ham")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Icecream")).build(),
-            new GoodsReceiptBuilder().withGoods(new GoodsName("Jam")).build()
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Apple")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Banana")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Carrot")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Dragonfruit")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Eggplant")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Fish")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Grape")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Ham")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Icecream")).build(),
+            new GoodsReceiptBuilder().withGoodsName(new GoodsName("Jam")).build()
         ));
 
         receiptLog.setReceipts(g);

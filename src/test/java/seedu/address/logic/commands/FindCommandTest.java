@@ -13,13 +13,17 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -76,10 +80,35 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_withCategory_multiplePersonsFound() {
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+
+        Function<GoodsCategories, Predicate<Person>> hasCategory = goodsCategory -> person -> model
+                .getGoods()
+                .getReceiptList()
+                .stream()
+                .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
+                .anyMatch(goodsReceipt -> goodsReceipt
+                        .getGoods()
+                        .getCategory()
+                        .equals(goodsCategory));
+
+        for (GoodsCategories category : GoodsCategories.values()) {
+            FindCommand command = new FindCommand(person -> false, category);
+            expectedModel.updateFilteredPersonList(hasCategory.apply(category));
+            String expectedMessage = String.format(
+                    MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size());
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+        }
+    }
+
+    @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        String expected = FindCommand.class.getCanonicalName()
+                + "{predicate=" + predicate + ", goodsCategory=" + null + "}";
         assertEquals(expected, findCommand.toString());
     }
 

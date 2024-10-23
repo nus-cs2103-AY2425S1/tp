@@ -3,13 +3,15 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -24,25 +26,33 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY);
-        String name = argMultimap.getPreamble();
-        if (!name.isEmpty()) {
-            String[] nameKeywords = name.split("\\s+");
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        } else if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY)) {
-            GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-            // TODO: Fix this implementation
-            return new FindCommand(null);
-        } else {
+
+        String name = argMultimap.getPreamble().trim();
+
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(List.of(name.split("\\s+")));
+
+        GoodsCategories category = parseGoodsCategory(argMultimap);
+
+        if (name.isEmpty() && category == null) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
+        Predicate<Person> predicate = name.isEmpty() ? p -> false : nameContainsKeywordsPredicate;
+
+        return new FindCommand(predicate, category);
     }
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private GoodsCategories parseGoodsCategory(ArgumentMultimap argMultimap) throws ParseException {
+        Optional<String> categoryArg = argMultimap.getValue(PREFIX_CATEGORY);
+        if (categoryArg.isEmpty()) {
+            return null;
+        }
+        try {
+            return ParserUtil.parseGoodsCategory(categoryArg.get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), pe);
+        }
     }
 }

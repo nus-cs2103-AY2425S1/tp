@@ -31,6 +31,10 @@ public class Goods {
         return goodsName.toString();
     }
 
+    public GoodsCategories getCategory() {
+        return category;
+    }
+
     /**
      * Returns True if the goods name is valid.
      *
@@ -56,7 +60,6 @@ public class Goods {
     public String convertToCsvWrite() {
         return goodsName + "," + category;
     }
-
 
     @Override
     public boolean equals(Object object) {

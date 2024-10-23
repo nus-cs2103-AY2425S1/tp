@@ -19,7 +19,8 @@ public class GoodsReceiptBuilder {
     public static final Date DEFAULT_PROCUREMENT_DATE = new Date("2021-01-01 00:00");
     public static final Date DEFAULT_ARRIVAL_DATE = new Date("2021-01-01 00:00");
 
-    private GoodsName goods;
+    private Goods goods;
+    private GoodsName goodsName;
     private Name supplierName;
     private Date procurementDate;
     private Date arrivalDate;
@@ -31,7 +32,7 @@ public class GoodsReceiptBuilder {
      * Creates a {@code GoodsReceiptBuilder} with the default details.
      */
     public GoodsReceiptBuilder() {
-        goods = DEFAULT_GOODS_NAME;
+        goodsName = DEFAULT_GOODS_NAME;
         supplierName = DEFAULT_SUPPLIER_NAME;
         procurementDate = DEFAULT_PROCUREMENT_DATE;
         arrivalDate = DEFAULT_ARRIVAL_DATE;
@@ -40,12 +41,19 @@ public class GoodsReceiptBuilder {
         price = DEFAULT_PRICE;
     }
 
+    /**
+     * Sets the {@code goods} of the {@code GoodsReceipt} that we are building.
+     */
+    public GoodsReceiptBuilder withGoods(Goods goods) {
+        this.goods = goods;
+        return this;
+    }
 
     /**
-     * Sets the {@code GoodsName} of the {@code GoodsReceipt} that we are building.
+     * Sets the {@code goodsName} of the {@code GoodsReceipt} that we are building.
      */
-    public GoodsReceiptBuilder withGoods(GoodsName goods) {
-        this.goods = goods;
+    public GoodsReceiptBuilder withGoodsName(GoodsName goodsName) {
+        this.goodsName = goodsName;
         return this;
     }
 
@@ -103,7 +111,11 @@ public class GoodsReceiptBuilder {
      * @return a GoodsReceipt object
      */
     public GoodsReceipt build() {
-        return new GoodsReceipt(new Goods(goods, GoodsCategories.CONSUMABLES), supplierName,
+        Goods buildGoods = goods;
+        if (buildGoods == null) {
+            buildGoods = new Goods(goodsName, GoodsCategories.CONSUMABLES);
+        }
+        return new GoodsReceipt(buildGoods, supplierName,
                 procurementDate, arrivalDate, isDelivered, quantity, price);
     }
 }

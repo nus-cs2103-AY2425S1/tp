@@ -9,11 +9,11 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
  * A utility class containing a list of {@code GoodsReceipts} objects to be used in tests.
  */
 public class TypicalGoodsReceipts {
-    public static final GoodsReceipt aliceReceipt = new GoodsReceiptBuilder()
+    public static final GoodsReceipt ALICE_RECEIPT = new GoodsReceiptBuilder()
             .withSupplierName(ALICE.getName())
             .build();
 
-    public static final GoodsReceipt bobReceipt = new GoodsReceiptBuilder()
+    public static final GoodsReceipt BOB_RECEIPT = new GoodsReceiptBuilder()
             .withSupplierName(BOB.getName())
             .build();
 }
