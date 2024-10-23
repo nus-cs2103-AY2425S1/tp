@@ -84,7 +84,8 @@ public class SwitchParserModeCommandTest {
     @Test
     public void toStringMethod() {
         SwitchParserModeCommand switchBuyerCommand = new SwitchParserModeCommand(ParserMode.BUYER);
-        String expected = SwitchParserModeCommand.class.getCanonicalName() + "{switching to: =" + ParserMode.BUYER + "}";
+        String expected = SwitchParserModeCommand.class.getCanonicalName()
+                + "{switching to: =" + ParserMode.BUYER + "}";
         assertEquals(expected, switchBuyerCommand.toString());
     }
 }
