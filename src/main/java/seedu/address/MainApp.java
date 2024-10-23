@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -21,12 +22,19 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.student.Student;
+import seedu.address.model.tut.Tutorial;
+import seedu.address.model.tut.TutorialList;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.AssignmentStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonAssignmentStorage;
+import seedu.address.storage.JsonTutorialStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TutorialStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -58,7 +66,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        AssignmentStorage assignmentStorage = new JsonAssignmentStorage(userPrefs.getAssignmentFilePath());
+        TutorialStorage tutorialStorage = new JsonTutorialStorage(userPrefs.getTutorialFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, assignmentStorage, tutorialStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -72,25 +82,78 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        Optional<AssignmentList> assignmentListOptional;
+        AssignmentList assignmentData;
+        Optional<TutorialList> tutorialListOptional;
+        TutorialList tutorialData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(AddressBook::new);
+            assignmentListOptional = storage.readAssignments();
+            if (assignmentListOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getAssignmentFilePath()
+                        + " populated with empty assignment list.");
+            }
+            assignmentData = assignmentListOptional.orElseGet(AssignmentList::new);
+
+            tutorialListOptional = storage.readTutorials();
+            if (tutorialListOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getTutorialFilePath()
+                        + " populated with empty tutorial list.");
+            }
+            tutorialData = tutorialListOptional.orElseGet(TutorialList::new);
+            synchronizeStudentsInTutorials(initialData, tutorialData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            assignmentData = new AssignmentList();
+            tutorialData = new TutorialList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            storage.saveAddressBook(initialData);
+            storage.saveAssignments(assignmentData);
+            storage.saveTutorials(tutorialData);
+        } catch (IOException e) {
+            logger.warning("Data couldn't be saved!");
+        }
+
+        return new ModelManager(initialData, userPrefs, assignmentData, tutorialData);
+    }
+
+    /**
+     * Synchronizes the students in the tutorials with the students in the address book.
+     * Ensures that the student instances in the tutorials are the same as those in the address book.
+     *
+     * @param addressBook The address book containing the list of students.
+     * @param tutorialList The list of tutorials to synchronize.
+     */
+    private void synchronizeStudentsInTutorials(ReadOnlyAddressBook addressBook, TutorialList tutorialList) {
+        for (Tutorial tutorial : tutorialList.getTutorials()) {
+            List<Student> studentsInTutorial = tutorial.getStudents();
+            for (int i = 0; i < studentsInTutorial.size(); i++) {
+                Student studentInTutorial = studentsInTutorial.get(i);
+                Optional<Student> matchingStudent = addressBook.getStudentList().stream()
+                        .filter(s -> s.getStudentId().equals(studentInTutorial.getStudentId()))
+                        .findFirst();
+                if (matchingStudent.isPresent()) {
+                    studentsInTutorial.set(i, matchingStudent.get());
+                } else {
+                    logger.warning("Student with ID " + studentInTutorial.getStudentId()
+                            + " in tutorial " + tutorial.getTutorialId() + " not found in AddressBook.");
+                }
+            }
+        }
     }
 
     private void initLogging(Config config) {
@@ -117,7 +180,7 @@ public class MainApp extends Application {
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-            if (!configOptional.isPresent()) {
+            if (configOptional.isEmpty()) {
                 logger.info("Creating new config file " + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());

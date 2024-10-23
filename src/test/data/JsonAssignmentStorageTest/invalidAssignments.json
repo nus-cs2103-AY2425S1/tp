@@ -1,0 +1,11 @@
+{
+  "assignments": [
+    {
+      "title": "Math Assignment",
+      "dueDate": "not-a-valid-date",
+      "indexToStatusMap": {
+        "1": true
+      }
+    }
+  ]
+}

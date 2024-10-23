@@ -1,0 +1,25 @@
+@startuml
+start
+
+:User marks assignment;
+
+if () then ([Empty title or index])
+    stop
+else ([else])
+    :Construct mark assignment command;
+
+    :Execute mark assignment command;
+
+    if () then ([Assignment title does not exist or index is invalid]])
+        stop
+    else ([else])
+        :Retrieve student ID;
+        :Set the specified student's assignment status to completed;
+        :Return successful command result;
+        :Save assignments into json storage file;
+    endif
+endif
+
+:Display results;
+stop
+@enduml

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.tut.TutorialList;
 
 /**
  * Clears the address book.
@@ -18,6 +20,8 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
+        model.setAssignments(new AssignmentList());
+        model.setTutorials(new TutorialList());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
