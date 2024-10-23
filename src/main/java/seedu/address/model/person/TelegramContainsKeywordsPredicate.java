@@ -32,7 +32,8 @@ public class TelegramContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        TelegramContainsKeywordsPredicate otherTelegramContainsKeywordsPredicate = (TelegramContainsKeywordsPredicate) other;
+        TelegramContainsKeywordsPredicate otherTelegramContainsKeywordsPredicate =
+                (TelegramContainsKeywordsPredicate) other;
         return keywords.equals(otherTelegramContainsKeywordsPredicate.keywords);
     }
 

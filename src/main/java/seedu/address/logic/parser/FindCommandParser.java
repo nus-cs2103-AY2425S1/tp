@@ -32,15 +32,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
         List<String> nameKeywords = argumentMultimap.getAllValues(PREFIX_NAME);
         List<String> roleKeywords = argumentMultimap.getAllValues(PREFIX_ROLE);
         List<String> telegramKeywords = argumentMultimap.getAllValues(PREFIX_TELEGRAM);
 
-        boolean hasEmptyInput = nameKeywords.stream().anyMatch(str -> str.trim().isEmpty())
-                || roleKeywords.stream().anyMatch(str -> str.trim().isEmpty())
-                || telegramKeywords.stream().anyMatch(str -> str.trim().isEmpty());
+        boolean hasAnyEmptyInput = hasEmptyInput(nameKeywords)
+                || hasEmptyInput(roleKeywords)
+                || hasEmptyInput(telegramKeywords);
 
-        if (hasEmptyInput) {
+        if (hasAnyEmptyInput) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -61,7 +62,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-
-
+    /**
+     * Returns true if any of the element in the list contains empty {@code String} values in the given
+     * {@code List<String>}
+     */
+    public static boolean hasEmptyInput(List<String> list) {
+        return list.stream().map(String::trim).anyMatch(str -> str.trim().isEmpty());
+    }
 
 }

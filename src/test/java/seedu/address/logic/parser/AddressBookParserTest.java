@@ -27,6 +27,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
+import seedu.address.model.person.TelegramContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -82,7 +83,8 @@ public class AddressBookParserTest {
                         .collect(Collectors.joining(" ")));
 
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords),
-                new RoleContainsKeywordsPredicate(List.of())), command);
+                new RoleContainsKeywordsPredicate(List.of()),
+                new TelegramContainsKeywordsPredicate(List.of())), command);
     }
 
 
