@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -38,7 +39,6 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<EmergencyContact> emergencyContacts;
-    private EmergencyContact firstEmergencyContact;
     private Doctor doctor;
     private Set<Tag> tags;
 
@@ -50,9 +50,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        firstEmergencyContact = new EmergencyContact(new Name(DEFAULT_ECNAME),
+        EmergencyContact emergencyContact = new EmergencyContact(new Name(DEFAULT_ECNAME),
                 new Phone(DEFAULT_ECPHONE), new Relationship(DEFAULT_ECRS));
-        emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
+        emergencyContacts = new LinkedHashSet<>(Arrays.asList(emergencyContact));
         doctor = new Doctor(new DoctorName(DEFAULT_DOC_NAME), new Phone(DEFAULT_DOC_PHONE),
                     new Email(DEFAULT_DOC_EMAIL));
         tags = new HashSet<>();
@@ -66,7 +66,6 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        firstEmergencyContact = personToCopy.getFirstEmergencyContact();
         emergencyContacts = personToCopy.getEmergencyContacts();
         doctor = personToCopy.getDoctor();
         tags = new HashSet<>(personToCopy.getTags());
@@ -114,35 +113,26 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code EmergencyContact Name} of the {@code Person} that we are
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are
      * building.
      */
-    public PersonBuilder withEcName(String ecName) {
-        this.firstEmergencyContact = new EmergencyContact(new Name(ecName), firstEmergencyContact.getPhone(),
-                firstEmergencyContact.getRelationship());
-        this.emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
+    public PersonBuilder withEmergencyContact(String ecName, String ecPhone, String ecrs) {
+        EmergencyContact emergencyContact = new EmergencyContact(new Name(ecName), new Phone(ecPhone),
+                new Relationship(ecrs));
+        this.emergencyContacts = new LinkedHashSet<>(List.of(emergencyContact));
         return this;
     }
 
     /**
-     * Sets the {@code EmergencyContact Phone} of the {@code Person} that we are
+     * Adds an {@code EmergencyContact} to the {@code Person} that we are
      * building.
      */
-    public PersonBuilder withEcPhone(String ecPhone) {
-        this.firstEmergencyContact = new EmergencyContact(firstEmergencyContact.getName(), new Phone(ecPhone),
-                firstEmergencyContact.getRelationship());
-        this.emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
-        return this;
-    }
-
-    /**
-     * Sets the {@code EmergencyContact Relationship} of the {@code Person} that we
-     * are building.
-     */
-    public PersonBuilder withEcRelationship(String ecRelationship) {
-        this.firstEmergencyContact = new EmergencyContact(firstEmergencyContact.getName(),
-                firstEmergencyContact.getPhone(), new Relationship(ecRelationship));
-        this.emergencyContacts = new LinkedHashSet<>(Arrays.asList(firstEmergencyContact));
+    public PersonBuilder addEmergencyContact(String ecName, String ecPhone, String ecrs) {
+        EmergencyContact emergencyContact = new EmergencyContact(new Name(ecName), new Phone(ecPhone),
+                new Relationship(ecrs));
+        Set<EmergencyContact> emergencyContactSet = new LinkedHashSet<>(this.emergencyContacts);
+        emergencyContactSet.add(emergencyContact);
+        this.emergencyContacts = emergencyContactSet;
         return this;
     }
 
@@ -170,7 +160,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Person} based on the fields set.
+     */
     public Person build() {
+        assert emergencyContacts.size() > 0;
         return new Person(name, phone, email, address, emergencyContacts, doctor, tags);
     }
 

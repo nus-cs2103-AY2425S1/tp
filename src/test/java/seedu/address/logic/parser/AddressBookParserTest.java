@@ -4,6 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ECNAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECPHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECRS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECPHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECRS_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,6 +20,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEmergencyContactCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -64,6 +71,17 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_addEmergencyContact() throws Exception {
+        Person person = new PersonBuilder()
+                .withEmergencyContact(VALID_ECNAME_AMY, VALID_ECPHONE_AMY, VALID_ECRS_AMY).build();
+        String descriptor = ECNAME_DESC_AMY + ECPHONE_DESC_AMY + ECRS_DESC_AMY;
+        AddEmergencyContactCommand command = (AddEmergencyContactCommand) parser.parseCommand(
+                AddEmergencyContactCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + descriptor);
+        assertEquals(new AddEmergencyContactCommand(INDEX_FIRST_PERSON, person.getFirstEmergencyContact()), command);
     }
 
     @Test

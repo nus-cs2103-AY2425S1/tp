@@ -52,6 +52,12 @@ public class DeleteCommand extends Command {
         this.deleteCommandDescriptor = deleteCommandDescriptor;
     }
 
+    /**
+     * Helper function which returns a new person with the updatedEmergencyContacts to abide by
+     * immutability of the Person class
+     * @param personToEdit  person in the filtered person list to delete
+     * @param updatedEmergencyContacts updated emergency contacts list
+     */
     public static Person createEditedPerson(Person personToEdit, Set<EmergencyContact> updatedEmergencyContacts) {
         assert personToEdit != null;
 

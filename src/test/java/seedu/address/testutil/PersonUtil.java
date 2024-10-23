@@ -34,6 +34,7 @@ public class PersonUtil {
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
+     * Take note that this method is only applicable when the person has only one emergency contact
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();

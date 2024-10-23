@@ -48,7 +48,9 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.emergencyContacts.addAll(emergencyContacts);
+        if (emergencyContacts != null) {
+            this.emergencyContacts.addAll(emergencyContacts);
+        }
         this.doctor = doctor;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -120,7 +122,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (emergencyContacts == null) {
+        if (emergencyContacts.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EmergencyContact.class.getSimpleName()));
         }

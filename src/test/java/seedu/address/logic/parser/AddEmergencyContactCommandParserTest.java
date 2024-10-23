@@ -1,11 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.CommandTestUtil.ECNAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECNAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ECPHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECPHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ECRS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECRS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ECNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ECPHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECPHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECRS_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_RELATIONSHIP;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.LinkedHashSet;
@@ -13,21 +24,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEmergencyContactCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relationship;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddEmergencyContactCommandParserTest {

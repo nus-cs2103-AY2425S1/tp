@@ -34,22 +34,23 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relationship;
 
 public class AddEmergencyContactCommandTest {
-    private EmergencyContact VALID_EMERGENCY_CONTACT = new EmergencyContact(
+    private static final EmergencyContact VALID_EMERGENCY_CONTACT = new EmergencyContact(
             new Name(VALID_ECNAME_AMY), new Phone(VALID_ECPHONE_AMY), new Relationship(VALID_ECRS_AMY));
-    private EmergencyContact VALID_EMERGENCY_CONTACT_BOB = new EmergencyContact(
+    private static final EmergencyContact VALID_EMERGENCY_CONTACT_BOB = new EmergencyContact(
             new Name(VALID_ECNAME_BOB), new Phone(VALID_ECPHONE_BOB), new Relationship(VALID_ECRS_BOB));
-    private Set<EmergencyContact> ALICE_EMERGENCY_CONTACTS = new LinkedHashSet<>(ALICE.getEmergencyContacts());
+    private static final Set<EmergencyContact> ALICE_EMERGENCY_CONTACTS =
+            new LinkedHashSet<>(ALICE.getEmergencyContacts());
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     private Person createExpectedPerson() {
         Set<EmergencyContact> emergencyContacts = new LinkedHashSet<>(ALICE_EMERGENCY_CONTACTS);
         emergencyContacts.add(VALID_EMERGENCY_CONTACT);
-     return new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
+        return new Person(ALICE.getName(), ALICE.getPhone(), ALICE.getEmail(),
                 ALICE.getAddress(), emergencyContacts, ALICE.getDoctor(), ALICE.getTags());
     }
 
     @Test
-    public void constructor_nullIndex_nullEmergencyContact_throwsNullPointerException() {
+    public void constructor_nullIndexAndNullEmergencyContact_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddEmergencyContactCommand(null,
                 null));
     }
@@ -98,7 +99,8 @@ public class AddEmergencyContactCommandTest {
                 model.getFilteredPersonList().get(0).getEmergencyContact(Index.fromOneBased(1));
         AddEmergencyContactCommand addEmergencyContactCommand = new AddEmergencyContactCommand(INDEX_FIRST_PERSON,
                 invalidEmergencyContact);
-        assertCommandFailure(addEmergencyContactCommand, model, AddEmergencyContactCommand.MESSAGE_DUPLICATE_EMERGENCY_CONTACT);
+        assertCommandFailure(addEmergencyContactCommand, model,
+                AddEmergencyContactCommand.MESSAGE_DUPLICATE_EMERGENCY_CONTACT);
     }
 
     @Test

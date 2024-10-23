@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
@@ -96,7 +95,6 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code EmergencyContact Name} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmergencyContactName(String name) {
-        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
         descriptor.setEmergencyContactName(new Name(name));
         return this;
     }
@@ -105,7 +103,6 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code EmergencyContact Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmergencyContactPhone(String phone) {
-        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
         descriptor.setEmergencyContactPhone(new Phone(phone));
         return this;
     }
@@ -114,7 +111,6 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code EmergencyContact relationship} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmergencyContactRelationship(String relationship) {
-        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
         descriptor.setEmergencyContactRelationship(new Relationship(relationship));
         return this;
     }
