@@ -11,7 +11,7 @@ import java.nio.file.Paths;
  */
 public class FileUtil {
 
-    private static final String CHARSET = "UTF-8";
+    public static final String CHARSET = "UTF-8";
 
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);

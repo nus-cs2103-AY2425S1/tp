@@ -48,15 +48,6 @@ public class Email {
     }
 
     /**
-     * Returns the email in a mailto URI format.
-     *
-     * @return The email URI string.
-     */
-    public String toEmailUri() {
-        return String.format("mailto:%s", this.value);
-    }
-
-    /**
      * Returns a string representation of the email.
      *
      * @return The email string.

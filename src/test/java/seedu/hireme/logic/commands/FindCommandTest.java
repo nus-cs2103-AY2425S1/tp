@@ -26,10 +26,8 @@ import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 
 // Todo add more test cases to deal with prefix predicates
 public class FindCommandTest {
-    private Model<InternshipApplication> model =
-            new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
-    private Model<InternshipApplication> expectedModel =
-            new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
+    private Model<InternshipApplication> model = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+    private Model<InternshipApplication> expectedModel = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
