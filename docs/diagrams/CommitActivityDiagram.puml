@@ -1,16 +1,23 @@
 @startuml
 skin rose
-skinparam ActivityFontSize 15
-skinparam ArrowFontSize 12
+skinparam ActivityFontSize 16
+skinparam ArrowFontSize 13
 start
 :User types command;
 :System parses the command;
-:Creates a new Person object;
-if () then ([Person does not already exist])
-  :Add person to AddressBook;
-else ([Person already exists])
-  :Show error message;
-endif
+
+partition "Command Handling" {
+  if () then ([Create Person])
+    :Creates a new Person object;
+    if () then ([Person does not already exist])
+      :Add person to AddressBook;
+    else ([Person already exists])
+      :Show error message;
+    endif
+  else ([Add Task])
+    :Creates a new Task object;
+    :Add task to AddressBook;
+  endif
+}
 stop
 @enduml
-
