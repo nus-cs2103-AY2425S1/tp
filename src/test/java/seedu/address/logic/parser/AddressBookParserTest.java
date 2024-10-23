@@ -154,10 +154,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_view() throws Exception {
-        Person person = new PersonBuilder().build();
         ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + " "
-                + person.getName());
-        assertEquals(new ViewCommand(person.getName()), command);
+                + NAME_DESC_AMY);
+        assertEquals(new ViewCommand(AMY.getName()), command);
     }
 
     @Test

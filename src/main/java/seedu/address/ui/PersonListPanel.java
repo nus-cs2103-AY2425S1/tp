@@ -37,6 +37,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public void updateUiState(UiState uiState) {
         this.uiState = uiState;
+        personListView.refresh();
     }
 
     /**
