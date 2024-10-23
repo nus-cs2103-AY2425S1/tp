@@ -1,6 +1,5 @@
 package tahub.contacts.logic.commands;
 
-import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
@@ -8,9 +7,6 @@ import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.UniqueCourseList;
-import tahub.contacts.model.person.Person;
-
-import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
