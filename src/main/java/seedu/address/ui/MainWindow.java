@@ -32,6 +32,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ClientListPanel clientListPanel;
+
+    private PropertyListPanel propertyListPanel;
+    private MeetingListPanel meetingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -78,6 +85,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,8 +118,30 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        // Instantiates the various panels
+        clientListPanel = new ClientListPanel(logic.getFilteredClientList());
+        propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
+        meetingListPanel = new MeetingListPanel(logic.getFilteredMeetingList());
+
+        // Initialise clientListPanel to display Clients
+        listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
+
+        // Add listener to modify display appropriately
+        logic.getDisplayMode().addListener((observable, oldValue, newValue) -> {
+            switch (newValue) {
+            case CLIENTS:
+                listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
+                break;
+            case PROPERTIES:
+                listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
+                break;
+            case MEETINGS:
+                listPanelPlaceholder.getChildren().setAll(meetingListPanel.getRoot());
+                break;
+            default:
+                throw new RuntimeException("Invalid Display Mode: " + newValue);
+            }
+        });
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -155,7 +185,7 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
@@ -172,7 +202,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
