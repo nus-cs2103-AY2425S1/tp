@@ -26,44 +26,40 @@
           <Label fx:id="featureIntroduction" text="Basic feature introduction"/>
         </VBox>
         <VBox fx:id="addFeatureGuide">
-          <Text styleClass="feature-text" fx:id="addFeatureHeader" text="Text" />
-          <Text styleClass="feature-text" fx:id="addFeatureDesc">
+          <Label styleClass="feature-header" fx:id="addFeatureHeader" text="&#10;Add" />
+          <Label styleClass="feature-text" fx:id="addFeatureDesc">
             Adds a person to DorManagerPro
-          </Text>
-          <Text styleClass="feature-text" fx:id="addFeatureFormat">
+          </Label>
+          <Label styleClass="feature-text" fx:id="addFeatureFormat">
             Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
-          </Text>
-          <Text styleClass="feature-text" fx:id="addFeatureNotes">
+          </Label>
+          <Label styleClass="feature-text" fx:id="addFeatureNotes">
             Note: ROOM_NUMBER, ADDRESS and TAGs are optional.
-          </Text>
+          </Label>
         </VBox>
         <VBox fx:id="editFeatureGuide">
-          <Text fx:id="editFeatureHeader">
-            Edit
-          </Text>
-          <Text styleClass="feature-text" fx:id="editFeatureDesc">
+          <Label styleClass="feature-header" fx:id="editFeatureHeader" text="&#10;Edit" />
+          <Label styleClass="feature-text" fx:id="editFeatureDesc">
             Edits an existing person in DorManagerPro
-          </Text>
-          <Text styleClass="feature-text" fx:id="editFeatureFormat">
+          </Label>
+          <Label styleClass="feature-text" fx:id="editFeatureFormat">
             Format: edit 2 n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
-          </Text>
-          <Text styleClass="feature-text" fx:id="editFeatureNotes">
+          </Label>
+          <Label styleClass="feature-text" fx:id="editFeatureNotes">
             Note: All fields are optional, but there must be 1 or more fields.
-          </Text>
+          </Label>
         </VBox>
         <VBox fx:id="deleteFeatureGuide">
-          <Text fx:id="deleteFeatureHeader">
-            Delete
-          </Text>
-          <Text styleClass="feature-text" fx:id="deleteFeatureDesc">
+          <Label styleClass="feature-header" fx:id="deleteFeatureHeader" text="&#10;Delete" />
+          <Label styleClass="feature-text" fx:id="deleteFeatureDesc">
             Deletes the specified person from DorManagerPro
-          </Text>
-          <Text styleClass="feature-text" fx:id="deleteFeatureFormat">
+          </Label>
+          <Label styleClass="feature-text" fx:id="deleteFeatureFormat">
             Format: delete INDEX
-          </Text>
-          <Text styleClass="feature-text" fx:id="deleteFeatureNotes">
+          </Label>
+          <Label styleClass="feature-text" fx:id="deleteFeatureNotes">
             Note: INDEX is based on what can currently be seen in DorManagerPro.
-          </Text>
+          </Label>
         </VBox>
         <HBox alignment="CENTER" fx:id="userGuideLinkContainer">
           <children>
