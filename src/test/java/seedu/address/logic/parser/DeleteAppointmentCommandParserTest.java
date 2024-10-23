@@ -31,7 +31,7 @@ public class DeleteAppointmentCommandParserTest {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        // Create expected AddAppointmentCommand
+        // Create expected DeleteAppointmentCommand
         DeleteAppointmentCommand expectedCommand = new DeleteAppointmentCommand(
             new Nric(VALID_NRIC_AMY),
             LocalDate.parse(VALID_DATE_APPOINTMENT, dateFormatter),
