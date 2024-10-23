@@ -100,7 +100,7 @@ public class UpdateStockLevelCommandParserTest {
     }
 
     @Test
-    public void parse_NegativeValues_failure() {
+    public void parse_negativeValues_failure() {
         // negative stock level
         assertParseFailure(parser, " pr/Product1 stk/-1000", MESSAGE_INVALID_STOCK_LEVEL);
     }
