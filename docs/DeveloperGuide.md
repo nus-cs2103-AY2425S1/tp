@@ -267,37 +267,62 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* small business owners
+* sole proprietors
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Since these businesses are single-individual teams, keeping track of different stakeholders alone is a hassle. These individuals work on their computers at least for their networking purposes, making the product compatible with their existing workflows. The product is an easy-to-use contact management app that manages customers, business partners and suppliers.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
-
+| Priority | As a …​       | I want to …​                                                                | So that I can…​                                                             |
+|----------|---------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | new user      | understand the interface easily                                             | start using my addressbook with little trouble                              |
+| `* * *`  | new user      | add a new contact                                                           | start storing my existing contacts                                          |
+| `* * *`  | new user      | find a contact by name                                                      | retrieve their contact information                                          |
+| `* * *`  | familiar user | delete/archive a contact                                                    | remove those that are no longer working with me                             |
+| `* * *`  | familiar user | group my contacts into categories                                           | group all users of one category (eg. just customers)                        |
+| `* * *`  | familiar user | retrieve all contacts from a specific group                                 | find my customers, suppliers, business partners, etc easily                 |
+| `* * `   | new user      | easily import my contact from my phone address book                         | set up faster                                                               |
+| `* *`    | new user      | call/text my contacts                                                       | easily speak to them                                                        |
+| `* * `   | new user      | retrieve all the emails (or some other info) of contacts in my current view | easily email all these contacts                                             |
+| `* * `   | new user      | see my contact history                                                      | know when contacts were added                                               |
+| `* *`    | familiar user | add any extra remarks to my contacts                                        | be aware of each contact's notable information                              |
+| `* * `   | familiar user | update/edit contact details                                                 | update any recent changes to the contact                                    |
+| `* * `   | familiar user | add additional information to each contact                                  | take note of special considerations from different customer                 |
+| `* *`    | familiar user | sort the contacts by product deadlines                                      | easily know which products I have to send out                               |
+| `* * `   | familiar user | filter contacts by criteria                                                 | search for specific types of people with certain characteristics            |
+| `* *`    | familiar user | sort my contacts alphabetically                                             | find my contacts by their name                                              |
+| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if i have not seen them for awhile |
+| `* * `   | familiar user | export and share a contact with others                                      | share a contact with others potentially to discuss about                    |
+| `* *`    | familiar user | pin contacts                                                                | quickly find those that are important to my business                        |
+| `* * `   | familiar user | see alerts on duplicate contacts                                            | delete it and keep my address book clean                                    |
+| `* * `   | familiar user | quickly retrieve my previous command                                        | not need to retype similar complex commands                                 |
+| `* * `   | familiar user | link my contacts' social media accounts                                     | access their social media easily, especially if relevant to our deal        |
+| `* *`    | familiar user | have a shortcut to user addresses                                           | easily determine where to send products to                                  |
+| `* * `   | familiar user | undo deletions                                                              | restore contacts incase of accidental deletion                              |
+| `* *`    | familiar user | rename tags                                                                 | change the group of names when my business needs change                     |
+| `* * `   | familiar user | create temporary groups                                                     | group contacts based on projects, rather than just their affiliations       |
+| `*`      | familiar user | colour code my contacts by their categories                                 | easily spot them                                                            |
+| `* `     | expert user   | perform mass edits                                                          | change in the information of groups of contacts at one shot                 |
+| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what i remember them by               |
+| `* `     | expert user   | add reminders                                                               | be reminded to follow up with specific contacts                             |
+| `* `     | expert user   | create shortcut commands to add specific types of contacts                  | add people of similar profiles faster                                       |
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
+1.  User requests to list contacts
+2.  BlitzBiz shows a list of contacts
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  BlitzBiz deletes the person
 
     Use case ends.
 
@@ -313,20 +338,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add a contact**
+
+**MSS**
+
+1.  User requests to add a contact
+2.  BlitzBiz requests for name, phone number, and email address minimally
+3.  User enters contact details
+4.  BlitzBiz asks for confirmation
+5.  User confirms
+6.  BlitzBiz adds the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The entered details do not follow the correct format.
+   *  3a1. BlitzBiz requests for the correct details.
+      3a2. User enters new details.
+      Steps 3a1-3a2 are repeated until the data entered are correct.
+      Use case resumes from step 4.
+
+* *a. At any time, User chooses to cancel the transfer.
+      *a1. BlitzBiz requests to confirm the cancellation.
+      *a2. User confirms the cancellation.
+      Use case ends.
+
+**Use case: Find contacts by name**
+
+**MSS**
+
+1.  User requests to view a contact by name
+2.  BlitzBiz requests for a prefix of the contact name
+3.  User enters name prefix
+4.  BlitzBiz displays all contacts containing the prefix in their name
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+   *  3a1. BlitzBiz displays an error message.
+      3a2. User enters new command.
+      Steps 3a1-3a2 are repeated until the command format entered is correct.
+      Use case resumes from step 4.
+
+* 4a. There are no contacts containing the prefix in their name.
+      4a1. BlitzBiz informs the user that there were no matches found.
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to load within 4 seconds while holding up to 1000 contacts.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should have an uptime of 99.9%.
+5.  The product must be intuitive to people without technical background.
+6.  For critical user actions such as searching for a contact or updating information, the system must respond within 1 second for up to 90% of operations.
+7.  The program should have a size of less than 100MB even with 1000 contacts.
+8.  The application should function fully when offline.
+9.  When a user executes a command there should be clear feedback on whether the task was successful.
+10. The user should be notified on the reason why the command they give is not working(i.e. incorrect input, lack of contacts in system)
 
 *{More to be added}*
 
 ### Glossary
 
+* **API**: An application programming interface (API) is a way for computer programs to interact with one another by providing services
+* **CLI**: The command line interface (CLI) is a text-based interface that interacts with the computer's operating system
+* **Customer**: A contact that obtains the services of the user's business
+* **GUI**: The graphical user interface (GUI) is an interface users interact with that provides visuals, potentially with some point-and-click functionalities
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Partner**: A contact that provides mainly services for the user's business
+* **Point-of-Contact**: The person to contact for obtaining goods and/or services, usually from a larger organisation
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Supplier**: A contact that provides mainly goods for the user's business to run smmothly
+* **Tag**: A label attached to a contact for grouping purposes. Common tags are `Supplier`, `Customer` and `Partner`, but can be flexible to suit the user's needs
+* **UI**: The user interface (UI) is a form of interface that the user interacts with
 
 --------------------------------------------------------------------------------------------------------------------
 
