@@ -53,7 +53,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     private final boolean isAscending(String s) throws ParseException {
-        if (s == null || s.isEmpty()) {
+        if (s.isEmpty()) {
             return true;
         }
         if (s.equals("asc") || s.equals("ascending")) {
