@@ -41,7 +41,6 @@ public class DisplayCardPanel extends UiPart<Region> {
      */
     public void setDisplayCard(Optional<Person> personToDisplay) {
         lastViewedPersonList.clear();
-
         personToDisplay.ifPresent(lastViewedPersonList::add);
     }
 
@@ -51,12 +50,15 @@ public class DisplayCardPanel extends UiPart<Region> {
     class DisplayCardListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
+            System.out.println("UpdateItem called - Person: " + person + ", Empty: " + empty);
             super.updateItem(person, empty);
 
             if (empty || person == null) {
+                System.out.println("Setting graphic to null");
                 setGraphic(null);
                 setText(null);
             } else {
+                System.out.println("Setting new DisplayCard");
                 setGraphic(new DisplayCard(Optional.of(person)).getRoot());
             }
         }
