@@ -2,6 +2,7 @@ package seedu.address.model.product;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -47,6 +48,14 @@ public class Product {
         this.stockLevel = 0;
         this.minStockLevel = Integer.MAX_VALUE;
         this.maxStockLevel = 0;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -118,6 +127,7 @@ public class Product {
     public void setMaxStockLevel(int maxStockLevel) {
         this.maxStockLevel = maxStockLevel;
     }
+
 
     public ProductName getName() {
         return name;

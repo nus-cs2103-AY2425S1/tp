@@ -44,12 +44,15 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
+    public CommandResult execute(String commandText, Boolean autoComplete) throws CommandException, ParseException {
+        if (autoComplete) {
+            logger.info("----------------[AUTO-COMPLETE][" + commandText + "]");
+        } else {
+            logger.info("----------------[USER COMMAND][" + commandText + "]");
+        }
 
-        CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        Command command = addressBookParser.parseCommand(commandText, autoComplete);
+        CommandResult commandResult = command.execute(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
