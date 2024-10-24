@@ -44,6 +44,9 @@ public class AddWorkExperienceCommandTest {
 
         // Verify that the person in the model has been updated
         assertEquals(editedPerson, model.getFilteredPersonList().get(0));
+
+        // Additional check to cover the last assertion
+        assertTrue(model.getFilteredPersonList().contains(editedPerson));
     }
 
     @Test
@@ -54,6 +57,7 @@ public class AddWorkExperienceCommandTest {
         assertThrows(CommandException.class, AddWorkExperienceCommand.MESSAGE_INVALID_INDEX, () ->
                 command.execute(model));
     }
+
 
     @Test
     public void equals() {
