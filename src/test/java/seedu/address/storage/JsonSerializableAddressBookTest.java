@@ -1,14 +1,15 @@
 package seedu.address.storage;
 
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.AddressBook;
 
 public class JsonSerializableAddressBookTest {
 
@@ -18,10 +19,12 @@ public class JsonSerializableAddressBookTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
 
     @Test
-    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidPersonFile_returnsEmptyAddressBook() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        assertDoesNotThrow(dataFromFile::toModelType);
+        AddressBook emptyFile = new AddressBook();
+        assertEquals(emptyFile, dataFromFile.toModelType());
     }
 
 
