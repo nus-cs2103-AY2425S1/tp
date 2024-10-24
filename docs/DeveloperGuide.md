@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. Manager requests to add customer
 2. AddressBook adds the person
-    
+
     Use Case Ends
 
 **Extension**
