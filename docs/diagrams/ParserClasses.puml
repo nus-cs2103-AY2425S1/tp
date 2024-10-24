@@ -15,6 +15,7 @@ Class CliSyntax
 Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
+Class PredicateFactory
 Class Prefix
 }
 
@@ -31,8 +32,14 @@ XYZCommandParser ..> ArgumentTokenizer
 ArgumentTokenizer .left.> ArgumentMultimap
 XYZCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
+XYZCommandParser ..right> PredicateFactory : <<use>>
 XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+
+note right of PredicateFactory
+PredicateFactory is used only by FindCommandParser.
+end note
+
 @enduml
