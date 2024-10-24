@@ -212,6 +212,16 @@ public class AddressBookTest {
 
         // different types -> returns false
         assertFalse(addressBook.equals(5));
+
+        // different student -> returns false
+        AddressBook differentStudentAddressBook = new AddressBook();
+        differentStudentAddressBook.addPerson(ALICE);
+        assertFalse(addressBook.equals(differentStudentAddressBook));
+
+        // different person -> returns false
+        AddressBook differentPersonAddressBook = new AddressBook();
+        differentPersonAddressBook.addStudent(BOB);
+        assertFalse(addressBook.equals(differentPersonAddressBook));
     }
 
     /**
