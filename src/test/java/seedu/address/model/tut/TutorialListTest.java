@@ -139,6 +139,20 @@ public class TutorialListTest {
     }
 
     @Test
+    public void toStringTest() {
+        // Setting up typical tutorial list
+        ArrayList<Tutorial> tutorials = new ArrayList<>();
+        tutorials.add(TUTORIAL1);
+        tutorials.add(TUTORIAL2);
+        TutorialList tutorialList = new TutorialList(tutorials);
+
+        // Expected string representation
+        String expectedString = "1. " + TUTORIAL1.toString() + "\n"
+                + "2. " + TUTORIAL2.toString() + "\n";
+
+        // Verify that the toString method matches the expected output
+        assertEquals(expectedString, tutorialList.toString());
+    }
     public void resetData_null_throwsNullPointerException() {
         TutorialList tutorials = new TutorialList();
         Assert.assertThrows(NullPointerException.class, () -> tutorials.resetData(null));

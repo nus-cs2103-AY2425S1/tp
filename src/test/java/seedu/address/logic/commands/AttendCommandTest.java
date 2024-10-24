@@ -251,6 +251,9 @@ public class AttendCommandTest {
         }
 
         @Override
+        public String listTutorials() {
+            throw new AssertionError("This method should not be called.");
+        }
         public void setTutorials(TutorialList tutorials) {
             throw new AssertionError("This method should not be called.");
         }

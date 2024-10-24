@@ -215,6 +215,9 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String listTutorials() {
+        return getTutorialList().toString();
+    }
     public void setTutorials(TutorialList tutorials) {
         this.tutorials.resetData(tutorials);
     }
