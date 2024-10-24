@@ -3,27 +3,29 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="ResearchRoster" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="ResearchRoster" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
-    <Scene>
+    <Scene fill="#534444">
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
       <VBox>
+        <!-- Menu bar remains at the top -->
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -33,27 +35,40 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
+        <!-- Main content in HBox for horizontal layout -->
+        <HBox VBox.vgrow="ALWAYS">
+          <!-- Left side with the participant list label and person list -->
+          <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+            <!-- Participant List Label -->
+            <Label text="Participant List:" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 5 0 10 10; -fx-text-fill: #88c09f;" />
+
+            <!-- Person List Panel -->
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="0" />
+              </padding>
+            </StackPane>
+          </VBox>
+
+          <!-- Right section for command box and result display -->
+          <VBox HBox.hgrow="ALWAYS">
+            <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </StackPane>
+
+            <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </StackPane>
+          </VBox>
+        </HBox>
+
+        <!-- Status bar at the bottom -->
+        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER">
         </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
-
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>
