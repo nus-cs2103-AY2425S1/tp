@@ -43,6 +43,7 @@
 
       <HBox spacing="0.5" alignment="CENTER" style="-fx-padding: 30;">
         <FlowPane fx:id="modules" />
+        <FlowPane fx:id="grades" />
       </HBox>
     </HBox>
   </GridPane>

@@ -85,6 +85,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /**
      * Saves the current state of the address book.
      * This allows the current state to be restored via undo or redo operations.

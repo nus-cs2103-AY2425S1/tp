@@ -13,6 +13,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -38,6 +39,8 @@ public class AutocompleteParser {
         FindCommand.COMMAND_WORD,
         ListCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD,
+        HelpCommand.COMMAND_WORD,
+        GradeCommand.COMMAND_WORD,
         HelpCommand.COMMAND_WORD,
         UndoCommand.COMMAND_WORD,
         RedoCommand.COMMAND_WORD,
@@ -122,7 +125,7 @@ public class AutocompleteParser {
         HashMap<String, String> suggestionList = new HashMap<>();
         for (Person person : ab.getPersonList()) {
             for (Module module : person.getModules()) {
-                String moduleString = module.toString().substring(1, module.toString().length() - 1);
+                String moduleString = module.module;
                 if (moduleString.startsWith(argMultimap.getValue(PREFIX_MODULE).get())
                         && !suggestionList.containsKey(moduleString)) {
                     suggestionList.put(moduleString, getCompleteStringWithReplacement(userInput, wordUnderCaret,
