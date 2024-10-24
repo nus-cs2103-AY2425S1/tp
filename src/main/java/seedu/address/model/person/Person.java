@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.AppNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -29,7 +30,6 @@ public class Person implements Appointmentable {
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final History history;
     private List<Appointment> appointments;
 
     /**
@@ -46,7 +46,6 @@ public class Person implements Appointmentable {
         this.remark = remark;
         this.tags.addAll(tags);
         this.id = new Id(role).getIdValue();
-        this.history = new History();
     }
 
     public Person(Name name, int id, String role, Phone phone, Email email,
@@ -61,7 +60,6 @@ public class Person implements Appointmentable {
         this.remark = remark;
         this.tags.addAll(tags);
         this.appointments = appointments;
-        this.history = new History();
     }
 
 
@@ -99,31 +97,26 @@ public class Person implements Appointmentable {
         return appointments;
     }
 
-    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
-    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
-        try {
-            Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            String time = "DateTime: " + dateTime.format(formatter);
-            return time + " " + appointment.toString();
-        } catch (AppNotFoundException e) {
-            return "No appointment found for the given date, patient, and doctor.";
-        }
-    }
-
-    public String getPatientHistory(Id patientId) {
-        String appointments = history.getAllPatientsAppointments(patientId);
-        return appointments; // Assuming the Appointment class has a toString() method for formatting
-    }
-
-    public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
-        try {
-            String appointments = history.getDoctorAppointmentsForDay(date, doctorId);
-            return appointments; // Assuming the Appointment class has a toString() method for formatting
-        } catch (AppNotFoundException e) {
-            return "No appointment found for the given date and doctor.";
-        }
-    }
+//    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
+//    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
+//        try {
+//            Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//            String time = "DateTime: " + dateTime.format(formatter);
+//            return time + " " + appointment.toString();
+//        } catch (AppNotFoundException e) {
+//            return "No appointment found for the given date, patient, and doctor.";
+//        }
+//    }
+//
+//    public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
+//        try {
+//            String appointments = history.getDoctorAppointmentsForDay(date, doctorId);
+//            return appointments; // Assuming the Appointment class has a toString() method for formatting
+//        } catch (AppNotFoundException e) {
+//            return "No appointment found for the given date and doctor.";
+//        }
+//    }
 
 
     /**
@@ -157,13 +150,10 @@ public class Person implements Appointmentable {
      * @return True if command was successful, false if otherwise.
      */
     @Override
-    public boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
-        requireNonNull(dateTime);
-        requireNonNull(patientId);
-        requireNonNull(doctorId);
-        requireNonNull(remarks);
+    public boolean addAppointment(LocalDateTime dateTime, int patientId, int doctorId, String remarks) {
+        requireAllNonNull(dateTime, patientId, doctorId, remarks);
 
-        return history.addAppointment(dateTime, patientId, doctorId, remarks);
+        return appointments.add(new Appointment(dateTime, patientId, doctorId, remarks));
     }
 
     /**
@@ -175,12 +165,9 @@ public class Person implements Appointmentable {
      * @return True if command was successful, false if otherwise.
      */
     @Override
-    public boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
-        requireNonNull(dateTime);
-        requireNonNull(patientId);
-        requireNonNull(doctorId);
-
-        return History.deleteAppointment(dateTime, patientId, doctorId);
+    public boolean deleteAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+        requireAllNonNull(dateTime, patientId, doctorId);
+        return appointments.remove(new Appointment(dateTime, patientId, doctorId, ""));
     }
 
     /**
@@ -192,13 +179,30 @@ public class Person implements Appointmentable {
      * @return True if command was successful, false if otherwise.
      */
     @Override
-    public Appointment getAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
-        // TODO AFTER v1.3
-        return null;
+    public Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+        requireAllNonNull(dateTime, patientId, doctorId);
+        return appointments.stream()
+                .filter(apt -> apt.equals(new Appointment(dateTime, patientId, doctorId, "")))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    public Appointment getAppointment(LocalDateTime dateTime, int patientId) {
+        requireAllNonNull(dateTime, patientId);
+        return appointments.stream()
+                .filter(apt -> apt.getDateTime() == dateTime)
+                .filter(apt -> apt.getPatientId() == patientId)
+                .collect(Collectors.toList()).get(0);
+    }
+
+    public String getStringAppointments() {
+        final StringBuilder builder = new StringBuilder();
+        appointments.stream()
+                .forEach(builder::append);
+        return builder.toString();
     }
 
     @Override
-    public boolean editAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
+    public boolean editAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
         // TODO AFTER v1.3
         return false;
     }

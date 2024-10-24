@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,14 +32,14 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Successfully "
             + "deleted appointment to a patient";
     public static final String MESSAGE_DELETE_APPOINTMENT_FAIL = "The appointment doesn't exist!";
-    private final Id patientId;
-    private final Id doctorId;
+    private final int patientId;
+    private final int doctorId;
     private final LocalDateTime appointmentTime;
 
     /**
      * Creates an DeleteAppointmentCommand to add the specified patient and doctor ids
      */
-    public DeleteAppointmentCommand(LocalDateTime appointmentTime, Id patientId, Id doctorId) {
+    public DeleteAppointmentCommand(LocalDateTime appointmentTime, int patientId, int doctorId) {
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.appointmentTime = appointmentTime;

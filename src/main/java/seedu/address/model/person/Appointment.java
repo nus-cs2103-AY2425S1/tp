@@ -45,6 +45,28 @@ public class Appointment {
         return remarks;
     }
 
+    /**
+     * Determines if an appointment is the same appointment including checking for remarks.
+     *
+     * @param o Object to be compared to.
+     * @return True if all details are the same (including checking remarks), false if otherwise.
+     */
+    public boolean equalsIncludngRemarks(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Appointment appointment = (Appointment) o;
+
+        return Objects.equals(patientId, appointment.patientId)
+                && Objects.equals(dateTime, appointment.dateTime)
+                && Objects.equals(doctorId, appointment.doctorId)
+                && Objects.equals(remarks, appointment.remarks);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -57,8 +79,8 @@ public class Appointment {
         Appointment appointment = (Appointment) o;
 
         return Objects.equals(patientId, appointment.patientId)
-                && Objects.equals(doctorId, appointment.doctorId)
-                && Objects.equals(remarks, appointment.remarks);
+                && Objects.equals(dateTime, appointment.dateTime)
+                && Objects.equals(doctorId, appointment.doctorId);
     }
 
     @Override
@@ -68,7 +90,8 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment: " + getPatientId() + " (patient id) with " + getDoctorId() + " (doctor id). "
+        return "Appointment: " + getDateTime() + " for " + getPatientId()
+                + " (patient id) with " + getDoctorId() + " (doctor id). "
                 + "Remarks: " + getRemarks();
     }
 }

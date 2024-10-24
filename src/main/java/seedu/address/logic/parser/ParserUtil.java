@@ -49,13 +49,9 @@ public class ParserUtil {
      * trimmed.
      * @throws InvalidIdException if the specified person id is invalid.
      */
-    public static Id parsePersonId(String id) throws InvalidIdException {
+    public static int parsePersonId(String id) throws InvalidIdException {
         String trimmedId = id.trim();
-        Person personWithId = Person.getpersonWithId(trimmedId);
-        if (personWithId == null) {
-            throw new InvalidIdException(MESSAGE_INVALID_INDEX); // TODO supposed to be INVALID PERSON?
-        }
-        return personWithId.getId();
+        return Integer.parseInt(trimmedId);
     }
 
     /**

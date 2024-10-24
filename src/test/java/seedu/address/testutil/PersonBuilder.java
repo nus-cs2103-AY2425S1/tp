@@ -5,9 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -35,7 +33,7 @@ public class PersonBuilder {
     private Remark remark;
     private Set<Tag> tags;
 
-    private Id id;
+    private int id;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.

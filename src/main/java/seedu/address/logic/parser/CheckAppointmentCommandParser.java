@@ -43,9 +43,9 @@ public class CheckAppointmentCommandParser implements Parser<CheckAppointmentCom
         }
 
         // Parse the doctor ID
-        Id doctorId;
+        int doctorId;
         try {
-            doctorId = ParserUtil.parseDoctorId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
+            doctorId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }

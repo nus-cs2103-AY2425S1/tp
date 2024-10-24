@@ -19,7 +19,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -173,17 +172,22 @@ public class ViewHistoryCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonById(Id id) {
+        public ObservableList<Person> getFilteredPersonById(int id) {
             return null;
         }
 
         @Override
-        public Person getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
+            return null; // TODO
+        }
+
+        @Override
+        public Person getFilteredPatientById(ObservableList<Person> allPersons, int id) {
             return null;
         }
 
         @Override
-        public Person getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredDoctorById(ObservableList<Person> allPersons, int id) {
             return null;
         }
 
@@ -216,15 +220,15 @@ public class ViewHistoryCommandTest {
             return javafx.collections.FXCollections.observableArrayList(patient, doctor);
         }
 
-        @Override
-        public Person getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
-            return patient.getId().equals(id) ? patient : null;
-        }
-
-        @Override
-        public Person getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
-            return doctor.getId().equals(id) ? doctor : null;
-        }
+        //        @Override
+        //        public Person getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        //            return patient.getId().equals(id) ? patient : null;
+        //        }
+        //
+        //        @Override
+        //        public Person getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        //            return doctor.getId().equals(id) ? doctor : null;
+        //        }
     }
 
     /**
@@ -248,21 +252,21 @@ public class ViewHistoryCommandTest {
         }
 
         @Override
-        public Person getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredPatientById(ObservableList<Person> allPersons, int id) {
             // Search for a patient with the specified ID
             for (Person person : allPersons) {
-                if (person.getId().equals(id) && person instanceof Patient) {
-                    return (Patient) person;
+                if (person.getId() == (id) && person instanceof Person) {
+                    return person;
                 }
             }
             return null;
         }
 
         @Override
-        public Person getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredDoctorById(ObservableList<Person> allPersons, int id) {
             // Search for a doctor with the specified ID
             for (Person person : allPersons) {
-                if (person.getId().equals(id) && person instanceof Person) {
+                if (person.getId() == (id) && person instanceof Person) {
                     return person;
                 }
             }

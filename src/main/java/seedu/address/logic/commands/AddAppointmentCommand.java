@@ -38,15 +38,15 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_PATIENT_BUSY = "The patient already has another appointment!";
     public static final String MESSAGE_DOCTOR_BUSY = "The doctor already has another appointment!";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "The appointment already exists!";
-    private final Id patientId;
-    private final Id doctorId;
+    private final int patientId;
+    private final int doctorId;
     private final LocalDateTime appointmentTime;
     private final String remarks;
 
     /**
      * Creates an AddAppointmentCommand to add the specified patient and doctor ids
      */
-    public AddAppointmentCommand(LocalDateTime appointmentTime, Id patientId, Id doctorId, String remarks) {
+    public AddAppointmentCommand(LocalDateTime appointmentTime, int patientId, int doctorId, String remarks) {
         requireNonNull(appointmentTime);
         requireNonNull(patientId);
         requireNonNull(doctorId);
