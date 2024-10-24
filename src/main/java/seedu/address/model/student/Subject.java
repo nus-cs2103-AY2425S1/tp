@@ -13,7 +13,7 @@ public class Subject {
             + "economics / literature / music / "
             + "biology / chemistry /science / "
             + "english / chinese / malay / tamil / "
-            + "math / history / geography / physics / "
+            + "mathematics / history / geography / physics / "
             + "GP "
             + "and it should not be blank";
 
