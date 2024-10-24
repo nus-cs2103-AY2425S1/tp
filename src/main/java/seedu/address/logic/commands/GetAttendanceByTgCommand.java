@@ -50,14 +50,7 @@ public class GetAttendanceByTgCommand extends Command {
         if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
         }
-
-        StringBuilder attendanceRecords = new StringBuilder();
-
-        for (Student student : students) {
-            attendanceRecords.append(student.getName()).append(": ");
-            attendanceRecords.append(student.getAttendanceRecordsString()).append("\n");
-        }
-
+        
         window.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }

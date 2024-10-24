@@ -125,7 +125,7 @@ public class Student extends Person {
      *
      * @param date The date on which attendance is being recorded.
      * @param status The attendance status, either 'present' or 'absent'.
-     * @throws IllegalArgumentException if the provided status is nvalid.
+     * @throws IllegalArgumentException if the provided status is invalid.
      */
     public void markAttendance(LocalDate date, String status) {
         Attendance attendance = new Attendance(status);
