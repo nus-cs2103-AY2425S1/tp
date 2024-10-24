@@ -3,7 +3,6 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssociations.AMY_WEDDING;
-import static seedu.address.testutil.TypicalAssociations.BOB_BIRTHDAY;
 
 import org.junit.jupiter.api.Test;
 
