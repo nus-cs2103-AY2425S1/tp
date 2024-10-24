@@ -132,6 +132,31 @@
     -fx-text-fill: #010504;
 }
 
+/* Default styling for status label */
+.status-label {
+    -fx-padding: 3px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Pending status: orange */
+.status-pending {
+    -fx-background-color: orange;
+}
+
+/* Accepted status: green */
+.status-accepted {
+    -fx-background-color: green;
+}
+
+/* Rejected status: red */
+.status-rejected {
+    -fx-background-color: red;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
