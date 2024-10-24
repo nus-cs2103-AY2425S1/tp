@@ -374,6 +374,7 @@ _Details coming soon ..._
 ## Command summary
 
 ### Managing Contacts
+
 | Action     | Format, Examples|
 |------------|------------------|
 | **Add**    | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity`|
@@ -385,6 +386,7 @@ _Details coming soon ..._
 |  **View**  | `view person KEYWORD [MORE_KEYWORDS]`<br> e.g., `view person Jake Doe`|
 
 ### Managing Events
+
 | Action     | Format, Examples|
 |------------|------------------|
 | **Add**    | `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`<br> e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe`|
@@ -396,6 +398,7 @@ _Details coming soon ..._
 |  **View**  | `view event KEYWORD [MORE_KEYWORDS]`<br> e.g., `view event Oscars`|
 
 ### Utility Commands
+
 | Action    | Format, Examples|
 |-----------|------------------|
 | **Clear** | `clear`|
