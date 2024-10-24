@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.types.common.PersonEventManager;
 import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
@@ -35,6 +36,9 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+
+        PersonEventManager.initialiseHashMap();
+
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
@@ -101,6 +105,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        PersonEventManager.removePersonFromAllEvents(target);
     }
 
     @Override
@@ -114,8 +119,20 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        PersonEventManager.setPersonForAllEvents(target, editedPerson);
     }
 
+    @Override
+    public boolean isPersonLinkedToEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        return PersonEventManager.isPersonLinkedToEvent(person, event);
+    }
+
+    @Override
+    public void linkPersonToEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        PersonEventManager.addPersonToEvent(person, event);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -144,11 +161,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteEvent(Event target) {
         addressBook.removeEvent(target);
+        PersonEventManager.removeEvent(target);
     }
 
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        PersonEventManager.addEvent(event);
+
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
@@ -157,6 +177,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedEvent);
 
         addressBook.setEvent(target, editedEvent);
+        PersonEventManager.setEvent(target, editedEvent);
+    }
+
+    @Override
+    public Event getEventByName(Event event) {
+        requireNonNull(event);
+        return PersonEventManager.getEventByName(event);
     }
 
     //=========== Filtered Event List Accessors =============================================================

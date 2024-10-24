@@ -57,13 +57,5 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (person.getEvent() != null) {
-            eventName.getChildren().add(new Label(person.getEvent().getName().toString()));
-            eventName.setVisible(true);
-            eventName.setManaged(true);
-        } else {
-            eventName.setVisible(false); // Hides the eventName FlowPane
-            eventName.setManaged(false); // Prevents eventName from occupying space in the layout
-        }
     }
 }
