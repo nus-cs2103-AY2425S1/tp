@@ -87,10 +87,6 @@ public class Transaction {
         return Collections.unmodifiableSet(categories);
     }
 
-    public boolean containsCategory(Category cat) {
-        return categories.contains(cat);
-    }
-
     /**
      * Returns true if both transactions have the same uuid.
      *
