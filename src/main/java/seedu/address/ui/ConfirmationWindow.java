@@ -1,16 +1,21 @@
 package seedu.address.ui;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Confirmation Window Ui to obtain users' confirmation.
  */
-public class ConfirmationWindow {
+public class ConfirmationWindow extends UiPart<Stage> {
     // Singleton instance
     private static ConfirmationWindow theConfirmationWindow = null;
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private ConfirmationWindow() {
     }
 
@@ -34,6 +39,7 @@ public class ConfirmationWindow {
      * @return true if the user clicks OK; false otherwise
      */
     public boolean showAlertDialogAndWait(String title, String contentText) {
+        logger.info("Showing confirmation window..");
         final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
