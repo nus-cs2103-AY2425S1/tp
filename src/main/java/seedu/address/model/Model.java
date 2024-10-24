@@ -104,6 +104,18 @@ public interface Model {
      */
     Meeting getMeeting(int index);
 
+    /**
+     * Returns true if a meeting with the same identity as {@code meeting} exists in the address book.
+     */
+    boolean hasMeeting(Meeting meeting);
+
+    /**
+     * Replaces the given meeting {@code target} with {@code editedMeeting}.
+     * {@code target} must exist in the address book.
+     * The meeting identity of {@code editedMeeting} must not be the same as another existing meeting in address book.
+     */
+    void setMeeting(Person person, Meeting target, Meeting editedMeeting);
+
     int getMeetingSize();
 
     String listMeetings();
