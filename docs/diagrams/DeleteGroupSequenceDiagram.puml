@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("dg gn/Group 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("dg Group 1")
+LogicManager -> AddressBookParser : parseCommand("dg gn/Group 1")
 activate AddressBookParser
 
 create DeleteGroupCommandParser
