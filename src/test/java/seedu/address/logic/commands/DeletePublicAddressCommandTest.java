@@ -16,7 +16,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.addresses.BtcAddress;
 import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -32,13 +34,38 @@ public class DeletePublicAddressCommandTest {
         DeletePublicAddressCommand deletePublicAddressCommand =
                 new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
 
-        String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDeleteAddress));
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
         updatedPerson.setPublicAddressesByNetwork(Network.BTC, new HashSet<>());
         expectedModel.setPerson(personToDeleteAddress, updatedPerson);
+
+        String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                updatedPerson.getPublicAddresses());
+
+        assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexValidNetworkValidLabel_success() throws Exception {
+        Person personToDeleteAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        HashSet<PublicAddress> addresses = new HashSet<>(
+                personToDeleteAddress.getPublicAddressesByNetwork(Network.BTC)
+        );
+        addresses.add(new BtcAddress("12345", "test2"));
+        addresses.add(new BtcAddress("12345", "test"));
+
+        personToDeleteAddress.setPublicAddressesByNetwork(Network.BTC, new HashSet<>(addresses));
+        DeletePublicAddressCommand deletePublicAddressCommand =
+                new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "test");
+
+        addresses.remove(new BtcAddress("12345", "test"));
+        Person updatedPerson = new PersonBuilder(personToDeleteAddress).build();
+        updatedPerson.setPublicAddressesByNetwork(Network.BTC, new HashSet<>(addresses));
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToDeleteAddress, updatedPerson);
+
+        String expectedMessage = String.format(DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                updatedPerson.getPublicAddresses());
 
         assertCommandSuccess(deletePublicAddressCommand, model, expectedMessage, expectedModel);
     }
@@ -51,7 +78,6 @@ public class DeletePublicAddressCommandTest {
 
         assertCommandFailure(deletePublicAddressCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
 
     @Test
     public void equals() {
