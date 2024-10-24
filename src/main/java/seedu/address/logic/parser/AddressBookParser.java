@@ -86,6 +86,7 @@ public class AddressBookParser {
 
         case AddNotesCommand.COMMAND_WORD:
             return new AddNotesCommandParser().parse(arguments);
+
         case EditNotesCommand.COMMAND_WORD:
             return new EditNotesCommandParser().parse(arguments);
 
