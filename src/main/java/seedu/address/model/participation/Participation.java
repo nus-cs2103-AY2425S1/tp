@@ -62,6 +62,22 @@ public class Participation {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Participation)) {
+            return false;
+        }
+
+        Participation otherParticipation = (Participation) other;
+        return student.equals(otherParticipation.student)
+                && tutorial.equals(otherParticipation.tutorial)
+                && attendanceList.equals(otherParticipation.attendanceList);
+    }
+
+    @Override
     public String toString() {
         return String.format("Attends: %s", tutorial.toString());
     }
