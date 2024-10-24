@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-VBook is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still 
+VBook is a **desktop app for freelance software developers to manage contacts, optimized for use via a Command Line 
+Interface** (CLI) while still 
 having the benefits of a Graphical User Interface (GUI). If you can type fast, VBook can get your contact management 
 tasks done faster than traditional GUI apps.
 
@@ -18,9 +19,10 @@ tasks done faster than traditional GUI apps.
 
 2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases) (not updated).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your VBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar vbook.jar` command to 
+   run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -34,9 +36,9 @@ tasks done faster than traditional GUI apps.
 
    * `:rm -i 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `:clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+   * `:exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -69,9 +71,8 @@ tasks done faster than traditional GUI apps.
 
 ### Viewing help : `:help`
 
-Shows a message explaning how to access the help page.
+Shows a command cheatsheet, as well as a link to access the user guide.
 
-![help message](images/helpMessage.png)
 
 Format: `:help`
 
@@ -178,10 +179,18 @@ Examples:
 * After using `:undo` to revert the addition of John Doe, using `:redo` will add John Doe back to the address book.
 * After using `:undo` to revert the deletion of a contact, using `:redo` will delete the contact again.
 
+### Exporting data to a file : `:export`
+
+Exports the address book data to a specified file in JSON format. Upon command, user will be prompted to 
+select a directory to save the file.
+
+Format: `:export`
+
 ### Clearing all entries : `:clear`
 
 
-Clears all entries from the address book.
+Clears all entries from the address book. This command does not delete the data file, but just clears the graphical 
+interface.
 
 Format: `:clear`
 
@@ -193,27 +202,29 @@ Format: `:exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+VBook data are saved in the hard disk automatically after any command that changes the data. There is no need 
+to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+VBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are 
+welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, VBook will discard all data and start with an empty data 
+file 
+at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause VBook to behave in unexpected ways (e.g., if a value entered is outside of the 
+acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous VBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -226,12 +237,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `:add -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]…​` <br> e.g., `add -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -t friend -t colleague`
-**Clear** | `clear`
-**Delete** | `:rm -i INDEX`<br> e.g., `:rm -i 3`
-**Edit** | `:edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
-**Find** | `:find INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br> e.g.,`:find -n James Lee -e jameslee@example.com`
-**List** | `:list`
-**Help** | `help`
+| Action     | Format                                                                                                                         | Examples                                                                                                                                        |
+|------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `:add -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…​` <br> `:a -n NAME ...`                             <br/> | `:add -n James Ho -p 22224444 -e jamesho@example.com -l 123, Clementi Rd, 1234665 -t friend -r My favourite colleague` <br> `:a -n James Ho...` |
+| **Clear**  | `:clear`                                                                                                                       | `:clear`                                                                                                                                        |
+| **Delete** | `:remove -i INDEX`<br/>`:rm -i INDEX1, INDEX2, ...`                                                                            | `:remove -i 3`<br/>`:rm -i 3`                                                                                                                   |
+| **Edit**   | `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br/>`:ed INDEX -n NAME...`                               | `:edit 2 -n James Lee -e jameslee@example.com`<br/>`:ed 2 -n Joshua...`                                                                         |
+| **Exit**   | `:exit`                                                                                                                        | `:exit`                                                                                                                                         |
+| **Export** | `:export`                                                                                                                      | `:export`                                                                                                                                       |
+| **Find**   | `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`                                                                | `:find -n david -l serangoon`                                                                                                                   |                                                                                                                                                 |
+| **Help**   | `:help`                                                                                                                        | `:help`                                                                                                                                         |
+| **List**   | `:list`<br/>`:ls`                                                                                                              | `:list`<br/>`:ls`                                                                                                                               |
+| **Redo**   | `:redo`                                                                                                                        | `:redo`                                                                                                                                         |
+| **Undo**   | `:undo`                                                                                                                        | `:undo`                                                                                                                                         |
+
+

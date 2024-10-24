@@ -11,6 +11,11 @@ public class RedoCommand extends Command {
     public static final String COMMAND_WORD = ":redo";
     public static final String MESSAGE_SUCCESS = "Redo successful!";
     public static final String MESSAGE_FAILURE = "No more commands to redo!";
+    public static final String COMMAND_SUMMARY_ACTION = "Redo";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":redo";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":redo";
 
     @Override
     public CommandResult execute(Model model) {
