@@ -90,24 +90,6 @@ public class Transaction {
         return categories;
     }
 
-    /**
-     * Add a categories into the transaction's categories hashset
-     * @param cat
-     */
-    public void addCategory(Category cat) {
-        requireNonNull(cat);
-        categories.add(cat);
-    }
-
-    /**
-     * Remove a categories from the transaction's categories hashset
-     * @param cat
-     */
-    public void removeCategory(Category cat) {
-        requireNonNull(cat);
-        categories.remove(cat);
-    }
-
     public boolean containsCategory(Category cat) {
         return categories.contains(cat);
     }

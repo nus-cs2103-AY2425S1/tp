@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -102,9 +101,9 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> Category} into a {@code Set<Category>}.
      */
-    public static Set<Category> parseTags(Collection<String> categoryStrs) throws ParseException {
+    public static HashSet<Category> parseCategories(Collection<String> categoryStrs) throws ParseException {
         requireNonNull(categoryStrs);
-        final Set<Category> categories = new HashSet<>();
+        final HashSet<Category> categories = new HashSet<>();
         for (String categoryStr : categoryStrs) {
             categories.add(parseCategory(categoryStr));
         }
@@ -138,6 +137,4 @@ public class ParserUtil {
         }
         return transactionList.get(index);
     }
-
-
 }

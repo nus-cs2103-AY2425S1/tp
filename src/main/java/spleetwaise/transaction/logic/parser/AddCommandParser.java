@@ -8,6 +8,7 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 import spleetwaise.address.logic.parser.ArgumentMultimap;
@@ -56,19 +57,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person person = ParserUtil.getPersonFromPhone(phone);
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        HashSet<Category> categories = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
 
         Transaction transaction;
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            transaction = new Transaction(person, amount, description, date);
+            transaction = new Transaction(person, amount, description, date, categories);
         } else {
-            transaction = new Transaction(person, amount, description);
-        }
-
-        if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-            transaction.addCategory(category);
+            transaction = new Transaction(person, amount, description, categories);
         }
 
         return new AddCommand(transaction);
