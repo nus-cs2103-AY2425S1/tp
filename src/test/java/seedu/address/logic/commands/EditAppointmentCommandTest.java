@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_APPOINTMENT_BOB;
@@ -21,6 +22,11 @@ import seedu.address.model.person.Nric;
 
 public class EditAppointmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void constructor_nullInputs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new EditAppointmentCommand(null, null, null));
+    }
 
     @Test
     public void equals() {
