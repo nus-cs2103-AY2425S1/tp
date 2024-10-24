@@ -52,7 +52,7 @@ activate TagCommand
 
 TagCommand -> Model : hasTag(florist)
 activate Model
-Model --> TagCommand : false
+Model --> TagCommand : true
 deactivate Model
 
 TagCommand -> Model : setPerson(personToEdit, editedPerson)
