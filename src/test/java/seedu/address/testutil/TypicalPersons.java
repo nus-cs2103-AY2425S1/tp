@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.RandomPersonGenerator.generateRandomPersons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +63,17 @@ public class TypicalPersons {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with 1000 random generated persons for stress testing.
+     */
+    public static AddressBook getStressTestAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : generateRandomPersons(1000)) {
             ab.addPerson(person);
         }
         return ab;
