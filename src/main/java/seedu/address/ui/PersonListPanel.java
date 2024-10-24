@@ -13,6 +13,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
@@ -29,6 +30,15 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private Label titleLabel;
 
+    @FXML
+    private VBox placeholderContainer;
+
+    @FXML
+    private Label placeholderLabel;
+
+    @FXML
+    private VBox personListContainer;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
@@ -42,6 +52,13 @@ public class PersonListPanel extends UiPart<Region> {
         // Then, center it
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
+
+        // Toggle visibility based on the list's content
+        togglePlaceholder(personList.isEmpty());
+
+        personList.addListener((ListChangeListener<Person>) change -> {
+            togglePlaceholder(personList.isEmpty());
+        });
 
         // Wait for the personListView to be initialized
         Platform.runLater(() -> {
@@ -113,6 +130,22 @@ public class PersonListPanel extends UiPart<Region> {
             if (node instanceof ScrollBar scrollBar) {
                 scrollBar.setDisable(true);
             }
+        }
+    }
+
+    private void togglePlaceholder(boolean isEmpty) {
+        if (isEmpty) {
+            placeholderContainer.setVisible(true);
+            placeholderContainer.setManaged(true);
+
+            personListContainer.setVisible(false);
+            personListContainer.setManaged(false);
+        } else {
+            placeholderContainer.setVisible(false);
+            placeholderContainer.setManaged(false);
+
+            personListContainer.setVisible(true);
+            personListContainer.setManaged(true);
         }
     }
 }

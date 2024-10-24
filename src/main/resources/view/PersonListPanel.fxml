@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -7,10 +9,18 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="panel-container" stylesheets="PersonListPanel.css">
-  <Label fx:id="titleLabel" styleClass="label-header" />
-  <Separator prefWidth="248.0" styleClass="separator"/>
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS"/>
-  <padding>
-    <Insets bottom="10" left="10" right="10" top="10" />
-  </padding>
+    <Label fx:id="titleLabel" styleClass="label-header" />
+    <Separator prefWidth="248.0" styleClass="separator" />
+    <VBox fx:id="placeholderContainer" alignment="CENTER" spacing="10" visible="false" managed="false" VBox.vgrow="ALWAYS">
+        <ImageView fitHeight="200" pickOnBounds="true" preserveRatio="true">
+            <Image url="@/images/emptyListIcon.jpg"/>
+        </ImageView>
+        <Label fx:id="placeholderLabel" />
+    </VBox>
+    <VBox fx:id="personListContainer" VBox.vgrow="ALWAYS" visible="false" managed="false">
+        <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+    </VBox>
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
 </VBox>
