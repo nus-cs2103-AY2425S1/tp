@@ -30,7 +30,9 @@ public class CommandResult {
         this.exit = exit;
         this.showPerson = showPerson;
     }
-
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
@@ -44,7 +46,10 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false);
     }
-
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code showPerson},
+     * and other fields set to their default value.
+     */
     public CommandResult(String feedbackToUser, boolean showPerson) {
         this(feedbackToUser, false, false, showPerson);
     }
