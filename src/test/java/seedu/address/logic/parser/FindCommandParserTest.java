@@ -71,6 +71,28 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_nonNumericPhone_throwsParseException() {
+        // Test with non-numeric input
+        assertParseFailure(parser, "p/abcd", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindPhoneCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_phoneWithLeadingAndTrailingSpaces_returnsFindPhoneCommand() {
+        // Test with leading and trailing spaces around a valid phone number
+        FindPhoneCommand expectedFindPhoneCommand =
+                new FindPhoneCommand(new PhoneBeginsWithKeywordPredicate("98765432"));
+        assertParseSuccess(parser, "p/  98765432  ", expectedFindPhoneCommand);
+    }
+
+    @Test
+    public void parse_phoneWithInvalidCharacters_throwsParseException() {
+        // Test with a phone number containing invalid characters
+        assertParseFailure(parser, "p/98765A432", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindPhoneCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgsAddress_returnsFindAddressCommand() {
         // valid address
         FindAddressCommand expectedFindAddressCommand =
@@ -104,11 +126,31 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "c/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindClientTypeCommand.MESSAGE_USAGE));
     }
+    @Test
+    public void parse_nonAlphanumericClientType_throwsParseException() {
+        // Test with a client type containing non-alphanumeric characters
+        assertParseFailure(parser, "c/@!$", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindClientTypeCommand.MESSAGE_USAGE));
+    }
 
+    @Test
+    public void parse_clientTypeWithLeadingAndTrailingSpaces_returnsFindClientTypeCommand() {
+        // Test with leading and trailing spaces around a valid client type
+        FindClientTypeCommand expectedFindClientTypeCommand =
+                new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(List.of("Corporate")));
+        assertParseSuccess(parser, "c/  Corporate  ", expectedFindClientTypeCommand);
+    }
+
+    @Test
+    public void parse_clientTypeWithInvalidCharacters_throwsParseException() {
+        // Test with a client type containing invalid characters
+        assertParseFailure(parser, "c/Corporate@", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindClientTypeCommand.MESSAGE_USAGE));
+    }
     @Test
     public void parse_invalidPrefix_throwsParseException() {
         // invalid prefix
         assertParseFailure(parser, "e/email@example.com", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindNameCommand.MESSAGE_USAGE));
+                FindCommand.MESSAGE_USAGE));
     }
 }

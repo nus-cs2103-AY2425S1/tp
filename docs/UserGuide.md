@@ -113,13 +113,44 @@ Examples:
 
 Finds persons by name, phone number, address or client type.
 
-Format: `find KEYWORD`
+Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYWORD`
 
 * `find n/KEYWORD` will search for persons by name.
+  * Only the name is searched.
+  * The search is case-insensitive. e.g `hans` will match `Hans`
+  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+  * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
+  * Persons matching all keyword prefix will be returned (i.e. `AND` search).
+    e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 * `find p/KEYWORD` will search for persons by phone number.
+  *  Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
 * `find a/KEYWORD` will search for persons by address.
+  * The search is case-insensitive. e.g `tampines` will match `Tampines`
+  * Only the address of the contact is searched.
+  * Persons with address with any matching substring to the keyword will be returned.
 * `find c/KEYWORD` will search for persons by client type.
-
+  * The search is case-insensitive. e.g `investment` will match `Investment`
+  * Only the `CLIENT_TYPE` of the person is searched.
+  * Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
+  * Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
+  
+A **valid** `KEYWORD` should:
+* For `find n/`:
+  * Not be empty.
+    * For eg. Just typing `fc` without providing any `CLIENT TYPE` will throw an error.
+* For `find p/`:
+  * Only numbers are allowed.
+    * For eg. Typing `find p/abc` will throw an error.
+  * Not be empty.
+      * For eg. Just typing `find p/` without providing any `KEYWORD` will throw an error.
+* For `find a/`:
+  * Not be empty.
+      * For eg. Just typing `find a/` without providing any `KEYWORD` will throw an error.
+* For `find c/`:
+  * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
+    * `client_type` will always be in alphanumeric format.
+  * Not be empty.
+      * For eg. Just typing `find c/` without providing any `KEYWORD` will throw an error.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -137,20 +168,25 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `fn KEYWORD`
 
+* Only the name is searched.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
 * Persons matching all keyword prefix will be returned (i.e. `AND` search).
   e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
+A **valid** `KEYWORD` should:
+  * Not be empty. 
+    * For eg. Just typing `fn` without providing any `KEYWORD` will throw an error.
+
 Examples:
-* `fn John` returns `john` and `John Doe`
+* `fn John` returns `John`, `John Doe`, `Doe John`, `Doe John Eng`
 * `fn Ale Yeo` returns `Alex Yeoh`
 * `fn Yeoh Alex` returns `Alex Yeoh`
+* `fn aLex yEOh` returns `Alex Yeoh`
 
-Result for `fn alex david`:
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Result for `fn alex`:
+  ![result for 'find alex david'](images/findAlexDavidResult.png) // need to change this image
 
 ### Locating persons by phone number: `fp`
 
