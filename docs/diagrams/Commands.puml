@@ -97,17 +97,6 @@ class DeleteCommand {
 class exceptions.CommandException {
 }
 
-class CommandResult {
-    - String feedbackToUser
-    - boolean showHelp
-    - boolean exit
-    + String getFeedbackToUser()
-    + boolean isShowHelp()
-    + boolean isExit()
-    + boolean equals(Object)
-    + int hashCode()
-    + String toString()
-}
 
 class EditCommand {
     + {static} String COMMAND_WORD
