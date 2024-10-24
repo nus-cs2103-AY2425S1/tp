@@ -1,0 +1,8 @@
+{
+  "meetings" : [ {
+    "contactIndexes" : "0",
+    "meetingName" : "Dinner",
+    "meetingDate" : "2024-10-23",
+    "meetingTime" : "18:00:00"
+  } ]
+}
