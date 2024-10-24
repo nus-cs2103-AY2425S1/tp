@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
@@ -33,6 +32,7 @@ public class DeleteAppointmentCommand extends Command {
      * @param appointmentToDelete The appointment object that should be deleted.
      */
     public DeleteAppointmentCommand(Appointment appointmentToDelete) {
+        requireNonNull(appointmentToDelete);
         this.appointmentToDelete = appointmentToDelete;
     }
 
@@ -52,7 +52,10 @@ public class DeleteAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT_ID);
         }
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                Messages.format(appointmentToDelete)));
+                appointmentToDelete.getPatient().getName().toString(),
+                appointmentToDelete.getDoctor().getName().toString(),
+                appointmentToDelete.getDate().toString(),
+                appointmentToDelete.getTime().toString()));
     }
 
     /**

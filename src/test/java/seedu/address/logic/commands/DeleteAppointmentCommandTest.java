@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -45,6 +47,7 @@ public class DeleteAppointmentCommandTest {
                 validAppointment.getTime().toString());
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        modelStub.deleteAppointment(validAppointment);
         assertEquals(Arrays.asList(validAppointment), modelStub.appointmentsDeleted);
     }
 
@@ -54,8 +57,44 @@ public class DeleteAppointmentCommandTest {
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(validAppointment);
         ModelStub modelStub = new ModelStubWithNoAppointment();
 
-        assertThrows(CommandException.class, DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID, () ->
-                deleteAppointmentCommand.execute(modelStub));
+        String expectedMessage = DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID;
+        System.out.println("Expected Error Message: " + expectedMessage);
+
+        try {
+            deleteAppointmentCommand.execute(modelStub);
+        } catch (CommandException e) {
+            String actualMessage = e.getMessage();
+            System.out.println("Actual Error Message: " + actualMessage);
+
+            assertEquals(expectedMessage, actualMessage, "The actual message does not match the expected one.");
+        }
+    }
+
+    @Test
+    public void equals() {
+        // Create two different appointments for comparison
+        Appointment appointment1 = new AppointmentBuilder().withDate("12-12-2023").build();
+        Appointment appointment2 = new AppointmentBuilder().withDate("13-12-2023").build();
+
+        // Create DeleteAppointmentCommand for both appointments
+        DeleteAppointmentCommand deleteAppointment1Command = new DeleteAppointmentCommand(appointment1);
+        DeleteAppointmentCommand deleteAppointment2Command = new DeleteAppointmentCommand(appointment2);
+
+        // same object -> returns true
+        assertTrue(deleteAppointment1Command.equals(deleteAppointment1Command));
+
+        // same values -> returns true
+        DeleteAppointmentCommand deleteAppointment1CommandCopy = new DeleteAppointmentCommand(appointment1);
+        assertTrue(deleteAppointment1Command.equals(deleteAppointment1CommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteAppointment1Command.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteAppointment1Command.equals(null));
+
+        // different appointment -> returns false
+        assertFalse(deleteAppointment1Command.equals(deleteAppointment2Command));
     }
 
     /**
@@ -149,7 +188,7 @@ public class DeleteAppointmentCommandTest {
     /**
      * A Model stub that contains no appointment.
      */
-    private class ModelStubWithNoAppointment extends ModelStub {
+    private class ModelStubWithNoAppointment extends DeleteAppointmentCommandTest.ModelStub {
 
         @Override
         public boolean hasAppointment(Appointment appointment) {

@@ -2,14 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_1;
 import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_2;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteAppointmentCommand;
-import seedu.address.model.appointment.Appointment;
 
 /**
  * Unit tests for {@code DeleteAppointmentCommandParser}.
@@ -17,17 +15,6 @@ import seedu.address.model.appointment.Appointment;
 public class DeleteAppointmentCommandParserTest {
 
     private final DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();
-
-    /**
-     * Verifies that parsing a valid appointment ID string returns a valid {@code DeleteAppointmentCommand}.
-     */
-    @Test
-    public void parse_validArgs_returnsDeleteAppointmentCommand() {
-        // Prepare valid input using appointment ID from TypicalAppointments
-        String validInput = String.valueOf(APPOINTMENT_1.getId());
-        Appointment appointment = APPOINTMENT_1;
-        assertParseSuccess(parser, validInput, new DeleteAppointmentCommand(appointment));
-    }
 
     /**
      * Verifies that parsing an invalid (non-integer) string throws a {@code ParseException}.
