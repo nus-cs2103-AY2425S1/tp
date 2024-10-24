@@ -40,9 +40,9 @@
 }
 
 .table-view {
-    -fx-base: #f5f5f5; /* Changed from dark grey to light grey */
-    -fx-control-inner-background: #f5f5f5; /* Changed from dark grey to light grey */
-    -fx-background-color: #f5f5f5; /* Changed from dark grey to light grey */
+    -fx-base: #f0f0f0; /* Light grey base */
+    -fx-control-inner-background: #ffffff; /* White background for inner control */
+    -fx-background-color: #ffffff; /* White background */
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -100,15 +100,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #f8f8f8; /* Changed from dark grey to light grey */
+    -fx-background-color: #f9f9f9; /* Very light grey for even rows */
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #e0e0e0; /* Changed from dark grey to medium-light grey */
+    -fx-background-color: #f0f0f0; /* Light grey for odd rows */
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #d0d0d0; /* Changed from dark grey to light grey */
+    -fx-background-color: #d0d0d0; /* Light grey for selected cells */
 }
 
 .list-cell:filled:selected #cardPane {
@@ -133,12 +133,12 @@
 }
 
 .stack-pane {
-    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
+    -fx-background-color: #ffffff; /* White background for stack pane */
 }
 
 .pane-with-border {
-    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
-    -fx-border-color: derive(#f0f0f0, 10%); /* Changed from dark grey to very light grey */
+    -fx-background-color: #ffffff; /* White background for pane */
+    -fx-border-color: #e0e0e0; /* Light grey border */
     -fx-border-top-width: 1px;
 }
 
