@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 
 /**
@@ -13,9 +14,9 @@ import seedu.address.model.person.Company;
  */
 public class EditVendorDescriptor extends EditPersonDescriptor {
     private Company company;
+    private Budget budget;
 
-    public EditVendorDescriptor() {
-    }
+    public EditVendorDescriptor() {}
 
     /**
      * Copy constructor.
@@ -24,6 +25,7 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
     public EditVendorDescriptor(EditVendorDescriptor toCopy) {
         super(toCopy);
         setCompany(toCopy.company);
+        setBudget(toCopy.budget);
     }
 
     /**
@@ -31,7 +33,7 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
      */
     @Override
     public boolean isAnyFieldEdited() {
-        return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(company);
+        return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(company, budget);
     }
 
     public void setCompany(Company company) {
@@ -40,6 +42,14 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
 
     public Optional<Company> getCompany() {
         return Optional.ofNullable(company);
+    }
+
+    public void setBudget(Budget budget) {
+        this.budget = budget;
+    }
+
+    public Optional<Budget> getBudget() {
+        return Optional.ofNullable(budget);
     }
 
     @Override
@@ -53,7 +63,8 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
         }
         EditVendorDescriptor otherEditVendorDescriptor = (EditVendorDescriptor) other;
         return super.equals(other)
-                && Objects.equals(company, otherEditVendorDescriptor.company);
+                && Objects.equals(company, otherEditVendorDescriptor.company)
+                && Objects.equals(budget, otherEditVendorDescriptor.budget);
     }
     @Override
     public String toString() {
@@ -64,6 +75,7 @@ public class EditVendorDescriptor extends EditPersonDescriptor {
                 .add("address", getAddress().orElse(null))
                 .add("tags", getTags().orElse(null))
                 .add("company", company)
+                .add("budget", budget)
                 .toString();
     }
 }

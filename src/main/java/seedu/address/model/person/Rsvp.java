@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an RSVP status for a person.
+ * Represents the RSVP status for a person.
  * The RSVP status can be one of the following: "PENDING", "ACCEPTED", "DECLINED".
  * This class enforces the following constraints:
  * RSVP Status should be either "PENDING", "ACCEPTED", or "DECLINED".</li>
@@ -16,12 +16,22 @@ public class Rsvp {
             "RSVP Status should be 'PENDING', 'ACCEPTED' or 'DECLINED'";
 
     /**
+     * Represents the RSVP status of a guest.
+     *
+     * The possible statuses are:
+     * - PENDING
+     * - ACCEPTED
+     * - DECLINED
+     */
+    public enum Status {
+        PENDING, ACCEPTED, DECLINED
+    }
+
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    private static final String[] RSVP_STATUS = {"PENDING", "ACCEPTED", "DECLINED"};
+    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
 
     public final String value;
 
@@ -50,8 +60,8 @@ public class Rsvp {
             return false;
         }
 
-        for (String status : RSVP_STATUS) {
-            if (status.equalsIgnoreCase(str)) {
+        for (Status status : Status.values()) {
+            if (status.name().equalsIgnoreCase(str)) {
                 return true;
             }
         }
@@ -82,11 +92,10 @@ public class Rsvp {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Rsvp)) {
+        if (!(other instanceof Rsvp otherName)) {
             return false;
         }
 
-        Rsvp otherName = (Rsvp) other;
         return value.equals(otherName.value);
     }
 

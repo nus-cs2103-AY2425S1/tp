@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RELATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RSVP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -17,6 +18,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.RELATION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.RELATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.RSVP_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.RSVP_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -31,6 +34,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -45,6 +49,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relation;
 import seedu.address.model.person.Rsvp;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.GuestBuilder;
@@ -58,14 +63,16 @@ public class AddGuestCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + RSVP_DESC_BOB + TAG_DESC_FRIEND, new AddGuestCommand(expectedGuest));
+                + ADDRESS_DESC_BOB + RSVP_DESC_BOB + RELATION_DESC_BOB
+                + TAG_DESC_FRIEND, new AddGuestCommand(expectedGuest));
 
 
         // multiple tags - all accepted
         Guest expectedGuestMultipleTags = new GuestBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + RSVP_DESC_BOB
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + RSVP_DESC_BOB + RELATION_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddGuestCommand(expectedGuestMultipleTags));
     }
@@ -73,7 +80,7 @@ public class AddGuestCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedGuestString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + RSVP_DESC_BOB + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_BOB + RSVP_DESC_BOB + RELATION_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedGuestString,
@@ -95,12 +102,16 @@ public class AddGuestCommandParserTest {
         assertParseFailure(parser, RSVP_DESC_AMY + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RSVP));
 
+        // multiple relation
+        assertParseFailure(parser, RELATION_DESC_AMY + validExpectedGuestString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RELATION));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedGuestString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + RSVP_DESC_AMY + validExpectedGuestString,
+                        + RSVP_DESC_AMY + RELATION_DESC_AMY + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
-                        PREFIX_RSVP));
+                        PREFIX_RSVP, PREFIX_RELATION));
 
         // invalid value followed by valid value
 
@@ -128,6 +139,10 @@ public class AddGuestCommandParserTest {
         assertParseFailure(parser, INVALID_RSVP_DESC + validExpectedGuestString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RSVP));
 
+        // invalid relation
+        assertParseFailure(parser, INVALID_RELATION_DESC + validExpectedGuestString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RELATION));
+
         // valid value followed by invalid value
 
         // invalid name
@@ -149,6 +164,10 @@ public class AddGuestCommandParserTest {
         // invalid rsvp
         assertParseFailure(parser, validExpectedGuestString + INVALID_RSVP_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RSVP));
+
+        // invalid relation
+        assertParseFailure(parser, validExpectedGuestString + INVALID_RELATION_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RELATION));
     }
 
     @Test
@@ -156,6 +175,12 @@ public class AddGuestCommandParserTest {
         // zero tags
         Guest expectedGuest = new GuestBuilder(BOB).withTags().build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+                new AddGuestCommand(expectedGuest));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + RSVP_DESC_BOB,
+                new AddGuestCommand(expectedGuest));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + RELATION_DESC_BOB,
                 new AddGuestCommand(expectedGuest));
     }
 
@@ -205,6 +230,10 @@ public class AddGuestCommandParserTest {
         // invalid rsvp
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_RSVP_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Rsvp.MESSAGE_CONSTRAINTS);
+
+        // invalid relation
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_RELATION_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Relation.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
