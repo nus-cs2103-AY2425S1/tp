@@ -25,9 +25,12 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 
 /**
  * Controller for a help page
@@ -49,14 +52,20 @@ public class HelpWindow extends UiPart<Stage> {
                          DeleteCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{EditCommand.COMMAND_SUMMARY_ACTION, EditCommand.COMMAND_SUMMARY_FORMAT,
                          EditCommand.COMMAND_SUMMARY_EXAMPLES},
+            new String[]{ExitCommand.COMMAND_SUMMARY_ACTION, ExitCommand.COMMAND_SUMMARY_FORMAT,
+                         ExitCommand.COMMAND_SUMMARY_EXAMPLES},
+            new String[]{ExportCommand.COMMAND_SUMMARY_ACTION, ExportCommand.COMMAND_SUMMARY_FORMAT,
+                         ExportCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{FindCommand.COMMAND_SUMMARY_ACTION, FindCommand.COMMAND_SUMMARY_FORMAT,
                          FindCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{ListCommand.COMMAND_SUMMARY_ACTION, ListCommand.COMMAND_SUMMARY_FORMAT,
-                         ListCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{HelpCommand.COMMAND_SUMMARY_ACTION, HelpCommand.COMMAND_SUMMARY_FORMAT,
                          HelpCommand.COMMAND_SUMMARY_EXAMPLES},
-            new String[]{ExitCommand.COMMAND_SUMMARY_ACTION, ExitCommand.COMMAND_SUMMARY_FORMAT,
-                         ExitCommand.COMMAND_SUMMARY_EXAMPLES}
+            new String[]{ListCommand.COMMAND_SUMMARY_ACTION, ListCommand.COMMAND_SUMMARY_FORMAT,
+                         ListCommand.COMMAND_SUMMARY_EXAMPLES},
+            new String[]{RedoCommand.COMMAND_SUMMARY_ACTION, RedoCommand.COMMAND_SUMMARY_FORMAT,
+                         RedoCommand.COMMAND_SUMMARY_EXAMPLES},
+            new String[]{UndoCommand.COMMAND_SUMMARY_ACTION, UndoCommand.COMMAND_SUMMARY_FORMAT,
+                         UndoCommand.COMMAND_SUMMARY_EXAMPLES}
     );
 
     private TableView table = new TableView();

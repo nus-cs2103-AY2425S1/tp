@@ -38,9 +38,9 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_SUMMARY_ACTION = "Find";
     public static final String COMMAND_SUMMARY_FORMAT =
-            ":find KEYWORD [MORE_KEYWORDS]…";
+            ":find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…\u200B";
     public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":find James Jake";
+            ":find -n david -l serangoon";
 
 
     public static final List<String> INVALID_VARIANTS = Arrays.asList("find", "search", ":search", ":query",

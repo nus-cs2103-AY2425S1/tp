@@ -12,6 +12,11 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = ":undo";
     public static final String MESSAGE_SUCCESS = "Undo successful!";
     public static final String MESSAGE_FAILURE = "No more commands to undo!";
+    public static final String COMMAND_SUMMARY_ACTION = "Undo";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":undo";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":undo";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
