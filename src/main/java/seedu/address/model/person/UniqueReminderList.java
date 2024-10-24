@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.Iterator;
 import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicateReminderException;

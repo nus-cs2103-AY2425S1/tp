@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Reminder;
 import seedu.address.model.ReadOnlyReminderAddressBook;
 import seedu.address.model.ReminderAddressBook;
+import seedu.address.model.person.Reminder;
 
 /**
  * An Immutable ReminderAddressBook that is serializable to JSON format.
