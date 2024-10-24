@@ -56,8 +56,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String LOG_DESC_FIRST_VISIT = " " + PREFIX_LOG + VALID_LOG_FIRST_VISIT;
-    public static final String LOG_DESC_SECOND_VISIT = " " + PREFIX_LOG + VALID_LOG_SECOND_VISIT;
-
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_IDENTITY_NUMBER_DESC = " " + PREFIX_IDENTITY_NUMBER + "S123Z"; // too short
