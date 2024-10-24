@@ -43,7 +43,7 @@ public class ExportCommand extends Command {
      */
     public ExportCommand() {
         JsonAddressBookStorage jsonStorage =
-            new JsonAddressBookStorage(projectRootPath.resolve("data").resolve("addressbook.json"));
+            new JsonAddressBookStorage(projectRootPath.resolve("addressbook.json"));
         JsonUserPrefsStorage userPrefStorage =
             new JsonUserPrefsStorage(projectRootPath.resolve("config.json"));
         storage = new StorageManager(jsonStorage, userPrefStorage);
@@ -53,7 +53,7 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Path importPath = projectRootPath.resolve("data").resolve("addressbook.json");
-        Path exportPath = projectRootPath.resolve("data").resolve("exported_data.csv");
+        Path exportPath = projectRootPath.resolve("exported_data.csv");
         requireNonNull(model);
         saveJsonFile(model, importPath, exportPath);
 
