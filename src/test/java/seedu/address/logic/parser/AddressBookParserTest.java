@@ -54,6 +54,7 @@ public class AddressBookParserTest {
         assertEquals(new AddStudentCommand(student), command);
     }
 
+    @Test
     public void parseCommand_addCompany() throws Exception {
         Company company = new CompanyBuilder().build();
         AddCompanyCommand command = (AddCompanyCommand) parser.parseCommand(CompanyUtil.getAddCommand(company));
