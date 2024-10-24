@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * Represents the reason that the student is absent.
  * The reason should only contain alphanumeric characters and spaces.
@@ -36,7 +34,7 @@ public class AbsentReason {
     public static boolean isValidAbsentReason(String reason) {
         return reason != null && (reason.matches(VALIDATION_REGEX) || reason.isEmpty());
     }
-    @JsonValue
+
     @Override
     public String toString() {
         return absentReason;
