@@ -47,10 +47,12 @@ public class FindConcertCommandParserTest {
     }
 
     @Test
-    public void parse_inputWithPreamble_throwsParseException() {
-        assertParseFailure(parser,
-                PREAMBLE_NON_EMPTY + " " + PREFIX_NAME + " \n Alice \n \t Bob  \t",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindConcertCommand.MESSAGE_USAGE));
+    public void parse_inputWithPreamble_success() {
+        FindConcertCommand expecteFindConcertCommand =
+                new FindConcertCommand(new NameContainsKeywordsPredicate<>(List.of("missing")));
+        assertParseSuccess(parser,
+                PREAMBLE_NON_EMPTY + " " + PREFIX_NAME + " \n missing \t",
+                expecteFindConcertCommand);
     }
 
     @Test
