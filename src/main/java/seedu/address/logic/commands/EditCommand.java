@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -26,6 +27,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.exam.Exam;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -36,6 +40,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
 import seedu.address.model.person.Sex;
 import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,10 +126,14 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getStudentClass());
         EcName updatedEcName = editPersonDescriptor.getEcName().orElse(personToEdit.getEcName());
         EcNumber updatedEcNumber = editPersonDescriptor.getEcNumber().orElse(personToEdit.getEcNumber());
+        Set<Exam> updatedExams = personToEdit.getExams();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        HashMap<AbsentDate, AbsentReason> updatedAttendances = personToEdit.getAttendances();
+        Set<Submission> updatedSubmissions = personToEdit.getSubmissions();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
-                updatedStudentClass, updatedEcName, updatedEcNumber, updatedTags);
+                updatedStudentClass, updatedEcName, updatedEcNumber, updatedExams, updatedTags, updatedAttendances,
+                updatedSubmissions);
     }
 
     @Override
@@ -166,6 +175,7 @@ public class EditCommand extends Command {
         private EcName ecName;
         private EcNumber ecNumber;
         private Set<Tag> tags;
+        private HashMap<AbsentDate, AbsentReason> attendances;
 
         public EditPersonDescriptor() {}
 
@@ -278,11 +288,21 @@ public class EditCommand extends Command {
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * @return {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
+
+        /**
+         * Returns a defensive copy of the attendance map to prevent modification
+         * of the original {@code HashMap<AbsentDate, AbsentReason>}.
+         * @return {@code Optional#empty()} if {@code attendances} is null.
+         */
+        public Optional<HashMap<AbsentDate, AbsentReason>> getAttendances() {
+            return (attendances != null) ? Optional.of(new HashMap<>(attendances)) : Optional.empty();
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -305,7 +325,8 @@ public class EditCommand extends Command {
                     && Objects.equals(studentClass, otherEditPersonDescriptor.studentClass)
                     && Objects.equals(ecName, otherEditPersonDescriptor.ecName)
                     && Objects.equals(ecNumber, otherEditPersonDescriptor.ecNumber)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(attendances, otherEditPersonDescriptor.attendances);
         }
 
         @Override
@@ -321,6 +342,7 @@ public class EditCommand extends Command {
                     .add("emergency contact name", ecName)
                     .add("emergency contact number", ecNumber)
                     .add("tags", tags)
+                    .add("attendances", attendances)
                     .toString();
         }
     }

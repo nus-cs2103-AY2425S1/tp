@@ -113,11 +113,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Filtering persons by name: `filter`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose attributes contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -125,11 +125,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Similar for emergency contact names and addresses
+* As for phone numbers, register numbers and class, the entire number must be provided in the command to filter
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `filter n/John` returns `john` and `John Doe`
+* `filter p/99999999` returns `Alex Yeoh` 
+* This image shows how students can be filtered using their phone number (99999999 - Alex Yeoh)
+![filter_by_phone.png](images%2Ffilter_by_phone.png)
 
 ### Deleting a person : `delete`
 
@@ -145,7 +148,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding an Emergency contact's name : `addEcName` 
+### Adding an Emergency contact's name : `addEcName`
 
 Adds an emergency contact's name to the specified person in the address book.
 
@@ -166,7 +169,7 @@ Examples:
 
 ### Adding an Emergency contact's number : `addEcNumber`
 
-Adds a emergency contact's number to the specified person in the address book.
+Adds an emergency contact's number to the specified person in the address book.
 
 Format: `addEcNumber INDEX [ep/ECNUMBER]`
 
@@ -182,6 +185,107 @@ Format: `addEcNumber INDEX [ep/ECNUMBER]`
 Examples:
 * `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
 * `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
+
+### Adding Attendance : `addAttendance`
+
+Adds the date and reason as to why the specified person in the address book is absent.
+
+Format: `addAttendance INDEX aa/[DATE] ar/[REASON]`
+
+<box type="tip" seamless>
+
+**Tip:** You can delete the attendance by leaving the `REASON` field empty.
+</box>
+
+* Adds the date where student is absent `DATE` and the reason `REASON` to the person at the specified `INDEX`
+* Deletes the attendance at the specified `INDEX`
+* The index **must be a positive integer** 1, 2, 3, …​
+* The date **must be in the form of DD-MM-YYYY**.
+
+Examples:
+* `addAttendance 1 aa/[24-09-2024] ar/[Sick]` to add the date where the 1st person in the list is absent and the reason.
+* `addAttendance 1 aa/[24-09-2024] ar/` to delete the attendance from the 1st person in the list.
+
+### Adding an Exam : `addExam`
+
+Adds an exam to every person in the address book.
+
+Format: `addExam ex/EXAMNAME`
+
+<box type="tip" seamless>
+
+**Tip:** If a new student is added after an exam is added, the exam has to be added again for it to be reflected for the new student.
+</box>
+
+* The exam name can only contain alphanumeric characters and spaces.
+
+Examples:
+* `addExam ex/Midterm`
+
+### Adding an Exam Score: `addExamScore`
+
+Adds an exam score for the specified exam for the person at the specified index.
+
+Format: `addExamScore INDEX ex/EXAMNAME sc/EXAMSCORE`
+
+* The exam score must be an integer between 0 and 100, or `NIL`.
+* The exam score can be edited using the same command with a different exam score.
+* The exam score can be deleted by entering the exam score as `NIL`.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `addExamScore 1 ex/Midterm sc/70`
+* `addExamScore 1 ex/Midterm sc/NIL`
+
+### Adding a Submission : `addSubmission`
+
+Adds a submission to every person in the address book.
+
+Format: `addSubmission sm/SUBMISSION_NAME`
+
+<box type="tip" seamless>
+
+**Tip:** If a new student is added after a submission is added, the submission has to be added again for it to be reflected for the new student.
+</box>
+
+* The submission name can only contain alphanumeric characters and spaces.
+
+Examples:
+* `addSubmission sm/Assignment 1`
+
+### Adding a Submission Status: `addSubmissionStatus`
+
+Adds a submission status for the specified submission for the person at the specified index.
+
+Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
+
+* The submission status must be a boolean value "T" or "F", or `NIL`.
+* The submission status can be edited using the same command with a different submission status.
+* The submission status can be deleted by entering the submission status as `NIL`.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `addSubmissionStatus 1 sm/Assignment 1 ss/T`
+* `addSubmissionStatus 1 sm/Tutorial 2 ss/NIL`
+
+### Sorting the list : `sort`
+
+Sorts the list of students based on the students attributes.
+
+Format: `sort [ATTRIBUTE]`
+
+<box type="tip" seamless>
+
+**Tip:** Students attributes include: name, phone, email, address, sex, register number, student class, emergency contact name, emergency contact number.
+</box>
+
+* Sorts the list based on the ATTRIBUTE
+* Unsort the list when the attribute is `none`
+
+Examples:
+* `sort name` to sort the list based on student's names
+* `sort register number` to sort the list based on student's register numbers
+* `sort none` to unsort the list
 
 ### Clearing all entries : `clear`
 
@@ -232,13 +336,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/SEX r/REGISTER_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/1A s/M r/1 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Add Emergency Phone Number**  | `EcNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`
+| Action                           | Format, Examples                                                                                                                                                                                                   |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/SEX r/REGISTER_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/1A s/M r/1 t/friend t/colleague` |
+| **Clear**                        | `clear`                                                                                                                                                                                                            |
+| **Delete**                       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                |
+| **Edit**                         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                        |
+| **Filter**                       | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g., `filter n/James p/90332234`                                           |
+| **List**                         | `list`                                                                                                                                                                                                             |
+| **Help**                         | `help`                                                                                                                                                                                                             |
+| **Add Emergency Contact Name**   | `addEcName INDEX [en/EMERGENCY CONTACT NAME]` <br> e.g., `addEcName 1 en/John Doe`                                                                                                                                 |
+| **Add Emergency Contact Number** | `EcNumber INDEX [ep/EMERGENCY_CONTACT_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`                                                                                                                                  |
+| **AddExam**                      | `addExam ex/EXAMNAME` <br> e.g., `addExam ex/Midterm`                                                                                                                                                              |
+| **AddExamScore**                 | `addExamScore INDEX ex/EXAMNAME sc/SCORE` <br> e.g., `addExamScore 1 ex/Midterm sc/70`                                                                                                                             |
+| **Add Attendance**               | `addAttendance INDEX aa/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 aa/[24-09-2024] ar/[Sick]`                                                                                                                  |
+| **AddSubmission**                | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`                                                                                                                                      |
+| **AddSubmissionStatus**          | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/T`                                                                                        |
+| **Sort**                         |   `sort [ATTRIBUTE]` <br> e.g., `sort student class`

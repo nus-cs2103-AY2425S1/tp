@@ -8,17 +8,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEcNameCommand;
 import seedu.address.logic.commands.AddEcNumberCommand;
+import seedu.address.logic.commands.AddExamCommand;
+import seedu.address.logic.commands.AddExamScoreCommand;
+import seedu.address.logic.commands.AddSubmissionCommand;
+import seedu.address.logic.commands.AddSubmissionStatusCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,8 +73,8 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -84,6 +90,24 @@ public class AddressBookParser {
 
         case AddEcNumberCommand.COMMAND_WORD:
             return new AddEcNumberCommandParser().parse(arguments);
+
+        case AddSubmissionCommand.COMMAND_WORD:
+            return new AddSubmissionCommandParser().parse(arguments);
+
+        case AddSubmissionStatusCommand.COMMAND_WORD:
+            return new AddSubmissionStatusCommandParser().parse(arguments);
+
+        case AddAttendanceCommand.COMMAND_WORD:
+            return new AddAttendanceCommandParser().parse(arguments);
+
+        case AddExamCommand.COMMAND_WORD:
+            return new AddExamCommandParser().parse(arguments);
+
+        case AddExamScoreCommand.COMMAND_WORD:
+            return new AddExamScoreCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

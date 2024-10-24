@@ -7,10 +7,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's sex in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSex(String)}
  */
-public class Sex {
+public class Sex implements Comparable<Sex> {
 
+    public static final String MESSAGE_GUI = "Sex: %1$s";
     public static final String MESSAGE_CONSTRAINTS = "Sex can only take \"M\" or \"F\"";
-
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -60,6 +60,11 @@ public class Sex {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Sex s) {
+        return this.toString().compareTo(s.toString());
     }
 
 }

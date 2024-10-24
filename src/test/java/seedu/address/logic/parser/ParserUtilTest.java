@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -13,7 +15,10 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -34,8 +39,11 @@ public class ParserUtilTest {
     private static final String INVALID_SEX = "H";
     private static final String INVALID_STUDENT_CLASS = "A1";
     private static final String INVALID_EMERGENCY_CONTACT_NAME = "--";
-    private static final String INVALID_EMERGENCY_PHONE = "1234";
+    private static final String INVALID_EMERGENCY_CONTACT_NUMBER = "1234";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ABSENT_DATE = "2024-10-32"; // Invalid date
+    private static final String INVALID_ABSENT_REASON = "";
+    private static final String INVALID_SORT_ATTRIBUTE = "names";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -45,9 +53,12 @@ public class ParserUtilTest {
     private static final String VALID_SEX = "F";
     private static final String VALID_STUDENT_CLASS = "1A";
     private static final String VALID_EMERGENCY_CONTACT_NAME = "Joe Walker";
-    private static final String VALID_EMERGENCY_PHONE = "91234567";
+    private static final String VALID_EMERGENCY_CONTACT_NUMBER = "91234567";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_ABSENT_DATE = "20-10-2024";
+    private static final String VALID_ABSENT_REASON = "Sick";
+    private static final String VALID_SORT_ATTRIBUTE = "register number";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -262,21 +273,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseEcNumber_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEcNumber(INVALID_EMERGENCY_PHONE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEcNumber(INVALID_EMERGENCY_CONTACT_NUMBER));
     }
 
     @Test
-    public void parseEcNumber_validValueWithoutWhitespace_returnsStudentClass() throws Exception {
-        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
-        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(VALID_EMERGENCY_PHONE));
+    public void parseEcNumber_validValueWithoutWhitespace_returnsEcNumber() throws Exception {
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_CONTACT_NUMBER);
+        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(VALID_EMERGENCY_CONTACT_NUMBER));
     }
 
     @Test
-    public void parseEcNumber_validValueWithWhitespace_returnsTrimmedStudentClass() throws Exception {
-        String ecNumberWithWhitespace = WHITESPACE + VALID_EMERGENCY_PHONE + WHITESPACE;
-        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
+    public void parseEcNumber_validValueWithWhitespace_returnsTrimmedEcNumber() throws Exception {
+        String ecNumberWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NUMBER + WHITESPACE;
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_CONTACT_NUMBER);
         assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(ecNumberWithWhitespace));
-
     }
 
     @Test
@@ -323,5 +333,74 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAbsentDate_validValueWithoutWhitespace_returnsAbsentDate() throws Exception {
+        AbsentDate expectedAbsentDate = new AbsentDate(VALID_ABSENT_DATE);
+        assertEquals(expectedAbsentDate, ParserUtil.parseAbsentDate(VALID_ABSENT_DATE));
+    }
+
+    @Test
+    public void parseAbsentDate_validValueWithWhitespace_returnsTrimmedAbsentDate() throws Exception {
+        String absentDateWithWhitespace = WHITESPACE + VALID_ABSENT_DATE + WHITESPACE;
+        AbsentDate expectedAbsentDate = new AbsentDate(VALID_ABSENT_DATE);
+        assertEquals(expectedAbsentDate, ParserUtil.parseAbsentDate(absentDateWithWhitespace));
+    }
+
+    @Test
+    public void parseAttendance_invalidAbsentDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAbsentDate(
+                AddAttendanceCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_ABSENT_DATE + INVALID_ABSENT_DATE + " "
+                        + PREFIX_ABSENT_REASON + VALID_ABSENT_REASON
+        ));
+    }
+
+    @Test
+    public void parseAbsentReason_validValueWithoutWhitespace_returnsAbsentReason() throws Exception {
+        AbsentReason expectedAbsentReason = new AbsentReason(VALID_ABSENT_REASON);
+        assertEquals(expectedAbsentReason, ParserUtil.parseAbsentReason(VALID_ABSENT_REASON));
+    }
+
+    @Test
+    public void parseAbsentReason_validValueWithWhitespace_returnsTrimmedAbsentReason() throws Exception {
+        String absentReasonWithWhitespace = WHITESPACE + VALID_ABSENT_REASON + WHITESPACE;
+        AbsentReason expectedAbsentReason = new AbsentReason(VALID_ABSENT_REASON);
+        assertEquals(expectedAbsentReason, ParserUtil.parseAbsentReason(absentReasonWithWhitespace));
+    }
+
+    @Test
+    public void parseAttendance_invalidAbsentReason_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAbsentReason(
+                AddAttendanceCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_ABSENT_DATE + VALID_ABSENT_DATE + " "
+                        + PREFIX_ABSENT_REASON + INVALID_ABSENT_REASON
+        ));
+    }
+
+    @Test
+    public void parseSortAttribute_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortAttribute((String) null));
+    }
+
+    @Test
+    public void parseSortAttribute_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortAttribute(INVALID_SORT_ATTRIBUTE));
+    }
+
+    @Test
+    public void parseSortAttribute_validValueWithoutWhitespace_returnsSortAttribute() throws Exception {
+        ParserUtil.SortAttribute expectedSortAttribute = ParserUtil.SortAttribute.REGISTERNUMBER;
+        assertEquals(expectedSortAttribute, ParserUtil.parseSortAttribute(VALID_SORT_ATTRIBUTE));
+    }
+
+    @Test
+    public void parseSortAttribute_validValueWithWhitespace_returnsTrimmedSortAttribute() throws Exception {
+        String sortAttributeWithWhiteSpace = WHITESPACE + VALID_SORT_ATTRIBUTE + WHITESPACE;
+        ParserUtil.SortAttribute expectedSortAttribute = ParserUtil.SortAttribute.REGISTERNUMBER;
+        assertEquals(expectedSortAttribute, ParserUtil.parseSortAttribute(sortAttributeWithWhiteSpace));
     }
 }
