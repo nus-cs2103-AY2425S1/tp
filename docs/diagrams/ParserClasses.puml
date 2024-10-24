@@ -6,11 +6,14 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 Class "{abstract}\nCommand" as Command
 Class XYZCommand
+Class FilterCommand
+Class CombinedPredicate
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
 Class AddressBookParser
 Class XYZCommandParser
+Class FilterCommandParser
 Class CliSyntax
 Class ParserUtil
 Class ArgumentMultimap
@@ -22,17 +25,34 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 
 AddressBookParser .down.> XYZCommandParser: <<create>>
+AddressBookParser .down.> FilterCommandParser: <<create>>
 
 XYZCommandParser ..> XYZCommand : <<create>>
+FilterCommandParser ..> FilterCommand : <<create>>
+FilterCommandParser ..> CombinedPredicate : <<create>>
 AddressBookParser ..> Command : <<use>>
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
+FilterCommandParser .up.|> Parser
+FilterCommandParser ..> ArgumentMultimap
+FilterCommandParser ..> ArgumentTokenizer
 ArgumentTokenizer .left.> ArgumentMultimap
 XYZCommandParser ..> CliSyntax
+FilterCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
 XYZCommandParser ..> ParserUtil
+FilterCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+FilterCommand -up-|> Command
+
+note right of FilterCommandParser
+Internally creates and combines multiple predicates
+(e.g., NameContainsSubstringPredicate,
+IncomeComparisonPredicate, etc.) into a
+CombinedPredicate.
+end note
+
 @enduml
