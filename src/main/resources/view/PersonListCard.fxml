@@ -38,10 +38,6 @@
         <Label text="Rating: " styleClass="cell_small_label" />
         <Label fx:id="rating" styleClass="cell_small_label" text="\$rating" />
       </HBox>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label text="Price: " styleClass="cell_small_label" />
-        <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
-      </HBox>
 
     </VBox>
   </GridPane>

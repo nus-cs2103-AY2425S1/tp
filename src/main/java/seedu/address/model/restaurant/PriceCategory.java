@@ -31,6 +31,7 @@ public enum PriceCategory {
      * @param symbol   the symbol of the price category
      */
     PriceCategory(int maxValue, String symbol) {
+        assert maxValue >= 0 : "Max value must not be negative.";
         this.maxValue = maxValue;
         this.symbol = symbol;
     }
