@@ -42,8 +42,8 @@ public class Restaurant {
 
         // Extract the price tag and other tags
         Pair<Tag, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
-    
-        this.price = priceTagAndOtherTags.getFirst() != null 
+
+        this.price = priceTagAndOtherTags.getFirst() != null
                 ? new Price(priceTagAndOtherTags.getFirst())
                 : null;
         this.tags.addAll(priceTagAndOtherTags.getSecond());
