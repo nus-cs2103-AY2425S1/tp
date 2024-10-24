@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_HELP_KEYWORD;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -31,9 +31,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             && !trimmedLowercaseKeyword.equals(EditCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(FindCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(ListCommand.COMMAND_WORD)
+            && !trimmedLowercaseKeyword.equals(HelpCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(ClearCommand.COMMAND_WORD)
             && !trimmedLowercaseKeyword.equals(ExitCommand.COMMAND_WORD)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_HELP_KEYWORD,
                 trimmedLowercaseKeyword));
         }
         return new HelpCommand(trimmedLowercaseKeyword);
