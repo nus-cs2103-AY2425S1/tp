@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
@@ -13,16 +11,10 @@ import seedu.address.model.supplier.NameContainsKeywordsPredicate;
 
 public class ViewSupplierCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private ViewSupplierCommandParser parser = new ViewSupplierCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ViewSupplierCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsViewSupplierCommand() {
         // no leading and trailing whitespaces
         ViewSupplierCommand expectedViewSupplierCommand =
                 new ViewSupplierCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));

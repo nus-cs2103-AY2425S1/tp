@@ -8,12 +8,15 @@ import seedu.address.model.Model;
 /**
  * Lists all suppliers in the address book to the user.
  */
-public class ListCommand extends Command {
+public class ViewAllSupplierCommand extends ViewSupplierCommand {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "view_supplier";
 
-    public static final String MESSAGE_SUCCESS = "Listed all suppliers";
+    public static final String MESSAGE_SUCCESS = "Showing all suppliers";
 
+    public ViewAllSupplierCommand() {
+        super(PREDICATE_SHOW_ALL_SUPPLIERS);
+    }
 
     @Override
     public CommandResult execute(Model model) {

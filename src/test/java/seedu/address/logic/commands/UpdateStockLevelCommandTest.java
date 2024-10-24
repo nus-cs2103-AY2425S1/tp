@@ -18,7 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 
-public class SetThresholdCommandTest {
+public class UpdateStockLevelCommandTest {
 
     private Model model;
     private ProductName validProductName;
@@ -34,22 +34,22 @@ public class SetThresholdCommandTest {
 
     @Test
     public void constructor_nullProductName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SetThresholdCommand(null, 1000));
+        assertThrows(NullPointerException.class, () -> new UpdateStockLevelCommand(null, 1000));
     }
 
     @Test
     public void execute_validProductNameAndStockLevel_success() throws Exception {
-        SetThresholdCommand command = new SetThresholdCommand(validProductName, 1000);
+        UpdateStockLevelCommand command = new UpdateStockLevelCommand(validProductName, 1000);
         CommandResult result = command.execute(model);
 
-        assertEquals(String.format(SetThresholdCommand.MESSAGE_EDIT_PRODUCT_SUCCESS,
+        assertEquals(String.format(UpdateStockLevelCommand.MESSAGE_EDIT_PRODUCT_SUCCESS,
                 Messages.format(validProduct), 1000), result.getFeedbackToUser());
 
         Product editedProduct = model.getFilteredProductList().stream()
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();
-        assertEquals(1000, editedProduct.getMinStockLevel());
+        assertEquals(1000, editedProduct.getStockLevel());
     }
 
     @Test
@@ -60,7 +60,7 @@ public class SetThresholdCommandTest {
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();
-        assertNotEquals(-100, editedProduct.getMinStockLevel());
+        assertNotEquals(-100, editedProduct.getStockLevel());
     }
 
     @Test
@@ -68,17 +68,20 @@ public class SetThresholdCommandTest {
         SetThresholdCommand command = new SetThresholdCommand(validProductName, 0);
         CommandResult result = command.execute(model);
 
+        assertEquals(String.format(UpdateStockLevelCommand.MESSAGE_EDIT_PRODUCT_SUCCESS,
+                Messages.format(validProduct), 0), result.getFeedbackToUser());
+
         Product editedProduct = model.getFilteredProductList().stream()
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();
-        assertEquals(0, editedProduct.getMinStockLevel());
+        assertEquals(0, editedProduct.getStockLevel());
     }
 
     @Test
     public void execute_nonexistentProduct_throwsCommandException() {
         ProductName nonExistentProduct = new ProductName("NonExistentProduct");
-        SetThresholdCommand command = new SetThresholdCommand(nonExistentProduct, 1000);
+        UpdateStockLevelCommand command = new UpdateStockLevelCommand(nonExistentProduct, 1000);
 
         assertThrows(CommandException.class, String.format(
                 SetThresholdCommand.MESSAGE_PRODUCT_NOT_FOUND, nonExistentProduct), () -> command.execute(model));
@@ -86,15 +89,15 @@ public class SetThresholdCommandTest {
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        SetThresholdCommand command = new SetThresholdCommand(validProductName, 1000);
+        UpdateStockLevelCommand command = new UpdateStockLevelCommand(validProductName, 1000);
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 
     @Test
     public void equals() {
-        SetThresholdCommand command1 = new SetThresholdCommand(validProductName, 1000);
-        SetThresholdCommand command2 = new SetThresholdCommand(validProductName, 2000);
-        SetThresholdCommand command3 = new SetThresholdCommand(new ProductName("DifferentProduct"), 1000);
+        UpdateStockLevelCommand command1 = new UpdateStockLevelCommand(validProductName, 1000);
+        UpdateStockLevelCommand command2 = new UpdateStockLevelCommand(validProductName, 20000);
+        UpdateStockLevelCommand command3 = new UpdateStockLevelCommand(new ProductName("DifferentProduct"), 1000);
 
         // same object -> returns true
         assertTrue(command1.equals(command1));
