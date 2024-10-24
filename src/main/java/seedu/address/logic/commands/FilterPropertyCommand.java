@@ -4,6 +4,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.property.MatchingPrice;
@@ -13,6 +16,8 @@ import seedu.address.model.property.Type;
  * Filters properties based on their optional {@code PropertyType} and {@code MatchingPrice}.
  */
 public class FilterPropertyCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(FilterPropertyCommand.class);
+
     /** The command word to trigger the filtering action. */
     public static final String COMMAND_WORD = "filterproperty";
 
@@ -43,6 +48,8 @@ public class FilterPropertyCommand extends Command {
      * @throws NullPointerException If the provided client is null.
      */
     public FilterPropertyCommand(Type type, MatchingPrice lteObj, MatchingPrice gteObj) {
+        assert type != null || lteObj != null || gteObj != null: "At least one command must be present";
+        logger.info("Filter property object created");
         this.type = type;
         /* Creates the upper bound of the MatchingPrice */
         this.lteObj = lteObj;
@@ -59,6 +66,8 @@ public class FilterPropertyCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert type != null || lteObj != null || gteObj != null: "At least one command must be present";
+        logger.info("Property filtering begining");
         String typeString = type == null ? "" : type.toString();
         int lte = lteObj == null ? Integer.MAX_VALUE : lteObj.toInteger();
         int gte = gteObj == null ? 0 : gteObj.toInteger();
@@ -68,6 +77,7 @@ public class FilterPropertyCommand extends Command {
             && MatchingPrice.getMatchingPrice(property.getAsk(), property.getBid()) <= lte
             && MatchingPrice.getMatchingPrice(property.getAsk(), property.getBid()) >= gte);
         model.setDisplayProperties();
+        logger.info("Property sucessfully filtered");
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

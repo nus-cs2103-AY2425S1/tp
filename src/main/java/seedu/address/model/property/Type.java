@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.property.PropertyType.isValidEnumValue;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+
 /**
  * Represents a property type in the address book.
  * Guarantees: immutable; type is valid as declared in {@link #isValidType(String)}.
@@ -12,6 +16,7 @@ public class Type {
     /**
      * Specifies allowed property types
      */
+    private static final Logger logger = LogsCenter.getLogger(Type.class);
     public static final String MESSAGE_CONSTRAINTS =
             "Type can only be case-insensetive HDB, CONDO, LANDED";
     public static final String VALIDATION_REGEX = String.format("^(?i)(%s)$", String.join("|",
@@ -27,8 +32,12 @@ public class Type {
      * @param type A valid type.
      */
     public Type(String type) {
+        logger.info("Creating Type object: " + type);
         requireNonNull(type);
+        assert type != null : "Type string cannot be null";
         checkArgument(isValidType(type), MESSAGE_CONSTRAINTS);
+        assert isValidType(type) != false : "Type string must be HDB, CONDO, LANDED";
+        logger.info("Type object created: " + type);
         value = PropertyType.valueOf(type.toUpperCase()).toString();
     }
 

@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +26,8 @@ import seedu.address.model.property.Unit;
  * Extends {@link Command} and uses its functionality to add a specific type of property: {@code Property}.
  */
 public class AddPropertyCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(AddPropertyCommand.class);
+
     public static final String COMMAND_WORD = "addproperty";
 
     public static final String MESSAGE_USAGE = String
@@ -44,6 +49,8 @@ public class AddPropertyCommand extends Command {
      */
     public AddPropertyCommand(Property property) {
         requireNonNull(property);
+        assert property != null: "Property cannot be null";
+        logger.info("AddProperty object created for: " + property);
         toAdd = property;
     }
 
@@ -58,12 +65,16 @@ public class AddPropertyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert toAdd != null: "Property cannot be null";
+        logger.info("Execution begining for " + toAdd);
 
         if (model.hasProperty(toAdd)) {
+            logger.warning("Attempting to create duplicate property for: " + toAdd);
             throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
 
         model.addProperty(toAdd);
+        logger.info("Property successfully added for: " + toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
