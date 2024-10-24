@@ -46,6 +46,7 @@ public class ListingBuilder {
      * Initializes the ListingBuilder with the data of {@code listingToCopy}.
      */
     public ListingBuilder(Listing listingToCopy) {
+        name = listingToCopy.getName();
         address = listingToCopy.getAddress();
         area = listingToCopy.getArea();
         price = listingToCopy.getPrice();
@@ -59,8 +60,18 @@ public class ListingBuilder {
         return this;
     }
 
+    public ListingBuilder withName(Name name) {
+        this.name = name;
+        return this;
+    }
+
     public ListingBuilder withAddress(String address) {
         this.address = new Address(address);
+        return this;
+    }
+
+    public ListingBuilder withAddress(Address address) {
+        this.address = address;
         return this;
     }
 
@@ -69,8 +80,18 @@ public class ListingBuilder {
         return this;
     }
 
+    public ListingBuilder withArea(Area area) {
+        this.area = area;
+        return this;
+    }
+
     public ListingBuilder withPrice(String formattedValue, BigDecimal rawValue) {
         this.price = new Price(formattedValue, rawValue);
+        return this;
+    }
+
+    public ListingBuilder withPrice(Price price) {
+        this.price = price;
         return this;
     }
 
