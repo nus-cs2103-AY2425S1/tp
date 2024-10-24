@@ -29,16 +29,12 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
      */
     public AddRentalCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ADDRESS, PREFIX_RENTAL_START_DATE, PREFIX_RENTAL_END_DATE,
                         PREFIX_RENT_DUE_DATE, PREFIX_MONTHLY_RENT, PREFIX_DEPOSIT, PREFIX_CUSTOMER_LIST);
-        Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRentalCommand.MESSAGE_USAGE), pe);
-        }
+        Index clientIndex = getClientIndex(argMultimap);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -50,48 +46,10 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
                 PREFIX_CUSTOMER_LIST);
 
         AddRentalDescriptor addRentalDescriptor = new AddRentalDescriptor();
-
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            addRentalDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_RENTAL_START_DATE).isPresent()) {
-            addRentalDescriptor.setRentalStartDate(ParserUtil.parseRentalDate(
-                    argMultimap.getValue(PREFIX_RENTAL_START_DATE).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_RENTAL_END_DATE).isPresent()) {
-            addRentalDescriptor.setRentalEndDate(ParserUtil.parseRentalDate(
-                    argMultimap.getValue(PREFIX_RENTAL_END_DATE).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_RENT_DUE_DATE).isPresent()) {
-            addRentalDescriptor.setRentDueDate(ParserUtil.parseRentDueDate(
-                    argMultimap.getValue(PREFIX_RENT_DUE_DATE).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_MONTHLY_RENT).isPresent()) {
-            addRentalDescriptor.setMonthlyRent(ParserUtil.parseMonthlyRent(
-                    argMultimap.getValue(PREFIX_MONTHLY_RENT).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_DEPOSIT).isPresent()) {
-            addRentalDescriptor.setDeposit(ParserUtil.parseDeposit(
-                    argMultimap.getValue(PREFIX_DEPOSIT).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_CUSTOMER_LIST).isPresent()) {
-            addRentalDescriptor.setCustomerList(ParserUtil.parseCustomerList(
-                    argMultimap.getValue(PREFIX_CUSTOMER_LIST).get()));
-        }
-
-        if (!addRentalDescriptor.isAddressFieldEdited()) {
-            throw new ParseException(AddRentalCommand.MESSAGE_REQUIRE_ADDRESS);
-        }
-
+        parseAllFields(argMultimap, addRentalDescriptor);
         RentalInformation rentalInformation = addRentalDescriptor.getRentalInformationEquivalentWithNull();
 
-        return new AddRentalCommand(index, rentalInformation);
+        return new AddRentalCommand(clientIndex, rentalInformation);
     }
 
     /**
@@ -100,5 +58,145 @@ public class AddRentalCommandParser implements Parser<AddRentalCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses the client index from the given {@code ArgumentMultimap}
+     * and returns the corresponding {@code Index} object.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @return The parsed {@code Index} of the client.
+     * @throws ParseException If client index failed parsing.
+     */
+    private Index getClientIndex(ArgumentMultimap argMultimap) throws ParseException {
+        try {
+            return ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRentalCommand.MESSAGE_USAGE), pe);
+        }
+    }
+
+    /**
+     * Parses all fields from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed values.
+     * @throws ParseException If any of the fields failed parsing.
+     */
+    private void parseAllFields(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor) throws ParseException {
+        parseAddress(argMultimap, descriptor);
+        parseRentalStartDate(argMultimap, descriptor);
+        parseRentalEndDate(argMultimap, descriptor);
+        parseRentDueDate(argMultimap, descriptor);
+        parseMonthlyRent(argMultimap, descriptor);
+        parseDeposit(argMultimap, descriptor);
+        parseCustomerList(argMultimap, descriptor);
+
+        if (!descriptor.isAddressFieldEdited()) {
+            throw new ParseException(AddRentalCommand.MESSAGE_REQUIRE_ADDRESS);
+        }
+    }
+
+    /**
+     * Parses address field from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed value.
+     * @throws ParseException If the field failed parsing.
+     */
+    private void parseAddress(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor) throws ParseException {
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            descriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+    }
+
+    /**
+     * Parses rental start date field from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed value.
+     * @throws ParseException If the field failed parsing.
+     */
+    private void parseRentalStartDate(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_RENTAL_START_DATE).isPresent()) {
+            descriptor.setRentalStartDate(ParserUtil.parseRentalDate(
+                    argMultimap.getValue(PREFIX_RENTAL_START_DATE).get()));
+        }
+    }
+
+    /**
+     * Parses rental end date field from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed value.
+     * @throws ParseException If the field failed parsing.
+     */
+    private void parseRentalEndDate(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_RENTAL_END_DATE).isPresent()) {
+            descriptor.setRentalEndDate(ParserUtil.parseRentalDate(
+                    argMultimap.getValue(PREFIX_RENTAL_END_DATE).get()));
+        }
+    }
+
+    /**
+     * Parses rent due date field from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed value.
+     * @throws ParseException If the field failed parsing.
+     */
+    private void parseRentDueDate(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor) throws ParseException {
+        if (argMultimap.getValue(PREFIX_RENT_DUE_DATE).isPresent()) {
+            descriptor.setRentDueDate(ParserUtil.parseRentDueDate(argMultimap.getValue(PREFIX_RENT_DUE_DATE).get()));
+        }
+    }
+
+    /**
+     * Parses monthly rent field from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed value.
+     * @throws ParseException If the field failed parsing.
+     */
+    private void parseMonthlyRent(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor) throws ParseException {
+        if (argMultimap.getValue(PREFIX_MONTHLY_RENT).isPresent()) {
+            descriptor.setMonthlyRent(ParserUtil.parseMonthlyRent(argMultimap.getValue(PREFIX_MONTHLY_RENT).get()));
+        }
+    }
+
+    /**
+     * Parses deposit field from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed value.
+     * @throws ParseException If the field failed parsing.
+     */
+    private void parseDeposit(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor) throws ParseException {
+        if (argMultimap.getValue(PREFIX_DEPOSIT).isPresent()) {
+            descriptor.setDeposit(ParserUtil.parseDeposit(argMultimap.getValue(PREFIX_DEPOSIT).get()));
+        }
+    }
+
+    /**
+     * Parses customer list field from the given {@code ArgumentMultimap}
+     * and populates the provided {@code AddRentalDescriptor}.
+     *
+     * @param argMultimap The {@code ArgumentMultimap} containing the arguments to be parsed.
+     * @param descriptor The {@code AddRentalDescriptor} to be populated with the parsed value.
+     * @throws ParseException If the field failed parsing.
+     */
+    private void parseCustomerList(ArgumentMultimap argMultimap, AddRentalDescriptor descriptor) throws ParseException {
+        if (argMultimap.getValue(PREFIX_CUSTOMER_LIST).isPresent()) {
+            descriptor.setCustomerList(ParserUtil.parseCustomerList(argMultimap.getValue(PREFIX_CUSTOMER_LIST).get()));
+        }
     }
 }
