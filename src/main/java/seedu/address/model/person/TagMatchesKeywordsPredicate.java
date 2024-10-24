@@ -3,20 +3,21 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 /**
- * Tests that a {@code Person}'s {@code Name} strictly matches the keywords given.
+ * Tests that a {@code Person}'s {@code tag} strictly matches the keywords given.
  */
-public class NameMatchesKeywordsPredicate implements Predicate<Person> {
+public class TagMatchesKeywordsPredicate implements Predicate<Person> {
     private final String keywords;
 
-    public NameMatchesKeywordsPredicate(String keywords) {
+    public TagMatchesKeywordsPredicate(String keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.equalsIgnoreCase(person.getName().toString());
+        return person.getTags().contains(new Tag(keywords));
     }
 
     @Override
@@ -26,12 +27,12 @@ public class NameMatchesKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof TagMatchesKeywordsPredicate)) {
             return false;
         }
 
-        NameMatchesKeywordsPredicate otherNameMatchesKeywordsPredicate = (NameMatchesKeywordsPredicate) other;
-        return keywords.equals(otherNameMatchesKeywordsPredicate.keywords);
+        TagMatchesKeywordsPredicate otherTagMatchesKeywordsPredicate = (TagMatchesKeywordsPredicate) other;
+        return keywords.equals(otherTagMatchesKeywordsPredicate.keywords);
     }
 
     @Override
