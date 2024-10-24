@@ -208,7 +208,7 @@ Examples:
 
 ### Exporting the contact list : `export`
 
-Exports the contacts in the contact list into the specified file type. The file will be named bizbook.<\file extension> and will be located in a folder named exports.
+Exports the contacts in the contact list into the specified file type. The file will be named bizbook.&lt;file extension&gt; and will be located in a folder named exports.
 
 Format: `export f/FILETYPE`
 
