@@ -51,7 +51,8 @@ public class MarkAttendanceByTutorialCommandTest {
         Index targetIndex = Index.fromOneBased(1);
         MarkAttendanceByTutorialCommand markAttendanceCommand = new MarkAttendanceByTutorialCommand(
                 new Tutorial("Math"), "12/12/2024");
-        String expected = MarkAttendanceByTutorialCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        String expected = MarkAttendanceByTutorialCommand.class.getCanonicalName() + "{targetIndex="
+                + targetIndex + "}";
         assertEquals(expected, markAttendanceCommand.toString());
     }
 }
