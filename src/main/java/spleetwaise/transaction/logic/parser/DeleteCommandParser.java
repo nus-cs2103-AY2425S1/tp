@@ -1,10 +1,10 @@
-package spleetwaise.address.logic.parser;
+package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.logic.commands.DeleteCommand;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.transaction.logic.commands.DeleteCommand;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

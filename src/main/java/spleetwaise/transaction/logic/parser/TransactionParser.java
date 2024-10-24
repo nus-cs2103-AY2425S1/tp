@@ -10,6 +10,7 @@ import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.transaction.logic.commands.AddCategoryCommand;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.logic.commands.ClearCommand;
+import spleetwaise.transaction.logic.commands.DeleteCommand;
 import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.logic.commands.ListCommand;
 import spleetwaise.transaction.logic.commands.RemoveCategoryCommand;
@@ -60,6 +61,8 @@ public class TransactionParser {
             return new AddCategoryCommandParser().parse(arguments);
         case RemoveCategoryCommand.COMMAND_WORD:
             return new RemoveCategoryCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
         default:
             return null;
         }

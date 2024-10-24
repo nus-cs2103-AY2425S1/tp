@@ -186,4 +186,10 @@ public class CommonModel implements Model {
         requireNonNull(personId);
         transactionBookModel.deleteTransactionsOfPersonId(personId);
     }
+
+    @Override
+    public void deleteTransaction(Transaction target) {
+        requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
+        transactionBookModel.deleteTransaction(target);
+    }
 }
