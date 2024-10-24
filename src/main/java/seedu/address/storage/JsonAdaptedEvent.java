@@ -1,10 +1,16 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 
@@ -16,14 +22,19 @@ public class JsonAdaptedEvent {
 
     private final String name;
     private final String date;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
-    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("date") String date) {
+    public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("date") String date,
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.date = date;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
@@ -32,6 +43,9 @@ public class JsonAdaptedEvent {
     public JsonAdaptedEvent(Event source) {
         name = source.getName().fullName;
         date = source.getDate().toString();
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .toList());
     }
 
     /**
@@ -58,6 +72,12 @@ public class JsonAdaptedEvent {
         }
         final Date modeldate = new Date(date);
 
-        return new Event(modelName, modeldate);
+        final List<Tag> eventTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            eventTags.add(tag.toModelType());
+        }
+        final Set<Tag> modelTags = new HashSet<>(eventTags);
+
+        return new Event(modelName, modeldate, modelTags);
     }
 }

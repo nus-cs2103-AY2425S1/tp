@@ -57,7 +57,9 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(event.getName())
                 .append("; Date: ")
-                .append(event.getDate());
+                .append(event.getDate())
+                .append("; Tags: ");
+        event.getTags().forEach(builder::append);
         return builder.toString();
     }
 }
