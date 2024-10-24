@@ -4,8 +4,10 @@ import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +32,11 @@ public class ViewPersonPanel extends UiPart<Region> {
     @FXML
     private Label email;
 
+    @FXML
+    private Label skills;
+
+    @FXML
+    private Label interviewScore;
     /**
      * Details to include inside the panel
      */
@@ -45,6 +52,18 @@ public class ViewPersonPanel extends UiPart<Region> {
         job.setText("Job : " + person.getJob().jobName);
         phone.setText("Phone Number : " + person.getPhone().value);
         email.setText("Email Address : " + person.getEmail().value);
+        interviewScore.setText("Interview Score : " + person.getInterviewScore().interviewScore);
+        Set<Skill> skillsSet = person.getSkills();
+        StringBuilder skillsText = new StringBuilder();
+        for (Skill skill : skillsSet) {
+            skillsText.append(skill.skillName).append(", ");
+        }
+
+        if (!skillsText.isEmpty()) {
+            skillsText.setLength(skillsText.length() - 2);
+        }
+
+        skills.setText("Skills : " + skillsText.toString());
         Set<Tag> tags = person.getTags();
         if (tags.contains(Person.DEFAULT_TAG_PENDING)) {
             status.setText("Status : " + Person.DEFAULT_TAG_PENDING.tagName);
