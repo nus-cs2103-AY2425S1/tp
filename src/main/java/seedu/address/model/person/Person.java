@@ -157,6 +157,19 @@ public class Person {
     }
 
     /**
+     * Returns the total weightage of all grades associated with this person.
+     *
+     * @return the total weightage of grades as a double.
+     */
+    public float getTotalWeightage() {
+        float totalWeightage = 0;
+        for (Grade g : gradeList.getMap().values()) {
+            totalWeightage += g.getWeightage();
+        }
+        return totalWeightage;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
