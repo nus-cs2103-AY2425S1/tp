@@ -13,7 +13,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "comment": "",
-    "tags" : [ "owesMoney", "friends" ],
+    "tags" : [ "NonEnglishSpeaker", "NewCustomer" ],
     "isVip" : true
   }, {
     "name" : "Carl Kurz",
