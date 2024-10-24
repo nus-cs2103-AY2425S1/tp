@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.FindCommand;
 
 /**
  * Tests that a {@code Person}'s {@code Name or Phone number or Address or Email or Tag}
@@ -29,6 +30,7 @@ public class ContainsSpecificKeywordsPredicate implements Predicate<Person> {
      * @return True if individual posesses a field exactly matching the keyword, false otherwise
      */
     private boolean testPerson(Person person, String keyword) {
+        assert keyword != FindCommand.VALIDATION_REGEX : "Keyword cannot be an empty value";
         if (StringUtil.containsMultipleWordsIgnoreCase(person.getName().fullName, keyword)) {
             return true; // Returns true if names match
         } else if (StringUtil.containsMultipleWordsIgnoreCase(person.getAddress().value, keyword)) {
