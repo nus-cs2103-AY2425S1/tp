@@ -189,10 +189,8 @@ public class StudentCourseAssociation {
 
     @Override
     public String toString() {
-        return String.format("Matriculation Number: %s\n" +
-                             "Course Code: %s\n" +
-                             "Tutorial Group: %s\n", student.getMatricNumber(),
-                                                     course.courseCode,
-                                                     tutorial.getTutorialId());
+        return String.format("Matriculation Number: %s Course Code: %s "
+                             + "Tutorial Group: %s ", student.getMatricNumber(),
+                course.courseCode, tutorial.getTutorialId());
     }
 }

@@ -2,19 +2,26 @@ package tahub.contacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.*;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL_ID;
+
+import java.util.HashSet;
+import java.util.Objects;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.person.*;
+import tahub.contacts.model.person.Address;
+import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
+import tahub.contacts.model.person.Name;
+import tahub.contacts.model.person.Person;
+import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
-
-import java.util.HashSet;
-import java.util.Objects;
 
 /**
  * Enrolls a person into TAHub Contacts.
@@ -34,8 +41,8 @@ public class EnrollCommand extends Command {
             + PREFIX_TUTORIAL_ID + "T14 ";
 
     public static final String MESSAGE_SUCCESS = "New enrollment created: %1$s";
-    public static final String MESSAGE_DUPLICATE_ENROLLMENT = "This student is already enrolled in this course and " +
-            "tutorial group!";
+    public static final String MESSAGE_DUPLICATE_ENROLLMENT = "This student is already enrolled in this course and "
+            + "tutorial group!";
 
 
     private final MatriculationNumber matriculationNumberToAdd;
@@ -43,11 +50,11 @@ public class EnrollCommand extends Command {
     private final String tutorialIdToAdd;
 
     /**
-     * Constructs an EnrollCommand object to enroll a student into a course and tutorial group.
+     * Constructs an EnrollCommand object with the provided matriculation number, course code, and tutorial ID.
      *
-     * @param matriculationNumber The matriculation number of the student.
-     * @param courseCode The code of the course to enroll the student in.
-     * @param tutorialId The ID of the tutorial group to enroll the student in.
+     * @param matriculationNumber The matriculation number of the student to enroll. Cannot be null.
+     * @param courseCode The code of the course to enroll in. Cannot be null.
+     * @param tutorialId The ID of the tutorial to enroll in. Cannot be null.
      */
     public EnrollCommand(MatriculationNumber matriculationNumber, String courseCode, String tutorialId) {
         requireAllNonNull(matriculationNumber, courseCode, tutorialId);

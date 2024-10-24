@@ -7,7 +7,7 @@ import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
-//import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+// import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
 /**
  * Adds a course to the course book.

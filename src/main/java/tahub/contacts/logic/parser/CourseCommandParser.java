@@ -1,7 +1,8 @@
 package tahub.contacts.logic.parser;
 
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tahub.contacts.logic.parser.CliSyntax.*;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.model.course.Course.COURSE_CODE_MESSAGE_CONSTRAINTS;
 
 import java.util.stream.Stream;
