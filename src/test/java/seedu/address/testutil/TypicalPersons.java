@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXAM_MIDTERM;
@@ -88,14 +90,16 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRegisterNumber(VALID_REGISTER_NUMBER_AMY)
-            .withSex(VALID_SEX_AMY).withStudentClass(VALID_STUDENT_CLASS_AMY).withEcName(VALID_ECNAME_AMY)
+            .withSex(VALID_SEX_AMY).withStudentClass(VALID_STUDENT_CLASS_AMY)
+            .withEcName(VALID_ECNAME_AMY).withEcNumber(VALID_ECNUMBER_AMY)
             .withExams(VALID_EXAM_MIDTERM).withExamScore(VALID_EXAM_MIDTERM, VALID_EXAM_SCORE_AMY)
             .withTags(VALID_TAG_FRIEND).withAttendance(VALID_ATTENDANCE_AMY)
             .withSubmissions(VALID_SUBMISSION_ASSIGNMENT_1)
             .withSubmissionStatus(VALID_SUBMISSION_ASSIGNMENT_1, VALID_SUBMISSION_STATUS_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRegisterNumber(VALID_REGISTER_NUMBER_BOB)
-            .withSex(VALID_SEX_BOB).withStudentClass(VALID_STUDENT_CLASS_BOB).withEcName(VALID_ECNAME_BOB)
+            .withSex(VALID_SEX_BOB).withStudentClass(VALID_STUDENT_CLASS_BOB)
+            .withEcName(VALID_ECNAME_BOB).withEcNumber(VALID_ECNUMBER_BOB)
             .withExams(VALID_EXAM_MIDTERM).withExamScore(VALID_EXAM_MIDTERM, VALID_EXAM_SCORE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAttendance(VALID_ATTENDANCE_BOB)
             .withSubmissions(VALID_SUBMISSION_ASSIGNMENT_1)

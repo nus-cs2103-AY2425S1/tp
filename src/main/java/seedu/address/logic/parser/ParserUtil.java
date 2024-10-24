@@ -296,4 +296,51 @@ public class ParserUtil {
         return new AbsentReason(trimmedAbsentReason);
     }
 
+
+    /**
+     * Parse {@code String attribute} into a {@code SortAttribute}.
+     * All whitespaces will be trimmed
+     *
+     * @throws ParseException if the given {@code SortAttribute} is invalid.
+     */
+    public static SortAttribute parseSortAttribute(String attribute) throws ParseException {
+        requireNonNull(attribute);
+        String trimmedAttribute = attribute.replaceAll("\\s+", "");
+        String upperCaseAttribute = trimmedAttribute.toUpperCase();
+        SortAttribute sortAttribute;
+        try {
+            sortAttribute = SortAttribute.valueOf(upperCaseAttribute);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(SortAttribute.MESSAGE_CONSTRAINTS);
+        }
+        return sortAttribute;
+    }
+
+    /**
+     * Enum to encapsulate all the possible attributes to sort the list by.
+     */
+    public enum SortAttribute {
+        NAME("name"),
+        PHONE("phone"),
+        EMAIL("email"),
+        ADDRESS("address"),
+        REGISTERNUMBER("register number"),
+        SEX("sex"),
+        STUDENTCLASS("student class"),
+        EMERGENCYCONTACTNAME("emergency contact name"),
+        EMERGENCYCONTACTNUMBER("emergency contact number"),
+        NONE("none");
+
+        public static final String MESSAGE_CONSTRAINTS = "Sorting Attribute is invalid";
+
+        private final String attribute;
+        SortAttribute(String attribute) {
+            this.attribute = attribute;
+        }
+
+        @Override
+        public String toString() {
+            return this.attribute;
+        }
+    }
 }

@@ -70,7 +70,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'studentmanagerpro.jar'
 }
 
 defaultTasks 'clean', 'test'

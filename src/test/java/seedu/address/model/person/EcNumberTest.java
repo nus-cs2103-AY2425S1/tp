@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -34,6 +36,19 @@ public class EcNumberTest {
         // valid phone numbers
         assertTrue(EcNumber.isValidEcNumber("")); // empty string
         assertTrue(EcNumber.isValidEcNumber("93121534")); // exactly 8 numbers
+    }
+
+    @Test
+    public void toInt() {
+        EcNumber ecNumber = new EcNumber("91234567");
+
+        assertEquals(ecNumber.toInt(), 91234567);
+        assertNotEquals(ecNumber.toInt(), 98765432);
+
+        // empty ecNumber
+        ecNumber = new EcNumber("");
+        assertEquals(ecNumber.toInt(), Integer.MAX_VALUE);
+        assertNotEquals(ecNumber.toInt(), 0);
     }
 
     @Test

@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -35,6 +37,14 @@ public class RegisterNumberTest {
         assertTrue(RegisterNumber.isValidRegisterNumber("40")); // max
         assertTrue(RegisterNumber.isValidRegisterNumber("5")); // single digit
         assertTrue(RegisterNumber.isValidRegisterNumber("32")); // double digit
+    }
+
+    @Test
+    public void toInt() {
+        RegisterNumber registerNumber = new RegisterNumber("1");
+
+        assertEquals(registerNumber.toInt(), 1);
+        assertNotEquals(registerNumber.toInt(), 2);
     }
 
     @Test

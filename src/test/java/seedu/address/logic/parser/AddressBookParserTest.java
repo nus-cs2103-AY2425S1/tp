@@ -33,6 +33,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
 import seedu.address.model.person.AbsentDate;
@@ -189,6 +190,14 @@ public class AddressBookParserTest {
                         + PREFIX_EXAM + exam + " "
                         + PREFIX_EXAM_SCORE + score);
 
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        SortCommand expected = new SortCommand(ParserUtil.SortAttribute.REGISTERNUMBER);
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " register number");
         assertEquals(expected, command);
     }
 

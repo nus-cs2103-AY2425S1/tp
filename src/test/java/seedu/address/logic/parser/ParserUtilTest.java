@@ -39,10 +39,11 @@ public class ParserUtilTest {
     private static final String INVALID_SEX = "H";
     private static final String INVALID_STUDENT_CLASS = "A1";
     private static final String INVALID_EMERGENCY_CONTACT_NAME = "--";
-    private static final String INVALID_EMERGENCY_PHONE = "1234";
+    private static final String INVALID_EMERGENCY_CONTACT_NUMBER = "1234";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ABSENT_DATE = "2024-10-32"; // Invalid date
     private static final String INVALID_ABSENT_REASON = "";
+    private static final String INVALID_SORT_ATTRIBUTE = "names";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -52,11 +53,12 @@ public class ParserUtilTest {
     private static final String VALID_SEX = "F";
     private static final String VALID_STUDENT_CLASS = "1A";
     private static final String VALID_EMERGENCY_CONTACT_NAME = "Joe Walker";
-    private static final String VALID_EMERGENCY_PHONE = "91234567";
+    private static final String VALID_EMERGENCY_CONTACT_NUMBER = "91234567";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_ABSENT_DATE = "20-10-2024";
     private static final String VALID_ABSENT_REASON = "Sick";
+    private static final String VALID_SORT_ATTRIBUTE = "register number";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -271,21 +273,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseEcNumber_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEcNumber(INVALID_EMERGENCY_PHONE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEcNumber(INVALID_EMERGENCY_CONTACT_NUMBER));
     }
 
     @Test
-    public void parseEcNumber_validValueWithoutWhitespace_returnsStudentClass() throws Exception {
-        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
-        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(VALID_EMERGENCY_PHONE));
+    public void parseEcNumber_validValueWithoutWhitespace_returnsEcNumber() throws Exception {
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_CONTACT_NUMBER);
+        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(VALID_EMERGENCY_CONTACT_NUMBER));
     }
 
     @Test
-    public void parseEcNumber_validValueWithWhitespace_returnsTrimmedStudentClass() throws Exception {
-        String ecNumberWithWhitespace = WHITESPACE + VALID_EMERGENCY_PHONE + WHITESPACE;
-        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
+    public void parseEcNumber_validValueWithWhitespace_returnsTrimmedEcNumber() throws Exception {
+        String ecNumberWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NUMBER + WHITESPACE;
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_CONTACT_NUMBER);
         assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(ecNumberWithWhitespace));
-
     }
 
     @Test
@@ -378,5 +379,28 @@ public class ParserUtilTest {
                         + PREFIX_ABSENT_DATE + VALID_ABSENT_DATE + " "
                         + PREFIX_ABSENT_REASON + INVALID_ABSENT_REASON
         ));
+    }
+
+    @Test
+    public void parseSortAttribute_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortAttribute((String) null));
+    }
+
+    @Test
+    public void parseSortAttribute_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortAttribute(INVALID_SORT_ATTRIBUTE));
+    }
+
+    @Test
+    public void parseSortAttribute_validValueWithoutWhitespace_returnsSortAttribute() throws Exception {
+        ParserUtil.SortAttribute expectedSortAttribute = ParserUtil.SortAttribute.REGISTERNUMBER;
+        assertEquals(expectedSortAttribute, ParserUtil.parseSortAttribute(VALID_SORT_ATTRIBUTE));
+    }
+
+    @Test
+    public void parseSortAttribute_validValueWithWhitespace_returnsTrimmedSortAttribute() throws Exception {
+        String sortAttributeWithWhiteSpace = WHITESPACE + VALID_SORT_ATTRIBUTE + WHITESPACE;
+        ParserUtil.SortAttribute expectedSortAttribute = ParserUtil.SortAttribute.REGISTERNUMBER;
+        assertEquals(expectedSortAttribute, ParserUtil.parseSortAttribute(sortAttributeWithWhiteSpace));
     }
 }

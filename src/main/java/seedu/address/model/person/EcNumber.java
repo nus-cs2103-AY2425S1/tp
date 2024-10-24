@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's emergency phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEcNumber(String)}
  */
-public class EcNumber {
+public class EcNumber implements Comparable<EcNumber> {
 
     public static final String MESSAGE_GUI = "Emergency Contact Number: %1$s";
     public static final String MESSAGE_CONSTRAINTS =
@@ -34,6 +34,17 @@ public class EcNumber {
         return number != null && (number.matches(VALIDATION_REGEX) || number.isEmpty());
     }
 
+    /**
+     * Returns the integer representation of EcNumber
+     */
+    public Integer toInt() {
+        if (value.isEmpty()) {
+            // max value when empty so that it goes to the bottom when sorted
+            return Integer.MAX_VALUE;
+        }
+        return Integer.valueOf(this.value);
+    }
+
     @Override
     public String toString() {
         return value;
@@ -57,6 +68,11 @@ public class EcNumber {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(EcNumber e) {
+        return this.toInt().compareTo(e.toInt());
     }
 
 }

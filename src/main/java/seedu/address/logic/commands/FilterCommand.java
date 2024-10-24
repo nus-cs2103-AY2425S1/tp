@@ -36,7 +36,7 @@ public class FilterCommand extends Command {
             + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
             + "[" + PREFIX_ECNUMBER + "EMERGENCY CONTACT NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + "Bob "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Bob "
             + PREFIX_PHONE + "90123445";
 
     private final PersonPredicate predicate;

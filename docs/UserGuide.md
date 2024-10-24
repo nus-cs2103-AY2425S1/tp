@@ -121,6 +121,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -267,6 +268,25 @@ Examples:
 * `addSubmissionStatus 1 sm/Assignment 1 ss/T`
 * `addSubmissionStatus 1 sm/Tutorial 2 ss/NIL`
 
+### Sorting the list : `sort`
+
+Sorts the list of students based on the students attributes.
+
+Format: `sort [ATTRIBUTE]`
+
+<box type="tip" seamless>
+
+**Tip:** Students attributes include: name, phone, email, address, sex, register number, student class, emergency contact name, emergency contact number.
+</box>
+
+* Sorts the list based on the ATTRIBUTE
+* Unsort the list when the attribute is `none`
+
+Examples:
+* `sort name` to sort the list based on student's names
+* `sort register number` to sort the list based on student's register numbers
+* `sort none` to unsort the list
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -332,3 +352,4 @@ _Details coming soon ..._
 | **Add Attendance**               | `addAttendance INDEX aa/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 aa/[24-09-2024] ar/[Sick]`                                                                                                                  |
 | **AddSubmission**                | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`                                                                                                                                      |
 | **AddSubmissionStatus**          | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/T`                                                                                        |
+| **Sort**                         |   `sort [ATTRIBUTE]` <br> e.g., `sort student class`
