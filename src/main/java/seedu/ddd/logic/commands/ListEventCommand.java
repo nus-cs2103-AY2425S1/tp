@@ -17,6 +17,10 @@ public class ListEventCommand extends ListCommand {
 
     public static final Predicate<Contact> CLEAR_CONTACTS = any -> false;
 
+    public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
+        + COMMAND_USAGE + "\n"
+        + EVENT_EXAMPLE_USAGE + "\n";
+
     private final Predicate<Event> predicate;
 
     /**

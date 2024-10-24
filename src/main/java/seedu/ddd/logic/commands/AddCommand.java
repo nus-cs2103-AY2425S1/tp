@@ -1,6 +1,8 @@
 package seedu.ddd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
+import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -8,6 +10,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ddd.model.contact.common.ContactType.CLIENT;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
@@ -25,67 +28,43 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: -CONTACT_FLAG (either `-v` or `-c`)"
+    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": adds a contact.";
+    public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " {"
+            + FLAG_CLIENT + " " + PREFIX_DATE + "DATE | "
+            + FLAG_VENDOR + " " + PREFIX_SERVICE + "SERVICE} "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SERVICE + "SERVICE (only if adding vendor) "
-            + PREFIX_DATE + "WEDDING_DATE (only if adding client) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Vendor example: " + COMMAND_WORD + " -v "
-            + PREFIX_NAME + "ABC Catering "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "contact@abccatering.com "
-            + PREFIX_ADDRESS + "Blk 123 Bukit Merah St 7 "
-            + PREFIX_SERVICE + "catering "
-            + PREFIX_TAG + "vegetarian "
-            + PREFIX_TAG + "budget\n"
-            + "Client example: " + COMMAND_WORD + " -c "
+            + "[" + PREFIX_TAG + "TAG ...]";
+    public static final String CLIENT_EXAMPLE_USAGE = "example: " + COMMAND_WORD + " "
+            + FLAG_CLIENT + " "
             + PREFIX_NAME + "Jane Doe "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "jane.doe@example.com "
-            + PREFIX_ADDRESS + "Blk 231 Sembawang St 4 "
+            + PREFIX_EMAIL + "jd@gmail.com "
+            + PREFIX_ADDRESS + "Blk 123 St 4 "
             + PREFIX_DATE + "2024-12-15 "
-            + PREFIX_TAG + "budget "
-            + PREFIX_TAG + "pets";
-
-    public static final String VENDOR_MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: -CONTACT_FLAG (either `-v` or `-c`)"
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SERVICE + "SERVICE (only if adding vendor) "
-            + PREFIX_DATE + "WEDDING_DATE (only if adding client) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " -v "
+            + PREFIX_TAG + "budget ";
+    public static final String VENDOR_EXAMPLE_USAGE = "example: " + COMMAND_WORD + " "
+            + FLAG_VENDOR + " "
             + PREFIX_NAME + "ABC Catering "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "contact@abccatering.com "
-            + PREFIX_ADDRESS + "Blk 123 Bukit Merah St 7 "
+            + PREFIX_EMAIL + "abc@abc.com "
+            + PREFIX_ADDRESS + "Blk 567 St 8 "
             + PREFIX_SERVICE + "catering "
-            + PREFIX_TAG + "vegetarian "
+            + PREFIX_TAG + "vegan "
             + PREFIX_TAG + "budget";
 
-    public static final String CLIENT_MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
-            + "Parameters: -CONTACT_FLAG (either `-v` or `-c`)"
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SERVICE + "SERVICE (only if adding vendor) "
-            + PREFIX_DATE + "WEDDING_DATE (only if adding client) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " -c "
-            + PREFIX_NAME + "Jane Doe "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "jane.doe@example.com "
-            + PREFIX_ADDRESS + "Blk 231 Sembawang St 4 "
-            + PREFIX_DATE + "2024-12-15 "
-            + PREFIX_TAG + "budget "
-            + PREFIX_TAG + "pets";
+    public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n"
+            + CLIENT_EXAMPLE_USAGE + "\n"
+            + VENDOR_EXAMPLE_USAGE;
+    public static final String VENDOR_MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n"
+            + VENDOR_EXAMPLE_USAGE;
+    public static final String CLIENT_MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n"
+            + CLIENT_EXAMPLE_USAGE;
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";

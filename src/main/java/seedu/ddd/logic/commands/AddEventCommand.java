@@ -29,10 +29,19 @@ public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to DDD. "
+    public static final String COMMAND_DESCRIPTION = COMMAND_WORD + ": adds an event";
+    public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " "
             + PREFIX_DESC + "DESCRIPTION "
-            + PREFIX_CLIENTS + "CLIENT...\n"
-            + PREFIX_VENDORS + "VENDOR...\n";
+            + PREFIX_CLIENTS + "CLIENT ... "
+            + PREFIX_VENDORS + "VENDOR ...";
+    public static final String USAGE_EXAMPLE = "example: " + COMMAND_WORD + " "
+            + PREFIX_DESC + "Wedding "
+            + PREFIX_CLIENTS + "0 "
+            + PREFIX_VENDORS + "1 "
+            + PREFIX_VENDORS + "2 ";
+    public static final String MESSAGE_USAGE = COMMAND_DESCRIPTION + "\n"
+            + COMMAND_USAGE + "\n"
+            + USAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New event created: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in DDD";
