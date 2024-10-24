@@ -12,17 +12,22 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
+Class UniqueContactList
 Class UniqueEventList
 Class Event
-Class Person
+Class Contact
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
 Class Description
+Class Id
 Class EventId
+Class Client
+Class Vendor
+Class Service
+Class Date
 
 Class I #FFFFFF
 }
@@ -39,24 +44,29 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+AddressBook --> "1" UniqueContactList
 AddressBook *--> "1" UniqueEventList
-UniquePersonList --> "~* all" Person
+UniqueContactList --> "~* all" Contact
 UniqueEventList --> "~* all" Event
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Event *--> EventId
+Client .up.--|> Contact
+Client *--> "1" Date
+Vendor .up.--|> Contact
+Vendor *--> "1" Service
+Contact *--> Name
+Contact *--> Phone
+Contact *--> Email
+Contact *--> Address
+Contact *--> "*" Tag
+Contact *--> "1" Id
+Event *--> "1" EventId
 Event *--> Description
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Contact -[hidden]up--> I
+UniqueContactList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Contact
 @enduml
