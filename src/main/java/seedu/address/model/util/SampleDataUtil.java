@@ -53,8 +53,8 @@ public class SampleDataUtil {
 
     public static Project[] getSampleProjects() {
         return new Project[] {
-            new Project(new ProjectName("Project Alpha"), new ProjectId("1")),
-            new Project(new ProjectName("Project Beta"), new ProjectId("2")),
+            new Project(new ProjectName("Project Alpha"), new ProjectId("1"), getSkillSet("Frontend")),
+            new Project(new ProjectName("Project Beta"), new ProjectId("2"), getSkillSet("UI")),
         };
     }
 
