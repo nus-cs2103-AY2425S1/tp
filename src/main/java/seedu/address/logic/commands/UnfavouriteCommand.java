@@ -14,21 +14,21 @@ import seedu.address.model.restaurant.Restaurant;
 /**
  * Favourites a restaurant identified using it's displayed index from the address book.
  */
-public class FavouriteCommand extends Command {
+public class UnfavouriteCommand extends Command {
 
-    public static final String COMMAND_WORD = "fav";
+    public static final String COMMAND_WORD = "unfav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Favourites the restaurant identified by the index number used in the displayed restaurant list.\n"
-            + "Restaurant will be displayed at the top of the list and highlighted.\n"
+            + ": Unfavourites the restaurant identified by the index number used in the displayed restaurant list.\n"
+            + "Restaurant will be removed from favourites.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Restaurant added to favourite: %1$s";
+    public static final String MESSAGE_SUCCESS = "Restaurant removed from favourite: %1$s";
 
     private final Index targetIndex;
 
-    public FavouriteCommand(Index targetIndex) {
+    public UnfavouriteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -41,9 +41,9 @@ public class FavouriteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
-        Restaurant restaurantToFavourite = lastShownList.get(targetIndex.getZeroBased());
-        model.favouriteRestaurant(restaurantToFavourite);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(restaurantToFavourite)));
+        Restaurant restaurantToUnfavourite = lastShownList.get(targetIndex.getZeroBased());
+        model.unfavouriteRestaurant(restaurantToUnfavourite);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(restaurantToUnfavourite)));
     }
 
     @Override
@@ -53,12 +53,12 @@ public class FavouriteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FavouriteCommand)) {
+        if (!(other instanceof UnfavouriteCommand)) {
             return false;
         }
 
-        FavouriteCommand otherFavouriteCommand = (FavouriteCommand) other;
-        return targetIndex.equals(otherFavouriteCommand.targetIndex);
+        UnfavouriteCommand otherUnfavouriteCommand = (UnfavouriteCommand) other;
+        return targetIndex.equals(otherUnfavouriteCommand.targetIndex);
     }
 
     @Override

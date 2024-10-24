@@ -280,19 +280,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
 | `* * *`  | Hungry restaurant with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
 | `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
-| `* * *`  | Foodie                      | review restaurant ratings and reviews                               | make an informed decision based on other diners' experiences |
+| `* * *`  | Foodie                      | add restaurant ratings                                              | give an informed decision to other diners' experiences       |
 | `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
 | `* *`    | thrifty individual          | find the cheapest food                                              | survive the day                                              |
 | `* *`    | Deal Seeker                 | find discounts and special offers at nearby restaurants             | enjoy eating out without overspending                        |
 | `* *`    | Health-Conscious Diner      | find restaurants that serve nutritious and diet-specific meals      | maintain my healthy lifestyle while dining out               |
 | `* *`    | Pet lover                   | find restaurants that allow and accommodate for pets                | enjoy my meal with my furry companion                        |
 | `*`      | Person with Disabilities    | find accessible restaurants with features like ramps                | dine out comfortably and independently                       |
-| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal restaurant                                     |
+| `*`      | Crippled Person             | find a wheelchair-friendly restaurant                               | eat like a normal restaurant                                 |
 | `*`      | Office Worker               | plan what to eat given my 1hr lunch                                 | fit lunch into my busy schedule                              |
 | `*`      | Food Connoisseur            | save my favorite restaurants                                        | quickly access them later                                    |
 | `*`      | Influencer                  | find an atas restaurant                                             | post them on Instagram                                       |
 | `*`      | introvert                   | filter eateries based on delivery options                           | find places that offer food delivery and enjoy meals at home |
-| `*`      | Food Journalist             | discover restaurants to try and write opinion pieces                | write engaging blogs to recommend to others                  |
+| `*`      | Food Journalist             | discover restaurants to try and write review                        | write engaging review to recommend to others                 |
 | `*`      | Carouser                    | find the bars that offer happy hours                                | drink riotously                                              |
 | `*`      | Chef                        | eat at my competitors' restaurants                                  | compare the quality of my food against theirs                |
 | `*`      | Student                     | find student deals for food                                         | know places to eat that are affordable for me                |

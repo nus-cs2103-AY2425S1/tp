@@ -96,11 +96,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Favourites {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void favouriteRestaurant(Restaurant key) {
         restaurants.favourite(key);
+    }
+
+    /**
+     * Unfavourites {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void unfavouriteRestaurant(Restaurant key) {
+        restaurants.unfavourite(key);
     }
 
     //// util methods

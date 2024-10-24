@@ -108,7 +108,13 @@ public class ParserUtil {
         if (rating.isEmpty()) {
             return new Rating(null);
         }
-        Integer trimmedRating = Integer.parseInt(rating.trim());
+
+        int trimmedRating;
+        try {
+            trimmedRating = Integer.parseInt(rating.trim());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
         if (!Rating.isValidRating(trimmedRating)) {
             throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
         }

@@ -312,6 +312,11 @@
     -fx-border-width: 0;
 }
 
+#cardPane.favourite {
+    -fx-border-color: #ffff00;
+    -fx-border-width: 2;
+}
+
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;

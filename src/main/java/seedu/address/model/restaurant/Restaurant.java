@@ -27,7 +27,7 @@ public class Restaurant {
     private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
     private boolean isFavourite;
-    private final Tag price;
+    private final Price price;
 
     /**
      * Every field must be present and not null.
@@ -41,7 +41,7 @@ public class Restaurant {
         this.rating = rating;
 
         // Extract the price tag and other tags
-        Pair<Tag, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
+        Pair<Price, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
         this.price = priceTagAndOtherTags.getFirst();
         this.tags.addAll(priceTagAndOtherTags.getSecond());
 
@@ -69,25 +69,14 @@ public class Restaurant {
         return rating;
     }
 
-    // I Suppress the Compilation Error Here
-    // Original:
-    // public Price getPrice() {
-    //     return price;
-    // }
-    // Current:
-    public Tag getPrice() {
-        return price;
-    }
-    // End of suppression
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        Set<Tag> tags = new HashSet<>(this.tags);
-        tags.addAll(getPriceTags());
-        return Collections.unmodifiableSet(tags);
+        Set<Tag> allTags = new HashSet<>(this.tags);
+        allTags.addAll(getPriceTags());
+        return Collections.unmodifiableSet(allTags);
     }
 
     /**
@@ -120,10 +109,16 @@ public class Restaurant {
                 && otherRestaurant.getName().equals(getName());
     }
 
+    /**
+     * Returns the boolean attribute isFavourite.
+     */
     public boolean isFavourite() {
         return isFavourite;
     }
 
+    /**
+     * Sets the boolean attribute isFavourite based on the favourite parameter.
+     */
     public void setFavourite(boolean favourite) {
         this.isFavourite = favourite;
     }

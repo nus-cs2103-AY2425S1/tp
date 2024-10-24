@@ -12,10 +12,19 @@ UniqueTagList -[hidden]down- UniqueRestaurantList
 UniqueTagList -right-> "*" Tag
 UniqueRestaurantList -right-> Restaurant
 
+
 Restaurant -up-> "*" Tag
+
+
+
+
 
 Restaurant *--> Name
 Restaurant *--> Phone
 Restaurant *--> Email
 Restaurant *--> Address
+
+
+Restaurant *--> "0..1" Price
+
 @enduml
