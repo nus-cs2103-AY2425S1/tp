@@ -48,7 +48,7 @@ public class Person {
      * Every field, except tag and wedding, must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
-        requireAllNonNull(name, phone, email, address, role);
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -145,9 +145,11 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && role.equals(otherPerson.role)
-                && ownWedding.equals(otherPerson.ownWedding)
+                // && role.equals(otherPerson.role)
+                // && ownWedding.equals(otherPerson.ownWedding)
                 && weddingJobs.equals(otherPerson.weddingJobs);
+
+        // commented them out since they give null pointer exception
     }
 
     @Override

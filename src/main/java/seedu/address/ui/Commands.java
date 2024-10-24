@@ -17,8 +17,8 @@ public enum Commands {
     ADDWEDDING("addw", "addw n1/NAME1 n2/NAME2 p1/PHONE_NUMBER1 p2/PHONE_NUMBER2 [d/DATE] [v/VENUE]",
             new String[]{"d/", "v/", "p1/", "p2/", "n1/", "n2/"}),
     TAGWEDDING("tagw", "tagw INDEX/NAME w/WEDDING r/ROLE ", new String[]{"w/", "r/"}),
-    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]",
-            new String[]{"n/", "p/", "e/", "a/", "t/"}),
+    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [w/WEDDING]",
+            new String[]{"n/", "p/", "e/", "a/", "w/"}),
     VIEWWEDDING("vieww", "vieww NAME", new String[]{}),
 
     DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
