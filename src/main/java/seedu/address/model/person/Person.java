@@ -68,6 +68,9 @@ public class Person {
         return attendanceList;
     }
 
+    public boolean isAbsentOn(LocalDateTime date) {
+        return new Attendance(false).equals(attendanceList.getAttendance(date));
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
