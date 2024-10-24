@@ -160,6 +160,41 @@ Assigns a grade to a module that a student is taking.
 - `grade 2 m/MA1522 s/90` assigns a grade of 90 to MA1522 for the second student.
 
 
+### Archiving data files `archive`
+
+Archive the current address book to the specific file name.
+
+The archived file and be found at `archived/FILENAME`.
+
+Format: `archive pa/PATH`
+
+Example: `archive pa/mybook.json`
+
+The file name must ends with ".json" and must not contain any slash "/".
+
+#### Warning
+
+All the entries in the current address book will be cleared.
+
+### Load data files `load`
+
+Load the current address book to the specific file name.
+
+This command will only load from a folder named `archived` which is in the same folder as the `jar` file.
+
+The archived file and be found at `load/FILENAME`.
+
+Format: `load pa/PATH`
+
+Example: `load pa/mybook.json`
+
+The file name must ends with ".json", must not contain any slash "/" and must point to an existing address book .json file.
+
+#### Warning
+Avoid loading non-address book .json files as it may result in unexpected behaviours
+
+All the entries in the current address book will be discard. So archiving current address book before loading is recommended.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -185,11 +220,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `archive`
 
-AddressBook data will be archived as a JSON file `[JAR file location]/archived/archivedaddressbook.json`.
-
-All the entries in the current address book will be cleared.
 
 --------------------------------------------------------------------------------------------------------------------
 

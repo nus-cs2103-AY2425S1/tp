@@ -3,9 +3,13 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parsePathWithCheck;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,12 +28,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_MODULE = " ";
     private static final String INVALID_TAG = "#friend";
-
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_MODULE = "CS2103T";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String INVALID_PATH_1 = "notjson";
+    private static final String INVALID_PATH_2 = "have/";
+    private static final String VALID_PATH = "TestingParser.json";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -199,4 +205,35 @@ public class ParserUtilTest {
     public void parseGrade_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, Module.GRADE_CONSTRAINTS, () -> ParserUtil.parseGrade("101"));
     }
+    @Test
+    public void parsePathWithCheck_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePathWithCheck((String) null));
+    }
+
+    @Test
+    public void parsePathWithCheck_invalid_path() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(VALID_PATH));
+    }
+
+    @Test
+    public void parsePathWithCheck_valid_path() throws Exception {
+        Path tempDir = Paths.get("archived");
+        if (!Files.exists(tempDir)) {
+            tempDir = Files.createDirectory(tempDir);
+        }
+        Path tempFile = tempDir.resolve("TestingParser.json");
+        Files.createFile(tempFile);
+        assertEquals(tempFile, parsePathWithCheck(VALID_PATH));
+        Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    public void parsePathWithoutCheck_invalid_path() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithoutCheck(INVALID_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithoutCheck(INVALID_PATH_2));
+    }
+
+
 }
