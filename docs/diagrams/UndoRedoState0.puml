@@ -1,4 +1,4 @@
-@startuml
+@startuml UndoRedoState0
 !include style.puml
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
