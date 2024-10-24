@@ -54,8 +54,7 @@ public class Participation {
 
         Participation otherParticipation = (Participation) other;
         return this.student.equals(otherParticipation.student)
-                && this.tutorial.equals(otherParticipation.tutorial)
-                && this.attendanceList.equals(otherParticipation.attendanceList);
+                && this.tutorial.equals(otherParticipation.tutorial);
     }
 
     /**
@@ -82,5 +81,4 @@ public class Participation {
     public String toString() {
         return String.format("Attends: %s", tutorial.toString());
     }
-    
 }
