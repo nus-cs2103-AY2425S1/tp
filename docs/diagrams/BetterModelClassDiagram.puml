@@ -23,4 +23,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> DateOfBirth
+Person *--> Gender
+Person *--> Specialty
 @enduml
