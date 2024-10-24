@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.commands.ClientUtil.findViewPerson;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
