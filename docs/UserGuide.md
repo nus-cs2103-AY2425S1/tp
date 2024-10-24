@@ -173,6 +173,20 @@ Examples:
 * `remark 1 r/Financial Issues` Adds the remark of the 1st person to be `Financial Issues`.
 * `remark 1 r/` Clears remarks (if any) of the 1st person.
 
+### Sorting the person list : `sort`
+
+Sorts the list of persons being viewed by name or date of last visit in ascending or descending order.
+
+Format: `sort paramater/order`
+
+* Sorts the displayed list of persons according to the specified order.
+* Order can be specified as ascending by leaving the order blank or **asc** **ascending**
+* Order can be specified as descending by **descending** or **desc**
+
+Examples:
+* `sort n/` sorts name in ascending order.
+* `sort d/descending` sorts by date of last visit in descending order.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -238,4 +252,5 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Seed**   | `seed`
+**Sort**   | `sort parameter/order` <br> e.g., `sort n/ascending`
 **Remark** | `remark INDEX r/REMARK`
