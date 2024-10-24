@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_NUMBER_AMY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_OWES_MONEY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +34,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25").withRoomNumber("05-0523")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withEmergencyContact("Aiken", "98765431").withGradYear("2030")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owes money", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRoomNumber("11-0343").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -55,7 +56,7 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withRoomNumber(VALID_ROOM_NUMBER_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withGradYear("2028").withTags(VALID_TAG_FRIEND).build();
+            .withGradYear("2028").withTags(VALID_TAG_FRIEND, VALID_TAG_OWES_MONEY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withRoomNumber(VALID_ROOM_NUMBER_BOB).withAddress(VALID_ADDRESS_BOB)
             .withGradYear("2029").withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
