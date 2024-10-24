@@ -207,6 +207,15 @@ public class AddCommandTest {
         public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int getFilteredGoodsQuantityStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public double getFilteredGoodsCostStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.GoodsReceiptUtil;
 import seedu.address.model.person.Person;
 
 /**
@@ -210,5 +211,15 @@ public class ModelManager implements Model {
     @Override
     public void deleteGoods(String goodsName) {
         goodsList.removeIf(receipt -> Objects.equals(receipt.getGoods().getReadableGoodsName(), goodsName));
+    }
+
+    @Override
+    public int getFilteredGoodsQuantityStatistics() {
+        return GoodsReceiptUtil.sumQuantity(filteredReceipts);
+    }
+
+    @Override
+    public double getFilteredGoodsCostStatistics() {
+        return GoodsReceiptUtil.sumTotals(filteredReceipts);
     }
 }

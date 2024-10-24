@@ -26,6 +26,8 @@ public class ListGoodsCommand extends Command {
             + PREFIX_GOODS_NAME + "BREAD";
 
     public static final String MESSAGE_SUCCESS = "Listed all matching goods.";
+    public static final String MESSAGE_EMPTY = "There were no matching goods.";
+    public static final String MESSAGE_STATISTICS = "\nTotal Quantity: %d items, Total Cost of Goods: $%.2f.";
 
     private final Predicate<GoodsReceipt> predicate;
 
@@ -37,7 +39,15 @@ public class ListGoodsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredReceiptsList(this.predicate);
-        return new CommandResult(MESSAGE_SUCCESS);
+        int qty = model.getFilteredGoodsQuantityStatistics();
+        double total = model.getFilteredGoodsCostStatistics();
+
+        if (qty == 0) {
+            return new CommandResult(MESSAGE_EMPTY);
+        } else {
+            String composedMessage = MESSAGE_SUCCESS + String.format(MESSAGE_STATISTICS, qty, total);
+            return new CommandResult(composedMessage);
+        }
     }
 
     @Override

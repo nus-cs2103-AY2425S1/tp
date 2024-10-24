@@ -136,4 +136,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate);
+
+    /**
+     * Returns the total quantity of the filtered goods list.
+     */
+    public int getFilteredGoodsQuantityStatistics();
+
+    /**
+     * Returns the total cost of the filtered goods list.
+     */
+    public double getFilteredGoodsCostStatistics();
 }
