@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class Person {
+    -name: Name
+    -phone: Phone
+    -email: Email
+    -gender: Gender
+    -address: Address
+    -tags: Set<Tag>
+    -subjects: Set<Subject>
+    -classes: Set<String>
+}
+
+class Teacher extends Person {
+}
+
+class Student extends Person {
+}
+
+@enduml
