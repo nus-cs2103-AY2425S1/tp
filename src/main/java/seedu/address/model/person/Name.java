@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -23,7 +25,10 @@ public class Name {
 
     public static final int MAX_LENGTH = 50;
 
+    public static final Comparator<Name> NAME_COMPARATOR = Comparator.comparing(name -> name.fullName);
+
     public final String fullName;
+
 
     /**
      * Constructs a {@code Name}.

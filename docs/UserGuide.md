@@ -130,9 +130,9 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons 
+Finds persons
 
-Format: 
+Format:
 `find n/FULL_NAME`
 `find j/JOB_CODE_APPLIED_FOR`
 `find t/TAG`
