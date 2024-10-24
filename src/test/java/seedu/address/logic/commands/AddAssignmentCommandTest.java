@@ -243,11 +243,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public String listTutorials() {
+        public void setTutorials(TutorialList tutorials) {
             throw new AssertionError("This method should not be called.");
         }
 
-        public void setTutorials(TutorialList tutorials) {
+        public String listTutorials() {
             throw new AssertionError("This method should not be called.");
         }
     }

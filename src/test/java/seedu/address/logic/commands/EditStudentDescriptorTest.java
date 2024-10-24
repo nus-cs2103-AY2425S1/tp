@@ -45,13 +45,9 @@ public class EditStudentDescriptorTest {
     public void toStringMethod() {
         EditCommand.EditStudentDescriptor editStudentDescriptor = new EditCommand.EditStudentDescriptor();
         String expected = EditCommand.EditStudentDescriptor.class.getCanonicalName() + "{name="
-                + editStudentDescriptor.getName().orElse(null) + ", phone="
-                + editStudentDescriptor.getPhone().orElse(null) + ", email="
-                + editStudentDescriptor.getEmail().orElse(null) + ", address="
-                + editStudentDescriptor.getEmail().orElse(null) + ", studentId="
-                + editStudentDescriptor.getEmail().orElse(null) + ", tutorialId="
-                + editStudentDescriptor.getAddress().orElse(null) + ", tags="
-                + editStudentDescriptor.getTags().orElse(null) + ", attendance="
+                + editStudentDescriptor.getName().orElse(null) + ", studentId="
+                + editStudentDescriptor.getStudentId().orElse(null) + ", tutorialId="
+                + editStudentDescriptor.getTutorialId().orElse(null) + ", attendance="
                 + editStudentDescriptor.getPresentDates().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }

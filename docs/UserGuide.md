@@ -289,6 +289,22 @@ section for detailed information
 
 > Edits an existing student details to the TrackMate application.
 
+**Format:** `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]`
+
+- Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index must be a positive integer 1, 2, 3, …​
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+
+**Examples:**
+
+- `edit 1 n/Samson Chew s/A1234567M`  
+  Edits the name and student ID of the 1st student to be "Samson Chew" and "A1234567M" respectively.
+
+- `edit 2 c/1002`  
+  Edits the tutorial ID of the 2nd student to be "1002".
+
+This command allows you to specify new values for a student's name, student ID, and/or tutorial ID, ensuring that each student's information is up to date and accurately reflects any changes in their academic or tutorial assignments.
+
 #### 4.1.3 Delete a student: `deleteStu`
 <a id="deleting-a-student-deleteStu"></a>
 > Delete a specified student from the TrackMate application.

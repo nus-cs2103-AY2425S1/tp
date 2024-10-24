@@ -31,6 +31,10 @@ public class CommandTestUtil {
     public static final String VALID_STUDENTID_BOB = "1002";
     public static final String VALID_TUTORIALID_AMY = "1001";
     public static final String VALID_TUTORIALID_BOB = "1001";
+    public static final String VALID_STUDENTID_NEW = "9999";
+    public static final String VALID_STUDENTID_DUPLICATE = "1002"; // Assuming this already exists
+    public static final String VALID_TUTORIALID_NEW = "9999";
+    public static final String VALID_TUTORIALID_NONEXISTENT = "9998";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
