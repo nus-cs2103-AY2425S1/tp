@@ -64,9 +64,9 @@ public class BlacklistCommand extends Command {
         Person personToBlacklisted = lastShownList.get(index.getZeroBased());
         Person blacklistedPerson = createBlacklistedPerson(personToBlacklisted);
 
-        model.setPerson(personToBlacklisted, blacklistedPerson);
+        model.setPerson(personToBlacklist, blacklistedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_BLACKLIST_PERSON_SUCCESS, Messages.format(personToBlacklisted)));
+        return new CommandResult(String.format(MESSAGE_BLACKLIST_PERSON_SUCCESS, Messages.format(personToBlacklist)));
     }
 
     @Override
