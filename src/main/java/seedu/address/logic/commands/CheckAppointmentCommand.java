@@ -25,10 +25,10 @@ public class CheckAppointmentCommand extends Command {
             + "LOCAL_DATETIME \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + " 01" + PREFIX_DAY_DATE + " 2023-09-25";
 
-    public static final String MESSAGE_CHECK_APPOINTMENT_SUCCESS = "Checked appointment for Doctor: %1$s on %2$s";
-    public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No appointment found for Doctor: %1$s on %2$s";
 
-    public static final String MESSAGE_NO_DATE_TIME = "No date time is given for Doctor appointment: %1$s on %2$s";
+    public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No appointment found for Doctor: %s";
+
+    public static final String MESSAGE_NO_DATE_TIME = "No date time is given for Doctor appointment: %s";
 
     private final int doctorId;
     private final LocalDate date;

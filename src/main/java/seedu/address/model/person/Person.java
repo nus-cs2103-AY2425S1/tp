@@ -230,7 +230,7 @@ public class Person implements Appointmentable {
 
         // Check if there are no appointments for the day
         if (appointmentsForDay.isEmpty()) {
-            return String.format("No appointments found for the day: %s", date.toString());
+            return null;
         }
 
         // Build a string for the appointments on the given day
@@ -317,3 +317,5 @@ public class Person implements Appointmentable {
     }
 
 }
+
+
