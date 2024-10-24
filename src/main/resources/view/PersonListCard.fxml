@@ -29,9 +29,6 @@
       </HBox>
       <Label fx:id="patientId" styleClass="cell_small_label" text="\$patientId" />
       <Label fx:id="ward" styleClass="cell_small_label" text="\$ward" />
-<!--      <Label fx:id="diagnosis" styleClass="cell_small_label" text="\$diagnosis" />-->
-<!--      <Label fx:id="medication" styleClass="cell_small_label" text="\$medication" />-->
-<!--      <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" />-->
 <!--      Use of ChatGPT to learn how to add labels together in a HBox.-->
 <!--      Prompt used: was wondering if i can make the appointment row made of 3 different labels, in 1 row-->
       <!-- New HBox for appointment -->
