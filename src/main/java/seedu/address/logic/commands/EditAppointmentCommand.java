@@ -7,9 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,7 +40,7 @@ public class EditAppointmentCommand extends Command {
     public static final String MESSAGE_INVALID_TIME = "Invalid time. Please use the HH:MM format";
     public static final String MESSAGE_NO_APPOINTMENT = "This appointment does not exist in CareLink";
     private final Nric patientNric;
-    private final LocalDateTime startDateTime;
+    private final EditAppointmentDescriptor editAppointmentDescriptor;
 
     /**
      * Constructs a EditAppointmentCommand object
@@ -50,10 +48,10 @@ public class EditAppointmentCommand extends Command {
      * @param date
      * @param startTime
      */
-    public EditAppointmentCommand(Nric patientNric, LocalDate date, LocalTime startTime) {
-        requireAllNonNull(patientNric, date, startTime);
+    public EditAppointmentCommand(Nric patientNric, EditAppointmentDescriptor editAppointmentDescriptor) {
+        requireAllNonNull(patientNric, editAppointmentDescriptor);
         this.patientNric = patientNric;
-        this.startDateTime = LocalDateTime.of(date, startTime);
+        this.editAppointmentDescriptor = editAppointmentDescriptor;
     }
 
     /**
@@ -67,7 +65,9 @@ public class EditAppointmentCommand extends Command {
         requireNonNull(model);
         Person patient = model.getPerson(patientNric);
 
-        Appointment appointmentToEdit = model.getAppointmentForPersonAndTime(patient, startDateTime);
+        Appointment appointmentToEdit = model.getAppointmentForPersonAndTime(patient,
+                editAppointmentDescriptor.getStartTime()
+                        .orElseThrow(() -> new CommandException("Start time is not specified")));
         Appointment editedAppointment = createEditedAppointment(appointmentToEdit, new EditAppointmentDescriptor());
 
         if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
