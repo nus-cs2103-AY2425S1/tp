@@ -13,11 +13,13 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is a fork of [`AddressBook Level-3`](https://github.com/se-edu/addressbook-level3).
+
+The icon image for the app was found on [Flaticon.com](https://www.flaticon.com/free-icon/wedding-rings_531864?term=wedding&page=1&position=1&origin=tag&related_id=531864) and was created by [Freepik](https://www.flaticon.com/authors/freepik).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -27,64 +29,63 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
+This architecture diagram gives a high-level overview of the app's design.
+
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+**Architecture Components**
 
-Given below is a quick overview of main components and how they interact with each other.
+**`Main`** consists of [`Main`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/ddd/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/ddd/MainApp.java), and is in charge of the app launch and shut down.
 
-**Main components of the architecture**
-
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+The app consists of the following components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): Renders user interface (UI) components of the app.
+* [**`Logic`**](#logic-component): Exexcutes commands.
+* [**`Model`**](#model-component): In-memory representation of the app's data.
+* [**`Storage`**](#storage-component): Stores data locally.
+* [**`Commons`**](#common-classes): A collection of classes used by multiple components.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+**Component Interactions**
 
-**How the architecture components interact with each other**
-
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+This sequence diagram shows how the components interact with each other for a scenario where the user issues the command `delete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+With the exception of `Commons`, each component is structured as such:
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* Component API is defined in an `interface` named `XYZ`, where XYZ is the name of the component.
+* Implements its functionality using a concrete `XYZManager` class.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
-The sections below give more details of each component.
+### UI Component
 
-### UI component
-
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/ddd/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DisplayedListPanel` etc. Each UI component inherits from the abstract `UiPart` class, which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/ddd/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
-The `UI` component,
+The `UI` component:
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* Takes user input and pass it to the `Logic` component.
+* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* Depends on `Model` (specifically `Client`, `Vendor` and `Event`) since it render data from the items inside `Model`.
 
-### Logic component
+When a user executes a command, the results of their command will be rendered within a single `DisplayedListPanel`. `DisplayedListPanel` contains some number of `DisplayedCard`, which could either be a `ClientCard`, `VendorCard` or an `EventCard`.
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+The items that need to be displayed on the GUI is stored in an `ObservableList<Displayable>`, and are retrieved from the `Model` using `Model::getDisplayedList`.
+
+### Logic Component
+
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -99,54 +100,67 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
+The `Logic` component:
+
+* Receives user input and parses it.
+* Interacts with the `Model` component to modify the underlying data.
+* Returns feedback to the user through a `CommandResult`.
+
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `DreamDayDesignerParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person). Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to complete execution.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
-How the parsing works:
-* When called upon to parse a user command, the `DreamDayDesignerParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `DreamDayDesignerParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+How the `AddressBookParser` works:
+
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser`, where `XYZ` is a placeholder for the specific command name (e.g `DeleteCommandParser`).
+* The newly created parser parses the user command and creates a `XYZCommand` object (e.g `DeleteCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g. `DeleteCommandParser`) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
+The `Model` component:
 
-The `Model` component,
+* Stores the address book data (i.e. all `Contact` objects inside a `UniqueContactList` and all `Event` objects inside a `UniqueEventList`).
+* Stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate filtered list.
+* Stores the currently 'selected' `Event` objects (e.g., results of a search query) as a separate filtered list.
+* Stores an `ObservableList<Displayable>` to represent the objects which need to be displayed by `UI`. When either the filtered contact list or filtered event list gets updated, this list of displayed items will be updated as well.
+* Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* Does not depend on `Ui`, `Logic` or `Storage`.
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+There are 2 main types of objects in Dream Day Designer: `Contact` and `Event`.
 
-<box type="info" seamless>
+#### `Contact`
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `DreamDayDesigner`, which `Person` references. This allows `DreamDayDesigner` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+Represents a contact within the address book. `Contact` can be either:
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+* **`Client`**: Clients are contacts who are hosting the weddings.
+* **`Vendor`**: Vendors provide services for the wedding (e.g. catering).
 
-</box>
+#### `Event`
 
+Represents a wedding event.
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `DreamDayDesignerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component:
+
+* Saves both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* Inherits from both `DreamDayDesignerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* Depends on `Model` since the data model of `Contact` and `Event` are defined within `Model`.
 
 ### Common classes
 
@@ -158,7 +172,7 @@ Classes used by multiple components are in the `seedu.ddd.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+<!-- ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
@@ -253,18 +267,18 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+_{Explain here how the data archiving feature will be implemented}_ -->
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Specific Guides**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation Guide](Documentation.md)
+* [Testing Guide](Testing.md)
+* [Logging Guide](Logging.md)
+* [Configuration Guide](Configuration.md)
+* [DevOps Guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,12 +288,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Busy wedding planners with many client and vendor contacts
-* Is reasonably comfortable using CLI apps
-* Works alone
+Freelance wedding planners with many client and vendor contacts
+* Reasonably comfortable with CLI apps
 * Likes flexibility in scheduling
+* Works alone
 
-**Value proposition**: Provide a way to easily select suitable vendors and freelancers for a wedding event given specific parameters such as budget, time, commission, client needs (culture, style), location. 
+**Value proposition**: Provide a way to easily select suitable vendors for a wedding event given specific parameters such as budget, time, commission, client needs (e.g. culture, style), location. 
 
 
 ### User stories
@@ -324,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `Dream Day Designer` and the **Actor** is the `Wedding planner`, unless specified otherwise)
 
-**Name: UC01 - Create Contact (Vendor/Client)**
+**Name: UC01 - Add Contact (Vendor/Client)**
 
 **Main Success Scenario (MSS):**
 1. Wedding planner selects the option to create a new contact.
@@ -444,21 +458,12 @@ ___
  
 ### Non-Functional Requirements
 
-1. Compatibility: Should work on any _mainstream OS_ (Windows/macOS/Linux) as long as it has Java `17` or above installed.
-2. Compatibility: The system should be usable on both desktop (Windows/macOS)
-3. Compatibility: The system should work on both 32-bit and 64-bit environments.
-4. User Experience: Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-5. User Experience: The system should respond within two seconds.
-6. User Experience: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-8. Privacy: User data must remain on the local machine and not be shared or transmitted to any external services unless explicitly requested by the user (e.g., exporting contacts). 
-9. Portability: The system should allow easy exporting of data to be imported into other applications if needed.
-
-### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Vendor**: A person who provides certain kinds of services
-* **32-bit and 64-bit environment**: The amount of memory that your computer can address. 64-bit machines are able to access much more memory than 32-bit machines.
+1. Compatibility: Should work on any mainstream OS (Windows/macOS/Linux) as long as Java `17` or above is installed.
+2. Compatibility: The system should work on both 32-bit and 64-bit environments.
+3. User Experience: Should be able to hold up to 1000 contacts and events without a noticeable sluggishness in performance for typical usage.
+4. User Experience: The system should respond within two seconds.
+5. User Experience: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+6. Privacy: User data must remain on the local machine and not be shared or transmitted to any external services unless explicitly requested by the user (e.g., exporting contacts).
 
 --------------------------------------------------------------------------------------------------------------------
 
