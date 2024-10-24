@@ -72,7 +72,7 @@ class JsonAdaptedWedding {
         }
 
         final Client dummyClient = new Client(new Person(new Name("dummy"), new Phone("12345678"),
-                new Email("dummy@gmail.com"),new Address("dummy"), null, null));
+                new Email("dummy@gmail.com"), new Address("dummy"), null, null));
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));

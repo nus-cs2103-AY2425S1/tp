@@ -27,10 +27,9 @@ public class Wedding {
         this.venue = venue;
     }
 
-    //this method is particularly for the storage of the wedding
+    /** this method is particularly for the storage of the wedding */
     public void addClient(Person person) {
         this.client = new Client(person);
-        person.setOwnWedding(this);
     }
 
     public Name getName() {
