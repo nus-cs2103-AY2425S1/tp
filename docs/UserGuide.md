@@ -26,8 +26,8 @@ for your large medical files.
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your computer.
-- To install Java 17, download Java. Refer to the [guide for installing Java](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
-  - Alternatively, download it from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- To install `Java 17`, download Java. Refer to the [guide for installing Java](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
+  - Alternatively, download it from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 - To check your Java version, refer [here](https://www.java.com/en/download/help/version_manual.html#).
 
 2. Download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It is a `.jar` file.
@@ -36,7 +36,7 @@ For more information, see this:
 - [How to run a JAR file](https://stackoverflow.com/questions/5774970/run-jar-file-in-command-prompt).
    
 
-3. Copy the file to the folder you want to use as the _home folder_ for your DocTrack.
+3. Copy the file to the folder you want to use as the _home folder_ for your DocTrack application.
 
 
 4. Open a [command terminal](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line) of your preference, and run the commands:
@@ -52,7 +52,8 @@ For more information, see this:
    ```
     
 
-5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+5. A GUI similar to the one below should appear in a few seconds. Note how the DocTrack application contains some sample data.
+   <br>
    ![Ui](images/Ui.png)
 
 
@@ -150,14 +151,14 @@ A **person** is a patient with several fields: a name, a phone number, an email,
 
 Adds a person to the address book.
 
-Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+**Format**: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags (including 0). For example, `t/friend t/likes coding` has 2 tags and it is valid. 
 </box>
 
-Examples:
+**Examples**:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
@@ -168,7 +169,7 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list person`
+**Format**: `list person`
 
 <br>
 
@@ -176,7 +177,7 @@ Format: `list person`
 
 Edits an existing person in the address book.
 
-Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format**: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 - Edits the person at the specified `INDEX`.
 - At least one of the optional fields must be provided.
@@ -185,7 +186,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
-Examples:
+**Examples**:
 
 - `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
@@ -196,7 +197,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find person KEYWORD [MORE_KEYWORDS]`
+**Format**: `find person KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -205,7 +206,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+**Examples**:
 
 - `find person John` returns `john` and `John Doe`
 - `find person alex david` returns `Alex Yeoh`, `David Li`<br><br>
@@ -217,11 +218,17 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete person INDEX`
+**Format**: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
 
-Examples:
+<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+
+**Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
+
+</box>
+
+**Examples**:
 
 - `list` followed by `delete person 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
@@ -232,7 +239,14 @@ Examples:
 
 Clears all entries from the address book after a validation check from the user.
 
-Format: `clear person`
+**Format**: `clear person`
+
+<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+
+**Warning:** This action is irreversible. Ensure you have a backup of the patient data before clearing. 
+
+</box>
+
 
 <br>
 
@@ -251,9 +265,14 @@ Format: `clear person`
 
 Adds an appointment to the DocTrack. 
 
-Format: `add appt i/PATIENT_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
+**Format**: `add appt i/PATIENT_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
 
-Examples:
+<box type="tip" seamless>
+
+**Note:** Format of `DATE_TIME` is `dd/MM/yyyy HH:mm:ss`. For example, `29/03/2025 10:30:00`.
+</box>
+
+**Examples**:
 
 - `add appt i/John Doe d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`
 - `add appt i/Jo An d/30/01/2024-12-01 16:40:00 ty/Follow-up s/Asthma m/Inhaler`
@@ -264,7 +283,7 @@ Examples:
 
 Shows a list of all appointments in DocTrack.
 
-Format: `list appt`
+**Format**: `list appt`
 
 <br>
 
@@ -272,13 +291,18 @@ Format: `list appt`
 
 Edits an existing appointment in DocTrack.
 
-Format: `edit appt INDEX [i/PATIENT_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`
+**Format**: `edit appt INDEX [i/PATIENT_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`
 
 - Edits the appointment at the specified `INDEX`.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
-Examples:
+<box type="tip" seamless>
+
+**Note:** Format of `DATE_TIME` is `dd/MM/yyyy HH:mm:ss`. For example, `29/03/2025 10:30:00`.
+</box>
+
+**Examples**:
 
 - `edit appt 3 d/2024-12-05 13:00 m/Budesonide` Edits the date and time and the medicine to be `29/03/2025 10:30` and `Budesonide` respectively.
 
@@ -288,11 +312,17 @@ Examples:
 
 Deletes the specified appointment from DocTrack.
 
-Format: `delete appt INDEX`
+**Format**: `delete appt INDEX`
 
 - Deletes the appointment at the specified `INDEX`.
 
-Examples:
+<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+
+**Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
+
+</box>
+
+**Examples**:
 
 - `list appt` followed by `delete appt 2` deletes the 2nd appointment in DocTrack.
 
@@ -302,7 +332,13 @@ Examples:
 
 Clears all entries from the appointment book after a validation check from the user.
 
-Format: `clear appt`
+**Format**: `clear appt`
+
+<box type="warning" seamless style="border: 1px solid red; background-color: #ffdddd;">
+
+**Warning:** This action is irreversible. Ensure you have a backup of the appointment data before clearing.
+
+</box>
 
 <br>
 
@@ -322,7 +358,7 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format**: `help`
 
 <br>
 
@@ -330,7 +366,7 @@ Format: `help`
 
 Exits the program.
 
-Format: `exit`
+**Format**: `exit`
 
 <br>
 
