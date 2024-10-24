@@ -71,7 +71,7 @@ public class SearchEventCommandTest {
         SearchEventCommand command = new SearchEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ANIME, BARBEQUE, CONCERT), model.getFilteredEventList());
+        assertEquals(Arrays.asList(CONCERT, BARBEQUE, ANIME), model.getFilteredEventList());
     }
 
     @Test
