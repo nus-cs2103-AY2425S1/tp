@@ -38,6 +38,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
@@ -52,6 +53,64 @@ public class EditCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
+
+    @Test
+    public void parse_validModuleChange_success() {
+        String studentId = "12345678";
+
+        String userInput = studentId + " m/ GEC1044 CS1231S";
+
+        Module oldModule = new Module("GEC1044");
+        Module newModule = new Module("CS1231S");
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setOldModule(oldModule);
+        descriptor.setNewModule(newModule);
+
+        EditCommand expectedCommand = new EditCommand(new StudentId(studentId), descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_missingModuleArguments_failure() {
+        String studentId = "12345678";
+        String userInput = studentId + " m/";
+
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_noModulesProvided_noModuleChange() {
+        String studentId = "12345678";
+        String userInput = studentId + " " + NAME_DESC_AMY + " " + PHONE_DESC_BOB;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_BOB)
+                .build();
+        EditCommand expectedCommand = new EditCommand(new StudentId(studentId), descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleRepeatedModuleFields_failure() {
+        String studentId = "12345678";
+        String userInput = studentId + " m/ GEC1044 CS1231S m/ CS1232S";
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_MODULE));
+    }
+
+    @Test
+    public void parse_threeArgumentsForModule_failure() {
+        String studentId = "12345678";
+        // Simulating three module arguments
+        String userInput = studentId + " m/ GEC1044 CS1231S CS1232S";
+
+        // Expecting a ParseException due to the invalid number of arguments for modules
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
+    }
 
     @Test
     public void parse_missingParts_failure() {

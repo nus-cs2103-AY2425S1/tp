@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,11 +37,12 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": 2 possible usages"
+            + " 1. Edits the details of the person identified "
             + "by the studentId assigned to the corresponding student. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: STUDENTID (must be a valid and existing 8-digit Student ID) "
-            + "[" + "STUDENTID] "
+            + "Parameters: ID (must be a valid and existing 8-digit ID) "
+            + "[ID] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -49,12 +51,17 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG] ...\n"
             + "Example: " + COMMAND_WORD + " 12345678 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + " 2. Edits a module of the person identified. "
+            + "Existing values will be overwritten by the input module.\n"
+            + "Parameters: ID (must be a valid and existing 8-digit ID "
+            + PREFIX_MODULE + " OLD_MODULE NEW_MODULE";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
+    public static final String MESSAGE_DUPLICATE_MODULE = "New module already exists in the person's module list.";
+    public static final String MESSAGE_MODULE_NOT_FOUND = "Old module not found in the person's module list.";
     private final StudentId studentId;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -95,19 +102,46 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
-        StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         Tag updatedTag = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
-        ArrayList<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
 
-        Person editedPerson = new Person(updatedStudentId, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedCourse, updatedTag, updatedModules);
+        ArrayList<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
+        if (editPersonDescriptor.hasModuleChanges()) {
+            Module oldModule = editPersonDescriptor.oldModule;
+            Module newModule = editPersonDescriptor.newModule;
+
+            boolean isModuleRenamed = false;
+            if (updatedModules.stream().anyMatch(m -> m.value.equals(newModule.value))) {
+                throw new CommandException(EditCommand.MESSAGE_DUPLICATE_MODULE);
+            }
+
+            for (int i = 0; i < updatedModules.size(); i++) {
+                if (updatedModules.get(i).value.equals(oldModule.value)) {
+                    Module updatedModule = new Module(newModule.value);
+                    if (updatedModules.get(i).hasGrade()) {
+                        updatedModule.setGrade(updatedModules.get(i).getGrade());
+                    }
+                    isModuleRenamed = true;
+                    updatedModules.set(i, updatedModule);
+                    break;
+                }
+            }
+
+            if (!isModuleRenamed) {
+                throw new CommandException(MESSAGE_MODULE_NOT_FOUND);
+            }
+        }
+
+        Person editedPerson = new Person(personToEdit.getStudentId(), updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedCourse, updatedTag, updatedModules);
+
         return editedPerson;
     }
 
@@ -148,6 +182,8 @@ public class EditCommand extends Command {
         private Course course;
         private Tag tag;
         private ArrayList<Module> modules;
+        private Module oldModule;
+        private Module newModule;
 
         public EditPersonDescriptor() {}
 
@@ -156,7 +192,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setStudentId(toCopy.studentId);
+            setStudentId(null);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -164,13 +200,16 @@ public class EditCommand extends Command {
             setCourse(toCopy.course);
             setTag(toCopy.tag);
             setModules(toCopy.modules);
+            setOldModule(toCopy.oldModule);
+            setNewModule(toCopy.newModule);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, course, tag, modules);
+            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, address, course, tag, modules)
+                    || hasModuleChanges();
         }
 
         public void setStudentId(StudentId studentId) {
@@ -221,6 +260,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(course);
         }
 
+        public void setNewModule(Module newModule) {
+            this.newModule = newModule;
+        }
+
+        public Optional<Module> getNewModule() {
+            return Optional.ofNullable(newModule);
+        }
+
+        public void setOldModule(Module oldModule) {
+            this.oldModule = oldModule;
+        }
+
+        public Optional<Module> getOldModule() {
+            return Optional.ofNullable(oldModule);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -261,14 +316,24 @@ public class EditCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(studentId, otherEditPersonDescriptor.studentId)
-                    && Objects.equals(name, otherEditPersonDescriptor.name)
+            return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
                     && Objects.equals(tag, otherEditPersonDescriptor.tag)
-                    && Objects.equals(modules, otherEditPersonDescriptor.modules);
+                    && Objects.equals(modules, otherEditPersonDescriptor.modules)
+                    && Objects.equals(oldModule, otherEditPersonDescriptor.oldModule)
+                    && Objects.equals(newModule, otherEditPersonDescriptor.newModule);
+        }
+
+        public void setModuleChanges(Module oldModule, Module newModule) {
+            this.oldModule = oldModule;
+            this.newModule = newModule;
+        }
+
+        public boolean hasModuleChanges() {
+            return oldModule != null && newModule != null;
         }
 
         @Override
@@ -282,6 +347,8 @@ public class EditCommand extends Command {
                     .add("course", course)
                     .add("tags", tag)
                     .add("modules", modules)
+                    .add("oldModule", oldModule)
+                    .add("newModule", newModule)
                     .toString();
         }
     }
