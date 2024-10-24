@@ -22,8 +22,10 @@ public class CommentCommand extends Command {
     public static final String MESSAGE_USAGE =
             "Ensure the correct Format: " + COMMAND_WORD + " INDEX c/ COMMENT\n"
                     + "Ensure the Prefix: c/ is after the INDEX and before the COMMENT \n"
-                    + "Required Parameter: Ensure INDEX is a valid positive integer within your current list size shown \n"
-                    + "Optional Parameter: Ensure COMMENT is empty to remove comments, or any value to add a comment \n"
+                    + "Required Parameter: Ensure INDEX is a valid positive integer within your current"
+                    + " list size shown \n"
+                    + "Optional Parameter: Ensure COMMENT is empty to remove comments, "
+                    + "or any value to add a comment \n"
                     + "Example: " + "comment 1 c/ Is always late to class. \n"
                     + "This will add a comment to the person identified by the index number used";
 
