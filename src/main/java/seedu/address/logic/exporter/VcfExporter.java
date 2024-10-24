@@ -3,9 +3,12 @@ package seedu.address.logic.exporter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
+import java.util.List;
 
+import ezvcard.Ezvcard;
 import ezvcard.VCard;
+import ezvcard.property.Address;
+import ezvcard.property.Categories;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
@@ -27,18 +30,33 @@ public class VcfExporter implements Exporter {
 
     @Override
     public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        String fileContent = addressBook.getPersonList()
-                .parallelStream().map(this::convertToVcf).collect(Collectors.joining());
+        List<VCard> vCards = addressBook.getPersonList()
+                .parallelStream().map(this::convertToVcf).toList();
+        String fileContent = Ezvcard.write(vCards).go();
 
         Path exportPath = getExportPath();
         FileUtil.createIfMissing(exportPath);
         FileUtil.writeToFile(exportPath, fileContent);
     }
 
-    private String convertToVcf(Person person) {
+    private VCard convertToVcf(Person person) {
+        // Convert attributes to vCard representable properties
+        Address address = new Address();
+        address.setStreetAddress(person.getAddress().value);
+
+        Categories categories = new Categories();
+        person.getTags().forEach(tag -> categories.getValues().add(tag.tagName));
+
         VCard vCard = new VCard();
-        // TODO
-        return vCard.toString();
+        vCard.setFormattedName(person.getName().fullName);
+        vCard.addTelephoneNumber(person.getPhone().value);
+        vCard.addEmail(person.getEmail().value);
+        vCard.addAddress(address);
+        vCard.setCategories(categories);
+        person.getNotes()
+                .forEach(note -> vCard.addNote(note.getNote()));
+
+        return vCard;
     }
 
     @Override
