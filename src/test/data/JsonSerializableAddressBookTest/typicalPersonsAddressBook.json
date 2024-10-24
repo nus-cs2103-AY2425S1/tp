@@ -5,11 +5,11 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Sarah Lim",
       "ecPhone" : "98761234",
       "ecRelationship" : "Parent"
-    },
+    }],
     "doctor": {
       "doctorName": "Tan Wei Ming",
       "doctorPhone": "82345678",
@@ -21,11 +21,11 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Kevin Goh",
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
-    },
+    }],
     "doctor": {
       "doctorName": "Koh Jia Jia",
       "doctorPhone": "81818211",
@@ -37,11 +37,11 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Kevin Goh",
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
-    },
+    }],
     "doctor": {
       "doctorName": "Ben Po",
       "doctorPhone": "61231231",
@@ -53,11 +53,11 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Haziq Bin Abudllah",
       "ecPhone" : "98763412",
       "ecRelationship" : "Brother"
-    },
+    }],
     "doctor": {
       "doctorName": "Sebastian Sim",
       "doctorPhone": "62353535",
@@ -69,11 +69,11 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Amanda Lee",
       "ecPhone" : "98762341",
       "ecRelationship" : "Cousin"
-    },
+    }],
     "doctor": {
       "doctorName": "Wong See Toh",
       "doctorPhone": "88338483",
@@ -85,11 +85,11 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Nurul Ain",
       "ecPhone" : "98761243",
       "ecRelationship" : "Grandmother"
-    },
+    }],
     "doctor": {
       "doctorName": "Bing Qi Ling",
       "doctorPhone": "81818211",
@@ -101,11 +101,11 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Anjali Devi",
       "ecPhone" : "98763124",
       "ecRelationship" : "Daughter"
-    },
+    }],
     "doctor": {
       "doctorName": "Peh Boon Hao",
       "doctorPhone": "96161616",

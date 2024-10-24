@@ -93,31 +93,58 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-.list-cell {
+#personListPanel .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
 }
 
-.list-cell:filled:even {
+#personListView .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
 }
 
-.list-cell:filled:odd {
+#personListView .list-cell:filled:odd {
     -fx-background-color: #515658;
 }
 
-.list-cell:filled:selected {
+#personListView .list-cell:filled:selected {
     -fx-background-color: #424d5f;
 }
 
-.list-cell:filled:selected #cardPane {
+#personListView .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
     -fx-border-width: 1;
 }
 
-.list-cell .label {
+#personListView .list-cell .label {
+    -fx-text-fill: white;
+}
 
+#emergencyContactListView .list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+}
+
+#emergencyContactListView .list-cell:filled:even {
+    -fx-background-color: #50879B;
+}
+
+#emergencyContactListView .list-cell:filled:odd {
+    -fx-background-color: #6E9CAC;
+}
+
+#emergencyContactListView .list-cell:filled:selected {
+    -fx-background-color: #92B4C1;
+}
+
+#emergencyContactListView .list-cell:filled:selected #cardPane {
+    -fx-border-color: #406478;
+    -fx-border-width: 1;
+}
+
+#emergencyContactListView .list-cell .label {
+    -fx-text-fill: white;
 }
 
 .cell_big_label {
@@ -132,7 +159,7 @@
     -fx-text-fill: white;
 }
 
-.emergency_contact {
+.emergencyContact {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #9999ff;

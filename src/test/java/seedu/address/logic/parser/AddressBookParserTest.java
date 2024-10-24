@@ -4,6 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ECNAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECPHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECRS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECPHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECRS_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,18 +20,24 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEmergencyContactCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteCommand.DeleteCommandDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindDoctorCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListArchiveFilesCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadArchiveCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DoctorNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -53,7 +65,7 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, new DeleteCommandDescriptor()), command);
     }
 
     @Test
@@ -63,6 +75,17 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_addEmergencyContact() throws Exception {
+        Person person = new PersonBuilder()
+                .withEmergencyContact(VALID_ECNAME_AMY, VALID_ECPHONE_AMY, VALID_ECRS_AMY).build();
+        String descriptor = ECNAME_DESC_AMY + ECPHONE_DESC_AMY + ECRS_DESC_AMY;
+        AddEmergencyContactCommand command = (AddEmergencyContactCommand) parser.parseCommand(
+                AddEmergencyContactCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + descriptor);
+        assertEquals(new AddEmergencyContactCommand(INDEX_FIRST_PERSON, person.getFirstEmergencyContact()), command);
     }
 
     @Test
@@ -97,6 +120,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_listArchiveFiles() throws Exception {
+        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD) instanceof ListArchiveFilesCommand);
+        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD + " 3") instanceof ListArchiveFilesCommand);
+    }
+
+    @Test
+    public void parseCommand_loadArchive() throws Exception {
+        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD) instanceof LoadArchiveCommand);
+    }
+
+    @Test
     public void parseCommand_undo() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
     }
@@ -104,6 +138,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_redo() throws Exception {
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+    }
+
+    @Test
+    public void parseCommand_find_doctor() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindDoctorCommand command = (FindDoctorCommand) parser.parseCommand(
+                FindDoctorCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindDoctorCommand(new DoctorNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
