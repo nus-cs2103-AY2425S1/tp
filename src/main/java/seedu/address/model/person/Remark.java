@@ -8,15 +8,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
-    public final String value;
-
-    public static final String VALIDATION_REGEX = ".{0,50}";
-
-    public static final int MAX_LENGTH = 50;
-
 
     public static final String MESSAGE_CONSTRAINTS =
             "Remark cannot be more than 50 characters.";
+
+    public static final String VALIDATION_REGEX = ".{0,50}";
+
+    public final String value;
 
     /**
      * Constructs a {@code Remark}.
