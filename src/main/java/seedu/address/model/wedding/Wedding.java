@@ -16,7 +16,7 @@ public class Wedding {
     private Client client;
     private Date date;
     private Venue venue;
-    private ContactMap contactMap;
+    private ContactSet contactSet;
 
     /**
      * Constructs a {@code Wedding}.
@@ -27,7 +27,7 @@ public class Wedding {
         this.client = client;
         this.date = date;
         this.venue = venue;
-        this.contactMap = new ContactMap();
+        this.contactSet = new ContactSet();
     }
 
     public Name getName() {
@@ -61,7 +61,7 @@ public class Wedding {
      * @param person The person who will have the role.
      * @throws IllegalArgumentException If the person is a spouse or if the role is already assigned.
      */
-    public void addRoleToMap(Person person) {
+    public void addRoleToSet(Person person) {
         if (person.isSamePerson(client.getPerson())) {
             throw new IllegalArgumentException("This person is a client and cannot have another role.");
         }
@@ -70,7 +70,7 @@ public class Wedding {
             throw new IllegalArgumentException("This person does not have a role.");
         }
 
-        contactMap.addToMap(person.getRole(), person);
+        contactSet.addToMap(person.getRole(), person);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Wedding {
                 .add("client", client)
                 .add("date", date)
                 .add("venue", venue)
-                .add("contactList", contactMap)
+                .add("contactSet", contactSet)
                 .toString();
     }
 
@@ -99,11 +99,11 @@ public class Wedding {
                && client.equals(otherWedding.client)
                && date.equals(otherWedding.date)
                && venue.equals(otherWedding.venue)
-               && contactMap.equals(otherWedding.contactMap);
+               && contactSet.equals(otherWedding.contactSet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, client, date, venue, contactMap);
+        return Objects.hash(name, client, date, venue, contactSet);
     }
 }
