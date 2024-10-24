@@ -37,6 +37,8 @@ public class DifficultyTag extends Tag {
      * @return true if the difficulty level is "low", "medium", or "high".
      */
     private static boolean isValidDifficulty(String difficultyLevel) {
+        assert difficultyLevel != null : "difficultyLevel should not be null";
+
         try {
             // Attempt to convert the input string to a valid Level enum value.
             Level.valueOf(difficultyLevel.toUpperCase(Locale.ROOT));

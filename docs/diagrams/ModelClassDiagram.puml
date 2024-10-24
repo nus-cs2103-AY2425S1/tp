@@ -21,6 +21,12 @@ Class Name
 Class Phone
 Class Tag
 Class Bookmark
+Class DifficultyTag
+Class SalaryTag
+Class PeriodTag
+Class WorkLifeBalanceTag
+
+
 
 Class I #FFFFFF
 }
@@ -46,6 +52,12 @@ Company *--> Bookmark
 Company *--> CareerPageUrl
 Company *--> Address
 Company *--> "*" Tag
+
+Tag <|-- SalaryTag
+Tag <|-- PeriodTag
+Tag <|-- WorkLifeBalanceTag
+Tag <|-- DifficultyTag
+
 
 Company -[hidden]up--> I
 UniqueCompanyList -[hidden]right-> I
