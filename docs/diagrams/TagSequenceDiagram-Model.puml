@@ -22,8 +22,9 @@ Model -> FilteredPersons : setPredicate(PREDICATE_SHOW_ALL_PERSONS)
 activate FilteredPersons
 FilteredPersons --> Model
 deactivate FilteredPersons
+[<-- Model
 deactivate Model
 
-[<-- Model
+
 
 @enduml
