@@ -7,13 +7,14 @@ import java.util.Set;
 
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.Displayable;
 import seedu.ddd.model.tag.Tag;
 
 /**
  * Represents a Contact in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public abstract class Contact {
+public abstract class Contact implements Displayable {
 
     // Identity fields
     private final Id id;

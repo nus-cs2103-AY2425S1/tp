@@ -20,14 +20,15 @@ import seedu.ddd.model.event.common.UniqueEventList;
 public class AddressBook implements ReadOnlyAddressBook {
     private static int nextContactId;
     private static int nextEventId;
-    private final UniqueContactList contacts;
+
     /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
+    * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+    * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+    *
+    * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+    *   among constructors.
+    */
+    private final UniqueContactList contacts;
     {
         contacts = new UniqueContactList();
     }

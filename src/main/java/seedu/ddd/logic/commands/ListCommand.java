@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.common.Event;
 
 
 /**
@@ -18,9 +19,7 @@ import seedu.ddd.model.contact.common.Contact;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + " -CONTACT_FLAG (either `-v` or `-c`)"
             + ": Lists all clients in the addressbook.\n"
             + "Example: " + COMMAND_WORD + " " + FLAG_CLIENT
@@ -30,8 +29,10 @@ public class ListCommand extends Command {
                     + "Example: " + COMMAND_WORD + " " + FLAG_CLIENT
             + " des/George and Amy, lists all events with description George and Amy in the addressbook.";
 
+    private static final Predicate<Event> CLEAR_EVENTS = any -> false;
 
     private final Predicate<Contact> predicate;
+
     public ListCommand(Predicate<Contact> predicate) {
         this.predicate = predicate;
     }
@@ -40,9 +41,11 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredContactList(predicate);
+        model.updateFilteredEventList(CLEAR_EVENTS);
         return new CommandResult(String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW,
                 model.getFilteredContactList().size()));
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

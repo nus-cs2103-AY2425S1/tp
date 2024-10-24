@@ -1,8 +1,8 @@
-.contact-list-container {
+.displayed-list-container {
     -fx-padding: 0 0 0 0;
 }
 
-.contact-list-view {
+.displayed-list-view {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
@@ -20,8 +20,3 @@
     -fx-background-radius: 8;
     -fx-background-color: #e9e9e9;
 }
-
-/* .list-cell:filled:selected #cardPane {
-    -fx-border-color: #0000ff;
-    -fx-border-width: 1;
-} */

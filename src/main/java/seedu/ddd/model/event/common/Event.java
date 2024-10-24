@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
+import seedu.ddd.model.Displayable;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
 
@@ -18,7 +19,7 @@ import seedu.ddd.model.contact.vendor.Vendor;
  * Represents a Event in the address book.
  * Guarantees: to be determined.
  */
-public class Event {
+public class Event implements Displayable {
 
     public static final String MESSAGE_CONSTRAINTS =
             "There must be at least one client in a specific event.";

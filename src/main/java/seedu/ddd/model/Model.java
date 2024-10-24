@@ -125,6 +125,9 @@ public interface Model {
     /** Returns a unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
+    /** Returns a unmodifiable view of the list of the items to display */
+    ObservableList<Displayable> getDisplayedList();
+
     /**
      * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

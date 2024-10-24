@@ -13,9 +13,11 @@ import seedu.ddd.logic.commands.CommandResult;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.logic.parser.AddressBookParser;
 import seedu.ddd.logic.parser.exceptions.ParseException;
+import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.common.Event;
 import seedu.ddd.storage.Storage;
 
 /**
@@ -69,6 +71,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Contact> getFilteredContactList() {
         return model.getFilteredContactList();
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return model.getFilteredEventList();
+    }
+
+    @Override
+    public ObservableList<Displayable> getDisplayedList() {
+        return model.getDisplayedList();
     }
 
     @Override

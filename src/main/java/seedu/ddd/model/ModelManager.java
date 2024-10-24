@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ddd.commons.core.GuiSettings;
@@ -25,6 +27,9 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
     private final FilteredList<Event> filteredEvents;
+    private final ObservableList<Displayable> displayedList = FXCollections.observableArrayList();
+    private final ObservableList<Displayable> internalUnmodifiableDisplayedList =
+            FXCollections.unmodifiableObservableList(displayedList);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +43,31 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+
+        // listen for changes in the original lists and update the combined list
+        filteredContacts.addListener((ListChangeListener<Contact>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    displayedList.removeAll(change.getRemoved());
+                }
+                if (change.wasAdded()) {
+                    displayedList.addAll(change.getAddedSubList());
+                }
+            }
+        });
+        filteredEvents.addListener((ListChangeListener<Event>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    displayedList.removeAll(change.getRemoved());
+                }
+                if (change.wasAdded()) {
+                    displayedList.addAll(change.getAddedSubList());
+                }
+            }
+        });
+
+        // populate the initial displayed list with contacts only
+        displayedList.addAll(filteredContacts);
     }
 
     public ModelManager() {
@@ -162,10 +192,10 @@ public class ModelManager implements Model {
         return filteredEvents.size();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Data List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -188,6 +218,11 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Displayable> getDisplayedList() {
+        return internalUnmodifiableDisplayedList;
     }
 
     @Override

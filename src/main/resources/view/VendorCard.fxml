@@ -8,27 +8,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox styleClass="contact-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox styleClass="card-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="100" GridPane.columnIndex="0">
 
-      <HBox styleClass="contact-title" alignment="CENTER_LEFT">
-        <Label fx:id="name" styleClass="contact-name" />
+      <HBox styleClass="card-title" alignment="CENTER_LEFT">
+        <Label fx:id="name" styleClass="card-name" />
         <Label fx:id="id" styleClass="vendor-id" />
       </HBox>
-      <Separator styleClass="contact-pane-divider" />
+      <Separator styleClass="card-pane-divider" />
 
       <VBox>
-        <Label fx:id="phone" styleClass="contact-details" text="\$phone" />
-        <Label fx:id="email" styleClass="contact-details" text="\$email" />
-        <Label fx:id="address" styleClass="contact-details" text="\$address" />
-        <Label fx:id="service" styleClass="contact-details" text="\$service" />
+        <Label fx:id="phone" styleClass="card-details" text="\$phone" />
+        <Label fx:id="email" styleClass="card-details" text="\$email" />
+        <Label fx:id="address" styleClass="card-details" text="\$address" />
+        <Label fx:id="service" styleClass="card-details" text="\$service" />
       </VBox>
 
-      <FlowPane fx:id="tags" styleClass="contact-tags" />
+      <FlowPane fx:id="tags" styleClass="card-tags" />
     </VBox>
   </GridPane>
 </HBox>
