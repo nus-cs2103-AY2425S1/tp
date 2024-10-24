@@ -22,10 +22,12 @@ import seedu.address.logic.commands.SetVolunteerHoursCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.group.CreateGroupCommand;
 import seedu.address.logic.commands.group.DeleteGroupCommand;
+import seedu.address.logic.commands.group.EditGroupNameCommand;
 import seedu.address.logic.commands.group.ListGroupsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.group.CreateGroupCommandParser;
 import seedu.address.logic.parser.group.DeleteGroupCommandParser;
+import seedu.address.logic.parser.group.EditGroupNameCommandParser;
 
 /**
  * Parses user input.
@@ -99,6 +101,9 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case EditGroupNameCommand.COMMAND_WORD:
+            return new EditGroupNameCommandParser().parse(arguments);
 
         case EmailCommand.COMMAND_WORD:
             return new EmailCommand();
