@@ -14,6 +14,11 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("delete 1")
 activate logic LOGIC_COLOR
 
+logic -[LOGIC_COLOR]> ui : showAlertDialogAndWait()
+activate ui UI_COLOR
+ui -[UI_COLOR]-> logic
+deactivate ui UI_COLOR
+
 logic -[LOGIC_COLOR]> model : deletePerson(p)
 activate model MODEL_COLOR
 
