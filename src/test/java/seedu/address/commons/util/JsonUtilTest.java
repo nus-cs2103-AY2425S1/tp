@@ -20,12 +20,10 @@ public class JsonUtilTest {
 
     private static final Path SERIALIZATION_FILE = TestUtil.getFilePathInSandboxFolder("serialize.json");
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUtilTest");
-    private Path testFolder;
 
     @BeforeEach
     public void setUp() throws IOException {
-        testFolder = Paths.get("src", "test", "data", "JsonUtilTest");
-        Files.createDirectories(testFolder);
+        Files.createDirectories(TEST_DATA_FOLDER);
     }
 
     @Test
@@ -64,7 +62,7 @@ public class JsonUtilTest {
     public void jsonUtil_writeThenReadObjectToJson_correctObject() throws IOException {
         TestClass testClass = new TestClass("Test String", 123);
 
-        Path testFile = testFolder.resolve("testFile.json");
+        Path testFile = TEST_DATA_FOLDER.resolve("testFile.json");
         Files.createDirectories(testFile.getParent());
         Files.deleteIfExists(testFile);
 
@@ -81,8 +79,6 @@ public class JsonUtilTest {
     private static class TestClass {
         private String stringField;
         private int intField;
-
-        public TestClass() {}
 
         TestClass(String stringField, int intField) {
             this.stringField = stringField;

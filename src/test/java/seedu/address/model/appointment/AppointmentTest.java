@@ -34,11 +34,12 @@ public class AppointmentTest {
         person2 = BOB;
 
         appointment1 = new Appointment(new AppointmentType("Checkup"), dateTime1,
-            person1, new Sickness("Cold"), new Medicine("Aspirin"));
+                person1, new Sickness("Cold"), new Medicine("Aspirin"));
         appointment2 = new Appointment(new AppointmentType("Checkup"), dateTime1,
-            person1, new Sickness("Cold"), new Medicine("Aspirin"));
+                person1, new Sickness("Cold"), new Medicine("Aspirin"));
         appointment3 = new Appointment(new AppointmentType("Followup"), dateTime2,
-            person2, new Sickness("Flu"), new Medicine("Tamiflu"));
+                person2, new Sickness("Flu"), new Medicine("Tamiflu"));
+    }
 
     @Test
     public void constructorTest_appointments_returnsCorrectAppointmentObject() {

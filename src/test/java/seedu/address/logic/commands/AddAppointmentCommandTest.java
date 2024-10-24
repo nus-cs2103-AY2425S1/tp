@@ -39,14 +39,14 @@ public class AddAppointmentCommandTest {
     @Test
     public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
-        AppointmentDescriptor validAppointementDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
+        AppointmentDescriptor validAppointmentDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
 
-        CommandResult commandResult = new AddAppointmentCommand(validAppointementDescriptor, 1)
+        CommandResult commandResult = new AddAppointmentCommand(validAppointmentDescriptor, 1)
                 .execute(modelStub);
 
         assertEquals(String.format(AddAppointmentCommand.MESSAGE_SUCCESS,
-                Messages.formatAppointment(validAppointementDescriptor)), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validAppointementDescriptor), modelStub.appointmentsAdded);
+                Messages.formatAppointment(validAppointmentDescriptor)), commandResult.getFeedbackToUser());
+        assertEquals(List.of(validAppointmentDescriptor), modelStub.appointmentsAdded);
     }
 
     @Test
@@ -64,7 +64,6 @@ public class AddAppointmentCommandTest {
     @Test
     public void execute_getPersonIdDoesNotExists_returnsCorrectMessage() {
         AppointmentDescriptor validAppointmentDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
-        Appointment validAppointment = new AppointmentBuilder().build();
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(validAppointmentDescriptor, 1);
         assertEquals(addAppointmentCommand.getPersonIdDoesNotExistMessage(), MESSAGE_PERSON_NOT_FOUND);
     }
@@ -92,7 +91,6 @@ public class AddAppointmentCommandTest {
     @Test
     public void toStringMethod() {
         AppointmentDescriptor validAppointmentDescriptor = new AppointmentBuilder().build().getAppointmentDescriptor();
-        Appointment validAppointment = new AppointmentBuilder().build();
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(validAppointmentDescriptor, 1);
         String expected = "seedu.address.logic.commands.AddAppointmentCommand"
                 + "{toAdd=seedu.address.model.appointment.AppointmentDescriptor{appointment type=Health Checkup, "
