@@ -142,10 +142,10 @@ public class ModelManager implements Model {
         return addressBook.hasTutorial(tutorial);
     }
 
-//    @Override
-//    public void deleteTutorial(Tutorial tutorial) {
-//        addressBook.remove(tutorial);
-//    }
+    //    @Override
+    //    public void deleteTutorial(Tutorial tutorial) {
+    //        addressBook.remove(tutorial);
+    //    }
 
     @Override
     public void addTutorial(Tutorial tutorial) {
@@ -153,12 +153,12 @@ public class ModelManager implements Model {
         updateFilteredTutorialList(PREDICATE_SHOW_ALL_TUTORIALS);
     }
 
-//    @Override
-//    public void setTutorial(Tutorial target,  editedPerson) {
-//        requireAllNonNull(target, editedPerson);
-//
-//        addressBook.setPerson(target, editedPerson);
-//    }
+    //    @Override
+    //    public void setTutorial(Tutorial target,  editedPerson) {
+    //        requireAllNonNull(target, editedPerson);
+    //
+    //        addressBook.setPerson(target, editedPerson);
+    //    }
 
 
     //=========== Filtered Person List Accessors =============================================================
