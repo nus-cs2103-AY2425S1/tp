@@ -22,6 +22,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SupplierSortBy;
 import seedu.address.model.product.Product;
 import seedu.address.model.tag.Tag;
 
@@ -328,5 +329,28 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSupplierSortBy_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSupplierSortBy((String) null));
+    }
+
+    @Test
+    public void parseSupplierSortBy_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSupplierSortBy("invalidSortBy"));
+    }
+
+    @Test
+    public void parseSupplierSortBy_validValueWithoutWhitespace_returnsSupplierSortBy() throws Exception {
+        SupplierSortBy expectedSortBy = new SupplierSortBy("n");
+        assertEquals(expectedSortBy, ParserUtil.parseSupplierSortBy("n"));
+    }
+
+    @Test
+    public void parseSupplierSortBy_validValueWithWhitespace_returnsTrimmedSupplierSortBy() throws Exception {
+        String sortByWithWhitespace = WHITESPACE + "n" + WHITESPACE;
+        SupplierSortBy expectedSortBy = new SupplierSortBy("n");
+        assertEquals(expectedSortBy, ParserUtil.parseSupplierSortBy(sortByWithWhitespace));
     }
 }

@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Delivery> filteredDeliveries;
     private final SortedList<Delivery> sortedDeliveries;
+    private final SortedList<Person> sortedSuppliers;
     private boolean isViewingFilteredList = true;
 
     /**
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredDeliveries = new FilteredList<>(this.addressBook.getDeliveryList());
         sortedDeliveries = new SortedList<>(this.addressBook.getDeliveryList());
+        sortedSuppliers = new SortedList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -118,6 +120,16 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+    //===========Sorted Supplier List Accessors  ====================================================================
+    @Override
+    public ObservableList<Person> getSortedSupplierList() {
+        return sortedSuppliers;
+    }
+    @Override
+    public void updateSortedSupplierList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        sortedSuppliers.setComparator(comparator);
     }
 
     //=========== Delivery List Methods ======================================================================

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -19,6 +20,8 @@ import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindDeliveryCommand;
+import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
@@ -92,8 +95,11 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
                 return new FindSupplierCommandParser().parse(arguments.trim().substring(2));
+            } else if (arguments.trim().startsWith("-d")) {
+                return new FindDeliveryCommandParser().parse(arguments.trim().substring(2));
             } else {
-                return new FindCommandParser().parse(arguments);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindSupplierCommand.MESSAGE_USAGE + "\nOR\n" + FindDeliveryCommand.MESSAGE_USAGE));
             }
 
         case ListCommand.COMMAND_WORD:
@@ -112,6 +118,8 @@ public class AddressBookParser {
         case SortCommand.COMMAND_WORD:
             if (arguments.trim().startsWith(PREFIX_DELIVERY.getPrefix())) {
                 return new SortDeliveryCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith(PREFIX_SUPPLIER.getPrefix())) {
+                return new SortSupplierCommandParser().parse(arguments.trim());
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         SortDeliveryCommand.MESSAGE_USAGE));

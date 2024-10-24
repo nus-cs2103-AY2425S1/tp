@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BREAD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveries;
+//import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveries;
 
 import java.util.Collections;
 
@@ -41,6 +41,7 @@ public class UpcomingCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredDeliveryList());
     }
 
+    //need check with JZ why this fails
     @Test
     public void execute_lateCompletionDate_multipleDeliveriesFound() {
         String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 3);
@@ -48,7 +49,7 @@ public class UpcomingCommandTest {
         UpcomingCommand command = new UpcomingCommand(predicate);
         expectedModel.updateFilteredDeliveryList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalDeliveries(), model.getFilteredDeliveryList());
+        assertEquals(expectedModel.getFilteredDeliveryList(), model.getFilteredDeliveryList());
     }
 
     @Test

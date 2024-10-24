@@ -104,13 +104,23 @@ public class Delivery {
     }
 
     /**
-     * Checks if current instance of delivery has same status as input status
+     * Checks if current instance of delivery has same status as input status.
      *
      * @param deliveryStatus Status object to compare against.
      * @return True if current delivery have same status as input status.
      */
     public boolean hasSameStatus(Status deliveryStatus) {
         return this.status.equals(deliveryStatus);
+    }
+
+    /**
+     * Checks if current instance of delivery has same DateTime as input DateTime.
+     *
+     * @param targetDate DateTime object to compare against.
+     * @return True if current delivery have same DateTime as input DateTime.
+     */
+    public boolean hasSameDate(DateTime targetDate) {
+        return this.deliveryDateTime.equals(targetDate);
     }
 
 
