@@ -18,7 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 
-public class SetThresholdCommandTest {
+public class UpdateMaxStockLevelCommandTest {
 
     private Model model;
     private ProductName validProductName;
@@ -34,22 +34,22 @@ public class SetThresholdCommandTest {
 
     @Test
     public void constructor_nullProductName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SetThresholdCommand(null, 1000));
+        assertThrows(NullPointerException.class, () -> new UpdateMaxStockLevelCommand(null, 1000));
     }
 
     @Test
     public void execute_validProductNameAndStockLevel_success() throws Exception {
-        SetThresholdCommand command = new SetThresholdCommand(validProductName, 1000);
+        UpdateMaxStockLevelCommand command = new UpdateMaxStockLevelCommand(validProductName, 25000);
         CommandResult result = command.execute(model);
 
-        assertEquals(String.format(SetThresholdCommand.MESSAGE_EDIT_PRODUCT_SUCCESS,
-                Messages.format(validProduct), 1000), result.getFeedbackToUser());
+        assertEquals(String.format(UpdateMaxStockLevelCommand.MESSAGE_EDIT_PRODUCT_SUCCESS,
+                Messages.format(validProduct), 25000), result.getFeedbackToUser());
 
         Product editedProduct = model.getFilteredProductList().stream()
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();
-        assertEquals(1000, editedProduct.getMinStockLevel());
+        assertEquals(25000, editedProduct.getMaxStockLevel());
     }
 
     @Test
@@ -60,25 +60,13 @@ public class SetThresholdCommandTest {
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();
-        assertNotEquals(-100, editedProduct.getMinStockLevel());
-    }
-
-    @Test
-    public void execute_zeroStockLevel_success() throws Exception {
-        SetThresholdCommand command = new SetThresholdCommand(validProductName, 0);
-        CommandResult result = command.execute(model);
-
-        Product editedProduct = model.getFilteredProductList().stream()
-                .filter(p -> p.getName().equals(validProductName))
-                .findFirst()
-                .get();
-        assertEquals(0, editedProduct.getMinStockLevel());
+        assertNotEquals(-100, editedProduct.getMaxStockLevel());
     }
 
     @Test
     public void execute_nonexistentProduct_throwsCommandException() {
         ProductName nonExistentProduct = new ProductName("NonExistentProduct");
-        SetThresholdCommand command = new SetThresholdCommand(nonExistentProduct, 1000);
+        UpdateStockLevelCommand command = new UpdateStockLevelCommand(nonExistentProduct, 1000);
 
         assertThrows(CommandException.class, String.format(
                 SetThresholdCommand.MESSAGE_PRODUCT_NOT_FOUND, nonExistentProduct), () -> command.execute(model));
@@ -86,15 +74,15 @@ public class SetThresholdCommandTest {
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        SetThresholdCommand command = new SetThresholdCommand(validProductName, 1000);
+        UpdateMaxStockLevelCommand command = new UpdateMaxStockLevelCommand(validProductName, 1000);
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 
     @Test
     public void equals() {
-        SetThresholdCommand command1 = new SetThresholdCommand(validProductName, 1000);
-        SetThresholdCommand command2 = new SetThresholdCommand(validProductName, 2000);
-        SetThresholdCommand command3 = new SetThresholdCommand(new ProductName("DifferentProduct"), 1000);
+        UpdateMaxStockLevelCommand command1 = new UpdateMaxStockLevelCommand(validProductName, 1000);
+        UpdateMaxStockLevelCommand command2 = new UpdateMaxStockLevelCommand(validProductName, 20000);
+        UpdateMaxStockLevelCommand command3 = new UpdateMaxStockLevelCommand(new ProductName("DifferentProduct"), 1000);
 
         // same object -> returns true
         assertTrue(command1.equals(command1));
@@ -112,3 +100,4 @@ public class SetThresholdCommandTest {
         assertFalse(command1.equals(null));
     }
 }
+
