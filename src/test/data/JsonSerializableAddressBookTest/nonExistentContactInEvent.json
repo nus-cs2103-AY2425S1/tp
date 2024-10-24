@@ -1,0 +1,161 @@
+{
+  "_comment": "AddressBook save file which contains the same Contact values as in TypicalAddressBooks#getTypicalAddressBook()",
+  "contacts" : [ {
+    "type" : "client",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "date" : "2000-01-01",
+    "tags" : [ "friends" ],
+    "id" : 1
+  }, {
+    "type" : "vendor",
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "service" : "flower provider",
+    "tags" : [ "owesMoney", "friends" ],
+    "id" : 2
+  }, {
+    "type" : "client",
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "date" : "2000-01-01",
+    "tags" : [ ],
+    "id" : 3
+  }, {
+    "type" : "vendor",
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "service" : "Photography",
+    "tags" : [ "friends" ],
+    "id": 4
+  }, {
+    "type" : "client",
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "date" : "2000-01-01",
+    "tags" : [ ],
+    "id" : 5
+  }, {
+    "type" : "client",
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "date" : "2000-12-31",
+    "tags" : [ ],
+    "id" : 6
+  }, {
+    "type" : "vendor",
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "service" : "catering",
+    "tags" : [ ],
+    "id" : 7
+  } ],
+  "events" : [ {
+    "description": "This is wedding A",
+    "eventId": 0,
+    "clients": [ {
+      "type" : "client",
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "date" : "2000-01-01",
+      "tags" : [ "friends" ],
+      "id" : 1
+    }, {
+      "type" : "client",
+      "name" : "Carl Kurz",
+      "phone" : "95352563",
+      "email" : "heinz@example.com",
+      "address" : "wall street",
+      "date" : "2000-01-01",
+      "tags" : [ ],
+      "id" : 3
+    } ],
+    "vendors": [ {
+      "type" : "vendor",
+      "name" : "Benson Meier",
+      "phone" : "98765432",
+      "email" : "johnd@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "service" : "flower provider",
+      "tags" : [ "owesMoney", "friends" ],
+      "id" : 2
+    }, {
+      "type" : "vendor",
+      "name" : "Daniel Meier",
+      "phone" : "87652533",
+      "email" : "cornelia@example.com",
+      "address" : "10th street",
+      "service" : "Photography",
+      "tags" : [ "friends" ],
+      "id": 4
+    } ]
+  }, {
+    "description": "This is wedding B",
+    "eventId": 1,
+    "clients": [ {
+      "type" : "client",
+      "name" : "Elle Meyer",
+      "phone" : "9482224",
+      "email" : "werner@example.com",
+      "address" : "michegan ave",
+      "date" : "2000-01-01",
+      "tags" : [ ],
+      "id" : 5
+    }, {
+      "type" : "client",
+      "name" : "Fiona",
+      "phone" : "9482427",
+      "email" : "lydia@example.com",
+      "address" : "little tokyo",
+      "date" : "2000-12-31",
+      "tags" : [ ],
+      "id" : 6
+    } ],
+    "vendors": [ {
+      "type" : "vendor",
+      "name" : "Benson Meier",
+      "phone" : "98765432",
+      "email" : "johnd@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "service" : "flower provider",
+      "tags" : [ "owesMoney", "friends" ],
+      "id" : 2
+    }, {
+      "type" : "vendor",
+      "name" : "Daniel Meier",
+      "phone" : "87652533",
+      "email" : "cornelia@example.com",
+      "address" : "10th street",
+      "service" : "Photography",
+      "tags" : [ "friends" ],
+      "id": 4
+    }, {
+      "type" : "vendor",
+      "name" : "George Best",
+      "phone" : "9482442",
+      "email" : "anna@example.com",
+      "address" : "4th street",
+      "service" : "catering",
+      "tags" : [ ],
+      "id" : 7
+    } ]
+  }],
+  "nextContactId": 8,
+  "nextEventId": 2
+}
