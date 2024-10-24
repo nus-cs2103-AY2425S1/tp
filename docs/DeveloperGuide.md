@@ -245,19 +245,19 @@ _{Explain here how the data archiving feature will be implemented}_
 <div>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
-![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
+![ArchiveSequenceDiagram](./images/ArchiveSequenceDiagramLogic.png)
 </div>
 
 <div>
 
 `Storage` Class Diagram with support for archive:
-![StorageClassDiagramWithArchive](images/StorageClassDiagramWithArchive.png)
+![StorageClassDiagramWithArchive](./images/StorageClassDiagramWithArchive.png)
 </div>
 
 <div>
 
 The following sequence diagram shows how a sort command goes through the `Model` component:
-![ArchiveSortSequenceDiagram](images/ArchiveSortSequenceDiagram.png)
+![ArchiveSortSequenceDiagram](./images/ArchiveSortSequenceDiagram.png)
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
