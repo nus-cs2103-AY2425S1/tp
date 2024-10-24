@@ -24,7 +24,7 @@ import careconnect.logic.commands.HelpCommand;
 import careconnect.logic.commands.ListCommand;
 import careconnect.logic.commands.ViewCommand;
 import careconnect.logic.parser.exceptions.ParseException;
-import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
+import careconnect.model.person.NameAndAddressAndTagsContainsKeywordsPredicate;
 import careconnect.model.person.Person;
 import careconnect.testutil.EditPersonDescriptorBuilder;
 import careconnect.testutil.PersonBuilder;
@@ -73,11 +73,12 @@ public class AddressBookParserTest {
     public void parseCommand_find_name() throws Exception {
         List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
         List<String> addressKeywords = Arrays.asList(new String[] {});
+        List<String> tagKeywords = Arrays.asList(new String[] {});
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_NAME + " "
                         + nameKeywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(
-                new NameAndAddressContainsKeywordPredicate(nameKeywords, addressKeywords)),
+                new NameAndAddressAndTagsContainsKeywordsPredicate(nameKeywords, addressKeywords, tagKeywords)),
                 command
         );
     }

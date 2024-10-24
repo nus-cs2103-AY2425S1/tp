@@ -7,7 +7,7 @@ import java.util.Arrays;
 import careconnect.logic.Messages;
 import careconnect.logic.commands.FindCommand;
 import careconnect.logic.parser.exceptions.ParseException;
-import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
+import careconnect.model.person.NameAndAddressAndTagsContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -31,29 +31,49 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(Messages.MESSAGE_TOO_SHORT_SEARCH, FindCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS);
-        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
 
         String[] nameKeywords = {};
         String[] addressKeywords = {};
+        String[] tagKeywords = {};
+        // If all three tags are not present, throw an error
         if (!argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()
-                && !argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {
+                && !argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()
+                && !argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()
+        ) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
                 );
         }
+
+
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
             String nameString = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
             nameKeywords = nameString.split("\\s+");
+            if (nameString.trim().length() == 0) {
+                throw new ParseException("argument cannot be empty");
+            }
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {
             String addressString = argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get();
             addressKeywords = addressString.split("\\s+");
+            if (addressString.trim().length() == 0) {
+                throw new ParseException("argument cannot be empty");
+            }
+        }
+        if (argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()) {
+            String tagString = argMultimap.getValue(CliSyntax.PREFIX_TAG).get();
+            tagKeywords = tagString.split("\\s+");
+            if (tagString.trim().length() == 0) {
+                throw new ParseException("argument cannot be empty");
+            }
         }
 
 
         return new FindCommand(
-                new NameAndAddressContainsKeywordPredicate(Arrays.asList(nameKeywords), Arrays.asList(addressKeywords))
+                new NameAndAddressAndTagsContainsKeywordsPredicate(
+                        Arrays.asList(nameKeywords), Arrays.asList(addressKeywords), Arrays.asList(tagKeywords))
                 );
     }
 

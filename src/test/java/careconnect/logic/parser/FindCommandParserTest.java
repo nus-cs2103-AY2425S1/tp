@@ -10,7 +10,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import careconnect.logic.commands.FindCommand;
-import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
+import careconnect.model.person.NameAndAddressAndTagsContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -34,9 +34,10 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameAndAddressContainsKeywordPredicate(
+                new FindCommand(new NameAndAddressAndTagsContainsKeywordsPredicate(
                         Arrays.asList("Alice", "Bob"),
-                        Arrays.asList("serangoon")
+                        Arrays.asList("serangoon"),
+                        Arrays.asList(new String[] {})
                 ));
         assertParseSuccess(parser, " n/Alice Bob a/ serangoon", expectedFindCommand);
 
