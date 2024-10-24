@@ -36,8 +36,23 @@ public class Messages {
 
     /**
      * Formats the {@code person} for display to the user.
+     * Only provides minimal information required.
      */
     public static String format(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        addName(builder, person);
+        addPhone(builder, person);
+        addTags(builder, person);
+        addDateOfLastVisit(builder, person);
+
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code person} for display to the user.
+     * Provides all the information about the user.
+     */
+    public static String formatFull(Person person) {
         final StringBuilder builder = new StringBuilder();
         addName(builder, person);
         addPhone(builder, person);
@@ -47,7 +62,6 @@ public class Messages {
         addDateOfLastVisit(builder, person);
         addEmergencyContact(builder, person);
         addRemark(builder, person);
-
         return builder.toString();
     }
 

@@ -36,17 +36,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
     @FXML
     private Label dateOfLastVisit;
-    @FXML
-    private Label emergencyContact;
-    @FXML
-    private Label remark;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -54,31 +46,39 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
+        setIdLabel(displayedIndex);
+        setNameLabel(person);
+        setPhoneLabel(person);
+        setTagsFlowpane(person);
+        setDateOfLastVisitLabel(person);
+    }
+
+    private void setIdLabel(int displayedIndex) {
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        if (person.hasAddress()) {
-            address.setText(person.getAddress().get().value);
+    }
+
+    private void setDateOfLastVisitLabel(Person personToView) {
+        if (personToView.hasDateOfLastVisit()) {
+            dateOfLastVisit.setText("Date last visited: " + personToView.getDateOfLastVisit().get().value);
+            dateOfLastVisit.setManaged(true);
         } else {
-            address.setText("");
-            address.setManaged(false);
+            dateOfLastVisit.setText("");
+            dateOfLastVisit.setManaged(false);
         }
-        if (person.hasEmail()) {
-            email.setText(person.getEmail().get().value);
-        } else {
-            email.setText("");
-            email.setManaged(false);
-        }
-        person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
+    }
+
+    private void setTagsFlowpane(Person personToView) {
+        personToView.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        dateOfLastVisit.setText(
-                person.hasDateOfLastVisit() ? "Date last visited: " + person.getDateOfLastVisit().get().value
-                        : "");
-        emergencyContact.setText(person.hasEmergencyContact()
-                ? "Emergency Contact: " + person.getEmergencyContact().get().value
-                : "");
-        remark.setText(person.hasRemark()
-                ? "Remarks: " + person.getRemark().value
-                : "");
+    }
+
+    private void setPhoneLabel(Person personToView) {
+        phone.setText("Phone number: " + personToView.getPhone().value);
+    }
+
+    private void setNameLabel(Person personToView) {
+        name.setText(personToView.getName().fullName);
     }
 }

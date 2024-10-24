@@ -30,6 +30,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SeedCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -162,9 +163,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        final Remark remark = new Remark("Test remark command");
         SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " "
                 + PREFIX_NAME);
         assertEquals(new SortCommand(PersonComparator.NAME, true), command);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ViewCommand(INDEX_FIRST_PERSON), command);
     }
 }
