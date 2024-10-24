@@ -179,6 +179,31 @@ The sequence diagram below illustrates the process of adding a person into Talen
 6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
 7. The UI reflects this new list with added `Person`.
 
+
+---
+### List Feature
+
+#### `ListCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of executing the `list` command in TalentSG, which lists all persons in the address book.
+
+![ListCommandSequenceDiagram.png](images%2FListCommandSequenceDiagram.png)
+
+#### Key Components
+- **`ListCommand`**: Executes the listing operation to show all persons in the address book.
+- **`AddressBookParser`**: Parses user input to create a `ListCommand` object.
+- **`LogicManager`**: Invokes the `ListCommand` to execute the list operation.
+- **`ModelManager`**: Implements the `Model` interface and contains the internal list of persons.
+- **`CommandResult`**: Encapsulates the result of the command execution, including any feedback to the user.
+
+#### Component Interaction Details
+1. The user executes the command `list`, intending to list all persons in the address book.
+2. The `AddressBookParser` interprets the input and creates a `ListCommand` object.
+3. The `LogicManager` invokes the execute method of `ListCommand`.
+4. The execute method of `ListCommand` calls `updateFilteredPersonList` in the `Model` to apply a filter to show all persons.
+5. The execute method of `ListCommand` returns a `CommandResult` object, indicating the command was successful with the message "Listed all persons".
+6. The UI reflects the updated list of persons.
+
+---
 ### Edit Feature
 
 #### `EditCommand` Implementation Sequence Diagram
@@ -204,6 +229,8 @@ The sequence diagram below illustrates the process of editing a person's details
 7. The UI reflects this updated list with the edited `Person`.
 
 
+
+---
 ### Delete Feature ###
 
 #### `Delete Command` Implementation Sequence Diagram
