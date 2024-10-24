@@ -7,11 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FindConcertContactCommand;
 
 public class FindConcertContactCommandParserTest {
@@ -38,9 +40,11 @@ public class FindConcertContactCommandParserTest {
 
     @Test
     public void parse_inputWithPreamble_throwsParseException() {
-        assertParseFailure(parser,
+        FindConcertContactCommand expectedFindConcertContact = new FindConcertContactCommand(
+            INDEX_FIRST_PERSON, (Index) null);
+        assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + " " + "preamble " + PREFIX_PERSON + INDEX_FIRST_PERSON.getOneBased(),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindConcertContactCommand.MESSAGE_USAGE));
+                expectedFindConcertContact);
     }
 
     @Test

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONCERT_CONTACTS;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
@@ -120,8 +121,8 @@ public class FindConcertContactCommand extends Command {
         }
 
         FindConcertContactCommand otherFindCommand = (FindConcertContactCommand) other;
-        return indexP.equals(otherFindCommand.indexP)
-                && indexC.equals(otherFindCommand.indexC);
+        return Objects.equals(indexP, otherFindCommand.indexP)
+                && Objects.equals(indexC, otherFindCommand.indexC);
     }
 
     @Override

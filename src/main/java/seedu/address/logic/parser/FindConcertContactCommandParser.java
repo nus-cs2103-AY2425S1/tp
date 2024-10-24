@@ -27,8 +27,7 @@ public class FindConcertContactCommandParser implements Parser<FindConcertContac
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PERSON, PREFIX_CONCERT);
 
-        if (argMultimap.getValue(PREFIX_PERSON).isEmpty() && argMultimap.getValue(PREFIX_CONCERT).isEmpty()
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_PERSON).isEmpty() && argMultimap.getValue(PREFIX_CONCERT).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindConcertContactCommand.MESSAGE_USAGE));
         }
