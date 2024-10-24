@@ -25,45 +25,51 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<SuperFindCommand> {
-    /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
     @Override
     public SuperFindCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer
-                .tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
+        ArgumentMultimap argMultimap = tokenizeArguments(args);
 
-        List<Predicate<Person>> predicates = new ArrayList<>();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
-            predicates.add(new NameContainsKeywordsPredicate(nameKeywords));
-        }
-
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            List<String> phoneKeywords = argMultimap.getAllValues(PREFIX_PHONE);
-            predicates.add(new PhoneContainsKeywordsPredicate(phoneKeywords));
-        }
-
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            List<String> emailKeywords = argMultimap.getAllValues(PREFIX_EMAIL);
-            predicates.add(new EmailContainsKeywordsPredicate(emailKeywords));
-        }
-
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            List<String> tagKeywords = argMultimap.getAllValues(PREFIX_TAG);
-            predicates.add(new TagContainsKeywordsPredicate(tagKeywords));
-        }
+        List<Predicate<Person>> predicates = buildPredicates(argMultimap);
 
         if (predicates.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SuperFindCommand.MESSAGE_USAGE));
         }
 
-        // Combine them into a single predicate
         ContainsKeywordsPredicate combinedPredicate = new CombinedContainsKeywordsPredicate(predicates);
         return new SuperFindCommand(combinedPredicate);
+    }
+
+    private ArgumentMultimap tokenizeArguments(String args) {
+        return ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
+    }
+
+    private List<Predicate<Person>> buildPredicates(ArgumentMultimap argMultimap) {
+        List<Predicate<Person>> predicates = new ArrayList<>();
+        buildNamePredicates(argMultimap, predicates);
+        buildPhonePredicates(argMultimap, predicates);
+        buildEmailPredicates(argMultimap, predicates);
+        buildTagPredicates(argMultimap, predicates);
+        return predicates;
+    }
+
+    private void buildNamePredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates) {
+        argMultimap.getValue(PREFIX_NAME).ifPresent(values ->
+                predicates.add(new NameContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_NAME))));
+    }
+
+    private void buildPhonePredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates) {
+        argMultimap.getValue(PREFIX_PHONE).ifPresent(values ->
+                predicates.add(new PhoneContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_PHONE))));
+    }
+
+    private void buildEmailPredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates) {
+        argMultimap.getValue(PREFIX_EMAIL).ifPresent(values ->
+                predicates.add(new EmailContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_EMAIL))));
+    }
+
+    private void buildTagPredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates) {
+        argMultimap.getValue(PREFIX_TAG).ifPresent(values ->
+                predicates.add(new TagContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_TAG))));
     }
 }
