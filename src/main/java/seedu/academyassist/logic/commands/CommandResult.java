@@ -20,7 +20,6 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
- 
     /** Number of students taking each subject should be shown to the user. */
     private final boolean showSubjectTracker;
 
@@ -35,8 +34,8 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
 
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSubjectTracker, boolean showDetailWindow,
-                         Person personToShow) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSubjectTracker,
+                         boolean showDetailWindow, Person personToShow) {
 
         this.feedbackToUser = requireNonNull(feedbackToUser);
 
@@ -74,7 +73,7 @@ public class CommandResult {
 
     public boolean isShowSubjectTracker() {
         return showSubjectTracker;
-
+    }
     public boolean isShowDetailWindow() {
         return showDetailWindow;
     }
@@ -98,7 +97,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showSubjectTracker == otherCommandResult.showSubjectTracker;
+                && showSubjectTracker == otherCommandResult.showSubjectTracker
                 && showDetailWindow == otherCommandResult.showDetailWindow;
     }
 

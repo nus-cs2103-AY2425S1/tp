@@ -16,6 +16,6 @@ public class TrackSubjectCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_SUBJECT_TRACKER_MESSAGE, false, false, true);
+        return new CommandResult(SHOWING_SUBJECT_TRACKER_MESSAGE, false, false, true, false, null);
     }
 }

@@ -90,7 +90,7 @@ public class AcademyAssistParser {
 
         case TrackSubjectCommand.COMMAND_WORD:
             return new TrackSubjectCommand();
-            
+
         case DetailCommand.COMMAND_WORD:
             return new DetailCommandParser().parse(arguments);
 
@@ -102,5 +102,4 @@ public class AcademyAssistParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
