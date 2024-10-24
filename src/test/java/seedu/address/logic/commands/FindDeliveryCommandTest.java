@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.DeliveryDatePredicate;
 import seedu.address.model.delivery.DeliveryProductPredicate;
-import seedu.address.model.delivery.DeliveryStatusPredicate;
+import seedu.address.model.delivery.DeliveryStatusMatchInputPredicate;
 import seedu.address.model.delivery.DeliverySupplierPredicate;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
@@ -66,7 +66,7 @@ public class FindDeliveryCommandTest {
     public void execute_statusContainsKeyword_multipleDeliveriesFound() {
         // "PENDING" should match APPLE, BREAD, and CAN (3 deliveries)
         Optional<SupplierIndex> supplierIndex = Optional.empty();
-        DeliveryStatusPredicate predicate = new DeliveryStatusPredicate(Status.PENDING);
+        DeliveryStatusMatchInputPredicate predicate = new DeliveryStatusMatchInputPredicate(Status.PENDING);
         FindDeliveryCommand command = new FindDeliveryCommand(predicate, supplierIndex);
         expectedModel.updateFilteredDeliveryList(predicate);
 

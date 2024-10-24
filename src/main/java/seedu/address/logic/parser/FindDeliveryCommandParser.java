@@ -18,7 +18,7 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDatePredicate;
 import seedu.address.model.delivery.DeliveryProductPredicate;
-import seedu.address.model.delivery.DeliveryStatusPredicate;
+import seedu.address.model.delivery.DeliveryStatusMatchInputPredicate;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
@@ -45,6 +45,10 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDeliveryCommand.MESSAGE_USAGE));
         }
 
+        // Ensure none of the filters are repeated
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
+                PREFIX_PRODUCT, PREFIX_STATUS);
+
         List<Predicate<Delivery>> predicates = new ArrayList<>();
 
         // Parse the date if present
@@ -69,7 +73,7 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkSupplierCommand.MESSAGE_USAGE));
             }
-            predicates.add(new DeliveryStatusPredicate(status));
+            predicates.add(new DeliveryStatusMatchInputPredicate(status));
         }
 
         // Parse the product if present

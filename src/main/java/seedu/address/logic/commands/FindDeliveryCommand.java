@@ -41,9 +41,10 @@ public class FindDeliveryCommand extends Command {
     private final Predicate<Delivery> predicate;
 
     /**
-     * Creates an FindDeliveryCommand instance based on the filter predicates given by user
-     * @param predicate consists of status, date and product filters
-     * @param supplierIndex consists the index of supplier by which deliveries will be filtered
+     * Creates an FindDeliveryCommand instance based on the filter predicates given by user.
+     *
+     * @param predicate consists of status, date and product filters.
+     * @param supplierIndex consists the index of supplier by which deliveries will be filtered.
      */
     public FindDeliveryCommand(Predicate<Delivery> predicate, Optional<SupplierIndex> supplierIndex) {
         this.predicate = predicate;

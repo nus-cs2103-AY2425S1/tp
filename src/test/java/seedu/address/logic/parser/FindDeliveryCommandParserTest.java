@@ -23,7 +23,7 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDatePredicate;
 import seedu.address.model.delivery.DeliveryProductPredicate;
-import seedu.address.model.delivery.DeliveryStatusPredicate;
+import seedu.address.model.delivery.DeliveryStatusMatchInputPredicate;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
@@ -78,7 +78,7 @@ public class FindDeliveryCommandParserTest {
     @Test
     public void parse_validStatusFilter_success() {
         String userInput = " " + PREFIX_STATUS + "PENDING";
-        Predicate<Delivery> expectedPredicate = new DeliveryStatusPredicate(Status.PENDING);
+        Predicate<Delivery> expectedPredicate = new DeliveryStatusMatchInputPredicate(Status.PENDING);
 
         FindDeliveryCommand expectedCommand = new FindDeliveryCommand(expectedPredicate, Optional.empty());
 
@@ -141,7 +141,7 @@ public class FindDeliveryCommandParserTest {
         Product expectedProduct = new Product("Apples");
 
         Predicate<Delivery> expectedPredicate = new DeliveryDatePredicate(expectedDateTime)
-                .and(new DeliveryStatusPredicate(expectedStatus))
+                .and(new DeliveryStatusMatchInputPredicate(expectedStatus))
                 .and(new DeliveryProductPredicate(expectedProduct));
 
         // Parse the user input to get the actual command

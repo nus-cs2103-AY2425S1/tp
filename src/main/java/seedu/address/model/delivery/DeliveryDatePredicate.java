@@ -19,8 +19,7 @@ public class DeliveryDatePredicate implements Predicate<Delivery> {
 
     @Override
     public boolean test(Delivery delivery) {
-        DateTime deliveryDate = delivery.getDeliveryDate();
-        return deliveryDate.equals(targetDate);
+        return delivery.hasSameDate(targetDate);
     }
 
     @Override
