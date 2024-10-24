@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentClass {
 
     public static final String MESSAGE_CONSTRAINTS = "Classes should a non-zero digit followed by an alphabet";
-
+    public static final String MESSAGE_GUI = "Student Class: %1$s";
     /*
      * The first character of the class must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.

@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Sex {
 
     public static final String MESSAGE_CONSTRAINTS = "Sex can only take \"M\" or \"F\"";
-
+    public static final String MESSAGE_GUI = "Sex: %1$s";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.

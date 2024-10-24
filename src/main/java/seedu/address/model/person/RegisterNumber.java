@@ -11,7 +11,7 @@ public class RegisterNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Register value should be a value between 1 and 40.";
-
+    public static final String MESSAGE_GUI = "Register Number: %1$s";
     public static final String VALIDATION_REGEX = "^(?:[1-9]|[1-3][0-9]|40)$";
 
     public final String value;

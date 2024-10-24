@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,36 +54,99 @@ public class Person {
         return name;
     }
 
+    /**
+     * Returns representation of Name in the GUI
+     */
+    public String getDisplayedName() {
+        return String.format(Name.MESSAGE_GUI, name);
+    }
+
     public Phone getPhone() {
         return phone;
+    }
+
+    /**
+     * Returns representation of Phone in the GUI
+     */
+    public String getDisplayedPhone() {
+        return String.format(Phone.MESSAGE_GUI, phone);
     }
 
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Returns representation of Email in the GUI
+     */
+    public String getDisplayedEmail() {
+        return String.format(Email.MESSAGE_GUI, email);
+    }
+
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns representation of Address in the GUI
+     */
+    public String getDisplayedAddress() {
+        return String.format(Address.MESSAGE_GUI, address);
     }
 
     public RegisterNumber getRegisterNumber() {
         return registerNumber;
     }
 
+    /**
+     * Returns representation of RegisterNumber in the GUI
+     */
+    public String getDisplayedRegisterNumber() {
+        return String.format(RegisterNumber.MESSAGE_GUI, registerNumber);
+    }
+
     public Sex getSex() {
         return sex;
+    }
+
+    /**
+     * Returns representation of Sex in the GUI
+     */
+    public String getDisplayedSex() {
+        return String.format(Sex.MESSAGE_GUI, sex);
     }
 
     public StudentClass getStudentClass() {
         return studentClass;
     }
 
+    /**
+     * Returns representation of StudentClass in the GUI
+     */
+    public String getDisplayedStudentClass() {
+        return String.format(StudentClass.MESSAGE_GUI, studentClass);
+    }
+
     public EcName getEcName() {
         return ecName;
     }
 
+    /**
+     * Returns representation of EcName in the GUI
+     */
+    public String getDisplayedEcName() {
+        return String.format(EcName.MESSAGE_GUI, ecName);
+    }
+
     public EcNumber getEcNumber() {
         return ecNumber;
+    }
+
+    /**
+     * Returns representation of EcNumber in the GUI
+     */
+    public String getDisplayedEcNumber() {
+        return String.format(EcNumber.MESSAGE_GUI, ecNumber);
     }
 
     /**

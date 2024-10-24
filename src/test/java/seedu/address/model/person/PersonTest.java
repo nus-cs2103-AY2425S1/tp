@@ -15,6 +15,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import com.sun.java.accessibility.util.AccessibilityListenerList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -53,6 +54,38 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void GuiDisplayedAttributeTest() {
+        Person p = ALICE;
+
+        // name in gui
+        assertEquals(p.getDisplayedName(), "Alice Pauline");
+
+        // phone in gui
+        assertEquals(p.getDisplayedPhone(), "Phone: 94351253");
+
+        // email in gui
+        assertEquals(p.getDisplayedEmail(), "Email: alice@example.com");
+
+        // address in gui
+        assertEquals(p.getDisplayedAddress(), "Address: 123, Jurong West Ave 6, #08-111");
+
+        // register number in gui
+        assertEquals(p.getDisplayedRegisterNumber(), "Register Number: 3");
+
+        // sex in gui
+        assertEquals(p.getDisplayedSex(), "Sex: F");
+
+        // student class in gui
+        assertEquals(p.getDisplayedStudentClass(), "Student Class: 1A");
+
+        // emergency contact name in gui
+        assertEquals(p.getDisplayedEcName(), "Emergency Contact Name: Joe Hardy");
+
+        // emergency contact number in gui
+        assertEquals(p.getDisplayedEcNumber(), "Emergency Contact Number: 26283728");
     }
 
     @Test
