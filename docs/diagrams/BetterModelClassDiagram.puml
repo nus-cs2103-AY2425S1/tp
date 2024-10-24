@@ -19,6 +19,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> University
+Person *--> WorkExp
 Person *--> Major
 Person *--> Interest
 @enduml

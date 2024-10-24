@@ -20,8 +20,10 @@ Package Model as ModelPackage <<Rectangle>> {
   Class Phone
   Class Tag
   Class University
+  Class WorkExp
   Class Major
   Class Interest
+
   Class I #FFFFFF
 }
 
@@ -45,6 +47,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> University
+Person *--> WorkExp
 Person *--> Major
 Person *--> Interest
 
