@@ -7,8 +7,16 @@ import static seedu.hireme.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains tests for the {@code Index} class.
+ */
 public class IndexTest {
 
+    /**
+     * Tests the creation of one-based index.
+     * Ensures that invalid one-based indexes throw an exception,
+     * and checks equality and conversions between one-based and zero-based indexes.
+     */
     @Test
     public void createOneBasedIndex() {
         // invalid index
@@ -23,6 +31,11 @@ public class IndexTest {
         assertEquals(4, Index.fromOneBased(5).getZeroBased());
     }
 
+    /**
+     * Tests the creation of zero-based index.
+     * Ensures that invalid zero-based indexes throw an exception,
+     * and checks equality and conversions between zero-based and one-based indexes.
+     */
     @Test
     public void createZeroBasedIndex() {
         // invalid index
@@ -37,6 +50,11 @@ public class IndexTest {
         assertEquals(6, Index.fromZeroBased(5).getOneBased());
     }
 
+    /**
+     * Tests the {@code equals} method in the {@code Index} class.
+     * Verifies the behavior for various cases, including same values, same object,
+     * null comparisons, different types, and different index values.
+     */
     @Test
     public void equals() {
         final Index fifthPersonIndex = Index.fromOneBased(5);
@@ -58,6 +76,10 @@ public class IndexTest {
         assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
     }
 
+    /**
+     * Tests the {@code toString} method in the {@code Index} class.
+     * Ensures that the string representation of the {@code Index} object is as expected.
+     */
     @Test
     public void toStringMethod() {
         Index index = Index.fromZeroBased(0);

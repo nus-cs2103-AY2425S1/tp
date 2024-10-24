@@ -38,6 +38,7 @@ public class InternshipListPanel extends UiPart<Region> {
             super.updateItem(internship, empty);
 
             if (empty || internship == null) {
+                logger.warning("Internship application is null or empty in InternshipListViewCell.");
                 setGraphic(null);
                 setText(null);
             } else {

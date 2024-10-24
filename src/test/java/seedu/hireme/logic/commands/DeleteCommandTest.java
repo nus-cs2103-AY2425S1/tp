@@ -25,8 +25,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
  */
 public class DeleteCommandTest {
 
-    private Model<InternshipApplication> model = new ModelManager<InternshipApplication>(getTypicalAddressBook(),
-            new UserPrefs());
+    private Model<InternshipApplication> model = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

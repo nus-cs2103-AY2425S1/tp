@@ -14,10 +14,12 @@ import seedu.hireme.logic.validator.DateValidator;
 import seedu.hireme.logic.validator.EmailValidator;
 import seedu.hireme.logic.validator.NameValidator;
 import seedu.hireme.logic.validator.RoleValidator;
+import seedu.hireme.logic.validator.StatusValidator;
 import seedu.hireme.model.internshipapplication.Date;
 import seedu.hireme.model.internshipapplication.Email;
 import seedu.hireme.model.internshipapplication.Name;
 import seedu.hireme.model.internshipapplication.Role;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -120,6 +122,21 @@ public class ParserUtil {
         }
 
         return trimmedOrder.equals("earliest");
+    }
+
+     /**
+     * Parses a {@code String status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed. String status is changed to uppercase
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        if (!StatusValidator.of().validate(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return Status.valueOf(trimmedStatus);
     }
 
 }
