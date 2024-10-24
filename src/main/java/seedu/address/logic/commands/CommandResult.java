@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
-import seedu.address.ui.CommandBox;
 
 /**
  * Represents the result of a command execution.
@@ -34,10 +34,10 @@ public class CommandResult {
     /**
      * Function that should be run after prompting the user for confirmation.
      */
-    private final Function<Model, CommandResult> continuationFunction;
+    private final Supplier<CommandResult> continuationFunction;
 
     private CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String history,
-                          Function<Model, CommandResult> continuationFunction) {
+                          Supplier<CommandResult> continuationFunction) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -75,7 +75,7 @@ public class CommandResult {
      * @param feedbackToUser message that is displayed to user during prompt
      * @param continuationFunction function that will be applied if user confirms the prompt
      */
-    public CommandResult(String feedbackToUser, Function<Model, CommandResult> continuationFunction) {
+    public CommandResult(String feedbackToUser, Supplier<CommandResult> continuationFunction) {
         this(feedbackToUser, false, false, "", continuationFunction);
     };
 
@@ -96,6 +96,14 @@ public class CommandResult {
      */
     public boolean isPromptConfirmation() {
         return continuationFunction != null;
+    }
+
+    /**
+     * Applies the continuation function.
+     * @return {@code CommandResult} that is returned by the continuation function
+     */
+    public CommandResult confirmPrompt() {
+        return continuationFunction.get();
     }
 
     public String getHistory() {
