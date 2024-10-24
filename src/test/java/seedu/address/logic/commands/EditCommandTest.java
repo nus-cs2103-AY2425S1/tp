@@ -24,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -80,6 +81,14 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addParentFieldToNonStudent_failure() {
+        EditPersonDescriptor descriptorWithParentFields = new EditPersonDescriptor();
+        descriptorWithParentFields.setParentName(new Name("BOBBY"));
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptorWithParentFields);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_ADD_PARENT_TO_NON_STUDENT);
     }
 
     @Test
