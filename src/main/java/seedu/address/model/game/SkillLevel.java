@@ -69,5 +69,5 @@ public class SkillLevel {
     public String toString() {
         return skillLevel;
     }
-}
 
+}
