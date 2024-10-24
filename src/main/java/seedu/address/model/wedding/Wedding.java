@@ -13,9 +13,21 @@ import seedu.address.model.person.Person;
  */
 public class Wedding {
     private Name name;
+    private Client stringClient;
     private Client client;
     private Date date;
     private Venue venue;
+
+    /**
+     * Constructs a temporary {@code Wedding}.
+     */
+    public Wedding(Name name, Date date, Venue venue) {
+        requireAllNonNull(name);
+        this.name = name;
+        this.date = date;
+        this.venue = venue;
+    }
+
     /**
      * Constructs a {@code Wedding}.
      */
@@ -72,21 +84,23 @@ public class Wedding {
                 .toString();
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Wedding)) {
-            return false;
-        }
-
-        Wedding otherWedding = (Wedding) other;
-        return name.equals(otherWedding.name)
-               && date.equals(otherWedding.date)
-               && venue.equals(otherWedding.venue);
-    }
+    // Commented to follow Object class definition
+    // All weddings are unique
+//    @Override
+//    public boolean equals(Object other) {
+//        if (other == this) {
+//            return true;
+//        }
+//
+//        if (!(other instanceof Wedding)) {
+//            return false;
+//        }
+//
+//        Wedding otherWedding = (Wedding) other;
+//        return name.equals(otherWedding.name)
+//               && date.equals(otherWedding.date)
+//               && venue.equals(otherWedding.venue);
+//    }
 
     @Override
     public int hashCode() {

@@ -1,5 +1,6 @@
 package seedu.address.model.wedding;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -9,6 +10,11 @@ import seedu.address.model.person.Person;
 public class Client {
     private final Person person;
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Client can take any names or index in the address book, and it should not be blank.";
+    public static final String INDEX_VALIDATION_REGEX = "^\\d+$\n";
+    public static final String NAME_VALIDATION_REGEX = Name.VALIDATION_REGEX;
+
     public Client(Person person) {
         this.person = new Person(person.getName(), person.getPhone(),
                 person.getEmail(), person.getAddress(), person.getRole(), null);
@@ -16,6 +22,14 @@ public class Client {
 
     public Person getPerson() {
         return this.person;
+    }
+
+    public static boolean isValidClientName(String test) {
+        return test.matches(NAME_VALIDATION_REGEX);
+    }
+
+    public static boolean isValidClientIndex(String test) {
+        return test.matches(INDEX_VALIDATION_REGEX);
     }
 
     @Override
