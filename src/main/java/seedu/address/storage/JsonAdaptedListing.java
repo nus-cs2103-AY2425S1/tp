@@ -99,6 +99,8 @@ public class JsonAdaptedListing {
 //        if (!Email.isValidEmail(area)) {
 //            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
 //        }
+
+        //Throws NUmberFormatException (need better errorhandling)
         final Area modelArea = new Area(Integer.parseInt(area));
 
         if (region == null) {

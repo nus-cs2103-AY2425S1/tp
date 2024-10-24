@@ -88,6 +88,7 @@ public class AddListingCommand extends Command {
         }
 
         Listing toAdd = new Listing(listingName, address, price, area, region, seller, personBuyers);
+        model.addListing(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
