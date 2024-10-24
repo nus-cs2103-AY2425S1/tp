@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReminderAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.DateDistantToRecentComparator;
 import seedu.address.model.person.DateRecentToDistantComparator;
@@ -28,8 +29,8 @@ import seedu.address.model.person.DateRecentToDistantComparator;
  */
 public class SortByDateCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ReminderAddressBook());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ReminderAddressBook());
 
     @Test
     public void equals() {

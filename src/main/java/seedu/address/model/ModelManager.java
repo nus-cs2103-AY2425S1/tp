@@ -27,29 +27,32 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final ReminderAddressBook reminderAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
+    private final FilteredList<Reminder> filteredReminders;
     private final SortedList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyReminderAddressBook reminderAddressBook) {
+        requireAllNonNull(addressBook, userPrefs, reminderAddressBook);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.reminderAddressBook = new ReminderAddressBook(reminderAddressBook);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
-
+        filteredReminders = new FilteredList<>(this.reminderAddressBook.getReminderList());
         applySavedSortPreference();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ReminderAddressBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -115,6 +118,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getReminderAddressBookFilePath() {
+        return userPrefs.getReminderAddressBookFilePath();
+    }
+
+    @Override
+    public void setReminderAddressBookFilePath(Path reminderAddressBookFilePath) {
+        requireNonNull(reminderAddressBookFilePath);
+        userPrefs.setAddressBookFilePath(reminderAddressBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -156,6 +170,28 @@ public class ModelManager implements Model {
         person.getReminderList().addReminder(reminder);
     }
 
+    //=========== ReminderAddressBook =========================================================================
+
+    @Override
+    public void setReminderAddressBook(ReadOnlyReminderAddressBook reminderAddressBook) {
+        this.reminderAddressBook.resetData(reminderAddressBook);
+    }
+
+    @Override
+    public ReadOnlyReminderAddressBook getReminderAddressBook() {
+        return reminderAddressBook;
+    }
+
+    @Override
+    public void deleteReminderInBook(Reminder target) {
+        reminderAddressBook.removeReminder(target);
+    }
+
+    @Override
+    public void addReminderToBook(Reminder reminder) {
+        reminderAddressBook.addReminder(reminder);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -177,6 +213,16 @@ public class ModelManager implements Model {
     public void updateSortedPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
         sortedPersons.setComparator(comparator);
+    }
+
+    //=========== Filtered Reminder List Accessors ===========================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Reminder}
+     */
+    @Override
+    public ObservableList<Reminder> getFilteredReminderList() {
+        return filteredReminders;
     }
 
     @Override

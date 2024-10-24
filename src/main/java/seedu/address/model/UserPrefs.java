@@ -17,6 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     // Default sort by priority
     private String sortPreference = "default";
+    private Path reminderAddressBookFilePath = Paths.get("data", "reminderaddressbook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -76,6 +77,16 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setSortPreference(String sortPreference) {
         requireNonNull(sortPreference);
         this.sortPreference = sortPreference;
+    }
+
+
+    public Path getReminderAddressBookFilePath() {
+        return reminderAddressBookFilePath;
+    }
+
+    public void setReminderAddressBookFilePath(Path reminderAddressBookFilePath) {
+        requireNonNull(reminderAddressBookFilePath);
+        this.reminderAddressBookFilePath = reminderAddressBookFilePath;
     }
 
     @Override
