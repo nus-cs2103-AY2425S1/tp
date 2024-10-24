@@ -166,6 +166,21 @@ Examples:
 - `addnotes 1 n/Supplier 1`
 - `addnotes 2 n/Supplier 2`
 
+### Edit a Note of an existing contact: `editnotes`
+
+Edits a note of a person in the address book.
+
+Format: `editnotes INDEX i/NOTE_INDEX n/[NOTES]`
+
+- Edits the note at the specified `NOTE_INDEX` of the person at the specified `INDEX`.
+- Both indexes refers to the index number shown in the displayed person list.
+- Both indexes **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `editnotes 1 i/1 n/Customer 1`
+- `editnotes 2 i/1 n/Customer 2`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -184,6 +199,7 @@ Format: `view INDEX`
 - The index **must be within the range** shown on the displayed person list.
 
 Examples:
+
 - `view 1` shows the contact details of the first person shown on the displayed person list.
 
 ### Exiting the program : `exit`
@@ -227,14 +243,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                      |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **List**     | `list`                                                                                                                                                                |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
-| **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                        |
-| **Clear**    | `clear`                                                                                                                                                               |
-| **Help**     | `help`                                                                                                                                                                |
+| Action        | Format, Examples                                                                                                                                                      |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **List**      | `list`                                                                                                                                                                |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Addnotes**  | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
+| **Editnotes** | `editnotes INDEX i/NOTE_INDEX n/[NOTE]` <br> e.g. `editnotes 1 i/1 n/Customer 1`                                                                                      |
+| **View**      | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
+| **Clear**     | `clear`                                                                                                                                                               |
+| **Help**      | `help`                                                                                                                                                                |
