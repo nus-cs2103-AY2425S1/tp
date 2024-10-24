@@ -46,6 +46,7 @@ Restaurant *--> Email
 Restaurant *--> Address
 Restaurant *--> "0..1" Rating
 Restaurant *--> "*" Tag
+Restaurant *--> "0..1" Price
 
 Restaurant -[hidden]up--> I
 UniqueRestaurantList -[hidden]right-> I
@@ -53,6 +54,8 @@ UniqueRestaurantList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+
+Price .left.|> Tag
 
 ModelManager --> "~* filtered" Restaurant
 @enduml

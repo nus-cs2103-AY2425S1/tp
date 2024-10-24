@@ -74,9 +74,9 @@ public class Restaurant {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        Set<Tag> tags = new HashSet<>(this.tags);
-        tags.addAll(getPriceTags());
-        return Collections.unmodifiableSet(tags);
+        Set<Tag> allTags = new HashSet<>(this.tags);
+        allTags.addAll(getPriceTags());
+        return Collections.unmodifiableSet(allTags);
     }
 
     /**
