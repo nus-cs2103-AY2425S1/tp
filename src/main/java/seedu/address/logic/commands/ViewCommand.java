@@ -8,7 +8,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricMatchesPredicate;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Views and lists the person in the address book whose NRIC matches the specified NRIC.
