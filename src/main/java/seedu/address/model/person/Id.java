@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.List;
 
 /**
  * Id class that auto-increments and generates an automated unique Id number for Doctors and Patients separately.
@@ -61,12 +61,12 @@ public class Id {
         doctorIdCounter = doctorIds.stream()
                 .mapToInt(x -> x)
                 .max()
-                .orElse(1) + 2;  // Increment by 2 to continue from the last used doctor ID
+                .orElse(1) + 2; // Increment by 2 to continue from the last used doctor ID
 
         patientIdCounter = patientIds.stream()
                 .mapToInt(x -> x)
                 .max()
-                .orElse(0) + 2;  // Increment by 2 to continue from the last used patient ID
+                .orElse(0) + 2; // Increment by 2 to continue from the last used patient ID
     }
 
     @Override

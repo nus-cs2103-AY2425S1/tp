@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.DeletePatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
 
 /**
  * Parses input arguments and creates a new DeletePatientCommand object

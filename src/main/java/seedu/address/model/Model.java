@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -83,11 +82,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list by Id search*/
     ObservableList<Person> getFilteredPersonById(int id);
 
-    /** Returns the patient via id search*/
-    Person getFilteredPatientById(ObservableList<Person> allPersons, int id);
-
     /** Returns the person via id search*/
     Person getFilteredPersonById(ObservableList<Person> allPersons, int id);
+
+    /** Returns the patient via id search*/
+    Person getFilteredPatientById(ObservableList<Person> allPersons, int id);
 
     /** Returns the doctor via id search*/
     Person getFilteredDoctorById(ObservableList<Person> allPersons, int id);

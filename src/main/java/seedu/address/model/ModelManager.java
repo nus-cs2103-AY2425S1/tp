@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -139,6 +138,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
+        Person person = null;
+        for (Person target : allPersons) {
+            if (target.getId() == id) {
+                person = target;
+                break;
+            }
+        }
+        return person;
+    }
+
+    @Override
     public Person getFilteredPatientById(ObservableList<Person> allPersons, int id) {
         Person patient = null;
         for (Person person : allPersons) {
@@ -149,18 +160,6 @@ public class ModelManager implements Model {
             }
         }
         return patient;
-    }
-
-    @Override
-    public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
-        Person person = null;
-        for (Person target : allPersons) {
-            if (target.getId() == id) {
-                person = target;
-                break;
-            }
-        }
-        return person;
     }
 
     @Override

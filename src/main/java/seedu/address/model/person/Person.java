@@ -1,11 +1,8 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,7 +12,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.exceptions.AppNotFoundException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
@@ -52,6 +48,9 @@ public class Person implements Appointmentable {
         this.appointments = new ArrayList<>();
     }
 
+    /**
+     * Creates a Person with the given  fields. Each field must be present and not null.
+     */
     public Person(Name name, int id, String role, Phone phone, Email email,
                   Address address, Remark remark, List<Appointment> appointments, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -101,26 +100,26 @@ public class Person implements Appointmentable {
         return appointments;
     }
 
-//    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
-//    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
-//        try {
-//            Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//            String time = "DateTime: " + dateTime.format(formatter);
-//            return time + " " + appointment.toString();
-//        } catch (AppNotFoundException e) {
-//            return "No appointment found for the given date, patient, and doctor.";
-//        }
-//    }
-//
-//    public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
-//        try {
-//            String appointments = history.getDoctorAppointmentsForDay(date, doctorId);
-//            return appointments; // Assuming the Appointment class has a toString() method for formatting
-//        } catch (AppNotFoundException e) {
-//            return "No appointment found for the given date and doctor.";
-//        }
-//    }
+    //    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
+    //    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
+    //        try {
+    //            Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
+    //            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    //            String time = "DateTime: " + dateTime.format(formatter);
+    //            return time + " " + appointment.toString();
+    //        } catch (AppNotFoundException e) {
+    //            return "No appointment found for the given date, patient, and doctor.";
+    //        }
+    //    }
+    //
+    //    public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
+    //        try {
+    //            String appointments = history.getDoctorAppointmentsForDay(date, doctorId);
+    //            return appointments; // Assuming the Appointment class has a toString() method for formatting
+    //        } catch (AppNotFoundException e) {
+    //            return "No appointment found for the given date and doctor.";
+    //        }
+    //    }
 
 
     /**

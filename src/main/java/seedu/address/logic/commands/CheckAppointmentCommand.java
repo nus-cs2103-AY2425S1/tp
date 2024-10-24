@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -58,18 +57,20 @@ public class CheckAppointmentCommand extends Command {
         throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND, doctorToCheckAppointment.getName()));
 
         // TODO UPDATE
-//        if (date != null) {
-//            appointmentDateTime = date;
-//            appointmentDetails = doctorToCheckAppointment.getOneDayDoctorAppointment(appointmentDateTime, doctorId);
-//        } else {
-//            throw new CommandException(String.format(MESSAGE_NO_DATE_TIME, doctorToCheckAppointment.getName()));
-//        }
-//
-//        if (appointmentDetails == null || appointmentDetails.isEmpty()) {
-//            throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND, doctorToCheckAppointment.getName()));
-//        }
-
-//        return new CommandResult(appointmentDetails);
+        //        if (date != null) {
+        //            appointmentDateTime = date;
+        //            appointmentDetails = doctorToCheckAppointment
+        //            .getOneDayDoctorAppointment(appointmentDateTime, doctorId);
+        //        } else {
+        //            throw new CommandException(String
+        //            .format(MESSAGE_NO_DATE_TIME, doctorToCheckAppointment.getName()));
+        //        }
+        //
+        //        if (appointmentDetails == null || appointmentDetails.isEmpty()) {
+        //            throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND,
+        //            doctorToCheckAppointment.getName()));
+        //        }
+        //        return new CommandResult(appointmentDetails);
     }
 
     @Override
