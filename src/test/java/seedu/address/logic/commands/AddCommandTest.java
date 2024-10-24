@@ -19,10 +19,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Reminder;
 import seedu.address.testutil.PersonBuilder;
@@ -168,6 +165,41 @@ public class AddCommandTest {
         @Override
         public void addReminder(Reminder reminder, Person person) {
             person.getReminderList().addReminder(reminder);
+        }
+
+        @Override
+        public void deleteReminderInBook(Reminder target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addReminderToBook(Reminder reminder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getReminderAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setReminderAddressBookFilePath(Path reminderAddressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setReminderAddressBook(ReadOnlyReminderAddressBook reminderAddressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyReminderAddressBook getReminderAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Reminder> getFilteredReminderList() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
