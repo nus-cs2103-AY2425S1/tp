@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -60,6 +62,7 @@ public class ListArchiveFilesCommandTest {
     }
 
     @Test
+    @EnabledOnOs({OS.WINDOWS, OS.LINUX})
     public void execute_withMultipleArchiveFiles_success() throws IOException {
         Files.createFile(Path.of(archiveDir.toString(), "multiple_archive1.json"));
         Files.createFile(Path.of(archiveDir.toString(), "multiple_archive2.json"));
