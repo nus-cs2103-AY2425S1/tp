@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -33,7 +34,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
 
-        // Separate keywords into phone and name
         List<String> phoneKeywords = Arrays.stream(keywords)
                 .filter(this::isNumeric)
                 .collect(Collectors.toList());
@@ -42,7 +42,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .filter(keyword -> !isNumeric(keyword) && !isPostalCode(keyword))
                 .collect(Collectors.toList());
 
-        // retrieve postal code keywords S...
         List<String> postalKeywords = Arrays.stream(keywords)
                 .filter(this::isPostalCode)
                 .collect(Collectors.toList());
@@ -51,38 +50,47 @@ public class FindCommandParser implements Parser<FindCommand> {
         Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
         Predicate<Person> postalPredicate = new PostalContainsKeywordsPredicate(postalKeywords);
 
-        if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) { // all 3 searches
-            return new FindCommand(namePredicate.or(phonePredicate).or(postalPredicate));
-        } else if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) { // find by name and number only
-            return new FindCommand(namePredicate.or(phonePredicate));
-        } else if (!nameKeywords.isEmpty() && !postalKeywords.isEmpty()) { // find by name and postal only
-            return new FindCommand(namePredicate.or(postalPredicate));
-        } else if (!phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) { // find by phone and postal only
-            return new FindCommand(phonePredicate.or(postalPredicate));
-        } else if (!nameKeywords.isEmpty()) { // search by name only
-            return new FindCommand(namePredicate);
-        } else if (!phoneKeywords.isEmpty()) { // search by phone only
-            return new FindCommand(phonePredicate);
-        } else { // search by postal only
-            return new FindCommand(postalPredicate);
+        List<Predicate<Person>> predicates = new ArrayList<>();
+
+        if (!nameKeywords.isEmpty()) {
+            predicates.add(namePredicate);
+        }
+        if (!phoneKeywords.isEmpty()) {
+            predicates.add(phonePredicate);
+        }
+        if (!postalKeywords.isEmpty()) {
+            predicates.add(postalPredicate);
+        }
+
+        if (!predicates.isEmpty()) {
+            Predicate<Person> combinedPredicate;
+            if (predicates.size() == 1) {
+                combinedPredicate = predicates.get(0);
+            } else {
+                combinedPredicate = predicates.stream().reduce(x -> false, Predicate::or);
+            }
+            return new FindCommand(combinedPredicate);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
     /**
-     * Utility method to check if a string is numeric (i.e., contains only digits).
+     * Utility method to check if a string is numeric (i.e., contains only phone digits and not 6 digits long).
      * @param str The string to check.
      * @return True if the string is numeric, false otherwise.
      */
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");
+        return str.matches("\\d+") && str.length() != 6;
     }
+
     /**
-     * Utility method to check if a string is a postal code (i.e., starts with 'S' and is followed by 6 digits).
+     * Utility method to check if a string is a postal code (i.e., 6 digit number).
      * @param str The string to check.
      * @return True if the string is a postal code, false otherwise.
      */
     private boolean isPostalCode(String str) {
-        // checks that postal code starts with 'S', followed by digits
-        return str.matches("S\\d+");
+        // checks that the postal code is exactly 6 digits
+        return str.matches("\\d{6}");
     }
 }

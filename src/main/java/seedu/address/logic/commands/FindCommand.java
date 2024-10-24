@@ -22,11 +22,17 @@ public class FindCommand extends Command {
             + "contain any of the specified keywords (case-insensitive) and "
             + "displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]... \n"
-            + "Example: " + COMMAND_WORD + " alice bob S123456 8123 \n"
-            + "Note: find by postal code should start with 'S'";
+            + "Example: " + COMMAND_WORD + " alice bob 123456 \n"
+            + "Note: any 6 digit number will be identified as a postal code only";
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Constructs a FindCommand with the specified predicate.
+     *
+     * @param predicate The predicate used to filter persons in the address book.
+     * @throws NullPointerException if the predicate is null.
+     */
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = requireNonNull(predicate);
     }
@@ -50,12 +56,10 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
+
         return predicate.equals(otherFindCommand.predicate);
     }
 
-    public Predicate<Person> getPredicate() {
-        return predicate;
-    }
     @Override
     public String toString() {
         return new ToStringBuilder(this)

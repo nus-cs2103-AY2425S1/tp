@@ -125,20 +125,11 @@ public class FindCommandTest {
     public void execute_nullPhonePredicate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new FindCommand(null));
     }
-    @Test
-    public void execute_partialPostalCodeSearch_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        Predicate<Person> predicate = preparePredicate("S888"); // Partial postal code for Alice
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(ALICE), model.getFilteredPersonList());
-    }
 
     @Test
-    public void execute_partialPostalCodeSearch_multiplePersonsFound() {
+    public void execute_postalSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("S8"); // Partial postal code matches ALICE and BENSON
+        Predicate<Person> predicate = preparePredicate("123000"); // postal code matches ALICE and BENSON
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -146,9 +137,9 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_nameAndPartialPostalCodeSearch_multiplePersonsFound() {
+    public void execute_nameAndPostalCodeSearch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        Predicate<Person> predicate = preparePredicate("Alice S812"); // Alice by name, Benson by partial postal code
+        Predicate<Person> predicate = preparePredicate("Alice 123000"); // Alice by name, Benson by postal code
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -185,10 +176,10 @@ public class FindCommandTest {
     }
 
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");
+        return str.matches("\\d+") && str.length() != 6;
     }
-
     private boolean isPostalCode(String str) {
-        return str.matches("^S\\d{1,6}$"); // partial or full postal codes in SXXXXXX
+        // checks that the postal code is exactly 6 digits
+        return str.matches("\\d{6}");
     }
 }

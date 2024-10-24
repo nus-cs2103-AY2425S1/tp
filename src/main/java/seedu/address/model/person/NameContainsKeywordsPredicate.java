@@ -18,13 +18,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        // Convert the full name to lowercase and split by space or comma
         String[] nameParts = person.getName().fullName.toLowerCase().split("[,\\s]+");
 
         return keywords.stream().anyMatch(keyword -> {
             String lowerCaseKeyword = keyword.toLowerCase();
 
-            // Check if any part of the name starts with the keyword
             return Arrays.stream(nameParts)
                     .anyMatch(namePart -> namePart.startsWith(lowerCaseKeyword));
         });
