@@ -19,30 +19,37 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class DeleteCustomerOrderCommand extends Command {
     public static final String COMMAND_WORD = "deleteCustomerOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete the customer order by their phone number. "
-            + "Parameters: PHONE_NUMBER\n"
-            + "Example: " + COMMAND_WORD + " 87654321";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the customer order at the given index of the displayed customer orders. "
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS = "Customer order deleted.\n\n%1$s";
+    public static final String MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS = "Customer order deleted at index: %1$d";
+    public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
 
-    private final String phoneNumber;
+    private final int targetIndex;
 
-    public DeleteCustomerOrderCommand(String phoneNumber) {
-        requireAllNonNull(phoneNumber);
-        this.phoneNumber = phoneNumber;
+    public DeleteCustomerOrderCommand(int targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // Retrieve the customer order list
         CustomerOrderList customerOrderList = model.getCustomerOrderList();
+
+        // Check if the index is valid (index should be 1-based)
+        if (targetIndex <= 0 || targetIndex > customerOrderList.getOrders().size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX);
+        }
+
+        String phoneNumber = customerOrderList.getOrderByIndex(targetIndex - 1).getPhoneNumber();
 
         customerOrderList.removeOrder(phoneNumber);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS, customerOrderList.viewOrders()));
+        return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_ORDER_SUCCESS, targetIndex));
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -55,6 +62,6 @@ public class DeleteCustomerOrderCommand extends Command {
         }
 
         DeleteCustomerOrderCommand otherCommand = (DeleteCustomerOrderCommand) other;
-        return phoneNumber.equals(otherCommand.phoneNumber);
+        return targetIndex == otherCommand.targetIndex;
     }
 }
