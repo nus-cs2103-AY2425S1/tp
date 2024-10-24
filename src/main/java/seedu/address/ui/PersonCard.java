@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,6 +27,8 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    private AttendanceContainer attendanceContainer;
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -41,9 +44,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label payment;
     @FXML
-    private Label attendance;
-    @FXML
     private FlowPane tags;
+    @FXML
+    private VBox attendanceContainerPlaceholder;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,9 +60,11 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         payment.setText(person.getPayment().toString());
-        attendance.setText(person.getParticipation().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        attendanceContainer = new AttendanceContainer(person.getParticipation());
+        attendanceContainerPlaceholder.getChildren().add(attendanceContainer.getRoot());
     }
 }
