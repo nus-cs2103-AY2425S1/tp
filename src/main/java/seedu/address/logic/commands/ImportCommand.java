@@ -77,9 +77,9 @@ public class ImportCommand extends Command {
 
                 switch (category.toLowerCase()) {
                 case "student":
-                    String studentID = values[2].trim();
-                    if (!studentID.isEmpty()) {
-                        Student student = new Student(name, new StudentID(studentID), phone, email, address, tagSet);
+                    String studentId = values[2].trim();
+                    if (!studentId.isEmpty()) {
+                        Student student = new Student(name, new StudentID(studentId), phone, email, address, tagSet);
                         if (!model.hasPerson(student)) {
                             new AddStudentCommand(student).execute(model);
                             successCount++;

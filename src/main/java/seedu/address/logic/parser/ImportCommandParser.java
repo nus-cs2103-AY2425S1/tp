@@ -40,14 +40,30 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
     /**
      * Validates whether a given string is a valid file path.
+     *
+     * @param filePath The file path string to validate.
+     * @return true if the file path is valid, false otherwise.
      */
     private boolean isValidFilePath(String filePath) {
+        // Define some characters that are invalid for file paths
+        String invalidChars = "*<>?|";
+
+        for (char ch : invalidChars.toCharArray()) {
+            if (filePath.contains(Character.toString(ch))) {
+                return false;
+            }
+        }
+
         try {
             // Check if it's a valid path by attempting to create a Path object
             Paths.get(filePath);
+            if (filePath.contains("//")) {
+                return false;
+            }
             return true;
         } catch (InvalidPathException e) {
             return false;
         }
     }
+
 }

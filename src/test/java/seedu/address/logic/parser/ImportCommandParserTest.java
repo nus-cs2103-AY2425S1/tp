@@ -30,14 +30,23 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_invalidFilePath_throwsParseException() {
-        // Invalid file path format
-        String invalidFilePath = "/path//tofile.csv"; // Double slashes
-        assertParseSuccess(parser, invalidFilePath, new ImportCommand(invalidFilePath)); // Handle in ImportCommand
+        // Invalid file path format that should trigger the path validation
+        String invalidFilePath = "/path//tofile.csv"; // Double slashes (Invalid path format)
+        assertParseFailure(parser, invalidFilePath, String.format(ImportCommandParser.MESSAGE_INVALID_FILE_PATH,
+                invalidFilePath));
+    }
+
+    @Test
+    public void parse_invalidCharactersInFilePath_throwsParseException() {
+        // File path with invalid characters (e.g., "*" is not allowed in file paths)
+        String invalidFilePath = "/path/to/invalid*.csv";
+        assertParseFailure(parser, invalidFilePath, String.format(ImportCommandParser.MESSAGE_INVALID_FILE_PATH,
+                invalidFilePath));
     }
 
     @Test
     public void parse_noFileArg_throwsParseException() {
-        // No file argument
+        // No file argument provided
         String emptyArg = "";
         assertParseFailure(parser, emptyArg, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ImportCommand.MESSAGE_USAGE));
