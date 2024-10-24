@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
  */
 public class RetrievePublicAddressCommand extends Command {
 
-    public static final String COMMAND_WORD = "retrievePublicAddress";
+    public static final String COMMAND_WORD = "retrievepa";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves public addresses of a contact.\n"
             + "Parameters: INDEX (must be a positive integer) "
