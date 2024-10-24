@@ -27,9 +27,6 @@
 
   <module name="SuppressionFilter">
     <property name="file" value="${config_loc}/suppressions.xml"/>
-    <property name="suppressions">
-      <suppress files=".*\.csv"/>
-    </property>
   </module>
 
   <module name="LineLength">
