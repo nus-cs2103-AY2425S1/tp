@@ -118,7 +118,7 @@ Format: `view INDEX`
 
 Examples:
 * `view 1` will bring up the help window for the first person in the displayed list. <br>
-![result of view 1](images/viewOneResult.png)
+ ![result of `view 1`](images/viewOneResult.png)
 
 
 ### Editing a person : `edit`
@@ -157,7 +157,7 @@ Format: `find [n/NAMEKEYWORDS] [p/PHONEKEYWORDS] [a/ADDRESSKEYWORDS]`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png) 
+  ![result for 'find n/alex david'](images/findAlexDavidResult.png) 
 * `find p/87438807 91031282` returns `Alex Yeoh`, `David Li`
 * `find a/serangoon` returns `David Li`
 * `find n/alex p/87438807 a/geylang` returns `Alex Yeoh`
@@ -252,6 +252,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find [n/NAMEKEYWORD] [p/PHONEKEYWORD] [a/ADDRESSKEYWORD]`<br> e.g., `find n/James Jake a/clementi street_woodlands`
 **List**   | `list`
+**View**   | `view INDEX`<br> e.g.,`view 1`
 **Help**   | `help`
 **Seed**   | `seed`
 **Remark** | `remark INDEX r/REMARK`
