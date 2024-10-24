@@ -372,7 +372,8 @@
     -fx-margin: 2 0 2 0;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 13;
+    -fx-background-insets: 0;
 }
 
 #appointments .list-cell {
