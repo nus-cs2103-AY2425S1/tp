@@ -16,7 +16,7 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
         </columnConstraints>
         <VBox>
-            <VBox alignment="CENTER_LEFT" minHeight="105" spacing="12" GridPane.columnIndex="0">
+            <VBox alignment="CENTER_LEFT" minHeight="175" spacing="12" GridPane.columnIndex="0">
                 <padding>
                     <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
                 </padding>
@@ -40,7 +40,7 @@
                     </HBox>
                 </VBox>
             </VBox>
-            <VBox fx:id="logsList" minWidth="380" styleClass="pane">
+            <VBox fx:id="logsList" minWidth="380" styleClass="pane" >
                 <padding>
                     <Insets left="10.0" top="10.0"/>
                 </padding>
