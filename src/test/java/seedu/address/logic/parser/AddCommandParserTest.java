@@ -21,6 +21,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.AMY_NO_TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -93,6 +94,14 @@ public class AddCommandParserTest {
         Student expectedStudent = new StudentBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + STUDENTID_DESC_AMY + TUTORIALID_DESC_AMY,
                 new AddCommand(expectedStudent, TUTORIAL_ID));
+    }
+
+    @Test
+    public void parse_tutorialFieldMissing_success() {
+        // zero tags
+        Student expectedStudent = new StudentBuilder(AMY_NO_TUTORIAL_ID).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + STUDENTID_DESC_AMY,
+                new AddCommand(expectedStudent, TutorialId.none()));
     }
 
     @Test
