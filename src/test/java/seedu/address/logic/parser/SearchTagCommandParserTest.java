@@ -17,14 +17,16 @@ public class SearchTagCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         SearchTagCommand expectedFindCommand =
-                new SearchTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("NewCustomer", "NonEnglishSpeaker")));
+                new SearchTagCommand(new TagContainsKeywordsPredicate(
+                        Arrays.asList("NewCustomer", "NonEnglishSpeaker")));
         assertParseSuccess(parser, "NewCustomer NonEnglishSpeaker", expectedFindCommand);
 
         // multiple whitespaces between keywords
