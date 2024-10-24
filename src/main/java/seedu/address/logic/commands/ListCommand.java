@@ -16,7 +16,8 @@ public class ListCommand extends Command {
             + "There should be no parameters!\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all persons\n"
+            + "Total number of students: ";
     public static final String MESSAGE_NO_RESULT = "There is.. no one?";
 
 
@@ -24,9 +25,10 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        int numberOfStudents = model.getFilteredPersonList().size();
         if (model.getFilteredPersonList().isEmpty()) {
             return new CommandResult(MESSAGE_NO_RESULT);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + numberOfStudents);
     }
 }
