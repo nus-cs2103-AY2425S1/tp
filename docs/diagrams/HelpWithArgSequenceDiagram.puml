@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HelpCommandParser" as HelpCommandParser LOGIC_COLOR
+participant "h:HelpCommand" as HelpCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("help add")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("help add")
+activate AddressBookParser
+
+create HelpCommandParser
+AddressBookParser -> HelpCommandParser
+activate HelpCommandParser
+
+HelpCommandParser --> AddressBookParser
+deactivate HelpCommandParser
+
+AddressBookParser -> HelpCommandParser : parse("add")
+activate HelpCommandParser
+
+create HelpCommand
+HelpCommandParser -> HelpCommand
+activate HelpCommand
+
+HelpCommand --> HelpCommandParser :
+deactivate HelpCommand
+
+HelpCommandParser --> AddressBookParser : h
+deactivate HelpCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+HelpCommandParser -[hidden]-> AddressBookParser
+destroy HelpCommandParser
+
+AddressBookParser --> LogicManager : h
+deactivate AddressBookParser
+
+LogicManager -> HelpCommand : execute(m)
+activate HelpCommand
+
+create CommandResult
+HelpCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> HelpCommand
+deactivate CommandResult
+
+HelpCommand --> LogicManager : r
+deactivate HelpCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
