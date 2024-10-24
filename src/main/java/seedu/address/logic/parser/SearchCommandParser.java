@@ -35,22 +35,22 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_ADDRESS);
             List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
             return new SearchCommand(new AddressContainsKeywordsPredicate(keywords));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_EMAIL);
             List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
             return new SearchCommand(new EmailContainsKeywordsPredicate(keywords));
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_NAME);
             List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
             return new SearchCommand(new NameContainsKeywordsPredicate(keywords));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_TAG);
+            List<String> keywordArguments  = argMultimap.getAllValues(PREFIX_PHONE);
             List<String> keywords  = ParserUtil.parseSearchKeywords(keywordArguments);
             return new SearchCommand(new PhoneContainsKeywordsPredicate(keywords));
         }
