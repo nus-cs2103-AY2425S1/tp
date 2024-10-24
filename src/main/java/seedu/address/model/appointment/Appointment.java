@@ -102,8 +102,16 @@ public class Appointment {
         return doctor;
     }
 
+    public String getDoctorName() {
+        return doctor.getName().toString();
+    }
+
     public Patient getPatient() {
         return patient;
+    }
+
+    public String getPatientName() {
+        return patient.getName().toString();
     }
 
     public Date getDate() {
