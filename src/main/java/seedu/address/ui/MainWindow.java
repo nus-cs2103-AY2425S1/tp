@@ -171,6 +171,7 @@ public class MainWindow extends UiPart<Stage> {
      * Handles the view for 'findnric' command by displaying a comprehensive result.
      */
     private void handleFindPerson() {
+        logger.info("Rendering Find UI");
         personListPanelPlaceholder.setVisible(false);
         personListPanelPlaceholder.setManaged(false);
         FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
@@ -191,6 +192,7 @@ public class MainWindow extends UiPart<Stage> {
             personListPanelPlaceholder.setManaged(true);
             isFindNricCommand = false;
         }
+        logger.info("Rendering default UI");
     }
 
     public PersonListPanel getPersonListPanel() {
