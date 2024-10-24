@@ -8,9 +8,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.contact.commands.FindCommand;
 import seedu.address.logic.commands.contact.commands.SearchCommand;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonIsRolePredicate;
 import seedu.address.model.role.Sponsor;
 import seedu.address.model.role.Volunteer;
