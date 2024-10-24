@@ -469,7 +469,7 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > * Adds the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. e.g. `addAllergy i/S1234567A` is invalid.
 > * `ALLERGY` is case-insensitive. e.g. `addAllergy i/S123457A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
-> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
+> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
 
 {: .alert .alert-success}
@@ -477,6 +477,11 @@ Format: `addAllergy i/NRIC al/ALLERGY…`
 > 
 > * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+
+Example:
+* `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.<br>
+
+[Back to Table of Contents](#table-of-contents)
 
 #### Deleting an allergy: `delAllergy`
 
@@ -490,8 +495,7 @@ Format: `delAllergy i/NRIC al/ALLERGY…`
 > * Deletes the specified `ALLERGY` to the patient with the given `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. e.g. `delAllergy i/S1234567A` is invalid.
 > * `ALLERGY` is case-insensitive. e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
-> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
-
+> * `ALLERGY` and `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -499,6 +503,10 @@ Format: `delAllergy i/NRIC al/ALLERGY…`
 > * You can delete multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
 > * e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
+Example:
+* `delAllergy i/S1234567A al/Peanuts` will delete the existing allergy `PEANUTS` from the patient with the NRIC `S1234567A`.<br>
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Managing Priority
 
@@ -553,7 +561,7 @@ Format: `listPrio !/PRIORITY`
 > :information_source: **Note:**
 > 
 > * An empty Patient List Panel will be displayed if no patients with the given `PRIORITY` are found.
-> * `PRIORITY` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section. 
+> * `PRIORITY` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section. 
 
 Example: 
 * `listPrio !/High` will display all patients with the priority `HIGH`.
@@ -620,7 +628,7 @@ Format: `find NRIC`
 > * Only the `NRIC` is searched.
 > * Only **full NRIC** will be matched e.g. `S1234567a` will not match `S12345`
 > * Returns an empty Patient List Panel if no matching patients with the given `NRIC` are found.
-> * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#Parameter-Details) section.
+> * `NRIC` must adhere to the constraints mentioned in the [Parameter Details](#parameter-details) section.
 
 Example:
 * `findNric S1234567A` returns `Alex Yeoh`
