@@ -26,9 +26,11 @@ import seedu.internbuddy.logic.commands.DeleteCommand;
 import seedu.internbuddy.logic.commands.EditCommand;
 import seedu.internbuddy.logic.commands.EditCommand.EditCompanyDescriptor;
 import seedu.internbuddy.logic.commands.ExitCommand;
+import seedu.internbuddy.logic.commands.FavCommand;
 import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
+import seedu.internbuddy.logic.commands.UnfavCommand;
 import seedu.internbuddy.logic.commands.UpdateCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 import seedu.internbuddy.model.application.AppStatus;
@@ -97,6 +99,20 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_fav() throws Exception {
+        FavCommand command = (FavCommand) parser.parseCommand(
+                FavCommand.COMMAND_WORD + " " + INDEX_FIRST_COMPANY.getOneBased());
+        assertEquals(new FavCommand(INDEX_FIRST_COMPANY), command);
+    }
+
+    @Test
+    public void parseCommand_unfav() throws Exception {
+        UnfavCommand command = (UnfavCommand) parser.parseCommand(
+                UnfavCommand.COMMAND_WORD + " " + INDEX_FIRST_COMPANY.getOneBased());
+        assertEquals(new UnfavCommand(INDEX_FIRST_COMPANY), command);
     }
 
     @Test
