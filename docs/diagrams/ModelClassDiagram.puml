@@ -41,6 +41,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 
+' Added Tag and Log to diagram
 ' Adjust the exit points of diamonds from the Person class to avoid clutter
 Person *--> Name
 Person *--> Phone
@@ -53,6 +54,8 @@ Person *--> "*" Log
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+' Added identity number to diagram
+' Added log to diagram
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
