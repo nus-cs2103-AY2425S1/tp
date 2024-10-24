@@ -72,7 +72,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddPersonCommand(person);
         case APPOINTMENT_ENTITY_STRING:
             if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_ID, PREFIX_DATETIME,
-                    PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE)) {
+                    PREFIX_APPOINTMENT_TYPE)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
             }
@@ -84,9 +84,12 @@ public class AddCommandParser implements Parser<AddCommand> {
                     argMultimap.getValue(PREFIX_DATETIME).get());
             AppointmentType appointmentType = ParserUtil.parseAppointmentType(
                     argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).get());
-            Sickness sickness = ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get());
-            Medicine medicine = ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get());
-
+            Sickness sickness = argMultimap.getValue(PREFIX_SICKNESS).isPresent()
+                    ? ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get())
+                    : null;
+            Medicine medicine = argMultimap.getValue(PREFIX_MEDICINE).isPresent()
+                    ? ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get())
+                    : null;
             AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(
                     appointmentType, appointmentDateTime, sickness, medicine);
 

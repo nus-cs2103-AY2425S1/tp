@@ -86,6 +86,11 @@ public class Appointment {
         return person;
     }
 
+
+    public int getPersonId() {
+        return person.getPersonId();
+    }
+
     public AppointmentType getAppointmentType() {
         return appointmentDescriptor.getAppointmentType();
     }
@@ -112,8 +117,8 @@ public class Appointment {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both appointments have the same identity and data fields.
+     * This defines a stronger notion of equality between two appointments.
      */
     @Override
     public boolean equals(Object other) {
@@ -127,8 +132,7 @@ public class Appointment {
         }
 
         return appointmentDescriptor.equals(otherAppointment.appointmentDescriptor)
-                && person == otherAppointment.person
-                && appointmentId == otherAppointment.appointmentId;
+                && person == otherAppointment.person;
     }
 
     @Override
@@ -147,5 +151,4 @@ public class Appointment {
                 .add("sickness", getSickness())
                 .toString();
     }
-
 }

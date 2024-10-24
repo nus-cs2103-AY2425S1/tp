@@ -4,7 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
+import seedu.address.commons.util.OptionalUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -15,8 +17,8 @@ public class AppointmentDescriptor {
 
     private final AppointmentType appointmentType;
     private final LocalDateTime appointmentDateTime;
-    private final Sickness sickness;
-    private final Medicine medicine;
+    private final Optional<Sickness> sickness;
+    private final Optional<Medicine> medicine;
 
     /**
      * Every field must be present and not null.
@@ -26,11 +28,11 @@ public class AppointmentDescriptor {
             LocalDateTime appointmentDateTime,
             Sickness sickness,
             Medicine medicine) {
-        requireAllNonNull(appointmentType, appointmentDateTime, sickness, medicine);
+        requireAllNonNull(appointmentType, appointmentDateTime);
         this.appointmentType = appointmentType;
         this.appointmentDateTime = appointmentDateTime;
-        this.sickness = sickness;
-        this.medicine = medicine;
+        this.sickness = Optional.ofNullable(sickness);
+        this.medicine = Optional.ofNullable(medicine);
     }
 
     public AppointmentType getAppointmentType() {
@@ -42,11 +44,11 @@ public class AppointmentDescriptor {
     }
 
     public Sickness getSickness() {
-        return this.sickness;
+        return this.sickness.orElse(null);
     }
 
     public Medicine getMedicine() {
-        return this.medicine;
+        return this.medicine.orElse(null);
     }
 
     /**
@@ -81,15 +83,14 @@ public class AppointmentDescriptor {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppointmentDescriptor)) {
+        if (!(other instanceof AppointmentDescriptor otherAppointment)) {
             return false;
         }
 
-        AppointmentDescriptor otherAppointment = (AppointmentDescriptor) other;
-        return appointmentType.equals(otherAppointment.getAppointmentType())
-                && appointmentDateTime.equals(otherAppointment.getAppointmentDateTime())
-                && sickness.equals(otherAppointment.getSickness())
-                && medicine.equals(otherAppointment.getMedicine());
+        return appointmentType.equals(otherAppointment.appointmentType)
+                && appointmentDateTime.equals(otherAppointment.appointmentDateTime)
+                && sickness.equals(otherAppointment.sickness)
+                && medicine.equals(otherAppointment.medicine);
     }
 
     @Override
@@ -103,8 +104,7 @@ public class AppointmentDescriptor {
         return new ToStringBuilder(this)
                 .add("appointment type", appointmentType)
                 .add("appointment datetime", appointmentDateTime)
-                .add("sickness", sickness)
-                .add("medicine", medicine)
-                .toString();
+                .add("sickness", OptionalUtil.optionalToString(sickness))
+                .add("medicine", OptionalUtil.optionalToString(medicine)).toString();
     }
 }

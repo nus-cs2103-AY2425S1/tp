@@ -39,7 +39,7 @@ public class Medicine {
 
     @Override
     public String toString() {
-        return value;
+        return value == null ? "" : value;
     }
 
     @Override

@@ -26,8 +26,8 @@ public class AddAppointmentCommand extends AddCommand {
             + ": Adds an appointment to the appointment book. \n"
             + "Parameters: "
             + PREFIX_APPOINTMENT_TYPE + "AppointmentType "
-            + PREFIX_PERSON_ID + "PersonId "
             + PREFIX_DATETIME + "Date "
+            + PREFIX_PERSON_ID + "PersonId "
             + PREFIX_SICKNESS + "Sickness "
             + PREFIX_MEDICINE + "Medicine \n"
             + "Example: " + COMMAND_WORD
@@ -69,7 +69,7 @@ public class AddAppointmentCommand extends AddCommand {
     @Override
     protected void addEntity(Model model) throws CommandException {
         Optional<Person> personOptional = model.findPerson(personId);
-        if (!personOptional.isPresent()) {
+        if (personOptional.isEmpty()) {
             throw new CommandException(getPersonIdDoesNotExistMessage());
         }
         model.addAppointment(personOptional.get(), toAdd);

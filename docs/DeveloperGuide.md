@@ -55,7 +55,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete  person 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -162,7 +162,7 @@ The `Storage` component,
   * data is saved in `JsonAddressBookStorage` which inherits from interface `AddressBookStorage`.
   * data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
 * Appointment data:
-  * data is saved in `JsonAppointmnetBookStorage` which inherits from interface `AppointmentBookStorage`.
+  * data is saved in `JsonAppointmentBookStorage` which inherits from interface `AppointmentBookStorage`.
   * data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which embodies the actual data of appointments and appointment details
 * User Preference data:
     * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
@@ -171,6 +171,21 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Flow**
+
+The activity diagram shows the general sequence of steps when a user interacts with DocTrack.
+
+<puml src="diagrams/OverallFlowActivityDiagram.puml" width="700"></puml>
+
+1. The user types a command in the `CommandBox`.
+2. The `AddressBookParser` parses the command.
+3. If the command is a known command and is in a valid format, a parser creates the corresponding 
+   `Command` object. Else, an error is displayed. 
+4. The `Command` object is executed.
+5. The `UI` displays the result of the command execution to the user.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -354,9 +369,14 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
+Steps 1 to 6 will similarly be implemented for the `Appointment` data. The `VersionedAppointmentBook` will 
+be initialized with the initial appointment book state, and the `currentStatePointer` pointing to that 
+single appointment book state. The `commit`, `undo`, and `redo` operations for `VersionedAppointmentBook` 
+will be implemented in the same way as the `VersionedAddressBook`.
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="550" />
 
 #### Design considerations:
 
@@ -387,6 +407,20 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Data storage and files**
+- The data of the patients and appointments is stored in the `data` folder.
+  - Patient data is stored in `data/addressbook.json`.
+  - Appointment data is stored in `data/appointmentbook.json`.
+
+<box type="warning" seamless>
+
+**Note:**
+For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if `Sickness` or `Medicine` 
+is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
