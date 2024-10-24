@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -97,9 +96,7 @@ public class AddPublicAddressCommandTest {
         String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
                 personToAddAddress.getName(), duplicateAddress, Network.BTC);
 
-        assertThrows(
-                IllegalArgumentException.class, expectedMessage, () -> duplicateCommand.execute(model)
-        );
+        assertCommandFailure(duplicateCommand, model, expectedMessage);
     }
 
     @Test
