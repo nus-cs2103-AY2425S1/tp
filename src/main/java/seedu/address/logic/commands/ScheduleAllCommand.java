@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -18,8 +21,9 @@ public class ScheduleAllCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // TODO: Implement logic to show all appointments
-        return new CommandResult("TODO: Implement schedule_all logic");
+        requireNonNull(model);
+        model.filterAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
