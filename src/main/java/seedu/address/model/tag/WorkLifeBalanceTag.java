@@ -39,6 +39,7 @@ public class WorkLifeBalanceTag extends Tag {
      * @return {@code true} if the input string is a valid level; {@code false} otherwise.
      */
     private static boolean isValidWorkLifeBalance(String workLifeBalanceLevel) {
+        assert workLifeBalanceLevel != null : "workLifeBalanceLevel should not be null";
         try {
             // Attempt to convert the input string to a valid Level enum value.
             Level.valueOf(workLifeBalanceLevel.toUpperCase(Locale.ROOT));

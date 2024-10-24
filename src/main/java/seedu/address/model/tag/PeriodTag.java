@@ -47,6 +47,8 @@ public class PeriodTag extends Tag {
      * @return {@code true} if both the period and year are valid; {@code false} otherwise.
      */
     private static boolean isValidPeriod(String period, int year) {
+        assert period != null : "period should not be null";
+
         try {
             // Attempt to convert the input string to a valid InternshipPeriod enum value.
             InternshipPeriod.valueOf(period.toUpperCase(Locale.ROOT));
