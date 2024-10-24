@@ -49,6 +49,7 @@ MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
+TabPane --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 EventListPanel --|> UiPart
