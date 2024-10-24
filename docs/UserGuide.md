@@ -39,8 +39,10 @@ DLTbook is a **desktop app for managing contacts and DLT public addresses, optim
    * `exit` : Exits the app.
 
    * `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` : Adds a public address to a contact
+    
+   * `editpa 1 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`: Edits an existing public address of a contact
 
-   * `retrievePublicAddress 1 pa/BTC l/wallet1` : Retrieves the public address of a contact
+   * `retrievepa 1 c/BTC l/wallet1` : Retrieves the public address of a contact
 
    * `deletePublicAddress c/BTC n/Travis w/wallet1` : Deletes the public address of a contact
 
@@ -182,11 +184,35 @@ Format: `addPublicAddress c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`
 Examples:
 * `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a contact named `Travis` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
 
-### Retrieving public addresses of a contact : `retrievePublicAddress`
+### Editing a public address of a contact : `editpa`
+
+Edits an existing public address of a contact.
+
+Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`
+
+* `INDEX`: **Positive integer** 1, 2, 3, ... corresponding to index number of desired contact shown in the displayed person list.
+* `NETWORK`: Ticker name of network of desired public address in **CAPS**.<br />
+  Allowed values: `BTC|ETH|SOL`.
+* `WALLET_NAME`: Exact label of desired public address (**CASE-SENSITIVE**).
+* `NEW_ADDRESS`: New public address to replace existing.
+
+#### Examples
+
+* `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
+  Changes the third contact's BTC public address labelled `Daily wallet` to `14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`.<br />
+  TODO: Example output
+* `editpa 3 c/BTC l/daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
+  **DOES NOT** change the third contact's BTC public address labelled `Daily wallet` as `WALLET_NAME` is case-sensitive.<br />
+
+#### Exceptions
+
+* TODO: Link to exception
+
+### Retrieving public addresses of a contact : `retrievepa`
 
 Retrieves the public addresses of a contact.
 
-Format: `retrievePublicAddress INDEX pa/NETWORK [l/WALLET_NAME]`
+Format: `retrievepa INDEX c/NETWORK [l/WALLET_NAME]`
 
 * `INDEX`: **Positive integer** 1, 2, 3, ... corresponding to index number of desired contact shown in the displayed person list.
 * `NETWORK`: Ticker name of network of desired public address in **CAPS**.<br />
@@ -198,9 +224,11 @@ Format: `retrievePublicAddress INDEX pa/NETWORK [l/WALLET_NAME]`
 
 #### Examples
 
-* `retrievePublicAddress 3 pa/BTC`: retrieves all the BTC public addresses of the third contact.<br />
+* `retrievepa 3 c/BTC`<br />
+  Retrieves all the BTC public addresses of the third contact.<br />
   TODO: Example output
-* `retrievePublicAddress 3 pa/BTC l/Daily wal`: retrieves all the BTC public addresses of the third contact which label contains "daily wal" (case-insensitive).
+* `retrievepa 3 c/BTC l/Daily wal`<br />
+  Retrieves all the BTC public addresses of the third contact which label contains "daily wal" (case-insensitive).
 
 #### Exceptions
 
@@ -250,10 +278,6 @@ If your changes to the data file makes its format invalid, DLTbook will discard 
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -283,7 +307,7 @@ Action     | Format, Examples
 **Help**   | `help`
 **Exit**   | `exit`
 **Add Public Address** | `addPublicAddress c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`
-**Retrieve Public Address** | `retrievePublicAddress INDEX pa/NETWORK l/WALLET_NAME`<br> e.g., `retrievePublicAddress 3 pa/BTC l/Daily wallet`
+**Edit Public Address** | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`
+**Retrieve Public Address** | `retrievepa INDEX c/NETWORK [l/WALLET_NAME]`<br> e.g., `retrievepa 3 c/BTC l/Daily wallet`
 **Delete Public Address** | `deletePublicAddress c/NETWORK n/NAME w/WALLET_NAME`<br> e.g., `deletePublicAddress c/BTC n/Travis w/wallet1`
 **Public Address Search** | `searchPublicAddress pa/PUBLIC_ADDRESS`<br> e.g., `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`
-
