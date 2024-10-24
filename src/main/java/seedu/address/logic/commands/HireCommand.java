@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -55,9 +56,12 @@ public class HireCommand extends Command {
                     personToHire.getName()));
         }
 
-        personToHire.markAsHired();
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
-                personToHire.getName()));
+        Person personHired = new Person(personToHire.getName(), personToHire.getJob(), personToHire.getPhone(),
+                personToHire.getEmail(), personToHire.getTags());
+        personHired.markAsHired();
+        model.setPerson(personToHire, personHired);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, personHired.getName()));
     }
 
     public Name getName() {

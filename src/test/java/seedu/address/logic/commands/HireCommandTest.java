@@ -37,12 +37,13 @@ public class HireCommandTest {
 
         HireCommand hireCommand = new HireCommand(validPerson.getName(), validPerson.getJob());
         hireCommand.execute(model);
+        Person validPersonHired = model.findPersonByNameAndJob(validPerson.getName(), validPerson.getJob());
 
         // Check the status and tags of the person
-        assertEquals("hired", validPerson.getStatus());
-        assertTrue(validPerson.getTags().contains(Person.TAG_HIRED));
-        assertFalse(validPerson.getTags().contains(Person.DEFAULT_TAG_PENDING));
-        assertFalse(validPerson.getTags().contains(Person.TAG_REJECTED));
+        assertEquals("hired", validPersonHired.getStatus());
+        assertTrue(validPersonHired.getTags().contains(Person.TAG_HIRED));
+        assertFalse(validPersonHired.getTags().contains(Person.DEFAULT_TAG_PENDING));
+        assertFalse(validPersonHired.getTags().contains(Person.TAG_REJECTED));
     }
 
     @Test
@@ -107,12 +108,13 @@ public class HireCommandTest {
         HireCommand hireCommand = new HireCommand(validPerson.getName(), validPerson.getJob());
         hireCommand.execute(model);
 
+        Person validPersonHired = model.findPersonByNameAndJob(validPerson.getName(), validPerson.getJob());
         // Check the status and tags of the person
-        assertEquals("hired", validPerson.getStatus());
-        assertTrue(validPerson.getTags().contains(Person.TAG_HIRED));
-        assertFalse(validPerson.getTags().contains(Person.DEFAULT_TAG_PENDING));
-        assertFalse(validPerson.getTags().contains(Person.TAG_REJECTED));
-        assertTrue(validPerson.getTags().contains(new Tag("interviewed")));
+        assertEquals("hired", validPersonHired.getStatus());
+        assertTrue(validPersonHired.getTags().contains(Person.TAG_HIRED));
+        assertFalse(validPersonHired.getTags().contains(Person.DEFAULT_TAG_PENDING));
+        assertFalse(validPersonHired.getTags().contains(Person.TAG_REJECTED));
+        assertTrue(validPersonHired.getTags().contains(new Tag("interviewed")));
     }
 
     @Test

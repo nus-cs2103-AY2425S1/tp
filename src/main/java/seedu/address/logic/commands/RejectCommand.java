@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -60,7 +61,12 @@ public class RejectCommand extends Command {
             throw new CommandException(String.format(MESSAGE_ALREADY_REJECTED,
                     personToReject.getName()));
         }
-        personToReject.markAsRejected();
+
+        Person personRejected = new Person(personToReject.getName(), personToReject.getJob(), personToReject.getPhone(),
+                personToReject.getEmail(), personToReject.getTags());
+        personRejected.markAsRejected();
+        model.setPerson(personToReject, personRejected);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_REJECT_PERSON_SUCCESS,
                 personToReject.getName()));
     }
