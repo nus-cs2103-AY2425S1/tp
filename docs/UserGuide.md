@@ -126,7 +126,7 @@ Edits an existing student's details in the system.
 
 Format: `edit STUDENT_ID FIELD/NEW_VALUE`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is 
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit number (e.g. S00001). The ID of a student is
 automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `FIELD` can be one of: Name, Phone Number, Email, Address, IC Number or Subject taken.
 * `NEW_VALUE` should follow the format for the respective field.
