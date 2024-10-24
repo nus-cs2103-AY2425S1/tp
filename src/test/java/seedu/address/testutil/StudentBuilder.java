@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
@@ -143,8 +143,19 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Builds the student object with empty assignments and attendance records.
+     * @return Student object
+     */
+    public Student build_default() {
+        return new Student(name, phone, tutorialGroup, studentNumber);
+    }
 
+    /**
+     * Builds the student object with the given assignments and attendance records.
+     * @return Student object
+     */
     public Student build() {
-        return new Student(name, phone, tutorialGroup, studentNumber, assignments);
+        return new Student(name, phone, tutorialGroup, studentNumber, assignments, attendanceRecords);
     }
 }

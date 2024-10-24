@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -263,8 +264,9 @@ public class StudentTest {
         ObservableList<Assignment> assignments = FXCollections.observableArrayList();
         assignments.add(MATH_ASSIGNMENT_SUBMITTED);
         assignments.add(SCIENCE_ASSIGNMENT_GRADED);
+        List<AttendanceRecord> attendanceRecords = new ArrayList<>();
 
-        Student student = new Student(name, phone, tutorialGroup, studentNumber, assignments);
+        Student student = new Student(name, phone, tutorialGroup, studentNumber, assignments, attendanceRecords);
 
         assertNotNull(student);
         assertEquals("John Doe", student.getName().toString());
@@ -274,16 +276,17 @@ public class StudentTest {
         assertEquals(2, student.getAssignments().size());
         assertEquals(MATH_ASSIGNMENT_SUBMITTED, student.getAssignments().get(0));
         assertEquals(SCIENCE_ASSIGNMENT_GRADED, student.getAssignments().get(1));
+        assertEquals(new ArrayList<>(), student.getAttendanceRecord());
     }
     @Test
     void getAttendanceRecordsString_noRecords_emptyString() {
-        Student student = new StudentBuilder().build();
+        Student student = new StudentBuilder().build_default();
         assertEquals("", student.getAttendanceRecordsString());
     }
 
     @Test
     void getAttendanceRecordsString_multipleRecords_success() {
-        Student student = new StudentBuilder().build();
+        Student student = new StudentBuilder().build_default();
         student.markAttendance(LocalDate.of(2024, 10, 22), "p");
         student.markAttendance(LocalDate.of(2024, 10, 23), "a");
 

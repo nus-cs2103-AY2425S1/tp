@@ -138,8 +138,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Returns a list of students in the given tutorial group.
+     */
     List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup);
-
-
-
 }

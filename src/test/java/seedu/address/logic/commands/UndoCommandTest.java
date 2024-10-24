@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 
 public class UndoCommandTest {
     private CommandStack commandStack;
@@ -184,6 +186,10 @@ public class UndoCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     private class NotUndoableCommandStub extends Command {

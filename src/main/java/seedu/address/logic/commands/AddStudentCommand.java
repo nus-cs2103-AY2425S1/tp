@@ -58,8 +58,8 @@ public class AddStudentCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof AddStudentCommand
-                && toAdd.equals(((AddStudentCommand) other).toAdd));
+                || (other instanceof AddStudentCommand otherCommand
+                && toAdd.equals(otherCommand.toAdd));
     }
 
     @Override

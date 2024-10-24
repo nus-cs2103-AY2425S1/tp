@@ -196,6 +196,17 @@ public class Student extends Person {
     }
 
     /**
+     * Deletes the assignment at the specified index.
+     *
+     * @param index A valid index.
+     * @return the deleted assignment
+     */
+    public Assignment deleteAssignment(int index) {
+        assert index >= 0 && index < assignments.size();
+        return assignments.remove(index);
+    }
+
+    /**
      * Deletes the first assignment matching the given assignment query.
      *
      * @param assignmentQuery A valid assignment query.
@@ -219,17 +230,6 @@ public class Student extends Person {
      */
     public void addAttendanceRecord(AttendanceRecord ar) {
         attendanceRecords.add(ar);
-    }
-
-    /**
-     * Deletes the assignment at the specified index.
-     *
-     * @param index A valid index.
-     * @return the deleted assignment
-     */
-    public Assignment deleteAssignment(int index) {
-        assert index >= 0 && index < assignments.size();
-        return assignments.remove(index);
     }
 
     /**
