@@ -1,27 +1,37 @@
 @startuml
-'abstract        abstract
-'abstract class  "abstract class"
-'annotation      annotation
-'circle          circle
-'()              circle_short_form
-'class           class
-'class           class_stereo  <<stereotype>>
-'diamond         diamond
-'<>              diamond_short_form
-'entity          entity
-'enum            enum
-'exception       exception
-'interface       interface
-'metaclass       metaclass
-'protocol        protocol
-'stereotype      stereotype
-'struct          struct
+
 hide circle
 skinparam classAttributeIconSize 0
+skinparam classMethodAttributeIconSize 0
+hide empty methods
 
-abstract class FindCommand {
-abstract + CommandResult execute(Model model)
+
+Class "<<interface>>\nModel" as Model
+Class "{abstract}\nCommand" as Command
+Class "{abstract}\nFindCommand" as FindCommand
+Command :  CommandResult execute(Model model) &#123;abstract&#125;
+
+
+Model <.left. FindCommand
+Class FindXYZCommand extends FindCommand
+Class FindCommand extends Command
+Class "{abstract}\nPredicate<T>" as Predicate {
+    + boolean test(T t) &#123;abstract&#125;
 }
-class FindXYZCommand extends FindCommand
+Class "{abstract}\nTraitContainsKeywordPredicate<T>" as TraitContainsKeywordPredicate
+Class "XYZContainsKeywordsPredicate" as XYZContainsKeywordPredicate
+Class TraitContainsKeywordPredicate implements Predicate
+Class XYZContainsKeywordPredicate extends TraitContainsKeywordPredicate
+
+TraitContainsKeywordPredicate.up.>Predicate
+FindXYZCommand -right-> XYZContainsKeywordPredicate
+
+hide FindCommand fields
+hide Model fields
+hide TraitContainsKeywordPredicate fields
+hide FindXYZCommand fields
+hide XYZContainsKeywordPredicate fields
+
+
 
 @enduml
