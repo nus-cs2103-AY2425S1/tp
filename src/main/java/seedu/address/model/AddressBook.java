@@ -109,6 +109,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeSupplier(Supplier key) {
+        Name supplierName = key.getName();
+        for (Product product : products) {
+            product.removeSupplier(supplierName);
+        }
         suppliers.remove(key);
     }
 
@@ -147,6 +151,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeProduct(Product key) {
+        for (Supplier supplier : suppliers) {
+            supplier.removeProduct(key);
+        }
         products.remove(key);
     }
 
