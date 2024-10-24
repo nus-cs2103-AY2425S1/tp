@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.wedding.CreateWeddingCommandParser.arePrefixesPresent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,10 +30,14 @@ public class TagCommandParser implements Parser<TagCommand> {
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_FORCE);
         Pair<Index, Set<Tag>> indexAndTags = TaggingCommandParserUtil.parseIndexAndTags(argMultimap,
                 TagCommand.MESSAGE_USAGE);
 
-        return new TagCommand(indexAndTags.getKey(), new HashSet<>(indexAndTags.getValue()));
+        if (arePrefixesPresent(argMultimap, PREFIX_FORCE)) {
+            return new TagCommand(indexAndTags.getKey(), new HashSet<>(indexAndTags.getValue()), true);
+        } else {
+            return new TagCommand(indexAndTags.getKey(), new HashSet<>(indexAndTags.getValue()));
+        }
     }
 }

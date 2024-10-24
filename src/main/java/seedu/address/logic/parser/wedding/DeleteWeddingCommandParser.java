@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.wedding;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.stream.Stream;
@@ -25,7 +26,7 @@ public class DeleteWeddingCommandParser implements Parser<DeleteWeddingCommand> 
      */
     public DeleteWeddingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_WEDDING);
+                ArgumentTokenizer.tokenize(args, PREFIX_WEDDING, PREFIX_FORCE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -34,7 +35,11 @@ public class DeleteWeddingCommandParser implements Parser<DeleteWeddingCommand> 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEDDING);
         Wedding wedding = ParserUtil.parseWedding(argMultimap.getValue(PREFIX_WEDDING).get());
-        return new DeleteWeddingCommand(wedding);
+        if (arePrefixesPresent(argMultimap, PREFIX_FORCE)) {
+            return new DeleteWeddingCommand(wedding, true);
+        } else {
+            return new DeleteWeddingCommand(wedding);
+        }
     }
 
     /**

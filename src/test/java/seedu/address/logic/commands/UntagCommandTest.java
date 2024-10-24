@@ -49,7 +49,8 @@ public class UntagCommandTest {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 updatedTags,
-                personToEdit.getWeddings());
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
         expectedModel.setPerson(personToEdit, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
@@ -64,6 +65,7 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Email("test@example.com"),
                 new seedu.address.model.person.Address("123, Test Street"),
                 new HashSet<>(Arrays.asList(new Tag(new TagName("friends")), new Tag(new TagName("owesMoney")))),
+                new HashSet<>(),
                 new HashSet<>()
         );
         model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()), personWithTags);
@@ -83,7 +85,8 @@ public class UntagCommandTest {
                 personWithTags.getEmail(),
                 personWithTags.getAddress(),
                 updatedTags,
-                personWithTags.getWeddings());
+                personWithTags.getWeddings(),
+                personWithTags.getTasks());
         expectedModel.setPerson(personWithTags, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
@@ -135,7 +138,8 @@ public class UntagCommandTest {
                 new seedu.address.model.person.Address("123, Test Street"),
                 new HashSet<>(), // No tags
                 new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Jiazhen's Wedding")),
-                        new Wedding(new WeddingName("Wedding 29th August"))))
+                        new Wedding(new WeddingName("Wedding 29th August")))),
+                        new HashSet<>()
         );
 
         model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased()), personWithoutTags);

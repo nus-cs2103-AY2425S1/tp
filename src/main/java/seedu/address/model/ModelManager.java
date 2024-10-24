@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -27,6 +28,8 @@ public class ModelManager implements Model {
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Wedding> filteredWeddings;
 
+    private final FilteredList<Task> filteredTasks;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -40,6 +43,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -140,6 +144,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addTask(Task task) {
+        addressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+        addressBook.setTask(target, editedTask);
+    }
+
+    @Override
+    public void deleteTask(Task target) {
+        addressBook.removeTask(target);
+    }
+
+    @Override
     public void addWedding(Wedding toAdd) {
         addressBook.addWedding(toAdd);
         updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
@@ -197,6 +223,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+    @Override
     public ObservableList<Wedding> getFilteredWeddingList() {
         return filteredWeddings;
     }
@@ -229,6 +265,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredTags.equals(otherModelManager.filteredTags)
+                && filteredTasks.equals(otherModelManager.filteredTasks)
                 && filteredWeddings.equals(otherModelManager.filteredWeddings);
     }
 }

@@ -25,6 +25,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEIGHBOR;
 import static seedu.address.testutil.TypicalTags.FLORIST;
 import static seedu.address.testutil.TypicalTags.PHOTOGRAPHER;
+import static seedu.address.testutil.TypicalTasks.DEADLINE_TASK;
+import static seedu.address.testutil.TypicalTasks.TODO_TASK;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
 
@@ -49,7 +51,7 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").withWeddings("Wedding 2", "Carla's Wedding").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street").withTasks("todo: Buy cake").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
@@ -83,7 +85,7 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical tasks.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -91,6 +93,8 @@ public class TypicalPersons {
         ab.addTag(PHOTOGRAPHER);
         ab.addWedding(AMY_WEDDING);
         ab.addWedding(BOB_WEDDING);
+        ab.addTask(TODO_TASK);
+        ab.addTask(DEADLINE_TASK);
 
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private WeddingListPanel weddingListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -114,6 +115,8 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
 
         weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
 
@@ -211,6 +214,9 @@ public class MainWindow extends UiPart<Stage> {
         case PERSON:
             changeToPersonView();
             break;
+        case TASK:
+            changeToTaskView();
+            break;
         case WEDDING:
             changeToWeddingView();
             break;
@@ -226,6 +232,15 @@ public class MainWindow extends UiPart<Stage> {
         weddingListPanel.updateWeddingList(logic.getFilteredWeddingList());
         listPanelPlaceholder.getChildren().clear();
         listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+    }
+
+    /**
+     * Changes the list panel to show the {@code Task} list.
+     */
+    public void changeToTaskView() {
+        taskListPanel.updatePersonList(logic.getFilteredTaskList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     /**

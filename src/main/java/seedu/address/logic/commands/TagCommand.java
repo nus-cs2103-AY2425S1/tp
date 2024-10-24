@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -34,7 +35,7 @@ public class TagCommand extends Command {
 
     private final Index index;
     private final HashSet<Tag> tagsToAdd;
-
+    private boolean force = false;
 
     /**
      * Constructs a {@code TagCommand} to add tags to a person.
@@ -47,6 +48,21 @@ public class TagCommand extends Command {
         requireNonNull(tagsToAdd);
         this.index = index;
         this.tagsToAdd = tagsToAdd;
+    }
+
+    /**
+     * Constructs a {@code TagCommand} to add tags to a person.
+     *
+     * @param index The index of the person in the person list.
+     * @param tagsToAdd The list of tags to be added.
+     * @param force A boolean representing if the command should be forced.
+     */
+    public TagCommand(Index index, HashSet<Tag> tagsToAdd, boolean force) {
+        requireNonNull(index);
+        requireNonNull(tagsToAdd);
+        this.index = index;
+        this.tagsToAdd = tagsToAdd;
+        this.force = force;
     }
 
     /**
@@ -74,7 +90,12 @@ public class TagCommand extends Command {
 
         for (Tag tag : tagsToAdd) {
             if (!model.hasTag(tag)) {
-                throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+                if (this.force) {
+                    CreateTagCommand createTagCommand = new CreateTagCommand(tag);
+                    createTagCommand.execute(model);
+                } else {
+                    throw new CommandException(MESSAGE_TAG_NOT_FOUND + "\n" + Messages.MESSAGE_FORCE_TAG_TO_CONTACT);
+                }
             }
         }
 
@@ -91,7 +112,8 @@ public class TagCommand extends Command {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 updatedTags,
-                personToEdit.getWeddings());
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
