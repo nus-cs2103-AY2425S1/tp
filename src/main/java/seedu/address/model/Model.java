@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Reminder;
 
 /**
  * The API of the Model component.
@@ -99,4 +100,6 @@ public interface Model {
      * This method will sort the List of persons based on the saved preferences
      */
     void applySavedSortPreference();
+
+    void addReminder(Reminder reminder, Person person);
 }

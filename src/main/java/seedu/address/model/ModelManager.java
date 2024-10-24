@@ -18,6 +18,7 @@ import seedu.address.model.person.DateRecentToDistantComparator;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PriorityHighToLowComparator;
 import seedu.address.model.person.PriorityLowToHighComparator;
+import seedu.address.model.person.Reminder;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -148,6 +149,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void addReminder(Reminder reminder, Person person) {
+        person.getReminderList().addReminder(reminder);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -43,6 +43,10 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final String VALID_REMARK = BENSON.getRemark().toString();
+    private static final List<JsonAdaptedReminder> VALID_REMINDERLIST = BENSON.getReminderList()
+            .getListOfReminders().stream()
+            .map(JsonAdaptedReminder::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
