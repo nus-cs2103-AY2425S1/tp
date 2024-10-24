@@ -47,11 +47,13 @@ public class ListProjectMembersCommand extends Command {
                 .distinct()
                 .toList();
 
-        // Step 4: Update the filtered person list in the model to include only project members
+        // Step 4: Update the filtered person list in the model to include only project
+        // members
         model.updateFilteredPersonList(projectMembers::contains);
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PROJECT_MEMBERS_LISTED, projectMembers.size()), DisplayType.PERSON_LIST);
+                String.format(Messages.MESSAGE_PROJECT_MEMBERS_LISTED, projectMembers.size()),
+                DisplayType.PERSON_LIST);
     }
 
     @Override

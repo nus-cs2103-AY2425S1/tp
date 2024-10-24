@@ -24,6 +24,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String ACTIVE_PANEL_STYLE = "-fx-background-color: derive(#f0f032, 20%);";
+    private static final String IDLE_PANEL_STYLE = "-fx-background-color: derive(#1d1d1d, 20%);";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -150,27 +152,33 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the list of persons.
+     * Highlights the list of persons.
      */
     @FXML
-    public void handleShowPersons() {
-        // TODO: Add highlighting
+    public void emphasizePersonListPanel() {
+        personListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
+        projectListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        assignmentListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
     }
 
     /**
-     * Shows the list of projects.
+     * Highlights the list of projects.
      */
     @FXML
-    public void handleShowProjects() {
-        // TODO: Add highlighting
+    public void emphasizeProjectListPanel() {
+        personListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        projectListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
+        assignmentListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
     }
 
     /**
-     * Shows the list of assignments.
+     * Highlights the list of assignments.
      */
     @FXML
-    public void handleShowAssignments() {
-        // TODO: Add highlighting
+    public void emphasizeAssignmentListPanel() {
+        personListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        projectListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        assignmentListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
     }
 
     /**
@@ -214,15 +222,15 @@ public class MainWindow extends UiPart<Stage> {
 
             // TODO: Consider using factory classes for this
             if (commandResult.getDisplayType().equals(DisplayType.PERSON_LIST)) {
-                handleShowPersons();
+                emphasizePersonListPanel();
             }
 
             if (commandResult.getDisplayType().equals(DisplayType.PROJECT_LIST)) {
-                handleShowProjects();
+                emphasizeProjectListPanel();
             }
 
             if (commandResult.getDisplayType().equals(DisplayType.ASSIGNMENT_LIST)) {
-                handleShowAssignments();
+                emphasizeAssignmentListPanel();
             }
 
             if (commandResult.isShowHelp()) {
