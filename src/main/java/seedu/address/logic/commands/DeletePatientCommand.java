@@ -49,6 +49,21 @@ public class DeletePatientCommand extends Command {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeletePatientCommand)) {
+            return false;
+        }
+
+        DeletePatientCommand otherDeleteCommand = (DeletePatientCommand) other;
+        return patientId == otherDeleteCommand.patientId;
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("patientId", patientId)
