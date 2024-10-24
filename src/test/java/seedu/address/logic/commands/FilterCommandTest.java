@@ -70,10 +70,10 @@ public class FilterCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonPredicate predicate = preparePredicate(" ");
-        System.out.println(predicate);
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        PersonPredicate pred = preparePredicate(" ");
+        System.out.println(pred);
+        FilterCommand command = new FilterCommand(pred);
+        expectedModel.updateFilteredPersonList(pred);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(emptyList(), model.getFilteredPersonList());
     }
