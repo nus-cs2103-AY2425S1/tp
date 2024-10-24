@@ -51,6 +51,7 @@ public class ParserUtilTest {
     private static final String VALID_PROJECT_NAME = "Project Alpha";
 
     private static final String VALID_ASSIGNMENT_ID = "1";
+    private static final String INVALID_ASSIGNMENT_ID = "A";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -318,5 +319,10 @@ public class ParserUtilTest {
     public void parseAssignmentId_validValue_returnTrimmedAssignmentId() throws Exception {
         AssignmentId expectedAssignmentId = new AssignmentId(VALID_ASSIGNMENT_ID);
         assertEquals(expectedAssignmentId, ParserUtil.parseAssignmentId(VALID_ASSIGNMENT_ID));
+    }
+
+    @Test
+    public void parseAssignmentId_collectionWithInvalidSkills_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssignmentId(INVALID_ASSIGNMENT_ID));
     }
 }
