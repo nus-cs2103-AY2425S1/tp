@@ -65,7 +65,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().getValueForUI());
         Image address = new Image(getClass().getResourceAsStream("/images/address_icon.png"));
         addressIcon.setImage(address);
-        notes.setText(person.getNotes().getValueForUI());
         email.setText(person.getEmail().getValueForUI());
         Image email = new Image(getClass().getResourceAsStream("/images/email_icon.png"));
         emailIcon.setImage(email);
