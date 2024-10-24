@@ -23,6 +23,7 @@ Class Tag
 Class Student extends Person
 Class Education
 Class Grade
+Class Parent extends Person
 
 Class I #FFFFFF
 }
@@ -45,11 +46,13 @@ ArchivedPersonList --> "~* all" Person
 UniquePersonList --> "~* all" Person
 Person *--> "1" Name
 Person *--> "1" Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Email
+Person *--> "1" Address
 Person *--> "*" Tag
-Student *--> Education
-Student *--> Grade
+
+Student *--> "1" Grade
+Student *--> "1" Education
+Student "child" <-right-> "parent"Parent:"                     "
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
