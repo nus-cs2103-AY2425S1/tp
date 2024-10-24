@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <Command Keyword>"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " COMMAND_KEYWORD"
             + ": Shows usage of the given command keyword\n"
             + "Example: " + COMMAND_WORD + " add\n"
             + COMMAND_WORD + ": Shows full list of keywords and usage instructions.\n"
