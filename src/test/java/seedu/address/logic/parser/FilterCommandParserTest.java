@@ -53,10 +53,6 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_invalidTag_throwsParseException() {
-        //non empty preamble
-        FilterCommand expectedFilterCommand = new FilterCommand(phoneOnlyPredicate);
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + " p/ " + ALICE.getPhone().value,
-              String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));;
         //invalid tag
         assertParseFailure(parser, INVALID_TAG_DESC,
               String.format(Tag.MESSAGE_CONSTRAINTS, FilterCommand.MESSAGE_USAGE));
@@ -86,10 +82,17 @@ public class FilterCommandParserTest {
         assertParseSuccess(parser, " p/ " + ALICE.getPhone().value, expectedFilterCommand);
 
         //parse with preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " p/ " + ALICE.getPhone().value, expectedFilterCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " p/ " + ALICE.getPhone().value,
+              expectedFilterCommand);
+
+        //parse with non-empty preamble
+        assertParseSuccess(parser, PREAMBLE_NON_EMPTY + " p/ " + ALICE.getPhone().value,
+              expectedFilterCommand);
+
         //tag only
         expectedFilterCommand = new FilterCommand(highTagOnlyPredicate);
         assertParseSuccess(parser, " t/ High Risk", expectedFilterCommand);
+
 
         //phone number and tag
         expectedFilterCommand =
