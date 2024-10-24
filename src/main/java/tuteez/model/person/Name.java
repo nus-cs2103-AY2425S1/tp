@@ -31,6 +31,7 @@ public class Name {
      * @param name A valid name.
      */
     public Name(String name) {
+        assert name != null : "Name cannot be null";
         validateInput(name);
         fullName = processName(name);
     }
