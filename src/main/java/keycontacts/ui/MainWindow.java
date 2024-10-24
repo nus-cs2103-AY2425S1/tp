@@ -8,7 +8,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
@@ -23,7 +25,7 @@ import keycontacts.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "Notebook.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -34,6 +36,18 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    @FXML
+    private AnchorPane leftPage;
+
+    @FXML
+    private AnchorPane rightPage;
+
+    @FXML
+    private StackPane binderPlaceholder;
+
+    @FXML
+    private VBox loopParent;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane calendarDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +83,14 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        primaryStage.getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
+            double newWidth = newValue.doubleValue();
+            leftPage.setPrefWidth((newWidth - binderPlaceholder.getWidth()) / 2);
+            rightPage.setPrefWidth((newWidth - binderPlaceholder.getWidth()) / 2);
+        });
+
+
     }
 
     public Stage getPrimaryStage() {
@@ -121,6 +146,13 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        CalendarView calendarView = new CalendarView();
+        calendarDisplayPlaceholder.getChildren().add(calendarView.getRoot());
+
+        Binder binder = new Binder(primaryStage.getScene().getHeight());
+        binderPlaceholder.getChildren().add(binder.getRoot());
+        binder.addListener();
     }
 
     /**
