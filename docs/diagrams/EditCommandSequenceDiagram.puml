@@ -1,14 +1,15 @@
-// @@author Darren
-// Reused from https://github.com/AY2324S2-CS2103T-W10-1/tp/blob/master/docs/diagrams/AddCommandSequenceDiagram.puml
-// with minor modifications
+//@author Aditya Joshi
+//adapted from https://github.com/AY2324S1-CS2103T-F08-3/tp/blob/master/docs/diagrams/EditSequenceDiagram.puml
+//with slight modifications
+
 @startuml
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
-participant "r:AddCommand" as AddCommand LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "r:EditCommand" as EditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -22,51 +23,51 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("args")
 activate AddressBookParser
 
-create AddCommandParser
-AddressBookParser -> AddCommandParser
-activate AddCommandParser
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
 
-AddCommandParser --> AddressBookParser
-deactivate AddCommandParser
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
 
-AddressBookParser -> AddCommandParser : parse("args")
-activate AddCommandParser
+AddressBookParser -> EditCommandParser : parse("args")
+activate EditCommandParser
 
-create AddCommand
-AddCommandParser -> AddCommand
-activate AddCommand
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
 
-AddCommand --> AddCommandParser : r
-deactivate AddCommand
+EditCommand --> EditCommandParser : r
+deactivate EditCommand
 
-AddCommandParser --> AddressBookParser : r
-deactivate AddCommandParser
+EditCommandParser --> AddressBookParser : r
+deactivate EditCommandParser
 
-AddCommandParser -[hidden]-> AddressBookParser
-destroy AddCommandParser
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
 
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> AddCommand : execute()
-activate AddCommand
+LogicManager -> EditCommand : execute()
+activate EditCommand
 
-AddCommand -> Model : addPerson(Person)
+EditCommand -> Model : editPerson(Person)
 activate Model
 
-Model --> AddCommand
+Model --> EditCommand
 deactivate Model
 
 create CommandResult
-AddCommand -> CommandResult
+EditCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddCommand : result
+CommandResult --> EditCommand : result
 deactivate CommandResult
 
-AddCommand --> LogicManager : result
-deactivate AddCommand
+EditCommand --> LogicManager : result
+deactivate EditCommand
 
-[<--LogicManager
+[<-- LogicManager
 deactivate LogicManager
 @enduml
