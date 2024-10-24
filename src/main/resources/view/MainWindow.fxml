@@ -57,7 +57,7 @@
           </VBox>
 
           <!-- Tags List Section -->
-          <VBox fx:id="tagsList" styleClass="pane-with-border" minWidth="250" prefWidth="250" VBox.vgrow="ALWAYS">
+          <VBox fx:id="tagsList" styleClass="pane-with-border" minWidth="300" prefWidth="300" VBox.vgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
