@@ -1,5 +1,11 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.ProjectName;
+import seedu.address.model.skill.Skill;
 
 /**
  * Jackson-friendly version of {@link Project}.
@@ -17,15 +24,19 @@ class JsonAdaptedProject {
 
     private final String name;
     private final String id;
-
-
+    private final List<JsonAdaptedSkill> skills = new ArrayList<>();
     /**
      * Constructs a {@code JsonAdaptedProject} with the given project details.
      */
     @JsonCreator
-    public JsonAdaptedProject(@JsonProperty("name") String name, @JsonProperty("id") String id) {
+    public JsonAdaptedProject(@JsonProperty("name") String name,
+                              @JsonProperty("id") String id,
+                              @JsonProperty("skills") List<JsonAdaptedSkill> skills) {
         this.name = name;
         this.id = id;
+        if (skills != null) {
+            this.skills.addAll(skills);
+        }
     }
 
     /**
@@ -34,6 +45,9 @@ class JsonAdaptedProject {
     public JsonAdaptedProject(Project source) {
         name = source.getName().fullName;
         id = source.getId().fullId;
+        skills.addAll(source.getSkills().stream()
+                .map(JsonAdaptedSkill::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -59,8 +73,13 @@ class JsonAdaptedProject {
             throw new IllegalValueException(ProjectId.MESSAGE_CONSTRAINTS);
         }
         final ProjectId modelProjectId = new ProjectId(id);
+        final List<Skill> projectSkills = new ArrayList<>();
+        for (JsonAdaptedSkill skill : skills) {
+            projectSkills.add(skill.toModelType());
+        }
+        final Set<Skill> modelSkills = new HashSet<>(projectSkills);
 
-        return new Project(modelProjectName, modelProjectId);
+        return new Project(modelProjectName, modelProjectId, modelSkills);
     }
 
 }

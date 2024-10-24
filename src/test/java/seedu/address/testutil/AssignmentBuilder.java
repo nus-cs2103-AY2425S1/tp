@@ -47,7 +47,7 @@ public class AssignmentBuilder {
      * Sets the {@code projectId} of the {@code Assignment} that we are building.
      */
     public AssignmentBuilder withProject(Project project) {
-        this.project = new Project(project.getName(), project.getId());
+        this.project = new Project(project.getName(), project.getId(), project.getSkills());
         return this;
     }
 
