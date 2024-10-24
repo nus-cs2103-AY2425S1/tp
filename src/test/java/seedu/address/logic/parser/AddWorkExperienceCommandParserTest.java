@@ -88,4 +88,11 @@ public class AddWorkExperienceCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddWorkExperienceCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parseInvalidArgs_emptyWorkExperience_throwsParseException() {
+        // Additional case for an empty work experience after the prefix
+        assertParseFailure(parser, " in/1 w/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddWorkExperienceCommand.MESSAGE_USAGE));
+    }
 }
+
