@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PropertyList;
@@ -37,10 +38,10 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
                 new PropertyList(model.getPropertyList()));
         expectedModel.addMeetUp(meetUp);
+        CommandResult expectedCommandResult = new CommandResult(String.format(
+                AddCommand.MESSAGE_SUCCESS, Messages.format(meetUp), false, false, true, false, false));
 
-        assertCommandSuccess(new AddCommand(meetUp), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(meetUp)),
-                expectedModel);
+        assertCommandSuccess(new AddCommand(meetUp), model, expectedCommandResult, expectedModel);
     }
 
     @Test

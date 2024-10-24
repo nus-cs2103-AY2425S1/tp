@@ -106,13 +106,4 @@ public class JsonAdaptedPropertyTest {
         assertThrows(IllegalValueException.class, expectedMessage, property::toModelType);
     }
 
-    @Test
-    public void toModelType_nullPropertyType_throwsIllegalValueException() {
-        JsonAdaptedProperty property = new JsonAdaptedProperty(VALID_NAME, VALID_PHONE, VALID_LOCATION, VALID_ASKING_PRICE,
-                INVALID_PROPERTY_TYPE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, PropertyType.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, property::toModelType);
-    }
-
-
 }

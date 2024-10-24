@@ -3,6 +3,10 @@ package seedu.address.storage.property;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.property.TypicalProperties.ALICE;
+import static seedu.address.testutil.property.TypicalProperties.AMY;
+import static seedu.address.testutil.property.TypicalProperties.BOB;
+import static seedu.address.testutil.property.TypicalProperties.CARL;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import java.io.IOException;
@@ -69,14 +73,14 @@ public class JsonPropertyListStorageTest {
         assertEquals(original, new PropertyList(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addProperty(NETWORKING_MEETUP);
-        original.removeProperty(THIRD_MEETUP);
+        original.addProperty(BOB);
+        original.removeProperty(CARL);
         jsonPropertyListStorage.savePropertyList(original, filePath);
         readBack = jsonPropertyListStorage.readPropertyList(filePath).get();
         assertEquals(original, new PropertyList(readBack));
 
         // Save and read without specifying file path
-        original.addProperty(PITCH_MEETUP);
+        original.addProperty(AMY);
         jsonPropertyListStorage.savePropertyList(original); // file path not specified
         readBack = jsonPropertyListStorage.readPropertyList().get(); // file path not specified
         assertEquals(original, new PropertyList(readBack));
@@ -89,7 +93,7 @@ public class JsonPropertyListStorageTest {
     }
 
     /**
-     * Saves {@code buyerList} at the specified {@code filePath}.
+     * Saves {@code propertyList} at the specified {@code filePath}.
      */
     private void savePropertyList(ReadOnlyPropertyList propertyList, String filePath) {
         try {

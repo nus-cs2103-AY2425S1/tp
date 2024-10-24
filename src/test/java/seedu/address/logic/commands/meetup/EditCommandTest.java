@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.meetup.EditCommand.EditMeetUpDescriptor;
 import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
@@ -51,8 +52,9 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
         expectedModel.setMeetUp(model.getFilteredMeetUpList().get(0), editedMeetUp);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false, false);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -72,8 +74,9 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
         expectedModel.setMeetUp(lastMeetUp, editedMeetUp);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false, false);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -86,8 +89,9 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false, false);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -105,8 +109,9 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
         expectedModel.setMeetUp(model.getFilteredMeetUpList().get(0), editedMeetUp);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false, false);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

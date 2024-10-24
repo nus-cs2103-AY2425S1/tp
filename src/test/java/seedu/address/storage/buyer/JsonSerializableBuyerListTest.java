@@ -16,17 +16,17 @@ import seedu.address.testutil.buyer.TypicalBuyers;
 public class JsonSerializableBuyerListTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableBuyerListTest");
-    private static final Path TYPICAL_BUYERS_FILE = TEST_DATA_FOLDER.resolve("typicalBuyersBuyerList.json");
-    private static final Path INVALID_BUYER_FILE = TEST_DATA_FOLDER.resolve("invalidBuyerBuyerList.json");
-    private static final Path DUPLICATE_BUYER_FILE = TEST_DATA_FOLDER.resolve("duplicateBuyerBuyerList.json");
+    private static final Path TYPICAL_BUYERS_FILE = TEST_DATA_FOLDER.resolve("typicalBuyerList.json");
+    private static final Path INVALID_BUYER_FILE = TEST_DATA_FOLDER.resolve("invalidBuyerList.json");
+    private static final Path DUPLICATE_BUYER_FILE = TEST_DATA_FOLDER.resolve("duplicateBuyerList.json");
 
     @Test
     public void toModelType_typicalBuyersFile_success() throws Exception {
         JsonSerializableBuyerList dataFromFile = JsonUtil.readJsonFile(TYPICAL_BUYERS_FILE,
                 JsonSerializableBuyerList.class).get();
         BuyerList buyerListFromFile = dataFromFile.toModelType();
-        BuyerList typicalBuyersBuyerList = TypicalBuyers.getTypicalBuyerList();
-        assertEquals(buyerListFromFile, typicalBuyersBuyerList);
+        BuyerList typicalBuyerList = TypicalBuyers.getTypicalBuyerList();
+        assertEquals(buyerListFromFile, typicalBuyerList);
     }
 
     @Test
