@@ -14,11 +14,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PARENT_EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PARENT_NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -141,12 +138,11 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_optionalFieldsMissing_success() {
+    public void parse_tagFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + EDUCATION_DESC_AMY + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY + PARENT_EMAIL_DESC_AMY,
-                new AddCommand(expectedPerson));
+                + EDUCATION_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -202,7 +198,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + EDUCATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + ADDRESS_DESC_BOB + EDUCATION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
