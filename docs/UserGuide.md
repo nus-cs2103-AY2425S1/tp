@@ -145,6 +145,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Grading a Module: `grade`
+
+Assigns a grade to a module that a student is taking.
+
+**Format:** `grade INDEX m/MODULE s/GRADE`
+
+- Assigns a numerical grade (between 0 and 100) to the module identified by the `INDEX` number shown in the displayed person list.
+- `INDEX` must be a positive integer.
+- The grade can be any whole number between 0 and 100, inclusive.
+
+**Examples:**
+- `grade 1 m/CS2103T s/85` assigns a grade of 85 to CS2103T for the first student.
+- `grade 2 m/MA1522 s/90` assigns a grade of 90 to MA1522 for the second student.
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
