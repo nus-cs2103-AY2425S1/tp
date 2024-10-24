@@ -32,7 +32,6 @@ public class ParserUtilTest {
     private static final String VALID_ROLE = GOOGLE.getRole().toString();
     private static final String VALID_DATE = GOOGLE.getDateOfApplication().toString();
     private static final String VALID_STATUS = GOOGLE.getStatus().getValue();
-  
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
