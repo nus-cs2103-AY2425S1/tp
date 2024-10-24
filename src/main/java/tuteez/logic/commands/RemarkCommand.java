@@ -3,10 +3,8 @@ package tuteez.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import tuteez.commons.core.index.Index;
-import tuteez.commons.core.LogsCenter;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;

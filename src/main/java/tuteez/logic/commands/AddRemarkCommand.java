@@ -16,10 +16,9 @@ import tuteez.model.remark.RemarkList;
  */
 public class AddRemarkCommand extends RemarkCommand {
     public static final String ADD_REMARK_PARAM = "-a";
+    private static final Logger logger = LogsCenter.getLogger(AddRemarkCommand.class);
 
     private final Remark remarkToAdd;
-
-    private static final Logger logger = LogsCenter.getLogger(AddRemarkCommand.class);
 
     /**
      * Adds the specified Remark to the person {@code personIndex} of the displayed list.

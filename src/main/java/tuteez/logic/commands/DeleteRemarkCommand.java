@@ -3,8 +3,8 @@ package tuteez.logic.commands;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import tuteez.commons.core.index.Index;
 import tuteez.commons.core.LogsCenter;
+import tuteez.commons.core.index.Index;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
@@ -16,10 +16,9 @@ import tuteez.model.remark.RemarkList;
  */
 public class DeleteRemarkCommand extends RemarkCommand {
     public static final String DELETE_REMARK_PARAM = "-d";
+    private static final Logger logger = LogsCenter.getLogger(DeleteRemarkCommand.class);
 
     private final Index remarkIndex;
-
-    private static final Logger logger = LogsCenter.getLogger(DeleteRemarkCommand.class);
 
     /**
      * Deletes the specified Remark {@code remarkIndex} to the person {@code personIndex} of the displayed list.
