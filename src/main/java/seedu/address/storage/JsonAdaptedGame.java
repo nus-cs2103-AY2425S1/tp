@@ -17,17 +17,20 @@ class JsonAdaptedGame {
     private final String username;
     private final String skillLevel;
     private final String role;
+    private final Boolean isFavourite;
 
     /**
      * Constructs a {@code JsonAdaptedGame} with the given {@code gameName}.
      */
     @JsonCreator
     public JsonAdaptedGame(@JsonProperty("gameName") String gameName, @JsonProperty("username") String username,
-                           @JsonProperty("skillLevel") String skillLevel, @JsonProperty("role") String role) {
+                           @JsonProperty("skillLevel") String skillLevel, @JsonProperty("role") String role,
+                           @JsonProperty("isFavourite") boolean isFavourite) {
         this.gameName = gameName;
         this.username = username;
         this.skillLevel = skillLevel;
         this.role = role;
+        this.isFavourite = isFavourite;
     }
 
     /**
@@ -38,6 +41,7 @@ class JsonAdaptedGame {
         username = source.getUsername().username;
         skillLevel = source.getSkillLevel().skillLevel;
         role = source.getRole().role;
+        isFavourite = source.getFavouriteStatus();
     }
 
     public String getGameName() {
@@ -53,7 +57,7 @@ class JsonAdaptedGame {
         if (!Game.isValidGameName(gameName)) {
             throw new IllegalValueException(Game.MESSAGE_CONSTRAINTS);
         }
-        return new Game(gameName, new Username(username), new SkillLevel(skillLevel), new Role(role));
+        return new Game(gameName, new Username(username), new SkillLevel(skillLevel), new Role(role), isFavourite);
     }
 
 }

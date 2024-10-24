@@ -36,14 +36,13 @@ public class PreferredTimeTest {
         // invalid preferred time
         assertFalse(PreferredTime.isValidPreferredTime("")); // empty String
         assertFalse(PreferredTime.isValidPreferredTime(" ")); // spaces only
-        assertFalse(PreferredTime.isValidPreferredTime("Sunday")); // first part only
         assertFalse(PreferredTime.isValidPreferredTime("3435")); // second part only
-        assertFalse(PreferredTime.isValidPreferredTime("2345 3456")); // first part being number
-        assertFalse(PreferredTime.isValidPreferredTime("Monday 12")); // < 4 places for second part
-        assertFalse(PreferredTime.isValidPreferredTime("Monday 24380")); // > 4 places for second part
-        assertFalse(PreferredTime.isValidPreferredTime("Wednesday  2130")); // more than one space
+        assertFalse(PreferredTime.isValidPreferredTime("2345 3456")); // no hyphen in between
+        assertFalse(PreferredTime.isValidPreferredTime("2100-4500")); // invalid time range
+        assertFalse(PreferredTime.isValidPreferredTime("2300-1700")); // start time later than end time
+
 
         // valid preferred time
-        assertTrue(PreferredTime.isValidPreferredTime("Monday 1230"));
+        assertTrue(PreferredTime.isValidPreferredTime("1100-1300"));
     }
 }

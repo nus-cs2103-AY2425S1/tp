@@ -3,6 +3,8 @@ package seedu.address.model.preferredtime;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,14 +16,17 @@ import java.util.regex.Pattern;
 public class PreferredTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "PreferredTime should consists of Day and Time in the format 'Day HHmm'.\n"
-            + "There should be exactly one space in between";
-    public static final String VALIDATION_REGEX = "(\\p{L}+)\\s(\\d{4})$";
+            "PreferredTime should consists of start and end Time in the format 'HHmm-HHmm'.\n"
+            + "Time should be in range from 0000 to 2359.";
+    public static final String VALIDATION_REGEX = "(\\d{4})-(\\d{4})$";
+    public static final String TIME_CHECK = "^([01][0-9]|2[0-3])[0-5][0-9]$";
     public static final Pattern VALIDATED_PATTERN = Pattern.compile(VALIDATION_REGEX);
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+
 
     public final String preferredTime;
-    public final Day day;
-    public final Time time;
+    public final LocalTime start;
+    public final LocalTime end;
 
 
     /**
@@ -32,22 +37,44 @@ public class PreferredTime {
     public PreferredTime(String preferredTime) {
         requireNonNull(preferredTime);
         checkArgument(isValidPreferredTime(preferredTime), MESSAGE_CONSTRAINTS);
-        this.preferredTime = preferredTime;
 
+        this.preferredTime = preferredTime;
         Matcher matcher = VALIDATED_PATTERN.matcher(preferredTime); // should always match as checked
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid preferred time format: " + preferredTime);
         }
 
-        day = new Day(matcher.group(1));
-        time = new Time(matcher.group(2));
+        start = LocalTime.parse(matcher.group(1), TIME_FORMATTER);
+        end = LocalTime.parse(matcher.group(2), TIME_FORMATTER);
     }
 
     /**
      * Returns true if a given string is a valid PreferredTime.
      */
     public static boolean isValidPreferredTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+
+        Matcher matcher = VALIDATED_PATTERN.matcher(test); // should always match as checked
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Invalid preferred time format: " + test);
+        }
+
+        String start = matcher.group(1);
+        String end = matcher.group(2);
+
+        Matcher matchStart = Pattern.compile(TIME_CHECK).matcher(start);
+        Matcher matchEnd = Pattern.compile(TIME_CHECK).matcher(end);
+
+        if (!matchStart.matches() || !matchEnd.matches()) {
+            return false;
+        }
+        return LocalTime.parse(start, TIME_FORMATTER).isBefore(LocalTime.parse(end, TIME_FORMATTER));
+    }
+
+    public boolean overlaps(PreferredTime other) {
+        return !(end.isBefore(other.start) || start.isAfter(other.end));
     }
 
     @Override
@@ -62,7 +89,7 @@ public class PreferredTime {
         }
 
         PreferredTime otherPreferredTime = (PreferredTime) other;
-        return day.equals(otherPreferredTime.day) && time.equals(otherPreferredTime.time);
+        return preferredTime.equals(otherPreferredTime.preferredTime);
     }
 
     @Override
@@ -75,6 +102,6 @@ public class PreferredTime {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + day.toString() + ' ' + time.toString() + ']';
+        return '[' + preferredTime + ']';
     }
 }
