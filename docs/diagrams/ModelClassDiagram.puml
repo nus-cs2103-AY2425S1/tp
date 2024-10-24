@@ -21,6 +21,8 @@ Package Model as ModelPackage <<Rectangle>> {
   Class Tag
   Class University
   Class WorkExp
+  Class Major
+  Class Interest
 
   Class I #FFFFFF
 }
@@ -46,6 +48,8 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> University
 Person *--> WorkExp
+Person *--> Major
+Person *--> Interest
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

@@ -25,22 +25,28 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new WorkExp("Intern,Google,2022"),
-                getTagSet("friends"), new University("NUS"), new Major("Business"), new Interest("")),
+                getTagSet("friends"), new University("NUS"), new Major("Business"),
+                    getInterestSet("reading", "cycling")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new WorkExp("Engineer,Microsoft,2023"),
-                getTagSet("colleagues", "friends"), new University("NTU"), new Major("Engineering"), new Interest("")),
+                getTagSet("colleagues", "friends"), new University("NTU"), new Major("Engineering"),
+                    getInterestSet("swimming")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new WorkExp("Manager,Amazon,2024"),
-                getTagSet("neighbours"), new University("SMU"), new Major("Accounting"), new Interest("")),
+                getTagSet("neighbours"), new University("SMU"), new Major("Accounting"),
+                    getInterestSet("hiking")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new WorkExp("Director,Google,2023"),
-                getTagSet("family"), new University("NUS"), new Major("Law"), new Interest("")),
+                getTagSet("family"), new University("NUS"), new Major("Law"),
+                    getInterestSet("traveling", "photography")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new WorkExp("Intern,Microsoft,2023"),
-                getTagSet("classmates"), new University("SUTD"), new Major("Design"), new Interest("")),
+                getTagSet("classmates"), new University("SUTD"), new Major("Design"),
+                    getInterestSet("gaming")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new WorkExp("Intern,Amazon,2024"),
-                getTagSet("colleagues"), new University("NUS"), new Major("Computer Science"), new Interest(""))
+                getTagSet("colleagues"), new University("NUS"), new Major("Computer Science"),
+                    getInterestSet("programming", "chess"))
         };
     }
 
@@ -58,6 +64,14 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+    /**
+     * Returns an interest set containing the list of strings given.
+     */
+    public static Set<Interest> getInterestSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Interest::new)
                 .collect(Collectors.toSet());
     }
 

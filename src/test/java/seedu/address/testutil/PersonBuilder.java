@@ -37,7 +37,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private University university;
     private Major major;
-    private Interest interest;
+    private Set<Interest> interests;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -51,7 +51,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         university = new University(DEFAULT_UNIVERSITY);
         major = new Major(DEFAULT_MAJOR);
-        interest = new Interest(DEFAULT_INTEREST);
+        interests = new HashSet<>();
     }
 
     /**
@@ -66,6 +66,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         university = personToCopy.getUniversity();
         major = personToCopy.getMajor();
+        interests = new HashSet<>(personToCopy.getInterests());
     }
 
     /**
@@ -115,6 +116,7 @@ public class PersonBuilder {
         this.workExp = new WorkExp(workExp);
         return this;
     }
+
     /**
      * Sets the {@code University} of the {@code Person} that we are building.
      */
@@ -130,17 +132,20 @@ public class PersonBuilder {
         this.major = new Major(major);
         return this;
     }
+
+    /**
+     * Sets the {@code Interests} of the {@code Person} that we are building.
+     * Parses the {@code interests} into a {@code Set<Interest>}.
+     */
+    public PersonBuilder withInterests(String... interests) {
+        this.interests = SampleDataUtil.getInterestSet(interests);
+        return this;
+    }
     /**
      * Builds and returns a {@code Person} object with the attributes that have been set for this {@code PersonBuilder}.
-     *
-     * <p>Any fields that are not set will be initialized with their default values.
-     * For example, if an {@code Interest} is not provided, the {@code Person} object will be created with an empty
-     * interest string.</p>
-     *
-     * @return A {@code Person} object with the current attributes of the {@code PersonBuilder}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, workExp, tags, university, major, new Interest(""));
+        return new Person(name, phone, email, address, workExp, tags, university, major, interests);
     }
 
 }

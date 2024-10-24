@@ -46,6 +46,9 @@ public class CommandTestUtil {
     public static final String VALID_UNIVERSITY_BOB = "NTU";
     public static final String VALID_MAJOR_AMY = "Computer Science";
     public static final String VALID_MAJOR_BOB = "Business";
+    public static final String VALID_INTEREST_BOB = "Swimming";
+    public static final String VALID_INTEREST_AMY = "Reading";
+
 
 
 
@@ -65,6 +68,9 @@ public class CommandTestUtil {
     public static final String UNIVERSITY_DESC_BOB = " " + PREFIX_UNIVERSITY + VALID_UNIVERSITY_BOB;
     public static final String MAJOR_DESC_AMY = " " + PREFIX_MAJOR + VALID_MAJOR_AMY;
     public static final String MAJOR_DESC_BOB = " " + PREFIX_MAJOR + VALID_MAJOR_BOB;
+    public static final String INTERESTS_DESC_BOB = " " + PREFIX_INTEREST + VALID_INTEREST_BOB;
+    public static final String INTERESTS_DESC_AMY = " " + PREFIX_INTEREST + VALID_INTEREST_AMY;
+
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -90,11 +96,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withWorkExp(VALID_WORKEXP_AMY).withUniversity(VALID_UNIVERSITY_AMY).withMajor(VALID_MAJOR_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withInterests(VALID_INTEREST_BOB, VALID_INTEREST_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withWorkExp(VALID_WORKEXP_BOB).withUniversity(VALID_UNIVERSITY_BOB).withMajor(VALID_MAJOR_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withInterests(VALID_INTEREST_BOB).build();
 
     }
 
