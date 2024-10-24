@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.TreeMap;
 
 /**
  * Represents a Event's time in the address book.
@@ -42,6 +43,10 @@ public class Time {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    public boolean isAfter(Time other) {
+        return eventTime.isAfter(other.eventTime);
     }
 
 
