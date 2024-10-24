@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface**
-(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get
+PhysioPal is a **desktop app for managing contacts for physiotherapists, optimized for use via a Command Line Interface**
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PhysioPal can get
 your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -37,7 +37,7 @@ your contact management tasks done faster than traditional GUI apps.
 
    * `appointment-delete John Doe` : Deletes a scheduled appointment for John Doe.
 
-   * `appointment-list` : Lists all scheduled appointments.
+   * `appointment-list` : Lists all upcoming scheduled appointments.
 
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
    * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for John Doe on October 14, 2024, at 12pm as paid.
@@ -142,9 +142,9 @@ Examples:
 
 ### Viewing upcoming appointments: `appointment-list`
 
-Lists all upcoming appointments 
+Lists all upcoming appointments in the order of the earliest next upcoming appointment.
 
-Format: `appointment-list [DATE_AND_TIME]`
+Format: `appointment-list [d/DATE_AND_TIME]`
 
 * This will only show appointments that are in the future (compared to local time now).
 * The optional date and time fields act as filters.
@@ -153,8 +153,8 @@ Format: `appointment-list [DATE_AND_TIME]`
 
 Examples:
 * `appointment-list`
-* `appointment-list 2024-10-17`
-* `appointment-list 2024-10-18 1000`
+* `appointment-list d/2024-10-17`
+* `appointment-list d/2024-10-18 1000`
 
 ### Making Payment for an appointment: `payment`
 
@@ -175,13 +175,36 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Viewing a person: `view [NAME]`
+
+Displays the details of a person in the address book.
+
+**Format:** `view [NAME]`
+
+<div markdown="span" class="alert alert-primary">
+Tip:
+The name must match the full name exactly.
+</div>
+
+**On success:** A pop-up window will show the details including:
+- Name
+- Phone Number
+- Email
+- Address
+- Condition
+- Schedule
+
+**Examples:**
+* `view John Doe`
+* `view Betsy Crowe`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person with the specified `NAME`. The name refers to the name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -189,8 +212,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `John Doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `Betsy Crowe` to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -277,8 +300,10 @@ Action | Format, Examples
 **Appointment Delete** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
 **Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
 **Reminder** | `reminder NAME r/REMINDER_TIME`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
 **Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe 2024-10-20 1100 pay/paid`
+**Appointment List** | `appointment-list [d/DATE_AND_TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
 **List** | `list`
 **Help** | `help`
+**View** | `view [NAME]`

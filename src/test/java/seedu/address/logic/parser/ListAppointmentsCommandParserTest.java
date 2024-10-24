@@ -18,7 +18,8 @@ public class ListAppointmentsCommandParserTest {
 
     @Test
     public void parse_emptyArg_returnsListAppointmentsCommand() {
-        ListAppointmentsCommand expectedCommand = new ListAppointmentsCommand(Optional.empty(), Optional.empty());
+        ListAppointmentsCommand expectedCommand = new ListAppointmentsCommand(Optional.empty(),
+                Optional.empty());
         assertParseSuccess(parser, "", expectedCommand);
     }
 
@@ -26,7 +27,7 @@ public class ListAppointmentsCommandParserTest {
     public void parse_validDateArg_returnsListAppointmentsCommand() {
         ListAppointmentsCommand expectedCommand = new ListAppointmentsCommand(
                 Optional.of(LocalDate.of(2024, 10, 15)), Optional.empty());
-        assertParseSuccess(parser, "2024-10-15", expectedCommand);
+        assertParseSuccess(parser, " d/2024-10-15", expectedCommand);
     }
 
     @Test
@@ -34,18 +35,18 @@ public class ListAppointmentsCommandParserTest {
         ListAppointmentsCommand expectedCommand = new ListAppointmentsCommand(
                 Optional.of(LocalDate.of(2024, 10, 15)),
                 Optional.of(LocalTime.of(14, 30)));
-        assertParseSuccess(parser, "2024-10-15 14:30", expectedCommand);
+        assertParseSuccess(parser, " d/2024-10-15 1430", expectedCommand);
     }
 
     @Test
     public void parse_invalidDateArg_throwsParseException() {
-        assertParseFailure(parser, "invalid-date",
+        assertParseFailure(parser, " d/invalid-date",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAppointmentsCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidTimeArg_throwsParseException() {
-        assertParseFailure(parser, "2024-10-15 invalid-time",
+        assertParseFailure(parser, " d/2024-10-15 invalid-time",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAppointmentsCommand.MESSAGE_USAGE));
     }
 }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="ClientInfo" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/info_icon.png" />
+    </icons>
+    <scene>
+    <Scene>
+        <stylesheets>
+            <URL value="@ViewWindow.css" />
+        </stylesheets>
+        <VBox fx:id="viewClientContainer" alignment="CENTER" prefHeight="372.0" prefWidth="507.0">
+            <children>
+                <HBox fx:id="clientProfileContainer" prefHeight="104.0" prefWidth="507.0" stylesheets="@ViewWindow.css">
+                    <children>
+                        <ImageView fx:id="clientImage" fitHeight="102.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                            <clip>
+                                <Circle centerX="52" centerY="51" radius="49" />
+                            </clip>
+                            <HBox.margin>
+                                <Insets left="30.0" right="50.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <VBox prefHeight="102.0" prefWidth="59.0">
+                            <children>
+                                <Label text="Name:">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Phone:">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Email:">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Address:">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                     <VBox prefHeight="144.0" prefWidth="196.0">
+                        <children>
+                                <Label fx:id="clientName" text="Label">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="clientPhone" text="Label">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="clientEmail" text="Label">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="clientAddress" text="Label">
+                                    <font>
+                                        <Font name="Times New Roman" size="15.0" />
+                                    </font>
+                                </Label>
+                        </children>
+                     </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                  <padding>
+                     <Insets bottom="10.0" top="20.0" />
+                  </padding>
+                </HBox>
+               <Label text="Features to be implemented">
+                  <font>
+                     <Font name="Times New Roman" size="15.0" />
+                  </font>
+               </Label>
+                <Label text="Condition:">
+                    <font>
+                        <Font name="Times New Roman" size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="clientCondition" text="Label">
+                    <font>
+                        <Font name="Times New Roman" size="15.0" />
+                    </font>
+                </Label>
+                <Label text="Schedule:">
+                    <font>
+                        <Font name="Times New Roman" size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="clientSchedule" text="Label">
+                    <font>
+                        <Font name="Times New Roman" size="15.0" />
+                    </font>
+                </Label>
+                <TableView prefHeight="161.0" prefWidth="507.0" stylesheets="@ViewWindow.css" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn prefWidth="120.0" text="Date" />
+                        <TableColumn prefWidth="265.0" text="Details" />
+                        <TableColumn prefWidth="120.0" text="Paid" />
+                    </columns>
+                    <VBox.margin>
+                        <Insets top="30.0" />
+                    </VBox.margin>
+                </TableView>
+            </children>
+        </VBox>
+    </Scene>
+    </scene>
+</fx:root>

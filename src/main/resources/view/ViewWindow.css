@@ -1,0 +1,11 @@
+#clientName, #clientPhone, #clientEmail, #clientAddress, #clientCondition, #clientSchedule {
+    -fx-text-fill: black;
+}
+
+#viewClientContainer {
+    -fx-background-color: #D3EDEA;
+}
+
+#clientProfileContainer {
+    -fx-background-color: #009794;
+}
