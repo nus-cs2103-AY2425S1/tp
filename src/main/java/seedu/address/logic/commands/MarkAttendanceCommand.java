@@ -19,7 +19,7 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Attendance marked successfully.";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         model.markAttendance();
         return new CommandResult(MESSAGE_SUCCESS);
