@@ -144,6 +144,7 @@ public class StarCommandTest {
                 personToStar.getSex(),
                 personToStar.getAppointment(),
                 personToStar.getTags(),
+                personToStar.getNote(),
                 new StarredStatus("true"));
         model.setPerson(personToStar, alreadyStarredPerson);
 

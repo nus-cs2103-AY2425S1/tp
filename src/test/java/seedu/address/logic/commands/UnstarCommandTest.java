@@ -38,6 +38,7 @@ public class UnstarCommandTest {
                 personToUnstar.getSex(),
                 personToUnstar.getAppointment(),
                 personToUnstar.getTags(),
+                personToUnstar.getNote(),
                 new StarredStatus("true"));
 
         model.setPerson(personToUnstar, starredPerson);
@@ -73,6 +74,7 @@ public class UnstarCommandTest {
                 personToUnstar.getSex(),
                 personToUnstar.getAppointment(),
                 personToUnstar.getTags(),
+                personToUnstar.getNote(),
                 new StarredStatus("true"));
 
         model.setPerson(personToUnstar, starredPerson);
@@ -164,6 +166,7 @@ public class UnstarCommandTest {
                 personToUnstar.getSex(),
                 personToUnstar.getAppointment(),
                 personToUnstar.getTags(),
+                personToUnstar.getNote(),
                 new StarredStatus("false"));
         model.setPerson(personToUnstar, alreadyUnstarredPerson);
 

@@ -16,7 +16,7 @@ class JsonAdaptedAppointment {
     private final String appointmentDate;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedAppointment} with the given {@code tagName}.
      */
     @JsonCreator
     public JsonAdaptedAppointment(String appointmentDate) {
@@ -24,7 +24,7 @@ class JsonAdaptedAppointment {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Appointment} into this class for Jackson use.
      */
     public JsonAdaptedAppointment(Appointment source) {
         appointmentDate = source.appointment.format(FORMATTER);

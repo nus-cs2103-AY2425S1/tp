@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -36,6 +37,7 @@ public class PersonBuilder {
     private Sex sex;
     private Set<Appointment> appointments;
     private Set<Tag> tags;
+    private Note note;
     private StarredStatus starredStatus;
 
     /**
@@ -50,6 +52,7 @@ public class PersonBuilder {
         sex = new Sex(DEFAULT_SEX);
         appointments = new HashSet<>();
         tags = new HashSet<>();
+        note = new Note();
         starredStatus = new StarredStatus(DEFAULT_STARRED_STATUS);
     }
 
@@ -65,6 +68,7 @@ public class PersonBuilder {
         sex = personToCopy.getSex();
         appointments = new HashSet<>(personToCopy.getAppointment());
         tags = new HashSet<>(personToCopy.getTags());
+        note = personToCopy.getNote();
         starredStatus = personToCopy.getStarredStatus();
     }
 
@@ -134,6 +138,26 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Sex} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String appointment, String remark, String medication) {
+        this.note = new Note();
+
+        if (appointment != null) {
+            this.note.addAppointment(appointment);
+        }
+
+        if (remark != null) {
+            this.note.addRemark(remark);
+        }
+
+        if (medication != null) {
+            this.note.addMedication(medication);
+        }
+        return this;
+    }
+
+    /**
      * Sets the {@code StarredStatus} of the {@code Person} that we are building.
      */
     public PersonBuilder withStarredStatus(String starredStatus) {
@@ -142,7 +166,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, age, sex, appointments, tags, starredStatus);
+        return new Person(name, phone, email, address, age, sex, appointments, tags, note, starredStatus);
     }
 
 }

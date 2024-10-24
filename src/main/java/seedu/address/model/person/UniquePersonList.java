@@ -65,6 +65,7 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.sort(Comparator.comparing(p -> p.getName().toString().toUpperCase()));
     }
 
+
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
@@ -113,10 +114,18 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
+        persons.forEach(Person::handleDueAppointments);
         internalList.setAll(persons);
-        sort();
     }
 
+    /**
+     * Sorts the list of persons on the basis of appointment dates
+     */
+    public void sortByAppointment() {
+        internalList.sort(Comparator.comparing(Person::getEarliestAppointmentDate,
+                Comparator.nullsLast(Comparator.naturalOrder())));
+
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

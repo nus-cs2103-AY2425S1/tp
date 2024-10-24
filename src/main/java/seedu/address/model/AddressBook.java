@@ -95,6 +95,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public void sortByAppointments() {
+        persons.sortByAppointment();
+    }
     /**
      * Returns true if a person with the same name as {@code person} exists in the address book.
      */

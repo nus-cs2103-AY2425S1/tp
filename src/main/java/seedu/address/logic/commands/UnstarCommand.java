@@ -12,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -107,10 +108,11 @@ public class UnstarCommand extends Command {
         Sex sex = personToEdit.getSex();
         Set<Appointment> appointment = new HashSet<>(personToEdit.getAppointment());
         Set<Tag> tags = new HashSet<>(personToEdit.getTags());
+        Note note = personToEdit.getNote();
         StarredStatus starredStatus = new StarredStatus("false");
 
         return new Person(name, phone, email, address,
-                age, sex, appointment, tags, starredStatus);
+                age, sex, appointment, tags, note, starredStatus);
     }
 
     @Override

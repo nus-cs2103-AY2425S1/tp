@@ -8,6 +8,11 @@
     "age" : "24",
     "sex" : "Female",
     "tags" : [ "friends" ],
+    "note": {
+      "medication": [ ],
+      "appointments": [ ],
+      "remark": [ ]
+    },
     "starredStatus" : "false"
   }, {
     "name" : "Benson Meier",
@@ -17,6 +22,11 @@
     "age" : "37",
     "sex" : "Male",
     "tags" : [ "owesMoney", "friends" ],
+    "note": {
+      "medication": [ ],
+      "appointments": [ ],
+      "remark": [ ]
+    },
     "starredStatus" : "true"
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +36,11 @@
     "age" : "29",
     "sex" : "Female",
     "tags" : [ ],
+    "note": {
+      "medication": [ ],
+      "appointments": [ ],
+      "remark": [ ]
+    },
     "starredStatus" : "false"
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +50,11 @@
     "age" : "40",
     "sex" : "Male",
     "tags" : [ "friends" ],
+    "note": {
+      "medication": [ ],
+      "appointments": [ ],
+      "remark": [ ]
+    },
     "starredStatus" : "false"
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +64,11 @@
     "age" : "16",
     "sex" : "Female",
     "tags" : [ ],
+    "note": {
+      "medication": [ ],
+      "appointments": [ ],
+      "remark": [ ]
+    },
     "starredStatus" : "false"
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +78,11 @@
     "age" : "70",
     "sex" : "Female",
     "tags" : [ ],
+    "note": {
+      "medication": [ ],
+      "appointments": [ ],
+      "remark": [ ]
+    },
     "starredStatus" : "false"
   }, {
     "name" : "George Best",
@@ -62,6 +92,11 @@
     "age" : "88",
     "sex" : "Male",
     "tags" : [ ],
+    "note": {
+      "medication": [ ],
+      "appointments": [ ],
+      "remark": [ ]
+    },
     "starredStatus" : "false"
   } ]
 }

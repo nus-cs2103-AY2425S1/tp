@@ -34,7 +34,8 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withAge("37").withSex("Male")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withAge("29").withSex("Female").build();
@@ -50,10 +51,11 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824425")
             .withEmail("anna@example.com").withAddress("4th street")
             .withAge("88").withSex("Male").build();
+
     public static final Person MARADONA = new PersonBuilder().withName("Diego Maradona").withPhone("94824221")
             .withEmail("maradona@example.com").withAddress("Argentina")
-            .withAge("60").withSex("Female")
-            .withTags("footballer").withAppointments("01/01/2020 1000").build();
+            .withAge("60").withSex("Female").withTags("footballer")
+            .withAppointments("01/01/2020 1000").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824245")

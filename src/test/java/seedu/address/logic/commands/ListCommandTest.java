@@ -61,6 +61,7 @@ public class ListCommandTest {
                 personToStar.getSex(),
                 personToStar.getAppointment(),
                 personToStar.getTags(),
+                personToStar.getNote(),
                 new StarredStatus("true"));
         model.setPerson(personToStar, alreadyStarredPerson);
         expectedModel.setPerson(personToStar, alreadyStarredPerson);

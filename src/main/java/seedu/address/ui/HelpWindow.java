@@ -132,10 +132,14 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary("Export", "export"),
                 new CommandSummary("Find", "find KEYWORD [MORE_KEYWORDS]\ne.g., find olive 87438"),
                 new CommandSummary("Help", "help"),
-                new CommandSummary("List", "list\nlist * (to list starred contacts)"),
+                new CommandSummary("List", "list"),
+                new CommandSummary("Note", "note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]\n"
+                                           + "e.g., note John Doe m/10mg Ibuprofen"),
+                new CommandSummary("Sort", "sort \ne.g., sort"),
                 new CommandSummary("Star", "star INDEX / star NAME\ne.g., star 3, star Alex Yeoh"),
                 new CommandSummary("Unstar", "unstar INDEX / unstar NAME\ne.g., unstar 3, unstar Alex Yeoh")
         );
+
 
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
         formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
