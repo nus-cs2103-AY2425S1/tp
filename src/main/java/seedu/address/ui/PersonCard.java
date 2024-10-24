@@ -148,7 +148,7 @@ public class PersonCard extends UiPart<Region> {
      */
     private String removeTagsFromString(String fullPropertyString) {
         // Detect the start of "Tags " and remove everything after it
-        int indexOfTags = fullPropertyString.indexOf(" Tags: ");
+        int indexOfTags = fullPropertyString.indexOf(" Actual Price:");
         return (indexOfTags != -1) ? fullPropertyString.substring(0, indexOfTags).trim() : fullPropertyString;
     }
 }
