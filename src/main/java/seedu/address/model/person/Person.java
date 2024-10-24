@@ -200,14 +200,17 @@ public class Person implements Appointmentable {
         if (apts.isEmpty() || apts.size() == 0) {
             throw new CommandException(Messages.MESSAGE_NO_APPOINTMENTS_FOUND);
         }
-
         return apts.get(0);
     }
 
     public String getStringAppointments() {
         final StringBuilder builder = new StringBuilder();
         appointments.stream()
-                .forEach(builder::append);
+                .forEach(appointment ->
+                        builder.append(appointment).append("\n")); // Add newline after each appointment
+        if (builder.isEmpty()) {
+            return null;
+        }
         return builder.toString();
     }
 
@@ -301,4 +304,5 @@ public class Person implements Appointmentable {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
 }
