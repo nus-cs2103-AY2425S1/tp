@@ -141,7 +141,7 @@ public class ModelManager implements Model {
 
     private void initializeAppointmentList() {
         AppointmentContainsDatePredicate predicate = new AppointmentContainsDatePredicate(LocalDate.now());
-        filterAppointmentList(predicate);
+        updateFilteredAppointmentList(predicate);
     }
 
     /**
@@ -154,7 +154,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void filterAppointmentList(Predicate<Person> predicate) {
+    public void updateFilteredAppointmentList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
     }
