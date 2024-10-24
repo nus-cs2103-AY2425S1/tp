@@ -67,13 +67,12 @@ public class AddInsuranceCommandParserTest {
     }
 
     /**
-     * Tests the execution of {@code AddInsuranceCommandParser} where PREFIX_INSURANCE_ID and insurance ID are missing.
-     * This test verifies that when PREFIX_INSURANCE_ID and insurance ID are not specified,
+     * Tests the execution of {@code AddInsuranceCommandParser} with missing PREFIX_INSURANCE_ID.
+     * This test verifies that when PREFIX_INSURANCE_ID is not specified,
      * the command throws a {@code ParseException}.
      */
     @Test
     public void parse_missingInsuranceIdPrefix_throwsParseException() {
-        // Valid client index but the PREFIX_INSURANCE_ID is completely missing
         String userInputWithoutInsuranceIdPrefix = INDEX_FIRST_CLIENT.getOneBased() + " ";
         assertParseFailure(parser, userInputWithoutInsuranceIdPrefix,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInsuranceCommand.MESSAGE_USAGE));
