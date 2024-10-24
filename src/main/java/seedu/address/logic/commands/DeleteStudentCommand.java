@@ -140,6 +140,8 @@ public class DeleteStudentCommand extends Command {
         }
 
         DeleteStudentCommand otherDeleteStudentCommand = (DeleteStudentCommand) other;
-        return name.equals(otherDeleteStudentCommand.name);
+        return name.equals(otherDeleteStudentCommand.name)
+                && ((studentNumber == null && otherDeleteStudentCommand.studentNumber == null)
+                || (studentNumber != null && studentNumber.equals(otherDeleteStudentCommand.studentNumber)));
     }
 }
