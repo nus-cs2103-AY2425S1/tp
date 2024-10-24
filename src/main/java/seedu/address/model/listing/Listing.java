@@ -31,7 +31,8 @@ public class Listing {
      * @param region   Region of the listing, represented by a {@code Region} enum.
      * @param seller   Seller of the listing, represented by a {@code Person}.
      */
-    public Listing(Name name, Address address, Price price, Area area, Region region, Person seller, Set<Person> buyers) {
+    public Listing(Name name, Address address, Price price,
+                   Area area, Region region, Person seller, Set<Person> buyers) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(price);
         Objects.requireNonNull(area);
@@ -48,7 +49,10 @@ public class Listing {
         this.buyers = buyers;
     }
 
-    public Name getName() { return name; }
+    public Name getName() {
+        return name;
+    }
+
     public Price getPrice() {
         return price;
     }

@@ -135,9 +135,8 @@ public interface Model {
      */
     void setListing(Listing target, Listing editedListing);
 
-    /**
-     * Returns the listing with the same name as {@code listing} exists in the address book.
-     */
+
+    // Returns the listing with the same name as {@code listing} exists in the address book.
     //Person getPersonByName(Name name);
 
     /** Returns an unmodifiable view of the filtered person list */

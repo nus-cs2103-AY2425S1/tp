@@ -1,13 +1,16 @@
 package seedu.address.testutil;
 
-import seedu.address.model.Listings;
-import seedu.address.model.listing.Listing;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.Listings;
+import seedu.address.model.listing.Listing;
+
+/**
+ * A utility class containing a list of {@code Listing} objects to be used in tests.
+ */
 public class TypicalListings {
     public static final Listing PASIR_RIS = new ListingBuilder().withName("Pasir Ris Condo")
             .withAddress("543 Pasir Ris Street 11").withArea(75)

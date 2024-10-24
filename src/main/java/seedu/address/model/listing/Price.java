@@ -1,8 +1,8 @@
 package seedu.address.model.listing;
 
-import java.math.BigDecimal;
-
 import static java.util.Objects.requireNonNull;
+
+import java.math.BigDecimal;
 
 /**
  * Represents the price of a listing in the real estate application.
@@ -12,11 +12,10 @@ public class Price {
     private final String formattedValue;
     private final BigDecimal rawValue;
 
-    /**
-     * Future Extension:
-     * Parse the formatted value into mil, k, etc.
-     * e.g. 5 mil, 600k
-     */
+
+    //Future Extension:
+    //Parse the formatted value into mil, k, etc.
+    //e.g. 5 mil, 600k
 
     /**
      * Constructs a {@code Price}.

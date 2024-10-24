@@ -1,15 +1,15 @@
 package seedu.address.model.listing;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.testutil.ListingBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.TAMPINES;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.ListingBuilder;
 
 public class ListingTest {
     @Test

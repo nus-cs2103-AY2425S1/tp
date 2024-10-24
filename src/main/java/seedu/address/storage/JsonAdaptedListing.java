@@ -1,16 +1,5 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.listing.Address;
-import seedu.address.model.listing.Area;
-import seedu.address.model.listing.Listing;
-import seedu.address.model.listing.Price;
-import seedu.address.model.listing.Region;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Name;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,6 +7,21 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.listing.Address;
+import seedu.address.model.listing.Area;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.listing.Price;
+import seedu.address.model.listing.Region;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+
+/**
+ * Jackson-friendly version of {@link Listing}.
+ */
 public class JsonAdaptedListing {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Listing's %s field is missing.";
@@ -87,18 +91,18 @@ public class JsonAdaptedListing {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
         // Can add check for price
-//        if (!Phone.isValidPhone(phone)) {
-//            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-//        }
+        //if (!Phone.isValidPhone(phone)) {
+        //  throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        //}
         final Price modelPrice = new Price(price, new BigDecimal(price));
 
         if (area == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Area.class.getSimpleName()));
         }
         // Can implement check for area
-//        if (!Email.isValidEmail(area)) {
-//            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-//        }
+        //if (!Email.isValidEmail(area)) {
+        //  throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        //}
 
         //Throws NUmberFormatException (need better errorhandling)
         final Area modelArea = new Area(Integer.parseInt(area));

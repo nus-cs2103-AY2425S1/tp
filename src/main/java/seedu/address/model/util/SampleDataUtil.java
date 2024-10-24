@@ -14,8 +14,12 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.listing.Address;
+import seedu.address.model.listing.Area;
+import seedu.address.model.listing.Listing;
+import seedu.address.model.listing.Price;
+import seedu.address.model.listing.Region;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.listing.*;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -63,6 +67,11 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
+    /**
+     * Generates an array of sample {@code Listing} objects.
+     *
+     * @return An array of {@code Listing} objects with sample data.
+     */
     public static Listing[] sampleListings() {
         return new Listing[] {
             new Listing(new Name("RC4"), new Address("134 Clementi Ave"),

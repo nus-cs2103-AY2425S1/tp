@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.listing.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -160,7 +160,7 @@ public class ParserUtil {
      * Parses {@code String region} into a {@code Area}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Region parseRegion(String region) throws ParseException{
+    public static Region parseRegion(String region) throws ParseException {
         String normalizedInput = region.trim().toUpperCase().replace(" ", "");
         for (Region r : Region.values()) {
             if (r.name().equals(normalizedInput)) {

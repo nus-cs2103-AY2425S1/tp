@@ -111,7 +111,7 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
     }
 
-    /**
+    /*
      * Address no longer used for Person
      *
     @Test

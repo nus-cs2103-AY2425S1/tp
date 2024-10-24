@@ -7,8 +7,6 @@ import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.listing.Listing;
-import seedu.address.model.listing.UniqueListingList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 

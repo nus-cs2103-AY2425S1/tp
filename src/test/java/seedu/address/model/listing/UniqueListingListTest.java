@@ -1,20 +1,21 @@
 package seedu.address.model.listing;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.listing.exceptions.DuplicateListingException;
-import seedu.address.model.listing.exceptions.ListingNotFoundException;
-import seedu.address.testutil.ListingBuilder;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.TAMPINES;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.listing.exceptions.DuplicateListingException;
+import seedu.address.model.listing.exceptions.ListingNotFoundException;
+import seedu.address.testutil.ListingBuilder;
 
 public class UniqueListingListTest {
 
@@ -31,7 +32,7 @@ public class UniqueListingListTest {
     }
 
     @Test
-    public void contains_ListingInList_returnsTrue() {
+    public void contains_listingInList_returnsTrue() {
         uniqueListingList.add(PASIR_RIS);
         assertTrue(uniqueListingList.contains(PASIR_RIS));
     }
@@ -72,7 +73,7 @@ public class UniqueListingListTest {
     @Test
     public void setListing_editedListingIsSameListing_success() {
         uniqueListingList.add(PASIR_RIS);
-        uniqueListingList.setListing(PASIR_RIS,PASIR_RIS);
+        uniqueListingList.setListing(PASIR_RIS, PASIR_RIS);
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(PASIR_RIS);
         assertEquals(uniqueListingList, expectedUniqueListingList);
