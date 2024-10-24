@@ -201,6 +201,26 @@ Examples:
 
   ![result for 'filterclient n/A'](images/filterclient.png)
 
+### Adding a meeting : `addmeeting`
+
+Adds a specified meeting to the meeting book of ClientGrid.
+
+Format: `addmeeting mt/TITLE d/DATE b/BUYER s/SELLER t/TYPE c/POSTALCODE`
+
+* Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
+* The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
+* The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
+* `BUYER` refers to a buyer name. There must be an existing buyer in the client book that has a name that contains `BUYER`. `BUYER` is not case-sensitive. For example, `b/alice` is valid if there is a buyer of name `Alice Pauline` in the client book.
+* `SELLER` refers to a seller name. There must be an existing seller in the client book that has a name that contains `SELLER`. `SELLER` is not case-sensitive.
+* `SELLER` refers to a seller name. There must be an existing seller in the client book that has a name that contains `SELLER`. `SELLER` is not case-sensitive.
+* `TYPE` refers to a property type. It must be either `CONDO`, `HDB`, or `LANDED`. `TYPE` is case-insensitive.
+* `POSTALCODE` refers to a postal code. The postal code must belong to some property to the property book.
+
+Examples:
+* `addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456` adds a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
+
+  ![result for 'addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456'](images/addmeeting.png)
+
 ### Deleting a meeting : `deletemeeting`
 
 Deletes a specified meeting from the meeting book of ClientGrid.

@@ -24,8 +24,8 @@ public class AddMeetingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the meeting log. \n"
             + "Parameters: "
-            + PREFIX_MEETING_TITLE + "TITLE "
-            + PREFIX_MEETING_DATE + "DATE "
+            + PREFIX_MEETING_TITLE + "MEETING_TITLE "
+            + PREFIX_MEETING_DATE + "MEETING_DATE "
             + PREFIX_BUYER + "BUYER "
             + PREFIX_SELLER + "SELLER "
             + PREFIX_TYPE + "TYPE "
