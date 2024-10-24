@@ -460,22 +460,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 3a. The specified person is invalid.
+- 2a. The specified person is invalid.
 
-    - 3a1. System shows an error message.
-
-      Use case ends.
-
-
-- 3b. The note name is invalid.
-
-    - 3b1. System shows an error message.
+    - 2a1. System shows an error message.
 
       Use case ends.
 
-- 3c. The note index is invalid.
 
-    - 3c1. System shows an error message.
+- 2b. The note name is invalid.
+
+    - 2b1. System shows an error message.
+
+      Use case ends.
+
+- 2c. The note index is invalid.
+
+    - 2c1. System shows an error message.
 
       Use case ends.
 
