@@ -78,6 +78,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+    /**
+     * Adds a person to the address book at specified index.
+     * The person must not already exist in the address book.
+     */
     public void addPerson(Person p, int index) {
         persons.add(p, index);
     }
