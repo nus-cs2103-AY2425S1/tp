@@ -91,7 +91,6 @@ public class SortCommandTest {
 
         // Apply sorting to reverseSortedModel via SortCommand
         assertCommandSuccess(sortCommand, reverseSortedModel, SortCommand.MESSAGE_SORT_LIST_SUCCESS, expectedModel);
-        
         assertEquals(reverseSortedModel.getFilteredPersonList(), sortedList);
     }
 }
