@@ -10,19 +10,19 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
+import seedu.address.logic.commands.MarkAttendanceByTutorialCommand;
 import seedu.address.model.person.Attendance;
+import seedu.address.model.tutorial.Tutorial;
 
-public class MarkAttendanceByStudentCommandParserTest {
+public class MarkAttendanceByTutorialCommandParserTest {
 
-    private MarkAttendanceByStudentCommandParser parser = new MarkAttendanceByStudentCommandParser();
+    private MarkAttendanceByTutorialCommandParser parser = new MarkAttendanceByTutorialCommandParser();
 
     @Test
-    public void parse_validArgs_returnsMarkAttendanceByStudentCommand() {
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024",
-                Attendance.VALID_DATE_FORMAT));
-        MarkAttendanceByStudentCommand expectedCommand =
-                new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, "Math");
-        assertParseSuccess(parser, "1 attend/12/12/2024 tut/Math", expectedCommand);
+    public void parse_validArgs_returnsMarkAttendanceByTutorialCommand() {
+        MarkAttendanceByTutorialCommand expectedCommand = new MarkAttendanceByTutorialCommand(
+                new Tutorial("Math"), "12/12/2024");
+        assertParseSuccess(parser, "attend/12/12/2024 tut/Math", expectedCommand);
     }
 
     @Test
