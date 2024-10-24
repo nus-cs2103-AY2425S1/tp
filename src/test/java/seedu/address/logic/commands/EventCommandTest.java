@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.EventBuilder.*;
+import static seedu.address.testutil.EventBuilder.DEFAULT_DATE;
+import static seedu.address.testutil.EventBuilder.DEFAULT_INDEXES;
+import static seedu.address.testutil.EventBuilder.DEFAULT_LOCATION;
+import static seedu.address.testutil.EventBuilder.DEFAULT_NAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,13 +31,17 @@ public class EventCommandTest {
 
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EventCommand(null, null,null, null));
+        assertThrows(NullPointerException.class, () -> new EventCommand(null, null, null, null));
 
         // test if any field is null
-        assertThrows(NullPointerException.class, () -> new EventCommand(null, DEFAULT_DATE, DEFAULT_LOCATION, DEFAULT_INDEXES));
-        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, null, DEFAULT_LOCATION, DEFAULT_INDEXES));
-        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, DEFAULT_DATE, null, DEFAULT_INDEXES));
-        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_LOCATION, null));
+        assertThrows(NullPointerException.class, () -> new EventCommand(null, DEFAULT_DATE, DEFAULT_LOCATION,
+                DEFAULT_INDEXES));
+        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, null, DEFAULT_LOCATION,
+                DEFAULT_INDEXES));
+        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, DEFAULT_DATE, null,
+                DEFAULT_INDEXES));
+        assertThrows(NullPointerException.class, () -> new EventCommand(DEFAULT_NAME, DEFAULT_DATE,
+                DEFAULT_LOCATION, null));
 
     }
 

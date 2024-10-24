@@ -1,7 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_ATTENDEE;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -28,7 +33,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         PREFIX_DATE,
         PREFIX_ATTENDEES,
         PREFIX_REMOVE_ATTENDEE,
-            PREFIX_LOCATION
+        PREFIX_LOCATION
     };
 
     /**

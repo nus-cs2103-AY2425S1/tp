@@ -9,9 +9,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.person.Person;
-
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Person;
 
 
 /**

@@ -12,7 +12,12 @@ import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,11 +81,11 @@ public class SampleDataUtil {
 
         Set<Person> sampleAttendees = new HashSet<>(Arrays.asList(getSamplePersons()));
         return new Event[] {
-                new Event("Emily's Birthday Party", LocalDate.of(2024, 10, 1), new Address("123 Party Lane"),
-                        sampleAttendees),
-                new Event("Family Reunion", LocalDate.of(2024, 10, 5), new Address("456 Family St"), sampleAttendees),
-                new Event("Grandpa's Wedding Day", LocalDate.of(2024, 10, 10), new Address("789 Wedding Blvd"),
-                        sampleAttendees)
+            new Event("Emily's Birthday Party", LocalDate.of(2024, 10, 1), new Address("123 Party Lane"),
+                    sampleAttendees),
+            new Event("Family Reunion", LocalDate.of(2024, 10, 5), new Address("456 Family St"), sampleAttendees),
+            new Event("Grandpa's Wedding Day", LocalDate.of(2024, 10, 10), new Address("789 Wedding Blvd"),
+                    sampleAttendees)
         };
     }
 
