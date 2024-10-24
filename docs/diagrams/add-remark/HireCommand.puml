@@ -8,18 +8,12 @@ Class "{abstract}\nCommand" as Command {
 
 Class HireCommand {
   +COMMAND_WORD: String
-  +MESSAGE_USAGE: String
-  +MESSAGE_SUCCESS: String
-  +MESSAGE_ALREADY_HIRED: String
-  +MESSAGE_NAME_NOT_SPECIFIED: String
-  +MESSAGE_JOB_NOT_FOUND: String
   -name: Name
   -job: Job
   +HireCommand(Name, Job)
   +execute(Model): CommandResult
   +getName(): Name
   +getJob(): Job
-  +equals(Object): boolean
 }
 
 Class CommandException
