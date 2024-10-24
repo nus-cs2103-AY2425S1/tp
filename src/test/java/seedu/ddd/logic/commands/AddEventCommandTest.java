@@ -25,6 +25,7 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.logic.Messages;
 import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
+import seedu.ddd.model.Displayable;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
@@ -220,6 +221,11 @@ public class AddEventCommandTest {
         public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Displayable> getDisplayedList() {
+            throw new AssertionError("This method should not be called.");
+        }        
 
         @Override
         public void updateFilteredContactList(Predicate<Contact> predicate) {
