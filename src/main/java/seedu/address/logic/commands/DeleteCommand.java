@@ -48,11 +48,15 @@ public class DeleteCommand extends Command {
             peopleToDelete.add(personToDelete);
         }
 
+        assert peopleToDelete.size() == targetIndices.size();
+
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToDelete) {
             model.deletePerson(person);
             resultMessages.add(Messages.format(person));
         }
+
+        assert resultMessages.size() == targetIndices.size();
 
         if (resultMessages.size() == 1) {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, resultMessages.get(0)));

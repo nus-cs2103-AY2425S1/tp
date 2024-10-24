@@ -46,11 +46,15 @@ public class UnpinCommand extends Command {
             peopleToUnpin.add(personToUnpin);
         }
 
+        assert peopleToUnpin.size() == targetIndices.size();
+
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToUnpin) {
             model.unpinPerson(person);
             resultMessages.add(Messages.format(person));
         }
+
+        assert resultMessages.size() == targetIndices.size();
 
         model.sortByPin();
 
