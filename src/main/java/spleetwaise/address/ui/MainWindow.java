@@ -27,13 +27,11 @@ import spleetwaise.transaction.ui.TransactionListPanel;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final double MIN_WIDTH_FOR_SPLIT = 800;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final Stage primaryStage;
     private final Logic logic;
     private final HelpWindow helpWindow;
-    private String currCommand = "list";
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private TransactionListPanel transactionListPanel;
@@ -82,9 +80,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-
-        // Add listener to handle layout changes
-        addWindowSizeListener();
     }
 
     public Stage getPrimaryStage() {
@@ -124,51 +119,6 @@ public class MainWindow extends UiPart<Stage> {
                 event.consume();
             }
         });
-    }
-
-    /**
-     * Adds a listener to the window size to adjust the SplitPane based on width.
-     */
-    private void addWindowSizeListener() {
-        primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            double width = newVal.doubleValue();
-            adjustPaneVisibility(width);
-        });
-
-        adjustPaneVisibility(primaryStage.getWidth()); // initial adjustment based on current window size
-    }
-
-    /**
-     * Adjusts the visibility of the panes based on window width.
-     */
-    private void adjustPaneVisibility(double width) {
-        if (width < MIN_WIDTH_FOR_SPLIT) {
-            hideRightPane();
-            setLeftPaneContent(logic.isTransactionCommand(currCommand));
-        } else {
-            showBothPanes();
-        }
-    }
-
-    private void hideRightPane() {
-        mainSplitPane.getItems().remove(rightPane);
-    }
-
-    private void showBothPanes() {
-        if (!mainSplitPane.getItems().contains(rightPane)) {
-            mainSplitPane.getItems().add(rightPane);
-        }
-        setLeftPaneContent(false); // Always show personListPanel when both panes are visible
-    }
-
-    private void setLeftPaneContent(boolean showTransactionList) {
-        StackPane newPane = showTransactionList ? transactionListPanelPlaceholder : personListPanelPlaceholder;
-        StackPane oldPane = showTransactionList ? personListPanelPlaceholder : transactionListPanelPlaceholder;
-
-        if (!leftPane.getChildren().contains(newPane)) {
-            leftPane.getChildren().remove(oldPane);
-            leftPane.getChildren().add(newPane);
-        }
     }
 
     /**
@@ -244,11 +194,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws SpleetWaiseCommandException, ParseException {
         try {
-            currCommand = commandText.trim().split("\\s+")[0];
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            adjustPaneVisibility(primaryStage.getWidth());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
