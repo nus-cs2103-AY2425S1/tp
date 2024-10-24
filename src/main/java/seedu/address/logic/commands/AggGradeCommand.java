@@ -24,7 +24,7 @@ public class AggGradeCommand extends Command {
     public static final Map<String, Operation> OPERATION_TRANSLATE = Collections.unmodifiableMap(
             Map.of("median", Operation.MEDIAN, "mean", Operation.MEAN, "max", Operation.MAX,
                    "min", Operation.MIN, "stddev", Operation.STDDEV, "var", Operation.VAR));
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Performs aggregation operationson the displayed "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Performs aggregation operation the displayed "
             + "person list.\n"
             + "Parameters: OPERATION " + PREFIX_NAME + "EXAM_NAME\n"
             + "Operations can be: " + String.join(", ", OPERATION_TRANSLATE.keySet()) + "\n"
