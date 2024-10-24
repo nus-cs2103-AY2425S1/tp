@@ -13,6 +13,7 @@ class JsonAdaptedSchedule {
 
     private final String dateTime;
     private final String note;
+    private boolean isPaid;
 
     /**
      * Constructs a {@code JsonAdaptedSchedule} with the given {@code datetime} and {@code note}.
@@ -21,6 +22,7 @@ class JsonAdaptedSchedule {
     public JsonAdaptedSchedule(@JsonProperty("dateTime")String dateTime, @JsonProperty("note") String note) {
         this.dateTime = dateTime;
         this.note = note;
+        this.isPaid = false;
     }
 
     /**
@@ -39,6 +41,11 @@ class JsonAdaptedSchedule {
     @JsonProperty("note")
     public String getNote() {
         return note;
+    }
+
+    @JsonProperty("payment")
+    public boolean getPaymentStatus() {
+        return isPaid;
     }
 
     /**

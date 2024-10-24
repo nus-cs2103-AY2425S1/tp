@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.PaymentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -171,4 +172,24 @@ public class ParserUtil {
         }
         return scheduleSet;
     }
+
+
+    /**
+     * Parses a {@code String paidStatus} into a {@code boolean}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code paidStatus} is invalid.
+     */
+    public static boolean parsePaidStatus(String paidStatus) throws ParseException {
+        requireNonNull(paidStatus);
+        String trimmedStatus = paidStatus.trim().toLowerCase();
+        if (trimmedStatus.equals("true") || trimmedStatus.equals("paid")) {
+            return true;
+        } else if (trimmedStatus.equals("false") || trimmedStatus.equals("unpaid")) {
+            return false;
+        } else {
+            throw new ParseException(PaymentCommand.MESSAGE_PAYMENT_STATUS_INVALID);
+        }
+    }
+
 }

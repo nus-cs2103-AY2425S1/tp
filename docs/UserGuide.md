@@ -40,6 +40,7 @@ your contact management tasks done faster than traditional GUI apps.
    * `appointment-list` : Lists all upcoming scheduled appointments.
 
    * `reminder John Doe r/1 hour` : Sets a reminder for John Doe 1 hour before his scheduled appointment.
+   * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for John Doe on October 14, 2024, at 12pm as paid.
 
    * `clear` : Deletes all contacts.
 
@@ -145,7 +146,7 @@ Lists all upcoming appointments in the order of the earliest next upcoming appoi
 
 Format: `appointment-list [d/DATE_AND_TIME]`
 
-* By default this will only show appointments that are in the future (compared to local time now).
+* This will only show appointments that are in the future (compared to local time now).
 * The optional date and time fields act as filters.
 * A time filter cannot be applied without date filter.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
@@ -154,6 +155,19 @@ Examples:
 * `appointment-list`
 * `appointment-list d/2024-10-17`
 * `appointment-list d/2024-10-18 1000`
+
+### Making Payment for an appointment: `payment`
+
+Marks an appointment for a client as paid or unpaid.
+
+Format: `payment NAME d/DATE_AND_TIME pay/PAYMENT_STATUS`
+
+* Format for the date and time must be in yyyy-MM-dd HHmm.
+* Payment status can be in the format [true/paid or false/unpaid].
+
+Examples:
+* `payment John Doe d/2024-10-14 1200 pay/true`
+* `payment Betsy Crowe d/2024-10-14 1300 pay/unpaid`
 
 ### Listing all persons : `list`
 
@@ -284,9 +298,11 @@ Action | Format, Examples
 **Delete** | `delete NAME`<br> e.g., `delete John Doe`
 **Schedule** | `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
 **Appointment Delete** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
+**Appointment List** | `appointment-list [DATE_AND_TIME]` <br> e.g., `appointment-list 2024-10-20 1100`
 **Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
 **Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
+**Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe 2024-10-20 1100 pay/paid`
 **Appointment List** | `appointment-list [d/DATE_AND_TIME]` <br> e.g., `appointment-list d/2024-10-20 1100`
 **List** | `list`
 **Help** | `help`
