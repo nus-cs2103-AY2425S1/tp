@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,10 +21,12 @@ public class CreateEventCommand extends CreateCommand {
             + PREFIX_EVENT + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE" + "\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: "
             + COMMAND_WORD + " " + PREFIX_EVENT + " "
             + PREFIX_NAME + "John Baby Shower "
-            + PREFIX_DATE + "2021-10-10";
+            + PREFIX_DATE + "2021-10-10 "
+            + PREFIX_TAG + "celebration";
 
     public static final String MESSAGE_SUCCESS = "New event created: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";

@@ -1,8 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Event objects.
@@ -14,6 +19,7 @@ public class EventBuilder {
 
     private Name name;
     private Date date;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -21,6 +27,7 @@ public class EventBuilder {
     public EventBuilder() {
         name = new Name(DEFAULT_NAME);
         date = new Date(DEFAULT_DATE);
+        tags = new HashSet<>();
     }
 
     /**
@@ -29,6 +36,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         name = eventToCopy.getName();
         date = eventToCopy.getDate();
+        tags = eventToCopy.getTags();
     }
 
     /**
@@ -47,8 +55,17 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code Event} that we are building.
+     */
+    public EventBuilder withTags(String... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
     public Event build() {
-        return new Event(name, date);
+        return new Event(name, date, tags);
     }
 
 }
