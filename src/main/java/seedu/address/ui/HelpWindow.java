@@ -16,7 +16,39 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f10-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_REF = "For more info, refer to the user guide: \n" + USERGUIDE_URL;
+
+    public static final String ADD_HELP = "Add contacts: \n" +
+            "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION [c/CLIENT_TYPE]";
+
+    public static final String LIST_HELP = "List all contacts: \n" +
+            "list";
+
+    public static final String EDIT_HELP = "Edit contacts by index: \n" +
+            "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE";
+
+    public static final String DELETE_HELP = "Delete contacts by name: \n" +
+            "delete NAME   or  " + "d NAME    or    " + "delete NAME/";
+
+    public static final String CLEAR_HELP = "Delete all contacts in ClientHub: \n" + "clear";
+
+    public static final String FIND_NAME_HELP = "Find contacts by name: \n" +
+            "find n/NAME   or   " + "fn NAME";
+
+    public static final String FIND_PHONE_HELP = "Find contacts by phone number: \n" +
+            "find p/PHONE   or   " + "fp PHONE";
+
+    public static final String FIND_ADDRESS_HELP = "Find contacts by address: \n" +
+            "find a/ADDRESS    or    " + "fa ADDRESS";
+
+    public static final String FIND_CLIENT_TYPE_HELP = "Find contacts by client type: \n" +
+            "find c/CLIENT_TYPE    or   " + "fc CLIENT_TYPE";
+
+    public static final String SORT_HELP = "Sort contacts by name: \n" + "sort n/";
+
+    public static final String VIEW_HELP = "View a contact's full information: \n" + "view NAME";
+
+    public static final String EXIT_HELP = "Exit and close the program: \n" + "exit";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -27,6 +59,41 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private Label addHelp;
+
+    @FXML
+    private Label listHelp;
+
+    @FXML
+    private Label editHelp;
+
+    @FXML
+    private Label deleteHelp;
+
+    @FXML
+    private Label clearHelp;
+
+    @FXML
+    private Label findNameHelp;
+
+    @FXML
+    private Label findPhoneHelp;
+
+    @FXML
+    private Label findAddressHelp;
+
+    @FXML
+    private Label findClientTypeHelp;
+    @FXML
+    private Label sortHelp;
+
+    @FXML
+    private Label viewHelp;
+
+    @FXML
+    private Label exitHelp;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -34,7 +101,19 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        helpMessage.setText(USERGUIDE_REF);
+        addHelp.setText(ADD_HELP);
+        listHelp.setText(LIST_HELP);
+        editHelp.setText(EDIT_HELP);
+        deleteHelp.setText(DELETE_HELP);
+        clearHelp.setText(CLEAR_HELP);
+        findNameHelp.setText(FIND_NAME_HELP);
+        findPhoneHelp.setText(FIND_PHONE_HELP);
+        findAddressHelp.setText(FIND_ADDRESS_HELP);
+        findClientTypeHelp.setText(FIND_CLIENT_TYPE_HELP);
+        sortHelp.setText(SORT_HELP);
+        viewHelp.setText(VIEW_HELP);
+        exitHelp.setText(EXIT_HELP);
     }
 
     /**
