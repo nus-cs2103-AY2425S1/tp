@@ -22,12 +22,13 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a log to the person identified by the Identification Number in the person list.\n"
-            + "Parameters: i/ IDENTIFICATION NUMBER (must be 9 characters long) l/ APPT DATE|ENTRY\n"
+            + "Parameters: i/ IDENTIFICATION NUMBER d/DATE l/LOG ENTRY\n"
             + "Format of APPT DATE: dd MMM yyyy\n"
-            + "Example: " + COMMAND_WORD + " /i S1234567Z /l 2024-10-17|Doctor's appointment\n";
+            + "Example: " + COMMAND_WORD + " i/S1234567D d/20 Oct 2024 l/First visit to the clinic\n";
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
+    public static final String MESSAGE_INVALID_ID = "Invalid ID.";
 
 
     private final IdentityNumber identityNumber;
@@ -44,27 +45,7 @@ public class AddLogCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        for (Log existingLog : model.getFilteredLogList()) {
-            if (existingLog.equals(log)) {
-                throw new CommandException("This log already exists!");
-            }
-        }
-
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToUpdate = null;
-
-        // Find the person by identity number
-        for (Person person : lastShownList) {
-            if (person.getIdentityNumber().equals(identityNumber)) {
-                personToUpdate = person;
-                break;
-            }
-        }
-
-        // If person was not found, throw an exception
-        if (personToUpdate == null) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, identityNumber));
-        }
+        Person personToUpdate = getPerson(model);
 
         // Create a new Set of logs that includes the new log
         Set<Log> updatedLogs = new HashSet<>(personToUpdate.getLogs());
@@ -85,6 +66,25 @@ public class AddLogCommand extends Command {
         model.setPerson(personToUpdate, updatedPerson);
 
         return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, updatedPerson.getName()));
+    }
+
+    private Person getPerson(Model model) throws CommandException {
+        List<Person> lastShownList = model.getPersonList();
+        Person personToUpdate = null;
+
+        // Find the person by identity number
+        for (Person person : lastShownList) {
+            if (person.getIdentityNumber().equals(identityNumber)) {
+                personToUpdate = person;
+                break;
+            }
+        }
+
+        // If person was not found, throw an exception
+        if (personToUpdate == null) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, identityNumber));
+        }
+        return personToUpdate;
     }
 
     @Override

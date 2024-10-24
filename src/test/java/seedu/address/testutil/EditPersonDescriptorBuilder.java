@@ -107,8 +107,15 @@ public class EditPersonDescriptorBuilder {
                     }
                     String dateStr = logParts[0].trim();
                     String details = logParts[1].trim();
-
+                    if (dateStr.isEmpty()) {
+                        throw new IllegalArgumentException("Log format has missing date."
+                                + Log.MESSAGE_CONSTRAINTS);
+                    }
                     AppointmentDate appointmentDate = new AppointmentDate(dateStr);
+                    if (details.isEmpty()) {
+                        throw new IllegalArgumentException("Log format has missing entry."
+                                + Log.MESSAGE_CONSTRAINTS);
+                    }
 
                     return new Log(appointmentDate, details);
                 })

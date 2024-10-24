@@ -43,23 +43,38 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /**
+     * Executes the command and returns the result.
+     *
+     * @param commandText The command as entered by the user.
+     * @return the result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     * @throws ParseException   If an error occurs during parsing.
+     */
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
-
-        CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
-
         try {
+            logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+            CommandResult commandResult;
+            Command command = addressBookParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+
+            if (!commandResult.isPrompt()) {
+                model.clearSavedCommand();
+            }
+
             storage.saveAddressBook(model.getAddressBook());
+
+            return commandResult;
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        } catch (Exception e) {
+            model.clearSavedCommand();
+            throw e;
         }
-
-        return commandResult;
     }
 
     @Override

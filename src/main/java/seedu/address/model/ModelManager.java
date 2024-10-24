@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
@@ -29,6 +32,9 @@ public class ModelManager implements Model {
     // FilteredLogs should be final? Note that it is not initalised,
     // may cause run time error. TODO: Improve on stability
     private FilteredList<Log> filteredLogs;
+
+    // Dangerous, find a better way to implement this.
+    private Command savedCommand = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -121,6 +127,14 @@ public class ModelManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     /**
+     * Returns the full list of persons in the address book.
+     */
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
@@ -178,6 +192,51 @@ public class ModelManager implements Model {
 
         // Update the FilteredLogs to the logs of the targetPerson
         filteredLogs = new FilteredList<>(loglist);
+    }
+
+    //===============Saved Commands=====================================================================================
+
+    /**
+     * Sets the saved command in the model.
+     *
+     * @param command The command to be saved.
+     */
+    @Override
+    public void setSavedCommand(Command command) {
+        this.savedCommand = command;
+    }
+
+    /**
+     * Returns true if there is a saved command in the model.
+     */
+    @Override
+    public boolean hasSavedCommand() {
+        return this.savedCommand != null;
+    }
+
+    /**
+     * Clears the saved command in the model.
+     */
+    @Override
+    public void clearSavedCommand() {
+        this.savedCommand = null;
+    }
+
+    /**
+     * Executes the saved command in the model.
+     *
+     * @return The result of the command execution.
+     * @throws CommandException If saved command does not exist or error occurs during command execution.
+     */
+    @Override
+    public CommandResult executeSavedCommand() throws CommandException {
+        if (!hasSavedCommand()) {
+            clearSavedCommand();
+            throw new CommandException("No command to confirm.");
+        }
+        CommandResult result = this.savedCommand.execute(this);
+        clearSavedCommand();
+        return result;
     }
 
     @Override

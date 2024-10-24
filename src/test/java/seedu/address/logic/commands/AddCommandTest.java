@@ -150,6 +150,14 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Returns an unmodifiable view of the full person list
+         */
+        @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
@@ -188,6 +196,25 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void clearSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSavedCommand(Command command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult executeSavedCommand() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

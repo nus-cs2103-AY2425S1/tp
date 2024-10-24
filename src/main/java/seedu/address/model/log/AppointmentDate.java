@@ -5,7 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -13,7 +15,11 @@ import java.util.Objects;
  */
 public class AppointmentDate {
     public static final String MESSAGE_CONSTRAINTS = "Invalid date format! Please use 'dd MMM yyyy'.";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendPattern("dd MMM yyyy")
+            .toFormatter(Locale.ENGLISH);
+
     private final LocalDate date;
 
     /**
