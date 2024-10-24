@@ -57,7 +57,8 @@ public class HireCommand extends Command {
         }
 
         Person personHired = new Person(personToHire.getName(), personToHire.getJob(), personToHire.getPhone(),
-                personToHire.getEmail(), personToHire.getTags());
+                personToHire.getEmail(), personToHire.getSkills(), personToHire.getInterviewScore(),
+                personToHire.getTags());
         personHired.markAsHired();
         model.setPerson(personToHire, personHired);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
