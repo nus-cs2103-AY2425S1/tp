@@ -83,7 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-        setAccelerator(themeMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(themeMenuItem, KeyCombination.valueOf("F3"));
     }
 
     /**
@@ -200,12 +200,14 @@ public class MainWindow extends UiPart<Stage> {
         if (theme.equals("light")) {
             primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/LightTheme.css")
                     .toExternalForm());
+            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/LightExtensions.css")
+                    .toExternalForm());
         } else if (theme.equals("dark")) {
             primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/DarkTheme.css")
                     .toExternalForm());
+            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/DarkExtensions.css")
+                    .toExternalForm());
         }
-        primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/Extensions.css")
-                .toExternalForm());
     }
 
     public PersonListPanel getPersonListPanel() {
