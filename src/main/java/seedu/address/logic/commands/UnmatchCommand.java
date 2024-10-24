@@ -34,9 +34,8 @@ public class UnmatchCommand extends Command {
                     + COMMAND_WORD + " 2 1";
 
     public static final String MESSAGE_UNMATCH_SUCCESS = "Unmatched Contact: %1$s with Job: %2$s";
-    public static final String MESSAGE_ALREADY_UNMATCHED = "This contact is not matched with this job!";
-    public static final String MESSAGE_CONTACT_HAS_NO_JOBS = "The contact %1$s is not associated with the job: %2$s!.";
-    public static final String MESSAGE_JOB_HAS_NO_CONTACTS = "The job %1$s is not associated with the contact: %2$s!";
+    public static final String MESSAGE_CONTACT_NOT_MATCHED = "This contact is not matched with this job!";
+    public static final String MESSAGE_CONTACT_HAS_NO_JOBS = "The contact %1$s is not associated with any job";
 
     private final Index contactIndex;
     private final Index jobIndex;
@@ -120,28 +119,23 @@ public class UnmatchCommand extends Command {
      */
     private void validateMatching(Person contactToUnmatch, Job jobToUnmatch) throws CommandException {
         // Check if the contact has no jobs associated at all
-        if (contactToUnmatch.getMatch() == null || contactToUnmatch.getMatch().isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_CONTACT_HAS_NO_JOBS, contactToUnmatch.getName(),
-                    jobToUnmatch.getName()));
+        if (!contactToUnmatch.isMatchPresent()) {
+            throw new CommandException(String.format(MESSAGE_CONTACT_HAS_NO_JOBS, contactToUnmatch.getName()));
         }
 
-        // Check if the job has no contacts associated at all
-        if (jobToUnmatch.getMatches().isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_JOB_HAS_NO_CONTACTS, jobToUnmatch.getName(),
-                    contactToUnmatch.getName()));
-        }
-
-        // Check if the contact and job are not matched to each other
         boolean hasContactMatchedJob = contactToUnmatch.hasMatched(jobToUnmatch.getIdentifier());
         boolean hasJobMatchedContact = jobToUnmatch.hasMatched(contactToUnmatch.getIdentifier());
 
-        if (!hasContactMatchedJob || !hasJobMatchedContact) {
-            throw new CommandException(MESSAGE_ALREADY_UNMATCHED);
-        }
+        // Assert to ensure that both entities are symmetrically matched (this should never happen in the system)
+        assert hasContactMatchedJob == hasJobMatchedContact
+              : "Mismatched state: Contact and job matching is asymmetric";
 
-        // Assert to ensure that both entities are symmetrically matched
-        assert hasContactMatchedJob == hasJobMatchedContact;
+        // Check and ensure the contact and job are matched to each other before unmatching
+        if (!(hasContactMatchedJob && hasJobMatchedContact)) {
+            throw new CommandException(MESSAGE_CONTACT_NOT_MATCHED);
+        }
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
