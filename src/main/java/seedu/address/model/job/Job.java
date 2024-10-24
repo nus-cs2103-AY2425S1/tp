@@ -82,10 +82,10 @@ public class Job {
     }
 
     /**
-     * Returns true if the contacts phone number is in matches.
+     * Returns true if the given identifier is in matches.
      */
-    public boolean hasMatched(String contactPhoneNumber) {
-        return this.matches.contains(contactPhoneNumber);
+    public boolean hasMatched(String identifier) {
+        return this.matches.contains(identifier);
     }
 
     /**
