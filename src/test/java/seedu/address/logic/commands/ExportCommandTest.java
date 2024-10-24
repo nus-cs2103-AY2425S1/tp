@@ -567,34 +567,28 @@ public class ExportCommandTest {
 
         String filename = "test";
         Path dataFile = dataDir.resolve(filename + ".csv");
-        Path testHomeDir = temporaryFolder.resolve("home");
-        Files.createDirectories(testHomeDir);
+        filesToCleanup.add(dataFile);
 
-        // Make home directory read-only to force IOException during copy
-        testHomeDir.toFile().setReadOnly();
+        // Create a custom ExportCommand that will simulate an IOException during home copy
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                // Return a path to a directory that exists but isn't writable
+                // This simulates the IOException without relying on file permissions
+                return temporaryFolder.resolve("nonexistent").resolve("directory").resolve(filename + ".csv");
+            }
+        };
 
-        try {
-            ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
-                @Override
-                protected Path getHomeFilePath(String filename) {
-                    return testHomeDir.resolve(filename + ".csv");
-                }
-            };
+        CommandResult result = exportCommand.execute(model);
 
-            CommandResult result = exportCommand.execute(model);
+        // Verify success message only mentions data file
+        String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS,
+                1, dataFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
 
-            // Verify success message only mentions data file
-            String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS,
-                    1, dataFile);
-            assertEquals(expectedMessage, result.getFeedbackToUser());
-
-            // Verify data file exists and contains correct content
-            assertTrue(Files.exists(dataFile));
-            verifyExportedFileContent(dataFile, sampleStudent);
-        } finally {
-            // Reset directory permissions for cleanup
-            testHomeDir.toFile().setWritable(true);
-        }
+        // Verify data file exists and contains correct content
+        assertTrue(Files.exists(dataFile));
+        verifyExportedFileContent(dataFile, sampleStudent);
     }
 
     /**
