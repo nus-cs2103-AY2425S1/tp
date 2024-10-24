@@ -18,7 +18,6 @@ public class Product {
     private final seedu.address.model.product.ProductName name;
 
     private Name supplierName;
-
     private int stockLevel;
     private int minStockLevel;
     private int maxStockLevel;
@@ -60,7 +59,7 @@ public class Product {
      * Removes assigned supplier if is supplied by the specified supplier.
      */
     public void removeSupplier(Name supplierName) {
-        if (supplierName == this.supplierName) {
+        if (this.supplierName.equals(supplierName)) {
             this.supplierName = null;
         }
     }
