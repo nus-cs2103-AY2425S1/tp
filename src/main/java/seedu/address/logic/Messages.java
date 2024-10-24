@@ -39,13 +39,13 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
+                .append(" | Phone: ")
                 .append(person.getPhone())
-                .append("; Email: ")
+                .append(" | Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
+                .append(" | Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append(" | Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
@@ -56,11 +56,11 @@ public class Messages {
     public static String format(Wedding wedding) {
         final StringBuilder builder = new StringBuilder();
         builder.append(wedding.getName())
-                .append("; Client: ")
-                .append(wedding.getClient())
-                .append("; Date: ")
+                .append(" | Client: ")
+                .append(wedding.getClient().getPerson().getName().fullName)
+                .append(" | Date: ")
                 .append(wedding.getDate())
-                .append("; Venue: ")
+                .append(" | Venue: ")
                 .append(wedding.getVenue());
         return builder.toString();
     }
