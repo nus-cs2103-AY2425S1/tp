@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -83,55 +83,66 @@ public class FindConcertContactCommandTest {
 
     @Test
     public void execute_personKeyword_noConcertContactsFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 0);
-        FindConcertContactCommand command = new FindConcertContactCommand(INDEX_THIRD_PERSON, null);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 0),
+                    false, false, true);
+        FindConcertContactCommand command = new FindConcertContactCommand(INDEX_THIRD_PERSON,
+                null);
         Person p = getTypicalAddressBook().getPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p);
         expectedModel.updateFilteredConcertContactList(predicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredConcertContactList());
     }
 
     @Test
     public void execute_personKeyword_multipleConcertContactsFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 2);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 2),
+                    false, false, true);
         FindConcertContactCommand command = new FindConcertContactCommand(INDEX_FIRST_PERSON, null);
         Person p = getTypicalAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p);
         expectedModel.updateFilteredConcertContactList(predicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE_COACHELLA, ALICE_GLASTONBURY), model.getFilteredConcertContactList());
     }
 
     @Test
     public void execute_concertKeyword_noConcertContactsFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 0);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 0),
+                false, false, true);
         FindConcertContactCommand command = new FindConcertContactCommand(null, INDEX_THIRD_CONCERT);
         Concert c = getTypicalAddressBook().getConcertList().get(INDEX_THIRD_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredConcertContactList());
     }
 
     @Test
     public void execute_concertKeyword_multipleConcertContactsFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 2);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 2),
+                false, false, true);
         FindConcertContactCommand command = new FindConcertContactCommand(null, INDEX_FIRST_CONCERT);
         Concert c = getTypicalAddressBook().getConcertList().get(INDEX_FIRST_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE_COACHELLA, BENSON_COACHELLA), model.getFilteredConcertContactList());
     }
 
     @Test
     public void execute_personAndConcertKeyword_noConcertContactsFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 0);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 0),
+                false, false, true);
         FindConcertContactCommand command = new FindConcertContactCommand(
                 INDEX_FIRST_PERSON,
                 INDEX_THIRD_CONCERT);
@@ -140,13 +151,15 @@ public class FindConcertContactCommandTest {
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p) && cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredConcertContactList());
     }
 
     @Test
     public void execute_personAndConcertKeyword_oneConcertContactFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW, 1);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 1),
+                false, false, true);
         FindConcertContactCommand command = new FindConcertContactCommand(
                 INDEX_FIRST_PERSON,
                 INDEX_FIRST_CONCERT);
@@ -155,7 +168,7 @@ public class FindConcertContactCommandTest {
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p) && cc.isAssociated(c);
         expectedModel.updateFilteredConcertContactList(predicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.singletonList(ALICE_COACHELLA), model.getFilteredConcertContactList());
     }
 
