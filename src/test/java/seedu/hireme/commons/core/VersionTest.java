@@ -6,8 +6,15 @@ import static seedu.hireme.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains tests for the {@code Version} class.
+ */
 public class VersionTest {
 
+    /**
+     * Tests that valid version strings are parsed correctly by the {@code Version} class.
+     * Verifies that the major, minor, patch numbers, and early access flag are parsed as expected.
+     */
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
         verifyVersionParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
@@ -15,11 +22,18 @@ public class VersionTest {
         verifyVersionParsedCorrectly("V100.100.100ea", 100, 100, 100, true);
     }
 
+    /**
+     * Tests that invalid version strings throw an {@code IllegalArgumentException}.
+     */
     @Test
     public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> Version.fromString("This is not a version string"));
     }
 
+    /**
+     * Tests that the {@code Version} constructor correctly assigns the major, minor, patch values,
+     * and the early access flag.
+     */
     @Test
     public void versionConstructor_correctParameter_valueAsExpected() {
         Version version = new Version(19, 10, 20, true);
@@ -30,21 +44,26 @@ public class VersionTest {
         assertEquals(true, version.isEarlyAccess());
     }
 
+    /**
+     * Tests the {@code toString} method of the {@code Version} class.
+     * Verifies that the string representation matches the expected format.
+     */
     @Test
     public void versionToString_validVersion_correctStringRepresentation() {
-        // boundary at 0
         Version version = new Version(0, 0, 0, true);
         assertEquals("V0.0.0ea", version.toString());
 
-        // normal values
         version = new Version(4, 10, 5, false);
         assertEquals("V4.10.5", version.toString());
 
-        // big numbers
         version = new Version(100, 100, 100, true);
         assertEquals("V100.100.100ea", version.toString());
     }
 
+    /**
+     * Tests the {@code compareTo} method of the {@code Version} class.
+     * Verifies that the comparison between versions behaves correctly according to the version numbers.
+     */
     @Test
     public void versionComparable_validVersion_compareToIsCorrect() {
         Version one;
@@ -105,6 +124,9 @@ public class VersionTest {
         assertTrue(one.compareTo(another) < 0);
     }
 
+    /**
+     * Tests that the {@code hashCode} method generates the correct hash code for the {@code Version} class.
+     */
     @Test
     public void versionComparable_validVersion_hashCodeIsCorrect() {
         Version version = new Version(100, 100, 100, true);
@@ -114,6 +136,9 @@ public class VersionTest {
         assertEquals(1010010010, version.hashCode());
     }
 
+    /**
+     * Tests that the {@code equals} method correctly compares two {@code Version} objects for equality.
+     */
     @Test
     public void versionComparable_validVersion_equalIsCorrect() {
         Version one;
@@ -128,8 +153,17 @@ public class VersionTest {
         assertTrue(one.equals(another));
     }
 
+    /**
+     * Verifies that the {@code Version} is parsed correctly from a string representation.
+     *
+     * @param versionString The version string to be parsed.
+     * @param major         The expected major version.
+     * @param minor         The expected minor version.
+     * @param patch         The expected patch version.
+     * @param isEarlyAccess Indicates if the version is an early access version.
+     */
     private void verifyVersionParsedCorrectly(String versionString,
-            int major, int minor, int patch, boolean isEarlyAccess) {
+                                              int major, int minor, int patch, boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
     }
 }

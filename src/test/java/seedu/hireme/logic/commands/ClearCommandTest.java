@@ -1,5 +1,6 @@
 package seedu.hireme.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.hireme.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
@@ -24,12 +25,17 @@ public class ClearCommandTest {
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model<InternshipApplication> model =
-                new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
+                new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
         Model<InternshipApplication> expectedModel =
-                new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
+                new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook<>());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ClearCommand().execute(null));
     }
 
 }

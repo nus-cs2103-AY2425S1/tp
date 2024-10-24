@@ -1,6 +1,8 @@
 package seedu.hireme.logic.commands;
 
 import static seedu.hireme.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.hireme.logic.commands.CommandTestUtil.showInternshipApplicationAtIndex;
+import static seedu.hireme.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLICATION;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,10 +32,9 @@ public class ListCommandTest {
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
-    //Todo when FILTER feature is implemented
-    //    @Test
-    //    public void execute_listIsFiltered_showsEverything() {
-    //        showPersonAtIndex(model, INDEX_FIRST_INTERNSHIP_APPLICATION);
-    //        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
-    //    }
+    @Test
+    public void execute_listIsFiltered_showsEverything() {
+        showInternshipApplicationAtIndex(model, INDEX_FIRST_INTERNSHIP_APPLICATION);
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
 }
