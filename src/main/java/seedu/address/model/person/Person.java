@@ -98,7 +98,7 @@ public class Person {
     }
 
     /**
-     * Add {@code Wedding} object to {@code weddingJobs}.
+     * Adds a wedding to the list of wedding jobs.
      *
      * @param wedding {@code Wedding} to be added to the list of wedding jobs
      */
@@ -109,15 +109,6 @@ public class Person {
             throw new IllegalArgumentException("Cannot add own wedding as a job.");
         }
     }
-
-    //    public void setWeddingJobs(Set<Wedding> weddings) {
-    //        if (ownWedding == null || !(weddings.contains(ownWedding))){
-    //            this.weddingJobs.addAll(weddings);
-    //        } else {
-    //            throw new IllegalArgumentException("Cannot add own wedding as a job.");
-    //        }
-    //    }
-
 
     /**
      * Returns true if both persons have the same name.
@@ -197,5 +188,4 @@ public class Person {
                 .add("wedding jobs", weddingJobs)
                 .toString();
     }
-
 }

@@ -83,9 +83,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Generates and adds the wedding jobs {@code toAdd} is involved in.
+     * Associates the person with wedding jobs based on the provided indices.
      *
-     * @param model {@code Model} which the command should operate on
+     * @param model The model containing the list of weddings.
      */
     public void generateWeddingJobs(Model model) {
         List<Wedding> weddingList = model.getFilteredWeddingList();

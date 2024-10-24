@@ -19,7 +19,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Wedding;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 /**
  * Adds a wedding to the Address Book.
  */
@@ -79,11 +82,11 @@ public class AddwCommand extends Command {
     }
 
     /**
-     * Returns a {@code Person} from the model's filtered person list based on the given index.
+     * Selects the client based on the provided index.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return {@code Person} at the given index in the filtered list
-     * @throws CommandException if the list is empty or if the index is invalid
+     * @param model The model containing the list of persons.
+     * @return The selected client at the given index.
+     * @throws CommandException If the list is empty or the index is invalid.
      */
     public Person selectClientWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -101,11 +104,19 @@ public class AddwCommand extends Command {
     }
 
     /**
+<<<<<<< HEAD
      * Returns a {@code Person} from the model's filtered person list based on the given keyword.
      *
      * @param model {@code Model} which the command should operate on
      * @return {@code Person} that matches the keyword
      * @throws CommandException if the list is empty or contains multiple matches
+=======
+     * Selects the client by matching the name keyword.
+     *
+     * @param model The model containing the filtered list of persons.
+     * @return The selected client.
+     * @throws CommandException If no person matches the keyword or there are multiple matches.
+>>>>>>> master
      */
     public Person selectClientWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
@@ -127,7 +138,6 @@ public class AddwCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AddwCommand)) {
             return false;
         }

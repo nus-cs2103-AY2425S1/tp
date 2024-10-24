@@ -197,7 +197,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Index>}.
+     * Parses {@code Collection<String> weddings} into a {@code Set<Index>}.
      */
     public static Set<Index> parseWeddingJobs(Collection<String> weddings) throws ParseException {
         requireNonNull(weddings);
