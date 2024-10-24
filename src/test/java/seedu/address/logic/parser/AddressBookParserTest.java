@@ -110,7 +110,7 @@ public class AddressBookParserTest {
         FilterCommand command = (FilterCommand) parser.parseCommand(
               FilterCommand.COMMAND_WORD + " " + "t/ High Risk"
         );
-        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null)),
+        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null, null, null)),
               command);
 
     }
