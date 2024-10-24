@@ -16,20 +16,23 @@ If you can type fast, PROperty can get your contact and property management task
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your PROperty.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click on the `.jar` file to run it
+   - **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
+
+- A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
+![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
    
    * `list` : Lists all contacts.
    
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
    
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    
@@ -70,36 +73,38 @@ If you can type fast, PROperty can get your contact and property management task
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to PROperty.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARKS]…​`
 
-* NAME and PHONE NUMBER fields must be provided.
+- `NAME` and `PHONE_NUMBER` fields must be provided.
+- `PERSON_TAG` can be `Buyer`, `Seller`, `Landlord`, `Tenant`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including no tags)
 </div>
 
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/looking for HDB`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567 t/Condominium`
+* `add n/Betsy Crowe t/condo e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567`
 
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the PROperty.
 
 Format: `list`
 
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the PROperty.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [dt/TAG] [r/REMARK]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [dt/PERSON_TAG] [r/REMARK]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* `PERSON_TAG` can be `Buyer`, `Seller`, `Landlord`, `Tenant`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the tags specified using `t/` will be added to the contact (cumulatively).
@@ -111,7 +116,7 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
+* `edit 2 t/condo` Adds the tag `condo` to the 2nd person
 
 ### Locating persons by name: `find`
 
@@ -129,7 +134,7 @@ the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * If a more specific search is required, utilise the `s/`.
   * Format: `find s/KEYWORD [s/MORE_KEYWORDS]`
   * Only individuals who match the keyword(s) one-to-one will be returned. e.g. `find s/Hans Bo` will not match `Bo Hans`. `find s/Hans Bo` will only match `Hans Bo`.
-  * Especially useful if there are multiple people with the same name in PROperty address book and you require a more specific search.
+  * Especially useful if there are multiple people with the same name in PROperty and you require a more specific search.
 
 Examples:
 
@@ -138,6 +143,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`.
 * `find s/Alex Yeoh s/23 Smith Street` returns `Alex Yeoh` who has `23 Smith Street` as his address.
 
+![Find Command](images/findCommand.png)
 
 ### Locating persons by tag: `findtag`
 
@@ -148,16 +154,18 @@ Format: `findtag TAG [MORE_TAGS]`
 - The search is case-insensitive. e.g., `HDB` will match `hdb`.
 - The order of the tags does not matter.
 - Persons with at least one matching tag will be returned (i.e., an `OR` search).
+- List of possible tags you can search are: `condo`, `hdb`, `landed`, `buyer`, `seller`, `tenant` or `landlord`
 
 Examples:
 
 - `findtag HDB` returns persons tagged with `HDB`.
 - `findtag HDB colleague` returns persons tagged with either `HDB` or `colleague`.
 
+![Find tag command](images/findtagCommand.png)
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the PROperty.
 
 Format: `delete INDEX`
 
@@ -167,13 +175,13 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in PROperty.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the PROperty.
 
 Format: `clear`
 
@@ -226,13 +234,44 @@ Shows the full details of the specified person, including their property listing
 Format: `show INDEX`
 
 - Shows the person at the specified `INDEX`
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The `INDEX` refers to the index number shown in the displayed person list.
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples: 
 
-- `show 2` shows the name, contact information, tags, and property listings of the second person in the address book.
+- `show 2` shows the name, contact information, tags, and property listings of the second person in the PROperty.
 
+![Show Command](images/showCommand.png)
+
+### Adding a property listing : `listing add`
+
+Adds a property listing to the person specified by `INDEX`
+
+Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
+
+- Adds a property listing to the person specified by `INDEX`
+- The `INDEX` refers to the index number shown in the displayed person list.
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- `PROPERTY_TAG` can be either: `condo`, `landed` or `hdb`
+
+Examples:
+
+- `listing add 1 t/condo a/NUS street 123` adds a property listing to the person at index `1` with a listing type of `condo` and address of `NUS street 123`
+
+### Adding a property listing : `listing delete`
+
+Deletes the property listing with index `LISTING_INDEX` from the person specified by `INDEX` 
+
+Format: `listing delete INDEX LISTING_INDEX`
+
+- Adds the property listing with index `LISTING_INDEX` to the person specified by `INDEX`
+- The `INDEX` refers to the index number shown in the displayed person list.
+- The `LISTING_INDEX` refers to the index number shown in the property listing displayed by the `show` command
+- The `INDEX`/`LISTING_INDEX` **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `listing delete 1 1` deletes the `1`st property listing from the person with index `1`
 
 ### Saving the data
 
@@ -271,15 +310,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action      | Format, Examples                                                                                                                                                                  |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**   | `clear`                                                                                                                                                                           |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                         |
-| **Findtag** | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                    |
-| **List**    | `list`                                                                                                                                                                            |
-| **Show**    | `show INDEX`<br> e.g., `show 1`                                                                                                                                                   |
-| **Help**    | `help`                                                                                                                                                                            |
-| **Remark**  | `remark INDEX r/[REMARKS]`                                                                                                                                                        |
+| Action             | Format, Examples                                                                                                                                                                |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
+| **Clear**          | `clear`                                                                                                                                                                         |
+| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                             |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                       |
+| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                  |
+| **List**           | `list`                                                                                                                                                                          
+| **Add Listing**    | `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
+| **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                            |
+| **Show**           | `show INDEX`<br> e.g., `show 1`                                                                                                                                                 |
+| **Help**           | `help`                                                                                                                                                                          |
+| **Remark**         | `remark INDEX r/[REMARKS]`                                                                                                                                                      |
