@@ -35,12 +35,17 @@
         </MenuBar>
 
         <!-- SplitPane to place person list and display card side by side -->
-        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.3">
+        <SplitPane xmlns="http://javafx.com/javafx/17"
+                   xmlns:fx="http://javafx.com/fxml/1"
+                   VBox.vgrow="ALWAYS"
+                   dividerPositions="0.3">
           <!-- Left: Person List -->
-          <StackPane fx:id="personListPanelPlaceholder" minWidth="340" prefWidth="340" />
-
-          <!-- Right: DisplayCard -->
-          <StackPane fx:id="displayCardPanelPlaceholder" minWidth="800" prefWidth="800" styleClass="right-pane"/>
+          <StackPane fx:id="personListPanelPlaceholder"
+                     minWidth="200"
+                     maxWidth="200"/>  <!-- Add maxWidth to fix the width -->
+          <!-- Right: Display Card -->
+          <StackPane fx:id="displayCardPanelPlaceholder"
+                     minWidth="200"/>
         </SplitPane>
 
         <!-- Result Display -->
