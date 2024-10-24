@@ -20,6 +20,7 @@ import seedu.internbuddy.logic.commands.FindCommand;
 import seedu.internbuddy.logic.commands.HelpCommand;
 import seedu.internbuddy.logic.commands.ListCommand;
 import seedu.internbuddy.logic.commands.UnfavCommand;
+import seedu.internbuddy.logic.commands.UpdateCommand;
 import seedu.internbuddy.logic.commands.WithdrawCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 
@@ -83,6 +84,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateCommandParser().parse(arguments);
 
         case WithdrawCommand.COMMAND_WORD:
             return new WithdrawCommandParser().parse(arguments);
