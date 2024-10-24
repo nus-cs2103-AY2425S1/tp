@@ -20,6 +20,7 @@ Class Name
 Class Phone
 Class Tag
 Class Schedule
+Class Reminder
 
 Class I #FFFFFF
 }
@@ -44,6 +45,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Schedule
+Person *--> Reminder
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
