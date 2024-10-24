@@ -51,7 +51,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
             addTagDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
 
-        parseTagstoAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::setTags);
+        parseTagsToAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::setTags);
 
         return new AddTagCommand(index, addTagDescriptor);
     }
@@ -61,7 +61,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagstoAdd(Collection<String> tags) throws ParseException {
+    private Optional<Set<Tag>> parseTagsToAdd(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {
