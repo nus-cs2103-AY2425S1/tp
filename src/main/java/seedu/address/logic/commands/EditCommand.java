@@ -38,8 +38,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TUTORIALID + "TUTORIAL_ID]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Samson Chew "
-            + PREFIX_STUDENTID + "A1234567M"
-            + PREFIX_TUTORIALID + "1001";
+            + PREFIX_STUDENTID + "A1234567U "
+            + PREFIX_TUTORIALID + "T1001";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

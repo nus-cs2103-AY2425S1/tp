@@ -23,11 +23,12 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_STUDENTID + "STUDENT_ID "
-            + PREFIX_TUTORIALID + "TUTORIAL_CLASS \n"
+            + '['
+            + PREFIX_TUTORIALID + "TUTORIAL_CLASS] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Samson "
             + PREFIX_STUDENTID + "A1234567U "
-            + PREFIX_TUTORIALID + "T1001 ";
+            + PREFIX_TUTORIALID + "T1001";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";

@@ -18,7 +18,7 @@ public class DeleteTutorialCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tutorial identified by the tutorial ID used in the displayed tutorial list."
             + " Parameters: TUTORIAL ID\n"
-            + "Example: " + COMMAND_WORD + " 1001";
+            + "Example: " + COMMAND_WORD + " T1001";
 
     public static final String MESSAGE_DELETE_TUTORIAL_SUCCESS = "Deleted Tutorial: %1$s";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "This tutorial class doesn't exist!";

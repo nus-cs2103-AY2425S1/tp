@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.AssignmentList;
+import seedu.address.model.student.Student;
+import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 
 /**
@@ -13,7 +15,7 @@ import seedu.address.model.tut.TutorialList;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Data has been cleared!";
 
 
     @Override
@@ -22,6 +24,9 @@ public class ClearCommand extends Command {
         model.setAddressBook(new AddressBook());
         model.setAssignments(new AssignmentList());
         model.setTutorials(new TutorialList());
+        for (Student s : Tutorial.none().getStudents()) {
+            Tutorial.none().deleteStudent(s);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

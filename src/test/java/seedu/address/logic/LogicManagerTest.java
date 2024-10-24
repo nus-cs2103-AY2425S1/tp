@@ -196,8 +196,8 @@ public class LogicManagerTest {
         // Create a dummy IOException to be thrown when saving tutorials
         IOException dummyIoException = new IOException("Invalid command format! \n"
                 + "add: Adds a student to the tutorial book. Parameters: n/NAME s/STUDENT_ID "
-                + "c/TUTORIAL_CLASS \n"
-                + "Example: add n/Samson s/A1234567U c/T1001 ");
+                + "[c/TUTORIAL_CLASS] \n"
+                + "Example: add n/Samson s/A1234567U c/T1001");
 
         // Create a temporary file path for the tutorial file
         Path tempTutorialFilePath = temporaryFolder.resolve("ExceptionTutorials.json");
