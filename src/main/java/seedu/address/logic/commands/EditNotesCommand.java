@@ -30,6 +30,7 @@ public class EditNotesCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 i/1 n/High profile client.";
 
     public static final String MESSAGE_EDIT_NOTES_SUCCESS = "Edit note of Person: %1$s";
+    public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
 
     private final Index personIndex;
     private final Index noteIndex;
@@ -62,7 +63,7 @@ public class EditNotesCommand extends Command {
         Set<Note> notesToEdit = new LinkedHashSet<>(personToEdit.getNotes());
 
         if (notesToEdit.contains(note)) {
-            throw new CommandException(Note.DUPLICATE_MESSAGE_CONSTRAINTS);
+            throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
         if (noteIndex.getZeroBased() >= notesToEdit.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTED_INDEX);
