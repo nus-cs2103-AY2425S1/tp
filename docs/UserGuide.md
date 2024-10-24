@@ -151,7 +151,7 @@ Format: `view person KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `view person Betsy Crowe` returns the details for `Betsy Crowe`<br>
+* `view person Betsy Crowe` returns the details for `Betsy Crowe`
 * `view person John Doe` returns the details for `John Doe`
 
 ![result for 'view john doe'](images/viewJohnDoeResult.png)
@@ -271,7 +271,7 @@ Format: `view event KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `view event Oscars` returns the details for `Oscars`
-* `view event Hair Cut` returns the details for `Hair Cut`<br>
+* `view event Hair Cut` returns the details for `Hair Cut`
 
 ![result for 'view hair cut'](images/viewHairCutResult.png)
 
