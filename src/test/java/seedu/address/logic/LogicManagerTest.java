@@ -126,55 +126,6 @@ public class LogicManagerTest {
         Files.deleteIfExists(tempFile);
     }
 
-    @Test
-    public void execute_undoCommand_success() throws Exception {
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + MODULE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-
-        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, expectedPerson), expectedModel);
-
-        String undoCommand = UndoCommand.COMMAND_WORD;
-        expectedModel = new ModelManager();
-
-        assertCommandSuccess(undoCommand, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void executeUndo_noCommandToUndo_throwsCommandException() {
-        String undoCommand = UndoCommand.COMMAND_WORD;
-        assertCommandException(undoCommand, UndoCommand.MESSAGE_UNDO_FAILURE);
-    }
-
-    @Test
-    public void execute_redoCommand_success() throws Exception {
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + MODULE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-
-        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, expectedPerson), expectedModel);
-
-        String undoCommand = UndoCommand.COMMAND_WORD;
-        expectedModel = new ModelManager();
-
-        assertCommandSuccess(undoCommand, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
-
-        String redoCommand = RedoCommand.COMMAND_WORD;
-        expectedModel.addPerson(expectedPerson);
-
-        assertCommandSuccess(redoCommand, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void executeRedo_noCommandToRedo_throwsCommandException() {
-        String redoCommand = RedoCommand.COMMAND_WORD;
-        assertCommandException(redoCommand, RedoCommand.MESSAGE_REDO_FAILURE);
-    }
-
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>

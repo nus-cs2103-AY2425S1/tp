@@ -224,6 +224,11 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public void saveAddressBook() {
+            // do nothing, but needed to avoid calling the default stub
+        }
     }
 
 }

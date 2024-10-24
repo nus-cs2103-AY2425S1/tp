@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -46,6 +47,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.saveAddressBook();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -67,6 +69,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.saveAddressBook();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -79,6 +82,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.saveAddressBook();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -96,6 +100,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.saveAddressBook();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -145,6 +150,50 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
+        Person editedPerson = new PersonBuilder().build();
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.saveAddressBook();
+        editCommand.execute(model);
+        expectedModel.undoAddressBook();
+        assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
+        expectedModel.redoAddressBook();
+        assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
+    }
+    @Test
+    public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_FAILURE);
+    }
+
+    @Test
+    public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
+        Person editedPerson = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showPersonAtIndex(model, INDEX_SECOND_PERSON);
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.saveAddressBook();
+        editCommand.execute(model);
+        expectedModel.undoAddressBook();
+        assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
+        assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personToEdit);
+        // redo -> edits same second person in unfiltered person list
+        expectedModel.redoAddressBook();
+        assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
     }
 
     @Test
