@@ -6,6 +6,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.List;
+import java.util.Optional;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.ToStringBuilder;
@@ -14,6 +15,7 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Date;
+import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.student.Student;
 
@@ -61,6 +63,15 @@ public class CancelLessonCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
+
+        Optional<MakeupLesson> makeupLessonOptional = studentToUpdate.findMakeupLesson(date, startTime);
+        if (makeupLessonOptional.isPresent()) {
+            Student updatedStudent = studentToUpdate.withoutMakeupLesson(makeupLessonOptional.get());
+            model.setStudent(studentToUpdate, updatedStudent);
+            return new CommandResult(String.format(MESSAGE_SUCCESS,
+                    date.toDisplay(), startTime, Messages.format(updatedStudent)));
+        }
+
         studentToUpdate.matchesLesson(date, startTime);
 
         if (!studentToUpdate.matchesLesson(date, startTime)) {

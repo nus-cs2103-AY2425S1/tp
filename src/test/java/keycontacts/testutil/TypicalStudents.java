@@ -24,20 +24,21 @@ import keycontacts.model.student.Student;
  */
 public class TypicalStudents {
 
+    // Makeup lessons based on the provided JSON
     public static final MakeupLesson MAKEUP_LESSON_1 =
-            new MakeupLesson(new Date("30-09-2021"), new Time("12:00"), new Time("14:00"));
+            new MakeupLesson(new Date("14-10-2024"), new Time("10:00"), new Time("12:00"));
     public static final MakeupLesson MAKEUP_LESSON_2 =
-            new MakeupLesson(new Date("01-10-2021"), new Time("12:00"), new Time("14:00"));
+            new MakeupLesson(new Date("15-10-2024"), new Time("10:00"), new Time("12:00"));
     public static final MakeupLesson MAKEUP_LESSON_3 =
-            new MakeupLesson(new Date("02-10-2021"), new Time("18:00"), new Time("19:00"));
+            new MakeupLesson(new Date("16-10-2024"), new Time("10:00"), new Time("12:00"));
     public static final MakeupLesson MAKEUP_LESSON_4 =
-            new MakeupLesson(new Date("03-10-2021"), new Time("09:00"), new Time("10:00"));
+            new MakeupLesson(new Date("17-10-2024"), new Time("10:00"), new Time("12:00"));
     public static final MakeupLesson MAKEUP_LESSON_5 =
-            new MakeupLesson(new Date("04-10-2021"), new Time("11:00"), new Time("12:00"));
+            new MakeupLesson(new Date("18-10-2024"), new Time("10:00"), new Time("12:00"));
     public static final MakeupLesson MAKEUP_LESSON_6 =
-            new MakeupLesson(new Date("05-10-2021"), new Time("20:00"), new Time("21:00"));
+            new MakeupLesson(new Date("19-10-2024"), new Time("10:00"), new Time("12:00"));
     public static final MakeupLesson MAKEUP_LESSON_7 =
-            new MakeupLesson(new Date("06-10-2021"), new Time("15:00"), new Time("17:00"));
+            new MakeupLesson(new Date("20-10-2024"), new Time("10:00"), new Time("12:00"));
 
     /**
      * When editing any entry below, take note to change typicalStudentsStudentDirectory.json
@@ -48,9 +49,9 @@ public class TypicalStudents {
             .withPhone("94351253")
             .withGradeLevel("ABRSM 2")
             .withPianoPieces("Etude")
-            .withRegularLesson("Monday", "12:00", "14:00")
+            .withRegularLesson("MONDAY", "12:00", "14:00")
             .withCancelledLessons("14-10-2024")
-            .withMakeupLessons(MAKEUP_LESSON_1, MAKEUP_LESSON_2)
+            .withMakeupLessons(MAKEUP_LESSON_1)
             .build();
     public static final Student BENSON = new StudentBuilder()
             .withName("Benson Meier")
@@ -58,7 +59,7 @@ public class TypicalStudents {
             .withPhone("98765432")
             .withGradeLevel("RSL 3")
             .withPianoPieces("Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2")
-            .withRegularLesson("Tuesday", "13:00", "15:00")
+            .withRegularLesson("TUESDAY", "12:00", "14:00")
             .withCancelledLessons("15-10-2024")
             .withMakeupLessons(MAKEUP_LESSON_2)
             .build();
@@ -68,7 +69,7 @@ public class TypicalStudents {
             .withAddress("wall street")
             .withGradeLevel("ABRSM 1")
             .withPianoPieces("Clair de Lune", "Le Sapin Op. 75 No. 5")
-            .withRegularLesson("Wednesday", "18:00", "19:00")
+            .withRegularLesson("WEDNESDAY", "12:00", "14:00")
             .withMakeupLessons(MAKEUP_LESSON_3)
             .build();
     public static final Student DANIEL = new StudentBuilder()
@@ -76,7 +77,7 @@ public class TypicalStudents {
             .withPhone("87652533")
             .withAddress("10th street")
             .withGradeLevel("ABRSM 3")
-            .withRegularLesson("Thursday", "09:00", "10:00")
+            .withRegularLesson("THURSDAY", "12:00", "14:00")
             .withMakeupLessons(MAKEUP_LESSON_4)
             .build();
     public static final Student ELLE = new StudentBuilder()
@@ -84,7 +85,7 @@ public class TypicalStudents {
             .withPhone("9482224")
             .withAddress("michegan ave")
             .withGradeLevel("IMEB 1")
-            .withRegularLesson("Friday", "11:00", "12:00")
+            .withRegularLesson("FRIDAY", "12:00", "14:00")
             .withMakeupLessons(MAKEUP_LESSON_5)
             .build();
     public static final Student FIONA = new StudentBuilder()
@@ -92,7 +93,7 @@ public class TypicalStudents {
             .withPhone("9482427")
             .withAddress("little tokyo")
             .withGradeLevel("RCM 2")
-            .withRegularLesson("Saturday", "20:00", "21:00")
+            .withRegularLesson("SATURDAY", "12:00", "14:00")
             .withMakeupLessons(MAKEUP_LESSON_6)
             .build();
     public static final Student GEORGE = new StudentBuilder()
@@ -100,7 +101,7 @@ public class TypicalStudents {
             .withPhone("9482442")
             .withAddress("4th street")
             .withGradeLevel("LCM 3")
-            .withRegularLesson("Sunday", "15:00", "17:00")
+            .withRegularLesson("SUNDAY", "12:00", "14:00")
             .withMakeupLessons(MAKEUP_LESSON_7)
             .build();
 

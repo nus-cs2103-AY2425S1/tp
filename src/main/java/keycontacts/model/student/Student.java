@@ -193,6 +193,25 @@ public class Student {
     }
 
     /**
+     * Creates and returns a new {@code Student} with the {@code makeupLesson} removed.
+     */
+    public Student withoutMakeupLesson(MakeupLesson makeupLesson) {
+        Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
+        updatedMakeupLessons.remove(makeupLesson);
+
+        return new Updater().withMakeupLessons(updatedMakeupLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with all {@code CancelledLessons} removed.
+     */
+    public Student withoutCancelledLessons() {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>();
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
+    }
+
+    /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
      */
@@ -259,6 +278,16 @@ public class Student {
         return this.getRegularLessonOptional()
                 .map(lesson -> lesson.isOnDayAndTime(date.convertToDay(), startTime))
                 .orElse(false);
+    }
+
+    /**
+     * Returns an {@code Optional<MakeupLesson>} if the student has a makeup lesson matching the paramters.
+     */
+    public Optional<MakeupLesson> findMakeupLesson(Date date, Time startTime) {
+        return this.getMakeupLessons()
+                .stream()
+                .filter(ml -> ml.getLessonDate().equals(date) && ml.getStartTime().equals(startTime))
+                .findFirst();
     }
 
     /**

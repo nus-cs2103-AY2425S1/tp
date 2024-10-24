@@ -25,7 +25,6 @@ public class Main {
     private static Logger logger = LogsCenter.getLogger(Main.class);
 
     public static void main(String[] args) {
-
         // As per https://github.com/openjdk/jfx/blob/master/doc-files/release-notes-16.md
         // JavaFX 16 (or later) runtime logs a warning at startup if JavaFX classes are loaded from
         // the classpath instead of a module.

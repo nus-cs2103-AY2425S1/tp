@@ -20,6 +20,7 @@ import keycontacts.model.student.Student;
 class JsonSerializableStudentDirectory {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_CLASHING_LESSONS = "Students list contains clashing lesson(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
@@ -52,8 +53,14 @@ class JsonSerializableStudentDirectory {
             if (studentDirectory.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
+
             studentDirectory.addStudent(student);
         }
+
+        if (studentDirectory.hasClashingLessons()) {
+            throw new IllegalValueException(MESSAGE_CLASHING_LESSONS);
+        }
+
         return studentDirectory;
     }
 
