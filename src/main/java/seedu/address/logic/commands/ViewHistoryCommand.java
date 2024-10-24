@@ -10,8 +10,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,25 +26,25 @@ public class ViewHistoryCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01" + PREFIX_DATE + "2023-09-25 10:15";
     public static final String MESSAGE_NO_HISTORY_FOUND = "No history found for Patient";
 
-    private final Id patientId;
+    private final int personId;
     private final LocalDateTime dateTime;
 
     /**
-     * @param patientId of the patient to view the history of
+     * @param personId of the patient to view the history of
      * @param dateTime the specific date and time of the history to view (optional)
      */
-    public ViewHistoryCommand(Id patientId, LocalDateTime dateTime) {
-        requireNonNull(patientId); // Only patientId is mandatory
-        this.patientId = patientId;
+    public ViewHistoryCommand(int personId, LocalDateTime dateTime) {
+        requireNonNull(personId); // Only patientId is mandatory
+        this.personId = personId;
         this.dateTime = dateTime;
     }
 
     /**
-     * @param patientId of the patient to view the history of
+     * @param personId of the person to view the history of
      */
-    public ViewHistoryCommand(Id patientId) {
-        requireNonNull(patientId); // Only patientId is mandatory
-        this.patientId = patientId;
+    public ViewHistoryCommand(int personId) {
+        requireNonNull(personId); // Only patientId is mandatory
+        this.personId = personId;
         this.dateTime = null; // Handle the case when dateTime is not provided
     }
 
@@ -54,8 +52,8 @@ public class ViewHistoryCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Patient patientToView = model.getFilteredPatientById(allPersons, patientId);
-        if (patientToView == null) {
+        Person personToView = model.getFilteredPersonById(allPersons, personId);
+        if (personToView == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -63,9 +61,9 @@ public class ViewHistoryCommand extends Command {
         String history;
         if (dateTime != null) {
             historyDateTime = dateTime;
-            history = patientToView.getOneHistory(historyDateTime, patientId);
+            history = personToView.getAppointment(historyDateTime, personId).toString();
         } else {
-            history = patientToView.getPatientHistory(patientId);
+            history = personToView.getStringAppointments();
         }
 
         if (history == null || history.isEmpty()) {
@@ -89,7 +87,7 @@ public class ViewHistoryCommand extends Command {
 
         // state check
         ViewHistoryCommand e = (ViewHistoryCommand) other;
-        return patientId.equals(e.patientId)
+        return personId == (e.personId)
                 && dateTime.equals(e.dateTime);
     }
 }

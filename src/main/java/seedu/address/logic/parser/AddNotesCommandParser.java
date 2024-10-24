@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.AddNotesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
 
 
 /**
@@ -31,12 +30,11 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNotesCommand.MESSAGE_USAGE));
         }
 
-        Id patientId;
+        int patientId;
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_REMARK);
         try {
-            patientId = ParserUtil.parsePatientId(argMultimap.getAllValues(PREFIX_ID).get(0));
-            System.out.println(patientId.getIdValue());
+            patientId = ParserUtil.parsePersonId(argMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }

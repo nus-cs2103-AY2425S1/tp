@@ -4,11 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -36,7 +33,7 @@ public class PersonBuilder {
     private Remark remark;
     private Set<Tag> tags;
 
-    private Id id;
+    private int id;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -119,14 +116,14 @@ public class PersonBuilder {
     /**
      * builds a patient class
      */
-    public Patient buildPatient() {
-        return new Patient(name, role, phone, email, address, remark, tags);
+    public Person buildPatient() {
+        return new Person(name, role, phone, email, address, remark, tags);
     }
 
     /**
      * builds a doctor class
      */
-    public Doctor buildDoctor() {
-        return new Doctor(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
+    public Person buildDoctor() {
+        return new Person(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
     }
 }

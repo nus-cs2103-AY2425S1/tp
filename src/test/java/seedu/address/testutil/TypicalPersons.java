@@ -16,8 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Doctor;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,59 +28,21 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withTags("friends").build();
 
-    public static final Doctor DRALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("friends").buildDoctor();
-
-    public static final Patient PATIENTALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("friends").buildPatient();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
 
-    public static final Doctor DRBENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").buildDoctor();
-
-    public static final Patient PATIENTBENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").buildPatient();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").buildDoctor();
-    public static final Doctor DRCARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").buildDoctor();
-    public static final Patient PATIENTCARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").buildPatient();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Doctor DRDANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").buildDoctor();
-    public static final Patient PATIENTDANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").buildPatient();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Doctor DRELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").buildDoctor();
-    public static final Patient PATIENTELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").buildPatient();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Doctor DRFIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").buildDoctor();
-    public static final Patient PATIENTFIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").buildPatient();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
-    public static final Doctor DRGEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").buildDoctor();
-    public static final Patient PATIENTGEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").buildPatient();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

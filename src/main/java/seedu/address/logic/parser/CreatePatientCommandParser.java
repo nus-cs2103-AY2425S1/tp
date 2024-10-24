@@ -15,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Patient;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -42,14 +42,14 @@ public class CreatePatientCommandParser implements Parser<CreatePatientCommand> 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String role = "patient";
+        String role = "PATIENT";
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Remark remark = new Remark("");
         Set<Tag> tagList = new HashSet<>();
 
-        Patient patient = new Patient(name, role, phone, email, address, remark, tagList);
+        Person patient = new Person(name, role, phone, email, address, remark, tagList);
 
 
         return new CreatePatientCommand(patient);
