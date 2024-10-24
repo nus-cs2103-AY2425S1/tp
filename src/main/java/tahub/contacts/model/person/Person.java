@@ -47,7 +47,7 @@ public class Person {
     }
 
     /**
-     * Creates a {@link Person} with generic details, taking in only a {@link MatriculationNumber}.
+     * Creates a valid {@link Person} with generic details, taking in only a {@link MatriculationNumber}.
      *
      * @param matricNumber Matriculation number.
      * @return Person.
