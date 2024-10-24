@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Line;
 import seedu.address.model.listing.Listing;
 
 /**
@@ -41,6 +42,8 @@ public class ListingCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label seller;
+    @FXML
+    private Line underline;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,11 +53,25 @@ public class ListingCard extends UiPart<Region> {
         this.listing = listing;
         id.setText(displayedIndex + ". ");
         name.setText(listing.getName().fullName);
-        price.setText(listing.getPrice().toString());
-        area.setText(listing.getArea().toString());
+        initializeUnderline();
+        initializePrice();
+        initializeArea();
         region.setText(listing.getRegion().toString());
         address.setText(listing.getAddress().toString());
         seller.setText(listing.getSeller().getName().fullName);
+    }
+
+    private void initializeUnderline() {
+        // Bind underline width to name label with adjustment
+        underline.endXProperty().bind(name.widthProperty().add(45));
+    }
+
+    private void initializePrice() {
+        price.setText(String.format("$%s", listing.getPrice().toString()));
+    }
+
+    private void initializeArea() {
+        area.setText(String.format("%s m²", listing.getArea().toString()));
     }
 
     // Getter methods for private fields
