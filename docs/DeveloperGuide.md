@@ -254,7 +254,11 @@ The following sequence diagram shows how an undo operation goes through the `Log
 ![StorageClassDiagramWithArchive](images/StorageClassDiagramWithArchive.png)
 </div>
 
+<div>
 
+The following sequence diagram shows how a sort command goes through the `Model` component:
+![ArchiveSortSequenceDiagram](images/ArchiveSortSequenceDiagram.png)
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
