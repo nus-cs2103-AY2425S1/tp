@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_OFFER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_ONGOING;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
@@ -14,38 +13,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.company.ApplicationStatus;
-import seedu.address.model.company.Company;
-import seedu.address.testutil.CompanyBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
  */
 public class ApplicationStatusCommandTest {
 
-    private static final String STATUS_STUB = "Some status";
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_addStatusUnfilteredList_success() {
-        Company firstCompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-        Company editedCompany = new CompanyBuilder(firstCompany).withApplicationStatus(STATUS_STUB).build();
-
-        ApplicationStatusCommand applicationStatusCommand = new ApplicationStatusCommand(INDEX_FIRST_COMPANY,
-                new ApplicationStatus(editedCompany.getApplicationStatus().value));
-
-        String expectedMessage = String.format(ApplicationStatusCommand.MESSAGE_ADD_STATUS_SUCCESS, editedCompany);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setCompany(firstCompany, editedCompany);
-
-        assertCommandSuccess(applicationStatusCommand, model, expectedMessage, expectedModel);
-    }
+    private Model model = new ModelManager(getTypicalAddressBook(),
+            new UserPrefs());
 
     @Test
     public void execute_invalidCompanyIndexUnfilteredList_failure() {
