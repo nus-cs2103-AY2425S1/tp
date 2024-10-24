@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CreateDoctorCommand.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.commands.CreateDoctorCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -44,10 +45,8 @@ public class CreateDoctorCommandTest {
         Person validDoctor = new PersonBuilder().buildDoctor();
         modelStub.addPerson(validDoctor); // Add first doctor
 
-        assertThrows(
-                CommandException.class, // expected exception type
-                CreateDoctorCommand.MESSAGE_DUPLICATE_PERSON, // expected message
-                () -> new CreateDoctorCommand(validDoctor).execute(modelStub)); // executable
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_PERSON, () ->
+                new CreateDoctorCommand(validDoctor).execute(modelStub));
     }
 
 
