@@ -75,6 +75,8 @@ public class UnEnrollCommand extends Command {
         tutorial.removeParticipation(p);
         student.removeParticipation(p);
         model.deleteParticipation(p);
+        model.setPerson(student, student);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, student, tutorial));
     }
 

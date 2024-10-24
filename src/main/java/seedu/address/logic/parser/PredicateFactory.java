@@ -82,7 +82,7 @@ public class PredicateFactory {
     private static void processAttendancePredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
-            LocalDate[] datesArray = ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_ATTENDANCE).get());
+            LocalDate[] datesArray = ParserUtil.parseAttendanceDateRange(argMultimap.getValue(PREFIX_ATTENDANCE).get());
             predicates.add(new StudentAttendedTutorialPredicate(datesArray[0], datesArray[1]));
         }
 

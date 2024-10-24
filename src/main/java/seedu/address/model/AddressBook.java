@@ -183,20 +183,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes a tutorial, denoted by {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void closeTutorial(Tutorial key) {
+    public void deleteTutorial(Tutorial key) {
         requireNonNull(key);
         tutorials.remove(key);
     }
-
-    /**
-     * Returns the tutorial in the list if a tutorial with the same identity
-     * as {@code tutorial} exists in the address book.
-     */
-    public Tutorial getTutorial(Tutorial tutorial) {
-        requireNonNull(tutorial);
-        return tutorials.getTutorial(tutorial);
-    }
-
 
     //// util methods
 

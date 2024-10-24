@@ -3,6 +3,7 @@ package seedu.address.model.participation;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Address.VALIDATION_REGEX;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.person.Attendance;
@@ -16,6 +17,16 @@ public class Participation {
     private final Person student;
     private final Tutorial tutorial;
     private final List<Attendance> attendanceList;
+
+    /**
+     * Person and Tutorial must be present and not null
+     */
+    public Participation(Person student, Tutorial tutorial) {
+        requireAllNonNull(student, tutorial);
+        this.student = student;
+        this.tutorial = tutorial;
+        this.attendanceList = new ArrayList<>();
+    }
 
     /**
      * Every field must be present and not null
@@ -54,8 +65,7 @@ public class Participation {
 
         Participation otherParticipation = (Participation) other;
         return this.student.equals(otherParticipation.student)
-                && this.tutorial.equals(otherParticipation.tutorial)
-                && this.attendanceList.equals(otherParticipation.attendanceList);
+                && this.tutorial.equals(otherParticipation.tutorial);
     }
 
     /**

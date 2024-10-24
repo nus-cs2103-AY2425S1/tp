@@ -84,8 +84,8 @@ public class MarkAttendanceByTutorialCommand extends Command {
         }
 
         MarkAttendanceByTutorialCommand otherMarkAttendanceCommand = (MarkAttendanceByTutorialCommand) other;
-        return tutorial.equals(otherMarkAttendanceCommand.tutorial) &&
-                attendance.equals(otherMarkAttendanceCommand.attendance);
+        return tutorial.equals(otherMarkAttendanceCommand.tutorial)
+                && attendance.equals(otherMarkAttendanceCommand.attendance);
     }
 
     @Override

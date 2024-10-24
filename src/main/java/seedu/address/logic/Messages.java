@@ -16,7 +16,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT = "The tutorial code provided is invalid";
+    public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT = "The tutorial subject provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -30,6 +30,8 @@ public class Messages {
             + " Please check the correct usage. \n%1$s";
     public static final String MESSAGE_INVALID_DATE = "At least one of the dates is not in the right format."
             + " Please check the correct usage. \n%1$s";
+    public static final String MESSAGE_TUTORIAL_NOT_FOUND = "No tutorial class with the name %1$s is found.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

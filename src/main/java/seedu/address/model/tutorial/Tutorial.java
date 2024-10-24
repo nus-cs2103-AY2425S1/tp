@@ -93,7 +93,7 @@ public class Tutorial {
         }
 
         Tutorial otherTutorial = (Tutorial) other;
-        return subject.equals(otherTutorial.subject);
+        return subject.equalsIgnoreCase(otherTutorial.subject);
     }
 
     @Override

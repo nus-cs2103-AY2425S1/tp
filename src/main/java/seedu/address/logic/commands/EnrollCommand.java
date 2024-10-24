@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,7 +67,8 @@ public class EnrollCommand extends Command {
         }
         Tutorial tutorial = optionalTutorial.get();
 
-        Participation p = new seedu.address.model.participation.Participation(student, tutorial, new ArrayList<>());
+        Participation p = new Participation(student, tutorial);
+
         if (tutorial.hasParticipation(p)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -83,6 +83,9 @@ public class EnrollCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.addParticipation(p);
+
+        model.setPerson(student, student);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(student), tutorial));
     }
 
