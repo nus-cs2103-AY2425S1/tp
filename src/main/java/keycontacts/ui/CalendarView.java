@@ -6,9 +6,9 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -27,7 +27,7 @@ public class CalendarView extends UiPart<Region> {
     private final List<HBox> dayHBoxes = new ArrayList<>();
 
     @FXML
-    private VBox grid;
+    private GridPane grid;
 
     @FXML
     private HBox mon;
@@ -74,7 +74,6 @@ public class CalendarView extends UiPart<Region> {
     private void generateGrid() {
         for (int i = 0; i < NUM_ROWS; i++) {
             timeBlocks[i] = new ArrayList<>();
-            dayHBoxes.get(i).prefHeightProperty().bind(grid.heightProperty().divide(NUM_ROWS));
         }
     }
 
