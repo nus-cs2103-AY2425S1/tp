@@ -112,11 +112,11 @@ Format: `help`
 
 ![help message](images/helpWindow.png)
 
-### Adding a supplier: `add`
+### Adding a supplier: `add_supplier`
 
 Adds a supplier to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -164,19 +164,19 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd supplier in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st supplier in the results of the `find` command.
 
-### Adding a product : `ADD_PRODUCT`
+### Adding a product : `add_product`
 
 Add a product.
 
-Format: `ADD_PRODUCT n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
+Format: `add_product n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
 
-### Assigning a product to supplier: `ASSIGN`
+### Assigning a product to supplier: `assign`
 The **Assign** feature allows you to connect products with their current supplier. This makes it easier to track which supplier is responsible for each product in your store.
 
-Format: `ASSIGN pr/PRODUCT_NAME su/SUPPLIER_NAME`
+Format: `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 
 Example Commands:
-- `ASSIGN Tissue Paper Jacob Smith` assigns product named `Tissue paper` to supplier named `Jacob Smith`
+- `assign Tissue Paper Jacob Smith` assigns product named `Tissue paper` to supplier named `Jacob Smith`
 
 > **Important**:  
 > The product and supplier must already exist in the system before you can assign them.  
@@ -185,13 +185,13 @@ Example Commands:
 > **Note:**
 > If product has already been assigned to supplier, the system will notify you.
 
-### Un-assigning a product to supplier: `ASSIGN`
+### Un-assigning a product to supplier: `unassign`
 Allows the user to remove or "unassign" products from their current supplier, useful if the store manager decides to stop sourcing a particular product from a supplier or switch to a new one.
 
-Format: `UNASSIGN pr/PRODUCT_NAME su/SUPPLIER_NAME`
+Format: `unassign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 
 Example Commands:
-- `UNASSIGN Tissue Paper Jacob Smith` Unassigns product named `Tissue paper` to supplier named `Jacob Smith`
+- `unassign Tissue Paper Jacob Smith` Unassigns product named `Tissue paper` to supplier named `Jacob Smith`
 
 > **Important**:  
 > The product and supplier must already exist in the system before you can assign them.  
@@ -210,23 +210,63 @@ Examples:
 * `threshold pr/sweater stk/1000`
 * `threshold apr/chocolates stk/2623900`
 
-### Locating suppliers and products by name: `view`
+### Updating stock level for a product: `update_stock`
 
-Finds suppliers or products whose names contain any of the given keywords.
+Updates the current stock level for a product.
 
-Format: `VIEW_SUPPLIER KEYWORD`, `VIEW_PRODUCT KEYWORD`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Suppliers matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Same goes for the product names
+Format: `update_stock pr/PRODUCT_NAME stk/STOCK_LEVEL`
 
 Examples:
-* `VIEW_SUPPLIER Smith`
-* `VIEW_PRODUCT Chocolate`
+* `update_stock pr/sweater stk/1000`
+* `update_stock apr/chocolates stk/2623900`
+
+### Updating maximum stock level for a product: `update_maxstock`
+
+Updates the maximum stock level for a product.
+
+Format: `update_maxstock pr/PRODUCT_NAME stk/STOCK_LEVEL`
+
+Examples:
+* `update_maxstock pr/sweater stk/1000`
+* `update_maxstock apr/chocolates stk/2623900`
+
+### Locating all suppliers: `view_supplier`
+
+Displays all the suppliers currently present in the supplier list.
+
+Format: `view_suppliers`
+
+Examples: `view_suppliers`
+
+### Locating all suppliers: `view_product`
+
+Displays all the products currently present in the product list.
+
+Format: `view_products`
+
+Examples: `view_suppliers`
+
+### Deleting a supplier: `delete_supplier`
+
+Deletes the specified supplier from the Supplier List.
+
+Format: `delete_supplier pr/PRODUCT_NAME stk/STOCK_LEVEL`
+
+Examples:
+* `delete_supplier n/Jack Molly`
+
+### Deleting a product: `delete_product`
+
+Deletes the specified product from the Product List.
+
+Format: `delete_product pr/PRODUCT_NAME stk/STOCK_LEVEL`
+
+Examples:
+* `delete_product n/sweater`
+
+### Locating suppliers and products by name: `view`
+
+### Locating suppliers and products by name: `view`
 
 ### Clearing all entries : `clear`
 

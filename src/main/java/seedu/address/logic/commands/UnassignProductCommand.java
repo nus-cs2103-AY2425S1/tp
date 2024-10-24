@@ -19,7 +19,7 @@ import seedu.address.model.supplier.Supplier;
  * Unassigns an existing product to an existing supplier in the address book.
  */
 public class UnassignProductCommand extends Command {
-    public static final String COMMAND_WORD = "UNASSIGN";
+    public static final String COMMAND_WORD = "unassign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a product to a supplier. "
             + "Parameters: "

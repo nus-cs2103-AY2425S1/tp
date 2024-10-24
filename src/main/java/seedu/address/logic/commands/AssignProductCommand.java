@@ -21,7 +21,7 @@ import seedu.address.model.supplier.Supplier;
  * Assigns an existing product to an existing supplier in the address book.
  */
 public class AssignProductCommand extends Command {
-    public static final String COMMAND_WORD = "ASSIGN";
+    public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a product to a supplier. "
             + "Parameters: "
