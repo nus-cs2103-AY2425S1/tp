@@ -36,6 +36,9 @@ public class CommandResultTest {
 
         // different history value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, "FAKE DATA")));
+
+        // different isPromptConfirmation -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", () -> null)));
     }
 
     @Test
