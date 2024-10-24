@@ -24,7 +24,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024",
+    "dateOfLastVisit" : "01-01-2025",
     "emergencyContact" : "",
     "remark" : ""
   }, {
@@ -33,7 +33,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ],
-    "dateOfLastVisit" : "01-01-2024",
+    "dateOfLastVisit" : "02-01-2024",
     "emergencyContact" : "",
     "remark" : ""
   }, {
@@ -42,7 +42,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024",
+    "dateOfLastVisit" : "10-10-2024",
     "emergencyContact" : "",
     "remark" : ""
   }, {
@@ -51,7 +51,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024",
+    "dateOfLastVisit" : "23-08-2024",
     "emergencyContact" : "",
     "remark" : ""
   }, {
@@ -60,7 +60,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],
-    "dateOfLastVisit" : "01-01-2024",
+    "dateOfLastVisit" : "05-06-2024",
     "emergencyContact" : "",
     "remark" : ""
   } ]
