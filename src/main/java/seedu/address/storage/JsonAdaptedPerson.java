@@ -12,9 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -39,6 +39,7 @@ class JsonAdaptedPerson {
     private final String dateOfBirth;
     private final Double income;
     private final JsonAdaptedAppointment appointment;
+    private final Integer familySize;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -55,6 +56,7 @@ class JsonAdaptedPerson {
             @JsonProperty("dateOfBirth") String dateOfBirth,
             @JsonProperty("income") Double income,
             @JsonProperty("appointment") JsonAdaptedAppointment appointment,
+            @JsonProperty("familySize") Integer familySize,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -65,6 +67,7 @@ class JsonAdaptedPerson {
         this.dateOfBirth = dateOfBirth;
         this.income = income;
         this.appointment = appointment;
+        this.familySize = familySize;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -85,6 +88,7 @@ class JsonAdaptedPerson {
         appointment = Optional.ofNullable(source.getAppointment())
                 .map(JsonAdaptedAppointment::new)
                 .orElse(null);
+        familySize = source.getFamilySize().getValue();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
@@ -148,10 +152,11 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark == null ? "" : remark);
 
         if (dateOfBirth == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateOfBirth.class.getSimpleName()));
         }
-        if (!Date.isValidDate(dateOfBirth)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        if (!DateOfBirth.isValidDate(dateOfBirth)) {
+            throw new IllegalValueException(DateOfBirth.MESSAGE_CONSTRAINTS);
         }
         final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
 
@@ -168,8 +173,17 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedAppointment::toModelType)
                 .orElse(null);
 
+        final FamilySize modelFamilySize;
+        if (familySize == null) {
+            modelFamilySize = new FamilySize(1);
+        } else if (FamilySize.isValidFamilySize(familySize)) {
+            modelFamilySize = new FamilySize(familySize);
+        } else {
+            throw new IllegalValueException(FamilySize.MESSAGE_CONSTRAINTS);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority,
-                modelRemark, modelDateOfBirth, modelIncome, modelAppointment, modelTags);
+                modelRemark, modelDateOfBirth, modelIncome, modelAppointment, modelFamilySize, modelTags);
     }
 }

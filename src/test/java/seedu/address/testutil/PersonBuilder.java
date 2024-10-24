@@ -9,6 +9,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -31,6 +32,7 @@ public class PersonBuilder {
     public static final String DEFAULT_REMARK = "";
     public static final double DEFAULT_INCOME = 0;
     public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
+    public static final int DEFAULT_FAMILY_SIZE = 1;
 
     private Name name;
     private Phone phone;
@@ -41,6 +43,7 @@ public class PersonBuilder {
     private DateOfBirth dateOfBirth;
     private Income income;
     private Appointment appointment;
+    private FamilySize familySize;
     private Set<Tag> tags;
 
     /**
@@ -56,6 +59,7 @@ public class PersonBuilder {
         dateOfBirth = new DateOfBirth(DEFAULT_DATE_OF_BIRTH);
         income = new Income(DEFAULT_INCOME);
         appointment = null;
+        familySize = new FamilySize(DEFAULT_FAMILY_SIZE);
         tags = new HashSet<>();
     }
 
@@ -72,6 +76,7 @@ public class PersonBuilder {
         dateOfBirth = personToCopy.getDateOfBirth();
         income = personToCopy.getIncome();
         appointment = personToCopy.getAppointment();
+        familySize = personToCopy.getFamilySize();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -157,6 +162,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code familySize} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFamilySize(int familySize) {
+        this.familySize = new FamilySize(familySize);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
@@ -164,7 +177,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Person}
+     */
     public Person build() {
-        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
+        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, familySize,
+                tags);
     }
 }
