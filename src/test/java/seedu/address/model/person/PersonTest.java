@@ -11,12 +11,77 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.IDA;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressFactory;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+
+    private static final String VALID_BTC_ADDRESS_1 = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_BTC_ADDRESS_2 = "34qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+
+    private Person person;
+    private PublicAddress btcAddress1;
+    private PublicAddress btcAddress2;
+
+    @BeforeEach
+    public void setUp() {
+        btcAddress1 = PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "btcLabel1");
+        btcAddress2 = PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_2, "btcLabel2");
+
+        person = new PersonBuilder(IDA).withPublicAddresses(btcAddress1, btcAddress2).build();
+    }
+
+    @Test
+    public void withUpdatedPublicAddress_existingNetwork_updatesAddress() {
+        PublicAddress newBtcAddress =
+                PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_2, "btcLabel1");
+        Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
+
+        assertEquals(2, updatedPerson.getPublicAddresses().get(Network.BTC).size());
+        assertTrue(updatedPerson.getPublicAddresses().get(Network.BTC).contains(newBtcAddress));
+        assertFalse(updatedPerson.getPublicAddresses().get(Network.BTC).contains(btcAddress1));
+        assertTrue(updatedPerson.getPublicAddresses().get(Network.BTC).contains(btcAddress2));
+    }
+
+    @Test
+    public void withUpdatedPublicAddress_existingNetworkCapitaliseLabel_returnsEqualPerson() {
+        PublicAddress newBtcAddress =
+                PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "BTCLABEL1");
+        Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
+
+        assertEquals(person, updatedPerson);
+    }
+
+    @Test
+    public void withUpdatedPublicAddress_existingNetworkNewLabel_returnsEqualPerson() {
+        PublicAddress newBtcAddress =
+                PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "newBtcLabel");
+        Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
+
+        assertEquals(person, updatedPerson);
+    }
+
+    @Test
+    public void withUpdatedPublicAddress_newNetwork_returnsEqualPerson() {
+        PublicAddress newAddress = PublicAddressFactory.createPublicAddress(Network.SOL, "solAddress", "solLabel");
+        Person updatedPerson = person.withUpdatedPublicAddress(newAddress);
+
+        assertEquals(person, updatedPerson);
+    }
+
+    @Test
+    public void withUpdatedPublicAddress_unchangedNetwork_returnsEqualPerson() {
+        Person updatedPerson = person.withUpdatedPublicAddress(btcAddress1);
+
+        assertEquals(person, updatedPerson);
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
