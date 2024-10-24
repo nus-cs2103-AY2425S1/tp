@@ -5,7 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_ALICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_HIGH_PROFILE_CLIENT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_ADDRESS;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_EMAIL;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_NAME;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_PHONE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,20 +53,21 @@ public class AddNotesCommandTest {
         ObjectProperty<Person> focusedPersonProperty = new SimpleObjectProperty<>(validPerson);
         when(modelMock.getFocusedPerson()).thenReturn(focusedPersonProperty);
 
-        // Setup the valid note and index for use in execution
-        Note validNote = new Note("High profile client.");
-        Index validIndex = Index.fromZeroBased(0);
+        // Set up the valid note and index for use in execution
+        Note validNote = new Note(VALID_NOTE_HIGH_PROFILE_CLIENT);
+        Index validIndex = INDEX_FIRST_PERSON;
 
         AddNotesCommand addNotesCommand = new AddNotesCommand(validIndex, validNote);
 
         // Execute the addNotesCommand
         CommandResult commandResult = addNotesCommand.execute(modelMock);
 
-        String expectedOutput = "Added notes to Person: Amy Bee; Phone: 85355255; Email: amy@gmail.com; Address: 123, "
-                + "Jurong West Ave 6, #08-111; Tags: ; Notes: [High profile client.]";
+        String expected = "Added notes to Person: " + DEFAULT_NAME + "; Phone: " + DEFAULT_PHONE + "; Email: "
+                + DEFAULT_EMAIL + "; Address: " + DEFAULT_ADDRESS + "; Tags: ; Notes: ["
+                + VALID_NOTE_HIGH_PROFILE_CLIENT + "]";
 
         // Assert that the expected output is matched
-        assertEquals(expectedOutput, commandResult.getFeedbackToUser());
+        assertEquals(expected, commandResult.getFeedbackToUser());
 
     }
 
@@ -67,7 +77,7 @@ public class AddNotesCommandTest {
         Model modelMock = mock(Model.class);
 
         // Create a valid person and set up the model's person list
-        Person validPerson = new PersonBuilder().withNotes("High profile client.").build();
+        Person validPerson = new PersonBuilder().withNotes(VALID_NOTE_HIGH_PROFILE_CLIENT).build();
         ObservableList<Person> personList = FXCollections.observableArrayList(validPerson);
 
         // Mock the behaviour of ModelMock to return personList when needed
@@ -77,8 +87,8 @@ public class AddNotesCommandTest {
         ObjectProperty<Person> focusedPersonProperty = new SimpleObjectProperty<>(validPerson);
         when(modelMock.getFocusedPerson()).thenReturn(focusedPersonProperty);
 
-        // Setup the valid note and index for use in execution
-        Note validNote = new Note("High profile client.");
+        // Set up the valid note and index for use in execution
+        Note validNote = new Note(VALID_NOTE_HIGH_PROFILE_CLIENT);
         Index validIndex = Index.fromZeroBased(0);
 
         AddNotesCommand addNotesCommand = new AddNotesCommand(validIndex, validNote);
@@ -90,10 +100,10 @@ public class AddNotesCommandTest {
 
     @Test
     public void equals() {
-        Note noteAlice = new Note("Alice's note");
-        Note noteBob = new Note("Bob's note");
-        Index indexFirstPerson = Index.fromZeroBased(0);
-        Index indexSecondPerson = Index.fromZeroBased(1);
+        Note noteAlice = new Note(VALID_NOTE_ALICE);
+        Note noteBob = new Note(VALID_NOTE_BOB);
+        Index indexFirstPerson = INDEX_FIRST_PERSON;
+        Index indexSecondPerson = INDEX_SECOND_PERSON;
 
         AddNotesCommand addAliceNoteCommand = new AddNotesCommand(indexFirstPerson, noteAlice);
         AddNotesCommand addBobNoteCommand = new AddNotesCommand(indexSecondPerson, noteBob);
