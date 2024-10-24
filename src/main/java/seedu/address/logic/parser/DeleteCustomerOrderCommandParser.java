@@ -12,11 +12,18 @@ public class DeleteCustomerOrderCommandParser implements Parser<DeleteCustomerOr
     public DeleteCustomerOrderCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        String trimmedArgs = args.trim();
+        // Trim and split the input into arguments
+        String[] splitArgs = args.trim().split("\\s+");
+
+        // Ensure there is only one argument (the index)
+        if (splitArgs.length != 1) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCustomerOrderCommand.MESSAGE_USAGE));
+        }
 
         // Check if the argument is a valid integer index
         try {
-            int index = Integer.parseInt(trimmedArgs);
+            int index = Integer.parseInt(splitArgs[0]);
 
             if (index <= 0) { // Index must be a positive integer
                 throw new ParseException(
