@@ -26,7 +26,9 @@ Model --> FindCommand:
 FindCommand -> Model: getFilteredPersonList()
 Model -> Model: size()
 Model --> FindCommand: ObservableList<Person>
+deactivate Model
 
 FindCommand --> User: CommandResult
+deactivate FindCommand
 
 @enduml
