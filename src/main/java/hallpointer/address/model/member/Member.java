@@ -11,6 +11,7 @@ import java.util.Set;
 import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
 
@@ -120,11 +121,17 @@ public class Member {
     /**
      *  Returns true if the member has the given session.
      *
-     *  @param session Session to checked.
+     *  @param session Session to be checked for.
      */
     public boolean hasSession(Session session) {
         requireNonNull(session);
-        return this.sessions.contains(session);
+        // far less efficient than .contains(), but necessary since we can't change equals() and hashCode() lightly
+        for (Session elem : sessions) {
+            if (elem.isSameSession(session)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -134,8 +141,11 @@ public class Member {
      */
     public void removeSession(SessionName sessionName) {
         requireNonNull(sessionName);
+        // dummy values to avoid duplicating isSameSession or add circular dependencies via SessionBuilder
         Session target = this.sessions.stream()
-                .filter(object -> object.getSessionName().toString().equals(sessionName.toString()))
+                .filter(object ->
+                        object.isSameSession(
+                                new Session(sessionName, new SessionDate("01 Dec 2010"), new Point("3"))))
                 .findFirst() // get the first match, wrapped in Optional
                 .orElse(null); // return null if no match is found
         if (target == null) {

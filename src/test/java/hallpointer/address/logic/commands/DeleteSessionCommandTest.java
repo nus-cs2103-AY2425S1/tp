@@ -130,8 +130,8 @@ public class DeleteSessionCommandTest {
         indices.add(INDEX_FIRST_MEMBER);
 
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(session.getSessionName(), indices);
-        String expected = DeleteSessionCommand.class.getCanonicalName() +
-                "{delete=" + ATTENDANCE.getSessionName() + "}";
+        String expected = DeleteSessionCommand.class.getCanonicalName()
+                + "{delete=" + ATTENDANCE.getSessionName() + "}";
         assertEquals(expected, deleteSessionCommand.toString());
     }
 

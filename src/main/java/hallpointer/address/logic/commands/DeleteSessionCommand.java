@@ -13,6 +13,9 @@ import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionDate;
 import hallpointer.address.model.session.SessionName;
 
 /**
@@ -64,7 +67,10 @@ public class DeleteSessionCommand extends Command {
             }
             Member member = lastShownList.get(index.getZeroBased());
             if (member.getSessions().stream().noneMatch(
-                    element -> element.getSessionName().toString().equals(sessionName.toString()))) {
+                    // dummy values to avoid duplicating isSameSession or add circular dependencies via SessionBuilder
+                    element -> element.isSameSession(
+                            new Session(sessionName, new SessionDate("01 Dec 2010"), new Point("3"))
+                    ))) {
                 throw new CommandException(String.format(MESSAGE_DELETE_SESSION_FAIL, sessionName.toString(),
                         member.getName().toString()));
             }
