@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ListProjectMembersCommand;
+import seedu.address.logic.commands.listcommands.ListProjectMembersCommand;
 import seedu.address.model.assignment.AssignmentProjectPredicate;
 
 public class ListProjectMembersCommandParserTest {

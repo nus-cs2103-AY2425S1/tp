@@ -1,16 +1,20 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.listcommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ASSIGNMENTS;
 
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.ui.DisplayType;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all assignments in the address book to the user.
  */
-public class ListAssignmentsCommand extends Command {
-    public static final String COMMAND_WORD = "listassignments";
+public class ListAssignmentsCommand extends ListCommand {
+
+    // Command word using the 'list' prefix + 'assignments'
+    public static final String COMMAND_WORD = COMMAND_PREFIX + "assignments";
+
     public static final String MESSAGE_SUCCESS = "Listed all assignments";
 
     @Override

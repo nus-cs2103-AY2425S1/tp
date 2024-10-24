@@ -32,9 +32,9 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindProjectCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListProjectCommand;
 import seedu.address.logic.commands.UnassignCommand;
+import seedu.address.logic.commands.listcommands.ListPersonsCommand;
+import seedu.address.logic.commands.listcommands.ListProjectsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -120,8 +120,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListPersonsCommand.COMMAND_WORD) instanceof ListPersonsCommand);
+        assertTrue(parser.parseCommand(ListPersonsCommand.COMMAND_WORD + " 3") instanceof ListPersonsCommand);
     }
 
     @Test
@@ -155,8 +155,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listProject() throws Exception {
-        assertTrue(parser.parseCommand(ListProjectCommand.COMMAND_WORD) instanceof ListProjectCommand);
-        assertTrue(parser.parseCommand(ListProjectCommand.COMMAND_WORD + " 3") instanceof ListProjectCommand);
+        assertTrue(parser.parseCommand(ListProjectsCommand.COMMAND_WORD) instanceof ListProjectsCommand);
+        assertTrue(parser.parseCommand(ListProjectsCommand.COMMAND_WORD + " 3") instanceof ListProjectsCommand);
     }
 
     @Test
