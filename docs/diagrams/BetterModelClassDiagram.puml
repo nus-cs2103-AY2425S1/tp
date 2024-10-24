@@ -12,7 +12,6 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
-
 Person *--> Name
 Person *--> Gender
 Person *--> Phone
@@ -20,5 +19,11 @@ Person *--> Email
 Person *--> Address
 Person *--> "1..*" Subject
 Person *--> "1..*" Class
+
+' Adding Student as a subclass of Person with extra attributes
+Student -up-|> Person
+Student *--> NextOfKinName
+Student *--> NextOfKinPhone
+
 @enduml
 
