@@ -6,6 +6,11 @@ plugins {
     id 'jacoco'
 }
 
+javafx {
+    version = '17.0.7' // Adjust version as needed
+    modules = [ 'javafx.controls', 'javafx.web' ] // Include necessary modules
+}
+
 mainClassName = 'seedu.address.Main'
 
 sourceCompatibility = JavaVersion.VERSION_17
