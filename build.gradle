@@ -23,8 +23,6 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-    systemProperty 'java.awt.headless', 'true'
-    jvmArgs '-Djava.awt.headless=true'
 
 }
 
@@ -47,6 +45,8 @@ dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 
+    testImplementation 'org.testfx:testfx-junit5:4.0.15-alpha'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -66,9 +66,6 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
-
-    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
-    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
 }
 
 shadowJar {
