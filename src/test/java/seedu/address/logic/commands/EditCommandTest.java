@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
@@ -206,7 +205,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_updatedAtFieldsAreNotEqual() {
+    public void execute_newUpdatedAtFieldComesAfterOld() {
         Person personToBeEdited = model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased());
 
@@ -221,8 +220,9 @@ public class EditCommandTest {
         Person editedPerson = model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased());
 
-        assertEquals(personToBeEdited, editedPerson); // ensure we are comparing the same person for updateAt
-        assertNotEquals(personToBeEdited.getUpdatedAt(), editedPerson.getUpdatedAt());
+        assertEquals(personToBeEdited, editedPerson); // ensure we are comparing the same person for updatedAt
+        assertTrue(editedPerson.getUpdatedAt().getValue()
+                .isAfter(personToBeEdited.getUpdatedAt().getValue()));
     }
 
     private class Helper {
