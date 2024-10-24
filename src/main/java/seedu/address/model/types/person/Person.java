@@ -98,9 +98,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && ((this.event == null && otherPerson.event == null)
-                || event.equals(otherPerson.event));
+                && tags.equals(otherPerson.tags);
     }
 
     @Override
