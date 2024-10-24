@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -235,6 +237,27 @@ public class ParserUtilTest {
     public void parsePersonIndexString_invalidPersonIndexes_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString("invalid"));
     }
+
+    @Test
+    public void parsePersonIndexString_duplicatePersonIndexes_throwsParseException() {
+        String duplicateIndexes = "1 1 2"; // Providing duplicate indexes
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(duplicateIndexes));
+    }
+
+    @Test
+    public void parsePersonIndexString_noDuplicatePersonIndexes_success() throws Exception {
+        String noDuplicateIndexes = "1 2 3";
+        Set<Index> expectedIndexesSet = Set.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3));
+        List<Index> expectedIndexes = expectedIndexesSet.stream()
+                .sorted((index1, index2) -> Integer.compare(index1.getZeroBased(), index2.getZeroBased()))
+                .collect(Collectors.toList());
+        Set<Index> actualIndexesSet = ParserUtil.parsePersonIndexString(noDuplicateIndexes);
+        List<Index> actualIndexes = actualIndexesSet.stream()
+                .sorted((index1, index2) -> Integer.compare(index1.getZeroBased(), index2.getZeroBased()))
+                .collect(Collectors.toList());
+        assertEquals(expectedIndexes, actualIndexes);
+    }
+
 
     @Test
     public void parseTags_validTags_success() throws Exception {
