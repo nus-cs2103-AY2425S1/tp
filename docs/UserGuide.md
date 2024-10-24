@@ -71,15 +71,6 @@ If you can type fast and you need to manage celebrities and their schedules, **T
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -148,7 +139,7 @@ Examples:
 * `find person John` returns `john` and `John Doe`
 * `find person john betsy` returns `John Doe`, `Betsy Crowe`
 
-<br>![result for 'find john betsy'](images/findJohnBetsyResult.png)
+![result for 'find john betsy'](images/findJohnBetsyResult.png)
 
 ### Locating events by name: `find event`
 
@@ -167,7 +158,7 @@ Examples:
 * `find event Hiking` returns `Hiking` and `Park Hiking`
 * `find event Hair Oscars` returns `Hair Cut`, `Oscars`
 
-<br>![result for 'find hair oscars'](images/findHairOscarsResult.png)
+![result for 'find hair oscars'](images/findHairOscarsResult.png)
 
 ### Viewing person by name: `view person`
 
