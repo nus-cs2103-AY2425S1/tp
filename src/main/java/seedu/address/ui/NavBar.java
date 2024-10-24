@@ -1,9 +1,11 @@
 package seedu.address.ui;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-
+import seedu.address.model.types.common.DateTimeUtil;
 
 /**
  * Represents a navigation bar to toggle between different pages,
@@ -18,6 +20,8 @@ public class NavBar extends UiPart<HBox> {
 
     @FXML
     private Button eventsButton;
+    @FXML
+    private Label dateTimeLabel;
 
     private final NavHandler navHandler;
 
@@ -30,6 +34,7 @@ public class NavBar extends UiPart<HBox> {
         super(FXML);
         this.navHandler = navHandler;
         initializeButtons();
+        initializeDateTime();
     }
 
     private void initializeButtons() {
@@ -42,6 +47,17 @@ public class NavBar extends UiPart<HBox> {
             navHandler.handleNav("Events");
             setActiveButton(eventsButton);
         });
+    }
+
+    private void initializeDateTime() {
+        Timeline timeline = DateTimeUtil.createTimeline(this::updateDateTime);
+        timeline.play();
+        updateDateTime();
+    }
+
+    private void updateDateTime() {
+        String formattedDateTime = DateTimeUtil.getCurrentDateTimeString();
+        dateTimeLabel.setText(formattedDateTime);
     }
 
     public void setActiveButton(Button activeButton) {

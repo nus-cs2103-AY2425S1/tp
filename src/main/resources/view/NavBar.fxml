@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       spacing="10" alignment="CENTER_LEFT" styleClass="nav-bar">
     <Button fx:id="contactsButton" text="Contacts"/>
     <Button fx:id="eventsButton" text="Events"/>
+    <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
+    <Label fx:id="dateTimeLabel" styleClass="date-time-label"/>
 </HBox>
