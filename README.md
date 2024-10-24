@@ -9,3 +9,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
   * While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * For the detailed documentation of this project, see the **[GOATS Product Website](https://ay2425s1-cs2103t-t09-4.github.io/tp/)**.
+
+## Acknowledgements
+
+Image for Pin Icon: https://pngimg.com/image/45823
