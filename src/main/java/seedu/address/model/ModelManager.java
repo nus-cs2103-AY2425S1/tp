@@ -143,13 +143,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void closeTutorial(Tutorial tutorial) {
-        addressBook.closeTutorial(tutorial);
-    }
-
-    @Override
-    public Tutorial getTutorial(Tutorial tutorial) {
-        return addressBook.getTutorial(tutorial);
+    public void deleteTutorial(Tutorial tutorial) {
+        addressBook.deleteTutorial(tutorial);
     }
 
     @Override
@@ -194,6 +189,12 @@ public class ModelManager implements Model {
     public ObservableList<Tutorial> getFilteredTutorialList() {
         return filteredTutorials;
     }
+
+    @Override
+    public ObservableList<Tutorial> getTutorialList() {
+        return addressBook.getTutorialList();
+    }
+
 
     @Override
     public void updateFilteredTutorialList(Predicate<Tutorial> predicate) {
