@@ -1,0 +1,61 @@
+@startuml
+participant ":LogicManager" as LM
+participant ":AddressBookParser" as ABP
+participant ":UndoCommandParser" as UCP
+participant "u:UndoCommand" as UC
+participant "cr:CommandResult" as CR
+participant "tempAddressBook:AddressBook" as B
+participant "currentAddressBook:AddressBook" as A
+participant ":Model" as M
+
+LM -> ABP: parseCommand("undo")
+activate ABP
+ABP -> LM:
+create UCP
+ABP --> UCP:
+activate UCP
+UCP -> ABP
+deactivate UCP
+ABP -> UCP: parse("undo")
+activate UCP
+create UC
+UCP -> UC
+activate UC
+UC -> UCP: u
+deactivate UC
+UCP -> ABP: u
+deactivate UCP
+destroy UCP
+ABP -> LM: u
+deactivate ABP
+LM -> UC: updateVersionHistory(versionHistory, model)
+activate UC
+UC -> LM
+deactivate UC
+LM -> UC: execute(model)
+activate UC
+create CR
+UC -> CR:
+activate CR
+CR -> UC: cr
+deactivate CR
+destroy CR
+UC -> LM: cr
+deactivate UC
+destroy UC
+create B
+LM -> B
+activate B
+B -> LM: tempAddressBook
+deactivate B
+destroy B
+create A
+LM -> A: new AddressBook.duplicatecopy(tempAddressBook)
+activate A
+A -> LM: currentAddressBook
+deactivate A
+LM -> M: setAddressBook(currentAddressBook)
+activate M
+M -> LM
+deactivate M
+@enduml
