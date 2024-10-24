@@ -4,9 +4,11 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street",
-    "postalCode": "123456"
+    "postalCode": "123456",
+    "isArchived": false
   } ],
   "orders": [ {
     "name": "test"
-  } ]
+  } ],
+  "shortcuts": []
 }

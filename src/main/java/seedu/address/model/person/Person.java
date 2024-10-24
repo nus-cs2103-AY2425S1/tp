@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ public class Person implements Comparable<Person> {
     private final PostalCode postalCode;
     private final Set<Tag> tags = new HashSet<>();
     private final OrderTracker tracker;
+    private final Boolean isArchived;
 
     /**
      * Every field must be present and not null.
@@ -41,6 +43,7 @@ public class Person implements Comparable<Person> {
         this.postalCode = postalCode;
         this.tags.addAll(tags);
         this.tracker = new OrderTracker();
+        this.isArchived = false;
     }
 
     /**
@@ -56,6 +59,23 @@ public class Person implements Comparable<Person> {
         this.tags.addAll(tags);
         this.postalCode = postalCode;
         this.tracker = tracker;
+        this.isArchived = false;
+    }
+
+    /**
+     * Every field with field must be present and not null with isArchived
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  PostalCode postalCode, Set<Tag> tags, Boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.postalCode = postalCode;
+        this.tracker = new OrderTracker();
+        this.isArchived = isArchived;
     }
 
     public Name getName() {
@@ -82,6 +102,10 @@ public class Person implements Comparable<Person> {
         return this.tracker;
     }
 
+    public boolean isArchived() {
+        return isArchived;
+    }
+
     /**
      * Add an order to the person
      * @param order The order to increase its frequency
@@ -101,6 +125,19 @@ public class Person implements Comparable<Person> {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+    /**
+     * Returns true if the person has all the tags in the provided tag list.
+     *
+     * @param tagList The list of tags to check against the person's tags.
+     * @return true if the person has all the tags in the tagList, false otherwise.
+     */
+    public boolean hasAllTags(Set<Tag> tagList) {
+        requireNonNull(tagList);
+
+        return tags.containsAll(tagList);
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -152,13 +189,14 @@ public class Person implements Comparable<Person> {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && postalCode.equals(otherPerson.postalCode)
-                && tracker.equals(otherPerson.tracker);
+                && tracker.equals(otherPerson.tracker)
+                && isArchived == otherPerson.isArchived;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, postalCode, tags, tracker);
+        return Objects.hash(name, phone, email, address, postalCode, tags, tracker, isArchived);
     }
 
     @Override
@@ -171,6 +209,7 @@ public class Person implements Comparable<Person> {
                 .add("postalCode", postalCode)
                 .add("tags", tags)
                 .add("orders", tracker)
+                .add("isArchived", isArchived)
                 .toString();
     }
 

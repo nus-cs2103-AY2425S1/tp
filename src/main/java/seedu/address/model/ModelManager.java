@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +16,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.ShortCut;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -90,6 +96,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList) {
+        return addressBook.getFilteredPersonList(tagList);
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -138,8 +149,34 @@ public class ModelManager implements Model {
     public ObservableList<Order> getOrderList() {
         return addressBook.getOrderList();
     }
+    @Override
+    public void addShortCut(ShortCut shortcut) {
+        addressBook.addShortCut(shortcut);
+    }
+    @Override
+    public void removeShortCut(ShortCut shortcut) {
+        addressBook.removeShortCut(shortcut);
+    }
+    @Override
+    public boolean hasShortCut(ShortCut shortcut) {
+        return addressBook.hasShortCut(shortcut);
+    }
+    @Override
+    public boolean hasAlias(Alias alias) {
+        return addressBook.hasAlias(alias);
+    }
+    @Override
+    public ObservableList<ShortCut> getShortCutList() {
+        return addressBook.getShortCutList();
+    }
     //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
+        requireNonNull(postalCode);
+        return addressBook.getPersonsByPostalCode(postalCode);
+    }
 
+    //=========== Filtered Person List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}

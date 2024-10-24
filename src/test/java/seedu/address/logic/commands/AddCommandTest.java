@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,10 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.ShortCut;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -136,6 +142,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -179,6 +191,30 @@ public class AddCommandTest {
         public ObservableList<Order> getOrderList() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void removeShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasAlias(Alias shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public ObservableList<ShortCut> getShortCutList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public Person findPersonByName(Name name) {

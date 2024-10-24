@@ -189,6 +189,8 @@ public class PersonTest {
                 + ALICE.getTags()
                 + ", orders="
                 + ALICE.getOrderTracker()
+                + ", isArchived="
+                + ALICE.isArchived()
                 + "}";
         assertEquals(expected, ALICE.toString());
     }

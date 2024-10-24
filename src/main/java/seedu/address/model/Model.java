@@ -1,6 +1,8 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,13 +10,17 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.ShortCut;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = Person -> !(Person.isArchived());
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,6 +59,9 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the filtered AddressBook as list */
+    ObservableList<Person> getFilteredPersonListFromAddressBook(Set<Tag> tagList);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -96,4 +105,11 @@ public interface Model {
     boolean hasOrder(Order order);
 
     ObservableList<Order> getOrderList();
+
+    void addShortCut(ShortCut shortcut);
+    void removeShortCut(ShortCut shortcut);
+    boolean hasShortCut(ShortCut shortCut);
+    ObservableList<ShortCut> getShortCutList();
+    boolean hasAlias(Alias alias);
+    List<Person> getPeopleByPostalCode(PostalCode postalCode);
 }
