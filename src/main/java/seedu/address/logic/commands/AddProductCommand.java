@@ -13,7 +13,7 @@ import seedu.address.model.product.Product;
  */
 public class AddProductCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_product";
+    public static final String COMMAND_WORD = CommandWords.ADD_PRODUCT_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to InvenTrack. ";
 

@@ -18,7 +18,7 @@ import seedu.address.model.product.ProductName;
  */
 public class SetThresholdCommand extends Command {
 
-    public static final String COMMAND_WORD = "threshold";
+    public static final String COMMAND_WORD = CommandWords.SET_THRESHOLD_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the products identified "
             + "by the product name used in the displayed product list. "

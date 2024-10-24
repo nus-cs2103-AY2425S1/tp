@@ -17,7 +17,7 @@ import seedu.address.model.supplier.Supplier;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = CommandWords.DELETE_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the supplier identified by the index number used in the displayed supplier list.\n"

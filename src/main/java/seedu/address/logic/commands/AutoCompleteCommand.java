@@ -45,22 +45,7 @@ public class AutoCompleteCommand extends Command {
         List<String> possibleCompletions = new ArrayList<>();
 
         if (inputType == null) {
-            possibleCompletions = List.of(
-                AddProductCommand.COMMAND_WORD,
-                AddSupplierCommand.COMMAND_WORD,
-                AssignProductCommand.COMMAND_WORD,
-                ClearCommand.COMMAND_WORD,
-                DeleteProductCommand.COMMAND_WORD,
-                DeleteSupplierCommand.COMMAND_WORD,
-                EditCommand.COMMAND_WORD,
-                ExitCommand.COMMAND_WORD,
-                HelpCommand.COMMAND_WORD,
-                ViewAllSupplierCommand.COMMAND_WORD,
-                SetThresholdCommand.COMMAND_WORD,
-                UnassignProductCommand.COMMAND_WORD,
-                ViewProductCommand.COMMAND_WORD,
-                ViewSupplierCommand.COMMAND_WORD
-            );
+            possibleCompletions = CommandWords.getCommandWords();
         } else if (inputType.equals(PREFIX_SUPPLIER_NAME)) {
             possibleCompletions = model.getFilteredSupplierList().stream()
                     .map(Supplier::getName)

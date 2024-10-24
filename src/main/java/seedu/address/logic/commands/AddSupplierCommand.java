@@ -18,7 +18,7 @@ import seedu.address.model.supplier.Supplier;
  */
 public class AddSupplierCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_supplier";
+    public static final String COMMAND_WORD = CommandWords.ADD_SUPPLIER_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a supplier to the address book. "
             + "Parameters: "
