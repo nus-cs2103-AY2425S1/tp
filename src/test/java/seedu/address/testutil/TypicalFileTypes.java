@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.ExportCommand.FileType;
+import seedu.address.logic.exporter.FileType;
 
 /**
  * A utility class containing a list of valid file types to be used in tests.

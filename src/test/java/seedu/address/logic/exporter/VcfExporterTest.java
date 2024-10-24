@@ -28,10 +28,10 @@ public class VcfExporterTest {
     private static final String CHARLIE_VCF_FILE_PATH = "charlie.vcf";
     private static final String PEOPLE_VCF_FILE_PATH = "people.vcf";
 
-    private VcfExporter vcfExporter;
-
     @TempDir
     public Path temporaryFolder;
+
+    private VcfExporter vcfExporter;
 
     @BeforeEach
     public void setUp() {
