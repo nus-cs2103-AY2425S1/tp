@@ -239,6 +239,23 @@ Examples:
 <br><br/>
 
 ### Edit wedding: `editw`
+Edits the wedding of the specified `INDEX`, changing its name and/or date
+
+Format: `editw INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
+* Edits the name and/or date in the wedding of the specified `INDEX`.
+* The index refers to the index number shown in the displayed wedding list on the left of the screen.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+<box type="warning" seamless>
+
+**Caution:**
+The edited wedding name provided must not be the name of a pre-existing wedding in the addressbook
+
+</box>
+
+Examples:
+* `editw 1 d/12/11/2025` edits the date of the first wedding shown on the displayed wedding list.
+  <br><br/>
 
 <br><br/>
 
@@ -251,6 +268,17 @@ Examples:
 <br><br/>
 
 ### Delete wedding: `deletew`
+Deletes the wedding of the specified `INDEX`
+
+Format: `deletew INDEX`
+* Deletes the wedding of the specified `INDEX`.
+* The index refers to the index number shown in the displayed wedding list on the left of the screen.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+* `deletew 4` deletes the fourth wedding shown on the displayed wedding list.
+
+  <br><br/>
 
 <br><br/>
 ## Other Features
