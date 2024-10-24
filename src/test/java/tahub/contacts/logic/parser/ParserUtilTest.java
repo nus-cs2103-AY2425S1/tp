@@ -48,7 +48,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -220,9 +220,9 @@ public class ParserUtilTest {
 
         @Test
         public void validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-             String tutIdWithWhitespace = WHITESPACE + "T20" + WHITESPACE;
-             String expectedTutId = "T20";
-             assertEquals(expectedTutId, ParserUtil.parseTutorialId(tutIdWithWhitespace));
+            String tutIdWithWhitespace = WHITESPACE + "T20" + WHITESPACE;
+            String expectedTutId = "T20";
+            assertEquals(expectedTutId, ParserUtil.parseTutorialId(tutIdWithWhitespace));
         }
     }
 }
