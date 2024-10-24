@@ -209,10 +209,9 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
     }
 
     /**
-     * Checks if this ModelManager is equal to another object.
+     * Sorts the filtered list.
      *
-     * @param other the other object to compare with.
-     * @return true if both objects are equal, otherwise false.
+     * @param comparator the sorting order used to sort the list.
      */
     @Override
     public void sortFilteredList(Comparator<T> comparator) {
@@ -220,6 +219,12 @@ public class ModelManager<T extends HireMeComparable<T>> implements Model<T> {
         addressBook.sortItems(comparator);
     }
 
+    /**
+     * Checks if this ModelManager is equal to another object.
+     *
+     * @param other the other object to compare with.
+     * @return true if both objects are equal, otherwise false.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

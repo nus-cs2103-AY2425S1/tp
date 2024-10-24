@@ -124,9 +124,9 @@ public class ParserUtil {
         return trimmedOrder.equals("earliest");
     }
 
-     /**
+    /**
      * Parses a {@code String status} into a {@code Status}.
-     * Leading and trailing whitespaces will be trimmed. String status is changed to uppercase
+     * Leading and trailing whitespaces will be trimmed. String status is changed to uppercase.
      *
      * @throws ParseException if the given {@code status} is invalid.
      */
