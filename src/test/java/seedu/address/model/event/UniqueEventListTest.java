@@ -17,6 +17,7 @@ public class UniqueEventListTest {
     private final UniqueEventList uniqueEventList = new UniqueEventList();
     private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
     private final Event differentEvent = new Event(new Name("Different"), new Date("2020-06-01"));
+    private final Event similarTestEvent = new Event(new Name("Test Event"), new Date("2023-05-20"));
 
     @Test
     public void contains_nullEvent_throwsNullPointerException() {
@@ -32,6 +33,12 @@ public class UniqueEventListTest {
     public void contains_eventInList_returnsTrue() {
         uniqueEventList.add(testEvent);
         assertTrue(uniqueEventList.contains(testEvent));
+    }
+
+    @Test
+    public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueEventList.add(testEvent);
+        assertTrue(uniqueEventList.contains(similarTestEvent));
     }
 
     @Test
