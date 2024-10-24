@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -24,17 +25,22 @@ public class JsonAdaptedProductTest {
             new JsonAdaptedTag("organic"));
     private static final Set<Tag> EXPECTED_TAGS = Set.of(new Tag("fruit"), new Tag("organic"));
     private static final String INVALID_NAME = "R@chel";
+    private Product expectedProduct;
 
-    @Test
-    public void toModelType_validProductDetails_returnsProduct() throws Exception {
-        JsonAdaptedProduct product = new JsonAdaptedProduct(VALID_NAME, VALID_SUPPLIER_NAME, VALID_STOCK_LEVEL,
-                VALID_MIN_STOCK_LEVEL, VALID_MAX_STOCK_LEVEL, VALID_TAGS);
-        Product expectedProduct = new Product(new ProductName(VALID_NAME), EXPECTED_TAGS);
+    @BeforeEach
+    public void setUp() {
+        expectedProduct = new Product(new ProductName(VALID_NAME), EXPECTED_TAGS);
         expectedProduct.setSupplierName(new seedu.address.model.supplier.Name(VALID_SUPPLIER_NAME));
         expectedProduct.setStockLevel(VALID_STOCK_LEVEL);
         expectedProduct.setMinStockLevel(VALID_MIN_STOCK_LEVEL);
         expectedProduct.setMaxStockLevel(VALID_MAX_STOCK_LEVEL);
-        assertEquals(expectedProduct, product.toModelType());
+    }
+
+    @Test
+    public void toModelType_validProductDetails_returnsProduct() throws Exception {
+        JsonAdaptedProduct jsonProduct = new JsonAdaptedProduct(VALID_NAME, VALID_SUPPLIER_NAME, VALID_STOCK_LEVEL,
+                VALID_MIN_STOCK_LEVEL, VALID_MAX_STOCK_LEVEL, VALID_TAGS);
+        assertEquals(expectedProduct, jsonProduct.toModelType());
     }
 
     @Test
@@ -49,5 +55,11 @@ public class JsonAdaptedProductTest {
         JsonAdaptedProduct product = new JsonAdaptedProduct(null, VALID_SUPPLIER_NAME, VALID_STOCK_LEVEL,
                 VALID_MIN_STOCK_LEVEL, VALID_MAX_STOCK_LEVEL, VALID_TAGS);
         assertThrows(IllegalValueException.class, product::toModelType);
+    }
+
+    @Test
+    public void constructor_product_createsJsonAdaptedProduct() throws Exception {
+        JsonAdaptedProduct jsonAdaptedProduct = new JsonAdaptedProduct(expectedProduct);
+        assertEquals(expectedProduct, jsonAdaptedProduct.toModelType());
     }
 }
