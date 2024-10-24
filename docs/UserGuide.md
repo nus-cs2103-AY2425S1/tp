@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # HallPointer User Guide
@@ -44,7 +44,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
-<box type="info" seamless>
+<box type="info" seamless></box>
 
 **Notes about the command format:**<br>
 
@@ -81,7 +81,7 @@ Adds a member to the address book.
 
 Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
-<box type="tip" seamless>
+<box type="tip" seamless></box>
 
 **Tip:** A member can have any number of tags (including 0)
 </box>
@@ -165,7 +165,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless></box>
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
