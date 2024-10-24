@@ -17,6 +17,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX =
             "The internship application index provided is invalid";
     public static final String MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW = "%1$d internship applications listed!";
+    public static final String MESSAGE_INTERNSHIP_APPLICATIONS_SORTED_OVERVIEW = "Internship applications list "
+            + "has been sorted!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 

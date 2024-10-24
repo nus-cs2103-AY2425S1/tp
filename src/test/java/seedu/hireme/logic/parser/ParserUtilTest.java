@@ -1,5 +1,6 @@
 package seedu.hireme.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.hireme.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.hireme.testutil.Assert.assertThrows;
@@ -18,9 +19,14 @@ import seedu.hireme.model.internshipapplication.Status;
 public class ParserUtilTest {
     private static final String INVALID_COMPANY_NAME = "!!";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_SORTING_ORDER = "??";
     private static final String INVALID_ROLE = ".";
     private static final String INVALID_DATE = "4 Sep 1998";
     private static final String INVALID_STATUS = "bad-status";
+
+    private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_SORTING_ORDER = "earliest";
     private static final String VALID_COMPANY_NAME = GOOGLE.getCompany().getName().toString();
     private static final String VALID_COMPANY_EMAIL = GOOGLE.getCompany().getEmail().toString();
     private static final String VALID_ROLE = GOOGLE.getRole().toString();
@@ -73,7 +79,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -95,6 +101,39 @@ public class ParserUtilTest {
     }
 
     @Test
+
+    public void parseSortingOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortingOrder(null));
+    }
+
+    @Test
+    public void parseSortingOrder_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(""));
+    }
+
+    @Test
+    public void parseSortingOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(INVALID_SORTING_ORDER));
+    }
+
+    @Test
+    public void parseSortingOrder_invalidNumberOfArguments_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortingOrder(VALID_SORTING_ORDER + " " + "extra"));
+    }
+
+    @Test
+    public void parseSortingOrder_validValueWithoutWhitespace_returnsSortingOrder() throws Exception {
+        assertDoesNotThrow(() -> AssertionError.class);
+        assertEquals(true, ParserUtil.parseSortingOrder(VALID_SORTING_ORDER));
+    }
+
+    @Test
+    public void parseSortingOrder_validValueWithWhitespace_returnsSortingOrder() throws Exception {
+        String sortingOrderWithWhitespace = WHITESPACE + VALID_SORTING_ORDER + WHITESPACE;
+        assertDoesNotThrow(() -> AssertionError.class);
+        assertEquals(true, ParserUtil.parseSortingOrder(sortingOrderWithWhitespace));
+    }
+
     public void parseRole_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
     }

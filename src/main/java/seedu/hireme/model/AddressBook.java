@@ -2,6 +2,7 @@ package seedu.hireme.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -89,6 +90,14 @@ public class AddressBook<T extends HireMeComparable<T>> implements ReadOnlyAddre
      */
     public void removeItem(T key) {
         items.remove(key);
+    }
+
+    /**
+     * Sorts the items in the address book according to the {@code comparator}.
+     */
+    public void sortItems(Comparator<T> comparator) {
+        requireNonNull(comparator);
+        items.sortItems(comparator);
     }
 
     //// util methods

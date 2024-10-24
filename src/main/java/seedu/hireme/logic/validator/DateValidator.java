@@ -39,8 +39,8 @@ public class DateValidator extends Validator<String> {
     @Override
     public boolean validate(String input) {
         try {
-            LocalDate.parse(input, FORMATTER);
-            return true;
+            LocalDate date = LocalDate.parse(input, FORMATTER);
+            return date.isBefore(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }

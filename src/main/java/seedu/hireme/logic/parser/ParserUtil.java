@@ -1,12 +1,14 @@
 package seedu.hireme.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import seedu.hireme.commons.core.index.Index;
 import seedu.hireme.commons.util.StringUtil;
+import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
 import seedu.hireme.logic.validator.DateValidator;
 import seedu.hireme.logic.validator.EmailValidator;
@@ -25,6 +27,7 @@ import seedu.hireme.model.internshipapplication.Status;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ORDER = "Order can only be 'earliest' or 'latest'.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -100,8 +103,30 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String order} into a boolean.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code order} is invalid.
+     */
+    public static boolean parseSortingOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim().toLowerCase();
+        boolean isInvalidCommand = trimmedOrder.isEmpty() || trimmedOrder.split("\\s+").length > 1;
+        if (isInvalidCommand) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        assert isInvalidCommand == false;
+        if (!trimmedOrder.equals("earliest") && !trimmedOrder.equals("latest")) {
+            throw new ParseException(MESSAGE_INVALID_ORDER);
+        }
+
+        return trimmedOrder.equals("earliest");
+    }
+
+    /**
      * Parses a {@code String status} into a {@code Status}.
-     * Leading and trailing whitespaces will be trimmed. String status is changed to uppercase
+     * Leading and trailing whitespaces will be trimmed. String status is changed to uppercase.
      *
      * @throws ParseException if the given {@code status} is invalid.
      */

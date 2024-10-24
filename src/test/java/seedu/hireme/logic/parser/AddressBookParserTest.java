@@ -20,8 +20,10 @@ import seedu.hireme.logic.commands.FilterCommand;
 import seedu.hireme.logic.commands.FindCommand;
 import seedu.hireme.logic.commands.HelpCommand;
 import seedu.hireme.logic.commands.ListCommand;
+import seedu.hireme.logic.commands.SortCommand;
 import seedu.hireme.logic.commands.StatusCommand;
 import seedu.hireme.logic.parser.exceptions.ParseException;
+import seedu.hireme.model.internshipapplication.DateComparator;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 import seedu.hireme.model.internshipapplication.Status;
@@ -68,6 +70,13 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        DateComparator comparator = new DateComparator(true);
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + "earliest");
+        assertEquals(new SortCommand(comparator), command);
     }
 
     @Test

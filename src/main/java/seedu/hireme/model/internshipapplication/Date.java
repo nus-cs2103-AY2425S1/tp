@@ -12,10 +12,10 @@ import seedu.hireme.logic.validator.DateValidator;
  * Represents a Date in the internship book.
  * Guarantees: immutable; the date is valid as declared in the constructor.
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format 'dd/MM/yy' and must be valid.";
+            "Dates must not be in the future, should be in the format 'dd/MM/yy', and must be valid.";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy");
 
@@ -82,6 +82,18 @@ public class Date {
 
         Date otherDate = (Date) other;
         return date.equals(otherDate.date);
+    }
+
+    /**
+     * Compares this {@code Date} to another object for ordering.
+     *
+     * @param other The date object to compare with.
+     * @return 0 if this date object occurs at the same date as the other date object, a negative number if this date
+     *     object occurs before the other date object and a positive number otherwise.
+     */
+    @Override
+    public int compareTo(Date other) {
+        return date.compareTo(other.date);
     }
 
     /**
