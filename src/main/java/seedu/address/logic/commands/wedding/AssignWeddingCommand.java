@@ -125,6 +125,7 @@ public class AssignWeddingCommand extends Command {
         }
 
         AssignWeddingCommand otherCommand = (AssignWeddingCommand) other;
-        return index.equals(otherCommand.index) && weddingsToAdd.equals(((AssignWeddingCommand) other).weddingsToAdd);
+        return index.equals(otherCommand.index) && weddingsToAdd.equals(((AssignWeddingCommand) other).weddingsToAdd)
+                && this.force == otherCommand.force;
     }
 }
