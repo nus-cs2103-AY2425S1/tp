@@ -28,9 +28,10 @@ public class Student {
     private final Fee fee;
 
     /**
-     * Every field must be present and not null except isPresent. I suggest
-     * we keep this constructor so that we do not break all the test cases
+     * Every field must be present and not null except isPresent.
+     *
      */
+    @Deprecated
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
