@@ -167,7 +167,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public ObservableList<Vendor> getAssociatedVendors(Event event) {
         requireNonNull(event);
-        UniqueId eventId = events.getEventId(event);
+        UniqueId eventId = event.getId();
         List<Vendor> vendorsList = associations.asUnmodifiableObservableList().stream()
                 .filter(association -> association.getEventId().equals(eventId))
                 .map(association -> getVendorById(association.getVendorId()))

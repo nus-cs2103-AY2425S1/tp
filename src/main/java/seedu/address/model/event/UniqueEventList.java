@@ -52,25 +52,13 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns the unique ID of the given {@code event}.
-     * Throws an {@code EventNotFoundException} if the event is not found.
-     */
-    public UniqueId getEventId(Event event) {
-        requireNonNull(event);
-        if (eventMap.containsKey(event.getId())) {
-            return event.getId();
-        }
-        throw new EventNotFoundException();
-    }
-
-    /**
      * Removes the equivalent event from the list.
      * The event must exist in the list.
      */
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
 
-        UniqueId eventId = getEventId(toRemove);
+        UniqueId eventId = toRemove.getId();
         if (!internalList.remove(toRemove)) {
             throw new EventNotFoundException();
         }
