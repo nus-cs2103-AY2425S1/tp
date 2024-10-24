@@ -11,7 +11,7 @@ import ezvcard.property.Address;
 import ezvcard.property.Categories;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,12 +19,12 @@ import seedu.address.model.person.Person;
  */
 public class VcfExporter implements Exporter {
     private final Path exportSubPath = Paths.get("bizbook.vcf");
-    private final UserPrefs userPrefs;
+    private final ReadOnlyUserPrefs userPrefs;
 
     /**
-     * Constructs a {@code VcfExporter} class configured with {@code UserPrefs}
+     * Constructs a {@code VcfExporter} class configured with {@code ReadOnlyUserPrefs}
      */
-    public VcfExporter(UserPrefs userPrefs) {
+    public VcfExporter(ReadOnlyUserPrefs userPrefs) {
         this.userPrefs = userPrefs;
     }
 

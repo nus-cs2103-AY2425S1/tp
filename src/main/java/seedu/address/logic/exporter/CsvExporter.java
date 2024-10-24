@@ -8,10 +8,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a class that can export to CSV
@@ -20,12 +19,12 @@ public class CsvExporter implements Exporter {
     private static final String CSV_HEADERS = "Name,Phone No,Email,Address,Tags,Notes";
 
     private final Path exportSubPath = Paths.get("bizbook.csv");
-    private final UserPrefs userPrefs;
+    private final ReadOnlyUserPrefs userPrefs;
 
     /**
      * Constructs a {@code VcfExporter} class configured with {@code UserPrefs}
      */
-    public CsvExporter(UserPrefs userPrefs) {
+    public CsvExporter(ReadOnlyUserPrefs userPrefs) {
         this.userPrefs = userPrefs;
     }
 
