@@ -96,6 +96,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void tagExists_correctTag_returnsTrue() {
+        Person person = new PersonBuilder().withTags("tag").build();
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        Boolean actualBool = modelManager.tagExists(person, tags);
+        assertEquals(true, actualBool);
+    }
+
+    @Test
+    public void tagExists_wrongTag_returnsFalse() {
+        Person person = new PersonBuilder().withTags("tag").build();
+        Tag tag = new Tag("taggg");
+        Set<Tag> tags = Set.of(tag);
+        Boolean actualBool = modelManager.tagExists(person, tags);
+        assertEquals(false, actualBool);
+    }
+
+    @Test
     public void addTagTest() {
         Person expectedPerson = new PersonBuilder().withTags("tag").build();
         Person actualPerson = new PersonBuilder().build();

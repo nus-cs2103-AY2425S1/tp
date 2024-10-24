@@ -51,7 +51,7 @@ public class UntagCommand extends Command {
         }
 
         Person person = lastShownList.get(targetIndex.getZeroBased());
-        Boolean tagExists = person.tagExists(tagsToDelete);
+        Boolean tagExists = model.tagExists(person, tagsToDelete);
 
         if (!tagExists) {
             throw new CommandException(MESSAGE_TAG_DOES_NOT_EXIST);
