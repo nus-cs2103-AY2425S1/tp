@@ -5,7 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+
 
 /**
  * Container for user visible messages.
@@ -38,9 +41,9 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(person.getPhone().map(Phone::toString).orElse("N/A"))
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(person.getEmail().map(Email::toString).orElse("N/A"))
                 .append("; Telegram Handle: ")
                 .append(person.getTelegramHandle())
                 .append("; Tags: ");

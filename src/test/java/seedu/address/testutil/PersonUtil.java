@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,9 +34,10 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_CONTACTTYPE + person.getContactType().value.toString() + " ");
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
+        person.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE + phone.value + " "));
+        person.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL + email.value + " "));
         sb.append(PREFIX_TELEHANDLE + person.getTelegramHandle().value + " ");
+        sb.append(PREFIX_MOD + person.getModuleName().toString() + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -52,6 +54,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getTelegramHandle().ifPresent(telegramHandle -> sb.append(PREFIX_TELEHANDLE)
                 .append(telegramHandle.value).append(" "));
+        descriptor.getModuleName().ifPresent(moduleName -> sb.append(PREFIX_MOD).append(moduleName).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

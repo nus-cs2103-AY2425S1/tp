@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,26 +20,26 @@ public class Person {
     // Identity fields
     private final ContactType contactType;
     private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private final Optional<Phone> phone;
+    private final Optional<Email> email;
 
     // Data fields
     private final TelegramHandle telegramHandle;
-
+    private final ModuleName moduleName;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-
-    public Person(ContactType contactType, Name name, Phone phone, Email email, TelegramHandle telegramHandle,
-                  Set<Tag> tags) {
-        requireAllNonNull(contactType, name, phone, email, tags);
+    public Person(ContactType contactType, Name name, Optional<Phone> phone, Optional<Email> email,
+                  TelegramHandle telegramHandle, ModuleName moduleName, Set<Tag> tags) {
+        requireAllNonNull(contactType, name, phone, email, telegramHandle, moduleName, tags);
         this.contactType = contactType;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegramHandle = telegramHandle;
+        this.moduleName = moduleName;
 
         this.tags.addAll(tags);
     }
@@ -51,17 +52,20 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
+    public Optional<Phone> getPhone() {
         return phone;
     }
 
-    public Email getEmail() {
+    public Optional<Email> getEmail() {
         return email;
     }
 
-
     public TelegramHandle getTelegramHandle() {
         return telegramHandle;
+    }
+
+    public ModuleName getModuleName() {
+        return moduleName;
     }
 
     /**
@@ -106,13 +110,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && telegramHandle.equals(otherPerson.telegramHandle)
+                && moduleName.equals(otherPerson.moduleName)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegramHandle, tags);
+        return Objects.hash(name, phone, email, telegramHandle, tags, moduleName);
 
     }
 
@@ -121,9 +126,10 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("contactType", contactType)
                 .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
+                .add("phone", phone.map(Phone::toString).orElse(" "))
+                .add("email", email.map(Email::toString).orElse(" "))
                 .add("telegramHandle", telegramHandle)
+                .add("moduleName", moduleName)
                 .add("tags", tags)
                 .toString();
     }
