@@ -79,22 +79,17 @@ public class JsonAdaptedParticipation {
         }
 
         // Matches parsed json strings to objects in addressbook
-        FilteredList<Person> studentObjects = addressBook.getPersonList()
-                .filtered(p -> p.getName().fullName.equals(student));
-        FilteredList<Tutorial> tutorialObjects = addressBook.getTutorialList()
-                .filtered(t -> t.getSubject().equals(tutorial));
+        Person studentObject = addressBook.getPersonList()
+                .filtered(p -> p.getName().fullName.equals(student))
+                .stream().findFirst()
+                .orElseThrow(() -> new IllegalValueException(String.format(
+                        MISSING_ADDRESSBOOK_OBJECT_MESSAGE_FORMAT, Person.class.getSimpleName())));
+        Tutorial tutorialObject = addressBook.getTutorialList()
+                .filtered(t -> t.getSubject().equals(tutorial))
+                .stream().findFirst()
+                .orElseThrow(() -> new IllegalValueException(String.format(
+                        MISSING_ADDRESSBOOK_OBJECT_MESSAGE_FORMAT, Tutorial.class.getSimpleName())));
 
-        if (studentObjects.isEmpty()) {
-            throw new IllegalValueException(String.format(
-                    MISSING_ADDRESSBOOK_OBJECT_MESSAGE_FORMAT, Person.class.getSimpleName()));
-        }
-        if (tutorialObjects.isEmpty()) {
-            throw new IllegalValueException(String.format(
-                    MISSING_ADDRESSBOOK_OBJECT_MESSAGE_FORMAT, Tutorial.class.getSimpleName()));
-        }
-
-        final Person studentObject = studentObjects.get(0);
-        final Tutorial tutorialObject = tutorialObjects.get(0);
         return new Participation(studentObject, tutorialObject, attendanceList);
     }
 }
