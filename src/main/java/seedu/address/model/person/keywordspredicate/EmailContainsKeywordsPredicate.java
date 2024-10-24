@@ -26,10 +26,10 @@ public class EmailContainsKeywordsPredicate extends TraitContainsKeywordsPredica
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EmailContainsKeywordsPredicate otherNameContainsKeywordsPredicate)) {
+        if (!(other instanceof EmailContainsKeywordsPredicate otherEmailContainsKeywordsPredicate)) {
             return false;
         }
 
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return keywords.equals(otherEmailContainsKeywordsPredicate.keywords);
     }
 }

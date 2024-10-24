@@ -30,6 +30,13 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Updates the {@code PersonListView} with an updated list of persons.
+     */
+    public void updatePersonList(ObservableList<Person> personList) {
+        personListView.setItems(personList);
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
