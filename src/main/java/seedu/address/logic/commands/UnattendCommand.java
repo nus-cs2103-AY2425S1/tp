@@ -32,22 +32,22 @@ public class UnattendCommand extends Command {
     public static final String MESSAGE_FAILURE = "Tutorial Class doesn't exist or Student not in Tutorial Class!";
 
     private final StudentId studentId;
-    private final TutorialId tutorialClass;
+    private final TutorialId tutorialId;
     private final Date tutDate;
 
     /**
      * Creates an UnattendCommand to mark the specified student as absent.
      *
      * @param studentId The ID of the student to be marked absent.
-     * @param tutorialClass The tutorial class the student is enrolled in.
+     * @param tutorialId The tutorial class the student is enrolled in.
      * @param tutDate The date on which the student is marked absent.
      */
-    public UnattendCommand(StudentId studentId, TutorialId tutorialClass, Date tutDate) {
+    public UnattendCommand(StudentId studentId, TutorialId tutorialId, Date tutDate) {
         requireNonNull(studentId);
-        requireNonNull(tutorialClass);
+        requireNonNull(tutorialId);
         requireNonNull(tutDate);
         this.studentId = studentId;
-        this.tutorialClass = tutorialClass;
+        this.tutorialId = tutorialId;
         this.tutDate = tutDate;
     }
 
@@ -55,7 +55,7 @@ public class UnattendCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.setStudentAbsent(studentId, tutorialClass, tutDate)) {
+        if (!model.setStudentAbsent(studentId, tutorialId, tutDate)) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
@@ -66,7 +66,7 @@ public class UnattendCommand extends Command {
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         return "Student: " + studentId.toString() + "\n" + "Date: " + sdf.format(tutDate) + "\n"
-                + "Tutorial ID: " + tutorialClass.toString();
+                + "Tutorial ID: " + tutorialId.toString();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class UnattendCommand extends Command {
         }
 
         return studentId.equals(otherAttendCommand.studentId)
-                && tutorialClass.equals(otherAttendCommand.tutorialClass)
+                && tutorialId.equals(otherAttendCommand.tutorialId)
                 && tutDate.equals(otherAttendCommand.tutDate);
     }
 }

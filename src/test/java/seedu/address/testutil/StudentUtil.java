@@ -39,8 +39,8 @@ public class StudentUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_STUDENTID)
                 .append(studentId.value).append(" "));
-        descriptor.getTutorialId().ifPresent(tutorialClass -> sb.append(PREFIX_TUTORIALID)
-                .append(tutorialClass.toString()).append(" "));
+        descriptor.getTutorialId().ifPresent(tutorialId -> sb.append(PREFIX_TUTORIALID)
+                .append(tutorialId.toString()).append(" "));
 
         return sb.toString();
     }
