@@ -1,6 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+
 
 import java.util.stream.Stream;
 
@@ -19,22 +25,22 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args.trim(), CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TAG,
-                        CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args.trim(), PREFIX_NAME, PREFIX_TAG,
+                        PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS);
 
         // Check if any valid prefixes are present
-        if (!areAnyPrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TAG,
-                CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_ADDRESS)) {
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG,
+                PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
         // Get values, defaulting to empty string if not present
-        String name = argMultimap.getValue(CliSyntax.PREFIX_NAME).orElse("").trim();
-        String tag = argMultimap.getValue(CliSyntax.PREFIX_TAG).orElse("").trim();
-        String email = argMultimap.getValue(CliSyntax.PREFIX_EMAIL).orElse("").trim();
-        String phone = argMultimap.getValue(CliSyntax.PREFIX_PHONE).orElse("").trim();
-        String address = argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).orElse("").trim();
+        String name = argMultimap.getValue(PREFIX_NAME).orElse("").trim();
+        String email = argMultimap.getValue(PREFIX_EMAIL).orElse("").trim();
+        String phone = argMultimap.getValue(PREFIX_PHONE).orElse("").trim();
+        String address = argMultimap.getValue(PREFIX_ADDRESS).orElse("").trim();
+        String tag = argMultimap.getValue(PREFIX_TAG).orElse("").trim();
 
         return new FilterCommand(name, tag, email, phone, address);
     }
