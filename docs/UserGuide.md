@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-## ConcertAddressBook
+## ConcertPhonebook
 
-ConcertAddressBook is a **desktop app** for **Concert Organisers** to manage your Concert contacts, optimized for use via a Command Line Interface (CLI) with also a Graphical User Interface (GUI) in place to assist with information display. Manage your _contacts_ and _concerts_ in the book, finding contact information faster than your regular GUI contact management applications.
+ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your Concert contacts, optimized for use via a Command Line Interface (CLI) with also a Graphical User Interface (GUI) in place to assist with information display. Manage your _contacts_ and _concerts_ in the book, finding contact information faster than your regular GUI contact management applications.
 
 1. [Quick start](#Quick-Start)
 2. [Features](#features)
@@ -110,33 +110,33 @@ Format: `help`
 
 ### Listing all persons : `listp`
 
-Shows a list of all persons in the Concert address book.
+Shows a list of all persons in the Concert Phone book.
 
 Format: `listp`
 
 ### Listing all concerts : `listc`
 
-Shows a list of all concerts in the Concert address book.
+Shows a list of all concerts in the Concert Phone book.
 
 Format: `listc`
 
 ### Listing all persons and concerts : `list`
 
-Shows a list of all persons and concerts in the Concert address book.
+Shows a list of all persons and concerts in the Concert Phone book.
 
 Format: `list`
 
 ### Listing all concertContacts : `listcc`
 
-Shows a list of all concertContacts in the Concert address book.
+Shows a list of all concertContacts in the Concert Phone book.
 
 Format: `listcc`
 
 ### Adding a person: `addp`
 
-Adds a person to the Concert Address book.
+Adds a person to the Concert Phone book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
+Format: `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -149,7 +149,11 @@ Examples:
 
 ### Adding a Concert: `addc`
 
-Adds a Concert to the Concert Address book.
+Adds a Concert to the Concert Phone book.
+
+- Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
+- FYI: If user were to add a date that does not exist, closest date in the same month will be added
+     e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
 
 Format: `addc n/CONCERTNAME a/ADDRESS d/DATE`
 
@@ -159,16 +163,16 @@ Examples:
 
 ### Adding a ConcertContact: `addcc`
 
-Adds an association to the contact in the Concert Address book with another Concert.
+Adds an association to the contact in the Concert Phone book with another Concert.
 
-Format: `addcc INDEX c/CONCERT_INDEX`
+Format: `addcc pi/INDEX ci/CONCERT_INDEX`
 
 - Adds an association between the person at the specified `INDEX` to the concert at the specified `CONCERT_INDEX`
 - The index refers to the index number shown in the displayed person / concert list. The index **must be a positive integer** 1, 2, 3, …​
 
 ### Deleting a person : `deletep`
 
-Deletes the specified person from the Concert address book.
+Deletes the specified person from the Concert Phone book.
 
 Format: `deletep INDEX`
 
@@ -178,12 +182,12 @@ Format: `deletep INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the Concert address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `deletep 2` deletes the 2nd person in the Concert Phone book.
+- `findp Betsy` followed by `deletep 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting a concert : `deletec`
 
-Deletes the specified person from the Concert address book.
+Deletes the specified person from the Concert Phone book.
 
 Format: `deletec INDEX`
 
@@ -193,9 +197,9 @@ Format: `deletec INDEX`
 
 ### Deleting a concertContact : `deletecc`
 
-Deletes the specified concertContact from the Concert address book.
+Deletes the specified concertContact from the Concert Phone book.
 
-Format: `deletecc PERSON_INDEX c/CONCERT_INDEX`
+Format: `deletecc pi/PERSON_INDEX ci/CONCERT_INDEX`
 
 - Deletes the concertContact between the person in the specified `PERSON_INDEX` and the concert in the specified `CONCERT_INDEX`.
 - The index refers to the index number shown in the displayed person / concert list.
@@ -203,7 +207,7 @@ Format: `deletecc PERSON_INDEX c/CONCERT_INDEX`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the Concert address book.
+Clears all entries from the Concert Phone book.
 
 Format: `clear`
 
@@ -244,20 +248,20 @@ Examples:
 
 Finds all concertContacts that are associated to the person or the concert at the specified index.
 
-Format: `findcc [p/PERSON_INDEX] [c/CONCERT_INDEX]`
+Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
-- The order of the keywords does not matter e.g. `findcc p/1 c/1` is equivalent to `findcc c/1 p/1`
+- The order of the keywords does not matter e.g. `findcc pi/1 ci/1` is equivalent to `findcc c/1 p/1`
 - At least one of the one of the 2 fields must be present
 
 Examples:
 
-- `findcc p/1` finds concertContact(s) associated with the first person in the address book.
-- `findcc c/1` finds concertContact(s) associated with the first concert in the address book.
-- `findcc p/1 c/1` finds concertContact(s) associated with the first concert or first person in the address book.
+- `findcc p/1` finds concertContact(s) associated with the first person in the phone book.
+- `findcc c/1` finds concertContact(s) associated with the first concert in the phone book.
+- `findcc p/1 c/1` finds concertContact(s) associated with the first concert or first person in the phone book.
 
 ### Editing a person : `editp`
 
-Edits an existing person in the Concert address book.
+Edits an existing person in the Concert Phone book.
 
 Format: `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]…​`
 
@@ -275,7 +279,7 @@ Examples:
 
 ### Editing a concert : `editc`
 
-Edits an existing concert in the Concert address book.
+Edits an existing concert in the Concert Phone book.
 
 Format: `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`
 
@@ -283,6 +287,8 @@ Format: `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
+- FYI: If user were to add a date that does not exist, closest date in the same month will be added
+    e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
 
 Examples:
 
@@ -297,11 +303,11 @@ Format: `exit`
 
 ### Saving the data
 
-ConcertAddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ConcertPhonebook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-ConcertAddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ConcertPhonebook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ConcertPhonebook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -336,15 +342,15 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 | **List ConcertContacts**     | `listcc`                                                                                                                                                                     |
 | **Add Person**               | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​` <br> e.g., `add n/Alex Yeoh p/22224444 e/alexyeoh@example.com a/123, Clementi Rd, 1234665 r/Artist t/friend` |
 | **Add Concert**              | `addc n/CONCERTNAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                             |
-| **Add ConcertContact**       | `addcc INDEX c/CONCERT_INDEX`                                                                                                                                                |
+| **Add ConcertContact**       | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
 | **Delete Person**            | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
 | **Delete Concert**           | `deletep INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
-| **Delete ConcertContact**    | `deletecc PERSON_INDEX c/CONCERT_INDEX`<br> e.g., `deletecc 3 c/3`                                                                                                           |
+| **Delete ConcertContact**    | `deletecc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g., `deletecc pi/3 ci/3`                                                                                                   |
 | **Clear**                    | `clear`                                                                                                                                                                      |
 | **Edit Person**              | `editp INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
 | **Edit Concert**             | `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`<br> e.g.,`editc 1 a/2 Stadium Drive d/2024-10-11 2200`                                                                           |
 | **Find Person**              | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `find n/James Jake r/organiser`                                                                                                 |
 | **Find Concert**             | `findc [n/NAME_KEYWORDS]`<br> e.g., `find n/Coachella Glastonbury`                                                                                                           |
-| **Find ConcertContact**      | `findcc [p/PERSON_INDEX] [c/CONCERT_INDEX]`<br> e.g., `findcc p/1 c/1`                                                                                                       |
+| **Find ConcertContact**      | `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`<br> e.g., `findcc pi/1 ci/1`                                                                                                   |
 | **Help**                     | `help`                                                                                                                                                                       |
 | **Exit**                     | `exit`                                                                                                                                                                       |

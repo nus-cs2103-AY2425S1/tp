@@ -56,8 +56,8 @@ Person *--> "*" Tag
 Concert *--> Name
 Concert *--> Address
 Concert *--> ConcertDate
-ConcertContract *--> Person
-ConcertContract *--> Concert
+Person "1" - "1" Concert
+(Person, Concert) .. ConcertContract
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
