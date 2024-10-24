@@ -1,7 +1,9 @@
 package seedu.address.logic.commands.edit;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.RoleType;
@@ -11,6 +13,7 @@ import seedu.address.model.person.RoleType;
  */
 public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     private final ModuleRoleMap moduleRoleMapToDelete;
 
     /**
@@ -31,6 +34,8 @@ public class DeleteModuleRoleOperation extends EditModuleRoleOperation {
         HashMap<ModuleCode, RoleType> roles = new HashMap<>(moduleRoleMapToEdit.getRoles());
         ModuleRoleMap ret = new ModuleRoleMap(roles);
         ret.removeAll(moduleRoleMapToDelete);
+        logger.info("Deleted module roles: " + moduleRoleMapToDelete.getData()
+                + "from: " + moduleRoleMapToEdit.getData());
         return ret;
     }
 
