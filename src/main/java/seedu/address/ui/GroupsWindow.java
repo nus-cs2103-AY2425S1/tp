@@ -7,8 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
 
 /**
  * Controller for a help page
@@ -16,22 +18,31 @@ import seedu.address.commons.core.LogsCenter;
 public class GroupsWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(GroupsWindow.class);
+    private Logic logic;
     private static final String FXML = "GroupWindow.fxml";
-
+    private GroupListPanel groupListPanel;
+    @FXML
+    private StackPane groupListPanelPlaceholder;
     /**
      * Creates a new HelpWindow.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public GroupsWindow(Stage root) {
+    public GroupsWindow(Stage root, Logic logic) {
         super(FXML, root);
+        this.logic = logic;
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public GroupsWindow() {
-        this(new Stage());
+    public GroupsWindow(Logic logic) {
+        this(new Stage(), logic);
+    }
+
+    void fillInnerParts() {
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
     }
 
     /**

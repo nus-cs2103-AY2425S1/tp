@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  * Panel containing the list of persons.
  */
 public class GroupListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "GroupListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(GroupListPanel.class);
 
     @FXML

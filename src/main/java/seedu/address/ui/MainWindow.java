@@ -36,7 +36,6 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     private GroupsWindow groupsWindow;
-
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -68,7 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        groupsWindow = new GroupsWindow();
+        groupsWindow = new GroupsWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -124,6 +123,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
     }
 
     /**
@@ -171,6 +171,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleGroups() {
+
+        groupsWindow.fillInnerParts();
         if (!groupsWindow.isShowing()) {
             groupsWindow.show();
         } else {
