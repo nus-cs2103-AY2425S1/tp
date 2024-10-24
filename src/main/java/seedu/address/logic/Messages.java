@@ -25,7 +25,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid";
     public static final String MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX = "The supplier index provided is invalid";
 
-
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
