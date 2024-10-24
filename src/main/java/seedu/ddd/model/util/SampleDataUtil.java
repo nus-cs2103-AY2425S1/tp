@@ -1,8 +1,6 @@
 package seedu.ddd.model.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,8 +10,8 @@ import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.client.Date;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
 import seedu.ddd.model.contact.vendor.Service;
@@ -28,12 +26,10 @@ import seedu.ddd.model.tag.Tag;
  */
 public class SampleDataUtil {
     private static final Client sampleCLient = new Client(new Name("A"), new Phone("12345678"), new Email("a@a.com"),
-            new Address("A"), new Date("01 Jan 2000"), getTagSet("another"), new Id(0));
+            new Address("A"), new Date("01 Jan 2000"), getTagSet("another"), new ContactId(0));
     private static final Vendor sampleVendor = new Vendor(new Name("B"), new Phone("12345678"), new Email("b@b.com"),
-            new Address("B"), new Service("Catering"), getTagSet("test"), new Id(1));
-    private static final Event sampleEvent = new Event(new ArrayList<>(Collections.singletonList(sampleCLient)),
-            new ArrayList<>(Collections.singletonList(sampleVendor)),
-            new Description("Sample Event"), new EventId(0));
+            new Address("B"), new Service("Catering"), getTagSet("test"), new ContactId(1));
+    private static final Event sampleEvent = new Event(new Description("Sample Event"), new EventId(0));
     private static final Contact[] sampleContacts = new Contact[] {
         sampleCLient, sampleVendor
     };
@@ -46,6 +42,8 @@ public class SampleDataUtil {
             sampleAb.addContact(sampleContact);
         }
         sampleAb.addEvent(sampleEvent);
+        sampleEvent.addVendor(sampleVendor);
+        sampleEvent.addClient(sampleCLient);
         AddressBook.setNextContactId(sampleNextContactId);
         AddressBook.setNextEventId(sampleNextEventId);
         return sampleAb;
@@ -57,6 +55,12 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<EventId> getEventIdSet(int[] eventIds) {
+        return Arrays.stream(eventIds)
+                .mapToObj(EventId::new)
                 .collect(Collectors.toSet());
     }
 }

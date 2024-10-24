@@ -1,7 +1,10 @@
 package seedu.ddd.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,8 +16,10 @@ import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.EventId;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -23,12 +28,13 @@ import seedu.ddd.model.event.common.Event;
 class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
-    public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
+    public static final String MESSAGE_NO_CLIENT = "Event does not have a valid client.";
     public static final String MESSAGE_CONTACT_NOT_CREATED = "Event contains contact(s) that have not been created.";
+    public static final String MESSAGE_ASSOCIATION_MISMATCH = "Association between event and contact do not match.";
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
-    private final int nextContactId;
-    private final int nextEventId;
+    private int nextContactId;
+    private int nextEventId;
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given contacts.
@@ -65,6 +71,9 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        HashMap<Integer, Set<EventId>> eventIdsTable = new HashMap<>();
+        int maxContactId = 0;
+        int maxEventId = 0;
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
             if (addressBook.hasContact(contact)) {
@@ -74,26 +83,64 @@ class JsonSerializableAddressBook {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
                 }
             }
+            int contactId = contact.getId().contactId;
+            eventIdsTable.put(contactId, jsonAdaptedContact.getEventIds());
             addressBook.addContact(contact);
+            if (contactId > maxContactId) {
+                maxContactId = contactId;
+            }
         }
 
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
-            List<Contact> contacts = event.getContacts();
-            for (Contact contact: contacts) {
-                if (!addressBook.hasContact(contact)) {
-                    throw new IllegalValueException(MESSAGE_CONTACT_NOT_CREATED);
-                }
+            List<ContactId> clientIds = jsonAdaptedEvent.getClientIds();
+            if (clientIds == null || clientIds.isEmpty()) {
+                throw new IllegalValueException(MESSAGE_NO_CLIENT);
             }
-            if (addressBook.hasEvent(event)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+            for (ContactId clientId: clientIds) {
+                addContactToEvent(event, clientId, addressBook, eventIdsTable, true);
+            }
+            List<ContactId> vendorIds = jsonAdaptedEvent.getVendorIds();
+            for (ContactId vendorId: vendorIds) {
+                addContactToEvent(event, vendorId, addressBook, eventIdsTable, false);
             }
             addressBook.addEvent(event);
+            int eventId = event.getEventId().eventId;
+            if (eventId > maxEventId) {
+                maxEventId = eventId;
+            }
+        }
+
+        if (maxContactId >= nextContactId) {
+            nextContactId = maxContactId + 1;
+        }
+        if (maxEventId >= nextEventId) {
+            nextEventId = maxEventId + 1;
         }
 
         AddressBook.setNextContactId(nextContactId);
         AddressBook.setNextEventId(nextEventId);
 
         return addressBook;
+    }
+
+    private void addContactToEvent(Event event, ContactId contactId, AddressBook addressBook,
+            Map<Integer, Set<EventId>> eventIdsTable, boolean isClient) throws IllegalValueException {
+        Contact contact = addressBook.getContact(contactId);
+        if (contact == null) {
+            throw new IllegalValueException(MESSAGE_CONTACT_NOT_CREATED);
+        }
+
+        Set<EventId> eventIds = eventIdsTable.get(contact.getId().contactId);
+        if (!eventIds.contains(event.getEventId())) {
+            throw new IllegalValueException(MESSAGE_ASSOCIATION_MISMATCH);
+        }
+        if (isClient) {
+            assert contact instanceof Client;
+            event.addClient((Client) contact);
+        } else {
+            assert contact instanceof Vendor;
+            event.addVendor((Vendor) contact);
+        }
     }
 }

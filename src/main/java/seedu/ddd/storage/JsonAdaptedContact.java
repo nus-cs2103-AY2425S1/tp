@@ -14,10 +14,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import seedu.ddd.commons.exceptions.IllegalValueException;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
+import seedu.ddd.model.event.common.EventId;
 import seedu.ddd.model.tag.Tag;
 
 /**
@@ -41,6 +42,7 @@ abstract class JsonAdaptedContact {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedEventId> eventIds = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedContact} with the given person details.
@@ -52,7 +54,8 @@ abstract class JsonAdaptedContact {
         @JsonProperty("email") String email,
         @JsonProperty("address") String address,
         @JsonProperty("tags") List<JsonAdaptedTag> tags,
-        @JsonProperty("id") int id
+        @JsonProperty("id") int id,
+        @JsonProperty("eventIds") List<JsonAdaptedEventId> eventIds
     ) {
         this.id = id;
         this.name = name;
@@ -62,19 +65,25 @@ abstract class JsonAdaptedContact {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        if (eventIds != null) {
+            this.eventIds.addAll(eventIds);
+        }
     }
 
     /**
      * Converts a given {@code Contact} into this class for Jackson use.
      */
     public JsonAdaptedContact(Contact source) {
-        id = source.getId().id;
+        id = source.getId().contactId;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        eventIds.addAll(source.getEventIds().stream()
+                .map(JsonAdaptedEventId::new)
                 .collect(Collectors.toList()));
     }
 
@@ -123,14 +132,26 @@ abstract class JsonAdaptedContact {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (!Id.isValidId(id)) {
-            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
+        if (!ContactId.isValidContactId(id)) {
+            throw new IllegalValueException(ContactId.MESSAGE_CONSTRAINTS);
         }
-        final Id modelId = new Id(id);
+        final ContactId modelContactId = new ContactId(id);
 
-        return createContact(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelId);
+        return createContact(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelContactId);
     }
 
-    public abstract Contact createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id)
-            throws IllegalValueException;
+    /**
+     * Retrieves the eventIds of the contact
+     * @throws IllegalValueException if there were any data constraints violated in the adapted eventId.
+     */
+    public Set<EventId> getEventIds() throws IllegalValueException {
+        final List<EventId> personEventIds = new ArrayList<>();
+        for (JsonAdaptedEventId eventId : eventIds) {
+            personEventIds.add(eventId.toModelType());
+        }
+        return new HashSet<>(personEventIds);
+    }
+
+    public abstract Contact createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            ContactId contactId) throws IllegalValueException;
 }
