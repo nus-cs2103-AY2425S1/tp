@@ -1,0 +1,15 @@
+@startuml
+skinparam class {
+    BackgroundColor #ADD8E6
+    ArrowColor #0000FF
+    BorderColor #000080
+}
+
+Command <|-- ListCommand
+
+ListCommand <|-- ListPersonCommand
+ListCommand <|-- ListProjectCommand
+ListCommand <|-- ListProjectMembersCommand
+ListCommand <|-- ListAssignmentsCommand
+
+@enduml
