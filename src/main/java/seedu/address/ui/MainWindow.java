@@ -243,12 +243,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPatientInfo()) {
                 showPatientInfo(commandResult.getPatient());
+            } else {
+                hidePatientInfo();
             }
 
             if (commandResult.getKeyword() != null && commandResult.getKeyword().equals("appts")) {
                 showAppts(logic.getFilteredAppts());
-            } else {
-                hidePatientInfo();
             }
 
             return commandResult;
