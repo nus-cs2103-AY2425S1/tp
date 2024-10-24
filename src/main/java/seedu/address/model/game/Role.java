@@ -14,7 +14,7 @@ public class Role {
     /*
      * Regex expression matches Strings that contain at least one non-whitespace character.
      */
-    private static final String VALIDATION_REGEX = "";
+    private static final String VALIDATION_REGEX = "^(?!\\s*$).+";
 
     public final String role;
 
@@ -24,8 +24,8 @@ public class Role {
      * @param role a valid skill level or rank.
      */
     public Role(String role) {
-        //requireNonNull(role);
-        //checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
+        requireNonNull(role);
+        checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
         this.role = role;
     }
 
@@ -33,7 +33,7 @@ public class Role {
      * Returns true if a given string is a valid Role.
      */
     public static boolean isValidRole(String test) {
-        return true; // test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**

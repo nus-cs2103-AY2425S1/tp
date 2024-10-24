@@ -24,8 +24,8 @@ public class Username {
      * @param username a valid username.
      */
     public Username(String username) {
-//        requireNonNull(username);
-//        checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
+        requireNonNull(username);
+        checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
         this.username = username;
     }
 
@@ -33,7 +33,7 @@ public class Username {
      * Returns true if a given string is a valid Username.
      */
     public static boolean isValidUsername(String test) {
-        return true; //test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
