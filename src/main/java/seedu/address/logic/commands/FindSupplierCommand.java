@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -34,16 +35,26 @@ public class FindSupplierCommand extends Command {
             + PREFIX_PRODUCT + "m";
 
 
-    private final Predicate<Person> predicate;
+    private final List<Predicate<Person>> listOfPredicates;
 
-    public FindSupplierCommand(Predicate<Person> predicate) {
-        this.predicate = predicate;
+    /**
+     * Constructs a {@code FindSupplierCommand} with the specified list of predicates.
+     *
+     * @param listOfPredicates a list of predicates used to filter suppliers.
+     *                         Each predicate corresponds to a specific criterion
+     *                         (e.g., name, company, product).
+     */
+    public FindSupplierCommand(List<Predicate<Person>> listOfPredicates) {
+        requireNonNull(listOfPredicates);
+        assert !listOfPredicates.isEmpty();
+        this.listOfPredicates = listOfPredicates;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        Predicate<Person> combindedPredicate = listOfPredicates.stream().reduce(x -> true, Predicate::and);
+        model.updateFilteredPersonList(combindedPredicate);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_SUPPLIERS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
@@ -61,13 +72,13 @@ public class FindSupplierCommand extends Command {
         }
 
         FindSupplierCommand otherFindCommand = (FindSupplierCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return listOfPredicates.equals(otherFindCommand.listOfPredicates);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicates", listOfPredicates.toString())
                 .toString();
     }
 }

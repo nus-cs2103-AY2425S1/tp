@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindSupplierCommand;
@@ -36,14 +38,14 @@ public class FindSupplierCommandParser implements Parser<FindSupplierCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PRODUCT, PREFIX_COMPANY);
-        Predicate<Person> supplierPredicates = x -> true;
+        List<Predicate<Person>> supplierPredicates = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String nameKeyword = argMultimap.getValue(PREFIX_NAME).get();
             if (nameKeyword.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_NAME));
             }
-            supplierPredicates = supplierPredicates.and(new NameContainsPredicate(nameKeyword));
+            supplierPredicates.add(new NameContainsPredicate(nameKeyword));
         }
 
         if (argMultimap.getValue(PREFIX_COMPANY).isPresent()) {
@@ -51,7 +53,7 @@ public class FindSupplierCommandParser implements Parser<FindSupplierCommand> {
             if (companyKeyword.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_COMPANY));
             }
-            supplierPredicates = supplierPredicates.and(new CompanyContainsKeywordPredicate(companyKeyword));
+            supplierPredicates.add(new CompanyContainsKeywordPredicate(companyKeyword));
         }
 
         if (argMultimap.getValue(PREFIX_PRODUCT).isPresent()) {
@@ -59,7 +61,7 @@ public class FindSupplierCommandParser implements Parser<FindSupplierCommand> {
             if (productKeyword.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_EMPTY_KEYWORD, PREFIX_PRODUCT));
             }
-            supplierPredicates = supplierPredicates.and(new ProductContainsKeywordPredicate(productKeyword));
+            supplierPredicates.add(new ProductContainsKeywordPredicate(productKeyword));
         }
 
         return new FindSupplierCommand(supplierPredicates);

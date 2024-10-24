@@ -36,6 +36,6 @@ public class ProductContainsKeywordPredicate extends SupplierPredicate {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keyword: ", keyword).toString();
+        return new ToStringBuilder(this).add("keyword", keyword).toString();
     }
 }
