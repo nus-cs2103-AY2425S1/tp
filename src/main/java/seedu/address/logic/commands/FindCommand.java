@@ -44,6 +44,7 @@ public class FindCommand extends Command {
      * Constructs a find command with a specified goods category.
      */
     public FindCommand(Predicate<Person> predicate, GoodsCategories goodsCategory) {
+        requireNonNull(predicate);
         this.predicate = predicate;
         this.goodsCategory = goodsCategory;
     }

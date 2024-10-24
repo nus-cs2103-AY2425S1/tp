@@ -105,8 +105,14 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        requireNonNull(target);
         addressBook.removePerson(target);
+        int previousSize = goodsList.size();
         goodsList.removeIf(receipt -> receipt.isFromSupplier(target.getName()));
+        int removedReceiptCount = goodsList.size() - previousSize;
+        logger.fine(String.format(
+                "Deleted suppler of name %s. Removed %d receipts.",
+                target.getName(), removedReceiptCount));
     }
 
     @Override
