@@ -40,6 +40,15 @@ public class ReminderList {
         return listOfReminders;
     }
 
+    /**
+     * Gets the size of reminder list.
+     *
+     * @return Size of reminder list.
+     */
+    public int numberOfReminders() {
+        return listOfReminders.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

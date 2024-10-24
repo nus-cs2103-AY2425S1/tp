@@ -66,6 +66,7 @@ public class AddReminderCommand extends Command {
         Person personForReminder = lastShownList.get(targetIndex.getZeroBased());
         toAdd = new Reminder(reminderDate, reminderDescription, personForReminder.getName());
         model.addReminder(toAdd, personForReminder);
+        model.addReminderToBook(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, personForReminder.getName()));
     }
 

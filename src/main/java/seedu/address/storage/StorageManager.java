@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyReminderAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -20,12 +21,16 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
+    private ReminderAddressBookStorage reminderAddressBookStorage;
+
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          ReminderAddressBookStorage reminderAddressBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.reminderAddressBookStorage = reminderAddressBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -45,6 +50,36 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
+
+    // ================ ReminderAddressBook methods ==============================
+
+    @Override
+    public Path getReminderAddressBookFilePath() {
+        return reminderAddressBookStorage.getReminderAddressBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyReminderAddressBook> readReminderAddressBook() throws DataLoadingException {
+        return readReminderAddressBook(reminderAddressBookStorage.getReminderAddressBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyReminderAddressBook> readReminderAddressBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return reminderAddressBookStorage.readReminderAddressBook(filePath);
+    }
+
+    @Override
+    public void saveReminderAddressBook(ReadOnlyReminderAddressBook reminderAddressBook) throws IOException {
+        saveReminderAddressBook(reminderAddressBook, reminderAddressBookStorage.getReminderAddressBookFilePath());
+    }
+
+    @Override
+    public void saveReminderAddressBook(ReadOnlyReminderAddressBook reminderAddressBook,
+                                        Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        reminderAddressBookStorage.saveReminderAddressBook(reminderAddressBook, filePath);
+    }
 
     // ================ AddressBook methods ==============================
 
@@ -74,5 +109,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
-
 }

@@ -92,6 +92,20 @@ public class Reminder {
         return "Date: " + reminderDate.toString() + "\n" + "Description: " + reminderDescription;
     }
 
+    /**
+     * Returns true if both reminders have the same date, description, personToMeet.
+     */
+    public boolean isSameReminder(Reminder otherReminder) {
+        if (otherReminder == this) {
+            return true;
+        }
+
+        return otherReminder != null
+                && otherReminder.getReminderDateAsString().equals(this.getReminderDateAsString())
+                && otherReminder.getReminderDescription().equals(this.getReminderDescription())
+                && otherReminder.getPersonToMeet().equals(this.getPersonToMeet());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
