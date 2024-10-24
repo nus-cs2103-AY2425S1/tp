@@ -24,7 +24,7 @@ public abstract class EditCommand extends Command {
             + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_VENDOR + "INDEX" + " <other vendor parameters> or "
-            + PREFIX_EVENT + "INDEX (must be a positive integer)" + " <other event parameters>" + "\n"
+            + PREFIX_EVENT + "INDEX (INDEX must be a positive integer)" + " <other event parameters>" + "\n"
             + "Example to edit a vendor: " + COMMAND_WORD + " " + PREFIX_VENDOR + "1 "
             + PREFIX_NAME + "Adam's Bakery "
             + PREFIX_PHONE + "98765432 "
