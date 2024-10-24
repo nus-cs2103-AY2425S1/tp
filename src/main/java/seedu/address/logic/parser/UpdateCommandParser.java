@@ -147,13 +147,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
             throws ParseException {
         Set<Index> attendeeIndices = new HashSet<>();
         if (arePrefixesPresent(argMultimap, prefix)) {
-            String[] attendeeIndicesString = argMultimap.getValue(prefix)
-                    .orElse("")
-                    .split(" ");
-            for (String s : attendeeIndicesString) {
-                Index attendeeIdx = ParserUtil.parseIndex(s);
-                attendeeIndices.add(attendeeIdx);
-            }
+            attendeeIndices.addAll(ParserUtil.parseIndexes(argMultimap.getValue(prefix).orElse("")));
             if (attendeeIndices.isEmpty()) {
                 throw new ParseException(String.format("Attendee list cannot be empty. \n%1$s",
                         UpdateCommand.MESSAGE_USAGE));
