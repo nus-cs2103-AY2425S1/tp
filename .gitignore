@@ -27,3 +27,5 @@ docs/_site/
 
 /src/main/java/seedu/address/model/person/BlacklistStatus.java
 /src/test/java/seedu/address/model/person/BlacklistStatusTest.java
+
+/out/*
