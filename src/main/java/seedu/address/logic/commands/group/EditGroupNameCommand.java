@@ -23,7 +23,7 @@ public class EditGroupNameCommand extends Command {
             + PREFIX_GROUP_NAME + "GROUP_NAME "
             + PREFIX_GROUP_NAME + "NEW_GROUP_NAME\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP_NAME
-            + "blood drive 2023 " + "new blood drive 2024";
+            + "blood drive 2023 " + PREFIX_GROUP_NAME + "new blood drive 2024";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited group name from %s to %s\n";
 
