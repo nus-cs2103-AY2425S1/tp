@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -23,13 +24,13 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
     public static final String EMPTY_FIELD_FORMAT = "%EMPTY-FIELD%";
 
     private final String name;
     private final String phone;
     private final String email;
     private final String address;
+    private final String notes;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,11 +39,12 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("notes") String notes, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.notes = notes == null ? EMPTY_FIELD_FORMAT : notes;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -56,6 +58,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().isEmpty() ? EMPTY_FIELD_FORMAT : source.getEmail().value;
         address = source.getAddress().isEmpty() ? EMPTY_FIELD_FORMAT : source.getAddress().value;
+        notes = source.getNotes().isEmpty() ? EMPTY_FIELD_FORMAT : source.getNotes().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,9 +118,17 @@ class JsonAdaptedPerson {
         } else {
             modelAddress = new Address(address);
         }
+        final Notes modelNotes;
+        if (isFieldEmpty(notes)) {
+            modelNotes = Notes.createEmpty();
+        } else if (!Notes.isValidNotes(notes)) {
+            throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
+        } else {
+            modelNotes = new Notes(notes);
+        }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNotes, modelTags);
     }
 
 }
