@@ -351,6 +351,15 @@
     -fx-font-size: 11;
 }
 
+#eventName .label {
+    -fx-text-fill: white;
+    -fx-background-color: #D397F8;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
 .nav-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-padding: 10px;

@@ -45,11 +45,9 @@ public class Event {
         return location;
     }
 
-
     public DateTime getStartTime() {
         return startTime;
     }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

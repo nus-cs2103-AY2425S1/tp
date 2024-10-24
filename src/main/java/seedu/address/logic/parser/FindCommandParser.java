@@ -5,8 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.Arrays;
 
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
-import seedu.address.logic.commands.personcommands.FindCommand;
+import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
 import seedu.address.model.types.common.NameContainsKeywordsPredicate;
@@ -21,24 +22,27 @@ public class FindCommandParser implements Parser<Command> {
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parse(ModelType modelType, String args) throws ParseException {
+    public FindCommand parse(ModelType modelType, String args) throws ParseException {
         if (modelType == ModelType.PERSON) {
             return parseForPerson(args);
-        } else {
+        } else if (modelType == ModelType.EVENT) {
             return parseForEvent(args);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
-    private FindCommand parseForPerson(String args) throws ParseException {
+    private FindPersonCommand parseForPerson(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        System.out.println(trimmedArgs);
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
     private FindEventCommand parseForEvent(String args) throws ParseException {

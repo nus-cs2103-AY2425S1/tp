@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
-import seedu.address.logic.commands.personcommands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.personcommands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.types.person.Person;
 

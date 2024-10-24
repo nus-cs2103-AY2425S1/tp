@@ -18,8 +18,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -31,7 +31,7 @@ import seedu.address.model.types.event.Event;
 /**
  * Edits the details of an existing event in the address book.
  */
-public class EditEventCommand extends Command {
+public class EditEventCommand extends EditCommand {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
@@ -54,7 +54,7 @@ public class EditEventCommand extends Command {
     private final EditEventDescriptor editEventDescriptor;
 
     /**
-     * @param index of the person in the filtered event list to edit
+     * @param index of the event in the filtered event list to edit
      * @param editEventDescriptor details to edit the event with
      */
     public EditEventCommand(Index index, EditEventCommand.EditEventDescriptor editEventDescriptor) {
@@ -71,7 +71,7 @@ public class EditEventCommand extends Command {
         List<Event> lastShownList = model.getFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());

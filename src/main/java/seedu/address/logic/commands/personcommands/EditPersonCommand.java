@@ -19,8 +19,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -28,12 +28,13 @@ import seedu.address.model.types.common.Address;
 import seedu.address.model.types.common.Email;
 import seedu.address.model.types.common.Name;
 import seedu.address.model.types.common.Phone;
+import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditPersonCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -48,7 +49,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_TAG + "friends";
+
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -61,7 +64,7 @@ public class EditCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditPersonCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -113,13 +116,13 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditPersonCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        EditPersonCommand otherEditPersonCommand = (EditPersonCommand) other;
+        return index.equals(otherEditPersonCommand.index)
+                && editPersonDescriptor.equals(otherEditPersonCommand.editPersonDescriptor);
     }
 
     @Override
@@ -140,6 +143,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Event event;
 
         public EditPersonDescriptor() {}
 
@@ -153,13 +157,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setEvent(toCopy.event);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, event);
         }
 
         public void setName(Name name) {
@@ -211,6 +216,22 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code event} to this object's {@code event}.
+         */
+        public void setEvent(Event event) {
+            this.event = event;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Event> getEvent() {
+            return Optional.ofNullable(event);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -227,7 +248,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(event, otherEditPersonDescriptor.event);
         }
 
         @Override
@@ -238,6 +260,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("event", event)
                     .toString();
         }
     }

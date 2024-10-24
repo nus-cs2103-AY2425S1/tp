@@ -17,10 +17,10 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
 import seedu.address.logic.commands.personcommands.DeletePersonCommand;
-import seedu.address.logic.commands.personcommands.EditCommand;
-import seedu.address.logic.commands.personcommands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.personcommands.EditPersonCommand;
+import seedu.address.logic.commands.personcommands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.personcommands.ExitCommand;
-import seedu.address.logic.commands.personcommands.FindCommand;
+import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.commands.personcommands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.types.common.NameContainsKeywordsPredicate;
@@ -57,9 +57,9 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " p "
+        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " p "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -71,9 +71,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " p " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " p " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

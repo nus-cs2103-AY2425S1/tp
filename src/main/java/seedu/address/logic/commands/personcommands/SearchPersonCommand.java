@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.model.Model;
 import seedu.address.model.types.common.PersonTagContainsKeywordsPredicate;
 
@@ -13,17 +13,17 @@ import seedu.address.model.types.common.PersonTagContainsKeywordsPredicate;
  * Finds and lists all persons in address book who has a tag with a name containing any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class SearchCommand extends Command {
+public class SearchPersonCommand extends SearchCommand {
     public static final String COMMAND_WORD = "search";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all people who have tags containing any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " friends work";
+            + "Example: " + COMMAND_WORD + " p friends work";
 
     private final PersonTagContainsKeywordsPredicate predicate;
 
-    public SearchCommand(PersonTagContainsKeywordsPredicate predicate) {
+    public SearchPersonCommand(PersonTagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -42,12 +42,12 @@ public class SearchCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SearchCommand)) {
+        if (!(other instanceof SearchPersonCommand)) {
             return false;
         }
 
-        SearchCommand otherSearchCommand = (SearchCommand) other;
-        return predicate.equals(otherSearchCommand.predicate);
+        SearchPersonCommand otherSearchPersonCommand = (SearchPersonCommand) other;
+        return predicate.equals(otherSearchPersonCommand.predicate);
     }
 
     @Override
