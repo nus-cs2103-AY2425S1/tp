@@ -168,11 +168,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes the concertContact associated to {@code concertKey} and {@code personKey}
+     * Removes the given {@code concertContact}
      * from this {@code AddressBook}. {@code concertContact} must exist in the address book.
      */
-    public void removeConcertContact(Person personKey, Concert concertKey) {
-        concertContacts.remove(personKey, concertKey);
+    public void removeConcertContact(ConcertContact concertContactKey) {
+        concertContacts.remove(concertContactKey);
     }
 
     /**

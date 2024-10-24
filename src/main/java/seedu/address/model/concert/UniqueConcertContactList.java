@@ -85,12 +85,11 @@ public class UniqueConcertContactList implements Iterable<ConcertContact> {
     }
 
     /**
-     * Removes the concertContact associated to the {@code concertToRemove} and {@code personToRemove} from the list.
-     * The concertContact must exist in the list.
+     * Removes {@code toRemove} from the list.
+     * The concertContact {@code toRemove} must exist in the list.
      */
-    public void remove(Person personToRemove, Concert concertToRemove) {
-        requireAllNonNull(personToRemove, concertToRemove);
-        ConcertContact toRemove = new ConcertContact(personToRemove, concertToRemove);
+    public void remove(ConcertContact toRemove) {
+        requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new ConcertContactNotFoundException();
         }

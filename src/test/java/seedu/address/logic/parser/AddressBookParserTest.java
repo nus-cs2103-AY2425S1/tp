@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERTCONTACT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -105,9 +106,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteConcertContact() throws Exception {
         DeleteConcertContactCommand command = (DeleteConcertContactCommand) parser.parseCommand(
-                DeleteConcertContactCommand.COMMAND_WORD + " " + " " + PREFIX_PERSON
-                        + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_CONCERT + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON), command);
+                DeleteConcertContactCommand.COMMAND_WORD + " " + INDEX_FIRST_CONCERTCONTACT.getOneBased());
+        assertEquals(new DeleteConcertContactCommand(INDEX_FIRST_CONCERTCONTACT), command);
     }
 
     @Test

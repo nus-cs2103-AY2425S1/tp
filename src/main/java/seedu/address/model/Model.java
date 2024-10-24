@@ -96,10 +96,10 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Deletes the concertConcert associated to the given concert and person.
+     * Deletes the given concertContact.
      * The concertContact must exist in the address book.
      */
-    void deleteConcertContact(Person targetPerson, Concert targetConcert);
+    void deleteConcertContact(ConcertContact targetConcertContact);
 
     /**
      * Deletes all concertContacts associated to the given concert.

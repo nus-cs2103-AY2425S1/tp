@@ -128,13 +128,13 @@ public class UniqueConcertContactListTest {
 
         // remove(Person, Concert)
         assertThrows(NullPointerException.class, () -> uniqueConcertContactList.remove(
-                (Person) null, (Concert) null));
+                (ConcertContact) null));
     }
 
     @Test
     public void remove_concertContactNotInList_throwsConcertContactNotFoundException() {
         assertThrows(ConcertContactNotFoundException.class, () -> uniqueConcertContactList.remove(
-                ALICE, COACHELLA));
+                ALICE_COACHELLA));
 
         // overloaded methods do not throw
         assertDoesNotThrow(() -> uniqueConcertContactList.remove(ALICE));

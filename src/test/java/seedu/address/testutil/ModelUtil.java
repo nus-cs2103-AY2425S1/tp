@@ -82,7 +82,7 @@ public class ModelUtil {
         }
 
         @Override
-        public void deleteConcertContact(Person targetPerson, Concert targetConcert) {
+        public void deleteConcertContact(ConcertContact cc) {
             throw new AssertionError("This method should not be called.");
         }
 
