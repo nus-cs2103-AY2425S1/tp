@@ -257,7 +257,7 @@ public class AddTutorialCommandTest {
 
         @Override
         public String listTutorials() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         public void setTutorials(TutorialList tutorials) {
