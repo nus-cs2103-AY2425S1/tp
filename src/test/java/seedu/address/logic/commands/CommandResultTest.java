@@ -53,7 +53,7 @@ public class CommandResultTest {
         Set<HealthService> healthServices = new HashSet<>();
         healthServices.add(new HealthService("Blood Test"));
         Person newPerson = new Person(new Name("Alice"), new Nric("S1111111A"),
-                new Birthdate("2022-11-11"), new Sex("F"), healthServices,
+                new Birthdate("2022-11-11"), new Sex("F"),
                 new Phone("1111111"), new Email("123@gmail.com"));
         assertFalse(commandResult.equals(new CommandResult("feedback", null,
                 false, newPerson, false, false)));

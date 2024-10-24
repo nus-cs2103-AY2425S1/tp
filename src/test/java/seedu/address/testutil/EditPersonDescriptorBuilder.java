@@ -4,12 +4,10 @@ package seedu.address.testutil;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Appt;
@@ -49,7 +47,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setNric(person.getNric());
         descriptor.setBirthDate(person.getBirthdate());
         descriptor.setSex(person.getSex());
-        descriptor.setHealthServices(person.getHealthServices());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
@@ -92,18 +89,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withSex(String sex) {
         descriptor.setSex(new Sex(sex));
-        return this;
-    }
-
-    /**
-     * Parses the {@code healthServices} into a {@code Set<HealthService>}
-     * and set it to the {@code EditPersonDescriptor}
-     * that we are building.
-     */
-    public EditPersonDescriptorBuilder withHealthServices(String... healthServices) {
-        Set<HealthService> healthServiceSet = Stream.of(healthServices)
-                .map(HealthService::new).collect(Collectors.toSet());
-        descriptor.setHealthServices(healthServiceSet);
         return this;
     }
 

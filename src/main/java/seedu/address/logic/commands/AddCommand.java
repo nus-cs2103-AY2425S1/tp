@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
@@ -25,15 +24,12 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_BIRTHDATE + "BIRTHDATE "
-            + PREFIX_SEX + "SEX "
-            + "[" + PREFIX_HEALTHSERVICE + "HEALTHSERVICE]...\n"
+            + PREFIX_SEX + "SEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_NRIC + "T0123456A "
             + PREFIX_BIRTHDATE + "2001-06-24 "
-            + PREFIX_SEX + "M "
-            + PREFIX_HEALTHSERVICE + "Blood Test "
-            + PREFIX_HEALTHSERVICE + "Vaccination";
+            + PREFIX_SEX + "M ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
