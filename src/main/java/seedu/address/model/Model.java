@@ -102,8 +102,10 @@ public interface Model {
     /**
      * Deletes the given student.
      * The student must exist in the address book.
+     *
+     * @return
      */
-    void deleteStudent(Student target);
+    int deleteStudent(Student target);
 
     /**
      * Adds the given student.
@@ -111,6 +113,12 @@ public interface Model {
      */
 
     void addStudent(Student student);
+
+    /**
+     * Adds the given student at the given index.
+     * {@code student} must not already exist in the address book.
+     */
+    void addStudent(int index, Student student);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.

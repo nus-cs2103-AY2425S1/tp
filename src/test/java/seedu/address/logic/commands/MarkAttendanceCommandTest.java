@@ -62,10 +62,6 @@ public class MarkAttendanceCommandTest {
     }
 
 
-
-
-
-
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -159,7 +155,12 @@ public class MarkAttendanceCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public void addStudent(int index, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -113,7 +113,6 @@ public class ModelManager implements Model {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
-
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -128,13 +127,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+    public int deleteStudent(Student target) {
+        return addressBook.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
         addressBook.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void addStudent(int index, Student student) {
+        addressBook.addStudent(index, student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 

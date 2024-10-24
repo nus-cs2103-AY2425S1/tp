@@ -37,6 +37,8 @@ public class DeleteStudentCommand extends Command {
     private final Name name;
 
     private final StudentNumber studentNumber;
+    private Student studentToDelete;
+    private int index;
 
     /**
      * Constructs a DeleteStudentCommand to delete the specified student by student name.
@@ -85,14 +87,14 @@ public class DeleteStudentCommand extends Command {
         }
 
         if (this.studentNumber != null) {
-            Student student = listToCheck.stream()
+            studentToDelete = listToCheck.stream()
                         .filter(stu -> stu.getStudentNumber().equals(studentNumber))
                         .reduce((a, b) -> b)
                         .orElse(null);
-            if (student == null) {
+            if (studentToDelete == null) {
                 throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
             }
-            model.deleteStudent(student);
+            model.deleteStudent(studentToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, name, studentNumber));
         }
 
@@ -104,8 +106,8 @@ public class DeleteStudentCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers, name));
         }
 
-        Student studentToDelete = listToCheck.get(0);
-        model.deleteStudent(studentToDelete);
+        studentToDelete = listToCheck.get(0);
+        index = model.deleteStudent(studentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, name,
                 studentToDelete.getStudentNumber()));
     }
@@ -129,5 +131,12 @@ public class DeleteStudentCommand extends Command {
         return name.equals(otherCommand.name)
                 && ((studentNumber == null && otherCommand.studentNumber == null)
                 || (studentNumber != null && studentNumber.equals(otherCommand.studentNumber)));
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        assert studentToDelete != null;
+        model.addStudent(index, studentToDelete);
+        return true;
     }
 }

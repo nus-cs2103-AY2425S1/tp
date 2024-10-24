@@ -162,6 +162,17 @@ public class DeleteStudentCommandTest {
         assertFalse(deleteThirdCommand.equals(deleteFirstCommand));
     }
 
+    @Test
+    public void undo_validStudent() throws CommandException {
+        ModelStubWithStudent model = new ModelStubWithStudent(validStudent1);
+        DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(validStudent1.getName());
+        deleteStudentCommand.execute(model);
+
+        // undo the Delete Student Command
+        deleteStudentCommand.undo(model);
+        assertEquals(FXCollections.observableArrayList(validStudent1), model.getFilteredStudentList());
+    }
+
     private class ModelStub implements Model {
 
         private final ObservableList<Student> studentList = FXCollections.observableArrayList();
@@ -258,7 +269,13 @@ public class DeleteStudentCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public void addStudent(int index, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int deleteStudent(Student target) {
+            throw new AssertionError("This method should not be called.");
         }
 
 
@@ -305,6 +322,12 @@ public class DeleteStudentCommandTest {
         }
 
         @Override
+        public void addStudent(int index, Student student) {
+            requireNonNull(student);
+            students.add(index, student);
+        }
+
+        @Override
         public void addStudent(Student student) {
             requireNonNull(student);
             students.add(student);
@@ -317,11 +340,16 @@ public class DeleteStudentCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public int deleteStudent(Student target) {
             requireNonNull(target);
-            students.remove(target);
+            for (int i = 0; i < students.size(); i++) {
+                if (students.get(i).isSamePerson(target)) {
+                    students.remove(i);
+                    return i;
+                }
+            }
+            return -1;
         }
-
     }
 
     /**

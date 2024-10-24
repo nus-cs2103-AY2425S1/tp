@@ -160,8 +160,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
-
         @Override
         public Person getPersonByName(Name name) {
             return null;
@@ -183,7 +181,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public void addStudent(int index, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
 
