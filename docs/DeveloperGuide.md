@@ -478,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Emergency contact**: The contact to use if an emergency happens during the tutoring period
-* **School level**: The level of study a student is currently at, eg. Secondary 3 (`S3`) or Junior College 1 (`JC1`)
+* **Level**: The level and track of study a student is currently at, eg. Secondary 3 Normal (Academic) (`S3 NA`)
 * **Subject**: The subject the student is receiving tuition for, eg. `Math`, `English`, `Literature`
 
 --------------------------------------------------------------------------------------------------------------------
