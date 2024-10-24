@@ -55,7 +55,7 @@ public class Course {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + courseCode.toString() + ": " + courseName.toString() + ']';
+        return "[" + courseCode.toString() + ": " + courseName.toString() + "]";
     }
 
 }

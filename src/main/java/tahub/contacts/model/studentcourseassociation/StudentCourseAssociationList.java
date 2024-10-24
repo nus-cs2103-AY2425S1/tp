@@ -10,8 +10,12 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 import tahub.contacts.model.tutorial.Tutorial;
 
 /**
@@ -110,17 +114,72 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
         return courseTutorialScas;
     }
 
+
+
     /**
      * Returns the SCA list of a student by matric number.
      */
     public ObservableList<StudentCourseAssociation> getByMatric(String matricNumber) {
         ObservableList<StudentCourseAssociation> studentScas = FXCollections.observableArrayList();
         for (StudentCourseAssociation sca : internalList) {
-            if (sca.getStudent().getMatricNumber().equals(matricNumber)) {
+            if (sca.getStudent().getMatricNumber().equals(new MatriculationNumber(matricNumber))) {
                 studentScas.add(sca);
             }
         }
         return studentScas;
+    }
+
+    /**
+     * Returns an SCA based on the matriculation number, course code, and tutorial code as string queries.
+     * Throws a {@link RuntimeException} if an SCA matching the query is not found.
+     *
+     * @param matricNumber The matriculation number.
+     * @param courseCodeString The course code.
+     * @param tutorialCodeString The tutorial code.
+     * @return The SCA matching the queries, if one is found.
+     */
+    public StudentCourseAssociation getFromStrings(
+            String matricNumber, String courseCodeString, String tutorialCodeString) {
+        requireAllNonNull(matricNumber, courseCodeString, tutorialCodeString);
+
+        // not used - can remove?
+
+        MatriculationNumber compMatricNumber = new MatriculationNumber(matricNumber);
+        Course compCourse = new Course(new CourseCode(courseCodeString), new CourseName("COURSE NAME PLACEHOLDER"));
+        Tutorial compTutorial = new Tutorial(tutorialCodeString, compCourse);
+
+        String notFoundErrorMessage = String.format(
+                "SCA not found for the query: %s, %s, %s",
+                matricNumber, courseCodeString, tutorialCodeString);
+
+        return internalList
+                .stream()
+                .filter(sca ->
+                        sca.getStudent().getMatricNumber().equals(compMatricNumber)
+                        && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial().equals(compTutorial)
+                )
+                .findFirst()
+                .orElseThrow(() -> new ScaNotFoundException(notFoundErrorMessage));
+    }
+
+    /**
+     * Returns a matching SCA based on an input query SCA. This query will be matched against the SCAs in this list
+     * based on the {@link MatriculationNumber}, {@link CourseCode} and tutorial ID {@code String}.
+     * <p></p>
+     * Throws a {@link RuntimeException} if an SCA matching the query is not found.
+     *
+     * @param toFind SCA with the {@link MatriculationNumber}, {@link CourseCode} and tutorial ID to look for.
+     * @return The SCA matching the queries, if one is found.
+     */
+    public StudentCourseAssociation findMatch(StudentCourseAssociation toFind) {
+        String notFoundErrorMessage = String.format(
+                "SCA not found for the query SCA: %s",
+                toFind);
+
+        return internalList.stream()
+                .filter(sca -> sca.isSameSca(toFind))
+                .findFirst()
+                .orElseThrow(() -> new ScaNotFoundException(notFoundErrorMessage));
     }
 
     /**

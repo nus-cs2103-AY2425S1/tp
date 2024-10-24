@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.StringUtil;
@@ -17,12 +18,23 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.tag.Tag;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    // ===================================== SPECIFIC PARSERS ===============================================
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -167,5 +179,21 @@ public class ParserUtil {
             throw new ParseException(CourseName.MESSAGE_CONSTRAINTS);
         }
         return new CourseName(trimmedCourseName);
+    }
+
+    /**
+     * Parses a {@code String tutorialId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return trimmed tutorial ID as a {@code String}.
+     * @throws ParseException if the given {@code tutorialId} is invalid.
+     */
+    public static String parseTutorialId(String tutorialId) throws ParseException {
+        requireNonNull(tutorialId);
+        String trimmedTutorialId = tutorialId.trim();
+        if (!Tutorial.isValidTutorialId(trimmedTutorialId)) {
+            throw new ParseException(Tutorial.TUTORIAL_ID_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedTutorialId;
     }
 }

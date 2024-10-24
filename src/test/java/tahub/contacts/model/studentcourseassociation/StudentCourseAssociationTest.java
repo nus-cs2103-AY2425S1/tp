@@ -11,6 +11,8 @@ import static tahub.contacts.testutil.AttendanceExamples.ATTENDANCE_EXAMPLE_1;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.Course;
@@ -24,7 +26,7 @@ import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.tutorial.Tutorial;
-
+import tahub.contacts.testutil.PersonBuilder;
 
 
 class StudentCourseAssociationTest {
@@ -199,6 +201,47 @@ class StudentCourseAssociationTest {
                 new GradingSystem(), ATTENDANCE_EXAMPLE_1);
         assertFalse(sca1.equals(sca2));
     }
+
+    @Nested
+    @DisplayName("isSameSca")
+    class IsSameSca {
+        private Person stuRef = new PersonBuilder().build();
+        private Person stuDiffMatricNo = new PersonBuilder().withMatriculationNumber("A9999999X").build();
+        private Person stuDiffName = new PersonBuilder().withName("Name Different").build();
+        private Course courseRef = new Course(new CourseCode("AA1000"), new CourseName("Reference Course"));
+        private Course courseDiffName = new Course(new CourseCode("AA1000"), new CourseName("Different Name"));
+        private Course courseDiffCode = new Course(new CourseCode("XX9999"), new CourseName("Reference Course"));
+        private Tutorial tutorialRef = new Tutorial("T01", courseRef);
+        private Tutorial tutorialDiffId = new Tutorial("T22", courseRef);
+        private Tutorial tutorialDiffCourse = new Tutorial("T01", courseDiffCode);
+
+        @Test
+        @DisplayName("returns true when SCAs have same student, course, tutorial object")
+        public void returnsTrue_sameStudentCourseTutorial() {
+            StudentCourseAssociation sca1 = new StudentCourseAssociation(stuRef, courseRef, tutorialRef);
+            StudentCourseAssociation sca2 = new StudentCourseAssociation(stuRef, courseRef, tutorialRef);
+            assertTrue(sca1.isSameSca(sca2));
+        }
+
+        @Test
+        @DisplayName("returns true when SCAs have the same IDs for student, course, tutorial but different details")
+        public void returnsTrue_sameIdsButDiffDetails() {
+            StudentCourseAssociation sca1 = new StudentCourseAssociation(stuRef, courseRef, tutorialRef);
+            StudentCourseAssociation sca2 = new StudentCourseAssociation(
+                    stuDiffName, courseDiffName, tutorialDiffCourse);
+            assertTrue(sca1.isSameSca(sca2));
+        }
+
+        @Test
+        @DisplayName("returns false when SCAs have different IDs for student, course, tutorial")
+        public void returnsTrue_differentIds() {
+            StudentCourseAssociation sca1 = new StudentCourseAssociation(stuRef, courseRef, tutorialRef);
+            StudentCourseAssociation sca2 = new StudentCourseAssociation(
+                    stuDiffMatricNo, courseDiffCode, tutorialDiffId);
+            assertFalse(sca1.isSameSca(sca2));
+        }
+    }
+
     @Test
     public void testGetCourseMethod() {
         Person student = new Person(
@@ -310,6 +353,8 @@ class StudentCourseAssociationTest {
         assertEquals(85.0, allGrades.get("Midterm"), 0.001);
         assertEquals(95.0, allGrades.get("Final"), 0.001);
     }
+
+    // ======================== UTIL METHODS ==============================================
 
     private Person createTestPerson(String matriculationNumber, String name) {
         return new Person(
