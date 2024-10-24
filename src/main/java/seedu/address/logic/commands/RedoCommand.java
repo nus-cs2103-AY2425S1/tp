@@ -24,7 +24,16 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_REDO_FAILURE);
         }
 
-        model.redoAddressBook();
+        redoLastAction(model);
         return new CommandResult(MESSAGE_REDO_SUCCESS);
+    }
+
+    /**
+     * Redoes the last action in the address book model.
+     *
+     * @param model The model of the application.
+     */
+    private void redoLastAction(Model model) {
+        model.redoAddressBook(); // Calls the model to redo the action
     }
 }

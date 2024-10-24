@@ -33,10 +33,16 @@ public class VersionedAddressBook extends AddressBook {
     public void save() {
         // Clear all states after the current pointer to prevent redo states
         clearRedoStack();
+        saveCurrentState();
+    }
 
-        AddressBook newState = new AddressBook(this);
-        addressBookStateList.add(newState);
-        currentStatePointer++;
+    /**
+     * Saves the current state as a new entry in the address book state list.
+     */
+    private void saveCurrentState() {
+        AddressBook newState = new AddressBook(this); // Create a new state
+        addressBookStateList.add(newState); // Add the new state to the list
+        currentStatePointer++; // Move the pointer to the new current state
     }
 
     /**
@@ -95,6 +101,24 @@ public class VersionedAddressBook extends AddressBook {
     public boolean canRedo() {
         int sizeOfStateList = addressBookStateList.size() - 1;
         return currentStatePointer < sizeOfStateList;
+    }
+
+    /**
+     * Returns the current state of the address book.
+     *
+     * @return the current {@code ReadOnlyAddressBook}.
+     */
+    public ReadOnlyAddressBook getCurrentState() {
+        return addressBookStateList.get(currentStatePointer); // Return the current state
+    }
+
+    /**
+     * Returns the total number of saved states.
+     *
+     * @return total count of saved states.
+     */
+    public int getTotalStates() {
+        return addressBookStateList.size(); // Return the size of the state list
     }
 
     /**

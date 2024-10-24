@@ -16,6 +16,13 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_SUCCESS = "Successfully undone the last action!";
     public static final String MESSAGE_UNDO_FAILURE = "There are no actions to undo.";
 
+    /**
+     * Executes the undo command to revert the last action.
+     *
+     * @param model The model of the application, which contains the address book.
+     * @return The result of executing the undo command.
+     * @throws CommandException If there are no actions to undo.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -24,7 +31,16 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_UNDO_FAILURE);
         }
 
-        model.undoAddressBook();
+        undoLastAction(model);
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
+    }
+
+    /**
+     * Undoes the last action in the address book model.
+     *
+     * @param model The model of the application.
+     */
+    private void undoLastAction(Model model) {
+        model.undoAddressBook(); // Calls the model to undo the action
     }
 }
