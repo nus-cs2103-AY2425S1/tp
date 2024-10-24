@@ -66,7 +66,7 @@ public class ModuleRoleMap {
      *
      * @param roles new roles which are assigned to the Person
      */
-    public ModuleRoleMap(HashMap<ModuleCode, RoleType> roles) {
+    public ModuleRoleMap(Map<ModuleCode, RoleType> roles) {
         requireAllNonNull(roles);
         this.roles = new HashMap<>(roles);
     }
@@ -176,5 +176,44 @@ public class ModuleRoleMap {
         return roles.entrySet().stream()
                 .map(entry -> new ModuleRolePair(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns true if the module role map is empty.
+     */
+    public boolean isEmpty() {
+        return this.roles.isEmpty();
+    }
+
+    /**
+     * Adds all module role pairs from another module role map to this module role map.
+     * @param moduleRoleMapToAdd The module role map to add.
+     * @return A module role map of all failed module role pairs.
+     */
+    public ModuleRoleMap putAll(ModuleRoleMap moduleRoleMapToAdd) {
+        assert !moduleRoleMapToAdd.isEmpty() : "Module role map to add cannot be empty!";
+        Map<ModuleCode, RoleType> failedModuleRoleMap = new HashMap<>();
+
+        for (Map.Entry<ModuleCode, RoleType> moduleRole : moduleRoleMapToAdd.roles.entrySet()) {
+            if (!this.put(moduleRole.getKey(), moduleRole.getValue())) {
+                failedModuleRoleMap.put(moduleRole.getKey(), moduleRole.getValue());
+            }
+        }
+        return new ModuleRoleMap(failedModuleRoleMap);
+    }
+
+    /**
+     * Adds a module role pair to the module role map.
+     * @param moduleCode The module code to add.
+     * @param role The role to add.
+     * @return True if the module role pair is added successfully.
+     */
+    public boolean put(ModuleCode moduleCode, RoleType role) {
+        if (this.roles.containsKey(moduleCode)) {
+            return false;
+        }
+
+        this.roles.put(moduleCode, role);
+        return true;
     }
 }

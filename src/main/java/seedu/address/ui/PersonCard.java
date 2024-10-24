@@ -4,11 +4,15 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.MainApp;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RoleType;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -24,6 +28,14 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
+
+
+    private static final Image studentIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
+    private static final Image tutorIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/tutor.png"));
+    private static final Image professorIcon =
+        new Image(MainApp.class.getResourceAsStream("/images/role-icons/professor.png"));
 
     public final Person person;
 
@@ -72,8 +84,36 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         // Add module role pairs
+        Integer roleLabelFontSize = 14;
         person.getModuleRoleMap().getData().stream()
                 .sorted(Comparator.comparing(moduleRolePair -> moduleRolePair.moduleCode.toString()))
-                .forEach(moduleRolePair -> roles.getChildren().add(new Label(moduleRolePair.toString())));
+                .forEach(moduleRolePair -> {
+                    Label curLabel = new Label(moduleRolePair.toString());
+
+                    curLabel.setStyle(curLabel.getStyle() + " -fx-font-size: " + roleLabelFontSize.toString());
+
+                    RoleType roleType = moduleRolePair.roleType;
+
+                    // Update CSS class
+                    String cssClass = roleType.toString().toLowerCase();
+                    curLabel.getStyleClass().add(cssClass);
+
+                    if (roleType != null) {
+                        Image image =
+                            roleType == RoleType.STUDENT ? studentIcon
+                            : roleType == RoleType.TUTOR ? tutorIcon
+                            : professorIcon;
+
+                        // Scale height but preserve aspect ratio
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight(roleLabelFontSize);
+                        imageView.setPreserveRatio(true);
+
+                        curLabel.setGraphic(imageView);
+                        curLabel.setContentDisplay(javafx.scene.control.ContentDisplay.RIGHT);
+                    }
+
+                    roles.getChildren().add(curLabel);
+                });
     }
 }

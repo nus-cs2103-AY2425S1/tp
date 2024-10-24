@@ -15,6 +15,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.edit.AddModuleRoleOperation;
+import seedu.address.logic.commands.edit.EditModuleRoleOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -342,5 +344,34 @@ public class ParserUtilTest {
             List<String> input = Arrays.asList("CS1101S-student", "CS1101S-student");
             ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
         });
+    }
+
+    @Test
+    public void parseEditModuleRoleOperation_validAddOperation_returnsAddModuleRoleOperation() throws Exception {
+        String input = "+CS1101S-student MA1521-student";
+        EditModuleRoleOperation result = ParserUtil.parseEditModuleRoleOperation(input);
+
+        HashMap<ModuleCode, RoleType> expectedMap = new HashMap<>();
+        expectedMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
+        expectedMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
+        AddModuleRoleOperation expected = new AddModuleRoleOperation(new ModuleRoleMap(expectedMap));
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseEditModuleRoleOperation_invalidInput_throwsParseException() {
+        // Invalid operation type
+        String invalidOperationType = "=CS1101S-student";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidOperationType));
+        // Invalid format
+        String invalidFormat = "+CS1101S-student-";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidFormat));
+        // Invalid module code
+        String invalidModuleCode = "+1234-student";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidModuleCode));
+        // Invalid role type
+        String invalidRoleType = "+CS1101S-role";
+        assertThrows(ParseException.class, () -> ParserUtil.parseEditModuleRoleOperation(invalidRoleType));
     }
 }
