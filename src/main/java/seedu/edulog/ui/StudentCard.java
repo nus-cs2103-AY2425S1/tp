@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.edulog.model.student.Phone;
 import seedu.edulog.model.student.Student;
 
 /**
@@ -46,8 +45,9 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private ImageView paidStatusIcon;
 
-    public final Image unpaidIcon = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
-    public final Image paidIcon = new Image(getClass().getResource("/images/paid.png").toExternalForm());
+    private final Image paidIcon = new Image(getClass().getResource("/images/paid.png").toExternalForm());
+    private final Image unpaidIcon = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
+
 
 
     /**
@@ -173,7 +173,8 @@ public class StudentCard extends UiPart<Region> {
         boolean isEqualPhone = this.phone.getText().equals(otherStudentCard.phone.getText());
         boolean isEqualAddress = this.address.getText().equals(otherStudentCard.address.getText());
         boolean isEqualEmail = this.email.getText().equals(otherStudentCard.email.getText());
-        boolean isEqualPaidStatus = this.paidStatusIcon.getImage().getUrl().equals(otherStudentCard.paidStatusIcon.getImage().getUrl());
+        boolean isEqualPaidStatus = this.paidStatusIcon.getImage().getUrl()
+                                    .equals(otherStudentCard.paidStatusIcon.getImage().getUrl());
 
         return isEqualName && isEqualId && isEqualPhone && isEqualAddress && isEqualEmail && isEqualPaidStatus;
     }
