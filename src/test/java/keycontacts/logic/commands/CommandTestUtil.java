@@ -13,16 +13,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.StudentDirectory;
-import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
+import keycontacts.model.student.StudentDescriptorMatchesPredicate;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
+import keycontacts.testutil.FindStudentDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -134,8 +134,9 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
-        final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        FindStudentDescriptorBuilder builder = new FindStudentDescriptorBuilder();
+        builder.withName(student.getName().fullName);
+        model.updateFilteredStudentList(new StudentDescriptorMatchesPredicate(builder.build()));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }

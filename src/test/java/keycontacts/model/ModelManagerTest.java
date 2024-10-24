@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.GuiSettings;
-import keycontacts.model.student.NameContainsKeywordsPredicate;
+import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
+import keycontacts.model.student.StudentDescriptorMatchesPredicate;
+import keycontacts.testutil.FindStudentDescriptorBuilder;
 import keycontacts.testutil.StudentDirectoryBuilder;
 
 public class ModelManagerTest {
@@ -118,8 +119,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentStudentDirectory, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        FindStudentDescriptor findStudentDescriptor = new FindStudentDescriptorBuilder()
+                .withName(ALICE.getName().fullName).build();
+        modelManager.updateFilteredStudentList(new StudentDescriptorMatchesPredicate(findStudentDescriptor));
         assertFalse(modelManager.equals(new ModelManager(studentDirectory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

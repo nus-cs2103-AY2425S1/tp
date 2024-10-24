@@ -170,16 +170,18 @@ Examples:
 
 ### Locating students by name: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose personal details match inputs
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [g/GRADE_LEVEL_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords does not matter. e.g. `[n/Hans] [p/88197184]` will fetch same list as `[p/88197184] [n/Hans]`
+* Prefixes other than `n/`, `p/`, `a/`, `g/` will be ignored.
+* Any keyword before the first valid prefix will be ignored
+* Only the name, phone number, address, and grade level is searched.
+* Partial inclusion of keyword will be considered a match
+* Students matching all field will be returned (i.e. `AND` search).
+  e.g. `n/Hans p/88191784` will return `Hans Gruber; 88197184`, but not`Hans Goretzka; 88197188`
 
 Examples:
 * `find John` returns `john` and `John Doe`
