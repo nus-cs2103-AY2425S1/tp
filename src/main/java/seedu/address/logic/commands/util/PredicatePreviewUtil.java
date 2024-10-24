@@ -10,7 +10,7 @@ import seedu.address.model.vendor.Vendor;
 /**
  * Contains utility methods for filtering vendors and events using predicates.
  */
-public class PredicateDryRunUtil {
+public class PredicatePreviewUtil {
 
     /**
      * Filters the vendors in the model using the given predicate.
@@ -19,7 +19,7 @@ public class PredicateDryRunUtil {
      * @param predicate the predicate to filter the vendors
      * @return a filtered list of vendors
      */
-    public static FilteredList<Vendor> filterVendorsDryRun(Model model, NameContainsKeywordsPredicate predicate) {
+    public static FilteredList<Vendor> filterVendorsPreview(Model model, NameContainsKeywordsPredicate predicate) {
         FilteredList<Vendor> vendors = new FilteredList<>(model.getFilteredVendorList());
         vendors.setPredicate(predicate);
         return vendors;
@@ -32,7 +32,7 @@ public class PredicateDryRunUtil {
      * @param predicate the predicate to filter the events
      * @return a filtered list of events
      */
-    public static FilteredList<Event> filterEventsDryRun(Model model, EventNameContainsKeywordsPredicate predicate) {
+    public static FilteredList<Event> filterEventsPreview(Model model, EventNameContainsKeywordsPredicate predicate) {
         FilteredList<Event> events = new FilteredList<>(model.getFilteredEventList());
         events.setPredicate(predicate);
         return events;

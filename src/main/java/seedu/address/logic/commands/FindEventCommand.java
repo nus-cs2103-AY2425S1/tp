@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.util.PredicateDryRunUtil.filterEventsDryRun;
+import static seedu.address.logic.commands.util.PredicatePreviewUtil.filterEventsPreview;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
 import javafx.collections.transformation.FilteredList;
@@ -35,7 +35,7 @@ public class FindEventCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        FilteredList<Event> events = filterEventsDryRun(model, predicate);
+        FilteredList<Event> events = filterEventsPreview(model, predicate);
         if (events.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_EVENTS_FOUND);
         }
