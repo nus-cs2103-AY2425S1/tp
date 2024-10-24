@@ -47,8 +47,8 @@ public class FindPersonCommand extends FindCommand {
             return false;
         }
 
-        FindPersonCommand otherFindCommand = (FindPersonCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        FindPersonCommand otherFindPersonCommand = (FindPersonCommand) other;
+        return predicate.equals(otherFindPersonCommand.predicate);
     }
 
     @Override

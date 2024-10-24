@@ -13,7 +13,6 @@ import seedu.address.model.types.common.Address;
 import seedu.address.model.types.common.Email;
 import seedu.address.model.types.common.Name;
 import seedu.address.model.types.common.Phone;
-import seedu.address.model.types.event.Event;
 
 /**
  * Represents a Person in the address book.
@@ -25,7 +24,6 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private Event event;
 
     // Data fields
     private final Address address;
@@ -43,16 +41,6 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Event event) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.event = event;
-    }
-
     public Name getName() {
         return name;
     }
@@ -67,10 +55,6 @@ public class Person {
 
     public Address getAddress() {
         return address;
-    }
-
-    public Event getEvent() {
-        return event;
     }
 
     /**
@@ -114,8 +98,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && event.equals(otherPerson.event);
+                && tags.equals(otherPerson.tags);
     }
 
     @Override

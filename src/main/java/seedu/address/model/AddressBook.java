@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,7 +14,7 @@ import seedu.address.model.types.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePerson and .isSameEvent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -148,11 +149,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// util methods
 
-    //TODO Implement toString for AddressBook, integrating both persons and events
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("events", events)
                 .toString();
     }
 
@@ -165,7 +166,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return events.asUnmodifiableObservableList();
     }
 
-    //TODO Implement equals for AddressBook, integrating both persons and events
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -178,13 +178,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && events.equals(otherAddressBook.events);
     }
 
-    //TODO: Implement hashCode for AddressBook, integrating both persons and events
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, events);
     }
 
 

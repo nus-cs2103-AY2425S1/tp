@@ -3,11 +3,14 @@ package seedu.address.model.types.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.types.common.DateTimeUtil;
 import seedu.address.model.types.common.Name;
 import seedu.address.model.types.event.exceptions.DuplicateEventException;
 import seedu.address.model.types.event.exceptions.EventNotFoundException;
@@ -28,6 +31,50 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    /**
+     * Periodically sorts the events especially when an event becomes completed.
+     */
+    //    public UniqueEventList() {
+    //        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
+    //                javafx.util.Duration.minutes(1));
+    //        eventReSortTimeline.play();
+    //    }
+
+    private void sortEvents() {
+        internalList.sort((event1, event2) -> {
+            long remainingTime1 = getEventTimeRemaining(event1);
+            long remainingTime2 = getEventTimeRemaining(event2);
+
+            // Compare based on the remaining time in minutes
+            if (remainingTime1 == 0 && remainingTime2 == 0) {
+                return 0; // Both events start now
+            } else if (remainingTime1 == 0) {
+                return -1; // event1 starts now, it comes first
+            } else if (remainingTime2 == 0) {
+                return 1; // event2 starts now, it comes first
+            }
+
+            // If both events are in the past
+            if (remainingTime1 < 0 && remainingTime2 < 0) {
+                return Long.compare(remainingTime1, remainingTime2); // Sort by which event is further in the past
+            } else if (remainingTime1 < 0) {
+                return 1; // event1 is in the past, comes after event2
+            } else if (remainingTime2 < 0) {
+                return -1; // event2 is in the past, comes after event1
+            }
+
+            // Sort based on remaining time in minutes
+            return Long.compare(remainingTime1, remainingTime2);
+        });
+    }
+
+    private long getEventTimeRemaining(Event event) {
+        LocalDateTime eventStart = event.getStartTime().toLocalDateTime();
+        LocalDateTime now = DateTimeUtil.getCurrentDateTime();
+        Duration duration = Duration.between(now, eventStart);
+        return duration.toMillis();
+    }
 
     /**
      * Returns true if the list contains an equivalent event as the given argument.
@@ -55,6 +102,7 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+        sortEvents();
     }
 
     /**

@@ -395,3 +395,30 @@
     -fx-opacity: 0.5;
     -fx-background-color: derive(#1d1d1d, 30%);
 }
+
+.nav-bar .date-time-label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.event-status-label {
+    -fx-font-size: 12px;
+    -fx-background-color: #555555;
+    -fx-text-fill: white;
+    -fx-padding: 2px 5px;
+    -fx-background-radius: 5px;
+}
+
+.event-status-incomplete {
+    -fx-background-color: #b22222;
+}
+
+.event-status-ongoing {
+    -fx-background-color: #e67100;
+}
+
+.event-status-completed {
+    -fx-background-color: #006400;
+}
