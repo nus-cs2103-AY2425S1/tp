@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SearchAppointmentCommandParser" as SearchAppointmentCommandParser LOGIC_COLOR
+participant "s:SearchAppointmentCommand" as SearchAppointmentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("search a/2023-12-31 14:30 to 2024-01-01 16:00")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("search a/2023-12-31 14:30 to 2024-01-01 16:00")
+activate AddressBookParser
+
+create SearchAppointmentCommandParser
+AddressBookParser -> SearchAppointmentCommandParser
+activate SearchAppointmentCommandParser
+
+SearchAppointmentCommandParser --> AddressBookParser
+deactivate SearchAppointmentCommandParser
+
+AddressBookParser -> SearchAppointmentCommandParser : parse("2023-12-31 14:30 to 2024-01-01 16:00")
+activate SearchAppointmentCommandParser
+
+create SearchAppointmentCommand
+SearchAppointmentCommandParser -> SearchAppointmentCommand
+activate SearchAppointmentCommand
+
+SearchAppointmentCommand --> SearchAppointmentCommandParser
+deactivate SearchAppointmentCommand
+
+SearchAppointmentCommandParser --> AddressBookParser : s
+deactivate SearchAppointmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SearchAppointmentCommandParser -[hidden]-> AddressBookParser
+destroy SearchAppointmentCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SearchAppointmentCommand : execute(m)
+activate SearchAppointmentCommand
+
+alt Invalid date-time format
+    SearchAppointmentCommand -> LogicManager : throw CommandException
+    deactivate SearchAppointmentCommand
+else No appointments found
+    SearchAppointmentCommand -> Model : updateFilteredPersonList(predicate)
+    activate Model
+
+    Model --> SearchAppointmentCommand
+    deactivate Model
+
+    SearchAppointmentCommand -> LogicManager : CommandResult("No appointments found.")
+    deactivate SearchAppointmentCommand
+else Appointments found
+    SearchAppointmentCommand -> Model : updateFilteredPersonList(predicate)
+    activate Model
+
+    Model --> SearchAppointmentCommand
+    deactivate Model
+
+    create CommandResult
+    SearchAppointmentCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> SearchAppointmentCommand
+    deactivate CommandResult
+
+    SearchAppointmentCommand --> LogicManager : r
+    deactivate SearchAppointmentCommand
+end
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

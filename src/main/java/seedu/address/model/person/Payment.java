@@ -62,6 +62,7 @@ public class Payment {
         }
     }
 
+
     /**
      * Updates the payment due date of the insurance payment.
      * @param policy
@@ -73,6 +74,7 @@ public class Payment {
             paymentDueDate = paymentDueDate.plusYears(1);
         }
     }
+
 
     public LocalDate getPaymentDueDate() {
         return paymentDueDate;

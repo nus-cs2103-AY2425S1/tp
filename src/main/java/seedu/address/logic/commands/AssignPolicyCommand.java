@@ -83,5 +83,20 @@ public class AssignPolicyCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit)));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // Short circuit if the same object
+        if (other == this) {
+            return true;
+        }
+        // Instance of handles nulls and type check
+        if (!(other instanceof AssignPolicyCommand)) {
+            return false;
+        }
+        // Cast and compare the policyName attribute
+        AssignPolicyCommand otherCommand = (AssignPolicyCommand) other;
+        return this.policy.equals(otherCommand.policy);
+    }
+
 }
 
