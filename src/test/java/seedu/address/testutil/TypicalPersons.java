@@ -10,20 +10,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.model.delivery.DeliveryListTest.VALID_DELIVERY_1;
+import static seedu.address.model.delivery.DeliveryListTest.VALID_DELIVERY_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.delivery.Archive;
-import seedu.address.model.delivery.Cost;
-import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.Eta;
-import seedu.address.model.delivery.ItemName;
-import seedu.address.model.delivery.Status;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,12 +32,8 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25, S120300")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
-            .withDelivery(new Delivery(new HashSet<>(Arrays.asList(new ItemName("Monitor"))),
-                    new Address("311, Clementi Ave 2, #02-25, S120300"), new Cost("$100"), new Eta("2020-02-02"),
-                    new Status("not delivered"), new Archive("false")))
-            .withDelivery(new Delivery(new HashSet<>(Arrays.asList(new ItemName("Mouse"))),
-                    new Address("369, WHERE Ave 2, #01-01, S987654"), new Cost("$20"), new Eta("1990-04-04"),
-                    new Status("not delivered"), new Archive("false")))
+            .withDelivery(VALID_DELIVERY_2)
+            .withDelivery(VALID_DELIVERY_1)
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street, S120300").build();

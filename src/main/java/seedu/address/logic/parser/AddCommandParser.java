@@ -71,11 +71,18 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_ITEMS, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST,
-                            PREFIX_STATUS);
+                            PREFIX_STATUS, PREFIX_TAG);
 
             // Checks for correct add format
-            if (!arePrefixesPresent(argMultimap, PREFIX_ITEMS, PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST, PREFIX_STATUS)
-                    || !argMultimap.getPreamble().isEmpty()) {
+            if (!arePrefixesPresent(
+                argMultimap,
+                PREFIX_ITEMS,
+                PREFIX_ETA,
+                PREFIX_ADDRESS,
+                PREFIX_COST,
+                PREFIX_STATUS,
+                PREFIX_TAG
+            ) || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_DELIVERY));
             }
@@ -89,7 +96,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).orElse("$0"));
             Set<ItemName> itemList = ParserUtil.parseItems(argMultimap.getAllValues(PREFIX_ITEMS));
             Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse("not delivered"));
-            Delivery delivery = new Delivery(itemList, address, cost, eta, status, new Archive(false));
+            Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            Delivery delivery = new Delivery(itemList, address, cost, eta, status, tags, new Archive(false));
             return new AddCommand(delivery);
         }
     }

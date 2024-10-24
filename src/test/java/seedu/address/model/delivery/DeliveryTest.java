@@ -11,7 +11,7 @@ public class DeliveryTest {
         String expected = Delivery.class.getCanonicalName() + "{deliveryId=" + APPLES.getDeliveryId() + ", items="
                 + APPLES.getItems() + ", date=" + APPLES.getDate() + ", time=" + APPLES.getTime() + ", eta="
                 + APPLES.getEta() + ", address=" + APPLES.getAddress() + ", cost=" + APPLES.getCost() + ", status="
-                + APPLES.getStatus() + ", archive=" + APPLES.getArchive() + "}";
+                + APPLES.getStatus() + ", tags=" + APPLES.getTags() + ", archive=" + APPLES.getArchive() + "}";
         assertEquals(expected, APPLES.toString());
     }
 }

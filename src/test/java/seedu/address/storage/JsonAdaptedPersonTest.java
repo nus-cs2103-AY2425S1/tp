@@ -18,6 +18,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
+    public static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+                                                              .map(JsonAdaptedTag::new)
+                                                              .collect(Collectors.toList());
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -32,9 +35,6 @@ public class JsonAdaptedPersonTest {
 
 
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList());
     private static final List<JsonAdaptedDelivery> VALID_DELIVERIES = BENSON.getUnmodifiableDeliveryList().stream()
             .map(JsonAdaptedDelivery::new)
             .collect(Collectors.toList());

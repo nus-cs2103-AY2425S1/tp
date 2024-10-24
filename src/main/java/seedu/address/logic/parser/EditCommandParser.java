@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
@@ -92,14 +93,16 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private EditCommand getEditDeliveryCommand(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ITEMS, PREFIX_ADDRESS, PREFIX_COST, PREFIX_ETA);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+            args, PREFIX_ITEMS, PREFIX_ADDRESS, PREFIX_COST, PREFIX_ETA, PREFIX_STATUS, PREFIX_TAG);
         Index index = parseIndex(argMultimap);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ADDRESS, PREFIX_COST, PREFIX_ETA);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ADDRESS, PREFIX_COST, PREFIX_ETA, PREFIX_STATUS);
 
         EditDeliveryDescriptor editDeliveryDescriptor = new EditDeliveryDescriptor();
 
         parseItemsForEdit(argMultimap.getAllValues(PREFIX_ITEMS)).ifPresent(editDeliveryDescriptor::setItems);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editDeliveryDescriptor::setTags);
+
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editDeliveryDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
@@ -109,8 +112,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ETA).isPresent()) {
             editDeliveryDescriptor.setEta(ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).get()));
         }
-        if (!editDeliveryDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            editDeliveryDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
         return new EditCommand(index, editDeliveryDescriptor);
     }

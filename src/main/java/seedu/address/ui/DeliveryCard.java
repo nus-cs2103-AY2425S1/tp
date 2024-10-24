@@ -46,6 +46,8 @@ public class DeliveryCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
+    private FlowPane tags;
+    @FXML
     private Label archive;
     @FXML
     private FlowPane items;
@@ -67,6 +69,9 @@ public class DeliveryCard extends UiPart<Region> {
         delivery.getItems().stream()
                 .sorted(Comparator.comparing(item -> item.value))
                 .forEach(item -> items.getChildren().add(new Label(item.value)));
+        delivery.getTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         //Can be removed
         archive.setText(delivery.getArchive().toString());

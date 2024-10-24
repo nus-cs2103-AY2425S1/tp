@@ -27,6 +27,7 @@ import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.DeliveryAction;
 import seedu.address.ui.InspectWindow;
 
@@ -152,10 +153,11 @@ public class ArchiveCommand extends Command {
         Time time = toArchive.getTime();
         Eta eta = toArchive.getEta();
         Status status = toArchive.getStatus();
+        Set<Tag> tags = toArchive.getTags();
 
         Archive updatedArchive = new Archive(true);
 
-        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, updatedArchive);
+        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, tags, updatedArchive);
     }
 
     /**
@@ -176,9 +178,6 @@ public class ArchiveCommand extends Command {
 
     /**
      * Check if the list to be archived are exactly equal
-     *
-     * @param other
-     * @return
      */
     @Override
     public boolean equals(Object other) {

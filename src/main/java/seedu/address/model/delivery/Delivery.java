@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Delivery.
@@ -25,13 +26,13 @@ public class Delivery {
     private final Time time;
     private final Eta eta;
     private Status status;
+    private final Set<Tag> tags = new HashSet<>();
     private Archive archive;
-
     /**
      * Every field must be present and not null.
      */
     public Delivery(DeliveryId deliveryId, Set<ItemName> items, Address address, Cost cost, Date date, Time time,
-                    Eta eta, Status status, Archive archive) {
+                    Eta eta, Status status, Set<Tag> tags, Archive archive) {
         requireAllNonNull(deliveryId, address, cost, date, time, eta, status, archive, items);
         this.deliveryId = deliveryId;
         this.address = address;
@@ -42,14 +43,23 @@ public class Delivery {
         this.status = status;
         this.archive = archive;
         this.items.addAll(items);
+        this.tags.addAll(tags);
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Set<ItemName> items, Address address, Cost cost, Eta eta, Status status, Archive archive) {
+    public Delivery(
+        Set<ItemName> items,
+        Address address,
+        Cost cost,
+        Eta eta,
+        Status status,
+        Set<Tag> tags,
+        Archive archive
+    ) {
         this(new DeliveryId(), items, address, cost, new Date(LocalDate.now().toString()),
-                new Time(LocalTime.now().toString()), eta, status, archive);
+                new Time(LocalTime.now().toString()), eta, status, tags, archive);
     }
 
     public Address getAddress() {
@@ -97,6 +107,14 @@ public class Delivery {
     }
 
     /**
+     * Returns an immutable tags set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
      * Returns true if both deliveries are equal.
      */
     public boolean isSameDelivery(Delivery otherDelivery) {
@@ -130,7 +148,8 @@ public class Delivery {
                 && eta.equals(otherDelivery.eta)
                 && deliveryId.equals(otherDelivery.deliveryId)
                 && archive.equals(otherDelivery.archive)
-                && items.equals(otherDelivery.items);
+                && items.equals(otherDelivery.items)
+                && tags.equals(otherDelivery.tags);
     }
 
     @Override
@@ -144,6 +163,7 @@ public class Delivery {
                 .add("address", address)
                 .add("cost", cost)
                 .add("status", status)
+                .add("tags", tags)
                 .add("archive", archive)
                 .toString();
     }

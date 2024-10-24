@@ -15,6 +15,7 @@ import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -30,6 +31,7 @@ public class DeliveryBuilder {
     public static final String DEFAULT_TIME = "00:00:00";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111, S120300";
     public static final String DEFAULT_ARCHIVE = "false";
+    public static final String DEFAULT_TAG = "Delayed delivery";
 
     private Cost cost;
     private Date date;
@@ -40,6 +42,7 @@ public class DeliveryBuilder {
     private Time time;
     private Address address;
     private Archive archive;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code DeliveryBuilder} with the default details.
@@ -54,6 +57,7 @@ public class DeliveryBuilder {
         time = new Time(DEFAULT_TIME);
         address = new Address(DEFAULT_ADDRESS);
         archive = new Archive(DEFAULT_ARCHIVE);
+        tags = new HashSet<>(Arrays.asList(new Tag(DEFAULT_TAG)));
     }
 
     /**
@@ -70,6 +74,7 @@ public class DeliveryBuilder {
         time = deliveryToCopy.getTime();
         address = deliveryToCopy.getAddress();
         archive = deliveryToCopy.getArchive();
+        tags = deliveryToCopy.getTags();
     }
 
     /**
@@ -146,12 +151,20 @@ public class DeliveryBuilder {
     }
 
     /**
+     * Sets the {@code Tag} of the {@code Delivery} that we are building.
+     */
+    public DeliveryBuilder withTags(List<Tag> tags) {
+        this.tags = new HashSet<>(tags);
+        return this;
+    }
+
+    /**
      * Builds the {@code Delivery} object.
      *
      * @return The built Delivery object.
      */
     public Delivery build() {
-        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, archive);
+        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, tags, archive);
     }
 
 }

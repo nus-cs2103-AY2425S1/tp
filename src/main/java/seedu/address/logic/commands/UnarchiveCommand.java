@@ -27,6 +27,7 @@ import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.DeliveryAction;
 import seedu.address.ui.InspectWindow;
 
@@ -140,10 +141,11 @@ public class UnarchiveCommand extends Command {
         Time time = toUnarchive.getTime();
         Eta eta = toUnarchive.getEta();
         Status status = toUnarchive.getStatus();
+        Set<Tag> tags = toUnarchive.getTags();
 
         Archive updatedArchive = new Archive(false);
 
-        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, updatedArchive);
+        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, tags, updatedArchive);
     }
 
     /**
