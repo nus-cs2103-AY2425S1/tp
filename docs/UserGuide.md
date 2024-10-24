@@ -115,6 +115,27 @@ The following sections describe the various commands available in the DocTrack p
 
 <br>
 
+### Summary of commands
+
+| Action                                                              | Format                                                                                                                    | Examples                                                                                                  |
+|---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| **[Add person](#adding-a-person-add-person)**                       | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS <br/><br/>[t/TAG]…​`                                                            | `add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **[List all persons](#listing-all-persons-list-person)**            | `list person`                                             <br/>                                                                | `list person`                                                                                             |
+| **[Edit person](#editing-a-person-edit-person)**                    | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                                             | `edit person 2 n/James Lee e/jameslee@example.com`                                                        |
+| **[Find person](#finding-persons-by-name-find-person)**             | `find person KEYWORD [MORE_KEYWORDS]`                                                                                     | `find person James Jake`                                                                                  |
+| **[Delete person](#deleting-a-person-delete-person)**               | `delete person INDEX`                                                                                                     | `delete person 3`                                                                                         |
+| **[Clear all persons](#clearing-all-persons-clear-person)**         | `clear person`                                                                                                            | `clear person`                                                                                            |
+| **[Add appointment](#adding-an-appointment-add-appt)**              | `add appt i/PATIENT_ID d/DATE_TIME ty/APPOINTMENT_TYPE` `s/SICKNESS` `m/MEDICINE`                   <br/>           <br/> | `add appt i/John Doe d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`                              |
+| **[List all appointments](#listing-all-appointments-list-appt)**    | `list appt`                                                                                                               | `list appt`                                                                                               |
+| **[Edit appointment](#editing-an-appointment-edit-appt)**           | `edit appt INDEX [i/PATIENT_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                |
+| **[Find appointment](#finding-an-appointment-find-appt)**           | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                       | `find appt 2024-12-05`                                                                                    |
+| **[Delete appointment](#deleting-an-appointment-delete-appt)**      | `delete appt INDEX`                                                                                                       | `delete appt 2`                                                                                           |
+| **[Clear all appointments](#clearing-all-appointments-clear-appt)** | `clear appt`                                                                     <br/>                                    | `clear appt`                                                                                              |
+| **[Help](#viewing-help-help)**                                      | `help`                                                                                                                    | `help`                                                                                                    |
+| **[Exit](#exiting-the-program-exit)**                               | `exit`                                                                                                                    | `exit`                                                                                                    |
+
+<br>
+
 ---
 
 <br>
@@ -171,7 +192,7 @@ Examples:
 
 <br>
 
-##### Locating persons by name: `find person`
+##### Finding persons by name: `find person`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -364,27 +385,3 @@ computer?<br>
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-<br>
-
----
-
-<br>
-
-## Command summary
-
-| Action                     | Format                                                                                                                    | Examples                                                                                                  |
-|----------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **Add person**             | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                                            | `add person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **List all persons**       | `list person`                                                                                                             | `list person`                                                                                             |
-| **Edit person**            | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                                             | `edit person 2 n/James Lee e/jameslee@example.com`                                                        |
-| **Find person**            | `find person KEYWORD [MORE_KEYWORDS]`                                                                                     | `find person James Jake`                                                                                  |
-| **Delete person**          | `delete person INDEX`                                                                                                     | `delete person 3`                                                                                         |
-| **Clear all persons**      | `clear person`                                                                                                            | `clear person`                                                                                            |
-| **Add appointment**        | `add appt i/PATIENT_ID d/DATE_TIME ty/APPOINTMENT_TYPE` `s/SICKNESS` `m/MEDICINE`                   <br/>           <br/> | `add appt i/John Doe d/2024-12-01 09:30 ty/Consulation s/Diabetes m/Insulin`                              |
-| **List all appointments**  | `list appt`                                                                                                               | `list appt`                                                                                               |
-| **Edit appointment**       | `edit appt INDEX [i/PATIENT_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`                            | `edit appt 3 d/2024-12-05 13:00 m/Panadol`                                                                |
-| **Find appointment**       | `find appt KEYWORD [MORE_KEYWORDS]`                                                                                       | `find appt 2024-12-05`                                                                                    |
-| **Delete appointment**     | `delete appt INDEX`                                                                                                       | `delete appt 2`                                                                                           |
-| **Clear all appointments** | `clear appt`                                                                     <br/>                                    | `clear appt`                                                                                              |
-| **Help**                   | `help`                                                                                                                    | `help`                                                                                                    |
-| **Exit**                   | `exit`                                                                                                                    | `exit`                                                                                                    |
