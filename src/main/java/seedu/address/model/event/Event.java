@@ -101,6 +101,10 @@ public class Event {
         return eventDuration.getEndDate();
     }
 
+    public EventDuration getEventDuration() {
+        return eventDuration;
+    }
+
     public int getEventId() {
         return eventId;
     }

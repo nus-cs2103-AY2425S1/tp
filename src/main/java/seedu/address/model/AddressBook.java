@@ -74,6 +74,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an event with the given ID exists in the address book.
+     */
+    public boolean hasEventById(int eventId) {
+        return events.containsId(eventId);
+    }
+
+    /**
+     * Retrieves an event by its ID.
+     * @throws IllegalArgumentException if the event does not exist.
+     */
+    public Event getEventById(int eventId) {
+        return events.getById(eventId);
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+        events.setEvent(target, editedEvent);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {

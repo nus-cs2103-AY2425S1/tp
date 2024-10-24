@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -189,6 +190,27 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasEventById(int eventId) {
+        return addressBook.hasEventById(eventId);
+    }
+
+    @Override
+    public Event getEventById(int eventId) {
+        try {
+            return addressBook.getEventById(eventId);
+        } catch (NoSuchElementException e) {
+            return null; // Return null if no event is found
+        }
+    }
+
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+        addressBook.setEvent(target, editedEvent);
     }
 
     @Override

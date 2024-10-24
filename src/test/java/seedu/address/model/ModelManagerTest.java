@@ -168,6 +168,68 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        Event event = new EventBuilder().withEventId(1).build();
+        assertFalse(modelManager.hasEvent(event));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        Event event = new EventBuilder().withEventId(1).build();
+        modelManager.addEvent(event);
+        assertTrue(modelManager.hasEvent(event));
+    }
+
+    @Test
+    public void addEvent_eventWithInvalidId_throwsAssertionError() {
+        boolean assertionsEnabled = false;
+        assert assertionsEnabled = true;
+
+        ModelManager modelManager = new ModelManager();
+        Event invalidEvent = new EventBuilder().withEventId(-1).build();
+        assertThrows(AssertionError.class, () -> modelManager.addEvent(invalidEvent));
+    }
+
+    @Test
+    public void setEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setEvent(null, null));
+    }
+
+    @Test
+    public void hasEventById_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEventById(1));
+    }
+
+    @Test
+    public void hasEventById_eventInAddressBook_returnsTrue() {
+        Event event = new EventBuilder().withEventId(1).build();
+        modelManager.addEvent(event);
+        assertTrue(modelManager.hasEventById(1));
+    }
+
+    @Test
+    public void getEventById_eventNotInAddressBook_returnsNull() {
+        assertEquals(null, modelManager.getEventById(1));
+    }
+
+    @Test
+    public void getEventById_eventInAddressBook_returnsEvent() {
+        Event event = new EventBuilder().withEventId(1).build();
+        modelManager.addEvent(event);
+        assertEquals(event, modelManager.getEventById(1));
+    }
+
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -202,15 +264,5 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
-    }
-
-    @Test
-    public void addEvent_eventWithInvalidId_throwsAssertionError() {
-        boolean assertionsEnabled = false;
-        assert assertionsEnabled = true;
-
-        ModelManager modelManager = new ModelManager();
-        Event invalidEvent = new EventBuilder().withEventId(-1).build();
-        assertThrows(AssertionError.class, () -> modelManager.addEvent(invalidEvent));
     }
 }
