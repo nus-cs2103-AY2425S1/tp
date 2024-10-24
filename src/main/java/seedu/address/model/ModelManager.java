@@ -14,6 +14,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventParticipatedByVolunteerPredicate;
+import seedu.address.model.event.exceptions.OverlappingAssignException;
+import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
 
@@ -185,7 +187,8 @@ public class ModelManager implements Model {
      * @param event Event to be assigned to.
      */
     @Override
-    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws CommandException {
+    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException,
+            OverlappingAssignException {
         addressBook.assignVolunteerToEvent(volunteer, event);
     }
 
