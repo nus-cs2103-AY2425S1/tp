@@ -23,6 +23,12 @@ public class ListAbsenteesCommand extends Command {
 
     private final DateAbsentPredicate predicate;
 
+    /**
+     * Constructs a ListAbsenteesCommand with the specified predicate.
+     *
+     * @param predicate The predicate used to filter the list of absentees.
+     * @throws NullPointerException if the predicate is null.
+     */
     public ListAbsenteesCommand(DateAbsentPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;

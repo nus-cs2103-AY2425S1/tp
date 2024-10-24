@@ -15,6 +15,12 @@ import seedu.address.commons.util.ToStringBuilder;
 public class DateAbsentPredicate implements Predicate<Person> {
     private final LocalDateTime classDate;
 
+    /**
+     * Constructs a {@code DateAbsentPredicate} with the specified class date.
+     *
+     * @param classDate The date and time of the class to be used for the predicate.
+     * @throws NullPointerException if {@code classDate} is null.
+     */
     public DateAbsentPredicate(LocalDateTime classDate) {
         requireNonNull(classDate);
         this.classDate = classDate;
