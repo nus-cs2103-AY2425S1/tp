@@ -54,31 +54,84 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
+        setIdLabel(displayedIndex);
+        setNameLabel(person);
+        setPhoneLabel(person);
+        setAddressLabel(person);
+        setEmailLabel(person);
+        setTagsFlowpane(person);
+        setDateOfLastVisitLabel(person);
+        setEmergencyContactLabel(person);
+        setRemarkLabel(person);
+    }
+
+    private void setIdLabel(int displayedIndex) {
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        if (person.hasAddress()) {
-            address.setText(person.getAddress().get().value);
+    }
+
+    private void setRemarkLabel(Person personToView) {
+        if (personToView.getRemark().isPresent()) {
+            // the lack of a remark is denoted by an empty string
+            remark.setText("Remarks: " + personToView.getRemark().value);
+            remark.setManaged(true);
         } else {
-            address.setText("");
-            address.setManaged(false);
+            remark.setText("");
+            remark.setManaged(false);
         }
-        if (person.hasEmail()) {
-            email.setText(person.getEmail().get().value);
+    }
+
+    private void setEmergencyContactLabel(Person personToView) {
+        if (personToView.hasEmergencyContact()) {
+            emergencyContact.setText("Emergency Contact: " + personToView.getEmergencyContact().get().value);
+            emergencyContact.setManaged(true);
+        } else {
+            emergencyContact.setText("");
+            emergencyContact.setManaged(false);
+        }
+    }
+
+    private void setDateOfLastVisitLabel(Person personToView) {
+        if (personToView.hasDateOfLastVisit()) {
+            dateOfLastVisit.setText("Date last visited: " + personToView.getDateOfLastVisit().get().value);
+            dateOfLastVisit.setManaged(true);
+        } else {
+            dateOfLastVisit.setText("");
+            dateOfLastVisit.setManaged(false);
+        }
+    }
+
+    private void setTagsFlowpane(Person personToView) {
+        personToView.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void setEmailLabel(Person personToView) {
+        if (personToView.hasEmail()) {
+            email.setText(personToView.getEmail().get().value);
+            email.setManaged(true);
         } else {
             email.setText("");
             email.setManaged(false);
         }
-        person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        dateOfLastVisit.setText(
-                person.hasDateOfLastVisit() ? "Date last visited: " + person.getDateOfLastVisit().get().value
-                        : "");
-        emergencyContact.setText(person.hasEmergencyContact()
-                ? "Emergency Contact: " + person.getEmergencyContact().get().value
-                : "");
-        remark.setText(person.hasRemark()
-                ? "Remarks: " + person.getRemark().value
-                : "");
+    }
+
+    private void setAddressLabel(Person personToView) {
+        if (personToView.hasAddress()) {
+            address.setText(personToView.getAddress().get().value);
+            address.setManaged(true);
+        } else {
+            address.setText("");
+            address.setManaged(false);
+        }
+    }
+
+    private void setPhoneLabel(Person personToView) {
+        phone.setText(personToView.getPhone().value);
+    }
+
+    private void setNameLabel(Person personToView) {
+        name.setText(personToView.getName().fullName);
     }
 }
