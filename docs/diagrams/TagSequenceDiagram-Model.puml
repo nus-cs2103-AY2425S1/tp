@@ -8,13 +8,20 @@ participant ":AddressBook" as AddressBook MODEL_COLOR
 participant ":FilteredPersons" as FilteredPersons MODEL_COLOR
 end box
 
+[-> Model : setPerson(personToTag, personWithTags)
+activate Model
 Model -> AddressBook : setPerson(personToTag, personWithTags)
 activate AddressBook
 AddressBook --> Model
 deactivate AddressBook
 
-Model -> FilteredPersons : setPredicate(predicate)
+[-> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+Model -> FilteredPersons : setPredicate(PREDICATE_SHOW_ALL_PERSONS)
 activate FilteredPersons
+FilteredPersons --> Model
 deactivate FilteredPersons
+
+[<-- Model
+deactivate Model
 
 @enduml
