@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -36,6 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_JOBCODE_BOB = "QAT0123689";
     public static final String VALID_TAG_NEW = "N";
     public static final String VALID_TAG_REJECTED = "R";
+    public static final String VALID_REMARK_AMY = "Available for part-time work only";
+    public static final String VALID_REMARK_BOB = "Have masters degree";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +50,17 @@ public class CommandTestUtil {
     public static final String JOBCODE_DESC_BOB = " " + PREFIX_JOBCODE + VALID_JOBCODE_BOB;
     public static final String TAG_DESC_NEW = " " + PREFIX_TAG + VALID_TAG_NEW;
     public static final String TAG_DESC_REJECTED = " " + PREFIX_TAG + VALID_TAG_REJECTED;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_JOBCODE_DESC = " " + PREFIX_JOBCODE; // empty string not allowed for job codes
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "have several degrees such as bachelor's, "
+        + "master's, or doctoral degrees, in various fields."; // more than 50 characters is not allowed
+    // allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -63,10 +71,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withJobCode(VALID_JOBCODE_AMY)
-                .withTag(VALID_TAG_REJECTED).build();
+                .withTag(VALID_TAG_REJECTED).withRemark(VALID_REMARK_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withJobCode(VALID_JOBCODE_BOB)
-                .withTag(VALID_TAG_NEW).build();
+                .withTag(VALID_TAG_NEW).withRemark(VALID_REMARK_BOB).build();
     }
 
     /**

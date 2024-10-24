@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBCODE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -95,15 +96,20 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withJobCode(VALID_JOBCODE_BOB).build();
         assertTrue(ALICE.equals(editedAlice));
 
-        // same name, email and phone, different tags -> returns true -> returns true
+        // same name, email and phone, different tags -> returns true
         editedAlice = new PersonBuilder(ALICE).withTag(VALID_TAG_NEW).build();
+        assertTrue(ALICE.equals(editedAlice));
+
+        // same name, email and phone, different remarks -> returns true
+        editedAlice = new PersonBuilder(ALICE).withRemark(VALID_REMARK_AMY).build();
         assertTrue(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", jobCode=" + ALICE.getJobCode() + ", tag=" + ALICE.getTag() + "}";
+                + ", email=" + ALICE.getEmail() + ", jobCode=" + ALICE.getJobCode() + ", tag=" + ALICE.getTag() + ", "
+                + "remark=" + ALICE.getRemark() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

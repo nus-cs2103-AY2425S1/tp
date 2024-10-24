@@ -26,10 +26,12 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withJobCode("SWE2024").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTag("N").build();
+            .withTag("N")
+            .withRemark("").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withJobCode("HRD2025")
             .withEmail("johnd@example.com").withPhone("98765432")
+            .withRemark("")
             .withTag("TP").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withJobCode("INTERN087").withTag("TC").build();

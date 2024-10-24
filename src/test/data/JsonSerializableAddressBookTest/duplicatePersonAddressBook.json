@@ -4,12 +4,14 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "jobCode": "SWE1234",
-    "tag": "N"
+    "tag": "N",
+    "remark" : ""
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "jobCode": "SWE2024",
-    "tag": "N"
+    "tag": "N",
+    "remark" : ""
   } ]
 }
