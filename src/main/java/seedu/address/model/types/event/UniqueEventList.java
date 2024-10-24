@@ -10,10 +10,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.types.common.DateTimeUtil;
 import seedu.address.model.types.common.Name;
-
 import seedu.address.model.types.event.exceptions.DuplicateEventException;
 import seedu.address.model.types.event.exceptions.EventNotFoundException;
 
