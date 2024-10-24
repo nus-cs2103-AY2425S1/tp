@@ -4,15 +4,19 @@ import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tag.exceptions.InvalidGradeIndexException;
 
 /**
  * Represents a Grade in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidGradeName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidGradeIndex(String)}
  */
 public class Grade {
     public static final String MESSAGE_CONSTRAINTS = "Grade index should be numeric and between 0 to 5";
     public static final String VALIDATION_REGEX = "\\d+";
+    private static final Logger logger = LogsCenter.getLogger(Grade.class);
     public final String gradeIndex;
 
     /**
@@ -22,14 +26,14 @@ public class Grade {
      */
     public Grade(String gradeIndex) {
         requireNonNull(gradeIndex);
-        checkArgument(isValidGradeName(gradeIndex), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGradeIndex(gradeIndex), MESSAGE_CONSTRAINTS);
         this.gradeIndex = gradeIndex;
     }
 
     /**
      * Returns true if a given string is a valid grade index.
      */
-    public static boolean isValidGradeName(String test) {
+    public static boolean isValidGradeIndex(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
@@ -43,27 +47,21 @@ public class Grade {
      * @return A name representing the grade index.
      */
     public String gradeIndexToName() {
-        String name = "";
         switch (parseInt(gradeIndex)) {
         case 0:
-            name = "Unknown";
-            break;
+            return "Unknown (0)";
         case 1:
-            name = "Excellent";
-            break;
+            return "Failing (1)";
         case 2:
-            name = "Good";
-            break;
+            return "Satisfactory (2)";
         case 3:
-            name = "Satisfactory";
-            break;
+            return "Good (3)";
         case 4:
-            name = "Failing";
-            break;
+            return "Excellent (4)";
         default:
+            logger.warning("isValidGradeIndex method may not be working as expected");
             throw new InvalidGradeIndexException();
         }
-        return name;
     }
 
     @Override
@@ -89,7 +87,7 @@ public class Grade {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + gradeIndex + ']';
+        return gradeIndex;
     }
 
 }

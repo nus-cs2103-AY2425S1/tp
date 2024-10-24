@@ -92,20 +92,21 @@ Examples:
 
 ### Assigning grade to students: `grade`
 
-Assign grade to students in the address book.
+Assigns grade to students in the address book.
 
 Format: `grade INDEX g/GRADE_INDEX`
 
 * The grade index ranges from 0 to 5
 * 0: `Unknown`
-* 1: `Excellent`
-* 2: `Good`
-* 3: `Satisfactory`
-* 4: `Failing`
+* 1: `Failing`
+* 2: `Satisfactory`
+* 3: `Good`
+* 4: `Excellent`
 
 Examples:
-* `grade 1 g/1` changes grade of first person on list to `Excellent`
-* `grade 2 g/4` changes grade of second person on list to `Failing`
+* `grade 1 g/1` changes grade of first person on list to `Failing`
+* `grade 2 g/4` changes grade of second person on list to `Excellent`<br>
+  ![result for 'grade 2 g/4'](images/addGradeResult.png)
 
 ### Listing all persons : `list`
 
@@ -164,7 +165,7 @@ Format: `findtag KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findtag friends` returns `Alex Yeoh` and `Bernice Yu`
 * `findtag friends colleagues` returns `Alex Yeoh`, `Bernice Yu` and `Roy Balakrishnan`<br>
-  ![result for 'find alex david'](images/findTagFriendsColleagues.png)
+  ![result for 'findtag friends colleagues'](images/findTagFriendsColleagues.png)
 
 ### Deleting a person : `delete`
 

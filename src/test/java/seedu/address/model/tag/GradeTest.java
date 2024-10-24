@@ -29,13 +29,28 @@ public class GradeTest {
     @Test
     public void isValidGradeName() {
         // null grade index
-        assertThrows(NullPointerException.class, () -> Grade.isValidGradeName(null));
+        assertThrows(NullPointerException.class, () -> Grade.isValidGradeIndex(null));
 
         // grade index too small
-        assertFalse(Grade.isValidGradeName("-1"));
+        assertFalse(Grade.isValidGradeIndex("-1"));
 
         // grade index too big
-        assertFalse(Grade.isValidGradeName("5"));
+        assertFalse(Grade.isValidGradeIndex("5"));
+    }
+
+    @Test
+    public void gradeIndexToName() {
+        Grade unknownGrade = new Grade("0");
+        Grade failingGrade = new Grade("1");
+        Grade satisfactoryGrade = new Grade("2");
+        Grade goodGrade = new Grade("3");
+        Grade excellentGrade = new Grade("4");
+
+        assertEquals("Unknown (0)", unknownGrade.gradeIndexToName());
+        assertEquals("Failing (1)", failingGrade.gradeIndexToName());
+        assertEquals("Satisfactory (2)", satisfactoryGrade.gradeIndexToName());
+        assertEquals("Good (3)", goodGrade.gradeIndexToName());
+        assertEquals("Excellent (4)", excellentGrade.gradeIndexToName());
     }
 
     @Test
@@ -60,6 +75,6 @@ public class GradeTest {
 
     @Test
     public void testToString() {
-        assertEquals("[4]", new Grade("4").toString());
+        assertEquals("4", new Grade("4").toString());
     }
 }
