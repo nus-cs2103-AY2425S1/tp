@@ -20,7 +20,6 @@ import seedu.address.model.person.Person;
  */
 public class DateCommand extends Command {
     public static final String COMMAND_WORD = "date";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment date of the person identified "
             + "by the index number used in the last person listing. "
@@ -29,7 +28,6 @@ public class DateCommand extends Command {
             + PREFIX_DATE + "[DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "12 October 2024";
-
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Date: %2$s";
     public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date to Person: %1$s";
     public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date from Person: %1$s";
@@ -56,7 +54,7 @@ public class DateCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTag(), date);
+                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergy(), date);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
