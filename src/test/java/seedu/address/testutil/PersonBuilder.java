@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -10,6 +12,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Policy;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -32,6 +35,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Birthday birthday;
     private Appointment appointment;
+    private List<Policy> policies;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,7 +47,9 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
+        policies = new ArrayList<>();
         tags = new HashSet<>();
+        policies = new ArrayList<>();
     }
 
     /**
@@ -56,7 +62,9 @@ public class PersonBuilder {
         this.address = personToCopy.getAddress();
         this.birthday = personToCopy.getBirthday();
         this.appointment = personToCopy.getAppointment();
+        this.policies = new ArrayList<>(personToCopy.getPolicies());
         this.tags = new HashSet<>(personToCopy.getTags());
+        this.policies = new ArrayList<>(personToCopy.getPolicies());
     }
 
     /**
@@ -115,9 +123,32 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code policies} of the {@code Person} that we are building.
+     * Each policy is created with default values for description, coverage, and premium.
+     *
+     * @param policies Varargs of policy names to be added to the {@code Person}.
+     * @return This {@code PersonBuilder} instance with the updated policies.
+     */
+    public PersonBuilder withPolicies(String... policies) {
+        this.policies = new ArrayList<>();
+        for (String policy : policies) {
+            this.policies.add(new Policy("Policy", "2022-12-12",
+                    "2023-12-12", "2022-12-12 300"));
+        }
+        return this;
+    }
 
+
+    /**
+     * Builds and returns a {@code Person} object with the current state of the {@code PersonBuilder}.
+     *
+     * @return A {@code Person} object with the set attributes.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags, appointment, birthday);
+        Person person = new Person(name, phone, email, address, tags, appointment, birthday);
+        person.setPolicies(policies);
+        return person;
     }
 
 }

@@ -90,6 +90,7 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        model.commitAddressBook();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
@@ -141,15 +142,47 @@ public class EditCommand extends Command {
         for (Map.Entry<Index, Policy> entry : newPolicies.entrySet()) {
             Index index = entry.getKey();
             Policy policy = entry.getValue();
+            int zeroBasedIndex = index.getZeroBased();
 
-            if (index.getZeroBased() >= policiesSize) {
+            if (zeroBasedIndex >= policiesSize) {
                 throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
             }
 
-            updatedPolicies.set(index.getZeroBased(), policy);
+            int duplicatePolicyIndex = getDuplicatePolicyIndex(policy, updatedPolicies);
+            boolean isPolicyToEdit = (duplicatePolicyIndex == zeroBasedIndex);
+            boolean isNotDuplicatePolicy = (duplicatePolicyIndex == -1);
+
+            if (!isNotDuplicatePolicy && !isPolicyToEdit) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_POLICY_NAME);
+            }
+
+            updatedPolicies.set(zeroBasedIndex, policy);
         }
 
         return updatedPolicies;
+    }
+
+    /**
+     * Checks if a given policy already exists in the provided list of policies. If a policy with the same name is
+     * found, the method returns the index of the matching policy in the list. If no matching policy is found, it
+     * returns {@code -1}.
+     *
+     * @param policy      the {@link Policy} object to check for duplication
+     * @param policyList  the list of {@link Policy} objects to compare against
+     * @return the index of the duplicate policy in the list, or {@code -1} if
+     *         no duplicate is found
+     */
+    public static Integer getDuplicatePolicyIndex(Policy policy, List<Policy> policyList) {
+        String policyName = policy.getPolicyName();
+        int size = policyList.size();
+
+        for (int i = 0; i < size; i++) {
+            if (policyName.equals(policyList.get(i).getPolicyName())) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     @Override

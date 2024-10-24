@@ -60,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         birthday.setText("Birthday: " + person.getBirthday().toString());
         appointment.setText("Next Appointment: " + person.getAppointment().value);
-        policies.setText("Policies: " + person.getPoliciesString());
+        policies.setText("Policies:\n" + person.getPoliciesString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_POLICY_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
@@ -218,6 +219,7 @@ public class ParserUtil {
     public static Map<Index, Policy> parsePolicies(Collection<String> policies) throws ParseException {
         requireNonNull(policies);
         final Map<Index, Policy> policyMap = new HashMap<>();
+        final Set<Integer> toEditIndexSet = new HashSet<>();
 
         for (String policyArgs : policies) {
             String trimmedPolicy = policyArgs.trim();
@@ -233,6 +235,11 @@ public class ParserUtil {
                 throw new ParseException(String.format(MESSAGE_INVALID_POLICY_FORMAT), pe);
             }
 
+            if (toEditIndexSet.contains(index.getZeroBased())) {
+                throw new ParseException(MESSAGE_DUPLICATE_POLICY_INDEX);
+            }
+
+            toEditIndexSet.add(index.getZeroBased());
             policyMap.put(index, parsePolicy(policyArgs));
         }
 

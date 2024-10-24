@@ -75,12 +75,17 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
     testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+    testImplementation 'org.mockito:mockito-core:4.0.0'
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
 
 shadowJar {
     archiveFileName = 'agentconnect.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'
