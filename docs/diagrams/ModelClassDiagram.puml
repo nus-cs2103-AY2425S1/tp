@@ -13,12 +13,19 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
-Class Address
+Class Client
 Class Email
 Class Name
 Class Phone
 Class Tag
+
+Class RentalInformation
+Class Address
+Class RentalDate
+Class RentDueDate
+Class MonthlyRent
+Class Deposit
+Class CustomerList
 
 Class I #FFFFFF
 }
@@ -36,19 +43,28 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+UniquePersonList --> "~* all" Client
+Client *--> Name
+Client *--> Phone
+Client *--> Email
+Client *--> "*" Tag
+Client *--> "*" RentalInformation
 
-Person -[hidden]up--> I
+RentalInformation *--> Address
+RentalInformation *--> "0..1" RentalDate : "Start date"
+RentalInformation *--> "0..1" RentalDate : "End date"
+RentalInformation *--> "0..1" RentDueDate
+RentalInformation *--> "0..1" MonthlyRent
+RentalInformation *--> "0..1" Deposit
+RentalInformation *--> "0..1" CustomerList
+
+Client -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+RentalDate -[hidden]right-> Address
+
+ModelManager --> "~* filtered" Client
 @enduml
