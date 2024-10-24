@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":CommandExecutor" as CommandExecutor UI_COLOR
+participant ":CommandHistory" as CommandHistory UI_COLOR
+participant ":TextField" as TextField UI_COLOR
+end box
+
+
+[-> CommandBox: handleCommandEntered()
+CommandBox -> TextField: getText()
+TextField --> CommandBox: commandText
+
+alt commandText is empty
+    CommandBox --> CommandBox: return
+else commandText not empty
+    CommandBox -> CommandExecutor: execute(commandText)
+    CommandExecutor --> CommandBox: return CommandResult
+    CommandBox -> CommandHistory: add(commandText)
+    CommandBox -> TextField: setText("")
+end
+
+alt CommandException or ParseException
+    CommandExecutor -> CommandBox: throw exception
+    CommandBox -> CommandBox: setStyleToIndicateCommandFailure()
+    CommandBox -> TextField: getStyleClass().add(ERROR_STYLE_CLASS)
+end
+@enduml
