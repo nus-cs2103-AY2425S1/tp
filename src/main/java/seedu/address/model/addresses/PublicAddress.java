@@ -1,5 +1,6 @@
 package seedu.address.model.addresses;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -10,6 +11,11 @@ import java.util.Objects;
 public abstract class PublicAddress {
 
     public static final String DEFAULT_LABEL = "default"; // TODO: Remove once placeholder is no longer needed
+
+    public static final String MESSAGE_LABEL_CONSTRAINTS =
+            "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
+
+    public static final String VALIDATION_LABEL_REGEX = "[^\\s].*"; // TODO: Update regex
 
     public final String publicAddress;
 
@@ -23,8 +29,9 @@ public abstract class PublicAddress {
      */
     public PublicAddress(String publicAddress, String label) {
         requireAllNonNull(publicAddress, label);
+        checkArgument(isValidPublicAddressLabel(label), getMessageConstraints());
 
-        if (!isValidPublicAddress(publicAddress, label)) {
+        if (!isValidPublicAddress(publicAddress)) {
             throw new IllegalArgumentException(getMessageConstraints());
         }
 
@@ -33,9 +40,16 @@ public abstract class PublicAddress {
     }
 
     /**
-     * Returns true if a given strings are valid fields of public address.
+     * Returns true if a given string is a valid public address label.
      */
-    protected abstract boolean isValidPublicAddress(String publicAddress, String label);
+    public static boolean isValidPublicAddressLabel(String test) {
+        return test.matches(VALIDATION_LABEL_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid public address.
+     */
+    protected abstract boolean isValidPublicAddress(String publicAddress);
 
     /**
      * Returns message for constraints of public address fields.

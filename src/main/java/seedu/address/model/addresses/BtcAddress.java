@@ -9,7 +9,6 @@ public class BtcAddress extends PublicAddress {
             "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
 
     public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "[^\\s].*"; // TODO: Update regex
-    public static final String VALIDATION_LABEL_REGEX = "[^\\s].*"; // TODO: Update regex
 
     /**
      * Constructs a {@code BtcAddress}.
@@ -22,8 +21,8 @@ public class BtcAddress extends PublicAddress {
     }
 
     @Override
-    protected boolean isValidPublicAddress(String publicAddress, String label) {
-        return publicAddress.matches(VALIDATION_PUBLIC_ADDRESS_REGEX) && label.matches(VALIDATION_LABEL_REGEX);
+    protected boolean isValidPublicAddress(String publicAddress) {
+        return publicAddress.matches(VALIDATION_PUBLIC_ADDRESS_REGEX);
     }
 
     @Override
