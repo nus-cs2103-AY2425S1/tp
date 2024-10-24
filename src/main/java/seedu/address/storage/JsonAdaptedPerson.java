@@ -1,16 +1,13 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Appt;
@@ -47,7 +44,6 @@ class JsonAdaptedPerson {
     private final String note;
     private final String nokName;
     private final String nokPhone;
-    private final List<JsonAdaptedHealthService> healthServices = new ArrayList<>();
     private final List<JsonAdaptedAppt> appts = new ArrayList<>();
 
 
@@ -57,7 +53,6 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
-            @JsonProperty("healthServices") List<JsonAdaptedHealthService> healthServices,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("allergy") String allergy,
             @JsonProperty("bloodType") String bloodType, @JsonProperty("healthRisk") String healthRisk,
@@ -68,9 +63,6 @@ class JsonAdaptedPerson {
         this.nric = nric;
         this.sex = sex;
         this.birthDate = birthDate;
-        if (healthServices != null) {
-            this.healthServices.addAll(healthServices);
-        }
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -94,9 +86,6 @@ class JsonAdaptedPerson {
         nric = source.getNric().value;
         sex = source.getSex().value;
         birthDate = source.getBirthdate().value;
-        healthServices.addAll(source.getHealthServices().stream()
-                .map(JsonAdaptedHealthService::new)
-                .collect(Collectors.toList()));
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress() == null ? "" : source.getAddress().value;
@@ -118,11 +107,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<HealthService> personHealthServices = new ArrayList<>();
-        for (JsonAdaptedHealthService healthService : healthServices) {
-            personHealthServices.add(healthService.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -227,8 +211,7 @@ class JsonAdaptedPerson {
             }
         }
 
-        final Set<HealthService> modelHealthServices = new HashSet<>(personHealthServices);
-        return new Person(modelName, modelNric, modelBirthDate, modelSex, modelHealthServices, modelPhone, modelEmail,
+        return new Person(modelName, modelNric, modelBirthDate, modelSex, modelPhone, modelEmail,
                 modelAddress, modelAllergy, modelBloodType, modelHealthRisk, modelHealthRecord, modelNote,
                 modelNokName, modelNokPhone, modelAppts);
     }

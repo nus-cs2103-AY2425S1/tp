@@ -4,14 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.ApptSorter;
-import seedu.address.model.healthservice.HealthService;
 
 /**
  * Represents a Person in the address book.
@@ -38,29 +35,27 @@ public class Person {
     private Note note;
     private Name nokName;
     private Phone nokPhone;
-    private final Set<HealthService> healthServices = new HashSet<>();
     private List<Appt> appts = new ArrayList<>();
 
     /**
      * Name, Nric, Sex, Birthdate and healthservice must be present and not null
      */
-    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices) {
-        this(name, nric, birthdate, sex, healthServices, new Phone("123"), new Email("dummy@gmail.com"));
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex) {
+        this(name, nric, birthdate, sex, new Phone("123"), new Email("dummy@gmail.com"));
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices,
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex,
             Phone phone, Email email) {
-        requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
+        requireAllNonNull(name, nric, birthdate, sex, phone, email);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
         this.sex = sex;
         this.phone = phone;
         this.email = email;
-        this.healthServices.addAll(healthServices);
         this.address = null;
         this.allergy = null;
         this.bloodType = null;
@@ -76,17 +71,16 @@ public class Person {
      * Only Name, NRIC, Sex, BirthDate, HealthServices field need to be present.
      * The other fields can be null
      */
-    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone,
+    public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
             Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
             HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
-        requireAllNonNull(name, nric, birthdate, sex, healthServices);
+        requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
         this.sex = sex;
         this.phone = phone;
         this.email = email;
-        this.healthServices.addAll(healthServices);
         this.address = address;
         this.allergy = allergy;
         this.bloodType = bloodType;
@@ -112,10 +106,6 @@ public class Person {
 
     public Birthdate getBirthdate() {
         return birthdate;
-    }
-
-    public Set<HealthService> getHealthService() {
-        return healthServices;
     }
 
     public Phone getPhone() {
@@ -194,12 +184,12 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws
-     * {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Deletes an appointment from the person's list of appointments.
+     *
+     * @param appt
      */
-    public Set<HealthService> getHealthServices() {
-        return Collections.unmodifiableSet(healthServices);
+    public void deleteAppt(Appt appt) {
+        appts.remove(appt);
     }
 
     /**
@@ -241,7 +231,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, birthdate, sex, healthServices);
+        return Objects.hash(name, phone, email, nric, birthdate, sex);
     }
 
     @Override
@@ -253,7 +243,6 @@ public class Person {
                 .add("birthdate", birthdate)
                 .add("phone", phone)
                 .add("email", email)
-                .add("Health Services", healthServices)
                 .toString();
     }
 

@@ -119,5 +119,25 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street"
-  } ]
+  }, {
+    "name" : "Keanu Reeves",
+    "healthServices" : [ "vaccination" ],
+    "allergy" : "peanuts",
+    "bloodType" : "O+",
+    "healthRisk" : "LOW",
+    "healthRecord" : "diabetes",
+    "note" : "Patient has previous gunshot wound to chest",
+    "nokName" : "Mila Kunis",
+    "nokPhone" : "84126990",
+    "appts" : [ ],
+    "nric" : "S9975483H",
+    "sex" : "M",
+    "birthDate" : "1997-11-30",
+    "phone" : "86526969",
+    "email" : "keanureeves@example.com",
+    "address" : "Blk 512 Ang Mo Kio Ave 2"
+  }
+
+
+  ]
 }

@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
@@ -21,18 +20,15 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Appt;
@@ -64,7 +60,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_HEALTHSERVICE + "HEALTH SERVICE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_BLOODTYPE + "BLOOD TYPE] "
             + "[" + PREFIX_NOKNAME + "NEXT-OF-KIN NAME] "
@@ -81,7 +76,6 @@ public class EditCommand extends Command {
             + PREFIX_SEX + "M "
             + PREFIX_PHONE + "81234567 "
             + PREFIX_EMAIL + "johndoe123@gmail.com "
-            + PREFIX_HEALTHSERVICE + "Blood Test "
             + PREFIX_ADDRESS + "Block 123, NUS Road, S123123 "
             + PREFIX_BLOODTYPE + "A+ "
             + PREFIX_NOKNAME + "Jack Doe "
@@ -147,8 +141,6 @@ public class EditCommand extends Command {
         Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Birthdate updatedBirthDate = editPersonDescriptor.getBirthDate().orElse(personToEdit.getBirthdate());
         Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
-        Set<HealthService> updatedHealthServices = editPersonDescriptor.getHealthServices()
-                .orElse(personToEdit.getHealthServices());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -162,7 +154,7 @@ public class EditCommand extends Command {
         Phone updatedNokPhone = editPersonDescriptor.getNokPhone().orElse(personToEdit.getNokPhone());
         List<Appt> updatedAppts = editPersonDescriptor.getAppts().orElse(personToEdit.getAppts());
 
-        return new Person(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedHealthServices, updatedPhone,
+        return new Person(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
                 updatedEmail, updatedAddress, updatedAllergy, updatedBloodType, updatedHealthRisk, updatedHealthRecord,
                 updatedNote, updatedNokName, updatedNokPhone, updatedAppts);
     }
@@ -210,7 +202,6 @@ public class EditCommand extends Command {
         private Note note;
         private Name nokName;
         private Phone nokPhone;
-        private Set<HealthService> healthServices = new HashSet<>();
         private List<Appt> appts = new ArrayList<>();
 
         public EditPersonDescriptor() {}
@@ -234,7 +225,6 @@ public class EditCommand extends Command {
             setNote(toCopy.note);
             setNokName(toCopy.nokName);
             setNokPhone(toCopy.nokPhone);
-            setHealthServices(toCopy.healthServices);
             setAppts(toCopy.appts);
         }
 
@@ -243,7 +233,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, nric, birthdate, sex, address, allergy, bloodType,
-                    healthRisk, healthRecord, note, nokName, nokPhone, healthServices, appts);
+                    healthRisk, healthRecord, note, nokName, nokPhone, appts);
         }
 
         public void setName(Name name) {
@@ -344,23 +334,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(nokPhone);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setHealthServices(Set<HealthService> healthServices) {
-            this.healthServices = (healthServices != null) ? new HashSet<>(healthServices) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<HealthService>> getHealthServices() {
-            return (healthServices != null) ? Optional.of(Collections.unmodifiableSet(healthServices))
-                    : Optional.empty();
-        }
 
         public void setAppts(List<Appt> appts) {
             this.appts = (appts != null) ? new ArrayList<>(appts) : null;
@@ -393,7 +366,6 @@ public class EditCommand extends Command {
                     .add("nric", nric)
                     .add("sex", sex)
                     .add("birthdate", birthdate)
-                    .add("Health Services", healthServices)
                     .toString();
         }
     }
