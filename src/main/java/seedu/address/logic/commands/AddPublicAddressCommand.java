@@ -121,9 +121,4 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         AddPublicAddressCommand otherAddCommand = (AddPublicAddressCommand) other;
         return super.equals(otherAddCommand);
     }
-
-    @Override
-    public String toString() {
-        return super.toString(); // TODO: Update toString
-    }
 }
