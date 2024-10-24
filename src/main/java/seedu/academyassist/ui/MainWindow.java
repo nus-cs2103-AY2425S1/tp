@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TrackSubjectWindow trackSubjectWindow;
     private PersonDetailWindow personDetailWindow;
 
     @FXML
@@ -68,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        trackSubjectWindow = new TrackSubjectWindow(logic.getModel());
         personDetailWindow = new PersonDetailWindow();
     }
 
@@ -167,6 +169,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the subject tracker window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleTrackSubject() {
+        if (!trackSubjectWindow.isShowing()) {
+            trackSubjectWindow.show();
+        } else {
+            trackSubjectWindow.focus();
+     
+     /**
      * Open the detail window of the person or focuses on it if it's already opened.
      * @param person
      */
@@ -201,6 +213,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            if (commandResult.isShowSubjectTracker()) {
+                handleTrackSubject();
 
             if (commandResult.isShowDetailWindow()) {
                 handleDetailWindow(commandResult.getPersonToShow());
