@@ -17,7 +17,7 @@ public class SearchTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all customers whose any tag contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " new_customer non_english_speaker";
+            + "Example: " + COMMAND_WORD + " NewCustomer NonEnglishSpeaker";
 
     private final TagContainsKeywordsPredicate predicate;
 
@@ -40,7 +40,7 @@ public class SearchTagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SearchCommand)) {
+        if (!(other instanceof SearchTagCommand)) {
             return false;
         }
 
