@@ -2,12 +2,12 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
-
-import java.util.List;
 
 public class SampleAddressBookTest {
 
