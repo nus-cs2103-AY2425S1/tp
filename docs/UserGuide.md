@@ -30,6 +30,8 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 
    * `list` : Lists all contacts.
 
+   * `view 2` : Views all the information on the 2nd contact shown in the current list.
+
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/06-01-2024` : Adds a contact named `John Doe` to the SocialBook.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
@@ -61,8 +63,8 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Li
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters will result in an error only for the `list` command. Other commands like `help`, `exit`, and `clear` will ignore any additional parameters and execute as intended.
-  e.g. if the command specifies `help 123`, `exit please` or `clear 5`, it will be interpreted as help, exit or clear respectively. However, if the command specifies `list something`, it will throw an error.
+* Extraneous parameters will result in an error for the `list` and `view` commands. Other commands like `help`, `exit`, and `clear` will ignore any additional parameters and execute as intended.
+  e.g. if the command specifies `help 123`, `exit please` or `clear 5`, it will be interpreted as help, exit or clear respectively. However, if the command specifies `list something` or `view 2 3`, it will throw an error.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -104,6 +106,20 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+### Viewing a person : `view`
+
+Pops up a window containing all the information that has been saved on this person. Also filters the current listed persons to just this specific person.
+
+Format: `view INDEX`
+
+* This command only works to `view` a single person. Trying to key in more than 1 index will result in an error message.
+* Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
+
+Examples:
+* `view 1` will bring up the help window for the first person in the displayed list. <br>
+![result of view 1](images/viewOneResult.png)
+
 
 ### Editing a person : `edit`
 
