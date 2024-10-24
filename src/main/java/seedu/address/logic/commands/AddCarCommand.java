@@ -33,7 +33,7 @@ public class AddCarCommand extends Command {
             + PREFIX_MODEL + "Corolla ";
 
     public static final String MESSAGE_USER_ALREADY_HAS_CAR = "This person already has a car.";
-    public static final String MESSAGE_ADD_CAR_SUCCESS = "Car successfully added: %s";
+    public static final String MESSAGE_ADD_CAR_SUCCESS = "Car added successfully: VRN: %s, VIN: %s, Make: %s, Model: %s";
     public static final String MESSAGE_SAME_CAR_ALREADY_EXISTS = "This car already exists in the address book";
 
     private final Index index;
@@ -83,7 +83,8 @@ public class AddCarCommand extends Command {
         // This method call effectively replaces the old user with the new user with a car.
         model.setPerson(personToAddCarTo, updatedPerson);
 
-        return new CommandResult(String.format(MESSAGE_ADD_CAR_SUCCESS, carToAdd));
+        return new CommandResult(String.format(MESSAGE_ADD_CAR_SUCCESS, carToAdd.getVrn(), carToAdd.getVin(),
+                carToAdd.getCarMake(), carToAdd.getCarModel()));
     }
 
     @Override
