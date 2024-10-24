@@ -6,7 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,9 +18,6 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Wedding;
-
-import java.util.List;
-
 
 /**
  * Adds a wedding to the Address Book.
@@ -79,6 +77,13 @@ public class AddwCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
+    /**
+     * Selects the client based on the provided index.
+     *
+     * @param model The model containing the list of persons.
+     * @return The selected client.
+     * @throws CommandException If the index is invalid.
+     */
     public Person selectClientWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -94,6 +99,13 @@ public class AddwCommand extends Command {
         return lastShownList.get(index.getZeroBased());
     }
 
+    /**
+     * Selects the client by matching the name keyword.
+     *
+     * @param model The model containing the filtered list of persons.
+     * @return The selected client.
+     * @throws CommandException If no person matches the keyword or there are multiple matches.
+     */
     public Person selectClientWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
         List<Person> filteredPersonList = model.getFilteredPersonList();
@@ -114,7 +126,6 @@ public class AddwCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AddwCommand)) {
             return false;
         }

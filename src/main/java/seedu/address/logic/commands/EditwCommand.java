@@ -8,12 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.logic.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.wedding.Date;
 import seedu.address.model.person.Name;
+import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 
@@ -83,7 +82,6 @@ public class EditwCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        // simplified for readability
         return other == this
                 || (other instanceof EditwCommand
                 && index.equals(((EditwCommand) other).index)
@@ -105,33 +103,50 @@ public class EditwCommand extends Command {
             return name != null || date != null || venue != null;
         }
 
+        /**
+         * Sets the {@code Name} of the wedding.
+         */
         public void setName(Name name) {
             this.name = name;
         }
 
+        /**
+         * Returns an Optional containing the wedding's {@code Name} if it was set.
+         */
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
+        /**
+         * Sets the {@code Date} of the wedding.
+         */
         public void setDate(Date date) {
             this.date = date;
         }
 
+        /**
+         * Returns an Optional containing the wedding's {@code Date} if it was set.
+         */
         public Optional<Date> getDate() {
             return Optional.ofNullable(date);
         }
 
+        /**
+         * Sets the {@code Venue} of the wedding.
+         */
         public void setVenue(Venue venue) {
             this.venue = venue;
         }
 
+        /**
+         * Returns an Optional containing the wedding's {@code Venue} if it was set.
+         */
         public Optional<Venue> getVenue() {
             return Optional.ofNullable(venue);
         }
 
         @Override
         public boolean equals(Object other) {
-            // simplified for readability
             return other == this
                     || (other instanceof EditWeddingDescriptor
                     && getName().equals(((EditWeddingDescriptor) other).getName())

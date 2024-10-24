@@ -8,9 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditwCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.wedding.Date;
-import seedu.address.model.person.Name;
-import seedu.address.model.wedding.Venue;
+
 
 /**
  * Parses input arguments and creates a new EditwCommand object.
