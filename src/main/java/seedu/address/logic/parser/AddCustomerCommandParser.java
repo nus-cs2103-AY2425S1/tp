@@ -40,6 +40,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+
         // Add the "customer" tag explicitly
         tagList.add(new Tag("customer"));
 

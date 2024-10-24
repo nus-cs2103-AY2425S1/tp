@@ -1,16 +1,23 @@
 package seedu.address.model.order;
 
+import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+/**
+ * Class to manage a list of orders, including both supply and customer orders.
+ */
 public abstract class OrderList<T extends Order> {
+    private ObservableList<T> orders = FXCollections.observableArrayList();;
+    private ObservableList<T> internalUnmodifiableOrders =
+            FXCollections.unmodifiableObservableList(orders);
 
-    protected List<T> orders;
-
-    public OrderList() {
-        this.orders = new ArrayList<>();
-    }
 
     /**
      * Adds an order to the list.
@@ -18,16 +25,9 @@ public abstract class OrderList<T extends Order> {
      * @param order The order to be added.
      */
     public void addOrder(T order) {
+        assert order != null : "Order to add cannot be null";
         orders.add(order);
-    }
-
-    /**
-     * Retrieves all orders.
-     *
-     * @return A list of all orders.
-     */
-    public List<T> getOrders() {
-        return new ArrayList<>(orders);  // Return a copy of the list to avoid modification
+        orders.sort(Comparator.comparing(Order::getStatus));
     }
 
     /**
@@ -36,7 +36,19 @@ public abstract class OrderList<T extends Order> {
      * @param phoneNumber The phone number associated with the order.
      * @return The order associated with the given phone number, or null if not found.
      */
+
+    /**
+     * Retrieves all customer orders.
+     *
+     * @return A list of all customer orders.
+     */
+    public ObservableList<T> getOrders() {
+        return internalUnmodifiableOrders;  // Return a copy of the list to avoid modification
+    }
+
+
     public T findOrderByPhoneNumber(String phoneNumber) {
+        assert phoneNumber != null : "Phone number cannot be null";
         for (T order : orders) {
             if (order.getPhoneNumber().equals(phoneNumber)) {
                 return order;
@@ -52,6 +64,7 @@ public abstract class OrderList<T extends Order> {
      * @return True if the order was successfully removed, false otherwise.
      */
     public boolean removeOrder(String phoneNumber) {
+        assert phoneNumber != null : "Phone number cannot be null";
         return orders.removeIf(order -> order.getPhoneNumber().equals(phoneNumber));
     }
 
@@ -69,7 +82,8 @@ public abstract class OrderList<T extends Order> {
         // Generate output
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
-            sb.append(String.format("Order %d: [Status: %s]\n", i + 1, order.getStatus()));
+            sb.append(String.format("Order %d", i + 1));
+            sb.append("\n");
             sb.append(order.viewOrder());
             sb.append("\n");
         }

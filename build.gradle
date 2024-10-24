@@ -40,6 +40,10 @@ task coverage(type: JacocoReport) {
     }
 }
 
+run {
+    jvmArgs '-ea'
+}
+
 dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
@@ -70,3 +74,7 @@ shadowJar {
 }
 
 defaultTasks 'clean', 'test'
+
+run {
+    enableAssertions = true
+}

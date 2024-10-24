@@ -31,8 +31,10 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
-    private final CustomerOrderList customerOrderList = new CustomerOrderList();
-    private final SupplierOrderList supplierOrderList = new SupplierOrderList();
+    private final SupplierOrderList supplierOrderList;
+    private final CustomerOrderList customerOrderList;
+    private final ObservableList<SupplyOrder> supplyOrderObservableList;
+    private final ObservableList<CustomerOrder> customerOrderObservableList;
     private final Inventory inventory = new Inventory(ingredientCatalogue);
 
     /**
@@ -40,13 +42,16 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
-
         logger.fine("Initializing with address book: " + addressBook
                 + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.supplierOrderList = this.addressBook.getSupplierOrderList();
+        this.customerOrderList = this.addressBook.getCustomerOrderList();
+        this.supplyOrderObservableList = this.supplierOrderList.getOrders();
+        this.customerOrderObservableList = this.customerOrderList.getOrders();
     }
 
     public ModelManager() {
@@ -155,6 +160,14 @@ public class ModelManager implements Model {
     @Override
     public SupplierOrderList getSupplierOrderList() {
         return supplierOrderList;
+    }
+
+    public ObservableList<SupplyOrder> getSupplyOrderObservableList() {
+        return supplyOrderObservableList;
+    }
+
+    public ObservableList<CustomerOrder> getCustomerOrderObservableList() {
+        return customerOrderObservableList;
     }
 
     @Override

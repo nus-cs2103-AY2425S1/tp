@@ -11,7 +11,7 @@ public class ViewPastryCatalogueCommand extends Command {
 
     public static final String COMMAND_WORD = "viewPastryCatalogue";
 
-    public static final String MESSAGE_SUCCESS = "The pastry catalogue is shown below: \n";
+    public static final String MESSAGE_SUCCESS = "The pastry catalogue is shown below: \n\n";
 
 
     @Override
