@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESENT;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -63,6 +64,7 @@ public class MarkAttendanceCommand extends Command {
 
         // Mark attendance
         student.markAttendance(date, attendance.value);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance, date));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
     }
 }

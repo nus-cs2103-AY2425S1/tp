@@ -298,7 +298,6 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
     }
 
     /**
@@ -365,10 +364,6 @@ public class DeleteStudentCommandTest {
         @Override
         public ObservableList<Student> getFilteredStudentList() {
             return FXCollections.observableArrayList();
-        }
-        @Override
-        public Student getStudentByName(Name name) {
-            return null;
         }
 
         @Override

@@ -157,6 +157,12 @@ Exits the program.
 
 Format: `exit`
 
+### Marking Attendance : `markat`
+
+Marks attendance of student for a particular date
+
+Format: `markat n/STUDENT_NAME d/DATE`
+
 ### Saving the data
 
 Teletutors data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.

@@ -124,10 +124,16 @@ public class Student extends Person {
      *
      * @param date The date on which attendance is being recorded.
      * @param status The attendance status, either 'present' or 'absent'.
-     * @throws IllegalArgumentException if the provided status is nvalid.
+     * @throws IllegalArgumentException if the provided status is invalid.
      */
     public void markAttendance(LocalDate date, String status) {
         Attendance attendance = new Attendance(status);
+        for (AttendanceRecord ar : attendanceRecords) {
+            if (ar.getDate().equals(date)) {
+                ar.setAttendance(attendance);
+                return;
+            }
+        }
         AttendanceRecord record = new AttendanceRecord(date, attendance);
         attendanceRecords.add(record);
     }
@@ -202,6 +208,15 @@ public class Student extends Person {
             }
         }
         return null;
+    }
+
+    /**
+     * Adds the attendance record to the attendance records
+     *
+     * @param ar A valid attendance record
+     */
+    public void addAttendanceRecord(AttendanceRecord ar) {
+        attendanceRecords.add(ar);
     }
 
     /**
