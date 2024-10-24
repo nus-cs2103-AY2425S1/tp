@@ -58,7 +58,7 @@ public class BookmarkCommand extends Command {
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
                 companyToBookmark.getEmail(), companyToBookmark.getAddress(), companyToBookmark.getCareerPageUrl(),
                 companyToBookmark.getApplicationStatus(),
-                companyToBookmark.getTags(), new Bookmark(true));
+                companyToBookmark.getTags(), new Bookmark(true), companyToBookmark.getRemark());
 
         model.setCompany(companyToBookmark, companyBookmarked);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);

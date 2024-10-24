@@ -54,7 +54,8 @@ public class ApplicationStatusCommand extends Command {
         Company editedPerson = new Company(
                 companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getCareerPageUrl(),
-                companyToEdit.getApplicationStatus(), companyToEdit.getTags(), companyToEdit.getIsBookmark());
+                companyToEdit.getApplicationStatus(), companyToEdit.getTags(),
+                companyToEdit.getIsBookmark(), companyToEdit.getRemark());
 
         model.setCompany(companyToEdit, editedPerson);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);

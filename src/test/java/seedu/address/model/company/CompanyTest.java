@@ -89,6 +89,14 @@ public class CompanyTest {
         // different tags -> returns false
         editedGoogle = new CompanyBuilder(GOOGLE).withTags(VALID_TAG_BIGTECH).build();
         assertFalse(GOOGLE.equals(editedGoogle));
+
+        // different career page URL -> returns false
+        editedGoogle = new CompanyBuilder(GOOGLE).withCareerPageUrl("different-career-url.com").build();
+        assertFalse(GOOGLE.equals(editedGoogle));
+
+        // different remark -> returns false
+        editedGoogle = new CompanyBuilder(GOOGLE).withRemark("Different remark").build();
+        assertFalse(GOOGLE.equals(editedGoogle));
     }
 
     @Test
@@ -98,7 +106,7 @@ public class CompanyTest {
                 + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress() + ", url="
                 + GOOGLE.getCareerPageUrl() + ", application status=" + GOOGLE.getApplicationStatus()
                 + ", tags=" + GOOGLE.getTags() + ", bookmark=" + GOOGLE.getIsBookmark()
-                + "}";
+                + ", remark=" + GOOGLE.getRemark() + "}";
         assertEquals(expected, GOOGLE.toString());
     }
 }

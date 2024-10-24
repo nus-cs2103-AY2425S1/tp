@@ -58,7 +58,7 @@ public class RemoveBookmarkCommand extends Command {
                 companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
                 companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
                 companyToRemoveBookmark.getApplicationStatus(),
-                companyToRemoveBookmark.getTags(), new Bookmark(false));
+                companyToRemoveBookmark.getTags(), new Bookmark(false), companyToRemoveBookmark.getRemark());
 
         model.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);

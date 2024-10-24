@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CAREER_PAGE_URL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK; // New prefix for remark
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -38,10 +39,12 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_MICROSOFT = "Block 123, Microsoft Street 3";
     public static final String VALID_CAREER_PAGE_URL_TESLA = "https://www.tesla.com/careers";
     public static final String VALID_CAREER_PAGE_URL_MICROSOFT = "https://careers.microsoft.com";
+    public static final String VALID_REMARK_COMPANY = "remark";
     public static final String VALID_TAG_BIGTECH = "bigTech";
     public static final String VALID_TAG_COMPANY = "company";
     public static final String VALID_STATUS_ONGOING = "ongoing";
     public static final String VALID_STATUS_OFFER = "offer";
+    public static final String VALID_REMARK = "Hard to schedule interview"; // New valid remark
 
     public static final String NAME_DESC_TESLA = " " + PREFIX_NAME + VALID_NAME_TESLA;
     public static final String NAME_DESC_MICROSOFT = " " + PREFIX_NAME + VALID_NAME_MICROSOFT;
@@ -54,8 +57,10 @@ public class CommandTestUtil {
     public static final String CAREER_PAGE_URL_DESC_TESLA = " " + PREFIX_CAREER_PAGE_URL + VALID_CAREER_PAGE_URL_TESLA;
     public static final String CAREER_PAGE_URL_DESC_MICROSOFT = " " + PREFIX_CAREER_PAGE_URL
             + VALID_CAREER_PAGE_URL_MICROSOFT;
+    public static final String REMARK_DESC_COMPANY = " " + PREFIX_ADDRESS + VALID_REMARK_COMPANY;
     public static final String TAG_DESC_COMPANY = " " + PREFIX_TAG + VALID_TAG_COMPANY;
     public static final String TAG_DESC_BIGTECH = " " + PREFIX_TAG + VALID_TAG_BIGTECH;
+    public static final String REMARK_DESC_VALID = " " + PREFIX_REMARK + VALID_REMARK; // New valid remark description
 
     // Invalid constants
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -65,6 +70,7 @@ public class CommandTestUtil {
     public static final String INVALID_CAREER_PAGE_URL_DESC = " " + PREFIX_CAREER_PAGE_URL
             + " "; // Invalid URL format
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + ""; // Empty remark not allowed
 
     // Preambles
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -76,19 +82,13 @@ public class CommandTestUtil {
 
     static {
         DESC_TESLA = new EditCompanyDescriptorBuilder().withName(VALID_NAME_TESLA)
-                .withPhone(VALID_PHONE_TESLA)
-                .withEmail(VALID_EMAIL_TESLA)
-                .withAddress(VALID_ADDRESS_TESLA)
-                .withCareerPageUrl(VALID_CAREER_PAGE_URL_TESLA)
-                .withTags(VALID_TAG_COMPANY)
-                .build();
+                .withPhone(VALID_PHONE_TESLA).withEmail(VALID_EMAIL_TESLA).withAddress(VALID_ADDRESS_TESLA)
+                .withRemark(VALID_REMARK).withCareerPageUrl(VALID_CAREER_PAGE_URL_TESLA)
+                .withTags(VALID_TAG_COMPANY).build(); // Added remark
         DESC_MICROSOFT = new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT)
-                .withPhone(VALID_PHONE_MICROSOFT)
-                .withEmail(VALID_EMAIL_MICROSOFT)
-                .withAddress(VALID_ADDRESS_MICROSOFT)
-                .withCareerPageUrl(VALID_CAREER_PAGE_URL_MICROSOFT)
-                .withTags(VALID_TAG_BIGTECH, VALID_TAG_COMPANY)
-                .build();
+                .withPhone(VALID_PHONE_MICROSOFT).withCareerPageUrl(VALID_CAREER_PAGE_URL_MICROSOFT)
+                .withEmail(VALID_EMAIL_MICROSOFT).withAddress(VALID_ADDRESS_MICROSOFT)
+                .withTags(VALID_TAG_BIGTECH, VALID_TAG_COMPANY).withRemark(VALID_REMARK).build(); // Added remark
     }
 
     /**
@@ -147,4 +147,5 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredCompanyList().size());
     }
+
 }

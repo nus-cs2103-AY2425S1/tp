@@ -9,7 +9,8 @@
     "tags": [ "bigTech" ],
     "isBookmark" : {
       "isBookmark" : false
-    }
+    },
+    "remark": "Search engine giant"
   }, {
     "name": "Google",
     "phone": "94351253",
@@ -20,6 +21,7 @@
     "tags": [ ],
     "isBookmark" : {
       "isBookmark" : false
-    }
+    },
+    "remark": "Duplicate Google entry"
   } ]
 }

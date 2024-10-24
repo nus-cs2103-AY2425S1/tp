@@ -38,7 +38,8 @@ public class BookmarkCommandTest {
         // Create a new company with the original company's isBookmark field set to true
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
                 companyToBookmark.getEmail(), companyToBookmark.getAddress(), companyToBookmark.getCareerPageUrl(),
-                companyToBookmark.getApplicationStatus(), companyToBookmark.getTags(), new Bookmark(true));
+                companyToBookmark.getApplicationStatus(), companyToBookmark.getTags(),
+                new Bookmark(true), companyToBookmark.getRemark());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToBookmark, companyBookmarked);
@@ -82,7 +83,8 @@ public class BookmarkCommandTest {
         // Create a new company with the original company's isBookmark field set to true
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
                 companyToBookmark.getEmail(), companyToBookmark.getAddress(), companyToBookmark.getCareerPageUrl(),
-                companyToBookmark.getApplicationStatus(), companyToBookmark.getTags(), new Bookmark(true));
+                companyToBookmark.getApplicationStatus(), companyToBookmark.getTags(),
+                new Bookmark(true), companyToBookmark.getRemark());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToBookmark, companyBookmarked);

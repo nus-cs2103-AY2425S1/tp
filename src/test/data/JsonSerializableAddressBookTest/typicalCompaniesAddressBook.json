@@ -1,81 +1,74 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "companies" : [ {
-    "name" : "Google",
-    "phone" : "00000001",
-    "email" : "google@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "careerPageUrl" : "careers.com",
-    "applicationStatus": "",
-    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
-    "isBookmark" : {
-      "isBookmark" : false
+  "companies" : [
+    {
+      "name" : "Google",
+      "phone" : "00000001",
+      "email" : "google@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "url" : "careers.com",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "Leading tech company"
+    },
+    {
+      "name" : "Meta",
+      "phone" : "00000002",
+      "email" : "meta@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "url" : "careers.com",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "Social media giant"
+    },
+    {
+      "name" : "Grab",
+      "phone" : "00000003",
+      "email" : "grab@example.com",
+      "address" : "wall street",
+      "url" : "careers.com",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "Leading ride-hailing service in Southeast Asia"
+    },
+    {
+      "name" : "Shopee",
+      "phone" : "00000004",
+      "email" : "shopee@example.com",
+      "address" : "10th street",
+      "url" : "careers.com",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "E-commerce platform"
+    },
+    {
+      "name" : "Apple",
+      "phone" : "00000005",
+      "email" : "apple@example.com",
+      "address" : "michegan ave",
+      "url" : "careers.com",
+      "tags" : [ ],
+      "bookmark" : false,
+      "remark" : "Creators of the iPhone"
+    },
+    {
+      "name" : "ByteDance",
+      "phone" : "00000006",
+      "email" : "bytedance@example.com",
+      "address" : "little tokyo",
+      "url" : "careers.com",
+      "tags" : [ ],
+      "bookmark" : false,
+      "remark" : "TikTok parent company"
+    },
+    {
+      "name" : "Amazon",
+      "phone" : "00000007",
+      "email" : "amazon@example.com",
+      "address" : "4th street",
+      "url" : "careers.com",
+      "tags" : [ ],
+      "bookmark" : false,
+      "remark" : "E-commerce and cloud computing leader"
     }
-  }, {
-    "name" : "Meta",
-    "phone" : "00000002",
-    "email" : "meta@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "careerPageUrl" : "careers.com",
-    "applicationStatus": "",
-    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
-    "isBookmark" : {
-      "isBookmark" : false
-    }
-  }, {
-    "name" : "Grab",
-    "phone" : "00000003",
-    "email" : "grab@example.com",
-    "address" : "wall street",
-    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
-    "careerPageUrl" : "careers.com",
-    "applicationStatus": "",
-    "isBookmark" : {
-      "isBookmark" : false
-    }
-  }, {
-    "name" : "Shopee",
-    "phone" : "00000004",
-    "email" : "shopee@example.com",
-    "address" : "10th street",
-    "careerPageUrl" : "careers.com",
-    "applicationStatus": "",
-    "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
-    "isBookmark" : {
-      "isBookmark" : false
-    }
-  }, {
-    "name" : "Apple",
-    "phone" : "00000005",
-    "email" : "apple@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ],
-    "careerPageUrl" : "careers.com",
-    "applicationStatus": "",
-    "isBookmark" : {
-      "isBookmark" : false
-    }
-  }, {
-    "name" : "ByteDance",
-    "phone" : "00000006",
-    "email" : "bytedance@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ],
-    "careerPageUrl" : "careers.com",
-    "applicationStatus": "",
-    "isBookmark" : {
-      "isBookmark" : false
-    }
-  }, {
-    "name" : "Amazon",
-    "phone" : "00000007",
-    "email" : "amazon@example.com",
-    "address" : "4th street",
-    "careerPageUrl" : "careers.com",
-    "applicationStatus": "",
-    "tags" : [ ],
-    "isBookmark" : {
-      "isBookmark" : false
-    }
-  } ]
+  ]
 }
