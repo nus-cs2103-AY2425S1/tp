@@ -24,6 +24,7 @@ public class FindPersonCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified names (case-insensitive) and role matches the specified role (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
+            + "The name or role, or both of them must be included.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ROLE + "ROLE]\n"

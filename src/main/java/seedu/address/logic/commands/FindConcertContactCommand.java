@@ -31,6 +31,7 @@ public class FindConcertContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all concertContacts which are associated to "
             + "the person at the specified person index and the concert at the specified concert index "
             + "and displays them as a list with index numbers.\n"
+            + "The person or concert index, or both of them must be included.\n"
             + "Parameters: "
             + "[" + PREFIX_PERSON + "PERSON_INDEX] "
             + "[" + PREFIX_CONCERT + "CONCERT_INDEX]\n"
