@@ -46,7 +46,7 @@ public class ScheduleCommandTest {
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT, updatedRegularLesson);
 
         Student studentToSchedule = model.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student scheduledStudent = studentToSchedule.withRegularLesson(updatedRegularLesson);
+        Student scheduledStudent = studentToSchedule.withRegularLesson(updatedRegularLesson).withoutCancelledLessons();
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULE_LESSON_SUCCESS,
                 updatedRegularLesson.toDisplay(), Messages.format(studentToSchedule));

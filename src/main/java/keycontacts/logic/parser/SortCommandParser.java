@@ -61,7 +61,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     private boolean isValidSortOrder(String sortOrder) {
-        return sortOrder.equals("ASC") || sortOrder.equals("DESC");
+        return sortOrder.toUpperCase().equals("ASC") || sortOrder.toUpperCase().equals("DESC");
     }
 
 }

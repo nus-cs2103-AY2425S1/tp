@@ -194,16 +194,16 @@ Sorts students with personal details
 
 Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [g/ASC or DESC]`
 
-* The order of keyword DOES matter. If there are ties in first field, it will use later fields to tie-break.
-* Other prefixes then `n/`, `/p`, `a/`, `g/` will be ignored.
+* The order of prefixes DOES matter. If there are ties in first field, it will use later fields to tie-break.
+* Prefixes other than `n/`, `/p`, `a/`, `g/` will be ignored.
 * Only name, phone number, address, and grade level are valid fields to be sorted against
-* The sorting order must be `ASC` or  `DESC`, and is case-SENSITIVE
+* The sorting order must be `ASC` or  `DESC`, and is case-insensitive
 
 To clear the sorting conditions, use command `sort clear`
 
 Examples:
 * `sort n/ASC` sorts the students by name in ascending order.
-* `sort n/ASC g/DESC` sorts the students by name in ascending order, and tie-breaks with grade level in descending order
+* `sort g/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks with name in ascending order
 
 ### Deleting a student : `delete`
 

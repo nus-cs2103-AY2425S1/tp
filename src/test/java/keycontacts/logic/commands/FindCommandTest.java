@@ -58,7 +58,7 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("e").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(5, model.getStudentList().size());
     }
@@ -69,7 +69,7 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("Carl Kurz").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(1, model.getStudentList().size());
     }
@@ -89,7 +89,7 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("Alice Pauline").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(1, model.getStudentList().size());
     }
@@ -100,7 +100,7 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("Ku").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(2, model.getStudentList().size());
     }
@@ -111,9 +111,9 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withPhone("9482").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(3, model.getFilteredStudentList().size());
+        assertEquals(3, model.getStudentList().size());
     }
 
     @Test
@@ -122,9 +122,9 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withAddress("wall street").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -133,9 +133,9 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withGradeLevel("ABRSM").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(3, model.getFilteredStudentList().size());
+        assertEquals(3, model.getStudentList().size());
     }
 
     @Test
@@ -145,9 +145,9 @@ public class FindCommandTest {
                 .withPhone("94351253").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -157,9 +157,9 @@ public class FindCommandTest {
                 .withAddress("wall street").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -169,9 +169,9 @@ public class FindCommandTest {
                 .withGradeLevel("ABRSM 3").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -181,9 +181,9 @@ public class FindCommandTest {
                 .withAddress("4th street").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -193,9 +193,9 @@ public class FindCommandTest {
                 .withGradeLevel("RCM 2").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -205,9 +205,9 @@ public class FindCommandTest {
                 .withGradeLevel("ABRSM 3").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -217,9 +217,9 @@ public class FindCommandTest {
                 .withPhone("94351253").withAddress("123, Jurong West Ave 6, #08-111").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -229,9 +229,9 @@ public class FindCommandTest {
                 .withPhone("98765432").withGradeLevel("RSL 3").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -241,9 +241,9 @@ public class FindCommandTest {
                 .withAddress("michegan ave").withGradeLevel("IMEB 1").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -253,9 +253,9 @@ public class FindCommandTest {
                 .withAddress("little tokyo").withGradeLevel("RCM 2").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -265,8 +265,8 @@ public class FindCommandTest {
                 .withPhone("94351253").withAddress("123, Jurong West Ave 6, #08-111").withGradeLevel("ABRSM 2").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.filterStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 }

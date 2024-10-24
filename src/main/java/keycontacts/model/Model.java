@@ -1,8 +1,8 @@
 package keycontacts.model;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -91,17 +91,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getStudentList();
 
-    /**
-     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredStudentList(Predicate<Student> predicate);
-
-    void updateStudentList(Predicate<Student> predicate);
+    void filterStudentList(Predicate<Student> predicate);
 
     /**
      * Updates the sorted student list to sort by the given {@code comparator}.
      * @throws NullPointerException if {@code comparator} is null.
      */
-    void updateStudentList(Comparator<Student> comparator);
+    void sortStudentList(Comparator<Student> comparator);
 }

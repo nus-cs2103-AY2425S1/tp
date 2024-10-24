@@ -30,7 +30,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateStudentList(this.comparator);
+        model.sortStudentList(this.comparator);
 
         if (this.comparator == null) {
             return new CommandResult(MESSAGE_SORT_CLEAR);

@@ -136,7 +136,7 @@ public class CommandTestUtil {
         Student student = model.getStudentList().get(targetIndex.getZeroBased());
         FindStudentDescriptorBuilder builder = new FindStudentDescriptorBuilder();
         builder.withName(student.getName().fullName);
-        model.updateStudentList(new StudentDescriptorMatchesPredicate(builder.build()));
+        model.filterStudentList(new StudentDescriptorMatchesPredicate(builder.build()));
 
         assertEquals(1, model.getStudentList().size());
     }

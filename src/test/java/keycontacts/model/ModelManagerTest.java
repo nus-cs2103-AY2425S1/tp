@@ -121,11 +121,11 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         FindStudentDescriptor findStudentDescriptor = new FindStudentDescriptorBuilder()
                 .withName(ALICE.getName().fullName).build();
-        modelManager.updateStudentList(new StudentDescriptorMatchesPredicate(findStudentDescriptor));
+        modelManager.filterStudentList(new StudentDescriptorMatchesPredicate(findStudentDescriptor));
         assertFalse(modelManager.equals(new ModelManager(studentDirectory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        modelManager.filterStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
