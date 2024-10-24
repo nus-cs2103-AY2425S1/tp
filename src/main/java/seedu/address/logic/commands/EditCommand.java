@@ -11,7 +11,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Edits the details of an existing vendor in the address book.
+ * Parent abstract class for edit commands.
+ * Contains the index of the target to be edited.
  */
 public abstract class EditCommand extends Command {
 

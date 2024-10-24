@@ -27,6 +27,9 @@ import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 import seedu.address.model.vendor.Vendor;
 
+/**
+ * Edits a vendor identified using it's displayed index from the address book.
+ */
 public class EditVendorCommand extends EditCommand {
 
     public static final String MESSAGE_EDIT_VENDOR_SUCCESS = "Edited Vendor: %1$s";
