@@ -35,7 +35,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
-        return eventMap.containsKey(toCheck.getId());
+        return internalList.stream().anyMatch(toCheck::isSameEvent);
     }
 
     /**

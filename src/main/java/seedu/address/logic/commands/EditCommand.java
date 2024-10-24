@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         Description updatedDescription = editVendorDescriptor.getDescription().orElse(vendorToEdit.getDescription());
         Set<Tag> updatedTags = editVendorDescriptor.getTags().orElse(vendorToEdit.getTags());
 
-        return new Vendor(updatedName, updatedPhone, updatedDescription, updatedTags);
+        return new Vendor(vendorToEdit.getId(), updatedName, updatedPhone, updatedDescription, updatedTags);
     }
 
     @Override

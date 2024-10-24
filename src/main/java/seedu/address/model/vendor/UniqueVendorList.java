@@ -37,7 +37,7 @@ public class UniqueVendorList implements Iterable<Vendor> {
      */
     public boolean contains(Vendor toCheck) {
         requireNonNull(toCheck);
-        return vendorMap.containsKey(toCheck.getId());
+        return internalList.stream().anyMatch(toCheck::isSameVendor);
     }
 
     /**
