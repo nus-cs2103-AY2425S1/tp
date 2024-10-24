@@ -117,8 +117,16 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `TutorEaseParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `TutorEaseParser` class creates a `ContactCommandParser` or `LessonCommandParser` based on the first word that the tutor keys in, which creates `XYZContactCommandParser`(e.g. `AddContactCommandParser`, `DeleteContactCommandParser`) and `XYZLessonCommandParser` (e.g. `AddLessonCommandParser`) respectively. `XYZContactCommandParser` and `XYZLessonCommandParser` use the other classes shown above to parse the user command and create a `XYZContactCommand` or `XYZLessonCommand` object (e.g., `AddContactCommand`) which the `TutorEaseParser` returns back as a `Command` object.
+* All `XYZContactCommandParser` and `XYZLessonCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the`Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+Extra Pointers about parsing:
+
+* For basic one-word commands like `help`, `exit`, and `clear`, they are handled directly within the `parseCommand` function in `TutorEaseParser` without the need for a dedicated parser.
+These simple commands are omitted in the Parser classes diagram to enhance clarity and reduce clutter.
+* Various contact and lesson command parsers are represented as `XYZContactCommandParser` and `XYZLessonCommandParser`, respectively. 
+However, their behaviour varies slightly depending on the function. For example, `ArgumentMultimap` is used exclusively in parsers for add, delete, and edit commands, 
+while `ArgumentTokenizer` is only used in parsers for add and edit commands. Not specifying every parser reduces clutter and conveys the high-level message concisely.
 
 ### Model component
 
