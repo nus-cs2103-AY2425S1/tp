@@ -144,7 +144,7 @@ public class ModelManagerTest {
         modelManager.addStudent(DIDDY);
         modelManager.addStudent(HUGH);
         modelManager.addStudent(BOB);
-        ObservableList<Student> result = modelManager.getAllStudentByName(BOB.getName());
+        ObservableList<Student> result = modelManager.getAllStudentsByName(BOB.getName());
 
         List<Student> expectedList = new ArrayList<>();
         expectedList.add(BOB);
@@ -157,7 +157,7 @@ public class ModelManagerTest {
         modelManager.addStudent(DIDDY);
         modelManager.addStudent(HUGH);
         modelManager.addStudent(BOB);
-        ObservableList<Student> result = modelManager.getAllStudentByName(new Name("Jerrell"));
+        ObservableList<Student> result = modelManager.getAllStudentsByName(new Name("Jerrell"));
 
         assertTrue(result.isEmpty());
     }

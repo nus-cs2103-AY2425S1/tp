@@ -199,7 +199,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Student> getAllStudentByName(Name name) {
+    public ObservableList<Student> getAllStudentsByName(Name name) {
         return getAddressBook()
                 .getStudentList()
                 .stream()
