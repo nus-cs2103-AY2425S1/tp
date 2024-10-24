@@ -24,6 +24,8 @@ public class AddToConsultCommandTest {
     private final Index validIndex = Index.fromOneBased(1);
     private final ObservableList<Name> studentNames = FXCollections.observableArrayList(new Name("John Doe"),
         new Name("Harry Ng"));
+    private final ObservableList<Name> duplicateStudentNames = FXCollections.observableArrayList(new Name("John Doe"),
+            new Name("John Doe"));
 
     @Test
     public void execute_addStudentsToConsult_success() throws Exception {
@@ -55,6 +57,13 @@ public class AddToConsultCommandTest {
 
         AddToConsultCommand command = new AddToConsultCommand(validIndex, invalidStudentNames);
 
+        assertThrows(CommandException.class, () -> command.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateStudent_throwsCommandException() throws Exception {
+        ModelStubWithConsultation modelStub = new ModelStubWithConsultation();
+        AddToConsultCommand command = new AddToConsultCommand(validIndex, duplicateStudentNames);
         assertThrows(CommandException.class, () -> command.execute(modelStub));
     }
 
