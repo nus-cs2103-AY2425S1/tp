@@ -74,6 +74,7 @@ public class JsonMeetUpListStorage implements MeetUpListStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
+        logger.info("saving meetup list");
         JsonUtil.saveJsonFile(new JsonSerializableMeetUpList(meetUpList), filePath);
     }
 

@@ -36,10 +36,8 @@ public class ModelManager implements Model {
                         ReadOnlyMeetUpList meetUpList, ReadOnlyPropertyList propertyList) {
         requireAllNonNull(buyerList, userPrefs, meetUpList, propertyList);
 
-        logger.fine("Initializing with buyer list: " + buyerList + " and user prefs " + userPrefs
+        logger.info("Initializing with buyer list: " + buyerList + " and user prefs " + userPrefs
                 + " and meet up list " + meetUpList + " and property list " + propertyList);
-
-        logger.info("initial meet up list contains " + meetUpList);
 
         this.buyerList = new BuyerList(buyerList);
         this.userPrefs = new UserPrefs(userPrefs);

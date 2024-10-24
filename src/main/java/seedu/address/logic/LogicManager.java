@@ -51,11 +51,11 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = AbcliParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
-        logger.info("meetup list is now " + model.getMeetUpList());
+        
         try {
             storage.saveBuyerList(model.getBuyerList());
             storage.saveMeetUpList(model.getMeetUpList());
+            storage.savePropertyList(model.getPropertyList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

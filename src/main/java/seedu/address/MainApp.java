@@ -87,7 +87,7 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getBuyerListFilePath());
         logger.info("Using meetUp file : " + storage.getMeetUpListFilePath());
-        logger.info("Using property file : " + storage.getUserPrefsFilePath());
+        logger.info("Using property file : " + storage.getPropertyListFilePath());
 
         Optional<ReadOnlyBuyerList> buyerListOptional;
         Optional<ReadOnlyMeetUpList> meetUpListOptional;
@@ -116,7 +116,6 @@ public class MainApp extends Application {
             }
 
             initialMeetUpList = meetUpListOptional.orElseGet(SampleMeetUpDataUtil::getSampleMeetUpList);
-            logger.info("initial list is" + initialMeetUpList);
 
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getMeetUpListFilePath() + " could not be loaded."
@@ -132,6 +131,7 @@ public class MainApp extends Application {
             }
 
             initialPropertyList = propertyListOptional.orElseGet(SamplePropertyDataUtil::getSamplePropertyList);
+            logger.info("initial list is " + initialPropertyList);
 
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getPropertyListFilePath() + " could not be loaded."

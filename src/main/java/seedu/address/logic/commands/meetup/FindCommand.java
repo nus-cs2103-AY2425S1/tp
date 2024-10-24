@@ -35,7 +35,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredMeetUpList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_MEETUPS_LISTED_OVERVIEW, model.getFilteredMeetUpList().size()));
+                String.format(Messages.MESSAGE_MEETUPS_LISTED_OVERVIEW, model.getFilteredMeetUpList().size()),
+                false, false, true, false, false);
     }
 
     @Override

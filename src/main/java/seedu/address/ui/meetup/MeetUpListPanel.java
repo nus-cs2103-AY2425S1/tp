@@ -2,6 +2,7 @@ package seedu.address.ui.meetup;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -10,8 +11,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.ui.UiPart;
+import java.util.List;
 
 /**
  * Panel containing the list of buyers.
@@ -26,23 +29,23 @@ public class MeetUpListPanel extends UiPart<Region> {
     /**
      * Creates a {@code BuyerListPanel} with the given {@code ObservableList}.
      */
-    public MeetUpListPanel(ObservableList<MeetUp> meetUpList) {
+    public MeetUpListPanel(ObservableList<MeetUp> meetUpList, ObservableList<MeetUp> originalList) {
         super(FXML);
-        logger.info(meetUpList.toString());
-        ArrayList<Boolean> hasOverlap = new ArrayList<Boolean>();
+        boolean[] hasOverlap = new boolean[meetUpList.size()];
 
-        for (MeetUp meetUp : meetUpList) {
+        for (int i = 0; i < meetUpList.size(); i++) {
             boolean foundOverlap = false;
-            for (MeetUp meetUp2 : meetUpList) {
+            MeetUp meetUp = meetUpList.get(i);
+            for (MeetUp meetUp2 : originalList) {
                 if (!meetUp.isSameMeetUp(meetUp2) && doDateRangesOverlap(meetUp, meetUp2)) {
                     foundOverlap = true;
                     break;
                 }
             }
-            hasOverlap.add(foundOverlap);
+            hasOverlap[i] = foundOverlap;
         }
         meetUpListView.setItems(meetUpList);
-        meetUpListView.setCellFactory(listView -> new MeetUpListViewCell(hasOverlap));
+        meetUpListView.setCellFactory(x -> new MeetUpListViewCell(hasOverlap));
     }
 
     /**
@@ -63,9 +66,9 @@ public class MeetUpListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code BuyerCard}.
      */
     class MeetUpListViewCell extends ListCell<MeetUp> {
-        private final ArrayList<Boolean> overlapList;
+        private boolean[] overlapList;
 
-        public MeetUpListViewCell(ArrayList<Boolean> overlapList) {
+        public MeetUpListViewCell(boolean[] overlapList) {
             this.overlapList = overlapList;
         }
 
@@ -73,15 +76,18 @@ public class MeetUpListPanel extends UiPart<Region> {
         protected void updateItem(MeetUp meetUp, boolean empty) {
             super.updateItem(meetUp, empty);
 
+            logger.info("Overlaplist size is : " + overlapList.length);
+            logger.info("Overlaplist size is : " + overlapList.length);
+            logger.info("Overlaplist size is : " + overlapList.length);
+            logger.info("Overlaplist size is : " + overlapList.length);
+            logger.info("Overlaplist size is : " + overlapList.length);
             if (empty || meetUp == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                // logger.info("making new card");
                 int index = getIndex();
-                setGraphic(new MeetUpCard(meetUp, index + 1, overlapList.get(index)).getRoot());
+                setGraphic(new MeetUpCard(meetUp, index + 1, overlapList[index]).getRoot());
             }
         }
     }
-
 }
