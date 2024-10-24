@@ -11,13 +11,16 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+#### Dual-parser setup
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command,
+1. When `Logic` is called upon to execute a command, it will first check whether the command is known by the `AddressBookParser`:
 
-   1.1. It is first passed to an `AddressBookParser` object which will attempt to parse it. If there is a matching command, it  creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+   1.1. **It is first passed to an `AddressBookParser` object which will attempt to parse it.** If there is a matching command, it creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 
-   1.2. If there is no matching command, repeat step `1.1` with a `TransactionBookParser`.
+   1.2. **If there is no matching command, `Logic` will try to parse it with a  `TransactionBookParser`.** If  there is a matching command, a similar thing happens as with `AddressBookParser`. The partial sequence diagram below illustrates this case clearly:
+
+   ![Partial sequence diagram for transaction command](images/LogicSequenceDiagram.png)
 
 2. This ultimately results in a non-null `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 
