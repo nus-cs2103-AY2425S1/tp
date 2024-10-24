@@ -1,9 +1,16 @@
 {
   "persons": [ {
-    "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "name": "Alice Pauline",
+    "nric": "S1234567A",
+    "dateOfBirth": "1990-03-03",
+    "gender": "F",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "priority": "NONE",
+    "allergies": [ "peanut" ],
+    "appointment": [],
+    "medCons": []
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",

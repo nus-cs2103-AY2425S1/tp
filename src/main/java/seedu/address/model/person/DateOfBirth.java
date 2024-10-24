@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.DateUtil.isAfterToday;
+import static seedu.address.commons.util.DateUtil.isDateAfterToday;
 import static seedu.address.commons.util.DateUtil.isValidDate;
 
 /**
@@ -30,11 +30,9 @@ public class DateOfBirth {
 
     /**
      * Returns if a given string is a valid date of birth.
-     *
-     * @param dob The date of birth to be checked.
      */
     public static boolean isValidDateOfBirth(String dob) {
-        return !(isAfterToday(dob));
+        return !(isDateAfterToday(dob));
     }
 
     @Override
