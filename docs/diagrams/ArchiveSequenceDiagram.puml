@@ -12,17 +12,16 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Person" as Person MODEL_COLOR
-participant ":DeliveryList" as DeliveryList MODEL_COLOR
 end box
 
 box Ui UI_COLOR_T1
 participant "<<class>>\nInspectWindow" as InspectWindow UI_COLOR
 end box
 
-[-> LogicManager : execute("archive 1 2")
+[-> LogicManager : execute("archive 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("archive 1 2")
+LogicManager -> AddressBookParser : parseCommand("archive 1")
 activate AddressBookParser
 
 create ArchiveCommandParser
@@ -32,7 +31,7 @@ activate ArchiveCommandParser
 ArchiveCommandParser --> AddressBookParser
 deactivate ArchiveCommandParser
 
-AddressBookParser -> ArchiveCommandParser : parse("1 2")
+AddressBookParser -> ArchiveCommandParser : parse("1")
 activate ArchiveCommandParser
 
 create ArchiveCommand
@@ -60,17 +59,21 @@ activate InspectWindow
 InspectWindow --> ArchiveCommand : inspectedPerson
 deactivate InspectWindow
 
-ArchiveCommand -> Person : getDeliveryList()
+ArchiveCommand -> ArchiveCommand : archiveDeliveries(...)
+activate ArchiveCommand
+
+ArchiveCommand -> Person : deleteDelivery(targetIndex)
 activate Person
 
-Person --> ArchiveCommand : deliveryList
+Person -[hidden]-> ArchiveCommand
+
+ArchiveCommand -> Person : addDelivery(deliveryToArchive)
+
+Person -[hidden]-> ArchiveCommand
 deactivate Person
 
-ArchiveCommand -> DeliveryList : archiveDeliveries(inspectedPerson, deliveryList)
-activate DeliveryList
-
-DeliveryList --> ArchiveCommand
-deactivate DeliveryList
+ArchiveCommand --> ArchiveCommand
+deactivate ArchiveCommand
 
 create CommandResult
 ArchiveCommand -> CommandResult
