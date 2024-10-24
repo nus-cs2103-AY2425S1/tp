@@ -26,10 +26,10 @@ public class AddAppointmentCommand extends AddCommand {
             + ": Adds an appointment to the appointment book. \n"
             + "Parameters: "
             + PREFIX_APPOINTMENT_TYPE + "AppointmentType "
-            + PREFIX_PERSON_ID + "PersonId "
             + PREFIX_DATETIME + "Date "
-            + "[" + PREFIX_SICKNESS + "Sickness] "
-            + "[" + PREFIX_MEDICINE + "Medicine] \n"
+            + PREFIX_PERSON_ID + "PersonId "
+            + PREFIX_SICKNESS + "Sickness "
+            + PREFIX_MEDICINE + "Medicine \n"
             + "Example: " + COMMAND_WORD
             + PREFIX_APPOINTMENT_TYPE + "Check up "
             + PREFIX_DATETIME + "2024-10-16 12:30:30 "
