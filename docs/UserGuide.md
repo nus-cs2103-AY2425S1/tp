@@ -1,4 +1,4 @@
----
+``---
   layout: default.md
   title: "User Guide"
   pageNav: 3
@@ -30,7 +30,7 @@ CampusConnect(CC) is a **desktop app** for managing contacts, optimized for use 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` with phone number `98765432` and email `johnd@example.com` to the CampusConnect.
+   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` with phone number `98765432` and email `johnd@example.com` to CampusConnect.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -52,7 +52,7 @@ CampusConnect(CC) is a **desktop app** for managing contacts, optimized for use 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -68,7 +68,7 @@ CampusConnect(CC) is a **desktop app** for managing contacts, optimized for use 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -77,7 +77,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the CampusConnect.
+Adds a person to CampusConnect.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 
@@ -86,7 +86,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
-* Phone number, following Singaporean convention, must have 8 digits, start with a 6, 8 or 9 and only have numbers.
+* The phone number must follow the Singaporean convention: have 8 digits, start with 6, 8, or 9, and consist only of numbers.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -94,20 +94,20 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the CampusConnect.
+Shows a list of all persons in CampusConnect.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the CampusConnect.
+Edits an existing person in CampusConnect.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -132,7 +132,7 @@ Format:
 
 * Only one field type can be specified per command.
 * Only the specified field is searched.
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -148,7 +148,7 @@ Disallowed examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the CampusConnect.
+Deletes the specified person from CampusConnect.
 
 Format: `delete INDEX`
 
@@ -157,7 +157,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the CampusConnect.
+* `list` followed by `delete 2` deletes the 2nd person in CampusConnect.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting a person's tag : `deletetag`
@@ -185,9 +185,18 @@ Format: `undo`
 
 * Reverts the state of CampusConnect to the one before the most recent command, if any.
 
+### Redo a command: `redo`
+
+Reapplies a command that was previously undone by `undo`.
+
+Format: `redo`
+
+* Advances CampusConnect to the state it was in before the most recent `undo` command, if any.
+* Note: If a new command (excluding `redo` or `undo`) is executed after an `undo`, the redo history is cleared, and further `redo` will not be possible.
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the CampusConnect.
+Clears all entries from CampusConnect.
 
 Format: `clear`
 
@@ -199,17 +208,17 @@ Format: `exit`
 
 ### Saving the data
 
-CampusConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CampusConnect data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-CampusConnect data are saved automatically as a JSON file `[JAR file location]/data/CampusConnect.json`. Advanced users are welcome to update data directly by editing that data file.
+CampusConnect data is saved automatically as a JSON file `[JAR file location]/data/CampusConnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, CampusConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the CampusConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause CampusConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -245,5 +254,8 @@ Action     | Format, Examples
 **Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
 **Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
 **Delete tag** | `deletetag INDEX t/KEYWORD` <br> e.g. `deletetag 1 t/friend`
+**Undo action** | `undo`
+**Redo action** | `redo`
 **List**   | `list`
 **Help**   | `help`
+``
