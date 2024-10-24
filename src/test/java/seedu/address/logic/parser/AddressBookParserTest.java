@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -15,7 +16,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -39,8 +39,8 @@ import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -85,11 +85,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_filter() throws Exception {
+        List<String> names = Arrays.asList("foo", "bar");
+        List<String> phones = Arrays.asList("123", "456");
+
+        String commandInput = FilterCommand.COMMAND_WORD + " " + "n/foo n/bar " + "p/123 p/456";
+
+        FilterCommand command = (FilterCommand) parser.parseCommand(commandInput);
+        FilterCommand expectedCommand = new FilterCommand(new PersonPredicate(names, phones, emptyList(),
+                emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList()));
+
+        assertEquals(expectedCommand, command);
     }
 
     @Test

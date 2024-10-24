@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
@@ -29,8 +30,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.AbsentDate;
 import seedu.address.model.person.AbsentReason;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -182,7 +183,8 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new PersonPredicate(Arrays.asList(splitName[0]), emptyList(), emptyList(),
+                emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), emptyList()));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
