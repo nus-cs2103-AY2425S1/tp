@@ -20,6 +20,8 @@ import tahub.contacts.logic.commands.ExitCommand;
 import tahub.contacts.logic.commands.FindCommand;
 import tahub.contacts.logic.commands.HelpCommand;
 import tahub.contacts.logic.commands.ListCommand;
+import tahub.contacts.logic.commands.attend.AttendPresentCommand;
+import tahub.contacts.logic.parser.attend.AttendPresentCommandParser;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 
 /**
@@ -82,6 +84,9 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case AttendPresentCommand.COMMAND_WORD:
+            return new AttendPresentCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

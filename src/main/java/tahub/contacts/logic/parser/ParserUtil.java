@@ -192,6 +192,7 @@ public class ParserUtil {
         requireNonNull(tutorialId);
         String trimmedTutorialId = tutorialId.trim();
         if (!Tutorial.isValidTutorialId(trimmedTutorialId)) {
+            boolean a = Tutorial.isValidTutorialId(trimmedTutorialId);
             throw new ParseException(Tutorial.TUTORIAL_ID_MESSAGE_CONSTRAINTS);
         }
         return trimmedTutorialId;
