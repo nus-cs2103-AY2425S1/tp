@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.concurrent.CompletableFuture;
 
-import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.model.Model;
+import seedu.address.security.EncryptionManager;
 
 /**
  * Exports the address book data to a specified location.
@@ -22,13 +25,26 @@ public class ExportCommand extends Command {
     public static final String COMMAND_SUMMARY_EXAMPLES = ":export";
     public static final String NO_DESTINATION_MESSAGE = "No destination selected. Export cancelled.";
     private File destinationFile;
+    private File sourceFile;
+    private String keyPath;
 
     // Constructor for normal use (opens file chooser)
-    public ExportCommand() {}
+    public ExportCommand() {
+        this(null, new File("data/addressbook.json"), null);
+    }
 
-    // Constructor for testing (bypasses file chooser)
-    public ExportCommand(File destinationFile) {
+    /**
+     * Constructs an {@code ExportCommand} with the specified destination file, source file, and key path.
+     * This is for testing where destination file is hardcoded.
+     *
+     * @param destinationFile the file where the data will be exported to
+     * @param sourceFile      the temporary file to be exported
+     * @param keyPath         the path to the key (if required for the export process)
+     */
+    public ExportCommand(File destinationFile, File sourceFile, String keyPath) {
         this.destinationFile = destinationFile;
+        this.sourceFile = sourceFile;
+        this.keyPath = keyPath;
     }
 
     /**
@@ -39,25 +55,40 @@ public class ExportCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
-        final File sourceFile = new File("savedcontacts/addressbook.json");
+        byte[] encryptedData;
+        try {
+            // Decrypt data on attempting to export
+            encryptedData = Files.readAllBytes(sourceFile.toPath());
+            String jsonData = EncryptionManager.decrypt(encryptedData, this.keyPath);
+            File tmpFile = new File("addressbook.json");
 
-        if (destinationFile == null) {
-            // If no destination file is set, show file chooser asynchronously
-            // This will be the main scenario except for testing.
-            Platform.runLater(() -> {
+            // Create a new file if it doesn't exist
+            tmpFile.createNewFile();
+
+            // Write the json string into the temp file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(tmpFile))) {
+                writer.write(jsonData);
+            }
+
+            if (destinationFile == null) {
+                // If no destination file is set, show file chooser asynchronously
+                // This will be the main scenario except for testing.
+
                 destinationFile = chooseExportLocation(new Stage());
                 if (destinationFile == null) {
                     // User cancels the export
-                    System.out.println(NO_DESTINATION_MESSAGE);
+                    return new CommandResult(NO_DESTINATION_MESSAGE);
                 }
-                // Perform the export only after a valid destination is chosen
-                performExport(sourceFile, destinationFile);
-            });
-            // Return immediately since file selection is asynchronous
-            return new CommandResult("Export process started. Please select a file location.");
-        } else {
-            // If the destination is already set (e.g., for testing), perform the export directly
-            return performExport(sourceFile, destinationFile);
+            }
+
+            CompletableFuture<String> result = performExport(tmpFile, destinationFile);
+            String feedback = result.join();
+            return new CommandResult(feedback);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -67,12 +98,14 @@ public class ExportCommand extends Command {
      * @param destinationFile The destination file chosen by the user.
      * @return A CommandResult indicating the success or failure of the export.
      */
-    private CommandResult performExport(File sourceFile, File destinationFile) {
+    private CompletableFuture<String> performExport(File sourceFile, File destinationFile) {
         try {
             Files.copy(sourceFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            return new CommandResult(MESSAGE_SUCCESS + " Data saved to: " + destinationFile.getAbsolutePath());
+            Files.delete(sourceFile.toPath());
+            return CompletableFuture.supplyAsync(() -> MESSAGE_SUCCESS
+                    + " Data saved to: " + destinationFile.getAbsolutePath());
         } catch (IOException e) {
-            return new CommandResult("Error exporting data: " + e.getMessage());
+            return CompletableFuture.supplyAsync(() -> "Error exporting data: " + e.getMessage());
         }
     }
 

@@ -30,8 +30,11 @@ public class EncryptionManager {
      * @return A byte array containing the encrypted data.
      * @throws Exception If any encryption errors occur.
      */
-    public static byte[] encrypt(String data) throws Exception {
-        SecretKey key = getKey();
+    public static byte[] encrypt(String data, String keyPath) throws Exception {
+        if (keyPath == null) {
+            keyPath = FILE_PATH;
+        }
+        SecretKey key = getKey(keyPath);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, key);
         return cipher.doFinal(data.getBytes());
@@ -44,8 +47,11 @@ public class EncryptionManager {
      * @return A string containing the decrypted plain text data.
      * @throws Exception If any decryption errors occur.
      */
-    public static String decrypt(byte[] data) throws Exception {
-        SecretKey key = getKey();
+    public static String decrypt(byte[] data, String keyPath) throws Exception {
+        if (keyPath == null) {
+            keyPath = FILE_PATH;
+        }
+        SecretKey key = getKey(keyPath);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decryptedData = cipher.doFinal(data);
@@ -58,13 +64,16 @@ public class EncryptionManager {
      *
      * @throws Exception If any errors occur during key generation or file writing.
      */
-    static void generateKey() throws Exception {
+    static void generateKey(String keyPath) throws Exception {
+        if (keyPath == null) {
+            keyPath = FILE_PATH;
+        }
         KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
         keyGen.init(128);
         SecretKey secretKey = keyGen.generateKey();
         String encodedKey = Base64.getEncoder().encodeToString(secretKey.getEncoded());
 
-        File file = new File(FILE_PATH);
+        File file = new File(keyPath);
         file.createNewFile();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
@@ -72,10 +81,13 @@ public class EncryptionManager {
         }
     }
 
-    static SecretKey getKey() throws Exception {
-        File file = new File(FILE_PATH);
+    static SecretKey getKey(String keyPath) throws Exception {
+        if (keyPath == null) {
+            keyPath = FILE_PATH;
+        }
+        File file = new File(keyPath);
         if (!file.exists()) {
-            generateKey();
+            generateKey(keyPath);
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             byte[] decodedKey = Base64.getDecoder().decode(reader.readLine());
