@@ -16,7 +16,8 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_TAG_LIST_SIZE = "A contact can only have up to 6 tags \n";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
+            "1 or more contact indexes provided is invalid";
 
     public static final String MESSAGE_NO_CONTACTS_SPECIFIED = "No contacts specified!";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
