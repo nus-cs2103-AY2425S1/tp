@@ -59,11 +59,17 @@ public class Messages {
      */
     public static String formatEvent(Event event) {
         final StringBuilder builder = new StringBuilder();
+        StringBuilder attendeesString = new StringBuilder();
+
+        for (Person attendee : event.getAttendees()) {
+            attendeesString.append('\n').append(attendee.toString());
+        }
+
         builder.append(event.getEventName())
                 .append("; Date: ")
                 .append(event.getDate())
-                .append("; Attendees: ")
-                .append(event.getAttendees());
+                .append("; \nAttendees: ")
+                .append(attendeesString);
         return builder.toString();
     }
 

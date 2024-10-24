@@ -92,10 +92,16 @@ public class Event {
 
     @Override
     public String toString() {
+        StringBuilder attendeesString = new StringBuilder();
+
+        for (Person attendee : attendees) {
+            attendeesString.append('\n').append(attendee.toString());
+        }
+
         return "Event{"
                 + "name='" + eventName + '\''
                 + ", date=" + date
-                + ", attendees=" + attendees
+                + ", \nattendees=" + attendeesString
                 + '}';
     }
 }
