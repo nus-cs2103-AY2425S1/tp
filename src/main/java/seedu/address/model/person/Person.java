@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -208,6 +209,31 @@ public class Person implements Appointmentable {
                 .forEach(builder::append);
         return builder.toString();
     }
+
+    public String getStringAppointmentsForDay(LocalDate date) {
+        requireAllNonNull(date);
+
+        // Filter appointments by the given date
+        List<Appointment> appointmentsForDay = appointments.stream()
+                .filter(appointment -> appointment.getDateTime().toLocalDate().equals(date))
+                .collect(Collectors.toList());
+
+        // Check if there are no appointments for the day
+        if (appointmentsForDay.isEmpty()) {
+            return String.format("No appointments found for the day: %s", date.toString());
+        }
+
+        // Build a string for the appointments on the given day
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("Appointments on %s:\n", date.toString()));
+        appointmentsForDay.forEach(appointment ->
+                builder.append(appointment.toString()).append("\n")
+        );
+
+        return builder.toString();
+
+    }
+
 
     @Override
     public boolean editAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
