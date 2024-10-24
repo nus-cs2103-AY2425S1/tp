@@ -21,11 +21,12 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
     @Override
     public DeleteAppointmentCommand parse(String args) throws ParseException {
         try {
-            // Parse the input argument as an index (unique appointment ID)
-            Index index = ParserUtil.parseIndex(args.trim());
-            // Get the one-based integer from the index object to use as the ID
-            Integer id = index.getOneBased();
+            Index index = ParserUtil.parseId(args.trim());
+            Integer id = index.getZeroBased();
             Appointment appointment = Appointment.getAppointmentById(id);
+            if (appointment == null) {
+                throw new ParseException(DeleteAppointmentCommand.MESSAGE_INVALID_APPOINTMENT_ID);
+            }
             return new DeleteAppointmentCommand(appointment);
         } catch (ParseException pe) {
             throw new ParseException(

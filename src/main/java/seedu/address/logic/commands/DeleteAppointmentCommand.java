@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Objects;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
 
 /**
  * Deletes an appointment using the unique ID.
@@ -17,7 +20,7 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the appointment identified by the unique ID.\n"
-            + "Parameters: UNIQUE_ID (must be a positive integer)\n"
+            + "Parameters: UNIQUE_ID\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS =
@@ -47,10 +50,21 @@ public class DeleteAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        boolean appointmentDeleted = Appointment.deleteAppointmentById(appointmentToDelete.getId());
-        if (!appointmentDeleted) {
+        // Ensure the appointment exists before proceeding.
+        if (!model.hasAppointment(appointmentToDelete)) {
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT_ID);
         }
+
+        // Find the patient and doctor involved in the appointment
+        Patient patientToEdit = appointmentToDelete.getPatient();
+        Doctor doctorToEdit = appointmentToDelete.getDoctor();
+
+        Appointment.deleteAppointmentById(appointmentToDelete.getId());
+        model.deleteAppointment(appointmentToDelete);
+        model.setPerson(patientToEdit, patientToEdit);
+        model.setPerson(doctorToEdit, doctorToEdit);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete.getPatient().getName().toString(),
                 appointmentToDelete.getDoctor().getName().toString(),

@@ -77,7 +77,6 @@ public class Appointment {
         }
 
         Appointment appointment = appointmentById.get(id);
-        appointment.doctor.removeAppointment(appointment);
         appointment.patient.removeAppointment(appointment);
 
         appointmentById.remove(id);

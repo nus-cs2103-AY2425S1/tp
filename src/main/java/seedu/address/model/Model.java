@@ -96,4 +96,10 @@ public interface Model {
      * {@code appointment} must not already exist in the address book.
      */
     void addAppointment(Appointment appointment);
+
+    /**
+     * Deletes the given appointment.
+     * {@code appointment} must already exist in the address book.
+     */
+    void deleteAppointment(Appointment appointment);
 }
