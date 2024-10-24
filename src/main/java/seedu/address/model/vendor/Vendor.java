@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,6 +21,7 @@ public class Vendor {
     // Identity fields
     private final Name name;
     private final Phone phone;
+    private final UniqueId id;
 
     // Data fields
     private final Description description;
@@ -28,8 +30,9 @@ public class Vendor {
     /**
      * Every field must be present and not null.
      */
-    public Vendor(Name name, Phone phone, Description description, Set<Tag> tags) {
+    public Vendor(UniqueId id, Name name, Phone phone, Description description, Set<Tag> tags) {
         requireAllNonNull(name, phone, description, tags);
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.description = description;
@@ -42,10 +45,28 @@ public class Vendor {
      */
     public Vendor(Name name, Phone phone, Set<Tag> tags) {
         requireAllNonNull(name, phone, tags);
+        this.id = new UniqueId();
         this.name = name;
         this.phone = phone;
         this.description = new Description("-");
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Overloaded constructor for Vendor where the ID is auto-generated.
+     * Every field must be present and not null, except for the ID, which is generated automatically.
+     */
+    public Vendor(Name name, Phone phone, Description description, Set<Tag> tags) {
+        requireAllNonNull(name, phone, description, tags);
+        this.id = new UniqueId(); // Auto-generate the UniqueId
+        this.name = name;
+        this.phone = phone;
+        this.description = description;
+        this.tags.addAll(tags);
+    }
+
+    public UniqueId getId() {
+        return id;
     }
 
     public Name getName() {
@@ -107,12 +128,13 @@ public class Vendor {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, description, tags);
+        return Objects.hash(id, name, phone, description, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
                 .add("phone", phone)
                 .add("description", description)

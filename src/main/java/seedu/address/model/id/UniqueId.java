@@ -26,13 +26,6 @@ public class UniqueId {
         this.id = UUID.fromString(uuidString); // Parse the UUID from a string
     }
 
-    /**
-     * Returns the UUID as a string.
-     */
-    public String getId() {
-        return id.toString();
-    }
-
     @Override
     public boolean equals(Object other) {
         if (this == other) {

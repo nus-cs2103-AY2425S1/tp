@@ -29,8 +29,8 @@ public class JsonAdaptedAssociation {
      * Converts a given {@code Association} into this class for Jackson use.
      */
     public JsonAdaptedAssociation(Association source) {
-        this.vendorId = source.getVendorId().getId();
-        this.eventId = source.getEventId().getId();
+        this.vendorId = source.getVendorId().toString();
+        this.eventId = source.getEventId().toString();
     }
 
     /**

@@ -39,17 +39,16 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Adds an event to the list, generating a new unique {@code UniqueId} for the event.
+     * Adds an event to the list.
      * The event must not already exist in the list.
      */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
-        UniqueId eventId = new UniqueId(); // Generate a new UniqueId (UUID)
         if (contains(toAdd)) {
             throw new DuplicateEventException();
         }
-        eventMap.put(eventId, toAdd); // Store the event in the map with its unique ID
-        internalList.add(toAdd); // Also add the event to the internal list
+        eventMap.put(toAdd.getId(), toAdd);
+        internalList.add(toAdd);
     }
 
     /**
@@ -58,12 +57,10 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public UniqueId getEventId(Event event) {
         requireNonNull(event);
-        for (Map.Entry<UniqueId, Event> entry : eventMap.entrySet()) {
-            if (entry.getValue().equals(event)) {
-                return entry.getKey(); // Return the associated UniqueId
-            }
+        if (eventMap.containsKey(event.getId())) {
+            return event.getId();
         }
-        throw new EventNotFoundException(); // Event not found
+        throw new EventNotFoundException();
     }
 
     /**
@@ -83,8 +80,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Replaces the contents of this list with the vendors from {@code replacement}.
-     * The replacement {@code UniqueVendorList} must not contain duplicate vendors.
+     * Replaces the contents of this list with the events from {@code replacement}.
+     * The replacement {@code UniqueEventList} must not contain duplicate events.
      */
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
@@ -116,7 +113,7 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.clear(); // Clear the internal list
 
         for (Event event : events) {
-            add(event); // Use the add method to assign new UniqueIds
+            add(event); // Use the add method, which respects the Event's existing UniqueId
         }
     }
 

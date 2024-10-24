@@ -15,7 +15,7 @@ public class Event {
     private final UniqueId id;
 
     /**
-     * Constructor for an Event.
+     * Constructor for an Event with an automatically generated UniqueId.
      *
      * @param name The name of the event.
      * @param date The date of the event.
@@ -23,6 +23,20 @@ public class Event {
     public Event(Name name, Date date) {
         requireAllNonNull(name, date);
         this.id = new UniqueId();
+        this.name = name;
+        this.date = date;
+    }
+
+    /**
+     * Constructor for an Event with a specified UniqueId.
+     *
+     * @param id The unique identifier for the event.
+     * @param name The name of the event.
+     * @param date The date of the event.
+     */
+    public Event(UniqueId id, Name name, Date date) {
+        requireAllNonNull(id, name, date);
+        this.id = id;
         this.name = name;
         this.date = date;
     }
@@ -63,7 +77,7 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return id.equals(otherEvent.id) && name.equals(otherEvent.name) && date.equals(otherEvent.date);
+        return name.equals(otherEvent.name) && date.equals(otherEvent.date);
     }
 
     @Override

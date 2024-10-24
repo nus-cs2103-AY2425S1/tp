@@ -41,16 +41,15 @@ public class UniqueVendorList implements Iterable<Vendor> {
     }
 
     /**
-     * Adds a vendor to the list, generating a new unique {@code UniqueId} for the vendor.
+     * Adds a vendor to the list.
      * The vendor must not already exist in the list.
      */
     public void add(Vendor toAdd) {
         requireNonNull(toAdd);
-        UniqueId vendorId = new UniqueId();
         if (contains(toAdd)) {
             throw new DuplicateVendorException();
         }
-        vendorMap.put(vendorId, toAdd);
+        vendorMap.put(toAdd.getId(), toAdd); // Use the Vendor's existing UniqueId
         internalList.add(toAdd);
     }
 
@@ -71,7 +70,7 @@ public class UniqueVendorList implements Iterable<Vendor> {
             throw new DuplicateVendorException();
         }
 
-        UniqueId vendorId = getVendorId(target);
+        UniqueId vendorId = target.getId();
         vendorMap.put(vendorId, editedVendor);
         internalList.set(index, editedVendor);
     }
@@ -82,25 +81,11 @@ public class UniqueVendorList implements Iterable<Vendor> {
      */
     public void remove(Vendor toRemove) {
         requireNonNull(toRemove);
-        UniqueId vendorId = getVendorId(toRemove);
+        UniqueId vendorId = toRemove.getId();
         if (!internalList.remove(toRemove)) {
             throw new VendorNotFoundException();
         }
         vendorMap.remove(vendorId);
-    }
-
-    /**
-     * Returns the unique ID of the given {@code vendor}.
-     * Throws a {@code VendorNotFoundException} if the vendor is not found.
-     */
-    public UniqueId getVendorId(Vendor vendor) {
-        requireNonNull(vendor);
-        for (Map.Entry<UniqueId, Vendor> entry : vendorMap.entrySet()) {
-            if (entry.getValue().equals(vendor)) {
-                return entry.getKey(); // Return the associated UniqueId
-            }
-        }
-        throw new VendorNotFoundException(); // Vendor not found
     }
 
     /**
