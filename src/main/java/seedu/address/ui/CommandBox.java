@@ -3,7 +3,9 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,6 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandHistory history;
 
     @FXML
     private TextField commandTextField;
@@ -24,11 +27,14 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, CommandHistory history) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.history = history;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        // Allows handling of up and down keys to go through entered commands
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeyPress);
     }
 
     /**
@@ -46,6 +52,28 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    private void handleKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+
+        case UP:
+            String previousCommand = history.getPrevious();
+            commandTextField.setText(previousCommand);
+            commandTextField.positionCaret(previousCommand.length()); // place caret at the end of the line
+            event.consume(); // ends the event so that it is not handled elsewhere, preventing unwanted behaviour
+            break;
+
+        case DOWN:
+            String nextCommand = history.getNext();
+            commandTextField.setText(nextCommand);
+            commandTextField.positionCaret(nextCommand.length());
+            event.consume();
+            break;
+
+        default:
+            break;
         }
     }
 
