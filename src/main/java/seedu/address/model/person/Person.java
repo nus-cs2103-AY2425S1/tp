@@ -110,14 +110,14 @@ public class Person {
             StringBuilder r = new StringBuilder("| ");
             Set<Role> roles = this.getRoles();
             for (Role role : roles) {
-                r.append(" " + role + " |");
+                r.append(role + " | ");
             }
             return r.toString();
         } else if (this.isMember() && c.equals(Attendance.class)) {
             StringBuilder a = new StringBuilder("| ");
             Set<Attendance> sessions = this.getAttendance();
             for (Attendance sesh : sessions) {
-                a.append(" " + sesh + " |");
+                a.append(sesh + " | ");
             }
             return a.toString();
         } else {
@@ -135,8 +135,10 @@ public class Person {
         Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES")
                 ? field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n"
                 : field.getName().toUpperCase().equals("ATTENDANCE")
-                        ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
-                        : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
+                ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
+                : field.getName().toUpperCase().equals("ISFAVOURITE")
+                ? "> " + this.isFavourite + " CONTACT\n"
+                : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
         return contactInfo.toString();
     }
 

@@ -308,8 +308,11 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
     -fx-border-width: 0;
+}
+
+.favCardPane {
+    -fx-background-color: linear-gradient(to bottom, #ffec64, #ffab23);
 }
 
 #commandTypeLabel {
