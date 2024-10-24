@@ -135,13 +135,13 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
 
         Stream<Lesson> clashingLessonsStream1 = uniqueGroupStudents.stream()
                 .flatMap(student -> student.getMakeupLessons().stream())
-                .flatMap(ml -> checkAgainstMakeupLessons(ml).stream());
+                .flatMap(ml -> checkAgainstMakeupLessons(uniqueGroupStudents, ml).stream());
         Stream<Lesson> clashingLessonsStream2 = uniqueGroupStudents.stream()
                 .flatMap(student -> student.getMakeupLessons().stream())
-                .flatMap(ml -> checkAgainstRegularLessons(ml).stream());
+                .flatMap(ml -> checkAgainstRegularLessons(uniqueGroupStudents, ml).stream());
         Stream<Lesson> clashingLessonsStream3 = uniqueGroupStudents.stream()
                 .map(student -> student.getRegularLesson())
-                .flatMap(rl -> checkAgainstRegularLessons(rl).stream());
+                .flatMap(rl -> checkAgainstRegularLessons(uniqueGroupStudents, rl).stream());
         return Stream.concat(clashingLessonsStream1,
                 Stream.concat(clashingLessonsStream2, clashingLessonsStream3))
                 .collect(Collectors.toSet()); // duplicate clashing lessons get eliminated during set conversion
@@ -151,8 +151,8 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
      * Checks if a {@code MakeupLesson} clashes with any student's {@code MakeupLesson}s.
      * @return A {@code Set<Lesson>} of clashing lessons.
      */
-    private Set<Lesson> checkAgainstMakeupLessons(MakeupLesson makeupLesson) {
-        return this.getStudentList().stream()
+    private Set<Lesson> checkAgainstMakeupLessons(ArrayList<Student> uniqueGroupStudents, MakeupLesson makeupLesson) {
+        return uniqueGroupStudents.stream()
                 .flatMap(student -> student.getMakeupLessons().stream())
                 .filter(ml -> makeupLesson.isClashing(ml))
                 .map(ml -> (Lesson) ml) // casting to lesson
@@ -163,8 +163,9 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
      * Checks if a {@code RegularLesson} clashes with any student's {@code RegularLesson}.
      * @return A {@code Set<Lesson>} of clashing lessons.
      */
-    private Set<Lesson> checkAgainstRegularLessons(RegularLesson regularLesson) {
-        return this.getStudentList().stream()
+    private Set<Lesson> checkAgainstRegularLessons(ArrayList<Student> uniqueGroupStudents,
+                                                   RegularLesson regularLesson) {
+        return uniqueGroupStudents.stream()
                 .map(student -> student.getRegularLesson())
                 .filter(rl -> rl != null && regularLesson != null && regularLesson.isClashing(rl))
                 .map(rl -> (Lesson) rl) // casting to lesson
@@ -175,10 +176,9 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
      * Checks if a {@code MakeupLesson} clashes with any student's {@code RegularLesson}.
      * @return A {@code Set<Lesson>} of clashing lessons.
      */
-    private Set<Lesson> checkAgainstRegularLessons(MakeupLesson makeupLesson) {
-        ObservableList<Student> students = this.getStudentList();
+    private Set<Lesson> checkAgainstRegularLessons(ArrayList<Student> uniqueGroupStudents, MakeupLesson makeupLesson) {
         Set<Lesson> clashingLessons = new HashSet<>();
-        for (Student student : students) {
+        for (Student student : uniqueGroupStudents) {
             RegularLesson regularLesson = student.getRegularLesson();
             if (regularLesson != null
                     && makeupLesson.isClashing(regularLesson)
