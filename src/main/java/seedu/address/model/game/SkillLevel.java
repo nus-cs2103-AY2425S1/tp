@@ -1,5 +1,7 @@
 package seedu.address.model.game;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Describes the Person's skill level in a Game.
@@ -22,8 +24,8 @@ public class SkillLevel {
      * @param skillLevel a valid skill level or rank.
      */
     public SkillLevel(String skillLevel) {
-        //requireNonNull(skillLevel);
-        //checkArgument(isValidSkillLevel(skillLevel), MESSAGE_CONSTRAINTS);
+        requireNonNull(skillLevel);
+        checkArgument(isValidSkillLevel(skillLevel), MESSAGE_CONSTRAINTS);
         this.skillLevel = skillLevel;
     }
 
@@ -31,7 +33,7 @@ public class SkillLevel {
      * Returns true if a given string is a valid SkillLevel.
      */
     public static boolean isValidSkillLevel(String test) {
-        return true; //test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
