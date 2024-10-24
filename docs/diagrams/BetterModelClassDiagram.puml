@@ -9,14 +9,14 @@ AddressBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
-UniqueTagList -right-> "*" Tag
+UniqueTagList -right-> Tag
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person -up-> Tag
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> JobCode
 Person *--> Remark
 @enduml

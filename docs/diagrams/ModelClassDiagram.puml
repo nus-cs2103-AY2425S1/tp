@@ -41,7 +41,7 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> JobCode
 Person *--> Tag
 Person *--> "*" Remark
 
@@ -49,8 +49,8 @@ Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> JobCode
+JobCode -[hidden]right-> Email
 
 
 ModelManager --> "~* filtered" Person
