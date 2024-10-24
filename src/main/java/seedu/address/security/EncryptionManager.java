@@ -64,7 +64,10 @@ public class EncryptionManager {
      *
      * @throws Exception If any errors occur during key generation or file writing.
      */
-    static void generateKey() throws Exception {
+    static void generateKey(String keyPath) throws Exception {
+        if (keyPath == null) {
+            keyPath = FILE_PATH;
+        }
         KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
         keyGen.init(128);
         SecretKey secretKey = keyGen.generateKey();
