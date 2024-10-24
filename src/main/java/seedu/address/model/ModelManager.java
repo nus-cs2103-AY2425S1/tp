@@ -2,10 +2,14 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Birthday.BIRTHDAY_REMINDER_EMPTY;
+import static seedu.address.model.person.Birthday.BIRTHDAY_REMINDER_HEADER;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -159,6 +163,32 @@ public class ModelManager implements Model {
     //        addressBook.sortPersonByTagArrayIndex(tagIndex); // Call the sortPersonsDesc method from AddressBook
     //        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the filtered list after sorting
     //    }
+
+    //=========== Filtered Birthday Person List Accessors ====================================================
+
+    public Predicate<Person> getBirthdayPredicate() {
+        return Person::isBirthdayWithinNextWeek;
+    }
+
+    @Override
+    public String getPersonsWithUpcomingBirthdays() {
+        // Collect the persons with upcoming birthdays into a list
+        List<Person> personsWithUpcomingBirthdays = addressBook.getPersonList().stream()
+                .filter(getBirthdayPredicate())
+                .collect(Collectors.toList());
+
+        // If no birthdays are found, return an appropriate message
+        if (personsWithUpcomingBirthdays.isEmpty()) {
+            return BIRTHDAY_REMINDER_EMPTY;
+        }
+
+        // Use the formatBirthdayMessage for each person and join the results
+        String formattedString = personsWithUpcomingBirthdays.stream()
+                .map(Person::formatBirthdayMessage)
+                .collect(Collectors.joining("\n"));
+
+        return BIRTHDAY_REMINDER_HEADER + formattedString;
+    }
 
     @Override
     public boolean equals(Object other) {

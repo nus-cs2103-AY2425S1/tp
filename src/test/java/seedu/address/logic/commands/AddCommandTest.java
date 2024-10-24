@@ -172,6 +172,11 @@ public class AddCommandTest {
         public void sortPersonsAsc() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getPersonsWithUpcomingBirthdays() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
     /**
      * A Model stub that contains a single person.

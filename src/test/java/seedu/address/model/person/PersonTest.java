@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -14,9 +15,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.model.person.Birthday.CUSTOM_BIRTHDAY_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -130,5 +134,34 @@ public class PersonTest {
                 + ", birthday=" + ALICE.getBirthday()
                 + ", dateOfCreation=" + ALICE.getDateOfCreation() + ", history=" + ALICE.getHistory() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    void isBirthdayWithinNextWeek() {
+        String birthdayYesterdaySomeYearsBack = LocalDate.now().minusDays(1).minusYears(20).toString();
+        String birthdayTomorrowSomeYearsBack = LocalDate.now().plusDays(1).minusYears(20).toString();
+        Person editedAlice = new PersonBuilder(ALICE).withBirthday(birthdayYesterdaySomeYearsBack).build();
+        Person editedBob = new PersonBuilder(BOB).withBirthday(birthdayTomorrowSomeYearsBack).build();
+
+        assertFalse(editedAlice.isBirthdayWithinNextWeek());
+        assertTrue(editedBob.isBirthdayWithinNextWeek());
+    }
+
+    @Test
+    void formatBirthdayMessage() {
+        String today = LocalDate.now().toString();
+        Person editedAlice = new PersonBuilder(ALICE).withName("Alice Pauline")
+                .withBirthday(LocalDate.now().toString()).build();
+
+        assertEquals(editedAlice.formatBirthdayMessage(), "Alice Pauline" + CUSTOM_BIRTHDAY_FORMAT + today);
+    }
+
+    @Test
+    void testHashCode() {
+        Person renamedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+
+        assertNotEquals(renamedAlice.hashCode(), ALICE.hashCode());
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
 }

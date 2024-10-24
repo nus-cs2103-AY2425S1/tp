@@ -46,6 +46,10 @@
     -fx-text-fill: #D9B08C;
 }
 
+#remark {
+    -fx-text-fill: #D9B08C;
+}
+
 /* Styling for the FlowPane that contains tags */
 #tags {
     -fx-hgap: 5;
@@ -64,6 +68,12 @@
     -fx-border-radius: 5px;
     -fx-font-size: 10pt;
 }
+
+.favourite-tag {
+    -fx-background-color: #d47a2b !important; /* Ensure this is applied */
+    -fx-text-fill: white !important;          /* Ensure this is applied */
+}
+
 
 /* History section styling */
 #history {
