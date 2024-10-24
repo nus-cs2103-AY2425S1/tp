@@ -63,13 +63,25 @@ public class PersonListPanel extends UiPart<Region> {
     private void setupAutoScroll(ObservableList<Person> personList) {
         personListView.getItems().addListener((ListChangeListener<Person>) change -> {
             while (change.next()) {
-                System.out.println(change.getAddedSubList());
                 if (change.wasAdded()) {
-                    Platform.runLater(() -> {
-                        personListView.scrollTo(change.getTo());
-                        personListView.getSelectionModel().select(change.getTo() - 1);
-                    });
-                    break;
+                    /*
+                     * Initially (when the app first opens), when adding either a guest or vendor,
+                     * three changes are picked up here.
+                     * The change involving adding the new person.
+                     * The change involving adding the entire current guests.
+                     * The change involving adding the entire current vendors.
+                     * Only auto-scroll for the first change.
+                     * Hence, we use the below if check to enforce this.
+                     */
+                    if (change.getAddedSize() == 1) {
+                        Platform.runLater(() -> {
+                            personListView.scrollTo(change.getTo());
+                            personListView.getSelectionModel().select(change.getTo() - 1);
+                        });
+                        break;
+                    } else {
+                        continue;
+                    }
                 }
                 if (change.wasRemoved()) {
                     Platform.runLater(() -> {
