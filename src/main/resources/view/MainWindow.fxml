@@ -6,10 +6,10 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <scene>
@@ -38,14 +38,14 @@
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+        <VBox VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="120" prefHeight="120" maxHeight="120">
           <padding>
             <Insets top="5" right="10" bottom="10" left="10" />
           </padding>
-        </StackPane>
+        </VBox>
 
-        <SplitPane VBox.vgrow="ALWAYS" styleClass="pane-with-border">
+        <HBox fx:id="contactLists" VBox.vgrow="ALWAYS" styleClass="pane-with-border" spacing="-3">
           <VBox fx:id="guestList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
             <StackPane fx:id="guestListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
@@ -53,7 +53,7 @@
           <VBox fx:id="vendorList" styleClass="pane-with-border" minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
             <StackPane fx:id="vendorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
-        </SplitPane>
+        </HBox>
       </VBox>
     </Scene>
   </scene>

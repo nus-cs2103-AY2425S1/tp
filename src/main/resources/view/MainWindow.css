@@ -1,35 +1,10 @@
-.label {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #F2E8C6;
-    -fx-opacity: 0.9;
+#contactLists {
+    -fx-padding: 0 0 7 0;
+    -fx-border-insets: 0 0 7 0;
+    -fx-background-insets: 0 0 7 0;
 }
 
-.label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #F2E8C6;
-    -fx-opacity: 1;
-}
-
-.label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #F2E8C6;
-    -fx-opacity: 1;
-}
-
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
-}
-
-.split-pane:horizontal .split-pane-divider {
-    -fx-background-color: transparent;
-    /*-fx-border-color: black;*/
-}
-
-.split-pane {
+#guestList, #vendorList {
     -fx-background-color: #F0A89F;
     -fx-background-radius: 10;
     -fx-background-insets: 10;
@@ -62,28 +37,6 @@
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
-}
-
-
-.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
-    -fx-shape: " ";
-}
-
-.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
-}
-
-.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 1 8 1 8;
-}
-
-.scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
-    -fx-padding: 0 0 0 0;
-}
-
-.scroll-bar {
-    -fx-background-color: #CAC6C5;
 }
 
 #commandBoxPlaceholder {
