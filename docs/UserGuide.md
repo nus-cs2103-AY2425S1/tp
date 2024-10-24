@@ -24,8 +24,8 @@ Let’s begin and get you up to speed with AgentAssist!
    <details>
    <summary>Subsections</summary>
 
-   3.1 [Installation](#31-installation)  
-   3.2 [Graphical User Interface (GUI) Layout](#32-graphical-user-interface-gui-layout)
+   - [3.1 Installation](#31-installation)  
+   - [3.2 Graphical User Interface (GUI) Layout](#32-graphical-user-interface-gui-layout)
 
    </details>
 
@@ -33,11 +33,11 @@ Let’s begin and get you up to speed with AgentAssist!
    <details>
    <summary>Subsections</summary>
 
-   4.1 [Command Structure Overview](#41-command-structure-overview)  
-   4.2 [Commands](#42-commands)  
-   4.3 [Flags](#43-flags)  
-   4.4 [Arguments](#44-arguments)  
-   4.5 [Using Commands](#45-using-commands)
+   - [4.1 Command Structure Overview](#41-command-structure-overview)  
+   - [4.2 Commands](#42-commands)  
+   - [4.3 Flags](#43-flags)  
+   - [4.4 Arguments](#44-arguments)  
+   - [4.5 Using Commands](#45-using-commands)
 
    </details>
 
@@ -45,12 +45,12 @@ Let’s begin and get you up to speed with AgentAssist!
    <details>
    <summary>Subsections</summary>
 
-   5.1 [How to Read Commands](#51-how-to-read-commands)  
-   5.2 [Data Modification Commands](#52-data-modification-commands)  
-   5.3 [Data Filtering Commands](#53-data-filtering-commands)  
-   5.4 [General Commands](#54-general-commands)  
-   5.5 [Saving Data](#55-saving-data)  
-   5.6 [Modifying the Data File](#56-modifying-the-data-file)
+   - [5.1 How to Read Commands](#51-how-to-read-commands)  
+   - [5.2 Data Modification Commands](#52-data-modification-commands)  
+   - [5.3 Data Filtering Commands](#53-data-filtering-commands)  
+   - [5.4 General Commands](#54-general-commands)  
+   - [5.5 Saving Data](#55-saving-data)  
+   - [5.6 Modifying the Data File](#56-modifying-the-data-file)
 
    </details>
 
