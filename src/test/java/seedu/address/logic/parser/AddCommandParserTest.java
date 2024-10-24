@@ -205,7 +205,8 @@ public class AddCommandParserTest {
 
         // invalid contact type
         assertParseFailure(parser, INVALID_CONTACTTYPE_DESC + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + TELEHANDLE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ContactType.MESSAGE_CONSTRAINTS);
+                + TELEHANDLE_DESC_BOB + MODNAME_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                ContactType.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, CONTACTTYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
