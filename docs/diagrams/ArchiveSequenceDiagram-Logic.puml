@@ -5,41 +5,41 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant "u:ArchiveCommand" as ArchiveCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
+[-> LogicManager : execute("archive 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
+LogicManager -> AddressBookParser : parseCommand("archive 1"))
 activate AddressBookParser
 
-create UndoCommand
-AddressBookParser -> UndoCommand
-activate UndoCommand
+create ArchiveCommand
+AddressBookParser -> ArchiveCommand
+activate ArchiveCommand
 
-UndoCommand --> AddressBookParser
-deactivate UndoCommand
+ArchiveCommand --> AddressBookParser
+deactivate ArchiveCommand
 
 AddressBookParser --> LogicManager : u
 deactivate AddressBookParser
 
-LogicManager -> UndoCommand : execute()
-activate UndoCommand
+LogicManager -> ArchiveCommand : execute()
+activate ArchiveCommand
 
-UndoCommand -> Model : undoAddressBook()
+ArchiveCommand -> Model : updateFilteredPersonList()
 activate Model
 
-Model --> UndoCommand
+Model --> ArchiveCommand
 deactivate Model
 
-UndoCommand --> LogicManager : result
-deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
-destroy UndoCommand
+ArchiveCommand --> LogicManager : result
+deactivate ArchiveCommand
+ArchiveCommand -[hidden]-> LogicManager : result
+destroy ArchiveCommand
 
 [<--LogicManager
 deactivate LogicManager
