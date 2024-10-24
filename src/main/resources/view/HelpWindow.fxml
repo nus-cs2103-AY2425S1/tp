@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -24,7 +24,7 @@
 
       <HBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
-          <ScrollPane fitToWidth="true" prefWidth="700" prefHeight="600" focusTraversable="true">
+          <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" prefWidth="700" prefHeight="600" focusTraversable="true">
             <VBox>
               <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label fx:id="helpMessage" text="Label">

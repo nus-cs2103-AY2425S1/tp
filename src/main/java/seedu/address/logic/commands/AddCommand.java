@@ -28,15 +28,15 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_TELEGRAM + "TELEGRAM "
-            + "Optional: " + PREFIX_FAVOURITE
-            + "[" + PREFIX_ROLE + "ROLE]...\n"
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_FAVOURITE + "]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TELEGRAM + "johnDoe12 "
-            + PREFIX_FAVOURITE
-            + PREFIX_ROLE + "Exco Member";
+            + PREFIX_ROLE + "Exco Member "
+            + PREFIX_FAVOURITE;
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

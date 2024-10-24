@@ -41,18 +41,18 @@ public class EditCommand extends Command {
     public static final String COMMAND_ALIAS = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
-            + "[" + PREFIX_ROLE + "ROLE]...\n"
-            + "[" + PREFIX_FAVOURITE + " or " + PREFIX_NONFAVOURITE + " (NOT BOTH) ]"
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_FAVOURITE + " or " + PREFIX_NONFAVOURITE + " (NOT BOTH)]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_FAVOURITE;
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";

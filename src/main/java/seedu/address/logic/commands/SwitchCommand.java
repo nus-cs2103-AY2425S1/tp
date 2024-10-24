@@ -22,11 +22,10 @@ import seedu.address.model.profile.Profile;
  */
 public class SwitchCommand extends Command {
     public static final String COMMAND_WORD = "switch";
-    public static final String COMMAND_ALIAS = "s";
+    public static final String COMMAND_ALIAS = "sw";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Switches to a different profile based on the provided name.\n"
             + "Parameters: PROFILE_NAME\n"
-            + Profile.MESSAGE_CONSTRAINTS + "\n"
             + "Example: " + COMMAND_WORD + " john-doe";
     public static final String MESSAGE_SUCCESS = "Switched to the profile '%1$s'";
     public static final String MESSAGE_SHOW_PROFILES = "Other profiles: %1$s";
