@@ -15,9 +15,9 @@ Member *-up-> "*" Tag
 Member *--> "1" Name
 Member *--> "1" Telegram
 Member *--> "1" Room
-Member *--> "1" Points
+Member *--> "1" Point
 
 Member *-right-> "*" Session
 
-Session --> "1" Points
+Session --> "1" Point
 @enduml
