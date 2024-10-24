@@ -194,4 +194,19 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Displays pre-decided messages when the application starts up.
+     */
+    public void showMessagesAtStartUp() {
+        //Show upcoming birthdays on startup
+        showUpcomingBirthdaysOnStartup();
+    }
+
+    private void showUpcomingBirthdaysOnStartup() {
+        String personsWithUpcomingBirthdays = logic.getPersonsWithUpcomingBirthdays();
+        if (!personsWithUpcomingBirthdays.isEmpty()) {
+            resultDisplay.setFeedbackToUser(personsWithUpcomingBirthdays);
+        }
+    }
 }

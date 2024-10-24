@@ -14,6 +14,9 @@ public class Birthday {
 
     public static final String MESSAGE_CONSTRAINTS = "Birthday should be a valid date of the format yyyy-mm-dd and be"
             + " within reasonable limits.";
+    public static final String BIRTHDAY_REMINDER_HEADER = "Upcoming birthdays: \n";
+    public static final String BIRTHDAY_REMINDER_EMPTY = "No upcoming birthdays.\n";
+    public static final String CUSTOM_BIRTHDAY_FORMAT = "'s birthday is on "; //Used for displaying a person's birthday
     public static final Birthday EMPTY_BIRTHDAY = Birthday.of("");
     public static final LocalDate LOWER_BOUND = LocalDate.parse("1908-05-23");
     public final LocalDate value;
@@ -58,10 +61,32 @@ public class Birthday {
     }
 
     /**
-     * Returns the value stored in the Birthday object.
+     * Returns the value stored in the Birthday object as a string.
      */
-    public LocalDate getValue() {
-        return value;
+    public String getValue() {
+        return value.toString();
+    }
+
+    /**
+     * Returns true if the stored date in {@code Birthday} is within a week from today.
+     */
+    public boolean isBirthdayWithinNextWeek() {
+        LocalDate today = LocalDate.now();
+        LocalDate dateInOneWeek = today.plusWeeks(1);
+        LocalDate upcomingBirthday = getDateOfUpcomingBirthday();
+        return upcomingBirthday.isAfter(today.minusDays(1)) && upcomingBirthday.isBefore(dateInOneWeek);
+    }
+
+    /**
+     * Returns the earliest upcoming day of the birthday.
+     */
+    public LocalDate getDateOfUpcomingBirthday() {
+        LocalDate birthdayThisYear = value.withYear(LocalDate.now().getYear());
+        if (birthdayThisYear.isBefore(LocalDate.now())) {
+            return birthdayThisYear.plusYears(1);
+        } else {
+            return birthdayThisYear;
+        }
     }
 
     @Override
