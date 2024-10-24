@@ -56,6 +56,38 @@ public class PersonTest {
     }
 
     @Test
+    public void guiDisplayedAttributeTest() {
+        Person p = ALICE;
+
+        // name in gui
+        assertEquals(p.getDisplayedName(), "Alice Pauline");
+
+        // phone in gui
+        assertEquals(p.getDisplayedPhone(), "Phone: 94351253");
+
+        // email in gui
+        assertEquals(p.getDisplayedEmail(), "Email: alice@example.com");
+
+        // address in gui
+        assertEquals(p.getDisplayedAddress(), "Address: 123, Jurong West Ave 6, #08-111");
+
+        // register number in gui
+        assertEquals(p.getDisplayedRegisterNumber(), "Register Number: 3");
+
+        // sex in gui
+        assertEquals(p.getDisplayedSex(), "Sex: F");
+
+        // student class in gui
+        assertEquals(p.getDisplayedStudentClass(), "Student Class: 1A");
+
+        // emergency contact name in gui
+        assertEquals(p.getDisplayedEcName(), "Emergency Contact Name: Joe Hardy");
+
+        // emergency contact number in gui
+        assertEquals(p.getDisplayedEcNumber(), "Emergency Contact Number: 26283728");
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
@@ -112,7 +144,7 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", register number="
                 + ALICE.getRegisterNumber() + ", sex=" + ALICE.getSex() + ", class=" + ALICE.getStudentClass()
                 + ", emergency contact name=" + ALICE.getEcName() + ", emergency contact number="
-                + ALICE.getEcNumber() + ", tags=" + ALICE.getTags() + "}";
+                + ALICE.getEcNumber() + ", exams=" + ALICE.getExams() + ", tags=" + ALICE.getTags() + "}";
 
         assertEquals(expected, ALICE.toString());
     }

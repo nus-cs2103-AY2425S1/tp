@@ -95,7 +95,9 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getStudentClass().orElse(null) + ", emergency contact name="
                 + editPersonDescriptor.getEcName().orElse(null) + ", emergency contact number="
                 + editPersonDescriptor.getEcNumber().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getTags().orElse(null) + ", attendances="
+                + editPersonDescriptor.getAttendances().orElse(null) + "}";
+
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
