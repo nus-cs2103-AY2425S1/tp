@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -47,6 +49,24 @@ public class Id {
         }
 
         return (idValue % 2 == 1) ? "DOCTOR" : "PATIENT";
+    }
+
+    /**
+     * Updates static counters from the correct value based on existing Persons.
+     *
+     * @param doctorIds List of doctor ids
+     * @param patientIds List of patient ids
+     */
+    public static void initializeCounters(List<Integer> doctorIds, List<Integer> patientIds) {
+        doctorIdCounter = doctorIds.stream()
+                .mapToInt(x -> x)
+                .max()
+                .orElse(1) + 2;  // Increment by 2 to continue from the last used doctor ID
+
+        patientIdCounter = patientIds.stream()
+                .mapToInt(x -> x)
+                .max()
+                .orElse(0) + 2;  // Increment by 2 to continue from the last used patient ID
     }
 
     @Override

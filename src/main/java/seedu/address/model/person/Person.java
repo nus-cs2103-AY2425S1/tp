@@ -14,7 +14,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.AppNotFoundException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -188,12 +190,17 @@ public class Person implements Appointmentable {
                 .collect(Collectors.toList()).get(0);
     }
 
-    public Appointment getAppointment(LocalDateTime dateTime, int patientId) {
+    public Appointment getAppointment(LocalDateTime dateTime, int patientId) throws CommandException {
         requireAllNonNull(dateTime, patientId);
-        return appointments.stream()
-                .filter(apt -> apt.getDateTime() == dateTime)
+        List<Appointment> apts = appointments.stream()
+                .filter(apt -> apt.getDateTime().toString().equals(dateTime.toString()))
                 .filter(apt -> apt.getPatientId() == patientId)
-                .collect(Collectors.toList()).get(0);
+                .collect(Collectors.toList());
+        if (apts.isEmpty() || apts.size() == 0) {
+            throw new CommandException(Messages.MESSAGE_NO_APPOINTMENTS_FOUND);
+        }
+
+        return apts.get(0);
     }
 
     public String getStringAppointments() {

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,6 +55,21 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+
+        List<Integer> doctorIds = persons.stream()
+                .filter(x -> Integer.parseInt(x.getId()) % 2 == 1)
+                .map(doctor -> Integer.parseInt(doctor.getId()))
+                .collect(Collectors.toList());
+
+        List<Integer> patientIds = persons.stream()
+                .filter(x -> Integer.parseInt(x.getId()) % 2 == 0)
+                .map(patient -> Integer.parseInt(patient.getId()))
+                .collect(Collectors.toList());
+
+
+        // Initialize the counters with the loaded IDs
+        Id.initializeCounters(doctorIds, patientIds);
+
         return addressBook;
     }
 

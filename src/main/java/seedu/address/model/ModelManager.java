@@ -153,7 +153,14 @@ public class ModelManager implements Model {
 
     @Override
     public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
-        return null; // TODO
+        Person person = null;
+        for (Person target : allPersons) {
+            if (target.getId() == id) {
+                person = target;
+                break;
+            }
+        }
+        return person;
     }
 
     @Override
