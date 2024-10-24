@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Guest;
@@ -25,14 +26,14 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Vendor(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), new Company("Company 1")),
+                    new Address("Blk 30 Geylang Street 29, #06-40"),
+                    getTagSet("friends"), new Company("Company 1"), new Budget("5000")),
             new Vendor(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), new Company("Company 2")),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    getTagSet("colleagues", "friends"), new Company("Company 2"), new Budget("7500.50")),
             new Vendor(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), new Company("Company 3"))
+                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    getTagSet("neighbours"), new Company("Company 3"), new Budget("10000.0"))
         };
     }
 

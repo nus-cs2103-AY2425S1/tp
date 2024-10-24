@@ -58,22 +58,33 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        Label extraLabel;
-        if (person instanceof Guest g) {
-            Label rsvpLabel = new Label("RSVP: " + g.getRsvp());
+        if (person instanceof Guest) {
+            Guest g = (Guest) person;
+            Label rsvpLabel = new Label("RSVP: " + g.getRsvp().value);
+            addLabel(rsvpLabel);
+
             Label relationLabel = new Label("Relation: " + g.getRelation());
-            relationLabel.getStyleClass().add("cell_small_label");
-            rsvpLabel.getStyleClass().add("cell_small_label");
-            cardPaneContents.getChildren().add(rsvpLabel);
-            cardPaneContents.getChildren().add(relationLabel);
+            addLabel(relationLabel);
         } else {
             Vendor v = (Vendor) person;
-            extraLabel = new Label("Company: " + v.getCompany().value);
-            cardPaneContents.getChildren().add(extraLabel);
+            Label companyLabel = new Label("Company: " + v.getCompany().value);
+            addLabel(companyLabel);
+
+            Label budgetLabel = new Label("Budget: $" + v.getBudget().toString());
+            addLabel(budgetLabel);
         }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Adds a label to the cardPaneContents with a specific style class.
+     * @param label The Label to be added to the UI.
+     */
+    public void addLabel(Label label) {
+        label.getStyleClass().add("cell_small_label");
+        cardPaneContents.getChildren().add(label);
     }
 }

@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BUDGET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -34,7 +36,8 @@ public class VendorTest {
 
         // same name, all other attributes different -> returns true
         Vendor editedAlice = new VendorBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withBudget(VALID_BUDGET_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(AMY.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -92,6 +95,10 @@ public class VendorTest {
         // different company -> returns false
         editedAlice = new VendorBuilder(AMY).withCompany(VALID_COMPANY_BOB).build();
         assertFalse(AMY.equals(editedAlice));
+
+        // different company -> returns false
+        editedAlice = new VendorBuilder(AMY).withBudget(VALID_BUDGET_BOB).build();
+        assertFalse(AMY.equals(editedAlice));
     }
 
     @Test
@@ -99,7 +106,12 @@ public class VendorTest {
         String expected = Vendor.class.getCanonicalName() + "{name=" + AMY.getName() + ", phone="
                 + AMY.getPhone() + ", email=" + AMY.getEmail() + ", address="
                 + AMY.getAddress() + ", tags=" + AMY.getTags() + ", company="
-                + AMY.getCompany() + "}";
+                + AMY.getCompany() + ", budget=" + AMY.getBudget() + "}";
         assertEquals(expected, AMY.toString());
+    }
+
+    @Test
+    public void testHashCode_differentObjects_shouldReturnDifferentHashCodes() {
+        assertNotEquals(AMY.hashCode(), BOB.hashCode());
     }
 }

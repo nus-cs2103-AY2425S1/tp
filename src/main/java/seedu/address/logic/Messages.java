@@ -85,6 +85,8 @@ public class Messages {
                 .append(vendor.getAddress())
                 .append("; Company: ")
                 .append(vendor.getCompany())
+                .append("; Budget: $")
+                .append(vendor.getBudget())
                 .append("; Tags: ");
         vendor.getTags().forEach(builder::append);
         return builder.toString();

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.util.EditVendorDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -41,6 +43,7 @@ public class EditVendorCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_BUDGET + "BUDGET] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -74,7 +77,9 @@ public class EditVendorCommand extends Command {
         Address updatedAddress = editVendorDescriptor.getAddress().orElse(vendorToEdit.getAddress());
         Set<Tag> updatedTags = editVendorDescriptor.getTags().orElse(vendorToEdit.getTags());
         Company updatedCompany = editVendorDescriptor.getCompany().orElse(vendorToEdit.getCompany());
-        return new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCompany);
+        Budget updatedBudget = editVendorDescriptor.getBudget().orElse(vendorToEdit.getBudget());
+        return new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedCompany, updatedBudget);
     }
 
     @Override

@@ -14,6 +14,26 @@ public class Vendor extends Person {
 
     // Identity field specific to vendor
     private final Company company;
+    private final Budget budget;
+
+    /**
+     * Constructs a {@code Vendor} with the specified details.
+     * Every field must be present and not null.
+     *
+     * @param name    Name of the vendor.
+     * @param company Company associated with the vendor.
+     * @param phone   Phone number of the vendor.
+     * @param email   Email address of the vendor.
+     * @param address Residential or business address of the vendor.
+     * @param tags    Tags associated with the vendor.
+     * @param budget  Budget allocated to the vendor.
+     */
+    public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Company company, Budget budget) {
+        super(name, phone, email, address, tags);
+        this.company = company;
+        this.budget = budget;
+    }
 
     /**
      * Constructs a {@code Vendor} with the specified details.
@@ -26,9 +46,11 @@ public class Vendor extends Person {
      * @param address Residential or business address of the vendor.
      * @param tags    Tags associated with the vendor.
      */
-    public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Company company) {
+    public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Company company) {
         super(name, phone, email, address, tags);
         this.company = company;
+        this.budget = new Budget("0");
     }
 
     /**
@@ -38,6 +60,15 @@ public class Vendor extends Person {
      */
     public Company getCompany() {
         return company;
+    }
+
+    /**
+     * Returns the budget allocated to this vendor.
+     *
+     * @return The budget of the vendor.
+     */
+    public Budget getBudget() {
+        return budget;
     }
 
     /**
@@ -71,7 +102,8 @@ public class Vendor extends Person {
 
         Vendor otherVendor = (Vendor) other;
         return super.equals(other)
-                && company.equals(otherVendor.company);
+                && company.equals(otherVendor.company)
+                && budget.equals(otherVendor.budget);
     }
 
     /**
@@ -83,7 +115,7 @@ public class Vendor extends Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getTags(), getCompany());
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getTags(), getCompany(), getBudget());
     }
 
     /**
@@ -95,6 +127,7 @@ public class Vendor extends Person {
     public String toString() {
         return super.toStringBuilder()
                 .add("company", company)
+                .add("budget", budget)
                 .toString();
     }
 
