@@ -11,14 +11,24 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+
+    @Test
+    public void addGroups_addsGroupSuccessfully() {
+        Person actualPerson = new PersonBuilder().build();
+        Group group = new Group("StudyGroup", List.of(actualPerson));
+        actualPerson.addGroups(group);
+        assertTrue(actualPerson.getGroups().contains(group));
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -111,11 +121,57 @@ public class PersonTest {
     }
 
     @Test
+    public void getGroups_returnsImmutableSet() {
+        Person person = new PersonBuilder().build();
+        Group group = new Group("StudyGroup", List.of(person));
+        person.addGroups(group);
+
+        // Verify that modification attempt throws exception
+        Set<Group> groups = person.getGroups();
+        assertThrows(UnsupportedOperationException.class, () -> groups.add(group));
+    }
+
+    @Test
+    public void addGroups_groupAlreadyPresent_doesNotDuplicate() {
+        Person actualPerson = new PersonBuilder().build();
+        Group group = new Group("StudyGroup", List.of(actualPerson));
+        actualPerson.addGroups(group); // Add the first time
+        actualPerson.addGroups(group); // Add again
+
+        // Ensure the group is not duplicated
+        assertEquals(1, actualPerson.getGroups().size());
+        assertTrue(actualPerson.getGroups().contains(group));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", studentClass=" + ALICE.getStudentClass()
                 + ", phone=" + ALICE.getPhone()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", tags=" + ALICE.getTags()
+                + ", groups=" + ALICE.getGroups()
+                + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hashCode_sameAttributes_sameHashCode() {
+        // Create two person objects with the same attributes
+        Person person1 = new PersonBuilder(ALICE).build();
+        Person person2 = new PersonBuilder(ALICE).build();
+
+        // Ensure that two objects with the same attributes have the same hashCode
+        assertEquals(person1.hashCode(), person2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentAttributes_differentHashCode() {
+        // Create two person objects with different attributes
+        Person person1 = new PersonBuilder(ALICE).build();
+        Person person2 = new PersonBuilder(BOB).build();
+
+        // Ensure that two objects with different attributes have different hashCodes
+        assertFalse(person1.hashCode() == person2.hashCode());
+    }
+
 }
