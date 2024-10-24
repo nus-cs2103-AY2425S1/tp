@@ -42,9 +42,9 @@ JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedStudent
 
 
-JsonAdaptedStudent --> "*" JsonAdaptedAssignment
-JsonAdaptedStudent --> "*" JsonAdaptedAttendanceRecord
-JsonAdaptedAttendanceRecord--> "*" JsonAdaptedAttendance
+JsonAdaptedStudent *--> "*" JsonAdaptedAssignment
+JsonAdaptedStudent *--> "*" JsonAdaptedAttendanceRecord
+JsonAdaptedAttendanceRecord *--> "*" JsonAdaptedAttendance
 
 
 @enduml
