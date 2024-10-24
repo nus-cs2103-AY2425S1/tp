@@ -434,7 +434,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC7 - Export contact list**
+**Use case: UC7 - Pin a person**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to pin a specific person.
+3.  System shows details of newly pinned person.
+
+**Extension**
+
+- 2a. The person is already pinned.
+
+  - 2a1. System shows duplicated pin message.
+
+    Use case ends.
+
+**Use case: UC8 - Export contact list**
 
 **MSS**
 1.  Actor requests to export contact list to a specific file.
@@ -455,22 +471,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1b1. System shows an error message.
 
       Use case ends.
-
-**Use case: UC7 - Pin a person**
-
-**MSS**
-
-1.  Actor performs <u>list all people (UC2)</u>.
-2.  Actor requests to pin a specific person.
-3.  System shows details of newly pinned person.
-
-**Extension**
-
-- 2a. The person is already pinned.
-
-  - 2a1. System shows duplicated pin message.
-
-    Use case ends.
 
 ### Non-Functional Requirements
 
