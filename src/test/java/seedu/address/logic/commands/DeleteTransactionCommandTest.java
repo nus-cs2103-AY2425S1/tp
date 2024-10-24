@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -31,6 +32,7 @@ public class DeleteTransactionCommandTest {
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         Person personToDeleteFrom = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         List<Transaction> transactions = personToDeleteFrom.getTransactions();
+        model.updateTransactionList(transactions);
         List<Transaction> expectedTransactions = new ArrayList<>(transactions);
 
         Transaction deletedTransaction = expectedTransactions.remove(INDEX_FIRST_TRANSACTION.getZeroBased());
@@ -44,6 +46,31 @@ public class DeleteTransactionCommandTest {
 
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
         assertCommandSuccess(deleteTransactionCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyFilteredTransactionList() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        List<Transaction> transactions = new ArrayList<>();
+        model.updateTransactionList(transactions);
+
+        String expectedMessage = Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
+
+        DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
+        assertCommandFailure(deleteTransactionCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_unfilteredListFailure() {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
+        String expectedMessage = Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
+
+        DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
+        assertCommandFailure(deleteTransactionCommand, model, expectedMessage);
     }
     @Test
     public void equals() {
