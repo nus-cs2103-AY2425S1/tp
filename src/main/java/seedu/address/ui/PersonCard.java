@@ -62,6 +62,9 @@ public class PersonCard extends UiPart<Region> {
             Guest g = (Guest) person;
             Label rsvpLabel = new Label("RSVP: " + g.getRsvp().value);
             addLabel(rsvpLabel);
+
+            Label relationLabel = new Label("Relation: " + g.getRelation());
+            addLabel(relationLabel);
         } else {
             Vendor v = (Vendor) person;
             Label companyLabel = new Label("Company: " + v.getCompany().value);

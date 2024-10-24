@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -49,6 +50,8 @@ public class CommandTestUtil {
     public static final String VALID_COMPANY_BOB = "Wedding anywhere";
     public static final String VALID_BUDGET_AMY = "2000.00";
     public static final String VALID_BUDGET_BOB = "4500.00";
+    public static final String VALID_RELATION_AMY = "W";
+    public static final String VALID_RELATION_BOB = "U";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -64,6 +67,8 @@ public class CommandTestUtil {
     public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_BOB;
     public static final String BUDGET_DESC_AMY = " " + PREFIX_BUDGET + VALID_BUDGET_AMY;
     public static final String BUDGET_DESC_BOB = " " + PREFIX_BUDGET + VALID_BUDGET_BOB;
+    public static final String RELATION_DESC_AMY = " " + PREFIX_RELATION + VALID_RELATION_AMY;
+    public static final String RELATION_DESC_BOB = " " + PREFIX_RELATION + VALID_RELATION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -75,6 +80,8 @@ public class CommandTestUtil {
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY; // empty string not allowed for company
     public static final String INVALID_BUDGET_DESC = " " + PREFIX_BUDGET; // empty string not allowed for budget
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_RELATION_DESC =
+            " " + PREFIX_RELATION + "Hi"; // only one character allowed for relation
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -87,10 +94,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditGuestDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withRsvp(VALID_RSVP_ACCEPTED).build();
+                .withTags(VALID_TAG_FRIEND).withRsvp(VALID_RSVP_ACCEPTED)
+                .withRelation(VALID_RELATION_AMY).build();
         DESC_BOB = new EditGuestDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRsvp(VALID_RSVP_PENDING).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRsvp(VALID_RSVP_PENDING)
+                .withRelation(VALID_RELATION_BOB).build();
         DESC_VENDOR_AMY = new EditVendorDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).withCompany(VALID_COMPANY_AMY).withBudget(VALID_BUDGET_AMY)

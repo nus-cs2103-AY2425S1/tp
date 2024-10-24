@@ -64,6 +64,8 @@ public class Messages {
                 .append(guest.getAddress())
                 .append("; RSVP: ")
                 .append(guest.getRsvp())
+                .append("; Relation: ")
+                .append(guest.getRelation())
                 .append("; Tags: ");
         guest.getTags().forEach(builder::append);
         return builder.toString();
