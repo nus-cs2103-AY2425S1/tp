@@ -86,5 +86,5 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void sortPersonList( Comparator<Person> comparator);
+    void sortPersonList(Comparator<Person> comparator);
 }

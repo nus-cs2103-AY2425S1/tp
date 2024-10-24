@@ -76,8 +76,10 @@ public class ArgumentTokenizer {
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
     }
-
-    public static List<Prefix> extractPrefixes(String argsString, Prefix... prefixes ) {
+    /**
+     * Returns the list of prefixes in the string argument
+     */
+    public static List<Prefix> extractPrefixes(String argsString, Prefix... prefixes) {
 
         List<PrefixPosition> prefixPositions = findAllPrefixPositions(argsString, prefixes);
 
