@@ -21,6 +21,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AttendanceCount;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 
 public class UnmarkCommandTest {
@@ -28,7 +29,7 @@ public class UnmarkCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToUnmark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student personToUnmark = (Student) model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Integer attendanceCount = personToUnmark.getAttendanceCount().integerCount();
         Integer incrementedAttendanceCount = attendanceCount + 1;
         UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON);

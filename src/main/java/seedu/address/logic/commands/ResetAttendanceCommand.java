@@ -14,6 +14,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +36,11 @@ public class ResetAttendanceCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         for (Person p : lastShownList) {
-            Person editedPerson = createNewPersonWithZeroAttendance(p);
-            model.setPerson(p, editedPerson);
+            if (p instanceof Student) {
+                Student studentToReset = (Student) p;
+                Student resetStudent = createNewStudentWithZeroAttendance(studentToReset);
+                model.setPerson(p, resetStudent);
+            }
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -47,15 +51,15 @@ public class ResetAttendanceCommand extends Command {
      * Creates and returns a {@code Person} with AttendanceCount of 0.
      * edited with {@code editPersonDescriptor}.
      */
-    static Person createNewPersonWithZeroAttendance(Person personToEdit) {
-        assert personToEdit != null;
+    static Student createNewStudentWithZeroAttendance(Student studentToReset) {
+        assert studentToReset != null;
 
-        Name name = personToEdit.getName();
-        Role role = personToEdit.getRole();
-        Phone phone = personToEdit.getPhone();
-        Email email = personToEdit.getEmail();
-        Address address = personToEdit.getAddress();
-        Set<Tag> tags = personToEdit.getTags();
-        return new Person(name, role, phone, email, address, tags);
+        Name name = studentToReset.getName();
+        Role role = studentToReset.getRole();
+        Phone phone = studentToReset.getPhone();
+        Email email = studentToReset.getEmail();
+        Address address = studentToReset.getAddress();
+        Set<Tag> tags = studentToReset.getTags();
+        return new Student(name, role, phone, email, address, tags);
     }
 }

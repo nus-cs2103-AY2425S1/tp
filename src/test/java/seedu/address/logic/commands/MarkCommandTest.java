@@ -21,6 +21,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AttendanceCount;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 public class MarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -28,19 +29,21 @@ public class MarkCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Integer attendanceCount = personToMark.getAttendanceCount().integerCount();
-        Integer incrementedAttendanceCount = attendanceCount + 1;
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON);
+        Student studentToMark = (Student) personToMark;
+        Integer attendanceCount = studentToMark.getAttendanceCount().integerCount();
+        Integer incrementedAttendanceCount = attendanceCount + 1;
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.getNameOnly(personToMark));
+                    Messages.getNameOnly(studentToMark));
 
-        Person newPerson = new Person(personToMark.getName(), personToMark.getRole(), personToMark.getPhone(),
-                personToMark.getEmail(), personToMark.getAddress(), personToMark.getTags(),
+        Student newPerson = new Student(studentToMark.getName(), studentToMark.getRole(), studentToMark.getPhone(),
+                studentToMark.getEmail(), studentToMark.getAddress(), studentToMark.getTags(),
                 new AttendanceCount(incrementedAttendanceCount.toString()));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToMark, newPerson);
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+
     }
 
     @Test

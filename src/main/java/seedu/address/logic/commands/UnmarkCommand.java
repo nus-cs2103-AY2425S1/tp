@@ -19,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,32 +53,33 @@ public class UnmarkCommand extends Command {
         }
 
         Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        if (personToUnmark.getRole().equals(new Role("Parent"))) {
+        if (!(personToUnmark instanceof Student)) {
             return new CommandResult(String.format(MESSAGE_CANNOT_MARK_PARENT));
-        } else if (personToUnmark.getAttendanceCount().integerCount() == 0) {
-            return new CommandResult(Messages.getNameOnly(personToUnmark) + "'s "
-                    + String.format(MESSAGE_CANNOT_UNMARK_FURTHER));
         } else {
-            Person unmarkedPerson = createNewPerson(personToUnmark);
-
-            model.setPerson(personToUnmark, unmarkedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS,
-                    Messages.getNameOnly(unmarkedPerson)));
-
+            Student studentToUnmark = (Student) personToUnmark;
+            if (studentToUnmark.getAttendanceCount().integerCount() == 0) {
+                return new CommandResult(Messages.getNameOnly(personToUnmark) + "'s "
+                        + String.format(MESSAGE_CANNOT_UNMARK_FURTHER));
+            } else {
+                Student unmarkedStudent = createNewUnmarkedStudent(studentToUnmark);
+                model.setPerson(personToUnmark, unmarkedStudent);
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS,
+                        Messages.getNameOnly(unmarkedStudent)));
+            }
         }
     }
 
-    private Person createNewPerson(Person selectedPerson) {
-        assert selectedPerson != null;
-        Name name = selectedPerson.getName();
-        Role role = selectedPerson.getRole();
-        Phone phone = selectedPerson.getPhone();
-        Email email = selectedPerson.getEmail();
-        Address address = selectedPerson.getAddress();
-        Set<Tag> tags = selectedPerson.getTags();
-        AttendanceCount attendanceCount = selectedPerson.getAttendanceCount().decrement();
-        return new Person(name, role, phone, email, address, tags, attendanceCount);
+    private Student createNewUnmarkedStudent(Student selectedStudent) {
+        assert selectedStudent != null;
+        Name name = selectedStudent.getName();
+        Role role = selectedStudent.getRole();
+        Phone phone = selectedStudent.getPhone();
+        Email email = selectedStudent.getEmail();
+        Address address = selectedStudent.getAddress();
+        Set<Tag> tags = selectedStudent.getTags();
+        AttendanceCount attendanceCount = selectedStudent.getAttendanceCount().decrement();
+        return new Student(name, role, phone, email, address, tags, attendanceCount);
 
     }
 

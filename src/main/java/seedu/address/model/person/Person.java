@@ -25,7 +25,6 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final AttendanceCount attendanceCount;
 
     /**
      * Constructs a new Person.
@@ -40,7 +39,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.attendanceCount = attendanceCount;
     }
 
     /**
@@ -55,7 +53,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.attendanceCount = new AttendanceCount("0");
     }
 
 
@@ -79,9 +76,6 @@ public class Person {
         return address;
     }
 
-    public AttendanceCount getAttendanceCount() {
-        return attendanceCount;
-    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

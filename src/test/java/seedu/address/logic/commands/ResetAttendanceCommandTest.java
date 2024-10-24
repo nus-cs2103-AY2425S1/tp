@@ -13,6 +13,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AttendanceCount;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 public class ResetAttendanceCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -34,7 +35,7 @@ public class ResetAttendanceCommandTest {
 
     @Test
     public void createNewPersonWithZeroAttendance_success() {
-        Person newAmy = ResetAttendanceCommand.createNewPersonWithZeroAttendance(AMY);
+        Student newAmy = ResetAttendanceCommand.createNewStudentWithZeroAttendance(AMY);
         assertNotEquals(new AttendanceCount("0"), AMY.getAttendanceCount());
         assertEquals(new AttendanceCount("0"), newAmy.getAttendanceCount());
 

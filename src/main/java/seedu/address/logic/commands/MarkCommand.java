@@ -19,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,27 +48,28 @@ public class MarkCommand extends Command {
         }
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-        if (personToMark.getRole().equals(new Role("parent"))) {
+        if (!(personToMark instanceof Student)) {
             return new CommandResult(String.format(MESSAGE_CANNOT_MARK_PARENT));
         } else {
-            Person markedPerson = createNewPerson(personToMark);
-            model.setPerson(personToMark, markedPerson);
+            Student studentToMark = (Student) personToMark;
+            Student markedStudent = createNewStudent(studentToMark);
+            model.setPerson(personToMark, markedStudent);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.getNameOnly(markedPerson)));
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.getNameOnly(markedStudent)));
         }
     }
 
 
-    private Person createNewPerson(Person selectedPerson) {
-        assert selectedPerson != null;
-        Name name = selectedPerson.getName();
-        Role role = selectedPerson.getRole();
-        Phone phone = selectedPerson.getPhone();
-        Email email = selectedPerson.getEmail();
-        Address address = selectedPerson.getAddress();
-        Set<Tag> tags = selectedPerson.getTags();
-        AttendanceCount attendanceCount = selectedPerson.getAttendanceCount().increment();
-        return new Person(name, role, phone, email, address, tags, attendanceCount);
+    private Student createNewStudent(Student selectedStudent) {
+        assert selectedStudent != null;
+        Name name = selectedStudent.getName();
+        Role role = selectedStudent.getRole();
+        Phone phone = selectedStudent.getPhone();
+        Email email = selectedStudent.getEmail();
+        Address address = selectedStudent.getAddress();
+        Set<Tag> tags = selectedStudent.getTags();
+        AttendanceCount attendanceCount = selectedStudent.getAttendanceCount().increment();
+        return new Student(name, role, phone, email, address, tags, attendanceCount);
 
     }
 
