@@ -139,6 +139,15 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Replaces the given concert {@code target} with {@code editedConcert}. {@code target} must exist
+     * in the address book. The {@code editedConcert} must not be equals to another existing concert
+     * in the address book.
+     * @param target The concert to be edited.
+     * @param editedConcert The concert to replace the target with.
+     */
+    void setConcert(Concert target, Concert editedConcert);
+
+    /**
      * Replaces the given concertContact {@code target} with {@code editedConcertContact}. {@code target} must exist
      * in the address book. The concertContact identity of {@code editedConcertContact} must not be the same as
      * another existing concertContact in the address book.

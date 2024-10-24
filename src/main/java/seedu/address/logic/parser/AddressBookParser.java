@@ -16,7 +16,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteConcertCommand;
 import seedu.address.logic.commands.DeleteConcertContactCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditConcertCommand;
+import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindConcertCommand;
 import seedu.address.logic.commands.FindPersonCommand;
@@ -67,8 +68,8 @@ public class AddressBookParser {
         case AddPersonCommand.COMMAND_WORD:
             return new AddPersonCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditPersonCommand.COMMAND_WORD:
+            return new EditPersonCommandParser().parse(arguments);
 
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments);
@@ -111,6 +112,9 @@ public class AddressBookParser {
 
         case DeleteConcertCommand.COMMAND_WORD:
             return new DeleteConcertCommandParser().parse(arguments);
+
+        case EditConcertCommand.COMMAND_WORD:
+            return new EditConcertCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
