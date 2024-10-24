@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -61,7 +60,7 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         StudentId validStudentId = new StudentId("12345678");
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + PREFIX_STUDENTID + validStudentId);
+                DeleteCommand.COMMAND_WORD + " " + validStudentId);
         assertEquals(new DeleteCommand(validStudentId), command);
     }
 
@@ -71,10 +70,7 @@ public class AddressBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).setEmptyModuleList().build();
         StudentId studentId = person.getStudentId();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + studentId + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-
-        EditCommand expected = new EditCommand(studentId, descriptor);
-
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(studentId, descriptor), command);
     }
 
@@ -127,7 +123,7 @@ public class AddressBookParserTest {
         StudentId validStudentId = new StudentId(CommandTestUtil.VALID_STUDENTID_BOB);
         Module validModule = new Module(CommandTestUtil.VALID_MODULE_BOB);
         ModuleCommand command = (ModuleCommand) parser.parseCommand(
-                ModuleCommand.COMMAND_WORD + " " + PREFIX_STUDENTID + validStudentId + " "
+                ModuleCommand.COMMAND_WORD + " " + validStudentId + " "
                         + PREFIX_MODULE + validModule.value);
         assertEquals(new ModuleCommand(validStudentId, validModule), command);
     }
@@ -137,8 +133,9 @@ public class AddressBookParserTest {
         StudentId validStudentId = new StudentId(CommandTestUtil.VALID_STUDENTID_BOB);
         Module validModule = new Module(CommandTestUtil.VALID_MODULE_BOB);
         Grade validGrade = new Grade(CommandTestUtil.VALID_GRADE_BOB);
+        System.out.println("this");
         GradeCommand command = (GradeCommand) parser.parseCommand(
-                GradeCommand.COMMAND_WORD + " " + PREFIX_STUDENTID + validStudentId + " "
+                GradeCommand.COMMAND_WORD + " " + validStudentId + " "
                         + PREFIX_MODULE + validModule.value + " " + PREFIX_GRADE + validGrade);
         assertEquals(new GradeCommand(validStudentId, validModule, validGrade), command);
     }

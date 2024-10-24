@@ -1,12 +1,12 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
 
 /**
@@ -23,12 +23,35 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         StudentId validStudentId = new StudentId("12345678");
-        String input = "id/" + validStudentId;
+        String input = "" + validStudentId;
         assertParseSuccess(parser, input, new DeleteCommand(validStudentId));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", StudentId.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_validArgsWithModule_returnsDeleteCommand() {
+        StudentId validStudentId = new StudentId("12345678");
+        Module validModule = new Module("CS2103T");
+        String input = "12345678 m/CS2103T";
+
+        assertParseSuccess(parser, input, new DeleteCommand(validStudentId, validModule));
+    }
+
+    @Test
+    public void parse_validArgsWithoutModule_returnsDeleteCommand() {
+        StudentId validStudentId = new StudentId("12345678");
+        String input = "12345678";
+
+        assertParseSuccess(parser, input, new DeleteCommand(validStudentId));
+    }
+
+    @Test
+    public void parse_invalidModuleFormat_throwsParseException() {
+        String input = "12345678 m/ Invalid_Module!";
+        assertParseFailure(parser, input, Module.MESSAGE_CONSTRAINTS);
     }
 }

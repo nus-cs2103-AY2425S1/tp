@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 
 /**
@@ -117,10 +118,22 @@ public class ModelManager implements Model {
             setPersonToDisplay(null);
         }
     }
+    @Override
+    public void deleteModule(Person target, Module module) {
+        addressBook.removeModule(target, module);
+    }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+
+        setPersonToDisplay(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addModule(Person person, Module module) {
+        addressBook.addModule(person, module);
 
         setPersonToDisplay(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
