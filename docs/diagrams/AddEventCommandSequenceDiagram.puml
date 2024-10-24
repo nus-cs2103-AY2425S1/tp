@@ -1,0 +1,29 @@
+@startuml
+Actor user
+participant "Logic Manager" as L #lightblue
+participant "addressBookParser: AddressBookParser" as A #red
+participant "eventManger: EventManager" as C #green
+participant ":NewEventCommandParser" as P #pink
+participant "contactCommand: AddEventCommand" as B #yellow
+participant "ParserUtil" as U #gray
+participant ":Event" as E #lightgreen
+
+
+user --> L: "new ..."
+L-> A: addressBookParser.parseCommand("new...")
+A -> P: .parse(arguments)
+
+create B
+P -> B: new AddEventCommand()
+B --> U: .parseEvent(userInput)
+create E
+U -> E: new Event()
+E-->U
+U-->B
+B --> P:
+P --> A:
+A --> L
+L -> B:  contactCommand.execute()
+B -> C: addEvent(event)
+B --> L: CommandResult
+@enduml
