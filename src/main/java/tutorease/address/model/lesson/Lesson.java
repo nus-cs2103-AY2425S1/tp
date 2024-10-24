@@ -120,6 +120,14 @@ public class Lesson implements Comparable<Lesson> {
     public String getFeeString() {
         return fee.getValueString();
     }
+    /**
+     * Returns the amount per hour for the lesson.
+     *
+     * @return The amount per hour of the lesson.
+     */
+    public String getAmountPerHour() {
+        return fee + "/hr";
+    }
 
     @Override
     public String toString() {

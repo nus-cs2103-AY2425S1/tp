@@ -17,10 +17,10 @@ public class ListLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         if (model.getFilteredLessonList().isEmpty()) {
             return new CommandResult(MESSAGE_NO_LESSONS_FOUND); // No lessons found
         }
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
