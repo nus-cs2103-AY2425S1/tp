@@ -47,17 +47,17 @@ public class JsonTalentHubStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("notJsonFormatTalentHub.json"));
+        assertThrows(DataLoadingException.class, () -> readAddressBook("notJsonFormatData.json"));
     }
 
     @Test
     public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonTalentHub.json"));
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonData.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonTalentHub.json"));
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonData.json"));
     }
 
     @Test
