@@ -27,6 +27,7 @@ public abstract class OrderList<T extends Order> {
     public void addOrder(T order) {
         assert order != null : "Order to add cannot be null";
         orders.add(order);
+        orders.sort(Comparator.comparing(Order::getStatus));
     }
 
     /**
