@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AbstractEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.AddPublicAddressCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
@@ -74,10 +73,6 @@ public class AddPublicAddressCommandParser implements Parser<AddPublicAddressCom
 
         Map<Network, Set<PublicAddress>> publicAddresses = Map.of(network, Set.of(publicAddress));
         editPersonDescriptor.setPublicAddresses(publicAddresses);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
 
         return new AddPublicAddressCommand(index, editPersonDescriptor);
     }

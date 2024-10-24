@@ -22,8 +22,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Deletes the person's public address identified by the index number
- * used in the displayed person list and their crypto network.
+ * Add a public address to the person identified by the index number
+ * used in the displayed person list with the corresponding network and label
  */
 public class AddPublicAddressCommand extends AbstractEditCommand {
     public static final String COMMAND_WORD = "addpa"; // short for add public address
@@ -47,7 +47,8 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
                     + "(overwrite) using the editpa command\n";
 
     /**
-     * Takes in a target index and deletes all the addresses related to the network
+     * Adds a public address to the person identified by the index number
+     * using the editPersonDescriptor
      *
      * @param index
      * @param editPersonDescriptor
