@@ -67,6 +67,6 @@ public class DonatedAmount implements Comparable<DonatedAmount> {
 
     @Override
     public int compareTo(DonatedAmount other) {
-        return -Double.compare(this.amount, other.amount);
+        return Double.compare(other.amount, this.amount);
     }
 }
