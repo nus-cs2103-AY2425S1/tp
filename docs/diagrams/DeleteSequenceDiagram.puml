@@ -1,4 +1,6 @@
 @startuml
+Title Delete Sequence Diagram
+
 !include style.puml
 skinparam ArrowFontStyle plain
 

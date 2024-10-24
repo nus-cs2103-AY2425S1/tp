@@ -1,4 +1,6 @@
 @startuml
+Title Model Class Diagram
+
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
