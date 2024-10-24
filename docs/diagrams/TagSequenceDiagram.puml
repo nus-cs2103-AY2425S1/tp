@@ -1,0 +1,129 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagDeleteCommandParser" as TagDeleteCommandParser LOGIC_COLOR
+participant "d:TagDeleteCommand" as TagDeleteCommand LOGIC_COLOR
+participant "dY:DeleteYCommand" as DeleteYCommand LOGIC_COLOR
+participant "dN:DeleteNCommand" as DeleteNCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete n/Alex")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete n/Alex")
+activate AddressBookParser
+
+create DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> AddressBookParser
+deactivate DeleteCommandParser
+
+AddressBookParser -> DeleteCommandParser : parse("n/alex")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser :
+deactivate DeleteCommand
+
+DeleteCommandParser --> AddressBookParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteCommand : execute(m)
+activate DeleteCommand
+
+DeleteCommand -> LogicManager : showConfirmationPrompt("Are you sure you want to delete Alex?")
+deactivate DeleteCommand
+
+[-> LogicManager : execute("delete-y")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete-y")
+activate AddressBookParser
+
+create DeleteYCommand
+AddressBookParser -> DeleteYCommand
+activate DeleteYCommand
+
+DeleteYCommand --> AddressBookParser
+deactivate DeleteYCommand
+
+AddressBookParser --> LogicManager : dY
+deactivate AddressBookParser
+
+LogicManager -> DeleteYCommand : execute(m)
+activate DeleteYCommand
+
+DeleteYCommand -> Model : deletePerson("Alex")
+activate Model
+
+Model --> DeleteYCommand
+deactivate Model
+
+create CommandResult
+DeleteYCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteYCommand
+deactivate CommandResult
+
+DeleteYCommand --> LogicManager : r
+deactivate DeleteYCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+[-> LogicManager : execute("delete-n")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete-n")
+activate AddressBookParser
+
+create DeleteNCommand
+AddressBookParser -> DeleteNCommand
+activate DeleteNCommand
+
+DeleteNCommand --> AddressBookParser
+deactivate DeleteNCommand
+
+AddressBookParser --> LogicManager : dN
+deactivate AddressBookParser
+
+LogicManager -> DeleteNCommand : execute(m)
+activate DeleteNCommand
+
+DeleteNCommand -> LogicManager : cancelDeletion()
+deactivate DeleteNCommand
+
+create CommandResult
+DeleteNCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteNCommand
+deactivate CommandResult
+
+DeleteNCommand --> LogicManager : r
+deactivate DeleteNCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

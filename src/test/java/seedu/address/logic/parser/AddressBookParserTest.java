@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WEDDING3;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -92,7 +92,7 @@ public class AddressBookParserTest {
         // Create a person with a valid name and tag
         Person person = new PersonBuilder().withName(VALID_NAME_AMY).withPhone("85355255")
                 .withEmail("amy@gmail.com").withAddress("123, Jurong West Ave 6, #08-111")
-                .withJob("Caterer").withTags(VALID_TAG_AMY).build();
+                .withJob("Caterer").withTags(VALID_TAG_WEDDING3).build();
 
         // Build the descriptor for editing the person
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
@@ -100,7 +100,7 @@ public class AddressBookParserTest {
         // Create the user input string for the edit command
         String userInput = EditCommand.COMMAND_WORD + " n/" + person.getName().fullName
                 + " p/85355255 e/amy@gmail.com a/123, Jurong West Ave 6, #08-111 j/Caterer "
-                + PREFIX_TAG + VALID_TAG_AMY;
+                + PREFIX_TAG + VALID_TAG_WEDDING3;
 
         // Parse the command using the parser
         EditCommand command = (EditCommand) parser.parseCommand(userInput);
@@ -137,10 +137,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tagAdd() throws Exception {
-        final String tag = "Jane and Tom 230412";
+        final String tag = "Jane Tan & Tom Cruise";
         TagAddCommand command = (TagAddCommand) parser.parseCommand(TagAddCommand.COMMAND_WORD + " n/"
                 + VALID_NAME_AMY + " " + PREFIX_TAG + tag);
-        Tag stubTag = new Tag(VALID_TAG_AMY);
+        Tag stubTag = new Tag(VALID_TAG_WEDDING3);
         Name stubName = new Name(VALID_NAME_AMY);
         Set<Tag> stubTagList = new HashSet<>();
         stubTagList.add(stubTag);
@@ -149,10 +149,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_tagDelete() throws Exception {
-        final String tag = "Jane and Tom 230412";
+        final String tag = "Jane Tan & Tom Cruise";
         TagDeleteCommand command = (TagDeleteCommand) parser.parseCommand(TagDeleteCommand.COMMAND_WORD + " n/"
                 + VALID_NAME_AMY + " " + PREFIX_TAG + tag);
-        Tag stubTag = new Tag(VALID_TAG_AMY);
+        Tag stubTag = new Tag(VALID_TAG_WEDDING3);
         Name stubName = new Name(VALID_NAME_AMY);
         Set<Tag> stubTagList = new HashSet<>();
         stubTagList.add(stubTag);
