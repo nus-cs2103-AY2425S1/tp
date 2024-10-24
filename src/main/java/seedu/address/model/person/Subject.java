@@ -43,22 +43,22 @@ public class Subject {
             Subjects.TAMIL, Subjects.HIGHER_TAMIL, Subjects.HINDI, Subjects.MUSIC, Subjects.ART
     );
     static {
-        validSubjectsByLevel.put(new Level("S1 Express"), validLowerSecondarySubjects);
+        validSubjectsByLevel.put(new Level("S1 EXPRESS"), validLowerSecondarySubjects);
         validSubjectsByLevel.put(new Level("S1 NA"), validLowerSecondarySubjects);
         validSubjectsByLevel.put(new Level("S1 NT"), validLowerSecondarySubjects);
         validSubjectsByLevel.put(new Level("S1 IP"), validLowerSecondarySubjects);
 
-        validSubjectsByLevel.put(new Level("S2 Express"), validLowerSecondarySubjects);
+        validSubjectsByLevel.put(new Level("S2 EXPRESS"), validLowerSecondarySubjects);
         validSubjectsByLevel.put(new Level("S2 NA"), validLowerSecondarySubjects);
         validSubjectsByLevel.put(new Level("S2 NT"), validLowerSecondarySubjects);
         validSubjectsByLevel.put(new Level("S2 IP"), validLowerSecondarySubjects);
 
-        validSubjectsByLevel.put(new Level("S3 Express"), validUpperSecondarySubjects);
+        validSubjectsByLevel.put(new Level("S3 EXPRESS"), validUpperSecondarySubjects);
         validSubjectsByLevel.put(new Level("S3 NA"), validUpperSecondarySubjects);
         validSubjectsByLevel.put(new Level("S3 NT"), validUpperSecondarySubjects);
         validSubjectsByLevel.put(new Level("S3 IP"), validUpperSecondarySubjects);
 
-        validSubjectsByLevel.put(new Level("S4 Express"), validUpperSecondarySubjects);
+        validSubjectsByLevel.put(new Level("S4 EXPRESS"), validUpperSecondarySubjects);
         validSubjectsByLevel.put(new Level("S4 NA"), validUpperSecondarySubjects);
         validSubjectsByLevel.put(new Level("S4 NT"), validUpperSecondarySubjects);
         validSubjectsByLevel.put(new Level("S4 IP"), validUpperSecondarySubjects);

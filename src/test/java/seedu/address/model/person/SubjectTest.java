@@ -44,18 +44,18 @@ public class SubjectTest {
     @Test
     public void isValidSubjectNameByLevel_validLevel_success() {
         assertTrue(Subject.isValidSubjectNameByLevel(
-                new Level("S1 Express"), VALID_SUBJECT_ENGLISH));
+                new Level("S1 EXPRESS"), VALID_SUBJECT_ENGLISH));
     }
 
     @Test
     public void isValidSubjectNameByLevel_invalidSubject_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () ->
-                Subject.isValidSubjectNameByLevel(new Level("S1 Express"), INVALID_SUBJECT));
+                Subject.isValidSubjectNameByLevel(new Level("S1 EXPRESS"), INVALID_SUBJECT));
     }
 
     @Test
     public void isValidSubjectNameByLevel_validSubject_success() {
-        assertTrue(Subject.isValidSubjectNameByLevel(new Level("S1 Express"), VALID_SUBJECT_MATH));
+        assertTrue(Subject.isValidSubjectNameByLevel(new Level("S1 EXPRESS"), VALID_SUBJECT_MATH));
     }
     @Test
     public void isValidSubjectsByLevel_invalidLevel_failure() {

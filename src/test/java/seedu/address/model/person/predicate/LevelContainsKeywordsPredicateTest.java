@@ -42,19 +42,19 @@ public class LevelContainsKeywordsPredicateTest {
     public void test_levelContainsKeywords_returnsTrue() {
         // One keyword
         LevelContainsKeywordsPredicate predicate = new LevelContainsKeywordsPredicate(
-                Collections.singletonList("S1 Express"));
-        assertTrue(predicate.test(new PersonBuilder().withLevel("S1 Express").build()));
+                Collections.singletonList("S1 EXPRESS"));
+        assertTrue(predicate.test(new PersonBuilder().withLevel("S1 EXPRESS").build()));
 
         // Multiple keywords
-        predicate = new LevelContainsKeywordsPredicate(Arrays.asList("S1 Express", "S2 Express"));
-        assertTrue(predicate.test(new PersonBuilder().withLevel("S1 Express").build()));
+        predicate = new LevelContainsKeywordsPredicate(Arrays.asList("S1 EXPRESS", "S2 EXPRESS"));
+        assertTrue(predicate.test(new PersonBuilder().withLevel("S1 EXPRESS").build()));
     }
 
     @Test
     public void test_levelDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         LevelContainsKeywordsPredicate predicate = new LevelContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withLevel("S1 Express").build()));
+        assertFalse(predicate.test(new PersonBuilder().withLevel("S1 EXPRESS").build()));
 
         // Non-matching keyword
         predicate = new LevelContainsKeywordsPredicate(Arrays.asList("S2 NA"));

@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_SUBJECT_MATH = "MATH";
     public static final String VALID_SUBJECT_ENGLISH = "ENGLISH";
     public static final String VALID_LEVEL_S1_NA = "S1 NA";
-    public static final String VALID_LEVEL_S1_EXPRESS = "S1 Express";
+    public static final String VALID_LEVEL_S1_EXPRESS = "S1 EXPRESS";
     public static final String VALID_LEVEL_S4_NT = "S4 NT";
     public static final String LEVEL_DESC_S1_NA = " " + PREFIX_LEVEL + VALID_LEVEL_S1_NA;
     public static final String LEVEL_DESC_S1_EXPRESS = " " + PREFIX_LEVEL + VALID_LEVEL_S1_EXPRESS;
