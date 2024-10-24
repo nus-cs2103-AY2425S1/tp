@@ -37,7 +37,11 @@
         <Label fx:id="interviewScore" styleClass="cell_small_label" text="interviewScore: \$interviewScore" />
 
         <!-- Skills -->
-        <Label fx:id="skills" styleClass="cell_small_label" text="Skills: \$skills" />
+        <Label fx:id="skills" styleClass="cell_small_label" text="Skills: \$skills"
+               wrapText="true"
+               textAlignment="CENTER"
+               alignment="CENTER"
+               maxWidth="400" />
 
         <!-- Add a Region for spacing between Background and Contact -->
         <Region prefHeight="20" /> <!-- Adjust the height as needed for spacing -->
