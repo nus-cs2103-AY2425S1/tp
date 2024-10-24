@@ -20,7 +20,7 @@ public class FavouriteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Favourites the restaurant identified by the index number used in the displayed restaurant list.\n"
-            + "Restaurant will be displayed at the top of the list.\n"
+            + "Restaurant will be displayed at the top of the list and highlighted.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
