@@ -27,6 +27,7 @@ import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 import tahub.contacts.model.tag.Tag;
 import tahub.contacts.model.tutorial.Tutorial;
+import tahub.contacts.testutil.PersonBuilder;
 
 public class StudentCourseAssociationListTest {
 
@@ -104,6 +105,36 @@ public class StudentCourseAssociationListTest {
         public void throwsRuntimeException_ScaNotInListInputsValid() {
             assertThrows(ScaNotFoundException.class, () -> scaList.getFromStrings(
                     "A1234567X", "AB2000", "T02"));
+        }
+    }
+
+    @Nested
+    @DisplayName("findMatch()")
+    class FindMatch {
+        @Test
+        @DisplayName("finds correct SCA if SCA with same matricNumber, courseCode, tutorialId is in list")
+        public void findsSca_ScaInList() {
+            Course course = new Course(new CourseCode("CS1010"), new CourseName("Different Name"));
+            StudentCourseAssociation toFind = new StudentCourseAssociation(
+                    new PersonBuilder().withMatriculationNumber("A1234567X").build(),
+                    course,
+                    new Tutorial("T01", course)
+            );
+            StudentCourseAssociation foundSca = scaList.findMatch(toFind);
+            assertEquals(foundSca, sca1);
+        }
+
+        @Test
+        @DisplayName("throws ScaNotFoundException if SCA with same IDs is not in list")
+        public void throwsScaNotFoundException_ScaNotInListInputsValid() {
+            Course course = new Course(new CourseCode("AA0000"), new CourseName("Different Name"));
+            StudentCourseAssociation toFind = new StudentCourseAssociation(
+                    new PersonBuilder().withMatriculationNumber("A4529999X").build(),
+                    course,
+                    new Tutorial("T99", course)
+            );
+
+            assertThrows(ScaNotFoundException.class, () -> scaList.findMatch(toFind));
         }
     }
 }

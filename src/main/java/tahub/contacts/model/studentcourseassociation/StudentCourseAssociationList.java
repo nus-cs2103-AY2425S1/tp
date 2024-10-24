@@ -142,6 +142,8 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
             String matricNumber, String courseCodeString, String tutorialCodeString) {
         requireAllNonNull(matricNumber, courseCodeString, tutorialCodeString);
 
+        // not used - can remove?
+
         MatriculationNumber compMatricNumber = new MatriculationNumber(matricNumber);
         Course compCourse = new Course(new CourseCode(courseCodeString), new CourseName("COURSE NAME PLACEHOLDER"));
         Tutorial compTutorial = new Tutorial(tutorialCodeString, compCourse);
@@ -156,6 +158,26 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
                         sca.getStudent().getMatricNumber().equals(compMatricNumber)
                         && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial().equals(compTutorial)
                 )
+                .findFirst()
+                .orElseThrow(() -> new ScaNotFoundException(notFoundErrorMessage));
+    }
+
+    /**
+     * Returns a matching SCA based on an input query SCA. This query will be matched against the SCAs in this list
+     * based on the {@link MatriculationNumber}, {@link CourseCode} and tutorial ID {@code String}.
+     * <p></p>
+     * Throws a {@link RuntimeException} if an SCA matching the query is not found.
+     *
+     * @param toFind SCA with the {@link MatriculationNumber}, {@link CourseCode} and tutorial ID to look for.
+     * @return The SCA matching the queries, if one is found.
+     */
+    public StudentCourseAssociation findMatch(StudentCourseAssociation toFind) {
+        String notFoundErrorMessage = String.format(
+                "SCA not found for the query SCA: %s",
+                toFind);
+
+        return internalList.stream()
+                .filter(sca -> sca.isSameSca(toFind))
                 .findFirst()
                 .orElseThrow(() -> new ScaNotFoundException(notFoundErrorMessage));
     }

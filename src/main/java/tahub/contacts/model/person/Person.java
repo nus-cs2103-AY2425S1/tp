@@ -161,9 +161,9 @@ public class Person {
     /**
      * Shortened string representation of this {@link Person}. Only includes the matriculation number.
      *
-     * @return String representation in {@code [matricNumber]} form
+     * @return String representation in "{@code matricNumber}" form
      */
     public String toStringShort() {
-        return "[" + matricNumber.toString() + "]";
+        return matricNumber.toString();
     }
 }

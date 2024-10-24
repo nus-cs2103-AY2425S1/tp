@@ -84,7 +84,7 @@ public class Tutorial {
         return Objects.hash(this.tutorialId, this.course);
     }
 
-    Override
+    @Override
     public String toString() {
         return tutorialId;
     }
