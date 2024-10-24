@@ -6,6 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.hireme.logic.Messages.MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW;
 import static seedu.hireme.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.hireme.testutil.TypicalInternshipApplications.APPLE;
+import static seedu.hireme.testutil.TypicalInternshipApplications.BOFA;
+import static seedu.hireme.testutil.TypicalInternshipApplications.CITIBANK;
+import static seedu.hireme.testutil.TypicalInternshipApplications.DELL;
+import static seedu.hireme.testutil.TypicalInternshipApplications.EY;
+import static seedu.hireme.testutil.TypicalInternshipApplications.FIGMA;
+import static seedu.hireme.testutil.TypicalInternshipApplications.GOOGLE;
 import static seedu.hireme.testutil.TypicalInternshipApplications.YAHOO;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
@@ -26,10 +32,8 @@ import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 
 // Todo add more test cases to deal with prefix predicates
 public class FindCommandTest {
-    private Model<InternshipApplication> model =
-            new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
-    private Model<InternshipApplication> expectedModel =
-            new ModelManager<InternshipApplication>(getTypicalAddressBook(), new UserPrefs());
+    private Model<InternshipApplication> model = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+    private Model<InternshipApplication> expectedModel = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -59,9 +63,10 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noInternshipApplicationsFound() {
+    public void execute_noInternshipApplicationsFound() {
         String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        NameContainsKeywordsPredicate predicate =
+                preparePredicate("ThisIsSuchAUniqueStringSuchThatNoOtherCompanyNameShouldBeTheSameAsThis");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,6 +81,52 @@ public class FindCommandTest {
         expectedModel.updateFilteredList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(APPLE, YAHOO), model.getFilteredList());
+    }
+
+    @Test
+    public void execute_keywordsInUpperCase_validInternshipApplicationsFound() {
+        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("APPLE");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(APPLE), model.getFilteredList());
+    }
+
+    @Test
+    public void execute_keywordsInLowerCase_validInternshipApplicationsFound() {
+        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("apple");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(APPLE), model.getFilteredList());
+    }
+
+    @Test
+    public void execute_entireAlphabetAsKeywords_allInternshipApplicationsFound() {
+        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 7);
+        NameContainsKeywordsPredicate predicate =
+                preparePredicate("a b c d e f g h i j k l m n o p q r s t u v w x y z");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, YAHOO), model.getFilteredList());
+    }
+
+    @Test
+    public void execute_commonKeyword_multipleInternshipApplicationsFound() {
+        Model<InternshipApplication> modelWithGoogleAndYahoo = new ModelManager<>(getTypicalAddressBook(),
+                                                                                  new UserPrefs());
+        modelWithGoogleAndYahoo.addItem(GOOGLE);
+        String expectedMessage = String.format(MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("oo");
+        FindCommand command = new FindCommand(predicate);
+        Model<InternshipApplication> expectedModel = new ModelManager<>(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.addItem(GOOGLE);
+        expectedModel.updateFilteredList(predicate);
+        assertCommandSuccess(command, modelWithGoogleAndYahoo, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(YAHOO, GOOGLE), modelWithGoogleAndYahoo.getFilteredList());
     }
 
     @Test

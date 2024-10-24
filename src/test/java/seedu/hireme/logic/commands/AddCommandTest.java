@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.hireme.logic.commands.CommandTestUtil.VALID_COMPANY_EMAIL_APPLE;
+import static seedu.hireme.logic.commands.CommandTestUtil.VALID_ROLE_APPLE;
 import static seedu.hireme.testutil.Assert.assertThrows;
 import static seedu.hireme.testutil.TypicalInternshipApplications.GOOGLE;
 
@@ -45,6 +47,48 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_sameCompanyDifferentEmail_addSuccessful() throws Exception {
+        ModelStubAcceptingInternshipApplicationAdded modelStub = new ModelStubAcceptingInternshipApplicationAdded();
+        InternshipApplication application = new InternshipApplicationBuilder().build();
+        modelStub.addItem(application);
+        InternshipApplication diffApplication = new InternshipApplicationBuilder()
+                                            .withEmail(VALID_COMPANY_EMAIL_APPLE).build();
+        CommandResult commandResult = new AddCommand(diffApplication).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(diffApplication)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(application, diffApplication), modelStub.internshipApplicationsAdded);
+    }
+
+    @Test
+    public void execute_sameCompanyDifferentRole_addSuccessful() throws Exception {
+        ModelStubAcceptingInternshipApplicationAdded modelStub = new ModelStubAcceptingInternshipApplicationAdded();
+        InternshipApplication application = new InternshipApplicationBuilder().build();
+        modelStub.addItem(application);
+        InternshipApplication diffApplication = new InternshipApplicationBuilder()
+                .withRole(VALID_ROLE_APPLE).build();
+        CommandResult commandResult = new AddCommand(diffApplication).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(diffApplication)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(application, diffApplication), modelStub.internshipApplicationsAdded);
+    }
+
+    @Test
+    public void execute_sameCompanyDifferentDate_addSuccessful() throws Exception {
+        ModelStubAcceptingInternshipApplicationAdded modelStub = new ModelStubAcceptingInternshipApplicationAdded();
+        InternshipApplication application = new InternshipApplicationBuilder().build();
+        modelStub.addItem(application);
+        InternshipApplication diffApplication = new InternshipApplicationBuilder()
+                .withDate("01/01/01").build();
+        CommandResult commandResult = new AddCommand(diffApplication).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(diffApplication)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(application, diffApplication), modelStub.internshipApplicationsAdded);
+    }
+
+    @Test
     public void execute_duplicateInternshipApplication_throwsCommandException() {
         InternshipApplication validApplication = new InternshipApplicationBuilder().build();
         AddCommand addCommand = new AddCommand(validApplication);
@@ -56,26 +100,26 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        InternshipApplication alice = new InternshipApplicationBuilder().withName("Alice").build();
-        InternshipApplication bob = new InternshipApplicationBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        InternshipApplication apple = new InternshipApplicationBuilder().withName("Apple").build();
+        InternshipApplication bofa = new InternshipApplicationBuilder().withName("Bofa").build();
+        AddCommand addAppleCommand = new AddCommand(apple);
+        AddCommand addBofaCommand = new AddCommand(bofa);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addAppleCommand.equals(addAppleCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addAppleCommandCopy = new AddCommand(apple);
+        assertTrue(addAppleCommand.equals(addAppleCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addAppleCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addAppleCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addAppleCommand.equals(addBofaCommand));
     }
 
     @Test
@@ -198,7 +242,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook<InternshipApplication> getAddressBook() {
-            return new AddressBook<InternshipApplication>();
+            return new AddressBook<>();
         }
     }
 
