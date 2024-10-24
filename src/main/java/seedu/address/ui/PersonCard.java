@@ -82,15 +82,15 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        registerNumber.setText(person.getRegisterNumber().value);
-        sex.setText(person.getSex().value);
-        studentClass.setText(person.getStudentClass().value);
-        ecName.setText(person.getEcName().value);
-        ecNumber.setText(person.getEcNumber().value);
+        name.setText(person.getDisplayedName());
+        phone.setText(person.getDisplayedPhone());
+        address.setText(person.getDisplayedAddress());
+        email.setText(person.getDisplayedEmail());
+        registerNumber.setText(person.getDisplayedRegisterNumber());
+        sex.setText(person.getDisplayedSex());
+        studentClass.setText(person.getDisplayedStudentClass());
+        ecName.setText(person.getDisplayedEcName());
+        ecNumber.setText(person.getDisplayedEcNumber());
 
         examNameColumn.setCellValueFactory(new PropertyValueFactory<>("examName"));
         examScoreColumn.setCellValueFactory(new PropertyValueFactory<>("examScore"));
