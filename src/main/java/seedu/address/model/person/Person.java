@@ -28,7 +28,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final List<Transaction> transactions;
+    private List<Transaction> transactions;
     private int balance;
 
     /**
@@ -91,6 +91,10 @@ public class Person {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void updateTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     public int getBalance() {
