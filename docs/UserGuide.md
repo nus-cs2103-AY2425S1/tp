@@ -175,6 +175,19 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Undo the previous command: `undo`
+Undoes the previous command from SocialBook.
+
+Format: `undo`
+
+* Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear
+* Undo can be called multiple times till there is no more previous command for the current execution.
+
+Examples:
+* `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
+* `clear` followed by `undo` will retrieve back the uncleared SocialBook.
+* `edit 1 n/John` followed by `undo` will change name back to what it was before.
+
 ### Displaying overall statistics : `statistics`
 
 Displays the statistics of current person list.
@@ -254,6 +267,7 @@ Action           | Format, Examples
 **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
+**Undo**         | `undo`
 **List**         | `list`
 **Statistics**   | `statistics` <br> Shows general statistics
 **Help**         | `help`

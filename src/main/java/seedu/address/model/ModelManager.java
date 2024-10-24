@@ -27,8 +27,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final SortedList<Person> sortedPersons;
+    private FilteredList<Person> filteredPersons;
+    private SortedList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,8 +42,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
-        sortedPersons.setComparator(Comparator.comparing(Person::getPriority)
-                .thenComparing(person -> person.getName().toString())); // sort high to low priority, then alphabetical
+        sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority
+                .thenComparing(person -> person.getName().toString())); // sort by name alphabetically after
     }
 
     public ModelManager() {
@@ -114,6 +114,18 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Adds person to addressbook at specified index
+     *
+     * @param person person to be added.
+     * @param index position to be added at.
+     */
+    @Override
+    public void addPerson(Person person, int index) {
+        addressBook.addPerson(person, index);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -136,10 +148,12 @@ public class ModelManager implements Model {
         return sortedPersons; // sortedPersons wraps filteredPersons and sorts it, so just return sorted version
     }
 
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+
     }
 
     @Override

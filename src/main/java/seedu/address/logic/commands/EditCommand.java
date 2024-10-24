@@ -68,6 +68,8 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private Person personToEdit;
+    private Person editedPerson;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -90,8 +92,8 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        personToEdit = lastShownList.get(index.getZeroBased());
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -125,6 +127,23 @@ public class EditCommand extends Command {
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority,
                 updatedRemark, updatedDateOfBirth, updatedIncome, updatedAppointment, updatedFamilySize, updatedTags);
+    }
+
+    public Index getIndex() {
+        return index;
+    }
+
+    public Person getUneditedPerson() {
+        return personToEdit;
+    }
+
+    public Person getEditedPerson() {
+        return editedPerson;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 
     @Override
