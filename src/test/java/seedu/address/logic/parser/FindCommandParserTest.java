@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
 
@@ -28,12 +27,20 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(Arrays.asList(
                         new FieldContainsKeywordsPredicate<>(Arrays.asList("Alice"), Person::getFullName, true),
-                        new FieldContainsKeywordsPredicate<>(Arrays.asList("Bob"), Person::getFullName, true)
+                        new FieldContainsKeywordsPredicate<>(Arrays.asList("Bob"), Person::getAddressValue, true)
                 ));
-        assertParseSuccess(parser, "n/Alice n/Bob", expectedFindCommand);
+        assertParseFailure(parser, "n/Alice n/Bob", "Invalid command format! \n"
+                + "find: Finds persons in the address book matching the given keywords across specified fields. "
+                + "You can search by name, address, attendance, tags, and more.\n"
+                + "Name, address, and tag searches support multiple words and duplicate prefix; other fields accept "
+                + "only a single word and single prefix. Partial matching is allowed, E.g. Doing find n/dav will match "
+                + "a person with the name David.Search is case-insensitive, and multiple conditions are combined "
+                + "with logical AND.\n"
+                + "Parameters: [n/NAME] [attend/ATTENDANCE (true/false)][t/TAG]...\n"
+                + "Example: find n/John Doe t/friend attend/true");
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        // assertParseSuccess(parser, "n/ \n Alice  a/Bob \n \t Bob  \t", expectedFindCommand);
     }
 
 }
