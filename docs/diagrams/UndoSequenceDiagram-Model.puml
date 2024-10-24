@@ -1,70 +1,23 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
-'https://plantuml.com/sequence-diagram
-
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":FindSubjectCommandParser" as FindSubjectCommandParser LOGIC_COLOR
-participant "f:FindSubjectCommand" as FindSubjectCommand LOGIC_COLOR
-participant "p:PersonHaveSubjectPredicate" as PersonHaveSubjectPredicate LOGIC_COLOR
-end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
 end box
 
-[-> LogicManager : execute(findSubject Math)
-activate LogicManager
+[-> Model : undoAddressBook()
+activate Model
 
-LogicManager -> AddressBookParser : parseCommand(findSubject Math)
-activate AddressBookParser
+Model -> VersionedAddressBook : undo()
+activate VersionedAddressBook
 
-create FindSubjectCommandParser
-AddressBookParser -> FindSubjectCommandParser
-activate FindSubjectCommandParser
+VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
+VersionedAddressBook --> Model :
+deactivate VersionedAddressBook
 
-FindSubjectCommandParser --> AddressBookParser
-deactivate FindSubjectCommandParser
-
-AddressBookParser -> FindSubjectCommandParser : parse(Math)
-activate FindSubjectCommandParser
-
-create PersonHaveSubjectPredicate
-FindSubjectCommandParser -> PersonHaveSubjectPredicate : PersonHaveSubjectPredicate(Math)
-activate PersonHaveSubjectPredicate
-
-PersonHaveSubjectPredicate --> FindSubjectCommandParser : p
-deactivate PersonHaveSubjectPredicate
-
-create FindSubjectCommand
-FindSubjectCommandParser -> FindSubjectCommand :FindSubjectCommand(p)
-activate FindSubjectCommand
-
-FindSubjectCommand --> FindSubjectCommandParser
-deactivate FindSubjectCommand
-
-FindSubjectCommandParser --> AddressBookParser : f
-deactivate FindSubjectCommandParser
-
-FindSubjectCommandParser -[hidden]-> AddressBookParser : f
-destroy FindSubjectCommandParser
-
-AddressBookParser --> LogicManager : f
-deactivate AddressBookParser
-
-LogicManager -> FindSubjectCommand : execute()
-activate FindSubjectCommand
-
-ref over FindSubjectCommand, Model : filter person list with p
-
-FindSubjectCommand --> LogicManager : result
-deactivate FindSubjectCommand
-
-
-[<-- LogicManager : result
-deactivate
+[<-- Model
+deactivate Model
 
 @enduml
-Footer
