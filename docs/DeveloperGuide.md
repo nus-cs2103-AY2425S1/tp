@@ -272,73 +272,162 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: 
 
-* has a need to manage a significant number of contacts
+* employees of a company's talent recruitment departments who need to manage contacts of job applicants.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This app streamlines the process of managing talent contact information by centralizing essential 
+contact details, making it easier to organise, search, and update information on potential candidates. 
+Its search and filtering capabilities help recruiters quickly find profiles based on specific criteria, 
+improving efficiency and reducing time spent on administrative tasks.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority     | As a …​                              | I want to …​                                                                 | So that I can…​                                                                                   |
+|--------------|--------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`      | user                                 | see the list of all contacts                                                 | see the contact of every applicants                                                               |
+| `* * *`      | user                                 | add a new contact                                                            | keep track of applicant's contact details                                                         |
+| `* * *`      | user                                 | delete a contact                                                             | remove contact of applicants who is no longer in the recruitment process                          |
+| `* * *`      | user                                 | find a contact by his/her name                                               | see particular applicant's contact detail without having to go through the entire list            |
+| `* * *`      | user                                 | tag applicants based on their stage in the recruitment process               | track their progress and determine the next steps in the recruitment process.                     |
+| `**`         | efficient user                       | filter contacts which fulfil several criteria                                | quickly access the list of contacts that matches my needs                                         |
+| `**`         | user                                 | sort the contacts based on certain criteria                                  | quickly access the contacts that I need to prioritize                                             |
+| `**`         | user with a high volume of applicants | batch update applicants stage in one action                                  | manage and progress multiple contacts efficiently without repetitive tasks                        |
+| `**`         | user                                 | change any detail of a contact                                               | update the contact details when needed                                                            |
+| `**`         | newbie user                          | get help on how to start using the program                                   | familiarize myself with how to use the program                                                    |
+| `**`         | senior user                          | know proportion of contacts who pass/fail in different recruitment stages    | get insightful data to help me adjust how much more/less to accept in the next recruitment period |
+| `**`         | user                                 | filter contacts with fuzzy match                                             | find relevant contacts easily without typing the exact keywords                                   |
+| `*`          | user                                 | highlight contact of applicant with criminal record or conflicts of interest | easily locate applicants who needs to be investigated further                                     |
+| `*`          | organized user                       | view visual timeline of each contact's recruitment stage                     | easily keep track of the position of each contact in the recruitment process                      |
+| `*`          | user | store applicant's resume                                                     | easily access and refer to their resume                                                           |
 
-*{More to be added}*
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `System` and the **Actor** is the `User`, unless specified otherwise.)
 
-**Use case: Delete a person**
+---
+
+#### **UC001: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new contact by providing a name, phone number, email, job code, and tag.
+2. System validates the provided input.
+3. System checks if the contact already exists (name + phone number or email).
+4. System adds the contact to the system and displays a confirmation message.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided input is invalid (e.g., invalid phone number format, name too long).
 
-  Use case ends.
+    * 2a1. System shows an error message and prompts the user to correct the input.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. A duplicate contact is found (same name and phone number/email).
 
-      Use case resumes at step 2.
+    * 3a1. System displays a duplicate contact error message.
 
-*{More to be added}*
+      Use case ends.
+
+---
+
+#### **UC002: Delete a contact**
+
+**MSS**
+
+1. User requests to delete a specific contact by name. Phone number or email is optional.
+2. System validates the provided input.
+3. System checks if the contact exists (name + phone number or email).
+4. System deletes the contact and displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided input is invalid (e.g., invalid phone number format, name too long).
+
+    * 2a1. System shows an error message and prompts the user to correct the input.
+
+      Use case ends.
+
+* 3a. No contact matches the provided identifier.
+
+    * 3a1. System shows an error message and prompts the user to correct the input an existing contact.
+
+      Use case ends.
+
+* 3b. Multiple contacts with the same name are found. This only happens if phone number and email are not provided by user.
+
+    * 3c1. System asks the user to provide additional details (phone number or email) to specify the contact to delete.
+
+      Use case ends.
+
+---
+
+#### **UC003: List all contacts**
+
+**MSS**
+
+1. User requests to list all contacts.
+2. System retrieves all stored contacts from the system.
+3. System displays the list of contacts.
+
+   Use case ends.
+
+---
+
+#### **UC004: Filter contacts**
+
+**MSS**
+
+1. User requests to filter contacts by job code or tag.
+2. System validates the filter criteria.
+3. System retrieves and displays the filtered contacts matching the job code or tag.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The filter criteria are invalid (e.g., tag not recognized or job code too long).
+
+    * 2a1. System shows an error message.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work seamlessly across macOS, Windows, and Linux operating systems.
+2. The system should support both 32-bit and 64-bit environments.
+3. Should work on any mainstream OS as long as it has Java `17` or above installed.
+4. The system should execute commands (such as adding, deleting, or listing contacts) within 1 second under normal loads (e.g., up to 1,000 contacts).
+5. Should be able to hold up to 1,000 persons without noticeable sluggishness in performance for typical usage.
+6. The system should support up to 1,000 concurrent users without performance degradation.
+7. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+8. The system must be user-friendly and usable by individuals with no prior experience with contact management systems.
+9. Volatility: Transaction data should be stored persistently and remain available for a minimum of 10 years.
+10. Complete user documentation, including installation and setup instructions, must be provided.
+11. The system should be designed to allow for the addition of new modules without requiring a full redesign.
+12. The system should gracefully handle incorrect or incomplete inputs by providing meaningful error messages without crashing.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: An entry in Talentcy address book that contains information about a particular person such as name, phone number, email address, and any other relevant details
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE_NUMBER e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG is a command to add a contact to the address book)
 
 --------------------------------------------------------------------------------------------------------------------
 

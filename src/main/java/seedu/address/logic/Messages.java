@@ -41,10 +41,10 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Job Code: ")
+                .append(person.getJobCode())
+                .append("; Tag: ")
+                .append(person.getTag());
         return builder.toString();
     }
 

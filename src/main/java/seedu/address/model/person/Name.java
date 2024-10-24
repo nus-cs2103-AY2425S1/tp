@@ -10,13 +10,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Invalid name: Only alphanumeric characters are allowed, and it should not be blank.";
+
+    public static final String MESSAGE_LENGTH_CONSTRAINTS =
+            "Name cannot be more than 50 characters.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9][a-zA-Z0-9 \\-]*";
+
+    public static final int MAX_LENGTH = 50;
 
     public final String fullName;
 
@@ -27,8 +32,12 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+
+        String trimmedName = name.trim().replaceAll("\\s+", " ");
+        checkArgument(isValidName(trimmedName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLengthName(trimmedName), MESSAGE_LENGTH_CONSTRAINTS);
+
+        fullName = trimmedName.toUpperCase();
     }
 
     /**
@@ -36,6 +45,13 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string have a valid length.
+     */
+    public static boolean isValidLengthName(String test) {
+        return test.length() <= MAX_LENGTH;
     }
 
 
@@ -56,6 +72,11 @@ public class Name {
         }
 
         Name otherName = (Name) other;
+
+        // Assert that fullName is not null
+        assert this.fullName != null : "fullName of the current object is null";
+        assert otherName.fullName != null : "fullName of the other object is null";
+
         return fullName.equals(otherName.fullName);
     }
 
