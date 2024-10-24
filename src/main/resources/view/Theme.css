@@ -1,26 +1,26 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
+    background-color: #ffffff; /* Changed from grey to white */
 }
 
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: #777777; /* Changed from darker grey to lighter grey */
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
     -fx-opacity: 1;
 }
 
@@ -40,9 +40,9 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #f5f5f5; /* Changed from dark grey to light grey */
+    -fx-control-inner-background: #f5f5f5; /* Changed from dark grey to light grey */
+    -fx-background-color: #f5f5f5; /* Changed from dark grey to light grey */
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -67,7 +67,7 @@
 .table-view .column-header .label {
     -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
     -fx-alignment: center-left;
     -fx-opacity: 1;
 }
@@ -77,20 +77,20 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #ff7700; /* Changed from blue to orange */
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
+    -fx-border-color: transparent transparent transparent #ff7700; /* No change */
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
 }
 
 .list-cell {
@@ -100,110 +100,111 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #f8f8f8; /* Changed from dark grey to light grey */
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #e0e0e0; /* Changed from dark grey to medium-light grey */
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #d0d0d0; /* Changed from dark grey to light grey */
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #ff7700; /* Changed from blue to orange */
+    -fx-border-color: #ff7700; /* No change */
     -fx-border-width: 1;
 }
 
 .list-cell .label {
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #333333; /* Changed from black to dark grey */
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #333333; /* Changed from black to dark grey */
 }
 
 .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
 }
 
 .pane-with-border {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
+    -fx-border-color: derive(#f0f0f0, 10%); /* Changed from dark grey to very light grey */
     -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#f0f0f0, 30%); /* Changed from dark grey to light grey */
 }
 
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: #333333 !important; /* Changed from black to dark grey */
 }
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#f0f0f0, 30%); /* Changed from dark grey to light grey */
+    -fx-border-color: derive(#f0f0f0, 25%); /* Changed from dark grey to very light grey */
     -fx-border-width: 1px;
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#f0f0f0, 30%); /* Changed from dark grey to light grey */
+    -fx-border-color: derive(#f0f0f0, 30%); /* Changed from dark grey to light grey */
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#f0f0f0, 30%); /* Changed from dark grey to light grey */
 }
+
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#f0f0f0, 50%); /* Changed from dark grey to light grey */
 }
 
 .context-menu .label {
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
     -fx-opacity: 0.9;
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: #f0f0f0; /* Changed from black to light grey */
 }
 
 /*
@@ -213,27 +214,27 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #cccccc; /* Changed from light grey to lighter grey */
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #ffffff; /* Changed from dark grey to white */
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: #333333; /* Changed from light grey to dark grey */
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #e0e0e0; /* Changed from dark grey to light grey */
 }
 
 .button:pressed, .button:default:hover:pressed {
-    -fx-background-color: #007bff; /* Changed from white to blue */
-    -fx-text-fill: #1d1d1d;
+    -fx-background-color: #007bff; /* No change */
+    -fx-text-fill: #ffffff; /* Changed from dark grey to white */
 }
 
 .button:focused {
-    -fx-border-color: #007bff, #007bff; /* Changed from white to blue */
+    -fx-border-color: #007bff, #007bff; /* No change */
     -fx-border-width: 1, 1;
     -fx-border-style: solid, segments(1, 1);
     -fx-border-radius: 0, 0;
@@ -242,13 +243,13 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-background-color: #f0f0f0; /* Changed from dark grey to light grey */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 .button:default {
     -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ff7700; /* Changed from blue to orange */
+    -fx-text-fill: #ff7700; /* No change */
 }
 
 .button:default:hover {
@@ -256,36 +257,36 @@
 }
 
 .dialog-pane {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #f0f0f0; /* Changed from dark grey to light grey */
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #f0f0f0; /* Changed from dark grey to light grey */
 }
 
 .dialog-pane > *.label.content {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#f0f0f0, 25%); /* Changed from dark grey to light grey */
 }
 
 .dialog-pane:header *.header-panel *.label {
     -fx-font-size: 18px;
     -fx-font-style: italic;
-    -fx-fill: #007bff; /* Changed from white to blue */
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-fill: #007bff; /* No change */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#f0f0f0, 20%); /* Changed from dark grey to light grey */
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#cccccc, 50%); /* Changed from dark grey to light grey */
     -fx-background-insets: 3;
 }
 
@@ -317,22 +318,22 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: transparent #f0f0f0 transparent #f0f0f0; /* Changed from dark grey to light grey */
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ff7700 #383838; /* Changed from white to orange */
+    -fx-border-color: #cccccc #cccccc #ff7700 #cccccc; /* Changed from dark grey to light grey */
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: #007bff; /* Changed from white to blue */
+    -fx-text-fill: #007bff; /* No change */
 }
 
 #filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+    -fx-effect: innershadow(gaussian, #cccccc, 10, 0, 0, 0); /* Changed from black to lighter grey shadow */
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: transparent, #f0f0f0, transparent, #f0f0f0; /* Changed from dark grey to light grey */
     -fx-background-radius: 0;
 }
 
@@ -342,11 +343,10 @@
 }
 
 #events .label {
-    -fx-text-fill: white;
-    -fx-background-color: #ff7700; /* Changed from blue to orange */
+    -fx-text-fill: #333333; /* Changed from white to dark grey */
+    -fx-background-color: #ff7700; /* No change */
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
-
