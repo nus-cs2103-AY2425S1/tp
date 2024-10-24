@@ -18,11 +18,6 @@ public interface AddressBookStorage {
     Path getAddressBookFilePath();
 
     /**
-     * Returns the archived file path of the data file.
-     */
-    Path getArchivedAddressBookFilePath();
-
-    /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
@@ -50,15 +45,10 @@ public interface AddressBookStorage {
     /**
      * Archive the given {@link ReadOnlyAddressBook} to the storage.
      * @param addressBook cannot be null.
+     * @param filePath  the path to archive, can not be null
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
-    /**
-     * @see #saveArchivedAddressBook(ReadOnlyAddressBook)
-     */
     void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
-
-
 
 }

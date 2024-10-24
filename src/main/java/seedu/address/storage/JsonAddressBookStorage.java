@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -20,11 +19,9 @@ import seedu.address.model.ReadOnlyAddressBook;
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 
-    private static final Path DEFAULT_ARCHIVEPATH = Paths.get("archived", "archiveaddressbook.json");
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
     private Path filePath;
-    private Path archivePath;
 
     /**
      * Create a  JsonAddressBookStorage with file Path and default archive path
@@ -32,25 +29,10 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * */
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
-        this.archivePath = DEFAULT_ARCHIVEPATH;
-    }
-
-    /**
-     * Create a JsonAddressBookStorage with file path and archive path
-     * @param filePath the file path.
-     * @param archivePath  the archive path.
-     * */
-    public JsonAddressBookStorage(Path filePath, Path archivePath) {
-        this.filePath = filePath;
-        this.archivePath = archivePath;
     }
 
     public Path getAddressBookFilePath() {
         return filePath;
-    }
-
-    public Path getArchivedAddressBookFilePath() {
-        return archivePath;
     }
 
     @Override
@@ -99,16 +81,8 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
 
-    @Override
-    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, archivePath);
-    }
 
-    /**
-     * Similar to {@link #saveArchivedAddressBook(ReadOnlyAddressBook)}.
-     *
-     * @param archivePath location of the data. Cannot be null.
-     */
+    @Override
     public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path archivePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(archivePath);
