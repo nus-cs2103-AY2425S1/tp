@@ -38,7 +38,7 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_AMOUNT + " 100.00";
 
     public static final String MESSAGE_SUCCESS =
-            "New claim added to Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s, Claim Amount: %4$s";
+            "New claim added to Client: %1$s, under Insurance plan: %2$s, with Claim ID: %3$s, Claim Amount: %4$s";
 
     public final Index index;
     private final int insuranceId;

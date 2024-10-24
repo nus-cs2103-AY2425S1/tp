@@ -34,7 +34,7 @@ public class CloseClaimCommand extends Command {
             + PREFIX_CLAIM_ID + " B1234";
 
     public static final String MESSAGE_CLOSE_CLAIM_SUCCESS =
-            "Claim from Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s marked as closed";
+            "Claim from Client: %1$s, under Insurance plan: %2$s, with Claim ID: %3$s marked as closed";
 
     public final Index index;
     private final int insuranceId;
