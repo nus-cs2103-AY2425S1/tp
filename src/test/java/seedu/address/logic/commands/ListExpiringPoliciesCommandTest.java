@@ -65,8 +65,11 @@ public class ListExpiringPoliciesCommandTest {
         Model modelWithExpiringPolicies = new ModelManager(getTypicalAddressBookWithExpiringPolicies(),
                 new UserPrefs());
 
-        LocalDate expiringDate = LocalDate.now().plusDays(25);
-        String formattedExpiryDate = expiringDate.format(MM_DD_YYYY_FORMATTER);
+        LocalDate expiringDateAlice = LocalDate.now().plusDays(25);
+        String formattedExpiryDateAlice = expiringDateAlice.format(MM_DD_YYYY_FORMATTER);
+
+        LocalDate expiringDateBenson = LocalDate.of(2024, 12, 23);
+        String formattedExpiryDateBenson = expiringDateBenson.format(MM_DD_YYYY_FORMATTER);
 
         // Command with 60 days time frame
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(60);
@@ -74,7 +77,10 @@ public class ListExpiringPoliciesCommandTest {
                 "The following policies are expiring within %d day(s):\n\n", 60)
                 + "Insuree name: Alice Pauline   |   Insuree phone: 94351253\n"
                 + "Policy Type: Health   |   Premium Amount: 250.00\n"
-                + "Coverage Amount: 15000.00   |   Expiry Date: " + formattedExpiryDate + "\n\n";
+                + "Coverage Amount: 15000.00   |   Expiry Date: " + formattedExpiryDateAlice + "\n\n"
+                + "Insuree name: Benson Meier   |   Insuree phone: 98765432\n"
+                + "Policy Type: Health   |   Premium Amount: 300.00\n"
+                + "Coverage Amount: 3000.00   |   Expiry Date: " + formattedExpiryDateBenson + "\n\n";
 
         assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
     }
