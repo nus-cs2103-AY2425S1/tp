@@ -180,6 +180,8 @@ The sequence diagram below illustrates the process of adding a person into Talen
 7. The UI reflects this new list with added `Person`.
 
 
+<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
