@@ -51,7 +51,7 @@ public class ListAbsenteesCommandTest {
     }
 
     @Test
-    public void execute_validKeyword_success() {
+    public void execute_validDate_returnsCorrectly() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         DateAbsentPredicate predicate = new DateAbsentPredicate(FIRST_DATE_TIME);
         ListAbsenteesCommand command = new ListAbsenteesCommand(predicate);
