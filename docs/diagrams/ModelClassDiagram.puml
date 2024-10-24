@@ -19,6 +19,13 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class PolicySet
+Class LifePolicy
+Class HealthPolicy
+Class EducationPolicy
+Class Policy
+Class ClaimSet
+Class Claim
 
 Class I #FFFFFF
 }
@@ -42,6 +49,15 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> PolicySet
+PolicySet --> LifePolicy
+PolicySet --> HealthPolicy
+PolicySet --> EducationPolicy
+LifePolicy --|> Policy
+HealthPolicy --|> Policy
+EducationPolicy --|> Policy
+Policy --> ClaimSet
+ClaimSet --> "*" Claim
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
