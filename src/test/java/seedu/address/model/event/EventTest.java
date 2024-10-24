@@ -15,7 +15,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.testutil.EventBuilder;
 
 public class EventTest {

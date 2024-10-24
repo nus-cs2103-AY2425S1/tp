@@ -15,8 +15,10 @@ public abstract class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the item identified by the index number used in the displayed item list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " <" + PREFIX_VENDOR
-            + " OR " + PREFIX_EVENT + ">" + "1";
+            + "Parameters: " + PREFIX_VENDOR + " INDEX or "
+            + PREFIX_EVENT + " INDEX (INDEX must be a positive integer)" + "\n"
+            + "Example to delete a vendor: " + COMMAND_WORD + " " + PREFIX_VENDOR + " 1" + "\n"
+            + "Example to delete an event: " + COMMAND_WORD + " " + PREFIX_EVENT + " 1" + "\n";
 
     protected final Index targetIndex;
 

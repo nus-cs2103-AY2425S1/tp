@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.commons.name.Name;
 import seedu.address.model.event.Date;
-import seedu.address.model.event.Name;
 
 public class JsonAdaptedEventTest {
     private static final String INVALID_NAME = "R@chel";
