@@ -58,7 +58,7 @@ public enum SortOption {
      * Constructs a {@code SortOption}.
      *
      * @param value A valid sort option.
-     * @param role A valid Role
+     * @param role A valid Role associated to the sort option
      */
     SortOption(String value, Role role) {
         this.value = value;
@@ -66,14 +66,14 @@ public enum SortOption {
     }
 
     /*
-     * Returns the role associated to the enum as a string
+     * Returns the Role associated to the sort option as a string
      */
     public String getRoleAsString() {
         return role.toLowerCase();
     }
 
     /*
-     * Returns the class related to the enum
+     * Returns the class related to the sort option
      */
     public Class<? extends Person> getRelatedClass() {
         return role.getRelatedClass();
