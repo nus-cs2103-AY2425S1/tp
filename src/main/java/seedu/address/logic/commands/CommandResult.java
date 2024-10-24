@@ -3,11 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.Model;
 
 /**
  * Represents the result of a command execution.
@@ -124,7 +122,8 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && isPromptConfirmation() == otherCommandResult.isPromptConfirmation();
     }
 
     @Override

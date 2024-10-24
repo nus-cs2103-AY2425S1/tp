@@ -190,6 +190,38 @@ public class CommandTestUtil {
 
     /**
      * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} is a request to prompt for user confirmation <br>
+     * - the message of the {@link CommandResult} matches {@code expectedPrompt} <br>
+     * Then, executes the resulting continuation function, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult}
+     * - the {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertCommandPromptsSuccess(Command command, Model actualModel, String expectedPrompt,
+                                                   CommandResult expectedCommandResult, Model expectedModel) {
+        CommandResult expectedResult = new CommandResult(expectedPrompt, () -> null);
+        assertCommandSuccess(command, actualModel, expectedResult, actualModel);
+        try {
+            CommandResult promptResult = command.execute(actualModel);
+            CommandResult result = promptResult.confirmPrompt();
+            assertEquals(result, expectedCommandResult);
+            assertEquals(actualModel, expectedModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandPromptsSuccess(Command, Model, String, String, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertCommandPromptsSuccess(Command command, Model actualModel, String expectedPrompt,
+                                                   String expectedMessage, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandPromptsSuccess(command, actualModel, expectedPrompt, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered client list and selected client in {@code actualModel} remain unchanged
@@ -204,6 +236,36 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} is a request to prompt for user confirmation <br>
+     * - the message of the {@link CommandResult} matches {@code expectedPrompt} <br>
+     * Then, executes the resulting continuation function, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the address book, filtered client list and selected client in {@code actualModel} remain unchanged
+     */
+    public static void assertCommandPromptsFailure(Command command, Model actualModel, String expectedPrompt,
+                                                   String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        List<Client> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+
+        CommandResult expectedPromptResult = new CommandResult(expectedPrompt, () -> null);
+        assertCommandSuccess(command, actualModel, expectedPromptResult, actualModel);
+
+        try {
+            CommandResult promptResult = command.execute(actualModel);
+            promptResult.confirmPrompt();
+            throw new AssertionError("Execution of command should not succeed.");
+        } catch (CommandException ce) {
+            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        }
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
      * {@code model}'s address book.
