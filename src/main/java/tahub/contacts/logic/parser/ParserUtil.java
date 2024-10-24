@@ -9,12 +9,14 @@ import java.util.Set;
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.commons.util.StringUtil;
 import tahub.contacts.logic.parser.exceptions.ParseException;
+import tahub.contacts.model.course.Course;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
 import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.tag.Tag;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -48,6 +50,38 @@ public class ParserUtil {
             throw new ParseException(MatriculationNumber.MESSAGE_CONSTRAINTS);
         }
         return new MatriculationNumber(trimmedMatricNumber);
+    }
+
+    /**
+     * Parses the given course code and trims leading and trailing whitespaces.
+     *
+     * @param courseCode the course code to parse
+     * @return the trimmed course code
+     * @throws ParseException if the specified course code is invalid
+     */
+    public static String parseCourseCode(String courseCode) throws ParseException {
+        requireNonNull(courseCode);
+        String trimmedCourseCode = courseCode.trim();
+        if (!Course.isValidCourseCode(trimmedCourseCode)) {
+            throw new ParseException(Course.COURSE_CODE_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedCourseCode;
+    }
+
+    /**
+     * Parses the given tutorial ID and trims leading and trailing whitespaces.
+     *
+     * @param tutorialId the tutorial ID to parse
+     * @return the trimmed tutorial ID
+     * @throws ParseException if the specified tutorial ID is invalid
+     */
+    public static String parseTutorialId(String tutorialId) throws ParseException {
+        requireNonNull(tutorialId);
+        String trimmedTutorialId = tutorialId.trim();
+        if (!Tutorial.isValidTutorialId(trimmedTutorialId)) {
+            throw new ParseException(Tutorial.TUTORIAL_ID_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedTutorialId;
     }
 
     /**

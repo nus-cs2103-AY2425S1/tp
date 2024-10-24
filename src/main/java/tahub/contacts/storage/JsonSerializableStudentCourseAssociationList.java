@@ -49,11 +49,7 @@ class JsonSerializableStudentCourseAssociationList {
         StudentCourseAssociationList scaList = new StudentCourseAssociationList();
         for (JsonAdaptedStudentCourseAssociation jsonAdaptedCourse : scas) {
             StudentCourseAssociation sca = jsonAdaptedCourse.toModelType();
-
-
-
-
-            if (scaList.has(sca)) {
+            if (scaList.contains(sca)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCA);
             }
             scaList.add(sca);

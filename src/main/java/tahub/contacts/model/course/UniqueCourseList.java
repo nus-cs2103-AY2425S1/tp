@@ -67,7 +67,7 @@ public class UniqueCourseList implements Iterable<Course> {
      * Returns the course list.
      */
     public ObservableList<Course> getCourseList() {
-        return internalList;
+        return internalUnmodifiableList;
     }
 
     /**

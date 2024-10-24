@@ -8,16 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tahub.contacts.commons.core.LogsCenter;
-import tahub.contacts.logic.commands.AddCommand;
-import tahub.contacts.logic.commands.ClearCommand;
-import tahub.contacts.logic.commands.Command;
-import tahub.contacts.logic.commands.CourseCommand;
-import tahub.contacts.logic.commands.DeleteCommand;
-import tahub.contacts.logic.commands.EditCommand;
-import tahub.contacts.logic.commands.ExitCommand;
-import tahub.contacts.logic.commands.FindCommand;
-import tahub.contacts.logic.commands.HelpCommand;
-import tahub.contacts.logic.commands.ListCommand;
+import tahub.contacts.logic.commands.*;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 
 /**
@@ -80,6 +71,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EnrollCommand.COMMAND_WORD:
+            return new EnrollCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

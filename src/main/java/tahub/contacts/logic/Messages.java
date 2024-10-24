@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import tahub.contacts.logic.parser.Prefix;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
 /**
  * Container for user visible messages.
@@ -19,6 +20,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "No student with this " +
+            "matriculation number exists!";
+    public static final String MESSAGE_COURSE_NOT_FOUND = "No course with this course code exists!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -56,5 +60,15 @@ public class Messages {
         // Implement the formatting logic for Course objects
         return course.toString();
     }
+
+    /**
+     * Formats the {@code studentCourseAssociation} for display to the user.
+     */
+    public static String format(StudentCourseAssociation studentCourseAssociation) {
+        // Implement the formatting logic for StudentCourseAssociation objects
+        return studentCourseAssociation.toString();
+    }
+
+
 
 }

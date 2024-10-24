@@ -11,6 +11,7 @@ import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * Represents an association between a student, course, grading system, and tutorial
+ * Can be viewed as an enrollment of a student into a particular course and a particular tutorial
  */
 public class StudentCourseAssociation {
     private final Person student;
@@ -184,5 +185,14 @@ public class StudentCourseAssociation {
         }
 
         return this.tutorial.equals(otherStudentCourseAssociation.tutorial);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Matriculation Number: %s\n" +
+                             "Course Code: %s\n" +
+                             "Tutorial Group: %s\n", student.getMatricNumber(),
+                                                     course.courseCode,
+                                                     tutorial.getTutorialId());
     }
 }

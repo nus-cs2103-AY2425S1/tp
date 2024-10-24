@@ -13,7 +13,7 @@ import tahub.contacts.model.course.Course;
 public class Tutorial {
 
     public static final String TUTORIAL_ID_MESSAGE_CONSTRAINTS =
-            "Tutorial Id should start with T, followed by exactly 2 digits between 01 and 99"
+            "Tutorial Id should start with T, followed by exactly 2 digits between 01 and 99\n"
                     + "e.g., T05, T56 or T98";
     /**
      * Represents the regex pattern for validating course codes.

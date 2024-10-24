@@ -195,7 +195,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasSca(StudentCourseAssociation sca) {
         requireNonNull(sca);
-        return scaList.has(sca);
+        return scaList.contains(sca);
     }
 
     @Override
