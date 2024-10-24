@@ -179,6 +179,7 @@ The sequence diagram below illustrates the process of adding a person into Talen
 6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
 7. The UI reflects this new list with added `Person`.
 
+
 ---
 ### List Feature
 
@@ -201,6 +202,33 @@ The sequence diagram below illustrates the process of executing the `list` comma
 4. The execute method of `ListCommand` calls `updateFilteredPersonList` in the `Model` to apply a filter to show all persons.
 5. The execute method of `ListCommand` returns a `CommandResult` object, indicating the command was successful with the message "Listed all persons".
 6. The UI reflects the updated list of persons.
+
+---
+### Edit Feature
+
+#### `EditCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of editing a person's details in TalentSG.
+
+<img src="images/EditCommandSequenceDiagram.png" width="550" />
+
+#### Key Components
+- `EditCommand`: Executes the edit operation based on the user's input.
+- `EditCommandParser`: Parses user input to create an `EditCommand` object.
+- `LogicManager`: Invokes the `EditCommand` to execute the edit operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Person`: Represents a person in TalentSG, encapsulating their personal information.
+- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
+
+#### Component Interaction Details
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
+2. The `EditCommandParser` interprets the input.
+3. An `EditCommand` object is created.
+4. The `LogicManager` invokes the execute method of `EditCommand`.
+5. The execute method of `EditCommand` invokes the `setPerson` method in the `Model` to update the details of the existing `Person` object with the new values.
+6. The execute method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditCommand`.
+7. The UI reflects this updated list with the edited `Person`.
+
+
 
 ---
 ### Delete Feature ###
