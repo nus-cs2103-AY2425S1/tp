@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.ExportCommand.MESSAGE_CONSTRAINTS;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -9,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ExportCommand.FileType;
+import seedu.address.logic.exporter.FileType;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -142,7 +141,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String fileType} into a valid {@code FileType}.
+     * Parses a {@code String fileType} into a valid {@code Exporter}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code fileType} is invalid.
@@ -155,7 +154,7 @@ public class ParserUtil {
             FileType type = FileType.valueOf(trimmedFileType);
             return type;
         } catch (IllegalArgumentException argex) {
-            throw new ParseException(MESSAGE_CONSTRAINTS);
+            throw new ParseException(FileType.MESSAGE_CONSTRAINTS);
         }
     }
 }

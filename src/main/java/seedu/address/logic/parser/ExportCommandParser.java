@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 
 import seedu.address.logic.commands.ExportCommand;
-import seedu.address.logic.commands.ExportCommand.FileType;
+import seedu.address.logic.exporter.FileType;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
