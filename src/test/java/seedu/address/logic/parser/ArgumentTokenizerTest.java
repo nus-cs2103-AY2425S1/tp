@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
+
 public class ArgumentTokenizerTest {
 
     private final Prefix unknownPrefix = new Prefix("--u");
@@ -134,6 +136,41 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(argMultimap, pSlash);
         assertArgumentPresent(argMultimap, dashT, "not joined^Qjoined");
         assertArgumentAbsent(argMultimap, hatQ);
+    }
+
+    @Test
+    public void getRightmostArgument_noPrefix_returnsEntireString() {
+        String userInput = "some random string";
+        Pair<String, String> result = ArgumentTokenizer.getRightmostArgument(userInput);
+        assertEquals(new Pair<>("some random string", null), result);
+    }
+
+    @Test
+    public void getRightmostArgument_onePrefix_returnsArgumentAndPrefix() {
+        String userInput = "some random string p/ArgumentValue";
+        Pair<String, String> result = ArgumentTokenizer.getRightmostArgument(userInput);
+        assertEquals(new Pair<>("ArgumentValue", "p/"), result);
+    }
+
+    @Test
+    public void getRightmostArgument_multiplePrefixes_returnsRightmostArgumentAndPrefix() {
+        String userInput = "some random string p/FirstValue q/SecondValue p/ThirdValue";
+        Pair<String, String> result = ArgumentTokenizer.getRightmostArgument(userInput);
+        assertEquals(new Pair<>("ThirdValue", "p/"), result);
+    }
+
+    @Test
+    public void getRightmostArgument_prefixesAndValues_returnsRightmostArgumentAndPrefix() {
+        String userInput = "p/FirstValue q/SecondValue p/ThirdValue";
+        Pair<String, String> result = ArgumentTokenizer.getRightmostArgument(userInput);
+        assertEquals(new Pair<>("ThirdValue", "p/"), result);
+    }
+
+    @Test
+    public void getRightmostArgument_prefixesAtDifferentPositions_returnsRightmostArgumentAndPrefix() {
+        String userInput = "p/FirstValue some text q/SecondValue more text p/ThirdValue";
+        Pair<String, String> result = ArgumentTokenizer.getRightmostArgument(userInput);
+        assertEquals(new Pair<>("ThirdValue", "p/"), result);
     }
 
     @Test

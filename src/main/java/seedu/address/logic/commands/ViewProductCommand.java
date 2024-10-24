@@ -15,7 +15,7 @@ import seedu.address.model.product.Product;
  */
 public class ViewProductCommand extends Command {
 
-    public static final String COMMAND_WORD = "view_product";
+    public static final String COMMAND_WORD = CommandWords.VIEW_PRODUCT_COMMAND;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all products whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

@@ -48,7 +48,6 @@ public class Product {
         this.minStockLevel = Integer.MAX_VALUE;
         this.maxStockLevel = 0;
     }
-
     /**
      * Removes assigned supplier and assignment status.
      */
@@ -118,6 +117,7 @@ public class Product {
     public void setMaxStockLevel(int maxStockLevel) {
         this.maxStockLevel = maxStockLevel;
     }
+
 
     public ProductName getName() {
         return name;

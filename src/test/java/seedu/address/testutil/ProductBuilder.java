@@ -1,10 +1,13 @@
 package seedu.address.testutil;
-
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 import seedu.address.model.tag.Tag;
+
+import seedu.address.model.util.SampleDataUtil;
+
 
 /**
  * A utility class to help with building Product objects.
@@ -16,8 +19,12 @@ public class ProductBuilder {
     private ProductName name;
     private Set<Tag> tags;
 
+    /**
+     * Creates a {@code ProductBuilder} with the default details.
+     */
     public ProductBuilder() {
         name = new ProductName(DEFAULT_NAME);
+        tags = new HashSet<>();
     }
 
     /**
@@ -25,6 +32,7 @@ public class ProductBuilder {
      */
     public ProductBuilder(Product productToCopy) {
         name = productToCopy.getName();
+        tags = new HashSet<>(productToCopy.getTags());
     }
 
     /**
@@ -34,7 +42,16 @@ public class ProductBuilder {
         this.name = new ProductName(name);
         return this;
     }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Product} that we are building.
+     */
+    public ProductBuilder withTags(String... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
     public Product build() {
-        return new Product(name);
+        return new Product(name, tags);
     }
 }
