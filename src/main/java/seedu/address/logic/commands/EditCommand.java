@@ -69,7 +69,7 @@ public class EditCommand extends ConcreteCommand {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
-    private Person personToEdit;
+    private Person originalPerson;
     private Person editedPerson;
 
     /**
@@ -94,7 +94,8 @@ public class EditCommand extends ConcreteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        originalPerson = personToEdit;
         editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
 
@@ -113,12 +114,12 @@ public class EditCommand extends ConcreteCommand {
     @Override
     public CommandResult undo(Model model) {
         requireExecuted();
-        requireAllNonNull(model, personToEdit, editedPerson);
+        requireAllNonNull(model, originalPerson, editedPerson);
 
-        model.setPerson(editedPerson, personToEdit);
+        model.setPerson(editedPerson, originalPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         isExecuted = false;
-        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToEdit)));
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(originalPerson)));
     }
 
     /**

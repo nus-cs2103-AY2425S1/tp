@@ -167,6 +167,7 @@ public class ModelManager implements Model {
 
     @Override
     public void pushToUndoStack(ConcreteCommand command) {
+        assert command != null;
         undoStack.push(command);
     }
 

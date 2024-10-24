@@ -28,7 +28,7 @@ public class DeleteCommand extends ConcreteCommand {
     public static final String MESSAGE_UNDO_SUCCESS = "Reverted deletion of person: %1$s";
 
     private final Index targetIndex;
-    private Person personToDelete;
+    private Person deletedPerson;
 
     /**
      * Creates a DeleteCommand to delete the person at the specified {@code Index}.
@@ -48,7 +48,7 @@ public class DeleteCommand extends ConcreteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         /*
         this part of code should only exist in javafx file so remove it so far
@@ -65,6 +65,7 @@ public class DeleteCommand extends ConcreteCommand {
          */
 
         model.deletePerson(personToDelete);
+        deletedPerson = personToDelete;
         isExecuted = true;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -72,10 +73,10 @@ public class DeleteCommand extends ConcreteCommand {
     @Override
     public CommandResult undo(Model model) {
         requireExecuted();
-        requireAllNonNull(model, personToDelete);
-        model.insertPerson(personToDelete, targetIndex);
+        requireAllNonNull(model, deletedPerson);
+        model.insertPerson(deletedPerson, targetIndex);
         isExecuted = false;
-        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(deletedPerson)));
     }
 
     @Override
