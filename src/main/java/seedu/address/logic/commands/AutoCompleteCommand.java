@@ -108,6 +108,21 @@ public class AutoCompleteCommand extends Command {
         // TODO: Handle text not fitting
         return new CommandResult(String.join(SUGGESTIONS_DELIMITER, filteredCompletions));
     }
+
+    /**
+     * Returns the current input the user is typing.
+     */
+    public String getCurrentInput() {
+        return currentInput;
+    }
+
+    /**
+     * Returns the type of input the user is typing.
+     */
+    public Prefix getInputType() {
+        return inputType;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

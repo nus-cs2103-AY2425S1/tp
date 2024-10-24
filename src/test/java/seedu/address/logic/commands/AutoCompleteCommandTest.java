@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.product.Product;
@@ -129,6 +130,24 @@ public class AutoCompleteCommandTest {
         );
         assertEquals(String.join(AutoCompleteCommand.SUGGESTIONS_DELIMITER, expectedCompletions),
             result.getFeedbackToUser());
+    }
+
+    @Test
+    public void getCurrentInput_validInput_returnsCurrentInput() {
+        String currentInput = "add";
+        Prefix inputType = new Prefix("n/");
+        AutoCompleteCommand autoCompleteCommand = new AutoCompleteCommand(currentInput, inputType.getPrefix());
+
+        assertEquals(currentInput, autoCompleteCommand.getCurrentInput());
+    }
+
+    @Test
+    public void getInputType_validInput_returnsInputType() {
+        String currentInput = "add";
+        Prefix inputType = new Prefix("n/");
+        AutoCompleteCommand autoCompleteCommand = new AutoCompleteCommand(currentInput, inputType.getPrefix());
+
+        assertEquals(inputType, autoCompleteCommand.getInputType());
     }
 
     @Test
