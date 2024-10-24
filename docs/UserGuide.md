@@ -349,7 +349,6 @@
 
 </div>
 <div class="content content-droppable">
-
 <details>
   <summary><strong>Demoting a person<br><code>demote</code></strong>
     <span class="material-symbols-outlined chevrons">
@@ -383,6 +382,7 @@
   * `demote 3` but only have 2 entries - invalid index number, index out of list size
   </div class="box">
   </div>
+
 </details>
 
 </div>
