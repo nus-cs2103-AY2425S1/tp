@@ -9,17 +9,17 @@ import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in the address book whose name, phone, email, address, or tags
- * contain any of the argument keywords. Keyword matching is case-insensitive.
+ * match any of the specified criteria (case-insensitive).
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose name, phone, email, "
-            + "address, or tags contain any of the specified keywords (case-insensitive) "
+            + "address, or tags contain the specified keyword (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: [/n NAME] [/p PHONE] [/e EMAIL] [/a ADDRESS] [/t TAG]...\n"
+            + "Example: " + COMMAND_WORD + " /n alice /a clementi";
 
     private final PersonContainsKeywordsPredicate predicate;
 

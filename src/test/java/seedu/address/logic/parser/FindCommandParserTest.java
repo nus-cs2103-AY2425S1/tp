@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,13 +22,18 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        // Expected search criteria with "Alice" as the name and "Bob" as the address
+        Map<String, String> searchCriteria = Map.of(
+                "name", "Alice",
+                "address", "Serangoon"
+        );
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(searchCriteria));
+
+        // Test with no leading and trailing whitespaces
+        assertParseSuccess(parser, " n/ Alice a/ Serangoon", expectedFindCommand);
+
+        // Test with multiple whitespaces between keywords and flags
+        assertParseSuccess(parser, " \n n/ Alice \n \t a/ Serangoon  \t", expectedFindCommand);
     }
-
 }
