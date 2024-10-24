@@ -21,6 +21,13 @@ Class Name
 Class Phone
 Class Skill
 Class Tag
+Class UniqueProjectList
+Class Project
+Class ProjectName
+Class ProjectId
+Class UniqueAssignmentList
+Class Assignment
+Class AssignmentId
 
 Class I #FFFFFF
 }
@@ -28,16 +35,20 @@ Class I #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
-
-ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+
+AddressBook .up.|> ReadOnlyAddressBook
+ModelManager .up.|> Model
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+ModelManager -down-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+
+AddressBook *-down-> "1" UniquePersonList
+AddressBook *-down-> "1" UniqueProjectList
+AddressBook *-down-> "1" UniqueAssignmentList
+
 UniquePersonList --> "~* all" Person
 Person *--> EmployeeId
 Person *--> Name
@@ -47,6 +58,13 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Skill
 
+UniqueProjectList --> "~* all" Project
+Project *--> ProjectName
+Project *--> ProjectId
+
+UniqueAssignmentList --> "~* all" Assignment
+Assignment *--> AssignmentId
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
@@ -55,5 +73,12 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+UniquePersonList -[hidden]right-> UniqueProjectList
+UniqueProjectList -[hidden]right-> UniqueAssignmentList
+Person -[hidden]right-> Project
+Project -[hidden]right-> Assignment
+
+ModelManager -down-> "~* filtered" Person
+ModelManager -down-> "~* filtered" Project
+ModelManager -down-> "~* filtered" Assignment
 @enduml

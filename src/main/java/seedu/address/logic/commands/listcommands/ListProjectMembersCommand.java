@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
@@ -53,5 +54,12 @@ public class ListProjectMembersCommand extends ListCommand {
         return other == this
                 || (other instanceof ListProjectMembersCommand
                 && predicate.equals(((ListProjectMembersCommand) other).predicate));
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }

@@ -208,8 +208,8 @@ public class ParserUtil {
     public static AssignmentId parseAssignmentId(String assignmentId) throws ParseException {
         requireNonNull(assignmentId);
         String trimmedAssignmentId = assignmentId.trim();
-        if (!ProjectId.isValidId(trimmedAssignmentId)) {
-            throw new ParseException(ProjectId.MESSAGE_CONSTRAINTS);
+        if (!AssignmentId.isValidAssignmentId(trimmedAssignmentId)) {
+            throw new ParseException(AssignmentId.MESSAGE_CONSTRAINTS);
         }
         return new AssignmentId(trimmedAssignmentId);
     }
