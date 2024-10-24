@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -76,9 +77,33 @@ public class PersonCard extends UiPart<Region> {
         sellingProperties.getChildren().clear(); // Clear old data
         int[] sellingIndex = {1};
         person.getListOfSellingProperties().forEach(property -> {
-            Label label = new Label(sellingIndex[0] + ". " + property.toString());
+            // Remove the "Tags" section from the property string
+            String propertyWithoutTags = removeTagsFromString(property.toString());
+
+            // Create a new HBox to hold the label and tags
+            HBox propertyContainer = new HBox();
+            Label label = new Label(sellingIndex[0] + ". " + propertyWithoutTags);
             label.getStyleClass().add("cell_small_label");
-            sellingProperties.getChildren().add(label);
+            propertyContainer.getChildren().add(label);
+
+            // Create a FlowPane for property tags
+            FlowPane propertyTags = new FlowPane();
+            propertyTags.setHgap(2.5); // Horizontal gap between tags
+            propertyTags.setVgap(5); // Vertical gap between tags
+            property.getTags().forEach(tag -> {
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.getStyleClass().add("tag-box"); // Apply tag-box style
+                propertyTags.getChildren().add(tagLabel);
+            });
+
+            // Create an HBox to encapsulate both property text and its tags
+            HBox outerContainer = new HBox();
+            outerContainer.setSpacing(10); // Add spacing between label and tags
+            outerContainer.setPadding(new Insets(10, 0, 10, 0)); // Add padding between HBox and text
+            outerContainer.getChildren().addAll(propertyContainer, propertyTags);
+
+            // Add the outer HBox to the sellingProperties FlowPane
+            sellingProperties.getChildren().add(outerContainer);
             sellingIndex[0]++;
         });
     }
@@ -87,10 +112,43 @@ public class PersonCard extends UiPart<Region> {
         buyingProperties.getChildren().clear(); // Clear old data
         int[] buyingIndex = {1};
         person.getListOfBuyingProperties().forEach(property -> {
-            Label label = new Label(buyingIndex[0] + ". " + property.toString());
+            // Remove the "Tags" section from the property string
+            String propertyWithoutTags = removeTagsFromString(property.toString());
+
+            // Create a new HBox to hold the label and tags
+            HBox propertyContainer = new HBox();
+            Label label = new Label(buyingIndex[0] + ". " + propertyWithoutTags);
             label.getStyleClass().add("cell_small_label");
-            buyingProperties.getChildren().add(label);
+            propertyContainer.getChildren().add(label);
+
+            // Create a FlowPane for property tags
+            FlowPane propertyTags = new FlowPane();
+            propertyTags.setHgap(2.5); // Horizontal gap between tags
+            propertyTags.setVgap(5); // Vertical gap between tags
+            property.getTags().forEach(tag -> {
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.getStyleClass().add("tag-box"); // Apply tag-box style
+                propertyTags.getChildren().add(tagLabel);
+            });
+
+            // Create an HBox to encapsulate both property text and its tags
+            HBox outerContainer = new HBox();
+            outerContainer.setSpacing(10); // Add spacing between label and tags
+            outerContainer.setPadding(new Insets(10, 0, 10, 0)); // Add padding between HBox and text
+            outerContainer.getChildren().addAll(propertyContainer, propertyTags);
+
+            // Add the outer HBox to the buyingProperties FlowPane
+            buyingProperties.getChildren().add(outerContainer);
             buyingIndex[0]++;
         });
+    }
+
+    /**
+     * Helper method to remove the 'Tags' section from the property string.
+     */
+    private String removeTagsFromString(String fullPropertyString) {
+        // Detect the start of "Tags " and remove everything after it
+        int indexOfTags = fullPropertyString.indexOf(" Tags: ");
+        return (indexOfTags != -1) ? fullPropertyString.substring(0, indexOfTags).trim() : fullPropertyString;
     }
 }
