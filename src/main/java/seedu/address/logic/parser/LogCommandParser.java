@@ -5,6 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AppointmentCommand;
@@ -24,7 +26,7 @@ public class LogCommandParser implements Parser<LogCommand> {
         }
         String[] argParts = trimmedArgs.split("\\s+");
 
-        if (argParts.length != 4) {
+        if (argParts.length < 4) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LogCommand.MESSAGE_USAGE));
         }
@@ -44,7 +46,8 @@ public class LogCommandParser implements Parser<LogCommand> {
         }
 
         String dateTimeString = argParts[1] + " " + argParts[2];
-        String logString = argParts[3];
+        String logString = Arrays.stream(argParts, 3, argParts.length)
+                .collect(Collectors.joining(" "));
         LocalDateTime dateTime;
         try {
             dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd-MM-yy HH:mm"));

@@ -16,8 +16,11 @@ public class LogCommand extends Command{
     public static final String COMMAND_WORD = "log";
     public static final String MESSAGE_SUCCESS = "Log added!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Logs information of a patient.\n"
-            + "Parameters: LOG\n"
-            + "Example: " + COMMAND_WORD + " Logged in.";
+            + "Parameters: INDEX (must be a positive integer), " +
+            "TIMESTAMP (in the format DD-MM-YYYY HH:MM)," +
+            "INFO (non-empty)\n" +
+            "\n"
+            + "Example: " + COMMAND_WORD + " 1 25-12-2024 14:30 Attended appointment";
 
     private final Index index;
     private final Log log;
