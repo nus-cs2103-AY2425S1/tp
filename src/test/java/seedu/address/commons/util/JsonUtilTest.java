@@ -80,6 +80,8 @@ public class JsonUtilTest {
         private String stringField;
         private int intField;
 
+        public TestClass() {}
+
         TestClass(String stringField, int intField) {
             this.stringField = stringField;
             this.intField = intField;
