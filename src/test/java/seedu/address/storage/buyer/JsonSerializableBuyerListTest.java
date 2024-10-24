@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.buyer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.BuyerList;
-import seedu.address.storage.buyer.JsonSerializableBuyerList;
 import seedu.address.testutil.buyer.TypicalBuyers;
 
 public class JsonSerializableBuyerListTest {

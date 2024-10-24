@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.meetup;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,7 +18,6 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.ReadOnlyMeetUpList;
-import seedu.address.storage.meetup.JsonMeetUpListStorage;
 
 public class JsonMeetUpListStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonMeetUpListStorageTest");
