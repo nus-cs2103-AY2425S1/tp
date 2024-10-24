@@ -511,6 +511,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<br/><br/>
+
+**Use case: UC12 - View contacts of a specified wedding**
+
+**MSS**
+
+1. User requests to view contacts stored in a specified wedding.
+2. PlanPerfect shows the list of all contacts involved in a specified wedding.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+
+    * 1a1. PlanPerfect shows an error message.
+
+      Use case ends.
+
+<br/><br/>
+
 ### Non-Functional Requirements
 
 1. Should work on any **mainstream OS** (e.g., Windows, macOS, Linux) as long as it has **Java 17** or above installed.

@@ -44,7 +44,7 @@ your wedding contact management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## General Features
 
 <box type="info" seamless>
 
@@ -78,6 +78,7 @@ Format: `help`
 
 <br><br/>
 
+## Contact-related Features
 ### Adding a contact: `add`
 
 Adds a contact to the address book.
@@ -206,6 +207,9 @@ Examples:
 
 <br><br/>
 
+### Sort all entries: `sort`
+
+<br><br/>
 ### Clearing all entries : `clear`
 
 Confirms with the user whether they actually want to clear the address book, then clears all entries from the address 
@@ -213,6 +217,45 @@ book only if the follow-up input is `yes` or `y` (case-insensitive). Any other i
 being cleared.
 
 Format: `clear`
+
+<br><br/>
+
+## Wedding-related Features
+### Add wedding: `addw`
+
+<br><br/>
+
+### View wedding : `view`
+Displays a list of contacts involved in a specified wedding.
+
+Format: `view INDEX`
+
+* Displays contacts involved in the wedding of the specified `INDEX`.
+* The index refers to the index number shown in the displayed wedding list on the left of the screen.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+* `view 2` displays a list of all contacts involved in the second wedding shown on the displayed wedding list.
+<br><br/>
+
+### Edit wedding: `editw`
+
+<br><br/>
+
+### Assign person to wedding : `assign`
+
+<br><br/>
+
+### Unassign person from wedding : `unassign`
+
+<br><br/>
+
+### Delete wedding: `deletew`
+
+<br><br/>
+## Other Features
+
+### Listing all active tags : `taglist`
 
 <br><br/>
 
@@ -272,10 +315,10 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend colleague`
 **List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Tag**    | `tag INDEX t/TAG1 TAG2 ...` <br> e.g., `tag 1 t/photographer`
-**Untag**  | `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
+**Tag**    | `tag INDEX t/TAG1 [TAG2] ...` <br> e.g., `tag 1 t/photographer`
+**Untag**  | `untag INDEX t/TAG1 [TAG2] ...` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
 **Find**   | `find KEYWORD1 KEYWORD2 ...`<br> e.g., `find James Jake`
-**Filter** | `filter INDEX t/TAG1 TAG2 ...` <br> e.g., `filter 2 t/friends colleagues`
+**Filter** | `filter INDEX t/TAG1 [TAG2] ...` <br> e.g., `filter 2 t/friends colleagues`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear**  | `clear`
 **Exit**   | `exit`
