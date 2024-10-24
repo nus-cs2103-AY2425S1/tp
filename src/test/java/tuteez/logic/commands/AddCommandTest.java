@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.logic.Messages;
@@ -26,7 +27,6 @@ import tuteez.model.ReadOnlyUserPrefs;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.lesson.Lesson;
-import javafx.beans.property.ObjectProperty;
 import tuteez.testutil.PersonBuilder;
 
 public class AddCommandTest {
