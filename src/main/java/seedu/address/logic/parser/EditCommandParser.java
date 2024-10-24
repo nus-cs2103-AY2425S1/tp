@@ -61,6 +61,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
             parseModuleRolesForEdit(argMultimap.getValue(PREFIX_MODULE).get())
                     .ifPresent(editPersonDescriptor::setModuleRoleOperation);

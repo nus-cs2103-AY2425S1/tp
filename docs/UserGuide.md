@@ -85,7 +85,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+`
+Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+`
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
 * `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).

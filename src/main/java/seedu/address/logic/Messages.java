@@ -56,11 +56,15 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail());
+        builder.append(person.getName());
+
+        // Only display Phone: if present
+        person.getPhone().ifPresent(phone -> builder.append("; Phone: ")
+                .append(person.getPhone().map(Object::toString).orElse("")));
+
+        // Only display Email: if present
+        person.getEmail().ifPresent(email -> builder.append("; Email: ")
+                .append(person.getEmail().map(Object::toString).orElse("")));
 
         // Only display Address: if present
         person.getAddress().ifPresent(address -> builder.append("; Address: ")

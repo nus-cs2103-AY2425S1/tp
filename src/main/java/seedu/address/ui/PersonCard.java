@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.RoleType;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -48,12 +48,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane roles;
@@ -66,18 +60,28 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
+
+
+        if (person.hasPhone()) {
+            Label phone = new Label(person.getPhone().map(Object::toString).orElse(null));
+            phone.getStyleClass().add("cell_small_label");
+            phone.setText(person.getPhone().orElse(null).value);
+            vBox.getChildren().add(phone);
+        }
+
+        if (person.hasEmail()) {
+            Label email = new Label(person.getEmail().map(Object::toString).orElse(null));
+            email.getStyleClass().add("cell_small_label");
+            email.setText(person.getEmail().orElse(null).value);
+            vBox.getChildren().add(email);
+        }
+
         if (person.hasAddress()) {
             Label address = new Label(person.getAddress().map(Object::toString).orElse(null));
             address.getStyleClass().add("cell_small_label");
             address.setText(person.getAddress().orElse(null).value);
             vBox.getChildren().add(address);
         }
-
-        email = new Label(person.getEmail().value);
-        email.getStyleClass().add("cell_small_label");
-        vBox.getChildren().add(email);
-
         // Add tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

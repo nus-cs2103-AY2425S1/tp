@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -55,7 +56,7 @@ public class PersonTest {
 
     @Test
     public void testPersonConstructorWithoutAddress() {
-        Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
+        Person betty = new PersonBuilder(BETTY).withEmptyAddress().build();
 
         Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
                 Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap());
@@ -65,8 +66,36 @@ public class PersonTest {
     }
 
     @Test
+    public void testHasPhoneWithoutPhone() {
+        Person betty = new PersonBuilder(BETTY).withEmptyPhone().build();
+
+        assertFalse(betty.hasPhone());
+    }
+
+    @Test
+    public void testHasPhoneWithPhone() {
+        Person carl = new PersonBuilder(CARL).build();
+
+        assertTrue(carl.hasPhone());
+    }
+
+    @Test
+    public void testHasEmailWithoutEmail() {
+        Person betty = new PersonBuilder(BETTY).withEmptyEmail().build();
+
+        assertFalse(betty.hasEmail());
+    }
+
+    @Test
+    public void testHasEmailWithEmail() {
+        Person carl = new PersonBuilder(CARL).build();
+
+        assertTrue(carl.hasEmail());
+    }
+
+    @Test
     public void testHasAddressWithoutAddress() {
-        Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
+        Person betty = new PersonBuilder(BETTY).withEmptyAddress().build();
 
         assertFalse(betty.hasAddress());
     }
@@ -90,8 +119,28 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(BOB).withEmail(VALID_EMAIL_ALICE).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different email, all other attributes same -> returns false
+        // same phone, all other attributes different -> returns true
+        editedAlice = new PersonBuilder(BOB).withPhone(VALID_PHONE_ALICE).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different email, all other attributes same including phone -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different phone, all other attributes same including email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different phone, different email, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // different phones, both empty emails, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmptyEmail().build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // different emails, both empty phones, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withEmptyPhone().build();
         assertFalse(ALICE.isSamePerson(editedAlice));
     }
 
@@ -138,8 +187,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName()
                 + "{name=" + ALICE.getName()
-                + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail()
+                + ", phone=" + ALICE.getPhone().map(Objects ::toString).orElse(null)
+                + ", email=" + ALICE.getEmail().map(Objects ::toString).orElse(null)
                 + ", address=" + ALICE.getAddress().map(Objects ::toString).orElse(null)
                 + ", tags=" + ALICE.getTags()
                 + ", roles=" + ALICE.getModuleRoleMap() + "}";
