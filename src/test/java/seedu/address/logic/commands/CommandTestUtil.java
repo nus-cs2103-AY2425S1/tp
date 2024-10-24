@@ -32,6 +32,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_ANDY = "Andy";
     public static final String VALID_NAME_BETTY = "Betty";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_PHONE_ALICE = "94351253";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_ANDY = "12345678";
     public static final String VALID_PHONE_BETTY = "98765432";
@@ -41,6 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_ANDY = "andy@example.com";
     public static final String VALID_EMAIL_BETTY = "johnd@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_JEREMY = "jeremy@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_ANDY = "Block 567, Andy Street 2";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";

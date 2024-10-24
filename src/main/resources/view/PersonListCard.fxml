@@ -29,7 +29,6 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <FlowPane fx:id="roles" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
     </VBox>
   </GridPane>
 </HBox>

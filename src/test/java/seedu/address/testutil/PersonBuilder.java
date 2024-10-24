@@ -30,8 +30,8 @@ public class PersonBuilder {
     public static final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
 
     private Name name;
-    private Phone phone;
-    private Email email;
+    private Optional<Phone> phone;
+    private Optional<Email> email;
     private Optional<Address> address;
     private Set<Tag> tags;
     private ModuleRoleMap moduleRoleMap;
@@ -41,8 +41,8 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        phone = Optional.of(new Phone(DEFAULT_PHONE));
+        email = Optional.of(new Email(DEFAULT_EMAIL));
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
 
@@ -129,7 +129,15 @@ public class PersonBuilder {
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.phone = Optional.of(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withEmptyPhone() {
+        this.phone = Optional.empty();
         return this;
     }
 
@@ -137,7 +145,15 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.email = Optional.of(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withEmptyEmail() {
+        this.email = Optional.empty();
         return this;
     }
 
@@ -149,12 +165,4 @@ public class PersonBuilder {
     public Person build() {
         return new Person(name, phone, email, address, tags, moduleRoleMap);
     }
-
-    /**
-     * Builds the {@code Person} that we are testing without address.
-     */
-    public Person buildEmptyAddressPerson() {
-        return new Person(name, phone, email, Optional.empty(), tags, moduleRoleMap);
-    }
-
 }

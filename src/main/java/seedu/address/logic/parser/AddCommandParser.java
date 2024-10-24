@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.areAllPrefixesPresent;
+import static seedu.address.logic.parser.ParserUtil.areAnyPrefixesPresent;
 
 import java.util.Optional;
 import java.util.Set;
@@ -37,15 +38,24 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_MODULE);
 
-        if (!areAllPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!(areAllPrefixesPresent(argMultimap, PREFIX_NAME)
+                && areAnyPrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+
+        Phone phone = null;
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        }
+
+        Email email = null;
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        }
 
         Address address = null;
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
@@ -56,7 +66,14 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ModuleRoleMap moduleRoleMap = ParserUtil.parseModuleRolePairs(argMultimap.getAllValues(PREFIX_MODULE));
 
-        Person person = new Person(name, phone, email, Optional.ofNullable(address), tagList, moduleRoleMap);
+        Person person = new Person(
+                name,
+                Optional.ofNullable(phone),
+                Optional.ofNullable(email),
+                Optional.ofNullable(address),
+                tagList,
+                moduleRoleMap
+        );
         return new AddCommand(person);
     }
 }
