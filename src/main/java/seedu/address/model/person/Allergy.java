@@ -3,10 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-
 /**
  * Represents a Patient's allergy in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAllergy (String)}
+ * Guarantees: immutable; is valid as declared in
+ * {@link #isValidAllergy (String)}
  */
 public class Allergy {
     public static final String MESSAGE_CONSTRAINTS = "Allergy can take any values";

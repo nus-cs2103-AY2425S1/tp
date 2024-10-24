@@ -346,13 +346,12 @@ public class ParserUtil {
     public static List<Appt> parseAppts(Collection<String> dates) throws ParseException {
         requireNonNull(dates);
         final List<Appt> apptList = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         for (String date : dates) {
             String trimmedDate = date.trim();
             if (!Appt.isValidAppt(trimmedDate)) {
                 throw new ParseException(Appt.MESSAGE_CONSTRAINTS);
             }
-            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, formatter);
+            LocalDateTime trimmedDateTime = LocalDateTime.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
             apptList.add(parseSingleAppt(trimmedDateTime));
         }
         return apptList;

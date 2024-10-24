@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="header" styleClass="label-subheader" stylesheets="@DarkTheme.css">
+        <padding>
+            <Insets bottom="4.0" left="2.0" right="2.0" top="4.0" />
+        </padding>
+    </Label>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="37.0" prefHeight="250.0"
+        prefWidth="150.0">
+        <content>
+            <AnchorPane layoutY="37.0" minWidth="0.0" prefWidth="150.0" styleClass="anchor-pane"
+                stylesheets="@DarkTheme.css">
+                <children>
+
+                    <Label fx:id="basicInfoHeader" styleClass="label-subheader"
+                        stylesheets="@DarkTheme.css">
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        </padding>
+                    </Label>
+
+                    <VBox layoutY="30.0" spacing="2.0">
+                        <Label fx:id="name" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="phone" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="email" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="nric" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="birthdate" styleClass="label-text"
+                            stylesheets="@DarkTheme.css" wrapText="true" />
+                        <Label fx:id="sex" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="address" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <padding>
+                            <Insets bottom="2.0" left="4.0" right="4.0" top="2.0" />
+                        </padding>
+                    </VBox>
+
+                    <Label fx:id="healthServiceHeader" layoutY="180.0" styleClass="label-subheader">
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        </padding>
+                    </Label>
+
+                    <VBox layoutY="215.0" spacing="2.0">
+                        <FlowPane fx:id="healthServices" />
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        </padding>
+                    </VBox>
+
+                    <Label fx:id="appointmentHeader" layoutY="245.0" styleClass="label-subheader">
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        </padding>
+                    </Label>
+
+                    <VBox layoutY="275.0" spacing="2.0">
+                        <Label fx:id="appointments" styleClass="label-text"
+                            stylesheets="@DarkTheme.css" wrapText="true" />
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        </padding>
+                    </VBox>
+
+                    <Label fx:id="furtherDetailsHeader" layoutY="310.0" styleClass="label-subheader">
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        </padding>
+                    </Label>
+
+                    <VBox layoutY="340.0" spacing="2.0">
+                        <Label fx:id="allergy" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="bloodType" styleClass="label-text"
+                            stylesheets="@DarkTheme.css" wrapText="true" />
+                        <Label fx:id="healthRisk" styleClass="label-text"
+                            stylesheets="@DarkTheme.css" wrapText="true" />
+                        <Label fx:id="healthRecord" styleClass="label-text"
+                            stylesheets="@DarkTheme.css" wrapText="true" />
+                        <Label fx:id="nokName" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="nokPhone" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <Label fx:id="note" styleClass="label-text" stylesheets="@DarkTheme.css"
+                            wrapText="true" />
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                        </padding>
+                    </VBox>
+                </children>
+            </AnchorPane>
+        </content>
+    </ScrollPane>
+</VBox>

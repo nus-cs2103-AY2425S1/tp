@@ -4,14 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.ApptSorter;
-import seedu.address.model.healthservice.HealthService;
 
 /**
  * Represents a Person in the address book.
@@ -77,7 +74,7 @@ public class Person {
     public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Phone phone,
             Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
             HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
-        requireAllNonNull(name, nric, birthdate, sex, phone, email);
+        requireAllNonNull(name, nric, birthdate, sex);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
@@ -99,24 +96,24 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
     public Nric getNric() {
         return nric;
+    }
+
+    public Sex getSex() {
+        return sex;
     }
 
     public Birthdate getBirthdate() {
         return birthdate;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
     }
 
     public Name getNokName() {

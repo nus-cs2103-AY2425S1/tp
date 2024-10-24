@@ -22,7 +22,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_NRIC = "The person with the NRIC %1$s does not exist in the "
             + "system.";
 
-
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

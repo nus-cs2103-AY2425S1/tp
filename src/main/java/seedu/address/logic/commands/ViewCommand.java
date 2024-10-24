@@ -46,10 +46,8 @@ public class ViewCommand extends Command {
 
         Person person = optionalPerson.get();
 
-        // View the person's details
-        // person.showDetails();
-
-        return new CommandResult(generateSuccessMessage(person));
+        return new CommandResult(generateSuccessMessage(person), null, false, person,
+                true, false);
     }
 
     @Override

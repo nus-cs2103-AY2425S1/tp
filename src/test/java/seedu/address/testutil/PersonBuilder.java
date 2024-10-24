@@ -17,7 +17,6 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -38,6 +37,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NOTE = "Requires special care";
     public static final String DEFAULT_NOKNAME = "Tay Bee";
     public static final String DEFAULT_NOKPHONE = "90184718";
+    public static final String DEFAULT_APPOINTMENT = "2001-12-10 T 14:30";
 
     private Name name;
     private Phone phone;
@@ -218,7 +218,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, nric, birthdate, sex, phone, email, address, allergy, bloodType,
-                healthRisk, healthRecord, note, nokName, nokPhone, new ArrayList<>());
+                healthRisk, healthRecord, note, nokName, nokPhone, appts);
     }
 
 }
