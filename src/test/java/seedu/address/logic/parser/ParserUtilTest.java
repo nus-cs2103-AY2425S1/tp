@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -192,5 +193,31 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseCriteria_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCriteria(null));
+    }
+
+    @Test
+    public void parseCriteria_emptyString_returnsEmptyList() throws Exception {
+        assertTrue(ParserUtil.parseCriteria("").isEmpty());
+    }
+
+    @Test
+    public void parseCriteria_multipleCriteria_returnsList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseCriteria("criteria1 criteria2 criteria3");
+        List<String> expectedCriteriaList = Arrays.asList("criteria1", "criteria2", "criteria3");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseCriteria_criteriaWithSpaces_returnsTrimmedList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseCriteria("  criteria1  criteria2  ");
+        List<String> expectedCriteriaList = Arrays.asList("criteria1", "criteria2");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
     }
 }

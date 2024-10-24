@@ -3,11 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -22,24 +19,12 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  *
  * @see Person#isSamePerson(Person)
  */
-public class UniquePersonList implements Iterable<Person> {
-
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
-
-    /**
-     * Returns true if the list contains an equivalent person as the given argument.
-     */
-    public boolean contains(Person toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
-    }
-
+public class UniquePersonList extends PersonList implements Iterable<Person> {
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
+    @Override
     public void add(Person toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -53,6 +38,7 @@ public class UniquePersonList implements Iterable<Person> {
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -69,25 +55,10 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
-     */
-    public void remove(Person toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
-        }
-    }
-
-    public void setPersons(UniquePersonList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
+    @Override
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
         if (!personsAreUnique(persons)) {
@@ -95,18 +66,6 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
-    }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Person> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
-    }
-
-    @Override
-    public Iterator<Person> iterator() {
-        return internalList.iterator();
     }
 
     @Override
@@ -122,16 +81,6 @@ public class UniquePersonList implements Iterable<Person> {
 
         UniquePersonList otherUniquePersonList = (UniquePersonList) other;
         return internalList.equals(otherUniquePersonList.internalList);
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return internalList.toString();
     }
 
     /**
