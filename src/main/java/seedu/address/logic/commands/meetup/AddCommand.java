@@ -55,7 +55,7 @@ public class AddCommand extends Command {
         }
 
         model.addMeetUp(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), false, false, true, false, false);
     }
 
     @Override

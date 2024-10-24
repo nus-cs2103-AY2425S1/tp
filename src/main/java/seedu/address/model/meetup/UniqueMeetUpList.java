@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ModelManager;
-import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.exceptions.DuplicateMeetUpException;
 import seedu.address.model.meetup.exceptions.MeetUpNotFoundException;
 

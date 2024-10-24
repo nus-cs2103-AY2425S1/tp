@@ -1,0 +1,13 @@
+{
+  "properties": [ {
+    "name": "Valid Buyer",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "budget": "1,000,000"
+  }, {
+    "name": "Buyer With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "budget": "1,000,000"
+  } ]
+}
