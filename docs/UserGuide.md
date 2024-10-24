@@ -150,6 +150,33 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an Appointment to a person: `make_appt`
+
+Makes an appointment for a person
+
+Format: `make_appt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_TIME`
+
+* Adds appointment to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The `APPOINTMENT_DESCRIPTION` refers to the type of appointment.
+* `START_DATE_TIME` and `END_DATE_TIME` refers to the date and time the appointment starts and ends respectively.
+* The start **must be before** the end date and time.
+
+Examples:
+* `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the 
+1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
+
+### List all person appointment: `schedule_all`
+
+Lists all the appointments assigned to every person
+
+Format: `schedule_all`
+
+Examples:
+* `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
+  1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -207,4 +234,6 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find FIELD/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
 **List**   | `list`
+**Make_appt** | `make_appt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_TIME`<br> e.g.,`make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00`
+**Schedule_all**| `schedule_all`<br> e.g.,`schedule_all`
 **Help**   | `help`
