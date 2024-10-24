@@ -44,6 +44,7 @@
 
     <VBox alignment="CENTER" spacing="3" style="-fx-padding: 10 0 10 0;">
         <Label fx:id="birthday" text="\$birthday" styleClass="label-small" />
+        <Label fx:id="age" text="\$age" styleClass="label-small" />
         <Label fx:id="address" text="\$address" styleClass="label-small" />
         <Label fx:id="hasPaid" text="\$hasPaid" styleClass="label-small" />
         <Label fx:id="frequency" text="\$frequency" styleClass="label-small" />

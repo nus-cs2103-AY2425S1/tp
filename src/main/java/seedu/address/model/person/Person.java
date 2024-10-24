@@ -24,6 +24,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Birthday birthday;
+    private final Age age;
     private final Set<Tag> tags = new HashSet<>();
     private final Boolean hasPaid;
     private final Frequency frequency;
@@ -42,6 +43,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.birthday = birthday;
+        this.age = new Age(birthday);
         this.tags.addAll(tags);
         this.hasPaid = hasPaid;
         this.frequency = frequency;
@@ -65,6 +67,10 @@ public class Person {
 
     public Birthday getBirthday() {
         return birthday;
+    }
+
+    public Age getAge() {
+        return age;
     }
 
     /**
@@ -116,6 +122,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && birthday.equals(otherPerson.birthday)
+                && age.equals(otherPerson.age)
                 && tags.equals(otherPerson.tags)
                 && hasPaid.equals(otherPerson.hasPaid)
                 && frequency.equals(otherPerson.frequency);
@@ -124,7 +131,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, birthday, tags, hasPaid, frequency);
+        return Objects.hash(name, phone, email, address, birthday, age, tags, hasPaid, frequency);
     }
 
     @Override
@@ -135,6 +142,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("birthday", birthday)
+                .add("age", age)
                 .add("tags", tags)
                 .add("hasPaid", hasPaid)
                 .add("frequency", frequency)
