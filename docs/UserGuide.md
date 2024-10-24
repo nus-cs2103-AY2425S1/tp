@@ -192,7 +192,7 @@ Format: `display INDEX`
 
 * Displays the details of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * The displayed information includes the student's name, phone number, email, address, tags, lessons, and any remarks associated with the student.
-  ![result for 'display 1'](images/findAlexDavidResult.png)
+
 Examples:
 * `display 1` Shows the details of the first student in the list.
 * `display 3` Shows the details of the third student in the list.
