@@ -62,6 +62,9 @@ ref over FindSubjectCommand, Model : filter person list with p
 FindSubjectCommand --> LogicManager : result
 deactivate FindSubjectCommand
 
+FindSubjectCommand -[hidden]-> LogicManager : result
+destroy FindSubjectCommand
+
 [<-- LogicManager : result
 deactivate
 
