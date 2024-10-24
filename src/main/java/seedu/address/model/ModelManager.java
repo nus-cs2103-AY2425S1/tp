@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -131,6 +132,17 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Optional<Person> getPerson(Name name) {
+        for (Person person : addressBook.getPersonList()) {
+            if (person.getName().equals(name)) {
+                return Optional.of(person); // Return the person if found
+            }
+        }
+
+        // Return an empty Optional if the person is not found
+        return Optional.empty();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
