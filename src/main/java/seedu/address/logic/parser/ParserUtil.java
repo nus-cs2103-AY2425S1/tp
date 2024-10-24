@@ -214,12 +214,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a String containing the field to search and keywords,
+     * Parses a List containing keyword arguments,
      * into a List containing the keywords.
      */
-    public static List<String> parseSearchKeywords(String fieldAndValues) {
-        requireNonNull(fieldAndValues);
-        List<String> splitFieldAndKeywords = Arrays.asList(fieldAndValues.split(" "));
-        return splitFieldAndKeywords.subList(1, splitFieldAndKeywords.size());
+    public static List<String> parseSearchKeywords(List<String> keywordArgument) {
+        requireNonNull(keywordArgument);
+        List<String> keywords = Arrays.asList(keywordArgument.get(0).split(" "));
+        return keywords;
     }
 }
