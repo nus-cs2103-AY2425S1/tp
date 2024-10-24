@@ -37,13 +37,13 @@ public class AddRentalCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a rental information to a client. "
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_RENTAL_START_DATE + "RENTAL START DATE "
-            + PREFIX_RENTAL_END_DATE + "RENTAL END DATE "
-            + PREFIX_RENT_DUE_DATE + "RENT DUE DATE "
-            + PREFIX_MONTHLY_RENT + "MONTHLY RENT "
-            + PREFIX_DEPOSIT + "DEPOSIT "
-            + PREFIX_CUSTOMER_LIST + "CUSTOMER LIST "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_RENTAL_START_DATE + "RENTAL START DATE] "
+            + "[" + PREFIX_RENTAL_END_DATE + "RENTAL END DATE] "
+            + "[" + PREFIX_RENT_DUE_DATE + "RENT DUE DATE] "
+            + "[" + PREFIX_MONTHLY_RENT + "MONTHLY RENT] "
+            + "[" + PREFIX_DEPOSIT + "DEPOSIT] "
+            + "[" + PREFIX_CUSTOMER_LIST + "CUSTOMER LIST] "
             + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ADDRESS + "BLK 1 Bishan "
@@ -77,13 +77,11 @@ public class AddRentalCommand extends Command {
         requireNonNull(model);
 
         List<Client> lastShownList = model.getFilteredPersonList();
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-
         if (model.hasRentalInformation(clientToEdit, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_RENTAL_INFORMATION);
         }
