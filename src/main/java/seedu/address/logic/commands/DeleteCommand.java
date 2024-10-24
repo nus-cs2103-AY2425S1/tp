@@ -96,6 +96,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         ObservableList<Person> lastShownList = model.getFilteredPersonList();
         FilteredList<Person> listForFilter = new FilteredList<>(lastShownList);
+        assert listForFilter != null : "FilteredList should not be null";
         // Check if index is not empty
         if (targetIndex.isPresent()) {
             return this.deleteByIndex(targetIndex, model, lastShownList);
@@ -143,6 +144,8 @@ public class DeleteCommand extends Command {
      */
     private CommandResult deleteByIndex(Optional<Index> targetIndex, Model model,
                                       ObservableList<Person> lastShownList) throws CommandException {
+        assert targetIndex.isPresent() : "Target index should be present";
+        assert lastShownList != null : "Last shown list should not be null";
         if (targetIndex.get().getZeroBased() >= lastShownList.size()) { // Checks if the index is greater than list size
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
