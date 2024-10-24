@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -12,12 +14,21 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code NameContainsKeywordsPredicate}.
+     *
+     * @param keywords A valid list of names.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
+        requireAllNonNull(keywords);
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
+        // Null objects should not have been added to addressbook
+        assert person != null;
+
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }

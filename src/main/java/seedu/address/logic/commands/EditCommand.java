@@ -15,12 +15,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -57,6 +60,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_EDIT_EMPLOYEE_ID = "Employee id cannot be edited.";
 
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -84,11 +89,15 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        // Cannot modify employeeId via CLI; Person must have the same employeeId
+        // ie, personToEdit and editedPerson must still be same person
+        assert personToEdit.isSamePerson(editedPerson);
 
         model.setPerson(personToEdit, editedPerson);
+
+        // Edited person successfully
+        logger.fine(COMMAND_WORD + " person\n" + editedPerson);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

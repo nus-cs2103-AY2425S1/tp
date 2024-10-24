@@ -41,10 +41,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         List<String> tagList = new ArrayList<String>();
         tagSet.forEach(tag -> tagList.add(tag.tagName));
 
-        List<String> skilList = new ArrayList<String>();
-        skillSet.forEach(skill -> skilList.add(skill.skill));
+        List<String> skillList = new ArrayList<String>();
+        skillSet.forEach(skill -> skillList.add(skill.skill));
 
-        return new FilterCommand(new SkillsContainsKeywordsPredicate(skilList),
+        return new FilterCommand(new SkillsContainsKeywordsPredicate(skillList),
                 new TagsContainsKeywordsPredicate(tagList));
     }
 
