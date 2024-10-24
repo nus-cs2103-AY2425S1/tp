@@ -73,4 +73,7 @@ public class Date {
         return date.hashCode();
     }
 
+    public boolean isSameDate(Date date) {
+        return this.date.isEqual(date.date);
+    }
 }
