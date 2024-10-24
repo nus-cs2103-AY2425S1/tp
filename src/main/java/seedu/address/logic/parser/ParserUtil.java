@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.SortOrder;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -153,5 +154,19 @@ public class ParserUtil {
             throw new ParseException(Profile.MESSAGE_CONSTRAINTS);
         }
         return new Profile(trimmedProfileName);
+    }
+
+    /**
+     * Parses {@code order} into an appropriate {@code SortOrder}
+     */
+    public static SortOrder parseSortOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        for (SortOrder s : SortOrder.values()) {
+            if (trimmedOrder.equals(s.keyword)) {
+                return s;
+            }
+        }
+        throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
     }
 }

@@ -75,12 +75,12 @@ public class Person {
     }
 
     /**
-     * Check is Person is a member
+     * Check if Person is a Member
      * @return true if Person has a role "Member"
      */
     public boolean isMember() {
         Set<Role> roles = this.getRoles();
-        return roles.contains(new Role(Member.MEMBER_ROLE));
+        return roles.contains(new Member());
     }
 
     /**
