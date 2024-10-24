@@ -22,7 +22,7 @@ public class MarkAttendanceByStudentCommandParserTest {
                 Attendance.VALID_DATE_FORMAT));
         MarkAttendanceByStudentCommand expectedCommand =
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, "Math");
-        assertParseSuccess(parser, "12/12/2024 Math", expectedCommand);
+        assertParseSuccess(parser, "1 attend/12/12/2024 tut/Math", expectedCommand);
     }
 
     @Test
