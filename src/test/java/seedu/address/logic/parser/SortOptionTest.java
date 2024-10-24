@@ -25,14 +25,14 @@ public class SortOptionTest {
         SortOption sortOptionName = SortOption.fromString("name");
         assertEquals(SortOption.NAME, sortOptionName);
         assertEquals("name", sortOptionName.toString());
-        assertEquals("Person", sortOptionName.getRole());
+        assertEquals("Person", sortOptionName.getRoleAsString());
         assertEquals(Person.class, sortOptionName.getRelatedClass());
 
         // Valid sort option: "hours"
         SortOption sortOptionHours = SortOption.fromString("hours");
         assertEquals(SortOption.HOURS, sortOptionHours);
         assertEquals("hours", sortOptionHours.toString());
-        assertEquals("volunteer", sortOptionHours.getRole());
+        assertEquals("volunteer", sortOptionHours.getRoleAsString());
         assertEquals(Volunteer.class, sortOptionHours.getRelatedClass());
 
         // Valid sort option with different casing: "NaMe"
@@ -70,12 +70,12 @@ public class SortOptionTest {
     public void testRoleAndRelatedClass() {
         // Testing role and related class for "name"
         SortOption sortOptionName = SortOption.NAME;
-        assertEquals("Person", sortOptionName.getRole());
+        assertEquals("Person", sortOptionName.getRoleAsString());
         assertEquals(Person.class, sortOptionName.getRelatedClass());
 
         // Testing role and related class for "hours"
         SortOption sortOptionHours = SortOption.HOURS;
-        assertEquals("volunteer", sortOptionHours.getRole());
+        assertEquals("volunteer", sortOptionHours.getRoleAsString());
         assertEquals(Volunteer.class, sortOptionHours.getRelatedClass());
     }
 }

@@ -60,7 +60,8 @@ public class SortCommand extends Command {
         }
 
         if (!model.hasPersonsOfType(sortOption.getRelatedClass())) {
-            return new CommandResult(String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND, sortOption.getRole()));
+            return new CommandResult(String.format(MESSAGE_SORT_BY_ROLE_CRITERIA_NONE_FOUND,
+                    sortOption.getRoleAsString()));
         }
 
         updateSort(model);
