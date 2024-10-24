@@ -23,6 +23,7 @@ public class Company {
     private final Phone phone;
     private final Email email;
     private final CareerPageUrl careerPageUrl;
+    private final ApplicationStatus applicationStatus;
     private final Bookmark isBookmark;
 
     // Data fields
@@ -32,8 +33,8 @@ public class Company {
     /**
      * Every field must be present and not null.
      */
-    public Company(Name name, Phone phone, Email email, Address address, CareerPageUrl careerPageUrl, Set<Tag> tags,
-                   Bookmark isBookmark) {
+    public Company(Name name, Phone phone, Email email, Address address, CareerPageUrl careerPageUrl,
+                   ApplicationStatus status, Set<Tag> tags, Bookmark isBookmark) {
         requireAllNonNull(name, phone, email, address, tags, isBookmark);
         this.name = name;
         this.phone = phone;
@@ -42,6 +43,7 @@ public class Company {
         this.careerPageUrl = careerPageUrl;
         this.tags.addAll(tags);
         this.isBookmark = isBookmark;
+        this.applicationStatus = status;
     }
 
     public Name getName() {
@@ -62,6 +64,10 @@ public class Company {
 
     public CareerPageUrl getCareerPageUrl() {
         return careerPageUrl;
+    }
+
+    public ApplicationStatus getApplicationStatus() {
+        return applicationStatus;
     }
 
     /**
@@ -112,13 +118,14 @@ public class Company {
                 && address.equals(otherCompany.address)
                 && careerPageUrl.equals(otherCompany.careerPageUrl)
                 && tags.equals(otherCompany.tags)
+                && applicationStatus.equals(otherCompany.applicationStatus)
                 && isBookmark.equals(otherCompany.isBookmark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, careerPageUrl, tags, isBookmark);
+        return Objects.hash(name, phone, email, address, careerPageUrl, applicationStatus, tags, isBookmark);
     }
 
     @Override
@@ -129,6 +136,7 @@ public class Company {
                 .add("email", email)
                 .add("address", address)
                 .add("url", careerPageUrl)
+                .add("application status", applicationStatus)
                 .add("tags", tags)
                 .add("bookmark", isBookmark)
                 .toString();

@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ApplicationStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.company.ApplicationStatus;
 
 /**
  * Parses input arguments and creates a new ApplicationStatusCommand object
@@ -32,7 +33,7 @@ public class ApplicationStatusCommandParser implements Parser<ApplicationStatusC
         }
         String status = argumentMultimap.getValue(PREFIX_APPLICATION_STATUS).orElse("");
 
-        return new ApplicationStatusCommand(index, status);
+        return new ApplicationStatusCommand(index, new ApplicationStatus(status));
     }
 
 }

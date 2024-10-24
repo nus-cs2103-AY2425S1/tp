@@ -25,6 +25,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.NameContainsKeywordsPredicate;
 import seedu.address.testutil.CompanyBuilder;
@@ -96,7 +97,7 @@ public class AddressBookParserTest {
         ApplicationStatusCommand command = (ApplicationStatusCommand) parser.parseCommand(
                 ApplicationStatusCommand.COMMAND_WORD
                 + " " + INDEX_FIRST_COMPANY.getOneBased() + " " + PREFIX_APPLICATION_STATUS + status);
-        assertEquals(new ApplicationStatusCommand(INDEX_FIRST_COMPANY, status), command);
+        assertEquals(new ApplicationStatusCommand(INDEX_FIRST_COMPANY, new ApplicationStatus(status)), command);
     }
 
     @Test

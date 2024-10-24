@@ -96,7 +96,8 @@ public class CompanyTest {
         String expected = Company.class.getCanonicalName() + "{name=" + GOOGLE.getName() + ", phone="
                 + GOOGLE.getPhone()
                 + ", email=" + GOOGLE.getEmail() + ", address=" + GOOGLE.getAddress() + ", url="
-                + GOOGLE.getCareerPageUrl() + ", tags=" + GOOGLE.getTags() + ", bookmark=" + GOOGLE.getIsBookmark()
+                + GOOGLE.getCareerPageUrl() + ", application status=" + GOOGLE.getApplicationStatus()
+                + ", tags=" + GOOGLE.getTags() + ", bookmark=" + GOOGLE.getIsBookmark()
                 + "}";
         assertEquals(expected, GOOGLE.toString());
     }

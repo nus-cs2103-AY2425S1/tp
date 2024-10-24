@@ -39,7 +39,7 @@ public class RemoveBookmarkCommandTest {
         Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
                 companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
                 companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
-                companyToRemoveBookmark.getTags(), new Bookmark(false));
+                companyToRemoveBookmark.getApplicationStatus(), companyToRemoveBookmark.getTags(), new Bookmark(false));
         ModelManager expectedModel = new ModelManager(bookmarkedModel.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
@@ -80,7 +80,7 @@ public class RemoveBookmarkCommandTest {
         Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
                 companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
                 companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
-                companyToRemoveBookmark.getTags(), new Bookmark(false));
+                companyToRemoveBookmark.getApplicationStatus(), companyToRemoveBookmark.getTags(), new Bookmark(false));
         ModelManager expectedModel = new ModelManager(bookmarkedModel.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);

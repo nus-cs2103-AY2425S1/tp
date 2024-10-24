@@ -6,6 +6,7 @@
     "email" : "google@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "careerPageUrl" : "careers.com",
+    "applicationStatus": "",
     "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "isBookmark" : {
       "isBookmark" : false
@@ -16,6 +17,7 @@
     "email" : "meta@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "careerPageUrl" : "careers.com",
+    "applicationStatus": "",
     "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "isBookmark" : {
       "isBookmark" : false
@@ -27,6 +29,7 @@
     "address" : "wall street",
     "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "careerPageUrl" : "careers.com",
+    "applicationStatus": "",
     "isBookmark" : {
       "isBookmark" : false
     }
@@ -36,6 +39,7 @@
     "email" : "shopee@example.com",
     "address" : "10th street",
     "careerPageUrl" : "careers.com",
+    "applicationStatus": "",
     "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
     "isBookmark" : {
       "isBookmark" : false
@@ -47,6 +51,7 @@
     "address" : "michegan ave",
     "tags" : [ ],
     "careerPageUrl" : "careers.com",
+    "applicationStatus": "",
     "isBookmark" : {
       "isBookmark" : false
     }
@@ -57,6 +62,7 @@
     "address" : "little tokyo",
     "tags" : [ ],
     "careerPageUrl" : "careers.com",
+    "applicationStatus": "",
     "isBookmark" : {
       "isBookmark" : false
     }
@@ -66,6 +72,7 @@
     "email" : "amazon@example.com",
     "address" : "4th street",
     "careerPageUrl" : "careers.com",
+    "applicationStatus": "",
     "tags" : [ ],
     "isBookmark" : {
       "isBookmark" : false

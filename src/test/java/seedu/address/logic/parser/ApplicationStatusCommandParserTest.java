@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ApplicationStatusCommand;
+import seedu.address.model.company.ApplicationStatus;
 
 public class ApplicationStatusCommandParserTest {
     private ApplicationStatusCommandParser parser = new ApplicationStatusCommandParser();
@@ -20,11 +21,12 @@ public class ApplicationStatusCommandParserTest {
         // have status
         Index targetIndex = INDEX_FIRST_COMPANY;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPLICATION_STATUS + nonEmptyStatus;
-        ApplicationStatusCommand expectedCommand = new ApplicationStatusCommand(INDEX_FIRST_COMPANY, nonEmptyStatus);
+        ApplicationStatusCommand expectedCommand = new ApplicationStatusCommand(INDEX_FIRST_COMPANY,
+                new ApplicationStatus(nonEmptyStatus));
         assertParseSuccess(parser, userInput, expectedCommand);
         // no status
         userInput = targetIndex.getOneBased() + " " + PREFIX_APPLICATION_STATUS;
-        expectedCommand = new ApplicationStatusCommand(INDEX_FIRST_COMPANY, "");
+        expectedCommand = new ApplicationStatusCommand(INDEX_FIRST_COMPANY, new ApplicationStatus(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
