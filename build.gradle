@@ -69,4 +69,8 @@ shadowJar {
     archiveFileName = 'InSUREance.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
