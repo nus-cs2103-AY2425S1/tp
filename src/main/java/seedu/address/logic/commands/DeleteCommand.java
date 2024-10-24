@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.DisplayType;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -54,7 +55,8 @@ public class DeleteCommand extends Command {
         // Deleted person successfully
         logger.fine(COMMAND_WORD + " person\n" + personToDelete);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)),
+                DisplayType.PERSON_LIST);
     }
 
     @Override
