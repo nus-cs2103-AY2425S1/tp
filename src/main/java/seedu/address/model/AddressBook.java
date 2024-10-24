@@ -3,12 +3,17 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.UniqueCompanyList;
+import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
+import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.UniqueJobList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -113,8 +118,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
-    /** Adds a job to the address book. */
+    /**
+     * Adds a job to the address book.
+     * The existence of the company referenced by the job creation is checked here.
+     */
     public void addJob(Job j) {
+        JobCompany c = j.getCompany();
+        boolean companyExists = StreamSupport
+                .stream(companies.spliterator(), false)
+                .anyMatch(x -> c.matchesCompanyName(x.getName()));
+        if (!companyExists) {
+            throw new CompanyNotFoundException();
+        }
         jobs.add(j);
     }
 
@@ -165,6 +180,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        if (key.isMatchPresent()) {
+            String personIdentifier = key.getIdentifier();
+            for (Job job : jobs) {
+                // The personIdentifier is guaranteed to be unique and its reference is kept by at most 1 job. Due to
+                // the guarantee provided by removeMatch, I do not have to check if the person is working at that job.
+                job.removeMatch(personIdentifier);
+            }
+        }
         persons.remove(key);
     }
 
@@ -173,16 +196,31 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeJob(Job key) {
+        Set<String> matches = key.getMatches();
+        for (Person person: persons) {
+            String personIdentifier = person.getIdentifier();
+            if (matches.contains(personIdentifier)) {
+                person.removeMatch();
+            }
+        }
         jobs.remove(key);
     }
 
     /**
      * Removes a company from this address book.
+     * Also removes all jobs tagged to the company.
      *
      * @param key Company to be removed.
      */
     public void removeCompany(Company key) {
         companies.remove(key);
+        Stream<Job> jobsToRemove = StreamSupport
+                .stream(jobs.spliterator(), false)
+                .filter(x -> x.getCompany().matchesCompanyName(key.getName()));
+        // DO NOT CONVERT BELOW TO STREAM, IT BREAKS THE JOB DELETION!!!
+        for (Job j : jobsToRemove.toList()) {
+            jobs.remove(j);
+        }
     }
 
     //// util methods

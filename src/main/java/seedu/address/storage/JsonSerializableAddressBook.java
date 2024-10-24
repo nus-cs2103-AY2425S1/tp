@@ -70,12 +70,13 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+
+        for (JsonAdaptedCompany jsonAdaptedCompany : companies) {
+            Company company = jsonAdaptedCompany.toModelType();
+            if (addressBook.hasCompany(company)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_COMPANY);
             }
-            addressBook.addPerson(person);
+            addressBook.addCompany(company);
         }
 
         for (JsonAdaptedJob jsonAdaptedJob : jobs) {
@@ -84,12 +85,12 @@ class JsonSerializableAddressBook {
             addressBook.addJob(job);
         }
 
-        for (JsonAdaptedCompany jsonAdaptedCompany : companies) {
-            Company company = jsonAdaptedCompany.toModelType();
-            if (addressBook.hasCompany(company)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_COMPANY);
+        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            Person person = jsonAdaptedPerson.toModelType();
+            if (addressBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addCompany(company);
+            addressBook.addPerson(person);
         }
 
         return addressBook;

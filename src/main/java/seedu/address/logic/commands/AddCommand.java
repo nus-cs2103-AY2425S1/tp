@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Adds a person to the address book.
+ * Represents an abstract command for adding an object of type {@code T} to the address book.
  */
 public abstract class AddCommand<T> extends Command {
 
