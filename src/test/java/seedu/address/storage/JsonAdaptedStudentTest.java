@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
+import seedu.address.storage.attendance.JsonAdaptedAttendance;
 import seedu.address.storage.attendance.JsonAdaptedAttendanceRecord;
 
 public class JsonAdaptedStudentTest {
@@ -158,6 +159,29 @@ public class JsonAdaptedStudentTest {
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_TUTORIAL_GROUP, null, VALID_ASSIGNMENTS, VALID_ATTENDANCE_RECORD);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
+
+
+    @Test
+    public void toModelType_invalidAssignment_throwsIllegalValueException() {
+        List<JsonAdaptedAssignment> invalidAssignments = List.of(new JsonAdaptedAssignment(
+                null, "2024-10-22", "submitted", "graded", "A"));
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_TUTORIAL_GROUP, VALID_STUDENT_NUMBER, invalidAssignments, VALID_ATTENDANCE_RECORD);
+        String expectedMessage = String.format(JsonAdaptedAssignment.MISSING_FIELD_MESSAGE_FORMAT, "AssignmentName");
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAttendanceRecord_throwsIllegalValueException() {
+        List<JsonAdaptedAttendanceRecord> invalidAttendanceRecords = List.of(new JsonAdaptedAttendanceRecord(
+                null, new JsonAdaptedAttendance("p")));
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_TUTORIAL_GROUP, VALID_STUDENT_NUMBER, VALID_ASSIGNMENTS, invalidAttendanceRecords);
+        String expectedMessage = String.format(JsonAdaptedAttendanceRecord.MISSING_FIELD_MESSAGE_FORMAT, "date");
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
