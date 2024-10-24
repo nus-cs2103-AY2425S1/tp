@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane games;
+    @FXML
+    private FlowPane preferredTimes;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,6 +66,9 @@ public class PersonCard extends UiPart<Region> {
         person.getGames().values().stream()
                 .sorted(Comparator.comparing(game -> game.gameName))
                 .forEach(game -> games.getChildren().add(gameLabel(game)));
+        person.getPreferredTimes().stream()
+                .sorted(Comparator.comparing(preferredTime -> preferredTime.preferredTime))
+                .forEach(preferredTime -> preferredTimes.getChildren().add(new Label(preferredTime.preferredTime)));
     }
 
     private static Label gameLabel(Game game) {
@@ -71,6 +76,7 @@ public class PersonCard extends UiPart<Region> {
         Username username = game.getUsername();
         SkillLevel skillLevel = game.getSkillLevel();
         Role role = game.getRole();
+        boolean isFavourite = game.getFavouriteStatus();
         sb.append(game.getGameName()).append("\n");
         if (username.getUsername() != "") {
             sb.append("Username: ").append(game.getUsername()).append("\n");
@@ -78,8 +84,11 @@ public class PersonCard extends UiPart<Region> {
         if (skillLevel.getSkillLevel() != "") {
             sb.append("Skill Lvl: ").append(game.getSkillLevel()).append("\n");
         }
-        if (role.getRole() != "") {
-            sb.append("Role: ").append(game.getRole());
+        if (role != null) {
+            sb.append("Role: ").append(game.getRole()).append("\n");
+        }
+        if (isFavourite) {
+            sb.append("Favourite!");
         }
         assert !sb.toString().equals("");
         return new Label(sb.toString());

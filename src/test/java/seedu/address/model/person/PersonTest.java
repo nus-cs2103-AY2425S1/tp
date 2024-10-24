@@ -90,7 +90,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPreferredTimes("Monday 2100").build();
+        editedAlice = new PersonBuilder(ALICE).withPreferredTimes("2100-2359").build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
