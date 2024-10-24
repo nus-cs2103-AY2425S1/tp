@@ -7,9 +7,12 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.CollectionUtil;
@@ -17,6 +20,9 @@ import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.MakeupLesson;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
 import keycontacts.model.student.Group;
@@ -78,7 +84,25 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.setStudent(studentToEdit, editedStudent);
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(editedStudent.getGroup());
+        if (studentsInGroup.isEmpty()) {
+            // this means the edited student does not share a group with anyone
+
+            // handle the case where the student's is removed from a group
+            // in this case we clear the student's lessons (as they are being removed from the group)
+            if (!studentToEdit.getGroup().isNoGroup()
+                    && !editedStudent.getGroup().isSameGroup(studentToEdit.getGroup())) {
+                model.setStudent(studentToEdit, editedStudent.withLessons(null, new HashSet<>(), new HashSet<>()));
+            } else {
+                model.setStudent(studentToEdit, editedStudent);
+            }
+        } else {
+            RegularLesson groupRegularLesson = studentsInGroup.get(0).getRegularLesson();
+            Set<CancelledLesson> groupCancelledLessons = studentsInGroup.get(0).getCancelledLessons();
+            Set<MakeupLesson> groupMakeupLessons = studentsInGroup.get(0).getMakeupLessons();
+            model.setStudent(studentToEdit,
+                    editedStudent.withLessons(groupRegularLesson, groupCancelledLessons, groupMakeupLessons));
+        }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
     }

@@ -5,6 +5,7 @@ import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import keycontacts.commons.core.index.Index;
@@ -69,7 +70,11 @@ public class CancelLessonCommand extends Command {
 
         CancelledLesson cancelledLesson = new CancelledLesson(date);
         Student updatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
-        model.setStudent(studentToUpdate, updatedStudent);
+
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(updatedStudent.getGroup());
+        for (Student groupStudent : studentsInGroup) {
+            model.setStudent(groupStudent, groupStudent.withAddedCancelledLesson(cancelledLesson));
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 date.toDisplay(), startTime, Messages.format(updatedStudent)));

@@ -22,6 +22,7 @@ import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.StudentBuilder;
 
@@ -149,6 +150,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Student> getFilteredStudentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -193,6 +199,11 @@ public class AddCommandTest {
         public void addStudent(Student student) {
             requireNonNull(student);
             studentsAdded.add(student);
+        }
+
+        @Override
+        public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+            return new ArrayList<>();
         }
 
         @Override

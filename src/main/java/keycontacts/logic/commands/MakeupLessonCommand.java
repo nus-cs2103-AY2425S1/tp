@@ -6,6 +6,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import keycontacts.commons.core.index.Index;
@@ -63,7 +64,10 @@ public class MakeupLessonCommand extends Command {
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
         Student updatedStudent = studentToUpdate.withAddedMakeupLesson(makeupLesson);
 
-        model.setStudent(studentToUpdate, updatedStudent);
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(updatedStudent.getGroup());
+        for (Student groupStudent : studentsInGroup) {
+            model.setStudent(groupStudent, groupStudent.withAddedMakeupLesson(makeupLesson));
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, makeupLesson.toDisplay(),
                 Messages.format(updatedStudent)));

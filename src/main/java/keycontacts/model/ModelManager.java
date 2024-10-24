@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 
 /**
@@ -109,6 +111,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
 
         studentDirectory.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+        requireNonNull(targetGroup);
+
+        return studentDirectory.getStudentsInGroup(targetGroup);
     }
 
     //=========== Filtered Student List Accessors =============================================================

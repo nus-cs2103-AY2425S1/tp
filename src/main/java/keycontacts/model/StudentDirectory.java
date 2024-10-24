@@ -2,10 +2,12 @@ package keycontacts.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.util.ToStringBuilder;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 import keycontacts.model.student.UniqueStudentList;
 
@@ -95,6 +97,18 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
         students.remove(key);
     }
 
+    public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+        ObservableList<Student> students = this.getStudentList();
+        ArrayList<Student> studentsInGroup = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getGroup().isSameGroup(targetGroup)) {
+                studentsInGroup.add(student);
+            }
+        }
+
+        return studentsInGroup;
+    }
+
     //// util methods
 
     @Override
@@ -120,8 +134,8 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
             return false;
         }
 
-        StudentDirectory otherAddressBook = (StudentDirectory) other;
-        return students.equals(otherAddressBook.students);
+        StudentDirectory otherStudentDirectory = (StudentDirectory) other;
+        return students.equals(otherStudentDirectory.students);
     }
 
     @Override

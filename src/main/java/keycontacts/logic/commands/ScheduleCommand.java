@@ -6,6 +6,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import keycontacts.commons.core.index.Index;
@@ -67,6 +68,11 @@ public class ScheduleCommand extends Command {
             throw new CommandException(MESSAGE_LESSON_UNCHANGED);
         }
         model.setStudent(studentToUpdate, updatedStudent);
+
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(updatedStudent.getGroup());
+        for (Student groupStudent : studentsInGroup) {
+            model.setStudent(groupStudent, groupStudent.withRegularLesson(regularLesson));
+        }
 
         return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, regularLesson.toDisplay(),
                 Messages.format(studentToUpdate)));

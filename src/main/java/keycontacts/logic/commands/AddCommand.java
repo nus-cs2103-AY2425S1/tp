@@ -7,10 +7,16 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.MakeupLesson;
+import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -55,7 +61,15 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.addStudent(toAdd);
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(toAdd.getGroup());
+        if (studentsInGroup.isEmpty()) {
+            model.addStudent(toAdd);
+        } else {
+            RegularLesson groupRegularLesson = studentsInGroup.get(0).getRegularLesson();
+            Set<CancelledLesson> groupCancelledLessons = studentsInGroup.get(0).getCancelledLessons();
+            Set<MakeupLesson> groupMakeupLessons = studentsInGroup.get(0).getMakeupLessons();
+            model.addStudent(toAdd.withLessons(groupRegularLesson, groupCancelledLessons, groupMakeupLessons));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

@@ -183,7 +183,7 @@ public class Student {
     }
 
     /**
-     * Returns a new student with an additional {@code CancelledLesson}.
+     * Creates and returns a new student with an additional {@code cancelledLesson}.
      */
     public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
         Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
@@ -200,6 +200,18 @@ public class Student {
         updatedMakeupLessons.add(makeupLesson);
 
         return new Updater().withMakeupLessons(updatedMakeupLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code regularLesson}, {@code cancelledLessons}
+     * and {@code makeupLessons}.
+     */
+    public Student withLessons(RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons,
+                               Set<MakeupLesson> makeupLessons) {
+        return new Updater().withRegularLesson(regularLesson)
+                .withCancelledLessons(cancelledLessons)
+                .withMakeupLessons(makeupLessons)
+                .update();
     }
 
     /**

@@ -1,10 +1,12 @@
 package keycontacts.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.core.GuiSettings;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 
 /**
@@ -76,6 +78,11 @@ public interface Model {
      * as another existing student in the directory.
      */
     void setStudent(Student target, Student editedStudent);
+
+    /**
+     * Gets all students in the student directory who are part of {@code targetGroup}
+     */
+    ArrayList<Student> getStudentsInGroup(Group targetGroup);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
