@@ -219,9 +219,9 @@ public class ModelManager implements Model {
     @Override
     public void updateTasksForPerson(Person target, Person editedPerson) {
         for (Task task : getFilteredTaskList()) {
-            if (task.getPatient().equals(editedPerson)) {
-                Task updatedTask = new Task(target, task.getDescription(), task.getStatus());
-                addressBook.setTask(task, updatedTask);
+            if (task.getPatient().equals(target)) {
+                Task updatedTask = new Task(editedPerson, task.getDescription(), task.getStatus());
+                setTask(task, updatedTask);
             }
         }
     }
