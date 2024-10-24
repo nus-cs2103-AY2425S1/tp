@@ -9,7 +9,8 @@
       "workExp": "Intern,Google,2024",
       "tags" : [ "friends" ],
       "university" : "NUS",
-      "major" : "Computer Science"
+      "major" : "Computer Science",
+      "interests": ["Reading", "Swimming"]
     },
     {
       "name" : "Benson Meier",
@@ -19,7 +20,8 @@
       "workExp": "Intern,Google,2024",
       "tags" : [ "owesMoney", "friends" ],
       "university" : "NTU",
-      "major" : "Computer Science"
+      "major" : "Computer Science",
+      "interests": ["Football", "Gaming"]
     },
     {
       "name" : "Carl Kurz",
@@ -29,7 +31,8 @@
       "workExp": "",
       "tags" : [],
       "university" : "NUS",
-      "major" : "Computer Science"
+      "major" : "Computer Science",
+      "interests": ["Cycling"]
     },
     {
       "name" : "Daniel Meier",
@@ -39,7 +42,8 @@
       "workExp": "",
       "tags" : [ "friends" ],
       "university" : "NTU",
-      "major" : "Computer Science"
+      "major" : "Business",
+      "interests": ["Traveling"]
     },
     {
       "name" : "Elle Meyer",
@@ -49,7 +53,8 @@
       "workExp": "",
       "tags" : [],
       "university" : "NUS",
-      "major" : "Computer Science"
+      "major" : "Engineering",
+      "interests": ["Photography"]
     },
     {
       "name" : "Fiona Kunz",
@@ -59,7 +64,8 @@
       "workExp": "",
       "tags" : [],
       "university" : "NUS",
-      "major" : "Computer Science"
+      "major" : "Architecture",
+      "interests": ["Painting", "Yoga"]
     },
     {
       "name" : "George Best",
@@ -69,7 +75,8 @@
       "workExp": "",
       "tags" : [],
       "university" : "NTU",
-      "major" : "Computer Science"
+      "major" : "Economics",
+      "interests": ["Running", "Chess"]
     }
   ]
 }

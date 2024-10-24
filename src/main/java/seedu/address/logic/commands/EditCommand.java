@@ -116,10 +116,10 @@ public class EditCommand extends Command {
         // Add the new fields
         University updatedUniversity = editPersonDescriptor.getUniversity().orElse(personToEdit.getUniversity());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
-        Interest updatedInterest = editPersonDescriptor.getInterest().orElse(personToEdit.getInterest());
+        Set<Interest> updatedInterests = editPersonDescriptor.getInterests().orElse(personToEdit.getInterests());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedWorkExp, updatedTags,
-                updatedUniversity, updatedMajor, updatedInterest);
+                updatedUniversity, updatedMajor, updatedInterests);
 
     }
 
@@ -158,7 +158,7 @@ public class EditCommand extends Command {
         private Address address;
         private WorkExp workExp;
         private Set<Tag> tags;
-        private Interest interest;
+        private Set<Interest> interests;
         private University university;
         private Major major;
 
@@ -177,13 +177,15 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setUniversity(toCopy.university);
             setMajor(toCopy.major);
+            setInterests(toCopy.interests);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, workExp, tags, university, major);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, workExp, tags, university, major,
+                    interests);
         }
 
         public void setName(Name name) {
@@ -210,13 +212,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setInterest(Interest interest) {
-            this.interest = interest;
-        }
-
-        public Optional<Interest> getInterest() {
-            return Optional.ofNullable(interest);
-        }
 
         public void setAddress(Address address) {
             this.address = address;
@@ -250,6 +245,23 @@ public class EditCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
+        /**
+         * Sets {@code interests} to this object's {@code interests}.
+         * A defensive copy of {@code interests} is used internally.
+         */
+        public void setInterests(Set<Interest> interests) {
+            this.interests = (interests != null) ? new HashSet<>(interests) : null;
+        }
+
+        /**
+         * Returns an unmodifiable interest set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code interests} is null.
+         */
+        public Optional<Set<Interest>> getInterests() {
+            return (interests != null) ? Optional.of(Collections.unmodifiableSet(interests)) : Optional.empty();
+        }
+
 
         public void setUniversity(University university) {
             this.university = university;
@@ -285,6 +297,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(workExp, otherEditPersonDescriptor.workExp)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(interests, otherEditPersonDescriptor.interests)
                     && Objects.equals(university, otherEditPersonDescriptor.university)
                     && Objects.equals(major, otherEditPersonDescriptor.major);
         }
@@ -298,6 +311,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("workExp", workExp)
                     .add("tags", tags)
+                    .add("interests", interests)
                     .add("university", university)
                     .add("major", major)
                     .toString();

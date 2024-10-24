@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTEREST_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -36,8 +37,8 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withUniversity("NTU")
-                .withMajor("Engineering").build(); // Include the new fields here
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withUniversity(VALID_UNIVERSITY_BOB)
+                .withMajor(VALID_MAJOR_BOB).withInterests(VALID_INTEREST_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -91,6 +92,7 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
         // different university -> returns false
         editedAlice = new PersonBuilder(ALICE).withUniversity(VALID_UNIVERSITY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -98,15 +100,19 @@ public class PersonTest {
         // different major -> returns false
         editedAlice = new PersonBuilder(ALICE).withMajor(VALID_MAJOR_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different interests -> returns false
+        editedAlice = new PersonBuilder(ALICE).withInterests(VALID_INTEREST_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
-        // Update to include university, major, interest, and experience
+        // Update to include university, major, interests, and work experience
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", workExp=" + ALICE.getWorkExp()
                 + ", tags=" + ALICE.getTags() + ", university=" + ALICE.getUniversity() + ", major=" + ALICE.getMajor()
-                + ", interest=" + ALICE.getInterest() + "}";
+                + ", interests=" + ALICE.getInterests() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

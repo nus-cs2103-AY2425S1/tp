@@ -27,7 +27,7 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
+      <FlowPane fx:id="tags" />  <!-- FlowPane for tags -->
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
@@ -35,7 +35,8 @@
       <!-- Add university and major here -->
       <Label fx:id="university" styleClass="cell_small_label" text="\$university" />
       <Label fx:id="major" styleClass="cell_small_label" text="\$major" />
-      <Label fx:id="interest" styleClass="cell_small_label" text="\$interest" />
+      <!-- FlowPane for interests (replaces Label) -->
+      <Label fx:id="interests" styleClass="cell_small_label" />
     </VBox>
   </GridPane>
 </HBox>

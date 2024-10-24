@@ -107,7 +107,6 @@ public class ParserUtil {
      */
     public static WorkExp parseWorkExp(String workExp) throws ParseException {
         String trimmedWorkExp = workExp.trim();
-        System.out.println(trimmedWorkExp);
         if (!WorkExp.isValidWorkExp(trimmedWorkExp)) {
             throw new ParseException(WorkExp.MESSAGE_CONSTRAINTS);
         }
@@ -177,9 +176,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code interest} is invalid.
      */
-    public static Interest parseInterest(String interest) throws ParseException {
-        requireNonNull(interest);
-        String trimmedInterest = interest.trim();
-        return new Interest(trimmedInterest);
+    public static Set<Interest> parseInterests(Collection<String> interests) throws ParseException {
+        final Set<Interest> interestSet = new HashSet<>();
+        for (String interestName : interests) {
+            interestSet.add(new Interest(interestName));
+        }
+        return interestSet;
     }
 }

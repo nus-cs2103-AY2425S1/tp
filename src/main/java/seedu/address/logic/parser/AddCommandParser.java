@@ -14,7 +14,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -46,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // Verify no duplicate prefixes for critical fields
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_WORKEXP, PREFIX_UNIVERSITY, PREFIX_MAJOR, PREFIX_INTEREST);
+                PREFIX_WORKEXP, PREFIX_UNIVERSITY, PREFIX_MAJOR);
 
         // Check if required prefixes are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
@@ -54,30 +53,23 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        // If adding an interest with an index, handle separately
-        if (arePrefixesPresent(argMultimap, PREFIX_INTEREST) && !argMultimap.getPreamble().isEmpty()) {
-            String[] splitArgs = args.trim().split("\\s+");
-            Index index = ParserUtil.parseIndex(splitArgs[0]);
-            String interest = argMultimap.getValue(PREFIX_INTEREST).get();
-            return new AddCommand(index, interest);
-        } else {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-            WorkExp workExp = argMultimap.getValue(PREFIX_WORKEXP).isPresent()
-                      ? ParserUtil.parseWorkExp(argMultimap.getValue(PREFIX_WORKEXP).get())
-                      : new WorkExp("");
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            // Parsing new fields
-            University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
-            Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
-            Person person = new Person(name, phone, email, address, workExp, tagList, university, major,
-                    new Interest(""));
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        WorkExp workExp = argMultimap.getValue(PREFIX_WORKEXP).isPresent()
+                  ? ParserUtil.parseWorkExp(argMultimap.getValue(PREFIX_WORKEXP).get())
+                  : new WorkExp("");
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // Parsing new fields
+        University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
+        Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
+        Set<Interest> interestList = ParserUtil.parseInterests(argMultimap.getAllValues(PREFIX_INTEREST));
 
-            return new AddCommand(person);
-        }
+        Person person = new Person(name, phone, email, address, workExp, tagList, university, major,
+                interestList);
+
+        return new AddCommand(person);
     }
 
     /**
