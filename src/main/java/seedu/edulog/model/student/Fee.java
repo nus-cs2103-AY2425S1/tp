@@ -50,4 +50,8 @@ public class Fee {
     public int hashCode() {
         return value;
     }
+
+    public String getFormattedString() {
+        return toString();
+    }
 }

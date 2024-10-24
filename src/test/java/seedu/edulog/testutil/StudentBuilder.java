@@ -22,7 +22,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final boolean DEFAULT_PAID = false;
-    public static final int DEFAULT_FEE = 0;
+    public static final int DEFAULT_FEE = 100;
 
     private Name name;
     private Phone phone;
@@ -55,6 +55,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         hasPaid = studentToCopy.getHasPaid();
+        fee = studentToCopy.getFee();
     }
 
     /**
@@ -100,13 +101,21 @@ public class StudentBuilder {
     /**
      * Sets the {@code hasPaid} of the {@code Student} that we are building.
      */
-    public StudentBuilder withhasPaid(boolean hasPaid) {
+    public StudentBuilder withHasPaid(boolean hasPaid) {
         this.hasPaid = hasPaid;
         return this;
     }
 
+    /**
+     * Sets the {@code fee} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withFee(int fee) {
+        this.fee = new Fee(fee);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, address, tags, fee);
     }
 
 }

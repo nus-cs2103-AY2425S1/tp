@@ -105,8 +105,15 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
         Fee fee = editStudentDescriptor.getFee().orElse(studentToEdit.getFee());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, fee, studentToEdit.getIsPresent());
+        Student result = new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, fee);
+        if (studentToEdit.getHasPaid()) {
+            result.mark();
+        } else {
+            result.unmark();
+        }
+
+        return result;
     }
 
     @Override

@@ -39,7 +39,7 @@ public class Student {
         this.address = address;
         this.tags.addAll(tags);
         this.hasPaid = false;
-        this.fee = new Fee(0);
+        this.fee = new Fee(100);
 
     }
 
@@ -55,20 +55,6 @@ public class Student {
         this.tags.addAll(tags);
         this.fee = fee;
         this.hasPaid = false;
-    }
-
-    /**
-     * New constructor with Fee and isPresent
-     */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Fee fee, boolean isPresent) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.fee = fee;
-        this.hasPaid = isPresent;
     }
 
     public Name getName() {

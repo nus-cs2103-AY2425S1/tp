@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.edulog.commons.exceptions.IllegalValueException;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
+import seedu.edulog.model.student.Fee;
 import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Phone;
 import seedu.edulog.model.student.Student;
@@ -29,6 +30,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String fee;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -36,7 +38,7 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("fee") String fee) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +46,7 @@ class JsonAdaptedStudent {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.fee = fee;
     }
 
     /**
@@ -57,6 +60,7 @@ class JsonAdaptedStudent {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        fee = source.getFee().getFormattedString();
     }
 
     /**
@@ -103,7 +107,15 @@ class JsonAdaptedStudent {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (fee == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
+        }
+        if (!Fee.isValidFee(fee)) {
+            throw new IllegalValueException(Fee.MESSAGE_CONSTRAINTS);
+        }
+        Fee modelFee = new Fee(fee);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelFee);
     }
 
 }
