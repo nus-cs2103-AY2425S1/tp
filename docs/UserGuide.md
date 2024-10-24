@@ -212,19 +212,19 @@ Examples:
 
 Sorts the displayed list of persons by either name, student id or tutorial attendance.
 
-Format: `sort ORDER [n/][i/][tut/]`
+Format: `sort ORDER [n/][i/][tut/TUTORIAL]`
 
 - `ORDER` indicates whether the sorted list is **ascending** or **descending**.
 - **Ascending** is represented with integer 1.
 - **Descending** is represented with integer -1.
 - `n/` indicates sorting according to name.
 - `i/` indicates sorting according to student id.
-- `tut/` indicates sorting according to tutorial attendance.
+- `tut/TUTORIAL` indicates sorting according to tutorial attendance for a specific tutorial.
 
 Examples:
 
 - `sort -1 i/` sorts the person list in descending order according to student id.
-- `sort 1 n/` sorts the person list in ascending order according to name.
+- `sort 1 tut/3` sorts the person list in ascending order according to tutorial 3 attendance.
 
 ### Deleting a person : `delete`
 
