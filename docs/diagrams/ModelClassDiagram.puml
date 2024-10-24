@@ -14,11 +14,13 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
 Class Name
-Class Phone
-Class Tag
+Class Id
+Class Ward
+Class Diagnosis
+Class Medication
+Class Notes
+class Appointment
 
 Class I #FFFFFF
 }
@@ -36,19 +38,26 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+UniquePersonList --> "~*" Person: has all
 Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> Id
+Person *--> Ward
+Person *--> Diagnosis
+Person *--> Medication
+Person *--> Notes
+Person *--> Appointment
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+I -[hidden]left-> UniquePersonList
+I -[hidden]down-> Person
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]right-> Id
+Id -[hidden]right-> Ward
+Ward -[hidden]right-> Diagnosis
+Diagnosis -[hidden]right-> Medication
+Medication -[hidden]right-> Notes
+Notes -[hidden]right-> Appointment
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~*" Person: search results
+ModelManager --> "~*" Person: appointments
 @enduml
+
