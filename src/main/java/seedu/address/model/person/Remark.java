@@ -18,6 +18,9 @@ public class Remark {
         value = remark;
     }
 
+    public Remark() {
+        value = "";
+    }
     @Override
     public String toString() {
         return value;
