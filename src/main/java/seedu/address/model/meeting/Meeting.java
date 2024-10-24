@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Type;
 
@@ -17,21 +17,21 @@ public class Meeting {
     // Identity fields
     private final MeetingTitle meetingTitle;
     private final MeetingDate meetingDate;
-    private final Name buyer;
-    private final Name seller;
+    private final Phone buyerPhone;
+    private final Phone sellerPhone;
     private final Type type;
     private final PostalCode postalCode;
 
     /**
      * Every field must be present and not null.
      */
-    public Meeting(MeetingTitle meetingTitle, MeetingDate meetingDate, Name buyer, Name seller,
+    public Meeting(MeetingTitle meetingTitle, MeetingDate meetingDate, Phone buyerPhone, Phone sellerPhone,
                    Type type, PostalCode postalCode) {
         requireAllNonNull(meetingTitle);
         this.meetingTitle = meetingTitle;
         this.meetingDate = meetingDate;
-        this.buyer = buyer;
-        this.seller = seller;
+        this.buyerPhone = buyerPhone;
+        this.sellerPhone = sellerPhone;
         this.type = type;
         this.postalCode = postalCode;
     }
@@ -43,11 +43,11 @@ public class Meeting {
         return meetingDate;
     }
 
-    public Name getBuyer() {
-        return this.buyer;
+    public Phone getBuyerPhone() {
+        return this.buyerPhone;
     }
-    public Name getSeller() {
-        return this.seller;
+    public Phone getSellerPhone() {
+        return this.sellerPhone;
     }
     public Type getType() {
         return this.type;
@@ -102,8 +102,8 @@ public class Meeting {
         return new ToStringBuilder(this)
                 .add("meetingTitle", meetingTitle)
                 .add("meetingDate", meetingDate)
-                .add("buyer", buyer)
-                .add("seller", seller)
+                .add("buyerPhone", buyerPhone)
+                .add("sellerPhone", sellerPhone)
                 .add("type", type)
                 .add("postalCode", postalCode)
                 .toString();

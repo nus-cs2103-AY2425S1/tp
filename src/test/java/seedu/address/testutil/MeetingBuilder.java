@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingDate;
 import seedu.address.model.meeting.MeetingTitle;
@@ -14,14 +14,14 @@ public class MeetingBuilder {
 
     public static final String DEFAULT_MEETINGTITLE = "Testing";
     public static final String DEFAULT_MEETINGDATE = "10-10-2024";
-    public static final String DEFAULT_BUYER = "Alice Pauline";
-    public static final String DEFAULT_SELLER = "Benson Meier";
+    public static final String DEFAULT_BUYER = "94351253";
+    public static final String DEFAULT_SELLER = "98765432";
     public static final String DEFAULT_TYPE = "CONDO";
     public static final String DEFAULT_POSTALCODE = "654321";
     private MeetingTitle meetingTitle;
     private MeetingDate meetingDate;
-    private Name buyer;
-    private Name seller;
+    private Phone buyerPhone;
+    private Phone sellerPhone;
     private Type type;
     private PostalCode postalCode;
 
@@ -31,8 +31,8 @@ public class MeetingBuilder {
     public MeetingBuilder() {
         meetingTitle = new MeetingTitle(DEFAULT_MEETINGTITLE);
         meetingDate = new MeetingDate(DEFAULT_MEETINGDATE);
-        buyer = new Name(DEFAULT_BUYER);
-        seller = new Name(DEFAULT_SELLER);
+        buyerPhone = new Phone(DEFAULT_BUYER);
+        sellerPhone = new Phone(DEFAULT_SELLER);
         type = new Type(DEFAULT_TYPE);
         postalCode = new PostalCode(DEFAULT_POSTALCODE);
     }
@@ -43,8 +43,8 @@ public class MeetingBuilder {
     public MeetingBuilder(Meeting meetingToCopy) {
         meetingTitle = meetingToCopy.getMeetingTitle();
         meetingDate = meetingToCopy.getMeetingDate();
-        buyer = meetingToCopy.getBuyer();
-        seller = meetingToCopy.getSeller();
+        buyerPhone = meetingToCopy.getBuyerPhone();
+        sellerPhone = meetingToCopy.getSellerPhone();
         type = meetingToCopy.getType();
         postalCode = meetingToCopy.getPostalCode();
     }
@@ -67,22 +67,22 @@ public class MeetingBuilder {
     /**
      * Sets the {@code Buyer} of the {@code Meeting} that we are building.
      *
-     * @param buyer the name of the buyer
+     * @param buyerPhone the phone number of the buyer
      * @return the updated MeetingBuilder object
      */
-    public MeetingBuilder withBuyer(String buyer) {
-        this.buyer = new Name(buyer);
+    public MeetingBuilder withBuyer(String buyerPhone) {
+        this.buyerPhone = new Phone(buyerPhone);
         return this;
     }
 
     /**
      * Sets the {@code Seller} of the {@code Meeting} that we are building.
      *
-     * @param seller the name of the seller
+     * @param sellerPhone the phone number of the seller
      * @return the updated MeetingBuilder object
      */
-    public MeetingBuilder withSeller(String seller) {
-        this.seller = new Name(seller);
+    public MeetingBuilder withSeller(String sellerPhone) {
+        this.sellerPhone = new Phone(sellerPhone);
         return this;
     }
 
@@ -109,7 +109,7 @@ public class MeetingBuilder {
     }
 
     public Meeting build() {
-        return new Meeting(meetingTitle, meetingDate, buyer, seller, type, postalCode);
+        return new Meeting(meetingTitle, meetingDate, buyerPhone, sellerPhone, type, postalCode);
     }
 
 }

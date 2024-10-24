@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_BEDOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_BEDOK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_CONDO;
 import static seedu.address.testutil.TypicalMeetings.MEETING_ADMIRALTY;
@@ -82,8 +82,8 @@ public class MeetingTest {
     @Test
     public void toStringMethod() {
         String expected = Meeting.class.getCanonicalName() + "{meetingTitle=" + MEETING_ADMIRALTY.getMeetingTitle()
-                + ", meetingDate=" + MEETING_ADMIRALTY.getMeetingDate() + ", buyer="
-                + VALID_NAME_AMY + ", seller=" + VALID_NAME_BOB + ", type=" + VALID_TYPE_CONDO
+                + ", meetingDate=" + MEETING_ADMIRALTY.getMeetingDate() + ", buyerPhone="
+                + VALID_PHONE_AMY + ", sellerPhone=" + VALID_PHONE_BOB + ", type=" + VALID_TYPE_CONDO
                 + ", postalCode=" + VALID_POSTALCODE_ADMIRALTY + "}";
         assertEquals(expected, MEETING_ADMIRALTY.toString());
     }

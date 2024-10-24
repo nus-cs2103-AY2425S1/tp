@@ -9,21 +9,22 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_B
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_CONDO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -238,8 +239,9 @@ public class AddressBookParserTest {
         Meeting meeting = new MeetingBuilder(MEETING_ADMIRALTY).build();
         AddMeetingCommand command = (AddMeetingCommand) parser.parseCommand(
                 AddMeetingCommand.COMMAND_WORD + " " + PREFIX_MEETING_TITLE + MEETING_ADMIRALTY.getMeetingTitle()
-                        + " " + PREFIX_MEETING_DATE + MEETING_ADMIRALTY.getMeetingDate() + " " + PREFIX_BUYER
-                        + VALID_NAME_AMY + " " + PREFIX_SELLER + VALID_NAME_BOB + " " + PREFIX_TYPE + VALID_TYPE_CONDO
+                        + " " + PREFIX_MEETING_DATE + MEETING_ADMIRALTY.getMeetingDate() + " " + PREFIX_BUYER_PHONE
+                        + VALID_PHONE_AMY + " " + PREFIX_SELLER_PHONE + VALID_PHONE_BOB + " "
+                        + PREFIX_TYPE + VALID_TYPE_CONDO
                         + " " + PREFIX_POSTALCODE + VALID_POSTALCODE_ADMIRALTY
         );
 

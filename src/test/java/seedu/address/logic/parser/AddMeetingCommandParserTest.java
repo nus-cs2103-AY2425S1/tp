@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.POSTALCODE;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_CONDO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
@@ -37,8 +37,8 @@ public class AddMeetingCommandParserTest {
         Meeting expectedMeeting = new MeetingBuilder()
                 .withMeetingTitle(VALID_MEETING_TITLE_ADMIRALTY)
                 .withMeetingDate(VALID_MEETING_DATE_ADMIRALTY)
-                .withBuyer(VALID_NAME_AMY)
-                .withSeller(VALID_NAME_BOB)
+                .withBuyer(VALID_PHONE_AMY)
+                .withSeller(VALID_PHONE_BOB)
                 .withType(VALID_TYPE_CONDO)
                 .withPostalCode(VALID_POSTALCODE_ADMIRALTY)
                 .build();

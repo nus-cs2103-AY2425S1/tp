@@ -46,8 +46,8 @@ public class MeetingCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         meetingTitle.setText("Title: " + meeting.getMeetingTitle().value);
         meetingDate.setText("Date: " + meeting.getMeetingDate().value);
-        buyer.setText("Buyer: " + meeting.getBuyer().toString());
-        seller.setText("Seller: " + meeting.getSeller().toString());
+        buyer.setText("Buyer's Phone Number: " + meeting.getBuyerPhone().toString());
+        seller.setText("Seller's Phone Number: " + meeting.getSellerPhone().toString());
         type.setText("Type: " + meeting.getType().value);
         postalCode.setText("PostalCode: " + meeting.getPostalCode().value);
     }
