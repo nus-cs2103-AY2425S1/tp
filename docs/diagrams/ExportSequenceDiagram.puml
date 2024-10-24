@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "d:ExportCommand" as ExportCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("export")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("export")
+activate AddressBookParser
+
+create ExportCommand
+AddressBookParser -> ExportCommand
+activate ExportCommand
+
+ExportCommand --> AddressBookParser : e
+deactivate ExportCommand
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> ExportCommand : execute(m)
+activate ExportCommand
+
+ExportCommand -> Model : saveJson(m)
+activate Model
+
+
+Model --> ExportCommand
+deactivate Model
+
+ExportCommand --> Model : translateJson(m, "exported_data.csv")
+activate Model
+
+Model --> ExportCommand
+deactivate Model
+
+create CommandResult
+ExportCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ExportCommand
+deactivate CommandResult
+
+ExportCommand --> LogicManager : r
+deactivate ExportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
