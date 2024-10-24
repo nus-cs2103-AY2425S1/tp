@@ -1,8 +1,10 @@
 package seedu.address.model.person;
 
+import java.time.LocalDateTime;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 
-import java.time.LocalDateTime;
+
 
 /**
  * Implemented by classes who have appointment-related functionality.
@@ -47,7 +49,8 @@ public interface Appointmentable {
      * @param doctorId  Id of doctor in the appointment.
      * @return True if command was successful, false if otherwise.
      */
-    public abstract Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId) throws CommandException;
+    public abstract Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId)
+            throws CommandException;
 
     /**
      * Marks an appointment at the specified time, with the respective patient and doctor.
