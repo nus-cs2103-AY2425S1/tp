@@ -155,7 +155,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_vendorAllFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_VENDOR;
-        String userInput = " " + PREFIX_VENDOR +targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
+        String userInput = " " + PREFIX_VENDOR + targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + DESCRIPTION_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder().withName(VALID_NAME_AMY)

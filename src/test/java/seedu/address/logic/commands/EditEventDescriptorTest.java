@@ -34,7 +34,8 @@ public class EditEventDescriptorTest {
         assertFalse(DESC_BIRTHDAY.equals(DESC_WEDDING));
 
         // different name -> returns false
-        EditEventDescriptor editedBirthday = new EditEventDescriptorBuilder(DESC_BIRTHDAY).withName(VALID_NAME_WEDDING).build();
+        EditEventDescriptor editedBirthday = new EditEventDescriptorBuilder(DESC_BIRTHDAY)
+                .withName(VALID_NAME_WEDDING).build();
         assertFalse(DESC_BIRTHDAY.equals(editedBirthday));
 
         // different date -> returns false
