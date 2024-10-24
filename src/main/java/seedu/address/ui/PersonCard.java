@@ -61,8 +61,11 @@ public class PersonCard extends UiPart<Region> {
         String jobIdentifier = person.getMatch();
         if (jobIdentifier != null) {
             String[] jobIdentifierComponents = jobIdentifier.split("::");
+            assert(jobIdentifierComponents.length == 2);
             String companyName = jobIdentifierComponents[0];
             String jobName = jobIdentifierComponents[1];
+            // The company and job should not be empty strings
+            assert(!(companyName.isEmpty() || jobName.isEmpty()));
             match.setText("Employed @ " + companyName + " - " + jobName);
         } else {
             match.setText("Unemployed");

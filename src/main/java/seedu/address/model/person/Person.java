@@ -42,7 +42,7 @@ public class Person {
     }
 
     /**
-     * Creates a person with the matching job
+     * Creates a person with the matching job.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Skill> skills, String match) {
         requireAllNonNull(name, phone, email, role, skills);
@@ -87,7 +87,7 @@ public class Person {
     }
 
     /**
-     * Returns true if this person has any job matches, returns false otherwise
+     * Returns true if this person has any job matches, returns false otherwise.
      */
     public boolean isMatchPresent() {
         return match.isPresent();
@@ -96,40 +96,25 @@ public class Person {
     /**
      * Checks if this person has matched with the specified job.
      *
-     * @param jobIdentifier A string that uniquely identify a job
+     * @param jobIdentifier A string that uniquely identify a job.
      */
     public boolean hasMatched(String jobIdentifier) {
         return match.map(s -> s.equals(jobIdentifier)).orElse(false);
     }
 
     /**
-     * Returns a string that identify the Person object
+     * Returns the phone number as a string, which uniquely identifies the Person object.
      */
     public String getIdentifier() {
         return phone.toString();
     }
 
     /**
-     * Removes
+     * Removes the association between the Person object and its matched Job.
      */
     public void removeMatch() {
         match = Optional.empty();
     }
-
-    // Todo: To be closed in PR review, basically we agreed that a person is unique due to contact and email
-    //  and you can see that before this PR, you can add a contact with the same contact or email. Let me know ur thots.
-    ///**
-    // * Returns true if both persons have the same name.
-    // * This defines a weaker notion of equality between two persons.
-    // */
-    //public boolean isSamePerson(Person otherPerson) {
-    //    if (otherPerson == this) {
-    //        return true;
-    //    }
-    //
-    //        return otherPerson != null
-    //                && otherPerson.getName().equals(getName());
-    //    }
 
     /**
      * Returns true if both persons have the same contact or email.
