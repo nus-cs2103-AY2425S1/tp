@@ -85,7 +85,7 @@ public class AddressBookParser {
 
         case FindTagCommand.COMMAND_WORD:
             return new FindTagCommandParser().parse(arguments);
-            
+
         case SwitchThemeCommand.COMMAND_WORD:
             return new SwitchThemeCommandParser().parse(arguments);
 
