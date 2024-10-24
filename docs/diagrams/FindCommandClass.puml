@@ -20,14 +20,8 @@ hide circle
 skinparam classAttributeIconSize 0
 
 abstract class FindCommand {
-+ CommandResult execute(Model model)
+abstract + CommandResult execute(Model model)
 }
-class FindNameCommand extends FindCommand
-class FindAddressCommand extends FindCommand
-class FindPhoneCommand extends FindCommand
-class FindTagCommand extends FindCommand
-class FindEmailCommand extends FindCommand
-class FindWeddingCommand extends FindCommand
-
+class FindXYZCommand extends FindCommand
 
 @enduml
