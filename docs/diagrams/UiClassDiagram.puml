@@ -13,6 +13,8 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class EventListPanel
+Class EventCard
 Class StatusBarFooter
 Class CommandBox
 }
