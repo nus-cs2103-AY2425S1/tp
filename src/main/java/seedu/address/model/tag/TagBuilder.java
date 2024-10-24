@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import java.util.Locale;
+
 /**
  * Acts like a builder class where it will output
  * a corresponding tag type according to whatever the user input is.
@@ -23,15 +25,20 @@ public class TagBuilder {
         String[] parts = userInput.split("_");
         // Check the first word
         if (parts.length > 1) {
-            String firstWord = parts[0];
-            String levelValue = parts[1];
+            String firstWord = parts[0].toLowerCase(Locale.ROOT);
+            String tagValue = parts[1];
             switch (firstWord) {
             case "difficulty":
-                return new DifficultyTag("Difficulty", levelValue);
+                return new DifficultyTag("Difficulty", tagValue);
             case "salary":
-                return new SalaryTag("Salary", levelValue);
+                return new SalaryTag("Salary", tagValue);
+            case "wlb":
+                return new WorkLifeBalanceTag("WLB", tagValue);
+            case "period":
+                int year = parts.length > 2 ? Integer.parseInt(parts[2]) : 0;
+                return new PeriodTag("Period", tagValue, year);
             default:
-                throw new IllegalArgumentException("Unknown tag type: " + firstWord);
+                return new Tag(userInput);
             }
         }
         // If no specific type, return a CustomTag

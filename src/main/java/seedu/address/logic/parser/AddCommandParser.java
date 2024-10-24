@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
@@ -50,8 +51,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         CareerPageUrl careerPageUrl = ParserUtil.parseCareerPageUrl(argMultimap.getValue(PREFIX_CAREER_PAGE_URL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // Add command does not allow bookmarking straight away
+        Bookmark bookmark = new Bookmark(false);
 
-        Company company = new Company(name, phone, email, address, careerPageUrl, tagList);
+        Company company = new Company(name, phone, email, address, careerPageUrl, tagList, bookmark);
 
         return new AddCommand(company);
     }

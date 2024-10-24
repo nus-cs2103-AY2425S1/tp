@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
@@ -32,6 +33,8 @@ class JsonAdaptedCompany {
     private final String careerPageUrl;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
+    private final Bookmark isBookmark;
+
     /**
      * Constructs a {@code JsonAdaptedCompany} with the given company details.
      */
@@ -39,7 +42,8 @@ class JsonAdaptedCompany {
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("careerPageUrl") String careerPageUrl,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("bookmark") Bookmark isBookmark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +52,7 @@ class JsonAdaptedCompany {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.isBookmark = isBookmark;
     }
 
     /**
@@ -60,8 +65,9 @@ class JsonAdaptedCompany {
         careerPageUrl = source.getCareerPageUrl().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+                .map(tag -> new JsonAdaptedTag(tag))
                 .collect(Collectors.toList()));
+        isBookmark = source.getIsBookmark();
     }
 
     /**
@@ -73,7 +79,7 @@ class JsonAdaptedCompany {
      */
     public Company toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
+        for (JsonAdaptedTag tag : this.tags) {
             personTags.add(tag.toModelType());
         }
 
@@ -118,9 +124,16 @@ class JsonAdaptedCompany {
         }
         final CareerPageUrl modelCareerPageUrl = new CareerPageUrl(careerPageUrl);
 
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl, modelTags);
+
+        if (isBookmark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Bookmark.class.getSimpleName()));
+        }
+        final Bookmark modelBookmark = new Bookmark(isBookmark.getIsBookmarkValue());
+
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl, modelTags,
+                modelBookmark);
     }
 
 }

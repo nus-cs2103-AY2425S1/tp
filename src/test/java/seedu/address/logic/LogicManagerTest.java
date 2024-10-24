@@ -193,6 +193,7 @@ public class LogicManagerTest {
                 .withAddress(VALID_ADDRESS_TESLA)
                 .withCareerPageUrl(VALID_CAREER_PAGE_URL_TESLA)
                 .withTags() // Assuming no tags are provided in the command
+                .withIsBookmark(false) // Default isBookmark value
                 .build();
 
         ModelManager expectedModel = new ModelManager();

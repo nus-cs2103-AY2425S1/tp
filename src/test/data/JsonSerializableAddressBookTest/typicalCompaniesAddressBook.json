@@ -6,48 +6,69 @@
     "email" : "google@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "careerPageUrl" : "careers.com",
-    "tags" : [ "google" ]
+    "tags" : [ "google" ],
+    "isBookmark" : {
+      "isBookmark" : false
+    }
   }, {
     "name" : "Meta",
     "phone" : "00000002",
     "email" : "meta@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "careerPageUrl" : "careers.com",
-    "tags" : [ "bigTech", "facebook" ]
+    "tags" : [ "bigTech", "facebook" ],
+    "isBookmark" : {
+      "isBookmark" : false
+    }
   }, {
     "name" : "Grab",
     "phone" : "00000003",
     "email" : "grab@example.com",
     "address" : "wall street",
+    "tags" : [ ],
     "careerPageUrl" : "careers.com",
-    "tags" : [ ]
+    "isBookmark" : {
+      "isBookmark" : false
+    }
   }, {
     "name" : "Shopee",
     "phone" : "00000004",
     "email" : "shopee@example.com",
     "address" : "10th street",
     "careerPageUrl" : "careers.com",
-    "tags" : [ "bigTech" ]
+    "tags" : [ "bigTech" ],
+    "isBookmark" : {
+      "isBookmark" : false
+    }
   }, {
     "name" : "Apple",
     "phone" : "00000005",
     "email" : "apple@example.com",
     "address" : "michegan ave",
+    "tags" : [ ],
     "careerPageUrl" : "careers.com",
-    "tags" : [ ]
+    "isBookmark" : {
+      "isBookmark" : false
+    }
   }, {
     "name" : "ByteDance",
     "phone" : "00000006",
     "email" : "bytedance@example.com",
     "address" : "little tokyo",
+    "tags" : [ ],
     "careerPageUrl" : "careers.com",
-    "tags" : [ ]
+    "isBookmark" : {
+      "isBookmark" : false
+    }
   }, {
     "name" : "Amazon",
     "phone" : "00000007",
     "email" : "amazon@example.com",
     "address" : "4th street",
     "careerPageUrl" : "careers.com",
-    "tags" : [ ]
+    "tags" : [ ],
+    "isBookmark" : {
+      "isBookmark" : false
+    }
   } ]
 }

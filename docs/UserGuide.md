@@ -100,7 +100,54 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Examples:
 * `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.goole-career-url.com`
-* `add n/Meta t/bigTech e/meta@example.com a/Newgate Prison p/1234567 t/criminal cp/www.meta-career-url.com`
+* `add n/Meta t/bigTech e/meta@example.com a/Newgate Prison p/1234567 t/salary_high cp/www.meta-career-url.com`
+
+### Special Tag Values for the `add` Command
+
+When using the `add` command, certain **tags** have special values. 
+> > **Note**: If no valid value is provided, the tag will be displayed as it is without special handling. 
+> For example t/randomtag tag will appear as "randomtag"
+
+Below are the supported categories:
+
+#### 1. Salary, Work-Life Balance, and Interview Difficulty Tags
+
+These tags represent qualitative levels. The valid values for these tags are:
+
+- **LOW**
+- **MEDIUM**
+- **HIGH**
+
+These tags must be written using the following format (note the underscore):
+
+Salary tag : `t/salary_[value]`
+
+Difficulty tag : `t/difficulty_[value]`
+
+Work Life Balance tag : `t/wlb_[value]`
+
+
+**Example:**
+` add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.goole-career-url.com
+t/salary_HIGH t/wlb_MEDIUM t/difficulty_MEDIUM`
+
+---
+
+#### 2. **Period Tag**
+
+The **`Period`** tag is used to specify:
+- **Season**:
+    - **Summer**
+    - **Winter**
+    - **Part-time**
+
+- **Year**: Any year between **2000 and 2500**
+
+Tag format: Salary tag : `t/period_[Season]_[Year]`
+**Example:**
+` add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.goole-career-url.com
+t/period_summer_2025`
+
 
 ### Listing all companies : `list`
 
@@ -127,7 +174,7 @@ Examples:
 
 ### Locating companies by name: `find`
 
-Finds companies whose names contain any of the given keywords.
+Finds companies whose names or tags contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -139,6 +186,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
+* `find Salary:HIGH` returns companies with Salary tags and value HIGH
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)

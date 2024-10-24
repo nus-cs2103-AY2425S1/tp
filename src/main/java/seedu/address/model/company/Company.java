@@ -23,7 +23,7 @@ public class Company {
     private final Phone phone;
     private final Email email;
     private final CareerPageUrl careerPageUrl;
-    private boolean isBookmark;
+    private final Bookmark isBookmark;
 
     // Data fields
     private final Address address;
@@ -32,15 +32,16 @@ public class Company {
     /**
      * Every field must be present and not null.
      */
-    public Company(Name name, Phone phone, Email email, Address address, CareerPageUrl careerPageUrl, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Company(Name name, Phone phone, Email email, Address address, CareerPageUrl careerPageUrl, Set<Tag> tags,
+                   Bookmark isBookmark) {
+        requireAllNonNull(name, phone, email, address, tags, isBookmark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.careerPageUrl = careerPageUrl;
         this.tags.addAll(tags);
-        this.isBookmark = false;
+        this.isBookmark = isBookmark;
     }
 
     public Name getName() {
@@ -70,6 +71,10 @@ public class Company {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Bookmark getIsBookmark() {
+        return isBookmark;
     }
 
     /**
@@ -106,13 +111,14 @@ public class Company {
                 && email.equals(otherCompany.email)
                 && address.equals(otherCompany.address)
                 && careerPageUrl.equals(otherCompany.careerPageUrl)
-                && tags.equals(otherCompany.tags);
+                && tags.equals(otherCompany.tags)
+                && isBookmark.equals(otherCompany.isBookmark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, careerPageUrl, tags);
+        return Objects.hash(name, phone, email, address, careerPageUrl, tags, isBookmark);
     }
 
     @Override
@@ -124,6 +130,7 @@ public class Company {
                 .add("address", address)
                 .add("url", careerPageUrl)
                 .add("tags", tags)
+                .add("bookmark", isBookmark)
                 .toString();
     }
 
