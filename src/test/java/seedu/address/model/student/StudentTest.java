@@ -2,6 +2,7 @@ package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
@@ -9,17 +10,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_NAME_A;
+import static seedu.address.testutil.TypicalAssignments.ENGLISH_ASSIGNMENT_NOT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.SCIENCE_ASSIGNMENT_GRADED;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
@@ -131,6 +136,46 @@ public class StudentTest {
         assertThrows(NullPointerException.class, () -> student.deleteAssignment(null));
     }
 
+    @Test
+    void addAssignment_validAssignment_success() {
+        Assignment newAssignment = ENGLISH_ASSIGNMENT_NOT_SUBMITTED;
+        student.addAssignment(newAssignment);
+        assertTrue(student.getAssignments().contains(newAssignment));
+    }
+
+    @Test
+    void addAssignmentAtIndex_validAssignment_success() {
+        Assignment newAssignment = ENGLISH_ASSIGNMENT_NOT_SUBMITTED;
+        student.addAssignment(1, newAssignment);
+        assertEquals(newAssignment, student.getAssignments().get(1));
+    }
+
+    @Test
+    void deleteAssignmentByIndex_validIndex_success() {
+        Assignment deletedAssignment = student.deleteAssignment(1);
+        assertEquals(MATH_ASSIGNMENT_SUBMITTED, deletedAssignment);
+    }
+
+    @Test
+    void deleteLastAssignment_success() {
+        student.deleteLastAssignment();
+        assertFalse(student.getAssignments().contains(SCIENCE_ASSIGNMENT_GRADED));
+    }
+
+    @Test
+    void getAssignmentIndex_existingAssignment_success() {
+        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, null, null, null, null);
+        int index = student.getAssignmentIndex(query);
+        assertEquals(1, index);
+    }
+
+    @Test
+    void getAssignmentIndex_nonExistentAssignment_returnsMinusOne() {
+        AssignmentQuery query = new AssignmentQuery(new AssignmentName("Nonexistent Assignment"),
+                null, null, null, null);
+        int index = student.getAssignmentIndex(query);
+        assertEquals(-1, index);
+    }
 
     @Test
     public void getAttendanceRecord_noRecords_emptyList() {
@@ -171,4 +216,82 @@ public class StudentTest {
         assertEquals(new Attendance("a"), attendanceRecords.get(1).getAttendance());
     }
 
+    @Test
+    void getStudentNumber_validStudent_success() {
+        Student student = new StudentBuilder().withStudentNumber("S1234567A").build();
+        assertEquals("S1234567A", student.getStudentNumber().toString());
+    }
+
+    @Test
+    void equalsMethod() {
+        Student student1 = new StudentBuilder().withName("John Doe").build();
+        Student student2 = new StudentBuilder().withName("John Doe").build();
+        Student student3 = new StudentBuilder().withName("Jane Doe").build();
+
+        // Same object
+        assertTrue(student1.equals(student1));
+
+        // Different objects, same values
+        assertTrue(student1.equals(student2));
+
+        // Different names
+        assertFalse(student1.equals(student3));
+
+        // Different types
+        assertFalse(student1.equals(new Object()));
+
+        // Null
+        assertFalse(student1.equals(null));
+    }
+
+    @Test
+    void constructor_validInputs_success() {
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        TutorialGroup tutorialGroup = new TutorialGroup("G01");
+        StudentNumber studentNumber = new StudentNumber("S1234567A");
+        Student student = new Student(name, phone, tutorialGroup, studentNumber);
+        assertNotNull(student);
+    }
+
+    @Test
+    void constructor_withAssignments_success() {
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        TutorialGroup tutorialGroup = new TutorialGroup("G01");
+        StudentNumber studentNumber = new StudentNumber("S1234567A");
+
+        ObservableList<Assignment> assignments = FXCollections.observableArrayList();
+        assignments.add(MATH_ASSIGNMENT_SUBMITTED);
+        assignments.add(SCIENCE_ASSIGNMENT_GRADED);
+        List<AttendanceRecord> attendanceRecords = new ArrayList<>();
+
+        Student student = new Student(name, phone, tutorialGroup, studentNumber, assignments, attendanceRecords);
+
+        assertNotNull(student);
+        assertEquals("John Doe", student.getName().toString());
+        assertEquals("12345678", student.getPhone().toString());
+        assertEquals("G01", student.getTutorialGroup().toString());
+        assertEquals("S1234567A", student.getStudentNumber().toString());
+        assertEquals(2, student.getAssignments().size());
+        assertEquals(MATH_ASSIGNMENT_SUBMITTED, student.getAssignments().get(0));
+        assertEquals(SCIENCE_ASSIGNMENT_GRADED, student.getAssignments().get(1));
+        assertEquals(new ArrayList<>(), student.getAttendanceRecord());
+    }
+    @Test
+    void getAttendanceRecordsString_noRecords_emptyString() {
+        Student student = new StudentBuilder().build_default();
+        assertEquals("", student.getAttendanceRecordsString());
+    }
+
+    @Test
+    void getAttendanceRecordsString_multipleRecords_success() {
+        Student student = new StudentBuilder().build_default();
+        student.markAttendance(LocalDate.of(2024, 10, 22), "p");
+        student.markAttendance(LocalDate.of(2024, 10, 23), "a");
+
+        String expectedString = "2024-10-22 [x]\n"
+                + "2024-10-23 [ ]\n";
+        assertEquals(expectedString, student.getAttendanceRecordsString());
+    }
 }

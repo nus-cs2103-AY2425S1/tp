@@ -1,5 +1,6 @@
 package seedu.address.model;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -7,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 
 /**
  * The API of the Model component.
@@ -102,8 +104,10 @@ public interface Model {
     /**
      * Deletes the given student.
      * The student must exist in the address book.
+     *
+     * @return
      */
-    void deleteStudent(Student target);
+    int deleteStudent(Student target);
 
     /**
      * Adds the given student.
@@ -113,25 +117,30 @@ public interface Model {
     void addStudent(Student student);
 
     /**
+     * Adds the given student at the given index.
+     * {@code student} must not already exist in the address book.
+     */
+    void addStudent(int index, Student student);
+
+    /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the address book.
      * The student identity of {@code editedStudent} must not be the same as another
      * existing student in the address book.
      */
-
     void setStudent(Student target, Student editedStudent);
 
     /** Returns an unmodifiable view of the filtered student list */
-
     ObservableList<Student> getFilteredStudentList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-
     void updateFilteredStudentList(Predicate<Student> predicate);
 
-    ObservableList<Student> getAllStudentsByName(Name name);
-
+    /**
+     * Returns a list of students in the given tutorial group.
+     */
+    List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup);
 }

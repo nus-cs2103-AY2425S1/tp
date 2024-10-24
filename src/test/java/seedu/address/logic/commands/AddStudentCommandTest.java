@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandTest {
@@ -77,6 +79,18 @@ public class AddStudentCommandTest {
 
         // different student -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+    }
+
+    @Test
+    public void undo_validStudent() throws CommandException {
+        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
+        Student validStudent = new StudentBuilder().build();
+        AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
+        addStudentCommand.execute(modelStub);
+
+        // undo the Add Student Command
+        addStudentCommand.undo(modelStub);
+        assertEquals(Arrays.asList(), modelStub.studentsAdded);
     }
 
     /**
@@ -153,7 +167,6 @@ public class AddStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public Person getPersonByName(Name name) {
             return null;
@@ -175,7 +188,12 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public void addStudent(int index, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -193,12 +211,10 @@ public class AddStudentCommandTest {
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
-        public ObservableList<Student> getAllStudentsByName(Name name) {
+        public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
             throw new AssertionError("This method should not be called.");
         }
-
 
     }
 
@@ -241,6 +257,12 @@ public class AddStudentCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public int deleteStudent(Student target) {
+            studentsAdded.remove(target);
+            return 0;
         }
     }
 }
