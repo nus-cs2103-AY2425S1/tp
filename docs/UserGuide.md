@@ -248,7 +248,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * The order of the keywords does not matter. e.g. `Alex Yu` will match `Yu Alex`
 * Only the name is searched.
-* Only full words will be matched e.g. `Ale` will not match `Ale`
+* Only full words will be matched e.g. `Ale` will not match `Alex`
 * Guests matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Alex Yu` will return `Alex Yeoh`, `Bernice Yu` and `Terrence Yu`
 
@@ -342,7 +342,7 @@ Command | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
-**NewTag** | `newtag TAG` <br> e.g. `newtag bride's side`
+**NewTag** | `newtag t/TAG…​` <br> e.g. `newtag bride's side`
 **DeleteTag** | `deletetag t/TAG...` <br> e.g. `deletetag t/bride's side`
 **Tag** | `tag INDEX t/TAG` <br> e.g. `tag 2 t/groom's side`
 **Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/bride's side`
