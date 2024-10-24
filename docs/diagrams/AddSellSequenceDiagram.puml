@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddPropertyToSellParser" as AddPropertyToSellParser LOGIC_COLOR
+participant "as:AddPropertyToSellCommand" as AddPropertyToSellCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:Person" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addSell 1 ht/a sp/12000000 pc/521890 un/13-134")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addSell 1 ht/a sp/12000000 pc/521890 un/13-134")
+activate AddressBookParser
+
+create AddPropertyToSellParser
+AddressBookParser -> AddPropertyToSellParser
+activate AddPropertyToSellParser
+
+AddPropertyToSellParser --> AddressBookParser
+deactivate AddPropertyToSellParser
+
+AddressBookParser -> AddPropertyToSellParser : parse("1 ht/a sp/12000000 pc/521890 un/13-134")
+activate AddPropertyToSellParser
+
+create AddPropertyToSellCommand
+AddPropertyToSellParser -> AddPropertyToSellCommand
+activate AddPropertyToSellCommand
+
+AddPropertyToSellCommand --> AddPropertyToSellParser :
+deactivate AddPropertyToSellCommand
+
+AddPropertyToSellParser --> AddressBookParser : as
+deactivate AddPropertyToSellParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddPropertyToSellParser -[hidden]-> AddressBookParser
+destroy AddPropertyToSellParser
+
+AddressBookParser --> LogicManager : as
+deactivate AddressBookParser
+
+LogicManager -> AddPropertyToSellCommand : execute(m)
+activate AddPropertyToSellCommand
+
+AddPropertyToSellCommand -> Model : addSellProperty(propertyToBeAdded)
+activate Model
+
+Model --> AddPropertyToSellCommand
+deactivate Model
+
+create CommandResult
+AddPropertyToSellCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddPropertyToSellCommand
+deactivate CommandResult
+
+AddPropertyToSellCommand --> LogicManager : r
+deactivate AddPropertyToSellCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
