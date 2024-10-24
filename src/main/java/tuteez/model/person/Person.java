@@ -64,10 +64,12 @@ public class Person {
     }
 
     public Name getName() {
+        assert name != null : "Name field should not be null";
         return name;
     }
 
     public Phone getPhone() {
+        assert phone != null : "Phone field should not be null";
         return phone;
     }
 

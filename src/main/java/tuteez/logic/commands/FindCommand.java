@@ -2,6 +2,9 @@ package tuteez.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import tuteez.commons.core.LogsCenter;
 import tuteez.commons.util.ToStringBuilder;
 import tuteez.logic.Messages;
 import tuteez.model.Model;
@@ -20,18 +23,31 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
+    private static final Logger logger = LogsCenter.getLogger(FindCommand.class);
+
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindCommand to find persons with the specified {@code NameContainsKeywordsPredicate}.
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
+        logger.fine("Initializing FindCommand with predicate: " + predicate);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int size = model.getFilteredPersonList().size();
+        String logMessage = String.format("Find command execution completed. Found %d matching %s",
+                size, size == 1 ? "result" : "results");
+        logger.info(logMessage);
+        if (size == 0) {
+            logger.info("No matching results found.");
+        }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, size));
     }
 
     @Override

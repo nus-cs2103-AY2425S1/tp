@@ -14,7 +14,8 @@ import tuteez.logic.commands.AddCommand;
  *  2. Check for clashing lessons
  */
 public class LessonManager {
-    private final HashMap<Day, TreeSet<Lesson>> dayLessonsMap = new HashMap<>(7);
+    private static final int NUMBER_OF_DAYS_IN_WEEK = 7;
+    private final HashMap<Day, TreeSet<Lesson>> dayLessonsMap = new HashMap<>(NUMBER_OF_DAYS_IN_WEEK);
     private final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     /**
@@ -66,6 +67,7 @@ public class LessonManager {
         Day lessonDay = lesson.getLessonDay();
         TreeSet<Lesson> lessonsOnDay = dayLessonsMap.get(lessonDay);
         for (Lesson lessonOnDay : lessonsOnDay) {
+            assert lessonOnDay != null;
             if (Lesson.isClashingWithOtherLesson(lessonOnDay, lesson)) {
                 String logMessage = String.format("%s clashes with %s", lessonOnDay, lesson);
                 logger.info(logMessage);

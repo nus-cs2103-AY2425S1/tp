@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RemarkCommandParser" as RemarkCommandParser LOGIC_COLOR
+participant "d:DeleteRemarkCommand" as DeleteRemarkCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("remark 1 -d 2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("remark 1 -d 2")
+activate AddressBookParser
+
+create RemarkCommandParser
+AddressBookParser -> RemarkCommandParser
+activate RemarkCommandParser
+
+RemarkCommandParser --> AddressBookParser
+deactivate RemarkCommandParser
+
+AddressBookParser -> RemarkCommandParser : parse("-d 2")
+activate RemarkCommandParser
+
+create DeleteRemarkCommand
+RemarkCommandParser -> DeleteRemarkCommand
+activate DeleteRemarkCommand
+
+DeleteRemarkCommand --> RemarkCommandParser :
+deactivate DeleteRemarkCommand
+
+RemarkCommandParser --> AddressBookParser : d
+deactivate RemarkCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RemarkCommandParser -[hidden]-> AddressBookParser
+destroy RemarkCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteRemarkCommand : execute(m)
+activate DeleteRemarkCommand
+
+DeleteRemarkCommand -> Model : updateFilteredPersonList(true)
+activate Model
+
+Model --> DeleteRemarkCommand
+deactivate Model
+
+create CommandResult
+DeleteRemarkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteRemarkCommand
+deactivate CommandResult
+
+DeleteRemarkCommand --> LogicManager : r
+deactivate DeleteRemarkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
