@@ -22,6 +22,7 @@ public class Meetings {
 
     private final ObservableList<Meeting> internalList = FXCollections.observableArrayList();
 
+    public static final String MESSAGE_NO_MEETINGS = "You don't have a meeting arranged with this Udder";
     /**
      * Returns true if the meeting clashes with any of the meetings in the list.
      */
@@ -114,6 +115,10 @@ public class Meetings {
      * @return String output of meetings list
      */
     public String toDetailPanelString() {
+        if (internalList.isEmpty()) {
+            return MESSAGE_NO_MEETINGS;
+        }
+
         StringBuilder meetingList = new StringBuilder();
 
         for (int i = 0; i < internalList.size(); i++) {
@@ -122,11 +127,6 @@ public class Meetings {
         }
 
         return meetingList.toString();
-    }
-
-
-    public boolean isEmptyMeetings() {
-        return internalList.isEmpty();
     }
 
 

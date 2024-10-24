@@ -80,9 +80,7 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tagDetails.getChildren().add(new Label(tag.tagName)));
 
-        meetings.setText("Meetings\t:\n" + (person.getMeetings().isEmptyMeetings()
-                ? "You don't have a meeting arranged with this Udder"
-                : person.getMeetings().toDetailPanelString()));
+        meetings.setText("Meetings\t:\n" + (person.getMeetings().toDetailPanelString()));
     }
 
 
