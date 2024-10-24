@@ -93,6 +93,11 @@ public class EventTest {
 
         // Validate that two Event objects with different values are not equal
         assertFalse(event1.equals(event2));
+
+        Event eventWithTwoTags = new EventBuilder().withTags("tag", "test").build();
+        Event eventWithOneTags = new EventBuilder().withTags("tag").build();
+        // Validate that two Event objects with different tags are not equal
+        assertFalse(eventWithTwoTags.equals(eventWithOneTags));
     }
 
     @Test
