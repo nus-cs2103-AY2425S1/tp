@@ -40,4 +40,8 @@ public class PersonUtil {
         }
         return sb.toString();
     }
+
+    public static String getPersonTagToAdd() {
+        return PREFIX_TAG + "newTag";
+    }
 }

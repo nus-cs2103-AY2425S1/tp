@@ -85,7 +85,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    protected Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

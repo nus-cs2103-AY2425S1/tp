@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,12 +24,15 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.TrackCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CategoryContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.student.Student;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.CompanyUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -77,6 +81,22 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_tag() throws Exception {
+        HashSet<Tag> expectedTags = new HashSet<>();
+        expectedTags.add(new Tag("newTag"));
+        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonTagToAdd());
+        assertEquals(new TagCommand(INDEX_FIRST_PERSON, expectedTags), command);
+    }
+
+    @Test
+    public void parseCommand_track() throws Exception {
+        String keyword = "student";
+        TrackCommand command = (TrackCommand) parser.parseCommand(TrackCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new TrackCommand(new CategoryContainsKeywordsPredicate(keyword)), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
@@ -113,8 +133,4 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 
-    @Test
-    public void trackCommand_track() throws Exception {
-        assertTrue(parser.parseCommand(TrackCommand.COMMAND_WORD + " student") instanceof TrackCommand);
-    }
 }
