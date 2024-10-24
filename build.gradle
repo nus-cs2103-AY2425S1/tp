@@ -59,8 +59,8 @@ dependencies {
 
     implementation 'com.googlecode.ez-vcard:ez-vcard:0.12.1'
 
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.0'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.18.0'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
