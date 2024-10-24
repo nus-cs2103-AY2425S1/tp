@@ -1,10 +1,6 @@
 ---
   layout: default.md
-<<<<<<< HEAD:docs/team/choaticman.md
   title: "Dylan Chan's Project Portfolio Page"
-=======
-  title: "Kelly Wong's Project Portfolio Page"
->>>>>>> eec111cc39b5327001778a086c19a4ed405af10a:docs/team/johndoe.md
 ---
 
 ### Project: AddressBook Level 3
