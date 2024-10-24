@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  * Represents a class that can export to VCF
  */
 public class VcfExporter implements Exporter {
-    private final Path exportSubPath = Paths.get("addressbook.vcf");
+    private final Path exportSubPath = Paths.get("bizbook.vcf");
     private final UserPrefs userPrefs;
 
     /**
