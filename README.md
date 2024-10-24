@@ -7,7 +7,7 @@ Welcome to **TAHub**.
 * TAHub simplifies the role of Teaching Assistants (TAs) by providing a centralized hub to organize student information, and efficiently manage course-related tasks. This platform empowers TAs to focus more on enhancing student learning and less on administrative chaos.
 * Why use TAHub?
   * TAs supporting professors and lecturers in managing course-related tasks.
-  * New and experienced TAs handling multiple responsibilities. 
+  * New and experienced TAs handling multiple responsibilities.
   * Efficient management of student information and tasks.
 <hr>
 
