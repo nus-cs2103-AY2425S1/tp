@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+scale 2
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
@@ -49,8 +50,6 @@ Client *--> "0..1" Phone
 Client *--> "0..1" Email
 Client *--> "*" Tag
 Client *--> "*" RentalInformation
-
-note "This is a floating note" as N1
 
 RentalInformation *--> "0..1" RentalDate
 RentalInformation *--> "0..1" RentalDate
