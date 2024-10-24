@@ -43,19 +43,22 @@ public class AddEventCommand extends Command {
     private final Set<Id> clientIds;
     private final Set<Id> vendorIds;
     private final Description description;
+    private final EventId eventId;
 
 
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public AddEventCommand(Set<Id> clientIds, Set<Id> vendorIds, Description description) {
+    public AddEventCommand(Set<Id> clientIds, Set<Id> vendorIds, Description description, EventId eventId) {
         requireNonNull(clientIds);
         requireNonNull(vendorIds);
         requireNonNull(description);
+        requireNonNull(eventId);
 
         this.clientIds = clientIds;
         this.vendorIds = vendorIds;
         this.description = description;
+        this.eventId = eventId;
     }
 
     @Override
@@ -78,7 +81,7 @@ public class AddEventCommand extends Command {
         List<Vendor> vendorsToAdd = vendorIds.stream().map(id -> (Vendor) model.getContact(id)).toList();
 
         Event eventToAdd = new Event(clientsToAdd, vendorsToAdd,
-                this.description, new EventId(AddressBook.getNextEventId()));
+                this.description, this.eventId);
 
         if (model.hasEvent(eventToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
