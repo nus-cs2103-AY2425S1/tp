@@ -87,6 +87,7 @@ administrators.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.1 Viewing Help : `help`
 
@@ -99,6 +100,7 @@ Shows a message explaining how to access the help page.
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.2 Adding a Person: `add`
 
@@ -126,9 +128,9 @@ Adds a person to Edututu.
 
 [Back to Table of Contents](#table-of-contents)
 
-
-
 ***
+<div style="page-break-after: always;"></div>
+
 ### 2.3 Listing All Persons: `list`
 
 The `list` command displays a list of all persons currently stored in EduTuTu.
@@ -155,6 +157,7 @@ After entering the `list` command, all persons stored in the address book will b
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.4 Editing a Person: `edit`
 
@@ -187,6 +190,7 @@ Edits an existing person in the address book.
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.5 Locating Persons by Name: `find`
 
@@ -222,8 +226,8 @@ Finds persons whose names, class IDs, or both contain any of the given keywords.
 
 [Back to Table of Contents](#table-of-contents)
 
-
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.6 Deleting a Person: `delete`
 
@@ -255,6 +259,7 @@ Deletes the specified person from the address book.
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.7 Clearing All Entries: `clear`
 
@@ -282,7 +287,9 @@ Upon entering the command, all entries will be cleared from Edututu. A message
 
 [Back to Table of Contents](#table-of-contents)
 
+
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.8 Exiting the Program: `exit`
 
@@ -310,6 +317,7 @@ Exiting the program can be done in two ways:
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.9 Saving the Data
 
@@ -318,6 +326,7 @@ EduTuTu data are saved in the hard disk automatically after any command that cha
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.10 Editing the Data File
 
@@ -330,6 +339,7 @@ EduTuTu data is saved automatically as a JSON file at `[JAR file location]/data/
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.11 Marking a Payment as Completed
 
@@ -350,6 +360,8 @@ Updates the payment status of a student to completed.
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
+
 ### 2.12 Displaying Pie Chart of Class Distribution: `piechart`
 
 Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
@@ -375,6 +387,7 @@ For example, given the following data set with 4 students:
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.13 Displaying Bar Chart: `bar`
 
@@ -398,6 +411,7 @@ Displays a bar chart showing the number of students who made payments for each m
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ### 2.14 Viewing Command History: `Arrow Keys`
 
@@ -419,6 +433,7 @@ Allows users to quickly access previously entered commands using the up and down
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 # 3. FAQ
 
@@ -437,6 +452,7 @@ Allows users to quickly access previously entered commands using the up and down
 [Back to Table of Contents](#table-of-contents)
 
 ***
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
