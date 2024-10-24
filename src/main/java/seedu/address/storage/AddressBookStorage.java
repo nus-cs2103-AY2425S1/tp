@@ -5,10 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link AddressBook}.
  */
 public interface AddressBookStorage {
 
@@ -26,7 +27,7 @@ public interface AddressBookStorage {
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #readAddressBook()
      */
     Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
 

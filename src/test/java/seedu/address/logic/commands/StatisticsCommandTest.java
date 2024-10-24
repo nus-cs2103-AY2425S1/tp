@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.StatisticsCommand.nbOfPeople;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,19 +21,18 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for StatisticsCommand.
  */
 public class StatisticsCommandTest {
+
     private Model model;
     private Model expectedModel;
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new ArrayList<>(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new ArrayList<>(), new UserPrefs());
     }
 
     @Test

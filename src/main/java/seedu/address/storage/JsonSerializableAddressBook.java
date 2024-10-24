@@ -13,14 +13,12 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_CONFLICTING_APPOINTMENT =
-            "Persons list contains conflicting appointment(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Person list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -53,11 +51,6 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-
-            if (addressBook.hasConflictingAppointment(person.getAppointment())) {
-                throw new IllegalValueException(MESSAGE_CONFLICTING_APPOINTMENT);
-            }
-
             addressBook.addPerson(person);
         }
         return addressBook;

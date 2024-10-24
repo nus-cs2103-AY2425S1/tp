@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -27,28 +28,36 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AppointmentListPanel appointmentListPanel;
+    private CalendarViewPanel calendarViewPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
-    @FXML
-    private StackPane commandBoxPlaceholder;
+    private Region personListPanelRoot;
+    private Region appointmentListPanelRoot;
 
     @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane commandBoxPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
+    private StackPane listPanelPlaceholder;
+
+    @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane calendarViewPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -111,7 +120,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
+
+        personListPanelRoot = personListPanel.getRoot();
+        appointmentListPanelRoot = appointmentListPanel.getRoot();
+        appointmentListPanelRoot.setVisible(false);
+
+        listPanelPlaceholder.getChildren().addAll(personListPanelRoot, appointmentListPanelRoot);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +136,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        calendarViewPanel = new CalendarViewPanel(logic.getFilteredAppointmentList());
+        calendarViewPanelPlaceholder.getChildren().add(calendarViewPanel.getCalendarView());
     }
 
     /**
@@ -133,6 +151,16 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    private void showAppointmentList() {
+        personListPanelRoot.setVisible(false);
+        appointmentListPanelRoot.setVisible(true);
+    }
+
+    private void showPersonList() {
+        personListPanelRoot.setVisible(true);
+        appointmentListPanelRoot.setVisible(false);
     }
 
     /**
@@ -163,10 +191,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -178,12 +202,14 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.isShowAppointments()) {
+                showAppointmentList();
+            } else if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else {
+                showPersonList();
             }
 
             return commandResult;

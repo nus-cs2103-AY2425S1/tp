@@ -66,14 +66,14 @@ public class JsonUserPrefsStorageTest {
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
-
         assertEquals(expected, actual);
     }
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        userPrefs.setSocialBookFilePath(Paths.get("socialbook.json"));
+        userPrefs.setAppointmentFilePath(Paths.get("appointments.json"));
         return userPrefs;
     }
 
@@ -101,23 +101,21 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void saveUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
-
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
 
-        //Try writing when the file doesn't exist
+        // Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);
         UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
 
-        //Try saving when the file exists
+        // Try saving when the file exists
         original.setGuiSettings(new GuiSettings(5, 5, 5, 5));
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
     }
-
 }

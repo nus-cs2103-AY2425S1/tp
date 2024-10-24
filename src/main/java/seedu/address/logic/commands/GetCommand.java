@@ -69,7 +69,7 @@ public class GetCommand extends Command {
                 break;
 
             default:
-                throw new CommandException(Messages.MESSAGE_INVALID_PARAMETER);
+                throw new CommandException(Messages.MESSAGE_INVALID_PARAMETERS);
             }
         }
 

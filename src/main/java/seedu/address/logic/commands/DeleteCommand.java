@@ -21,7 +21,6 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
                 + ": Deletes the people identified by the index numbers used in the displayed person list.\n"
                 + "Parameters: INDEXES (must be a positive integer)\n"
@@ -52,23 +51,23 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        String s = "";
-        ArrayList<Person> personsToDelete = new ArrayList<>();
-        for (int i = 0; i < targetIndexes.length; i++) {
-            if (targetIndexes[i].getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        List<Person> personsToDelete = new ArrayList<>();
+
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEXES);
             }
-            personsToDelete.add(lastShownList.get(targetIndexes[i].getZeroBased()));
+            personsToDelete.add(lastShownList.get(targetIndex.getZeroBased()));
         }
 
-        s = personsToDelete.stream()
-                .peek(person -> model.deletePerson(person))
-                .map(person -> Messages.format(person))
-                .collect(Collectors.joining("\n\n"));
+        String s = personsToDelete.stream().map(person -> {
+            model.deleteAppointments(person.getName());
+            model.deletePerson(person);
+            return Messages.format(person);
+        }).collect(Collectors.joining("\n\n"));
 
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, s));
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -77,22 +76,17 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteCommand otherDeleteCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return Arrays.equals(targetIndexes, otherDeleteCommand.targetIndexes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", Arrays.toString(targetIndexes))
+                .add("targetIndexes", Arrays.toString(targetIndexes))
                 .toString();
     }
-
-
-
-
 }

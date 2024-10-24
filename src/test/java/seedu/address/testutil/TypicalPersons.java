@@ -34,7 +34,6 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
             .withEmail("johnd@example.com").withAddress("311, Clementi Ave 2, #02-25")
             .withPriority("HIGH").withRemark("Promises to pay back next week.").withDateOfBirth("29 Jan 1999")
-            .withAppointment("2024-10-20", "14:00", "16:00")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withDateOfBirth("1 Jan 2000").build();
@@ -85,7 +84,6 @@ public class TypicalPersons {
         }
         return ab;
     }
-
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));

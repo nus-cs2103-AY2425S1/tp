@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
-
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
@@ -112,8 +111,7 @@ public class PersonTest {
                 + ALICE.getPriority() + ", remark="
                 + ALICE.getRemark() + ", dateOfBirth="
                 + ALICE.getDateOfBirth() + ", income="
-                + ALICE.getIncome() + ", appointment="
-                + ALICE.getAppointment() + ", tags="
+                + ALICE.getIncome() + ", tags="
                 + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

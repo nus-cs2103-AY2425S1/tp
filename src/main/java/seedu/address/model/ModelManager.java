@@ -4,15 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
@@ -27,26 +28,37 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
+
+    private final ObservableList<Appointment> appointments;
+    private final FilteredList<Appointment> filteredAppointments;
+    private final SortedList<Appointment> sortedAppointments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, List<Appointment> appointments, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
         sortedPersons.setComparator(Comparator.comparing(Person::getPriority)); // sort by descending priority
+
+        this.appointments = FXCollections.observableList(appointments);
+        filteredAppointments = new FilteredList<>(this.appointments);
+        sortedAppointments = new SortedList<>(filteredAppointments,
+                Comparator.comparing(Appointment::date).thenComparing(Appointment::startTime));
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new ArrayList<>(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,13 +87,13 @@ public class ModelManager implements Model {
 
     @Override
     public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getSocialBookFilePath();
     }
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setSocialBookFilePath(addressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -120,8 +132,34 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Pair<Name, Appointment>> getConflictingAppointments(Person person, Appointment appointment) {
-        return addressBook.getConflictingAppointments(person, appointment);
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
+    @Override
+    public void updateAppointments(Name oldName, Name newName) {
+        for (int i = 0; i < appointments.size(); i++) {
+            Appointment appointment = appointments.get(i);
+            if (appointment.name().equals(oldName)) {
+                appointments.set(i, appointment.withName(newName));
+            }
+        }
+    }
+
+    @Override
+    public Appointment deleteAppointment(int index) {
+        return appointments.remove(index);
+    }
+
+    @Override
+    public void deleteAppointments(Name name) {
+        appointments.removeIf(appointment -> appointment.name().equals(name));
+    }
+
+    @Override
+    public List<Appointment> getConflictingAppointments(Appointment appointment) {
+        return appointments.stream().filter(appointment::hasConflictWith).toList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -142,19 +180,30 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return sortedAppointments;
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        filteredAppointments.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
+        if (!(other instanceof ModelManager otherModelManager)) {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredAppointments.equals(otherModelManager.filteredAppointments);
     }
 }

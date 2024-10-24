@@ -2,14 +2,10 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -96,42 +92,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    /**
-     * Returns true if the given appointment conflicts with any existing appointments.
-     */
-    public boolean hasConflictingAppointment(Appointment appointment) {
-        if (appointment == null) {
-            return false;
-        }
-
-        for (Person person : persons) {
-            if (appointment.hasConflictWith(person.getAppointment())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns a list of appointments that conflict with the given appointment.
-     */
-    public List<Pair<Name, Appointment>> getConflictingAppointments(Person person, Appointment appointment) {
-        List<Pair<Name, Appointment>> conflictingAppointments = new ArrayList<>();
-
-        for (Person otherPerson : persons) {
-            if (person.isSamePerson(otherPerson)) {
-                continue;
-            }
-
-            Appointment otherAppointment = otherPerson.getAppointment();
-            if (appointment.hasConflictWith(otherAppointment)) {
-                conflictingAppointments.add(new Pair<>(otherPerson.getName(), otherAppointment));
-            }
-        }
-
-        return conflictingAppointments;
-    }
-
     //// util methods
 
     @Override
@@ -153,11 +113,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof AddressBook otherAddressBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons);
     }
 

@@ -31,10 +31,9 @@ public class HelpCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (usage.isEmpty()) {
-            return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
-        } else {
-            return new CommandResult(usage, false, false);
+            return new CommandResult(SHOWING_HELP_MESSAGE, false, true, false);
         }
+        return new CommandResult(usage, false, false, false);
     }
 
     @Override
@@ -44,11 +43,10 @@ public class HelpCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof HelpCommand)) {
+        if (!(other instanceof HelpCommand otherHelpCommand)) {
             return false;
         }
 
-        HelpCommand otherHelpCommand = (HelpCommand) other;
         return usage.equals(otherHelpCommand.usage);
     }
 }

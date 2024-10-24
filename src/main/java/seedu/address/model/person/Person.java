@@ -8,13 +8,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null (except the appointment),
- * field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -29,7 +27,6 @@ public class Person {
     private final Remark remark;
     private final DateOfBirth dateOfBirth;
     private final Income income;
-    private final Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -37,15 +34,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
                   DateOfBirth dateOfBirth, Income income, Set<Tag> tags) {
-        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, tags);
-    }
-
-    /**
-     * Every field must be present and not null, except the appointment.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, Appointment appointment, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, priority, remark, dateOfBirth, income, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,12 +43,7 @@ public class Person {
         this.remark = remark;
         this.dateOfBirth = dateOfBirth;
         this.income = income;
-        this.appointment = appointment;
         this.tags.addAll(tags);
-    }
-
-    public Person withAppointment(Appointment appointment) {
-        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
     }
 
     public Name getName() {
@@ -94,10 +78,6 @@ public class Person {
         return income;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -115,8 +95,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -130,11 +109,10 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
@@ -143,14 +121,13 @@ public class Person {
                 && remark.equals(otherPerson.remark)
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && income.equals(otherPerson.income)
-                && Objects.equals(appointment, otherPerson.appointment)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
+        return Objects.hash(name, phone, email, address, priority, remark, dateOfBirth, income, tags);
     }
 
     @Override
@@ -164,7 +141,6 @@ public class Person {
                 .add("remark", remark)
                 .add("dateOfBirth", dateOfBirth)
                 .add("income", income)
-                .add("appointment", appointment)
                 .add("tags", tags)
                 .toString();
     }
