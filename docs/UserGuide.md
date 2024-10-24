@@ -35,7 +35,9 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 
    * `deletebuyer p/81234567` : Deletes the buyer with contact number `81234567`.
    
-   * `addproperty c/124894 u/15-20` : Adds a property with postal code 124894 and unit number #15-20.
+   * `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
+   
+   * `filterproperty t/HDB gte/500 lte/15000` : Filters and lists properties which is type HDB and matching price (average of ask and bid price) is greater than $500 and less than $15000.
    
    * `deleteproperty c/124894 u/15-20` : Deletes the property with postal code 124894 and unit number #15-20.
 
@@ -161,16 +163,25 @@ Examples:
 
 Add a specified property into the property book of ClientGrid.
 
-Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
+Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 
-* Adds a property with the specified `POSTAL_CODE` and `UNIT_NUMBER`.
+* Adds a property of `TYPE` with the specified `POSTAL_CODE` and `UNIT_NUMBER` with seller's `ASK` price and buyers `BID` price.
 * The `POSTAL_CODE` must be exactly 6 digits with each digit in the range [0-9]. It does not accept any non-integer characters or spaces.
 * The `UNIT_NUMBER` comprises of two numbers delimited by exactly one dash(-). On either side of the dash are numbers comprising of two or more digits. The range of numbers of the left hand side of the dash is [00-148] and the right hand side is [00-111110]. Other than the dash, other non-integer characters or spaces are not accepted.
+* The `TYPE` is case-insensetive HDB,CONDO or LANDED.
+* The `ASK` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
+* The `BID` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
+
+> [!NOTE]
+> No duplicate properties are allowed. Duplicate properties are checked based on 
+> 1. if either of two properties are of LANDED type, then the comparison is done based on postal code.
+> 2. if the two properties are CONDO and HDB type, then the comparison is done based on postal code.
+> 3. if the two properties are both CONDO or HDB type, then the comparison is done based on postal code and unit.
 
 Examples:
-* `addproperty c/124894 u/15-20` adds a property with postal code `124894` and unit number `15-20`.
+* `addproperty c/124894 u/15-20 t/HDB a/50000 b/10000` : Adds a property with postal code 124894 and unit number #15-20 whose type is a HDB with an ask price of $50000 and bid price of $10000.
 
-  ![result for 'addproperty c/124894 u/15-20'](images/addproperty.png)
+  ![result for 'addproperty c/124894 u/15-20 t/HDB a/50000 b/10000'](images/addproperty.png)
 
 ### Deleting a property : `deleteproperty`
 
@@ -194,12 +205,30 @@ Filters the clients that starts with the prefix provided.
 Format: `filterclient n/NAME`
 
 * Filters the client with the specified prefix `NAME`.
-* The `NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
+* words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
 
 Examples:
 * `filterclient n/A` filters the clients that starts with the prefix `A`.
 
   ![result for 'filterclient n/A'](images/filterclient.png)
+
+### Filtering properties : `filterproperty`
+
+Filters the properties based on any combination of type, lower bound for matching price and upper bound for matching price.
+
+Format: `filterclient [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
+
+* Filters the properties with any combination of `TYPE`, lower bounded `MATCHING_PRICE` and upper bounded `MATCHING_PRICE`.
+* The `TYPE` is case-insensetive HDB, CONDO or LANDED.
+* The `MATCHING_PRICE` is a non-negative integer (i.e No non-numeric symbols such as decimal points, currency symbols, etc.).
+
+> [!IMPORTANT]
+> At least one optional prefix needs to be present for any filtering to be possible.
+
+Examples:
+* `filterproperty t/HDB gte/500 lte/60000` filters the properties for HDB with a lower bounded matching price of $500 and upper bounded matching price of $60000.
+
+  ![result for 'filterproperty t/HDB gte/500 lte/60000'](images/filterproperty.png)
 
 ### Adding a meeting : `addmeeting`
 
@@ -293,7 +322,8 @@ Action     | Format, Examples
 **Add Seller** | `addseller n/SELLER_NAME p/SELLER_PHONE_NUMBER e/SELLER_EMAIL`
 **Delete Buyer** | `deletebuyer p/PHONE_NUMBER`
 **Delete Seller** | `deleteseller p/PHONE_NUMBER`
-**Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
+**Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 **Delete Property** | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
+**Filtering Properties** | `filterclient [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 **Filtering Clients** | `filterclient n/NAME`
 **Delete Meeting** | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
