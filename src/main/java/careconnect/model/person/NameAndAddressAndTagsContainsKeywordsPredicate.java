@@ -47,7 +47,6 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
         if (nameKeywords.isEmpty()) {
             passedTests[0] = true;
         } else {
-            logger.info("running test on nameKeywords");
             passedTests[0] = nameKeywords.stream()
                     .anyMatch(
                             keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword)
@@ -57,8 +56,6 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
         if (addressKeywords.isEmpty()) {
             passedTests[1] = true;
         } else {
-            logger.info("running test on addressKeywords");
-
             passedTests[1] = addressKeywords.stream()
                     .anyMatch(
                             keyword -> StringUtil.containsPartialWordIgnoreCase(person.getAddress().toString(), keyword)
