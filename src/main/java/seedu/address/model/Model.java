@@ -91,4 +91,10 @@ public interface Model {
      * The restaurant must exist in the address book.
      */
     void favouriteRestaurant(Restaurant target);
+
+    /**
+     * Unfavourite the given restaurant.
+     * The restaurant must exist in the address book.
+     */
+    void unfavouriteRestaurant(Restaurant target);
 }
