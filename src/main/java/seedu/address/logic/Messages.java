@@ -16,6 +16,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_NO_LATEST_COMMAND = "There is no latest command to undo";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "One or more of the index provided is invalid";
     public static final String MESSAGE_INVALID_PARAMETER = "One or more of the parameters provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
@@ -53,10 +54,12 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Date of birth: ")
                 .append(person.getDateOfBirth())
+                .append("; Priority: ")
+                .append(person.getPriority())
                 .append("; Income: ")
                 .append(person.getIncome())
-                .append("; Priority: ")
-                .append(person.getPriority());
+                .append("; Family size: ")
+                .append(person.getFamilySize());
 
         String remark = person.getRemark().value;
         if (!remark.isEmpty()) {

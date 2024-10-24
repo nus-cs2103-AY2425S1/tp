@@ -243,6 +243,7 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
+                    personToBeEdited.getFamilySize(),
                     personToBeEdited.getTags(),
                     personToBeEdited.getUpdatedAt());
 
@@ -275,6 +276,7 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
+                    personToBeEdited.getFamilySize(),
                     personToBeEdited.getTags(),
                     personToBeEdited.getUpdatedAt());
 

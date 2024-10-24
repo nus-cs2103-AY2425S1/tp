@@ -30,23 +30,27 @@ public class Person {
     private final DateOfBirth dateOfBirth;
     private final Income income;
     private final Appointment appointment;
-    private final UpdatedAt updatedAt;
+    private final FamilySize familySize;
     private final Set<Tag> tags = new HashSet<>();
+
+    private final UpdatedAt updatedAt;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, Set<Tag> tags, UpdatedAt updatedAt) {
-        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, tags, updatedAt);
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags,
+                  UpdatedAt updatedAt) {
+        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, familySize, tags, updatedAt);
     }
 
     /**
      * Every field must be present and not null, except the appointment.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, Appointment appointment, Set<Tag> tags, UpdatedAt updatedAt) {
-        requireAllNonNull(name, phone, email, address, tags);
+                  DateOfBirth dateOfBirth, Income income, Appointment appointment, FamilySize familySize,
+                  Set<Tag> tags, UpdatedAt updatedAt) {
+        requireAllNonNull(name, phone, email, address, dateOfBirth, familySize, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,16 +60,20 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
         this.income = income;
         this.appointment = appointment;
+        this.familySize = familySize;
         this.tags.addAll(tags);
         this.updatedAt = updatedAt;
     }
 
     /**
-     * Returns a new {@code Person} with the specified {@code appointment}.
+     * Constructs a {@code Person} with the specified appointment.
+     *
+     * @param appointment An {@code Appointment}
+     * @return a new {@code Person} with the appointment
      */
     public Person withAppointment(Appointment appointment) {
-        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags,
-                updatedAt);
+        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment,
+                familySize, tags, updatedAt);
     }
 
     public Name getName() {
@@ -102,6 +110,10 @@ public class Person {
 
     public Appointment getAppointment() {
         return appointment;
+    }
+
+    public FamilySize getFamilySize() {
+        return familySize;
     }
 
     /**
@@ -154,6 +166,7 @@ public class Person {
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && income.equals(otherPerson.income)
                 && Objects.equals(appointment, otherPerson.appointment)
+                && familySize.equals(otherPerson.familySize)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -175,6 +188,7 @@ public class Person {
                 .add("dateOfBirth", dateOfBirth)
                 .add("income", income)
                 .add("appointment", appointment)
+                .add("familySize", familySize)
                 .add("tags", tags)
                 .toString();
     }

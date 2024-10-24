@@ -18,4 +18,8 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Remark
+Person *--> Income
+Person *--> Priority
+Person *--> DateOfBirth
 @enduml

@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -195,6 +196,29 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException("Times should be in HH:mm format");
         }
+    }
+
+    /**
+     * Parses a {@code String familySize} into a {@code FamilySize}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code familySize} is invalid
+     */
+    public static FamilySize parseFamilySize(String familySize) throws ParseException {
+        requireNonNull(familySize);
+        int size;
+
+        try {
+            size = Integer.parseInt(familySize.trim());
+        } catch (NumberFormatException e) {
+            throw new ParseException(FamilySize.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!FamilySize.isValidFamilySize(size)) {
+            throw new ParseException(FamilySize.MESSAGE_CONSTRAINTS);
+        }
+
+        return new FamilySize(size);
     }
 
     /**

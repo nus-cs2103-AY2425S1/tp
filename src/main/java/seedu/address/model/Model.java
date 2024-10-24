@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -74,6 +75,13 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given person at specified index.
+     * {@code person} must not already exist in the address book.
+     */
+
+    void addPerson(Person person, int index);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -88,13 +96,17 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    // TO BE IMPLEMENTED
-    // Updates the order in which the filtered contact list is sorted.
-    // void updateSortingOrder(String criterion); - Can use switch statements for criteria to sort by
+    /**
+     * Updates the order of the person list according to the given parameter.
+     *
+     * @param comparator Specifies new comparison criteria to order person list by.
+     */
+    void updateSortingOrder(Comparator<Person> comparator);
 }
