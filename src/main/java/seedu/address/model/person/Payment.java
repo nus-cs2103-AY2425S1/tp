@@ -69,8 +69,9 @@ public class Payment {
     public void updatePaymentDueDate(Policy policy) {
         if (policy.isExpiringSoon()) {
             paymentDueDate = LocalDate.MAX;
+        } else {
+            paymentDueDate = paymentDueDate.plusYears(1);
         }
-        paymentDueDate = paymentDueDate.plusYears(1);
     }
 
     public LocalDate getPaymentDueDate() {
