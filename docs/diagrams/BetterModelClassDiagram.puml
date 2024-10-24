@@ -32,8 +32,11 @@ UniqueProjectList --> Project
 
 Project *--> ProjectName
 Project *--> ProjectId
+Project *--> "*" Skill
 
 UniqueAssignmentList --> Assignment
 
 Assignment *--> AssignmentId
+Assignment *--> Person
+Assignment *--> Project
 @enduml
