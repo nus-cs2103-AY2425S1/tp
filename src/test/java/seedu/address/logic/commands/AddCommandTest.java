@@ -163,6 +163,11 @@ public class AddCommandTest {
         public void favouriteRestaurant(Restaurant target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void unfavouriteRestaurant(Restaurant target) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

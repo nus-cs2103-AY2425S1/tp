@@ -109,10 +109,16 @@ public class Restaurant {
                 && otherRestaurant.getName().equals(getName());
     }
 
+    /**
+     * Returns the boolean attribute isFavourite.
+     */
     public boolean isFavourite() {
         return isFavourite;
     }
 
+    /**
+     * Sets the boolean attribute isFavourite based on the favourite parameter.
+     */
     public void setFavourite(boolean favourite) {
         this.isFavourite = favourite;
     }
