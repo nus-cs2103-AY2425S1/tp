@@ -7,22 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.logic.commands.exceptions.CommandException;
 import hallpointer.address.model.AddressBook;
-import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.testutil.MemberBuilder;
-import javafx.collections.ObservableList;
+import hallpointer.address.testutil.ModelStub;
 
 public class AddMemberCommandTest {
 
@@ -89,81 +84,6 @@ public class AddMemberCommandTest {
         AddMemberCommand addMemberCommand = new AddMemberCommand(ALICE);
         String expected = AddMemberCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addMemberCommand.toString());
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addMember(Member member) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasMember(Member member) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteMember(Member target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setMember(Member target, Member updatedMember) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Member> getFilteredMemberList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredMemberList(Predicate<Member> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
