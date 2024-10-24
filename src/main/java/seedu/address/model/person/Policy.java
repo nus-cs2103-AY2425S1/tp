@@ -21,8 +21,10 @@ public class Policy {
             + "endDate' paydate amountDue, where dates are in 'yyyy-MM-dd' format.";
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final String TOSTRINGFORMATTER = "(\\w+)\\s*\\((\\d{4}-\\d{2}-\\d{2})\\s*to"
-            + "\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})";
+    private static final String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*"
+            + "to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})";
+
+
 
     private final String policyName;
     private final LocalDate startDate;
