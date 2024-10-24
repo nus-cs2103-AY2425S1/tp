@@ -6,12 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -19,15 +16,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing student in the address book.
@@ -42,14 +35,19 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STUDENTID + "STUDENT_ID] "
-            + "[" + PREFIX_TUTORIALID + "TUTORIAL_CLASS] "
+            + "[" + PREFIX_TUTORIALID + "TUTORIAL_ID]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STUDENTID + "1002"
-            + PREFIX_TUTORIALID + "1002";;
+            + PREFIX_NAME + "Samson Chew "
+            + PREFIX_STUDENTID + "A1234567M"
+            + PREFIX_TUTORIALID + "1001";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_STUDENTID = "This student ID already exists in the address book.";
+
+    public static final String MESSAGE_TUTORIAL_NOT_FOUND = "The tutorial ID provided doesn't exist! \nTutorial ID: ";
+
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -82,7 +80,28 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
+        // Check for duplicate student IDs if student ID is changed
+
+        if (!editedStudent.getStudentId().equals(studentToEdit.getStudentId())) {
+            if (model.hasStudentWithId(editedStudent.getStudentId())) {
+                throw new CommandException(MESSAGE_DUPLICATE_STUDENTID);
+            }
+        }
+
+        // Check if new tutorial exists if tutorial ID is changed
+        if (!editedStudent.getTutorialId().equals(studentToEdit.getTutorialId())) {
+            if (!model.hasTutorial(editedStudent.getTutorialId())) {
+                throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND + editedStudent.getTutorialId());
+            }
+        }
+
         model.setStudent(studentToEdit, editedStudent);
+
+        // Update tutorial assignments if tutorial ID has changed
+        if (!editedStudent.getTutorialId().equals(studentToEdit.getTutorialId())) {
+            model.assignStudent(editedStudent, editedStudent.getTutorialId());
+        }
+
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
     }
@@ -133,12 +152,8 @@ public class EditCommand extends Command {
      */
     public static class EditStudentDescriptor {
         private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
         private StudentId studentId;
         private TutorialId tutorialId;
-        private Set<Tag> tags;
         private PresentDates presentDates;
 
         public EditStudentDescriptor() {}
@@ -149,12 +164,8 @@ public class EditCommand extends Command {
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setStudentId(toCopy.studentId);
             setTutorialId(toCopy.tutorialId);
-            setTags(toCopy.tags);
             setPresentDates(toCopy.presentDates);
         }
 
@@ -162,7 +173,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, studentId, tutorialId, tags);
+            return CollectionUtil.isAnyNonNull(name, studentId, tutorialId);
         }
 
         public void setName(Name name) {
@@ -171,30 +182,6 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setPresentDates(PresentDates presentDates) {
@@ -219,23 +206,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(tutorialId);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -249,10 +219,6 @@ public class EditCommand extends Command {
 
             EditStudentDescriptor otherEditStudentDescriptor = (EditStudentDescriptor) other;
             return Objects.equals(name, otherEditStudentDescriptor.name)
-                    && Objects.equals(phone, otherEditStudentDescriptor.phone)
-                    && Objects.equals(email, otherEditStudentDescriptor.email)
-                    && Objects.equals(address, otherEditStudentDescriptor.address)
-                    && Objects.equals(tags, otherEditStudentDescriptor.tags)
                     && Objects.equals(presentDates, otherEditStudentDescriptor.presentDates)
                     && Objects.equals(studentId, otherEditStudentDescriptor.studentId)
                     && Objects.equals(tutorialId, otherEditStudentDescriptor.tutorialId);
@@ -262,12 +228,8 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
                     .add("studentId", studentId)
                     .add("tutorialId", tutorialId)
-                    .add("tags", tags)
                     .add("attendance", presentDates)
                     .toString();
         }

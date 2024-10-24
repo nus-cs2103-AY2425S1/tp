@@ -24,8 +24,8 @@ import seedu.address.logic.commands.AttendCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-// import seedu.address.logic.commands.EditCommand;
-// import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -35,9 +35,9 @@ import seedu.address.logic.commands.UnattendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
-// import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
 
@@ -100,7 +100,7 @@ public class AddressBookParserTest {
 
         assertEquals(expectedCommand, command);
     }
-    /*
+
     @Test
     public void parseCommand_edit() throws Exception {
         Student student = new StudentBuilder().build();
@@ -109,7 +109,7 @@ public class AddressBookParserTest {
                 + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
-    */
+
 
 
     @Test

@@ -102,6 +102,7 @@ public class TutorialList {
                 .forEach(t -> t.add(student));
     }
 
+
     /**
      * Deletes the specified student from all tutorials where the student is present.
      *
