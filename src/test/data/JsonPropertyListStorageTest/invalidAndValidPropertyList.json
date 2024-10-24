@@ -1,0 +1,15 @@
+{
+  "properties": [ {
+    "name": "Valid Property",
+    "phone": "9482424",
+    "location": "Clementi",
+    "askingPrice": "1,000,000",
+    "propertyType": "HDB"
+  }, {
+    "name": "Buyer With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "location": "Clementi",
+    "askingPrice": "1,000,000",
+    "propertyType": "HDB"
+  } ]
+}

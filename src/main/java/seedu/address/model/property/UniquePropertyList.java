@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.meetup.exceptions.MeetUpNotFoundException;
 import seedu.address.model.property.exceptions.DuplicatePropertyException;
 import seedu.address.model.property.exceptions.PropertyNotFoundException;
 
@@ -53,7 +54,7 @@ public class UniquePropertyList implements Iterable<Property> {
      * {@code target} must exist in the list.
      * The property identity of {@code editedProperty} must not be the same as another existing property in the list.
      */
-    public void setProperties(Property target, Property editedProperty) {
+    public void setProperty(Property target, Property editedProperty) {
         requireAllNonNull(target, editedProperty);
 
         int index = internalList.indexOf(target);
@@ -66,6 +67,17 @@ public class UniquePropertyList implements Iterable<Property> {
         }
 
         internalList.set(index, editedProperty);
+    }
+
+    /**
+     * Removes the equivalent property from the list.
+     * The property must exist in the list.
+     */
+    public void remove(Property toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new MeetUpNotFoundException();
+        }
     }
 
     public void setProperties(UniquePropertyList replacement) {
@@ -84,17 +96,6 @@ public class UniquePropertyList implements Iterable<Property> {
         }
 
         internalList.setAll(properties);
-    }
-
-    /**
-     * Removes the equivalent property from the list.
-     * The property must exist in the list.
-     */
-    public void remove(Property toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new PropertyNotFoundException();
-        }
     }
 
     /**
