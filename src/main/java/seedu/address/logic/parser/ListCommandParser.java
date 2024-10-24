@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KEY;
 
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ListBuyersCommand;
 import seedu.address.logic.commands.ListClientsCommand;
@@ -48,30 +49,35 @@ public class ListCommandParser implements Parser<ListCommand> {
         // Switch case to handle different key values with assertions
         switch (keyArgLower) {
         case ListClientsCommand.KEY_WORD:
-            assert keyArgLower.equals("clients") :
-                    "Key argument must be 'clients' for ListClientsCommand to be created";
+            assert keyArgLower.equals("clients")
+                    : "Key argument must be 'clients' for ListClientsCommand to be created";
             logger.info("Creating ListClientsCommand");
             return new ListClientsCommand();
+
         case ListBuyersCommand.KEY_WORD:
-            assert keyArgLower.equals("buyers") :
-                    "Key argument must be 'buyers' for ListBuyersCommand to be created";
+            assert keyArgLower.equals("buyers")
+                    : "Key argument must be 'buyers' for ListBuyersCommand to be created";
             logger.info("Creating ListBuyersCommand");
             return new ListBuyersCommand();
+
         case ListSellersCommand.KEY_WORD:
-            assert keyArgLower.equals("sellers") :
-                    "Key argument must be 'sellers' for ListSellersCommand to be created";
+            assert keyArgLower.equals("sellers")
+                    : "Key argument must be 'sellers' for ListSellersCommand to be created";
             logger.info("Creating ListSellersCommand");
             return new ListSellersCommand();
+
         case ListPropertiesCommand.KEY_WORD:
-            assert keyArgLower.equals("properties") :
-                    "Key argument must be 'properties' for ListPropertiesCommand to be created";
+            assert keyArgLower.equals("properties")
+                    : "Key argument must be 'properties' for ListPropertiesCommand to be created";
             logger.info("Creating ListPropertiesCommand");
             return new ListPropertiesCommand();
+
         case ListMeetingsCommand.KEY_WORD:
-            assert keyArgLower.equals("meetings") :
-                    "Key argument must be 'meetings' for ListMeetingsCommand to be created";
+            assert keyArgLower.equals("meetings")
+                    : "Key argument must be 'meetings' for ListMeetingsCommand to be created";
             logger.info("Creating ListMeetingsCommand");
             return new ListMeetingsCommand();
+
         default:
             // Assert that the keyArg is not any of the valid keys
             assert !keyArgLower.equals(ListClientsCommand.KEY_WORD.toLowerCase())
