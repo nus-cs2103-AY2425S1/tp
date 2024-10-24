@@ -6,7 +6,7 @@ import seedu.address.model.person.PhoneContainsKeywordsPredicate;
  * Finds and lists all persons in address book whose phone number
  * contains any of the argument keywords.
  */
-public class FindByPhoneCommand extends AbstractFindCommand {
+public class FindByPhoneCommand extends SuperFindCommand {
     public static final String COMMAND_WORD = "find p/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose phone numbers "

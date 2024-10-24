@@ -26,11 +26,10 @@ public abstract class ContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ContainsKeywordsPredicate)) {
+        if (!(other instanceof ContainsKeywordsPredicate otherNameContainsKeywordsPredicate)) {
             return false;
         }
 
-        ContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (ContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

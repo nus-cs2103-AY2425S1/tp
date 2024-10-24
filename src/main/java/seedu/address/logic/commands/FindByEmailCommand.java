@@ -6,7 +6,7 @@ import seedu.address.model.person.EmailContainsKeywordsPredicate;
  * Finds and lists all persons in address book whose email is equivalent to the specified keyword.
  * Keyword matching is case-insensitive.
  */
-public class FindByEmailCommand extends AbstractFindCommand {
+public class FindByEmailCommand extends SuperFindCommand {
 
     public static final String COMMAND_WORD = "find e/";
 

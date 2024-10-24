@@ -52,7 +52,7 @@ public class FindByEmailCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = AbstractFindCommand.MESSAGE_NO_PERSONS_FOUND;
+        String expectedMessage = SuperFindCommand.MESSAGE_NO_PERSONS_FOUND;
         EmailContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindByEmailCommand command = new FindByEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

@@ -13,19 +13,19 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AbstractFindCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindByNameCommand;
-import seedu.address.logic.commands.FindByPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SuperFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CombinedContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -75,19 +75,34 @@ public class CampusConnectParserTest {
     @Test
     public void parseCommand_findByName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindByNameCommand command = (FindByNameCommand) parser.parseCommand(AbstractFindCommand.COMMAND_WORD
-                + keywords.stream().map(x -> FindByNameCommand.NAME_COMMAND_WORD + x)
-                .collect(Collectors.joining(" ")));
-        assertEquals(new FindByNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        SuperFindCommand expectedCommand = new SuperFindCommand(
+                new CombinedContainsKeywordsPredicate(List.of(
+                        new NameContainsKeywordsPredicate(keywords))
+                )
+        );
+        String input = SuperFindCommand.COMMAND_WORD + " "
+                + keywords.stream()
+                        .map(keyword -> SuperFindCommand.NAME_COMMAND_WORD + keyword)
+                        .collect(Collectors.joining(" "));
+        Command command = parser.parseCommand(input);
+        assertEquals(expectedCommand, command);
     }
 
     @Test
     public void parseCommand_findByPhone() throws Exception {
         List<String> keywords = Arrays.asList("995", "91234567", "132");
-        FindByPhoneCommand command = (FindByPhoneCommand) parser.parseCommand(AbstractFindCommand.COMMAND_WORD
-                        + keywords.stream().map(x -> FindByPhoneCommand.PHONE_COMMAND_WORD + x)
-                        .collect(Collectors.joining(" ")));
-        assertEquals(new FindByPhoneCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
+        // Adjust expectation if using combined predicates through AbstractFindCommand instead.
+        SuperFindCommand expectedCommand = new SuperFindCommand(
+                new CombinedContainsKeywordsPredicate(List.of(
+                        new PhoneContainsKeywordsPredicate(keywords))
+                )
+        );
+        String input = SuperFindCommand.COMMAND_WORD + " "
+                + keywords.stream()
+                        .map(keyword -> SuperFindCommand.PHONE_COMMAND_WORD + keyword)
+                        .collect(Collectors.joining(" "));
+        Command command = parser.parseCommand(input);
+        assertEquals(expectedCommand, command);
     }
 
     @Test
