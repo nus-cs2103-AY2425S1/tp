@@ -82,8 +82,7 @@ public class DeleteStudentCommandTest {
 
         assertThrows(CommandException.class,
                 String.format(DeleteStudentCommand.MESSAGE_DUPLICATE_STUDENT,
-                        "A1234567X A0123456Y A9876543Z A1111111B", "John Ng"),
-                () -> command.execute(modelStub));
+                        "A1234567X A0123456Y A9876543Z A1111111B", "John Ng"), () -> command.execute(modelStub));
     }
 
     // Ensure deletion by only provided name works when student with correct details exists
@@ -97,8 +96,8 @@ public class DeleteStudentCommandTest {
 
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, validStudent.getName()
-                ,validStudent.getStudentNumber()),
+        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, validStudent.getName(),
+                        validStudent.getStudentNumber()),
                 result.getFeedbackToUser());
     }
 
@@ -113,8 +112,8 @@ public class DeleteStudentCommandTest {
 
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, validStudent.getName()
-                        ,validStudent.getStudentNumber()),
+        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, validStudent.getName(),
+                        validStudent.getStudentNumber()),
                 result.getFeedbackToUser());
     }
 
