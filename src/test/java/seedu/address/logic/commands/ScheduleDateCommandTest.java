@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.DateUtil.DATE_FORMATTER;
 import static seedu.address.logic.Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -66,12 +68,12 @@ public class ScheduleDateCommandTest {
 
     @Test
     public void execute_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 2, "23 October 2024");
+        String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 4, "23 October 2024");
         AppointmentContainsDatePredicate predicate = preparePredicate("23-10-2024");
         ScheduleDateCommand command = new ScheduleDateCommand(predicate);
         expectedModel.updateFilteredAppointmentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA, GEORGE), expectedModel.getSortedAppointmentList());
+        assertEquals(Arrays.asList(FIONA, CARL, GEORGE, BENSON), expectedModel.getSortedAppointmentList());
     }
 
     @Test
