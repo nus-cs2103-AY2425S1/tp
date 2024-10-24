@@ -14,6 +14,11 @@ public class HelpLogicManager {
 
     private final HelpContentManager contentManager;
 
+    /**
+     * Constructs a HelpLogicManager with the specified HelpContentManager.
+     * @param contentManager The HelpContentManager used to manage help content.
+     * @throws AssertionError if the provided HelpContentManager is null.
+     */
     public HelpLogicManager(HelpContentManager contentManager) {
         assert contentManager != null : "HelpContentManager should not be null";
         this.contentManager = contentManager;

@@ -16,6 +16,9 @@ public class HelpContentManager {
     private Map<String, String> contentMap = new HashMap<>();
     private final ObservableList<String[]> commandSummaryData = FXCollections.observableArrayList();
 
+    /**
+     * Constructs a HelpContentManager and initializes the content map with predefined help content.
+     */
     public HelpContentManager() {
         initializeContents();
         assert !contentMap.isEmpty() : "Content map should be initialized with values";
@@ -241,7 +244,8 @@ public class HelpContentManager {
             String> formatColumn, TableColumn<String[], String> exampleColumn) {
 
         assert table != null : "TableView should not be null";
-        assert actionColumn != null && formatColumn != null && exampleColumn != null : "Table columns should not be null";
+        assert actionColumn != null && formatColumn != null
+                && exampleColumn != null : "Table columns should not be null";
 
         actionColumn.setCellValueFactory(
                 cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue()[0]));
