@@ -87,7 +87,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showListings, showClients);
     }
 
     @Override
@@ -96,6 +96,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showListings", showListings)
+                .add("showClients", showClients)
                 .toString();
     }
 
