@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HIGH_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOW_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MEDIUM_RISK;
@@ -79,9 +81,18 @@ public class FilterCommandParserTest {
         FilterCommand expectedFilterCommand = new FilterCommand(phoneOnlyPredicate);
         assertParseSuccess(parser, " p/ " + ALICE.getPhone().value, expectedFilterCommand);
 
+        //parse with preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " p/ " + ALICE.getPhone().value,
+              expectedFilterCommand);
+
+        //parse with non-empty preamble
+        assertParseSuccess(parser, PREAMBLE_NON_EMPTY + " p/ " + ALICE.getPhone().value,
+              expectedFilterCommand);
+
         //tag only
         expectedFilterCommand = new FilterCommand(highTagOnlyPredicate);
         assertParseSuccess(parser, " t/ High Risk", expectedFilterCommand);
+
 
         //phone number and tag
         expectedFilterCommand =
