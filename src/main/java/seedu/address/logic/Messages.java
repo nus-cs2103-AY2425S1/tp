@@ -75,7 +75,7 @@ public class Messages {
         if (person.getCar() == null) {
             builder.append(".");
         } else {
-            builder.append("(VRN: ");
+            builder.append(" (VRN: ");
             builder.append(person.getVrn());
             builder.append(").");
         }
