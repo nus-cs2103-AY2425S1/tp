@@ -247,6 +247,29 @@ public class AddressBookTest {
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void setEvent_existingEvent_replacesEvent() {
+        // Add an initial event to the address book
+        Event originalEvent = new EventBuilder()
+                .withEventName("Original Meeting")
+                .withEventDescription("A meeting to discuss project updates.")
+                .withEventDuration("2024-10-01", "2024-10-02")
+                .build();
+        addressBook.addEvent(originalEvent);
+
+        // Create an edited version of the event
+        Event editedEvent = new EventBuilder(originalEvent)
+                .withEventName("Edited Meeting")
+                .build();
+
+        // Replace the existing event with the edited event
+        addressBook.setEvent(originalEvent, editedEvent);
+
+        // Check that the event list contains the edited event and not the original
+        assertTrue(addressBook.hasEvent(editedEvent));
+        assertFalse(addressBook.hasEvent(originalEvent));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons and events lists can violate interface constraints.
      */
