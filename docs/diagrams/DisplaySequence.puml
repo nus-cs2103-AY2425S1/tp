@@ -1,0 +1,54 @@
+@startuml DisplaySequence
+
+participant ":LogicManager" as Logic
+participant ":DisplayCommand" as Command
+participant ":Model" as Model
+participant ":PersonList" as PersonList
+
+alt Display by Index
+    Logic -> Command : execute(model)
+    activate Command
+
+    Command -> Model : getFilteredPersonList()
+    activate Model
+    Model --> Command : filteredList
+    deactivate Model
+
+    Command -> Command : getPersonToDisplayByIndex(model, index)
+    activate Command
+        alt index >= list.size
+            Command --> Logic : throw CommandException\n(invalid index)
+        else valid index
+            Command -> PersonList : get(index)
+            activate PersonList
+            PersonList --> Command : person
+            deactivate PersonList
+        end
+    deactivate Command
+
+else Display by Name
+    Logic -> Command : execute(model)
+    activate Command
+
+    Command -> Command : getPersonToDisplayByName(model, name)
+    activate Command
+        Command -> Model : findPersonByName(name)
+        activate Model
+        Model --> Command : person
+        deactivate Model
+
+        alt person == null
+            Command --> Logic : throw CommandException\n(invalid name)
+        end
+    deactivate Command
+end
+
+Command -> Model : displayPerson(person)
+activate Model
+Model --> Command
+deactivate Model
+
+Command --> Logic : CommandResult
+deactivate Command
+
+@enduml
