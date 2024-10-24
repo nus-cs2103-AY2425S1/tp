@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -19,14 +20,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Grade;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -36,8 +41,92 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void execute_editModuleOldModuleNotFound_throwsCommandException() {
+        Person originalPerson = TypicalPersons.BENSON;
+        Module oldModule = new Module("CS1111");
+        Module newModule = new Module("CS1231S");
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.setModuleChanges(oldModule, newModule);
+
+        EditCommand editCommand = new EditCommand(originalPerson.getStudentId(), descriptor);
+
+        String expectedMessage = EditCommand.MESSAGE_MODULE_NOT_FOUND;
+        assertThrows(CommandException.class, () -> editCommand.execute(model), expectedMessage);
+    }
+
+
+    @Test
+    public void execute_editModuleWithoutGrade_success() throws Exception {
+        Person originalPerson = TypicalPersons.BENSON;
+        Module oldModule = new Module("GEC1044");
+        Module newModule = new Module("CS1231S");
+
+        Person expectedPerson = new PersonBuilder()
+                .withStudentId("19191919")
+                .withName("Benson Meier")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withEmail("johnd@example.com")
+                .withPhone("98765432")
+                .withCourse("Medicine")
+                .withTag("Student")
+                .addUngradedModule("CS1231S")
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.setModuleChanges(oldModule, newModule);
+
+        EditCommand editCommand = new EditCommand(originalPerson.getStudentId(), descriptor);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(originalPerson, expectedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(expectedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        assertTrue(expectedPerson.getModules().stream().anyMatch(m -> m.value.equals("CS1231S")));
+        assertFalse(expectedPerson.getModules().stream().anyMatch(m -> m.value.equals("GEC1044")));
+    }
+
+    @Test
+    public void execute_editModuleWithGrade_success() throws Exception {
+        Person originalPerson = TypicalPersons.ALICE;
+        Module oldModule = new Module("MA1100");
+        oldModule.setGrade(new Grade("A"));
+        Module newModule = new Module("CS1010");
+
+        Person expectedPerson = new PersonBuilder()
+                .withStudentId("22223333")
+                .withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withEmail("alice@example.com")
+                .withPhone("94351253")
+                .withCourse("Math")
+                .withTag("Student")
+                .addGradedModule("CS1010", "A")
+                .addUngradedModule("MA2202")
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.setModuleChanges(oldModule, newModule);
+
+        EditCommand editCommand = new EditCommand(originalPerson.getStudentId(), descriptor);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(originalPerson, expectedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(expectedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+
+    @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder().withStudentId("22223333").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         StudentId studentId = model.getFilteredPersonList().get(0).getStudentId();
         EditCommand editCommand = new EditCommand(studentId, descriptor);

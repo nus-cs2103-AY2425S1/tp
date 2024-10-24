@@ -46,6 +46,10 @@ public class Module {
         return this.grade;
     }
 
+    public boolean hasGrade() {
+        return this.grade != null;
+    }
+
     @Override
     public String toString() {
         return value + ": " + (grade == null ? "Grade not assigned" : grade.toString());
