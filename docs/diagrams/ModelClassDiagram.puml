@@ -20,6 +20,10 @@ Class Name
 Class Phone
 Class Tag
 Class Nric
+Class Appointment
+Class Log
+Class LogList
+Class Remark
 
 Class I #FFFFFF
 }
@@ -43,7 +47,12 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> Nric
+Person *--> "*" Appointment
+Person *--> "*" Remark
+Person *--> "1" LogList
 Person *--> "*" Tag
+
+LogList *--> "*" Log
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

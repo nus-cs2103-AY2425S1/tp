@@ -19,4 +19,10 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> Nric
+Person *--> "*" Appointment
+Person *--> "*" Remark
+Person *--> "1" LogList
+Person *--> "*" Tag
+LogList *--> "*" Log
+
 @enduml
