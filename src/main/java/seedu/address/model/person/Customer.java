@@ -22,8 +22,8 @@ public class Customer extends Person {
      * Every field must be present and not null.
      */
     public Customer(Name name, Phone phone, Email email, Address address,
-                    DietaryPreference preference, Information information, Remark remark, Set<Tag> tags) {
-        super(name, phone, email, address, preference, remark, tags);
+                    Information information, Remark remark, Set<Tag> tags) {
+        super(name, phone, email, address, remark, tags);
         this.information = information;
         this.openCustomerOrders = new ArrayList<>();
     }

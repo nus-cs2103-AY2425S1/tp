@@ -22,9 +22,9 @@ public class Supplier extends Person {
      * Every field must be present and not null.
      */
     public Supplier(Name name, Phone phone, Email email, Address address,
-                    DietaryPreference preference, Ingredients ingredientsSupplied,
+                     Ingredients ingredientsSupplied,
                     Remark remark, Set<Tag> tags) {
-        super(name, phone, email, address, preference, remark, tags);
+        super(name, phone, email, address, remark, tags);
         this.ingredientsSupplied = ingredientsSupplied;
         this.openSupplyOrders = new ArrayList<>();
     }
