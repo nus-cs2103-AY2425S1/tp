@@ -1,7 +1,9 @@
 package tuteez.logic.commands;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import tuteez.commons.core.LogsCenter;
 import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
@@ -17,6 +19,8 @@ public class AddRemarkCommand extends RemarkCommand {
 
     private final Remark remarkToAdd;
 
+    private static final Logger logger = LogsCenter.getLogger(AddRemarkCommand.class);
+
     /**
      * Adds the specified Remark to the person {@code personIndex} of the displayed list.
      *
@@ -31,6 +35,8 @@ public class AddRemarkCommand extends RemarkCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person personToUpdate = getPersonFromModel(model);
+        String logMessage = String.format("Fetched person from model: %s", personToUpdate);
+        logger.info(logMessage);
         Person updatedPerson = addRemarkToPerson(personToUpdate);
 
         model.setPerson(personToUpdate, updatedPerson);
@@ -43,6 +49,10 @@ public class AddRemarkCommand extends RemarkCommand {
     private Person addRemarkToPerson(Person person) {
         RemarkList updatedRemarkList = new RemarkList(new ArrayList<>(person.getRemarkList().getRemarks()));
         updatedRemarkList.addRemark(remarkToAdd);
+
+        String logMessage = String.format("Remark '%s' added to person %s ", remarkToAdd, person);
+        logger.info(logMessage);
+
         return new Person(person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTelegramUsername(),
                 person.getTags(), person.getLessons(), updatedRemarkList);

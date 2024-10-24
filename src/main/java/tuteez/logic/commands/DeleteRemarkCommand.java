@@ -1,8 +1,10 @@
 package tuteez.logic.commands;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import tuteez.commons.core.index.Index;
+import tuteez.commons.core.LogsCenter;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
 import tuteez.model.Model;
@@ -16,6 +18,8 @@ public class DeleteRemarkCommand extends RemarkCommand {
     public static final String DELETE_REMARK_PARAM = "-d";
 
     private final Index remarkIndex;
+
+    private static final Logger logger = LogsCenter.getLogger(DeleteRemarkCommand.class);
 
     /**
      * Deletes the specified Remark {@code remarkIndex} to the person {@code personIndex} of the displayed list.
@@ -31,6 +35,8 @@ public class DeleteRemarkCommand extends RemarkCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person personToUpdate = getPersonFromModel(model);
+        String logMessage = String.format("Fetched person from model: %s", personToUpdate);
+        logger.info(logMessage);
         Person updatedPerson = deleteRemarkFromPerson(personToUpdate);
 
         model.setPerson(personToUpdate, updatedPerson);
@@ -43,11 +49,18 @@ public class DeleteRemarkCommand extends RemarkCommand {
     private Person deleteRemarkFromPerson(Person person) throws CommandException {
         RemarkList updatedRemarkList = new RemarkList(new ArrayList<>(person.getRemarkList().getRemarks()));
 
+        String logSizeMessage = String.format("Size of remark list: %d ", updatedRemarkList.getSize());
+        logger.info(logSizeMessage);
+
         if (remarkIndex.getZeroBased() < 0 || remarkIndex.getZeroBased() >= updatedRemarkList.getSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_REMARK_INDEX);
         }
 
         updatedRemarkList.deleteRemark(remarkIndex.getZeroBased());
+
+        String logDeleteMessage = String.format("Remark of index %d deleted from person %s ",
+                remarkIndex.getOneBased(), person);
+        logger.info(logDeleteMessage);
 
         return new Person(person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTelegramUsername(),
