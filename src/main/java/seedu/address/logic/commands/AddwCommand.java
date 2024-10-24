@@ -5,12 +5,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Wedding;
+
+import java.util.List;
 
 
 /**
@@ -28,26 +36,76 @@ public class AddwCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
-    private final Wedding toAdd;
+    public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book";
+    public static final String MESSAGE_DUPLICATE_HANDLING =
+            "Please specify the index of the contact you want to edit.\n"
+                    + "Find the index from the list below and type edit INDEX ...\n"
+                    + "Example: " + COMMAND_WORD + " 1 ...";
+
+    private final Index index;
+    private final NameMatchesKeywordPredicate predicate;
+    private Wedding toAdd;
 
     /**
      * Creates an AddwCommand to add the specified {@code Wedding}
      */
-    public AddwCommand(Wedding wedding) {
+    public AddwCommand(Index index, NameMatchesKeywordPredicate predicate, Wedding wedding) {
         requireNonNull(wedding);
-        toAdd = wedding;
+        this.index = index;
+        this.predicate = predicate;
+        this.toAdd = wedding;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        Person client;
+
+        if (this.index != null) {
+            client = selectClientWithIndex(model);
+        } else {
+            client = selectClientWithKeyword(model);
+        }
+
+        toAdd = new Wedding(toAdd.getName(), new Client(client), toAdd.getDate(), toAdd.getVenue());
+
         if (model.hasWedding(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
         }
 
+        client.setOwnWedding(toAdd);
         model.addWedding(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    public Person selectClientWithIndex(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_PERSON);
+        }
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    lastShownList.size()));
+        }
+
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    public Person selectClientWithKeyword(Model model) throws CommandException {
+        model.updateFilteredPersonList(predicate);
+        List<Person> filteredPersonList = model.getFilteredPersonList();
+
+        if (filteredPersonList.isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_INVALID_PERSON);
+        } else if (filteredPersonList.size() == 1) {
+            return filteredPersonList.get(0);
+        } else {
+            throw new CommandException(MESSAGE_DUPLICATE_HANDLING);
+        }
     }
 
     @Override

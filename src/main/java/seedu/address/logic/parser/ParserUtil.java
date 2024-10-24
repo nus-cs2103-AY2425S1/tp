@@ -105,13 +105,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Client parseClient(String client) throws ParseException {
+    public static String parseClient(String client) throws ParseException {
         // SHERNICE HELPPP idk the name & index thing
         requireNonNull(client);
-        Person temporary = new Person(new Name("Sample"), new Phone("00000000"),
-                new Email("sample@gmail.com"),
-                new Address("Blk 90 Sims Drive , #08-15, Singapore 380090"), null, null);
-        return new Client(temporary);
+        String trimmedClient = client.trim();
+        if (!Client.isValidClientName(trimmedClient) && Client.isValidClientIndex(trimmedClient)) {
+            throw new ParseException(Client.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedClient;
     }
 
     /**

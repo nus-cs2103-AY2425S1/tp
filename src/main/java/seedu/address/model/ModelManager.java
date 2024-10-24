@@ -140,6 +140,7 @@ public class ModelManager implements Model {
     @Override
     public void addWedding(Wedding wedding) {
         addressBook.addWedding(wedding);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
     }
 
