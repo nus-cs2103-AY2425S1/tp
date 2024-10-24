@@ -14,16 +14,16 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("add_session Rehearsal 24 Oct 2024 2 1")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : getFilteredMemberList()
-activate model MODEL_COLOR
+logic -[LOGIC_COLOR]> logic : createSession("Rehearsal", "24 Oct 2024", 2, 1)
+activate logic LOGIC_COLOR
+logic --[LOGIC_COLOR]> logic
+deactivate logic
 
-model -[MODEL_COLOR]> logic : List<Member>
-deactivate model
 
-loop For each member
-    logic -[LOGIC_COLOR]> model : setMember(updatedMember, updatedMember)
+loop For each Member
+    logic -[LOGIC_COLOR]> model : addSession(Session)
     activate model MODEL_COLOR
-    model -[MODEL_COLOR]-> logic
+    model --[MODEL_COLOR]> logic
     deactivate model
 end
 
@@ -41,6 +41,6 @@ deactivate storage
 logic --[LOGIC_COLOR]> ui
 deactivate logic
 
-ui --[UI_COLOR]> user
+ui--[UI_COLOR]> user
 deactivate ui
 @enduml
