@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -17,6 +18,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
     Predicate<Wedding> PREDICATE_SHOW_ALL_WEDDINGS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -128,6 +130,39 @@ public interface Model {
      * The tag must exist in the Wedlinker.
      */
     void deleteTag(Tag toDelete);
+
+    /**
+     * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
+     */
+    boolean hasTask(Task toAdd);
+
+    /**
+     * Adds the given task.
+     * {@code task} must not already exist in the address book.
+     */
+    void addTask(Task toAdd);
+
+    /** Returns an unmodifiable view of the filtered task list */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Replaces the given Task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The task identity of {@code editedTask} must not be the same as another existing Task in the address book.
+     */
+    void setTask(Task target, Task editedTask);
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the Wedlinker.
+     */
+    void deleteTask(Task toDelete);
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
      * Returns true if a wedding with the same name as {@code toAdd} exists in the Wedlinker.

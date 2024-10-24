@@ -49,7 +49,8 @@ public class TagCommandTest {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 updatedTags,
-                personToEdit.getWeddings());
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
         expectedModel.setPerson(personToEdit, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
@@ -64,6 +65,7 @@ public class TagCommandTest {
                 new Email("test@example.com"),
                 new Address("123, Test Street"),
                 new HashSet<>(List.of(new Tag(new TagName("family")))),
+                new HashSet<>(),
                 new HashSet<>()
         );
         model.addTag(new Tag(new TagName("family")));
@@ -86,7 +88,8 @@ public class TagCommandTest {
                 personWithTags.getEmail(),
                 personWithTags.getAddress(),
                 updatedTags,
-                personWithTags.getWeddings());
+                personWithTags.getWeddings(),
+                personWithTags.getTasks());
         expectedModel.setPerson(personWithTags, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);

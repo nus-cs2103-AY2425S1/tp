@@ -46,7 +46,12 @@ public class CommandResultTest {
 
         // different switchView value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
+                SwitchView.TASK)));
+
+        // different switchView value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
                 SwitchView.WEDDING)));
+
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
                 SwitchView.PERSON)));
 
