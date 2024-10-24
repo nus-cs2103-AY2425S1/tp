@@ -153,6 +153,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        addressBook.setTask(target, editedTask);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -208,6 +214,16 @@ public class ModelManager implements Model {
                 target.getAddress(), target.getEmergencyContact(), target.getTags(),
                 new PriorityLevel(3));
         setPerson(target, resetPerson);
+    }
+
+    @Override
+    public void updateTasksForPerson(Person target, Person editedPerson) {
+        for (Task task : getFilteredTaskList()) {
+            if (task.getPatient().equals(editedPerson)) {
+                Task updatedTask = new Task(target, task.getDescription(), task.getStatus());
+                addressBook.setTask(task, updatedTask);
+            }
+        }
     }
 
 }
