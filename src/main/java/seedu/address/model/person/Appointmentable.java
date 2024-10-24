@@ -47,12 +47,4 @@ public interface Appointmentable {
      */
     public abstract Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId);
 
-    /**
-     * Marks an appointment at the specified time, with the respective patient and doctor.
-     *
-     * @param dateTime  Time of appointment.
-     * @param patientId Id of patient in the appointment.
-     * @param doctorId  Id of doctor in the appointment.
-     */
-    public abstract void markAppointment(LocalDateTime dateTime, int patientId, int doctorId);
 }
