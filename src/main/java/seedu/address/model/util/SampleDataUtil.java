@@ -15,7 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Tag;
-import seedu.address.model.wedding.Datetime;
+import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
@@ -75,9 +75,9 @@ public class SampleDataUtil {
     public static Wedding[] getSampleWeddings() {
         return new Wedding[] {
             new Wedding(new WeddingName("Adam & Steve"), new Venue("Serangoon Nex"),
-                    new Datetime("22/12/2025")),
+                    new Date("22/12/2025")),
             new Wedding(new WeddingName("Lisa & Jane"), new Venue("Hougang Void Deck"),
-                    new Datetime("11/11/2032"))
+                    new Date("11/11/2032"))
         };
     }
 

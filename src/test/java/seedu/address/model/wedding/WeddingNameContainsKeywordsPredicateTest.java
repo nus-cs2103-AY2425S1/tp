@@ -76,7 +76,7 @@ public class WeddingNameContainsKeywordsPredicateTest {
         // Keywords match phone, email and address, but does not match name
         predicate = new WeddingNameContainsKeywordsPredicate(Arrays.asList("woodlands", "22/01/2024"));
         assertFalse(predicate.test(new WeddingBuilder().withWeddingName("Alice & Bob")
-                .withVenue("woodlands").withDatetime("22/01/2024").build()));
+                .withVenue("woodlands").withDate("22/01/2024").build()));
     }
 
     @Test

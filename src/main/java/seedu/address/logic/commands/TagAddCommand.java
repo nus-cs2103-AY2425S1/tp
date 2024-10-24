@@ -22,9 +22,10 @@ import seedu.address.model.person.Tag;
 public class TagAddCommand extends Command {
 
     public static final String COMMAND_WORD = "tag-add";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Adds a tag to the person identified "
-            + "by their name. "
+            + "by their name. ";
+    public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: "
             + PREFIX_NAME + "NAME " + PREFIX_TAG + "[TAG]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui "
@@ -99,9 +100,9 @@ public class TagAddCommand extends Command {
         Set<Tag> tagsInBoth = new HashSet<>(personToEdit.getTags());
         Set<Tag> tagsInNeither = new HashSet<>(tagsToAdd);
         // if all tags in og person matches the tags to add, means all tags to be added
-        // are duplicates, so dont go inside the loop
+        // are duplicates, so don't go inside the loop
         if (!personToEdit.getTags().containsAll(tagsToAdd)) {
-            tagsInBoth.retainAll(tagsToAdd); // duplicates that we dont want to add
+            tagsInBoth.retainAll(tagsToAdd); // duplicates that we don't want to add
             tagsInNeither.removeAll(tagsInBoth); // new tags minus the duplicates that we want to add
             if (tagsInBoth.isEmpty()) {
                 // if there are no duplicates, this is a clean addition
