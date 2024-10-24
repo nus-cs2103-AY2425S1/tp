@@ -177,13 +177,30 @@ public class StudentCourseAssociation {
 
         StudentCourseAssociation otherStudentCourseAssociation = (StudentCourseAssociation) other;
         boolean checkStudentAndCourse = this.student.equals(otherStudentCourseAssociation.student)
-                && this.course.isConflictCourse(otherStudentCourseAssociation.course);
+                && this.course.equals(otherStudentCourseAssociation.course);
 
         if (!checkStudentAndCourse) {
             return false;
         }
 
         return this.tutorial.equals(otherStudentCourseAssociation.tutorial);
+    }
+
+    /**
+     * Compares this {@code StudentCourseAssociation} with another {@code StudentCourseAssociation} for equality
+     * based on the primary identifiers: matriculation number, course code, and tutorial ID.
+     *
+     * @param other The other {@code StudentCourseAssociation} to compare this {@code StudentCourseAssociation} with
+     * @return true if the two SCAs are equal, false otherwise
+     */
+    public boolean isSameSca(StudentCourseAssociation other) {
+        if (other == this) {
+            return true;
+        }
+
+        return this.student.isSamePerson(other.student)
+                && this.course.isConflictCourse(other.course)
+                && this.tutorial.equals(other.tutorial);
     }
 
     @Override
