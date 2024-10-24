@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import tuteez.commons.core.LogsCenter;
 import tuteez.commons.core.index.Index;
 import tuteez.commons.util.CollectionUtil;
 import tuteez.commons.util.ToStringBuilder;
@@ -63,6 +65,7 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -95,19 +98,25 @@ public class EditCommand extends Command {
         Optional<Set<Lesson>> lessons = editPersonDescriptor.getLessons();
         if (lessons.isPresent()) {
             for (Lesson newLesson : lessons.get()) {
-                if (personToEdit.getLessons().contains(newLesson)) {
+                if (personToEdit.isLessonScheduled(newLesson)) {
                     continue;
                 }
 
                 if (model.isClashingWithExistingLesson(newLesson)) {
+                    String logMessage = String.format("Student: %s | Lessons: %s "
+                            + "| Conflict: Clashes with another student's lesson",
+                            editedPerson.getName(), editedPerson.getLessons().toString());
+                    logger.info(logMessage);
                     throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-                    //return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
                 }
             }
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        String logMessage = String.format("Before Edit - Student: %s%nAfter Edit - Student: %s",
+                personToEdit, editedPerson);
+        logger.info(logMessage);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: derive(#fdf5f5, 20%);
+    background-color: #fdf5f5; /* Used in the default.html file */
 }
 
 .label {
@@ -138,9 +138,25 @@
     -fx-text-fill: derive(#757575, -10%);
 }
 
+.card_big_label {
+    -fx-font-family: "Raleway Semibold";
+        -fx-font-size: 16px;
+        -fx-text-fill: derive(#757575, -10%);
+}
+
+.card_small_label {
+    -fx-font-family: "Raleway";
+    -fx-font-size: 12px;
+    -fx-text-fill: derive(#757575, -10%);
+}
+
 .stack-pane {
      -fx-background-color: #fdf5f5;
      /*-fx-padding: 10px;*/
+}
+
+.right-pane {
+    -fx-background-color: #fdf5f5;
 }
 
 .pane-with-border {

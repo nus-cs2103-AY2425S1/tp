@@ -10,7 +10,9 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Set;
+import java.util.logging.Logger;
 
+import tuteez.commons.core.LogsCenter;
 import tuteez.commons.util.ToStringBuilder;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.exceptions.CommandException;
@@ -53,6 +55,7 @@ public class AddCommand extends Command {
             + " student, please retype command";
 
     private final Person toAdd;
+    private final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -72,12 +75,17 @@ public class AddCommand extends Command {
 
         Set<Lesson> lessonSet = toAdd.getLessons();
         for (Lesson lesson: lessonSet) {
+            assert lesson != null;
             if (model.isClashingWithExistingLesson(lesson)) {
+                String logMessage = String.format("Student: %s | Lessons: %s | Conflict: Clashes with "
+                        + "another student's lesson", toAdd.getName(), toAdd.getLessons().toString());
+                logger.info(logMessage);
                 throw new CommandException(MESSAGE_DUPLICATE_LESSON);
             }
         }
 
         model.addPerson(toAdd);
+        logger.info("Student Added - " + toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

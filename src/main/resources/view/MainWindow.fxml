@@ -24,6 +24,7 @@
       </stylesheets>
 
       <VBox>
+        <!-- Menu Bar -->
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -33,13 +34,21 @@
           </Menu>
         </MenuBar>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+        <!-- SplitPane to place person list and display card side by side -->
+        <SplitPane xmlns="http://javafx.com/javafx/17"
+                   xmlns:fx="http://javafx.com/fxml/1"
+                   VBox.vgrow="ALWAYS"
+                   dividerPositions="0.3">
+          <!-- Left: Person List -->
+          <StackPane fx:id="personListPanelPlaceholder"
+                     minWidth="200"
+                     maxWidth="200"/>  <!-- Add maxWidth to fix the width -->
+          <!-- Right: Display Card -->
+          <StackPane fx:id="displayCardPanelPlaceholder"
+                     minWidth="200"/>
+        </SplitPane>
 
+        <!-- Result Display -->
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="100" prefHeight="100" maxHeight="100">
           <padding>
@@ -47,12 +56,14 @@
           </padding>
         </StackPane>
 
+        <!-- Command Box -->
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
 
+        <!-- Status Bar -->
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

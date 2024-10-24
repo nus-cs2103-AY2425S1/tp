@@ -3,8 +3,10 @@ package tuteez.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.commons.core.LogsCenter;
@@ -69,6 +71,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObjectProperty<Optional<Person>> getLastViewedPerson() {
+        return model.getLastViewedPerson();
     }
 
     @Override

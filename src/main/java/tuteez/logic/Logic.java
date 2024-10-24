@@ -1,7 +1,9 @@
 package tuteez.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.logic.commands.CommandResult;
@@ -32,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the person's details */
+    ObjectProperty<Optional<Person>> getLastViewedPerson();
 
     /**
      * Returns the user prefs' address book file path.
