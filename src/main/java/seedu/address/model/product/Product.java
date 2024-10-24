@@ -24,7 +24,7 @@ public class Product {
     private int minStockLevel;
     private int maxStockLevel;
 
-    private final Set<Tag> tags = new HashSet<>(); // TODO: Implement storage of tags
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -32,7 +32,6 @@ public class Product {
     public Product(seedu.address.model.product.ProductName name) {
         requireAllNonNull(name);
         this.name = name;
-        this.tags.addAll(tags);
         this.stockLevel = 0;
         this.minStockLevel = Integer.MAX_VALUE;
         this.maxStockLevel = 0;
@@ -49,15 +48,6 @@ public class Product {
         this.minStockLevel = Integer.MAX_VALUE;
         this.maxStockLevel = 0;
     }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
     /**
      * Removes assigned supplier and assignment status.
      */
@@ -131,6 +121,13 @@ public class Product {
 
     public ProductName getName() {
         return name;
+    }
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
