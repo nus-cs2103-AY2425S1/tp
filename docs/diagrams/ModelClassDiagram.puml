@@ -22,6 +22,7 @@ Class Phone
 Class Tag
 Class Student extends Person
 Class Grade
+Class Parent extends Person
 
 Class I #FFFFFF
 }
@@ -48,6 +49,7 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Student *--> Grade
+Student <-> Parent
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
