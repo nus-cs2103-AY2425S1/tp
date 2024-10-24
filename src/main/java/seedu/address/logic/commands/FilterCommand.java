@@ -5,22 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.address.model.FilteredAppointment.FilteredAppointment.APPOINTMENT_COMPARATOR;
-import static seedu.address.model.person.Appt.DATETIME_COMPARATOR;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AppointmentDateFilter.AppointmentDateFilter;
 import seedu.address.model.FilteredAppointment.FilteredAppointment;
 import seedu.address.model.Model;
-import seedu.address.model.healthservice.HealthService;
-import seedu.address.model.AppointmentDateFilter.AppointmentDateFilter;
-
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 

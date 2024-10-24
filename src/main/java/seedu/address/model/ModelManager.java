@@ -6,10 +6,6 @@ import static seedu.address.model.FilteredAppointment.FilteredAppointment.APPOIN
 
 import java.nio.file.Path;
 import java.util.TreeSet;
-import static seedu.address.model.person.Appt.DATETIME_COMPARATOR;
-
-import java.nio.file.Path;
-import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -18,7 +14,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.FilteredAppointment.FilteredAppointment;
-import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,7 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final TreeSet<FilteredAppointment> filteredAppts;
-  
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */

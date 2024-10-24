@@ -7,10 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Predicate;
-import java.util.logging.Filter;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +20,6 @@ import seedu.address.model.FilteredAppointment.FilteredAppointment;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
