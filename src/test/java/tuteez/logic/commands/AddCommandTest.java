@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import javafx.beans.property.ObjectProperty;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -28,6 +27,8 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.testutil.PersonBuilder;
+
+import javafx.beans.property.ObjectProperty;
 
 public class AddCommandTest {
 
