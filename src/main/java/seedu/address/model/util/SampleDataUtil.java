@@ -54,6 +54,7 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        //TODO tags & weddings
         return sampleAb;
     }
 

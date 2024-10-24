@@ -29,6 +29,14 @@ public class WeddingCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label partner1;
+    @FXML
+    private Label partner2;
+    @FXML
+    private Label address;
+    @FXML
+    private Label date;
 
     /**
      * Creates a {@code WeddingCard} with the given {@code Wedding} and index to display.
@@ -38,5 +46,17 @@ public class WeddingCard extends UiPart<Region> {
         this.wedding = wedding;
         id.setText(displayedIndex + ". ");
         name.setText(wedding.getWeddingName().toString());
+        partner1.setText("Partner 1: " + (wedding.getPartner1() != null
+                ? wedding.getPartner1().getName().toString()
+                : "TBC"));
+        partner2.setText("Partner 2: " + (wedding.getPartner2() != null
+                ? wedding.getPartner2().getName().toString()
+                : "TBC"));
+        address.setText("Address: " + (wedding.getAddress() != null
+                ? wedding.getAddress().toString()
+                : "TBC"));
+        date.setText("Date: " + (wedding.getDate() != null
+                ? wedding.getDate()
+                : "TBC"));
     }
 }
