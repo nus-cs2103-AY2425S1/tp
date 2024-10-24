@@ -138,7 +138,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tutorial} is invalid.
      */
-    private static Tutorial parseTutorial(String tutorial) throws ParseException {
+    public static Tutorial parseTutorial(String tutorial) throws ParseException {
         requireNonNull(tutorial);
         String trimmedTutorial = tutorial.trim();
         try {
