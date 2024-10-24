@@ -1,7 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RSVP_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,8 +24,8 @@ import seedu.address.model.tag.Tag;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    public static final String MESSAGE_SUPPORT = "filter does not support Name, Email or Phone\n" +
-            "filter only supports Tag and RSVP Status";
+    public static final String MESSAGE_SUPPORT = "filter does not support Name, Email or Phone\n"
+            + "filter only supports Tag and RSVP Status";
     private final Set<Predicate<Person>> predicateSet = new HashSet<>();
 
     /**
@@ -30,7 +35,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_RSVP_STATUS, PREFIX_EMAIL, PREFIX_NAME, PREFIX_PHONE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_RSVP_STATUS, PREFIX_EMAIL,
+                PREFIX_NAME, PREFIX_PHONE);
         if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
@@ -48,7 +54,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         return this.predicateSet;
     }
 
-    public void checkInputs(ArgumentMultimap argMultimap) throws ParseException{
+    /**
+     * Checks if the user input includes Name, Phone or Email
+     */
+    public void checkInputs(ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.contains(PREFIX_EMAIL) || argMultimap.contains(PREFIX_NAME)
                 || argMultimap.contains(PREFIX_PHONE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
