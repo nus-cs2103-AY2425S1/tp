@@ -94,7 +94,7 @@ public class StudentCourseAssociationListTest {
     class GetFromStrings {
         @Test
         @DisplayName("finds correct SCA if SCA is in list")
-        public void findsSca_ScaInList() {
+        public void findsSca_scaInList() {
             StudentCourseAssociation foundSca = scaList.getFromStrings(
                     "A1234567X", "CS1010", "T01");
             assertEquals(foundSca, sca1);
@@ -102,7 +102,7 @@ public class StudentCourseAssociationListTest {
 
         @Test
         @DisplayName("throws runtime exception if SCA is not in list but inputs are valid")
-        public void throwsRuntimeException_ScaNotInListInputsValid() {
+        public void throwsRuntimeException_scaNotInListInputsValid() {
             assertThrows(ScaNotFoundException.class, () -> scaList.getFromStrings(
                     "A1234567X", "AB2000", "T02"));
         }
@@ -113,7 +113,7 @@ public class StudentCourseAssociationListTest {
     class FindMatch {
         @Test
         @DisplayName("finds correct SCA if SCA with same matricNumber, courseCode, tutorialId is in list")
-        public void findsSca_ScaInList() {
+        public void findsSca_scaInList() {
             Course course = new Course(new CourseCode("CS1010"), new CourseName("Different Name"));
             StudentCourseAssociation toFind = new StudentCourseAssociation(
                     new PersonBuilder().withMatriculationNumber("A1234567X").build(),
@@ -126,7 +126,7 @@ public class StudentCourseAssociationListTest {
 
         @Test
         @DisplayName("throws ScaNotFoundException if SCA with same IDs is not in list")
-        public void throwsScaNotFoundException_ScaNotInListInputsValid() {
+        public void throwsScaNotFoundException_scaNotInListInputsValid() {
             Course course = new Course(new CourseCode("AA0000"), new CourseName("Different Name"));
             StudentCourseAssociation toFind = new StudentCourseAssociation(
                     new PersonBuilder().withMatriculationNumber("A4529999X").build(),

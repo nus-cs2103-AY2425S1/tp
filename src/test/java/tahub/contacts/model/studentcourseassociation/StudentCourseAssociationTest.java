@@ -205,15 +205,15 @@ class StudentCourseAssociationTest {
     @Nested
     @DisplayName("isSameSca")
     class IsSameSca {
-        Person stuRef = new PersonBuilder().build();
-        Person stuDiffMatricNo = new PersonBuilder().withMatriculationNumber("A9999999X").build();
-        Person stuDiffName = new PersonBuilder().withName("Name Different").build();
-        Course courseRef = new Course(new CourseCode("AA1000"), new CourseName("Reference Course"));
-        Course courseDiffName = new Course(new CourseCode("AA1000"), new CourseName("Different Name"));
-        Course courseDiffCode = new Course(new CourseCode("XX9999"), new CourseName("Reference Course"));
-        Tutorial tutorialRef = new Tutorial("T01", courseRef);
-        Tutorial tutorialDiffId = new Tutorial("T22", courseRef);
-        Tutorial tutorialDiffCourse = new Tutorial("T01", courseDiffCode);
+        private Person stuRef = new PersonBuilder().build();
+        private Person stuDiffMatricNo = new PersonBuilder().withMatriculationNumber("A9999999X").build();
+        private Person stuDiffName = new PersonBuilder().withName("Name Different").build();
+        private Course courseRef = new Course(new CourseCode("AA1000"), new CourseName("Reference Course"));
+        private Course courseDiffName = new Course(new CourseCode("AA1000"), new CourseName("Different Name"));
+        private Course courseDiffCode = new Course(new CourseCode("XX9999"), new CourseName("Reference Course"));
+        private Tutorial tutorialRef = new Tutorial("T01", courseRef);
+        private Tutorial tutorialDiffId = new Tutorial("T22", courseRef);
+        private Tutorial tutorialDiffCourse = new Tutorial("T01", courseDiffCode);
 
         @Test
         @DisplayName("returns true when SCAs have same student, course, tutorial object")
