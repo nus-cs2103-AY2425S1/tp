@@ -29,7 +29,7 @@ public class MarkAttendanceCommand extends Command {
             + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
             + PREFIX_DATE + "2019-10-09 "
-            + PREFIX_PRESENT + " p";
+            + PREFIX_PRESENT + "p";
 
     public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
 
