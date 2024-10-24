@@ -78,4 +78,9 @@ public class SchemeCommand extends Command {
         SchemeCommand otherSchemeCommand = (SchemeCommand) other;
         return targetIndex.equals(otherSchemeCommand.targetIndex);
     }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }
