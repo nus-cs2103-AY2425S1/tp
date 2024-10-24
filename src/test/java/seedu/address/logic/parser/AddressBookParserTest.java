@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -56,10 +57,10 @@ public class AddressBookParserTest {
             +
             " "
             + ParserUtil.PERSON_ENTITY_STRING) instanceof ClearCommand);
-        /* ToDo: Make this work
-             assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD +
-                " " + ParserUtil.PERSON_ENTITY_STRING + " 3") instanceof ClearCommand);
-                */
+
+        assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " "
+                + ParserUtil.PERSON_ENTITY_STRING
+                + " 3"));
     }
 
     @Test
@@ -118,7 +119,7 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " "
             + ParserUtil.PERSON_ENTITY_STRING) instanceof ListCommand);
-        // TODO: assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test

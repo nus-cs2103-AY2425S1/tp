@@ -116,6 +116,10 @@ public class Appointment {
                 && person.isSamePerson(otherAppointment.person);
     }
 
+    public boolean isSameAppointment(AppointmentDescriptor otherAppointment) {
+        return appointmentDescriptor.isSameAppointment(otherAppointment);
+    }
+
     /**
      * Returns true if both appointments have the same identity and data fields.
      * This defines a stronger notion of equality between two appointments.
