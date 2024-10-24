@@ -231,7 +231,6 @@ public class ModelManager implements Model {
     @Override
     public CommandResult executeSavedCommand() throws CommandException {
         if (!hasSavedCommand()) {
-            clearSavedCommand();
             throw new CommandException("No command to confirm.");
         }
         CommandResult result = this.savedCommand.execute(this);
