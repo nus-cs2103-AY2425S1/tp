@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.id.UniqueId;
 
 public class EventTest {
 
@@ -71,10 +75,12 @@ public class EventTest {
         Name name = new Name("Workshop");
         Date date = new Date("2024-10-10");
 
-        Event event1 = new Event(name, date);
-        Event event2 = new Event(name, date);
+        // Generate a valid UUID
+        UniqueId id = new UniqueId(UUID.randomUUID().toString());
+        Event event1 = new Event(id, name, date);
+        Event event2 = new Event(id, name, date);
 
-        // Validate that two different Event objects with the same values are equal
+        // Validate that two different Event objects with the same values (including UniqueId) are equal
         assertTrue(event1.equals(event2));
     }
 
@@ -98,8 +104,10 @@ public class EventTest {
         Name name = new Name("Workshop");
         Date date = new Date("2024-10-10");
 
-        Event event1 = new Event(name, date);
-        Event event2 = new Event(name, date);
+        // Generate a valid UUID
+        UniqueId id = new UniqueId(UUID.randomUUID().toString());
+        Event event1 = new Event(id, name, date);
+        Event event2 = new Event(id, name, date);
 
         // Check that if two objects are equal, their hashCodes are also equal
         assertTrue(event1.equals(event2));

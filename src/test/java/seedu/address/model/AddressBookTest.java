@@ -165,6 +165,9 @@ public class AddressBookTest {
         ObservableList<Vendor> associatedVendors = addressBook.getAssociatedVendors(testEvent);
         ObservableList<Vendor> expectedVendors = FXCollections.observableArrayList(BOB, ALICE);
 
+        associatedVendors.sort((v1, v2) -> v1.getName().fullName.compareTo(v2.getName().fullName));
+        expectedVendors.sort((v1, v2) -> v1.getName().fullName.compareTo(v2.getName().fullName));
+
         assertEquals(expectedVendors, associatedVendors);
     }
 
@@ -184,6 +187,9 @@ public class AddressBookTest {
 
         ObservableList<Event> associatedEvents = addressBook.getAssociatedEvents(ALICE);
         ObservableList<Event> expectedEvents = FXCollections.observableArrayList(anotherEvent, testEvent);
+
+        associatedEvents.sort((e1, e2) -> e1.getName().fullName.compareTo(e2.getName().fullName));
+        expectedEvents.sort((e1, e2) -> e1.getName().fullName.compareTo(e2.getName().fullName));
 
         assertEquals(expectedEvents, associatedEvents);
     }

@@ -200,6 +200,9 @@ public class ModelManagerTest {
         ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(testEvent);
         ObservableList<Vendor> expectedVendors = FXCollections.observableArrayList(BENSON, ALICE);
 
+        associatedVendors.sort((v1, v2) -> v1.getName().fullName.compareTo(v2.getName().fullName));
+        expectedVendors.sort((v1, v2) -> v1.getName().fullName.compareTo(v2.getName().fullName));
+
         assertEquals(expectedVendors, associatedVendors);
     }
 
@@ -219,6 +222,9 @@ public class ModelManagerTest {
 
         ObservableList<Event> associatedEvents = modelManager.getAssociatedEvents(ALICE);
         ObservableList<Event> expectedEvents = FXCollections.observableArrayList(anotherEvent, testEvent);
+
+        associatedEvents.sort((e1, e2) -> e1.getName().fullName.compareTo(e2.getName().fullName));
+        expectedEvents.sort((e1, e2) -> e1.getName().fullName.compareTo(e2.getName().fullName));
 
         assertEquals(expectedEvents, associatedEvents);
     }
@@ -257,8 +263,8 @@ public class ModelManagerTest {
         }
 
         Association expectedAssociation = new Association(
-                uniqueVendorList.getVendorId(uniqueVendor),
-                uniqueEventList.getEventId(uniqueEvent));
+                uniqueVendor.getId(),
+                uniqueEvent.getId());
         assertEquals(observedState.get(), expectedAssociation);
     }
 

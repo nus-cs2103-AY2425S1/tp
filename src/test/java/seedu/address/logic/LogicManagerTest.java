@@ -196,9 +196,7 @@ public class LogicManagerTest {
             throw new IllegalArgumentException("Event not found");
         }
 
-        Association expectedAssociation = new Association(
-                uniqueVendorList.getVendorId(uniqueVendor),
-                uniqueEventList.getEventId(uniqueEvent));
+        Association expectedAssociation = new Association(uniqueVendor.getId(), uniqueEvent.getId());
         assertEquals(observedState.get(), expectedAssociation);
     }
 
