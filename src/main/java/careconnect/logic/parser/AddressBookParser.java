@@ -12,6 +12,8 @@ import careconnect.logic.commands.AddCommand;
 import careconnect.logic.commands.AddLogCommand;
 import careconnect.logic.commands.ClearCommand;
 import careconnect.logic.commands.Command;
+import careconnect.logic.commands.ConfirmationNoCommand;
+import careconnect.logic.commands.ConfirmationYesCommand;
 import careconnect.logic.commands.DeleteCommand;
 import careconnect.logic.commands.DeleteLogCommand;
 import careconnect.logic.commands.EditCommand;
@@ -99,6 +101,12 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ConfirmationYesCommand.COMMAND_WORD:
+            return new ConfirmationYesCommand();
+
+        case ConfirmationNoCommand.COMMAND_WORD:
+            return new ConfirmationNoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

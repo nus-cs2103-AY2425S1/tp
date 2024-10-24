@@ -28,6 +28,12 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
+        super(true);
+        this.targetIndex = targetIndex;
+    }
+
+    private DeleteCommand(Index targetIndex, boolean requireConfirmation) {
+        super(requireConfirmation);
         this.targetIndex = targetIndex;
     }
 
@@ -40,6 +46,11 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        if (this.requireConfirmation) {
+            // Add a DeleteCommand to the stack
+            Command.stack.add(new DeleteCommand(this.targetIndex, false));
+            return new CommandResult(Command.CONFIRMATION_MESSAGE);
+        }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
