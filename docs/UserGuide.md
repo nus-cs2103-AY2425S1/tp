@@ -136,6 +136,7 @@ Format: `sort [s/SORT_OPTION]`
 * `name`: Sorts contacts alphabetically by name.
 * `hours`: Sorts volunteers by hours contributed.
 * `donations`: Sorts donors by donation amount
+* `end_date`: Sorts partners by partnership end date.
 </box>
 
 Examples:
