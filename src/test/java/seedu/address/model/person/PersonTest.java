@@ -38,7 +38,7 @@ public class PersonTest {
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same email, all other attributes different -> returns true
-         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withRole(VALID_ROLE_BOB).withSkills(VALID_SKILL_PYTHON).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
