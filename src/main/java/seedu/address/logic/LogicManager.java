@@ -78,8 +78,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getTalentHubFilePath() {
+        return model.getTalentHubFilePath();
     }
 
     @Override
