@@ -73,6 +73,22 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
+#### Command Box Component
+
+The `CommandBox` component is responsible for handling user command inputs. Below is the sequence diagram illustrating how the `CommandBox` processes user commands:
+
+<puml src="diagrams/CommandBoxSequenceDiagram.puml" alt="Sequence Diagram for CommandBox"/>
+
+The command execution flow:
+1. When the user types a command and presses Enter, the `CommandBox` retrieves the command text from the `TextField`.
+2. If the command is not empty, it is passed to the `CommandExecutor` for execution.
+3. Upon successful execution:
+   - The command is added to the `CommandHistory` for tracking previous commands
+   - The text field is cleared
+4. If a `CommandException` or `ParseException` occurs:
+   - The command box styling is updated to indicate the error
+   - The error style class is added to the text field
+
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
