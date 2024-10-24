@@ -402,6 +402,12 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
     - 1a1. Cher shows correct input format. <br>
       Use case ends.
 
+#### Use case: UC6 - Sort
+**MSS**
+1. User enters sort command.
+2. Cher displays all contacts in list in alphabetical order by name.<br>
+   Use case ends.
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
