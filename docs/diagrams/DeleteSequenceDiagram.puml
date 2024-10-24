@@ -20,50 +20,50 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("delete 1")
 activate AddressBookParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create ViewStudentCommandParser
+AddressBookParser -> ViewStudentCommandParser
+activate ViewStudentCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+ViewStudentCommandParser --> AddressBookParser
+deactivate ViewStudentCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+AddressBookParser -> ViewStudentCommandParser : parse("1")
+activate ViewStudentCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create ViewStudentCommand
+ViewStudentCommandParser -> ViewStudentCommand
+activate ViewStudentCommand
 
-DeleteCommand --> DeleteCommandParser :
-deactivate DeleteCommand
+ViewStudentCommand --> ViewStudentCommandParser :
+deactivate ViewStudentCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+ViewStudentCommandParser --> AddressBookParser : d
+deactivate ViewStudentCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+ViewStudentCommandParser -[hidden]-> AddressBookParser
+destroy ViewStudentCommandParser
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
-activate DeleteCommand
+LogicManager -> ViewStudentCommand : execute(m)
+activate ViewStudentCommand
 
-DeleteCommand -> Model : deletePerson(1)
+ViewStudentCommand -> Model : deletePerson(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> ViewStudentCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+ViewStudentCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> ViewStudentCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+ViewStudentCommand --> LogicManager : r
+deactivate ViewStudentCommand
 
 [<--LogicManager
 deactivate LogicManager
