@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -22,7 +21,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -50,9 +48,9 @@ public class CheckAppointmentCommandTest {
         CommandResult result = command.execute(modelStub);
 
         String expectedMessage = String.format("Appointments on %s:\n"
-                                        +  "Appointment: %s for %s (patient id) "
+                                        + "Appointment: %s for %s (patient id)" + " "
                                         + "with %s (doctor id). Remarks: %s\n"
-                                        + "Appointment: %s for %s (patient id) "
+                                        + "Appointment: %s for %s (patient id)" + " "
                                         + "with %s (doctor id). Remarks: %s\n",
                 appointmentDate, appointmentTime1, validPatient.getId(),
                 validDoctor.getId(), appointmentRemark, appointmentTime2,
