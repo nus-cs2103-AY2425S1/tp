@@ -17,6 +17,10 @@ import seedu.address.model.FilteredAppointment.FilteredAppointment;
 import seedu.address.model.Model;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.AppointmentDateFilter.AppointmentDateFilter;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 

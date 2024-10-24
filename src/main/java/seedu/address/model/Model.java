@@ -8,6 +8,7 @@ import java.util.logging.Filter;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+
 import seedu.address.model.FilteredAppointment.FilteredAppointment;
 import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
