@@ -1,8 +1,10 @@
+<!--
 ---
-  layout: default.md
-  title: "Testing guide"
-  pageNav: 3
+layout: default.md
+title: "Testing guide"
+pageNav: 3
 ---
+-->
 
 # Testing guide
 
