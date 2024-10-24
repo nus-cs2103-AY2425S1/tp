@@ -25,7 +25,7 @@ public class MarkAppointmentCommand extends Command {
             + PREFIX_ID + "[PATIENT_ID] "
             + PREFIX_ID + "[DOCTOR_ID]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATE + "2024-12-31 15:23"
+            + PREFIX_DATE + "2024-12-31 15:23 "
             + PREFIX_ID + "1234 "
             + PREFIX_ID + "5678";
     public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Successfully "
