@@ -13,6 +13,7 @@ import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.Displayable;
 import seedu.ddd.model.contact.client.Client;
+import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
 
 /**
@@ -56,21 +57,31 @@ public class Event implements Displayable {
     }
 
     /**
-     * Returns the clients list.
-     * @return An {@code ArrayList} of {@code Client}.
+     * Returns the contact list.
+     * @return A {@code List} of {@code Contacts}.
+     */
+    public List<Contact> getContacts() {
+        List<Contact> contacts = new ArrayList<>();
+        contacts.addAll(clients);
+        contacts.addAll(vendors);
+        return Collections.unmodifiableList(contacts);
+    }
+
+    /**
+     * Returns the client list.
+     * @return A {@code List} of {@code Clients}.
      */
     public List<Client> getClients() {
         return Collections.unmodifiableList(clients);
     }
 
     /**
-     * Returns the vendors list.
-     * @return An {@code ArrayList} of {@code Vendor}.
+     * Returns the vendor list.
+     * @return A {@code List} of {@code Vendors}.
      */
     public List<Vendor> getVendors() {
         return Collections.unmodifiableList(vendors);
     }
-
     /**
      * Returns the event description.
      * @return A {@code String} which represents the description of the event.
