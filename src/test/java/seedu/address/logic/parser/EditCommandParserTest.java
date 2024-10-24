@@ -94,6 +94,7 @@ public class EditCommandParserTest {
 
         // no field specified
         assertParseFailure(parser, " v/1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, " e/1", EditCommand.MESSAGE_NOT_EDITED);
 
         // empty edit command
         assertParseFailure(parser, "", EDIT_MESSAGE_INVALID_FORMAT);
