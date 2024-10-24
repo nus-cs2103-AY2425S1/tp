@@ -17,7 +17,7 @@ public class ViewCompanyCommandParser implements Parser<ViewCompanyCommand> {
      * Parses the given {@code String} of arguments in the context of a ViewCompanyCommand
      * and returns a ViewCompanyCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public ViewCompanyCommand parse(String args) throws ParseException {
 
