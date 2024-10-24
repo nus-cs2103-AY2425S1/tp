@@ -170,6 +170,22 @@ Examples:
 - `addnotes 1 n/Supplier 1`
 - `addnotes 2 n/Supplier 2`
 
+### Deleting a note from an existing contact: `deletenotes`
+
+Deletes a note from a person in the address book.
+
+Format: `deletnotes INDEX n/[NOTE_INDEX]`
+
+- Delete note from the person at the specified `INDEX` and specified `NOTE_INDEX`.
+- The index refers to the index number shown in the displayed person list. 
+- The note index refers to the index number shown in the notes list of the contact details of the displayed person.
+- The index and notes index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `deletenotes 1 i/1`
+- `deletenotes 2 i/2`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
