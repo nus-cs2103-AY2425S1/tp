@@ -1,4 +1,4 @@
-package seedu.address.model.AppointmentDateFilter;
+package seedu.address.model.appointmentdatefilter;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;

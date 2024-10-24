@@ -9,7 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.FilteredAppointment.FilteredAppointment;
+import seedu.address.model.filteredappointment.FilteredAppointment;
 
 
 /**
