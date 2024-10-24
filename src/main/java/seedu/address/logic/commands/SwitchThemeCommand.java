@@ -21,7 +21,6 @@ public class SwitchThemeCommand extends Command {
     public SwitchThemeCommand(String theme) {
         this.theme = theme;
     }
-    
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
