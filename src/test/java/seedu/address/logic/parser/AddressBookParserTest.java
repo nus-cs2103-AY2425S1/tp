@@ -25,10 +25,15 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventsCommand;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventUtil;
@@ -87,6 +92,40 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_search() throws Exception {
+        List<String> keywords;
+        SearchCommand command;
+        //Search command with address prefix
+        keywords = Arrays.asList("street", "road", "lane");
+        command = (SearchCommand) parser.parseCommand(
+                SearchCommand.COMMAND_WORD + " a/"
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchCommand(new AddressContainsKeywordsPredicate(keywords)), command);
+        //Search command with email prefix
+        keywords = Arrays.asList("example", "gmail", "yahoo");
+        command = (SearchCommand) parser.parseCommand(
+                SearchCommand.COMMAND_WORD + " e/"
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchCommand(new EmailContainsKeywordsPredicate(keywords)), command);
+        //Search command with name prefix
+        keywords = Arrays.asList("foo", "bar", "baz");
+        command = (SearchCommand) parser.parseCommand(
+                SearchCommand.COMMAND_WORD + " n/"
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        //Search command with phone prefix
+        keywords = Arrays.asList("12345678", "98765432", "13572468");
+        command = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " p/"
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
+        //Search command with tags prefix
+        keywords = Arrays.asList("12345678", "98765432", "13572468");
+        command = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " t/"
+                + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new SearchCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
