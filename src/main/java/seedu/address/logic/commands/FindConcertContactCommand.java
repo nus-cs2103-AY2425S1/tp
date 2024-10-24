@@ -61,9 +61,8 @@ public class FindConcertContactCommand extends Command {
         Predicate<ConcertContact> predicate = createPredicate(person, concert);
         model.updateFilteredConcertContactList(predicate);
 
-        return new CommandResult(String.format(
-                        Messages.MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW,
-                        model.getFilteredConcertContactList().size()));
+        return new CommandResult(String.format(Messages.MESSAGE_CONCERT_CONCERTS_LISTED_OVERVIEW,
+                model.getFilteredConcertContactList().size()), false, false, true);
     }
 
     private Person getPersonFromIndex(Model model) throws CommandException {
