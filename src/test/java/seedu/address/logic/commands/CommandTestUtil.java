@@ -89,7 +89,7 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-       CommandResult expectedCommandResult;
+        CommandResult expectedCommandResult;
         if (command instanceof ListCommand) {
             expectedCommandResult = new CommandResult(expectedMessage, false,
                     false, false, true);
