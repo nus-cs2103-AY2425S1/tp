@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -60,37 +61,43 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
 
-        // Convert and add vendors
+        HashMap<UniqueId, Vendor> vendorMap = new HashMap<>();
+        HashMap<UniqueId, Event> eventMap = new HashMap<>();
+
         for (JsonAdaptedVendor jsonAdaptedVendor : vendors) {
             Vendor vendor = jsonAdaptedVendor.toModelType();
             if (addressBook.hasVendor(vendor)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
             }
             addressBook.addVendor(vendor);
+            vendorMap.put(vendor.getId(), vendor);
         }
 
-        // Convert and add events
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
             if (addressBook.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
             addressBook.addEvent(event);
+            eventMap.put(event.getId(), event);
         }
 
-        // Convert and add associations
         for (JsonAdaptedAssociation jsonAdaptedAssociation : associations) {
             Association association = jsonAdaptedAssociation.toModelType();
 
             UniqueId vendorId = association.getVendorId();
             UniqueId eventId = association.getEventId();
 
-            Vendor vendor = addressBook.getVendorById(vendorId);
-            Event event = addressBook.getEventById(eventId);
+            Vendor vendor = vendorMap.get(vendorId);
+            Event event = eventMap.get(eventId);
 
-            // Check if the vendor and event exist in the address book
-            if (vendor == null || event == null) {
-                throw new IllegalValueException("Association contains non-existent vendor or event.");
+            if (vendor == null) {
+                throw new IllegalValueException(
+                        String.format("Association contains non-existent vendor with ID: %s", vendorId));
+            }
+            if (event == null) {
+                throw new IllegalValueException(
+                        String.format("Association contains non-existent event with ID: %s", eventId));
             }
 
             if (addressBook.isVendorAssignedToEvent(vendor, event)) {

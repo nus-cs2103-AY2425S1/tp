@@ -35,7 +35,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameEvent);
+        return eventMap.containsKey(toCheck.getId());
     }
 
     /**
@@ -110,6 +110,15 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public ObservableList<Event> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the Event corresponding to the given {@code UniqueId}.
+     * If no such event exists, returns null.
+     */
+    public Event getEventById(UniqueId eventId) {
+        requireNonNull(eventId);
+        return eventMap.get(eventId); // Retrieve the event from the map using the UniqueId
     }
 
     @Override

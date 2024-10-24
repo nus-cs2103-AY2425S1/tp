@@ -88,6 +88,7 @@ public class Event {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
                 .add("date", date)
                 .toString();

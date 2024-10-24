@@ -37,7 +37,7 @@ public class UniqueVendorList implements Iterable<Vendor> {
      */
     public boolean contains(Vendor toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameVendor);
+        return vendorMap.containsKey(toCheck.getId());
     }
 
     /**
@@ -131,6 +131,15 @@ public class UniqueVendorList implements Iterable<Vendor> {
      */
     public ObservableList<Vendor> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the Vendor corresponding to the given {@code UniqueId}.
+     * If no such vendor exists, returns null.
+     */
+    public Vendor getVendorById(UniqueId vendorId) {
+        requireNonNull(vendorId);
+        return vendorMap.get(vendorId); // Retrieve the event from the map using the UniqueId
     }
 
     @Override

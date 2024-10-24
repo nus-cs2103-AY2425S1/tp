@@ -176,7 +176,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         UniqueId eventId = event.getId();
         List<Vendor> vendorsList = associations.asUnmodifiableObservableList().stream()
                 .filter(association -> association.getEventId().equals(eventId))
-                .map(association -> getVendorById(association.getVendorId()))
+                .map(association -> vendors.getVendorById(association.getVendorId()))
                 .filter(Objects::nonNull) // Ensure no null values are added
                 .collect(Collectors.toList());
 
@@ -191,7 +191,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         UniqueId vendorId = vendor.getId();
         List<Event> eventsList = associations.asUnmodifiableObservableList().stream()
                 .filter(association -> association.getVendorId().equals(vendorId))
-                .map(association -> getEventById(association.getEventId()))
+                .map(association -> events.getEventById(association.getEventId()))
                 .filter(Objects::nonNull) // Ensure no null values are added
                 .collect(Collectors.toList());
 
@@ -238,6 +238,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new ToStringBuilder(this)
                 .add("vendors", vendors)
                 .add("events", events)
+                .add("associations", associations)
                 .toString();
     }
 
@@ -254,24 +255,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Association> getAssociationList() {
         return associations.asUnmodifiableObservableList();
-    }
-
-    public Vendor getVendorById(UniqueId vendorId) {
-        for (Vendor vendor : vendors.asUnmodifiableObservableList()) {
-            if (vendor.getId().equals(vendorId)) {
-                return vendor;
-            }
-        }
-        return null;
-    }
-
-    public Event getEventById(UniqueId eventId) {
-        for (Event event : events.asUnmodifiableObservableList()) {
-            if (event.getId().equals(eventId)) {
-                return event;
-            }
-        }
-        return null;
     }
 
     @Override

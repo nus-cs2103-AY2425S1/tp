@@ -69,6 +69,6 @@ public class JsonAdaptedEvent {
         }
         final Date modeldate = new Date(date);
 
-        return new Event(modelName, modeldate);
+        return new Event(modelId, modelName, modeldate);
     }
 }
