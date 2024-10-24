@@ -185,38 +185,38 @@ public class ContactDisplay extends UiPart<Region> {
     public Label getNameLabel() {
         return nameLabel;
     }
-    
+
     /**
      * Returns the phoneLabel for testing.
      */
     public Label getPhoneLabel() {
         return phoneLabel;
     }
-    
+
     /**
      * Returns the emailLabel for testing.
      */
     public Label getEmailLabel() {
         return emailLabel;
     }
-    
+
     /**
      * Returns the tags for testing.
      */
     public FlowPane getTags() {
         return tags;
     }
-    
+
     /**
      * Returns the industryStudentIdLabel for testing.
      */
     public Label getIndustryStudentIdLabel() {
         return industryStudentIdLabel;
     }
-    
+
     /**
      * Returns the helpLabel for testing.
-     */    
+     */
     public Label getHelpLabel() {
         return helpLabel;
     }
@@ -224,7 +224,7 @@ public class ContactDisplay extends UiPart<Region> {
     public Label getAddressLabel() {
         return addressLabel;
     }
-    
+
 
 }
 

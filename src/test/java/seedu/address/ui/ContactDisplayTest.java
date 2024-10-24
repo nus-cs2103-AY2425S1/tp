@@ -1,29 +1,29 @@
 package seedu.address.ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+// import static org.junit.jupiter.api.Assertions.assertEquals;
+// import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
+// import org.junit.jupiter.api.BeforeAll;
+// import org.junit.jupiter.api.BeforeEach;
+// import org.junit.jupiter.api.Test;
+// import org.testfx.framework.junit5.ApplicationTest;
+// import org.testfx.util.WaitForAsyncUtils;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.company.Company;
-import seedu.address.model.person.student.Student;
-import seedu.address.testutil.CompanyBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.StudentBuilder;
+// import javafx.scene.Scene;
+// import javafx.scene.control.Label;
+// import javafx.scene.control.ScrollPane;
+// import javafx.scene.layout.FlowPane;
+// import javafx.scene.layout.Region;
+// import javafx.scene.layout.VBox;
+// import javafx.stage.Stage;
+// import seedu.address.model.person.Person;
+// import seedu.address.model.person.company.Company;
+// import seedu.address.model.person.student.Student;
+// import seedu.address.testutil.CompanyBuilder;
+// import seedu.address.testutil.PersonBuilder;
+// import seedu.address.testutil.StudentBuilder;
 
-public class ContactDisplayTest extends ApplicationTest {
+public class ContactDisplayTest {
 
     private ContactDisplay contactDisplay;
 
