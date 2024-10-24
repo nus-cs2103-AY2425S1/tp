@@ -1,20 +1,23 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookFilter;
 
 import java.util.Arrays;
-import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
@@ -22,61 +25,127 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
  */
 public class FilterCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
 
-    @Test
-    public void equals() {
-        TagContainsKeywordsPredicate firstPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("friend"));
-        TagContainsKeywordsPredicate secondPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("colleague"));
-
-        FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
-        FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
-
-        // same object -> returns true
-        assertTrue(filterFirstCommand.equals(filterFirstCommand));
-
-        // same values -> returns true
-        FilterCommand filterFirstCommandCopy = new FilterCommand(firstPredicate);
-        assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(filterFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(filterFirstCommand.equals(null));
-
-        // different predicate -> returns false
-        assertFalse(filterFirstCommand.equals(filterSecondCommand));
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBookFilter(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBookFilter(), new UserPrefs());
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        TagContainsKeywordsPredicate predicate = preparePredicate("t/ ");
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    public void execute_multipleCriteria_filtersSuccessfully() throws CommandException {
+        // Create a FilterCommand with multiple criteria
+        FilterCommand filterCommand = new FilterCommand("John", "friends", "example@test.com",
+                "94351253", "Main St");
+
+        // Set up expected model to filter based on criteria
+        expectedModel.updateFilteredPersonList(person -> new NameContainsKeywordsPredicate(Arrays.asList("John"))
+                    .test(person)
+                && new TagContainsKeywordsPredicate(Arrays.asList("friends")).test(person)
+                && new EmailContainsKeywordsPredicate(Arrays.asList("example@test.com")).test(person)
+                && new PhoneContainsKeywordsPredicate(Arrays.asList("94351253")).test(person)
+                && new AddressContainsKeywordsPredicate(Arrays.asList("Main St")).test(person));
+
+        // Execute the command
+        CommandResult result = filterCommand.execute(model);
+
+        // Check that the filtered list matches the expected result
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                result.getFeedbackToUser());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends gym colleague");
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(5, model.getFilteredPersonList().size());
+    public void execute_emptyCriteria_throwsCommandException() {
+        // Attempting to filter with no criteria should result in an error
+        FilterCommand filterCommand = new FilterCommand("", "", "", "", "");
+        assertThrows(CommandException.class, () -> filterCommand.execute(model));
     }
 
-    /**
-     * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
-     */
-    private TagContainsKeywordsPredicate preparePredicate(String userInput) {
-        System.out.println(Arrays.asList(userInput.split("\\s+")));
-        return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    @Test
+    public void execute_nameCriteria_filtersByName() throws CommandException {
+        // Filter by name only
+        FilterCommand filterCommand = new FilterCommand("John", "", "", "", "");
+
+        // Set up expected model to filter by name only
+        expectedModel.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList("John")));
+
+        // Execute the command
+        CommandResult result = filterCommand.execute(model);
+
+        // Check that the filtered list matches the expected result
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_tagCriteria_filtersByTag() throws CommandException {
+        // Filter by tag only
+        FilterCommand filterCommand = new FilterCommand("", "friends", "", "", "");
+
+        // Set up expected model to filter by tag only
+        expectedModel.updateFilteredPersonList(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
+
+        // Execute the command
+        CommandResult result = filterCommand.execute(model);
+
+        // Check that the filtered list matches the expected result
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_emailCriteria_filtersByEmail() throws CommandException {
+        // Filter by email only
+        FilterCommand filterCommand = new FilterCommand("", "", "example@test.com", "", "");
+
+        // Set up expected model to filter by email only
+        expectedModel.updateFilteredPersonList(new EmailContainsKeywordsPredicate(Arrays.asList("example@test.com")));
+
+        // Execute the command
+        CommandResult result = filterCommand.execute(model);
+
+        // Check that the filtered list matches the expected result
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_phoneCriteria_filtersByPhone() throws CommandException {
+        // Filter by phone only
+        FilterCommand filterCommand = new FilterCommand("", "", "", "94351253", "");
+
+        // Set up expected model to filter by phone only
+        expectedModel.updateFilteredPersonList(new PhoneContainsKeywordsPredicate(Arrays.asList("94351253")));
+
+        // Execute the command
+        CommandResult result = filterCommand.execute(model);
+
+        // Check that the filtered list matches the expected result
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_addressCriteria_filtersByAddress() throws CommandException {
+        // Filter by address only
+        FilterCommand filterCommand = new FilterCommand("", "", "", "", "Main St");
+
+        // Set up expected model to filter by address only
+        expectedModel.updateFilteredPersonList(new AddressContainsKeywordsPredicate(Arrays.asList("Main St")));
+
+        // Execute the command
+        CommandResult result = filterCommand.execute(model);
+
+        // Check that the filtered list matches the expected result
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                result.getFeedbackToUser());
     }
 }

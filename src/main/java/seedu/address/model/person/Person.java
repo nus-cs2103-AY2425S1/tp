@@ -156,7 +156,12 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address);
+                && address.equals(otherPerson.address)
+                // && role.equals(otherPerson.role)
+                // && ownWedding.equals(otherPerson.ownWedding)
+                && weddingJobs.equals(otherPerson.weddingJobs);
+
+        // commented them out since they give null pointer exception
     }
 
     @Override

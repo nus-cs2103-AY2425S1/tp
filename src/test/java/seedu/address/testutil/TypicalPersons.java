@@ -30,7 +30,7 @@ public class TypicalPersons {
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withPhone("93125432")
             .withTags("owesMoney", "friends").build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
@@ -50,16 +50,21 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824422")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
-
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824244")
             .withEmail("stefan@example.com").withAddress("little india").build();
+
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821311")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     public static final Person CARLDUH = new PersonBuilder().withName("Carl Duh Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withTags("colleague").build();
+
+    public static final Person JOHN = new PersonBuilder().withName("John").withPhone("94351253")
+            .withEmail("example@test.com").withAddress("Main St")
+            .withTags("friends").build();
+
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -83,8 +88,20 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static AddressBook getTypicalAddressBookFilter() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersonsFilter()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalPersonsFilter() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN));
     }
 
     /**

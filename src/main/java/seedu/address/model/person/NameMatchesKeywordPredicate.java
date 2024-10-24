@@ -8,6 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Different from NameContainsKeywordsPredicate as it requires all keywords to be present in the name.
  */
 public class NameMatchesKeywordPredicate implements Predicate<Person> {
     private final List<String> keywords;

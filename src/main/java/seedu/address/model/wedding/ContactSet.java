@@ -3,27 +3,27 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Contact Map of a Wedding.
+ * Represents a Contact Set of a Wedding.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class ContactMap {
-    private Map<Tag, Person> map;
+public class ContactSet {
+    private Set<Person> set;
 
     /**
-     * Creates an empty ContactList
+     * Creates an empty ContactSet.
      */
-    public ContactMap() {
-        this.map = new HashMap<>();
+    public ContactSet() {
+        this.set = new HashSet<>();
     }
 
     /**
@@ -33,13 +33,12 @@ public class ContactMap {
      * @return whether the role is assigned.
      */
     public boolean hasRole(Tag role) {
-        return map.containsKey(role);
+        return set.stream().anyMatch(x -> x.getRole().equals(role));
     }
 
     /**
-     * Adds a role and person to the map.
+     * Adds a person to the set.
      *
-     * @param role role to be added.
      * @param person person with the role.
      * @throws IllegalArgumentException if the role is already assigned.
      */
@@ -48,13 +47,12 @@ public class ContactMap {
         if (this.hasRole(role)) {
             throw new IllegalArgumentException("This role is already assigned.");
         }
-        map.put(role, person);
+        set.add(person);
     }
 
     /**
-     * Removes a role and person from the map.
+     * Removes a person from the set.
      *
-     * @param role role to be removed.
      * @param person person with the role.
      */
     public void removeFromMap(Tag role, Person person) {
@@ -62,28 +60,26 @@ public class ContactMap {
         if (!this.hasRole(role)) {
             throw new IllegalArgumentException("This role is not assigned.");
         }
-        map.remove(role, person);
+        set.remove(person);
     }
 
     /**
      * Retrieves person of the specified role.
      *
      * @param role person of this role.
-     * @return person of role.
+     * @return Optional person of role.
      */
     public Optional<Person> getPersonOfRole(Tag role) {
         requireNonNull(role);
-        return Optional.ofNullable(map.get(role));
+        return set.stream().filter(x -> x.getRole().equals(role)).findFirst();
     }
 
     @Override
     public String toString() {
         ToStringBuilder str = new ToStringBuilder(this);
-        for (Map.Entry<Tag, Person> entry : map.entrySet()) {
-            Tag role = entry.getKey();
-            Person person = entry.getValue();
-            str.add("role", role.toString())
-                    .add("person", person.toString());
+        for (Person person : set) {
+            Tag role = person.getRole();
+            str.add("person", person.toString());
         }
         return str.toString();
     }
@@ -94,16 +90,16 @@ public class ContactMap {
             return true;
         }
 
-        if (!(other instanceof ContactMap)) {
+        if (!(other instanceof ContactSet)) {
             return false;
         }
 
-        ContactMap otherContactMap = (ContactMap) other;
-        return map.equals(otherContactMap.map);
+        ContactSet otherContactSet = (ContactSet) other;
+        return set.equals(otherContactSet.set);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(map);
+        return Objects.hash(set);
     }
 }

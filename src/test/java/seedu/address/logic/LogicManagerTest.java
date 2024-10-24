@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.DeleteCommand.DELETE_EMPTY_LIST_ERROR_MESSAGE;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_EMPTY_LIST_ERROR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -61,7 +61,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, DELETE_EMPTY_LIST_ERROR_MESSAGE);
+        assertCommandException(deleteCommand, MESSAGE_DELETE_EMPTY_LIST_ERROR);
     }
 
     @Test
