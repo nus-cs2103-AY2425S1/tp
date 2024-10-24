@@ -30,7 +30,17 @@ public class Person {
     private final Set<Log> logs = new HashSet<>();
 
     /**
+     * Constructs a Person object with the provided details.
      * Every field must be present and not null.
+     *
+     * @param name The person's name.
+     * @param identityNumber The person's identity number.
+     * @param phone The person's phone number.
+     * @param email The person's email address.
+     * @param address The person's physical address.
+     * @param tags The set of tags associated with the person.
+     * @param logs The set of logs associated with the person.
+     * @throws NullPointerException if any of the arguments are null.
      */
     public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags,
                   Set<Log> logs) {
@@ -42,6 +52,21 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.logs.addAll(logs);
+    }
+    /**
+     * Constructs a Person object without logs, initializing logs as an empty set by default.
+     * Every field must be present and not null.
+     *
+     * @param name The person's name.
+     * @param identityNumber The person's identity number.
+     * @param phone The person's phone number.
+     * @param email The person's email address.
+     * @param address The person's physical address.
+     * @param tags The set of tags associated with the person.
+     * @throws NullPointerException if any of the arguments are null.
+     */
+    public Person(Name name, IdentityNumber identityNumber, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, identityNumber, phone, email, address, tags, new HashSet<>());
     }
 
     public Name getName() {
