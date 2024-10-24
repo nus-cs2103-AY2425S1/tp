@@ -94,6 +94,7 @@ Here's a (partial) class diagram of the `Logic` component:
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/EditSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit 1 n/tom` Command" />
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(find all n/John)` API call as an example.
 
@@ -111,7 +112,7 @@ The sequence diagram below illustrates another interaction within the `Logic` co
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteEmployeeCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -329,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons
 2.  StaffSync shows a list of persons
-3.  User requests to delete a specific person in the list
+3.  User requests to delete a specific person in the list of the correct shown type
 4.  StaffSync deletes the person
 
     Use case ends.
@@ -342,7 +343,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. StaffSync shows an error message.
+   * 3a1. StaffSync shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given index is not of the correct person type.
+
+   * 3b1. StaffSync shows an error message.
 
       Use case resumes at step 2.
 
@@ -564,7 +571,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No change to the current list. Error details shown in the status message.
 
    4. Test case `list all asdfg` <br>
-      Expected: All persons in the application are listed regardless of if they are employees or potential hires.
+      Expected: No change to the current list. Error details shown in the status message.
 
    5. Test case `list asdfg` <br>
       Expected: No change to the current displayed list. Error details shown in the status message.
@@ -580,7 +587,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No change to the current list. Error details shown in the status message.
 
    4. Test case `list e asdfg` <br>
-      Expected: All employees in the application are listed.
+      Expected: No change to the current list. Error details shown in the status message.
 
    5. Test case `list asdfg` <br>
       Expected: No change to the current displayed list. Error details shown in the status message.
@@ -596,7 +603,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No change to the current list. Error details shown in the status message.
 
    4. Test case `list ph asdfg` <br>
-      Expected: All potential hires in the application are listed.
+      Expected: No change to the current list. Error details shown in the status message.
 
    5. Test case `list asdfg` <br>
       Expected: No change to the current displayed list. Error details shown in the status message.
@@ -619,7 +626,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `delete e`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-   6. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`, `delete e    1     `,  `...` (where x is larger than the list size)<br>
+   6. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`,  `...` (where x is larger than the list size)<br>
       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Deleting a person with no potential hires/employees
@@ -632,26 +639,34 @@ testers are expected to do more *exploratory* testing.
 ### Finding a person
 
 1. Finding a person
-   1. Test case: `find all john`<br>
-      Expected: Number of people listed found shown in the status message. Displays the list of people found.
+   1. Test case: `find e n/John`<br>
+   Expected: Number of employees with name `John` listed found shown in the status message.
+   Displays the list of employees found.
 
-   2. Test case: `find ph john`<br>
-            Expected: Number of potential hires listed found shown in the status message. Displays the list of potential hires found.
+   2. Test case: `find ph p/12345678`<br>
+   Expected: Number of potential hires with phone number `12345678` listed found shown in the status message.
+   Displays the list of potential hires found.
 
-   3. Test case: `find e john`<br>
-            Expected: Number of employees listed shown in the status message. Displays the list of employees found.
+   3. Test case: `find all e/john@example.com`<br>
+   Expected: Number of employees and potential hires with email `john@example.com` listed shown in the status message.
+   Displays the list of persons found.
 
-   4. Test case: `Find all john`, `Find e john`, `Find ph john`<br>
-            Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
+   4. Test case: `find e d/IT r/SWE`<br>
+   Expected: Number of employees with department `IT` and role `SWE` listed shown in the status message.
+   Displays the list of employees found
 
-   5. Test case: `find all`, `find e`, `find ph`<br>
-      Expected: Incorrect command format. Status message shows the correct usage of Find command.
+   5. Test case: `Find e n/john`, `Find ph p/12345678`, `Find all john@example.com`<br>
+   Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
 
-   6. Test case: `find ALL john`, `find E john`, `find PH john`<br>
-            Expected: Incorrect command format. Status message shows the correct usage of Find command.
+   6. Test case: `find e`, `find ph`, `find all`<br>
+   Expected: Incorrect command format due to missing keywords. Status message shows the correct usage of Find command.
 
-   7. Other incorrect find commands to try: `find aLL john`, `find pH john`, `find a`, `...`<br>
-            Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
+   7. Test case: `find E n/john`, `find PH n/john`, `find ALL n/john`<br>
+   Expected: Incorrect command format due to capitalisation of parameter.
+   Status message shows the correct usage of Find command.
+
+   8. Other incorrect find commands to try: `find aLL n/john`, `find pH n/john`, `find a`, `...`<br>
+   Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
 
 ### Demoting an employee
 
@@ -713,3 +728,48 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `promote 1 2024-12-20`<br>
        Expected: No potential hires are promoted. Error details shown in the status message
+
+### Sorting the contents of StaffSync
+
+1. Sorting with all contacts shown
+
+   Prerequisites: List all contacts using the `list all` command. The list is not empty and not already in order.
+
+   1. Test case: `sort name`<br>
+      Expected: All contacts in StaffSync are sorted by name in ascending order.
+
+   2. Test case: `sort date`<br>
+      Expected: Potential hires are filtered out. Employees are sorted by contract end date in ascending order.
+
+   3. Test case: `sort`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+   4. Test case: `sort 1`<br>
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+   5. Test case: `sort name 1`
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+2. Sorting with an already filtered list
+
+   Prerequisites: List has been filtered using a `find` or `list` command. The list is not empty and not already in order.
+
+   1. Test case: `sort name`<br>
+      Expected: The shown contacts are sorted by name in ascending order. contacts that were filtered out will not be shown.
+
+   2. Test case: `sort date`<br>
+      Expected: List will show all employees. Employees are sorted by contract end date in ascending order.
+
+   3. Test case: `sort`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+   4. Test case: `sort 1`<br>
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+   5. Test case: `sort name 1`
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
+
+## **Appendix: Additional uml diagrams for other cases**
+
+<puml src="diagrams/ListSeqeuenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
+Diagram for interactions inside the logic component for the `list all` command.
