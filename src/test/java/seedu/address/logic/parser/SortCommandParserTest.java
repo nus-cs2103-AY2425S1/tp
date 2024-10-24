@@ -17,7 +17,7 @@ public class SortCommandParserTest {
     @Test
     public void parse_validArgsName_returnsSortCommand() throws Exception {
         SortCommand command = parser.parse("name");
-        Comparator<? extends Person> expectedComparator = Comparator.comparing(Person::getNameString);
+        Comparator<? super Person> expectedComparator = Comparator.comparing(person -> person.getName().toString());
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);
     }
@@ -25,15 +25,15 @@ public class SortCommandParserTest {
     @Test
     public void parse_validArgsSubject_returnsSortCommand() throws Exception {
         SortCommand command = parser.parse("subject");
-        Comparator<? extends Person> expectedComparator = Comparator.comparing(Person::getSubjectString);
+        Comparator<? super Person> expectedComparator = Comparator.comparing(person -> person.getSubjects().toString());
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);
     }
 
     @Test
     public void parse_validArgsClasses_returnsSortCommand() throws Exception {
-        SortCommand command = parser.parse("classes");
-        Comparator<? extends Person> expectedComparator = Comparator.comparing(Person::getClassesString);
+        SortCommand command = parser.parse("class");
+        Comparator<? super Person> expectedComparator = Comparator.comparing(person -> person.getClasses().toString());
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);
     }

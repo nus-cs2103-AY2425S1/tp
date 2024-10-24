@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.Teacher;
 import seedu.address.model.person.UniquePersonList;
 
@@ -56,10 +57,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-    }
-
-    public void updateInternalList(ObservableList<Person> internalList) {
-        internalList.setAll(getPersonList());
     }
 
     //// person-level operations
@@ -139,5 +136,36 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTeacher(Teacher teacher) {
         addPerson(teacher);
+    }
+
+    /**
+     * Marks the attendance of all students in the address book.
+     */
+    public void markAttendance() {
+        for (Person person : persons) {
+            if (person instanceof Student student) {
+                student.markAttendance();
+            }
+        }
+    }
+
+    /**
+     * Unmarks the attendance of a particular student.
+     */
+    public void unmarkAttendance(Person personToUnmark) {
+        if (personToUnmark instanceof Student student) {
+            student.unmarkAttendance();
+        }
+    }
+
+    /**
+     * Resets the attendance of all students in the address book.
+     */
+    public void resetAttendance() {
+        for (Person person : persons) {
+            if (person instanceof Student student) {
+                student.resetAttendance();
+            }
+        }
     }
 }

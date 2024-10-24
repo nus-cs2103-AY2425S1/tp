@@ -167,13 +167,31 @@ public class AddTeacherCommandTest {
         }
 
         @Override
+        public void markAttendance() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkAttendance(Person targetIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetAttendance() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+
         @Override
         public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");

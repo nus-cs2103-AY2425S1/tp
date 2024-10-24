@@ -145,7 +145,7 @@ public class TeacherTest {
                 new Email("johndoe@hotmail.com"), new Address("123 Main St"),
                 SampleDataUtil.getTagSet("Friends"), SampleDataUtil.getSubjectSet("Math"),
                 SampleDataUtil.getClassSet("1A"));
-        assertEquals("[Math]", teacher.getSubjectString());
+        assertEquals("[Math]", teacher.getSubjects().toString());
     }
 
     @Test
@@ -154,7 +154,7 @@ public class TeacherTest {
                 new Email("johndoe@hotmail.com"), new Address("123 Main St"),
                 SampleDataUtil.getTagSet("Friends"), SampleDataUtil.getSubjectSet("Math"),
                 SampleDataUtil.getClassSet("1A", "2B"));
-        assertEquals("1A, 2B", teacher.getClassesString());
+        assertEquals("[1A, 2B]", teacher.getClasses().toString());
     }
 
 }

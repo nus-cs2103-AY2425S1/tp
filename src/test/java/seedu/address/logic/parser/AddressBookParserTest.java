@@ -22,8 +22,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.ResetAttendanceCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnmarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
@@ -107,12 +110,29 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_sortByName_success() throws Exception {
         SortCommand commandByName = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " name");
-        Comparator<Person> comparatorByName = Comparator.comparing(Person::getNameString);
+        Comparator<Person> comparatorByName = Comparator.comparing(person -> person.getName().fullName);
         assertEquals(new SortCommand(comparatorByName), commandByName);
     }
 
     @Test
     public void parseCommand_sortInvalidParameter_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " invalidParameter"));
+    }
+
+    @Test
+    public void parseCommand_markAttendance() throws Exception {
+        assertTrue(parser.parseCommand(MarkAttendanceCommand.COMMAND_WORD) instanceof MarkAttendanceCommand);
+    }
+
+    @Test
+    public void parseCommand_resetAttendance() throws Exception {
+        assertTrue(parser.parseCommand(ResetAttendanceCommand.COMMAND_WORD) instanceof ResetAttendanceCommand);
+    }
+
+    @Test
+    public void parseCommand_unmarkAttendance() throws Exception {
+        UnmarkAttendanceCommand command = (UnmarkAttendanceCommand) parser.parseCommand(
+                UnmarkAttendanceCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnmarkAttendanceCommand(INDEX_FIRST_PERSON), command);
     }
 }

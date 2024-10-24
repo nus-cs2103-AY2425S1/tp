@@ -11,11 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
@@ -34,6 +36,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
     private final List<String> classes = new ArrayList<>();
+    private final Integer daysAttended;
 
 
     /**
@@ -44,7 +47,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
-                             @JsonProperty("classes") List<String> classes) {
+                             @JsonProperty("classes") List<String> classes,
+                             @JsonProperty("daysAttended") Integer daysAttended) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         if (classes != null) {
             this.classes.addAll(classes);
         }
+        this.daysAttended = daysAttended;
     }
 
     /**
@@ -79,6 +84,11 @@ class JsonAdaptedPerson {
         classes.addAll(source.getClasses().stream()
             .map(String::toString)
             .collect(Collectors.toList()));
+        if (source instanceof Student) {
+            this.daysAttended = ((Student) source).getDaysAttended().getDaysAttended();
+        } else {
+            daysAttended = null;
+        }
     }
 
     /**
@@ -144,8 +154,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        return new Person(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
-            modelSubjects, modelClasses);
+        if (daysAttended != null) {
+            if (!DaysAttended.isValidDaysAttended(daysAttended)) {
+                throw new IllegalValueException(DaysAttended.MESSAGE_CONSTRAINTS);
+            }
+
+            final DaysAttended modelDaysAttended = new DaysAttended(daysAttended);
+            return new Student(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelSubjects, modelClasses, modelDaysAttended);
+        } else {
+            return new Person(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags,
+                    modelSubjects, modelClasses);
+        }
     }
 
 }

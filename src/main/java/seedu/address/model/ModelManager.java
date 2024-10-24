@@ -23,10 +23,9 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedAddressBook addressBook;
+
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
-    private final ObservableList<Person> internalList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,8 +37,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.internalList = FXCollections.observableArrayList(this.addressBook.getPersonList());
-        this.filteredPersons = new FilteredList<>(internalList);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -86,12 +84,10 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
-        internalList.setAll(addressBook.getPersonList());
-        filteredPersons.setPredicate(internalList::contains);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
 
@@ -104,7 +100,6 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
-        addressBook.updateInternalList(internalList);
     }
 
     @Override
@@ -117,14 +112,30 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
-        addressBook.updateInternalList(internalList);
     }
 
     @Override
     public void setFilteredPersonList(List<Person> persons) {
-        requireNonNull(persons);
-        internalList.setAll(persons);
-        filteredPersons.setPredicate(filteredPersons.getPredicate());
+        requireAllNonNull(persons);
+        addressBook.setPersons(persons);
+    }
+
+    @Override
+    public void markAttendance() {
+        addressBook.markAttendance();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void unmarkAttendance(Person personToUnmark) {
+        addressBook.unmarkAttendance(personToUnmark);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void resetAttendance() {
+        addressBook.resetAttendance();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -171,7 +182,6 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        addressBook.updateInternalList(internalList);
         filteredPersons.setPredicate(predicate);
     }
 
