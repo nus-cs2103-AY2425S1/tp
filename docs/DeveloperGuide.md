@@ -163,6 +163,21 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
 
 Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then calls on `model::addItem` to add the internship application into the data.
 
+
+### Find internship applications
+The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+
+`AddressBookParser` first obtains the keyword from the user's input.
+`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
+  `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
+
+Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`. 
+`setPredicate` updates the `filteredList` in `model` to contain all InternshipApplication that contains the keyword.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
