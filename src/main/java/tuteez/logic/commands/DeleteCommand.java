@@ -3,7 +3,9 @@ package tuteez.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import tuteez.commons.core.LogsCenter;
 import tuteez.commons.core.index.Index;
 import tuteez.commons.util.ToStringBuilder;
 import tuteez.logic.Messages;
@@ -29,6 +31,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
     private final Name targetName;
+    private final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
 
     /**
      * Creates a DeleteCommand to delete the person at the specified {@code targetIndex} of the displayed list.
@@ -58,6 +61,7 @@ public class DeleteCommand extends Command {
             personToDelete = getPersonToDeleteByName(model, targetName);
         }
 
+        logger.info("Student deleted - " + personToDelete);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
