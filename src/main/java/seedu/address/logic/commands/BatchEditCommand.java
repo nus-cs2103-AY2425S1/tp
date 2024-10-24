@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -24,13 +23,12 @@ public class BatchEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Change the specified tag with new tag"
             + "Parameters:"
-            + PREFIX_TAG + "TAG" + " "
-            + PREFIX_TAG + "TAG\n"
+            + PREFIX_TAG + "OLDTAG" + " "
+            + PREFIX_TAG + "NEWTAG\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "OLDTAG " + PREFIX_TAG + "NEWTAG";
+            + PREFIX_TAG + "sec2 " + PREFIX_TAG + "sec3";
 
-    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM = "Tag changed from: %1$s\n";
-    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO = "Tag changed to: %1$s\n";
+    public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED = "Tag Changed: %s -> %s";
     public static final String MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG = "No person with Tag= %s is found";
 
     private final Tag oldTag;
@@ -65,13 +63,11 @@ public class BatchEditCommand extends Command {
         if (nonObservableList.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG, oldTag));
         }
+        feedbackToUser.append(String.format(MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED, oldTag, newTag));
 
         for (Person person : nonObservableList) {
             Person updatedPerson = changeTag(person, oldTag, newTag);
             model.setPerson(person, updatedPerson);
-            feedbackToUser.append(String
-                    .format(MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM, Messages.format(person))
-                    + String.format(MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO, Messages.format(updatedPerson)));
         }
 
         PersonContainsTagsPredicate newPredicate = new PersonContainsTagsPredicate(Set.of(newTag));

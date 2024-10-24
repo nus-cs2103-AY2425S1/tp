@@ -14,7 +14,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -66,25 +65,8 @@ class BatchEditCommandTest {
                 .withEmail("cornelia@example.com").withAddress("10th street")
                 .withTags("fren").build();
 
-        String expectedMessage = String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
-                Messages.format(ALICE))
-
-                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
-                Messages.format(changedAlice))
-
-                + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
-                Messages.format(BENSON))
-
-                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
-                Messages.format(changedBenson))
-
-                + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
-                Messages.format(DANIEL))
-
-                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
-                Messages.format(changedDaniel));
+        String expectedMessage =
+                String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED, friendsTag, frenTag);
 
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -106,6 +88,7 @@ class BatchEditCommandTest {
         String expectedMessage = String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG, nonExistentTag);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        // Shows the changed person
         expectedModel.updateFilteredPersonList(predicate);
 
         assertCommandSuccess(batchEditCommand, model, expectedMessage, expectedModel);
@@ -118,27 +101,11 @@ class BatchEditCommandTest {
         PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Set.of(friendsTag));
         BatchEditCommand batchEditCommand = new BatchEditCommand(friendsTag, friendsTag, predicate);
 
-        String expectedMessage = String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
-                Messages.format(ALICE))
-
-                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
-                Messages.format(ALICE))
-
-                + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
-                Messages.format(BENSON))
-
-                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
-                Messages.format(BENSON))
-
-                + String.format(
-                BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_FROM,
-                Messages.format(DANIEL))
-
-                + String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_SUCCESS_TO,
-                Messages.format(DANIEL));
+        String expectedMessage =
+                String.format(BatchEditCommand.MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED, friendsTag, friendsTag);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        // Shows the changed person
         expectedModel.updateFilteredPersonList(predicate);
 
         assertCommandSuccess(batchEditCommand, model, expectedMessage, expectedModel);
