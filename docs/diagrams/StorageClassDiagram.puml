@@ -55,7 +55,7 @@ JsonAdaptedPerson --> "*" JsonAdaptedTag
 JsonTransactionBookStorage .up.|> TransactionBookStorage
 JsonTransactionBookStorage ..> JsonSerializableTransactionBook
 JsonSerializableTransactionBook --> "*" JsonAdaptedTransaction
-JsonAdaptedTransaction --> "*" JsonAdaptedAmount
+JsonAdaptedTransaction --> "1" JsonAdaptedAmount
 JsonAdaptedTransaction --> "*" JsonAdaptedCategory
 
 @enduml
