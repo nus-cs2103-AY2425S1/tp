@@ -34,7 +34,7 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSortCommand() throws Exception {
-        SortCommand command = parser.parse(" n/ASC p/DESC a/ASC g/DESC");
+        SortCommand command = parser.parse(" n/ASC p/DESC a/ASC gl/DESC");
         assertTrue(command instanceof SortCommand);
         StudentComparator comparator = command.getComparator();
         assertTrue(comparator != null);

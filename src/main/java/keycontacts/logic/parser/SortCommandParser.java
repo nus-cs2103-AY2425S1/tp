@@ -42,7 +42,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         for (int i = 1; i < argList.size(); i++) {
             String sortOrder = argList.getValue(i);
-            if (!isValidSortOrder(sortOrder)) {
+            if (!SortOrder.isValidSortOrder(sortOrder)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
@@ -59,9 +59,4 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         return new SortCommand(studentComparator);
     }
-
-    private boolean isValidSortOrder(String sortOrder) {
-        return sortOrder.toUpperCase().equals("ASC") || sortOrder.toUpperCase().equals("DESC");
-    }
-
 }

@@ -19,9 +19,6 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
-    Comparator<Student> COMPARATOR_SORT_BY_NAME = (student1, student2) -> student1.getName()
-            .compareTo(student2.getName());
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

@@ -93,18 +93,24 @@ public class StudentComparator implements Comparator<Student> {
          * @param sortOrder
          */
         public SortOrder(String sortOrder) {
-            if (!sortOrder.equals(ASCENDING) && !sortOrder.equals(DESCENDING)) {
+            if (!isValidSortOrder(sortOrder)) {
                 throw new IllegalArgumentException("Invalid sort order");
             }
             this.sortOrder = sortOrder;
         }
 
+        /**
+         * Checks if a sort order is ascending.
+         */
         public boolean isAscending() {
-            return sortOrder.equals(ASCENDING);
+            return sortOrder.equalsIgnoreCase(ASCENDING);
         }
 
-        public boolean isDescending() {
-            return sortOrder.equals(DESCENDING);
+        /**
+         * Checks if a sort order is valid.
+         */
+        public static boolean isValidSortOrder(String sortOrder) {
+            return sortOrder.equalsIgnoreCase(ASCENDING) || sortOrder.equalsIgnoreCase(DESCENDING);
         }
     }
 }

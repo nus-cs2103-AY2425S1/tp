@@ -82,7 +82,7 @@ Adds a student to the student directory.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS gl/GRADE_LEVEL`
 
 Examples:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/LCM 1`
+* `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`
 
 ### Listing all students : `list`
 
@@ -172,11 +172,11 @@ Examples:
 
 Finds students whose personal details match inputs
 
-Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [g/GRADE_LEVEL_KEYWORD]`
+Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `[n/Hans] [p/88197184]` will fetch same list as `[p/88197184] [n/Hans]`
-* Prefixes other than `n/`, `p/`, `a/`, `g/` will be ignored.
+* Prefixes other than `n/`, `p/`, `a/`, `gl` will be ignored.
 * Any keyword before the first valid prefix will be ignored
 * Only the name, phone number, address, and grade level is searched.
 * Partial inclusion of keyword will be considered a match
@@ -192,10 +192,10 @@ Examples:
 
 Sorts students with personal details
 
-Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [g/ASC or DESC]`
+Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC]`
 
 * The order of prefixes DOES matter. If there are ties in first field, it will use later fields to tie-break.
-* Prefixes other than `n/`, `/p`, `a/`, `g/` will be ignored.
+* Prefixes other than `n/`, `p/`, `a/`, `gl/` will be ignored.
 * Only name, phone number, address, and grade level are valid fields to be sorted against
 * The sorting order must be `ASC` or  `DESC`, and is case-insensitive
 
@@ -203,7 +203,7 @@ To clear the sorting conditions, use command `sort clear`
 
 Examples:
 * `sort n/ASC` sorts the students by name in ascending order.
-* `sort g/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks with name in ascending order
+* `sort gl/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks with name in ascending order
 
 ### Deleting a student : `delete`
 
@@ -271,7 +271,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 g/LCM 1`
+**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
 **List**   | `list`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL]`<br> e.g.,`edit 2 n/James Lee p/81234567`
 **Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`

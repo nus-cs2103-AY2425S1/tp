@@ -1,6 +1,8 @@
 package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 
 import keycontacts.model.Model;
 import keycontacts.model.student.StudentComparator;
@@ -19,7 +21,7 @@ public class SortCommand extends Command {
             + ": Sorts all students in the student directory by the specified field in specified order.\n"
             + "Parameters: Name, Address, Phone Number, Grade Level\n"
             + "Command: " + COMMAND_WORD + " [prefix/[ASC or DESC]]\n"
-            + "Example: " + COMMAND_WORD + " n/ASC a/DESC p/ASC g/DESC";
+            + "Example: " + COMMAND_WORD + PREFIX_GRADE_LEVEL + "/ASC " + PREFIX_NAME + "/DESC";
 
     private final StudentComparator comparator;
 
@@ -35,6 +37,7 @@ public class SortCommand extends Command {
         if (this.comparator == null) {
             return new CommandResult(MESSAGE_SORT_CLEAR);
         }
+        System.out.println(comparator);
         return new CommandResult(MESSAGE_SUCCESS + comparator.getSortDescription());
     }
 

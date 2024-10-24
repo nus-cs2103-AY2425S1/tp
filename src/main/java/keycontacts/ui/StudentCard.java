@@ -76,10 +76,12 @@ public class StudentCard extends UiPart<Region> {
         pianoPieces.setText(formatPianoPieces(student));
         cancelledLessons.setText(formatCancelledLessons(student));
         makeupLessons.setText(formatMakeupLessons(student));
-        // TODO Change this to take the student's group
-        Label groupChip = new Label("Group " + displayedIndex);
-        groupChip.getStyleClass().add("group-chip");
-        groupChipHolder.getChildren().add(groupChip);
+
+        if (!student.getGroup().isNoGroup()) {
+            Label groupChip = new Label(student.getGroup().toString());
+            groupChip.getStyleClass().add("group-chip");
+            groupChipHolder.getChildren().add(groupChip);
+        }
     }
 
     /**
