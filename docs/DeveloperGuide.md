@@ -131,7 +131,7 @@ Extra Pointers about parsing:
 These simple commands are omitted in the Parser classes diagram to enhance clarity and reduce clutter.
 * Various contact and lesson command parsers are represented as `XYZContactCommandParser` and `XYZLessonCommandParser`, respectively. 
 However, their behaviour varies slightly depending on the function. For example, `ArgumentMultimap` is used exclusively in parsers for add, delete, and edit commands, 
-while `ArgumentTokenizer` is only used in parsers for add and edit commands.Not specifying every parser reduces clutter and conveys the high-level message concisely.
+while `ArgumentTokenizer` is only used in parsers for add and edit commands. Not specifying every parser reduces clutter and conveys the high-level message concisely.
 
 ### Model component
 
