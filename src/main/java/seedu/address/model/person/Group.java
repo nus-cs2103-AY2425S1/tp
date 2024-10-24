@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
  * @see UniquePersonList
  */
 public class Group extends UniquePersonList {
-    private String name;
+    private final String name;
 
     /**
      * Creates a group named {@code name}.

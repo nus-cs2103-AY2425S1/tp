@@ -71,7 +71,7 @@ public class EditGroupNameCommand extends Command {
      * Returns a new group with a new name {@code newName} and the same
      * members as the current group.
      */
-    public static Group createRenamedGroup(String newName, Group existingGroup) {
+    private static Group createRenamedGroup(String newName, Group existingGroup) {
         Group newGroup = new Group(newName);
         newGroup.setPersons(existingGroup.asUnmodifiableObservableList());
         return newGroup;
