@@ -41,23 +41,6 @@ public class Participation {
         return test.matches(VALIDATION_REGEX);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Participation)) {
-            return false;
-        }
-
-        Participation otherParticipation = (Participation) other;
-        return this.student.equals(otherParticipation.student)
-                && this.tutorial.equals(otherParticipation.tutorial)
-                && this.attendanceList.equals(otherParticipation.attendanceList);
-    }
-
     /**
      * ensures the immutability of the class
      * @return a new List of attendance
@@ -98,5 +81,4 @@ public class Participation {
     public String toString() {
         return String.format("Attends: %s", tutorial.toString());
     }
-    
 }
