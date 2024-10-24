@@ -4,9 +4,12 @@ import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static spleetwaise.transaction.model.transaction.Date.getNowDate;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import spleetwaise.address.logic.parser.ArgumentMultimap;
@@ -17,6 +20,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -44,25 +48,21 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(
+                        args, PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_CATEGORY);
         if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
         Phone phone = spleetwaise.address.logic.parser.ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Person person = ParserUtil.getPersonFromPhone(phone);
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(getNowDate()));
+        Set<Category> categories = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
 
-        Transaction transaction;
-
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            transaction = new Transaction(person, amount, description, date);
-        } else {
-            transaction = new Transaction(person, amount, description);
-        }
+        Transaction transaction = new Transaction(person, amount, description, date, categories);
 
         return new AddCommand(transaction);
     }

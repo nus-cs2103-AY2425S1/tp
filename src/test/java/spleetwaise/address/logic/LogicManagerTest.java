@@ -105,7 +105,7 @@ public class LogicManagerTest {
         String addTxnCommand = "addTxn p/94351253 amt/12.3 desc/Test date/01012024";
         String expectedMessageSuccess = String.format(
                 spleetwaise.transaction.logic.commands.AddCommand.MESSAGE_SUCCESS,
-                "[test-uuid] Alice Pauline(94351253): Test on 01/01/2024 for $12.30"
+                "[test-uuid] Alice Pauline(94351253): Test on 01/01/2024 for $12.30 with categories: []"
         );
 
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, addressBookModel, transactionModel);

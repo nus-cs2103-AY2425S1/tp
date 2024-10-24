@@ -2,7 +2,11 @@ package spleetwaise.transaction.storage.adapters;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +15,7 @@ import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -43,6 +48,10 @@ public class JsonAdaptedTransaction {
      * The date of the transaction.
      */
     private final String date;
+    /**
+     * The List of the categories.
+     */
+    private final List<JsonAdaptedCategory> categories = new ArrayList<>();
 
     /**
      * Constructor for creating a JsonAdaptedTransaction from a Transaction object, which serializes the given
@@ -55,13 +64,17 @@ public class JsonAdaptedTransaction {
             @JsonProperty("personId") String personId,
             @JsonProperty("amount") JsonAdaptedAmount amount,
             @JsonProperty("description") String description,
-            @JsonProperty("date") String date
+            @JsonProperty("date") String date,
+            @JsonProperty("categories") List<JsonAdaptedCategory> categories
     ) {
         this.id = id;
         this.personId = personId;
         this.amount = amount;
         this.description = description;
         this.date = date;
+        if (categories != null) {
+            this.categories.addAll(categories);
+        }
     }
 
     /**
@@ -75,6 +88,8 @@ public class JsonAdaptedTransaction {
         this.amount = new JsonAdaptedAmount(transaction.getAmount());
         this.description = transaction.getDescription().toString();
         this.date = transaction.getDate().getDate().format(Date.VALIDATION_FORMATTER);
+        this.categories.addAll(transaction.getCategories().stream().map(JsonAdaptedCategory::new)
+                .toList());
     }
 
     /**
@@ -126,6 +141,11 @@ public class JsonAdaptedTransaction {
         final Amount a;
         final Description d;
         final Date dt;
+        final List<Category> txnCategories = new ArrayList<>();
+
+        for (JsonAdaptedCategory cat : categories) {
+            txnCategories.add(cat.toModelType());
+        }
 
         // Check missing fields
         if (id == null) {
@@ -163,7 +183,8 @@ public class JsonAdaptedTransaction {
         a = amount.toModelType();
         d = new Description(description);
         dt = new Date(date);
+        Set<Category> mc = new HashSet<>(txnCategories);
 
-        return new Transaction(id, p, a, d, dt);
+        return new Transaction(id, p, a, d, dt, mc);
     }
 }

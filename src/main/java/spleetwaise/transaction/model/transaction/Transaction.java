@@ -2,6 +2,10 @@ package spleetwaise.transaction.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import spleetwaise.address.commons.util.CollectionUtil;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.IdUtil;
@@ -17,6 +21,7 @@ public class Transaction {
     private final Amount amount;
     private final Description description;
     private final Date date;
+    private final Set<Category> categories = new HashSet<>();
 
     /**
      * Represents a Transaction in the transaction book.
@@ -26,22 +31,32 @@ public class Transaction {
      * @param amount      The amount involved in this transaction.
      * @param description The description of the transaction.
      * @param date        The date the transaction has taken place.
+     * @param categories  The categories the transaction has.
      */
-    public Transaction(String id, Person person, Amount amount, Description description, Date date) {
-        CollectionUtil.requireAllNonNull(person, amount, description, date);
+    public Transaction(
+            String id, Person person, Amount amount, Description description, Date date,
+            Set<Category> categories
+    ) {
+        CollectionUtil.requireAllNonNull(person, amount, description, date, categories);
         this.id = id;
         this.person = person;
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.categories.addAll(categories);
     }
 
-    public Transaction(Person person, Amount amount, Description description, Date date) {
-        this(IdUtil.getId(), person, amount, description, date);
-    }
-
-    public Transaction(Person person, Amount amount, Description description) {
-        this(IdUtil.getId(), person, amount, description, Date.getNowDate());
+    /**
+     * Represents a Transaction in the transaction book.
+     *
+     * @param person      The person involved in this transaction.
+     * @param amount      The amount involved in this transaction.
+     * @param description The description of the transaction.
+     * @param date        The date the transaction has taken place.
+     * @param categories  The categories the transaction has.
+     */
+    public Transaction(Person person, Amount amount, Description description, Date date, Set<Category> categories) {
+        this(IdUtil.getId(), person, amount, description, date, categories);
     }
 
     public String getId() {
@@ -65,6 +80,21 @@ public class Transaction {
     }
 
     /**
+     * Returns a boolean value if the transaction contains the category
+     */
+    public boolean containsCategory(Category category) {
+        return categories.contains(category);
+    }
+
+    /**
+     * Returns an immutable category set, which throws {@code UnsupportedOperationException} if modification is
+     * attempted.
+     */
+    public Set<Category> getCategories() {
+        return Collections.unmodifiableSet(categories);
+    }
+
+    /**
      * Returns true if both transactions have the same uuid.
      *
      * @param other The other object to compare
@@ -76,14 +106,14 @@ public class Transaction {
             return true;
         }
 
-        if (!(other instanceof Transaction)) {
+        if (!(other instanceof Transaction otherTransaction)) {
             return false;
         }
-        Transaction otherTransaction = (Transaction) other;
         return this.person.equals(otherTransaction.getPerson())
                 && this.amount.equals(otherTransaction.getAmount())
                 && this.description.equals(otherTransaction.getDescription())
-                && this.date.equals(otherTransaction.getDate());
+                && this.date.equals(otherTransaction.getDate())
+                && this.categories.equals(otherTransaction.getCategories());
     }
 
     /**
@@ -109,10 +139,8 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s(%s): %s on %s for $%s", id, person.getName(), person.getPhone(), description,
-                date, amount
+        return String.format("[%s] %s(%s): %s on %s for $%s with categories: %s", id, person.getName(),
+                person.getPhone(), description, date, amount, categories
         );
     }
-
-
 }

@@ -2,10 +2,12 @@ package spleetwaise.transaction.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -15,24 +17,29 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Category;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 public class ModelManagerTest {
 
-    private static Person testPerson = TypicalPersons.ALICE;
-    private static Amount testAmount = new Amount("1.23");
-    private static Description testDescription = new Description("1");
-    private static Date testDate = new Date("01012024");
+    private static final Person testPerson = TypicalPersons.ALICE;
+    private static final Amount testAmount = new Amount("1.23");
+    private static final Description testDescription = new Description("1");
+    private static final Date testDate = new Date("01012024");
+    private static final Set<Category> testCategories = Collections.emptySet();
 
-    private static Transaction testTxn = new Transaction(testPerson, testAmount, testDescription, testDate);
-    private static Transaction testTxn2 = new Transaction(testPerson, testAmount, new Description("2"), testDate);
-    private static Transaction testTxn3 = new Transaction(testPerson, testAmount, new Description("3"), testDate);
+    private static final Transaction testTxn = new Transaction(
+            testPerson, testAmount, testDescription, testDate, testCategories);
+    private static final Transaction testTxn2 = new Transaction(
+            testPerson, testAmount, new Description("2"), testDate, testCategories);
+    private static final Transaction testTxn3 = new Transaction(
+            testPerson, testAmount, new Description("3"), testDate, testCategories);
 
 
-    private TransactionBookModel transactionModel = new TransactionBookModelManager();
-    private AddressBookModel addressBookModel = new AddressBookModelManager();
+    private final TransactionBookModel transactionModel = new TransactionBookModelManager();
+    private final AddressBookModel addressBookModel = new AddressBookModelManager();
 
     @Test
     void transactionModelIsNotAddressBookModel() {
@@ -149,7 +156,7 @@ public class ModelManagerTest {
     public void equals_null_returnsFalse() {
         TransactionBookModelManager manager = new TransactionBookModelManager();
 
-        assertFalse(manager.equals(null));
+        assertNotEquals(null, manager);
     }
 
     @Test
@@ -159,7 +166,7 @@ public class ModelManagerTest {
         TransactionBookModelManager manager2 = new TransactionBookModelManager();
         manager2.addTransaction(testTxn2);
 
-        assertFalse(manager1.equals(manager2));
+        assertNotEquals(manager1, manager2);
     }
 
     @Test
@@ -176,7 +183,7 @@ public class ModelManagerTest {
         Predicate<Transaction> pred2 = (t) -> t.getDescription().equals(new Description("3"));
         manager1.updateFilteredTransactionList(pred2);
 
-        assertFalse(manager1.equals(manager2));
+        assertNotEquals(manager1, manager2);
     }
 
     @Test
@@ -184,12 +191,12 @@ public class ModelManagerTest {
         TransactionBookModelManager manager1 = new TransactionBookModelManager();
         manager1.addTransaction(testTxn);
 
-        assertTrue(manager1.equals(manager1));
+        assertEquals(manager1, manager1);
 
         TransactionBookModelManager manager2 = new TransactionBookModelManager();
         manager2.addTransaction(testTxn);
 
-        assertTrue(manager1.equals(manager2));
+        assertEquals(manager1, manager2);
     }
 
 
