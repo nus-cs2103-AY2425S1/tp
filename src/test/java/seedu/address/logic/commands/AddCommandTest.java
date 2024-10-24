@@ -42,7 +42,7 @@ public class AddCommandTest {
         Person personWithAllFields = new PersonBuilder().build();
         CommandResult commandResult = new AddCommand(personWithAllFields).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithAllFields)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithAllFields)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(personWithAllFields), modelStub.personsAdded);
     }
@@ -54,7 +54,7 @@ public class AddCommandTest {
         Person personWithoutEmail = new PersonBuilder(ALICE).withEmail().build();
         CommandResult commandResultWithoutEmail = new AddCommand(personWithoutEmail).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutEmail)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithoutEmail)),
                 commandResultWithoutEmail.getFeedbackToUser());
         assertEquals(Arrays.asList(personWithoutEmail), modelStub.personsAdded);
     }
@@ -66,7 +66,7 @@ public class AddCommandTest {
         Person personWithoutAddress = new PersonBuilder(BENSON).withAddress().build();
         CommandResult commandResultWithoutAddress = new AddCommand(personWithoutAddress).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutAddress)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithoutAddress)),
                 commandResultWithoutAddress.getFeedbackToUser());
         assertEquals(Arrays.asList(personWithoutAddress),
                 modelStub.personsAdded);
@@ -80,7 +80,7 @@ public class AddCommandTest {
         CommandResult commandResultWithoutDateOfLastVisit = new AddCommand(personWithoutDateOfLastVisit)
                 .execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutDateOfLastVisit)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithoutDateOfLastVisit)),
                 commandResultWithoutDateOfLastVisit.getFeedbackToUser());
         assertEquals(Arrays.asList(personWithoutDateOfLastVisit),
                 modelStub.personsAdded);
