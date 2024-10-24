@@ -61,7 +61,7 @@ public class Appointment {
         int newId;
         do {
             newId = r.nextInt();
-        } while (appointmentById.containsKey(newId));
+        } while (appointmentById.containsKey(newId) || newId <= 0);
 
         return newId;
     }
@@ -78,6 +78,7 @@ public class Appointment {
 
         Appointment appointment = appointmentById.get(id);
         appointment.patient.removeAppointment(appointment);
+        appointment.doctor.removeAppointment(appointment);
 
         appointmentById.remove(id);
 
