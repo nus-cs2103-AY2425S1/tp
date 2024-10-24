@@ -39,7 +39,7 @@ public class DeleteStudentCommand extends Command {
     private final StudentNumber studentNumber;
 
     /**
-     * Constructs a DeleteStudentCommand to delete the specified student by student number.
+     * Constructs a DeleteStudentCommand to delete the specified student by student name.
      *
      * @param name The student name of the student to be deleted.
      */
@@ -50,7 +50,7 @@ public class DeleteStudentCommand extends Command {
     }
 
     /**
-     * Constructs a DeleteStudentCommand to delete the specified student by student number.
+     * Constructs a DeleteStudentCommand to delete the specified student by student name and student number.
      *
      * @param name The student name of the student to be deleted.
      * @param studentNumber The student number of the student to be deleted.
