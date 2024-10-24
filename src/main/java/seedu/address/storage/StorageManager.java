@@ -12,7 +12,6 @@ import seedu.address.model.ReadOnlyReminderAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
-
 /**
  * Manages storage of AddressBook data in local storage.
  */
