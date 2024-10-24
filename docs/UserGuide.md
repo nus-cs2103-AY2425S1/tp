@@ -249,5 +249,6 @@ _Details coming soon ..._
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
 | **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                        |
+| **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                                        |
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Help**     | `help`                                                                                                                                                                |
