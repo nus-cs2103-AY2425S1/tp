@@ -334,7 +334,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-- 1b. A person with same name is already in contact list.
+- 1b. A person with the same identifier is already in contact list.
 
   - 1b1. System shows duplicate person message.
 
