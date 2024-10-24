@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Skill> skills = new HashSet<>();
-    private final Optional<String> match;
+    private Optional<String> match;
 
     /**
      * Every parameter must be present and not null.
@@ -42,7 +42,7 @@ public class Person {
     }
 
     /**
-     * Creates a person with the matching job
+     * Creates a person with the matching job.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Skill> skills, String match) {
         requireAllNonNull(name, phone, email, role, skills);
@@ -51,7 +51,7 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
-        this.match = Optional.of(match);
+        this.match = Optional.ofNullable(match);
     }
 
     public Name getName() {
@@ -78,12 +78,16 @@ public class Person {
         return Collections.unmodifiableSet(skills);
     }
 
+    /**
+     * Returns a {@code String} representing a single association between {@code Job} and {@code Person} if it exists,
+     * null otherwise.
+     */
     public String getMatch() {
         return match.orElse(null);
     }
 
     /**
-     * Returns true if this person has any job matches, returns false otherwise
+     * Returns true if this person has any job matches, returns false otherwise.
      */
     public boolean isMatchPresent() {
         return match.isPresent();
@@ -92,22 +96,28 @@ public class Person {
     /**
      * Checks if this person has matched with the specified job.
      *
-     * @param jobIdentifier A string that uniquely identify a job
+     * @param jobIdentifier A string that uniquely identify a job.
      */
     public boolean hasMatched(String jobIdentifier) {
         return match.map(s -> s.equals(jobIdentifier)).orElse(false);
     }
 
     /**
-     * Returns a string that identify the Person object
+     * Returns the phone number as a string, which uniquely identifies the Person object.
      */
     public String getIdentifier() {
-        // TODO: This identifier cannot guarantee uniqueness
-        return name.fullName;
+        return phone.toString();
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Removes the association between the Person object and its matched Job.
+     */
+    public void removeMatch() {
+        match = Optional.empty();
+    }
+
+    /**
+     * Returns true if both persons have the same contact or email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -116,7 +126,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getEmail().equals(getEmail()) || otherPerson.getPhone().equals(getPhone()));
     }
 
     /**
@@ -146,7 +156,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, role, skills);
+        return Objects.hash(name, phone, email, role, skills, match);
     }
 
     @Override

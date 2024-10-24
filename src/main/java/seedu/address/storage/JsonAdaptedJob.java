@@ -37,13 +37,17 @@ class JsonAdaptedJob {
     @JsonCreator
     public JsonAdaptedJob(@JsonProperty("name") String name, @JsonProperty("company") String company,
             @JsonProperty("salary") String salary, @JsonProperty("description") String description,
-            @JsonProperty("requirements") List<JsonAdaptedTag> requirements) {
+            @JsonProperty("requirements") List<JsonAdaptedTag> requirements,
+            @JsonProperty("matches") List<String> matches) {
         this.name = name;
         this.company = company;
         this.salary = salary;
         this.description = description;
         if (requirements != null) {
             this.requirements.addAll(requirements);
+        }
+        if (matches != null) {
+            this.matches.addAll(matches);
         }
     }
 
@@ -81,8 +85,10 @@ class JsonAdaptedJob {
 
         Set<Tag> modelJobRequirements = new HashSet<>(jobRequirements);
 
+        Set<String> modelJobMatches = new HashSet<>(matches);
+
         return new Job(modelName, modelJobCompany, modelJobSalary, modelJobDescription, modelJobRequirements,
-                new HashSet<>());
+                modelJobMatches);
     }
 
 }

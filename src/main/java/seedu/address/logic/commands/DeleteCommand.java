@@ -11,7 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Represents an abstract command for deleting an object of type {@code T} from the address book.
  */
 public abstract class DeleteCommand<T> extends Command {
 
@@ -22,8 +22,6 @@ public abstract class DeleteCommand<T> extends Command {
             + "the index number used in the displayed person list.\n"
             + "Parameters: [contact/job/company] INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " contact 1";
-
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
 

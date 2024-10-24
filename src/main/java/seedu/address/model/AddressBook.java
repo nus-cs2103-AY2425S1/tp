@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -179,6 +180,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        if (key.isMatchPresent()) {
+            String personIdentifier = key.getIdentifier();
+            for (Job job : jobs) {
+                // The personIdentifier is guaranteed to be unique and its reference is kept by at most 1 job. Due to
+                // the guarantee provided by removeMatch, I do not have to check if the person is working at that job.
+                job.removeMatch(personIdentifier);
+            }
+        }
         persons.remove(key);
     }
 
@@ -187,6 +196,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeJob(Job key) {
+        Set<String> matches = key.getMatches();
+        for (Person person: persons) {
+            String personIdentifier = person.getIdentifier();
+            if (matches.contains(personIdentifier)) {
+                person.removeMatch();
+            }
+        }
         jobs.remove(key);
     }
 

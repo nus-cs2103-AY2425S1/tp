@@ -1,6 +1,7 @@
 package seedu.address.model.job;
 
 import seedu.address.model.common.Name;
+
 /**
  * Represents a Job's company in the address book.
  * This extends from the Name class to avoid code duplication.
@@ -25,7 +26,7 @@ public class JobCompany extends Name {
     }
 
     /**
-     * Checks if this name is equal to the specified company's name
+     * Checks if this name is equal to the specified company's name.
      *
      * @param name Name of the company specified.
      * @return true if equal.

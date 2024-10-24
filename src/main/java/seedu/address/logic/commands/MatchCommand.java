@@ -23,7 +23,7 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Matches a contact to a job.
+ * Matches the {@code Person} with the {@code Job} at the respective indexes.
  */
 public class MatchCommand extends Command {
 
@@ -93,7 +93,6 @@ public class MatchCommand extends Command {
         assert contactToMatch != null;
         assert jobToMatch != null;
 
-        // TODO: Let's assume contact name is used preserve uniqueness for now
         final String contactIdentifier = contactToMatch.getIdentifier();
         final String jobIdentifier = jobToMatch.getIdentifier();
 
@@ -138,6 +137,8 @@ public class MatchCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("contactIndex", contactIndex).add("jobIndex", jobIndex).toString();
+        return new ToStringBuilder(this)
+                .add("contactIndex", contactIndex)
+                .add("jobIndex", jobIndex).toString();
     }
 }
