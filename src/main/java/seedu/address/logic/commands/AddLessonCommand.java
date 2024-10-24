@@ -42,6 +42,8 @@ public class AddLessonCommand extends Command {
     private final Index tuteeIndex;
 
     /**
+     * Creates an AddLessonCommand to add the specified {@code Tutor} and {@code Tutee}.
+     *
      * @param tutorIndex Index of the tutor
      * @param tuteeIndex Index of the tutee
      */
