@@ -86,7 +86,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of roles (including 0).
+A person can have any number of roles (including 0) and Telegram username is optional.
 </div>
 
 Examples:
@@ -109,8 +109,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAM
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When adding roles, only the following are valid roles: attendee, sponsor, vendor, volunteer
-* You can remove all the person’s roles by typing `r/` without
-    specifying any role after it.
+
+:bulb: **Tip:** You can remove all the person’s roles by typing `r/` without
+    specifying any role after it. Likewise for telegram handle, typing `t/` will remove the person's telegram handle
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -218,7 +219,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TELEGRAM_USERNAME] [r/ROLE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**new** | `new EVENT NAME`
+**new** | `new EVENT NAME` <br> e.g. `new Sumo Bot Festival`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
