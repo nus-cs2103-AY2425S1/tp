@@ -49,6 +49,10 @@ benefits of a Graphical User Interface (GUI).
 
     * `find John` : Finds the patient named 'John'
 
+    * `update S1234567Z p/91234567 e/johndoe@example.com` : Updates the email address of the patient with provided NRIC.
+
+    * `update 1 p/91234567 e/johndoe@example.com` : Updates the email address of the first patient in the list.
+
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -116,35 +120,15 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
-
-Edits an existing person in the address book by searching for their index.
-
-Format: `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-  The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
-  and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
 ### Updating a person : `update`
 
-Updates an existing person in the address book by searching for their Name or NRIC.
+Updates an existing person in the address book by searching for their index or NRIC.
 
 Format: 
-`update NAME [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​ `  
+`update INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​ `  
 OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
 
-* Edits the person at the specified `NAME` or `NRIC`. The name and nric refers to the name and nric shown in the displayed person list respectively.
+* Edits the person at the specified `INDEX` or `NRIC`. The index and NRIC refers to the index number and NRIC shown in the displayed person list respectively.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -152,10 +136,12 @@ OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDR
   specifying any tags after it.
 
 Examples:
-
-* `edit S1234567Z p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person whose NRIC is 'S1234567Z' to be `91234567`
+* `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st person to be `91234567`
   and `johndoe@example.com` respectively.
-* `edit Betsy n/Betsy Crower t/` Edits the name of the person named 'Betsy' to be `Betsy Crower` and clears all existing tags.
+* `update 2 n/Betsy Crower t/` Updates the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+* `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the person whose NRIC is 'S1234567Z' to be `91234567`
+  and `johndoe@example.com` respectively.
 
 ### Locating persons: `find`
 
@@ -369,8 +355,7 @@ to any desired location if needed.
  **Add**    | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`                                     
  **Clear**  | `clear`                                                                                                                                          
  **Delete** | `delete NRIC`<br> e.g., `delete S1234567Z`                                                                                                       
- **Edit**   | `edit INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
- **Update**   | `edit NAME/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
+ **Update**   | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
  **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       
  **List**   | `list`                                                                                                                                           
  **Help**   | `help`                                                                                                                                           
