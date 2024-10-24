@@ -30,7 +30,6 @@ public class ModelManager implements Model {
 
     // Dangerous, find a better way to implement this.
     private Command savedCommand = null;
-    
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
