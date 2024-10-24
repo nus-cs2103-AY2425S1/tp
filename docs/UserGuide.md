@@ -206,6 +206,19 @@ Examples:
 
 - `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
+### Exporting the contact list : `export`
+
+Exports the contacts in the contact list into the specified file type. The file will be named bizbook.&lt;file extension&gt; and will be located in a folder named exports.
+
+Format: `export f/FILETYPE`
+
+- Exports the contact list into the specified `FILETYPE`.
+- The file type must be **either csv or vcf**.
+
+Examples:
+- `export f/csv` exports the contact list into a csv file.
+- `export f/vcf` exports the contact list into a vcf file.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -249,13 +262,14 @@ _Details coming soon ..._
 
 | Action       | Format, Examples                                                                                                                                                      |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
 | **List**     | `list`                                                                                                                                                                |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
 | **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
 | **Pin**      | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
+| **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                                         |
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Help**     | `help`                                                                                                                                                                |
