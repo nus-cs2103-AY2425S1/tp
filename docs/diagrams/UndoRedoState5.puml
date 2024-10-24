@@ -1,22 +1,20 @@
 @startuml
 !include style.puml
-skinparam ClassFontColor #000000
-skinparam ClassBorderColor #000000
-skinparam ClassBackgroundColor #FFFFAA
+skinparam ArrowFontStyle plain
 
-title After command "clear"
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":FilteredPersons" as FilteredPersons MODEL_COLOR
+end box
 
-package States <<rectangle>> {
-    class State1 as "<u>ab0:AddressBook</u>"
-    class State2 as "<u>ab1:AddressBook</u>"
-    class State3 as "<u>ab3:AddressBook</u>"
-}
+Model -> AddressBook : setPerson(personToTag, personWithTags)
+activate AddressBook
+AddressBook --> Model
+deactivate AddressBook
 
-State1 -[hidden]right-> State2
-State2 -[hidden]right-> State3
+Model -> FilteredPersons : setPredicate(predicate)
+activate FilteredPersons
+deactivate FilteredPersons
 
-class Pointer as "Current State" #FFFFFF
-
-Pointer -up-> State3
-note right on link: State ab2 deleted.
-@end
+@enduml
