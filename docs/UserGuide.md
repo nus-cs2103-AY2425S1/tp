@@ -115,7 +115,7 @@ Finds persons by name, phone number, address or client type.
 
 Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYWORD`
 
-* `find n/KEYWORD` will search for persons by name.
+#### Locating by name: `find n/NAME` 
   * Only the name is searched.
   * The search is case-insensitive. e.g `hans` will match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -123,66 +123,78 @@ Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYW
   * Persons matching all keyword prefix will be returned (i.e. `AND` search).
     e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
-
-* `find p/KEYWORD` will search for persons by phone number.
-  *  Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
-
-
-* `find a/KEYWORD` will search for persons by address.
-  * The search is case-insensitive. e.g `tampines` will match `Tampines`
-  * Only the address of the contact is searched.
-  * Persons with address with any matching substring to the keyword will be returned.
-
-
-* `find c/KEYWORD` will search for persons by client type.
-  * The search is case-insensitive. e.g `investment` will match `Investment`
-  * Only the `CLIENT_TYPE` of the person is searched.
-  * Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
-  * Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
-  
-A **valid** `KEYWORD` should:
-* For `find n/`:
-  * Not be empty.
+A **valid** `NAME` should:
+* Not be empty.
     * For eg. Just typing `find n/` without providing any `KEYWORD` will throw an error.
-
-
-* For `find p/`:
-  * Only numbers are allowed.
-    * For eg. Typing `find p/abc` will throw an error.
-  * Not be empty.
-      * For eg. Just typing `find p/` without providing any `KEYWORD` will throw an error.
-
-
-* For `find a/`:
-  * Not be empty.
-      * For eg. Just typing `find a/` without providing any `KEYWORD` will throw an error.
-
-
-* For `find c/`:
-  * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
-    * `client_type` will always be in alphanumeric format.
-  * Not be empty.
-      * For eg. Just typing `find c/` without providing any `KEYWORD` will throw an error.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex yeo` returns `Alex Yeoh`
-* `find p/8433` returns `8433 4567`
-* `find a/Blk 47` returns `Blk 47 Tampines Street 20`
-* `find c/Investment` returns `Investment Plan`
 
-Result for `find alex david`:
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Result for `find n/alex`:
+![result for 'find alex david'](images/findAlexDavidResult.png) // need to change this image
+
+
+#### Locating by phone number: `find p/PHONE_NUMBER`
+  *  Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
+
+A **valid** `PHONE_NUMBER` should:
+* Only numbers are allowed.
+    * For eg. Typing `find p/abc` will throw an error.
+* Not be empty.
+    * For eg. Just typing `find p/` without providing any `KEYWORD` will throw an error.
+
+Examples:
+* `find p/8433` returns `8433 4567`
+
+Result for `find p/9234`:
+![result for 'find 9234'](images/find9234Result.png)
+
+
+#### Locating by address: `find a/ADDRESS`
+  * The search is case-insensitive. e.g `tampines` will match `Tampines`
+  * Only the address of the contact is searched.
+  * Persons with address with any matching substring to the keyword will be returned.
+
+A **valid** `ADDRESS` should:
+* Not be empty.
+    * For eg. Just typing `find a/` without providing any `ADDRESS` will throw an error.
+
+Examples:
+* `find a/Blk 47` returns `Blk 47 Tampines Street 20`
+
+Result for `find a/tampines`:
+![result for 'fa tampines`](images/findTampines.png)
+
+
+#### Locating by client type: `find c/CLIENT_TYPE`
+* The search is case-insensitive. e.g `investment` will match `Investment`
+* Only the `CLIENT_TYPE` of the person is searched.
+* Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
+* Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
+  
+A **valid** `CLIENT_TYPE` should:
+* Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
+    * `client_type` will always be in alphanumeric format.
+* Not be empty.
+    * For eg. Just typing `find c/` without providing any `CLIENT_TYPE` will throw an error.
+
+Examples:
+* `find c/Investment` returns every contact that has a `client_type` beginning with `Investment`
+* `find c/Invest` returns every contact that has `client_type` beginning with `Invest`
+* `find c/Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` AND `Healthcare`
+
+Result for `fc Investment Plan`:
+![result for 'fc Investment Plan`](images/FindClientType.png)
+
 
 ### Shortcuts for `find` command
-* All constraints for `find` command apply to the shortcuts as well.
+All constraints for `find` command apply to the shortcuts as well.
 
 #### Locating persons by name: `fn`
-
-Finds persons whose names contain any of the given keywords.
+Shortcut command for `find n/NAME`
 
 Format: `fn KEYWORD`
-* Shortcut command for `find n/NAME`
 
 Examples:
 * `fn John` returns `John`, `John Doe`, `Doe John`, `Doe John Eng`
@@ -190,44 +202,34 @@ Examples:
 * `fn Yeoh Alex` returns `Alex Yeoh`
 * `fn aLex yEOh` returns `Alex Yeoh`
 
-Result for `fn alex`:
-  ![result for 'find alex david'](images/findAlexDavidResult.png) // need to change this image
 
 #### Locating persons by phone number: `fp`
-
-Finds persons whose phone number begins with the given keyword.
-
-Format: `fp KEYWORD`
 * Shortcut command for `find p/PHONE_NUMBER`
 
-Result for `fp 9234`:
-  ![result for 'find 9234'](images/find9234Result.png)
+Format: `fp KEYWORD`
+
+Examples: 
+* `fp 8433` returns `8433 4567`
 
 
 #### Locating persons by address : `fa`
-
-Finds persons whose address matches any part of the given keyword(s).
-
-Format `fa ADDRESS`
 * Shortcut command for `find a/ADDRESS`
 
-Result for `fa tampines`:
-  ![result for 'fa tampines`](images/findTampines.png)
-
-#### Locating persons by client type: `fc`
-
-Finds persons whose address matches any part of the given keyword(s).
-
-Format `fc CLIENT_TYPE`
-* Shortcut command for `find c/CLIENT_TYPE` 
+Format: `fa ADDRESS`
 
 Examples:
-* `fc Investment` returns every contact that has a `client_type` beginning with `Investment`
-* `fc Invest` returns every contact that has `client_type` beginning with `Invest`
-* `fc Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` AND `Healthcare`
+* `fa Blk 47` returns `Blk 47 Tampines Street 20`
 
-Result for `fc Investment Plan`:
-  ![result for 'fc Investment Plan`](images/FindClientType.png)
+
+#### Locating persons by client type: `fc`
+* Shortcut command for `find c/CLIENT_TYPE`
+
+Format: `fc CLIENT_TYPE`
+
+Examples:
+* `fc Investment` returns `Investment Plan`
+* `fc Investment Healthcare` returns `Investment Plan` and `Healthcare Plan`
+
 
 ### Sort by name : `sort`
 
