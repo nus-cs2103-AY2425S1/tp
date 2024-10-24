@@ -225,7 +225,7 @@ public class ParserUtil {
      * @return An array of two {@code LocalDate} objects: the start date and end date.
      * @throws ParseException If the input format is invalid or if the start date is after the end date.
      */
-    public static LocalDate[] parseAttendanceDate(String searchString) throws ParseException {
+    public static LocalDate[] parseAttendanceDateRange(String searchString) throws ParseException {
         String trimmedString = parseMultipleWordsFromFindCommand(searchString);
         String[] attendanceDates = validateAndSplitDateString(trimmedString);
 
@@ -246,7 +246,7 @@ public class ParserUtil {
      * @return An array of two strings: the start date and end date as strings.
      * @throws ParseException If the input does not contain exactly two parts.
      */
-    public static String[] validateAndSplitDateString(String dateInput) throws ParseException {
+    private static String[] validateAndSplitDateString(String dateInput) throws ParseException {
         String[] dateParts = dateInput.split(":");
         if (dateParts.length != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -261,7 +261,7 @@ public class ParserUtil {
      * @return A {@code LocalDate} object representing the parsed date.
      * @throws ParseException If the input string cannot be parsed into a valid date.
      */
-    public static LocalDate parseDate(String dateString) throws ParseException {
+    private static LocalDate parseDate(String dateString) throws ParseException {
         try {
             return LocalDate.parse(parseSingleWordFromFindCommand(dateString), Attendance.VALID_DATE_FORMAT);
         } catch (DateTimeParseException e) {
