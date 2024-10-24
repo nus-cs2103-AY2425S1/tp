@@ -68,23 +68,23 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 ## Command summary
 
-| Index |        Action         |                                                        Format                                                        |                                          examples                                          |
-|:-----:|:---------------------:|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
-|   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 l/S1 s/MATH s/CHEMISTRY` |
-|   2   |        Delete         |                                                   `delete i/INDEX`                                                   |                                        `delete i/2`                                        |
-|   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                         `update Alex Yeoh n/James Lee e/99999999`                          |
-|   4   |         Find          |                        `find n/KEYWORD [MORE_KEYWORDS]` or `find l/LEVEL` or `find s/SUBJECT`                        |                       `find n/Alex` or `find l/S2` or `find s/MATH`                        |
-|   5   |         List          |                                                        `list`                                                        |                                           `list`                                           |
-|   6   |          Tag          |                                          `tag n/NAME [l/LEVEL] [s/SUBJECT]`                                          |                                `tag n/John Doe l/S1 s/MATH`                                |
-|   7   |         Note          |                                                `note n/NAME nt/NOTES`                                                |                      `note n/John Doe nt/Doing well in all subjects`                       |
-|   8   |         Clear         |                                                       `clear`                                                        |                                          `clear`                                           |
-|   9   |         Help          |                                                        `help`                                                        |                                           `help`                                           |
-|  10   |       Add Task        |                                          `addtask n/NAME t/TASK d/DEADLINE`                                          |                        `addtask n/John Doe t/Mark CA1 d/2024-10-15`                        |
-|  11   |      Delete Task      |                                          `deletetask n/NAME ti/TASK_INDEX`                                           |                                `deletetask n/John Doe ti/1`                                |
-|  12   |      Update Task      |                                  `updatetask n/NAME ti/INDEX [t/TASK] [d/DEADLINE]`                                  |                       `updatetask n/Joht Doe ti/2 t/Mark assignment`                       |
-|  13   |    View All Tasks     |                                                     `viewtasks`                                                      |                                        `viewtasks`                                         |
-|  14   | View Specific Student |                                                    `view n/NAME`                                                     |                                     `view n/John Doe`                                      |
-|  15   |         Exit          |                                                        `exit`                                                        |                                           `exit`                                           |
+| Index |        Action         |                                                        Format                                                        |                                           examples                                            |
+|:-----:|:---------------------:|:--------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------:|
+|   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 l/S1 NT s/MATH s/CHEMISTRY` |
+|   2   |        Delete         |                                                   `delete i/INDEX`                                                   |                                         `delete i/2`                                          |
+|   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                           `update Alex Yeoh n/James Lee e/99999999`                           |
+|   4   |         Find          |                        `find n/KEYWORD [MORE_KEYWORDS]` or `find l/LEVEL` or `find s/SUBJECT`                        |                       `find n/Alex` or `find l/S2 NA` or `find s/MATH`                        |
+|   5   |         List          |                                                        `list`                                                        |                                            `list`                                             |
+|   6   |          Tag          |                                          `tag n/NAME [l/LEVEL] [s/SUBJECT]`                                          |                                `tag n/John Doe l/S1 NT s/MATH`                                |
+|   7   |         Note          |                                                `note n/NAME nt/NOTES`                                                |                        `note n/John Doe nt/Doing well in all subjects`                        |
+|   8   |         Clear         |                                                       `clear`                                                        |                                            `clear`                                            |
+|   9   |         Help          |                                                        `help`                                                        |                                            `help`                                             |
+|  10   |       Add Task        |                                          `addtask n/NAME t/TASK d/DEADLINE`                                          |                         `addtask n/John Doe t/Mark CA1 d/2024-10-15`                          |
+|  11   |      Delete Task      |                                          `deletetask n/NAME ti/TASK_INDEX`                                           |                                 `deletetask n/John Doe ti/1`                                  |
+|  12   |      Update Task      |                                  `updatetask n/NAME ti/INDEX [t/TASK] [d/DEADLINE]`                                  |                        `updatetask n/Joht Doe ti/2 t/Mark assignment`                         |
+|  13   |    View All Tasks     |                                                     `viewtasks`                                                      |                                          `viewtasks`                                          |
+|  14   | View Specific Student |                                                    `view n/NAME`                                                     |                                       `view n/John Doe`                                       |
+|  15   |         Exit          |                                                        `exit`                                                        |                                            `exit`                                             |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 Adds a student to the address book.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/SCHOOL_LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
 
 <box type="tip" seamless>
 
@@ -137,7 +137,7 @@ Adds a student to the address book.
 
 **Examples:**
 * `add n/John Doe p/98765432 e/99999999 a/John street, block 123, #01-01`
-* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 s/ENGLISH`
+* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 NA s/ENGLISH`
 
 ***
 
@@ -161,7 +161,7 @@ Deletes the specified student from the address book.
 
 Updates the details of an existing student in the address book.
 
-**Format:** `update NAME [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
+**Format:** `update NAME [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
 
 * Updates the student with the specified `NAME`. The name refers to the full name shown in the displayed student list.
 * At least one of the optional fields must be provided.
@@ -191,7 +191,7 @@ Find students by either their name, level or subject.
 
 **Examples:**
 * `find n/John` returns `john` and `John Doe`
-* `find l/S3` returns all students tagged with level `S3`
+* `find l/S3 NA` returns all students tagged with level `S3 NA`
 * `find s/MATH` returns all students tagged with subject `MATH`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
@@ -210,11 +210,11 @@ Shows a list of all students in the address book.
 
 Allows tagging a student by their level and subject. A student must have a level assigned before they can be tagged with a subject.
 
-**Format:** `tag n/NAME [l/level] [s/SUBJECT]…​`
+**Format:** `tag n/NAME [l/LEVEL] [s/SUBJECT]…​`
 * To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT ...`
 
 **Examples:**
-* `tag n/John Doe l/S3 s/ENGLISH`
+* `tag n/John Doe l/S3 NA s/ENGLISH`
 * `tag n/Jane Smith s/MATH` only works if `Jane Smith` has a `level` assigned previously
 
 ***
