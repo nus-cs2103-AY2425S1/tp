@@ -11,6 +11,7 @@ import static tuteez.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -97,6 +98,50 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getLastViewedPerson_noPersonViewed_returnsEmptyOptional() {
+        assertTrue(modelManager.getLastViewedPerson().get().isEmpty());
+    }
+
+    @Test
+    public void updateLastViewedPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateLastViewedPerson(null));
+    }
+
+    @Test
+    public void updateLastViewedPerson_validPerson_updatesLastViewedPerson() {
+        modelManager.addPerson(ALICE);
+
+        modelManager.updateLastViewedPerson(ALICE);
+
+        assertEquals(Optional.of(ALICE), modelManager.getLastViewedPerson().get());
+    }
+
+    @Test
+    public void updateLastViewedPerson_multipleUpdates_returnsLatestPerson() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+
+        modelManager.updateLastViewedPerson(ALICE);
+        modelManager.updateLastViewedPerson(BENSON);
+
+        assertEquals(Optional.of(BENSON), modelManager.getLastViewedPerson().get());
+    }
+
+    @Test
+    public void getLastViewedPerson_observableProperty_notifiesListeners() {
+        modelManager.addPerson(ALICE);
+        final boolean[] propertyChanged = {false};
+
+        modelManager.getLastViewedPerson().addListener((observable, oldValue, newValue) -> {
+            propertyChanged[0] = true;
+        });
+
+        modelManager.updateLastViewedPerson(ALICE);
+
+        assertTrue(propertyChanged[0]);
     }
 
     @Test
