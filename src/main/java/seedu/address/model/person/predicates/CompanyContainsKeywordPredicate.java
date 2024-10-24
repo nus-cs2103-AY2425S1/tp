@@ -3,8 +3,6 @@ package seedu.address.model.person.predicates;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
 /**
  * Tests that a {@code Person}'s {@code Company} matches any of the keywords given.
  */

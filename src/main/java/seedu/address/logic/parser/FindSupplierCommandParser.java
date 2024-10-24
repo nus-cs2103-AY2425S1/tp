@@ -2,13 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_KEYWORD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.CompanyContainsKeywordPredicate;
 import seedu.address.model.person.predicates.NameContainsPredicate;
