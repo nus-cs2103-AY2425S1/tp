@@ -58,7 +58,12 @@ public class CommandBox extends UiPart<Region> {
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Clear error style whenever text changes
+            setStyleToDefault();
+
+            // Handle text changes for suggestions
             handleTextChanged(newValue);
+
             // Reset tab index when user types
             if (!oldValue.equals(newValue)) {
                 tabIndex = 0;
@@ -76,6 +81,43 @@ public class CommandBox extends UiPart<Region> {
             }
         });
     }
+
+    /**
+     * Sets the command box style to use the default style.
+     */
+    private void setStyleToDefault() {
+        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Sets the command box style to indicate a failed command.
+     */
+    private void setStyleToIndicateCommandFailure() {
+        ObservableList<String> styleClass = commandTextField.getStyleClass();
+        if (!styleClass.contains(ERROR_STYLE_CLASS)) {
+            styleClass.add(ERROR_STYLE_CLASS);
+        }
+    }
+
+    /**
+     * Handles the Enter button pressed event.
+     */
+    @FXML
+    private void handleCommandEntered() {
+        String commandText = commandTextField.getText();
+        if (commandText.equals("")) {
+            return;
+        }
+
+        try {
+            commandExecutor.execute(commandText);
+            commandTextField.setText(""); // Clear after successful command execution
+            suggestionLabel.setVisible(false); // Hide the suggestion after execution
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
 
     /**
      * Extract all parameters ending with "/"
@@ -101,38 +143,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
-    /**
-     * Handles tab completion based on current input state
-     */
-    private void handleTabCompletion() {
-        String input = commandTextField.getText().trim();
-
-        if (input.isEmpty()) {
-            return;
-        }
-
-        if (!input.contains(" ")) {
-            handleCommandCompletion(input);
-        } else {
-            handleParameterCompletion(input);
-        }
-    }
-
-    private void handleCommandCompletion(String input) {
-        for (String command : commandSyntaxMap.keySet()) {
-            if (command.startsWith(input)) {
-                List<String> parameters = commandParametersMap.get(command);
-                if (!parameters.isEmpty()) {
-                    commandTextField.setText(command + " " + parameters.get(0));
-                    commandTextField.positionCaret(commandTextField.getText().length());
-                    currentSuggestion = commandSyntaxMap.get(command);
-                    tabIndex = 1;
-                }
-                return;
-            }
-        }
-    }
 
     /**
      * This method helps with auto-completion of command parameters when the user presses the Tab key.
@@ -203,12 +213,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    /**
-     * Handles the text change event for the input field.
-     * This will be used to suggest commands as the user types.
-     */
     private void handleTextChanged(String input) {
-        if (input.endsWith("/")) {
+        // Clear suggestion if input is empty
+        if (input.trim().isEmpty()) {
             suggestionLabel.setVisible(false);
             return;
         }
@@ -216,15 +223,68 @@ public class CommandBox extends UiPart<Region> {
         String[] parts = input.trim().split("\\s+");
         String command = parts[0];
 
-        if (!input.contains(" ")) {
+        // If we're in parameter mode (after a valid command)
+        if (input.contains(" ") && commandSyntaxMap.containsKey(command)) {
+            handleParameterInput(input, command);
+        } else if (!input.contains(" ")) {
+            // We're still typing the command
             handleCommandSuggestion(input, command);
-        } else if (input.endsWith(" ")) {
-            handleParameterSuggestion(input, command);
         }
     }
+
+    private void handleParameterInput(String input, String command) {
+        String[] inputParts = input.split("\\s+");
+        String lastPart = inputParts[inputParts.length - 1];
+
+        // If the last part ends with slash or contains slash and no space after it,
+        // hide suggestion until space is added
+        if (lastPart.endsWith("/") || (lastPart.contains("/") && !input.endsWith(" "))) {
+            suggestionLabel.setVisible(false);
+            return;
+        }
+
+        // If input ends with space, show next parameter suggestion
+        if (input.endsWith(" ")) {
+            handleNextParameterSuggestion(input, command, inputParts);
+            return;
+        }
+
+        // Hide suggestion if we're not in any valid suggestion state
+        suggestionLabel.setVisible(false);
+    }
+
+    private void handleNextParameterSuggestion(String input, String command, String[] inputParts) {
+        List<String> parameters = commandParametersMap.get(command);
+        Set<String> usedParams = new HashSet<>();
+
+        // Find used parameters
+        for (String part : inputParts) {
+            if (part.contains("/")) {
+                String prefix = part.substring(0, part.indexOf("/") + 1);
+                usedParams.add(prefix);
+            }
+        }
+
+        // Find next unused parameter
+        for (String param : parameters) {
+            if (!usedParams.contains(param)) {
+                String fullSyntax = commandSyntaxMap.get(command);
+                String paramDescription = getParameterDescription(fullSyntax, param);
+                suggestionLabel.setText(input + param + paramDescription);
+                suggestionLabel.setVisible(true);
+                return;
+            }
+        }
+
+        // Hide suggestion if all parameters are used
+        suggestionLabel.setVisible(false);
+    }
+
     private void handleCommandSuggestion(String input, String currentInput) {
+        boolean foundMatch = false;
+
         for (String command : commandSyntaxMap.keySet()) {
-            if (command.startsWith(currentInput)) {
+            if (command.startsWith(currentInput.toLowerCase())) {
                 String fullSyntax = commandSyntaxMap.get(command);
                 String remainingSuggestion = fullSyntax.substring(currentInput.length());
 
@@ -237,57 +297,58 @@ public class CommandBox extends UiPart<Region> {
                 suggestionLabel.setText(input + remainingSuggestion);
                 suggestionLabel.setVisible(true);
                 currentSuggestion = fullSyntax;
+                foundMatch = true;
                 break;
             }
+        }
+
+        if (!foundMatch) {
+            suggestionLabel.setVisible(false);
+            currentSuggestion = "";
         }
     }
 
     /**
-     * This method is responsible for generating and showing parameter suggestions for a command
-     * after the user starts typing it in the input field. Once a command is typed, this method helps show
-     * suggestions for the remaining parameters that haven't been used yet.
+     * Handles tab completion based on current input state
      */
-    private void handleParameterSuggestion(String input, String command) {
-        if (commandSyntaxMap.containsKey(command)) {
-            String fullSyntax = commandSyntaxMap.get(command);
-            List<String> parameters = commandParametersMap.get(command);
+    private void handleTabCompletion() {
+        String input = commandTextField.getText().trim();
 
-            if (parameters != null) {
-                // Find used parameters
-                Set<String> usedParams = new HashSet<>();
-                String[] inputParts = input.split("\\s+");
-                for (String part : inputParts) {
-                    for (String param : parameters) {
-                        if (part.startsWith(param)) {
-                            usedParams.add(param);
-                        }
-                    }
-                }
+        if (input.isEmpty()) {
+            return;
+        }
 
-                // Build remaining syntax
-                StringBuilder remainingSyntax = new StringBuilder();
-                boolean isFirst = true;
-                for (String param : parameters) {
-                    if (!usedParams.contains(param)) {
-                        if (!isFirst) {
-                            remainingSyntax.append(" ");
-                        }
-                        // Get the parameter description from the full syntax
-                        String paramDescription = getParameterDescription(fullSyntax, param);
-                        remainingSyntax.append(param).append(paramDescription);
-                        isFirst = false;
-                    }
-                }
-
-                String remainingText = remainingSyntax.toString().trim();
-                if (!remainingText.isEmpty()) {
-                    suggestionLabel.setText(input + remainingText);
-                    suggestionLabel.setVisible(true);
-                }
-
-                // Example: If user typed add n/Saajid and the command syntax is add n/NAME p/PHONE_NUMBER e/EMAIL ...,
-                //  the remaining suggestion will be: p/PHONE_NUMBER e/EMAIL a/ADDRESS ...
+        if (!input.contains(" ")) {
+            // Only handle command completion if there's a valid suggestion
+            if (!currentSuggestion.isEmpty() && suggestionLabel.isVisible()) {
+                handleCommandCompletion(input);
             }
+        } else {
+            handleParameterCompletion(input);
+        }
+    }
+
+    private void handleCommandCompletion(String input) {
+        // Only complete if the input matches the beginning of a valid command
+        boolean validCommand = false;
+        for (String command : commandSyntaxMap.keySet()) {
+            if (command.startsWith(input.toLowerCase())) {
+                List<String> parameters = commandParametersMap.get(command);
+                if (!parameters.isEmpty()) {
+                    commandTextField.setText(command + " " + parameters.get(0));
+                    commandTextField.positionCaret(commandTextField.getText().length());
+                    currentSuggestion = commandSyntaxMap.get(command);
+                    tabIndex = 1;
+                    validCommand = true;
+                }
+                break;
+            }
+        }
+
+        // If no valid command matches, clear suggestion
+        if (!validCommand) {
+            suggestionLabel.setVisible(false);
+            currentSuggestion = "";
         }
     }
 
@@ -329,37 +390,6 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    /**
-     * Handles the Enter button pressed event.
-     */
-    @FXML
-    private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
-            return;
-        }
-
-        try {
-            commandExecutor.execute(commandText);
-            commandTextField.setText(""); // Clear after successful command execution
-            suggestionLabel.setVisible(false); // Hide the suggestion after execution
-        } catch (CommandException | ParseException e) {
-            setStyleToIndicateCommandFailure();
-        }
-    }
-
-    /**
-     * Sets the command box style to indicate a failed command.
-     */
-    private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextField.getStyleClass();
-
-        if (styleClass.contains(ERROR_STYLE_CLASS)) {
-            return;
-        }
-
-        styleClass.add(ERROR_STYLE_CLASS);
-    }
 
     /**
      * Represents a function that can execute commands.
