@@ -51,9 +51,16 @@ public class AskingPrice {
         return numberFormat.format(number);
     }
 
+    /**
+     * Returns pretty formatted String
+     */
+    public String toPrettyString() {
+        return String.format("$%s", value);
+    }
+
     @Override
     public String toString() {
-        return String.format("$%s",value);
+        return value;
     }
 
     @Override

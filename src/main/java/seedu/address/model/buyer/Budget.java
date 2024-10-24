@@ -38,7 +38,7 @@ public class Budget {
     }
 
     /**
-         * Returns true if a given string is a valid budget.
+     * Returns true if a given string is a valid budget.
      */
     public static boolean isValidBudget(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -56,9 +56,16 @@ public class Budget {
         return numberFormat.format(number);
     }
 
+    /**
+     * Returns pretty formatted String
+     */
+    public String toPrettyString() {
+        return String.format("$%s", value);
+    }
+
     @Override
     public String toString() {
-        return String.format("$%s",value);
+        return value;
     }
 
     @Override

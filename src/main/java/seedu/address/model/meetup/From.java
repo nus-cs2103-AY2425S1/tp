@@ -41,8 +41,10 @@ public class From {
         return test.matches(VALIDATION_REGEX);
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Returns pretty formatted LocalDateTime String
+     */
+    public String toPrettyString() {
         // Define the formatter with the desired pattern
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy (h:mma)");
 
@@ -51,6 +53,13 @@ public class From {
 
         // Convert "AM"/"PM" to lowercase
         formattedDateTime = formattedDateTime.replace("AM", "am").replace("PM", "pm");
+        return formattedDateTime;
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String formattedDateTime = value.format(formatter);
         return formattedDateTime;
     }
 

@@ -49,8 +49,8 @@ public class MeetUpCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(meetUp.getName().toString());
         info.setText(meetUp.getInfo().toString());
-        from.setText(meetUp.getFrom().toString());
-        to.setText(meetUp.getTo().toString());
+        from.setText(meetUp.getFrom().toPrettyString());
+        to.setText(meetUp.getTo().toPrettyString());
         meetUp.getAddedBuyers().stream()
                 .sorted(Comparator.comparing(buyer -> buyer.addedBuyerName))
                 .forEach(addedBuyer -> addedBuyers.getChildren().add(new Label(addedBuyer.addedBuyerName)));
@@ -58,6 +58,9 @@ public class MeetUpCard extends UiPart<Region> {
         if (overlap) {
             from.setStyle("-fx-text-fill: red;");
             to.setStyle("-fx-text-fill: red;");
+        } else {
+            from.setStyle("-fx-text-fill: #2DFF54;");
+            to.setStyle("-fx-text-fill: #2DFF54;");
         }
     }
 }
