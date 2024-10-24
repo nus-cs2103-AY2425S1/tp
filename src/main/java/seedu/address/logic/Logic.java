@@ -41,7 +41,10 @@ public interface Logic {
      * Returns an unmodifiable view of the modified list of deliveries
      */
     ObservableList<Delivery> getModifiedDeliveryList();
-
+    /**
+     * Returns an unmodifiable view of the sorted list of suppliers.
+     */
+    ObservableList<Person> getSortedSupplierList();
     /**
      * Returns the user prefs' address book file path.
      */

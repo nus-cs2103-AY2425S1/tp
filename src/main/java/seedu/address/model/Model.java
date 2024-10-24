@@ -139,4 +139,13 @@ public interface Model {
      * Returns an unmodifiable view of the modified delivery list.
      */
     ObservableList<Delivery> getModifiedDeliveryList();
+    /**
+     * Returns an unmodifiable view of the sorted supplier list.
+     */
+    ObservableList<Person> getSortedSupplierList();
+    /**
+     * Updates the comparator of the sorted supplier list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedSupplierList(Comparator<Person> comparator);
 }

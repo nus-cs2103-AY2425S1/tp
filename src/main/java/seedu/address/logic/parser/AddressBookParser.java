@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -107,6 +108,8 @@ public class AddressBookParser {
         case SortCommand.COMMAND_WORD:
             if (arguments.trim().startsWith(PREFIX_DELIVERY.getPrefix())) {
                 return new SortDeliveryCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith(PREFIX_SUPPLIER.getPrefix())) {
+                return new SortSupplierCommandParser().parse(arguments.trim());
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         SortDeliveryCommand.MESSAGE_USAGE));

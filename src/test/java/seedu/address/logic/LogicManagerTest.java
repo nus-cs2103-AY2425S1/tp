@@ -19,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -172,5 +173,25 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getSortedSupplierList_returnsSortedSupplierList() {
+        // Setup expected model with sorted suppliers
+        Model expectedModel = new ModelManager();
+        Person amy = new PersonBuilder(AMY).withTags().withProducts().build();
+        expectedModel.addPerson(amy);
+        // Add more suppliers to the expected model as needed
+
+        // Create a new instance of Logic with the expectedModel and a storage instance
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        Logic logicWithExpectedModel = new LogicManager(expectedModel, storage);
+
+        // Ensure the list is sorted
+        ObservableList<Person> sortedSupplierList = expectedModel.getSortedSupplierList();
+        assertEquals(sortedSupplierList, logicWithExpectedModel.getSortedSupplierList());
     }
 }

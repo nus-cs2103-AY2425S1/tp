@@ -6,6 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -32,6 +34,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
+import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DateTime;
@@ -40,6 +43,8 @@ import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.SupplierSortComparator;
+import seedu.address.model.person.SupplierSortNameComparator;
 import seedu.address.model.person.SupplierStatus;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
@@ -162,5 +167,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+    @Test
+    public void parseCommand_sortSupplier() throws Exception {
+        SupplierSortComparator comparator = new SupplierSortNameComparator(new SortOrder("a"));
+        SortSupplierCommand command = (SortSupplierCommand) parser.parseCommand(
+                SortSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " "
+                        + PREFIX_SORT_ORDER + "a " + PREFIX_SORT_BY + "n");
+        assertEquals(new SortSupplierCommand(comparator), command);
     }
 }
