@@ -117,7 +117,7 @@ public class AbstractEditCommand extends Command {
      * @return CommandResult with the success message.
      * @throws CommandException If the index is invalid or the person to edit does not exist.
      */
-    public CommandResult execute(
+    CommandResult execute(
             Model model,
             BiFunction<? super Person, ? super EditPersonDescriptor, ? extends Person> makeEditedPerson
     ) throws CommandException {
