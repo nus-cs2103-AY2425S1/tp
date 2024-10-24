@@ -5,18 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 /**
  * The calendar view
  */
 public class CalendarView extends UiPart<Region> {
-    private static final String FXML = "Calendar.fxml";
+    private static final String FXML = "CalendarView.fxml";
 
     private static final int NUM_ROWS = 7;
     private static final int NUM_MINUTES = 24 * 60;
@@ -24,31 +30,31 @@ public class CalendarView extends UiPart<Region> {
     @SuppressWarnings("unchecked")
     private final List<TimeBlock>[] timeBlocks = (ArrayList<TimeBlock>[]) new ArrayList[NUM_ROWS];
 
-    private final List<HBox> dayHBoxes = new ArrayList<>();
+    private final List<VBox> dayVBoxes = new ArrayList<>();
 
     @FXML
     private GridPane grid;
 
     @FXML
-    private HBox mon;
+    private VBox mon;
 
     @FXML
-    private HBox tue;
+    private VBox tue;
 
     @FXML
-    private HBox wed;
+    private VBox wed;
 
     @FXML
-    private HBox thu;
+    private VBox thu;
 
     @FXML
-    private HBox fri;
+    private VBox fri;
 
     @FXML
-    private HBox sat;
+    private VBox sat;
 
     @FXML
-    private HBox sun;
+    private VBox sun;
 
     /**
      * Default constructor to initialize the {@code CalendarView}
@@ -57,18 +63,19 @@ public class CalendarView extends UiPart<Region> {
         super(FXML);
         addHBoxes();
         generateGrid();
-        update();
 
+        // TODO remove
+        update();
     }
 
     private void addHBoxes() {
-        dayHBoxes.add(mon);
-        dayHBoxes.add(tue);
-        dayHBoxes.add(wed);
-        dayHBoxes.add(thu);
-        dayHBoxes.add(fri);
-        dayHBoxes.add(sat);
-        dayHBoxes.add(sun);
+        dayVBoxes.add(mon);
+        dayVBoxes.add(tue);
+        dayVBoxes.add(wed);
+        dayVBoxes.add(thu);
+        dayVBoxes.add(fri);
+        dayVBoxes.add(sat);
+        dayVBoxes.add(sun);
     }
 
     private void generateGrid() {
@@ -77,7 +84,7 @@ public class CalendarView extends UiPart<Region> {
         }
     }
 
-    private void createBlock(int day, LocalTime startTime, LocalTime endTime, Color color) {
+    private void createBlock(int day, LocalTime startTime, LocalTime endTime, Color color, String name) {
         assert endTime.isAfter(startTime);
 
         TimeBlock timeBlock = new TimeBlock(startTime, endTime);
@@ -88,10 +95,10 @@ public class CalendarView extends UiPart<Region> {
         for (int i = 0; i <= currentDayBlocks.size(); i++) {
             if (i == currentDayBlocks.size()) {
                 // attach
-                dayHBoxes.get(day).getChildren().add(i * 2,
+                dayVBoxes.get(day).getChildren().add(i * 2,
                         timeBlock.createPadding(previousTimeBlock));
-                dayHBoxes.get(day).getChildren().add(i * 2 + 1,
-                        timeBlock.createBlock(color));
+                dayVBoxes.get(day).getChildren().add(i * 2 + 1,
+                        timeBlock.createBlock(color, name));
                 currentDayBlocks.add(i, timeBlock);
 
                 return;
@@ -101,10 +108,10 @@ public class CalendarView extends UiPart<Region> {
             assert !currentTimeBlock.isIntersecting(timeBlock);
             if (currentTimeBlock.isAfter(timeBlock)) {
                 // attach
-                dayHBoxes.get(day).getChildren().add(i * 2,
+                dayVBoxes.get(day).getChildren().add(i * 2,
                         timeBlock.createPadding(previousTimeBlock));
-                dayHBoxes.get(day).getChildren().add(i * 2 + 1,
-                        timeBlock.createBlock(color));
+                dayVBoxes.get(day).getChildren().add(i * 2 + 1,
+                        timeBlock.createBlock(color, name));
                 currentDayBlocks.add(i, timeBlock);
 
                 // fix padding
@@ -122,23 +129,23 @@ public class CalendarView extends UiPart<Region> {
      */
     public void update() {
         createBlock(2, LocalTime.of(1, 0, 0), LocalTime.of(3, 0, 0),
-                Color.DARKBLUE);
+                Color.DARKBLUE, "Poppy Ulys");
         createBlock(2, LocalTime.of(6, 0, 0), LocalTime.of(8, 0, 0),
-                Color.DARKRED);
+                Color.DARKRED, "Ben Atis");
         createBlock(0, LocalTime.of(3, 45, 0), LocalTime.of(5, 45, 0),
-                Color.SLATEBLUE);
-        createBlock(0, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
-                Color.SLATEGRAY);
-        createBlock(1, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
-                Color.SLATEGRAY);
-        createBlock(3, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
-                Color.SLATEGRAY);
-        createBlock(4, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
-                Color.SLATEGRAY);
-        createBlock(5, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
-                Color.SLATEGRAY);
-        createBlock(6, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
-                Color.SLATEGRAY);
+                Color.SLATEBLUE, "Lye Pistro");
+        createBlock(0, LocalTime.of(7, 0, 0), LocalTime.of(8, 30, 0),
+                Color.MEDIUMSLATEBLUE, "Diene Slich");
+        createBlock(1, LocalTime.of(5, 0, 0), LocalTime.of(6, 30, 0),
+                Color.SLATEGRAY, "Vin Polaris");
+        createBlock(3, LocalTime.of(4, 0, 0), LocalTime.of(5, 30, 0),
+                Color.SLATEGRAY, "Ches Lia");
+        createBlock(4, LocalTime.of(12, 0, 0), LocalTime.of(23, 59, 0),
+                Color.DARKGOLDENROD, "Easen Lee");
+        createBlock(5, LocalTime.of(2, 0, 0), LocalTime.of(3, 0, 0),
+                Color.SLATEGRAY, "Britz Yela");
+        createBlock(6, LocalTime.of(0, 0, 0), LocalTime.of(23, 59, 0),
+                Color.SLATEBLUE, "Feri Mona");
     }
 
     class TimeBlock {
@@ -146,8 +153,8 @@ public class CalendarView extends UiPart<Region> {
         private final int startTimeMinutes;
         private final int endTimeMinutes;
 
-        private Rectangle block;
-        private Rectangle padding;
+        private Pane block;
+        private Pane padding;
 
         private int paddingWidth;
         private int blockWidth;
@@ -209,16 +216,16 @@ public class CalendarView extends UiPart<Region> {
          * Updates the binding to the new padding width
          */
         private void updatePaddingBinding() {
-            this.padding.widthProperty().bind(grid.widthProperty().multiply((double) paddingWidth / NUM_MINUTES));
-            this.padding.heightProperty().bind(grid.heightProperty().divide(NUM_ROWS));
+            this.padding.prefHeightProperty().bind(grid.heightProperty().multiply((double) paddingWidth / NUM_MINUTES));
+            this.padding.prefWidthProperty().bind(grid.widthProperty().divide(NUM_ROWS));
         }
 
         /**
          * Updates the binding to the new block width
          */
         private void updateBlockBinding() {
-            this.block.widthProperty().bind(grid.widthProperty().multiply((double) blockWidth / NUM_MINUTES));
-            this.block.heightProperty().bind(grid.heightProperty().divide(NUM_ROWS));
+            this.block.prefHeightProperty().bind(grid.heightProperty().multiply((double) blockWidth / NUM_MINUTES));
+            this.block.prefWidthProperty().bind(grid.widthProperty().divide(NUM_ROWS));
         }
 
         /**
@@ -233,7 +240,7 @@ public class CalendarView extends UiPart<Region> {
          */
         public Node createPadding(TimeBlock previousTimeBlock) {
             this.paddingWidth = getDistance(previousTimeBlock);
-            this.padding = new Rectangle();
+            this.padding = new Pane();
             this.padding.setStyle("-fx-opacity: 0");
             updatePaddingBinding();
             return this.padding;
@@ -242,10 +249,17 @@ public class CalendarView extends UiPart<Region> {
         /**
          * Returns a block rectangle based on the duration of this {@code TimeBlock} with the provided color
          */
-        public Node createBlock(Color color) {
+        public Node createBlock(Color color, String name) {
             this.blockWidth = getDuration();
-            this.block = new Rectangle();
-            this.block.setFill(color);
+            this.block = new Pane();
+            this.block.setBackground(new Background(new BackgroundFill(color, new CornerRadii(0), new Insets(0))));
+
+            Label label = new Label(name);
+            label.getStyleClass().add("label-calendar-block");
+            label.prefWidthProperty().bind(block.widthProperty());
+            label.setAlignment(Pos.CENTER);
+            this.block.getChildren().add(label);
+
             updateBlockBinding();
             return this.block;
         }
