@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,11 +35,14 @@ import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.MarkPresentAllCommand;
+import seedu.address.logic.commands.UnmarkPresentAllCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -180,6 +187,25 @@ public class AddressBookParserTest {
                         parser.parseCommand(DeleteAssignmentCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
                 DeleteAssignmentCommand.COMMAND_WORD + " n/John a/Homework 1") instanceof DeleteAssignmentCommand);
+    }
+
+    @Test
+    public void parseCommand_markPresentAll() throws Exception {
+        TutorialGroup tutorialGroup = DIDDY.getTutorialGroup();
+        LocalDate date = LocalDate.of(2024, 10, 23);
+        MarkPresentAllCommand command = (MarkPresentAllCommand) parser.parseCommand(MarkPresentAllCommand.COMMAND_WORD
+                + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " " + PREFIX_DATE + date);
+        assertEquals(new MarkPresentAllCommand(tutorialGroup, date), command);
+    }
+
+    @Test
+    public void parseCommand_unmarkPresentAll() throws Exception {
+        TutorialGroup tutorialGroup = DIDDY.getTutorialGroup();
+        LocalDate date = LocalDate.of(2024, 10, 23);
+        UnmarkPresentAllCommand command = (UnmarkPresentAllCommand) parser.parseCommand(
+                UnmarkPresentAllCommand.COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " "
+                        + PREFIX_DATE + date);
+        assertEquals(new UnmarkPresentAllCommand(tutorialGroup, date), command);
     }
 
 
