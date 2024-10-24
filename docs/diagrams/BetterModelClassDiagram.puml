@@ -1,19 +1,16 @@
 @startuml
-!include ../style.puml
+!include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
-AddressBook *-right-> "1" UniqueStudentList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
-UniquePersonList -[hidden]down- UniqueStudentList
 
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
-UniqueStudentList -down-> Student
 
 Person -up-> "*" Tag
 
@@ -21,11 +18,4 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-
-Student --|> Person
-Person -[hidden]down- Student
-Student -[hidden]right- Name
-Student *--> TutorialGroup
-Student *--> StudentNumber
-Student *--> Assignment
 @enduml
