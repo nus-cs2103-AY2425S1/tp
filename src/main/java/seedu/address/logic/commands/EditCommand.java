@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
@@ -23,6 +24,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -47,7 +49,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
@@ -107,9 +110,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Appointment updatedAppointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNric,
-                          updatedAddress, updatedRemark, updatedTags, null);
+                          updatedAddress, updatedRemark, updatedTags, updatedAppointment);
     }
 
     @Override
@@ -147,6 +151,7 @@ public class EditCommand extends Command {
         private Nric nric;
         private Address address;
         private Set<Tag> tags;
+        private Appointment appointment;
 
         public EditPersonDescriptor() {}
 
@@ -161,13 +166,14 @@ public class EditCommand extends Command {
             setNric(toCopy.nric);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setAppointment(toCopy.appointment);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, nric, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, nric, address, tags, appointment);
         }
 
         public void setName(Name name) {
@@ -210,6 +216,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setAppointment(Appointment appointment) {
+            this.appointment = appointment;
+        }
+
+        public Optional<Appointment> getAppointment() {
+            return Optional.ofNullable(appointment);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -244,7 +258,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(nric, otherEditPersonDescriptor.nric)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(appointment, otherEditPersonDescriptor.appointment);
         }
 
         @Override
@@ -256,6 +271,7 @@ public class EditCommand extends Command {
                     .add("nric", nric)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("appointment", appointment)
                     .toString();
         }
 
