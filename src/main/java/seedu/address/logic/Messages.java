@@ -19,6 +19,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
             "1 or more contact indexes provided is invalid";
 
+    public static final String MESSAGE_TRY_PERSON_LIST_MODE =
+            "You may enter the 'list' command and try assigning the person to this wedding again.";
+
     public static final String MESSAGE_NO_CONTACTS_SPECIFIED = "No contacts specified!";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
