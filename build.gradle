@@ -70,7 +70,7 @@ run {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'GOATS.jar'
 }
 
 defaultTasks 'clean', 'test'
