@@ -27,6 +27,7 @@ public class Person {
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private Appointment appointment; // New appointment field
+    private final LogList logEntries;
 
     /**
      * Every field must be present and not null.
@@ -49,6 +50,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.appointment = appointment; // Appointment field initialized
+        this.logEntries = new LogList();
     }
 
     public Name getName() {
@@ -91,6 +93,14 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public LogList getLogEntries() {
+        return logEntries;
+    }
+
+    public void addLogEntry(Log log) {
+        logEntries.addLog(log);
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -126,13 +136,14 @@ public class Person {
                 && nric.equals(otherPerson.nric)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && Objects.equals(appointment, otherPerson.appointment); // Include appointment in equality check
+                && Objects.equals(appointment, otherPerson.appointment) // Include appointment in equality check
+                && logEntries.equals(otherPerson.logEntries);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, address, tags, appointment); // Include appointment in hashCode
+        return Objects.hash(name, phone, email, nric, address, tags, appointment, logEntries);
     }
 
     @Override
@@ -146,6 +157,7 @@ public class Person {
                 .add("remark", remark)
                 .add("tags", tags)
                 .add("appointment", appointment) // Include appointment in toString
+                .add("logEntries", logEntries)
                 .toString();
     }
 }
