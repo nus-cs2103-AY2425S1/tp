@@ -13,7 +13,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ResetDisplayListsCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.UnassignCommand;
 import seedu.address.logic.parser.eventcommandparser.EventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -61,8 +61,8 @@ public class AddressBookParser {
         case VOLUNTEER_COMMAND_INDICATOR:
             return new VolunteerCommandParser().parseCommand(arguments);
 
-        case ResetDisplayListsCommand.COMMAND_WORD:
-            return new ResetDisplayListsCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
         case AssignCommand.COMMAND_WORD:
             return new AssignCommandParser().parseCommand(arguments);
