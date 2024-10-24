@@ -26,9 +26,14 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_CLIENT_TYPE = "#A";
-    private static final String INVALID_DESC = "Exploring the depths of knowledge can lead to unexpected insights,"
-            + "transforming ordinary thoughts into extraordinary ideas that inspire change and growth."
-            + "blah blah blah";
+    private static final String INVALID_DESC = "apple banana orange mango grape lemon peach pear strawberry blueberry "
+             + "raspberry watermelon pineapple kiwi cherry lime grapefruit apricot plum coconut "
+            + "fig date nectarine cantaloupe guava papaya pomegranate cranberry tangerine blackberry currant "
+            + "dragonfruit lychee persimmon quince starfruit avocado passionfruit gooseberry mulberry "
+            + "elderberry boysenberry kumquat jujube "
+             + "yuzu ackee rambutan loquat carambola jabuticaba sapodilla medlar feijoa pawpaw salak "
+            + "tamarillo lucuma BLAH BLAH BLAH BLAH BLAH BLAH BLAH";
+
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";

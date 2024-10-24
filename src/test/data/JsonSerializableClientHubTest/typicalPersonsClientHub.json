@@ -33,28 +33,28 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "clientTypes" : [ ],
+    "clientTypes" : [ "A" ],
     "description" : "Likes to eat a lot"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "clientTypes" : [ ],
+    "clientTypes" : [ "A" ],
     "description" : "Likes to eat a lot"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "clientTypes" : [ ],
+    "clientTypes" : [ "A" ],
     "description" : "Likes to eat a lot"
   }, {
     "name" : "Alice Potter",
     "phone" : "9992442",
     "email" : "APotter@example.com",
     "address" : "china",
-    "clientTypes" : [ ],
+    "clientTypes" : [ "A" ],
     "description" : "Likes to eat a lot"
   }]
 }

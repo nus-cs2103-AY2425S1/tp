@@ -60,11 +60,13 @@ public class CommandTestUtil {
     public static final String INVALID_CLIENT_TYPE_DESC = " "
             + PREFIX_CLIENT_TYPE + "hubby*"; // '*' not allowed in client types
     public static final String INVALID_DESCRIPTION_DESC = " "
-            + PREFIX_DESCRIPTION + "Exploring the depths of knowledge can "
-            + "lead to unexpected insights"
-            + "transforming ordinary thoughts into extraordinary"
-            + "ideas that inspire change and growth"
-            + "blah blah blah blah blah blah blah blah blah blah blag"; //
+            + PREFIX_DESCRIPTION + "apple banana orange mango grape lemon peach pear strawberry blueberry "
+            + "raspberry watermelon pineapple kiwi cherry lime grapefruit apricot plum coconut "
+            + "fig date nectarine cantaloupe guava papaya pomegranate cranberry tangerine blackberry currant "
+            + "dragonfruit lychee persimmon quince starfruit avocado passionfruit gooseberry mulberry "
+            + "elderberry boysenberry kumquat jujube "
+            + "yuzu ackee rambutan loquat carambola jabuticaba sapodilla medlar feijoa pawpaw salak "
+            + "tamarillo lucuma BLAH BLAH BLAH BLAH BLAH BLAH BLAH";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

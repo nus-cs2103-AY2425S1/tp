@@ -22,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DESCRIPTION = "Likes to eat a lot";
+    public static final String DEFAULT_CLIENT_TYPE = "A";
 
     private Name name;
     private Phone phone;
@@ -38,7 +39,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        clientTypes = new HashSet<>();
+        clientTypes = new HashSet<>(SampleDataUtil.getClientTypeSet(DEFAULT_CLIENT_TYPE));
         description = new Description(DEFAULT_DESCRIPTION);
     }
 
