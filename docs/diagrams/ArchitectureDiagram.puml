@@ -17,10 +17,10 @@ Class "<$user>" as User MODEL_COLOR_T2
 Class "<$documents>" as File UI_COLOR_T1
 
 
-UI -[#green]> Logic
-UI -right[#green]-> Model
-Logic -[#blue]-> Storage
-Logic -down[#blue]-> Model
+UI -[#DarkGreen]> Logic
+UI -right[#DarkGreen]-> Model
+Logic -[#DarkBlue]-> Storage
+Logic -down[#DarkBlue]-> Model
 Main -[#grey]-> UI
 Main -[#grey]-> Logic
 Main -[#grey]-> Storage
