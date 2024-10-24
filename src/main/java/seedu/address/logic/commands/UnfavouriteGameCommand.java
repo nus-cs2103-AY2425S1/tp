@@ -70,4 +70,9 @@ public class UnfavouriteGameCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_UNFAVOURITE_GAME_SUCCESS, gameName));
     }
+
+    @Override
+    public void undo(Model model) {
+
+    }
 }
