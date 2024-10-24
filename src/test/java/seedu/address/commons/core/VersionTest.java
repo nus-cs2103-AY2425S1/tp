@@ -139,7 +139,7 @@ public class VersionTest {
     public void testCurrentVersion() {
         Version test = MainApp.VERSION;
         assertEquals(1, test.getMajor());
-        assertEquals(3, test.getMinor());
+        assertEquals(4, test.getMinor());
         assertEquals(0, test.getPatch());
         assertTrue(test.isEarlyAccess());
     }
