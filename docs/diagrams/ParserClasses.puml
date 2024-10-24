@@ -24,9 +24,9 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> TutorEaseParser
 
-XYZCommand .up.|> Command
-XYZContactCommand .up.|> Command
-XYZLessonCommand .up.|> Command
+XYZCommand -up-|> Command
+XYZContactCommand -up-|> Command
+XYZLessonCommand -up-|> Command
 
 TutorEaseParser .down.> ContactCommandParser: <<create>>
 TutorEaseParser .down.> LessonCommandParser: <<create>>
