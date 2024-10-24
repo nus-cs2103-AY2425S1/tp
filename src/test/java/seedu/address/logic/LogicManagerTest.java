@@ -63,8 +63,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String ViewAllSupplierCommandStr = ViewAllSupplierCommand.COMMAND_WORD;
-        assertCommandSuccess(ViewAllSupplierCommandStr, ViewAllSupplierCommand.MESSAGE_SUCCESS, model);
+        String viewAllSupplierCommandStr = ViewAllSupplierCommand.COMMAND_WORD;
+        assertCommandSuccess(viewAllSupplierCommandStr, ViewAllSupplierCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -118,7 +118,7 @@ public class LogicManagerTest {
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
             Model expectedModel) throws CommandException, ParseException {
-        CommandResult result = logic.execute(inputCommand);
+        CommandResult result = logic.execute(inputCommand, false);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
@@ -158,7 +158,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage, Model expectedModel) {
-        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand, false));
         assertEquals(expectedModel, model);
     }
 

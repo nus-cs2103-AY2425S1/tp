@@ -7,10 +7,12 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddProductCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.AssignProductCommand;
+import seedu.address.logic.commands.AutoCompleteCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteProductCommand;
@@ -34,17 +36,27 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
+     * @param autoComplete whether the user input is for auto-completion
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, Boolean autoComplete) throws ParseException {
+
+        if (autoComplete) {
+            logger.fine("AutoComplete trigger with input: " + userInput);
+            Pair<String, String> rightmostArg = ArgumentTokenizer.getRightmostArgument(userInput);
+            System.out.println("AutoComplete trigger with input: " + rightmostArg.getKey()
+                + " " + rightmostArg.getValue());
+            return new AutoCompleteCommand(rightmostArg.getKey(), rightmostArg.getValue());
+        }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -111,4 +123,14 @@ public class AddressBookParser {
         }
     }
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public Command parseCommand(String userInput) throws ParseException {
+        return parseCommand(userInput, false);
+    }
 }
