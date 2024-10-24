@@ -182,6 +182,7 @@ public class Person {
                 .add("ward", ward)
                 .add("diagnosis", diagnosis)
                 .add("medication", medication)
+                .add("appointment", appointment)
                 .add("notes", notes)
                 .toString();
     }
