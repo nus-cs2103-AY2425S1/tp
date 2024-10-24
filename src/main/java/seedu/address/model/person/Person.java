@@ -245,7 +245,7 @@ public class Person implements Appointmentable {
     }
 
     @Override
-    public void markAppointment(LocalDateTime dateTime, int patientId, int doctorId) throws {
+    public void markAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
         requireAllNonNull(dateTime, patientId, doctorId);
         getAppointment(dateTime, patientId, doctorId).markAsComplete();
     }
