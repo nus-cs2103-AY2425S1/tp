@@ -36,6 +36,8 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
         Ingredients ingredientsSupplied = ParserUtil.parseIngredients(argMultimap.getValue(PREFIX_INGREDIENTS_SUPPLIED).get());
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // Add the "supplier" tag explicitly
+        tagList.add(new Tag("supplier"));
 
         Supplier supplier = new Supplier(name, phone, email, address, preference, ingredientsSupplied, remark, tagList);
 
