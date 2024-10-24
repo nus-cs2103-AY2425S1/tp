@@ -62,26 +62,28 @@ public class MarkCustomerOrderCommand extends Command {
             }
         }
 
-        // Step 2: Check if inventory has enough of each ingredient
-        for (Map.Entry<Integer, Integer> entry : requiredIngredients.entrySet()) {
-            int ingredientId = entry.getKey();
-            int requiredQuantity = entry.getValue();
+//        // Step 2: Check if inventory has enough of each ingredient
+//        for (Map.Entry<Integer, Integer> entry : requiredIngredients.entrySet()) {
+//            int ingredientId = entry.getKey();
+//            int requiredQuantity = entry.getValue();
+//
+//            if (inventory.getStockLevel(ingredientId) < requiredQuantity) {
+//                throw new CommandException(MESSAGE_INSUFFICIENT_STOCK);
+//            }
+//        }
 
-            if (inventory.getStockLevel(ingredientId) < requiredQuantity) {
-                throw new CommandException(MESSAGE_INSUFFICIENT_STOCK);
-            }
-        }
-
-        // Step 3: If enough stock, update inventory by removing required quantities
-        for (Map.Entry<Integer, Integer> entry : requiredIngredients.entrySet()) {
-            int ingredientId = entry.getKey();
-            int quantityToRemove = entry.getValue();
-            inventory.removeStock(ingredientId, quantityToRemove);
-        }
+//        // Step 3: If enough stock, update inventory by removing required quantities
+//        for (Map.Entry<Integer, Integer> entry : requiredIngredients.entrySet()) {
+//            int ingredientId = entry.getKey();
+//            int quantityToRemove = entry.getValue();
+//            inventory.removeStock(ingredientId, quantityToRemove);
+//        }
 
         // Mark the order as completed
         customerOrder.setStatus(OrderStatus.COMPLETED);
 
+        customerOrderList.removeOrder(customerOrder.getPhoneNumber());
+        customerOrderList.addOrder(customerOrder);
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, targetIndex));
     }
 
