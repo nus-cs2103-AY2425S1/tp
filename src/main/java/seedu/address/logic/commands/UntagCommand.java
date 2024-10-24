@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -73,7 +72,6 @@ public class UntagCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.getActiveTags().decrementTag(tagsToRemoveFromPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson, tagsToRemoveFromPerson));
     }
