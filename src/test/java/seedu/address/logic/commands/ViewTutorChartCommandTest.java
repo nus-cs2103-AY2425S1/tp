@@ -12,7 +12,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
-public class ViewTuteeChartCommandTest {
+public class ViewTutorChartCommandTest {
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
