@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -38,6 +37,7 @@ public class ListAbsenteesCommandParserTest {
         assertParseSuccess(parser, "\n d/01/01/2024 12:00 \t ", command);
     }
 
+    @Test
     public void parse_missingField_failure() {
         // empty
         assertParseFailure(parser, "     ", MESSAGE_INVALID_FORMAT);
