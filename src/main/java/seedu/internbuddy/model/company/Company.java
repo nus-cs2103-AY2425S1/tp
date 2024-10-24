@@ -99,6 +99,30 @@ public class Company {
         return Collections.unmodifiableList(applications);
     }
 
+    public String getAppNameString() {
+        StringBuilder appNames = new StringBuilder();
+        for (Application application : applications) {
+            appNames.append(application.getName().fullName).append(" ");
+        }
+        return appNames.toString();
+    }
+
+    public String getTagsString() {
+        StringBuilder tagNames = new StringBuilder();
+        for (Tag tag : tags) {
+            tagNames.append(tag.tagName).append(" ");
+        }
+        return tagNames.toString();
+    }
+
+    public String getAppDescriptionString() {
+        StringBuilder appDescriptions = new StringBuilder();
+        for (Application application : applications) {
+            appDescriptions.append(application.getDescription().fullDescription).append(" ");
+        }
+        return appDescriptions.toString();
+    }
+
     /**
      * Returns true if both companies have the same name.
      * This defines a weaker notion of equality between two companies.
