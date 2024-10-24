@@ -14,7 +14,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AppointmentDateFilter.AppointmentDateFilter;
+import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;

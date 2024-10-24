@@ -17,7 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.FilteredAppointment.FilteredAppointment;
+import seedu.address.model.filteredappointment.FilteredAppointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -243,12 +243,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPatientInfo()) {
                 showPatientInfo(commandResult.getPatient());
+            } else {
+                hidePatientInfo();
             }
 
             if (commandResult.getKeyword() != null && commandResult.getKeyword().equals("appts")) {
                 showAppts(logic.getFilteredAppts());
-            } else {
-                hidePatientInfo();
             }
 
             return commandResult;

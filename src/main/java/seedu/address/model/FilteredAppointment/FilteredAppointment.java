@@ -1,4 +1,4 @@
-package seedu.address.model.FilteredAppointment;
+package seedu.address.model.filteredappointment;
 
 import static seedu.address.model.person.Appt.DATETIME_COMPARATOR;
 

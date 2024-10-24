@@ -101,71 +101,31 @@ public class PatientInfoPanel extends UiPart<Region> {
         birthdate.setText("Birth Date: " + patient.getBirthdate().toString());
         sex.setText("Sex: " + patient.getSex().toString());
         /*
-        patient.getHealthServices().stream()
-                .sorted(Comparator.comparing(healthservice -> healthservice.healthServiceName))
-                .forEach(healthservice -> healthServices.getChildren().add(new Label(healthservice.healthServiceName)));
-        */
+         * patient.getHealthServices().stream()
+         * .sorted(Comparator.comparing(healthservice ->
+         * healthservice.healthServiceName))
+         * .forEach(healthservice -> healthServices.getChildren().add(new
+         * Label(healthservice.healthServiceName)));
+         */
         phone.setText("Phone Number: " + (patient.getPhone() == null ? "" : patient.getPhone().toString()));
         email.setText("Email: " + (patient.getEmail() == null ? "" : patient.getEmail().toString()));
         address.setText("Address: " + (patient.getAddress() == null ? "" : patient.getAddress().toString()));
-        appointments.setText("Appointments: " + (patient.getAppts() == null ? "" : patient.getAppts().toString()));
+        appointments.setText(
+                "Appointments: " + (patient.getAppts() == null ? "" : patient.getApptsString()));
         allergy.setText("Allergies: " + (patient.getAllergy() == null ? "" : patient.getAllergy().toString()));
-        bloodType.setText("Blood Type: " + (patient.getBloodType() == null ? "" : patient.getBloodType().toString()));
-        healthRisk
-                .setText("Health Risk: " + (patient.getHealthRisk() == null ? "" : patient.getHealthRisk().toString()));
-        healthRecord.setText(
-                "Health Record: " + (patient.getHealthRecord() == null ? "" : patient.getHealthRecord().toString()));
-        nokName.setText("Next of Kin Name: " + (patient.getNokName() == null ? "" : patient.getNokName().toString()));
-        nokPhone.setText(
-                "Next of Kin Phone Number: " + (patient.getNokPhone() == null ? "" : patient.getNokPhone().toString()));
+        bloodType.setText("Blood Type: "
+                + (patient.getBloodType() == null ? "" : patient.getBloodType().toString()));
+        healthRisk.setText("Health Risk: " + (patient.getHealthRisk() == null
+                ? ""
+                : patient.getHealthRisk().toString()));
+        healthRecord.setText("Health Record: " + (patient.getHealthRecord() == null
+                ? ""
+                : patient.getHealthRecord().toString()));
+        nokName.setText("Next of Kin Name: "
+                + (patient.getNokName() == null ? "" : patient.getNokName().toString()));
+        nokPhone.setText("Next of Kin Phone Number: " + (patient.getNokPhone() == null
+                ? ""
+                : patient.getNokPhone().toString()));
         note.setText("Additional Notes: " + (patient.getNote() == null ? "" : patient.getNote().toString()));
     }
-
-    // /**
-    // * Shows the patient info window.
-    // *
-    // * @throws IllegalStateException
-    // * <ul>
-    // * <li>
-    // * if this method is called on a thread other than
-    // * the JavaFX Application Thread.
-    // * </li>
-    // * <li>
-    // * if this method is called during animation or
-    // * layout processing.
-    // * </li>
-    // * <li>
-    // * if this method is called on the primary stage.
-    // * </li>
-    // * <li>
-    // * if {@code dialogStage} is already showing.
-    // * </li>
-    // * </ul>
-    // */
-    // public void show() {
-    // logger.fine("Showing help page about the application.");
-    // getRoot().show();
-    // getRoot().centerOnScreen();
-    // }
-
-    // /**
-    // * Returns true if the help window is currently being shown.
-    // */
-    // public boolean isShowing() {
-    // return getRoot().isShowing();
-    // }
-
-    // /**
-    // * Hides the help window.
-    // */
-    // public void hide() {
-    // getRoot().hide();
-    // }
-
-    // /**
-    // * Focuses on the help window.
-    // */
-    // public void focus() {
-    // getRoot().requestFocus();
-    // }
 }
