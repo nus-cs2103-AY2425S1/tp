@@ -40,6 +40,9 @@ public abstract class EditCommand extends Command {
 
     protected final Index index;
 
+    /**
+     * @param targetIndex in the filtered list to edit
+     */
     public EditCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.index = targetIndex;
