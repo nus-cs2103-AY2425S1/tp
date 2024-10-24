@@ -16,15 +16,26 @@ import seedu.address.model.tutorial.Tutorial;
 public class Participation {
     private final Person student;
     private final Tutorial tutorial;
-    private final List<Attendance> attendanceList = new ArrayList<>();
+    private final List<Attendance> attendanceList;
+
+    /**
+     * Person and Tutorial must be present and not null
+     */
+    public Participation(Person student, Tutorial tutorial) {
+        requireAllNonNull(student, tutorial);
+        this.student = student;
+        this.tutorial = tutorial;
+        this.attendanceList = new ArrayList<>();
+    }
 
     /**
      * Every field must be present and not null
      */
-    public Participation(Person student, Tutorial tutorial) {
+    public Participation(Person student, Tutorial tutorial, List<Attendance> attendanceList) {
         requireAllNonNull(student, tutorial, attendanceList);
         this.student = student;
         this.tutorial = tutorial;
+        this.attendanceList = attendanceList;
     }
 
     public Person getStudent() {
@@ -67,7 +78,7 @@ public class Participation {
 
     /**
      * Returns true if both participation are of the same subject.
-     * This defines a weaker notion of equality between two tutorials.
+     * This defines a weaker notion of equality between two participations.
      */
     public boolean isSameParticipation(Participation otherParticipation) {
         if (otherParticipation == this) {
@@ -80,5 +91,13 @@ public class Participation {
     @Override
     public String toString() {
         return String.format("Attends: %s", tutorial.toString());
+    }
+
+    /**
+     * Adds itself to the student and tutorial participation lists
+     */
+    public void addSelfToStudentTutorial() {
+        student.addParticipation(this);
+        tutorial.addParticipation(this);
     }
 }

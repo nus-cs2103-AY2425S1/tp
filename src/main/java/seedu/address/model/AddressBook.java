@@ -82,6 +82,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTutorials(newData.getTutorialList());
+        setParticipations(newData.getParticipationList());
     }
 
     //// person-level operations
@@ -205,6 +206,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Tutorial> getTutorialList() {
         return tutorials.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Participation> getParticipationList() {
+        return participations.asUnmodifiableObservableList();
     }
 
     @Override
