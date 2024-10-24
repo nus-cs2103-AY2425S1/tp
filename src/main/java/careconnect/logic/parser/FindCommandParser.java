@@ -46,17 +46,28 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
                 );
         }
+
+
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
             String nameString = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
             nameKeywords = nameString.split("\\s+");
+            if (nameString.trim().length() == 0) {
+                throw new ParseException("argument cannot be empty");
+            }
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).isPresent()) {
             String addressString = argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get();
             addressKeywords = addressString.split("\\s+");
+            if (addressString.trim().length() == 0) {
+                throw new ParseException("argument cannot be empty");
+            }
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()) {
             String tagString = argMultimap.getValue(CliSyntax.PREFIX_TAG).get();
             tagKeywords = tagString.split("\\s+");
+            if (tagString.trim().length() == 0) {
+                throw new ParseException("argument cannot be empty");
+            }
         }
 
 

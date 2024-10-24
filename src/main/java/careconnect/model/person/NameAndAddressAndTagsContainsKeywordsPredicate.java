@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import careconnect.commons.core.LogsCenter;
 import careconnect.commons.util.StringUtil;
 import careconnect.commons.util.ToStringBuilder;
+import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.ModelManager;
 import careconnect.model.tag.Tag;
 
@@ -27,7 +28,9 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
      * @param nameKeywords
      * @param addressKeywords
      */
-    public NameAndAddressAndTagsContainsKeywordsPredicate(List<String> nameKeywords, List<String> addressKeywords, List<String> tagKeywords) {
+    public NameAndAddressAndTagsContainsKeywordsPredicate(
+            List<String> nameKeywords, List<String> addressKeywords, List<String> tagKeywords
+    ) {
         this.nameKeywords = nameKeywords;
         this.addressKeywords = addressKeywords;
         this.tagKeywords = tagKeywords;
@@ -45,6 +48,7 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
         if (nameKeywords.isEmpty()) {
             passedTests[0] = true;
         } else {
+            logger.info("running test on nameKeywords");
             passedTests[0] = nameKeywords.stream()
                     .anyMatch(
                             keyword -> StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword)
@@ -54,6 +58,8 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
         if (addressKeywords.isEmpty()) {
             passedTests[1] = true;
         } else {
+            logger.info("running test on addressKeywords");
+
             passedTests[1] = addressKeywords.stream()
                     .anyMatch(
                             keyword -> StringUtil.containsPartialWordIgnoreCase(person.getAddress().toString(), keyword)
@@ -75,11 +81,16 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
             }
             passedTests[2] = numberOfTagsPresent == tagKeywords.size();
         }
-
         return passedTests[0] && passedTests[1] && passedTests[2];
+
 
     }
 
+    /**
+     * Create a duplicate of the tagSet with all lowercase, for easy searching
+     * @param tags
+     * @return
+     */
     private Set<Tag> getAllLowercaseSet(Set<Tag> tags) {
         HashSet<Tag> lowercaseTags = new HashSet<Tag>();
         for (Tag t: tags) {
