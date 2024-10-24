@@ -18,7 +18,6 @@ Class EventListPanel
 Class EventCard
 Class PersonListPanel
 Class PersonCard
-
 }
 
 package Model <<Rectangle>> {
