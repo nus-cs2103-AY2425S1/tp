@@ -48,7 +48,8 @@ public class EditEventDescriptorTest {
         EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
         String expected = EditEventDescriptor.class.getCanonicalName() + "{name="
                 + editEventDescriptor.getName().orElse(null) + ", date="
-                + editEventDescriptor.getDate().orElse(null) + "}";
+                + editEventDescriptor.getDate().orElse(null) + ", tags="
+                + editEventDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editEventDescriptor.toString());
     }
 }

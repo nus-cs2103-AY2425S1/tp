@@ -6,9 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -17,6 +20,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 
@@ -79,8 +83,9 @@ public class EditEventCommand extends EditCommand {
 
         Name updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         Date updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getDate());
+        Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
 
-        return new Event(updatedName, updatedDate);
+        return new Event(updatedName, updatedDate, updatedTags);
     }
 
     @Override
@@ -115,6 +120,7 @@ public class EditEventCommand extends EditCommand {
     public static class EditEventDescriptor {
         private Name name;
         private Date date;
+        private Set<Tag> tags;
 
         public EditEventDescriptor() {
         }
@@ -125,6 +131,7 @@ public class EditEventCommand extends EditCommand {
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);
             setDate(toCopy.date);
+            setTags(toCopy.tags);
         }
 
         /**
@@ -150,6 +157,24 @@ public class EditEventCommand extends EditCommand {
             return Optional.ofNullable(date);
         }
 
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -163,7 +188,8 @@ public class EditEventCommand extends EditCommand {
 
             EditEventDescriptor otherEditEventDescriptor = (EditEventDescriptor) other;
             return Objects.equals(name, otherEditEventDescriptor.name)
-                    && Objects.equals(date, otherEditEventDescriptor.date);
+                    && Objects.equals(date, otherEditEventDescriptor.date)
+                    && Objects.equals(tags, otherEditEventDescriptor.tags);
         }
 
         @Override
@@ -171,6 +197,7 @@ public class EditEventCommand extends EditCommand {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("date", date)
+                    .add("tags", tags)
                     .toString();
         }
     }

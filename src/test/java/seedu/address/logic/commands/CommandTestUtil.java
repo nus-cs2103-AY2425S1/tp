@@ -47,11 +47,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String NAME_DESC_WEDDING = " " + PREFIX_NAME + VALID_NAME_WEDDING;
-    public static final String DATE_DESC_WEDDING = " " + PREFIX_DATE + VALID_DATE_WEDDING;
-    public static final String NAME_DESC_BIRTHDAY = " " + PREFIX_NAME + VALID_NAME_BIRTHDAY;
-    public static final String DATE_DESC_BIRTHDAY = " " + PREFIX_DATE + VALID_DATE_BIRTHDAY;
-
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     // empty string not allowed for description
@@ -76,7 +71,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_CHARITY = " " + PREFIX_TAG + VALID_TAG_CHARITY;
     public static final String TAG_DESC_WEDDING = " " + PREFIX_TAG + VALID_TAG_WEDDING;
     public static final String TAG_DESC_BIRTHDAY = " " + PREFIX_TAG + VALID_TAG_BIRTHDAY;
-    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "24th January 2024"; // invalid date format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
