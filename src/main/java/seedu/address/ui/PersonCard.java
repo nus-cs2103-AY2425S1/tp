@@ -49,12 +49,6 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
 
-        if (person.hasAddress()) {
-            Label address = new Label(person.getAddress().map(Object::toString).orElse(null));
-            address.getStyleClass().add("cell_small_label");
-            address.setText(person.getAddress().orElse(null).value);
-            vBox.getChildren().add(address);
-        }
 
         if (person.hasPhone()) {
             Label phone = new Label(person.getPhone().map(Object::toString).orElse(null));
@@ -70,6 +64,12 @@ public class PersonCard extends UiPart<Region> {
             vBox.getChildren().add(email);
         }
 
+        if (person.hasAddress()) {
+            Label address = new Label(person.getAddress().map(Object::toString).orElse(null));
+            address.getStyleClass().add("cell_small_label");
+            address.setText(person.getAddress().orElse(null).value);
+            vBox.getChildren().add(address);
+        }
         // Add tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

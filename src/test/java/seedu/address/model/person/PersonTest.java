@@ -134,6 +134,14 @@ public class PersonTest {
         // different phone, different email, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // different phones, both empty emails, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmptyEmail().build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
+
+        // different emails, both empty phones, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withEmptyPhone().build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
     }
 
     @Test

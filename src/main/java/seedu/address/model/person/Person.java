@@ -78,9 +78,14 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && (otherPerson.getEmail().equals(getEmail())
-                || otherPerson.getPhone().equals(getPhone()));
+        if (otherPerson == null) {
+            return false;
+        }
+
+        boolean isEmailPresentAndSame = hasEmail() && otherPerson.getEmail().equals(getEmail());
+        boolean isPhonePresentAndSame = hasPhone() && otherPerson.getPhone().equals(getPhone());
+
+        return isEmailPresentAndSame || isPhonePresentAndSame;
     }
 
     /**
