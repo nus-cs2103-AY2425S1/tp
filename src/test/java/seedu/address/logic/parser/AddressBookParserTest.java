@@ -25,19 +25,20 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
-import seedu.address.logic.commands.UpdatePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.EditPolicyDescriptor;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -122,14 +123,15 @@ public class AddressBookParserTest {
         assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, life), command);
     }
     @Test
-    public void parseCommand_updatePolicy() throws Exception {
+    public void parseCommand_editPolicy() throws Exception {
         // This is hardcoded for now.
         // Will change in future commits.
-        UpdatePolicyCommand command = (UpdatePolicyCommand) parser.parseCommand(
-                UpdatePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + " " + PREFIX_POLICY_TYPE + "life");
-        PolicySet policies = new PolicySet();
-        assertEquals(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), command);
+        EditPolicyCommand command = (EditPolicyCommand) parser.parseCommand(
+                EditPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_POLICY_TYPE + "life" + " pa/200");
+        EditPolicyDescriptor policy = new EditPolicyDescriptor(PolicyType.LIFE);
+        policy.setPremiumAmount(new PremiumAmount(200));
+        assertEquals(new EditPolicyCommand(INDEX_FIRST_PERSON, policy), command);
     }
     @Test
     public void parseCommand_deletePolicy() throws Exception {
