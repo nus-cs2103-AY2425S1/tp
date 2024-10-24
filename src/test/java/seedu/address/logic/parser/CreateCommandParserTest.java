@@ -1,11 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BIRTHDAY;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_WEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BIRTHDAY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_WEDDING;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CHARITY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CONFERENCE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CHARITY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CONFERENCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
@@ -13,6 +21,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalEvents.BIRTHDAY;
+import static seedu.address.testutil.TypicalEvents.WEDDING;
 import static seedu.address.testutil.TypicalVendors.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +34,7 @@ import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.VendorBuilder;
 
 public class CreateCommandParserTest {
@@ -49,16 +60,18 @@ public class CreateCommandParserTest {
 
     @Test
     public void parse_eventPrefixSpecifiedWithValidEventParameters_success() {
-        assertParseSuccess(parser, " " + PREFIX_EVENT + " " + PREFIX_NAME + "Birthday Party" + " "
-                        + PREFIX_DATE + "2024-10-10",
-                new CreateEventCommand(new Event(new Name("Birthday Party"), new Date("2024-10-10"))));
+        Event expectedEvent = new EventBuilder(BIRTHDAY).withTags(VALID_TAG_CONFERENCE).build();
+        assertParseSuccess(parser, " " + PREFIX_EVENT + NAME_DESC_BIRTHDAY + DATE_DESC_BIRTHDAY
+                        + TAG_DESC_CONFERENCE,
+                new CreateEventCommand(expectedEvent));
     }
 
     @Test
     public void parse_eventPrefixContainsParameterValueWithValidEventParameters_success() {
-        assertParseSuccess(parser, " " + PREFIX_EVENT + "Some event parameter" + " " + PREFIX_NAME
-                        + "Birthday Party" + " " + PREFIX_DATE + "2024-10-10",
-                new CreateEventCommand(new Event(new Name("Birthday Party"), new Date("2024-10-10"))));
+        Event expectedEvent = new EventBuilder(WEDDING).withTags(VALID_TAG_CHARITY).build();
+        assertParseSuccess(parser, " " + PREFIX_EVENT + "Some event parameter" + NAME_DESC_WEDDING
+                        + DATE_DESC_WEDDING + TAG_DESC_CHARITY,
+                new CreateEventCommand(expectedEvent));
     }
 
     @Test

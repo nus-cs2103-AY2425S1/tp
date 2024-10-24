@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VENDORS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.BIRTHDAY;
+import static seedu.address.testutil.TypicalEvents.WEDDING;
 import static seedu.address.testutil.TypicalVendors.ALICE;
 import static seedu.address.testutil.TypicalVendors.BENSON;
 
@@ -36,8 +38,6 @@ import seedu.address.ui.UiState;
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
-    private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
-    private final Event anotherEvent = new EventBuilder().withName("Another Event").build();
 
     @Test
     public void constructor() {
@@ -112,13 +112,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasEvent_eventNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasEvent(testEvent));
+        assertFalse(modelManager.hasEvent(WEDDING));
     }
 
     @Test
     public void hasEvent_eventInAddressBook_returnsTrue() {
-        modelManager.addEvent(testEvent);
-        assertTrue(modelManager.hasEvent(testEvent));
+        modelManager.addEvent(WEDDING);
+        assertTrue(modelManager.hasEvent(WEDDING));
     }
 
     @Test
@@ -183,7 +183,7 @@ public class ModelManagerTest {
 
     @Test
     public void getAssociatedVendors_noAssociations_returnsEmptyList() {
-        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(testEvent);
+        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(WEDDING);
         assertEquals(FXCollections.observableArrayList(), associatedVendors);
     }
 
@@ -191,11 +191,11 @@ public class ModelManagerTest {
     public void getAssociatedVendors_withAssociations_returnsCorrectVendors() {
         modelManager.addVendor(ALICE);
         modelManager.addVendor(BENSON);
-        modelManager.addEvent(testEvent);
-        modelManager.assignVendorToEvent(ALICE, testEvent);
-        modelManager.assignVendorToEvent(BENSON, testEvent);
+        modelManager.addEvent(WEDDING);
+        modelManager.assignVendorToEvent(ALICE, WEDDING);
+        modelManager.assignVendorToEvent(BENSON, WEDDING);
 
-        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(testEvent);
+        ObservableList<Vendor> associatedVendors = modelManager.getAssociatedVendors(WEDDING);
         ObservableList<Vendor> expectedVendors = FXCollections.observableArrayList(BENSON, ALICE);
 
         assertEquals(expectedVendors, associatedVendors);
@@ -210,13 +210,13 @@ public class ModelManagerTest {
     @Test
     public void getAssociatedEvents_withAssociations_returnsCorrectEvents() {
         modelManager.addVendor(ALICE);
-        modelManager.addEvent(testEvent);
-        modelManager.addEvent(anotherEvent);
-        modelManager.assignVendorToEvent(ALICE, testEvent);
-        modelManager.assignVendorToEvent(ALICE, anotherEvent);
+        modelManager.addEvent(WEDDING);
+        modelManager.addEvent(BIRTHDAY);
+        modelManager.assignVendorToEvent(ALICE, WEDDING);
+        modelManager.assignVendorToEvent(ALICE, BIRTHDAY);
 
         ObservableList<Event> associatedEvents = modelManager.getAssociatedEvents(ALICE);
-        ObservableList<Event> expectedEvents = FXCollections.observableArrayList(anotherEvent, testEvent);
+        ObservableList<Event> expectedEvents = FXCollections.observableArrayList(WEDDING, BIRTHDAY);
 
         assertEquals(expectedEvents, associatedEvents);
     }

@@ -4,31 +4,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BIRTHDAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_WEDDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_WEDDING;
+import static seedu.address.testutil.TypicalEvents.BIRTHDAY;
+import static seedu.address.testutil.TypicalEvents.WEDDING;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.EventBuilder;
+
 public class EventTest {
 
-    private final Event testEvent = new Event(new Name("Test Event"), new Date("2024-10-11"));
-    private final Event similarTestEvent = new Event(new Name("Test Event"), new Date("2023-05-20"));
-    private final Event differentEvent = new Event(new Name("Different"), new Date("2020-06-01"));
+    Name name = new Name(VALID_NAME_WEDDING);
+    Date date = new Date(VALID_DATE_WEDDING);
+    Set<Tag> tags = new HashSet<>();
 
     @Test
     public void constructor_nullValues_throwsNullPointerException() {
-        Name name = new Name("Meeting");
-        Date date = new Date("2024-10-10");
-
         // Check if each field being null throws NullPointerException
-        assertThrows(NullPointerException.class, () -> new Event(null, date));
-        assertThrows(NullPointerException.class, () -> new Event(name, null));
+        assertThrows(NullPointerException.class, () -> new Event(null, date, tags));
+        assertThrows(NullPointerException.class, () -> new Event(name, null, tags));
+        // Check if each field being null throws NullPointerException
+        assertThrows(NullPointerException.class, () -> new Event(name, date, null));
     }
 
     @Test
     public void eventConstructor_validValues_createsEvent() {
-        Name name = new Name("Conference");
-        Date date = new Date("2024-10-10");
-
-        Event event = new Event(name, date);
+        Event event = new Event(name, date, tags);
 
         // Validate that the Event object is created with the correct values
         assertEquals(name, event.getName());
@@ -37,30 +44,28 @@ public class EventTest {
 
     @Test
     public void isSameEvent_nullEvent_returnsFalse() {
-        assertFalse(testEvent.isSameEvent(null));
+        assertFalse(WEDDING.isSameEvent(null));
     }
 
     @Test
     public void isSameEvent_sameEvent_returnsTrue() {
-        assertTrue(testEvent.isSameEvent(testEvent));
+        assertTrue(WEDDING.isSameEvent(WEDDING));
     }
 
     @Test
     public void isSameEvent_differentEvent_returnsFalse() {
-        assertFalse(testEvent.isSameEvent(differentEvent));
+        assertFalse(WEDDING.isSameEvent(BIRTHDAY));
     }
 
     @Test
     public void isSameEvent_eventWithSameIdentity_returnsTrue() {
-        assertTrue(testEvent.isSameEvent(similarTestEvent));
+        Event similarWedding = new EventBuilder(WEDDING).withDate(VALID_DATE_BIRTHDAY).build();
+        assertTrue(WEDDING.isSameEvent(similarWedding));
     }
 
     @Test
     public void equals_sameObject_returnsTrue() {
-        Name name = new Name("Workshop");
-        Date date = new Date("2024-10-10");
-
-        Event event = new Event(name, date);
+        Event event = new Event(name, date, tags);
 
         // Validate that an object equals itself
         assertTrue(event.equals(event));
@@ -68,11 +73,8 @@ public class EventTest {
 
     @Test
     public void equals_differentObjectsSameValues_returnsTrue() {
-        Name name = new Name("Workshop");
-        Date date = new Date("2024-10-10");
-
-        Event event1 = new Event(name, date);
-        Event event2 = new Event(name, date);
+        Event event1 = new Event(name, date, tags);
+        Event event2 = new Event(name, date, tags);
 
         // Validate that two different Event objects with the same values are equal
         assertTrue(event1.equals(event2));
@@ -86,8 +88,8 @@ public class EventTest {
         Name name2 = new Name("Seminar");
         Date date2 = new Date("2024-11-11"); // different date
 
-        Event event1 = new Event(name1, date1);
-        Event event2 = new Event(name2, date2);
+        Event event1 = new Event(name1, date1, tags);
+        Event event2 = new Event(name2, date2, tags);
 
         // Validate that two Event objects with different values are not equal
         assertFalse(event1.equals(event2));
@@ -98,8 +100,8 @@ public class EventTest {
         Name name = new Name("Workshop");
         Date date = new Date("2024-10-10");
 
-        Event event1 = new Event(name, date);
-        Event event2 = new Event(name, date);
+        Event event1 = new Event(name, date, tags);
+        Event event2 = new Event(name, date, tags);
 
         // Check that if two objects are equal, their hashCodes are also equal
         assertTrue(event1.equals(event2));
@@ -111,9 +113,9 @@ public class EventTest {
         Name name = new Name("Conference");
         Date date = new Date("2024-10-10");
 
-        Event event = new Event(name, date);
+        Event event = new Event(name, date, tags);
 
-        String expected = Event.class.getCanonicalName() + "{name=Conference, date=2024-10-10}";
+        String expected = Event.class.getCanonicalName() + "{name=Conference, date=2024-10-10, tags=[]}";
         assertEquals(expected, event.toString());
     }
 }
