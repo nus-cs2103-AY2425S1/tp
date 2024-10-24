@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -224,8 +226,15 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime) {
+            throw new AssertionError("This method should not be called.");
+        }
 
-
+        @Override
+        public void addNoteToPerson(Note note, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
 
     }
 

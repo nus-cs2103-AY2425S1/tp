@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -195,6 +197,20 @@ public class ModelManager implements Model {
         List<Appointment> temp = new ArrayList<>(person.getAppointments());
         temp.sort(Comparator.comparing(Appointment::getStartTime));
         return temp;
+    }
+
+    public Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime) {
+        List<Appointment> temp = this.getAppointmentsForPerson(person);
+        for (Appointment appointment : temp) {
+            if (appointment.getStartTime().equals(startTime)) {
+                return appointment;
+            }
+        }
+        return null;
+    }
+
+    public void addNoteToPerson(Note note, Person person) {
+        addressBook.addNoteToPerson(note, person);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -9,6 +9,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLinkCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -100,6 +104,20 @@ public class AddressBookParserTest {
         DeleteLinkCommand command = (DeleteLinkCommand) parser.parseCommand(
                 PersonUtil.getDeleteLinkCommand(nric1, nric2));
         assertEquals(new DeleteLinkCommand(nric1, nric2), command);
+    }
+
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        Nric validNric = new PersonBuilder().build().getNric();
+        String validDate = "22/10/2025";
+        String validStartTime = "10:00";
+        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
+                PersonUtil.getDeleteAppointmentCommand(validNric, validDate, validStartTime)
+        );
+        assertEquals(new DeleteAppointmentCommand(validNric, LocalDate.parse(validDate, dateFormatter),
+            LocalTime.parse(validStartTime, timeFormatter)), command);
     }
 
     @Test

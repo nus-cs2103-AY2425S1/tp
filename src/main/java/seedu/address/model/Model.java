@@ -1,12 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -105,4 +107,8 @@ public interface Model {
     List<Appointment> getAllAppointments();
 
     List<Appointment> getAppointmentsForPerson(Person person);
+
+    Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime);
+
+    void addNoteToPerson(Note note, Person person);
 }
