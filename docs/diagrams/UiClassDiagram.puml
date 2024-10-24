@@ -1,5 +1,6 @@
 @startuml
 Title Ui Class Diagram
+
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
