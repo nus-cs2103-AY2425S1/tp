@@ -7,21 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.exceptions.CommandException;
-import hallpointer.address.model.Model;
-import hallpointer.address.model.ReadOnlyAddressBook;
-import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
 import hallpointer.address.model.point.Point;
