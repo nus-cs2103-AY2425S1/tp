@@ -225,7 +225,7 @@ public class MainWindow extends UiPart<Stage> {
         isPrompt = false;
 
         if (!isConfirmation(userInput)) {
-            throw new CommandException("Command cancelled");
+            return new CommandResult("Command cancelled");
         }
         return lastCommandResult.confirmPrompt();
     }
