@@ -19,7 +19,9 @@ Class Email
 Class Name
 Class Phone
 Class Tag
-
+Class NameContainsKeywordsPredicate
+Class PhoneNumberContainsKeywordPredicate
+Class TagContactContainsKeywordPredicate
 Class I #FFFFFF
 }
 
@@ -50,5 +52,8 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* add" Person
+ModelManager --> "~* delete" Person
+ModelManager --> "~* filtered (by name, phone, tags)" Person
+ModelManager --> "~* pinned" Person
 @enduml
