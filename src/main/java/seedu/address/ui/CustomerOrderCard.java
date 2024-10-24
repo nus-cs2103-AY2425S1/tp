@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.Order;
@@ -23,8 +24,8 @@ public class CustomerOrderCard extends UiPart<Region> {
 
     public final Order order;
 
-//    @FXML
-//    private Label name;
+    @FXML
+    private Label name;
     @FXML
     private Label id;
     @FXML
@@ -34,7 +35,7 @@ public class CustomerOrderCard extends UiPart<Region> {
     @FXML
     private Label items;
     @FXML
-    private Label status;
+    private FlowPane status;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -42,10 +43,10 @@ public class CustomerOrderCard extends UiPart<Region> {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");
-//        name.setText(person.getName().fullName);
+        name.setText(order.getPerson().getName().fullName);
         phone.setText(order.getPhoneNumber());
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
-        status.setText(order.getStatus().toString());
+        status.getChildren().add(new Label(order.getStatus().toString()));
     }
 }

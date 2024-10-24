@@ -12,17 +12,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class DeleteSupplyOrderCommand extends Command {
     public static final String COMMAND_WORD = "deleteSupplyOrder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete the supply order by their phone number. "
-            + "Parameters: PHONE_NUMBER\n"
-            + "Example: " + COMMAND_WORD + " 87654321";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete the supply order at the given index of the displayed supplier orders. "
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS = "Supply order deleted.\n\n%1$s";
+    public static final String MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS = "Supply order deleted at index: %1$d";
+    public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
 
-    private final String phoneNumber;
+    private final int targetIndex;
 
-    public DeleteSupplyOrderCommand(String phoneNumber) {
-        requireAllNonNull(phoneNumber);
-        this.phoneNumber = phoneNumber;
+    public DeleteSupplyOrderCommand(int targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     @Override
@@ -31,9 +31,15 @@ public class DeleteSupplyOrderCommand extends Command {
 
         SupplierOrderList supplierOrderList = model.getSupplierOrderList();
 
+        if (targetIndex <= 0 || targetIndex > supplierOrderList.getOrders().size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX);
+        }
+
+        String phoneNumber = supplierOrderList.getOrderByIndex(targetIndex - 1).getPhoneNumber();
+
         supplierOrderList.removeOrder(phoneNumber);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS, supplierOrderList.viewOrders()));
+        return new CommandResult(String.format(MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS, targetIndex));
     }
 
 
@@ -48,6 +54,6 @@ public class DeleteSupplyOrderCommand extends Command {
         }
 
         DeleteSupplyOrderCommand otherCommand = (DeleteSupplyOrderCommand) other;
-        return phoneNumber.equals(otherCommand.phoneNumber);
+        return targetIndex == otherCommand.targetIndex;
     }
 }
