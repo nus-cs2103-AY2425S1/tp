@@ -133,11 +133,13 @@ public class ModelManager implements Model {
     @Override
     public void undoAddressBook() {
         versionedAddressBook.undo();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
