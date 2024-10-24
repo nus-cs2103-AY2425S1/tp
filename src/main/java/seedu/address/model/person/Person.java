@@ -184,11 +184,17 @@ public class Person implements Appointmentable {
      * @return True if command was successful, false if otherwise.
      */
     @Override
-    public Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+    public Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId) throws CommandException {
         requireAllNonNull(dateTime, patientId, doctorId);
-        return appointments.stream()
+        List<Appointment> apts = appointments.stream()
                 .filter(apt -> apt.equals(new Appointment(dateTime, patientId, doctorId, "")))
-                .collect(Collectors.toList()).get(0);
+                .collect(Collectors.toList());
+        if (apts.isEmpty() || apts.size() == 0) {
+            throw new CommandException(Messages.MESSAGE_NO_APPOINTMENTS_FOUND);
+        }
+
+        return apts.get(0);
+
     }
 
     public Appointment getAppointment(LocalDateTime dateTime, int patientId) throws CommandException {
@@ -274,9 +280,14 @@ public class Person implements Appointmentable {
     }
 
     @Override
-    public void markAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+    public boolean markAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
         requireAllNonNull(dateTime, patientId, doctorId);
-        getAppointment(dateTime, patientId, doctorId).markAsComplete();
+        try {
+            getAppointment(dateTime, patientId, doctorId).markAsComplete();
+        } catch (CommandException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

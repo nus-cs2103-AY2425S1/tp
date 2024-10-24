@@ -25,7 +25,7 @@ public class MarkAppointmentCommand extends Command {
             + PREFIX_ID + "[PATIENT_ID] "
             + PREFIX_ID + "[DOCTOR_ID]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATE + "2024-12-31 15:23"
+            + PREFIX_DATE + "2024-12-31 15:23 "
             + PREFIX_ID + "1234 "
             + PREFIX_ID + "5678";
     public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Successfully "
@@ -53,9 +53,19 @@ public class MarkAppointmentCommand extends Command {
         ObservableList<Person> allPersons = model.getFilteredPersonList();
         Person patientToMarkAppointment = model.getFilteredPatientById(allPersons, patientId);
         Person doctorToMarkAppointment = model.getFilteredDoctorById(allPersons, doctorId);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        boolean isMarkSuccessful = patientToMarkAppointment.markAppointment(appointmentTime,
+                patientToMarkAppointment.getId(),
+                doctorToMarkAppointment.getId());
+        if (!isMarkSuccessful) {
+            throw new CommandException(MESSAGE_MARK_APPOINTMENT_FAIL);
+        }
         doctorToMarkAppointment.markAppointment(appointmentTime, patientToMarkAppointment.getId(),
                 doctorToMarkAppointment.getId());
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(MESSAGE_MARK_APPOINTMENT_SUCCESS);
+
     }
+
 }
