@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -22,10 +24,10 @@ public class ListLogsCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists the log entries.\n"
-            + "Parameters: i/NRIC\n"
-            + "Example: " + COMMAND_WORD + " i/S6285715C";
-
+            + ": Lists all logs of a person identified by the NRIC.\n"
+            + "Parameters: NRIC\n"
+            + "Example: " + COMMAND_WORD + " i/S1234567A";
+  
     private final IdentityNumber identityNumber;
 
     /**

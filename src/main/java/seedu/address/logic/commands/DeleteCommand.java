@@ -19,9 +19,9 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: /i IDENTIFICATION_NUMBER (must be 9 characters)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the patient in the patient list identified by their Identity Number.\n"
+            + "Parameters: i/NRIC (must be 9 characters)\n"
+            + "Example: " + COMMAND_WORD + " i/S1234567A";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
 
         // Find the person by identity number
@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
 
         // If person was not found, throw an exception
         if (personToDelete == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
 
         model.deletePerson(personToDelete);
