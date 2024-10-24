@@ -74,7 +74,7 @@ public class CommandResultTest {
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit()
-                + ", prompt=" + commandResult.isPrompt()
+                + ", prompt=" + commandResult.hasPrompt()
                 + ", list=" + commandResult.isList()
                 + ", personIndex=" + commandResult.getPersonIndex() + "}";
         assertEquals(expected, commandResult.toString());

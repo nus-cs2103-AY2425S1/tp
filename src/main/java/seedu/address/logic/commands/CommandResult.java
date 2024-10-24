@@ -29,11 +29,12 @@ public class CommandResult {
     private final int personIndex;
 
     /** The previous command prompts the user for confirmation */
-    private final boolean prompt;
+    private final boolean hasPrompt;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
+
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isPrompt,
                          boolean list, int personIndex) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -41,7 +42,7 @@ public class CommandResult {
         this.exit = exit;
         this.list = list;
         this.personIndex = personIndex;
-        this.prompt = isPrompt;
+        this.hasPrompt = isPrompt;
     }
 
 
@@ -65,6 +66,7 @@ public class CommandResult {
         return exit;
     }
 
+
     public boolean isList() {
         return list;
     }
@@ -74,8 +76,9 @@ public class CommandResult {
         return personIndex;
     }
 
-    public boolean isPrompt() {
-        return prompt;
+
+    public boolean hasPrompt() {
+        return hasPrompt;
     }
 
     @Override
@@ -94,12 +97,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && list == otherCommandResult.list
-                && personIndex == otherCommandResult.personIndex;
+                && personIndex == otherCommandResult.personIndex
+                && hasPrompt == otherCommandResult.hasPrompt;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, list, personIndex);
+        return Objects.hash(feedbackToUser, showHelp, exit, list, personIndex, hasPrompt);
     }
 
     @Override
@@ -108,7 +112,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("prompt", prompt)
+                .add("prompt", hasPrompt)
                 .add("list", list)
                 .add("personIndex", personIndex)
                 .toString();

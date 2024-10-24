@@ -60,7 +60,7 @@ public class LogicManager implements Logic {
             Command command = addressBookParser.parseCommand(commandText);
             commandResult = command.execute(model);
 
-            if (!commandResult.isPrompt()) {
+            if (!commandResult.hasPrompt()) {
                 model.clearSavedCommand();
             }
 

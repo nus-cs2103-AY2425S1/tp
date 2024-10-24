@@ -69,7 +69,7 @@ public class AddressBookParser {
             return new ConfirmPrompt(new DeleteCommandParser().parse(arguments));
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ConfirmPrompt(new ClearCommand());
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
