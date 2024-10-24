@@ -331,9 +331,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC1 - Add Client (Buyer or Seller)**
 
-Guarantees:
-* If property listing is not in the database, it would be removed from property database with no side effects.
-
 MSS:
 1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
 2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
@@ -460,6 +457,31 @@ Extensions:
 
       Use case ends.
 
+**Use case: UC7 - Add Meeting**
+
+MSS:
+1. Real estate agent requests to add a meeting based on the meeting’s meeting title and meeting date. The real estate agent also specifies the buyer, seller, and property involved in this meeting.
+2. ClientGrid will add the meeting and indicate success.
+   Use case ends.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the meeting title or meeting date format provided by the real estate agent.
+
+    * 1a1. ClientGrid requests for the correct data.
+
+    * 1a2. Real estate agent enters new data.
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+    * Use case resumes from step 2.
+
+* 1b. ClientGrid is unable to find a matching buyer, seller, or property entry in the meeting book.
+
+    * 1b1. ClientGrid informs real estate agent that the buyer, seller, or property does not exist in the meeting book.
+
+    * Use case ends.
+
 **Use case: UC8 - Delete Meeting**
 
 Guarantees:
@@ -482,9 +504,9 @@ Extensions:
 
     * Use case resumes from step 2.
 
-* 1b. ClientGrid is unable to find a matching meeting entry in the database.
+* 1b. ClientGrid is unable to find a matching meeting entry in the meeting book.
 
-    * 1b1. ClientGrid informs real estate agent that the meeting does not exist in the database.
+    * 1b1. ClientGrid informs real estate agent that the meeting does not exist in the meeting book.
 
     * Use case ends.
 
