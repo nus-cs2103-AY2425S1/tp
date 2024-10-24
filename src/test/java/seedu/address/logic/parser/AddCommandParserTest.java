@@ -155,9 +155,25 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_addressFieldMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(BETTY).withTags("friend").buildEmptyAddressPerson();
+        // no address
+        Person expectedPerson = new PersonBuilder(BETTY).withTags("friend").withEmptyAddress().build();
         assertParseSuccess(parser, NAME_DESC_BETTY + PHONE_DESC_BETTY + EMAIL_DESC_BETTY
+                + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_phoneFieldMissing_success() {
+        // no phone
+        Person expectedPerson = new PersonBuilder(AMY).withTags("friend").withEmptyPhone().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_emailFieldMissing_success() {
+        // no email
+        Person expectedPerson = new PersonBuilder(AMY).withTags("friend").withEmptyEmail().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
     }
 
@@ -178,21 +194,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + MODULE_ROLE_DESC, expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+        // missing phone prefix and email prefix
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
                 + MODULE_ROLE_DESC, expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                + MODULE_ROLE_DESC, expectedMessage);
-
-        // missing module role prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                + VALID_MODULE_ROLE, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                + MODULE_ROLE_DESC, expectedMessage);
+                + VALID_MODULE_ROLE, expectedMessage);
     }
 
     @Test

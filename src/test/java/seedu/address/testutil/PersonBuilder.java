@@ -165,12 +165,4 @@ public class PersonBuilder {
     public Person build() {
         return new Person(name, phone, email, address, tags, moduleRoleMap);
     }
-
-    /**
-     * Builds the {@code Person} that we are testing without address.
-     */
-    public Person buildEmptyAddressPerson() {
-        return new Person(name, phone, email, Optional.empty(), tags, moduleRoleMap);
-    }
-
 }

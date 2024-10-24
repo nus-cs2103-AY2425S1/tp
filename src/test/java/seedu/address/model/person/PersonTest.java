@@ -55,7 +55,7 @@ public class PersonTest {
 
     @Test
     public void testPersonConstructorWithoutAddress() {
-        Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
+        Person betty = new PersonBuilder(BETTY).withEmptyAddress().build();
 
         Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
                 Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap());
@@ -94,7 +94,7 @@ public class PersonTest {
 
     @Test
     public void testHasAddressWithoutAddress() {
-        Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
+        Person betty = new PersonBuilder(BETTY).withEmptyAddress().build();
 
         assertFalse(betty.hasAddress());
     }
