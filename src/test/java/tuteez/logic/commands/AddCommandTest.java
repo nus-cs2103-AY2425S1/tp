@@ -10,8 +10,10 @@ import static tuteez.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -176,6 +178,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObjectProperty<Optional<Person>> getLastViewedPerson() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateLastViewedPerson(Person personOnDisplay) {
             throw new AssertionError("This method should not be called.");
         }
 
