@@ -2,13 +2,12 @@ package seedu.address.model.person;
 
 import static java.util.Objects.isNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.ENGLISH_FORMAT_WITH_TIME;
+import static seedu.address.logic.parser.ParserUtil.parseDateTime;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 import seedu.address.model.person.exceptions.TimeParseException;
 
@@ -21,17 +20,7 @@ public class Appointment {
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in a format of \n"
             + "dd/MM/yyyy HH:mm or dd MM yyyy HH:mm or dd-MM-yyyy HH:mm"
             + "and must be between 8:30 - 21:30 inclusive";
-    public static final DateTimeFormatter ENGLISH_FORMAT = DateTimeFormatter.ofPattern("dd MMMM yyyy",
-                                                                                            Locale.ENGLISH);
-    public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
-                                                                "dd MMMM yyyy HH:mm",
-                                                                        Locale.ENGLISH);
-    public static final DateTimeFormatter[] FORMATTERS = new DateTimeFormatter[] {
-        ENGLISH_FORMAT_WITH_TIME,
-        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"),
-        DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"),
-        DateTimeFormatter.ofPattern("dd MM yyyy HH:mm")
-    };
+
     public static final LocalDate TODAY = LocalDate.now();
 
     public final String dateTime;
@@ -46,25 +35,8 @@ public class Appointment {
             dateTime = "-";
         } else {
             checkArgument(isValidAppointment(date), MESSAGE_CONSTRAINTS);
-            dateTime = parse(date).format(ENGLISH_FORMAT_WITH_TIME);
+            dateTime = parseDateTime(date).format(ENGLISH_FORMAT_WITH_TIME);
         }
-    }
-
-    /**
-     * Parses string into LocalDateTime Object based on fixed formats
-     * @param dateTime A valid Appointment date
-     * @return LocalDateTime object corresponding to a specific date and time
-     * @throws TimeParseException String given does not match any time format
-     */
-    private static LocalDateTime parse(String dateTime) throws TimeParseException {
-        for (DateTimeFormatter formatter : FORMATTERS) {
-            try {
-                return LocalDateTime.parse(dateTime, formatter);
-            } catch (DateTimeParseException ignored) {
-                continue;
-            }
-        }
-        throw new TimeParseException();
     }
 
     /**
@@ -76,7 +48,7 @@ public class Appointment {
         }
 
         try {
-            LocalDateTime temp = parse(test);
+            LocalDateTime temp = parseDateTime(test);
             return temp.toLocalTime().isAfter(LocalTime.of(8, 29))
                     && temp.toLocalTime().isBefore(LocalTime.of(21, 31));
 
@@ -107,7 +79,6 @@ public class Appointment {
         return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
                 .toLocalDate().isEqual(date);
     }
-
 
     /**
      * Returns true if appointment has passed.
