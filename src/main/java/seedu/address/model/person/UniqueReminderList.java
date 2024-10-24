@@ -1,14 +1,11 @@
 package seedu.address.model.person;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.DuplicateReminderException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.exceptions.ReminderNotFoundException;
-
 import java.util.Iterator;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateReminderException;
+import seedu.address.model.person.exceptions.ReminderNotFoundException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;

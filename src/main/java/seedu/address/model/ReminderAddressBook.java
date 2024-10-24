@@ -1,14 +1,10 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Reminder;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniqueReminderList;
-
-import java.util.ArrayList;
 import java.util.List;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Reminder;
+import seedu.address.model.person.UniqueReminderList;
 
 import static java.util.Objects.requireNonNull;
 

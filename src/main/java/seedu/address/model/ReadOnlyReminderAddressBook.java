@@ -3,8 +3,6 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Reminder;
 
-import java.util.ArrayList;
-
 /**
  * Unmodifiable view of a reminder list
  */

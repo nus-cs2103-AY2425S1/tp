@@ -15,9 +15,23 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyReminderAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReminderAddressBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonReminderAddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.ReminderAddressBookStorage;
+import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -48,8 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        ReminderAddressBookStorage reminderAddressBookStorage = new JsonReminderAddressBookStorage(userPrefs.
-                                                                    getReminderAddressBookFilePath());
+        ReminderAddressBookStorage reminderAddressBookStorage = new JsonReminderAddressBookStorage(userPrefs
+                                                                .getAddressBookFilePath());
 
         storage = new StorageManager(addressBookStorage, userPrefsStorage, reminderAddressBookStorage);
 
@@ -72,7 +86,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         Optional<ReadOnlyReminderAddressBook> reminderAddressBookOptional;
-        ReadOnlyReminderAddressBook initialReminders= new ReminderAddressBook();
+        ReadOnlyReminderAddressBook initialReminders = new ReminderAddressBook();
         try {
             addressBookOptional = storage.readAddressBook();
             //reminderAddressBookOptional = storage.readReminderAddressBook();
