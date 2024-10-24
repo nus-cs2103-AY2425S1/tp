@@ -53,7 +53,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         try {
             byte[] encryptedData = Files.readAllBytes(filePath);
-            String jsonData = EncryptionManager.decrypt(encryptedData);
+            String jsonData = EncryptionManager.decrypt(encryptedData, null);
             JsonSerializableAddressBook jsonAddressBook = JsonUtil.fromJsonString(
                     jsonData, JsonSerializableAddressBook.class);
 
@@ -105,7 +105,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         // Encrypt the JSON data
         byte[] encryptedData = new byte[0];
         try {
-            encryptedData = EncryptionManager.encrypt(jsonData);
+            encryptedData = EncryptionManager.encrypt(jsonData, null);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
