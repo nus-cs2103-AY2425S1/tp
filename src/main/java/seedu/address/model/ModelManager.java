@@ -192,6 +192,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEventById(int eventId) {
+        return addressBook.hasEventById(eventId);
+    }
+
+    @Override
+    public Event getEventById(int eventId) {
+        return addressBook.getEventById(eventId);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+        addressBook.setEvent(target, editedEvent);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

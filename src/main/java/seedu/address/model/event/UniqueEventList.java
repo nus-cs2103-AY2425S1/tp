@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,6 +44,18 @@ public class UniqueEventList implements Iterable<Event> {
     public boolean containsId(int idToCheck) {
         return internalList.stream().anyMatch(event -> event.getEventId() == idToCheck);
     }
+
+    /**
+     * Retrieves an event by its ID.
+     * @throws NoSuchElementException if the event does not exist.
+     */
+    public Event getById(int eventId) {
+        return internalList.stream()
+                .filter(event -> event.getEventId() == eventId)
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("No event with ID: " + eventId));
+    }
+
 
     /**
      * Adds an event to the list.
