@@ -10,10 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, "
-            + "but it should not be blank and must be at most 200 characters long.";
+            + "and must be at most 200 characters long.";
 
-    // Validation regex to ensure the remark is not blank and is at most 200 characters
-    public static final String VALIDATION_REGEX = "^(?!\\s*$).{1,200}$"; // No empty string, max 200 chars
+    // Validation regex to allow empty strings and up to 200 characters
+    public static final String VALIDATION_REGEX = "^.{0,200}$"; // Accepts empty strings up to 200 chars
 
     public final String value;
 
