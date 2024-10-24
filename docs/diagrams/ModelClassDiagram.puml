@@ -43,12 +43,12 @@ AddressBook *--> "1" UniquePersonList
 AddressBook *--> "1" ArchivedPersonList
 ArchivedPersonList --> "~* all" Person
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1"Phone
+Person *--> "1"Email
+Person *--> "1"Address
 Person *--> "*" Tag
-Student *--> Grade
+Student *--> "1"Grade
 Student "child" <-right-> "parent"Parent:"                     "
 
 Person -[hidden]up--> I
