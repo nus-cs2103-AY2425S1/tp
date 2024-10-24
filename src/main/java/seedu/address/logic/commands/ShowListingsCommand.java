@@ -9,10 +9,10 @@ import seedu.address.model.Model;
 /**
  * Displays all listings to the user.
  */
-public class ShowAllListingsCommand extends Command {
+public class ShowListingsCommand extends Command {
 
     public static final String COMMAND_WORD = "showlistings";
-    public static final String MESSAGE_SUCCESS = "These are your listings!";
+    public static final String MESSAGE_SUCCESS = "Here are your listings!";
     public static final String MESSAGE_NO_LISTINGS_IN_LIST = "You have no listings available.";
 
     /**
