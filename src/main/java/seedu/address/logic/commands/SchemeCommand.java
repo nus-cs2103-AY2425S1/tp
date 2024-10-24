@@ -63,4 +63,19 @@ public class SchemeCommand extends Command {
         }
         return new CommandResult(result.toString(), false, false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SchemeCommand)) {
+            return false;
+        }
+
+        SchemeCommand otherSchemeCommand = (SchemeCommand) other;
+        return targetIndex.equals(otherSchemeCommand.targetIndex);
+    }
 }

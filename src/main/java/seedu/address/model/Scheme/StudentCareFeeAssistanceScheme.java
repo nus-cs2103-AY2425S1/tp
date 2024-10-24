@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Represents a SCFA scheme in the address book.
  */
-public class Scfascheme extends Scheme {
+public class StudentCareFeeAssistanceScheme extends Scheme {
 
     public static final String SCHEME_NAME = "Student Care Fee Assistance (SCFA)";
     private static final int INCOME_THRESHOLD = 4500;

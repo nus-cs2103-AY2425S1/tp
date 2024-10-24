@@ -3,6 +3,7 @@ package seedu.address.model.scheme;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 import seedu.address.model.person.Person;
@@ -30,15 +31,16 @@ public class SchemeRetrieval {
         this.targetFamily = targetFamily;
         this.income = targetFamily.getIncome().getValue();
         LocalDate currentDate = LocalDate.now();
-        this.age = targetFamily.getDateOfBirth().toLocalDate().getYear() - currentDate.getYear();
+        this.age = Period.between(targetFamily.getDateOfBirth().toLocalDate(), currentDate).getYears();
         this.familySize = 1;
         this.incomePerCapita = (int) Math.round(income / familySize);
-        allSchemes.add(new Fasscheme());
-        allSchemes.add(new Scfascheme());
+        allSchemes.add(new MoeFinancialAssistanceScheme());
+        allSchemes.add(new StudentCareFeeAssistanceScheme());
     }
 
     /**
      * Returns the schemes that the person is eligible for.
+     * @return ArrayList of schemes that the person is eligible for.
      */
     public ArrayList<Scheme> getSchemes() {
         requireNonNull(targetFamily);

@@ -63,6 +63,18 @@ public class TypicalPersons {
             .withRemark(VALID_REMARK_BOB).withDateOfBirth("1 Jan 2000").withIncome(VALID_INCOME_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
+    // Manually added - Terry presenting rich while Berry is poor while Cherry is moderate
+    public static final Person TERRY = new PersonBuilder().withName("Terry").withPhone("98765432")
+            .withEmail("terry@example.com").withAddress("311, Clementi Ave 2, #02-25").withDateOfBirth("29 Jan 1999")
+            .withIncome(1000000).build();
+    public static final Person BERRY = new PersonBuilder().withName("Berry").withPhone("98765432")
+            .withEmail("berry@example.com").withAddress("311, Clementi Ave 2, #02-25").withDateOfBirth("29 Jan 1999")
+            .withIncome(100).build();
+
+    public static final Person CHERRY = new PersonBuilder().withName("Cherry").withPhone("98765432")
+            .withEmail("cheery@example.com").withAddress("311, Clementi Ave 2, #02-25").withDateOfBirth("29 Jan 1999")
+            .withIncome(4000).build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -86,6 +98,14 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static AddressBook getTypicalAddressBook3() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons3()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
@@ -93,5 +113,9 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons2() {
         return new ArrayList<>(Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalPersons3() {
+        return new ArrayList<>(Arrays.asList(TERRY, BERRY, CHERRY));
     }
 }

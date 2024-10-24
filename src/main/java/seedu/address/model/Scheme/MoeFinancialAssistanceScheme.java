@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Represents a MOE FAS scheme in the address book.
  */
-public class Fasscheme extends Scheme {
+public class MoeFinancialAssistanceScheme extends Scheme {
     public static final String SCHEME_NAME = "MOE Financial Assistance Scheme (MOE FAS)";
     public static final int INCOME_THRESHOLD = 3000;
     public static final int FAMILY_SIZE_THRESHOLD = 0;
