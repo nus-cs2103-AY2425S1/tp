@@ -56,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         renderTags();
-        
+
         String remarkValue = person.getRemark().value;
         if (remarkValue != null && !remarkValue.trim().isEmpty()) {
             remark.setText(remarkValue);
