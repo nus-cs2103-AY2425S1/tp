@@ -170,6 +170,22 @@ Examples:
 - `addnotes 1 n/Supplier 1`
 - `addnotes 2 n/Supplier 2`
 
+### Edit a Note of an existing contact: `editnotes`
+
+Edits a note of a person in the address book.
+
+Format: `editnotes INDEX i/NOTE_INDEX n/[NOTES]`
+
+- Edits the note at the specified `NOTE_INDEX` of the person at the specified `INDEX`.
+-The index refers to the index number shown in the displayed person list. 
+- The note index refers to the index number shown in the notes list of the contact details of the displayed person.
+- The index and notes index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+- `editnotes 1 i/1 n/Customer 1`
+- `editnotes 2 i/1 n/Customer 2`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -268,6 +284,7 @@ _Details coming soon ..._
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Addnotes** | `addnotes INDEX n/[NOTE]` <br> e.g. `addnotes 1 n/Customer 1`                                                                                                         |
+| **Editnotes** | `editnotes INDEX i/NOTE_INDEX n/[NOTE]` <br> e.g. `editnotes 1 i/1 n/Customer 1`                                                                                      |
 | **View**     | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
 | **Pin**      | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
 | **Export**   | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                                         |

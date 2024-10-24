@@ -24,7 +24,7 @@ public class AddNotesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add the note of the person identified "
-            + "by the index number used in the last person listing. "
+            + "by the person index number used on the left display panel. "
             + "New note(letters and numbers) will be appended to the notes currently stored.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "n/ [NOTES]\n"
@@ -39,8 +39,8 @@ public class AddNotesCommand extends Command {
 
 
     /**
-     * @param index of the person in the filtered person list to edit the notes
-     * @param note of the person to be updated to
+     * @param index of the person in the filtered person list to add a new note
+     * @param note of the person to be added
      */
     public AddNotesCommand(Index index, Note note) {
         requireAllNonNull(index, note);

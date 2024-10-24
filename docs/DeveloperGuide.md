@@ -282,7 +282,7 @@ particular, this representative works with B2B sales.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| -------- | ---------------- |-----------------------------------------------------------------------------| ---------------------------------------------------------------------- |
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -304,6 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
 | `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                             |
 | `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                                |
+ `* *`    | sales rep        | edit notes saved to client's contact                                        | keep track of my conversation with them                                |
 | `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics      |
 | `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
 | `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                            |
@@ -469,6 +470,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 1b. System detects that the file is used by another process.
 
     - 1b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC9 - Edit a note to a person contact**
+
+**MSS**
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to edit a note to a specific person.
+3.  System shows details of the newly edited note of that person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+    - 2a1. System shows an error message.
+
+      Use case ends.
+
+
+- 2b. The note name is invalid.
+
+    - 2b1. System shows an error message.
+
+      Use case ends.
+
+- 2c. The note index is invalid.
+
+    - 2c1. System shows an error message.
 
       Use case ends.
 
