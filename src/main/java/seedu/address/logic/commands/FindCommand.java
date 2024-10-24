@@ -69,16 +69,14 @@ public class FindCommand extends Command {
 
             // Case for group-based search
             // Use updateFilteredGroupList to get the list of matching groups
-            List<Group> matchingGroups = model.updateFilteredGroupList(groupPredicate);
-
-            // Now filter the persons based on whether they are in any of the matching groups
-            model.updateFilteredPersonList(person -> matchingGroups.stream()
-                    .flatMap(group -> group.getMembers().stream())
-                    .anyMatch(member -> member.isSamePerson(person)));
+            model.updateFilteredGroupList(groupPredicate);
         }
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                false,
+                true,
+                false);
     }
 
     @Override

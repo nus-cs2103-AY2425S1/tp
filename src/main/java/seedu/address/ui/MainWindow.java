@@ -35,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private GroupsWindow groupsWindow;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -66,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        groupsWindow = new GroupsWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -168,10 +171,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleGroups() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+        if (!groupsWindow.isShowing()) {
+            groupsWindow.show();
         } else {
-            helpWindow.focus();
+            groupsWindow.focus();
         }
     }
 

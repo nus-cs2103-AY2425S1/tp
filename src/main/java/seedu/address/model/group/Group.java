@@ -62,6 +62,18 @@ public class Group {
         return String.format("[Group: %s, Members: %s]", groupName, memberString);
     }
 
+    /**
+     * Returns true if both groups have the same name.
+     * This defines a weaker notion of equality between two groups.
+     */
+    public boolean isSameGroup(Group otherGroup) {
+        if (otherGroup == this) {
+            return true;
+        }
+        return otherGroup != null
+                && otherGroup.getGroupName().equals(getGroupName());
+    }
+
     @Override
     public boolean equals(Object other) throws ClassCastException {
 

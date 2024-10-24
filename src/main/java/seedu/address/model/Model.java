@@ -20,6 +20,7 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Returns the user prefs.
@@ -123,5 +124,11 @@ public interface Model {
 
     boolean hasGroupName(Group group);
 
-    List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupName);
+    void updateFilteredGroupList(Predicate<Group> groupName);
+
+
+    /**
+     * Returns an unmodifiable view of the groups list
+     */
+    ObservableList<Group> getFilteredGroupList();
 }

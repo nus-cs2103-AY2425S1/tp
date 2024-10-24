@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.person.Person;
 
 /**
  * Deletes a group identified by its name from the address book.
@@ -34,11 +35,11 @@ public class DeleteGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Group> lastShownList = model.getFilteredGroupList();
 
-        // Use the predicate to search for groups by name
         GroupContainsKeywordsPredicate groupPredicate =
                 new GroupContainsKeywordsPredicate(List.of(groupName.groupName));
-        List<Group> matchingGroups = model.updateFilteredGroupList(groupPredicate);
+        List<Group> matchingGroups = model.getFilteredGroupList();
 
         if (matchingGroups.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_GROUP_NOT_FOUND, groupName));

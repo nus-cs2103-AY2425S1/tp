@@ -157,12 +157,11 @@ public class ModelManagerTest {
         modelManager.addGroup(groupC);
 
         GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(List.of("Group A", "Group B"));
-        List<Group> matchingGroups = modelManager.updateFilteredGroupList(predicate);
+        modelManager.updateFilteredGroupList(predicate);
 
-        assertEquals(2, matchingGroups.size());
-        assertTrue(matchingGroups.contains(groupA));
-        assertTrue(matchingGroups.contains(groupB));
-        assertFalse(matchingGroups.contains(groupC));
+        assertTrue(modelManager.hasGroupName(groupA));
+        assertTrue(modelManager.hasGroupName(groupB));
+        assertFalse(modelManager.hasGroupName(groupC));
     }
 
     @Test

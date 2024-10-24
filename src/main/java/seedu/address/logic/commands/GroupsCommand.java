@@ -12,8 +12,7 @@ public class GroupsCommand extends Command {
     public static final String COMMAND_WORD = "groups";
 
     public static final String MESSAGE_SUCCESS = "Listed all groups";
-
-    public static final String SHOWING_GROUPS_MESSAGE = "Opened help window.";
+    public static final String SHOWING_GROUPS_MESSAGE = "Opened group window.";
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
