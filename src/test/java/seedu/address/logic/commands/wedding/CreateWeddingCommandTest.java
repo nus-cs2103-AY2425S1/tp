@@ -209,6 +209,11 @@ public class CreateWeddingCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonListByWedding(Predicate<Wedding> tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Wedding> getFilteredWeddingList() {
             throw new AssertionError("This method should not be called.");
         }

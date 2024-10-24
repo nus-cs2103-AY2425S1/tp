@@ -46,7 +46,8 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "tags" : [ ],
+    "weddings" : [ "Wedding 2"]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
