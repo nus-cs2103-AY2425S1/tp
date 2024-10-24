@@ -2,6 +2,8 @@ package seedu.address.model.restaurant;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.Pair;
@@ -66,6 +68,10 @@ public enum PriceCategory {
     public static String getPriceCategoryString(double value) {
         // Pre-condition: Ensure the price is not negative
         assert value >= 0 : "Price must not be negative.";
+
+        // Log the price value
+        Logger logger = Logger.getLogger("PriceCategory");
+        logger.log(Level.INFO, "Price value: {0}", value);
 
         for (PriceCategory category : PriceCategory.values()) {
             if (value <= category.maxValue) {
