@@ -126,8 +126,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getDisplayPersons() {
-        System.out.println("getDisplayList");
-        System.out.println(sortedPersons);
         return sortedPersons;
     }
 

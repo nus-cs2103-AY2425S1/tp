@@ -22,9 +22,8 @@ public class SortCommand extends Command {
             + " CRITERIA"
             + ": Sorts the list according to criteria given."
             + "\n"
-            + "Possible usages: "
-            + "sort n/ , "
-            + "sort c/";
+            + "Usage: "
+            + "sort n/ , ";
 
     private final Comparator<Person> comparator;
 
