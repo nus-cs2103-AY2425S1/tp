@@ -20,8 +20,8 @@ Class Phone
 Class Tag
 
 Class RentalInformation
-Class Address
 Class RentalDate
+Class Address
 Class RentDueDate
 Class MonthlyRent
 Class Deposit
@@ -44,19 +44,24 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Client
-Client *--> Name
-Client *--> Phone
-Client *--> Email
+Client *--> "1" Name
+Client *--> "0..1" Phone
+Client *--> "0..1" Email
 Client *--> "*" Tag
 Client *--> "*" RentalInformation
 
-RentalInformation *--> Address
-RentalInformation *--> "0..1" RentalDate : "Start date"
-RentalInformation *--> "0..1" RentalDate : "End date"
+note "This is a floating note" as N1
+
+RentalInformation *--> "0..1" RentalDate
+RentalInformation *--> "0..1" RentalDate
+RentalInformation *--> "1" Address
 RentalInformation *--> "0..1" RentDueDate
 RentalInformation *--> "0..1" MonthlyRent
 RentalInformation *--> "0..1" Deposit
 RentalInformation *--> "0..1" CustomerList
+
+note top of RentalDate : (No space to show association roles\n in the diagram) The association roles for \nRentalDate are rental start date and \nrental end date respectively.
+note right of Client : Note that at least one of Phone or\n Email is required for Client.
 
 Client -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -64,7 +69,8 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Email
 
-RentalDate -[hidden]right-> Address
+MonthlyRent -[hidden]right-> RentalDate
+RentalDate -[hidden]right-> RentDueDate
 
 ModelManager --> "~* filtered" Client
 @enduml
