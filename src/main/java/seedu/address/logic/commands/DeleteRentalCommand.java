@@ -64,8 +64,8 @@ public class DeleteRentalCommand extends Command {
 
         RentalInformation targetRental = rentalInformationList.get(rentalIndex.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_PROMPT, Messages.formatRentalInformation(targetRental)),
-                () -> confirmDelete(model, targetClient, rentalIndex));
+        return new CommandResult(String.format(MESSAGE_PROMPT, Messages.formatRentalInformation(targetRental)), () ->
+                confirmDelete(model, targetClient, rentalIndex));
     }
 
     private CommandResult confirmDelete(Model model, Client targetClient, Index rentalIndex) {
