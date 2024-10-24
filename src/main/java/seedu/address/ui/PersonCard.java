@@ -6,10 +6,7 @@ import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
@@ -75,6 +72,14 @@ public class PersonCard extends UiPart<Region> {
      * @param person The person whose public addresses to display.
      */
     public void addPublicAddressUI(Person person) {
+        publicAddress.getChildren().clear();
+
+        // Delete VBox if the person has no public addresses
+        if (person.getPublicAddresses().isEmpty()) {
+            VBox parent = (VBox) publicAddress.getParent();
+            parent.getChildren().remove(publicAddress);
+        }
+
         person.getPublicAddresses().entrySet().stream()
                 .filter(entry -> !entry.getValue().isEmpty())
                 .flatMap(entry -> {
@@ -90,6 +95,8 @@ public class PersonCard extends UiPart<Region> {
                     label.getStyleClass().add("cell_small_label");
                     publicAddress.getChildren().add(label);
                 });
+
     }
+
 }
 
