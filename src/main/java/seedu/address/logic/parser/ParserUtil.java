@@ -13,7 +13,10 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.PriceCategory;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,6 +99,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String rating} into an {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        if (rating.isEmpty()) {
+            return new Rating(null);
+        }
+        Integer trimmedRating = Integer.parseInt(rating.trim());
+        if (!Rating.isValidRating(trimmedRating)) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        return new Rating(trimmedRating);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -118,6 +138,10 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
+        }
+
+        if (PriceCategory.hasMultiplePriceTags(tagSet)) {
+            throw new ParseException(PriceCategory.MESSAGE_MULTIPLE_PRICE_TAGS);
         }
         return tagSet;
     }

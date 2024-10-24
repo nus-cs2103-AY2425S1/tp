@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RATING_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -53,6 +54,10 @@ public class EditRestaurantDescriptorTest {
         editedAmy = new EditRestaurantDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different address -> returns false
+        editedAmy = new EditRestaurantDescriptorBuilder(DESC_AMY).withRating(VALID_RATING_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditRestaurantDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -65,6 +70,7 @@ public class EditRestaurantDescriptorTest {
                 + editRestaurantDescriptor.getName().orElse(null) + ", phone="
                 + editRestaurantDescriptor.getPhone().orElse(null) + ", email="
                 + editRestaurantDescriptor.getEmail().orElse(null) + ", address="
+                + editRestaurantDescriptor.getRating().orElse(null) + ", rating="
                 + editRestaurantDescriptor.getAddress().orElse(null) + ", tags="
                 + editRestaurantDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editRestaurantDescriptor.toString());
