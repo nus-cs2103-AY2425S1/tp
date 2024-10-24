@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
@@ -31,6 +32,7 @@ class JsonAdaptedCompany {
     private final String email;
     private final String address;
     private final String careerPageUrl;
+    private final String applicationStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     private final Bookmark isBookmark;
@@ -42,12 +44,14 @@ class JsonAdaptedCompany {
     public JsonAdaptedCompany(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("careerPageUrl") String careerPageUrl,
+                              @JsonProperty("applicationStatus") String status,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
                               @JsonProperty("bookmark") Bookmark isBookmark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.careerPageUrl = careerPageUrl;
+        this.applicationStatus = status;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -63,6 +67,7 @@ class JsonAdaptedCompany {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         careerPageUrl = source.getCareerPageUrl().value;
+        applicationStatus = source.getApplicationStatus().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(tag -> new JsonAdaptedTag(tag))
@@ -124,6 +129,13 @@ class JsonAdaptedCompany {
         }
         final CareerPageUrl modelCareerPageUrl = new CareerPageUrl(careerPageUrl);
 
+        if (applicationStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApplicationStatus.class.getSimpleName()));
+        }
+        final ApplicationStatus modelApplicationStatus = new ApplicationStatus(applicationStatus);
+
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (isBookmark == null) {
@@ -132,8 +144,8 @@ class JsonAdaptedCompany {
         }
         final Bookmark modelBookmark = new Bookmark(isBookmark.getIsBookmarkValue());
 
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl, modelTags,
-                modelBookmark);
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelCareerPageUrl,
+                modelApplicationStatus, modelTags, modelBookmark);
     }
 
 }

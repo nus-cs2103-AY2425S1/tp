@@ -57,6 +57,7 @@ public class BookmarkCommand extends Command {
 
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
                 companyToBookmark.getEmail(), companyToBookmark.getAddress(), companyToBookmark.getCareerPageUrl(),
+                companyToBookmark.getApplicationStatus(),
                 companyToBookmark.getTags(), new Bookmark(true));
 
         model.setCompany(companyToBookmark, companyBookmarked);

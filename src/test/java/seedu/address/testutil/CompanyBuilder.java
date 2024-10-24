@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
@@ -23,6 +24,7 @@ public class CompanyBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_URL = "careers.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_STATUS = "";
 
     public static final Bookmark DEFAULT_BOOKMARK = new Bookmark(false);
 
@@ -31,6 +33,7 @@ public class CompanyBuilder {
     private Email email;
     private Address address;
     private CareerPageUrl careerPageUrl;
+    private ApplicationStatus applicationStatus;
     private Set<Tag> tags;
 
     private Bookmark isBookmark;
@@ -44,6 +47,7 @@ public class CompanyBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         careerPageUrl = new CareerPageUrl(DEFAULT_URL);
+        applicationStatus = new ApplicationStatus(DEFAULT_STATUS);
         tags = new HashSet<>();
         isBookmark = DEFAULT_BOOKMARK;
     }
@@ -57,6 +61,7 @@ public class CompanyBuilder {
         email = companyToCopy.getEmail();
         address = companyToCopy.getAddress();
         careerPageUrl = companyToCopy.getCareerPageUrl();
+        applicationStatus = companyToCopy.getApplicationStatus();
         tags = new HashSet<>(companyToCopy.getTags());
         isBookmark = companyToCopy.getIsBookmark();
     }
@@ -111,6 +116,14 @@ public class CompanyBuilder {
     }
 
     /**
+     * Sets the {@code ApplicationStatus} of the {@code Company} that we are building.
+     */
+    public CompanyBuilder withApplicationStatus(String status) {
+        this.applicationStatus = new ApplicationStatus(status);
+        return this;
+    }
+
+    /**
      * Sets the {@code isBookmark} of the {@code Company} that we are building
      */
     public CompanyBuilder withIsBookmark(boolean value) {
@@ -119,7 +132,7 @@ public class CompanyBuilder {
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, careerPageUrl, tags, isBookmark);
+        return new Company(name, phone, email, address, careerPageUrl, applicationStatus, tags, isBookmark);
     }
 
 }

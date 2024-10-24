@@ -23,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
@@ -106,11 +107,13 @@ public class EditCommand extends Command {
         CareerPageUrl updatedCareerPageUrl = editCompanyDescriptor.getCareerPageUrl()
                 .orElse(companyToEdit.getCareerPageUrl());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
-        // Edit command does not allow editing bookmark
+        // Edit command does not allow editing bookmark and application status
         Bookmark updatedBookmark = companyToEdit.getIsBookmark();
+        ApplicationStatus updatedApplicationStatus = companyToEdit.getApplicationStatus();
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCareerPageUrl, updatedTags,
-                updatedBookmark);
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCareerPageUrl,
+                updatedApplicationStatus, updatedTags, updatedBookmark);
     }
 
     @Override

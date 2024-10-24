@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
 import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
@@ -21,26 +22,27 @@ import seedu.address.model.tag.TagBuilder;
  */
 public class SampleDataUtil {
     public static final Bookmark DEFAULT_BOOKMARK = new Bookmark(false);
+    public static final ApplicationStatus DEFAULT_APPLICATION_STATUS = new ApplicationStatus("");
     public static Company[] getSampleCompanies() {
         return new Company[] {
             new Company(new Name("Google"), new Phone("00000001"), new Email("google@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new CareerPageUrl("www.google-careers.com"),
-                    getTagSet("Salary: Low", "WLB: High"), DEFAULT_BOOKMARK),
+                    DEFAULT_APPLICATION_STATUS, getTagSet("Salary: Low", "WLB: High"), DEFAULT_BOOKMARK),
             new Company(new Name("Grab"), new Phone("00000002"), new Email("grab@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new CareerPageUrl("www.grab-jobs.com"),
-                    getTagSet("bigTech", "transport"), DEFAULT_BOOKMARK),
+                    DEFAULT_APPLICATION_STATUS, getTagSet("bigTech", "transport"), DEFAULT_BOOKMARK),
             new Company(new Name("Shopee"), new Phone("00000003"), new Email("shopee@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new CareerPageUrl("www.shopee-jobs.com"),
-                    getTagSet("shopping"), DEFAULT_BOOKMARK),
+                    DEFAULT_APPLICATION_STATUS, getTagSet("shopping"), DEFAULT_BOOKMARK),
             new Company(new Name("Meta"), new Phone("00000004"), new Email("meta@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new CareerPageUrl("www.meta-jobs.com"),
-                    getTagSet("bigTech"), DEFAULT_BOOKMARK),
+                    DEFAULT_APPLICATION_STATUS, getTagSet("bigTech"), DEFAULT_BOOKMARK),
             new Company(new Name("Apple"), new Phone("00000005"), new Email("apple@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), new CareerPageUrl("www.apple-careers.com"),
-                    getTagSet("iphone"), DEFAULT_BOOKMARK),
+                    DEFAULT_APPLICATION_STATUS, getTagSet("iphone"), DEFAULT_BOOKMARK),
             new Company(new Name("ByteDance"), new Phone("00000006"), new Email("bytedance@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), new CareerPageUrl("www.bytedance-jobs.com"),
-                    getTagSet("douyin"), DEFAULT_BOOKMARK)
+                    DEFAULT_APPLICATION_STATUS, getTagSet("douyin"), DEFAULT_BOOKMARK)
         };
     }
 

@@ -57,6 +57,7 @@ public class RemoveBookmarkCommand extends Command {
         Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
                 companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
                 companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
+                companyToRemoveBookmark.getApplicationStatus(),
                 companyToRemoveBookmark.getTags(), new Bookmark(false));
 
         model.setCompany(companyToRemoveBookmark, companyRemovedBookmark);

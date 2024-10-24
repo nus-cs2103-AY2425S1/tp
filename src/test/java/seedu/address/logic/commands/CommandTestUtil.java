@@ -40,6 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_CAREER_PAGE_URL_MICROSOFT = "https://careers.microsoft.com";
     public static final String VALID_TAG_BIGTECH = "bigTech";
     public static final String VALID_TAG_COMPANY = "company";
+    public static final String VALID_STATUS_ONGOING = "ongoing";
+    public static final String VALID_STATUS_OFFER = "offer";
 
     public static final String NAME_DESC_TESLA = " " + PREFIX_NAME + VALID_NAME_TESLA;
     public static final String NAME_DESC_MICROSOFT = " " + PREFIX_NAME + VALID_NAME_MICROSOFT;
