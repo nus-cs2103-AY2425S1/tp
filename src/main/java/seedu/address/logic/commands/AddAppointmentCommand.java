@@ -83,15 +83,14 @@ public class AddAppointmentCommand extends Command {
         Person editedPatient;
         Person editedDoctor;
 
-        if (patientToEdit.addAppointment(appointmentToAdd) && doctorToEdit.addAppointment(appointmentToAdd)) {
-            editedPatient = patientToEdit;
-            editedDoctor = doctorToEdit;
-            model.setPerson(patientToEdit, editedPatient);
-            model.setPerson(doctorToEdit, editedDoctor);
-        } else {
+        if (model.hasAppointment(appointmentToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
+        editedPatient = patientToEdit;
+        editedDoctor = doctorToEdit;
+        model.setPerson(patientToEdit, editedPatient);
+        model.setPerson(doctorToEdit, editedDoctor);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(appointmentToAdd)));
