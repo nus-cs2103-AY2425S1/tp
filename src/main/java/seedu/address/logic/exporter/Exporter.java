@@ -1,5 +1,6 @@
 package seedu.address.logic.exporter;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 import seedu.address.model.ReadOnlyAddressBook;
@@ -11,7 +12,7 @@ public interface Exporter {
     /**
      * Exports the address book
      */
-    public void exportAddressBook(ReadOnlyAddressBook addressBook);
+    public void exportAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
     /**
      * Returns the path that the addressbook will be exported to
