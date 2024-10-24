@@ -203,10 +203,12 @@ public class Student {
     }
 
     /**
-     * Returns a new student with an remove {@Code RegularLesson}.
+     * Creates and returns a new {@code Student} with all {@code CancelledLessons} removed.
      */
-    public Student withoutRegularLesson() {
-        return new Updater().withoutRegularLesson().update();
+    public Student withoutCancelledLessons() {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>();
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
     }
 
     /**
@@ -339,11 +341,6 @@ public class Student {
 
         private Updater withMakeupLessons(Set<MakeupLesson> makeupLessons) {
             this.makeupLessons = makeupLessons;
-            return this;
-        }
-
-        private Updater withoutRegularLesson() {
-            this.regularLesson = null;
             return this;
         }
 

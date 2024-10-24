@@ -44,9 +44,7 @@ public class MakeupLessonCommand extends Command {
     private final MakeupLesson makeupLesson;
 
     /**
-     * @param date      of the makeup lesson
-     * @param startTime of the makeup lesson
-     * @param endTime   of the makeup lesson
+     * Constructs a {@code MakeupLessonCommand} to schedule the given {@code MakeupLesson}.
      */
     public MakeupLessonCommand(Index targetIndex, MakeupLesson makeupLesson) {
         requireAllNonNull(targetIndex, makeupLesson);
@@ -73,7 +71,7 @@ public class MakeupLessonCommand extends Command {
             model.setStudent(updatedStudent, studentToUpdate); // revert change if clash
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
                     clashingLessons.stream()
-                            .filter(lesson -> lesson == makeupLesson)
+                            .filter(lesson -> lesson != makeupLesson)
                             .findFirst().get().toDisplay()));
         }
 

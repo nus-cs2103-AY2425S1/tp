@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a Student's lesson time in the student directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Lesson time should be in 24 hour format (e.g. 16:00)";
@@ -67,6 +67,11 @@ public class Time {
     @Override
     public int hashCode() {
         return time.hashCode();
+    }
+
+    @Override
+    public int compareTo(Time other) {
+        return time.compareTo(other.time);
     }
 
     /**

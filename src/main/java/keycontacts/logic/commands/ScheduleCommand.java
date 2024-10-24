@@ -64,11 +64,13 @@ public class ScheduleCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
-        Student updatedStudent = studentToUpdate.withRegularLesson(regularLesson);
-        if (studentToUpdate.equals(updatedStudent)) {
+        Student updatedStudentWithCancelledLessons = studentToUpdate.withRegularLesson(regularLesson);
+        if (studentToUpdate.equals(updatedStudentWithCancelledLessons)) {
             throw new CommandException(MESSAGE_LESSON_UNCHANGED);
         }
 
+        // rescheduling a regular lesson clears all cancelled lessons as well
+        Student updatedStudent = updatedStudentWithCancelledLessons.withoutCancelledLessons();
         model.setStudent(studentToUpdate, updatedStudent);
 
         Set<Lesson> clashingLessons = model.getClashingLessons();
@@ -76,7 +78,7 @@ public class ScheduleCommand extends Command {
             model.setStudent(updatedStudent, studentToUpdate); // revert change if clash
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
                     clashingLessons.stream()
-                            .filter(lesson -> lesson == regularLesson)
+                            .filter(lesson -> lesson != regularLesson)
                             .findFirst().get().toDisplay()));
         }
 
