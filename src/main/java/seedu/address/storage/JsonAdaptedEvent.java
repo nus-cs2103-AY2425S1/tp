@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
+
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -19,6 +21,7 @@ public class JsonAdaptedEvent {
     private final String eventName;
     private final LocalDate eventDate;
     private final Set<JsonAdaptedPerson> attendees = new HashSet<>();
+    private final Address location;
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
@@ -26,12 +29,14 @@ public class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
                             @JsonProperty("eventDate") LocalDate eventDate,
-                            @JsonProperty("attendees") Set<JsonAdaptedPerson> attendees) {
+                            @JsonProperty("attendees") Set<JsonAdaptedPerson> attendees,
+                            @JsonProperty("location") Address location) {
         this.eventName = eventName;
         this.eventDate = eventDate;
         if (attendees != null) {
             this.attendees.addAll(attendees);
         }
+        this.location = location;
     }
 
     /**
@@ -41,6 +46,7 @@ public class JsonAdaptedEvent {
         eventName = source.getEventName();
         eventDate = source.getDate();
         attendees.addAll(source.getAttendees().stream().map(JsonAdaptedPerson::new).collect(Collectors.toSet()));
+        location = source.getLocation();
     }
 
     /**
@@ -53,6 +59,7 @@ public class JsonAdaptedEvent {
         for (JsonAdaptedPerson attendee : attendees) {
             modelAttendees.add(attendee.toModelType());
         }
-        return new Event(eventName, eventDate, modelAttendees);
+        return new Event(eventName, eventDate, location, modelAttendees);
+
     }
 }

@@ -45,6 +45,13 @@
             </HBox>
 
             <HBox spacing="5">
+                <ImageView fx:id="locationIcon" fitHeight="15" fitWidth="15">
+                    <Image url="@/images/location_light.png"/>
+                </ImageView>
+                <Label fx:id="locationLabel" styleClass="cell_small_label" text="\$location" />
+            </HBox>
+
+            <HBox spacing="5">
                 <ImageView fx:id="personIcon" fitHeight="15" fitWidth="15">
                     <Image url="@/images/person_light.png"/>
                 </ImageView>
