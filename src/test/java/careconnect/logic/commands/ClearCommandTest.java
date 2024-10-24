@@ -17,16 +17,28 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, expectedConfirmationMessage, model);
+
+        // Now we confirm the clear
+        ConfirmationYesCommand confirmationCommand = new ConfirmationYesCommand();
+
+        assertCommandSuccess(confirmationCommand, model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        String expectedConfirmationMessage = Command.CONFIRMATION_MESSAGE;
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, expectedConfirmationMessage, model);
+
+        // Now we confirm the clear
+        ConfirmationYesCommand confirmationCommand = new ConfirmationYesCommand();
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(confirmationCommand, model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
