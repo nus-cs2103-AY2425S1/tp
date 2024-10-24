@@ -195,6 +195,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Handler for exporting address list to CSV format
+     */
+    @FXML
+    private void handleExport() {
+        String exportToCsvCommand = "export format/csv";
+        try {
+            CommandResult commandResult = executeCommand(exportToCsvCommand);
+        } catch (CommandException | ParseException e) {
+            return;
+        }
+    }
+
+    /**
      * Handler for filling the command box when clicking the "Filter by Name" menu item.
      */
     @FXML
