@@ -184,6 +184,15 @@ public class Person {
     }
 
     /**
+     * Deletes an appointment from the person's list of appointments.
+     *
+     * @param appt
+     */
+    public void deleteAppt(Appt appt) {
+        appts.remove(appt);
+    }
+
+    /**
      * Returns true if both persons have the same NRIC.
      * This defines a weaker notion of equality between two persons.
      */
