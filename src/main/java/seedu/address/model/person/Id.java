@@ -2,32 +2,33 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 /**
  * Id class that auto-increments and generates an automated unique Id number for Doctors and Patients separately.
  */
 public class Id {
+    public static final String DOCTOR = "DOCTOR";
+    private static final String PATIENT = "PATIENT";
     private static int patientIdCounter = 0;
-    private static int doctorIdCounter = 0;
-    private static int personIdCounter = 0; // TODO REMOVE AFTER V1.3
-    private int idValue;
-    private Class<? extends Person> role;
+    private static int doctorIdCounter = 1;
+    private final int idValue;
 
     /**
-     * Creates an Id that is associated with a specific class.
+     * Creates appropriate ID for Person depending on their role.
      *
-     * @param personClass Either Doctor or Patient class.
+     * @param role Role of the Person: Either Doctor or Patient.
      */
-    public Id(Class<? extends Person> personClass) {
-        requireNonNull(personClass);
-        this.role = personClass;
+    public Id(String role) {
+        requireNonNull(role);
+        role = role.toUpperCase();
 
-        // Check if the class is Patient or Doctor and assign the appropriate ID
-        if (personClass.equals(Patient.class)) {
-            idValue = ++patientIdCounter;
-        } else if (personClass.equals(Doctor.class)) {
-            idValue = ++doctorIdCounter;
-        } else if (personClass.equals(Person.class)) { // TODO AFTER INTEGRATION
-            idValue = ++personIdCounter;
+        if (role.equals(DOCTOR)) {
+            idValue = doctorIdCounter;
+            doctorIdCounter += 2;
+        } else if (role.equals(PATIENT)) {
+            idValue = patientIdCounter;
+            patientIdCounter += 2;
         } else {
             throw new IllegalArgumentException("Invalid class type. Expected Patient or Doctor.");
         }
@@ -37,12 +38,39 @@ public class Id {
         return idValue;
     }
 
-    public Class<? extends Person> getRole() {
-        return role;
+    /**
+     * Informs if the id is that of a Patient or for that of a Doctor.
+     *
+     * @return "DOCTOR" if for Doctor, "PATIENT" if for Patient.
+     */
+    public String getRole() {
+        if (idValue < 0) {
+            throw new RuntimeException("idValue is somehow less than 0.");
+        }
+
+        return (idValue % 2 == 1) ? "DOCTOR" : "PATIENT";
+    }
+
+    /**
+     * Updates static counters from the correct value based on existing Persons.
+     *
+     * @param doctorIds List of doctor ids
+     * @param patientIds List of patient ids
+     */
+    public static void initializeCounters(List<Integer> doctorIds, List<Integer> patientIds) {
+        doctorIdCounter = doctorIds.stream()
+                .mapToInt(x -> x)
+                .max()
+                .orElse(1) + 2; // Increment by 2 to continue from the last used doctor ID
+
+        patientIdCounter = patientIds.stream()
+                .mapToInt(x -> x)
+                .max()
+                .orElse(0) + 2; // Increment by 2 to continue from the last used patient ID
     }
 
     @Override
     public String toString() {
-        return "Id{" + "id=" + idValue + ", role=" + role.getSimpleName() + '}';
+        return String.valueOf(idValue);
     }
 }

@@ -11,9 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Doctor;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,6 +34,16 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        /*
+        for (Person person : filteredPersons) {
+            if (person.getRole().equals("doctor")) {
+                Doctor.addDoctors((Doctor) person);
+            }
+            if (person.getRole().equals("patient")) {
+                Patient.addPatient(person);
+            }
+        }
+        */
     }
 
     public ModelManager() {
@@ -126,16 +133,29 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonById(Id id) {
-        return filteredPersons.filtered(person -> person.getId().getIdValue() == id.getIdValue());
+    public ObservableList<Person> getFilteredPersonById(int id) {
+        return filteredPersons.filtered(person -> person.getId() == id);
     }
 
     @Override
-    public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
-        Patient patient = null;
+    public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
+        Person person = null;
+        for (Person target : allPersons) {
+            if (target.getId() == id) {
+                person = target;
+                break;
+            }
+        }
+        return person;
+    }
+
+    @Override
+    public Person getFilteredPatientById(ObservableList<Person> allPersons, int id) {
+        Person patient = null;
         for (Person person : allPersons) {
-            if (Patient.class.isAssignableFrom(person.getId().getRole())) {
-                patient = (Patient) person;
+            if (person.getId() == id) {
+                System.out.println(person.getName());
+                patient = person;
                 break;
             }
         }
@@ -143,11 +163,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
-        Doctor doctor = null;
+    public Person getFilteredDoctorById(ObservableList<Person> allPersons, int id) {
+        Person doctor = null;
         for (Person person : allPersons) {
-            if (Doctor.class.isAssignableFrom(person.getId().getRole())) {
-                doctor = (Doctor) person;
+            if (person.getId() == id) {
+                doctor = person;
                 break;
             }
         }

@@ -9,18 +9,22 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddAppointmentCommand;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddNotesCommand;
+import seedu.address.logic.commands.CheckAppointmentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CreateDoctorCommand;
 import seedu.address.logic.commands.CreatePatientCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePatientCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetIdCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,14 +61,8 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -90,8 +88,26 @@ public class AddressBookParser {
         case DeleteAppointmentCommand.COMMAND_WORD:
             return new DeleteAppointmentCommandParser().parse(arguments);
 
+        case ViewHistoryCommand.COMMAND_WORD:
+            return new ViewHistoryCommandParser().parse(arguments);
+
+        case CreateDoctorCommand.COMMAND_WORD:
+            return new CreateDoctorCommandParser().parse(arguments);
+
         case CreatePatientCommand.COMMAND_WORD:
             return new CreatePatientCommandParser().parse(arguments);
+
+        case DeletePatientCommand.COMMAND_WORD:
+            return new DeletePatientCommandParser().parse(arguments);
+
+        case AddNotesCommand.COMMAND_WORD:
+            return new AddNotesCommandParser().parse(arguments);
+
+        case CheckAppointmentCommand.COMMAND_WORD:
+            return new CheckAppointmentCommandParser().parse(arguments);
+
+        case GetIdCommand.COMMAND_WORD:
+            return new GetIdCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

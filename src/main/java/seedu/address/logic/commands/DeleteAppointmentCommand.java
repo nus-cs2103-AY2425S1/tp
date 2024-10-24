@@ -10,9 +10,6 @@ import java.time.LocalDateTime;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Doctor;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,14 +30,15 @@ public class DeleteAppointmentCommand extends Command {
             + PREFIX_ID + "5678";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Successfully "
             + "deleted appointment to a patient";
-    private final Id patientId;
-    private final Id doctorId;
+    public static final String MESSAGE_DELETE_APPOINTMENT_FAIL = "The appointment doesn't exist!";
+    private final int patientId;
+    private final int doctorId;
     private final LocalDateTime appointmentTime;
 
     /**
      * Creates an DeleteAppointmentCommand to add the specified patient and doctor ids
      */
-    public DeleteAppointmentCommand(LocalDateTime appointmentTime, Id patientId, Id doctorId) {
+    public DeleteAppointmentCommand(LocalDateTime appointmentTime, int patientId, int doctorId) {
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.appointmentTime = appointmentTime;
@@ -49,10 +47,14 @@ public class DeleteAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Patient patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
-        Doctor doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
-        patientToAddAppointment.deleteAppointment(appointmentTime, patientToAddAppointment.getId(),
+        Person patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
+        Person doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
+        boolean isDeleteSuccessful = patientToAddAppointment.deleteAppointment(appointmentTime,
+                patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId());
+        if (!isDeleteSuccessful) {
+            throw new CommandException(MESSAGE_DELETE_APPOINTMENT_FAIL);
+        }
         doctorToAddAppointment.deleteAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -12,12 +12,14 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Creates a new Patient profile
+ * Creates a new Doctor profile
+ *
+ * Code is adapted from @@author sandyk0105
  */
-public class CreatePatientCommand extends Command {
-    public static final String COMMAND_WORD = "createPatient";
+public class CreateDoctorCommand extends Command {
+    public static final String COMMAND_WORD = "createDoctor";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new patient. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new doctor. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -29,17 +31,17 @@ public class CreatePatientCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
-    public static final String MESSAGE_SUCCESS = "Successfully created a new patient Patient#%d : %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists";
+    public static final String MESSAGE_SUCCESS = "Successfully created a new doctor Doctor#%d : %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This doctor already exists";
 
     private final Person toAdd;
 
     /**
-     * Creates an CreatePatientCommand to add the specified {@code Patient}
+     * Creates an CreatevCommand to add the specified {@code doctor}
      */
-    public CreatePatientCommand(Person patient) {
-        requireNonNull(patient);
-        toAdd = patient;
+    public CreateDoctorCommand(Person doctor) {
+        requireNonNull(doctor);
+        toAdd = doctor;
     }
 
     @Override

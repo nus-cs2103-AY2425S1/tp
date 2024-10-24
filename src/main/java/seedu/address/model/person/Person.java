@@ -1,14 +1,18 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,33 +22,55 @@ import seedu.address.model.tag.Tag;
 public class Person implements Appointmentable {
     // Identity fields
     private final Name name;
+    private final String role;
     private final Phone phone;
     private final Email email;
-    private final Id id;
-
-    // Data fields
+    private final int id;
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final History history;
+    private List<Appointment> appointments;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, String role, Phone phone, Email email,
+                  Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, role, phone, email, address, tags);
         this.name = name;
+        this.role = role;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
-        this.id = new Id(this.getClass());
-        this.history = new History();
+        this.id = new Id(role).getIdValue();
+        this.appointments = new ArrayList<>();
     }
+
+    /**
+     * Creates a Person with the given  fields. Each field must be present and not null.
+     */
+    public Person(Name name, int id, String role, Phone phone, Email email,
+                  Address address, Remark remark, List<Appointment> appointments, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.id = id;
+        this.role = role;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.tags.addAll(tags);
+        this.appointments = appointments;
+    }
+
 
     public Name getName() {
         return name;
+    }
+    public String getRole() {
+        return role;
     }
 
     public Phone getPhone() {
@@ -63,13 +89,38 @@ public class Person implements Appointmentable {
         return remark;
     }
 
-    public Id getId() {
-        return id;
+    public void addNotes(String notes) {
+        this.remark.addNotes(notes);
     }
 
-    public History getHistory() {
-        return history;
+    public int getId() {
+        return id;
     }
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    //    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
+    //    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
+    //        try {
+    //            Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
+    //            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    //            String time = "DateTime: " + dateTime.format(formatter);
+    //            return time + " " + appointment.toString();
+    //        } catch (AppNotFoundException e) {
+    //            return "No appointment found for the given date, patient, and doctor.";
+    //        }
+    //    }
+    //
+    //    public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {
+    //        try {
+    //            String appointments = history.getDoctorAppointmentsForDay(date, doctorId);
+    //            return appointments; // Assuming the Appointment class has a toString() method for formatting
+    //        } catch (AppNotFoundException e) {
+    //            return "No appointment found for the given date and doctor.";
+    //        }
+    //    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -102,13 +153,10 @@ public class Person implements Appointmentable {
      * @return True if command was successful, false if otherwise.
      */
     @Override
-    public boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks) {
-        requireNonNull(dateTime);
-        requireNonNull(patientId);
-        requireNonNull(doctorId);
-        requireNonNull(remarks);
+    public boolean addAppointment(LocalDateTime dateTime, int patientId, int doctorId, String remarks) {
+        requireAllNonNull(dateTime, patientId, doctorId, remarks);
 
-        return history.addAppointment(dateTime, patientId, doctorId, remarks);
+        return appointments.add(new Appointment(dateTime, patientId, doctorId, remarks));
     }
 
     /**
@@ -120,12 +168,9 @@ public class Person implements Appointmentable {
      * @return True if command was successful, false if otherwise.
      */
     @Override
-    public boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
-        requireNonNull(dateTime);
-        requireNonNull(patientId);
-        requireNonNull(doctorId);
-
-        return History.deleteAppointment(dateTime, patientId, doctorId);
+    public boolean deleteAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+        requireAllNonNull(dateTime, patientId, doctorId);
+        return appointments.remove(new Appointment(dateTime, patientId, doctorId, ""));
     }
 
     /**
@@ -137,18 +182,35 @@ public class Person implements Appointmentable {
      * @return True if command was successful, false if otherwise.
      */
     @Override
-    public Appointment getAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
-        // TODO AFTER v1.3
-        return null;
+    public Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
+        requireAllNonNull(dateTime, patientId, doctorId);
+        return appointments.stream()
+                .filter(apt -> apt.equals(new Appointment(dateTime, patientId, doctorId, "")))
+                .collect(Collectors.toList()).get(0);
+    }
+
+    public Appointment getAppointment(LocalDateTime dateTime, int patientId) throws CommandException {
+        requireAllNonNull(dateTime, patientId);
+        List<Appointment> apts = appointments.stream()
+                .filter(apt -> apt.getDateTime().toString().equals(dateTime.toString()))
+                .filter(apt -> apt.getPatientId() == patientId)
+                .collect(Collectors.toList());
+        if (apts.isEmpty() || apts.size() == 0) {
+            throw new CommandException(Messages.MESSAGE_NO_APPOINTMENTS_FOUND);
+        }
+
+        return apts.get(0);
+    }
+
+    public String getStringAppointments() {
+        final StringBuilder builder = new StringBuilder();
+        appointments.stream()
+                .forEach(builder::append);
+        return builder.toString();
     }
 
     @Override
-    public String getAllAppointments() {
-        return History.getAllAppointments(this.getId());
-    }
-
-    @Override
-    public boolean editAppointment(LocalDateTime dateTime, Id patientId, Id doctorId) {
+    public boolean editAppointment(LocalDateTime dateTime, int patientId, int doctorId) {
         // TODO AFTER v1.3
         return false;
     }
@@ -185,6 +247,10 @@ public class Person implements Appointmentable {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" ID: ")
+                .append(getId())
+                .append(" Role: ")
+                .append(getRole())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
@@ -193,6 +259,11 @@ public class Person implements Appointmentable {
                 .append(getAddress())
                 .append(" Remark: ")
                 .append(getRemark())
+                .append(" Appointments: ");
+        if (getAppointments() != null) {
+            getAppointments().forEach(builder::append);
+        }
+        builder.append(getAppointments())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
