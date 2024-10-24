@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.commons.name.Name;
 import seedu.address.model.id.UniqueId;
 
 public class EventTest {
