@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutee;
 import seedu.address.testutil.TuteeBuilder;
@@ -153,6 +155,31 @@ public class AddTuteeCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public void deleteLesson(Lesson target) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public void addLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public void setLesson(Lesson target, Lesson editedLesson) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public List<Person> getAssociatedPeople(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

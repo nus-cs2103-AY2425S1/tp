@@ -1,11 +1,14 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutor;
 
 /**
  * Container for user visible messages.
@@ -55,4 +58,33 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code person} for display to the user.
+     */
+    public static String format(Person person, List<Person> associatedPeople) {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append(format(person));
+
+        if (person instanceof Tutor) {
+            builder.append("\n Tutees: ");
+        } else {
+            builder.append("\n Tutors: ");
+        }
+
+        associatedPeople.forEach(p -> builder.append(p.getName()).append("; "));
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code lesson} for display to the user.
+     */
+    public static String format(Lesson lesson) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\n Tutor: ")
+                .append(lesson.getTutorName())
+                .append("\n Tutee: ")
+                .append(lesson.getTuteeName());
+        return builder.toString();
+    }
 }
