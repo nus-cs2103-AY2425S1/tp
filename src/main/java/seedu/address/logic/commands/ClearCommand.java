@@ -30,6 +30,7 @@ public class ClearCommand extends ConcreteCommand {
     public CommandResult undo(Model model) {
         requireExecuted();
         requireNonNull(model);
+        requireNonNull(initialAddressBook);
         model.setAddressBook(initialAddressBook);
         isExecuted = false;
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
