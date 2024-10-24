@@ -80,7 +80,8 @@ public class EventBuilder {
      * Sets the {@code Clients} of the {@code Event} that we are building.
      */
     public EventBuilder withClients(List<Client> clients) {
-        this.clients = clients;
+        this.clients = new ArrayList<>();
+        this.clients.addAll(clients);
         return this;
     }
 
@@ -88,7 +89,8 @@ public class EventBuilder {
      * Sets the {@code Vendors} of the {@code Event} that we are building.
      */
     public EventBuilder withVendors(List<Vendor> vendors) {
-        this.vendors = vendors;
+        this.vendors = new ArrayList<>();
+        this.vendors.addAll(vendors);
         return this;
     }
     public Event build() {

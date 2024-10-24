@@ -2,6 +2,7 @@ package seedu.ddd.model.event.common.predicate;
 
 import java.util.function.Predicate;
 
+import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.event.common.EventId;
 
@@ -34,5 +35,9 @@ public class EventIdPredicate implements Predicate<Event> {
 
         EventIdPredicate otherEventIdPredicate = (EventIdPredicate) other;
         return eventId.equals(otherEventIdPredicate.eventId);
+    }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("eventId", eventId).toString();
     }
 }

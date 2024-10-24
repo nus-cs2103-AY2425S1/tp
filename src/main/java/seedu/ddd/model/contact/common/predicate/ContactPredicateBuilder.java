@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.commands.ListCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.ParserUtil;
@@ -143,6 +144,11 @@ public class ContactPredicateBuilder {
 
         ContactPredicateBuilder otherContactPredicateBuilder = (ContactPredicateBuilder) other;
         return argMultimap.equals(otherContactPredicateBuilder.argMultimap);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).toString();
     }
 
 }

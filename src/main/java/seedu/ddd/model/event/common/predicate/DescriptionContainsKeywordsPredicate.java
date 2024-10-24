@@ -8,7 +8,7 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.event.common.Event;
 
 /**
- * Tests that a {@code Contact}'s {@code Description} matches any of the keywords given.
+ * Tests that a {@code Event}'s {@code Description} matches any of the keywords given.
  */
 public class DescriptionContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
