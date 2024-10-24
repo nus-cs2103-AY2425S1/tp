@@ -82,29 +82,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEventName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEventName(null));
-    }
-
-    @Test
-    public void parseEventName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEventName(INVALID_EVENT_NAME));
-    }
-
-    @Test
-    public void parseEventName_validValueWithoutWhitespace_returnsEventName() throws Exception {
-        Name expectedName = new Name(VALID_EVENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseEventName(VALID_EVENT_NAME));
-    }
-
-    @Test
-    public void parseEventName_validValueWithWhitespace_returnsTrimmedEventName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_EVENT_NAME + WHITESPACE;
-        Name expectedName = new Name(VALID_EVENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseEventName(nameWithWhitespace));
-    }
-
-    @Test
     public void parsePhone_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
     }

@@ -33,7 +33,7 @@ public class CreateEventCommandParser implements Parser<CreateEventCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE);
 
-        Name name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
         Event event = new Event(name, date);
