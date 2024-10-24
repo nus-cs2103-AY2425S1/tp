@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
@@ -10,8 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag names must be non-empty and alphanumeric.";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    public static final String MESSAGE_CONSTRAINTS = "Tag name should be in the same format as Wedding Name: "
+            + "2 person names separated with &. " + "\n"
+            + "It should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String VALIDATION_REGEX =
+            "^\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)\\s*&\\s*([\\p{Alnum}]+(?:\\s+[\\p{Alnum}]+)?)\\s*$";
 
     public final String tagName;
 
@@ -22,7 +24,7 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        //checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
 

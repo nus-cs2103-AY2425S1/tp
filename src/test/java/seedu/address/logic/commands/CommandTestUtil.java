@@ -45,12 +45,11 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_JOB_AMY = "Caterer";
     public static final String VALID_JOB_BOB = "Photographer";
-    public static final String VALID_TAG_FRIEND = "friend 25";
-    public static final String VALID_TAG_FRIENDS = "friends";
-    public static final String VALID_TAG_AMY = "Jane and Tom 230412";
-    public static final String VALID_TAG_BOB = "Jim and Joe 240101";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_OWESMONEY = "owesMoney";
+    public static final String VALID_TAG_WEDDING1 = "John Loh & Jean Tan";
+    public static final String VALID_TAG_WEDDING2 = "James Tan & Emily Koh";
+    public static final String VALID_TAG_WEDDING3 = "Jane Tan & Tom Cruise";
+    public static final String VALID_TAG_WEDDING4 = "Jim Lee & Joe Goldberg";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -62,8 +61,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String JOB_DESC_AMY = " " + PREFIX_JOB + VALID_JOB_AMY;
     public static final String JOB_DESC_BOB = " " + PREFIX_JOB + VALID_JOB_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_WEDDING1 = " " + PREFIX_TAG + VALID_TAG_WEDDING1;
+    public static final String TAG_DESC_WEDDING2 = " " + PREFIX_TAG + VALID_TAG_WEDDING2;
 
     public static final String INVALID_NAME = "Android";
 
@@ -103,10 +102,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJob(VALID_JOB_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withJob(VALID_JOB_AMY).withTags(VALID_TAG_WEDDING1).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withJob(VALID_JOB_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withJob(VALID_JOB_BOB).withTags(VALID_TAG_WEDDING1, VALID_TAG_WEDDING2).build();
     }
 
     /**
