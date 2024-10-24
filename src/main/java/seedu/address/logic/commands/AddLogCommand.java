@@ -22,13 +22,13 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a log to the person identified by the Identification Number in the person list.\n"
-            + "Parameters: i/ IDENTIFICATION NUMBER d/DATE l/LOG ENTRY\n"
-            + "Format of APPT DATE: dd MMM yyyy\n"
-            + "Example: " + COMMAND_WORD + " i/S1234567D d/20 Oct 2024 l/First visit to the clinic\n";
+            + "Parameters: i/NRIC d/DATE l/LOG ENTRY\n"
+            + "Format of Appointment Date: dd MMM yyyy\n"
+            + "Example: " + COMMAND_WORD + " i/S1234567A d/20 Oct 2024 l/First visit to the clinic\n";
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
-    public static final String MESSAGE_INVALID_ID = "Invalid ID.";
+    public static final String MESSAGE_INVALID_ID = "NRIC not found in system, perhaps there was a typo.";
 
 
     private final IdentityNumber identityNumber;

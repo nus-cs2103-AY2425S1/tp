@@ -10,9 +10,11 @@ import java.util.Objects;
  */
 public class Log {
 
-    public static final String MESSAGE_CONSTRAINTS = "Log entry can take any alphanumeric values, "
-            + "and it should not be blank, it must be in the format 'dd MMM yyy|details'. "
-            + "e.g. /l 10 May 2024|First Appointment!";
+    public static final String MESSAGE_CONSTRAINTS = "A Log requires a date in the format of dd MMM yyyy,"
+            + "and a log description that can take any characters, including symbols, numbers, etc.\n"
+            + "Both date and description should not be blank.\n"
+            + "Format: d/date l/log description\n"
+            + "e.g. d/20 May 2024 l/First appointment with John. John shared 3 problems during the session.";
     public static final String VALIDATION_REGEX = ".+";
 
     private final String entry;
