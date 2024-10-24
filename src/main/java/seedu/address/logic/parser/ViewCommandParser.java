@@ -30,9 +30,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VENDOR, PREFIX_EVENT);
 
-        final boolean isEventDelete = argMultimap.getValue(PREFIX_EVENT).isPresent();
+        final boolean isEventView = argMultimap.getValue(PREFIX_EVENT).isPresent();
 
-        if (isEventDelete) {
+        if (isEventView) {
             return parseViewEventCommand(argMultimap);
         } else {
             return parseViewVendorCommand(argMultimap);

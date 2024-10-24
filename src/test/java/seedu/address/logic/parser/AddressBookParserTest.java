@@ -23,10 +23,14 @@ import seedu.address.logic.commands.CreateEventCommand;
 import seedu.address.logic.commands.CreateVendorCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.DeleteVendorCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditVendorDescriptor;
+import seedu.address.logic.commands.EditEventCommand;
+import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.address.logic.commands.EditVendorCommand;
+import seedu.address.logic.commands.EditVendorCommand.EditVendorDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEventCommand;
+import seedu.address.logic.commands.FindVendorCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.UnassignCommand;
@@ -34,8 +38,10 @@ import seedu.address.logic.commands.ViewEventCommand;
 import seedu.address.logic.commands.ViewVendorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditVendorDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventUtil;
@@ -108,12 +114,21 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editVendor() throws Exception {
         Vendor vendor = new VendorBuilder().build();
         EditVendorDescriptor descriptor = new EditVendorDescriptorBuilder(vendor).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditVendorCommand command = (EditVendorCommand) parser.parseCommand(EditVendorCommand.COMMAND_WORD + " v/"
                 + INDEX_FIRST_VENDOR.getOneBased() + " " + VendorUtil.getEditVendorDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_VENDOR, descriptor), command);
+        assertEquals(new EditVendorCommand(INDEX_FIRST_VENDOR, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editEvent() throws Exception {
+        Event event = new EventBuilder().build();
+        EditEventDescriptor descriptor = new EditEventDescriptorBuilder(event).build();
+        EditEventCommand command = (EditEventCommand) parser.parseCommand(EditEventCommand.COMMAND_WORD + " e/"
+                + INDEX_FIRST_EVENT.getOneBased() + " " + EventUtil.getEditEventDescriptorDetails(descriptor));
+        assertEquals(new EditEventCommand(INDEX_FIRST_EVENT, descriptor), command);
     }
 
     @Test
@@ -125,9 +140,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser
-                .parseCommand(FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindCommand firstCommand = (FindCommand) parser
+                .parseCommand(FindCommand.COMMAND_WORD + " " + PREFIX_VENDOR
+            + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindVendorCommand(new NameContainsKeywordsPredicate(keywords)), firstCommand);
+
+        FindCommand secondCommand = (FindCommand) parser
+                .parseCommand(FindCommand.COMMAND_WORD + " " + PREFIX_EVENT
+            + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindEventCommand(new EventNameContainsKeywordsPredicate(keywords)), secondCommand);
     }
 
     @Test

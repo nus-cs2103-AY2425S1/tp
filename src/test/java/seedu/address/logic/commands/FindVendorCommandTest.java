@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_NO_VENDORS_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_VENDORS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalVendors.CARL;
 import static seedu.address.testutil.TypicalVendors.ELLE;
@@ -21,9 +23,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindVendorCommand}.
  */
-public class FindCommandTest {
+public class FindVendorCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -34,14 +36,14 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindVendorCommand findFirstCommand = new FindVendorCommand(firstPredicate);
+        FindVendorCommand findSecondCommand = new FindVendorCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindVendorCommand findFirstCommandCopy = new FindVendorCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -55,20 +57,18 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noVendorFound() {
-        String expectedMessage = String.format(MESSAGE_VENDORS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noVendorFoundError() {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        FindVendorCommand command = new FindVendorCommand(predicate);
         expectedModel.updateFilteredVendorList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredVendorList());
+        assertCommandFailure(command, model, MESSAGE_NO_VENDORS_FOUND);
     }
 
     @Test
     public void execute_multipleKeywords_multipleVendorsFound() {
         String expectedMessage = String.format(MESSAGE_VENDORS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        FindVendorCommand command = new FindVendorCommand(predicate);
         expectedModel.updateFilteredVendorList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredVendorList());
@@ -77,8 +77,8 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        FindVendorCommand findCommand = new FindVendorCommand(predicate);
+        String expected = FindVendorCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
