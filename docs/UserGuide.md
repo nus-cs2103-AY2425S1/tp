@@ -1,8 +1,10 @@
+<!--
 ---
 layout: default.md
 title: "User Guide"
 pageNav: 3
 ---
+-->
 
 # HallPointer User Guide
 
@@ -43,11 +45,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
-<box type="info" seamless></box>
+<box type="info" seamless>
 
 **Notes about the command format:**<br>
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add_member n/NAME`, `NAME` is a parameter which can be used as `add_member n/John Doe`.
 
@@ -64,6 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </box>
 
 ### Viewing help : `help`
@@ -81,9 +82,10 @@ Adds a member to the address book.
 
 Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
-<box type="tip" seamless></box>
+<box type="tip" seamless>
 
 **Tip:** A member can have any number of tags (including 0)
+
 </box>
 
 Examples:
@@ -165,11 +167,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit data directly by editing that data file.
 
-<box type="warning" seamless></box>
+<box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`

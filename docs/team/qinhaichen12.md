@@ -41,8 +41,7 @@
 **Jan 2023 - Aug 2023**
 
 - Tutored multiple students for physics and mathematics at Junior College level
-- Available to tutor for 2040s and 2030s, no guarantee your grade will increase 
-
+- Available to tutor for 2040s and 2030s, no guarantee your grade will increase
 ### Head Depot Clerk (Singapore Armed Forces)
 
 **Jan 2021 - Jan 2023**
