@@ -15,6 +15,11 @@ import seedu.address.logic.commands.UnmarkAttendanceCommand;
 import seedu.address.model.person.AttendanceList;
 
 public class UnmarkAttendanceCommandParserTest {
+
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            UnmarkAttendanceCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_DATE_CONSTRAINTS = "Date must be in the format: "
+            + AttendanceList.DATE_TIME_FORMAT;
     private UnmarkAttendanceCommandParser parser = new UnmarkAttendanceCommandParser();
 
     @Test
@@ -31,9 +36,6 @@ public class UnmarkAttendanceCommandParserTest {
 
     @Test
     public void parse_missingFields_failure() {
-        String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                UnmarkAttendanceCommand.MESSAGE_USAGE);
-
         // empty
         assertParseFailure(parser, "     ", MESSAGE_INVALID_FORMAT);
 
@@ -56,8 +58,6 @@ public class UnmarkAttendanceCommandParserTest {
 
     @Test
     public void parse_invalidDate_failure() {
-        String MESSAGE_DATE_CONSTRAINTS = "Date must be in the format: " + AttendanceList.DATE_TIME_FORMAT;
-
         // wrong date part
         assertParseFailure(parser, "3 d/01-01-2024 12:00", MESSAGE_DATE_CONSTRAINTS);
 

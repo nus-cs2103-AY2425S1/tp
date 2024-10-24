@@ -18,6 +18,11 @@ import seedu.address.model.person.AttendanceList;
 
 public class MarkAttendanceCommandParserTest {
 
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            MarkAttendanceCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_DATE_CONSTRAINTS = "Date must be in the format: "
+            + AttendanceList.DATE_TIME_FORMAT;
+
     private MarkAttendanceCommandParser parser = new MarkAttendanceCommandParser();
 
     @Test
@@ -38,9 +43,6 @@ public class MarkAttendanceCommandParserTest {
 
     @Test
     public void parse_missingFields_failure() {
-        String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MarkAttendanceCommand.MESSAGE_USAGE);
-
         // empty
         assertParseFailure(parser, "     ", MESSAGE_INVALID_FORMAT);
 
@@ -70,8 +72,6 @@ public class MarkAttendanceCommandParserTest {
 
     @Test
     public void parse_invalidDate_failure() {
-        String MESSAGE_DATE_CONSTRAINTS = "Date must be in the format: " + AttendanceList.DATE_TIME_FORMAT;
-
         // wrong date part
         assertParseFailure(parser, "3 d/01-01-2024 12:00 m/Attended", MESSAGE_DATE_CONSTRAINTS);
 
@@ -81,7 +81,6 @@ public class MarkAttendanceCommandParserTest {
 
     @Test
     public void parse_invalidAttendance_failure() {
-        String MESSAGE_ATTENDANCE_CONSTRAINTS = Attendance.MESSAGE_CONSTRAINTS;
-        assertParseFailure(parser, "3 d/01/01/2024 12:00 m/Present", MESSAGE_ATTENDANCE_CONSTRAINTS);
+        assertParseFailure(parser, "3 d/01/01/2024 12:00 m/Present", Attendance.MESSAGE_CONSTRAINTS);
     }
 }
