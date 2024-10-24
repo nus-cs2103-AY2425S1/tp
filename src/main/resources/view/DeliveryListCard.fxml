@@ -40,7 +40,7 @@
             <Label fx:id="eta" styleClass="cell_small_label" text="eta" />
             <Label fx:id="status" styleClass="cell_small_label" text="status" />
             <HBox fx:id="tagsContainer" styleClass="cell_small_label">
-                <Label fx:id="tagsLabel" minWidth="40" text="Tags: " />
+                <Label fx:id="tagsLabel" minWidth="40" text="Tags: "/>
                 <FlowPane fx:id="tags" />
             </HBox>
 
