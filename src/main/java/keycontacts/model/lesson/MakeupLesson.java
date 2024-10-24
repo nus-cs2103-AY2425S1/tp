@@ -74,4 +74,18 @@ public class MakeupLesson extends Lesson {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public boolean isClashing(RegularLesson other) {
+        return this.getLessonDate().convertToDay().equals(other.getLessonDay())
+                && this.getStartTime().isBefore(other.getEndTime())
+                && this.getEndTime().isAfter(other.getStartTime());
+    }
+
+    @Override
+    public boolean isClashing(MakeupLesson other) {
+        return this != other
+                && this.getLessonDate().equals(other.getLessonDate())
+                && this.getStartTime().isBefore(other.getEndTime())
+                && this.getEndTime().isAfter(other.getStartTime());
+    }
 }

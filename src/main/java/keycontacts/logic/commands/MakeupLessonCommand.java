@@ -7,11 +7,13 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.List;
+import java.util.Set;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.student.Student;
 
@@ -36,14 +38,13 @@ public class MakeupLessonCommand extends Command {
             + PREFIX_END_TIME + "13:00";
 
     public static final String MESSAGE_SUCCESS = "Makeup lesson created at %1$s for student: %2$s.";
+    public static final String MESSAGE_CLASHING_LESSON = "Could not create lesson due to clash with lesson: %1$s.";
 
     private final Index targetIndex;
     private final MakeupLesson makeupLesson;
 
     /**
-     * @param date      of the makeup lesson
-     * @param startTime of the makeup lesson
-     * @param endTime   of the makeup lesson
+     * Constructs a {@code MakeupLessonCommand} to schedule the given {@code MakeupLesson}.
      */
     public MakeupLessonCommand(Index targetIndex, MakeupLesson makeupLesson) {
         requireAllNonNull(targetIndex, makeupLesson);
@@ -64,6 +65,15 @@ public class MakeupLessonCommand extends Command {
         Student updatedStudent = studentToUpdate.withAddedMakeupLesson(makeupLesson);
 
         model.setStudent(studentToUpdate, updatedStudent);
+
+        Set<Lesson> clashingLessons = model.getClashingLessons();
+        if (!clashingLessons.isEmpty()) { // if there are clashing lessons
+            model.setStudent(updatedStudent, studentToUpdate); // revert change if clash
+            throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
+                    clashingLessons.stream()
+                            .filter(lesson -> lesson != makeupLesson)
+                            .findFirst().get().toDisplay()));
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, makeupLesson.toDisplay(),
                 Messages.format(updatedStudent)));

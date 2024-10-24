@@ -57,7 +57,7 @@ public class SampleDataUtil {
                     PianoPiece.getPianoPieceSet("Styx Helix"),
                     new RegularLesson(new Day("Saturday"), new Time("14:00"), new Time("16:00")), new HashSet<>(),
                     MakeupLesson.getMakeupLessonSet(new String[]{"05-10-2024", "19-10-2024"},
-                            new String[]{"13:00", "14:00"}, new String[]{"14:00", "15:00"})),
+                            new String[]{"13:00", "16:00"}, new String[]{"14:00", "17:00"})),
         };
     }
 

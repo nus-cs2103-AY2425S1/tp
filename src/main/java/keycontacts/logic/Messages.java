@@ -53,4 +53,5 @@ public class Messages {
     public static <T> String format(Collection<T> collection) {
         return collection.stream().map(T::toString).collect(Collectors.joining(", "));
     }
+
 }

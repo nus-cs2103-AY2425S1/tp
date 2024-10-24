@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.StudentBuilder;
 
@@ -155,6 +157,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Lesson> getClashingLessons() {
             throw new AssertionError("This method should not be called.");
         }
     }
