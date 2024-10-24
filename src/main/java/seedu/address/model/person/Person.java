@@ -91,6 +91,10 @@ public class Person {
         return buyingProperties;
     }
 
+    public int getTotalNumProps() {
+        return sellingProperties.size() + buyingProperties.size();
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

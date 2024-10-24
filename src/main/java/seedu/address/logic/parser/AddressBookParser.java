@@ -26,6 +26,7 @@ import seedu.address.logic.commands.FindTagContactCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PinContactCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -112,6 +113,9 @@ public class AddressBookParser {
 
         case PinContactCommand.COMMAND_WORD:
             return new PinContactCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case SortIndividualCommand.COMMAND_WORD:
             return new SortIndividualCommandParser().parse(arguments);
