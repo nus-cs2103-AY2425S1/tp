@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient in the patient list identified by their Identity Number.\n"
             + "Parameters: i/NRIC (must be 9 characters)\n"
-            + "Example: " + COMMAND_WORD + " i/S1234567A";
+            + "Example: " + COMMAND_WORD + PREFIX_IDENTITY_NUMBER + "S1234567A";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 

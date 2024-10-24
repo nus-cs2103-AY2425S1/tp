@@ -69,17 +69,6 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
-        if (descriptor.getLogs().isPresent()) {
-            Set<Log> logs = descriptor.getLogs().get();
-            if (logs.isEmpty()) {
-                sb.append(PREFIX_LOG);
-            } else {
-                logs.forEach(log ->
-                        sb.append(PREFIX_LOG).append(log.getAppointmentDate()).append(" | ")
-                                .append(log.toDetailedString()).append(" ")
-                );
-            }
-        }
 
         return sb.toString();
     }
