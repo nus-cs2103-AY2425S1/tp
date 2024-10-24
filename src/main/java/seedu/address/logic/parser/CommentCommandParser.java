@@ -21,6 +21,7 @@ public class CommentCommandParser implements Parser<CommentCommand> {
     public CommentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_COMMENT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMMENT);
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
