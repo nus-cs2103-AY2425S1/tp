@@ -12,7 +12,6 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -67,17 +66,6 @@ public class PersonUtil {
                 sb.append(PREFIX_TAG);
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
-        if (descriptor.getLogs().isPresent()) {
-            Set<Log> logs = descriptor.getLogs().get();
-            if (logs.isEmpty()) {
-                sb.append(PREFIX_LOG);
-            } else {
-                logs.forEach(log ->
-                        sb.append(PREFIX_LOG).append(log.getAppointmentDate()).append(" | ")
-                                .append(log.toDetailedString()).append(" ")
-                );
             }
         }
 

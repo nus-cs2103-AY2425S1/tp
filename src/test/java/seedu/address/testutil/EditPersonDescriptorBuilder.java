@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.log.AppointmentDate;
-import seedu.address.model.log.Log;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.IdentityNumber;
@@ -41,7 +39,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setLogs(person.getLogs());
     }
 
     /**
@@ -94,36 +91,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
-    /**
-     * Parses the {@code logs} into a {@code Set<Log>} and sets it to the {@code EditPersonDescriptor}
-     * that we are building.
-     */
-    public EditPersonDescriptorBuilder withLogs(String... logs) {
-        Set<Log> logSet = Stream.of(logs)
-                .map(log -> {
-                    String[] logParts = log.split("\\|", 2);
-                    if (logParts.length != 2) {
-                        throw new IllegalArgumentException("Log format is invalid: " + log);
-                    }
-                    String dateStr = logParts[0].trim();
-                    String details = logParts[1].trim();
-                    if (dateStr.isEmpty()) {
-                        throw new IllegalArgumentException("Log format has missing date."
-                                + Log.MESSAGE_CONSTRAINTS);
-                    }
-                    AppointmentDate appointmentDate = new AppointmentDate(dateStr);
-                    if (details.isEmpty()) {
-                        throw new IllegalArgumentException("Log format has missing entry."
-                                + Log.MESSAGE_CONSTRAINTS);
-                    }
-
-                    return new Log(appointmentDate, details);
-                })
-                .collect(Collectors.toSet());
-        descriptor.setLogs(logSet);
-        return this;
-    }
-
 
     public EditPersonDescriptor build() {
         return descriptor;
