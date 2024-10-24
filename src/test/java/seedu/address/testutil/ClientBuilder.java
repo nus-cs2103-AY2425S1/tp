@@ -109,7 +109,7 @@ public class ClientBuilder {
 
     /**
      * Adds all the clients current claims using the {@code InsurancePlansManager}
-     * of the {@code Person} that we are building.
+     * of the {@code Client} that we are building.
      */
     public ClientBuilder withClaims(String claimsString) {
         assert this.insurancePlansManager != null;

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
 
@@ -35,31 +36,30 @@ class DeleteClaimCommandTest {
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
-        InsurancePlan insurancePlan = clientToEdit.getInsurancePlansManager().getInsurancePlan(0);
-        Claim claim = clientToEdit.getInsurancePlansManager().getInsurancePlan(0).getClaim("A1001");
+        InsurancePlansManager originalInsurancePlansManager = clientToEdit.getInsurancePlansManager();
+        InsurancePlan insurancePlan = originalInsurancePlansManager.getInsurancePlan(0);
+        Claim claim = originalInsurancePlansManager.getInsurancePlan(0).getClaim("A1001");
 
         DeleteClaimCommand deleteClaimCommand =
                 new DeleteClaimCommand(INDEX_THIRD_CLIENT, 0, claim.getClaimId());
 
         // make sure all the messages only have client name inside the actual classes
-        // because when the message is created here before deletion there can be issues with the
+        // because when the message is created here before deletion there can be issues with
         // the string comparison of the client after deletion and before deletion.
         String expectedMessage = String.format(DeleteClaimCommand.MESSAGE_DELETE_CLAIM_SUCCESS,
                 clientToEdit.getName().toString(), insurancePlan, claim.getClaimId());
 
         // rebuilds a copy of the claims from string to prevent same-object manipulation
-        String insurancePlanString = insurancePlan.toString();
-        String claimsString = clientToEdit.getInsurancePlansManager().convertClaimsToJson();
-        InsurancePlansManager updatedInsurancePlanManager = new InsurancePlansManager(insurancePlanString);
-        updatedInsurancePlanManager.addAllClaimsFromJson(claimsString);
-        updatedInsurancePlanManager.deleteClaimFromInsurancePlan(insurancePlan, claim);
+        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
+        updatedInsurancePlansManager.deleteClaimFromInsurancePlan(insurancePlan, claim);
 
         Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
-                clientToEdit.getAddress(), updatedInsurancePlanManager, clientToEdit.getTags());
+                clientToEdit.getAddress(), updatedInsurancePlansManager, clientToEdit.getTags());
 
         expectedModel.setClient(clientToEdit, updatedClient);
 
-        assertCommandSuccess(deleteClaimCommand, model, expectedMessage, expectedModel);
+        assertInsuranceCommandSuccess(deleteClaimCommand, model, expectedMessage,
+                clientToEdit.getInsurancePlansManager(), updatedInsurancePlansManager);
     }
 
     @Test

@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
 import static seedu.address.model.client.insurance.InsurancePlanFactory.INVALID_PLAN_ID_MESSAGE;
 import static seedu.address.model.client.insurance.InsurancePlansManager.DUPLICATE_PLAN_DETECTED_MESSAGE;
 import static seedu.address.testutil.TypicalClients.BENSON;
@@ -23,6 +23,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.insurance.InsurancePlan;
 import seedu.address.model.client.insurance.InsurancePlanFactory;
+import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.testutil.ClientBuilder;
 
 class AddInsuranceCommandTest {
@@ -38,6 +39,7 @@ class AddInsuranceCommandTest {
     public void execute_validIndexValidInsuranceId_success() throws Exception {
         // DANIEL (fourth client) does not have basic insurance plan
         Client originalClient = model.getFilteredClientList().get(INDEX_FOURTH_CLIENT.getZeroBased());
+        InsurancePlansManager originalInsurancePlansManager = originalClient.getInsurancePlansManager();
 
         // Assume valid insurance plan
         int validInsuranceId = 0;
@@ -52,10 +54,12 @@ class AddInsuranceCommandTest {
 
         String expectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
                 planToBeAdded, Messages.format(updatedClient));
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setClient(originalClient, updatedClient);
 
-        assertCommandSuccess(addInsuranceCommand, model, expectedMessage, expectedModel);
+        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
+        updatedInsurancePlansManager.addPlan(planToBeAdded);
+
+        assertInsuranceCommandSuccess(addInsuranceCommand, model, expectedMessage,
+                originalInsurancePlansManager, updatedInsurancePlansManager);
     }
 
     /**
@@ -67,6 +71,7 @@ class AddInsuranceCommandTest {
     public void execute_multipleInsurancePlans_success() throws Exception {
         // ELLE (fifth client) does not have any insurance plans
         Client originalClient = model.getFilteredClientList().get(INDEX_FIFTH_CLIENT.getZeroBased());
+        InsurancePlansManager originalInsurancePlansManager = originalClient.getInsurancePlansManager();
 
         // Add first insurance plan (basic insurance plan)
         int firstInsuranceId = 0;
@@ -80,10 +85,12 @@ class AddInsuranceCommandTest {
 
         String firstExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
                 firstPlan, Messages.format(clientWithFirstPlan));
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setClient(originalClient, clientWithFirstPlan);
 
-        assertCommandSuccess(firstAddCommand, model, firstExpectedMessage, expectedModel);
+        InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
+        updatedInsurancePlansManager.addPlan(firstPlan);
+
+        assertInsuranceCommandSuccess(firstAddCommand, model, firstExpectedMessage,
+                originalInsurancePlansManager, updatedInsurancePlansManager);
 
         // Second insurance plan (travel insurance plan)
         int secondInsuranceId = 1;
@@ -97,10 +104,11 @@ class AddInsuranceCommandTest {
 
         String secondExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
                 secondPlan, Messages.format(clientWithBothPlans));
-        ModelManager finalExpectedModel = new ModelManager(expectedModel.getAddressBook(), new UserPrefs());
-        finalExpectedModel.setClient(clientWithFirstPlan, clientWithBothPlans);
 
-        assertCommandSuccess(secondAddCommand, expectedModel, secondExpectedMessage, finalExpectedModel);
+        updatedInsurancePlansManager.addPlan(secondPlan);
+
+        assertInsuranceCommandSuccess(secondAddCommand, model, secondExpectedMessage,
+                originalInsurancePlansManager, updatedInsurancePlansManager);
     }
 
     /**

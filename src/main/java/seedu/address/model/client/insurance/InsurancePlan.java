@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import seedu.address.model.client.exceptions.ClaimException;
 import seedu.address.model.client.insurance.claim.Claim;
+import seedu.address.model.client.insurance.claim.ClaimComparator;
 
 /**
  * The {@code InsurancePlan} abstract class represents a general blueprint for an insurance plan.
@@ -51,12 +52,31 @@ public abstract class InsurancePlan {
     }
 
     /**
+     * Adds a claim to the insurance plan's list of claims.
+     *
+     * @param claim The claim to be added.
+     */
+    public void addClaim(Claim claim) {
+        claims.add(claim);
+        sortClaims();
+    }
+
+    /**
      * Removes a claim from the insurance plan's list of claims.
      *
      * @param claim The claim to be removed.
      */
     public void removeClaim(Claim claim) {
         claims.remove(claim);
+        sortClaims();
+    }
+
+    /**
+     * Sorts the claims of this insurance plan only based on claim status then by claim ID.
+     */
+    public void sortClaims() {
+        ClaimComparator claimComparator = new ClaimComparator();
+        this.claims.sort(claimComparator);
     }
 
     /**
