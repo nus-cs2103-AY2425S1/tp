@@ -21,6 +21,9 @@ administrators.
     - [2.8 Exiting the Program](#28-exiting-the-program)
     - [2.9 Saving the Data](#29-saving-the-data)
     - [2.10 Editing the Data File](#210-editing-the-data-file)
+    - [2.11 Marking a Payment as Completed](#211-marking-a-payment-as-completed)
+    - [2.12 Displaying pie chart of class distribution](#212-displaying-pie-chart-of-class-distribution)
+    - [2.13 Bar Chart](#213-bar-chart)
 3. [FAQs](#3-faqs)
 
 ---
@@ -80,88 +83,134 @@ administrators.
 
 ### 2.1 Viewing Help : `help`
 
+Command: `help`
+
 Shows a message explaining how to access the help page.
 
 ![help message](images/help.png)
 
-Format: `help`
+---
+
+### 2.2 Adding a Person: `add`
+
+Adds a person to Edututu.
+
+**Command Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
+
+> **Remark:** A person can have any number of tags (including 0).
+
+**Example Usage:**
+
+`add n/Ryan p/82154565 e/Ryan@gmail.com a/3 Padang Chancery f/550 c/1`
+
+*Input: User enters the `add` command.*  
+![Ui](images/addcommandinput.png)
+
+*Output: The UI updates to show the added person.*  
+![Ui](images/afteraddcommand.png)
+
+**Tips:**
+
+- Use the `add` command to add a new person with their name, phone number, email, address, fees, and class ID.
+- Tags can be added to classify or group persons for easier management.
+- The `add` command is helpful when setting up new contacts in EduTuTu.
+
+
+---
+### 2.3 Listing All Persons: `list`
+
+The `list` command displays a list of all persons currently stored in EduTuTu.
+
+**Command Format:** `list`
+
+After entering the `list` command, all persons stored in the address book will be displayed in the UI.
+
+**Example Usage:**
+
+
+*Input: User enters the `list` command.*
+![Command Input Example](images/listcommandinput.png)
+
+*Output: The UI updates to show all persons.*
+![Command Output Example](images/listcommand.png)  
+
+
+**Tips:**
+
+- Use the `list` command whenever you want to view all entries in your address book.
+- The `list` command is particularly useful after adding, editing, or deleting records to confirm changes.
 
 ---
 
-### 2.2 Adding a Person : `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASSID [t/TAG]…​`
-
-> **Tip:** A person can have any number of tags (including 0).
-
-Examples:
-* 'add n/Ryan p/82154565 e/Ryan@gmail.com a/3 Padang Chancery f/550 c/1'
-  ![Ui](images/addcommandinput.png)
-* After Using the Command, this will be displayed in the UI
-  ![Ui](images/afteraddcommand.png)
-
-
----
-
-### 2.3 Listing All Persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
----
-
-### 2.4 Editing a Person : `edit`
+### 2.4 Editing a Person: `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
+**Command Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
-Examples:
-*  `edit 1 p/91088511 e/wongwaihin7@gmail.com` Edits the phone number and email address of the 1st person to be `91088511` and `wongwaihin7@example.com` respectively.
-   ![Ui](images/editcommandinput.png)
-* After using the command, this will be displayed in the UI
-  ![Ui](images/aftereditcommand.png)
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+**Example Usage:**
+
+`edit 1 p/91088511 e/wongwaihin7@gmail.com`  
+
+*Input: User enters the `edit` command to change the phone number and email address of the 1st person.*  
+![Ui](images/editcommandinput.png)
+
+*Output: The UI updates to show the edited details.*  
+![Ui](images/aftereditcommand.png)
+
+**Tips:**
+
+- Use the `edit` command to update a person’s details when changes occur.
+- Make sure to use the correct `INDEX` as shown in the displayed list to edit the right person.
+- The `edit` command is particularly useful for keeping contact information up to date.
 
 ---
 
-### 2.5 Locating Persons by Name : `find`
+### 2.5 Locating Persons by Name: `find`
 
-Finds persons whose names, class IDs or both contain any of the given keywords.
+Finds persons whose names, class IDs, or both contain any of the given keywords.
 
-Format 1: `find n/KEYWORD [MORE_KEYWORDS]`
-Format 2: `find c/KEYWORD [MORE_KEYWORDS]`
-Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD [MORE_KEYWORDS]`
+**Command Format:**
+- Format 1: `find n/KEYWORD [MORE_KEYWORDS]`
+- Format 2: `find c/KEYWORD [MORE_KEYWORDS]`
+- Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `kim` will match `Kim`
-* The order of the keywords does not matter. e.g. `Esther Kim` will match `Kim Esther`
-* Only the name is searched.
-* Partially matched words will be matched e.g. `Han` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Esther Kim` will return `Esther Gruber`, `Kim Yang`
-* The priority of the search will be class ID then followed by name.
+* The search is case-insensitive. e.g., `kim` will match `Kim`.
+* The order of the keywords does not matter. e.g., `Esther Kim` will match `Kim Esther`.
+* Only the name is searched when using `n/` format.
+* Partially matched words will be matched, e.g., `Han` will match `Hans`.
+* Persons matching at least one keyword will be returned (i.e., `OR` search), e.g., `Esther Kim` will return `Esther Gruber`, `Kim Yang`.
+* The priority of the search will be class ID, followed by name.
 
-Examples:
+**Example Usage:**
 
-* `find Kim` returns `Munhui Kim` and `Esther Kim`
+`find Kim`  
+
+*Input: User enters the `find` command to search for persons whose names contain the keyword `Kim`.*  
 ![find image](images/findBefore.png)
+
+*Output: The UI updates to show persons matching the search keyword.*  
 ![find image](images/findAfter.png)
+
+**Tips:**
+
+- Use the `find` command to quickly locate persons based on their names or class IDs.
+- The `find` command is particularly useful when you have a large list and need to filter by specific attributes.
+- The `OR` search means more results, making it easier to find related entries.
+
 ---
 
 ### 2.6 Deleting a Person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Command: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -181,7 +230,7 @@ Examples:
 
 Clears all entries from the address book.
 
-Command Instructions: `clear`
+Command: `clear`
 
 Upon entering the command, all entries will be cleared from the address book. A message 
 "Address book has been cleared!" will be displayed in the command box.
@@ -193,17 +242,21 @@ Upon entering the command, all entries will be cleared from the address book. A 
 
 ### 2.8 Exiting the Program : `exit`
 
+Command : `exit`
+
 Exits the program.
 
-Exiting the programme can be done by separate ways
-Method 1:
+
+Exiting the programme can be done by 2 separate ways
+
+**Method 1:**
 1. Clicking the `File` button at the top right corner of the window.
    ![Ui](images/exitcommand.png)
 
-2. Next click on the `Exit` button.
+2. Click on the `Exit` button.
 3. The program will close.
 
-Method 2:
+**Method 2:**
 1. Type the command `exit` in the command box and press Enter.
 2. The program will close.
 
@@ -212,13 +265,13 @@ Method 2:
 
 ### 2.9 Saving the Data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EduTuTu data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ---
 
 ### 2.10 Editing the Data File
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+EduTuTu data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -246,13 +299,14 @@ Updates the payment status of a student to completed.
 Creates a pie chart of the distribution of students in each class. Such a feature is meant to give tuition centre 
 administrators quick visualisation of the number of students in each class, thus allowing them to efficiently allocate class sizes.
 
+Command : `pie`
+
 For instance, we have this following data set with 4 students; 1 students in class 1 and 2 students in class 2 and 1 student in class 3.
 ![Ui](images/piecommand.png)
 
 Upon entering the command pie, a pie chart will be displayed showing the distribution of students in each class.
 ![Ui](images/piechart.png)
 
-Format: `pie`
 
 ### 2.13 Bar Chart
 
