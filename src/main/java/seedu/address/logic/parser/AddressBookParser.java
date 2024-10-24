@@ -76,7 +76,7 @@ public class AddressBookParser {
             return new ListCommand();
 
         case ArchiveCommand.COMMAND_WORD:
-            return new ArchiveCommand();
+            return new ArchiveCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.filename.Filename;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -31,7 +32,8 @@ public class ArchiveCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(new Filename("")), model, ArchiveCommand.MESSAGE_SUCCESS,
+                expectedModel);
     }
 
     @Test
@@ -39,7 +41,8 @@ public class ArchiveCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(new Filename("")), model, ArchiveCommand.MESSAGE_SUCCESS,
+                expectedModel);
     }
 
     @Test
@@ -47,7 +50,8 @@ public class ArchiveCommandTest {
         Model model = new ModelManagerStubThrowingIoException();
         Model expectedModel = new ModelManagerStubThrowingIoException();
 
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_FAILURE, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(new Filename("")), model, ArchiveCommand.MESSAGE_FAILURE,
+                expectedModel);
     }
 
     /**
@@ -55,7 +59,7 @@ public class ArchiveCommandTest {
      */
     private static class ModelManagerStubThrowingIoException extends ModelManager {
         @Override
-        public void archiveAddressBook() throws IOException {
+        public void archiveAddressBook(Filename filename) throws IOException {
             throw new IOException();
         }
     }
