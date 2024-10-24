@@ -14,6 +14,7 @@ import careconnect.logic.parser.CliSyntax;
 import careconnect.model.Model;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -63,11 +64,12 @@ public class DeleteLogCommand extends Command {
         Address address = personToDeleteLog.getAddress();
         Set<Tag> tags = personToDeleteLog.getTags();
         ArrayList<Log> updatedLogs = new ArrayList<>(personToDeleteLog.getLogs());
+        AppointmentDate appointmentDate = personToDeleteLog.getAppointmentDate();
 
         this.deletedLog = updatedLogs.get(deletedLogIndex.getZeroBased());
         updatedLogs.remove(deletedLogIndex.getZeroBased());
 
-        return new Person(name, phone, email, address, tags, updatedLogs);
+        return new Person(name, phone, email, address, tags, updatedLogs, appointmentDate);
     }
 
     @Override

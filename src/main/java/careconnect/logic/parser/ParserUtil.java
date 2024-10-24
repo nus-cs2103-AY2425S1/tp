@@ -14,6 +14,7 @@ import careconnect.commons.util.StringUtil;
 import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Phone;
@@ -148,6 +149,24 @@ public class ParserUtil {
             throw new ParseException(Log.MESSAGE_CONSTRAINTS);
         }
         return parsedDate;
+    }
+
+    /**
+     * Parses a {@code String dateString} into a {@code AppointmentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateString} is invalid.
+     */
+    public static AppointmentDate parseAppointmentDate(String dateString) throws ParseException {
+        if (dateString == null || dateString.isEmpty()) {
+            return new AppointmentDate();
+        }
+        String trimmedDateString = dateString.trim();
+        if (!AppointmentDate.isValidAppointmentDateString(trimmedDateString)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentDate(trimmedDateString);
+
     }
 
     /**
