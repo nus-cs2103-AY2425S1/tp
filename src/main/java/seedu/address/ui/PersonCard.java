@@ -29,8 +29,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label preference;
-    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
@@ -47,7 +45,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
-        preference.setText(person.getPreference().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
 
