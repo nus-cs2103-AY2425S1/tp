@@ -197,6 +197,11 @@ public class AddClassCommandTest {
         }
 
         @Override
+        public void sortAcademyAssistById() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void incrementStudentCount() {
             throw new AssertionError("This method should not be called.");
         }
