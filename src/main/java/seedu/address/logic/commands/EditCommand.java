@@ -98,8 +98,8 @@ public class EditCommand extends Command {
 
         ContactType updatedContactType = personToEdit.getContactType(); // edit command does not allow editing
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Optional<Phone> updatedPhone = editPersonDescriptor.getPhone().or(() -> personToEdit.getPhone());
+        Optional<Email> updatedEmail = editPersonDescriptor.getEmail().or(() -> personToEdit.getEmail());
         TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
                 .orElse(personToEdit.getTelegramHandle());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
