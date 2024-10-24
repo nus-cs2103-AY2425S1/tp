@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.model.person.Appt.DATETIME_COMPARATOR;
 
-import javafx.collections.transformation.FilteredList;
-import javafx.util.Pair;
-import org.w3c.dom.css.ElementCSSInlineStyle;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.TreeMap;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.healthservice.HealthService;
@@ -15,8 +17,8 @@ import seedu.address.model.person.AppointmentDateFilter;
 import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 
-import java.time.LocalDate;
-import java.util.List;
+
+
 
 /**
  * Filters the patients based on their appointment dates and health services.
@@ -51,13 +53,17 @@ public class FilterCommand extends Command {
         LocalDate endDate = dateFilter.getEndDate();
         HealthService service = dateFilter.getHealthService();
 
+        TreeMap<Appt, Person> filteredAppts = new TreeMap<>(DATETIME_COMPARATOR);
+
         List<Person> personList = model.getFilteredPersonList();
-        personList.stream()
-                ## match the duration of appointments and match healthservice if not null
-            ## add to a new List<Pair<Person, Appt>> to keep track of the NRIC and name
-            get a new LIST
-            then update UI based on Appointment
-
+        for (Person person : personList) {
+            for (Appt appt : person.getAppts()) {
+                if (appt.isBetweenDatesAndMatchService(dateFilter)) {
+                    filteredAppts.put(appt, person);
+                }
+            }
+        }
+        model.setFilteredAppointments(filteredAppts);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
-
 }

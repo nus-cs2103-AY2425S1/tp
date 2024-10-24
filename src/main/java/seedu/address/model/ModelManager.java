@@ -2,8 +2,10 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Appt.DATETIME_COMPARATOR;
 
 import java.nio.file.Path;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final TreeMap<Appt, Person> filteredAppts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredAppts = new TreeMap<>(DATETIME_COMPARATOR);
     }
 
     public ModelManager() {
@@ -126,6 +131,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void setFilteredAppointments(TreeMap<Appt, Person> filteredAppointments) {
+        this.filteredAppts.clear();
+        this.filteredAppts.putAll(filteredAppointments);
     }
 
     @Override
