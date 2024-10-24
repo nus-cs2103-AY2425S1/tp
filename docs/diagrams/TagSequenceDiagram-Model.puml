@@ -8,7 +8,7 @@ participant ":AddressBook" as AddressBook MODEL_COLOR
 participant ":FilteredPersons" as FilteredPersons MODEL_COLOR
 end box
 
-Model -> AddressBook : setPerson(target, updatedPerson)
+Model -> AddressBook : setPerson(personToTag, personWithTags)
 activate AddressBook
 AddressBook --> Model
 deactivate AddressBook
