@@ -2,12 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.addresses.Network;
@@ -27,8 +29,8 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private Map<Network, Set<PublicAddress>> publicAddresses;
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<Network, Set<PublicAddress>> publicAddresses;
 
     /**
      * Every field must be present and not null.
@@ -63,6 +65,37 @@ public class Person {
 
     public Set<PublicAddress> getPublicAddressesByNetwork(Network network) {
         return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
+    }
+
+    /**
+     * Returns true if the person has a public address in the network
+     *
+     * @param publicAddressString
+     * @return
+     */
+    public Boolean hasPublicAddressStringAmongAllNetworks(String publicAddressString) {
+        return publicAddresses.values().stream()
+                .flatMap(Set::stream)
+                .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
+    }
+
+    public Set<PublicAddress> getPublicAddressObjectByPublicAddressStringMap(String publicAddressString) {
+        return publicAddresses.values().stream()
+                .flatMap(Set::stream)
+                .filter(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString))
+                .collect(Collectors.toSet());
+    }
+
+    public Map<Network, Set<PublicAddress>> getPublicAddressObjectByPublicAddressMap(String publicAddressString) {
+        return publicAddresses.entrySet().stream()
+                .map(entry -> {
+                    Set<PublicAddress> filteredAddresses = entry.getValue().stream()
+                            .filter(pa -> pa.isPublicAddressStringEquals(publicAddressString))
+                            .collect(Collectors.toSet());
+                    return new AbstractMap.SimpleEntry<>(entry.getKey(), filteredAddresses);
+                })
+                .filter(entry -> !entry.getValue().isEmpty())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
@@ -114,11 +147,10 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)

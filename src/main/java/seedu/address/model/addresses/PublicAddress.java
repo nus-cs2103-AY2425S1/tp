@@ -52,8 +52,6 @@ public abstract class PublicAddress {
         return test.matches(VALIDATION_PAT_REGEX);
     }
 
-    public abstract Network getNetwork();
-
     /**
      * Checks if the network is valid
      *
@@ -64,9 +62,49 @@ public abstract class PublicAddress {
         return Network.valueOf(network);
     }
 
+    public abstract Network getNetwork();
+
     @Override
     public String toString() {
         return label + ": " + publicAddress;
+    }
+
+    /**
+     * Returns true if the public address string is the same as the other public address string
+     *
+     * @param otherPublicAddressString The other public address string
+     * @return boolean
+     */
+    public boolean isPublicAddressStringEquals(String otherPublicAddressString) {
+        return publicAddress.equals(otherPublicAddressString);
+    }
+
+    /**
+     * Returns true if the public address string is part of the other public address string
+     *
+     * @param otherPublicAddressString The other public address string
+     * @return boolean
+     */
+    public boolean isSubstringInPublicAddressString(String otherPublicAddressString) {
+        return publicAddress.contains(otherPublicAddressString);
+    }
+
+    /**
+     * Returns the public address string
+     *
+     * @return String
+     */
+    public String getPublicAddressString() {
+        return publicAddress;
+    }
+
+    /**
+     * Returns the label of the public address
+     *
+     * @return String
+     */
+    public String getLabel() {
+        return label;
     }
 
     @Override
@@ -76,11 +114,10 @@ public abstract class PublicAddress {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PublicAddress)) {
+        if (!(other instanceof PublicAddress otherPublicAddress)) {
             return false;
         }
 
-        PublicAddress otherPublicAddress = (PublicAddress) other;
         return publicAddress.equals(otherPublicAddress.publicAddress) && label.equals(otherPublicAddress.label);
     }
 
