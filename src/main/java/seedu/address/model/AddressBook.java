@@ -71,6 +71,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the association list with {@code associations}.
+     * {@code associations} must not contain duplicate associations.
+     */
+    public void setAssociations(List<Association> associations) {
+        this.associations.setAssociations(associations);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -78,6 +86,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setVendors(newData.getVendorList());
         setEvents(newData.getEventList());
+        setAssociations(newData.getAssociationList());
     }
 
     //// vendor-level operations

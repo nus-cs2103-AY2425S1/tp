@@ -66,7 +66,7 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedVendor jsonAdaptedVendor : vendors) {
             Vendor vendor = jsonAdaptedVendor.toModelType();
-            if (addressBook.hasVendor(vendor)) {
+            if (addressBook.hasVendor(vendor) || vendorMap.containsKey(vendor.getId())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_VENDOR);
             }
             addressBook.addVendor(vendor);
@@ -75,7 +75,7 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
-            if (addressBook.hasEvent(event)) {
+            if (addressBook.hasEvent(event) || eventMap.containsKey(event.getId())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
             addressBook.addEvent(event);
