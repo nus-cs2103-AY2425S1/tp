@@ -108,7 +108,7 @@ The sequence diagram below illustrates another interaction within the `Logic` co
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteEmployeeCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons
 2.  StaffSync shows a list of persons
-3.  User requests to delete a specific person in the list
+3.  User requests to delete a specific person in the list of the correct shown type
 4.  StaffSync deletes the person
 
     Use case ends.
@@ -339,8 +339,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. StaffSync shows an error message.
+   * 3a1. StaffSync shows an error message.
 
+      Use case resumes at step 2.
+
+* 3b. The given index is not of the correct person type.
+   
+   * 3b1. StaffSync shows an error message.
+   
       Use case resumes at step 2.
 
 **Use Case: Add an employee**
@@ -616,7 +622,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `delete e`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
 
-   6. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`, `delete e    1     `,  `...` (where x is larger than the list size)<br>
+   6. Other incorrect delete commands to try: `delete ph`, `delete e x`, `delete e 1 2`,  `...` (where x is larger than the list size)<br>
       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Deleting a person with no potential hires/employees
