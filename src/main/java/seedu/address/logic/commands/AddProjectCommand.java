@@ -22,6 +22,7 @@ public class AddProjectCommand extends Command {
             + "Parameters: "
             + PREFIX_PROJECT_ID + "PROJECT ID "
             + PREFIX_PROJECT_NAME + "PROJECT NAME "
+            + PREFIX_SKILL + "PROJECT SKILL"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PROJECT_ID + "A0276123K "
             + PREFIX_PROJECT_NAME + "Project Alpha "
