@@ -25,7 +25,6 @@ package Storage as StoragePackage {
 package Model as ModelPackage {
     Class Session
     Class AddressBook
-    Class VersionedAddressBook
     Class ModelManager
     Class Member
     Class Point
@@ -47,12 +46,15 @@ JsonSerializableAddressBook --> "*" JsonAdaptedPoint
 JsonSerializableAddressBook --> "*" JsonAdaptedSession
 JsonAdaptedMember --> "*" JsonAdaptedTag
 JsonAdaptedMember --> "*" JsonAdaptedSession
+JsonAdaptedSession --> "*" JsonAdaptedPoint
 AddressBook --> "*" Session
-VersionedAddressBook --> AddressBook
-StorageManager --> VersionedAddressBook
+AddressBook --> "*" Member
+StorageManager --> AddressBook
 ModelManager --> StorageManager
 ModelManager --> AddressBook
 ModelManager --> Member
+ModelManager --> Session
+Session --> "*" Point
 Member --> "*" Point
-
+Member --> "*" Session
 @enduml
