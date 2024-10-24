@@ -1,5 +1,6 @@
 package seedu.address.model;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -7,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 
 /**
  * The API of the Model component.
@@ -136,6 +138,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+    List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup);
 
 
 

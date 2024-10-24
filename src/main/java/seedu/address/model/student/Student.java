@@ -4,9 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -122,7 +124,7 @@ public class Student extends Person {
      *
      * @param date The date on which attendance is being recorded.
      * @param status The attendance status, either 'present' or 'absent'.
-     * @throws IllegalArgumentException if the provided status is invalid.
+     * @throws IllegalArgumentException if the provided status is nvalid.
      */
     public void markAttendance(LocalDate date, String status) {
         Attendance attendance = new Attendance(status);
@@ -134,6 +136,17 @@ public class Student extends Person {
 
     public List<AttendanceRecord> getAttendanceRecord() {
         return attendanceRecords;
+    }
+
+    public String getAttendanceRecordsString() {
+        List<AttendanceRecord> sortedRecords = attendanceRecords.stream()
+                .sorted(Comparator.comparing(AttendanceRecord::getDate))
+                .collect(Collectors.toList());
+        StringBuilder sb = new StringBuilder();
+        for (AttendanceRecord record : sortedRecords) {
+            sb.append(record.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
 

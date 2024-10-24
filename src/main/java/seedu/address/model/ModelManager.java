@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -18,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialGroup;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -217,6 +220,18 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+    @Override
+    public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
+        List<Student> studentsInTG = new ArrayList<>();
+        for (Student student : getAddressBook().getStudentList()) {
+            if (student.getTutorialGroup().equals(tutorialGroup)) {
+                studentsInTG.add(student);
+            }
+        }
+        return studentsInTG;
+    }
+
 
 
 

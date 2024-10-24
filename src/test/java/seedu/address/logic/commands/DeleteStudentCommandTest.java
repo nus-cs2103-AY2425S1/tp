@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +24,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 public class DeleteStudentCommandTest {
@@ -175,8 +178,6 @@ public class DeleteStudentCommandTest {
 
     private class ModelStub implements Model {
 
-        private final ObservableList<Student> studentList = FXCollections.observableArrayList();
-
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -247,7 +248,6 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public Person getPersonByName(Name name) {
             return null;
@@ -278,12 +278,10 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public ObservableList<Student> getFilteredStudentList() {
-            return studentList;
+            throw new AssertionError("This method should not be called.");
         }
-
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
@@ -294,6 +292,13 @@ public class DeleteStudentCommandTest {
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**
@@ -350,6 +355,7 @@ public class DeleteStudentCommandTest {
             }
             return -1;
         }
+
     }
 
     /**

@@ -31,4 +31,9 @@ public class AttendanceRecord {
     public String toString() {
         return date + " [" + (attendance.value.equals("p") ? "x" : " ") + "]";
     }
+
+    @Override
+    public int hashCode() {
+        return date.hashCode() + attendance.hashCode();
+    }
 }
