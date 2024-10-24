@@ -387,6 +387,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Managing UI  ==================================================================================
+    // TODO: Add defensive programming by only returning a ReadOnly version of the this.displayMode
     @Override
     public ObjectProperty<DisplayMode> getDisplayMode() {
         return this.displayMode;
@@ -395,15 +396,18 @@ public class ModelManager implements Model {
     @Override
     public void setDisplayClients() {
         this.displayMode.set(DisplayMode.CLIENTS);
+        logger.info("Setting Display Mode to \"CLIENTS\"");
     }
 
     @Override
     public void setDisplayProperties() {
         this.displayMode.set(DisplayMode.PROPERTIES);
+        logger.info("Setting Display Mode to \"PROPERTIES\"");
     }
 
     @Override
     public void setDisplayMeetings() {
         this.displayMode.set(DisplayMode.MEETINGS);
+        logger.info("Setting Display Mode to \"MEETINGS\"");
     }
 }
