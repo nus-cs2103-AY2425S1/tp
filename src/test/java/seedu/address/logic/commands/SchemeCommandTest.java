@@ -25,7 +25,7 @@ public class SchemeCommandTest {
     public void execute_notSchemeAvail_success() {
         CommandResult expectedCommandResult = new CommandResult("No schemes available for this family.",
                 false, false);
-        assertCommandSuccess(new SchemeCommand(INDEX_FIRST_PERSON), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new SchemeCommand(INDEX_THIRD_PERSON), model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class SchemeCommandTest {
         CommandResult expectedCommandResult = new CommandResult("1. "
                 + MoeFinancialAssistanceScheme.SCHEME_NAME + "\n"
                 + "2. " + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n", false, false);
-        assertCommandSuccess(new SchemeCommand(INDEX_SECOND_PERSON), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new SchemeCommand(INDEX_FIRST_PERSON), model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class SchemeCommandTest {
         CommandResult expectedCommandResult = new CommandResult("1. "
                 + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n",
                 false, false);
-        assertCommandSuccess(new SchemeCommand(INDEX_THIRD_PERSON), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new SchemeCommand(INDEX_SECOND_PERSON), model, expectedCommandResult, expectedModel);
     }
 
     @Test

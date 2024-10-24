@@ -68,7 +68,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page or display how to use a specified command.
+Shows a message explaining how to access the help page or display how to use a specified command.
 
 ![help message](images/updatedHelpMessage.png)
 
@@ -188,6 +188,20 @@ Statistics include:
 * Number of Appointments Within a Week From Current Date
 
 Format: `statistics`
+
+### Displaying eligible schemes : `scheme`
+
+Displays the schemes that specified people from the address book are eligible for.
+
+Format: `scheme INDEXES`
+
+* Displays the schemes that the people at the specified `INDEXES` are eligible for.
+* The indexes refer to the index numbers shown in the displayed person list.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* Only 1 index can be inputted at a time.
+
+Examples:
+* `scheme 1` shows scheme that the 1st person in the address book is eligible for.
 
 ### Exiting the program : `exit`
 

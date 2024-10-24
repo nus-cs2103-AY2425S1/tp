@@ -72,14 +72,14 @@ public class TypicalPersons {
     // Manually added - Terry presenting rich while Berry is poor while Cherry is moderate
     public static final Person TERRY = new PersonBuilder().withName("Terry").withPhone("98765432")
             .withEmail("terry@example.com").withAddress("311, Clementi Ave 2, #02-25").withDateOfBirth("29 Jan 1999")
-            .withIncome(1000000).build();
+            .withIncome(1000000).withFamilySize(1).build();
     public static final Person BERRY = new PersonBuilder().withName("Berry").withPhone("98765432")
             .withEmail("berry@example.com").withAddress("311, Clementi Ave 2, #02-25").withDateOfBirth("29 Jan 1999")
-            .withIncome(100).build();
+            .withIncome(100).withFamilySize(1).build();
 
     public static final Person CHERRY = new PersonBuilder().withName("Cherry").withPhone("98765432")
             .withEmail("cheery@example.com").withAddress("311, Clementi Ave 2, #02-25").withDateOfBirth("29 Jan 1999")
-            .withIncome(4000).build();
+            .withIncome(4000).withFamilySize(1).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

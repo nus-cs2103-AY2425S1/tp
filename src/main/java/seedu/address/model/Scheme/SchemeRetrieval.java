@@ -32,7 +32,7 @@ public class SchemeRetrieval {
         this.income = targetFamily.getIncome().getValue();
         LocalDate currentDate = LocalDate.now();
         this.age = Period.between(targetFamily.getDateOfBirth().toLocalDate(), currentDate).getYears();
-        this.familySize = 1;
+        this.familySize = targetFamily.getFamilySize().getValue();
         this.incomePerCapita = (int) Math.round(income / familySize);
         allSchemes.add(new MoeFinancialAssistanceScheme());
         allSchemes.add(new StudentCareFeeAssistanceScheme());

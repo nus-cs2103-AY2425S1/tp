@@ -19,11 +19,8 @@ import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ScheduleCommand;
-<<<<<<< HEAD
 import seedu.address.logic.commands.SchemeCommand;
-=======
 import seedu.address.logic.commands.SortCommand;
->>>>>>> master
 import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

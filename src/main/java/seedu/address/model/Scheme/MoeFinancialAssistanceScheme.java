@@ -1,6 +1,6 @@
 package seedu.address.model.scheme;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a MOE FAS scheme in the address book.
@@ -13,11 +13,8 @@ public class MoeFinancialAssistanceScheme extends Scheme {
 
     @Override
     public boolean isEligible(double income, int familySize, int incomePerCapita) {
-        requireNonNull(income);
-        requireNonNull(familySize);
-        requireNonNull(incomePerCapita);
-
-        return (income < INCOME_THRESHOLD) || (incomePerCapita < INCOME_PER_CAPITA_THRESHOLD);
+        requireAllNonNull(income, familySize, incomePerCapita);
+        return (income <= INCOME_THRESHOLD) || (incomePerCapita <= INCOME_PER_CAPITA_THRESHOLD);
     }
 
     @Override

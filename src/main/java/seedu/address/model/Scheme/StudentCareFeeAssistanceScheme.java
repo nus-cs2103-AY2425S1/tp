@@ -1,6 +1,6 @@
 package seedu.address.model.scheme;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a SCFA scheme in the address book.
@@ -14,12 +14,10 @@ public class StudentCareFeeAssistanceScheme extends Scheme {
 
     @Override
     public boolean isEligible(double income, int familySize, int incomePerCapita) {
-        requireNonNull(income);
-        requireNonNull(familySize);
-        requireNonNull(incomePerCapita);
+        requireAllNonNull(income, familySize, incomePerCapita);
 
-        return (income < INCOME_THRESHOLD && familySize <= FAMILY_SIZE_THRESHOLD)
-                || (incomePerCapita < INCOME_PER_CAPITA_THRESHOLD && familySize > FAMILY_SIZE_THRESHOLD);
+        return (income <= INCOME_THRESHOLD && familySize <= FAMILY_SIZE_THRESHOLD)
+                || (incomePerCapita <= INCOME_PER_CAPITA_THRESHOLD && familySize > FAMILY_SIZE_THRESHOLD);
     }
 
     @Override
