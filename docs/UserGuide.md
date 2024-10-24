@@ -230,7 +230,7 @@ Examples:
 * `update_maxstock pr/sweater stk/1000`
 * `update_maxstock apr/chocolates stk/2623900`
 
-### Locating all suppliers: `view_suppliers`
+### Locating all suppliers: `view_supplier`
 
 Displays all the suppliers currently present in the supplier list.
 
@@ -238,7 +238,7 @@ Format: `view_suppliers`
 
 Examples: `view_suppliers`
 
-### Locating all suppliers: `view_products`
+### Locating all suppliers: `view_product`
 
 Displays all the products currently present in the product list.
 
