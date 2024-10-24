@@ -87,4 +87,21 @@ public class DeleteClaimCommand extends Command {
             throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteClaimCommand)) {
+            return false;
+        }
+
+        DeleteClaimCommand otherDeleteClaimCommand = (DeleteClaimCommand) other;
+        return index.equals(otherDeleteClaimCommand.index)
+                && insuranceId == otherDeleteClaimCommand.insuranceId
+                && claimId.equals(otherDeleteClaimCommand.claimId);
+    }
 }

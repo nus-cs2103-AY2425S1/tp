@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
@@ -19,6 +21,11 @@ import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.model.client.insurance.claim.Claim;
 
 class DeleteClaimCommandTest {
+
+    public static final int VALID_INSURANCE_ID_FIRST = 0;
+    public static final int VALID_INSURANCE_ID_SECOND = 1;
+    public static final String VALID_CLAIM_ID_FIRST = "A1001";
+    public static final String VALID_CLAIM_ID_SECOND = "B1234";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -53,4 +60,30 @@ class DeleteClaimCommandTest {
         assertInsuranceCommandSuccess(deleteClaimCommand, model, expectedMessage,
                 clientToEdit.getInsurancePlansManager(), updatedInsurancePlansManager);
     }
+
+    @Test
+    public void equals() {
+        DeleteClaimCommand deleteClaimFirstCommand =
+                new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_FIRST, VALID_CLAIM_ID_FIRST);
+        DeleteClaimCommand deleteClaimSecondCommand =
+                new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_SECOND, VALID_CLAIM_ID_SECOND);
+
+        // same object -> returns true
+        assertEquals(deleteClaimFirstCommand, deleteClaimFirstCommand);
+
+        // same values -> returns true
+        DeleteClaimCommand deleteClaimFirstCommandCopy =
+                new DeleteClaimCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID_FIRST, VALID_CLAIM_ID_FIRST);
+        assertEquals(deleteClaimFirstCommand, deleteClaimFirstCommandCopy);
+
+        // different types -> returns false
+        assertNotEquals(1, deleteClaimFirstCommand);
+
+        // null -> returns false
+        assertNotEquals(null, deleteClaimFirstCommand);
+
+        // different insurance/claim -> returns false
+        assertNotEquals(deleteClaimFirstCommand, deleteClaimSecondCommand);
+    }
 }
+
