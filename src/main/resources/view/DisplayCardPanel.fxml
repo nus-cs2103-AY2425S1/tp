@@ -3,9 +3,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.HBox?>
-<HBox>
-    <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-        <ListView fx:id="displayCardListView" />
-    </VBox>
-</HBox>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
+    <ListView fx:id="displayCardListView" VBox.vgrow="ALWAYS"/>
+</VBox>
