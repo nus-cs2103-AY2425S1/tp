@@ -68,7 +68,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page or display how to use a specified command.
+Shows a message explaining how to access the help page or display how to use a specified command.
 
 ![help message](images/updatedHelpMessage.png)
 
@@ -153,21 +153,21 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
-### Getting that parameter of all these people: `get` 
-Gets the specified parameter of the filtered people from SocialBook.
+### Getting the parameters of these people: `get` 
+Gets the specified parameters of each individual person in current person list.
 
 Format: `get PARAMETERS`
 
-* Gets the specified parameters for each person in the filtered list.
-* The only valid parameters are: n/, p/, e/, a/.
+* The only valid parameters are: name, phone, email, address.
+* Parameters are not case sensitive, which means `get PHONE name` will return phone number and name details too.
 * All inputted parameters must be valid for the details to be displayed. 
 * The details will be displayed in the order of the inputted parameters.
 * Executing the same parameter multiple times in the same command will still only return one set of that detail.
 
 Examples:
-* `list` followed by `get p/ e/` gets the phone numbers followed by the emails of the people in SocialBook.
-* `list` followed by `get p/ p/` gets only one set of the phone numbers of the people in SocialBook.
-* `find p/HIGH` followed by `get n/ a/` gets the names followed by the addresses of the high priority people.
+* `list` followed by `get phone EMAIL` gets the phone numbers followed by the emails of the people in SocialBook.
+* `list` followed by `get pHone phone` gets only one set of the phone numbers of the people in SocialBook.
+* `find pri/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people.
 
 ### Clearing all entries : `clear`
 
@@ -175,19 +175,46 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Undo the previous command: `undo`
+Undoes the previous command from SocialBook.
+
+Format: `undo`
+
+* Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear
+* Undo can be called multiple times till there is no more previous command for the current execution.
+
+Examples:
+* `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
+* `clear` followed by `undo` will retrieve back the uncleared SocialBook.
+* `edit 1 n/John` followed by `undo` will change name back to what it was before.
+
 ### Displaying overall statistics : `statistics`
 
-Displays the statistics of filtered list.
+Displays the statistics of current person list.
 
 Statistics include: 
-* Nb of People
-* Nb of HIGH Priority People
-* Nb of MEDIUM Priority People
-* Nb of LOW Priority People
-* Nb of People Income <= 800
-* Nb of Appointments Within a Week From Current Date
+* Number of People
+* Number of HIGH Priority People
+* Number of MEDIUM Priority People
+* Number of LOW Priority People
+* Number of People With Monthly Household Income < 2500
+* Number of Appointments Within a Week From Current Date
 
 Format: `statistics`
+
+### Displaying eligible schemes : `scheme`
+
+Displays the schemes that specified people from the address book are eligible for.
+
+Format: `scheme INDEXES`
+
+* Displays the schemes that the people at the specified `INDEXES` are eligible for.
+* The indexes refer to the index numbers shown in the displayed person list.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* Only 1 index can be inputted at a time.
+
+Examples:
+* `scheme 1` shows scheme that the 1st person in the address book is eligible for.
 
 ### Exiting the program : `exit`
 
@@ -234,12 +261,13 @@ _Details coming soon ..._
 
 Action           | Format, Examples
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**        | `clear`
-**Delete**       | `delete INDEXES`<br> e.g., `delete 2,3`
+**Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`
 **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Get**          | `get PARAMETERS`<br> e.g.,`get e/ p/`
+**Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
+**Undo**         | `undo`
 **List**         | `list`
-**Statistics**   | `statistics`
+**Statistics**   | `statistics` <br> Shows general statistics
 **Help**         | `help`

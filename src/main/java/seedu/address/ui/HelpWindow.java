@@ -9,6 +9,18 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.SchemeCommand;
+import seedu.address.logic.commands.StatisticsCommand;
 
 /**
  * Controller for a help page
@@ -23,27 +35,32 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String TITLE = "Below are the commands you can use in the application:\n";
 
-    private static final String ADD_COMMAND = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B\n";
+    private static final String ADD_COMMAND = AddCommand.MESSAGE_USAGE + "\n";
 
-    private static final String LIST_COMMAND = "list\n";
+    private static final String LIST_COMMAND = ListCommand.MESSAGE_USAGE + "\n";
 
-    private static final String EDIT_COMMAND = "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\u200B\n";
+    private static final String EDIT_COMMAND = EditCommand.MESSAGE_USAGE + "\n";
 
-    private static final String FIND_COMMAND = "find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]\n";
+    private static final String FIND_COMMAND = FindCommand.MESSAGE_USAGE + "\n";
 
-    private static final String GET_COMMAND = "get PARAMETERS\n";
+    private static final String GET_COMMAND = GetCommand.MESSAGE_USAGE + "\n";
 
-    private static final String DELETE_COMMAND = "delete INDEXES\n";
+    private static final String DELETE_COMMAND = DeleteCommand.MESSAGE_USAGE + "\n";
 
-    private static final String CLEAR_COMMAND = "clear\n";
+    private static final String CLEAR_COMMAND = ClearCommand.MESSAGE_USAGE + "\n";
 
-    private static final String EXIT_COMMAND = "exit\n";
+    private static final String EXIT_COMMAND = ExitCommand.MESSAGE_USAGE + "\n";
 
-    private static final String STATISTICS_COMMAND = "statistics\n";
+    private static final String STATISTICS_COMMAND = StatisticsCommand.MESSAGE_USAGE + "\n";
 
-    private static final String HELP_COMMAND = "help [COMMANDS]\n";
+    private static final String SCHEDULE_COMMAND = ScheduleCommand.MESSAGE_USAGE + "\n";
+
+    private static final String SCHEME_COMMAND = SchemeCommand.MESSAGE_USAGE + "\n";
+
+    private static final String HELP_COMMAND = HelpCommand.MESSAGE_USAGE + "\n";
     private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
-        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, HELP_COMMAND, EXIT_COMMAND};
+        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEDULE_COMMAND, SCHEME_COMMAND,
+        HELP_COMMAND, EXIT_COMMAND};
 
     @FXML
     private Button copyButton;
