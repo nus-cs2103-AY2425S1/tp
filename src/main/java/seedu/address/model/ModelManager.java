@@ -42,7 +42,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
-        sortedPersons.setComparator(Comparator.comparing(Person::getPriority)); // sort by descending priority
+        sortedPersons.setComparator(Comparator.comparing(Person::getPriority)
+                .thenComparing(person -> person.getName().toString())); // sort high to low priority, then alphabetical
     }
 
     public ModelManager() {
@@ -156,5 +157,14 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    /**
+     * Updates the sorting of the person list according to the newly supplied parameter.
+     *
+     * @param comparator New criteria to sort the person list by.
+     */
+    public void updateSortingOrder(Comparator<Person> comparator) {
+        sortedPersons.setComparator(comparator);
     }
 }
