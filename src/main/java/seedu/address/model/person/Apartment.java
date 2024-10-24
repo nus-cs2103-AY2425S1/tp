@@ -22,6 +22,11 @@ public class Apartment extends Property {
     public Apartment(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         super(postalCode, unitNumber, price, tags);
     }
+
+    public Apartment(PostalCode postalCode, UnitNumber unitNumber, Price price, Price actualPrice, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, actualPrice, tags);
+    }
+
     @Override
     public boolean equals(Object otherApartment) {
         if (this == otherApartment) {

@@ -23,6 +23,10 @@ public class Condo extends Property {
         super(postalCode, unitNumber, price, tags);
     }
 
+    public Condo(PostalCode postalCode, UnitNumber unitNumber, Price price, Price actualPrice, Set<Tag> tags) {
+        super(postalCode, unitNumber, price, actualPrice, tags);
+    }
+
     @Override
     public boolean equals(Object otherCondo) {
         if (this == otherCondo) {

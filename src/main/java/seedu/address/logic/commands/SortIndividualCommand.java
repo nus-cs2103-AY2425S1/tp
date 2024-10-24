@@ -29,6 +29,8 @@ public class SortIndividualCommand extends Command {
             + PREFIX_ORDER + "[ORDER]"
             + " (either \"o/H for High to Low\" or \"o/L for Low to High\")\n"
             + "Example: " + COMMAND_WORD + " " + "1 " + PREFIX_FIELD + "Price " + PREFIX_ORDER + "L";
+    private static int isInSortedState = 0;
+    private static int isFromLowToHighOrder = 0;
     private final Index personIndexToSort;
     /**
      * Creates an SortIndividualCommand to sort the list of properties by price.
@@ -39,6 +41,12 @@ public class SortIndividualCommand extends Command {
         this.personIndexToSort = index;
         this.order = order;
         this.field = field;
+        isInSortedState = 1;
+        if (order.equals("L")) {
+            isFromLowToHighOrder = 1;
+        } else {
+            isFromLowToHighOrder = 0;
+        }
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -86,5 +94,19 @@ public class SortIndividualCommand extends Command {
         } else {
             return "High to Low";
         }
+    }
+    /**
+     * Returns the sort status.
+     * @return sort status
+     */
+    public static int getSortStatus() {
+        return isInSortedState;
+    }
+    /**
+     * Returns the order of sorting.
+     * @return order of sorting
+     */
+    public static int getIsFromLowToHighOrder() {
+        return isFromLowToHighOrder;
     }
 }

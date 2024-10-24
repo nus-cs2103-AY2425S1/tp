@@ -28,6 +28,8 @@ public class PropertyToBuyBuilder {
     private PostalCode postalCode;
     private UnitNumber unitNumber;
     private Price price;
+    private Price actualPrice;
+
     private HousingType housingType;
     private Set<Tag> tags;
 
@@ -67,6 +69,14 @@ public class PropertyToBuyBuilder {
     }
 
     /**
+     * Sets the {@code actualPrice} of the {@code Property} that we are building.
+     */
+    public PropertyToBuyBuilder withActualPrice(String price) {
+        this.actualPrice = new Price(price);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Property} that we are building.
      */
     public PropertyToBuyBuilder withTags(String ... tags) {
@@ -88,17 +98,17 @@ public class PropertyToBuyBuilder {
     public Property build() {
         switch (housingType) {
         case HDB:
-            return new Hdb(postalCode, unitNumber, price, tags);
+            return new Hdb(postalCode, unitNumber, price, actualPrice, tags);
         case BTO:
-            return new Bto(postalCode, unitNumber, price, tags);
+            return new Bto(postalCode, unitNumber, price, actualPrice, tags);
         case CONDO:
-            return new Condo(postalCode, unitNumber, price, tags);
+            return new Condo(postalCode, unitNumber, price, actualPrice, tags);
         case APARTMENT:
-            return new Apartment(postalCode, unitNumber, price, tags);
+            return new Apartment(postalCode, unitNumber, price, actualPrice, tags);
         case OTHERS:
-            return new OtherProperty(postalCode, unitNumber, price, tags);
+            return new OtherProperty(postalCode, unitNumber, price, actualPrice, tags);
         default:
-            return new Property(postalCode, unitNumber, price, tags) {};
+            return new Property(postalCode, unitNumber, price, actualPrice, tags) {};
         }
     }
 }

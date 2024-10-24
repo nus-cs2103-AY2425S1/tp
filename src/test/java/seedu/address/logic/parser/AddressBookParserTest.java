@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
+import seedu.address.logic.commands.AddPropertyToSellCommand;
+import seedu.address.logic.commands.BoughtPropertyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePropertyToBuyCommand;
@@ -30,12 +32,14 @@ import seedu.address.logic.commands.FindPhoneNumberCommand;
 import seedu.address.logic.commands.FindSellCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SoldPropertyCommand;
 import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.BuyPropertyContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneNumberContainsKeywordPredicate;
+import seedu.address.model.person.Price;
 import seedu.address.model.person.Property;
 import seedu.address.model.person.SellPropertyContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -134,16 +138,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addSell() throws Exception {
-        /*PostalCode postalCode = new PostalCode("567510");
-        UnitNumber unitNumber = new UnitNumber("10-65");
-        Price sellingPrice = new Price("1.65M");
-        Set<Tag> tagList = ParserUtil.parseTags(Arrays.asList("Extremely spacious", "Near MRT"));
-
-        Property property = new Condo(postalCode, unitNumber, sellingPrice, tagList);
-        AddPropertyToSellCommand command = (AddPropertyToSellCommand)
-            parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddPropertyToSellCommand(), command);*/
-        assertEquals(1, 1);
+        Index index = Index.fromOneBased(1);
+        Property property = new PropertyToBuyBuilder().withHousingType("c").build();
+        AddPropertyToSellCommand command =
+                (AddPropertyToSellCommand) parser.parseCommand("addSell 1 ht/c sp/1500000 pc/123456 un/10-01");
+        assertEquals(new AddPropertyToSellCommand(index, property), command);
     }
 
     @Test
@@ -182,6 +181,54 @@ public class AddressBookParserTest {
         DeletePropertyToBuyCommand command =
                 (DeletePropertyToBuyCommand) parser.parseCommand("delBuy 1 1");
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_bought() throws Exception {
+        Index personIndex = Index.fromOneBased(1);
+        Index propertyIndex = Index.fromOneBased(1);
+        String priceString = "2000000";
+        Price actualPrice = new Price(priceString);
+
+        String input = "bought "
+                + personIndex.getOneBased()
+                + " "
+                + propertyIndex.getOneBased()
+                + " ap/" + priceString;
+
+        BoughtPropertyCommand expectedCommand = new BoughtPropertyCommand(
+                personIndex,
+                propertyIndex,
+                actualPrice);
+
+        BoughtPropertyCommand command =
+                (BoughtPropertyCommand) parser.parseCommand(input);
+
+        assertEquals(command, expectedCommand);
+    }
+
+    @Test
+    public void parseCommand_sold() throws Exception {
+        Index personIndex = Index.fromOneBased(1);
+        Index propertyIndex = Index.fromOneBased(1);
+        String priceString = "2000000";
+        Price actualPrice = new Price(priceString);
+
+        String input = "sold "
+                + personIndex.getOneBased()
+                + " "
+                + propertyIndex.getOneBased()
+                + " ap/" + priceString;
+
+        SoldPropertyCommand expectedCommand = new SoldPropertyCommand(
+                personIndex,
+                propertyIndex,
+                actualPrice);
+
+        SoldPropertyCommand command =
+                (SoldPropertyCommand) parser.parseCommand(input);
+
+        assertEquals(command, expectedCommand);
     }
 
     @Test

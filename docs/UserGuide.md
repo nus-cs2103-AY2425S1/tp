@@ -38,9 +38,11 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-   
+
+   * `addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Extremely spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1.
+
    * `addBuy 1 ht/c bp/1750000 pc/567510 un/10-65 t/Extremely spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1. 
-   
+
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
@@ -101,7 +103,7 @@ Examples:
 
 ### Adding a property to buy: `addBuy`
 
-Adds a property which has to be bought to the address book. The property is associated to a contact in the Address Book. 
+Adds a property which has to be bought to the address book. The property is associated to a contact in the Address Book.
 
 Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 

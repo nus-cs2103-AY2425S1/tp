@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.statistics.AddressBookStatistics;
 
 /**
  * Wraps all data at the address-book level
@@ -19,6 +20,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final AddressBookStatistics statistics;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        statistics = new AddressBookStatistics();
     }
 
     public AddressBook() {}
@@ -38,6 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
+        resetStatistics();
         resetData(toBeCopied);
     }
 
@@ -52,11 +56,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void resetStatistics() {
+        this.statistics.reset();
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
+        resetStatistics();
         setPersons(newData.getPersonList());
     }
 
@@ -85,6 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
+        statistics.processPersonData(p);
         persons.add(p);
     }
 

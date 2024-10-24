@@ -9,6 +9,9 @@ Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class AddressBookStatistics
+Class UniqueSellingPropertyList
+Class UniqueBuyingPropertyList
 Class ModelManager
 Class UserPrefs
 
@@ -19,6 +22,17 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class NameContainsKeywordsPredicate
+Class PhoneNumberContainsKeywordPredicate
+Class TagContactContainsKeywordPredicate
+Class BuyingProperties
+Class SellingProperties
+Class Property
+Class "<<enumeration>>\nHousingType" as HousingType
+Class PostalCode
+Class UnitNumber
+Class Price
+Class ActualPrice
 
 Class I #FFFFFF
 }
@@ -36,19 +50,44 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" AddressBookStatistics
+AddressBookStatistics --> UniqueSellingPropertyList
+AddressBookStatistics --> UniqueBuyingPropertyList
+
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> BuyingProperties
+Person *--> SellingProperties
+
+SellingProperties --> "*" Property
+BuyingProperties --> "*" Property
+
+Property *--> HousingType
+Property *--> PostalCode
+Property *--> UnitNumber
+Property *--> Price
+Property *--> ActualPrice
+Property *--> "*" Tag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+ModelManager -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> BuyingProperties
+BuyingProperties -[hidden]right-> SellingProperties
+AddressBookStatistics -[hidden]right-> UniquePersonList
 
-ModelManager --> "~* filtered" Person
+
+ModelManager --> "~* add" Person
+ModelManager --> "~* delete" Person
+ModelManager --> "~* filtered (by name, phone, tags)" Person
+ModelManager --> "~* pinned" Person
+ModelManager -----> "~* filtered" Person
 @enduml

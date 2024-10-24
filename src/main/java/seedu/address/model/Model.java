@@ -103,4 +103,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of filtered person based on their phone number */
     ObservableList<Person> getFilteredPhoneNumberList();
+
+    /** Pins the given person to the top of the list */
+    void pinPerson(Person target);
 }

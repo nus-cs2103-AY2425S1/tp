@@ -25,6 +25,13 @@ public class Price {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns an Integer representation of Price.
+     */
+    public Integer getPrice() {
+        return Integer.parseInt(value);
+    }
+
     @Override
     public String toString() {
         return value;
