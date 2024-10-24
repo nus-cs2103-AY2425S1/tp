@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -34,6 +35,8 @@
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
             <Label fx:id="dob" styleClass="cell_small_label" text="\$dob" />
             <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
+            <Label fx:id="appointmentsLabel" styleClass="cell_small_label" text="\$appointmentsLabel" />
+            <ListView fx:id="appointments" />
         </VBox>
     </GridPane>
 </HBox>

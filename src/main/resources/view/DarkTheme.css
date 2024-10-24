@@ -133,17 +133,17 @@
 }
 
 .cell_doctor_flag_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
     -fx-background-color: #89cffa;
+    -fx-padding: 0 2 0 2;
+    -fx-margin: 0 5 0 0;
+    -fx-border-radius: 5;
 }
 
 .cell_patient_flag_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
     -fx-background-color: #f75c5c;
+    -fx-padding: 0 2 0 2;
+    -fx-margin: 0 5 0 0;
+    -fx-border-radius: 5;
 }
 
 .stack-pane {
@@ -363,4 +363,33 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#appointmentsLabel {
+    -fx-text-fill: white;
+    -fx-background-color: #00674F;
+    -fx-padding: 1 3 1 3;
+    -fx-margin: 2 0 2 0;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 13;
+    -fx-background-insets: 0;
+}
+
+#appointments .list-cell {
+    -fx-text-fill: white; /* 5 */
+    -fx-padding: 1 3 1 3;
+}
+
+#appointments .list-cell:odd {
+    -fx-background-color: #777777; /* 1 */
+}
+
+#appointments .list-cell:even {
+    -fx-background-color: #333333; /* for information */
+}
+
+#appointments .list-cell:filled:hover {
+    -fx-background-color: #00f; /* 2 */
+    -fx-text-fill: white;
 }

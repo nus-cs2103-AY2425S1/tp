@@ -1,12 +1,17 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.doctor.Doctor;
 
 /**
@@ -44,6 +49,10 @@ public class DoctorCard extends UiPart<Region> {
     private Label specialty;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label appointmentsLabel;
+    @FXML
+    private ListView<String> appointments;
 
     /**
      * Creates a {@code DoctorCode} with the given {@code Doctor} and index to display.
@@ -61,5 +70,22 @@ public class DoctorCard extends UiPart<Region> {
         doctor.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        Set<Appointment> appointmentSet = doctor.getAppointments();
+        appointmentsLabel.setText("Appointments: " + appointmentSet.size());
+
+        ObservableList<String> appointmentStrings = FXCollections.observableArrayList(appointmentSet.stream()
+                .map(appointment -> "Appointment " + appointment.getId() + ": With Patient "
+                        + appointment.getPatientName() + " on "
+                        + appointment.getDate().toString() + " (" + appointment.getTime().toString() + "hrs)")
+                .toArray(String[]::new));
+
+        appointments.setItems(appointmentStrings);
+
+        if (appointmentSet.isEmpty()) {
+            appointments.setPrefHeight(0);
+        } else {
+            appointments.setPrefHeight(50);
+        }
     }
 }
