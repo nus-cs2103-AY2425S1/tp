@@ -13,7 +13,7 @@
 
 .label-hour {
     -fx-text-fill: white;
-    -fx-font-size: 8px;
+    -fx-font-size: 10px;
 }
 
 .icon {
@@ -304,4 +304,9 @@
     -fx-background-color: darkblue;
     -fx-background-radius: 20;
     -fx-padding: 2 5 2 5;
+}
+
+.label-calendar-header {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
 }

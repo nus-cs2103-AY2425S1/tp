@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <Label styleClass="label-calendar-header" prefHeight="20.0" text="20 October 2024 - 26 October"/>
     <HBox>
 
         <VBox prefWidth="50.0" HBox.hgrow="NEVER" />
