@@ -75,6 +75,14 @@ public class PersonCard extends UiPart<Region> {
      * @param person The person whose public addresses to display.
      */
     public void addPublicAddressUI(Person person) {
+        publicAddress.getChildren().clear();
+
+        // Delete VBox if the person has no public addresses
+        if (person.getPublicAddresses().isEmpty()) {
+            VBox parent = (VBox) publicAddress.getParent();
+            parent.getChildren().remove(publicAddress);
+        }
+
         person.getPublicAddresses().entrySet().stream()
                 .filter(entry -> !entry.getValue().isEmpty())
                 .flatMap(entry -> {
@@ -90,6 +98,8 @@ public class PersonCard extends UiPart<Region> {
                     label.getStyleClass().add("cell_small_label");
                     publicAddress.getChildren().add(label);
                 });
+
     }
+
 }
 
