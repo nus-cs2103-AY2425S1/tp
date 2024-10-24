@@ -62,8 +62,15 @@ public class PersonEventManager {
      * @param person
      */
     public static void removePersonFromAllEvents(Person person) {
+        if (eventPersonMap.keySet() == null) {
+            return;
+        }
+
         for (Event event : eventPersonMap.keySet()) {
-            eventPersonMap.get(event).remove(person);
+            ArrayList<Person> linkedPeople = eventPersonMap.get(event);
+            if (linkedPeople != null) {
+                linkedPeople.remove(person);
+            }
         }
     }
 
@@ -73,6 +80,10 @@ public class PersonEventManager {
      * @param editedPerson
      */
     public static void setPersonForAllEvents(Person target, Person editedPerson) {
+        if (eventPersonMap.keySet() == null) {
+            return;
+        }
+
         for (Event event : eventPersonMap.keySet()) {
             if (eventPersonMap.get(event).contains(target)) {
                 eventPersonMap.get(event).remove(target);
