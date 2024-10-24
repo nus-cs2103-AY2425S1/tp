@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private WeddingListPanel weddingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +43,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private StackPane listPanelPlaceholder;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane weddingListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -184,6 +191,16 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            // allows for the corresponding person or wedding list to be shown
+            listPanelPlaceholder.getChildren().clear();
+            if (commandText.startsWith("list-wedding")) {
+                weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+                listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+            } else {
+                personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+                listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
             }
 
             return commandResult;

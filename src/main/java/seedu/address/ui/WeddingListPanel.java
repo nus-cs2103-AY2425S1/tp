@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.wedding.Wedding;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of weddings.
  */
 public class WeddingListPanel extends UiPart<Region> {
     private static final String FXML = "WeddingListPanel.fxml";
@@ -30,7 +30,7 @@ public class WeddingListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Wedding} using a {@code WeddingCard}.
      */
     class WeddingListViewCell extends ListCell<Wedding> {
         @Override
@@ -45,5 +45,4 @@ public class WeddingListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
