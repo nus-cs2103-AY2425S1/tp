@@ -182,8 +182,10 @@ The sequence diagram below illustrates the process of adding a person into Talen
 
 ### Delete Feature ###
 
-#### `Delete Feature` Implementation Sequence Diagram
+#### `Delete Command` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of deleting a person from TalentSG.
+
+<img src="images/DeleteCommandSequenceDiagram.png" width="550" />
 
 #### Key Components
 - `DeleteCommand`: Executes the deletion operation based on the user's input.
