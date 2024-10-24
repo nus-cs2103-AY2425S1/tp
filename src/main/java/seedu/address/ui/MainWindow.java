@@ -34,12 +34,16 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private boolean isLightMode = true;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem themeMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -63,6 +67,11 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
+        // Load the saved theme from GuiSettings
+        GuiSettings guiSettings = logic.getGuiSettings();
+        String savedTheme = guiSettings.getTheme();
+        applyTheme(savedTheme != null ? savedTheme : "light");
+
         setAccelerators();
 
         helpWindow = new HelpWindow();
@@ -74,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(themeMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -110,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getGuiSettings().getTheme());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -157,10 +167,45 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), isLightMode ? "light" : "dark");
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Toggles between light and dark mode
+     */
+    @FXML
+    private void handleTheme() {
+        if (isLightMode) {
+            applyTheme("dark");
+            isLightMode = false;
+        } else {
+            applyTheme("light");
+            isLightMode = true;
+        }
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), isLightMode ? "light" : "dark");
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY(), isLightMode ? "light" : "dark");
+
+        logic.setGuiSettings(guiSettings);
+    }
+
+    private void applyTheme(String theme) {
+        primaryStage.getScene().getStylesheets().clear();
+        if (theme.equals("light")) {
+            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/LightTheme.css")
+                    .toExternalForm());
+        } else if (theme.equals("dark")) {
+            primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/DarkTheme.css")
+                    .toExternalForm());
+        }
+        primaryStage.getScene().getStylesheets().add(getClass().getResource("/view/Extensions.css")
+                .toExternalForm());
     }
 
     public PersonListPanel getPersonListPanel() {
