@@ -56,6 +56,35 @@ public class TagCommandTest {
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_validTagsUnfilteredListWithForce_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("colleague"))));
+
+        // Ensure the model has the tag before adding it to the person
+
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd, true);
+
+        String expectedMessage = String.format(Messages.MESSAGE_ADD_TAG_SUCCESS,
+                "colleague", personToEdit.getName().toString());
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        updatedTags.addAll(tagsToAdd);
+        Person editedPerson = new Person(
+                personToEdit.getName(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getAddress(),
+                updatedTags,
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.addTag(new Tag(new TagName("colleague")));
+
+        CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
 
     @Test
     public void execute_validMultipleTagsUnfilteredList_success() {
