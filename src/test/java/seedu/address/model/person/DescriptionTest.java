@@ -15,9 +15,14 @@ public class DescriptionTest {
 
     @Test
     public void constructor_invalidDescription_throwsIllegalArgumentException() {
-        String invalidDescription = "Exploring the depths of knowledge can lead to unexpected insights, "
-                + "transforming ordinary thoughts into extraordinary ideas that inspire change and growth."
-                + "blah blah blah";
+        String invalidDescription = "apple banana orange mango grape lemon peach pear strawberry blueberry "
+                            + "raspberry watermelon pineapple kiwi cherry lime grapefruit apricot plum coconut "
+                            + "fig date nectarine cantaloupe guava papaya pomegranate "
+                            + "cranberry tangerine blackberry currant "
+                            + "dragonfruit lychee persimmon quince starfruit avocado passionfruit "
+                            + "gooseberry mulberry elderberry boysenberry kumquat jujube"
+                            + "yuzu ackee rambutan loquat carambola jabuticaba sapodilla medlar feijoa pawpaw salak "
+                            + "tamarillo lucuma BLAH BLAH BLAH BLAH BLAH BLAH BLAH";
         assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
     }
 
@@ -28,10 +33,15 @@ public class DescriptionTest {
 
         // invalid Descriptions
         assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription("Exploring the depths of knowledge can "
-                + "lead to unexpected insights," + "transforming ordinary thoughts into extraordinary "
-                + "ideas that inspire change and growth"
-                + "blah blah blah")); // too long Description
+        assertFalse(Description.isValidDescription("apple banana orange mango grape lemon peach "
+                            + "pear strawberry blueberry "
+                            + "raspberry watermelon pineapple kiwi cherry lime grapefruit apricot plum coconut "
+                            + "fig date nectarine cantaloupe guava papaya pomegranate cranberry "
+                            + "tangerine blackberry currant "
+                            + "dragonfruit lychee persimmon quince starfruit avocado passionfruit "
+                            + "gooseberry mulberry elderberry boysenberry kumquat jujube"
+                            + "yuzu ackee rambutan loquat carambola jabuticaba sapodilla medlar feijoa pawpaw salak "
+                            + "tamarillo lucuma BLAH BLAH BLAH BLAH BLAH BLAH BLAH")); // too long Description
 
 
 

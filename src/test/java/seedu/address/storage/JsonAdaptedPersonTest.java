@@ -24,12 +24,15 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_CLIENT_TYPE = "#A";
-    private static final String INVALID_DESCRIPTION = "Exploring new horizons often brings "
-            + "unexpected insights and experiences. "
-            + "Embracing change allows us to grow, adapt, and discover our true potential. "
-            + "Each challenge presents an opportunity for learning and self-improvement. "
-            + "By stepping out of our comfort zones, "
-            + "we open ourselves to new possibilities and connections with others.";
+    private static final String INVALID_DESCRIPTION = "apple banana orange mango grape lemon "
+                    + "peach pear strawberry blueberry "
+                    + "raspberry watermelon pineapple kiwi cherry lime grapefruit apricot plum coconut "
+                    + "fig date nectarine cantaloupe guava papaya pomegranate cranberry tangerine blackberry currant "
+                    + "dragonfruit lychee persimmon quince starfruit avocado passionfruit "
+                    + "gooseberry mulberry elderberry boysenberry kumquat jujube "
+                    + "yuzu ackee rambutan loquat carambola jabuticaba sapodilla medlar feijoa pawpaw salak "
+                    + "tamarillo lucuma BLAH BLAH BLAH BLAH BLAH BLAH BLAH";
+
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();

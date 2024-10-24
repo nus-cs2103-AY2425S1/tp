@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #VALIDATION_REGEX}
  */
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values but not more than 150 "
+    public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values but not more than 500"
             + "characters";
 
-    public static final String VALIDATION_REGEX = "^.{1,150}$";
+    public static final String VALIDATION_REGEX = "^.{1,500}$";
 
     public final String description;
 
