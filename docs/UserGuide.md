@@ -74,6 +74,29 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## Features
+
+### Mark a supplier status : `mark`
+
+The `mark` command is used to mark a supplier as either **active** or **inactive**
+in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
+
+#### Command Format:
+`mark <supplier_index> <status>`
+- `<supplier_index>`: The index of the supplier in the list.
+
+
+- `<status>`: Either `active` or `inactive` to indicate the supplier's status.
+
+#### Example
+To mark the supplier at index 3 as active:
+    
+    mark 3 active
+
+   A success message will be displayed if the supplier is successfully marked as active.
+   
+### Here's how it would look like in the app:
+![mark command](images/markCommand.png)
 
 ### Adding a person: `add`
 
@@ -131,19 +154,24 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a supplier : `delete`
 
-Deletes the specified person from the address book.
+The `delete` command is used to delete a supplier from the list of suppliers in VendorVault.
 
-Format: `delete INDEX`
+#### Command Format:
+`delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX`: The index of the supplier in the list.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+#### Example
+To delete the supplier at index 3:
+
+    delete 3
+
+A success message will be displayed if the supplier is successfully deleted.
+
+### Here's how it would look like in the app:
+![delete command](images/deleteCommand.png)
 
 ### Clearing all entries : `clear`
 
