@@ -65,7 +65,7 @@
             <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
           </VBox>
           <VBox fx:id="rightPane" VBox.vgrow="ALWAYS" style="-fx-background-color: #f0f0f0;">
-            <Label text="Placeholder for future content" />
+            <StackPane fx:id="personDetailsPlaceholder" VBox.vgrow="NEVER" />
           </VBox>
         </SplitPane>
       </VBox>
