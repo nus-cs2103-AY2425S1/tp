@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -42,7 +43,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PROJECT_STATUS = BENSON.getProjectStatus().toString();
     private static final String VALID_PAYMENT_STATUS = BENSON.getPaymentStatus().toString();
     private static final String VALID_CLIENT_STATUS = BENSON.getClientStatus().toString();
-    private static final String VALID_DEADLINE = BENSON.getDeadline().toString().format("dd-mm-yyyy");
+    private static final String VALID_DEADLINE = String.format("dd-mm-yyyy", BENSON.getDeadline().toString());
 
 
     @Test
@@ -155,6 +156,16 @@ public class JsonAdaptedPersonTest {
                         VALID_PROJECT_STATUS, INVALID_PAYMENT_STATUS,
                         VALID_CLIENT_STATUS, VALID_DEADLINE, VALID_TAGS);
         String expectedMessage = PaymentStatus.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidClientStatus_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_PROJECT_STATUS, VALID_PAYMENT_STATUS,
+                        INVALID_CLIENT_STATUS, VALID_DEADLINE, VALID_TAGS);
+        String expectedMessage = ClientStatus.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

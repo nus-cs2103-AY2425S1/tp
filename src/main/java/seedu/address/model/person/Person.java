@@ -43,9 +43,9 @@ public class Person {
         this.projectStatus = (projectStatus != null)
                 ? projectStatus : new ProjectStatus("in progress"); // Default value
         this.paymentStatus = (paymentStatus != null)
-                ? paymentStatus : new PaymentStatus("unpaid");
+                ? paymentStatus : new PaymentStatus("unpaid"); // Default value
         this.clientStatus = (clientStatus != null)
-                ? clientStatus : new ClientStatus("active"); //default
+                ? clientStatus : new ClientStatus("active"); // Default value
         this.deadline = deadline;
     }
 
@@ -119,6 +119,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the person has been blacklisted by the user.
+     */
+    public boolean isBlacklisted() {
+        return clientStatus.isBlacklisted();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -147,7 +154,6 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags, projectStatus, paymentStatus, clientStatus, deadline);
     }
 
