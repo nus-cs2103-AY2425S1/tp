@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_NOTED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.EditNotesCommand.DUPLICATE_MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_NOTE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -21,7 +22,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -62,7 +62,7 @@ public class EditNotesCommandTest {
     @Test
     public void execute_duplicateNote_throwsCommandException() {
         EditNotesCommand editNotesCommand = new EditNotesCommand(INDEX_SECOND_PERSON, INDEX_FIRST_NOTE, DUPLICATE_NOTE);
-        assertThrows(CommandException.class, Note.DUPLICATE_MESSAGE_CONSTRAINTS, () -> editNotesCommand.execute(model));
+        assertThrows(CommandException.class, DUPLICATE_MESSAGE_CONSTRAINTS, () -> editNotesCommand.execute(model));
     }
 
     @Test
