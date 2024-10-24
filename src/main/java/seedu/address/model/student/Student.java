@@ -129,6 +129,12 @@ public class Student extends Person {
      */
     public void markAttendance(LocalDate date, String status) {
         Attendance attendance = new Attendance(status);
+        for (AttendanceRecord ar : attendanceRecords) {
+            if (ar.getDate().equals(date)) {
+                ar.setAttendance(attendance);
+                return;
+            }
+        }
         AttendanceRecord record = new AttendanceRecord(date, attendance);
         attendanceRecords.add(record);
     }

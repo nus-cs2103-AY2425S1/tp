@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class AttendanceRecord {
     private final LocalDate date;
-    private final Attendance attendance;
+    private Attendance attendance;
 
     /**
      *  Constructs an {@code AttendanceRecord} object.
@@ -25,6 +25,10 @@ public class AttendanceRecord {
 
     public Attendance getAttendance() {
         return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
     }
 
     @Override
