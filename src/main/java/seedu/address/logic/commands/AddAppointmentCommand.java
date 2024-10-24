@@ -62,8 +62,10 @@ public class AddAppointmentCommand extends Command {
         Person doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
         boolean isPatientFree = patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId(), remarks);
+        boolean isDoctorFree = doctorToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
+                doctorToAddAppointment.getId(), remarks);
 
-        if (!isPatientFree) {
+        if (!isPatientFree || !isDoctorFree) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
