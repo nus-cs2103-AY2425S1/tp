@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_HELP_KEYWORD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -20,6 +20,7 @@ public class HelpCommandParserTest {
         assertParseSuccess(parser, "edit", new HelpCommand("edit"));
         assertParseSuccess(parser, "find", new HelpCommand("find"));
         assertParseSuccess(parser, "clear", new HelpCommand("clear"));
+        assertParseSuccess(parser, "help", new HelpCommand("help"));
         assertParseSuccess(parser, "list", new HelpCommand("list"));
         assertParseSuccess(parser, "exit", new HelpCommand("exit"));
         assertParseSuccess(parser, " add", new HelpCommand("add"));
@@ -31,8 +32,8 @@ public class HelpCommandParserTest {
     @Test
     public void parse_invalidKeyWords_fail() {
         assertParseFailure(parser, "hello",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, "hello"));
+            String.format(MESSAGE_INVALID_HELP_KEYWORD, "hello"));
         assertParseFailure(parser, "helpadd",
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, "helpadd"));
+            String.format(MESSAGE_INVALID_HELP_KEYWORD, "helpadd"));
     }
 }
