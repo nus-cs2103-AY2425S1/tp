@@ -35,7 +35,7 @@ public class ResetAttendanceCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         for (Person p : lastShownList) {
-            Person editedPerson = createNewPerson(p);
+            Person editedPerson = createNewPersonWithZeroAttendance(p);
             model.setPerson(p, editedPerson);
         }
 
@@ -47,7 +47,7 @@ public class ResetAttendanceCommand extends Command {
      * Creates and returns a {@code Person} with AttendanceCount of 0.
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createNewPerson(Person personToEdit) {
+    static Person createNewPersonWithZeroAttendance(Person personToEdit) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
