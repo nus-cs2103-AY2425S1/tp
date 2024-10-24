@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkAttendanceCommandParser" as MarkAttendanceCommandParser LOGIC_COLOR
+participant "markCommand:MarkAttendanceCommand" as MarkAttendanceCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "event:AttendanceEvent" as AttendanceEvent MODEL_COLOR
+participant "personList:List<Person>" as PersonList MODEL_COLOR
+participant "person:Person" as Person MODEL_COLOR
+end box
+
+LogicManager -> AddressBookParser : parseCommand("mark e/Event i/1 i/2")
+activate AddressBookParser
+
+AddressBookParser -> MarkAttendanceCommandParser : parse("e/Event i/1 i/2")
+activate MarkAttendanceCommandParser
+
+MarkAttendanceCommandParser -> MarkAttendanceCommandParser : parse event name and indices
+
+MarkAttendanceCommandParser -> MarkAttendanceCommand : create command
+activate MarkAttendanceCommand
+
+MarkAttendanceCommandParser <-- MarkAttendanceCommand : command created
+deactivate MarkAttendanceCommand
+
+MarkAttendanceCommandParser --> AddressBookParser : markCommand
+deactivate MarkAttendanceCommandParser
+deactivate AddressBookParser
+
+LogicManager -> markCommand : execute(model)
+activate markCommand
+
+markCommand -> Model : getAttendanceEvent("Event")
+activate Model
+
+Model --> markCommand : Optional<AttendanceEvent>
+deactivate Model
+
+markCommand -> Model : getFilteredPersonList()
+Model --> markCommand : personList
+
+loop for each index
+    markCommand -> personList : get(zeroBasedIndex)
+    personList --> markCommand : person
+    markCommand -> Model : markStudentAttendance(eventName, studentId, true)
+    activate Model
+    Model --> markCommand
+    deactivate Model
+end
+
+markCommand -> CommandResult : create result
+activate CommandResult
+
+markCommand <-- CommandResult : result created
+deactivate CommandResult
+
+markCommand --> LogicManager : result
+deactivate markCommand
+@enduml
