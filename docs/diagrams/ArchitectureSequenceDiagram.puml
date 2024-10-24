@@ -2,6 +2,14 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+' Define colors
+!define USER_COLOR #ff6666
+!define UI_COLOR #66b3ff
+!define LOGIC_COLOR #ffcc66
+!define MODEL_COLOR #99ff99
+!define STORAGE_COLOR #ff99cc
+!define STORAGE_COLOR_T1 #ffb3e6
+
 Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR
 Participant ":Logic" as logic LOGIC_COLOR
@@ -34,6 +42,7 @@ deactivate storage
 logic --[LOGIC_COLOR]> ui
 deactivate logic
 
-ui--[UI_COLOR]> user
+ui --[UI_COLOR]> user
 deactivate ui
 @enduml
+
