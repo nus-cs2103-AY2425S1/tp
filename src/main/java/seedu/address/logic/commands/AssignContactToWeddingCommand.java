@@ -75,8 +75,8 @@ public class AssignContactToWeddingCommand extends Command {
 
         for (Index i : assignedPersonIndexList) {
             if (i.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + " " +
-                        Messages.MESSAGE_TRY_PERSON_LIST_MODE);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + " "
+                        + Messages.MESSAGE_TRY_PERSON_LIST_MODE);
             } else {
                 Person personToAdd = lastShownList.get(i.getZeroBased());
                 newContactsAssignedToWedding.add(personToAdd);
