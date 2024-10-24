@@ -24,3 +24,6 @@ src/test/data/sandbox/
 docs/_site/
 
 .vscode/
+
+/src/main/java/seedu/address/model/person/BlacklistStatus.java
+/src/test/java/seedu/address/model/person/BlacklistStatusTest.java
