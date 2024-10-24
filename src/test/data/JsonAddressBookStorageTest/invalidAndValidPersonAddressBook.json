@@ -5,13 +5,15 @@
     "email": "hans@example.com",
     "address": "4th street",
     "telegram": "@ValidTelegram",
-    "github": "ValidGithub"
+    "github": "ValidGithub",
+    "attendance": [ ]
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "address": "4th street",
     "telegram": "@Person",
-    "github": "PersonWithInvalidPhone"
+    "github": "PersonWithInvalidPhone",
+    "attendance": [ ]
   } ]
 }

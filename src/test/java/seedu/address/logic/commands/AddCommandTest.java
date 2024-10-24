@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -153,6 +154,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Optional<Person> getPerson(Name name) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -187,7 +193,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called");
         }
 
-        @Override
         public Github getGitHubUsername(Name name) {
             throw new AssertionError("This method should not be called");
         }
@@ -195,7 +200,6 @@ public class AddCommandTest {
         public void replaceAllPersons(List<Person> persons) {
             throw new AssertionError("This method should not be called");
         }
-
 
     }
 

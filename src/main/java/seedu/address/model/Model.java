@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -85,6 +86,14 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Returns the person in the address book with the given name.
+     *
+     * @param name The name to search for
+     * @return An Optional containing the matched person if that person is found, otherwise an empty Optional
+     */
+    Optional<Person> getPerson(Name name);
+
+    /**
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
@@ -98,6 +107,7 @@ public interface Model {
 
     /**
      * Updates the filtered person list to be sorted by the given {@code comparator}.
+     *
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedPersonList(Comparator<Person> comparator);
