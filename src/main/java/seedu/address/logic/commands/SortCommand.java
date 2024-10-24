@@ -33,6 +33,10 @@ public class SortCommand extends Command {
         this.isAscending = isAscending;
     }
 
+    public boolean isAscending() {
+        return isAscending;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
