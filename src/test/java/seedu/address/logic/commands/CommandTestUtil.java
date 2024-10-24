@@ -30,6 +30,7 @@ import seedu.address.model.pet.Pet;
 import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditOwnerDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditPetDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -108,6 +109,9 @@ public class CommandTestUtil {
     public static final EditOwnerCommand.EditOwnerDescriptor DESC_OWNER_AMY;
     public static final EditOwnerCommand.EditOwnerDescriptor DESC_OWNER_BOB;
 
+    public static final EditPetCommand.EditPetDescriptor DESC_PET_FLUFFY;
+    public static final EditPetCommand.EditPetDescriptor DESC_PET_BELLA;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -119,6 +123,10 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
         DESC_OWNER_BOB = new EditOwnerDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
+        DESC_PET_FLUFFY = new EditPetDescriptorBuilder().withName(VALID_NAME_FLUFFY).withSpecies(VALID_SPECIES_FLUFFY)
+                .withBreed(VALID_BREED_FLUFFY).withAge(VALID_AGE_FLUFFY).withSex(VALID_SEX_FLUFFY).build();
+        DESC_PET_BELLA = new EditPetDescriptorBuilder().withName(VALID_NAME_BELLA).withSpecies(VALID_SPECIES_BELLA)
+                .withBreed(VALID_BREED_BELLA).withAge(VALID_AGE_BELLA).withSex(VALID_SEX_BELLA).build();
     }
 
     /**
