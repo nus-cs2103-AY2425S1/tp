@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_AMY;
@@ -149,7 +150,7 @@ public class UpdateCommandTest {
         UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(firstPerson).build();
         UpdateCommand updateCommand = new UpdateCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(updateCommand, model, UpdateCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(updateCommand, model, MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -161,7 +162,7 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(INDEX_FIRST_PERSON,
                 new UpdatePersonDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(updateCommand, model, UpdateCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(updateCommand, model, MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test

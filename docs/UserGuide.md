@@ -101,6 +101,9 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+There is a unique tag for Blood Type, Try putting a tag named A+
+</div>
 
 Examples:
 
@@ -132,6 +135,7 @@ OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDR
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* If NRIC is being updated, the updated NRIC must be unique.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
