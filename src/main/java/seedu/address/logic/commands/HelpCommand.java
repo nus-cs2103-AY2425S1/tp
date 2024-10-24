@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_HELP_KEYWORD;
 import static seedu.address.logic.Messages.getOrderedListString;
 
+import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
