@@ -36,6 +36,10 @@ public class ViewCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Filters the displayed {@code ObservableList} in the {@code Model} to just the selected index.
+     * Returns a {@code CommandResult} that indicates the user has requested to View a person.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
