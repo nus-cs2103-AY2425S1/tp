@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -126,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        PersonDetails personDetails = new PersonDetails(logic.getPersonToDisplay());
+        personDetails = new PersonDetails(logic.getPersonToDisplay());
         personDetailsPlaceholder.getChildren().add(personDetails.getRoot());
     }
 
@@ -170,6 +171,11 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleShowPerson() {
+        personDetails.updateDetails(logic.getPersonToDisplay());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -191,6 +197,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPerson()) {
+                handleShowPerson();
             }
 
             return commandResult;
