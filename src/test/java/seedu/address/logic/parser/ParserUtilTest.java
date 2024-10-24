@@ -258,6 +258,13 @@ public class ParserUtilTest {
         assertEquals(expectedIndexes, actualIndexes);
     }
 
+    @Test
+    public void parsePersonIndexString_emptyPersonIndexString_throwsParseException() {
+        String emptyPersonIndexString = "";
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(emptyPersonIndexString));
+    }
+
+
 
     @Test
     public void parseTags_validTags_success() throws Exception {
