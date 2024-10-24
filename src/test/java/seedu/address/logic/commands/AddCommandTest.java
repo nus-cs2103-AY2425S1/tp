@@ -184,6 +184,26 @@ public class AddCommandTest {
         public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**
