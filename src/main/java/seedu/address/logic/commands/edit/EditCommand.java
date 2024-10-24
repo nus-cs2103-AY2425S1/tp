@@ -138,8 +138,9 @@ public class EditCommand extends Command {
         }
         if (!personBefore.getAddress().equals(personAfter.getAddress())) {
             isChanged = true;
-            changeDescription.append("Address: ").append(personBefore.getAddress()).append(" -> ")
-                    .append(personAfter.getAddress()).append("\n");
+            changeDescription.append("Address: ")
+                    .append(personBefore.getAddress().map(Object::toString).orElse("<no address>")).append(" -> ")
+                    .append(personAfter.getAddress().map(Object::toString).orElse("<no address>")).append("\n");
         }
         if (!personBefore.getTags().equals(personAfter.getTags())) {
             isChanged = true;

@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BETTY;
@@ -28,7 +33,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RoleType;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -217,4 +224,35 @@ public class EditCommandTest {
         assertEquals(expected, editCommand.toString());
     }
 
+    @Test
+    public void getChangeDescription_hasChanges_success() {
+        // changed all fields
+        Person person = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_AMY).withEmptyAddress()
+                .withTags(VALID_TAG_HUSBAND).withModuleRoleMap(new ModuleCode("MA1522"), RoleType.TUTOR).build();
+
+        Person editedPerson = new PersonBuilder().withName(VALID_NAME_BETTY).withPhone(VALID_PHONE_BETTY)
+                .withEmail(VALID_EMAIL_BETTY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND).withModuleRoleMap(new ModuleCode("MA2001"), RoleType.PROFESSOR).build();
+
+        String expected = "Changes made: "
+                + "\nName: " + person.getName() + " -> " + editedPerson.getName()
+                + "\nPhone: " + person.getPhone() + " -> " + editedPerson.getPhone()
+                + "\nEmail: " + person.getEmail() + " -> " + editedPerson.getEmail()
+                + "\nAddress: " + person.getAddress().map(Object::toString).orElse("<no address>")
+                + " -> " + editedPerson.getAddress().map(Object::toString).orElse("<no address>")
+                + "\nTags: " + person.getTags() + " -> " + editedPerson.getTags()
+                + "\n" + EditModuleRoleOperation.getModuleCodeChangeDescription(
+                        person.getModuleRoleMap(),
+                        editedPerson.getModuleRoleMap()) + "\n";
+
+        assertEquals(expected, EditCommand.getChangeDescription(person, editedPerson));
+    }
+
+    @Test
+    public void getChangeDescription_noChanges_success() {
+        Person person = new PersonBuilder().build();
+        String expected = "No changes made.";
+        assertEquals(expected, EditCommand.getChangeDescription(person, person));
+    }
 }
