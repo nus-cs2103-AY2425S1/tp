@@ -48,6 +48,9 @@ public class DeleteLogCommandParser implements Parser<DeleteLogCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteLogCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_LOG_INDEX);
+
         logIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_LOG_INDEX).get());
         return new DeleteLogCommand(personIndex, logIndex);
     }
