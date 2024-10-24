@@ -83,7 +83,8 @@ public class MakeupLesson extends Lesson {
 
     @Override
     public boolean isClashing(MakeupLesson other) {
-        return this.getLessonDate().equals(other.getLessonDate())
+        return this != other
+                && this.getLessonDate().equals(other.getLessonDate())
                 && this.getStartTime().isBefore(other.getEndTime())
                 && this.getEndTime().isAfter(other.getStartTime());
     }

@@ -2,7 +2,6 @@ package keycontacts.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,8 +11,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.StudentDirectory;
-import keycontacts.model.lesson.MakeupLesson;
-import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
 /**
@@ -53,14 +50,11 @@ class JsonSerializableStudentDirectory {
         StudentDirectory studentDirectory = new StudentDirectory();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
-            RegularLesson regularLesson = student.getRegularLesson();
-            Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
             if (studentDirectory.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
 
             studentDirectory.addStudent(student);
-
         }
 
         if (studentDirectory.hasClashingLessons()) {

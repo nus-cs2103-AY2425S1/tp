@@ -2,12 +2,16 @@ package keycontacts.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.util.ToStringBuilder;
+import keycontacts.model.lesson.CancelledLesson;
 import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.RegularLesson;
@@ -105,85 +109,80 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
      * the student directory.
      */
     public boolean hasClashingLessons() {
-        ObservableList<Student> students = this.getStudentList();
-        for (Student student : students) {
-            RegularLesson regularLesson = student.getRegularLesson();
-            Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
-
-            if (getClashingLesson(regularLesson).isPresent()) {
-                return true;
-            }
-
-            for (MakeupLesson makeupLesson : makeupLessons) {
-                if (getClashingLesson(makeupLesson).isPresent()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return !getClashingLessons().isEmpty();
     }
 
     /**
-     * Checks for any clashing lessons in the existing student directory.
-     * @param lessonToCheck Lesson to check for clashes with.
-     * @return A {@code ClashResult} object containing the results of the clash check.
+     * Returns a set of every clashing lesson in the {@code StudentDirectory}.
      */
-    public Optional<Lesson> getClashingLesson(Lesson lessonToCheck) {
+    public Set<Lesson> getClashingLessons() {
         ObservableList<Student> students = this.getStudentList();
+        Stream<Lesson> clashingLessonsStream1 = students.stream()
+                .flatMap(student -> student.getMakeupLessons().stream())
+                .flatMap(ml -> checkAgainstMakeupLessons(ml).stream());
+        Stream<Lesson> clashingLessonsStream2 = students.stream()
+                .flatMap(student -> student.getMakeupLessons().stream())
+                .flatMap(ml -> checkAgainstRegularLessons(ml).stream());
+        Stream<Lesson> clashingLessonsStream3 = students.stream()
+                .map(student -> student.getRegularLesson())
+                .flatMap(rl -> checkAgainstRegularLessons(rl).stream());
+        return Stream.concat(clashingLessonsStream1,
+                Stream.concat(clashingLessonsStream2, clashingLessonsStream3))
+                .collect(Collectors.toSet()); // duplicate clashing lessons get eliminated during set conversion
+    }
+
+    /**
+     * Checks if a {@code MakeupLesson} clashes with any student's {@code MakeupLesson}s.
+     * @return A {@code Set<Lesson>} of clashing lessons.
+     */
+    private Set<Lesson> checkAgainstMakeupLessons(MakeupLesson makeupLesson) {
+        return this.getStudentList().stream()
+                .flatMap(student -> student.getMakeupLessons().stream())
+                .filter(ml -> makeupLesson.isClashing(ml))
+                .map(ml -> (Lesson) ml) // casting to lesson
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Checks if a {@code RegularLesson} clashes with any student's {@code RegularLesson}.
+     * @return A {@code Set<Lesson>} of clashing lessons.
+     */
+    private Set<Lesson> checkAgainstRegularLessons(RegularLesson regularLesson) {
+        return this.getStudentList().stream()
+                .map(student -> student.getRegularLesson())
+                .filter(rl -> rl != null && regularLesson != null && regularLesson.isClashing(rl))
+                .map(rl -> (Lesson) rl) // casting to lesson
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Checks if a {@code MakeupLesson} clashes with any student's {@code RegularLesson}.
+     * @return A {@code Set<Lesson>} of clashing lessons.
+     */
+    private Set<Lesson> checkAgainstRegularLessons(MakeupLesson makeupLesson) {
+        ObservableList<Student> students = this.getStudentList();
+        Set<Lesson> clashingLessons = new HashSet<>();
         for (Student student : students) {
-            Lesson clashLesson = findClashingLesson(student, lessonToCheck);
-            if (clashLesson != null) {
-                return Optional.of(clashLesson);
-            }
-        }
-        return Optional.empty(); // no clashes found
-    }
-
-    private Lesson findClashingLesson(Student student, Lesson lessonToCheck) {
-        if (lessonToCheck == null) {
-            return null;
-        }
-
-        RegularLesson regularLesson = student.getRegularLesson();
-        Set<MakeupLesson> makeupLessons = student.getMakeupLessons();
-
-        // check for clashes with the provided lesson against the current student's lessons
-        if (regularLesson != null
-                && lessonToCheck.isClashing(regularLesson)
-                && regularLesson != lessonToCheck
-                && !isOnCancelledLessonDay(lessonToCheck)) { // check if regular lesson on the day is cancelled
-            return regularLesson; // clash with the student's regular lesson
-        }
-
-        for (MakeupLesson ml : makeupLessons) {
-            if (lessonToCheck.isClashing(ml)
-                    && ml != lessonToCheck) {
-                return ml; // clash with the student's makeup lesson
+            RegularLesson regularLesson = student.getRegularLesson();
+            if (regularLesson != null
+                    && makeupLesson.isClashing(regularLesson)
+                    && findCancelledLessonMatchingDay(student, makeupLesson).isEmpty()) {
+                clashingLessons.add(regularLesson);
+                clashingLessons.add(makeupLesson);
             }
         }
 
-        return null; // no clashes found
+        return clashingLessons;
     }
 
-    private boolean isOnCancelledLessonDay(Lesson lesson) {
-        if (lesson instanceof MakeupLesson) {
-            MakeupLesson makeupLesson = (MakeupLesson) lesson;
-            return this.getStudentList()
-                    .stream()
-                    .flatMap(student -> student.getCancelledLessons().stream())
-                    .anyMatch(cl -> makeupLesson.getLessonDate().equals(cl.getLessonDate()));
-        }
-
-        if (lesson instanceof RegularLesson) {
-            RegularLesson regularLesson = (RegularLesson) lesson;
-            return this.getStudentList()
-                    .stream()
-                    .flatMap(student -> student.getCancelledLessons().stream())
-                    .anyMatch(cl -> regularLesson.getLessonDay().equals(cl.getLessonDate().convertToDay()));
-        }
-
-        return false;
+    /**
+     * Helper function to check if the student has a {@code CancelledLesson} on the day of the {@code MakeupLesson}
+     * to see if it should ignore the student's {@code RegularLesson}.
+     */
+    private Optional<CancelledLesson> findCancelledLessonMatchingDay(Student student, MakeupLesson makeupLesson) {
+        return student.getCancelledLessons().stream()
+                .filter(cl -> makeupLesson.getLessonDate().equals(cl.getLessonDate()))
+                .findFirst();
     }
 
     //// util methods

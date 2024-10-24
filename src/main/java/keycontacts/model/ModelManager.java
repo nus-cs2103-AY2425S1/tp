@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -114,9 +114,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<Lesson> getClashingLesson(Lesson lesson) {
-        requireNonNull(lesson);
-        return studentDirectory.getClashingLesson(lesson);
+    public Set<Lesson> getClashingLessons() {
+        return studentDirectory.getClashingLessons();
     }
 
     //=========== Filtered Student List Accessors =============================================================

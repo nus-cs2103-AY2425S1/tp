@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Optional<Lesson> getClashingLesson(Lesson lesson) {
+        public Set<Lesson> getClashingLessons() {
             throw new AssertionError("This method should not be called.");
         }
     }

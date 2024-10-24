@@ -1,7 +1,7 @@
 package keycontacts.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -57,7 +57,7 @@ public interface Model {
     /**
      * Returns a {@Code ClashResult} object containing details of lesson clashes.
      */
-    Optional<Lesson> getClashingLesson(Lesson lessonToCheck);
+    Set<Lesson> getClashingLessons();
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the student directory.

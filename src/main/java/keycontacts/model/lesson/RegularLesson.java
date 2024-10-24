@@ -73,7 +73,8 @@ public class RegularLesson extends Lesson {
 
     @Override
     public boolean isClashing(RegularLesson other) {
-        return this.getLessonDay().equals(other.getLessonDay())
+        return this != other
+                && this.getLessonDay().equals(other.getLessonDay())
                 && this.getStartTime().isBefore(other.getEndTime())
                 && this.getEndTime().isAfter(other.getStartTime());
     }

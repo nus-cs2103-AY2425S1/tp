@@ -7,7 +7,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.logic.Messages;
@@ -63,16 +63,19 @@ public class MakeupLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Optional<Lesson> clashResult = model.getClashingLesson(makeupLesson);
-        if (clashResult.isPresent()) {
-            throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
-                    clashResult.get().toDisplay()));
-        }
-
         Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
         Student updatedStudent = studentToUpdate.withAddedMakeupLesson(makeupLesson);
 
         model.setStudent(studentToUpdate, updatedStudent);
+
+        Set<Lesson> clashingLessons = model.getClashingLessons();
+        if (!clashingLessons.isEmpty()) { // if there are clashing lessons
+            model.setStudent(updatedStudent, studentToUpdate); // revert change if clash
+            throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
+                    clashingLessons.stream()
+                            .filter(lesson -> lesson == makeupLesson)
+                            .findFirst().get().toDisplay()));
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, makeupLesson.toDisplay(),
                 Messages.format(updatedStudent)));
