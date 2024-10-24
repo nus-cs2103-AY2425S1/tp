@@ -5,16 +5,19 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniqueMemberList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueMemberList
-UniqueTagList -[hidden]down- UniqueMemberList
 
-UniqueTagList -right-> "*" Tag
-UniqueMemberList -right-> Member
 
-Member -up-> "*" Tag
+UniqueMemberList -right-> "*" Member
 
-Member *--> Name
-Member *--> Telegram
-Member *--> Room
+
+Member *-up-> "*" Tag
+
+Member *--> "1" Name
+Member *--> "1" Telegram
+Member *--> "1" Room
+Member *--> "1" Points
+
+Member *-right-> "*" Session
+
+Session --> "1" Points
 @enduml
