@@ -23,7 +23,8 @@ import seedu.address.testutil.TypicalPersons;
 
 public class EditPublicAddressCommandTest {
 
-    private static final String VALID_PUBLIC_ADDRESS = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_PUBLIC_ADDRESS_1 = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+    private static final String VALID_PUBLIC_ADDRESS_2 = "34qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
 
     private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
@@ -33,12 +34,12 @@ public class EditPublicAddressCommandTest {
         Index index = Index.fromOneBased(model.getFilteredPersonList().size());
 
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
-        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC, VALID_PUBLIC_ADDRESS,
+        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC, VALID_PUBLIC_ADDRESS_1,
                 BTC_DAILY_ADDRESS.label);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person editedPerson = personToEdit.withUpdatedPublicAddress(
-                PublicAddressFactory.createPublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS, BTC_DAILY_ADDRESS.label));
+                PublicAddressFactory.createPublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_1, BTC_DAILY_ADDRESS.label));
         expectedModel.setPerson(personToEdit, editedPerson);
 
         String expectedMessage = String.format(EditPublicAddressCommand.MESSAGE_SUCCESS, Messages.format(editedPerson));
@@ -50,7 +51,7 @@ public class EditPublicAddressCommandTest {
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPublicAddressCommand editCommand = new EditPublicAddressCommand(outOfBoundIndex,
-                Network.BTC, VALID_PUBLIC_ADDRESS, BTC_DAILY_ADDRESS.label);
+                Network.BTC, VALID_PUBLIC_ADDRESS_1, BTC_DAILY_ADDRESS.label);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -60,7 +61,7 @@ public class EditPublicAddressCommandTest {
         model.addPerson(JOE);
         Index index = Index.fromOneBased(model.getFilteredPersonList().size());
 
-        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC, VALID_PUBLIC_ADDRESS,
+        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC, VALID_PUBLIC_ADDRESS_1,
                 "nonExistentLabel");
 
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
@@ -73,16 +74,20 @@ public class EditPublicAddressCommandTest {
     @Test
     public void equals() {
         EditPublicAddressCommand editFirstCommand = new EditPublicAddressCommand(Index.fromZeroBased(0),
-                Network.BTC, "address1", "label1");
+                Network.BTC, VALID_PUBLIC_ADDRESS_1, "label");
         EditPublicAddressCommand editSecondCommand = new EditPublicAddressCommand(Index.fromZeroBased(1),
-                Network.BTC, "address2", "label2");
+                Network.BTC, VALID_PUBLIC_ADDRESS_1, "label");
+        EditPublicAddressCommand editThirdCommand = new EditPublicAddressCommand(Index.fromZeroBased(0),
+                Network.BTC, VALID_PUBLIC_ADDRESS_1, "differentLabel");
+        EditPublicAddressCommand editFourthCommand = new EditPublicAddressCommand(Index.fromZeroBased(0),
+                Network.BTC, VALID_PUBLIC_ADDRESS_2, "label");
 
         // same object -> returns true
         assertTrue(editFirstCommand.equals(editFirstCommand));
 
         // same values -> returns true
         EditPublicAddressCommand editFirstCommandCopy = new EditPublicAddressCommand(Index.fromZeroBased(0),
-                Network.BTC, "address1", "label1");
+                Network.BTC, VALID_PUBLIC_ADDRESS_1, "label");
         assertTrue(editFirstCommand.equals(editFirstCommandCopy));
 
         // different types -> returns false
@@ -93,15 +98,22 @@ public class EditPublicAddressCommandTest {
 
         // different person -> returns false
         assertFalse(editFirstCommand.equals(editSecondCommand));
+
+        // different label -> returns false
+        assertFalse(editFirstCommand.equals(editThirdCommand));
+
+        // different address -> returns false
+        assertFalse(editFirstCommand.equals(editFourthCommand));
     }
 
     @Test
     public void toStringMethod() {
         EditPublicAddressCommand editCommand = new EditPublicAddressCommand(Index.fromZeroBased(0),
-                Network.BTC, "newAddress", "label");
+                Network.BTC, VALID_PUBLIC_ADDRESS_1, "label");
         String expected = new ToStringBuilder(editCommand)
                 .add("index", Index.fromZeroBased(0))
-                .add("publicAddress", PublicAddressFactory.createPublicAddress(Network.BTC, "newAddress", "label"))
+                .add("publicAddress",
+                        PublicAddressFactory.createPublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_1, "label"))
                 .toString();
         assertEquals(expected, editCommand.toString());
     }
