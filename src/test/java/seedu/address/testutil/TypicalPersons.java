@@ -34,7 +34,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25").withRoomNumber("05-0523")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withEmergencyContact("Aiken", "98765431").withGradYear("2030")
-            .withTags("owes Money", "friends").build();
+            .withTags("owes money", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRoomNumber("11-0343").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
