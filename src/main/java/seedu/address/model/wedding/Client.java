@@ -8,13 +8,18 @@ import seedu.address.model.person.Person;
  * Guarantees: Field values are validated and immutable.
  */
 public class Client {
-    private final Person person;
 
     public static final String MESSAGE_CONSTRAINTS =
             "Client can take any names or index in the address book, and it should not be blank.";
     public static final String INDEX_VALIDATION_REGEX = "^\\d+$\n";
     public static final String NAME_VALIDATION_REGEX = Name.VALIDATION_REGEX;
+    private final Person person;
 
+    /**
+     * Constructs a {@code Client}.
+     *
+     * @param person A valid {@code Person} to be classified as the Client
+     */
     public Client(Person person) {
         this.person = new Person(person.getName(), person.getPhone(),
                 person.getEmail(), person.getAddress(), person.getRole(), null);

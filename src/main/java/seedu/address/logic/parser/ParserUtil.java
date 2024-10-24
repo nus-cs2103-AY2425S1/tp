@@ -12,7 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.Client;
@@ -106,7 +105,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static String parseClient(String client) throws ParseException {
-        // SHERNICE HELPPP idk the name & index thing
         requireNonNull(client);
         String trimmedClient = client.trim();
         if (!Client.isValidClientName(trimmedClient) && Client.isValidClientIndex(trimmedClient)) {
@@ -180,6 +178,9 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Index>}.
+     */
     public static Set<Index> parseWeddingJobs(Collection<String> weddings) throws ParseException {
         requireNonNull(weddings);
 

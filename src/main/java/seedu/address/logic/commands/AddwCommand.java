@@ -6,7 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,8 +18,6 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Wedding;
-
-import java.util.List;
 
 
 /**
@@ -79,6 +78,13 @@ public class AddwCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
+    /**
+     * Returns a {@code Person} from the model's filtered person list based on the given index.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return {@code Person} at the given index in the filtered list
+     * @throws CommandException if the list is empty or if the index is invalid
+     */
     public Person selectClientWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -94,6 +100,13 @@ public class AddwCommand extends Command {
         return lastShownList.get(index.getZeroBased());
     }
 
+    /**
+     * Returns a {@code Person} from the model's filtered person list based on the given keyword.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return {@code Person} that matches the keyword
+     * @throws CommandException if the list is empty or contains multiple matches
+     */
     public Person selectClientWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
         List<Person> filteredPersonList = model.getFilteredPersonList();

@@ -97,21 +97,26 @@ public class Person {
         return weddingJobs;
     }
 
+    /**
+     * Add {@code Wedding} object to {@code weddingJobs}.
+     *
+     * @param wedding {@code Wedding} to be added to the list of wedding jobs
+     */
     public void addWeddingJob(Wedding wedding) {
-        if (ownWedding == null || !ownWedding.isSameWedding(wedding)){
+        if (ownWedding == null || !ownWedding.isSameWedding(wedding)) {
             weddingJobs.add(wedding);
         } else {
             throw new IllegalArgumentException("Cannot add own wedding as a job.");
         }
     }
 
-//    public void setWeddingJobs(Set<Wedding> weddings) {
-//        if (ownWedding == null || !(weddings.contains(ownWedding))){
-//            this.weddingJobs.addAll(weddings);
-//        } else {
-//            throw new IllegalArgumentException("Cannot add own wedding as a job.");
-//        }
-//    }
+    //    public void setWeddingJobs(Set<Wedding> weddings) {
+    //        if (ownWedding == null || !(weddings.contains(ownWedding))){
+    //            this.weddingJobs.addAll(weddings);
+    //        } else {
+    //            throw new IllegalArgumentException("Cannot add own wedding as a job.");
+    //        }
+    //    }
 
 
     /**

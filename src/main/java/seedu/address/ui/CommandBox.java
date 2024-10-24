@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
@@ -83,7 +82,7 @@ public class CommandBox extends UiPart<Region> {
         double textWidth = text.getLayoutBounds().getWidth();
 
         // Position the suggestion text field
-        suggestionTextField.setTranslateX( textWidth);
+        suggestionTextField.setTranslateX(textWidth);
     }
 
     /**

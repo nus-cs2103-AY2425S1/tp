@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -10,8 +9,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameMatchesKeywordPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonMatchesWeddingPredicate;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 import seedu.address.model.wedding.Wedding;
@@ -24,7 +21,8 @@ public class ViewwCommand extends Command {
     public static final String COMMAND_WORD = "vieww";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views the wedding details of the person identified by the index number used in the displayed person list.\n"
+            + ": Views the wedding details of the person identified by the index number used in the "
+            + "displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " alex";
 

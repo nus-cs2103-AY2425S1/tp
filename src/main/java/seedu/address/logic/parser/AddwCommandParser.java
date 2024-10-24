@@ -14,7 +14,6 @@ import seedu.address.logic.commands.AddwCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
-import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
