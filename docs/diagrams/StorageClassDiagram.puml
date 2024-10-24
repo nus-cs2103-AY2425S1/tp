@@ -22,7 +22,15 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
+package "TransactionBook Storage" #F4F6F6{
+Class "<<interface>>\nTransactionBookStorage" as TransactionBookStorage
+Class JsonTransactionBookStorage
+Class JsonSerializableTransactionBook
+Class JsonAdaptedTransaction
+Class JsonAdaptedAmount
+Class JsonAdaptedCategory
 }
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
@@ -30,14 +38,24 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" TransactionBookStorage
 
-Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
+Storage -right-|> TransactionBookStorage
+Storage -left-|> UserPrefsStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
+
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+
+JsonTransactionBookStorage .up.|> TransactionBookStorage
+JsonTransactionBookStorage ..> JsonSerializableTransactionBook
+JsonSerializableTransactionBook --> "*" JsonAdaptedTransaction
+JsonAdaptedTransaction --> "*" JsonAdaptedAmount
+JsonAdaptedTransaction --> "*" JsonAdaptedCategory
 
 @enduml
