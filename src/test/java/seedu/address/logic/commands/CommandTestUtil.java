@@ -136,6 +136,7 @@ public class CommandTestUtil {
     public static final String KEYWORD_PHONE_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_PHONE_ALICE;
     public static final String KEYWORD_EMAIL_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_EMAIL_ALICE;
     public static final String KEYWORD_ADDRESS_DESC_ONE = " " + PREFIX_KEYWORD + VALID_ADDRESS_ONE;
+    public static final String KEYWORD_INVALID_EMPTY = " " + PREFIX_KEYWORD;
 
     public static final EditRentalDescriptor EDIT_RENTAL_DESCRIPTOR_ONE;
     public static final EditRentalDescriptor EDIT_RENTAL_DESCRIPTOR_TWO;
