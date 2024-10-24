@@ -7,12 +7,14 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCompanyDescriptor;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
 import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 import seedu.address.model.company.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagBuilder;
 
 /**
  * A utility class to help with building EditCompanyDescriptor objects.
@@ -39,6 +41,7 @@ public class EditCompanyDescriptorBuilder {
         descriptor.setPhone(company.getPhone());
         descriptor.setEmail(company.getEmail());
         descriptor.setAddress(company.getAddress());
+        descriptor.setCareerPageUrl(company.getCareerPageUrl()); // Added this line
         descriptor.setTags(company.getTags());
     }
 
@@ -88,12 +91,23 @@ public class EditCompanyDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * Sets the {@code CareerPageUrl} of the {@code EditCompanyDescriptor} that we are
+     * building.
+     */
+    public EditCompanyDescriptorBuilder withCareerPageUrl(String url) {
+        descriptor.setCareerPageUrl(new CareerPageUrl(url));
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the
      * {@code EditCompanyDescriptor}
      * that we are building.
      */
     public EditCompanyDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Tag> tagSet = Stream.of(tags)
+                .map(tag -> new TagBuilder().build(tag))
+                .collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }

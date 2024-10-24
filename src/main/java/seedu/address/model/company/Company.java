@@ -22,7 +22,8 @@ public class Company {
     private final Phone phone;
     private final Email email;
     private final CareerPageUrl careerPageUrl;
-    private boolean isBookmark;
+    private final ApplicationStatus applicationStatus;
+    private final Bookmark isBookmark;
 
     // Data fields
     private final Address address;
@@ -32,16 +33,17 @@ public class Company {
     /**
      * Every field must be present and not null.
      */
-    public Company(Name name, Phone phone, Email email, Address address,
-                   CareerPageUrl careerPageUrl, Set<Tag> tags, Remark remark) {
-        requireAllNonNull(name, phone, email, address, careerPageUrl, tags, remark);
+    public Company(Name name, Phone phone, Email email, Address address, CareerPageUrl careerPageUrl,
+                   ApplicationStatus status, Set<Tag> tags, Bookmark isBookmark, Remark remark) {
+        requireAllNonNull(name, phone, email, address, tags, isBookmark, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.careerPageUrl = careerPageUrl;
         this.tags.addAll(tags);
-        this.isBookmark = false;
+        this.isBookmark = isBookmark;
+        this.applicationStatus = status;
         this.remark = remark;
     }
 
@@ -66,6 +68,10 @@ public class Company {
         return careerPageUrl;
     }
 
+    public ApplicationStatus getApplicationStatus() {
+        return applicationStatus;
+    }
+
     public Remark getRemark() {
         return remark;
     }
@@ -76,6 +82,10 @@ public class Company {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Bookmark getIsBookmark() {
+        return isBookmark;
     }
 
     /**
@@ -101,6 +111,7 @@ public class Company {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof Company)) {
             return false;
         }
@@ -112,12 +123,15 @@ public class Company {
                 && address.equals(otherCompany.address)
                 && careerPageUrl.equals(otherCompany.careerPageUrl)
                 && tags.equals(otherCompany.tags)
+                && applicationStatus.equals(otherCompany.applicationStatus)
+                && isBookmark.equals(otherCompany.isBookmark)
                 && remark.equals(otherCompany.remark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address, careerPageUrl, tags, remark);
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, email, address, careerPageUrl, applicationStatus, tags, isBookmark, remark);
     }
 
     @Override
@@ -128,8 +142,11 @@ public class Company {
                 .add("email", email)
                 .add("address", address)
                 .add("url", careerPageUrl)
+                .add("application status", applicationStatus)
                 .add("tags", tags)
+                .add("bookmark", isBookmark)
                 .add("remark", remark)
                 .toString();
     }
+
 }

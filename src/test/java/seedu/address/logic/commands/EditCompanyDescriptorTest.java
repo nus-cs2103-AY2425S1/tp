@@ -61,11 +61,11 @@ public class EditCompanyDescriptorTest {
     @Test
     public void toStringMethod() {
         EditCompanyDescriptor editCompanyDescriptor = new EditCompanyDescriptor();
-        String expected = EditCompanyDescriptor.class.getCanonicalName() + "{name="
+        String expected = EditCompanyDescriptor.class.getSimpleName() + "{name="
                 + editCompanyDescriptor.getName().orElse(null) + ", phone="
                 + editCompanyDescriptor.getPhone().orElse(null) + ", email="
                 + editCompanyDescriptor.getEmail().orElse(null) + ", address="
-                + editCompanyDescriptor.getAddress().orElse(null) + ", career page url="
+                + editCompanyDescriptor.getAddress().orElse(null) + ", careerPageUrl="
                 + editCompanyDescriptor.getCareerPageUrl().orElse(null) + ", tags="
                 + editCompanyDescriptor.getTags().orElse(null) + ", remark="
                 + editCompanyDescriptor.getRemark().orElse(null) + "}";

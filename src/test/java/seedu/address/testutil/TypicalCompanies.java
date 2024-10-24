@@ -25,27 +25,23 @@ import seedu.address.model.company.Company;
 public class TypicalCompanies {
 
     public static final Company GOOGLE = new CompanyBuilder().withName("Google")
-            .withAddress("123, Jurong West Ave 6, #08-111")
-            .withEmail("google@example.com").withPhone("00000001")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("google@example.com")
+            .withPhone("00000001")
             .withCareerPageUrl("www.google-careers.com").withRemark("Leading tech company")
-            .withTags("google").build();
-
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company META = new CompanyBuilder().withName("Meta")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("meta@example.com").withPhone("00000002")
             .withCareerPageUrl("www.meta-careers.com").withRemark("Social media giant")
-            .withTags("bigTech", "facebook").build();
-
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company GRAB = new CompanyBuilder().withName("Grab").withPhone("00000003")
-            .withEmail("grab@example.com").withAddress("Wall Street")
+            .withEmail("grab@example.com").withAddress("wall street")
             .withCareerPageUrl("www.grab-jobs.com").withRemark("Leading ride-hailing service in Southeast Asia")
-            .build();
-
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company SHOPEE = new CompanyBuilder().withName("Shopee").withPhone("00000004")
-            .withEmail("shopee@example.com").withAddress("10th Street")
+            .withEmail("shopee@example.com").withAddress("10th street").withTags("bigTech")
             .withCareerPageUrl("www.shopee-careers.com").withRemark("E-commerce platform")
-            .withTags("bigTech").build();
-
+            .withTags("Salary:High", "WLB:low", "Difficulty:low", "Period: SUMMER-2025").build();
     public static final Company APPLE = new CompanyBuilder().withName("Apple").withPhone("00000005")
             .withEmail("apple@example.com").withAddress("Michigan Ave")
             .withCareerPageUrl("www.apple-careers.com").withRemark("Creators of the iPhone")

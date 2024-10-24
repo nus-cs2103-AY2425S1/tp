@@ -12,6 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_CAREER_PAGE_URL = new Prefix("cp/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_URL = new Prefix("/url ");
+    public static final Prefix PREFIX_APPLICATION_STATUS = new Prefix("as/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
 
 }

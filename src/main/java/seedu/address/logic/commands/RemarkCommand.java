@@ -10,6 +10,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
+import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
@@ -89,10 +91,12 @@ public class RemarkCommand extends Command {
         Email updatedEmail = companyToEdit.getEmail();
         Address updatedAddress = companyToEdit.getAddress();
         CareerPageUrl updatedCareerPageUrl = companyToEdit.getCareerPageUrl();
+        ApplicationStatus updatedApplicationStatus = companyToEdit.getApplicationStatus();
+        Bookmark updatedBookmark = companyToEdit.getIsBookmark();
         Set<Tag> updatedTags = companyToEdit.getTags();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedCareerPageUrl, updatedTags, remark);
+                updatedCareerPageUrl, updatedApplicationStatus, updatedTags, updatedBookmark, remark);
     }
 
     @Override

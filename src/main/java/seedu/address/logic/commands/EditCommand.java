@@ -23,6 +23,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Address;
+import seedu.address.model.company.ApplicationStatus;
+import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
@@ -60,7 +62,7 @@ public class EditCommand extends Command {
     private final EditCompanyDescriptor editCompanyDescriptor;
 
     /**
-     * @param index                of the company in the filtered company list to edit
+     * @param index                 of the company in the filtered company list to edit
      * @param editCompanyDescriptor details to edit the company with
      */
     public EditCommand(Index index, EditCompanyDescriptor editCompanyDescriptor) {
@@ -106,10 +108,14 @@ public class EditCommand extends Command {
         CareerPageUrl updatedCareerPageUrl = editCompanyDescriptor.getCareerPageUrl()
                 .orElse(companyToEdit.getCareerPageUrl());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
+        // Edit command does not allow editing bookmark and application status
+        Bookmark updatedBookmark = companyToEdit.getIsBookmark();
+        ApplicationStatus updatedApplicationStatus = companyToEdit.getApplicationStatus();
         Remark updatedRemark = editCompanyDescriptor.getRemark().orElse(companyToEdit.getRemark());
 
-        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedCareerPageUrl, updatedTags, updatedRemark);
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCareerPageUrl,
+                updatedApplicationStatus, updatedTags, updatedBookmark, updatedRemark);
     }
 
     @Override
@@ -236,18 +242,18 @@ public class EditCommand extends Command {
                 return true;
             }
 
+            // instanceof handles nulls
             if (!(other instanceof EditCompanyDescriptor)) {
                 return false;
             }
 
             EditCompanyDescriptor otherDescriptor = (EditCompanyDescriptor) other;
-            return Objects.equals(name, otherDescriptor.name)
-                    && Objects.equals(phone, otherDescriptor.phone)
-                    && Objects.equals(email, otherDescriptor.email)
-                    && Objects.equals(address, otherDescriptor.address)
-                    && Objects.equals(careerPageUrl, otherDescriptor.careerPageUrl)
-                    && Objects.equals(tags, otherDescriptor.tags)
-                    && Objects.equals(remark, otherDescriptor.remark);
+            return Objects.equals(getName(), otherDescriptor.getName())
+                    && Objects.equals(getPhone(), otherDescriptor.getPhone())
+                    && Objects.equals(getEmail(), otherDescriptor.getEmail())
+                    && Objects.equals(getAddress(), otherDescriptor.getAddress())
+                    && Objects.equals(getCareerPageUrl(), otherDescriptor.getCareerPageUrl())
+                    && Objects.equals(getTags(), otherDescriptor.getTags());
         }
 
         @Override

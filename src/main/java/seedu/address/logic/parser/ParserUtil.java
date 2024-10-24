@@ -96,7 +96,7 @@ public class ParserUtil {
         requireNonNull(url);
         String trimmedUrl = url.trim();
         if (!Address.isValidAddress(trimmedUrl)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(CareerPageUrl.MESSAGE_CONSTRAINTS);
         }
         return new CareerPageUrl(trimmedUrl);
     }

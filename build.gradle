@@ -66,7 +66,15 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'techconnect.jar'
+}
+
+tasks.withType(Jar) {
+    duplicatesStrategy = DuplicatesStrategy.WARN
+}
+
+run  {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

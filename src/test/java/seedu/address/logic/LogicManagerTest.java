@@ -4,11 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.CAREER_PAGE_URL_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_TESLA;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CAREER_PAGE_URL_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TESLA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_TESLA;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCompanies.TESLA;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -161,8 +166,7 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e
-        // when saving
+        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
             public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
@@ -179,10 +183,22 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_TESLA + PHONE_DESC_TESLA
-                + EMAIL_DESC_TESLA + ADDRESS_DESC_TESLA;
-        Company expectedCompany = new CompanyBuilder(TESLA).withTags().build();
+                + EMAIL_DESC_TESLA + ADDRESS_DESC_TESLA + CAREER_PAGE_URL_DESC_TESLA;
+
+        // Construct expectedCompany using the same data as in addCommand
+        Company expectedCompany = new CompanyBuilder()
+                .withName(VALID_NAME_TESLA)
+                .withPhone(VALID_PHONE_TESLA)
+                .withEmail(VALID_EMAIL_TESLA)
+                .withAddress(VALID_ADDRESS_TESLA)
+                .withCareerPageUrl(VALID_CAREER_PAGE_URL_TESLA)
+                .withTags() // Assuming no tags are provided in the command
+                .withIsBookmark(false) // Default isBookmark value
+                .build();
+
         ModelManager expectedModel = new ModelManager();
         expectedModel.addCompany(expectedCompany);
+
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }
