@@ -61,8 +61,6 @@ public abstract class PublicAddress {
      */
     public abstract Network getNetwork();
 
-    public abstract Network getNetwork();
-
     @Override
     public String toString() {
         return label + ": " + publicAddress;
