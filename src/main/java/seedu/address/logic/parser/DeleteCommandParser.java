@@ -20,30 +20,31 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            String[] arr = args.split(",");
-            int size = arr.length;
-            for (int i = 0; i < size; i++) {
-                if (!DeleteCommandParser.isNumber(arr[i].trim())) {
+            String[] inputArr = args.split(",");
+            int inputSize = inputArr.length;
+            int[] intArr = new int[inputSize];
+
+            for (int i = 0; i < inputSize; i++) {
+                if (!DeleteCommandParser.isNumber(inputArr[i].trim())) {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
                 }
             }
-            Index[] indexes = new Index[size];
-            int[] intArr = new int[size];
-
             //convert string indexes to int indexes and sort int indexes in ascending order
-            for (int i = 0; i < size; i++) {
-                intArr[i] = Integer.parseInt(arr[i].trim());
+            for (int i = 0; i < inputSize; i++) {
+                intArr[i] = Integer.parseInt(inputArr[i].trim());
             }
-            Arrays.sort(intArr);
-            //convert sorted int arr back into str arr to be parsed
-            for (int i = 0; i < size; i++) {
-                arr[i] = String.valueOf(intArr[i]);
+            //extract only the unique int indexes
+            int[] uniqueIntArr = Arrays.stream(intArr)
+                    .distinct()
+                    .toArray();
+            int uniqueSize = uniqueIntArr.length;
+            Index[] uniqueIndex = new Index[uniqueSize];
+
+            for (int i = 0; i < uniqueSize; i++) {
+                uniqueIndex[i] = ParserUtil.parseIndex(String.valueOf(uniqueIntArr[i]));
             }
-            for (int i = 0; i < size; i++) {
-                indexes[i] = ParserUtil.parseIndex(arr[i]);
-            }
-            return new DeleteCommand(indexes);
+            return new DeleteCommand(uniqueIndex);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);

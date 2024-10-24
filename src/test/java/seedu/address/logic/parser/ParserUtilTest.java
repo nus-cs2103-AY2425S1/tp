@@ -37,6 +37,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_1 = "129 March 00021";
     private static final String INVALID_DATE_2 = "zxcvbn";
+    private static final String INVALID_DATE_FUTURE = "19 Mar 2900";
     private static final String INVALID_INCOME = "-21092";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -309,6 +310,11 @@ public class ParserUtilTest {
     public void parseDateOfBirth_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDateOfBirth(INVALID_DATE_1));
         assertThrows(ParseException.class, () -> ParserUtil.parseDateOfBirth(INVALID_DATE_2));
+    }
+
+    @Test
+    public void parseDateOfBirth_futureDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateOfBirth(INVALID_DATE_FUTURE));
     }
 
     @Test

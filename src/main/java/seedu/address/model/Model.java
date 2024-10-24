@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -97,7 +98,10 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    // TO BE IMPLEMENTED
-    // Updates the order in which the filtered contact list is sorted.
-    // void updateSortingOrder(String criterion); - Can use switch statements for criteria to sort by
+    /**
+     * Updates the order of the person list according to the given parameter.
+     *
+     * @param comparator Specifies new comparison criteria to order person list by.
+     */
+    void updateSortingOrder(Comparator<Person> comparator);
 }

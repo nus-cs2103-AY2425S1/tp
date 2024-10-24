@@ -172,4 +172,13 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
+    /**
+     * Updates the sorting of the person list according to the newly supplied parameter.
+     *
+     * @param comparator New criteria to sort the person list by.
+     */
+    public void updateSortingOrder(Comparator<Person> comparator) {
+        sortedPersons.setComparator(comparator);
+    }
 }
