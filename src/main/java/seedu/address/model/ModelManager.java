@@ -115,12 +115,46 @@ public class ModelManager implements Model {
 
     @Override
     public void addMeeting(Person target, Meeting meeting) {
-        target.getMeetings().addMeeting(meeting);
+        // Change in main meeting list first to check for any time clash exception in all meetings
         addressBook.addMeeting(meeting);
+        target.getMeetings().addMeeting(meeting);
     }
 
+    @Override
+    public void deleteMeeting(Person target, Meeting meeting) {
+        // Delete meeting for anUdder
+        target.getMeetings().deleteMeeting(meeting);
+        // Delete meeting for user
+        addressBook.deleteMeeting(meeting);
+    }
+
+    @Override
+    public Meeting getMeeting(int index) {
+        return addressBook.getMeeting(index);
+    }
+
+    @Override
+    public boolean hasMeeting(Meeting meeting) {
+        requireNonNull(meeting);
+        return addressBook.hasMeeting(meeting);
+    }
+
+    @Override
+    public void setMeeting(Person person, Meeting target, Meeting editedMeeting) {
+        // Change in main meeting list first to check for any time clash exception in all meetings
+        requireAllNonNull(person, target, editedMeeting);
+        addressBook.setMeeting(target, editedMeeting);
+        person.getMeetings().setMeeting(target, editedMeeting);
+    }
+
+    @Override
     public String listMeetings() {
         return addressBook.listMeetings();
+    }
+
+    @Override
+    public int getMeetingSize() {
+        return addressBook.getMeetingSize();
     }
 
     //=========== Filtered Person List Accessors =============================================================

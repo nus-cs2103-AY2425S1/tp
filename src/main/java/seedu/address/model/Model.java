@@ -92,5 +92,31 @@ public interface Model {
      */
     void addMeeting(Person target, Meeting meeting) throws CommandException;
 
+    /**
+     * Deletes a given meeting with a person.
+     */
+    void deleteMeeting(Person target, Meeting meeting);
+
+    /**
+     * Gets a Meeting object given the index.
+     *
+     * @return Meeting object.
+     */
+    Meeting getMeeting(int index);
+
+    /**
+     * Returns true if a meeting with the same identity as {@code meeting} exists in the address book.
+     */
+    boolean hasMeeting(Meeting meeting);
+
+    /**
+     * Replaces the given meeting {@code target} with {@code editedMeeting}.
+     * {@code target} must exist in the address book.
+     * The meeting identity of {@code editedMeeting} must not be the same as another existing meeting in address book.
+     */
+    void setMeeting(Person person, Meeting target, Meeting editedMeeting);
+
+    int getMeetingSize();
+
     String listMeetings();
 }
