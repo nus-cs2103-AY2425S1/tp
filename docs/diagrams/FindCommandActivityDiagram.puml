@@ -1,0 +1,22 @@
+@startuml
+start
+
+:Execute FindCommand;
+
+if () then ([NameContainsKeywordsPredicate])
+  :Call model.updateFilteredPersonList(predicate);
+else ([else])
+  if () then ([GroupContainsKeywordsPredicate])
+    :Call model.updateFilteredGroupList(groupPredicate);
+    :Get matching groups;
+    :Filter persons based on group membership;
+    :Call model.updateFilteredPersonList(person);
+  else ([else])
+    :No matching groups or predicates;
+  endif
+endif
+
+:Return CommandResult with filtered person list size;
+
+stop
+@enduml
