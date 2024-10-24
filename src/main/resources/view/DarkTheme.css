@@ -343,6 +343,21 @@
     -fx-vgap: 3;
 }
 
+.tag-customer {
+    -fx-background-color: red !important;
+    -fx-text-fill: white !important;
+    -fx-padding: 2px 5px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+}
+.tag-supplier {
+    -fx-background-color: green !important;
+    -fx-text-fill: white !important;
+    -fx-padding: 2px 5px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+}
+
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
@@ -351,3 +366,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
