@@ -2,6 +2,11 @@ package seedu.address.ui;
 
 import static seedu.address.logic.commands.ClientUtil.findViewPerson;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -19,6 +24,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private List<Person> personList;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -113,6 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        personList = logic.getFilteredPersonList();
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -124,6 +132,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        showTopThreeSchedules();
     }
 
     /**
@@ -209,5 +219,56 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Displays the top three upcoming appointments for all persons in the system
+     *
+     * @see Person
+     * @see Schedule
+     */
+    private void showTopThreeSchedules() {
+        List<Map.Entry<Person, LocalDateTime>> allAppointments = new ArrayList<>();
+
+        for (Person person : personList) {
+            for (Schedule schedule : person.getSchedules()) {
+                if (schedule.getDateTime().isEmpty()) {
+                    continue;
+                }
+
+                LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.getDateTime(),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+                allAppointments.add(Map.entry(person, appointmentDateTime));
+            }
+        }
+
+        allAppointments.sort(Map.Entry.comparingByValue());
+
+        List<String> result = new ArrayList<>();
+        int count = 1;
+        for (Map.Entry<Person, LocalDateTime> entry : allAppointments) {
+            if (count > 3) {
+                break;
+            }
+
+            String formattedAppointment = String.format("%d. %s: %s",
+                    count,
+                    entry.getKey().getName(),
+                    entry.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
+            );
+            result.add(formattedAppointment);
+            count++;
+        }
+
+        StringBuilder feedbackMessage = new StringBuilder("Upcoming Appointments:\n");
+
+        if (result.isEmpty()) {
+            feedbackMessage.append("No upcoming appointments.");
+        } else {
+            feedbackMessage.append(String.join("\n", result));
+        }
+
+        resultDisplay.setFeedbackToUser(feedbackMessage.toString());
     }
 }
