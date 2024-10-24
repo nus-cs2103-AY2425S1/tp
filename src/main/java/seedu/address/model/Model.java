@@ -74,6 +74,11 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    /**
+     * Adds the given person at specified index.
+     * {@code person} must not already exist in the address book.
+     */
+
     void addPerson(Person person, int index);
 
     /**
