@@ -29,6 +29,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Role
+Class Worker
 
 Class I #FFFFFF
 }
@@ -51,7 +53,11 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Role
+Person *--> Worker
 Person *--> "*" Tag
+
+Worker -up--> "*" DeliveryId
 
 Delivery .left.>ItemName
 Delivery *--> DeliveryId
