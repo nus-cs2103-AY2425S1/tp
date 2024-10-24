@@ -91,4 +91,26 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the pinned person list */
+    ObservableList<Person> getPinnedPersonList();
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the pinned list.
+     */
+    boolean isPinned(Person person);
+
+    /**
+     * Adds the {@code person} in the pinned contact list.
+     *
+     * @param person The {@code person} in the contact list to be pinned.
+     */
+    void addPinnedPersonList(Person person);
+
+    /**
+     * Remove the {@code person} in the pinned contact list.
+     *
+     * @param person The {@code person} in the contact list to be unpinned.
+     */
+    void removePinnedPersonList(Person person);
 }
