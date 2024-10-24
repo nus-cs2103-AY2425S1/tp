@@ -74,11 +74,11 @@ public class LogicManager implements Logic {
     }
 
     public ObservableList<SupplyOrder> getSupplyOrderList() {
-        return model.getSupplyOrderList();
+        return model.getSupplyOrderObservableList();
     }
 
     public ObservableList<CustomerOrder> getCustomerOrderList() {
-        return model.getCustomerOrderList();
+        return model.getCustomerOrderObservableList();
     }
 
     @Override
