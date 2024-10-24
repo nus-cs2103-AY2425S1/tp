@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -173,5 +175,24 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_redoCommand_success() throws Exception {
+        // Add a person to the model to create a state to undo
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + APPOINTMENT_AMY + BIRTHDAY_AMY;
+        logic.execute(addCommand);
+
+        // Undo the previous add command
+        String undoCommand = "undo";
+        logic.execute(undoCommand);
+
+        // Now execute the redo command
+        String redoCommand = RedoCommand.COMMAND_WORD;
+        CommandResult result = logic.execute(redoCommand);
+
+        // Verify that the command was executed successfully
+        assertTrue(result.getFeedbackToUser().contains(RedoCommand.MESSAGE_SUCCESS));
     }
 }

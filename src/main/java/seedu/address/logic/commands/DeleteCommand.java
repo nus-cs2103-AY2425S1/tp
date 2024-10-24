@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -22,16 +22,16 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "And also deletes the policy identified by the index number used in the displayed policy list.\n"
+            + "Parameters: INDEX (must be a positive integer) + <Optional> po/policyIndex\n"
+            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 1 po/1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_POLICY_SUCCESS = "Deleted Policy %1$d from %2$s";
     public static final String MESSAGE_DUPLICATE_NAMES = "Multiple persons found with the name '%1$s'."
             + " Please specify the index to delete:\n%2$s";
 
-    private static final Stack<Person> deletedPersons = new Stack<>();
-    private static final Stack<Policy> deletedPolicies = new Stack<>();
+    private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
 
     private final Index targetIndex;
     private final Name targetName;
@@ -79,17 +79,16 @@ public class DeleteCommand extends Command {
 
         if (targetIndex != null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                logger.log(Level.WARNING, "Invalid person index: " + targetIndex.getOneBased());
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            deletedPersons.push(personToDelete);
 
             if (policyIndex != null) {
                 if (policyIndex.getZeroBased() >= personToDelete.getPolicies().size()) {
                     throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
                 }
                 Policy policyToDelete = personToDelete.getPolicies().get(policyIndex.getZeroBased());
-                deletedPolicies.push(policyToDelete);
                 personToDelete.removePolicy(policyToDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_POLICY_SUCCESS, policyIndex
                         .getOneBased(), personToDelete.getName()));
@@ -100,6 +99,7 @@ public class DeleteCommand extends Command {
                     return new CommandResult("Deletion cancelled.");
                 }
                 model.deletePerson(personToDelete);
+                model.commitAddressBook();
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
             }
         } else {
@@ -108,6 +108,7 @@ public class DeleteCommand extends Command {
                     .collect(Collectors.toList());
 
             if (personsWithName.isEmpty()) {
+                logger.log(Level.WARNING, "No person found with name: " + targetName);
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
             } else if (personsWithName.size() == 1) {
                 personToDelete = personsWithName.get(0);
@@ -117,6 +118,7 @@ public class DeleteCommand extends Command {
                     return new CommandResult("Deletion cancelled.");
                 }
                 model.deletePerson(personToDelete);
+                model.commitAddressBook();
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
             } else {
                 // Update the model's filtered list to show only the duplicates
@@ -131,29 +133,7 @@ public class DeleteCommand extends Command {
         }
     }
 
-    /**
-     * Undoes the last delete operation performed by the `DeleteCommand`.
-     * If a policy was deleted, it restores the policy to the person it was removed from.
-     * If a person was deleted, it restores the person to the address book.
-     *
-     * @param model The model to which the undo operation will be applied.
-     * @return A `CommandResult` indicating the result of the undo operation.
-     */
-    public static CommandResult undo(Model model) {
-        if (!deletedPolicies.isEmpty()) {
-            Policy policyToRestore = deletedPolicies.pop();
-            Person personToRestore = deletedPersons.peek();
-            List<Policy> policies = new ArrayList<>(personToRestore.getPolicies());
-            policies.add(policyToRestore);
-            personToRestore.setPolicies(policies);
-            return new CommandResult("Undo successful: Policy restored.");
-        } else if (!deletedPersons.isEmpty()) {
-            Person personToRestore = deletedPersons.pop();
-            model.addPerson(personToRestore);
-            return new CommandResult("Undo successful: " + personToRestore.getName() + " restored.");
-        }
-        return new CommandResult("No deletions to undo.");
-    }
+
 
     @Override
     public boolean equals(Object other) {
