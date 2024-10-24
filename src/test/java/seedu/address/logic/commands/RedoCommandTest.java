@@ -51,4 +51,5 @@ public class RedoCommandTest {
         testModel.redoAddressBook();
         assertCommandFailure(new RedoCommand(), testModel, RedoCommand.MESSAGE_REDO_FAILURE);
     }
+
 }

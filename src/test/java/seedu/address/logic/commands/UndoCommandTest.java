@@ -52,4 +52,5 @@ public class UndoCommandTest {
         testModel.undoAddressBook();
         assertCommandFailure(new UndoCommand(), testModel, UndoCommand.MESSAGE_UNDO_FAILURE);
     }
+
 }
