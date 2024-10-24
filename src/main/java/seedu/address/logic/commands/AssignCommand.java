@@ -5,12 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.ASSIGN_EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.ASSIGN_VOLUNTEER_PREFIX_NAME;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -29,7 +31,7 @@ public class AssignCommand extends Command {
             + ASSIGN_EVENT_PREFIX_NAME + "3 ";
 
     /**
-     * Creates a {@code VolunteerAddCommand} to add the specified {@code Volunteer}.
+     * Creates a {@code VolunteerNewCommand} to add the specified {@code Volunteer}.
      *
      * @param volunteer The volunteer to be added.
      */
@@ -37,7 +39,7 @@ public class AssignCommand extends Command {
     private final Index eventIndex;
 
     /**
-     * Constructs a {@code VolunteerAddCommand} that adds the specified {@code Volunteer} to the system.
+     * Constructs a {@code VolunteerNewCommand} that adds the specified {@code Volunteer} to the system.
      *
      * @param volunteerIndex The volunteer to be added. Must not be null.
      */
@@ -51,7 +53,9 @@ public class AssignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
 
-        System.out.println("We are assigning volunteer " + this.volunteerIndex + " to event " + this.eventIndex);
+
+        Logger.getLogger("AssignCommand").fine("Assigning volunteer " + this.volunteerIndex
+                + " to event " + this.eventIndex);
 
         List<Volunteer> lastShownVolunteerList = model.getFilteredVolunteerList();
         List<Event> lastShownEventList = model.getFilteredEventList();
@@ -67,18 +71,11 @@ public class AssignCommand extends Command {
         Event e = lastShownEventList.get(eventIndex.getZeroBased());
         Volunteer v = lastShownVolunteerList.get(volunteerIndex.getZeroBased());
 
-        // Check if the volunteer is already assigned to the event
-        if (e.getVolunteers().contains(v.getName().toString())) {
+        try {
+            model.assignVolunteerToEvent(v, e);
+        } catch (DuplicateAssignException exception) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
         }
-
-        // Check if the event is already in the volunteer's list
-        if (v.getEvents().contains(e.getName().toString())) {
-            throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
-        }
-
-        e.assignVolunteer(v.getName().toString());
-        v.addEvent(e.getName().toString());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

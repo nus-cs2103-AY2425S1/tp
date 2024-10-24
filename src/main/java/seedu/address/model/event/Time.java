@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -14,15 +15,10 @@ import java.time.format.DateTimeParseException;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should follow the format hh:mm, and it should not be blank";
+            "Time should follow the format hh:mm, it must be valid and not blank";
     public static final String MESSAGE_CHRONOLOGICAL_CONSTRAINTS =
             "Start time should be before end time";
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "\\d{2}:\\d{2}";
-
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     public final LocalTime eventTime;
 
     /**
@@ -37,11 +33,17 @@ public class Time {
     }
 
     /**
-     * Returns true if a given string is a valid time.
+     * Returns true if the given string is a valid time in HH:mm format.
      */
     public static boolean isValidTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalTime.parse(test, TIME_FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
+
 
     /**
      * Returns true if this time is before the other time.

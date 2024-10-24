@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.eventcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.EVENT_COMMAND_INDICATOR;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.EVENT_PREFIX_END_TIME;
@@ -28,15 +29,15 @@ public class EventNewCommand extends Command {
             + EVENT_PREFIX_START_TIME + "START TIME "
             + EVENT_PREFIX_END_TIME + "END TIME "
             + EVENT_PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + EVENT_COMMAND_INDICATOR + COMMAND_WORD + " "
             + EVENT_PREFIX_NAME + "Food collection "
             + EVENT_PREFIX_LOCATION + "NTUC "
-            + EVENT_PREFIX_DATE + "Oct 11 2025 "
-            + EVENT_PREFIX_START_TIME + "0000 "
-            + EVENT_PREFIX_END_TIME + "2359 "
+            + EVENT_PREFIX_DATE + "2024-11-29 "
+            + EVENT_PREFIX_START_TIME + "00:00 "
+            + EVENT_PREFIX_END_TIME + "23:59 "
             + EVENT_PREFIX_DESCRIPTION + "Collecting unsold food from NTUC for distribution ";
     private static final String MESSAGE_DUPLICATE_EVENT = "This event already exists!";
-    private static final String MESSAGE_SUCCESS = "Event added succesfully!";
+    private static final String MESSAGE_SUCCESS = "Event added successfully!";
     private final Event toAdd;
 
     /**

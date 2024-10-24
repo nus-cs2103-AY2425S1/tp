@@ -4,56 +4,36 @@
     "phone" : "91234567",
     "email" : "alicewong@example.com",
     "availableDate" : "2023-05-10",
-    "startTimeAvailability" : "09:00",
-    "endTimeAvailability" : "18:00",
     "involvedIn" : [ "Beach Cleanup", "Charity Run", "Food Donation Drive" ]
   }, {
     "name" : "Bob Tan",
     "phone" : "98765432",
     "email" : "bobtan@example.com",
     "availableDate" : "2023-06-15",
-    "startTimeAvailability" : "10:00",
-    "endTimeAvailability" : "16:00",
     "involvedIn" : [ "Beach Cleanup" ]
   }, {
     "name" : "Cathy Lee",
     "phone" : "92345678",
     "email" : "cathylee@example.com",
     "availableDate" : "2023-07-20",
-    "startTimeAvailability" : "13:00",
-    "endTimeAvailability" : "20:00",
     "involvedIn" : [ ]
   }, {
     "name" : "David Ng",
     "phone" : "93456789",
     "email" : "davidng@example.com",
     "availableDate" : "2023-08-12",
-    "startTimeAvailability" : "08:00",
-    "endTimeAvailability" : "12:00",
     "involvedIn" : [ ]
   }, {
     "name" : "Emily Lim",
     "phone" : "94567890",
     "email" : "emilylim@example.com",
     "availableDate" : "2023-09-01",
-    "startTimeAvailability" : "14:00",
-    "endTimeAvailability" : "17:00",
     "involvedIn" : [ ]
   }, {
     "name" : "John Doe",
     "phone" : "98765432",
     "email" : "johndoe@example.com",
     "availableDate" : "2020-10-10",
-    "startTimeAvailability" : "11:00",
-    "endTimeAvailability" : "12:00",
-    "involvedIn" : [ ]
-  }, {
-    "name" : "John Do",
-    "phone" : "98765432",
-    "email" : "johndoe@example.com",
-    "availableDate" : "2020-10-10",
-    "startTimeAvailability" : "11:00",
-    "endTimeAvailability" : "12:00",
     "involvedIn" : [ ]
   } ],
   "events" : [ {

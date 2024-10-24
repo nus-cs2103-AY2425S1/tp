@@ -2,12 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX;
-import static seedu.address.logic.commands.UnassignCommand.MESSAGE_NOT_ASSIGNED;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventParticipatedByVolunteerPredicate;
@@ -161,6 +156,10 @@ public class ModelManager implements Model {
                 .orElse(null); // Return null if not found
     }
 
+    /**
+     * Displays the full list of volunteers participating in the event.
+     * @param eventToView The event to view.
+     */
     @Override
     public void viewEvent(Event eventToView) {
         String eventName = eventToView.getName().toString();
@@ -168,12 +167,37 @@ public class ModelManager implements Model {
         filteredVolunteers.setPredicate(volsInEventPredicate);
     }
 
+    /**
+     * Displays the full list of events the volunteer is participating in.
+     * @param volunteerToView The volunteer to view.
+     */
     @Override
     public void viewVolunteer(Volunteer volunteerToView) {
         String volunteerName = volunteerToView.getName().toString();
         EventParticipatedByVolunteerPredicate eventInVolPredicate =
                 new EventParticipatedByVolunteerPredicate(volunteerName);
         filteredEvents.setPredicate(eventInVolPredicate);
+    }
+
+    /**
+     * Assigns a volunteer to an event.
+     * @param volunteer Volunteer to be assigned.
+     * @param event Event to be assigned to.
+     */
+    @Override
+    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws CommandException {
+        addressBook.assignVolunteerToEvent(volunteer, event);
+    }
+
+    /**
+     * Unassigns a volunteer from an event.
+     * @param volunteer The volunteer to unassign.
+     * @param event The event to unassign the volunteer from.
+     * @throws CommandException
+     */
+    @Override
+    public void unassignVolunteerFromEvent(Volunteer volunteer, Event event) throws CommandException {
+        addressBook.unassignVolunteerFromEvent(volunteer, event);
     }
 
 
@@ -188,6 +212,10 @@ public class ModelManager implements Model {
         return filteredVolunteers;
     }
 
+    /**
+     * Updates the filter of the filtered volunteer list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     @Override
     public void updateFilteredVolunteerList(Predicate<Volunteer> predicate) {
         requireNonNull(predicate);
@@ -223,37 +251,13 @@ public class ModelManager implements Model {
         return filteredEvents;
     }
 
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
-    }
-
-    @Override
-    public void unassignVolunteer(Index volunteerIndex, Index eventIndex) throws CommandException {
-        List<Volunteer> lastShownVolunteerList = getFilteredVolunteerList();
-        List<Event> lastShownEventList = getFilteredEventList();
-
-        if (volunteerIndex.getZeroBased() >= lastShownVolunteerList.size()) {
-            throw new CommandException(MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX);
-        }
-
-        if (eventIndex.getZeroBased() >= lastShownEventList.size()) {
-            throw new CommandException(MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        }
-
-        Event event = lastShownEventList.get(eventIndex.getZeroBased());
-        Volunteer volunteer = lastShownVolunteerList.get(volunteerIndex.getZeroBased());
-
-        if (!event.getVolunteers().contains(volunteer.getName().toString())) {
-            throw new CommandException(MESSAGE_NOT_ASSIGNED);
-        }
-
-        if (!volunteer.getEvents().contains(event.getName().toString())) {
-            throw new CommandException(MESSAGE_NOT_ASSIGNED);
-        }
-
-        event.unassignVolunteer(volunteer.getName().toString());
-        volunteer.removeEvent(event.getName().toString());
     }
 }

@@ -10,7 +10,6 @@ import seedu.address.model.volunteer.Date;
 import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
-import seedu.address.model.volunteer.Time;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -24,8 +23,6 @@ class JsonAdaptedVolunteer {
     private final String phone;
     private final String email;
     private final String availableDate;
-    private final String startTimeAvailability;
-    private final String endTimeAvailability;
     private final List<String> involvedIn;
 
     /**
@@ -35,15 +32,11 @@ class JsonAdaptedVolunteer {
     public JsonAdaptedVolunteer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                 @JsonProperty("email") String email,
                                 @JsonProperty("availableDate") String availableDate,
-                                @JsonProperty("startTimeAvailability") String startTime,
-                                @JsonProperty("endTimeAvailability") String endTime,
                                 @JsonProperty("involvedIn") List<String> involvedIn) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.availableDate = availableDate;
-        this.startTimeAvailability = startTime;
-        this.endTimeAvailability = endTime;
         this.involvedIn = involvedIn;
     }
 
@@ -55,8 +48,6 @@ class JsonAdaptedVolunteer {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         availableDate = source.getAvailableDate().toParsableString();
-        startTimeAvailability = source.getStartTimeAvailability().toString();
-        endTimeAvailability = source.getEndTimeAvailability().toString();
         involvedIn = source.getEvents();
     }
 
@@ -86,22 +77,11 @@ class JsonAdaptedVolunteer {
         }
         final Date modelAvailableDate = new Date(availableDate);
 
-        if (startTimeAvailability == null || !Time.isValidTime(startTimeAvailability)) {
-            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
-        }
-        final Time modelStartTimeAvailability = new Time(startTimeAvailability);
-
-        if (endTimeAvailability == null || !Time.isValidTime(endTimeAvailability)) {
-            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
-        }
-        final Time modelEndTimeAvailability = new Time(endTimeAvailability);
-
         if (involvedIn == null) {
             throw new IllegalValueException("Involved events list is missing!");
         }
 
-        return new Volunteer(modelName, modelPhone, modelEmail, modelAvailableDate,
-                modelStartTimeAvailability, modelEndTimeAvailability, involvedIn);
+        return new Volunteer(modelName, modelPhone, modelEmail, modelAvailableDate, involvedIn);
     }
 
 }

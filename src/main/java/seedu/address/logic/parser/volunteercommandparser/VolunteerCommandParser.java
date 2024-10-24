@@ -11,8 +11,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
-import seedu.address.logic.commands.volunteercommands.VolunteerAddCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerDeleteCommand;
+import seedu.address.logic.commands.volunteercommands.VolunteerNewCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerViewCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -50,8 +50,8 @@ public class VolunteerCommandParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-        case VolunteerAddCommand.COMMAND_WORD:
-            return new VolunteerAddCommandParser().parse(arguments);
+        case VolunteerNewCommand.COMMAND_WORD:
+            return new VolunteerNewCommandParser().parse(arguments);
         case VolunteerDeleteCommand.COMMAND_WORD:
             return new VolunteerDeleteCommandParser().parse(arguments);
         case FindVolunteerCommand.COMMAND_WORD:

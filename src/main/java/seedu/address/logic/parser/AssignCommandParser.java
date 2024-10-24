@@ -8,16 +8,16 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AssignCommand;
-import seedu.address.logic.commands.volunteercommands.VolunteerAddCommand;
+import seedu.address.logic.commands.volunteercommands.VolunteerNewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new VolunteerAddCommand object.
+ * Parses input arguments and creates a new VolunteerNewCommand object.
  */
 public class AssignCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the VolunteerAddCommand
-     * and returns a VolunteerAddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the VolunteerNewCommand
+     * and returns a VolunteerNewCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public AssignCommand parseCommand(String args) throws ParseException {
@@ -27,7 +27,7 @@ public class AssignCommandParser {
         // Check if mandatory prefixes are present and preamble is empty
         if (!arePrefixesPresent(argMultimap, ASSIGN_VOLUNTEER_PREFIX_NAME, ASSIGN_EVENT_PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VolunteerAddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VolunteerNewCommand.MESSAGE_USAGE));
         }
 
         // Ensure no duplicate prefixes are provided
