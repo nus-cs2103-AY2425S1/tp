@@ -11,5 +11,4 @@ public class TypicalIndexes {
     public static final Index INDEX_THIRD_CLIENT = Index.fromOneBased(3);
     public static final Index INDEX_FOURTH_CLIENT = Index.fromOneBased(4);
     public static final Index INDEX_FIFTH_CLIENT = Index.fromOneBased(5);
-    public static final Index INDEX_SIXTH_CLIENT = Index.fromOneBased(6);
 }

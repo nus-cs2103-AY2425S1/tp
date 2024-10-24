@@ -45,16 +45,12 @@ public class TypicalClients {
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Client GEORGE = new ClientBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
-    public static final Client JUSTIN = new ClientBuilder().withName("Justin Meyer").withPhone("9210240")
-            .withEmail("justin@example.com").withAddress("waterloo st")
-            .withInsurancePlansManager("Basic Insurance Plan").build();
 
     // Manually added
     public static final Client HOON = new ClientBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Client IDA = new ClientBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
-
 
     // Manually added - Client's details found in {@code CommandTestUtil}
     public static final Client AMY = new ClientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -79,6 +75,6 @@ public class TypicalClients {
     }
 
     public static List<Client> getTypicalClients() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JUSTIN));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
