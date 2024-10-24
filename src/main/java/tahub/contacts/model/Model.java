@@ -8,6 +8,8 @@ import tahub.contacts.commons.core.GuiSettings;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 /**
  * The API of the Model component.
@@ -43,12 +45,16 @@ public interface Model {
 
     Path getCourseListFilePath();
 
+    Path getScaListFilePath();
+
     /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
     void setCourseListFilePath(Path courseListFilePath);
+
+    void setScaListFilePath(Path scaListFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -60,7 +66,11 @@ public interface Model {
 
     void setCourseList(UniqueCourseList courseList);
 
+    void addSca(StudentCourseAssociation sca);
+
     UniqueCourseList getCourseList();
+
+    StudentCourseAssociationList getScaList();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -86,7 +96,12 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    void deleteSca(StudentCourseAssociation target);
+
     void addCourse(Course course);
+
+    boolean hasSca(StudentCourseAssociation sca);
+
     void deleteCourse(Course course);
     boolean hasCourse(Course course);
 
