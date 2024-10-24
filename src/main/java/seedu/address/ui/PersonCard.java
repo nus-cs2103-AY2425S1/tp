@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Student;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -61,8 +62,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        if (person.getRole().equals(new Role("student"))) {
-            attendance.setText("Attendance: " + person.getAttendanceCount().toString());
+        if (person instanceof Student) {
+            Student student = (Student) person;
+            attendance.setText("Attendance: " + student.getAttendanceCount().toString());
         } else {
             attendance.setText("");
         }

@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -65,7 +66,12 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        attendanceCount = source.getAttendanceCount().toString();
+        if (source instanceof Student) {
+            Student student = (Student) source;
+            attendanceCount = student.getAttendanceCount().toString();
+        } else {
+            attendanceCount = "0";
+        }
     }
 
     /**
