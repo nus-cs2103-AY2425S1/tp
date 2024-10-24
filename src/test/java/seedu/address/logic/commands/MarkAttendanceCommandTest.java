@@ -42,9 +42,9 @@ public class MarkAttendanceCommandTest {
         CommandResult result = command.execute(modelStub);
 
         assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS,
-                validStudent.getName(), attendance, date), result.getFeedbackToUser());
-        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(),
-                        validStudent.getTutorialGroup(), attendance,
+                validStudent.getName(), attendance,
+                DateTimeFormatter.ofPattern("MMM d yyyy").format(date)), result.getFeedbackToUser());
+        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(), attendance,
                 DateTimeFormatter.ofPattern("MMM d yyyy").format(date)), result.getFeedbackToUser());
     }
 
@@ -189,10 +189,6 @@ public class MarkAttendanceCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public ObservableList<Student> getAllStudentsByName(Name name) {
-            throw new AssertionError("This method should not be called.");
-        }
 
 
     }
