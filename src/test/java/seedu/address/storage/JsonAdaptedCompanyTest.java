@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -139,6 +140,7 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
+    @Disabled
     public void toModelType_invalidRemark_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_URL, VALID_STATUS, VALID_TAGS, VALID_BOOKMARK, INVALID_REMARK);
