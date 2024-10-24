@@ -127,14 +127,4 @@ public class ParserUtil {
         }
         return filteredPersonList.get(0);
     }
-
-    public static Transaction getTransactionFromIndex(int index) throws ParseException {
-        index--;
-        ReadOnlyTransactionBook tb = CommonModel.getInstance().getTransactionBook();
-        ObservableList<Transaction> transactionList = tb.getTransactionList();
-        if (index < 0 || index >= transactionList.size()) {
-            throw new ParseException("Invalid index");
-        }
-        return transactionList.get(index);
-    }
 }
