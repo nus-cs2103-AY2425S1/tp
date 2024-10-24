@@ -48,10 +48,10 @@ public class ViewPersonPanel extends UiPart<Region> {
 
     public void setPersonDetails(Person person) {
         name.setText(person.getName().fullName);
-        job.setText("Job : " + person.getJob().jobName);
-        phone.setText("Phone Number : " + person.getPhone().value);
-        email.setText("Email Address : " + person.getEmail().value);
-        interviewScore.setText("Interview Score : " + person.getInterviewScore().interviewScore);
+        job.setText("Job: " + person.getJob().jobName);
+        phone.setText("Phone Number: " + person.getPhone().value);
+        email.setText("Email Address: " + person.getEmail().value);
+        interviewScore.setText("Interview Score: " + person.getInterviewScore().interviewScore);
         Set<Skill> skillsSet = person.getSkills();
         StringBuilder skillsText = new StringBuilder();
 
@@ -69,11 +69,11 @@ public class ViewPersonPanel extends UiPart<Region> {
 
         Set<Tag> tags = person.getTags();
         if (tags.contains(Person.DEFAULT_TAG_PENDING)) {
-            status.setText("Status : " + Person.DEFAULT_TAG_PENDING.tagName);
+            status.setText("Status: " + Person.DEFAULT_TAG_PENDING.tagName);
         } else if (tags.contains(Person.TAG_HIRED)) {
-            status.setText("Status : " + Person.TAG_HIRED.tagName);
+            status.setText("Status: " + Person.TAG_HIRED.tagName);
         } else {
-            status.setText("Status : " + Person.TAG_REJECTED.tagName);
+            status.setText("Status: " + Person.TAG_REJECTED.tagName);
         }
     }
 }
