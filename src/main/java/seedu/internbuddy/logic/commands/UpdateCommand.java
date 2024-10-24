@@ -1,7 +1,9 @@
 package seedu.internbuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_INDEX;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_COMPANY_INDEX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +27,10 @@ public class UpdateCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the status of an application. "
-            + "Parameters: COMPANY_INDEX (must be a positive integer) "
-            + "APPLICATION_INDEX (must be a positive integer) "
+            + "Parameters: " + PREFIX_COMPANY_INDEX + "COMPANY_INDEX (must be a positive integer) "
+            + PREFIX_APP_INDEX + "APPLICATION_INDEX (must be a positive integer) "
             + PREFIX_APP_STATUS + "APP_STATUS\n"
-            + "Example: " + COMMAND_WORD + " 1 1 "
+            + "Example: " + COMMAND_WORD + " c/1 app/1 "
             + PREFIX_APP_STATUS + "OA";
 
     public static final String MESSAGE_UPDATE_APPLICATION_SUCCESS = "Updated application: %1$s";

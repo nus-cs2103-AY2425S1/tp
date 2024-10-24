@@ -3,6 +3,7 @@ package seedu.internbuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
@@ -81,7 +82,7 @@ public class UpdateCommandTest {
                 Index.fromOneBased(1), appStatus);
 
         // same object -> returns true
-        assertEquals(updateCommand, updateCommand2);
+        assertTrue(updateCommand.equals(updateCommand2));
     }
 
     @Test

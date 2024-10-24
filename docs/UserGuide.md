@@ -20,16 +20,16 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 
 | Action       | Format, Examples                                                                                                                                                                  |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software`  |
+| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
 | **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
 | **Clear**    | `clear`                                                                                                                                                                           |
 | **Delete**   | `delete INDEX`                                                                                                                                                                    |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                          |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
 | **Exit**     | `exit`                                                                                                                                                                            |
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
 | **Help**     | `help`                                                                                                                                                                            |
 | **List**     | `list`                                                                                                                                                                            |
-| **Update**   | `update COMPANY_INDEX APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update 1 1 as/OA`                                                                                                |
+| **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update 1 1 as/OA`                                                                                  |
 | **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
 
 [back to top](#internbuddy-user-guide)
@@ -205,7 +205,7 @@ Format: `list`
 
 Updates the application status of an application for an existing company in the address book.
 
-Format: `update COMPANY_INDEX APPLICATION_INDEX as/APPLICATION_STATUS`
+Format: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`
 
 * Updates the application status of application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX` to `APPLICATION_STATUS`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​

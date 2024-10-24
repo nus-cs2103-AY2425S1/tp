@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.internbuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_INDEX;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_COMPANY_INDEX;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
@@ -106,7 +108,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_update() throws Exception {
         UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_COMPANY.getOneBased() + " " + INDEX_FIRST_COMPANY.getOneBased() + " "
+                + PREFIX_COMPANY_INDEX + INDEX_FIRST_COMPANY.getOneBased() + " "
+                + PREFIX_APP_INDEX + INDEX_FIRST_COMPANY.getOneBased() + " "
                 + PREFIX_APP_STATUS + "OA");
         AppStatus appStatus = new AppStatus("OA");
         assertEquals(new UpdateCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_COMPANY, appStatus), command);

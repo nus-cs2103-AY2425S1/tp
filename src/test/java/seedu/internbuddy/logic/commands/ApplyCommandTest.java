@@ -3,6 +3,7 @@ package seedu.internbuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.testutil.TypicalApplications.SWE_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
@@ -43,7 +44,7 @@ public class ApplyCommandTest {
         ApplyCommand applyCommand = new ApplyCommand(INDEX_FIRST_COMPANY, SWE_APPLICATION);
 
         // same object -> returns true
-        assertEquals(applyCommand, applyCommand);
+        assertTrue(applyCommand.equals(applyCommand));
     }
 
     @Test
