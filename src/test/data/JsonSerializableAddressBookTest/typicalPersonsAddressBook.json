@@ -8,7 +8,8 @@
     "priority" : "MEDIUM",
     "remark" : "She likes pygmy hippos.",
     "dateOfBirth": "10 Jun 1999",
-    "income" : "1000",
+    "income" : 1000,
+    "familySize" : 1,
     "appointment" : null,
     "tags" : [ "friends" ]
   }, {
@@ -19,7 +20,8 @@
     "priority" : "HIGH",
     "remark" : "Promises to pay back next week.",
     "dateOfBirth": "29 Jan 1999",
-    "income" : "0",
+    "income" : 0,
+    "familySize" : 1,
     "appointment" : {
       "date" : "2024-10-20",
       "startTime" : "14:00",
@@ -34,7 +36,8 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "1 Jan 2000",
-    "income" : "970.50",
+    "income" : 970.50,
+    "familySize" : 1,
     "appointment" : null,
     "tags" : [ ]
   }, {
@@ -45,7 +48,8 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "1 Jan 1990",
-    "income" : "2200.46",
+    "income" : 2200.46,
+    "familySize" : 1,
     "appointment" : null,
     "tags" : [ "friends" ]
   }, {
@@ -56,7 +60,8 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "1 May 2000",
-    "income" : "2532.00",
+    "income" : 2532.00,
+    "familySize" : 1,
     "appointment" : null,
     "tags" : [ ]
   }, {
@@ -67,7 +72,8 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "31 May 2000",
-    "income" : "1750.96",
+    "income" : 1750.96,
+    "familySize" : 1,
     "appointment" : null,
     "tags" : [ ]
   }, {
@@ -78,7 +84,8 @@
     "priority" : "LOW",
     "remark" : "",
     "dateOfBirth": "25 Dec 2010",
-    "income" : "1300.54",
+    "income" : 1300.54,
+    "familySize" : 1,
     "appointment" : null,
     "tags" : [ ]
   } ]

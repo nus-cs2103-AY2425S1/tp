@@ -144,6 +144,10 @@ public class StatisticsCommand extends Command {
         LocalDate now = LocalDate.now();
         return !date.isBefore(now) && ChronoUnit.DAYS.between(now, date) <= 7;
     }
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 
     public String getResultMessage() {
         return this.resultMessage;

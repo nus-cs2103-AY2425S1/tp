@@ -27,6 +27,14 @@ public class DateTest {
     }
 
     @Test
+    public void isValidDate_dateWithLowercaseMonth_returnsTrue() {
+        String date1 = "1 jan 2000";
+        String date2 = "31 dec 1983";
+
+        assertTrue(Date.isValidDate(date1));
+        assertTrue(Date.isValidDate(date2));
+    }
+    @Test
     public void isValidDate_invalidDate_returnsFalse() {
         String invalidDate = "srjhehr";
         assertFalse(Date.isValidDate(invalidDate));

@@ -222,6 +222,7 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
+                    personToBeEdited.getFamilySize(),
                     personToBeEdited.getTags());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
@@ -253,6 +254,7 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
+                    personToBeEdited.getFamilySize(),
                     personToBeEdited.getTags());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
