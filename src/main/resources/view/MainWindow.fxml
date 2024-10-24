@@ -67,6 +67,13 @@
           <StackPane fx:id="ownerListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
 
+        <VBox fx:id="linkList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" visible="false" managed="false">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+          </padding>
+          <StackPane fx:id="linkListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

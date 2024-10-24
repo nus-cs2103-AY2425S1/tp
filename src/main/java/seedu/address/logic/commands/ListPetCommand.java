@@ -25,7 +25,6 @@ public class ListPetCommand extends ListCommand {
         requireNonNull(model);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
         CommandResult c = new CommandResult(MESSAGE_SUCCESS);
-        c.setListType(ListPetCommand.MESSAGE_SUCCESS);
         return c;
     }
 

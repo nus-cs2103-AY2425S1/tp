@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalOwners.ALICE;
 import static seedu.address.testutil.TypicalOwners.BOB;
+import static seedu.address.testutil.TypicalPets.AARFUL;
 import static seedu.address.testutil.TypicalPets.FLUFFY;
 import static seedu.address.testutil.TypicalPets.MILO;
 
@@ -27,6 +28,13 @@ public class LinkTest {
         assertFalse(new Link(ALICE, BOB).equals(new Link(FLUFFY, MILO)));
         assertFalse(new Link(ALICE, BOB).equals(new Link(ALICE, MILO)));
         assertFalse(new Link(ALICE, BOB).equals(new Link(FLUFFY, BOB)));
+    }
+
+    @Test
+    public void descriptionMethod() {
+        Link link = new Link(ALICE, AARFUL);
+        String expected = "Link from owner " + ALICE.getUniqueID() + " to pet " + AARFUL.getUniqueID().substring(1);
+        assertEquals(expected, new Link(ALICE, AARFUL).description());
     }
 
     @Test
