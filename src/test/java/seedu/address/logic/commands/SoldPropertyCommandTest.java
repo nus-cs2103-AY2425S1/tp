@@ -8,8 +8,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BILL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -43,18 +41,18 @@ public class SoldPropertyCommandTest {
             .get(differentPersonIndex.getZeroBased())
             .getNumberOfPropertiesSold());
 
-    private final Optional<Price> actualPrice = Optional.ofNullable(model
+    private final Price actualPrice = model
             .getFilteredPersonList()
             .get(personIndex.getZeroBased())
             .getListOfPropertiesBought()
             .get(propertyIndex.getZeroBased())
-            .getPrice());
-    private final Optional<Price> differentActualPrice = Optional.ofNullable(model
+            .getActualPrice();
+    private final Price differentActualPrice = model
             .getFilteredPersonList()
             .get(differentPersonIndex.getZeroBased())
             .getListOfPropertiesBought()
             .get(differentPropertyIndex.getZeroBased())
-            .getActualPrice());
+            .getActualPrice();
 
     @Test
     public void execute_validModel_success() throws Exception {

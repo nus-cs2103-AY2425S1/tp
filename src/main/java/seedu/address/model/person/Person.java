@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -214,7 +213,7 @@ public class Person {
      * @param index One based Index of property bought in the list of properties to buy.
      * @param actualPrice {@code Optional<Price>} of the actual price of the property provided by the user.
      */
-    public Property getBoughtProperty(Index index, Optional<Price> actualPrice) {
+    public Property getBoughtProperty(Index index, Price actualPrice) {
         Property propertyToBeUpdated = buyingProperties.get(index.getZeroBased());
         propertyToBeUpdated.setActualPrice(actualPrice);
         return propertyToBeUpdated;
@@ -236,9 +235,9 @@ public class Person {
      * Returns the {@code Property} sold with its updated price.
      *
      * @param index One based Index of property sold in the list of properties to sell.
-     * @param actualPrice {@code Optional<Price>} of the actual price of the property provided by the user.
+     * @param actualPrice {@code Price} of the actual price of the property provided by the user.
      */
-    public Property getSoldProperty(Index index, Optional<Price> actualPrice) {
+    public Property getSoldProperty(Index index, Price actualPrice) {
         Property propertyToBeUpdated = sellingProperties.get(index.getZeroBased());
         propertyToBeUpdated.setActualPrice(actualPrice);
         return propertyToBeUpdated;
@@ -315,10 +314,6 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("selling properties", sellingProperties)
-                .add("buying properties", buyingProperties)
-                .add("properties sold", propertiesSold)
-                .add("properties bought", propertiesBought)
                 .toString();
     }
 

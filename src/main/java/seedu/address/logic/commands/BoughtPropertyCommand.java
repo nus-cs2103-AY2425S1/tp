@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTUAL_PRICE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -34,7 +33,7 @@ public class BoughtPropertyCommand extends Command {
 
     private final Index personIndex;
     private final Index propertyIndex;
-    private final Optional<Price> actualPrice;
+    private final Price actualPrice;
 
     /**
      * Creates an BoughtPropertyCommand to record and remove the specified {@code Property}
@@ -42,11 +41,12 @@ public class BoughtPropertyCommand extends Command {
      *
      * @param personIndex of the person in the filtered person list to edit
      * @param propertyIndex of the property to be marked as bought in the list of properties to buy
-     * @param actualPrice An {@code Optional} of the actual price of the property bought if provided by the user
+     * @param actualPrice A {@code Price} of the actual price of the property bought provided by the user
      */
-    public BoughtPropertyCommand(Index personIndex, Index propertyIndex, Optional<Price> actualPrice) {
+    public BoughtPropertyCommand(Index personIndex, Index propertyIndex, Price actualPrice) {
         requireNonNull(personIndex);
         requireNonNull(propertyIndex);
+        requireNonNull(actualPrice);
 
         this.personIndex = personIndex;
         this.propertyIndex = propertyIndex;

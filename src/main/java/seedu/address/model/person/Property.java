@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import java.util.Collections;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,6 +34,7 @@ public abstract class Property {
         this.unitNumber = unitNumber;
         this.price = price;
         this.tags = tags;
+        this.actualPrice = new Price("0");
     }
 
     /**
@@ -87,7 +87,7 @@ public abstract class Property {
      * @return the {@code actualPrice} of this property
      */
     public Price getActualPrice() {
-        return (actualPrice != null) ? actualPrice : null;
+        return actualPrice;
     }
 
     /**
@@ -118,9 +118,8 @@ public abstract class Property {
      *
      * @param newPrice Price {@code Price} that the user specifies as the actual price.
      */
-    public void setActualPrice(Optional<Price> newPrice) {
-        newPrice.ifPresentOrElse(price -> this.actualPrice = price, () ->
-                this.actualPrice = new Price(this.price.value));
+    public void setActualPrice(Price newPrice) {
+        actualPrice = newPrice;
     }
 
     @Override

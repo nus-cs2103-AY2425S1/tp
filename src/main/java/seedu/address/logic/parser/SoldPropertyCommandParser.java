@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTUAL_PRICE;
 
-import java.util.Optional;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SoldPropertyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,11 +35,9 @@ public class SoldPropertyCommandParser implements Parser<SoldPropertyCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ACTUAL_PRICE);
 
-        Optional<String> actualPriceValue = argMultimap.getValue(PREFIX_ACTUAL_PRICE);
-        Price actualPrice = actualPriceValue.isPresent()
-                ? ParserUtil.parseSellingPrice(actualPriceValue.get())
-                : null;
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ACTUAL_PRICE);
+        Price actualPrice = ParserUtil.parseSellingPrice(argMultimap.getValue(PREFIX_ACTUAL_PRICE).get());
 
-        return new SoldPropertyCommand(personIndex, propertyIndex, Optional.ofNullable(actualPrice));
+        return new SoldPropertyCommand(personIndex, propertyIndex, actualPrice);
     }
 }

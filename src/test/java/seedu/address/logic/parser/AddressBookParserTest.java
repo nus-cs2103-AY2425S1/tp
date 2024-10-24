@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -189,7 +188,7 @@ public class AddressBookParserTest {
         Index personIndex = Index.fromOneBased(1);
         Index propertyIndex = Index.fromOneBased(1);
         String priceString = "2000000";
-        Optional<Price> actualPrice = Optional.of(new Price(priceString));
+        Price actualPrice = new Price(priceString);
 
         String input = "bought "
                 + personIndex.getOneBased()
@@ -213,7 +212,7 @@ public class AddressBookParserTest {
         Index personIndex = Index.fromOneBased(1);
         Index propertyIndex = Index.fromOneBased(1);
         String priceString = "2000000";
-        Optional<Price> actualPrice = Optional.of(new Price(priceString));
+        Price actualPrice = new Price(priceString);
 
         String input = "sold "
                 + personIndex.getOneBased()

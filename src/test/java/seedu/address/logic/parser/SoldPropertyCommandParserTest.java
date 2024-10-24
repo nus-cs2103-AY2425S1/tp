@@ -7,8 +7,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROPERTY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PROPERTY;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SoldPropertyCommand;
@@ -21,7 +19,7 @@ public class SoldPropertyCommandParserTest {
     @Test
     public void parseValidArgsReturnSoldCommandWithUpdatedPrice_success() {
         String priceString = "2000000";
-        Optional<Price> actualPrice = Optional.of(new Price(priceString));
+        Price actualPrice = new Price(priceString);
 
         String input = INDEX_FIRST_PERSON.getOneBased()
                 + " "
@@ -39,7 +37,7 @@ public class SoldPropertyCommandParserTest {
     @Test
     public void parseValidArgsReturnSoldCommandWithUpdatedPriceAndBigGapInArguments_success() {
         String priceString = "2000000";
-        Optional<Price> actualPrice = Optional.of(new Price(priceString));
+        Price actualPrice = new Price(priceString);
 
         String input = INDEX_FIRST_PERSON.getOneBased()
                 + "                              "
@@ -53,23 +51,6 @@ public class SoldPropertyCommandParserTest {
 
         assertParseSuccess(parser, input, expectedCommand);
     }
-
-    @Test
-    public void parseValidArgsReturnSoldCommandWithNoUpdatedPrice_success() {
-        Optional<Price> actualPrice = Optional.ofNullable(null);
-
-        String input = INDEX_FIRST_PERSON.getOneBased()
-                + " "
-                + INDEX_FIRST_PROPERTY.getOneBased();
-
-        SoldPropertyCommand expectedCommand = new SoldPropertyCommand(
-                INDEX_FIRST_PERSON,
-                INDEX_FIRST_PROPERTY,
-                actualPrice);
-
-        assertParseSuccess(parser, input, expectedCommand);
-    }
-
     @Test
     public void parse_missingArgs_returnSoldCommandFailure() {
         String input = INDEX_FIRST_PERSON.getOneBased()
