@@ -32,7 +32,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedSchedule> VALID_SCHEDULE = BENSON.getSchedules().stream()
             .map(JsonAdaptedSchedule::new)
             .collect(Collectors.toList());
-    private static final String VALID_REMINDER_TIME = BENSON.getReminder().reminderTime;
+    private static final String VALID_REMINDER_TIME = BENSON.getReminder().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

@@ -101,14 +101,25 @@ public class UniquePersonList implements Iterable<Person> {
      * Deletes the appointment of the given person.
      * The person must exist in the list.
      */
-    public void deleteAppointment(Person target) {
+    public void deleteAppointment(Person target, Schedule appointment) {
+        requireNonNull(target);
+        int index = internalList.indexOf(target);
+
+        internalList.get(index).removeAppointment(appointment);
+    }
+
+    /**
+     * Deletes the reminder of the given person.
+     * The person must exist in the list.
+     */
+    public void deleteReminder(Person target) {
         requireNonNull(target);
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
 
-        internalList.get(index).removeAppointment();
+        internalList.get(index).removeReminder();
     }
 
     /**

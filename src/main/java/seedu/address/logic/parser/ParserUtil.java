@@ -140,6 +140,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into a {@code Schedule} with an empty note.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Schedule} is invalid.
+     */
+    public static Schedule parseSchedule(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+
+        Schedule.isValidDateTime(trimmedDateTime);
+        return new Schedule(trimmedDateTime, "");
+    }
+
+    /**
      * Parses {@code Collection<String> schedules} into a {@code Set<Schedule>}.
      */
     public static Set<Schedule> parseSchedules(Collection<String> dateTimes, Collection<String> notes)

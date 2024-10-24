@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
 /**
  * The API of the Model component.
@@ -83,7 +84,13 @@ public interface Model {
      * Deletes the scheduled appointment of the given {@code target}.
      * {@code target} must exist in the address book.
      */
-    void deleteAppointment(Person target);
+    void deleteAppointment(Person target, Schedule schedule);
+
+    /**
+     * Deletes the scheduled reminder of the given {@code target}.
+     * {@code target} must exist in the address book.
+     */
+    void deleteReminder(Person target);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

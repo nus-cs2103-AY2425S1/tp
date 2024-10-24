@@ -53,8 +53,6 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
-Tag -[hidden]right-> Schedule
-Schedule -[hidden]right-> Reminder
 
 ModelManager --> "~* filtered" Person
 @enduml
