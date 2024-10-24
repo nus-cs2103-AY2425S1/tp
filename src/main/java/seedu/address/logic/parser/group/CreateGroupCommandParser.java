@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBERS;
+import static seedu.address.logic.parser.ParserUtil.parseMembers;
 
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -34,8 +34,7 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         String membersString = argMultimap.getValue(PREFIX_MEMBERS).orElse("");
         List<Index> members;
         try {
-            members = Arrays.stream(membersString.split(" ")).map(
-                    i -> Index.fromOneBased(Integer.parseInt(i))).toList();
+            members = parseMembers(membersString);
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE),
                     e);

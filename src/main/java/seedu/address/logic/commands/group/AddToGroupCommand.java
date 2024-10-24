@@ -64,8 +64,7 @@ public class AddToGroupCommand extends Command {
         } catch (GroupNotFoundException gnfe) {
             throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXISTS, groupName));
         }
-        Group newGroup = this.createGroupWithAddedMembers(existingGroup, members, lastShownList);
-        model.setGroup(existingGroup, newGroup);
+        Group newGroup = this.createGroupWithNewMembers(existingGroup, members, lastShownList);
         try {
             model.setGroup(existingGroup, newGroup);
         } catch (DuplicateGroupException e) {
@@ -100,7 +99,7 @@ public class AddToGroupCommand extends Command {
      * @param lastShownList The list of Person's objects last displayed to the user.
      * @return a new Group object with the added person objects.
      */
-    private Group createGroupWithAddedMembers(Group existingGroup,
+    private Group createGroupWithNewMembers(Group existingGroup,
                                                      List<Index> members, List<Person> lastShownList) {
         Group newGroup = new Group(this.groupName);
         newGroup.setPersons(existingGroup.asUnmodifiableObservableList());
