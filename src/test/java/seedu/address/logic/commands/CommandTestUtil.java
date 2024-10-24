@@ -47,13 +47,16 @@ public class CommandTestUtil {
     public static final String VALID_NAME_COACHELLA = "Coachella";
     public static final String VALID_NAME_GLASTONBURY = "Glastonbury";
     public static final String VALID_NAME_ADELE = "Adele";
+    public static final String VALID_NAME_TOMORROWLAND = "Tomorrowland";
     public static final String VALID_ADDRESS_COACHELLA =
             "81800 51st Ave, Indio, Southern California, United States";
     public static final String VALID_ADDRESS_GLASTONBURY = "1 Stadium Dr, Singapore 397629";
     public static final String VALID_ADDRESS_ADELE = "1 Stadium Dr, Singapore 397629";
+    public static final String VALID_ADDRESS_TOMORROWLAND = "De Schorre Recreation Ground, Boom 2850 Belgium";
     public static final String VALID_DATE_COACHELLA = "2024-04-12 0000";
     public static final String VALID_DATE_GLASTONBURY = "2024-10-10 2200";
     public static final String VALID_DATE_ADELE = "2024-12-12 1900";
+    public static final String VALID_DATE_TOMORROWLAND = "2024-07-19 0000";
 
     public static final String NAME_DESC_COACHELLA = " " + PREFIX_NAME + VALID_NAME_COACHELLA;
     public static final String ADDRESS_DESC_COACHELLA = " " + PREFIX_ADDRESS + VALID_ADDRESS_COACHELLA;

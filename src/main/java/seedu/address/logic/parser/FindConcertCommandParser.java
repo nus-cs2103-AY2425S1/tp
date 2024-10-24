@@ -23,6 +23,7 @@ public class FindConcertCommandParser implements Parser<FindConcertCommand> {
     public FindConcertCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindConcertCommand.MESSAGE_USAGE));
