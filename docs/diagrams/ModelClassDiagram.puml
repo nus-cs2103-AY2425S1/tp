@@ -16,6 +16,7 @@ Class UniquePersonList
 Class Person
 Class Address
 Class Email
+Class IdentityNumber
 Class Name
 Class Phone
 Class Tag
@@ -40,6 +41,7 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
+Person *--> IdentityNumber
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
