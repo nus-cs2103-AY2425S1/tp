@@ -6,13 +6,11 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.CustomerOrder;
-import seedu.address.model.order.OrderList;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplierOrderList;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Pastry;
-import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.*;
 
 /**
  * The API of the Model component.
@@ -104,5 +102,14 @@ public interface Model {
 
     void addSupplyOrder(SupplyOrder supplyOrder);
 
-    OrderList getOrderList();
+
+    ObservableList<SupplyOrder> getSupplyOrderObservableList();
+
+    ObservableList<CustomerOrder> getCustomerOrderObservableList();
+
+    CustomerOrderList getCustomerOrderList();
+
+    SupplierOrderList getSupplierOrderList();
+
+    Inventory getInventory();
 }

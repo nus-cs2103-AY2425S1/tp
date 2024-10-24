@@ -17,10 +17,10 @@ public abstract class Order {
     private String phoneNumber; //may be better to store "person" object or "Phone" in the future
     private LocalDateTime orderDate;
     private List<? extends Product> items; //stores list of pastries/ingredients
-    private String status;  // e.g., "Pending", "Completed", "Cancelled"
+    private OrderStatus status;
 
     // Constructor
-    public Order(String phoneNumber, List<? extends Product> items, String status) {
+    public Order(String phoneNumber, List<? extends Product> items, OrderStatus status) {
         this.orderId = nextId++;  // Assign the current value of nextId and increment
         this.phoneNumber = phoneNumber;
         this.orderDate = LocalDateTime.now();
@@ -37,8 +37,8 @@ public abstract class Order {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
+    public String getOrderDate() {
+        return orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     public void setOrderDate(LocalDateTime orderDate) {
@@ -53,11 +53,11 @@ public abstract class Order {
         this.items = items;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
@@ -82,8 +82,9 @@ public abstract class Order {
             sb.append("\n");
         }
 
-        return "Phone Number: " + phoneNumber + "\n" +
-                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
-                "Items: \n" + sb.toString();
+        return sb.toString();
+//        return "Phone Number: " + phoneNumber + "\n" +
+//                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
+//                "Items: \n" + sb.toString();
     }
 }
