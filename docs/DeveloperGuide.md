@@ -1,10 +1,10 @@
 ---
-  layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# EduContacts Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html), [GitHub Page](https://github.com/se-edu/addressbook-level3)).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 12345678")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -130,7 +130,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Role` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Role` object per unique tag, instead of each `Person` needing their own `Role` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 12345678` command to delete the person with Student ID of `12345678` in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 12345678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add id/12345678 …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -281,6 +281,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: save important time through simplification of student-parent contact management, enhancement in communication tracking and integrated progress reports
 
+<br>
 
 ### User stories
 
@@ -310,24 +311,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | long-time teacher  | import contact data                            | load data from a file to restore lost or missing data                       |
 | `*`      | long-time teacher  | access communication history                   | be well-prepared for upcoming meetings                                      |
 
+<br>
+
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `EduContacts` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Add a student**
 
 **MSS**
 
 1. User adds a student to the list of contacts.
-2. AddressBook updates the list of contacts.
+2. EduContacts updates the list of contacts.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. AddressBook detects an error in the given data.
+* 1a. EduContacts detects an error in the given data.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. EduContacts shows an error message.
 
       Use case ends.
 
@@ -337,36 +340,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User finds a student.
-2. AddressBook displays the student.
+1. User provides details of the student.
+2. EduContacts displays the student and their details.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. AddressBook detects an error in the given data.
+* 1a. EduContacts detects an error in the given data.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. EduContacts shows an error message.
 
       Use case ends.
 
-* 2a. AddressBook displays an empty list.
+* 2a. EduContacts is unable to find the student.
 
   Use case ends.
-
-* 2b. AddressBook displays a list of multiple students.
-    
-    * 2b1. User manually locates the student in the list.
-      
-      Use case ends.
 
 **Use case: UC03 - Add a grade for a student**
 
 **MSS**
-
-1. User <u>finds the student they wish to add a grade for (UC02).</u>
+1. User <u>finds the student</u> (UC02) they wish to add a grade for.
 2. User adds a grade for the student.
-3. AddressBook updates the list of contacts.
+3. EduContacts updates the list of contacts.
 
    Use case ends.
 
@@ -376,9 +372,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. AddressBook detects an error in the given data.
+* 2a. EduContacts detects an error in the given data.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. EduContacts shows an error message.
 
       Use case ends.
 
@@ -386,9 +382,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student they wish to delete from the list (UC02).</u>
+1. User <u>finds the student</u> (UC02) they wish to delete from the list.
 2. User deletes the student in the list.
-3. AddressBook updates the list of contacts.
+3. EduContacts updates the list of contacts.
 
    Use case ends.
 
@@ -398,9 +394,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. AddressBook detects an error in the given data.
+* 2a. EduContacts detects an error in the given data.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. EduContacts shows an error message.
 
       Use case ends.
 
@@ -408,9 +404,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student they wish to edit (UC02).</u>
+1. User <u>finds the student</u> (UC02) they wish to edit.
 2. User edits the details of the student in the list.
-3. AddressBook updates the list of contacts.
+3. EduContacts updates the list of contacts.
 
    Use case ends.
 
@@ -420,19 +416,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. AddressBook detects an error in the given data.
+* 2a. EduContacts detects an error in the given data.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. EduContacts shows an error message.
 
       Use case ends.
 
-**Use case: UC06 - Add a tag to a student**
+**Use case: UC06 - Add a module to a student**
 
 **MSS**
 
-1. User <u>finds the student they wish to edit the details of (UC02).</u>
-2. User adds a tag to the student in the list.
-3. AddressBook adds the tag to the student and updates the list of contacts.
+1. User <u>finds the student</u> (UC02) they wish to add a module for.
+2. User adds a module to the student in the list.
+3. EduContacts updates the list of contacts.
 
    Use case ends.
 
@@ -442,19 +438,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. AddressBook detects an error in the given data.
+* 2a. EduContacts detects an error in the given data.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. EduContacts shows an error message.
 
       Use case ends.
 
-**Use case: UC07 - Add contacts of next-of-kins of a student**
+* 2b. Student already has the module.
+
+    * 2b1. EduContacts shows an error message.
+
+      Use case ends.
+
+**Use case: UC07 - Grade a student**
 
 **MSS**
 
-1. User <u>finds the student they wish to add contacts of next-of-kins for (UC02).</u>
+1. User <u>finds the student</u> (UC02) they wish to grade.
+2. User grades a module the student is taking.
+3. EduContacts updates the list of contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User is unable to find the student.
+
+  Use case ends.
+
+* 2a. EduContacts detects an error in the given data.
+
+    * 2a1. EduContacts shows an error message.
+
+      Use case ends.
+
+* 2b. The module is already graded.
+
+    * 2b1. EduContacts overwrites the old grade with the new grade.
+
+      Use case ends.
+  
+**Use case: UC08 - Add contacts of next-of-kins of a student**
+
+**MSS**
+
+1. User <u>finds the student</u> (UC02) they wish to add contacts of next-of-kins for.
 2. User adds contacts of next-of-kins of the student in the list.
-3. AddressBook updates the list of contacts.
+3. EduContacts updates the list of contacts.
 
    Use case ends.
 
@@ -464,11 +494,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. AddressBook detects an error in the given data.
+* 2a. EduContacts detects an error in the given data.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. EduContacts shows an error message.
 
       Use case ends.
+
+<br>
 
 ### Non-Functional Requirements
 1.  **Data Requirements**
@@ -510,14 +542,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The system should support exporting and importing data in common file formats (e.g., CSV) for ease of use and integration.
 13. **Disaster Recovery**
     - The system should support manual and automatic backups to prevent data loss. In case of a critical failure, the data should be easily recoverable.
-    - There should be clear steps for restoring data from a backup after a system failure, ensuring minimal downtime.
+    - There should be clear steps for restoring data from a backup after a system failure, ensuring minimal downtime.<br>
 14. **Fault Tolerance**
     - All critical errors should be logged, allowing developers to troubleshoot and resolve issues. Minor errors should not crash the system but allow users to continue their tasks.
     - In the event of a system fault, the system should continue operating in a degraded mode without losing functionality.
 
-
-
-
+<br>
 
 ### Glossary
 
@@ -545,44 +575,85 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+<br>
+
 ### Launch and shutdown
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file.<br> 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+<br>
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. One person in the list has Student ID `12345678`.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 12345678`<br>
+       Expected: Person with Student ID `12345678` is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 1234 5678`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is a Student ID that no student in the list has)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a person while only one person is being shown
+
+    1. Prerequisites: Filter persons using the `filter` command until only one person remains. Multiple persons in the list. Person that remains has Student ID `12345678`. One person in the list has Student ID `11111111`
+   
+    2. Test case: `delete 12345678`<br>
+       Expected: Person with Student ID `12345678` is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. List of persons shown is now blank.
+   
+    3. Test case: `delete 11111111`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+3. Deleting a person while no persons are in the list
+
+    1. Prerequisites: Delete all persons in the list using the `clear` command.
+   
+    2. Test case: `delete 12345678`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+<br>
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. To simulate a missing file, in the same folder as the jar file, navigate to the `data` folder and delete the `address.json` file in the folder.
+   
+    2. Launch EduContacts by double-clicking the jar file.<br>
+       Expected: EduContacts is populated by a set of default list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+    1. To simulate a corrupted file, navigate to the `data` folder and remove a curly brace at the end of the file.
+
+    2. Launch EduContacts by double-clicking the jar file.<br>
+       Expected: EduContacts has a blank list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+_{to work on in the future}_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+_{to work on in the future}_
+

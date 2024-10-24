@@ -19,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_STUDENTID =
+            "Multiple student IDs specified. Only one student ID is allowed.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -30,6 +32,13 @@ public class Messages {
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+    }
+
+    /**
+     * Returns an error message indicating multiple student IDs were provided.
+     */
+    public static String getErrorMessageForDuplicateID() {
+        return MESSAGE_DUPLICATE_STUDENTID;
     }
 
     /**

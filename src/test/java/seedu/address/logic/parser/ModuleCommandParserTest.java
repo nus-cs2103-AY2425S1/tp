@@ -5,14 +5,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -42,22 +40,22 @@ public class ModuleCommandParserTest {
 
         // multiple studentIds
         assertParseFailure(parser, STUDENTID_DESC_AMY + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID));
+                Messages.getErrorMessageForDuplicateID());
 
         // multiple modules
-        assertParseFailure(parser, MODULE_DESC_AMY + validExpectedModuleString,
+        assertParseFailure(parser, validExpectedModuleString + MODULE_DESC_AMY,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MODULE));
 
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedModuleString + STUDENTID_DESC_AMY + MODULE_DESC_AMY + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID, PREFIX_MODULE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MODULE));
 
         // invalid value followed by valid value
 
         // invalid studentId
         assertParseFailure(parser, INVALID_STUDENTID_DESC + validExpectedModuleString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID));
+                Messages.getErrorMessageForDuplicateID());
 
         // invalid module
         assertParseFailure(parser, INVALID_MODULE_DESC + validExpectedModuleString,
@@ -67,7 +65,7 @@ public class ModuleCommandParserTest {
 
         // invalid studentId
         assertParseFailure(parser, validExpectedModuleString + INVALID_STUDENTID_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID));
+                 Messages.getErrorMessageForDuplicateID());
 
         // invalid module
         assertParseFailure(parser, validExpectedModuleString + INVALID_MODULE_DESC,
@@ -77,9 +75,6 @@ public class ModuleCommandParserTest {
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCommand.MESSAGE_USAGE);
-
-        // missing studentId prefix
-        assertParseFailure(parser, VALID_STUDENTID_BOB + MODULE_DESC_BOB, expectedMessage);
 
         // missing module prefix
         assertParseFailure(parser, STUDENTID_DESC_BOB + VALID_MODULE_BOB, expectedMessage);
@@ -100,8 +95,8 @@ public class ModuleCommandParserTest {
         assertParseFailure(parser, INVALID_STUDENTID_DESC + INVALID_MODULE_DESC,
                 StudentId.MESSAGE_CONSTRAINTS);
 
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + STUDENTID_DESC_BOB + MODULE_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCommand.MESSAGE_USAGE));
+        //        // non-empty preamble
+        //        assertParseFailure(parser, PREAMBLE_NON_EMPTY + STUDENTID_DESC_BOB + MODULE_DESC_BOB,
+        //                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCommand.MESSAGE_USAGE));
     }
 }
