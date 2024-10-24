@@ -29,6 +29,11 @@ public class TransactionListPanel extends UiPart<Region> {
         transactionListView.setCellFactory(listView -> new TransactionListPanel.TransactionListViewCell());
     }
 
+    /**
+     * Updates the current {@code TransactionListPanel} UI with the transaction list.
+     *
+     * @param transactionList The updated transaction list.
+     */
     public void updateTransactionList(ObservableList<Transaction> transactionList) {
         transactionListView.setItems(transactionList);
         transactionListView.setCellFactory(listView -> new TransactionListPanel.TransactionListViewCell());

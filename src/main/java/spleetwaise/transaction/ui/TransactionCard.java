@@ -9,7 +9,7 @@ import spleetwaise.address.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
- * An UI component that displays information of a {@code Transaction}.
+ * A UI component that displays information of a {@code Transaction}.
  */
 public class TransactionCard extends UiPart<Region> {
     private static final String FXML = "TransactionListCard.fxml";

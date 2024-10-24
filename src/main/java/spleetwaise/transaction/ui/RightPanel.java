@@ -18,6 +18,9 @@ import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Transaction;
 
+/**
+ * A UI component that displays information of {@code Transaction} related information.
+ */
 public class RightPanel extends UiPart<Region> {
     private static final String FXML = "RightPanel.fxml";
 
