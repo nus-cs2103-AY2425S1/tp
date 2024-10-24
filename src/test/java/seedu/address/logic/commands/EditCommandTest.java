@@ -204,6 +204,27 @@ public class EditCommandTest {
         assertEquals(expected, editCommand.toString());
     }
 
+    @Test
+    public void execute_newUpdatedAtFieldComesAfterOld() {
+        Person personToBeEdited = model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+
+        Model expectedModel = generateExpectedModel(personToBeEdited, personToBeEdited);
+
+        String expectedMessage = generateExpectedSuccessMessage(personToBeEdited);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        Person editedPerson = model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+
+        assertEquals(personToBeEdited, editedPerson); // ensure we are comparing the same person for updatedAt
+        assertTrue(editedPerson.getUpdatedAt().getValue()
+                .isAfter(personToBeEdited.getUpdatedAt().getValue()));
+    }
+
     private class Helper {
 
         public void execute_specifiedRemarkField_shouldModifyRemark(String remarkString) {
@@ -222,7 +243,9 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
-                    personToBeEdited.getTags());
+                    personToBeEdited.getFamilySize(),
+                    personToBeEdited.getTags(),
+                    personToBeEdited.getUpdatedAt());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                     .withRemark(remark.value)
@@ -253,7 +276,9 @@ public class EditCommandTest {
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getAppointment(),
-                    personToBeEdited.getTags());
+                    personToBeEdited.getFamilySize(),
+                    personToBeEdited.getTags(),
+                    personToBeEdited.getUpdatedAt());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                     .withPriority(priority)

@@ -13,7 +13,7 @@ public class HelpCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD + " for overview of commands\n"
-            + "Example: " + COMMAND_WORD + " add for detailed usage of add command\n";
+            + "Example: " + COMMAND_WORD + " add for detailed usage of add command";
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
@@ -50,5 +50,10 @@ public class HelpCommand extends Command {
 
         HelpCommand otherHelpCommand = (HelpCommand) other;
         return usage.equals(otherHelpCommand.usage);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }
