@@ -2,6 +2,8 @@ package seedu.address.ui.meetup;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
@@ -14,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.ui.UiPart;
+
 import java.util.List;
 
 /**
@@ -31,7 +34,7 @@ public class MeetUpListPanel extends UiPart<Region> {
      */
     public MeetUpListPanel(ObservableList<MeetUp> meetUpList, ObservableList<MeetUp> originalList) {
         super(FXML);
-        boolean[] hasOverlap = new boolean[meetUpList.size()];
+        Map<MeetUp, Boolean> hasOverlapMap = new HashMap<>();
 
         for (int i = 0; i < meetUpList.size(); i++) {
             boolean foundOverlap = false;
@@ -42,10 +45,10 @@ public class MeetUpListPanel extends UiPart<Region> {
                     break;
                 }
             }
-            hasOverlap[i] = foundOverlap;
+            hasOverlapMap.put(meetUp, foundOverlap);
         }
         meetUpListView.setItems(meetUpList);
-        meetUpListView.setCellFactory(x -> new MeetUpListViewCell(hasOverlap));
+        meetUpListView.setCellFactory(x -> new MeetUpListViewCell(hasOverlapMap));
     }
 
     /**
@@ -66,27 +69,22 @@ public class MeetUpListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code BuyerCard}.
      */
     class MeetUpListViewCell extends ListCell<MeetUp> {
-        private boolean[] overlapList;
+        private Map<MeetUp, Boolean> hasOverlapMap;
 
-        public MeetUpListViewCell(boolean[] overlapList) {
-            this.overlapList = overlapList;
+        public MeetUpListViewCell(Map<MeetUp, Boolean> hasOverlapMap) {
+            this.hasOverlapMap = hasOverlapMap;
         }
 
         @Override
         protected void updateItem(MeetUp meetUp, boolean empty) {
             super.updateItem(meetUp, empty);
 
-            logger.info("Overlaplist size is : " + overlapList.length);
-            logger.info("Overlaplist size is : " + overlapList.length);
-            logger.info("Overlaplist size is : " + overlapList.length);
-            logger.info("Overlaplist size is : " + overlapList.length);
-            logger.info("Overlaplist size is : " + overlapList.length);
             if (empty || meetUp == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                int index = getIndex();
-                setGraphic(new MeetUpCard(meetUp, index + 1, overlapList[index]).getRoot());
+                Boolean hasOverlapForThisItem = hasOverlapMap.getOrDefault(meetUp, false);
+                setGraphic(new MeetUpCard(meetUp, getIndex() + 1, hasOverlapForThisItem).getRoot());
             }
         }
     }
