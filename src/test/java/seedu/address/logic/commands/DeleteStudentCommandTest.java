@@ -174,10 +174,6 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public ObservableList<Student> getAllStudentsByName(Name name) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -225,28 +221,9 @@ public class DeleteStudentCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-            // Student student = (Student) person;
             return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
-            // Student student = (Student) person;
-            return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
+
         }
-
-
-        @Override
-        public void addStudent(Student student) {
-            requireNonNull(student);
-            studentsAdded.add(student);
-        }
-
-
-        @Override
-        public void addStudent(Student student) {
-            requireNonNull(student);
-            studentsAdded.add(student);
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
@@ -254,7 +231,6 @@ public class DeleteStudentCommandTest {
         }
     }
 
-    private class ModelStubWithNoStudent extends DeleteStudentCommandTest.ModelStub {
     private class ModelStubWithNoStudent extends DeleteStudentCommandTest.ModelStub {
         @Override
         public Student getStudentByName(Name name) {

@@ -64,8 +64,7 @@ public class MarkAttendanceCommand extends Command {
 
         // Mark attendance
         student.markAttendance(date, attendance.value);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance, date));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, tg, attendance,
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance,
                 DateTimeFormatter.ofPattern("MMM d yyyy").format(date)));
     }
 }
