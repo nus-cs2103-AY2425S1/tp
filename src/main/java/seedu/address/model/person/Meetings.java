@@ -20,9 +20,9 @@ import seedu.address.model.person.exceptions.TimeClashException;
  */
 public class Meetings {
 
+    public static final String MESSAGE_NO_MEETINGS = "You don't have a meeting arranged with this Udder";
     private final ObservableList<Meeting> internalList = FXCollections.observableArrayList();
 
-    public final static String MESSAGE_NO_MEETINGS = "You don't have a meeting arranged with this Udder";
     /**
      * Returns true if the meeting clashes with any of the meetings in the list.
      */
