@@ -26,6 +26,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Integer> eventIds;
     private int id;
 
     /**
@@ -37,6 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        eventIds = new HashSet<>();
         id = 0;
     }
 
@@ -49,6 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        eventIds = new HashSet<>(personToCopy.getEventIds());
         id = personToCopy.getId();
     }
 
@@ -101,7 +104,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, id);
+        return new Person(name, phone, email, address, tags, eventIds, id);
     }
 
 }

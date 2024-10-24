@@ -1,3 +1,5 @@
+package seedu.address.logic.commands;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -15,7 +17,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -37,9 +38,9 @@ public class ImportCommandTest {
     private static final String MULTIPLE_PERSON_ENTRIES = "\"Jane Doe\",\"91234567\",\"jane@example.com\","
             + "\"123, Main St\",\"family\"\n"
             + "\"John Smith\",\"87654321\",\"john@example.com\",\"456, Secondary St\",\"coworkers\"";
-    private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv"; // Invalid parse line file
-    private static final String INVALID_NAME_FILE = "./data/InvalidNameEntry.csv"; // New invalid name entry file
-    private static final String MALFORMED_CSV_FILE = "./data/MalformedLineEntry.csv"; // Malformed line entry file
+    private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv";
+    private static final String INVALID_NAME_FILE = "./data/InvalidNameEntry.csv";
+    private static final String MALFORMED_CSV_FILE = "./data/MalformedLineEntry.csv";
     private static final String TEST_DIRECTORY = "./data";
 
     private Model model;
@@ -178,8 +179,9 @@ public class ImportCommandTest {
         Tag tag = new Tag("friends");
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(tag);
+        Set<Integer> eventIdsSet = new HashSet<>();
         int newPersonId = expectedModel.generateNewPersonId();
-        Person person = new Person(name, phone, email, address, tagSet, newPersonId);
+        Person person = new Person(name, phone, email, address, tagSet, eventIdsSet, newPersonId);
         expectedModel.addPerson(person);
         // Ensure success of import
         assertCommandSuccess(importCommand, model,
@@ -206,8 +208,9 @@ public class ImportCommandTest {
         Tag tag1 = new Tag("family");
         Set<Tag> tagSet1 = new HashSet<>();
         tagSet1.add(tag1);
+        Set<Integer> eventIdsSet1 = new HashSet<>();
         int person1Id = expectedModel.generateNewPersonId();
-        Person person1 = new Person(name1, phone1, email1, address1, tagSet1, person1Id);
+        Person person1 = new Person(name1, phone1, email1, address1, tagSet1, eventIdsSet1, person1Id);
 
         Name name2 = new Name("John Smith");
         Phone phone2 = new Phone("87654321");
@@ -216,8 +219,9 @@ public class ImportCommandTest {
         Tag tag2 = new Tag("coworkers");
         Set<Tag> tagSet2 = new HashSet<>();
         tagSet2.add(tag2);
+        Set<Integer> eventIdsSet2 = new HashSet<>();
         int person2Id = expectedModel.generateNewPersonId();
-        Person person2 = new Person(name2, phone2, email2, address2, tagSet2, person2Id);
+        Person person2 = new Person(name2, phone2, email2, address2, tagSet2, eventIdsSet2, person2Id);
 
         expectedModel.addPerson(person1);
         expectedModel.addPerson(person2);

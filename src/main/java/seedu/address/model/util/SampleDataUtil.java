@@ -21,22 +21,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), 1),
+                getTagSet("friends"), getEventIdSet(), 1),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), 2),
+                getTagSet("colleagues", "friends"), getEventIdSet(1), 2),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), 3),
+                getTagSet("neighbours"), getEventIdSet(1, 2), 3),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), 4),
+                getTagSet("family"), getEventIdSet(3), 4),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), 5),
+                getTagSet("classmates"), getEventIdSet(4), 5),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), 6)
+                getTagSet("colleagues"), getEventIdSet(5), 6)
         };
     }
 
@@ -57,4 +57,14 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a set containing the list of event IDs given.
+     *
+     * @param ids The event IDs to be added to the set.
+     * @return A set containing the event IDs.
+     */
+    public static Set<Integer> getEventIdSet(Integer... ids) {
+        return Arrays.stream(ids)
+                .collect(Collectors.toSet());
+    }
 }
