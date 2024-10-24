@@ -59,7 +59,7 @@ public class AddSubmissionCommand extends Command {
             Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                     personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
                     personToEdit.getStudentClass(), personToEdit.getEcName(), personToEdit.getEcNumber(),
-                    updatedSubmissions, personToEdit.getTags());
+                    personToEdit.getExams(), personToEdit.getTags(), personToEdit.getAttendances(), updatedSubmissions);
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }

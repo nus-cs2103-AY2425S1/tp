@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.exam.Exam;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -41,8 +45,10 @@ public class PersonBuilder {
     private StudentClass studentClass;
     private EcName ecName;
     private EcNumber ecNumber;
-    private Set<Submission> submissions;
+    private Set<Exam> exams;
     private Set<Tag> tags;
+    private HashMap<AbsentDate, AbsentReason> attendances;
+    private Set<Submission> submissions;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -57,8 +63,10 @@ public class PersonBuilder {
         studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
         ecName = new EcName(DEFAULT_ECNAME);
         ecNumber = new EcNumber(DEFAULT_ECNUMBER);
-        submissions = new HashSet<>();
+        exams = new HashSet<>();
         tags = new HashSet<>();
+        attendances = new HashMap<>();
+        submissions = new HashSet<>();
     }
 
     /**
@@ -74,8 +82,10 @@ public class PersonBuilder {
         studentClass = personToCopy.getStudentClass();
         ecName = personToCopy.getEcName();
         ecNumber = personToCopy.getEcNumber();
-        submissions = new HashSet<>(personToCopy.getSubmissions());
+        exams = new HashSet<>(personToCopy.getExams());
         tags = new HashSet<>(personToCopy.getTags());
+        attendances = new HashMap<>(personToCopy.getAttendances());
+        submissions = new HashSet<>(personToCopy.getSubmissions());
     }
 
     /**
@@ -83,6 +93,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code exams} into a {@code Set<Exam>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withExams(String ... exams) {
+        this.exams = SampleDataUtil.getExamSet(exams);
         return this;
     }
 
@@ -109,6 +127,22 @@ public class PersonBuilder {
             updatedSubmissions.add(updatedSubmission);
         }
         this.submissions = updatedSubmissions;
+        return this;
+    }
+
+    /**
+     * Sets the {@code String examScore} for a specified {@code Exam} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExamScore(String examName, String examScore) {
+        Set<Exam> updatedExams = new HashSet<>();
+        for (Exam exam : this.exams) {
+            Exam updatedExam = exam;
+            if (exam.examName.equals(examName)) {
+                updatedExam = new Exam(examName, examScore);
+            }
+            updatedExams.add(updatedExam);
+        }
+        this.exams = updatedExams;
         return this;
     }
 
@@ -185,11 +219,19 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code attendances} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendance(HashMap<AbsentDate, AbsentReason> attendances) {
+        this.attendances = attendances;
+        return this;
+    }
+
+    /**
      * Builds a new Person with all the required attributes.
      */
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber,
-                submissions, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
+                tags, attendances, submissions);
     }
 
 }

@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.exam.Exam;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -39,7 +44,9 @@ class JsonAdaptedPerson {
     private final String studentClass;
     private final String ecName;
     private final String ecNumber;
+    private final Map<String, String> attendances;
 
+    private final List<JsonAdaptedExam> exams = new ArrayList<>();
     private final List<JsonAdaptedSubmission> submissions = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -52,8 +59,10 @@ class JsonAdaptedPerson {
              @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
              @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName,
              @JsonProperty("emergency contact number") String ecNumber,
-             @JsonProperty("submissions") List<JsonAdaptedSubmission> submissions,
-             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+             @JsonProperty("exams") List<JsonAdaptedExam> exams,
+             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+             @JsonProperty("attendances") Map<String, String> attendances,
+             @JsonProperty("submissions") List<JsonAdaptedSubmission> submissions) {
 
         this.name = name;
         this.phone = phone;
@@ -64,11 +73,19 @@ class JsonAdaptedPerson {
         this.studentClass = studentClass;
         this.ecName = ecName;
         this.ecNumber = ecNumber;
+        if (exams != null) {
+            this.exams.addAll(exams);
+        }
         if (submissions != null) {
             this.submissions.addAll(submissions);
         }
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (attendances != null) {
+            this.attendances = new HashMap<>(attendances);
+        } else {
+            this.attendances = new HashMap<>();
         }
     }
 
@@ -85,12 +102,19 @@ class JsonAdaptedPerson {
         studentClass = source.getStudentClass().value;
         ecName = source.getEcName().value;
         ecNumber = source.getEcNumber().value;
+        exams.addAll(source.getExams().stream()
+                .map(JsonAdaptedExam::new)
+                .collect(Collectors.toList()));
         submissions.addAll(source.getSubmissions().stream()
                 .map(JsonAdaptedSubmission::new)
                 .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        attendances = new HashMap<>();
+        source.getAttendances().forEach((date, reason) -> {
+            attendances.put(date.toString(), reason.toString());
+        });
     }
 
     /**
@@ -99,6 +123,10 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Exam> personExams = new ArrayList<>();
+        for (JsonAdaptedExam exam : exams) {
+            personExams.add(exam.toModelType());
+        }
         final List<Submission> personSubmissions = new ArrayList<>();
         for (JsonAdaptedSubmission submission : submissions) {
             personSubmissions.add(submission.toModelType());
@@ -185,12 +213,33 @@ class JsonAdaptedPerson {
         }
         final EcNumber modelEcNumber = new EcNumber(ecNumber);
 
+        final Set<Exam> modelExams = new HashSet<>(personExams);
+
         final Set<Submission> modelSubmissions = new HashSet<>(personSubmissions);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        final HashMap<AbsentDate, AbsentReason> modelAttendances = new HashMap<>();
+        if (attendances != null) {
+            for (Map.Entry<String, String> entry : attendances.entrySet()) {
+                String dateStr = entry.getKey();
+                String reasonStr = entry.getValue();
+
+                if (!AbsentDate.isValidAbsentDate(dateStr)) {
+                    System.out.println("Invalid date detected: " + dateStr);
+                    throw new IllegalValueException(AbsentDate.MESSAGE_CONSTRAINTS);
+                }
+
+                if (!AbsentReason.isValidAbsentReason(reasonStr)) {
+                    throw new IllegalValueException(AbsentReason.MESSAGE_CONSTRAINTS);
+                }
+
+                modelAttendances.put(new AbsentDate(dateStr), new AbsentReason(reasonStr));
+            }
+        }
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
-                modelStudentClass, modelEcName, modelEcNumber, modelSubmissions, modelTags);
-
+                modelStudentClass, modelEcName, modelEcNumber, modelExams, modelTags,
+                modelAttendances, modelSubmissions);
     }
-
 }

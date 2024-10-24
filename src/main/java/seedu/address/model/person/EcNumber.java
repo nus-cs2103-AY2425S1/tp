@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class EcNumber {
 
+    public static final String MESSAGE_GUI = "Emergency Contact Number: %1$s";
     public static final String MESSAGE_CONSTRAINTS =
             "Emergency contact numbers should contain numbers that are 8 digits long\n"
             + "and it can be blank if no contact number is provided.";
