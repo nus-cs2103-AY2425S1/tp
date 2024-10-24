@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT_REASON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
@@ -18,12 +20,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -59,6 +64,8 @@ public class CommandTestUtil {
     public static final String VALID_EXAM_SCORE_BOB = "65";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final HashMap<AbsentDate, AbsentReason> VALID_ATTENDANCE_AMY = new HashMap<>();
+    public static final HashMap<AbsentDate, AbsentReason> VALID_ATTENDANCE_BOB = new HashMap<>();
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -75,13 +82,16 @@ public class CommandTestUtil {
     public static final String STUDENT_CLASS_DESC_AMY = " " + PREFIX_STUDENT_CLASS + VALID_STUDENT_CLASS_AMY;
     public static final String STUDENT_CLASS_DESC_BOB = " " + PREFIX_STUDENT_CLASS + VALID_STUDENT_CLASS_BOB;
     public static final String ECNAME_DESC_AMY = " " + PREFIX_ECNAME + VALID_ECNAME_AMY;
-    public static final String ECNAME_DESC_BOB = " " + PREFIX_ECNAME + VALID_ECNAME_BOB;
     public static final String ECNUMBER_DESC_AMY = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_AMY;
     public static final String ECNUMBER_DESC_BOB = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_BOB;
     public static final String EXAM_DESC_MIDTERM = " " + PREFIX_EXAM + VALID_EXAM_MIDTERM;
     public static final String EXAM_SCORE_DESC_AMY = " " + PREFIX_EXAM_SCORE + VALID_EXAM_SCORE_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ATTENDANCE_DESC_AMY = " " + PREFIX_ABSENT_DATE + "20-10-2024" + " "
+            + PREFIX_ABSENT_REASON + "Sick";
+    public static final String ATTENDANCE_DESC_BOB = " " + PREFIX_ABSENT_DATE + "21-10-2024" + " "
+            + PREFIX_ABSENT_REASON + "Holiday";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -96,6 +106,8 @@ public class CommandTestUtil {
     public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "1234"; // 4 digit number
     public static final String INVALID_EXAM_DESC = " " + PREFIX_EXAM + "Midterm%"; // only alphanumeric characters
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_ATTENDANCE_DESC = " " + PREFIX_ABSENT_DATE + "2024-13-01" + " "
+            + PREFIX_ABSENT_REASON + "MC"; // Date should be in the form of DD-MM-YYYY
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -104,6 +116,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
+        VALID_ATTENDANCE_AMY.put(new AbsentDate("20-10-2024"), new AbsentReason("Sick"));
+        VALID_ATTENDANCE_BOB.put(new AbsentDate("21-10-2024"), new AbsentReason("Sick"));
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withRegisterNumber(VALID_REGISTER_NUMBER_AMY).withSex(VALID_SEX_AMY).withTags(VALID_TAG_FRIEND)
@@ -113,7 +127,8 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withRegisterNumber(VALID_REGISTER_NUMBER_BOB).withSex(VALID_SEX_BOB)
                 .withStudentClass(VALID_STUDENT_CLASS_BOB).withEcName(VALID_ECNAME_BOB)
-                .withEcNumber(VALID_ECNUMBER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withEcNumber(VALID_ECNUMBER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .build();
     }
 
     /**

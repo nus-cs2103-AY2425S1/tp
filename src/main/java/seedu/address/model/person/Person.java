@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,14 +33,16 @@ public class Person {
     private final EcNumber ecNumber;
     private final Set<Exam> exams = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
+    private final HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
-                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Exam> exams, Set<Tag> tags) {
+                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Exam> exams, Set<Tag> tags,
+                HashMap<AbsentDate, AbsentReason> attendances) {
         requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
-                tags);
+                tags, attendances);
 
         this.name = name;
         this.phone = phone;
@@ -51,6 +55,12 @@ public class Person {
         this.ecNumber = ecNumber;
         this.exams.addAll(exams);
         this.tags.addAll(tags);
+        for (Map.Entry<AbsentDate, AbsentReason> entry : attendances.entrySet()) {
+            this.attendances.put(
+                    new AbsentDate(entry.getKey().toString()),
+                    new AbsentReason(entry.getValue().toString())
+            );
+        }
     }
 
     public Name getName() {
@@ -101,6 +111,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public HashMap<AbsentDate, AbsentReason> getAttendances() {
+        return attendances;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -144,7 +158,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
-                tags);
+                tags, attendances);
     }
 
     @Override

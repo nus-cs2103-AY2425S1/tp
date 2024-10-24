@@ -8,7 +8,8 @@
     "sex": "F",
   	"class": "1A",
     "emergency contact name": "",
-    "emergency phone":""
+    "emergency phone":"",
+    "attendances" : {}
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
@@ -18,6 +19,7 @@
     "sex": "F",
 	  "class": "1A",
     "emergency contact name": "",
-    "emergency phone": ""
+    "emergency phone": "",
+    "attendances" : {}
   } ]
 }

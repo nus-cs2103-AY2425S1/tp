@@ -10,6 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -232,4 +234,35 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String absentDate} into a {@code AbsentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentDate} is invalid.
+     */
+    public static AbsentDate parseAbsentDate(String absentDate) throws ParseException {
+        requireNonNull(absentDate);
+        String trimmedAbsentDate = absentDate.trim();
+        if (!AbsentDate.isValidAbsentDate(trimmedAbsentDate)) {
+            throw new ParseException(AbsentDate.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentDate(trimmedAbsentDate);
+    }
+
+    /**
+     * Parses a {@code String absentReason} into a {@code AbsentReason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentReason} is invalid.
+     */
+    public static AbsentReason parseAbsentReason(String absentReason) throws ParseException {
+        requireNonNull(absentReason);
+        String trimmedAbsentReason = absentReason.trim();
+        if (!AbsentReason.isValidAbsentReason(trimmedAbsentReason)) {
+            throw new ParseException(AbsentReason.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentReason(trimmedAbsentReason);
+    }
+
 }

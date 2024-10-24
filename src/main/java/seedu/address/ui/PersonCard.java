@@ -1,8 +1,12 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -12,6 +16,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.exam.Exam;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Person;
 
 /**
@@ -56,11 +62,18 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private TableView<Exam> tableView;
+    private TableView<AttendanceEntry> tableView1;
+    @FXML
+    private TableColumn<AttendanceEntry, String> absentDateColumn;
+    @FXML
+    private TableColumn<AttendanceEntry, String> absentReasonColumn;
+    @FXML
+    private TableView<Exam> tableView2;
     @FXML
     private TableColumn<Exam, String> examNameColumn;
     @FXML
     private TableColumn<Exam, String> examScoreColumn;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -81,10 +94,60 @@ public class PersonCard extends UiPart<Region> {
 
         examNameColumn.setCellValueFactory(new PropertyValueFactory<>("examName"));
         examScoreColumn.setCellValueFactory(new PropertyValueFactory<>("examScore"));
-        tableView.setItems(FXCollections.observableArrayList(person.getExams()));
+        tableView2.setItems(FXCollections.observableArrayList(person.getExams()));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        List<AttendanceEntry> attendanceEntries = new ArrayList<>();
+        for (Map.Entry<AbsentDate, AbsentReason> entry : person.getAttendances().entrySet()) {
+            attendanceEntries.add(new AttendanceEntry(entry.getKey().toString(), entry.getValue().toString()));
+        }
+
+        ObservableList<AttendanceEntry> observableAttendanceList = FXCollections.observableArrayList(attendanceEntries);
+        tableView1.setItems(observableAttendanceList);
+
+        absentDateColumn.setCellValueFactory(new PropertyValueFactory<>("absentDate"));
+        absentReasonColumn.setCellValueFactory(new PropertyValueFactory<>("absentReason"));
     }
+
+    /**
+     * Represents an entry of attendance containing the absent date and reason for a student's absence.
+     */
+    public static class AttendanceEntry {
+
+        private final String absentDate;
+        private final String absentReason;
+
+        /**
+         * Constructs an {@code AttendanceEntry} with the given absent date and reason.
+         *
+         * @param absentDate The date the student was absent.
+         * @param absentReason The reason for the student's absence.
+         */
+        public AttendanceEntry(String absentDate, String absentReason) {
+            this.absentDate = absentDate;
+            this.absentReason = absentReason;
+        }
+
+        /**
+         * Returns the absent date for this attendance entry.
+         *
+         * @return The absent date as a string.
+         */
+        public String getAbsentDate() {
+            return absentDate;
+        }
+
+        /**
+         * Returns the absent reason for this attendance entry.
+         *
+         * @return The reason for absence as a string.
+         */
+        public String getAbsentReason() {
+            return absentReason;
+        }
+    }
+
 }
