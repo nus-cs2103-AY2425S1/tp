@@ -79,7 +79,6 @@ public class AddCommandParserTest {
     }
 
     @Test
-    @Disabled
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedCompanyString = NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
                 + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + CAREER_PAGE_URL_DESC_MICROSOFT + TAG_DESC_COMPANY;
@@ -157,7 +156,6 @@ public class AddCommandParserTest {
     }
 
     @Test
-    @Disabled
     public void parse_optionalFieldsMissing_failure() {
         // Missing required field: CareerPageUrl
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -170,7 +168,6 @@ public class AddCommandParserTest {
     }
 
     @Test
-    @Disabled
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
@@ -206,7 +203,6 @@ public class AddCommandParserTest {
     }
 
     @Test
-    @Disabled
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT

@@ -116,11 +116,10 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
-    @Disabled
     public void toModelType_invalidUrl_throwsIllegalValueException() {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_URL, VALID_TAGS);
-        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        String expectedMessage = CareerPageUrl.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalArgumentException.class, expectedMessage, company::toModelType);
     }
 
