@@ -41,11 +41,8 @@ public class Restaurant {
         this.rating = rating;
 
         // Extract the price tag and other tags
-        Pair<Tag, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
-
-        this.price = priceTagAndOtherTags.getFirst() != null
-                ? new Price(priceTagAndOtherTags.getFirst())
-                : null;
+        Pair<Price, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
+        this.price = priceTagAndOtherTags.getFirst();
         this.tags.addAll(priceTagAndOtherTags.getSecond());
 
         // Default to not favourite

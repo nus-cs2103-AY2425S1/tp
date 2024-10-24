@@ -87,13 +87,13 @@ public enum PriceCategory {
      * @param tags the set of tags
      * @return a pair of the price tag and the other tags
      */
-    public static Pair<Tag, Set<Tag>> extractPriceTag(Set<Tag> tags) {
-        Tag priceTag = null;
+    public static Pair<Price, Set<Tag>> extractPriceTag(Set<Tag> tags) {
+        Price priceTag = null;
         Set<Tag> otherTags = new HashSet<>();
 
         for (Tag tag : tags) {
             if (isSymbol(tag.tagName) && priceTag == null) {
-                priceTag = tag;
+                priceTag = new Price(tag);
             } else if (isSymbol(tag.tagName) && priceTag != null) {
                 throw new IllegalArgumentException(MESSAGE_MULTIPLE_PRICE_TAGS);
             } else {
