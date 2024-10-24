@@ -129,7 +129,7 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
 
-        assertFalse(modelManager.equals(new ModelManager(addressBook,  differentUserPrefs, reminderAddressBook)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, reminderAddressBook)));
 
         // same userPrefs but different sortPreference -> return false
         UserPrefs differentUserPrefs2 = new UserPrefs();
