@@ -19,11 +19,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -102,6 +104,7 @@ public class AppointmentCommandTest {
 
     /**
      * A default model stub that have all of the methods failing.
+     * Possible to abstract this
      */
     private class ModelStub implements Model {
         @Override
@@ -150,6 +153,26 @@ public class AppointmentCommandTest {
         }
 
         @Override
+        public Path getListingsFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setListingsFilePath(Path listingsFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setListings(ReadOnlyListings listings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyListings getListings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -161,6 +184,10 @@ public class AppointmentCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person getPersonByName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -175,7 +202,32 @@ public class AppointmentCommandTest {
         }
 
         @Override
-        public Person getPersonByName(Name name) {
+        public boolean hasListing(Listing listing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteListing(Listing listing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addListing(Listing listing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setListing(Listing target, Listing editedListing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Listing> getFilteredListingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredListingList(Predicate<Listing> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

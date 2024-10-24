@@ -322,7 +322,7 @@ public class ChatWindowUiTest extends ApplicationTest {
             robot.clickOn(userInput);
             robot.write(message);
             robot.type(KeyCode.ENTER);
-            waitFor(Duration.seconds(4));
+            waitFor(Duration.seconds(2));
         }
 
         String expectedResponses =

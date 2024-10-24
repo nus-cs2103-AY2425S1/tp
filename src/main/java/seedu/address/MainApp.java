@@ -16,15 +16,19 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonListingsStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ListingStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -45,9 +49,11 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+
     public MainApp() {
-        //empty constructor
+        // empty constructor
     }
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing EZSTATES ]===========================");
@@ -60,7 +66,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ListingStorage listingStorage = new JsonListingsStorage(userPrefs.getListingsFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, listingStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -75,24 +82,36 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using client data file : " + storage.getAddressBookFilePath());
+        logger.info("Using listings data file : " + storage.getListingsFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyListings> listingsOptional;
+        ReadOnlyListings initialListings;
         try {
             addressBookOptional = storage.readAddressBook();
+            listingsOptional = storage.readListings();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            if (!listingsOptional.isPresent()) {
+                logger.info("Creating a new listings file " + storage.getListingsFilePath()
+                        + " populated with sample Listings.");
+            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialListings = listingsOptional.orElseGet(SampleDataUtil::getSampleListings);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
+            logger.warning("Data file at " + storage.getListingsFilePath() + " could not be laoded."
+                    + " Will be starting with empty Listings.");
             initialData = new AddressBook();
+            initialListings = new Listings();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialListings);
     }
 
     private void initLogging(Config config) {

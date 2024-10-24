@@ -1,24 +1,31 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "property": "123, Jurong West Ave 6, #08-111",
-    "remark": "",
-    "date": "",
-    "from": "",
-    "to" : "",
-    "tags": [ "friends" ],
-    "role": "buyer"
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "property": "4th street",
-    "remark": "",
-    "date": "",
-    "from": "",
-    "to" : "",
-    "role": "buyer"
-  } ]
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "property": "123, Jurong West Ave 6, #08-111",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01/01/2024" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "tags": ["friends"],
+      "role": "buyer"
+    },
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "pauline@example.com",
+      "property": "4th street",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01/01/2024" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "role": "buyer"
+    }
+  ]
 }
