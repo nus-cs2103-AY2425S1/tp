@@ -75,7 +75,8 @@ public class DeleteLessonCommand extends Command {
         }
 
         DeleteLessonCommand otherDeleteCommand = (DeleteLessonCommand) other;
-        return tutorIndex.equals(otherDeleteCommand.tuteeIndex);
+        return tutorIndex.equals(otherDeleteCommand.tutorIndex)
+                && tuteeIndex.equals(otherDeleteCommand.tuteeIndex);
     }
 
     @Override
