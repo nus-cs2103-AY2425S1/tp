@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Skill> skills = new HashSet<>();
-    private final Optional<String> match;
+    private Optional<String> match;
 
     /**
      * Every parameter must be present and not null.
@@ -108,6 +108,14 @@ public class Person {
     public String getIdentifier() {
         return phone.toString();
     }
+
+    /**
+     * Removes
+     */
+    public void removeMatch() {
+        match = Optional.empty();
+    }
+
     // Todo: To be closed in PR review, basically we agreed that a person is unique due to contact and email
     //  and you can see that before this PR, you can add a contact with the same contact or email. Let me know ur thots.
     ///**

@@ -82,17 +82,25 @@ public class Job {
     }
 
     /**
-     * Returns true if the contacts phone number is in matches
+     * Returns true if the contacts phone number is in matches.
      */
     public boolean hasMatched(String contactPhoneNumber) {
         return this.matches.contains(contactPhoneNumber);
     }
 
     /**
-     * Returns a string that identify the Job object
+     * Returns a string that identify the Job object.
      */
     public String getIdentifier() {
         return company.toString() + "::" + name;
+    }
+
+    /**
+     * Removes the association of a single person from the Job object.
+     * Guaranteed to not throw an exception so long as the input is a {@code String} or {@code null}.
+     */
+    public void removeMatch(String identifier) {
+        matches.remove(identifier);
     }
 
     /**
@@ -125,4 +133,5 @@ public class Job {
                                         .add("requirements", requirements)
                                         .toString();
     }
+
 }
