@@ -49,7 +49,6 @@ public class StudentCard extends UiPart<Region> {
     private final Image unpaidIcon = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
 
     private Label fee;
-  
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -103,7 +102,7 @@ public class StudentCard extends UiPart<Region> {
     public String getIdText() {
         return id.getText();
     }
-  
+
     /**
      * Returns the text displayed for the student's phone number.
      *
