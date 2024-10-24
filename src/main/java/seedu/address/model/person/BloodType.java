@@ -5,7 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Patient's blood type in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidBloodType(String)}
+ * Guarantees: immutable; is valid as declared in
+ * {@link #isValidBloodType(String)}
  */
 public class BloodType {
     public static final String MESSAGE_CONSTRAINTS = "Blood type must be either A/B/AB/O followed by the Rhesus factor";
