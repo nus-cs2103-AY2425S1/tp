@@ -12,6 +12,10 @@ import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand.FilterPersonDescriptor;
@@ -22,10 +26,6 @@ import seedu.address.model.person.FilterPredicate;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
 
 public class FilterCommandTest {
 
