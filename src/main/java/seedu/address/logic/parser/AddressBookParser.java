@@ -14,6 +14,7 @@ import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -25,7 +26,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewTuteeChartCommand;
+import seedu.address.logic.commands.ViewTutorChartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -103,11 +104,14 @@ public class AddressBookParser {
         case AddLessonCommand.COMMAND_WORD:
             return new AddLessonCommandParser().parse(arguments);
 
+        case DeleteLessonCommand.COMMAND_WORD:
+            return new DeleteLessonCommandParser().parse(arguments);
+
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
 
-        case ViewTuteeChartCommand.COMMAND_WORD:
-            return new ViewTuteeChartCommand();
+        case ViewTutorChartCommand.COMMAND_WORD:
+            return new ViewTutorChartCommand();
 
         case FindSubjectCommand.COMMAND_WORD:
             return new FindSubjectCommandParser().parse(arguments);

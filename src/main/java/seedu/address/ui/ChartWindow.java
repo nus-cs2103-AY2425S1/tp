@@ -40,7 +40,7 @@ public class ChartWindow extends UiPart<Region> {
      */
     private void populateChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Tutee Hours Chart");
+        series.setName("Tutor Hours Chart");
 
         // Iterate over the Person array to create chart data entries.
         for (Person person : chartData) {

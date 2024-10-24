@@ -33,9 +33,22 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedTutor} with the given tutor details.
      */
     @JsonCreator
-    public JsonAdaptedTutor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                            @JsonProperty("email") String email, @JsonProperty("address") String address,
-                            @JsonProperty("hours") String hours,
+    public JsonAdaptedTutor(@JsonProperty("id") int id, @JsonProperty("name") String name,
+                            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                            @JsonProperty("address") String address, @JsonProperty("hours") String hours,
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
+
+        super(id, name, phone, email, address, hours, tags, "Tutor", subjects);
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedTutor} with the given tutor details.
+     */
+    @JsonCreator
+    public JsonAdaptedTutor(@JsonProperty("name") String name,
+                            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                            @JsonProperty("address") String address, @JsonProperty("hours") String hours,
                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
 
@@ -46,7 +59,7 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
      * Converts a given {@code Tutor} into this class for Jackson use.
      */
     public JsonAdaptedTutor(Person source) {
-        super(source.getName().fullName, source.getPhone().value, source.getEmail().value,
+        super(source.getId(), source.getName().fullName, source.getPhone().value, source.getEmail().value,
                 source.getAddress().value, source.getHours().value,
                 source.getTags().stream()
                         .map(JsonAdaptedTag::new)

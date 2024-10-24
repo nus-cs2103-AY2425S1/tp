@@ -9,18 +9,18 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 
 /**
- * View the chart of tutees in increasing order.
+ * View the chart of tutors in increasing order.
  */
-public class ViewTuteeChartCommand extends Command {
+public class ViewTutorChartCommand extends Command {
     public static final String COMMAND_WORD = "vtc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the chart of tutees.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the chart of tutors.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Here is the chart of tutees in increasing order.";
+    public static final String MESSAGE_SUCCESS = "Here is the chart of tutors in increasing order.";
 
     /**
      * Executes the command and returns the result message.
@@ -36,15 +36,15 @@ public class ViewTuteeChartCommand extends Command {
         ObservableList<Person> fullList = model.getFilteredPersonList();
         Person[] fullListArray = fullList.toArray(new Person[0]);
         Arrays.sort(fullListArray, Comparator.comparing(Person -> Person.getHours().getHoursInt()));
-        Tutee[] tuteeArray = Arrays.stream(fullListArray).filter(person -> person instanceof Tutee)
-                .map(person -> (Tutee) person).toArray(Tutee[]::new);
+        Tutor[] tutorArray = Arrays.stream(fullListArray).filter(person -> person instanceof Tutor)
+                .map(person -> (Tutor) person).toArray(Tutor[]::new);
         return new CommandResult(MESSAGE_SUCCESS, false, false,
-                true, tuteeArray);
+                true, tutorArray);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || other instanceof ViewTuteeChartCommand; // instanceof handles nulls
+                || other instanceof ViewTutorChartCommand; // instanceof handles nulls
     }
 }
