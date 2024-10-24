@@ -55,7 +55,7 @@ public class ScheduleDateCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noAppointmentFound() {
+    public void execute_noAppointmentFound() {
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 0, "29 February 2024");
         AppointmentContainsDatePredicate predicate = preparePredicate("29-02-2024");
         ScheduleDateCommand command = new ScheduleDateCommand(predicate);
@@ -65,7 +65,7 @@ public class ScheduleDateCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 2, "23 October 2024");
         AppointmentContainsDatePredicate predicate = preparePredicate("23-10-2024");
         ScheduleDateCommand command = new ScheduleDateCommand(predicate);
