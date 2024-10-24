@@ -73,6 +73,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code publicAddresses} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withPublicAddresses(Map<Network, Set<PublicAddress>> publicAddresses) {
+        this.publicAddresses = publicAddresses;
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String... tags) {
@@ -103,6 +111,7 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+
 
     public Person build() {
         return new Person(name, phone, email, address, publicAddresses, tags);
