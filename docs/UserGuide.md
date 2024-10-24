@@ -33,7 +33,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete n/John Doe` : Deletes the contact with name `John Doe` if it is shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -196,7 +196,7 @@ Format: `view [n/NAME]`
 
 Examples:
 * `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
-* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`. 
+* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`.
 
 ### Marking a student as present : `mark`
 
@@ -226,6 +226,20 @@ Examples:
 * `unmarks n/John Doe w/1` unmarks the student named `JohnDoe` as present for week 1.
   ![result for unmark](images/unmarkViswa.png)
 
+### Sorting the displayed lsit : `sort`
+
+Sorts the displayed list based on the given field and order.
+
+Format: `sort FIELD order/ORDER`
+
+* Current FIELD that can be sorted by: `github`, `name`, `telegram`.
+* Current ORDER that is accepted: `asc`, `desc`.
+* The sort order will persist between commands.
+* The sorting is case-insensitive: upper and lower case are treated as the same values.
+
+Examples:
+* `sort name order/asc` will sort the displayed list based on their name in ascending order.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -246,7 +260,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless> 
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -275,17 +289,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action      | Format, Examples                                                                                                                                                                                                                        |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
-| **Clear**   | `clear`                                                                                                                                                                                                                                 |
-| **Delete**  | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
-| **Filter**  | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
-| **List**    | `list`                                                                                                                                                                                                                                  |
-| **Help**    | `help`                                                                                                                                                                                                                                  |
-| **View**    | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
-| **GitHub**  | `github n/NAME`                                                                                                                                                                                                                         |
-| **Mark**    | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                             |
-| **Unmark**  | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                         |
+| Action     | Format, Examples                                                                                                                                                                                                                          |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool`   |
+| **Clear**  | `clear`                                                                                                                                                                                                                                   |
+| **Delete** | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                                |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                  |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                |
+| **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                     |
+| **List**   | `list`                                                                                                                                                                                                                                    |
+| **Help**   | `help`                                                                                                                                                                                                                                    |
+| **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                               |
+| **GitHub** | `github n/NAME`                                                                                                                                                                                                                           |
+| **Mark**   | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                                                                                               |
+| **Unmark** | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                                                                                           |
+| **Sort**   | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                                                                  |
