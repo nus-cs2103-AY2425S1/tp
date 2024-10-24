@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_PUBLIC_ADDRESS_SUBSTRING = new Prefix("pas/");
 
     public static final Prefix PREFIX_PUBLIC_ADDRESS_LABEL = new Prefix("l/");
+    public static final Prefix PREFIX_PUBLIC_ADDRESS_NETWORK = new Prefix("c/");
 
 }

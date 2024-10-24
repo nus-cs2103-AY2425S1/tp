@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #1d1d1d;
     background-color: #383838; /* Used in the default.html file */
 }
 
@@ -117,13 +117,13 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Comic Sans MS";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: "Comic Sans MS";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
@@ -132,10 +132,17 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.vbox-address {
+    -fx-background-color: #c49521;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
 .pane-with-border {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: derive(#1d1d1d, 10%);
-    -fx-border-top-width: 1px;
+    -fx-background-color: derive(#1d1d1d, 0%);
+    -fx-border-color: derive(#1d1d1d, 0%);
+    -fx-border-top-width: 10px;
+    -fx-border-padding: 5px;
 }
 
 .status-bar {
@@ -144,7 +151,7 @@
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Comic Sans MS";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
@@ -154,7 +161,7 @@
 }
 
 .status-bar .label {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Comic Sans MS";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
@@ -194,7 +201,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Comic Sans MS";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -214,7 +221,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Comic Sans MS", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -319,7 +326,7 @@
     -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Comic Sans MS";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
@@ -340,9 +347,11 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: #ce9f25;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+
