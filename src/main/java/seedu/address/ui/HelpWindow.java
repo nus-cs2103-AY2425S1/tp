@@ -17,15 +17,13 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-2.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = """
-        Replace UPPERCASE content with relevant details. Details in Square Brackets are OPTIONAL to provide.
-        
+        Replace UPPERCASE content with relevant details. Details in Square Brackets are OPTIONAL to provide.\n
             General Commands:
                 1. help: Show a basic help message with a link to the PlanPerfect User Guide for advanced support.
                 2. list: Show all saved contacts.
                 3. find KEYWORD1 KEYWORD2 ... : Find contacts with any of the given keywords in their name.
                 4. exit: Exit the program.
-                5. taglist: List all tags currently in use in PlanPerfect.
-                
+                5. taglist: List all tags currently in use in PlanPerfect.\n
             Contact Commands:
                 1. add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]: Add a contact with up to 6 tags.
                 2. edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]: Edit a contact’s personal detail(s).
@@ -34,8 +32,7 @@ public class HelpWindow extends UiPart<Stage> {
                 5. filter t/TAG1 TAG2 ... : Filter contacts by the specified tag(s).
                 6. delete INDEX: Delete the contact in the specified index.
                 7. sort: Sort the contacts in the list by name.
-                8. clear: Clear all contacts (following a confirmation message).
-                
+                8. clear: Clear all contacts (following a confirmation message).\n
             Wedding Commands:
                 1. addw n/WEDDING_NAME d/DATE [c/CONTACT1_INDEX ...]: Add wedding with 0 or more contacts.
                 2. editw WEDDING_INDEX [n/WEDDING_NAME] [d/DATE]: Edit a wedding's detail(s).
