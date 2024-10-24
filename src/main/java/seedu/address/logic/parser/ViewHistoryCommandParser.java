@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
 
 
 /**
@@ -44,9 +43,9 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
         }
 
         // Parse the patient ID
-        Id patientId;
+        int patientId;
         try {
-            patientId = ParserUtil.parsePatientId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
+            patientId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }

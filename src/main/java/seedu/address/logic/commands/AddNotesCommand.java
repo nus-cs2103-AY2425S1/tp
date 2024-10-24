@@ -9,8 +9,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 
@@ -33,7 +31,7 @@ public class AddNotesCommand extends Command {
 
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Successfully "
             + "added notes: %s to patient of ID: %d.";
-    private final Id patientId;
+    private final int patientId;
     private final String additionalNotes;
 
     /**
@@ -41,7 +39,7 @@ public class AddNotesCommand extends Command {
      * @param patientId patient id
      * @param additionalNotes notes to be added
      */
-    public AddNotesCommand(Id patientId, String additionalNotes) {
+    public AddNotesCommand(int patientId, String additionalNotes) {
         requireAllNonNull(patientId, additionalNotes);
 
         this.patientId = patientId;
@@ -53,12 +51,12 @@ public class AddNotesCommand extends Command {
 
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Patient patientToAddNotes = model.getFilteredPatientById(allPersons, patientId);
+        Person patientToAddNotes = model.getFilteredPatientById(allPersons, patientId);
         patientToAddNotes.addNotes(additionalNotes);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS, additionalNotes, patientId.getIdValue()
+        return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS, additionalNotes, patientId
         ));
     }
 

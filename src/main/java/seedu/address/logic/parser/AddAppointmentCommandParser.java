@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
 
 /**
  * Parses input arguments and creates a new AddAppointmentCommand object
@@ -39,11 +38,11 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
-        Id patientId;
-        Id doctorId;
+        int patientId;
+        int doctorId;
         try {
-            patientId = ParserUtil.parsePatientId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
-            doctorId = ParserUtil.parseDoctorId(argumentMultimap.getAllValues(PREFIX_ID).get(1));
+            patientId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
+            doctorId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(1));
         } catch (InvalidIdException e) {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }

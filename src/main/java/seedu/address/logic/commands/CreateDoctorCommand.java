@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Person;
 
 /**
  * Creates a new Doctor profile
@@ -34,12 +34,12 @@ public class CreateDoctorCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully created a new doctor Doctor#%d : %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This doctor already exists";
 
-    private final Doctor toAdd;
+    private final Person toAdd;
 
     /**
      * Creates an CreatevCommand to add the specified {@code doctor}
      */
-    public CreateDoctorCommand(Doctor doctor) {
+    public CreateDoctorCommand(Person doctor) {
         requireNonNull(doctor);
         toAdd = doctor;
     }
@@ -53,8 +53,7 @@ public class CreateDoctorCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        Doctor.addDoctors(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getId().getIdValue(), Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getId(), Messages.format(toAdd)));
     }
 
 }

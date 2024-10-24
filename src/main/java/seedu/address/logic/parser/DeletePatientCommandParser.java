@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.DeletePatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
 
 /**
  * Parses input arguments and creates a new DeletePatientCommand object
@@ -33,9 +32,9 @@ public class DeletePatientCommandParser implements Parser<DeletePatientCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeletePatientCommand.MESSAGE_USAGE));
         }
-        Id patientId;
+        int patientId;
         try {
-            patientId = ParserUtil.parsePatientId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
+            patientId = ParserUtil.parsePersonId(argumentMultimap.getAllValues(PREFIX_ID).get(0));
         } catch (InvalidIdException e) {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }

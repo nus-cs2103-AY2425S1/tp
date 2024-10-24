@@ -15,11 +15,8 @@ import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -48,29 +45,11 @@ public class ParserUtil {
     /**
      * Parses {@code id} into an {@code Id} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws InvalidIdException if the specified patient id is invalid.
+     * @throws InvalidIdException if the specified person id is invalid.
      */
-    public static Id parsePatientId(String id) throws InvalidIdException {
+    public static int parsePersonId(String id) throws InvalidIdException {
         String trimmedId = id.trim();
-        Patient patientWithId = Patient.getPatientWithId(trimmedId);
-        if (patientWithId == null) {
-            throw new InvalidIdException(MESSAGE_INVALID_PATIENT_ID);
-        }
-        return patientWithId.getId();
-    }
-
-    /**
-     * Parses {@code id} into an {@code Id} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws InvalidIdException if the specified doctor id is invalid.
-     */
-    public static Id parseDoctorId(String id) throws InvalidIdException {
-        String trimmedId = id.trim();
-        Doctor doctorWithId = Doctor.getDoctorWithId(trimmedId);
-        if (doctorWithId == null) {
-            throw new InvalidIdException(MESSAGE_INVALID_DOCTOR_ID);
-        }
-        return doctorWithId.getId();
+        return Integer.parseInt(trimmedId);
     }
 
     /**

@@ -10,47 +10,41 @@ public interface Appointmentable {
     /**
      * Adds a new appointment at the specified time, for the respective patient and doctor.
      *
-     * @param dateTime Time of appointment.
+     * @param dateTime  Time of appointment.
      * @param patientId Id of patient in the appointment.
-     * @param doctorId Id of doctor in the appointment.
+     * @param doctorId  Id of doctor in the appointment.
      * @return True if command was successful, false if otherwise.
      */
-    public abstract boolean addAppointment(LocalDateTime dateTime, Id patientId, Id doctorId, String remarks);
+    public abstract boolean addAppointment(LocalDateTime dateTime, int patientId, int doctorId, String remarks);
 
     /**
      * Edit an appointment at the specified time, with the respective patient and doctor.
      *
-     * @param dateTime Time of appointment.
+     * @param dateTime  Time of appointment.
      * @param patientId Id of patient in the appointment.
-     * @param doctorId Id of doctor in the appointment.
+     * @param doctorId  Id of doctor in the appointment.
      * @return True if command was successful, false if otherwise.
      */
-    public abstract boolean editAppointment(LocalDateTime dateTime, Id patientId, Id doctorId);
+    public abstract boolean editAppointment(LocalDateTime dateTime, int patientId, int doctorId);
 
     /**
      * Delete an appointment at the specified time, with the respective patient and doctor.
      *
-     * @param dateTime Time of appointment.
+     * @param dateTime  Time of appointment.
      * @param patientId Id of patient in the appointment.
-     * @param doctorId Id of doctor in the appointment.
+     * @param doctorId  Id of doctor in the appointment.
      * @return True if command was successful, false if otherwise.
      */
-    public abstract boolean deleteAppointment(LocalDateTime dateTime, Id patientId, Id doctorId);
+    public abstract boolean deleteAppointment(LocalDateTime dateTime, int patientId, int doctorId);
 
     /**
      * Gets an appointment at the specified time, with the respective patient and doctor.
      *
-     * @param dateTime Time of appointment.
+     * @param dateTime  Time of appointment.
      * @param patientId Id of patient in the appointment.
-     * @param doctorId Id of doctor in the appointment.
+     * @param doctorId  Id of doctor in the appointment.
      * @return True if command was successful, false if otherwise.
      */
-    public abstract Appointment getAppointment(LocalDateTime dateTime, Id patientId, Id doctorId);
+    public abstract Appointment getAppointment(LocalDateTime dateTime, int patientId, int doctorId);
 
-    /**
-     * Returns all appointments for the specified person.
-     *
-     * @return String representing all the appointments of the person, may not be a String.
-     */
-    public abstract String getAllAppointments();
 }

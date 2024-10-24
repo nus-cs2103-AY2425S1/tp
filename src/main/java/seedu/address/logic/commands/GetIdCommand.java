@@ -32,7 +32,7 @@ public class GetIdCommand extends Command {
         }
 
         return new CommandResult(String.format(Messages.MESSAGE_GET_ID,
-                model.getFilteredPersonList().get(0).getId().getIdValue()));
+                model.getFilteredPersonList().get(0).getId()));
     }
 
     @Override
