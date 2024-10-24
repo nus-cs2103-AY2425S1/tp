@@ -22,7 +22,7 @@ public class Event {
     private final String eventName;
     private final LocalDate date;
     private final Set<Person> attendees = new HashSet<>();
-    private Address location;
+    private final Address location;
 
     /**
      * Constructs an {@code Event}.
@@ -31,12 +31,13 @@ public class Event {
      * @param date A valid date.
      * @param attendees A set of {@code Person} attending the event.
      */
-    public Event(String eventName, LocalDate date, Set<Person> attendees, Address location) {
-        requireAllNonNull(eventName, date, attendees, location);
+    public Event(String eventName, LocalDate date, Address location, Set<Person> attendees) {
+        requireAllNonNull(eventName, date, location, attendees);
         this.eventName = eventName;
         this.date = date;
-        this.attendees.addAll(attendees);
         this.location = location;
+        this.attendees.addAll(attendees);
+
     }
 
     public String getEventName() {
