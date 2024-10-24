@@ -25,7 +25,8 @@ public class ViewClientCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewClientCommand viewClientCommand = new ViewClientCommand(INDEX_FIRST_PERSON);
-        String expectedMessage = String.format(ViewClientCommand.MESSAGE_VIEW_CLIENT_SUCCESS, personToView.getName());
+        String expectedMessage = Messages.formatSuccessMessage(personToView,
+                ViewClientCommand.MESSAGE_VIEW_CLIENT_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         CommandResult expectedCommandResult = new CommandResult(
             expectedMessage, false, false, true, personToView

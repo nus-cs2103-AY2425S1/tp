@@ -63,4 +63,22 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the command success message for display to the user.
+     * If the user has a Car, include the VRN in the message.
+     */
+    public static String formatSuccessMessage(Person person, String successMessage) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(successMessage);
+        builder.append(": ");
+        builder.append(person.getName());
+        if (person.getCar() == null) {
+            builder.append(".");
+        } else {
+            builder.append("(VRN: ");
+            builder.append(person.getVrn());
+            builder.append(").");
+        }
+        return builder.toString();
+    }
 }

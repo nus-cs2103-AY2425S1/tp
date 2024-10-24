@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -44,8 +45,7 @@ public class AddClientCommand extends Command {
 
     public static final String VEHICLE_DETAILS_MISSING =
             "Vehicle details are missing. Please provide all vehicle details.\n" + MESSAGE_USAGE;
-    public static final String MESSAGE_SUCCESS = "New Client added to MATER: %s.";
-    public static final String MESSAGE_SUCCESS_WITH_CAR = "New Client added to MATER: %s (VRN: %s).";
+    public static final String MESSAGE_SUCCESS = "New Client added to MATER";
     public static final String MESSAGE_DUPLICATE_PERSON = "Client already exists in MATER.";
     public static final String MESSAGE_NO_CAR_TO_ADD_ISSUES = "Client does not have a Car to add Issues.";
 
@@ -78,12 +78,7 @@ public class AddClientCommand extends Command {
 
         model.addPerson(toAdd);
 
-        String message;
-        if (toAdd.getCar() == null) {
-            message = String.format(MESSAGE_SUCCESS, toAdd.getName());
-        } else {
-            message = String.format(MESSAGE_SUCCESS_WITH_CAR, toAdd.getName(), toAdd.getVrn());
-        }
+        String message = Messages.formatSuccessMessage(toAdd, MESSAGE_SUCCESS);
         return new CommandResult(message);
     }
 

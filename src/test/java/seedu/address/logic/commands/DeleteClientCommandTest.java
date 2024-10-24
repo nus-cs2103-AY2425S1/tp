@@ -32,8 +32,8 @@ public class DeleteClientCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteClientCommand deleteClientCommand = new DeleteClientCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteClientCommand.MESSAGE_DELETE_CLIENT_SUCCESS,
-                personToDelete.getName());
+        String expectedMessage = Messages.formatSuccessMessage(personToDelete,
+                DeleteClientCommand.MESSAGE_DELETE_CLIENT_SUCCESS);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -56,8 +56,8 @@ public class DeleteClientCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteClientCommand deleteClientCommand = new DeleteClientCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteClientCommand.MESSAGE_DELETE_CLIENT_SUCCESS,
-                personToDelete.getName());
+        String expectedMessage = Messages.formatSuccessMessage(personToDelete,
+                DeleteClientCommand.MESSAGE_DELETE_CLIENT_SUCCESS);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);

@@ -20,9 +20,7 @@ public class ViewClientCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_VIEW_CLIENT_SUCCESS =
-            "Mater - View Client window opened for: %s.";
-    public static final String MESSAGE_VIEW_CLIENT_SUCCESS_WITH_CAR =
-            "Mater - View Client window opened for: %s (VRN: %s).";
+            "Mater - View Client window opened for";
 
     private final Index index;
 
@@ -45,18 +43,8 @@ public class ViewClientCommand extends Command {
         }
 
         Person clientToView = lastShownList.get(index.getZeroBased());
-        String carDetails = clientToView.getCar() == null ? "No car details available" : "VRN: "
-                + clientToView.getCar().getVrn() + "\nVIN: " + clientToView.getCar().getVin() + "\nMake: "
-                + clientToView.getCar().getCarMake() + "\nModel: " + clientToView.getCar().getCarModel();
 
-        String message;
-        if (clientToView.getCar() == null) {
-            message = String.format(MESSAGE_VIEW_CLIENT_SUCCESS,
-                    clientToView.getName());
-        } else {
-            message = String.format(MESSAGE_VIEW_CLIENT_SUCCESS_WITH_CAR,
-                    clientToView.getName(), clientToView.getVrn());
-        }
+        String message = Messages.formatSuccessMessage(clientToView, MESSAGE_VIEW_CLIENT_SUCCESS);
         return new CommandResult(message, false, false, true, clientToView);
     }
 

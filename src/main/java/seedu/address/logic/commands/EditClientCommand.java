@@ -58,8 +58,7 @@ public class EditClientCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_VRN + "SNP5701C";
-    public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client in MATER: %s.";
-    public static final String MESSAGE_EDIT_CLIENT_SUCCESS_WITH_CAR = "Edited Client in MATER: %s (VRN: %s).";
+    public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client in MATER";
     public static final String MESSAGE_NOT_EDITED = "At least one field must be edited.";
     public static final String MESSAGE_CAR_DOES_NOT_EXIST = "Client does not have a Car to edit.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Client already exists in MATER.";
@@ -128,14 +127,7 @@ public class EditClientCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        String message;
-        if (editedPerson.getCar() == null) {
-            message = String.format(MESSAGE_EDIT_CLIENT_SUCCESS,
-                    editedPerson.getName());
-        } else {
-            message = String.format(MESSAGE_EDIT_CLIENT_SUCCESS_WITH_CAR,
-                    editedPerson.getName(), editedPerson.getVrn());
-        }
+        String message = Messages.formatSuccessMessage(editedPerson, MESSAGE_EDIT_CLIENT_SUCCESS);
         return new CommandResult(message);
     }
 
