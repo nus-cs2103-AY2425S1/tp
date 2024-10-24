@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -23,7 +24,9 @@ public class AddProjectCommand extends Command {
             + PREFIX_PROJECT_NAME + "PROJECT NAME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PROJECT_ID + "A0276123K "
-            + PREFIX_PROJECT_NAME + "Project Alpha ";
+            + PREFIX_PROJECT_NAME + "Project Alpha "
+            + PREFIX_SKILL + "Cybersecurity "
+            + PREFIX_SKILL + "Java";
 
     public static final String MESSAGE_SUCCESS = "New project added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROJECT = "This project already exists in the address book";

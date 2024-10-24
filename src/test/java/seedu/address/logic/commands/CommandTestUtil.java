@@ -74,11 +74,15 @@ public class CommandTestUtil {
     public static final String VALID_PROJECT_NAME_BETA = "Project Beta";
     public static final String VALID_PROJECT_ID_ALPHA = "A0276123J";
     public static final String VALID_PROJECT_ID_BETA = "A0276123K";
+    public static final String VALID_PROJECT_SKILL_THIEVERY_BETA = "thievery";
+    public static final String VALID_PROJECT_SKILL_GAMBLING_BETA = "gambling";
 
     public static final String PROJECT_NAME_DESC_ALPHA = " " + PREFIX_PROJECT_NAME + VALID_PROJECT_NAME_ALPHA;
     public static final String PROJECT_NAME_DESC_BETA = " " + PREFIX_PROJECT_NAME + VALID_PROJECT_NAME_BETA;
     public static final String PROJECT_ID_DESC_ALPHA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_ALPHA;
     public static final String PROJECT_ID_DESC_BETA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_BETA;
+    public static final String PROJECT_SKILLS_DESC_BETA = " " + PREFIX_SKILL + VALID_PROJECT_SKILL_GAMBLING_BETA
+            + " " + PREFIX_SKILL + VALID_PROJECT_SKILL_THIEVERY_BETA;
 
     public static final String INVALID_PROJECT_NAME_DESC = " " + PREFIX_PROJECT_NAME + "James&";
     // '&' not allowed in names
