@@ -32,7 +32,7 @@ public class MarkAttendanceCommand extends Command {
             + PREFIX_DATE + "2019-10-09 "
             + PREFIX_PRESENT + " p";
 
-    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s from Tutorial Group: %2$s is %3$s on %4$s";
+    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
 
     private final Name name;
     private final LocalDate date;
@@ -60,11 +60,10 @@ public class MarkAttendanceCommand extends Command {
         if (student == null) {
             throw new CommandException("Student not found: " + name);
         }
-        TutorialGroup tg = student.getTutorialGroup();
 
 
         // Mark attendance
         student.markAttendance(date, attendance.value);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, tg, attendance.toString(), date));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance, date));
     }
 }
