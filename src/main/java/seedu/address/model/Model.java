@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the address book.
+     */
+    boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Adds the given appointment.
+     * {@code appointment} must not already exist in the address book.
+     */
+    void addAppointment(Appointment appointment);
 }

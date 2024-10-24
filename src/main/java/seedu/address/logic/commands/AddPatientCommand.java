@@ -47,7 +47,7 @@ public class AddPatientCommand extends Command {
     private final Patient patientToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Patient}
+     * Creates an AddPatientCommand to add the specified {@code Patient}
      */
     public AddPatientCommand(Patient patient) {
         requireNonNull(patient);
