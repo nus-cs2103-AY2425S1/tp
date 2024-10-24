@@ -52,10 +52,6 @@ Company *--> Bookmark
 Company *--> CareerPageUrl
 Company *--> Address
 Company *--> "*" Tag
-Company *--> Phone
-Company *--> Email
-Company *--> Address
-Company *--> "*" Tag
 
 Tag <|-- SalaryTag
 Tag <|-- PeriodTag
