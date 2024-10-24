@@ -192,6 +192,14 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
+        System.out.println("versioned: " + versionedAddressBook.equals(otherModelManager.versionedAddressBook));
+        System.out.println("versioned ab: " + versionedAddressBook);
+        System.out.println("versioned ab: " + otherModelManager.versionedAddressBook);
+        System.out.println(filteredPersons.equals(otherModelManager.filteredPersons));
+        System.out.println("filtered persons: " + filteredPersons);
+        System.out.println(otherModelManager.filteredPersons);
+
         return versionedAddressBook.equals(otherModelManager.versionedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);

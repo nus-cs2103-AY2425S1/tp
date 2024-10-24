@@ -9,8 +9,8 @@ Class "{abstract}\nPerson" as Person
 
 AddressBook *--> "1" UniquePersonList
 AddressBook *-left-> "1" UniqueLessonList
-UniquePersonList -right->"~* all" Person
-UniqueLessonList --> "~* all" Lesson
+UniquePersonList o-right->"~* all" Person
+UniqueLessonList o--> "~* all" Lesson
 
 Person *--> "1" Name
 Person *--> "1" Phone
