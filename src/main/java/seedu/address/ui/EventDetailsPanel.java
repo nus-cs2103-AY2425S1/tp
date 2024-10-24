@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
-// TODO: Uncomment when event implement tags
-// import java.util.Comparator;
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
@@ -72,9 +71,8 @@ public class EventDetailsPanel extends UiPart<Region> {
         this.event = event;
         name.setText(event.getName().fullName);
         date.setText(event.getDate().toString());
-        // TODO: Uncomment when event implement tags
-        // event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
-        // .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+         event.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
+         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     private void showEventDetails() {
