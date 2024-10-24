@@ -95,7 +95,7 @@ public interface Model {
 
     boolean hasMeeting(Meeting meeting);
 
-    ObservableList<Meeting> getWeeklySchedule();
+    public ObservableList<Meeting> getWeeklySchedule();
 
     void changeWeeklySchedule(Predicate<Meeting> predicate);
 

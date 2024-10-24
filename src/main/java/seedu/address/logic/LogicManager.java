@@ -90,6 +90,7 @@ public class LogicManager implements Logic {
         return model.getCurrentWeeklySchedule(currentWeekPredicate);
     }
 
+
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();

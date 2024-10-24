@@ -1,10 +1,13 @@
 package seedu.address.ui.calendar;
 
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
 import seedu.address.ui.UiPart;
 
@@ -32,7 +35,7 @@ public class CalendarCard extends UiPart<Region> {
     /**
      * Creates a {@code CalendarCard} with the given {@code meeting} and index to display.
      */
-    public CalendarCard(Meeting meeting, int displayedIndex) {
+    public CalendarCard(Meeting meeting, int displayedIndex, ReadOnlyAddressBook addressBook) {
         super(FXML);
         this.meeting = meeting;
         id.setText(displayedIndex + ".");
@@ -40,8 +43,14 @@ public class CalendarCard extends UiPart<Region> {
         date.setText(meeting.getMeetingDate().toString());
         time.setText(meeting.getMeetingTime().toString());
         meeting.getContactUids()
-            .forEach(contact -> associatedContacts.getChildren().add(
-                new Label(String.valueOf(contact))));
-        // Manipulation to contact lambda can be done to get the string out instead of just having the index
+            .forEach(contact -> {
+                FilteredList<Person> filteredList = addressBook.getPersonList()
+                        .filtered(p -> p.getUid().equals(contact));
+                if (!filteredList.isEmpty()) {
+                    associatedContacts.getChildren().add(
+                            new Label(filteredList.get(0).getName().toString())
+                    );
+                }
+            });
     }
 }
