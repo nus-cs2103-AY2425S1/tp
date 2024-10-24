@@ -239,6 +239,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+
 ### \[Proposed\] Consultation Management
 
 The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
@@ -311,8 +312,6 @@ deleteconsult 1
 removefromconsult 1 n/John Doe
 ```
 
-#### Design Considerations
-
 **Aspect 1: Date and Time Representation**
 
 * **Alternative 1 (current choice)**: Separate `Date` and `Time` classes
@@ -333,9 +332,62 @@ removefromconsult 1 n/John Doe
     * Pros: Simpler thread-safety
     * Cons: Higher memory usage for modifications
 
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+### \[Proposed\] Data Archiving / Export Feature
+
+[//]: # (_{Explain here how the data archiving feature will be implemented}_)
+
+The export feature allows TAs to export their current list of students to a CSV file for external use. This feature is particularly useful for creating backups, sharing data with other applications, or generating reports.
+
+#### Proposed Implementation
+
+The export functionality is implemented through the `ExportCommand` class which converts the current student list into CSV format and saves it to a file in the project's `data` folder. It is then ready for further use, which could be in the form of a download/import functionality in a separate feature.
+
+Currently, the exported CSV includes the following student information:
+- Name
+- Phone number
+- Email address
+- Enrolled courses (semicolon separated)
+
+#### Implementation Details
+
+1. File Handling
+The system aims to implement several safety features:
+- Creates a `data` directory if it does not exist
+- Validates filename for illegal characters
+- Prevents accidental file overwriting
+- Properly escapes special characters in CSV output
+- 
+2. Force Flag
+The `-f` flag allows overwriting of existing files:
+```
+export students     // Creates a new file students.csv
+export students     // Warns the user
+export -f students  // Overwrites the students.csv file
+```
+
+#### Design Considerations
+
+**Aspect: Export File Format**
+
+* **Alternative 1 (current choice)**: CSV format
+    * Pros: Wide compatibility, easy to read/edit
+    * Cons: Limited formatting options
+
+* **Alternative 2**: JSON format
+    * Pros: Preserves data structures better
+    * Cons: Less user-friendly for direct editing
+
+**Aspect: File Location**
+
+* **Alternative 1 (current choice)**: Fixed `data` directory
+    * Pros: Consistent location, prevents scattered files
+    * Cons: Less flexibility for users
+
+* **Alternative 2**: User-specified directory
+    * Pros: More user control
+    * Cons: More complex input validation needed
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -511,7 +563,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. TAHub shows an error message stating that the index is invalid.
   * 2a2. Use case ends.
 
-**<u>Use case: UC6 - Create a Consultation</u>**
+<br>
+
+**<u>Use case: UC6 - Export Student List</u>**
+
+**MSS**
+
+1. TA enters export command with desired filename
+2. System validates filename
+3. System creates CSV file
+4. System writes current student list to file
+5. Success message shows number of students exported
+
+**Extensions**
+
+* 2a. Invalid filename
+    * 2a1. System shows error message about invalid characters
+    * 2a2. Use case resumes from step 1
+
+* 3a. File already exists
+    * 3a1. System shows error message suggesting force flag
+    * 3a2. Use case resumes from step 1
+
+* 3b. Directory creation fails
+    * 3b1. System shows error message about directory creation
+    * 3b2. Use case ends
+
+* 4a. Write operation fails
+    * 4a1. System shows error message about write failure
+    * 4a2. Use case ends
+
+**<u>Use case: UC7 - Create a Consultation</u>**
 
 **MSS**
 
@@ -533,7 +615,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. System shows conflict error
     * 1b2. Use case ends
 
-**<u>Use case: UC7 - Add Student to Consultation</u>**
+**<u>Use case: UC8 - Add Student to Consultation</u>**
 
 **MSS**
 
@@ -561,7 +643,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System shows error message that student is already registered
     * 3b2. Use case resumes from step 3
 
-**<u>Use case: UC8 - Delete Consultation</u>**
+**<u>Use case: UC9 - Delete Consultation</u>**
 
 **MSS**
 
@@ -580,7 +662,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System shows error message listing invalid indices
     * 2a2. Use case resumes from step 2
 
-**<u>Use case: UC9 - Remove Students from Consultation</u>**
+**<u>Use case: UC10 - Remove Students from Consultation</u>**
 
 **MSS**
 
@@ -604,6 +686,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. Student not in consultation
     * 4a1. System shows error message that student is not in consultation
     * 4a2. Use case resumes from step 3
+
 
 *{More to be added}*
 
