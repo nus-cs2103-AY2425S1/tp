@@ -42,18 +42,14 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedMember
-JsonSerializableAddressBook --> "*" JsonAdaptedPoint
-JsonSerializableAddressBook --> "*" JsonAdaptedSession
 JsonAdaptedMember --> "*" JsonAdaptedTag
 JsonAdaptedMember --> "*" JsonAdaptedSession
 JsonAdaptedSession --> "*" JsonAdaptedPoint
-AddressBook --> "*" Session
 AddressBook --> "*" Member
 StorageManager --> AddressBook
 ModelManager --> StorageManager
 ModelManager --> AddressBook
 ModelManager --> Member
-ModelManager --> Session
 Session --> "*" Point
 Member --> "*" Point
 Member --> "*" Session
