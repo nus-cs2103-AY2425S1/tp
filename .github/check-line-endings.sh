@@ -3,7 +3,7 @@
 # Prohibited line endings: \r\n
 # Exclude .vcf files as the RFC states that they must use \r\n
 
-git grep --cached -I -n --no-color -P '\r$' -- ':(exclude)*.vcf' ':/' |
+git grep --cached -I -n --no-color -P '\r$' -- ':/' ':/!*.vcf' |
 awk '
     BEGIN {
         FS = ":"
