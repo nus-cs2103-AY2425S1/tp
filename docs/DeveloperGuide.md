@@ -202,6 +202,29 @@ The sequence diagram below illustrates the process of deleting a person from Tal
 6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
 7. The UI reflects this new list with deleted `Person`.
 
+### Find Feature ###
+#### `FindCommand` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
+
+<img src="images/FindCommandSequenceDiagram.png" width="550" />
+
+#### Key Components
+- `FindCommand`: Executes the find operation based on the user's input.
+- `FindCommandParser`: Parses user input to create an `FindCommand` object.
+- `LogicManager`: Invokes the `FindCommand` to execute the find operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Predicate`: Represents the keyword for finding persons whose name contains any of the argument keyword in TalentSG.
+- `AddressBookParser`: Creates an `FindCommand` object based on the user input.
+
+#### Component Interaction Details
+1. The user executes the command `find john`, intending to find all persons whose name contains the keyword.
+2. The `FindCommandParser` interprets the input.
+3. An `FindCommand` object is created.
+4. The `LogicManager` invokes the execute method of FindCommand.
+5. The execute method of `FindCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the filter of the filtered person list.
+6. The execute method of `FindCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FindCommand`.
+7. The UI reflects this updated filtered `Person` list.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
