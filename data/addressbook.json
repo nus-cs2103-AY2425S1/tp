@@ -4,19 +4,19 @@
     "phone" : "91234567",
     "email" : "alicewong@example.com",
     "availableDate" : "2023-05-10",
-    "involvedIn" : [ "Beach Cleanup", "Charity Run", "Food Donation Drive", "beach clean2" ]
+    "involvedIn" : [ "Beach Cleanup", "Charity Run", "Food Donation Drive" ]
   }, {
     "name" : "Bob Tan",
     "phone" : "98765432",
     "email" : "bobtan@example.com",
     "availableDate" : "2023-06-15",
-    "involvedIn" : [ "Beach Cleanup", "beach clean2" ]
+    "involvedIn" : [ "Beach Cleanup" ]
   }, {
     "name" : "Cathy Lee",
     "phone" : "92345678",
     "email" : "cathylee@example.com",
     "availableDate" : "2023-07-20",
-    "involvedIn" : [ "Beach Cleanup" ]
+    "involvedIn" : [ ]
   }, {
     "name" : "David Ng",
     "phone" : "93456789",
@@ -43,7 +43,7 @@
     "endTime" : "12:00",
     "location" : "East Coast Park",
     "description" : "Annual beach cleaning event",
-    "volunteers" : [ "Alice Wong", "Bob Tan", "Cathy Lee" ]
+    "volunteers" : [ "Alice Wong", "Bob Tan" ]
   }, {
     "eventName" : "Charity Run",
     "date" : "2023-11-05",
@@ -76,13 +76,5 @@
     "location" : "Red Cross Center",
     "description" : "Organizing a blood donation drive",
     "volunteers" : [ ]
-  }, {
-    "eventName" : "beach clean2",
-    "date" : "2023-10-15",
-    "startTime" : "09:00",
-    "endTime" : "10:00",
-    "location" : "here",
-    "description" : "",
-    "volunteers" : [ "Alice Wong", "Bob Tan" ]
   } ]
 }

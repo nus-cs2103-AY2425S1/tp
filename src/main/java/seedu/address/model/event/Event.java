@@ -181,15 +181,4 @@ public class Event {
                 .add("description", description)
                 .toString();
     }
-
-    public boolean isOverlapping(Event event) {
-
-        if (!this.date.isSameDate(event.getDate())) {
-            return false;
-        }
-
-        return !(endTime.isBefore(event.startTime) ||
-                startTime.isAfter(event.endTime));
-    }
-
 }

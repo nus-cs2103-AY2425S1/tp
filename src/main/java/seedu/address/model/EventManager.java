@@ -2,13 +2,10 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.event.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.volunteer.Volunteer;
@@ -49,27 +46,11 @@ public class EventManager {
      * @param event Event to be assigned to.
      * @throws DuplicateAssignException if the volunteer is already assigned to the event.
      */
-    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException,
-            OverlappingAssignException {
+    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException {
         if (event.getVolunteers().contains(volunteer.getName().fullName)) {
             throw new DuplicateAssignException();
-        } if (hasOverlap(volunteer.getEvents(), event)) {
-            throw new OverlappingAssignException();
         }
         event.assignVolunteer(volunteer.getName().fullName);
-    }
-
-    public boolean hasOverlap(List<String> eventNames, Event event) {
-
-        for (Event e : events) {
-            if (!eventNames.contains(e.getName().toString())) {
-                continue;
-            }
-            if (e.isOverlapping(event)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
