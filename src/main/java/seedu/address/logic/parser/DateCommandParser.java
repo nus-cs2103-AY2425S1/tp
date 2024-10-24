@@ -29,8 +29,8 @@ public class DateCommandParser implements Parser<DateCommand> {
             requireNonNull(args);
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                     PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE);
-            if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL) &&
-                    !areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
+            if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
+                    && !areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
             }
 
@@ -41,8 +41,8 @@ public class DateCommandParser implements Parser<DateCommand> {
 
             // Validate the phone number format if present
             if (phone.isPresent() && !isValidPhone(phone.get())) {
-                throw new ParseException("ERROR: Invalid phone number format. " +
-                        "Enter a valid 8 digit phone number starting with 3, 6, 8 or 9.");
+                throw new ParseException("ERROR: Invalid phone number format. "
+                        + "Enter a valid 8 digit phone number starting with 3, 6, 8 or 9.");
             }
 
             // Validate the email format if present
