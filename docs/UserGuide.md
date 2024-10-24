@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-![Banner](images/AgentAssistBanner.png) 
+![Banner](images/AgentAssistBanner.png)
 # Welcome to the AgentAssist User Guide!
 
 The **AgentAssist User Guide** is here to help you unlock the full potential of **AgentAssist** and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
@@ -53,7 +53,7 @@ Let’s begin and get you up to speed with AgentAssist!
    5.6 [Modifying the Data File](#56-modifying-the-data-file)
 
    </details>
-   
+
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
@@ -62,19 +62,19 @@ Let’s begin and get you up to speed with AgentAssist!
 # 1. Introduction
 ## 1.1 What is AgentAssist?
 
-AgentAssist is the **definitive desktop tool for credit card sales agents**. Merging the swift efficiency of a Command Line Interface (CLI) with the intuitive accessibility of a Graphical User Interface (GUI), this application lets you manage contact databases, track sales progress, and execute transactions with unprecedented speed. 
+AgentAssist is the **definitive desktop tool for credit card sales agents**. Merging the swift efficiency of a Command Line Interface (CLI) with the intuitive accessibility of a Graphical User Interface (GUI), this application lets you manage contact databases, track sales progress, and execute transactions with unprecedented speed.
 
 **Overview of Key Features:**
-* **Contact Management**: 
-  * Manage your client details easily. Add, edit, and delete contacts to keep all your client information in one accessible place.
-* **Keyboard-centric Navigation**: 
-  * Navigate through the application entirely via keyboard shortcuts, improving workflow efficiency.
-* **Multi-Level Filtering**: 
-  * Filter your data by multiple criteria to find exactly who you’re looking for.
-* **Auto-Save**: 
-  * Automatically saves your work as you go, ensuring data is updated without manual intervention.
-* **Effortless Data Import & Export**: 
-  * Import or export client and sales data in compatible formats for backups or use in other systems.
+* **Contact Management**:
+    * Manage your client details easily. Add, edit, and delete contacts to keep all your client information in one accessible place.
+* **Keyboard-centric Navigation**:
+    * Navigate through the application entirely via keyboard shortcuts, improving workflow efficiency.
+* **Multi-Level Filtering**:
+    * Filter your data by multiple criteria to find exactly who you’re looking for.
+* **Auto-Save**:
+    * Automatically saves your work as you go, ensuring data is updated without manual intervention.
+* **Effortless Data Import & Export**:
+    * Import or export client and sales data in compatible formats for backups or use in other systems.
 
 Maximize your productivity, minimize your response time, and amplify your sales performance. With AgentAssist, you're not just keeping up with the competitive world of credit card sales — _you're setting the pace_.
 
@@ -98,16 +98,16 @@ AgentAssist allows you to manage client data like names, phone numbers, emails, 
 # 3. Getting Started
 Welcome to AgentAssist. Here’s how to get up and running quickly and easily.
 
-## 3.1 Installation 
-### Step 1: Install Java 
+## 3.1 Installation
+### Step 1: Install Java
 
 Ensure you have **Java 17** installed on your computer. AgentAssist is optimized for **Java 17**, and using other versions may affect performance or functionality. If you already have Java 17 installed, you can skip this step.
 
 To install Java 17:
-* Visit the Java download page from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17?er=221886). 
+* Visit the Java download page from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 * Download the appropriate installer for your operating system (Windows, macOS, or Linux).
 * Follow the installation instructions on the website to complete the setup.
-* Once installed, verify the installation by [opening your terminal (or command prompt)](#how-to-open-terminal) and typing:  
+* Once installed, verify the installation by [opening your terminal (or command prompt)](#how-to-open-terminal) and typing:
     ```
     java -version
     ```
@@ -117,7 +117,7 @@ To install Java 17:
 
 Download the latest version of the `.jar` file from the AgentAssist [repository](https://github.com/AY2425S1-CS2103T-T14-4/tp/releases).
 
-[comment]: # (TODO: Add image of GitHub Releases page with annotations to show user the file to install.) 
+[comment]: # (TODO: Add image of GitHub Releases page with annotations to show user the file to install.)
 
 ### Step 3: Choose a Folder
 
@@ -127,37 +127,37 @@ Move the .jar file you downloaded into this folder.
 ### Step 4: Run the Application
 
 1. **Open a command terminal**
-   - On Windows, press `Windows Key + R`, type `cmd`, and press `Enter`.
-   - On macOS, press `Command + Space`, type `Terminal`, and press `Enter`.
-   - On Linux, open your **Terminal** application from the system menu.
+    - On Windows, press `Windows Key + R`, type `cmd`, and press `Enter`.
+    - On macOS, press `Command + Space`, type `Terminal`, and press `Enter`.
+    - On Linux, open your **Terminal** application from the system menu.
 
 2. **Navigate your terminal to the folder where you saved the AgentAssist application:**
-   - To do this, use the `cd` command followed by the path to your folder.\
-    >  ℹ️ **Tip:** Follow the guide below to navigate to your folder in the terminal:
-    >
-    > <details><summary><strong>Click here to learn how to navigate to your folder in terminal</strong></summary>
-    >
-    > - **Windows**: Use the command `cd <folder path>`.   
-        For example, if **AgentAssist** is stored in the `Downloads` folder:
-    >   ```bash
+    - To do this, use the `cd` command followed by the path to your folder.\
+   >  ℹ️ **Tip:** Follow the guide below to navigate to your folder in the terminal:
+   >
+   > <details><summary><strong>Click here to learn how to navigate to your folder in terminal</strong></summary>
+   >
+   > - **Windows**: Use the command `cd <folder path>`.   
+       For example, if **AgentAssist** is stored in the `Downloads` folder:
+       >   ```bash
     >   cd C:\Users\<YourUsername>\Downloads
     >   ```
-    >
-    > - **macOS/Linux**: Use the command `cd <folder path>`.  
-        For example, if **AgentAssist** is stored in the `Downloads` folder:
-    >   ```bash
+   >
+   > - **macOS/Linux**: Use the command `cd <folder path>`.  
+       For example, if **AgentAssist** is stored in the `Downloads` folder:
+       >   ```bash
     >   cd /Users/<YourUsername>/Downloads
     >   ```
-    >   
-    > </details>
-   
+   >
+   > </details>
+
 3. Run the application:
-   - Type the following command: **`java -jar agentassist.jar`** and press **Enter**.
-   - A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br><br>
-   ![Ui](images/Ui.png)
+    - Type the following command: **`java -jar agentassist.jar`** and press **Enter**.
+    - A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br><br>
+      ![Ui](images/Ui.png)
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
-   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity! 
+   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity!
 
 ## 3.2 Graphical User Interface (GUI) Layout
 
@@ -191,7 +191,7 @@ add n/ John Doe e/ john@example.com
 
 
 ## 4.2 Commands
-A command is the action that AgentAssist will perform, such as adding, deleting, or editing a contact. 
+A command is the action that AgentAssist will perform, such as adding, deleting, or editing a contact.
 
 Here is a reference table that briefly summarizes available commands:
 
@@ -202,6 +202,8 @@ Here is a reference table that briefly summarizes available commands:
 | `delete`    | Removes a client from the system.                      |
 | `list`      | Displays all clients currently stored in the system.   |
 | `filter`    | Filters clients based on specified criteria            |
+| `view`      | Opens a split view showing detailed client information |
+| `close`     | Closes the split view of client details               |
 | `clear`     | Deletes all clients from the system.                   |
 | `help`      | Displays a list of available commands and their usage. |
 | `exit`      | Exits the AgentAssist application.                     |
@@ -212,7 +214,7 @@ Refer to the [Commands Section](#commands-section) for more comprehensive detail
 
 AgentAssist uses flags as a shorthand for different options in commands. Flags help you specify what kind of information you are providing, allowing you to write shorter and more efficient commands, improving your workflow.
 
-Here’s a reference table of available flags and the type of data they correspond to: 
+Here’s a reference table of available flags and the type of data they correspond to:
 
 | **Flag** | **Type of Data** |
 |----------|------------------|
@@ -229,7 +231,7 @@ Here’s a reference table of available flags and the type of data they correspo
 | `rn/`    | `remark new`     |
 
 > 💡 **Pro Tip:**
-> 
+>
 > Flags are typically derived from the first letter of their corresponding data type (e.g., `n/` for `name`), making them easy to remember!
 
 ## 4.4 Arguments
@@ -252,7 +254,7 @@ Refer to the table below for more details.
 | `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |    
 
 > 💡 **Pro Tip:**
-> 
+>
 > Ensure every flag is followed by a valid argument!
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
@@ -272,13 +274,17 @@ Some initial commands to try:
 * `edit 4 rn/Updated remarks here`: Replaces the remarks of the fourth client with "Updated remarks here".
 
 **Removing a Client**
-* `delete 3`: Removes the third client from your list. Ensure you have the correct index to avoid deleting the wrong client. 
+* `delete 3`: Removes the third client from your list. Ensure you have the correct index to avoid deleting the wrong client.
 
 **Searching for a Client**
 * `filter n/Jane`: Finds all clients named Jane in your database. It’s a powerful tool for quickly locating clients or filtering for a specific type of client.
 
+**Viewing Detailed Client Information**
+* `view 1`: Opens a split view showing detailed information for the first client in your list.
+* `close`: Closes the split view and returns to the full list display.
+
 **Getting Help**
-* `help`: Opens a help dialog that provides a summary of all available commands and their usage. 
+* `help`: Opens a help dialog that provides a summary of all available commands and their usage.
 
 The GUI will dynamically update to show the results of your commands, making it easy to see the impact of your actions in real time.
 
@@ -319,7 +325,7 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 
 ### 5.2.1 Adding a new client {#add-command}
 
-**Purpose:** Save detailed records of a new client. 
+**Purpose:** Save detailed records of a new client.
 
 Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
 
@@ -343,18 +349,18 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
 
 #### What to Expect
-- **On Success:** 
-  - Message: 
-    ```
-    New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>.
-    ```
-  - If "Tier" and "Remark" are not provided, they will be set to "N.A." and displayed as such in the success message.
+- **On Success:**
+    - Message:
+      ```
+      New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>.
+      ```
+    - If "Tier" and "Remark" are not provided, they will be set to "N.A." and displayed as such in the success message.
 
 - **On Error**
-  - Message: 
-    ```
-    Please verify that your input is in the correct format. Include the following details: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>].
-    ```
+    - Message:
+      ```
+      Please verify that your input is in the correct format. Include the following details: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>].
+      ```
 
 > **Note on Duplicates:**
 >
@@ -375,7 +381,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 ### 5.2.2 Edit an Existing Client's Information {#edit-command}
 
-**Purpose:** Update the details of an existing client in the database. 
+**Purpose:** Update the details of an existing client in the database.
 
 All client information, including contact details, address, job information, and other relevant data, can be modified. You can also append to or replace existing remarks and adjust the client's tier status.
 
@@ -413,16 +419,16 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 **What to Expect:**
 - **On Success:**
-  - Message:
-    ```
-    Customer <INDEX> has been updated successfully.
-    ```
+    - Message:
+      ```
+      Customer <INDEX> has been updated successfully.
+      ```
 - **On Error:**
-  - Message:
-    ```
-    Failed to update customer <INDEX>.
-    ```
-    
+    - Message:
+      ```
+      Failed to update customer <INDEX>.
+      ```
+
 > 💡 **Pro Tip:**  
 > No need to worry about duplicate indexes—AgentAssist guarantees that every customer has a unique index automatically.
 
@@ -502,16 +508,16 @@ This will permanently clear all contacts. Are you sure you want to execute this 
       Command has been cancelled.
       ```
 - **On Error:**
-  - This command does not typically produce errors but will have no effect if there are no clients in the database to clear.
+    - This command does not typically produce errors but will have no effect if there are no clients in the database to clear.
 
 > ⛔ **Danger:**  
 > The `clear` command is **irreversible**. Once executed, all client data is **permanently deleted**.
 >
 > It is highly recommended to **avoid using this command** unless absolutely necessary.
 
- 
- 
- 
+
+
+
 ## 5.3 Data Filtering Commands
 
 ### 5.3.1 List All Clients {#list-command}
@@ -529,7 +535,7 @@ list
 
 ### 5.2.3 Filter Clients by Details / Find a Client {#filter-command}
 
-**Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, or remarks. 
+**Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, or remarks.
 
 **Command Format:**
 ```
@@ -537,9 +543,9 @@ filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARKS> t/ <TI
 ```
 - **Mandatory Field**: One or more flags with corresponding search terms.
 - **Special Syntax for Income (i/)**:
-  - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
-  - Example: `i/ >5000` will filter customers with an income greater than 5000.
-  - See [Filtering By Income](#filtering-by-income) for more information.
+    - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
+    - Example: `i/ >5000` will filter customers with an income greater than 5000.
+    - See [Filtering By Income](#filtering-by-income) for more information.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -560,48 +566,48 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 - **Substring Matching: (For most fields)**  
   Searches for most fields use **substring matching**, meaning the search term must match part of the field in the same order as it appears in the customer record.
-  - **Example:**  
-  If a customer’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
- 
+    - **Example:**  
+      If a customer’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
+
 - **Filtering by Tier (Prefix Matching):**  
   Tier searches use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
-  - **Example:**  
-  If a customer has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
+    - **Example:**  
+      If a customer has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
 - **Filtering by Income (Using Comparison Operators):**
-Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find customers whose income meets certain criteria.
+  Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find customers whose income meets certain criteria.
 
-  - **Equal to (`=`):**  
-  Use `=` to find customers with a specific income.
-  Example: `i/ =5000` will match customers with an income of exactly 5000.
+    - **Equal to (`=`):**  
+      Use `=` to find customers with a specific income.
+      Example: `i/ =5000` will match customers with an income of exactly 5000.
 
-  - **Greater than (`>`):**  
-  Use `>` to find customers with an income higher than the specified threshold.
-  Example: `i/ >5000` will match customers with incomes greater than 5000.
+    - **Greater than (`>`):**  
+      Use `>` to find customers with an income higher than the specified threshold.
+      Example: `i/ >5000` will match customers with incomes greater than 5000.
 
-  - **Less than (`<`):**  
-  Use `<` to find customers with an income lower than the specified threshold.
-  Example: `i/ <5000` will match customers with incomes below 5000.
+    - **Less than (`<`):**  
+      Use `<` to find customers with an income lower than the specified threshold.
+      Example: `i/ <5000` will match customers with incomes below 5000.
 
 **What to Expect:**
 - **On Success:**
-  - Message:
-    ```
-    x person(s) listed!
-    ```
-    where `x` is the number of matching results.
+    - Message:
+      ```
+      x person(s) listed!
+      ```
+      where `x` is the number of matching results.
 - **On Error:**
-  - If no valid flags are used:
-    ```
-    filter: Searches for all customers whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
-
-    Parameters: <FLAG>/ <SEARCH TERM>
+    - If no valid flags are used:
+      ```
+      filter: Searches for all customers whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
   
-    Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remarks)
-  
-    Example: filter n/ Alice p/ 91112222
-    ```
-  - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to the first invalid search term.
+      Parameters: <FLAG>/ <SEARCH TERM>
+    
+      Flags: n/ (name), p/ (phone), e/ (email), a/ (address), j/ (job), r/ (remarks)
+    
+      Example: filter n/ Alice p/ 91112222
+      ```
+    - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to the first invalid search term.
 
 
 
@@ -610,38 +616,53 @@ Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` 
 
 ### 5.4.1 Viewing a Client's Details {#view-command}
 
-**Purpose:** View the full details of a selected client by opening a detailed card with all available information about the client.
+**Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remarks and additional details.
 
-**Methods to View Client Details:**
-- **Method 1 - Using GUI:**  
-  Left-click on a specific client in the list to open the client's card and display their full details.
-- **Method 2 - Using CLI:**  
-  1. Use the `↑` and `↓` arrow keys to navigate through the client list in the Command Line Interface (CLI).
-  2. Once the desired client is selected **(highlighted in blue)**, type the following command to open their detailed card:
-     ```
-     view
-     ```
-  - This will display the full details of the currently selected client.
+**Command Format:**
+```
+view index
+```
+* Mandatory Field: `<INDEX>`
+* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of customers in the list**.
+
+**Examples:**
+- **View client no.1**
+    ```
+    view 1
+    ```
+  This will open a split view showing detailed information for the client at index 1.
+
+**What to Expect:**
+- **On Success:**
+    - A split view opens showing the selected client's complete information
+    - The main list remains visible and functional on the left while detailed information appears on the right
+- **On Error:**
+    - Invalid index error message:
+      ```
+      The person index provided is invalid
+      ```
 
 > 💡 **Pro Tip:**  
-> Using the CLI with the `↑` and `↓` arrow keys to select a client is a fast, keyboard-friendly way to navigate through the list. Once selected, simply type `view` to instantly display the client's details without needing to use the mouse!
-
-
+> You can use the split view to compare client details side by side with the main list, making it easier to reference multiple clients at once.
 
 
 ### 5.4.2 Closing a Client's Details {#close-command}
 
-**Purpose:** Close the detailed view of a client's card and return to the main client list.
+**Purpose:** Close the split view of client details and return to the full list view.
 
 **Command Format:**
 ```
 close
 ```
-- If a client's detailed card is currently open, this command will return you to the main list view. 
-- **Note:** If no client cards are open, the `close` command is ignored.
+* No parameters required
+* This command has no effect if the split view is not currently open
 
-  
-
+**What to Expect:**
+- **On Success:**
+    - The split view closes
+    - The main list view returns to full width
+- **On Error:**
+    - No error messages are shown; the command is simply ignored if no split view is open
 
 ### 5.4.3 Help Menu {#help-command}
 
@@ -651,9 +672,9 @@ close
 ```
 help
 ```
-- Opens up a dialog box that provides: 
-  - **Command summary table** with command format and basic examples
-  - **Hyperlink to the User Guide**
+- Opens up a dialog box that provides:
+    - **Command summary table** with command format and basic examples
+    - **Hyperlink to the User Guide**
 
 
 
@@ -702,7 +723,7 @@ Use the [`edit` command](#feature-4-edit-the-existing-customer), and specify the
 ### Why am I getting an error when trying to edit the remark of an existing customer?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark, while `ra/` appends to the current remark.
 
-### What do the different tier colors represent in the UI?  
+### What do the different tier colors represent in the UI?
 Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each customer.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -723,11 +744,8 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 | **Edit Existing Client**   | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [rn/<NEW REMARK>] [ra/<APPEND REMARK>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info` |
 | **List All Clients**       | `list`                                                                                                                       | `list`                                                                                                    |
 | **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/<INCOME>]`                     | `filter n/ GORDON MOORE j/ doctor t/ gold`                                                                |
-| **View Client Details**    | `view`                                                                                                                       | `view`                                                                                                    |
+| **View Client Details**    | `view <INDEX>`                                                                                                              | `view 1`                                                                                                  |
 | **Close Client Details**   | `close`                                                                                                                      | `close`                                                                                                   |
 | **View Help**              | `help`                                                                                                                       | `help`                                                                                                    |
 | **Exit Application**       | `exit`                                                                                                                       | `exit`                                                                                                    |
 | **Clear All Data**         | `clear`                                                                                                                      | `clear`                                                                                                   |
-
-
-
