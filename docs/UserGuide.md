@@ -47,7 +47,10 @@
 
   .headers {
     font-weight: 900;
-    margin-top: 128px
+  }
+
+  .headers-first {
+    margin-top: 128px;
   }
 
   .content {
@@ -184,7 +187,7 @@
   }
 </style>
 
-<h1 class="headers">StaffSync User Guide</h1>
+<h1 class="headers headers-first">StaffSync User Guide</h1>
 
 <p class="content content-special">
   StaffSync is a <strong>desktop app for managing potential hires and employees, optimized for use via a  Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StaffSync can get your contact management tasks done faster than traditional GUI apps.
