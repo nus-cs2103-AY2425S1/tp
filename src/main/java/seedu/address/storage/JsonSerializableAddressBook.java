@@ -55,7 +55,7 @@ class JsonSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         //Wedding has to be added first, since person has a reference to wedding
         for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
-            Wedding wedding = jsonAdaptedWedding.toModelType();
+            Wedding wedding = jsonAdaptedWedding.toModelType(addressBook.getWeddingList());
             if (addressBook.hasWedding(wedding)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_WEDDING);
             }

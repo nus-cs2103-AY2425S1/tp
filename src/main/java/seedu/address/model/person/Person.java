@@ -105,6 +105,15 @@ public class Person {
         }
     }
 
+//    public void setWeddingJobs(Set<Wedding> weddings) {
+//        if (ownWedding == null || !(weddings.contains(ownWedding))){
+//            this.weddingJobs.addAll(weddings);
+//        } else {
+//            throw new IllegalArgumentException("Cannot add own wedding as a job.");
+//        }
+//    }
+
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
