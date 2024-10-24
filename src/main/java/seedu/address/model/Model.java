@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -89,6 +90,8 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    void sortPersonList(Comparator<Person> comparator);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -100,4 +103,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of filtered person based on their phone number */
     ObservableList<Person> getFilteredPhoneNumberList();
+
+    /** Pins the given person to the top of the list */
+    void pinPerson(Person target);
 }

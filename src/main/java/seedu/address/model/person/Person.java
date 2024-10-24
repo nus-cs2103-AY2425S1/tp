@@ -99,6 +99,10 @@ public class Person {
         return buyingProperties;
     }
 
+    public int getTotalNumProps() {
+        return sellingProperties.size() + buyingProperties.size();
+    }
+
     public ObservableList<Property> getListOfPropertiesSold() {
         return propertiesSold;
     }
