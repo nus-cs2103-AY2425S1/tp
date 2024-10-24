@@ -64,6 +64,9 @@ public enum PriceCategory {
      * @return the price category
      */
     public static String getPriceCategoryString(double value) {
+        // Pre-condition: Ensure the price is not negative
+        assert value >= 0 : "Price must not be negative.";
+
         for (PriceCategory category : PriceCategory.values()) {
             if (value <= category.maxValue) {
                 return category.getSymbol();
