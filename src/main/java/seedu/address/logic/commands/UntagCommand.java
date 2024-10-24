@@ -67,7 +67,7 @@ public class UntagCommand extends Command {
             tagsToRemoveFromPerson = this.tagsToRemove;
         }
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+        Person editedPerson = new Person(personToEdit.getId(), personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), this.removeTags(personToEdit.getTags(), tagsToRemoveFromPerson));
 
         model.setPerson(personToEdit, editedPerson);
