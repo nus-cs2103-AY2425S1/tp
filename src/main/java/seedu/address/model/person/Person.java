@@ -48,7 +48,7 @@ public class Person {
      * Every field, except tag and wedding, must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Tag role, Wedding ownWedding) {
-        requireAllNonNull(name, phone, email, address, role);
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
