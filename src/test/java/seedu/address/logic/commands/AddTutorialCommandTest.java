@@ -60,7 +60,7 @@ public class AddTutorialCommandTest {
         ModelStub modelStub = new ModelStubWithTut(validTutorial);
 
         assertThrows(CommandException.class,
-                     AddTutCommand.MESSAGE_DUPLICATE_TUTORIAL, () -> addTutCommand.execute(modelStub));
+                AddTutCommand.MESSAGE_DUPLICATE_TUTORIAL, () -> addTutCommand.execute(modelStub));
     }
 
     @Test
@@ -256,6 +256,10 @@ public class AddTutorialCommandTest {
         }
 
         @Override
+        public String listTutorials() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public void setTutorials(TutorialList tutorials) {
             throw new AssertionError("This method should not be called.");
         }

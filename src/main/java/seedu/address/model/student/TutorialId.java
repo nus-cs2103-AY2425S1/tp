@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents an abstract TutorialClass.
- * A TutorialClass can either be an existing class with a specific class code or a "None" type.
+ * Represents an abstract TutorialId.
+ * A TutorialId can either be an existing class with a specific class code or a "None" type.
  */
 public abstract class TutorialId {
 
@@ -22,7 +22,7 @@ public abstract class TutorialId {
      * @param test The string to be checked.
      * @return True if the string is valid; otherwise false.
      */
-    public static boolean isValidTutorialClass(String test) {
+    public static boolean isValidTutorialId(String test) {
         return test.matches(VALIDATION_REGEX); // Simple numeric validation
     }
 
@@ -33,7 +33,7 @@ public abstract class TutorialId {
     /**
      * Returns an instance representing no tutorial class.
      *
-     * @return A None type of TutorialClass.
+     * @return A None type of TutorialId.
      */
     public static TutorialId none() {
         return None.none();
@@ -43,7 +43,7 @@ public abstract class TutorialId {
      * Creates an instance of an existing tutorial class.
      *
      * @param value The string value representing the class code.
-     * @return A new TutorialClass object.
+     * @return A new TutorialId object.
      */
     public static TutorialId of(String value) {
         requireNonNull(value);
@@ -71,10 +71,10 @@ public abstract class TutorialId {
         private final String value;
 
         @JsonCreator
-        public Exist(@JsonProperty("tutorialId") String tutorialClass) {
-            requireNonNull(tutorialClass);
-            checkArgument(isValidTutorialClass(tutorialClass));
-            this.value = tutorialClass;
+        public Exist(@JsonProperty("tutorialId") String tutorialId) {
+            requireNonNull(tutorialId);
+            checkArgument(isValidTutorialId(tutorialId));
+            this.value = tutorialId;
         }
 
         @Override

@@ -186,10 +186,9 @@ public interface Model {
      * @param tutorialId The tutorial class that student will be assigned to.
      */
     void assignStudent(Student student, TutorialId tutorialId);
-
+    String listTutorials();
     /**
      * Replaces tutorial data with the data in {@code tutorials}.
      */
     void setTutorials(TutorialList tutorials);
-
 }

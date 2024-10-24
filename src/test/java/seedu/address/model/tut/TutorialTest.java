@@ -38,7 +38,7 @@ public class TutorialTest {
         assertThrows(IllegalArgumentException.class, () -> Tutorial.of(new TutName(""), TUTORIAL_ID));
     }
     @Test
-    public void constructor_nullTutorialClass_throwsNullPointerException() {
+    public void constructor_nullTutorialId_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Tutorial.of(new TutName(TUT_NAME), (TutorialId) null));
     }
 
@@ -251,7 +251,7 @@ public class TutorialTest {
     }
 
     @Test
-    public void getTutorialClass_noneTest() {
+    public void getTutorialId_noneTest() {
         assertEquals(NONE.getTutorialId(), TutorialId.none());
     }
 

@@ -36,10 +36,10 @@ public class UnattendCommandParser implements Parser<UnattendCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENTID, PREFIX_TUTORIALID, PREFIX_ATTENDANCEDATE);
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
-        TutorialId tutorialClass = ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIALID).get());
+        TutorialId tutorialId = ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIALID).get());
         Date tutDate = argMultimap.getValue(PREFIX_ATTENDANCEDATE).isPresent()
                 ? ParserUtil.parseDate(argMultimap.getValue(PREFIX_ATTENDANCEDATE).get()) : getTodayDateWithoutTime();
-        return new UnattendCommand(studentId, tutorialClass, tutDate);
+        return new UnattendCommand(studentId, tutorialId, tutDate);
     }
 
     private static Date getTodayDateWithoutTime() {

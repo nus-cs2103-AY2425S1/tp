@@ -8,13 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.TUT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TUT_NAME_DESC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.testutil.Assert.assertThrows;
-//import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-//import static seedu.address.testutil.TutUtil.TUT_SAMPLE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTutCommand;
-//import seedu.address.model.student.TutorialClass;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
@@ -36,7 +33,7 @@ public class AddTutorialCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // Example: If you have optional fields, test scenarios where they are missing
-        Tut expectedTut = new Tut("CS2103T", new TutorialClass("1001"));
+        Tut expectedTut = new Tut("CS2103T", new TutorialId("1001"));
         assertParseSuccess(parser, TUT_NAME_DESC + TUT_ID_DESC, new AddTutCommand(expectedTut));
     }
     */

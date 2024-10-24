@@ -43,7 +43,7 @@ public class AttendCommandTest {
     }
 
     @Test
-    public void constructor_nullTutorialClass_throwsNullPointerException() {
+    public void constructor_nullTutorialId_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("A1001000U"), null,
                 new Date()));
     }
@@ -77,9 +77,9 @@ public class AttendCommandTest {
 
     @Test
     public void execute_attendanceRecordingFails_throwsCommandException() {
-        ModelStubWithoutTutorialClass modelStub = new ModelStubWithoutTutorialClass();
         StudentId studentId = new StudentId("A1001000U");
         TutorialId tutorialId = TutorialId.of("T1001");
+        ModelStubWithoutTutorialId modelStub = new ModelStubWithoutTutorialId();
         Date date = new Date();
 
         AttendCommand attendCommand = new AttendCommand(studentId, tutorialId, date);
@@ -253,6 +253,9 @@ public class AttendCommandTest {
         }
 
         @Override
+        public String listTutorials() {
+            throw new AssertionError("This method should not be called.");
+        }
         public void setTutorials(TutorialList tutorials) {
             throw new AssertionError("This method should not be called.");
         }
@@ -317,7 +320,7 @@ public class AttendCommandTest {
     /**
      * A Model stub without tutorial class
      */
-    private class ModelStubWithoutTutorialClass extends ModelStub {
+    private class ModelStubWithoutTutorialId extends ModelStub {
         private final List<Tutorial> tutorials = new ArrayList<>();
 
         @Override
@@ -340,7 +343,7 @@ public class AttendCommandTest {
     /**
      * Helper class to represent an attendance record for testing purposes.
      */
-    private class AttendanceRecord {
+    private static class AttendanceRecord {
         private final StudentId studentId;
         private final TutorialId tutorialId;
         private final Date date;
@@ -356,10 +359,9 @@ public class AttendCommandTest {
             if (this == other) {
                 return true;
             }
-            if (!(other instanceof AttendanceRecord)) {
+            if (!(other instanceof AttendanceRecord otherRecord)) {
                 return false;
             }
-            AttendanceRecord otherRecord = (AttendanceRecord) other;
             return studentId.equals(otherRecord.studentId)
                     && tutorialId.equals(otherRecord.tutorialId)
                     && date.equals(otherRecord.date);
