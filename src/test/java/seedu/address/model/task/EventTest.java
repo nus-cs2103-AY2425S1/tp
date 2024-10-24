@@ -67,6 +67,13 @@ public class EventTest {
     }
 
     @Test
+    public void equals_nonEvent_returnsFalse() {
+        Event event1 = new Event(VALID_DESCRIPTION, VALID_FROM_DATE, VALID_TO_DATE);
+        Todo event2 = new Todo(VALID_DESCRIPTION);
+        assertFalse(event1.equals(event2));
+    }
+
+    @Test
     public void equals_differentEvent_returnsFalse() {
         Event event1 = new Event(VALID_DESCRIPTION, VALID_FROM_DATE, VALID_TO_DATE);
         Event event2 = new Event("Workshop", "2023-10-05", "2023-10-06");
