@@ -34,24 +34,31 @@ Package Model as ModelPackage <<Rectangle>> {
         Class TagName
     }
 
+    Package "Task " {
+            Class UniqueTaskList
+            Class Task
+            Class TaskName
+        }
+
     Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+HiddenOutside .down.> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager --> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 AddressBook *--> "1" UniqueWeddingList
 AddressBook *--> "1" UniqueTagList
+AddressBook *--> "1" UniqueTaskList
 
 UniquePersonList --> "~* all" Person
 Person *--> Name
@@ -67,8 +74,9 @@ Wedding *--> "2" Person
 Wedding *--> "1" WeddingAddress
 
 UniqueTagList --> "* all" Tag
-
+UniqueTaskList --> "* all" Task
 Tag *--> "1" TagName
+Task *--> "1" TaskName
 
 ' Adjusted visibility of hidden lines for better organization
 Person -[hidden]up--> I
@@ -81,5 +89,6 @@ Address -[hidden]right-> Email
 ' Ensuring clarity in connections
 ModelManager --> "~* filtered" Person
 ModelManager --> "~* filtered" Wedding
+ModelManager --> "~* filtered" Task
 
 @enduml
