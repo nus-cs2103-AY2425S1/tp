@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AGE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDY_GROUP_TAG_1A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AMY;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,11 +46,19 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different gender -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withGender(VALID_GENDER_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
 
         // different age -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAge(VALID_AGE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different study groups -> returns false
+        // added study groups -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudyGroupTags(VALID_STUDY_GROUP_TAG_1A).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // removed study groups -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTagsToRemove(VALID_TAG_AMY).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -60,6 +71,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", age="
                 + editPersonDescriptor.getName().orElse(null) + ", detail="
                 + editPersonDescriptor.getEmail().orElse(null) + ", study groups="
+                + editPersonDescriptor.getEmail().orElse(null) + ", to remove="
                 + editPersonDescriptor.getStudyGroupTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

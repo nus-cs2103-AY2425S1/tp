@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -39,6 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_DETAIL_BOB = "To follow up";
     public static final String VALID_STUDY_GROUP_TAG_1A = "1A";
     public static final String VALID_STUDY_GROUP_TAG_2B = "2B";
+    public static final String VALID_TAG_AMY = VALID_STUDY_GROUP_TAG_2B;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -50,6 +52,7 @@ public class CommandTestUtil {
     public static final String AGE_DESC_BOB = " " + PREFIX_AGE + VALID_AGE_BOB;
     public static final String DETAIL_DESC_AMY = " " + PREFIX_DETAIL + VALID_DETAIL_AMY;
     public static final String DETAIL_DESC_BOB = " " + PREFIX_DETAIL + VALID_DETAIL_BOB;
+    public static final String REMOVE_TAG_DESC_1A = " " + PREFIX_REMOVE_TAG + VALID_STUDY_GROUP_TAG_1A;
     public static final String STUDY_GROUP_TAG_DESC_1A = " " + PREFIX_STUDY_GROUP_TAG + VALID_STUDY_GROUP_TAG_1A;
     public static final String STUDY_GROUP_TAG_DESC_2B = " " + PREFIX_STUDY_GROUP_TAG + VALID_STUDY_GROUP_TAG_2B;
 
@@ -64,10 +67,12 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withEmail(VALID_EMAIL_AMY).withGender(VALID_GENDER_AMY).withAge(VALID_AGE_AMY)
-                .withDetail(VALID_DETAIL_AMY).withStudyGroupTags(VALID_STUDY_GROUP_TAG_2B).build();
+                .withDetail(VALID_DETAIL_AMY).withStudyGroupTags(VALID_TAG_AMY).build();
+
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withEmail(VALID_EMAIL_BOB).withGender(VALID_GENDER_BOB).withAge(VALID_AGE_BOB)
                 .withDetail(VALID_DETAIL_BOB).withStudyGroupTags(VALID_STUDY_GROUP_TAG_1A, VALID_STUDY_GROUP_TAG_2B)

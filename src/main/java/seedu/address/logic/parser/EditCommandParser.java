@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 
 import java.util.Collection;
@@ -34,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER,
-                PREFIX_AGE, PREFIX_DETAIL, PREFIX_STUDY_GROUP_TAG);
+                PREFIX_AGE, PREFIX_DETAIL, PREFIX_STUDY_GROUP_TAG, PREFIX_REMOVE_TAG);
 
         Index index;
 
@@ -62,6 +63,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseStudyGroupsForEdit(argMultimap.getAllValues(PREFIX_STUDY_GROUP_TAG))
                 .ifPresent(editPersonDescriptor::setStudyGroupTags);
+        parseStudyGroupsForEdit(argMultimap.getAllValues(PREFIX_REMOVE_TAG))
+                .ifPresent(editPersonDescriptor::setTagsToRemove);
         if (argMultimap.getValue(PREFIX_DETAIL).isPresent()) {
             editPersonDescriptor.setDetail(ParserUtil.parseDetail(argMultimap.getValue(PREFIX_DETAIL).get()));
         }
