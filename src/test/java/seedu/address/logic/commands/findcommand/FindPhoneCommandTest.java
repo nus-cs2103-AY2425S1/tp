@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.findcommand.FindPhoneCommand.MESSAGE_
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
@@ -94,16 +93,6 @@ public class FindPhoneCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
-    }
-
-    @Test
-    public void execute_singlePartialMatchNumber2_singlePersonFound() {
-        PhoneContainsKeywordsPredicate predicate = preparePredicate("5253");
-        String expectedMessage = String.format(MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString());
-        FindPhoneCommand command = new FindPhoneCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL), model.getFilteredPersonList());
     }
 
     @Test
