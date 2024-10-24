@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -33,6 +34,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTag(person.getTag());
+        descriptor.setAllergy(person.getAllergy());
     }
 
     /**
@@ -73,6 +75,15 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTags(String tag) {
         descriptor.setTag(new Tag(tag));
+        return this;
+    }
+
+    /**
+     * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withAllergy(String allergy) {
+        descriptor.setAllergy(new Allergy(allergy));
         return this;
     }
 
