@@ -216,23 +216,32 @@ Format: `delete-schedule INDEX`
 Example:
 - `delete-schedule 2` will delete the second meeting from the current schedule view.
 
-### Edit meeting in schedule
+### Edit Meeting in Schedule
 
 Edit the existing meeting within the schedule.
 
-Format: `edit-schedule INDEX n/NAME d/DATE t/TIME [add/INDEX] [remove/INDEX]`
-- `INDEX` of the schedule with respect to current schedule view.
-- `n/NAME` description of the meeting.
-- `d/DATE` date must be in the format of DD-MM-YYYY.
-- `t/TIME` time must be in the format of hhmm (24 hours notation).
-- `add/INDEX` (optional) index for the contact’s being added to the schedule. with respect to current addressbook view.
-- `remove/INDEX` (optional) index for the contact’s being removed from the schedule. Must not be out of range and the contact must be in the meeting.
-- If add or remove command is not specified, we will keep the contacts involved in the schedule the same.
+Format: `edit-schedule INDEX [n/NAME] [d/DATE] [t/TIME] [c/INDEX]...`
+- `INDEX`: Refers to the schedule you want to edit. The index is based on the current schedule view and **must** be specified.
+- `n/NAME` (optional): The new description or name of the meeting. If not provided, the name remains unchanged.
+- `d/DATE` (optional): The new date of the meeting. Must be in the format `DD-MM-YYYY`. If not provided, the date remains unchanged.
+- `t/TIME` (optional): The new time of the meeting. Must be in 24-hour format `hhmm`. If not provided, the time remains unchanged.
+- `c/INDEX` (optional): Refers to the contact's index in the current address book view. You can specify multiple `c/INDEX` values:
+    - If the contact is **already in** the meeting, specifying `c/INDEX` will **remove** the contact.
+    - If the contact is **not in** the meeting, specifying `c/INDEX` will **add** the contact.
+- At least one of `n/NAME`, `d/DATE`, `t/TIME`, or `c/INDEX` must be specified. If a field is not provided, the current value for that field remains unchanged.
 
 Example:
-- `edit-schedule 1 n/Dinner d/10-10-2024 t/1800 add/1 remove/2`
+- `edit-schedule 1 n/Dinner d/10-10-2024 t/1800 c/2 c/3 c/4`
 
---------------------------------------------------------------------------------------------------------------------
+- **Before**: Schedule 1 contains contacts `1, 2, 3`.
+- **After**: Contacts `2` and `3` are removed (as they were already in the meeting), and contact `4` is added. The final list of contacts for the meeting is `1, 4`.
+
+Notes:
+- You must always specify the `INDEX` of the schedule to be edited.
+- At least one other field (`n/NAME`, `d/DATE`, `t/TIME`, or `c/INDEX`) must be provided; otherwise, the command will not execute.
+- If a field (name, date, time, or contacts) is not specified, the existing value for that field remains unchanged.
+
+This ensures flexibility by allowing you to only modify the fields you need while keeping the others intact.
 
 ## FAQ
 
