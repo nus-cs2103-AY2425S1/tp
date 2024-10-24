@@ -88,6 +88,7 @@ public class RoleCommand extends Command {
         Person personWithRole = createPersonWithRole(personToAddRole, personWithRoleDescriptor);
         model.setPerson(personToAddRole, personWithRole);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        System.out.println(personToAddRole);
         return new CommandResult(String.format(MESSAGE_ADD_PERSON_ROLE_SUCCESS, Messages.format(personWithRole)));
     }
 
@@ -102,7 +103,7 @@ public class RoleCommand extends Command {
         Phone updatedPhone = personWithRoleDescriptor.getPhone().orElse(personToAddRole.getPhone());
         Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
         Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
-        Role updatedRole = personToAddRole.getRole();
+        Role updatedRole = personWithRoleDescriptor.getRole().orElse(personToAddRole.getRole());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole);
     }

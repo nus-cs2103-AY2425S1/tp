@@ -2,8 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 
@@ -39,9 +38,23 @@ public class RoleCommandParser implements Parser<RoleCommand> {
 
         PersonWithRoleDescriptor personWithRoleDescriptor = new PersonWithRoleDescriptor();
 
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            personWithRoleDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            personWithRoleDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            personWithRoleDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            personWithRoleDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
 
         Role role = parseRoleToAssign(argMultimap.getValue(PREFIX_ROLE).get());
+
         personWithRoleDescriptor.setRole(role);
+        System.out.println(personWithRoleDescriptor.getRole());
 
         return new RoleCommand(name, personWithRoleDescriptor);
     }
