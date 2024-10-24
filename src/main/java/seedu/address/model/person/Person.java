@@ -30,17 +30,18 @@ public class Person {
     private final DateOfBirth dateOfBirth;
     private final Income income;
     private final Appointment appointment;
-
     private final FamilySize familySize;
-
     private final Set<Tag> tags = new HashSet<>();
+
+    private final UpdatedAt updatedAt;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags) {
-        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, familySize, tags);
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags,
+                  UpdatedAt updatedAt) {
+        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, familySize, tags, updatedAt);
     }
 
     /**
@@ -48,8 +49,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
                   DateOfBirth dateOfBirth, Income income, Appointment appointment, FamilySize familySize,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, familySize, tags);
+                  Set<Tag> tags, UpdatedAt updatedAt) {
+        requireAllNonNull(name, phone, email, address, dateOfBirth, familySize, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,6 +62,7 @@ public class Person {
         this.appointment = appointment;
         this.familySize = familySize;
         this.tags.addAll(tags);
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -71,7 +73,7 @@ public class Person {
      */
     public Person withAppointment(Appointment appointment) {
         return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment,
-                familySize, tags);
+                familySize, tags, updatedAt);
     }
 
     public Name getName() {
@@ -120,6 +122,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public UpdatedAt getUpdatedAt() {
+        return updatedAt;
     }
 
     /**
