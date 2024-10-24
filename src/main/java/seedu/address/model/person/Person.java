@@ -26,38 +26,41 @@ public class Person {
     // Data fields
     private final Address address;
     private final EmergencyContact emergencyContact;
+    private final GradYear gradYear;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Basic constructor.
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = null;
-        this.address = address;
+        this.address = null;
         this.emergencyContact = null;
+        this.gradYear = null;
         this.tags.addAll(tags);
     }
 
     /**
      * Overloaded constructor that includes optional parameters.
      * Every field must be present and not null, except for optional parameters.
-     * Non-optional params: name, phone, email, address, and tags.
-     * Optional params: roomNumber and emergencyContact.
+     * Non-optional params: name, phone, email and tags.
+     * Optional params: address, roomNumber and emergencyContact.
      */
     public Person(Name name, Phone phone, Email email, RoomNumber roomNumber,
-                  Address address, EmergencyContact emergencyContact, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+                  Address address, EmergencyContact emergencyContact, GradYear gradYear, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = roomNumber;
         this.address = address;
         this.emergencyContact = emergencyContact;
+        this.gradYear = gradYear;
         this.tags.addAll(tags);
     }
 
@@ -77,8 +80,8 @@ public class Person {
         return Optional.ofNullable(roomNumber);
     }
 
-    public Address getAddress() {
-        return address;
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);
     }
 
     public Optional<EmergencyContact> getEmergencyContact() {
@@ -91,6 +94,10 @@ public class Person {
 
     public Optional<Phone> getEmergencyContactPhone() {
         return Optional.ofNullable(emergencyContact).flatMap(EmergencyContact::getPhone);
+    }
+
+    public Optional<GradYear> getGradYear() {
+        return Optional.ofNullable(gradYear);
     }
 
     /**
@@ -149,13 +156,14 @@ public class Person {
                 && (Objects.equals(roomNumber, otherPerson.roomNumber))
                 && address.equals(otherPerson.address)
                 && (Objects.equals(emergencyContact, otherPerson.emergencyContact))
+                && (Objects.equals(gradYear, otherPerson.gradYear))
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, roomNumber, address, emergencyContact, tags);
+        return Objects.hash(name, phone, email, roomNumber, address, emergencyContact, gradYear, tags);
     }
 
     @Override
@@ -167,6 +175,7 @@ public class Person {
                 .add("room number", roomNumber)
                 .add("address", address)
                 .add("emergency contact", emergencyContact)
+                .add("graduation year", gradYear)
                 .add("tags", tags)
                 .toString();
     }

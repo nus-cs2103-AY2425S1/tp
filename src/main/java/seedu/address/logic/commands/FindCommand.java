@@ -46,7 +46,7 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
-        assert !isExecuted : "This command has already been executed";
+        requireNotExecuted();
         requireNonNull(model);
         model.updateFilteredPersonList(combinedPredicate);
         isExecuted = true;
@@ -54,16 +54,13 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
-    /**
-     * @param other
-     * @return a boolean indicate if they are equal
-     */
     @Override
     public boolean equals(Object other) {
-        if (this == other) {
+        if (other == this) {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof FindCommand)) {
             return false;
         }

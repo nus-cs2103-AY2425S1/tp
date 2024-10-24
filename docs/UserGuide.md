@@ -163,18 +163,36 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+DorManagerPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually although there is an option to do so in the `export` and `import` functions.
+
+### Manual saving: `export`
+
+The `export` command will directly and immediately save the contents of the data to a save file akin to the one created automatically when closing the application.
+
+Format: `export`
+
+### Manual data restoration: `import`
+The `import` command allows users to restore data from any one save file into the application.
+
+Format: `import f/FILE_PATH`
+
+* Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
+
+Examples: 
+
+* `import ./SaveFile3.json` imports data from the file named at `./SaveFile3.json` into the application.
+
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+DorManagerPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" 
 seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, DorManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`

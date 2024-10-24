@@ -1,5 +1,27 @@
+
+.feature-header {
+    -fx-font-size: 15;
+    -fx-text-fill: #3895d3;
+}
+
+.feature-text {
+    -fx-text-fill: white;
+}
+
 #copyButton, #helpMessage {
     -fx-text-fill: white;
+}
+
+#featureIntroduction {
+    -fx-text-fill: #58cced;
+}
+
+#featureIntroduction {
+    -fx-font-size: 20;
+}
+
+#featureIntroduction, #addFeatureHeader, #editFeatureHeader, #deleteFeatureHeader {
+    -fx-font-weight: bold;
 }
 
 #copyButton {

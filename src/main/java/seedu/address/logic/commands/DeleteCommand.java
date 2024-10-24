@@ -11,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+
 /**
  * Deletes a person identified using its displayed index from the address book.
  */
@@ -23,11 +24,11 @@ public class DeleteCommand extends ConcreteCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted person: %1$s";
     public static final String MESSAGE_UNDO_SUCCESS = "Reverted deletion of person: %1$s";
 
     private final Index targetIndex;
-    private Person personToDelete;
+    private Person deletedPerson;
 
     /**
      * Creates a DeleteCommand to delete the person at the specified {@code Index}.
@@ -39,7 +40,7 @@ public class DeleteCommand extends ConcreteCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert !isExecuted : "This command has already been executed";
+        requireNotExecuted();
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -48,7 +49,6 @@ public class DeleteCommand extends ConcreteCommand {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         /*
         this part of code should only exist in javafx file so remove it so far
@@ -57,6 +57,7 @@ public class DeleteCommand extends ConcreteCommand {
         alert.setTitle("Delete Confirmation");
         alert.setHeaderText("Are you sure you want to delete this person?");
         alert.setContentText(String.format("Name: %s", personToDelete.getName()));
+
         ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
         if (result != ButtonType.OK) {
             return new CommandResult("Deletion cancelled.");
@@ -64,17 +65,18 @@ public class DeleteCommand extends ConcreteCommand {
          */
 
         model.deletePerson(personToDelete);
+        deletedPerson = personToDelete;
         isExecuted = true;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
     public CommandResult undo(Model model) {
-        assert isExecuted : "This command has not been executed";
-        requireAllNonNull(model, personToDelete);
-        model.addPerson(personToDelete);
+        requireExecuted();
+        requireAllNonNull(model, deletedPerson);
+        model.insertPerson(deletedPerson, targetIndex);
         isExecuted = false;
-        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(deletedPerson)));
     }
 
     @Override
@@ -82,13 +84,16 @@ public class DeleteCommand extends ConcreteCommand {
         if (other == this) {
             return true;
         }
+
         // instanceof handles nulls
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
+
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

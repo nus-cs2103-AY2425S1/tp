@@ -11,6 +11,26 @@ public abstract class Command {
      */
     protected boolean isExecuted = false;
 
+    public static final String MESSAGE_EXECUTED_ERROR = "This command has already been executed";
+    public static final String MESSAGE_NOT_EXECUTED_ERROR = "This command has not been executed";
+
+    /**
+     * Indicates whether the command is executed.
+     * Should be set to true after the command is executed.
+     */
+
+    protected void requireNotExecuted() {
+        if (isExecuted) {
+            throw new AssertionError(MESSAGE_EXECUTED_ERROR);
+        }
+    }
+
+    protected void requireExecuted() {
+        if (!isExecuted) {
+            throw new AssertionError(MESSAGE_NOT_EXECUTED_ERROR);
+        }
+    }
+
     /**
      * Executes the command and returns the result message.
      * A command should only be executed once.

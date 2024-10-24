@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -19,26 +21,67 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
-        <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
+      <VBox alignment="CENTER" fx:id="helpMessageContainer">
+        <VBox>
+          <Label fx:id="featureIntroduction" text="Basic feature introduction"/>
+        </VBox>
+        <VBox fx:id="addFeatureGuide">
+          <Label styleClass="feature-header" fx:id="addFeatureHeader" text="&#10;Add" />
+          <Label styleClass="feature-text" fx:id="addFeatureDesc">
+            Adds a person to DorManagerPro
           </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
-        </children>
-        <opaqueInsets>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </opaqueInsets>
-        <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </padding>
-      </HBox>
+          <Label styleClass="feature-text" fx:id="addFeatureFormat">
+            Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
+          </Label>
+          <Label styleClass="feature-text" fx:id="addFeatureNotes">
+            Note: ROOM_NUMBER, ADDRESS and TAGs are optional.
+          </Label>
+        </VBox>
+        <VBox fx:id="editFeatureGuide">
+          <Label styleClass="feature-header" fx:id="editFeatureHeader" text="&#10;Edit" />
+          <Label styleClass="feature-text" fx:id="editFeatureDesc">
+            Edits an existing person in DorManagerPro
+          </Label>
+          <Label styleClass="feature-text" fx:id="editFeatureFormat">
+            Format: edit 2 n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM_NUMBER a/ADDRESS [t/TAG]
+          </Label>
+          <Label styleClass="feature-text" fx:id="editFeatureNotes">
+            Note: All fields are optional, but there must be 1 or more fields.
+          </Label>
+        </VBox>
+        <VBox fx:id="deleteFeatureGuide">
+          <Label styleClass="feature-header" fx:id="deleteFeatureHeader" text="&#10;Delete" />
+          <Label styleClass="feature-text" fx:id="deleteFeatureDesc">
+            Deletes the specified person from DorManagerPro
+          </Label>
+          <Label styleClass="feature-text" fx:id="deleteFeatureFormat">
+            Format: delete INDEX
+          </Label>
+          <Label styleClass="feature-text" fx:id="deleteFeatureNotes">
+            Note: INDEX is based on what can currently be seen in DorManagerPro.
+          </Label>
+        </VBox>
+        <HBox alignment="CENTER" fx:id="userGuideLinkContainer">
+          <children>
+            <Label fx:id="helpMessage" text="Label">
+              <HBox.margin>
+                <Insets right="5.0" />
+              </HBox.margin>
+            </Label>
+            <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+              <HBox.margin>
+                <Insets left="5.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+          <opaqueInsets>
+            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+          </opaqueInsets>
+          <padding>
+            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+          </padding>
+        </HBox>
+      </VBox>
     </Scene>
   </scene>
 </fx:root>
