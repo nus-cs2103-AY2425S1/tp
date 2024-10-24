@@ -13,18 +13,18 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Reapplies the last undone change to the address book.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_UNDO_SUCCESS = "Successfully redone the last undone action!";
-    public static final String MESSAGE_UNDO_FAILURE = "There are no actions to redo.";
+    public static final String MESSAGE_REDO_SUCCESS = "Successfully redone the last undone action!";
+    public static final String MESSAGE_REDO_FAILURE = "There are no actions to redo.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.canRedoAddressBook()) {
-            throw new CommandException(MESSAGE_UNDO_FAILURE);
+            throw new CommandException(MESSAGE_REDO_FAILURE);
         }
 
         model.redoAddressBook();
-        return new CommandResult(MESSAGE_UNDO_SUCCESS);
+        return new CommandResult(MESSAGE_REDO_SUCCESS);
     }
 }
