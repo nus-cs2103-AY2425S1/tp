@@ -88,7 +88,7 @@ public class FindCommandTest {
 
         // Use FindCommand instance for ToStringBuilder in expected generation to match the test's 'this' context
         String expected = new ToStringBuilder(findCommand)
-                .add("Find predicate", combinedPredicate)
+                .add("find predicate", combinedPredicate)
                 .toString();
 
         assertEquals(expected, findCommand.toString());

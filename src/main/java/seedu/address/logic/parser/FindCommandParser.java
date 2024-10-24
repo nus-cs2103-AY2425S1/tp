@@ -24,18 +24,13 @@ import seedu.address.model.person.RoomNumberPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
- * Parser for Find commands.
+ * Parser for FindCommand.
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
 
 
     /**
-     * Parses the provided arguments to create a new FindCommand object.
-     * Validates and extracts name, contact number, and room number from the arguments.
-     * Constructs a predicate for filtering persons based on these extracted values.
-     * Throws ParseException if the input does not conform to the expected format.
-     *
      * @param args The input arguments to parse.
      * @return A command object used for Finding persons based on specified criteria.
      * @throws ParseException If the input does not meet the required format.

@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Represents a command to Find details of a person.
+ * Keyword matching is case insensitive
  */
 public class FindCommand extends Command {
 
@@ -27,7 +28,7 @@ public class FindCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME \n"
             + PREFIX_PHONE + "PHONE \n"
-            + PREFIX_ROOM_NUMBER + "ROOM_NUMBER \b"
+            + PREFIX_ROOM_NUMBER + "ROOM_NUMBER \n"
             + PREFIX_TAG + "TAGS";
 
     private final Predicate<Person> combinedPredicate;
@@ -66,8 +67,6 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        // Compare the combinedPredicate using reference equality or a custom method
-        // if you have a better way to compare the logic encapsulated by the predicates.
         return combinedPredicate.equals(otherFindCommand.combinedPredicate);
     }
 
@@ -79,7 +78,7 @@ public class FindCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Find predicate", combinedPredicate)
+                .add("find predicate", combinedPredicate)
                 .toString();
     }
 }
