@@ -19,6 +19,7 @@ public class Appt {
     /**
      * Comparator to compare two appointments by their date and time.
      * Used for sorting appointments by date and time.
+     *
      * @param appt1
      * @param appt2
      * @return int
@@ -35,6 +36,7 @@ public class Appt {
 
     /**
      * Constructs a {@code Appt}.
+     *
      * @param dateTime A valid appointment date.
      */
     public Appt(LocalDateTime dateTime) {
@@ -50,8 +52,9 @@ public class Appt {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Appt // instanceof handles nulls
-                && dateTime.equals(((Appt) other).dateTime)); // state check
+                        && dateTime.equals(((Appt) other).dateTime)); // state check
     }
+
     @Override
     public int hashCode() {
         return dateTime.hashCode();

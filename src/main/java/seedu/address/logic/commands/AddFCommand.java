@@ -44,7 +44,7 @@ public class AddFCommand extends Command {
             + "[" + PREFIX_NOKNAME + "NEXT-OF-KIN NAME] "
             + "[" + PREFIX_NOKPHONE + "NEXT-OF-KIN PHONE] "
             + "[" + PREFIX_ALLERGY + "ALLERGY] "
-            + "[" + PREFIX_HEALTHRISK + "HEALTH CONDITION] "
+            + "[" + PREFIX_HEALTHRISK + "HEALTH RISK] "
             + "[" + PREFIX_HEALTHRECORD + "PAST HEALTH RECORD] "
             + "[" + PREFIX_NOTE + "ADDITIONAL NOTES]\n"
             + "Example: " + COMMAND_WORD + " "

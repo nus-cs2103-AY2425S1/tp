@@ -5,7 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.healthservice.HealthService;
+import seedu.address.model.person.Birthdate;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Sex;
 
 public class CommandResultTest {
     @Test
@@ -14,7 +26,8 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", null, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", null,
+                false, null, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,13 +42,29 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", null, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", null,
+                true, null, false, false)));
+
+        // different showPatientInfo value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", null,
+                false, null, true, false)));
+
+        // different patient value -> returns false
+        Set<HealthService> healthServices = new HashSet<>();
+        healthServices.add(new HealthService("Blood Test"));
+        Person newPerson = new Person(new Name("Alice"), new Nric("S1111111A"),
+                new Birthdate("2022-11-11"), new Sex("F"), healthServices,
+                new Phone("1111111"), new Email("123@gmail.com"));
+        assertFalse(commandResult.equals(new CommandResult("feedback", null,
+                false, newPerson, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", null, false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", null,
+                false, null, false, true)));
 
-        //different keyword value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", "keyword", false, false)));
+        // different keyword value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", "keyword",
+                false, null, false, false)));
     }
 
     @Test
@@ -49,13 +78,16 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", null, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", null,
+                true, null, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", null, false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", null,
+                false, null, false, true).hashCode());
 
-        //different keyword value -> returns differnt hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", "keyword", false, false).hashCode());
+        // different keyword value -> returns differnt hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", "keyword",
+                false, null, false, false).hashCode());
     }
 
     @Test

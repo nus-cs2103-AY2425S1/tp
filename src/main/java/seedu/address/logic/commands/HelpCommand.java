@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, keyword, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, keyword, true, null, false, false);
     }
 
     @Override
