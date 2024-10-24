@@ -1,14 +1,15 @@
 package seedu.ddd.model.event.common.predicate;
 
+import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
+
 import java.util.Arrays;
 import java.util.function.Predicate;
 
 import seedu.ddd.commons.util.ToStringBuilder;
-import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.ddd.logic.commands.ListEventCommand;
 import seedu.ddd.logic.parser.ArgumentMultimap;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
-import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.event.common.EventId;

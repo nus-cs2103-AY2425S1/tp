@@ -34,7 +34,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_USAGE = "usage: " + COMMAND_WORD + " [{"
             + FLAG_CLIENT + " | "
             + FLAG_VENDOR + " | "
-            + FLAG_EVENT +  "}] "
+            + FLAG_EVENT + "}] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "

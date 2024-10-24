@@ -10,7 +10,6 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ddd.model.contact.common.ContactType.CLIENT;
 
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.Messages;
