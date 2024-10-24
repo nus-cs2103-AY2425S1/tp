@@ -1,5 +1,6 @@
 package seedu.address.model.order;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public abstract class Order {
     private LocalDateTime orderDate;
     private List<? extends Product> items; //stores list of pastries/ingredients
     private OrderStatus status;
+    private Person person;
 
     // Constructor
     public Order(String phoneNumber, List<? extends Product> items, OrderStatus status) {
@@ -26,6 +28,14 @@ public abstract class Order {
         this.orderDate = LocalDateTime.now();
         this.items = items;
         this.status = status;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Person getPerson() {
+        return person;
     }
 
     // Getters and Setters
@@ -60,6 +70,8 @@ public abstract class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
+    public int getOrderId() { return orderId; }
 
     // Abstract method to be implemented by subclasses
     public abstract String getOrderType();
