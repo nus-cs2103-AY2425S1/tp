@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteGroupCommandParser" as DeleteGroupCommandParser LOGIC_COLOR
+participant "d:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("dg gn/Group 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("dg Group 1")
+activate AddressBookParser
+
+create DeleteGroupCommandParser
+AddressBookParser -> DeleteGroupCommandParser
+activate DeleteGroupCommandParser
+
+DeleteGroupCommandParser --> AddressBookParser
+deactivate DeleteGroupCommandParser
+
+AddressBookParser -> DeleteGroupCommandParser : parse("gn/Group 1")
+activate DeleteGroupCommandParser
+
+create DeleteGroupCommand
+DeleteGroupCommandParser -> DeleteGroupCommand
+activate DeleteGroupCommand
+
+DeleteGroupCommand --> DeleteGroupCommandParser :
+deactivate DeleteGroupCommand
+
+DeleteGroupCommandParser --> AddressBookParser : d
+deactivate DeleteGroupCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteGroupCommandParser -[hidden]-> AddressBookParser
+destroy DeleteGroupCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteGroupCommand : execute(m)
+activate DeleteGroupCommand
+
+DeleteGroupCommand -> Model : deleteGroup(group)
+activate Model
+
+Model --> DeleteGroupCommand
+deactivate Model
+
+create CommandResult
+DeleteGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteGroupCommand
+deactivate CommandResult
+
+DeleteGroupCommand --> LogicManager : r
+deactivate DeleteGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

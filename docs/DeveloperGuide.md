@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # T_Assistant Developer Guide
@@ -198,6 +198,33 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Delete Group feature
+
+The `Delete Group` feature allows users to delete an existing group in the address book given a group's name.
+
+Below, we provide an example usage scenario and description of how the delete group code works at each step.
+
+#### Implementation details
+
+1. User has the application launched with at least 1 group added.
+2. User executes `lg` to view all groups. For this example, the user wishes to delete `Group 1`.
+3. The user executes `dg gn/Group 1` to delete the group with a group name `Group 1`. The command is parsed in the
+   `AddressBookParser`.
+4. `DeleteGroupCommandParser` is created and gets the group name of the group to be deleted. The group name is used to
+   construct a `DeleteGroupCommand` object.
+5. The `DeleteGroupCommand` object then calls `deleteGroup(group)` in the `ModelManager` with the specified group to be
+   deleted. This method deletes the specified `Group` in the model.
+6. Finally, the `DeleteGroupCommand` returns the `CommandResult`.
+
+##### Note
+
+This feature will also remove `Students` in the `Group` and reset their `Group`, and delete all `Tasks` related to the
+`Group`.
+
+#### Sequence Diagram
+The following sequence diagram shows how the above steps for delete group works:
+<puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupCommand"/>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -346,12 +373,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * Manage contacts faster than a typical mouse/GUI driven app
 * Helps to track the following:
-  * Students
-  * Their groups
-  * Group projects’ progress
-  * TA will create Groups and assign tasks
-    * Mark the tasks as the groups complete them
-
+    * Students
+    * Their groups
+    * Group projects’ progress
+    * TA will create Groups and assign tasks
+        * Mark the tasks as the groups complete them
 
 ### User stories
 
@@ -553,13 +579,13 @@ Use case ends.
 
 * 1a. The Group/Task parameters are invalid.
 
-    * 1a1.  T_Assistant shows an error message.
+    * 1a1. T_Assistant shows an error message.
 
       Use case ends.
 
 * 1b. The user marks an already complete task.
 
-    * 1b1.  T_Assistant shows an error message.
+    * 1b1. T_Assistant shows an error message.
 
       Use case ends.
 
@@ -605,7 +631,7 @@ Use case ends.
 
 * 1a. There are currently no groups.
 
-    * 1a1.  T_Assistant shows an error message.
+    * 1a1. T_Assistant shows an error message.
 
       Use case ends.
 
@@ -622,7 +648,7 @@ Use case ends.
 
 * 1a. There are currently no tasks.
 
-    * 1a1.  T_Assistant shows an error message.
+    * 1a1. T_Assistant shows an error message.
 
       Use case ends.
 
@@ -639,13 +665,13 @@ Use case ends.
 
 * 1a. The Group/Task parameters are invalid.
 
-    * 1a1.  T_Assistant shows an error message.
+    * 1a1. T_Assistant shows an error message.
 
       Use case ends.
 
 * 1b. A duplicate task is entered.
 
-    * 1b1.  T_Assistant informs user that the task already exists.
+    * 1b1. T_Assistant informs user that the task already exists.
 
       Use case resumes at step 2.
 
@@ -662,7 +688,7 @@ Use case ends.
 
 * 1a. The Group/Task parameters are invalid.
 
-    * 1a1.  T_Assistant shows an error message.
+    * 1a1. T_Assistant shows an error message.
 
       Use case ends.
 
