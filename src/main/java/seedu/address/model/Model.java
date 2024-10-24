@@ -105,13 +105,7 @@ public interface Model {
      * Closes/Deletes the given tutorial.
      * The tutorial must exist in the address book.
      */
-    void closeTutorial(Tutorial tutorial);
-
-    /**
-     * Retrieves the given tutorial in the list with the same identity.
-     * The tutorial must exist in the address book.
-     */
-    Tutorial getTutorial(Tutorial tutorial);
+    void deleteTutorial(Tutorial tutorial);
 
     /**
      * Creates/Adds the given tutorial.
@@ -127,6 +121,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTutorialList(Predicate<Tutorial> predicate);
+
+    /** Returns an unmodifiable view of the entire tutorial list */
+    ObservableList<Tutorial> getTutorialList();
 
 
 
