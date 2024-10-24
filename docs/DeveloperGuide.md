@@ -329,10 +329,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The details entered about the new person are invalid.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 **Use case: UC2 - List all people**
 
@@ -406,6 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC6 - Add notes to a person contact**
 
 **MSS**
+
 1.  Actor performs <u>list all people (UC2)</u>.
 2.  Actor requests to add a note to a specific person.
 3.  System shows details of the newly added note to that person.
@@ -416,17 +416,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. The specified person is invalid.
 
-    - 3a1. System shows an error message.
+  - 3a1. System shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 - 3b. The note name is invalid.
 
-    - 3b1. System shows an error message.
+  - 3b1. System shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -470,7 +468,7 @@ testers are expected to do more *exploratory* testing.
    2a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2b. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+   Expected: The most recent window size and location is retained.
 
 3. _{ more test cases …​ }_
 
@@ -481,13 +479,13 @@ testers are expected to do more *exploratory* testing.
    1a. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1b. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1c. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
 
@@ -497,5 +495,4 @@ testers are expected to do more *exploratory* testing.
 
    1a. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-2_{ more test cases …​ }_
-
+2*{ more test cases …​ }*
