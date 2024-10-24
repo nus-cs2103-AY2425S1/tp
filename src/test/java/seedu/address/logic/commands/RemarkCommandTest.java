@@ -14,7 +14,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
+import seedu.address.logic.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -133,3 +133,4 @@ public class RemarkCommandTest {
         assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON,
                 new Remark(VALID_REMARK_BOB))));
     }
+}
