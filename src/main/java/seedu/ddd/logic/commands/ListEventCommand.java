@@ -15,7 +15,7 @@ import seedu.ddd.model.event.common.Event;
  */
 public class ListEventCommand extends ListCommand {
 
-    private static final Predicate<Contact> CLEAR_CONTACTS = any -> false;
+    public static final Predicate<Contact> CLEAR_CONTACTS = any -> false;
 
     private final Predicate<Event> predicate;
 
