@@ -39,19 +39,19 @@ Whether you prefer clicking buttons or typing commands, AgentConnect will help y
 ## Quick start
 
 
-1. **Ensure Java is Installed**  
+1. **Ensure Java is Installed**
    Make sure you have **Java 17 or above** installed on your computer. If you're not sure, you can download it from [here](https://www.oracle.com/java/technologies/downloads/).
 
-2. **Download AgentConnect**  
+2. **Download AgentConnect**
    Get the latest version of AgentConnect from [this link](https://github.com/se-edu/addressbook-level3/releases). Look for a file named `AgentConnect.jar`.
 
-3. **Place the File**  
+3. **Place the File**
    Move the `AgentConnect.jar` file to a folder where you want to store the application and its data.
 
 4. **Run the Application**
-    - **Option 1: Double-Click**  
+    - **Option 1: Double-Click**
       Simply double-click the `AgentConnect.jar` file to start the application.
-    - **Option 2: Use Command Prompt**  
+    - **Option 2: Use Command Prompt**
       Open the Command Prompt (Windows) or Terminal (Mac/Linux), navigate to the folder containing the `AgentConnect.jar` file, and type:
       ```
       java -jar AgentConnect.jar
@@ -59,9 +59,9 @@ Whether you prefer clicking buttons or typing commands, AgentConnect will help y
       Then press **Enter**.
 
 6. **Try It Out**
-    - **Enter a Command**  
+    - **Enter a Command**
       Type a command into the command box at the bottom and press **Enter**. For example, type `help` to see the help message.
-    - **Explore**  
+    - **Explore**
       Feel free to experiment with different commands.
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -73,20 +73,20 @@ AgentConnect offers a range of features to help you manage your clients effectiv
 
 ### Understanding Command Format
 
-- **Words in UPPER_CASE** are placeholders for information you need to provide.  
+- **Words in UPPER_CASE** are placeholders for information you need to provide.
   Example: In `add n/NAME`, replace `NAME` with the client's name.
 
-- **Square brackets [ ]** indicate optional items.  
+- **Square brackets [ ]** indicate optional items.
   Example: `n/NAME [t/TAG]` means the `t/TAG` part is optional.
 
-- **Ellipsis ...** means you can include the item multiple times or not at all.  
+- **Ellipsis ...** means you can include the item multiple times or not at all.
   Example: `[t/TAG]...` allows for multiple tags or none.
 
-- **Order Doesn't Matter**  
-  You can enter the parameters in any order.  
+- **Order Doesn't Matter**
+  You can enter the parameters in any order.
   Example: `n/John p/123` is the same as `p/123 n/John`.
 
-- **Extra Parameters are Ignored**  
+- **Extra Parameters are Ignored**
   For commands that don't require additional input, any extra text will be ignored.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -109,7 +109,7 @@ Adds a client to the address book.
 
 Format: `add n/<name> p/<phone number> e/<email address> addr/<address> b/<birthday >appt/<appointment and time>`
 
-- Birthday should be in `yyyy-mm-dd` 
+- Birthday should be in `yyyy-mm-dd`
 - Appointment should be in `yyyy-mm-dd HH:mm`
 
 Examples:
@@ -124,7 +124,7 @@ Assign policies to a client
 
 Format: `assign <Index> pon/<Policy Name> /pos<Policy start date> /poe <Policy end date> /paydate <Insurance due date> /amt <Amount Due>`
 
-- Policy start date and end date refers to the duration of coverage 
+- Policy start date and end date refers to the duration of coverage
 - Policy start date and Policy end date should be in `yyyy-mm-dd`
 - Pay date should be in `yyyy-mm-dd` format
 - Amount Due only can be Big Decimal format
@@ -170,7 +170,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 po/1 pon/Health Insurance pos/2024-10-19 poe/2025-10-19 paydate/2024-11-19 amt/200` Edits the 1st policy of 
+*  `edit 3 po/1 pon/Health Insurance pos/2024-10-19 poe/2025-10-19 paydate/2024-11-19 amt/200` Edits the 1st policy of
      the 3rd person to be `Health Insurance` which valid from `2024-10-19` to `2025-10-19` which pay date on `2024-11-19`
      and amount of `200`
    ![result for 'edit first index client'](images/editUI.png)
@@ -205,7 +205,6 @@ Find clients with appointments on a specific date or within a date range.
 
 - **Parameters**:
 - `DATETIME`: A specific date and time in `YYYY-MM-DD HH:mm` format.
-- 
 
 - **What It Does**:
 - **Single Datetime Search**: Lists all clients with appointments on the specified date and time.
@@ -408,9 +407,8 @@ _Details coming soon ..._
 
 ## Known Issues
 
-1. **Multiple Screens**: If you use multiple monitors and move AgentConnect to a secondary screen, it may open off-screen if that monitor is disconnected.  
+1. **Multiple Screens**: If you use multiple monitors and move AgentConnect to a secondary screen, it may open off-screen if that monitor is disconnected.
    **Solution**: Delete the `preferences.json` file in the application folder before restarting AgentConnect.
-
 
 2. **Help Window Minimization**: If you minimize the Help window and try to open it again, it may stay minimized.  
    **Solution**: Restore the Help window manually.
