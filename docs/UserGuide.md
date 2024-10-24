@@ -1,4 +1,3 @@
-# EduTUTU User Guide
 
 **EduTUTU** is a desktop application designed to streamline contact management for tuition centers, making it easier to 
 organise and access student information. Optimised for use through a Command Line Interface (CLI) while incorporating 
