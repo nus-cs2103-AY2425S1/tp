@@ -133,17 +133,17 @@
 }
 
 .cell_doctor_flag_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
     -fx-background-color: #89cffa;
+    -fx-padding: 0 2 0 2;
+    -fx-margin: 0 5 0 0;
+    -fx-border-radius: 5;
 }
 
 .cell_patient_flag_label {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
     -fx-background-color: #f75c5c;
+    -fx-padding: 0 2 0 2;
+    -fx-margin: 0 5 0 0;
+    -fx-border-radius: 5;
 }
 
 .stack-pane {
