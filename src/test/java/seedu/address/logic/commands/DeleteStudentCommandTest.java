@@ -211,6 +211,8 @@ public class DeleteStudentCommandTest {
             requireNonNull(student);
         }
 
+
+
     }
 
 
@@ -225,6 +227,8 @@ public class DeleteStudentCommandTest {
             requireNonNull(student);
             // Student student = (Student) person;
             return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
+            // Student student = (Student) person;
+            return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
         }
 
 
@@ -234,12 +238,23 @@ public class DeleteStudentCommandTest {
             studentsAdded.add(student);
         }
 
+
+        @Override
+        public void addStudent(Student student) {
+            requireNonNull(student);
+            studentsAdded.add(student);
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
 
+    private class ModelStubWithNoStudent extends DeleteStudentCommandTest.ModelStub {
     private class ModelStubWithNoStudent extends DeleteStudentCommandTest.ModelStub {
         @Override
         public Student getStudentByName(Name name) {

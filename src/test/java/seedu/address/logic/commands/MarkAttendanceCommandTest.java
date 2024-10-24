@@ -41,6 +41,8 @@ public class MarkAttendanceCommandTest {
 
         CommandResult result = command.execute(modelStub);
 
+        assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS,
+                validStudent.getName(), attendance, date), result.getFeedbackToUser());
         assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(),
                         validStudent.getTutorialGroup(), attendance,
                 DateTimeFormatter.ofPattern("MMM d yyyy").format(date)), result.getFeedbackToUser());
