@@ -44,7 +44,7 @@ public class Messages {
                 .append("; Room Number: ")
                 .append(person.getRoomNumber().map(rm -> rm.value).orElse("N/A"))
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(person.getAddress().map(address -> address.value).orElse("N/A"))
                 .append("; Emergency Contact: ")
                 .append(person.getEmergencyContact().map(ec -> ec.toString()).orElse("N/A"))
                 .append("; Tags: ");

@@ -33,13 +33,13 @@ public class Person {
      * Basic constructor.
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.roomNumber = null;
-        this.address = address;
+        this.address = null;
         this.emergencyContact = null;
         this.gradYear = null;
         this.tags.addAll(tags);
@@ -48,12 +48,12 @@ public class Person {
     /**
      * Overloaded constructor that includes optional parameters.
      * Every field must be present and not null, except for optional parameters.
-     * Non-optional params: name, phone, email, address, and tags.
-     * Optional params: roomNumber and emergencyContact.
+     * Non-optional params: name, phone, email and tags.
+     * Optional params: address, roomNumber and emergencyContact.
      */
     public Person(Name name, Phone phone, Email email, RoomNumber roomNumber,
                   Address address, EmergencyContact emergencyContact, GradYear gradYear, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -80,8 +80,8 @@ public class Person {
         return Optional.ofNullable(roomNumber);
     }
 
-    public Address getAddress() {
-        return address;
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);
     }
 
     public Optional<EmergencyContact> getEmergencyContact() {

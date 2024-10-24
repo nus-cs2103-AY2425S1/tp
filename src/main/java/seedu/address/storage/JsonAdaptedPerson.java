@@ -67,7 +67,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         roomNumber = source.getRoomNumber().map(rn -> rn.value).orElse(null);
-        address = source.getAddress().value;
+        address = source.getAddress().map(ad -> ad.value).orElse(null);
         emergencyName = source.getEmergencyContactName().map(en -> en.fullName).orElse(null);
         emergencyPhone = source.getEmergencyContactPhone().map(ep -> ep.value).orElse(null);
         gradYear = source.getGradYear().map(gy -> gy.value).orElse(null);
@@ -119,13 +119,12 @@ class JsonAdaptedPerson {
     }
 
     private Address parseAddress(String address) throws IllegalValueException {
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
+        // address is optional
+        boolean hasAddress = address != null;
+        if (hasAddress && !Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        return new Address(address);
+        return hasAddress ? new Address(address) : null;
     }
 
     private EmergencyContact parseEmergencyContact(String name, String phone) throws IllegalValueException {

@@ -60,7 +60,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         roomNumber = personToCopy.getRoomNumber().orElse(null);
-        address = personToCopy.getAddress();
+        address = personToCopy.getAddress().orElse(null);
         emergencyContact = personToCopy.getEmergencyContact().orElse(null);
         gradYear = personToCopy.getGradYear().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());

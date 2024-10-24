@@ -132,7 +132,8 @@ public class EditCommand extends ConcreteCommand {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Address updatedAddress = editPersonDescriptor.getAddress()
+                .orElse(personToEdit.getAddress().orElse(null));
         RoomNumber updatedRoomNumber = editPersonDescriptor.getRoomNumber()
                 .orElse(personToEdit.getRoomNumber().orElse(null));
         Name updatedEmergencyName = editPersonDescriptor.getEmergencyName()

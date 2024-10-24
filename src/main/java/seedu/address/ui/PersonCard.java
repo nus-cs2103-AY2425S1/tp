@@ -58,8 +58,13 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        // display default text if address is not assigned
+        address.setText(
+                person.getAddress().map(address -> address.value)
+                        .orElse("Address not yet assigned")
+        );
 
         // display default text if room number is not assigned
         roomNumber.setText(
