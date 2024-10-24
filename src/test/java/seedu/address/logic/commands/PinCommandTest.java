@@ -65,8 +65,10 @@ public class PinCommandTest {
     public void equals() {
         PinCommand pinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
         PinCommand pinSecondCommand = new PinCommand(INDEX_SECOND_PERSON);
+        PinCommand duplicatepinFirstCommand = new PinCommand(INDEX_FIRST_PERSON);
 
         assertTrue(pinFirstCommand.equals(pinFirstCommand));
+        assertTrue(pinFirstCommand.equals(duplicatepinFirstCommand));
 
         assertFalse(pinFirstCommand.equals(null));
         assertFalse(pinFirstCommand.equals(pinSecondCommand));
