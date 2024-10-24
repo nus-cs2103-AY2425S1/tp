@@ -30,8 +30,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_MODULENAME = "ABCDEF";
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
+    private static final String VALID_PHONE = BENSON.getPhone().map(Phone::toString).orElse("");
+    private static final String VALID_EMAIL = BENSON.getEmail().map(Email::toString).orElse("");
     private static final String VALID_TELEHANDLE = BENSON.getTelegramHandle().toString();
     private static final String VALID_CONTACTTYPE = BENSON.getContactType().toString();
     private static final String VALID_MODULENAME = BENSON.getModuleName().toString();
@@ -72,27 +72,11 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_EMAIL,
-                VALID_TELEHANDLE, VALID_MODULENAME, VALID_TAGS, VALID_CONTACTTYPE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_TELEHANDLE, VALID_MODULENAME,
                         VALID_TAGS, VALID_CONTACTTYPE);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, null,
-                VALID_TELEHANDLE, VALID_MODULENAME, VALID_TAGS, VALID_CONTACTTYPE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
