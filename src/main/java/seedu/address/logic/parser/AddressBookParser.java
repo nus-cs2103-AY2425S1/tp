@@ -37,12 +37,12 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
-     * Used to keep track of all the commands available
+     * Used to keep track of all the commands available.
      */
     private final Map<String, ParseCommandFunction> commands;
 
     /**
-     * Creates an AddressBookParser and registers all commands available
+     * Creates an AddressBookParser and registers all commands available.
      */
     public AddressBookParser() {
         commands = new HashMap<>();
@@ -90,7 +90,7 @@ public class AddressBookParser {
     }
 
     /**
-     * This is a private functional interface to hold the command parsing process
+     * This is a private functional interface to hold the command parsing process.
      */
     @FunctionalInterface
     private interface ParseCommandFunction {
