@@ -67,6 +67,11 @@ dependencies {
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.4.0'
 }
 
+run {
+    enableAssertions = true
+}
+
+
 shadowJar {
     archiveFileName = 'clientGrid.jar'
 }

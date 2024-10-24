@@ -72,7 +72,7 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         PropertyBookStorage propertyBookStorage = new JsonPropertyBookStorage(userPrefs.getPropertyBookFilePath());
         ClientBookStorage clientBookStorage = new JsonClientBookStorage(userPrefs.getClientBookFilePath());
-        MeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(userPrefs.getMeetingBookBookFilePath());
+        MeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(userPrefs.getMeetingBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
                 clientBookStorage, meetingBookStorage);
 
@@ -143,14 +143,14 @@ public class MainApp extends Application {
         try {
             meetingBookOptional = storage.readMeetingBook();
             if (!meetingBookOptional.isPresent()) {
-                logger.info("Creating a new meeting data file " + storage.getClientBookFilePath()
-                        + " populated with a sample MettingBook.");
+                logger.info("Creating a new meeting data file " + storage.getMeetingBookFilePath()
+                        + " populated with a sample MeetingBook.");
             }
             initialMeetingData = meetingBookOptional.orElseGet(SampleDataUtil::getSampleMeetingBook);
-            System.out.println(initialClientData);
+            System.out.println(initialMeetingData);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getClientBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty ClientBook.");
+            logger.warning("Data file at " + storage.getMeetingBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty MeetingBook.");
             initialMeetingData = new MeetingBook();
         }
 

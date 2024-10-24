@@ -18,7 +18,7 @@ public class MeetingTitle {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String meetingTitle;
+    public final String value;
 
     /**
      * Constructs a {@code MeetingTitle}.
@@ -28,7 +28,7 @@ public class MeetingTitle {
     public MeetingTitle(String meetingTitle) {
         requireNonNull(meetingTitle);
         checkArgument(isValidMeetingTitle(meetingTitle), MESSAGE_CONSTRAINTS);
-        this.meetingTitle = meetingTitle;
+        this.value = meetingTitle;
     }
 
     /**
@@ -41,7 +41,7 @@ public class MeetingTitle {
 
     @Override
     public String toString() {
-        return meetingTitle;
+        return value;
     }
 
     @Override
@@ -56,12 +56,12 @@ public class MeetingTitle {
         }
 
         MeetingTitle otherMeetingTitle = (MeetingTitle) other;
-        return meetingTitle.equals(otherMeetingTitle.meetingTitle);
+        return value.equals(otherMeetingTitle.value);
     }
 
     @Override
     public int hashCode() {
-        return meetingTitle.hashCode();
+        return value.hashCode();
     }
 
 }

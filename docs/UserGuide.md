@@ -73,21 +73,22 @@ Format: `help`
 
 ### Listing address book records: `list`
 
-Shows a list of all existing properties, sellers, buyers, or clients in the address book.
+Shows a list of all existing clients (i.e. buyers and sellers), properties, and meetings in the address book.
 
 Format: `list k/KEY`
 
-* The `list` command displays records based on the specified `KEY`. 
-* The `KEY` must be one of the following: `properties`, `buyers`, `sellers`, or `clients`.
+* The `list` command displays records based on the specified `KEY`.
+* The `KEY` must be one of the following: `buyers`, `sellers`, `clients`, `meetings` or `properties`.
   * `buyers`: Lists all buyers in the database.
   * `sellers`: Lists all sellers in the database.
   * `clients`: Lists all buyers and sellers (i.e. clients) combined.
   * `properties`: Lists all properties in the database.
+  * `meetings`: Lists all meetings in th e database.
 
 * If an invalid `KEY` is provided, an error message will be displayed.
 
 Key Considerations:
-* Only accepts "properties", "buyers", "sellers", and "clients" (case insensitive) as valid inputs for `k/KEY`.
+* Only accepts "buyers", "sellers", "clients", "properties" and "meetings" (case-insensitive) as valid inputs for k/KEY.
 * The `KEY` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `KEY` also ignores UPPER/lower case. All names will be converted to lower case and checked against the list of valid keys.
 * If the user provides an invalid key, the system will respond with an error message indicating that only the valid keys are accepted.
 
@@ -200,20 +201,40 @@ Examples:
 
   ![result for 'filterclient n/A'](images/filterclient.png)
 
+### Adding a meeting : `addmeeting`
+
+Adds a specified meeting to the meeting book of ClientGrid.
+
+Format: `addmeeting mt/TITLE d/DATE b/BUYER s/SELLER t/TYPE c/POSTALCODE`
+
+* Adds a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
+* The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
+* The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
+* `BUYER` refers to a buyer name. There must be an existing buyer in the client book that has a name that contains `BUYER`. `BUYER` is not case-sensitive. For example, `b/alice` is valid if there is a buyer of name `Alice Pauline` in the client book.
+* `SELLER` refers to a seller name. There must be an existing seller in the client book that has a name that contains `SELLER`. `SELLER` is not case-sensitive.
+* `SELLER` refers to a seller name. There must be an existing seller in the client book that has a name that contains `SELLER`. `SELLER` is not case-sensitive.
+* `TYPE` refers to a property type. It must be either `CONDO`, `HDB`, or `LANDED`. `TYPE` is case-insensitive.
+* `POSTALCODE` refers to a postal code. The postal code must belong to some property to the property book.
+
+Examples:
+* `addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456` adds a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
+
+  ![result for 'addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456'](images/addmeeting.png)
+
 ### Deleting a meeting : `deletemeeting`
 
 Deletes a specified meeting from the meeting book of ClientGrid.
 
-Format: `deletemeeting t/MEETING_TITLE d/MEETING_DATE`
+Format: `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
 
 * Deletes a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
 * The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
 * The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
 
 Examples:
-* `deletemeeting t/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
+* `deletemeeting mt/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
 
-  ![result for 'deletemeeting t/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
+  ![result for 'deletemeeting mt/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
 
 ### Clearing all entries : `clear`
 
@@ -275,4 +296,4 @@ Action     | Format, Examples
 **Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
 **Delete Property** | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
 **Filtering Clients** | `filterclient n/NAME`
-**Delete Meeting** | `deletemeeting t/MEETING_TITLE d/MEETING_DATE`
+**Delete Meeting** | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`

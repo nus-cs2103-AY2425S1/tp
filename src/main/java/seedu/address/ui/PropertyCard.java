@@ -11,7 +11,7 @@ import seedu.address.model.property.Property;
  */
 public class PropertyCard extends UiPart<Region> {
 
-    private static final String FXML = "PropertyListCard.fxml";
+    private static final String FXML = "PropertyCard.fxml";
 
     public final Property property;
 
@@ -25,6 +25,12 @@ public class PropertyCard extends UiPart<Region> {
     private Label typeLabel;
     @FXML
     private Label unit;
+    @FXML
+    private Label type;
+    @FXML
+    private Label bid;
+    @FXML
+    private Label ask;
 
     /**
      * Creates a {@code PropertyCard} with the given {@code Property} and index to display.
@@ -35,6 +41,9 @@ public class PropertyCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         postalCode.setText(property.getPostalCode().value);
         unit.setText(property.getUnit().value);
+        type.setText("Type: " + property.getType().value);
+        bid.setText("Bid: $" + property.getBid().value);
+        ask.setText("Ask: $" + property.getAsk().value);
     }
 
     public HBox getPropertyCardPane() {

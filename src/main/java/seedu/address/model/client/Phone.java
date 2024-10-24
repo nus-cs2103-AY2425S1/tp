@@ -3,15 +3,16 @@ package seedu.address.model.client;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain 8 numbers in the range [0-9] and can only start with ‘8’ or ‘9’";
+            "Phone numbers should only contain 8 numbers in the range [0-9] and can only start with '8' or '9'";
     public static final String VALIDATION_REGEX = "^[89]\\d{7}$";
     public final String value;
 
@@ -50,7 +51,8 @@ public class Phone {
         }
 
         Phone otherPhone = (Phone) other;
-        return value.equals(otherPhone.value);
+
+        return Objects.equals(value, otherPhone.value);
     }
 
     @Override

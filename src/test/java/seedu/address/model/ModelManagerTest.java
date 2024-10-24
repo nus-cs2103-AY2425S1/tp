@@ -10,6 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SELLERS_ONLY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.DANIEL;
+import static seedu.address.testutil.TypicalMeetings.MEETING_ADMIRALTY;
 import static seedu.address.testutil.TypicalMeetings.MEETING_BEDOK;
 import static seedu.address.testutil.TypicalMeetings.MEETING_CLEMENTI;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -24,7 +25,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -40,6 +41,7 @@ import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
 import seedu.address.testutil.MeetingBookBuilder;
 
+
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -50,6 +52,8 @@ public class ModelManagerTest {
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
         assertEquals(new ClientBook(), new ClientBook(modelManager.getClientBook()));
+        assertEquals(new PropertyBook(), new PropertyBook(modelManager.getPropertyBook()));
+        assertEquals(new MeetingBook(), new MeetingBook(modelManager.getMeetingBook()));
     }
 
     @Test
@@ -62,6 +66,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
         userPrefs.setClientBookFilePath(Paths.get("client/book/file/path"));
+        userPrefs.setPropertyBookFilePath(Paths.get("property/book/file/path"));
+        userPrefs.setMeetingBookFilePath(Paths.get("meeting/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
@@ -70,6 +76,8 @@ public class ModelManagerTest {
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         userPrefs.setClientBookFilePath(Paths.get("new/client/book/file/path"));
+        userPrefs.setPropertyBookFilePath(Paths.get("new/property/book/file/path"));
+        userPrefs.setMeetingBookFilePath(Paths.get("new/meeting/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -107,6 +115,18 @@ public class ModelManagerTest {
         Path path = Paths.get("data/clientbook.json");
         modelManager.setClientBookFilePath(path);
         assertEquals(path, modelManager.getClientBookFilePath());
+    }
+
+    @Test
+    public void setMeetingBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setMeetingBookFilePath(null));
+    }
+
+    @Test
+    public void setMeetingBookFilePath_validPath_setsMeetingBookFilePath() {
+        Path path = Paths.get("data/meetingbook.json");
+        modelManager.setMeetingBookFilePath(path);
+        assertEquals(path, modelManager.getMeetingBookFilePath());
     }
 
     // ==================== AddressBook Related Tests ====================
@@ -163,7 +183,7 @@ public class ModelManagerTest {
 
     @Test
     public void setPropertyBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("data/propertybook.json");
         modelManager.setPropertyBookFilePath(path);
         assertEquals(path, modelManager.getPropertyBookFilePath());
     }
@@ -177,6 +197,16 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPropertyList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPropertyList().remove(0));
+    }
+
+    @Test
+    public void hasProperty_nullProperty_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasProperty(null));
+    }
+
+    @Test
+    public void hasProperty_propertyNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasProperty(BEDOK));
     }
 
     // ==================== MeetingBook Related Tests ====================
@@ -233,6 +263,22 @@ public class ModelManagerTest {
         assertEquals(expectedList, modelManager.getFilteredMeetingList());
     }
 
+    @Test
+    public void hasMeeting_nullMeeting_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasMeeting(null));
+    }
+
+    @Test
+    public void hasMeeting_meetingNotInMeetingBook_returnsFalse() {
+        assertFalse(modelManager.hasMeeting(MEETING_ADMIRALTY));
+    }
+
+    @Test
+    public void hasMeeting_meetingInAddressBook_returnsTrue() {
+        modelManager.addMeeting(MEETING_ADMIRALTY);
+        assertTrue(modelManager.hasMeeting(MEETING_ADMIRALTY));
+    }
+
     // ==================== Equality Tests ====================
     @Test
     public void equals() {
@@ -282,22 +328,53 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
+    public void getDisplayMode_returnsObjectPropertyType() {
         // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
 
-        // Assert that the result is an instance of BooleanProperty
-        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+        // Assert that the result is an instance of ObjectProperty
+        assertTrue(result instanceof ObjectProperty, "Expected result to be an instance of ObjectProperty");
     }
 
     @Test
-    public void getIsDisplayClientsProperty_isObservable() {
+    public void getDisplayMode_isObservable() {
         // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
 
         // Assert that the result is an instance of Observable
         assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
     }
+
+    @Test
+    public void setDisplayClients_setsDisplayModeToClients() {
+        // Set display mode to CLIENTS
+        modelManager.setDisplayClients();
+        assertEquals(
+                ModelManager.DisplayMode.CLIENTS, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be CLIENTS"
+        );
+    }
+
+    @Test
+    public void setDisplayProperties_setsDisplayModeToProperties() {
+        // Set display mode to PROPERTIES
+        modelManager.setDisplayProperties();
+        assertEquals(
+                ModelManager.DisplayMode.PROPERTIES, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be PROPERTIES"
+        );
+    }
+
+    @Test
+    public void setDisplayMeetings_setsDisplayModeToMeetings() {
+        // Set display mode to MEETINGS
+        modelManager.setDisplayMeetings();
+        assertEquals(
+                ModelManager.DisplayMode.MEETINGS, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be MEETINGS"
+        );
+    }
+
 
     @Test
     public void testBuyerPredicate() {

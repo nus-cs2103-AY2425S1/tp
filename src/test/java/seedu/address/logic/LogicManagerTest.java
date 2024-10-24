@@ -19,15 +19,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ModelManager.DisplayMode;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyMeetingBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -57,9 +60,9 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder
                 .resolve("userPrefs.json"));
         JsonPropertyBookStorage propertyBookStorage =
-                new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
+                new JsonPropertyBookStorage(temporaryFolder.resolve("propertybook.json"));
         JsonMeetingBookStorage meetingBookStorage =
-                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingBook.json"));
+                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingbook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
                 clientBookStorage, meetingBookStorage);
         logic = new LogicManager(model, storage);
@@ -76,14 +79,6 @@ public class LogicManagerTest {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
-    //TODO: Update test to reflect new ListCommand @apollo-tan
-
-    //    @Test
-    //    public void execute_validCommand_success() throws Exception {
-    //        String listCommand = ListCommand.COMMAND_WORD;
-    //        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-    //    }
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
@@ -187,12 +182,23 @@ public class LogicManagerTest {
             }
         };
 
+        JsonPropertyBookStorage propertyBookStorage = new JsonPropertyBookStorage(prefPath) {
+            @Override
+            public void savePropertyBook(ReadOnlyPropertyBook propertyBook, Path filePath)
+                    throws IOException {
+                throw e;
+            }
+        };
+        JsonMeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(prefPath) {
+            @Override
+            public void saveMeetingBook(ReadOnlyMeetingBook meetingBook, Path filePath)
+                    throws IOException {
+                throw e;
+            }
+        };
+
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        JsonPropertyBookStorage propertyBookStorage =
-                new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
-        JsonMeetingBookStorage meetingBookStorage =
-                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
                 clientBookStorage, meetingBookStorage);
 
@@ -217,18 +223,26 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
-        // Call the method
-        BooleanProperty result = logic.getIsDisplayClientsProperty();
-
-        // Assert that the result is an instance of BooleanProperty
-        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+    public void getFilteredMeetingsList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredMeetingList().remove(0));
     }
 
     @Test
-    public void getIsDisplayClientsProperty_isObservable() {
+    public void getIsDisplayClientsProperty_returnsObjectPropertyType() {
         // Call the method
-        BooleanProperty result = logic.getIsDisplayClientsProperty();
+        ObjectProperty<DisplayMode> result = logic.getDisplayMode();
+
+        // Assert that the result is an instance of ObjectProperty<DisplayMode>
+        assertTrue(
+                result instanceof ObjectProperty<?>,
+                "Expected result to be an instance of ObjectProperty<DisplayMode>"
+        );
+    }
+
+    @Test
+    public void getDisplayMode_isObservable() {
+        // Call the method
+        ObjectProperty<DisplayMode> result = logic.getDisplayMode();
 
         // Assert that the result is an instance of Observable
         assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");

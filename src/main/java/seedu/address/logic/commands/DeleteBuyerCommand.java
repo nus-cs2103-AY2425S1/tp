@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,6 +28,8 @@ public class DeleteBuyerCommand extends DeleteClientCommand {
     );
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Buyer: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteBuyerCommand.class);
+
     /**
      * Constructs a {@code DeleteBuyerCommand} with the specified phone number.
      *
@@ -32,6 +37,7 @@ public class DeleteBuyerCommand extends DeleteClientCommand {
      */
     public DeleteBuyerCommand(Phone phoneNumber) {
         super(phoneNumber);
+        assert phoneNumber != null : "phone number should never be null";
     }
     /**
      * Executes the delete buyer command and removes the buyer from the model.
@@ -44,11 +50,18 @@ public class DeleteBuyerCommand extends DeleteClientCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // Search for the person with the specified phone number
+        logger.info("Executing DeleteBuyer command with phone number: " + phoneNumber);
         Client personToDelete = model.getFilteredClientList().stream()
                 .filter(Client::isBuyer)
                 .filter(person -> person.getPhone().equals(phoneNumber))
-                .findFirst().orElseThrow(() -> new CommandException(String.format("Buyer not found. ", phoneNumber)));
+                .findFirst()
+                .orElseThrow(() -> {
+                    logger.warning("Buyer with phone number " + phoneNumber + " not found");
+                    return new CommandException(String.format("Buyer not found. Phone: %s", phoneNumber));
+                });
+        logger.info("Deleting Buyer: " + personToDelete);
         model.deleteClient(personToDelete);
+        assert !model.getFilteredClientList().contains(personToDelete) : "Buyer should be deleted from the client book";
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

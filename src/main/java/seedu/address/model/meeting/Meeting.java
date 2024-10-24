@@ -5,6 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.client.Phone;
+import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Type;
 
 /**
  * Represents a Meeting in the meeting book.
@@ -14,14 +17,23 @@ public class Meeting {
     // Identity fields
     private final MeetingTitle meetingTitle;
     private final MeetingDate meetingDate;
+    private final Phone buyerPhone;
+    private final Phone sellerPhone;
+    private final Type type;
+    private final PostalCode postalCode;
 
     /**
      * Every field must be present and not null.
      */
-    public Meeting(MeetingTitle meetingTitle, MeetingDate meetingDate) {
+    public Meeting(MeetingTitle meetingTitle, MeetingDate meetingDate, Phone buyerPhone, Phone sellerPhone,
+                   Type type, PostalCode postalCode) {
         requireAllNonNull(meetingTitle);
         this.meetingTitle = meetingTitle;
         this.meetingDate = meetingDate;
+        this.buyerPhone = buyerPhone;
+        this.sellerPhone = sellerPhone;
+        this.type = type;
+        this.postalCode = postalCode;
     }
 
     public MeetingTitle getMeetingTitle() {
@@ -29,6 +41,20 @@ public class Meeting {
     }
     public MeetingDate getMeetingDate() {
         return meetingDate;
+    }
+
+    public Phone getBuyerPhone() {
+        return this.buyerPhone;
+    }
+    public Phone getSellerPhone() {
+        return this.sellerPhone;
+    }
+    public Type getType() {
+        return this.type;
+    }
+
+    public PostalCode getPostalCode() {
+        return this.postalCode;
     }
 
     /**
@@ -76,6 +102,10 @@ public class Meeting {
         return new ToStringBuilder(this)
                 .add("meetingTitle", meetingTitle)
                 .add("meetingDate", meetingDate)
+                .add("buyerPhone", buyerPhone)
+                .add("sellerPhone", sellerPhone)
+                .add("type", type)
+                .add("postalCode", postalCode)
                 .toString();
     }
 }

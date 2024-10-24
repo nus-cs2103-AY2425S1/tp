@@ -14,15 +14,14 @@ import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingDate;
 import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.property.Ask;
 import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
@@ -37,22 +36,28 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Person(new seedu.address.model.person.Name("Alex Yeoh"),
+                    new seedu.address.model.person.Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Person(new seedu.address.model.person.Name("Bernice Yu"),
+                    new seedu.address.model.person.Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+            new Person(new seedu.address.model.person.Name("Charlotte Oliveiro"),
+                    new seedu.address.model.person.Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+            new Person(new seedu.address.model.person.Name("David Li"),
+                    new seedu.address.model.person.Phone("87438801"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+            new Person(new seedu.address.model.person.Name("Irfan Ibrahim"),
+                    new seedu.address.model.person.Phone("87438804"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+            new Person(new seedu.address.model.person.Name("Roy Balakrishnan"),
+                    new seedu.address.model.person.Phone("87438802"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
         };
@@ -122,9 +127,15 @@ public class SampleDataUtil {
 
     public static Meeting[] getSampleMeetings() {
         return new Meeting[] {
-            new Meeting(new MeetingTitle("Meeting 1"), new MeetingDate("01-01-2024")),
-            new Meeting(new MeetingTitle("Meeting 2"), new MeetingDate("02-01-2024")),
-            new Meeting(new MeetingTitle("Meeting 3"), new MeetingDate("03-01-2024")),
+            new Meeting(new MeetingTitle("Meeting 1"), new MeetingDate("01-01-2024"), new Phone("91234567"),
+                    new Phone("81234567"),
+                    new Type("HDB"), new PostalCode("111111")),
+            new Meeting(new MeetingTitle("Meeting 2"), new MeetingDate("02-01-2024"), new Phone("91234567"),
+                    new Phone("81234567"),
+                    new Type("HDB"), new PostalCode("111111")),
+            new Meeting(new MeetingTitle("Meeting 3"), new MeetingDate("03-01-2024"),
+                    new Phone("81234567"), new Phone("91234567"),
+                    new Type("HDB"), new PostalCode("111111")),
         };
     }
 

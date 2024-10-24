@@ -25,4 +25,16 @@ public class ListClientsCommand extends ListCommand {
         model.setDisplayClients();
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }
+
+    /**
+     * Compares this ListClientsCommand to another object for equality.
+     * Two ListClientsCommand objects are considered equal if they are of the same class at runtime.
+     *
+     * @param other the object to compare with this ListClientsCommand
+     * @return true if the specified object is equal to this ListClientsCommand; false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ListClientsCommand;
+    }
 }

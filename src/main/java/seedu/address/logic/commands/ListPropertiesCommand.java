@@ -28,4 +28,16 @@ public class ListPropertiesCommand extends ListCommand {
         model.setDisplayProperties();
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }
+
+    /**
+     * Compares this ListPropertiesCommand to another object for equality.
+     * Two ListPropertiesCommand objects are considered equal if they are of the same class at runtime.
+     *
+     * @param other the object to compare with this ListPropertiesCommand
+     * @return true if the specified object is equal to this ListPropertiesCommand; false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ListPropertiesCommand;
+    }
 }

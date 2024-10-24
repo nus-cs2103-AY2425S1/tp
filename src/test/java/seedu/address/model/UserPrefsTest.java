@@ -70,7 +70,7 @@ public class UserPrefsTest {
         UserPrefs userPrefs = new UserPrefs();
         Path path = Paths.get("meeting/book/file/path");
         userPrefs.setMeetingBookFilePath(path);
-        assertEquals(path, userPrefs.getMeetingBookBookFilePath());
+        assertEquals(path, userPrefs.getMeetingBookFilePath());
     }
 
     @Test

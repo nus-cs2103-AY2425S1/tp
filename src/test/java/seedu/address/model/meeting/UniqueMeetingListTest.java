@@ -3,8 +3,8 @@ package seedu.address.model.meeting;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGDATE_ADMIRALTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGTITLE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMeetings.MEETING_ADMIRALTY;
 import static seedu.address.testutil.TypicalMeetings.MEETING_BEDOK;
@@ -42,8 +42,8 @@ public class UniqueMeetingListTest {
     @Test
     public void contains_meetingWithSameIdentityFieldsInList_returnsTrue() {
         uniqueMeetingList.add(MEETING_ADMIRALTY);
-        Meeting editedAdmiralty = new MeetingBuilder(MEETING_ADMIRALTY).withMeetingTitle(VALID_MEETINGTITLE_ADMIRALTY)
-                .withMeetingDate(VALID_MEETINGDATE_ADMIRALTY).build();
+        Meeting editedAdmiralty = new MeetingBuilder(MEETING_ADMIRALTY).withMeetingTitle(VALID_MEETING_TITLE_ADMIRALTY)
+                .withMeetingDate(VALID_MEETING_DATE_ADMIRALTY).build();
         assertTrue(uniqueMeetingList.contains(editedAdmiralty));
     }
 
@@ -86,8 +86,8 @@ public class UniqueMeetingListTest {
     @Test
     public void setMeeting_editedMeetingHasSameIdentity_success() {
         uniqueMeetingList.add(MEETING_ADMIRALTY);
-        Meeting editedAdmiralty = new MeetingBuilder(MEETING_ADMIRALTY).withMeetingTitle(VALID_MEETINGTITLE_ADMIRALTY)
-                .withMeetingDate(VALID_MEETINGDATE_ADMIRALTY).build();
+        Meeting editedAdmiralty = new MeetingBuilder(MEETING_ADMIRALTY).withMeetingTitle(VALID_MEETING_TITLE_ADMIRALTY)
+                .withMeetingDate(VALID_MEETING_DATE_ADMIRALTY).build();
         uniqueMeetingList.setMeeting(MEETING_ADMIRALTY, editedAdmiralty);
         UniqueMeetingList expectedUniqueMeetingList = new UniqueMeetingList();
         expectedUniqueMeetingList.add(editedAdmiralty);

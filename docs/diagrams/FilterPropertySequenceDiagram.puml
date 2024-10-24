@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":FilterPropertyCommand" as fpc LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+Participant ":MatchingPrice" as mp STORAGE_COLOR
+
+activate fpc LOGIC_COLOR
+
+fpc -[LOGIC_COLOR]> mp : getMatchingPrice(Ask, Bid)
+activate mp STORAGE_COLOR
+mp --[STORAGE_COLOR]> fpc
+deactivate mp
+
+fpc -[LOGIC_COLOR]> mp : getMatchingPrice(Ask, Bid)
+activate mp STORAGE_COLOR
+mp --[STORAGE_COLOR]> fpc
+deactivate mp
+
+fpc -[LOGIC_COLOR]> model : updateFilteredPropertyList()
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> fpc
+deactivate model
+
+@enduml

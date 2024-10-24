@@ -93,7 +93,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.propertyBookFilePath = propertyBookFilePath;
     }
 
-    public Path getMeetingBookBookFilePath() {
+    public Path getMeetingBookFilePath() {
         return meetingBookFilePath;
     }
 

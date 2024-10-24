@@ -3,11 +3,19 @@
   "meetings": [
     {
       "meetingTitle": "Admiralty HDB Client Viewing",
-      "meetingDate": "31-10-2024"
+      "meetingDate": "31-10-2024",
+      "buyer": "91234562",
+      "seller": "81234563",
+      "type": "hdb",
+      "postalCode": "654321"
     },
     {
       "meetingTitle": "Bedok Villa Finalizing Purchase Agreement",
-      "meetingDate": "11-06-2024"
+      "meetingDate": "11-06-2024",
+      "buyer": "91234561",
+      "seller": "81234562",
+      "type": "hdb",
+      "postalCode": "654321"
     }
   ]
 }

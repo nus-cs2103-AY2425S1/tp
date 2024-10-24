@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -44,7 +44,40 @@ public class ModelManager implements Model {
     private Path propertyBookFilePath = Paths.get("data" , "propertybook.json");
     private Path meetingBookFilePath = Paths.get("data" , "meetingbook.json");
 
-    private final BooleanProperty isDisplayClients = new SimpleBooleanProperty(true);
+    /* To determine type of cards to display */
+    /**
+     * Enum representing the different types of records that can be displayed
+     * in the application's UI. This enum is used to determine which set of
+     * cards (clients, meetings, or properties) should be shown to the user.
+     *
+     * <p>Each value corresponds to a specific type of data:
+     * <ul>
+     *     <li>{@link #CLIENTS} - Displays the list of clients.</li>
+     *     <li>{@link #MEETINGS} - Displays the list of scheduled meetings.</li>
+     *     <li>{@link #PROPERTIES} - Displays the list of properties.</li>
+     * </ul>
+     *
+     * The {@code DisplayMode} enum helps in controlling the UI state and
+     * ensures that only one type of data is shown at any given time.
+     */
+    public enum DisplayMode {
+        /**
+         * Represents the mode for displaying the list of clients.
+         */
+        CLIENTS,
+
+        /**
+         * Represents the mode for displaying the list of meetings.
+         */
+        MEETINGS,
+
+        /**
+         * Represents the mode for displaying the list of properties.
+         */
+        PROPERTIES
+    }
+
+    private final ObjectProperty<DisplayMode> displayMode = new SimpleObjectProperty<>(DisplayMode.CLIENTS);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -116,6 +149,17 @@ public class ModelManager implements Model {
     public void setClientBookFilePath(Path clientBookFilePath) {
         requireNonNull(clientBookFilePath);
         userPrefs.setAddressBookFilePath(clientBookFilePath);
+    }
+
+    @Override
+    public Path getMeetingBookFilePath() {
+        return userPrefs.getMeetingBookFilePath();
+    }
+
+    @Override
+    public void setMeetingBookFilePath(Path meetingBookFilePath) {
+        requireNonNull(meetingBookFilePath);
+        userPrefs.setAddressBookFilePath(meetingBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -294,7 +338,10 @@ public class ModelManager implements Model {
     }
 
     //=========== MeetingBook ================================================================================
-
+    @Override
+    public void setMeetingBook(ReadOnlyMeetingBook meetingBook) {
+        this.meetingBook.resetData(meetingBook);
+    }
     @Override
     public ReadOnlyMeetingBook getMeetingBook() {
         return meetingBook;
@@ -311,6 +358,17 @@ public class ModelManager implements Model {
         }
     }
 
+    @Override
+    public boolean hasMeeting(Meeting meeting) {
+        requireNonNull(meeting);
+        return meetingBook.hasMeeting(meeting);
+    }
+
+    @Override
+    public void addMeeting(Meeting meeting) {
+        meetingBook.addMeeting(meeting);
+        updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+    }
     //=========== Filtered Meeting List Accessors =============================================================
 
     /**
@@ -330,16 +388,22 @@ public class ModelManager implements Model {
 
     //=========== Managing UI  ==================================================================================
     @Override
-    public BooleanProperty getIsDisplayClientsProperty() {
-        return isDisplayClients;
+    public ObjectProperty<DisplayMode> getDisplayMode() {
+        return this.displayMode;
     }
+
     @Override
     public void setDisplayClients() {
-        isDisplayClients.set(true);
+        this.displayMode.set(DisplayMode.CLIENTS);
     }
 
     @Override
     public void setDisplayProperties() {
-        isDisplayClients.set(false);
+        this.displayMode.set(DisplayMode.PROPERTIES);
+    }
+
+    @Override
+    public void setDisplayMeetings() {
+        this.displayMode.set(DisplayMode.MEETINGS);
     }
 }
