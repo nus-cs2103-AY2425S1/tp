@@ -76,15 +76,15 @@ Format: `help`
 
 Adds a person to the Client Hub.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION [c/CLIENT_TYPE]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of Client Type (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe c/Plan A c/Plan B e/betsycrowe@example.com a/Newgate Prison p/1234567 d/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/Plan A d/likes bubble tea`
+* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town c/Plan A c/Plan B d/Loves travelling`
 
 ### Listing all persons : `list`
 
@@ -122,12 +122,18 @@ Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYW
   * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
   * Persons matching all keyword prefix will be returned (i.e. `AND` search).
     e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
+
+
 * `find p/KEYWORD` will search for persons by phone number.
   *  Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
+
+
 * `find a/KEYWORD` will search for persons by address.
   * The search is case-insensitive. e.g `tampines` will match `Tampines`
   * Only the address of the contact is searched.
   * Persons with address with any matching substring to the keyword will be returned.
+
+
 * `find c/KEYWORD` will search for persons by client type.
   * The search is case-insensitive. e.g `investment` will match `Investment`
   * Only the `CLIENT_TYPE` of the person is searched.
@@ -137,15 +143,21 @@ Format: `find n/KEYWORD` or `find p/KEYWORD` or `find a/KEYWORD` or `find c/KEYW
 A **valid** `KEYWORD` should:
 * For `find n/`:
   * Not be empty.
-    * For eg. Just typing `fc` without providing any `CLIENT TYPE` will throw an error.
+    * For eg. Just typing `find n/` without providing any `KEYWORD` will throw an error.
+
+
 * For `find p/`:
   * Only numbers are allowed.
     * For eg. Typing `find p/abc` will throw an error.
   * Not be empty.
       * For eg. Just typing `find p/` without providing any `KEYWORD` will throw an error.
+
+
 * For `find a/`:
   * Not be empty.
       * For eg. Just typing `find a/` without providing any `KEYWORD` will throw an error.
+
+
 * For `find c/`:
   * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
     * `client_type` will always be in alphanumeric format.
@@ -162,22 +174,15 @@ Examples:
 Result for `find alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by name: `fn`
+### Shortcuts for `find` command
+* All constraints for `find` command apply to the shortcuts as well.
+
+#### Locating persons by name: `fn`
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `fn KEYWORD`
-
-* Only the name is searched.
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
-* Persons matching all keyword prefix will be returned (i.e. `AND` search).
-  e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
-
-A **valid** `KEYWORD` should:
-  * Not be empty. 
-    * For eg. Just typing `fn` without providing any `KEYWORD` will throw an error.
+* Shortcut command for `find n/NAME`
 
 Examples:
 * `fn John` returns `John`, `John Doe`, `Doe John`, `Doe John Eng`
@@ -188,57 +193,33 @@ Examples:
 Result for `fn alex`:
   ![result for 'find alex david'](images/findAlexDavidResult.png) // need to change this image
 
-### Locating persons by phone number: `fp`
+#### Locating persons by phone number: `fp`
 
 Finds persons whose phone number begins with the given keyword.
 
 Format: `fp KEYWORD`
-
-* Only numbers are allowed.
-* Only the phone number is searched.
-* Only numbers that begin with keyword will be matched e.g. `8765432` will not match `98765432`
-
-Examples:
-* `fp 9` returns every contact that has phone number beginning with `9`
-* `fp 9123` returns every contact that has phone number beginning with `9123`
-* `fp 98765432` returns every contact that has phone number `98765432`
+* Shortcut command for `find p/PHONE_NUMBER`
 
 Result for `fp 9234`:
   ![result for 'find 9234'](images/find9234Result.png)
 
 
-### Locating persons by address : `fa`
+#### Locating persons by address : `fa`
 
 Finds persons whose address matches any part of the given keyword(s).
 
-Format `fa KEYWORD(s)`
-
-* The search is case-insensitive. e.g `tampines` will match `Tampines`
-* Only the address of the contact is searched.
-* Persons with address with any matching substring to the keyword will be returned.
-
-Examples:
-* `fa Blk` returns `Blk 45` and `Blk 35`
-* `fa tampines` returns `Blk 47 Tampines Street 20`
+Format `fa ADDRESS`
+* Shortcut command for `find a/ADDRESS`
 
 Result for `fa tampines`:
   ![result for 'fa tampines`](images/findTampines.png)
 
-### Locating persons by client type: `fc`
+#### Locating persons by client type: `fc`
 
 Finds persons whose address matches any part of the given keyword(s).
 
 Format `fc CLIENT_TYPE`
-* The search is case-insensitive. e.g `investment` will match `Investment`
-* Only the `CLIENT_TYPE` of the person is searched.
-* Persons whose `client_type` contains a substring that matches the provided `CLIENT_TYPE` will be returned.
-* Person with `client_type` that has a prefix matching the input `CLIENT_TYPE` will be returned (i.e. `AND` search).
-
- A **valid** `KEYWORD` should:
-  * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
-    * `client_type` will always be in alphanumeric format.
-  * Not be empty. 
-    * For eg. Just typing `fc` without providing any `CLIENT TYPE` will throw an error.
+* Shortcut command for `find c/CLIENT_TYPE` 
 
 Examples:
 * `fc Investment` returns every contact that has a `client_type` beginning with `Investment`
@@ -364,17 +345,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                                                          |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CLIENT_TYPE]…​ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` | 
-| **Clear**             | `clear`                                                                                                                                                                                                   |
-| **Delete**            | `delete NAME`<br> e.g., `delete JAMES`                                                                                                                                                                    |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​ [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                       | 
-| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                |
-| **Find Name*8         | `fn NAME(s)`                                                                                                                                                                                              |
-| **Find Phone Number** | `fp KEYWORD`                                                                                                                                                                                              |
-| **Find Address**      | `fa KEYWORD(s)`                                                                                                                                                                                           |
-| **Find Client Type**  | `fc CLIENT_TYPE`                                                                                                                                                                                          |
-| **Sort Name**         | `sort n/`                                                                                                                                                                                                 |
-| **List**              | `list`                                                                                                                                                                                                    |
-| **Help**              | `help`                                                                                                                                                                                                    |
+| Action                | Format, Examples                                                                                                                                                                            |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​ ` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` | 
+| **Clear**             | `clear`                                                                                                                                                                                     |
+| **Delete**            | `delete NAME`<br> e.g., `delete JAMES`                                                                                                                                                      |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE]…​ [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         | 
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| **Find Name**         | `fn NAME`                                                                                                                                                                                   |
+| **Find Phone Number** | `fp PHONE_NUMBER`                                                                                                                                                                           |
+| **Find Address**      | `fa ADDRESS`                                                                                                                                                                                |
+| **Find Client Type**  | `fc CLIENT_TYPE`                                                                                                                                                                            |
+| **Sort Name**         | `sort n/`                                                                                                                                                                                   |
+| **View**              | `view NAME`<br> e.g., `view James`                                                                                                                                                          |
+| **List**              | `list`                                                                                                                                                                                      |
+| **Help**              | `help`                                                                                                                                                                                      |
