@@ -39,8 +39,11 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
-Person *--> Phone
-Person *--> Email
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
+note "Person must have reference to \neither a Phone or an Email" as N1
+Phone .. N1
+Email .. N1
 Person *--> "0..1"Address
 Person *--> "*" Tag
 Person *--> "1" ModuleRoleMap
