@@ -137,7 +137,7 @@ public class Person {
                 : field.getName().toUpperCase().equals("ATTENDANCE")
                 ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
                 : field.getName().toUpperCase().equals("ISFAVOURITE")
-                ?  "> " + this.isFavourite + " CONTACT\n"
+                ? "> " + this.isFavourite + " CONTACT\n"
                 : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
         return contactInfo.toString();
     }
