@@ -11,7 +11,7 @@ import seedu.address.model.student.Student;
  * Deletes a student from the system based on the student number provided.
  */
 public class DeleteStudentCommand extends Command {
-    public static final String COMMAND_WORD = "deletestu";
+    public static final String COMMAND_WORD = "deletes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the student name used in the displayed student list.\n"
@@ -71,5 +71,10 @@ public class DeleteStudentCommand extends Command {
 
         DeleteStudentCommand otherDeleteStudentCommand = (DeleteStudentCommand) other;
         return name.equals(otherDeleteStudentCommand.name);
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        return true;
     }
 }
