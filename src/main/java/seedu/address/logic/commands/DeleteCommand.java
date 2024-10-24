@@ -14,8 +14,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FullNameMatchesPredicate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameEmailPredicate;
 import seedu.address.model.person.NamePhonePredicate;
+import seedu.address.model.person.NameEmailPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 

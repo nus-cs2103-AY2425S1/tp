@@ -12,25 +12,30 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Tag;
+import seedu.address.model.person.Remark;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    public static final Remark EMPTY_REMARK = new Remark("");
+
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new JobCode("SWE2025"), new Tag("N")),
+                new JobCode("SWE2025"), new Tag("N"), new Remark("")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new JobCode("HRD140572"), new Tag("TP")),
+                new JobCode("HRD140572"), new Tag("TP"), new Remark("very confident")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new JobCode("INTERN0829"), new Tag("TC")),
+                new JobCode("INTERN0829"), new Tag("TC"), new Remark("can only do part time")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new JobCode("ST0182"), new Tag("A")),
+                new JobCode("ST0182"), new Tag("A"), EMPTY_REMARK),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new JobCode("A0824B8"), new Tag("R")),
+                new JobCode("A0824B8"), new Tag("R"), EMPTY_REMARK),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new JobCode("ZSGGG"), new Tag("BP"))
+                new JobCode("ZSGGG"), new Tag("BP"), EMPTY_REMARK)
         };
     }
 

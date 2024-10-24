@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Tag;
+import seedu.address.model.person.Remark;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -23,6 +24,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String jobCode;
     private final String tag;
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -30,12 +32,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("jobCode") String jobCode,
-            @JsonProperty("tag") String tag) {
+            @JsonProperty("tag") String tag, @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.jobCode = jobCode;
         this.tag = tag;
+        this.remark = remark;
     }
 
     /**
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         jobCode = source.getJobCode().value;
         tag = source.getTag().tagCode;
+        remark = source.getRemark().value;
     }
 
     /**
@@ -96,7 +100,16 @@ class JsonAdaptedPerson {
         }
         final Tag modelTag = new Tag(tag);
 
-        return new Person(modelName, modelPhone, modelEmail, modelJobCode, modelTag);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        if (!Remark.isValidRemark(remark)) {
+            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        final Remark modelRemark = new Remark(remark);
+
+
+        return new Person(modelName, modelPhone, modelEmail, modelJobCode, modelTag, modelRemark);
     }
 
 }

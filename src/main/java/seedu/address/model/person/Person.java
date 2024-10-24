@@ -20,17 +20,19 @@ public class Person {
     // Data fields
     private final JobCode jobCode;
     private final Tag tag;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, JobCode jobCode, Tag tag) {
+    public Person(Name name, Phone phone, Email email, JobCode jobCode, Tag tag, Remark remark) {
         requireAllNonNull(name, phone, email, jobCode, tag);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.jobCode = jobCode;
         this.tag = tag;
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -51,6 +53,10 @@ public class Person {
 
     public Tag getTag() {
         return tag;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -92,7 +98,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, jobCode, tag);
+        return Objects.hash(name, phone, email, jobCode, tag, remark);
     }
 
     @Override
@@ -103,6 +109,7 @@ public class Person {
                 .add("email", email)
                 .add("jobCode", jobCode)
                 .add("tag", tag)
+                .add("remark", remark)
                 .toString();
     }
 

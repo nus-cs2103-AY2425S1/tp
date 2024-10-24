@@ -14,6 +14,7 @@ import seedu.address.model.person.JobCodePredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Tag;
 
 /**
@@ -86,11 +87,12 @@ public class MassRejectCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         JobCode updatedJobCode = personToEdit.getJobCode();
+        Remark updatedRemark = personToEdit.getRemark();
 
         // Set the tag to "r" (rejected)
         Tag rejectedTag = new Tag("r");
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedJobCode, rejectedTag);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedJobCode, rejectedTag, updatedRemark);
     }
 
     @Override
