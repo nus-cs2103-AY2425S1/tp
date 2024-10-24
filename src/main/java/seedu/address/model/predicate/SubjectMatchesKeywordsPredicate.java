@@ -6,9 +6,18 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Predicate to test if any of the {@code Person}'s tutorial subjects matches a inputted tutorial subject.
+ * This tests for a case-insensitive match between the tutorial subject and the keyword.
+ */
 public class SubjectMatchesKeywordsPredicate implements Predicate<Person> {
     private final String keyword;
 
+    /**
+     * Constructs a {@code SubjectMatchesKeywordsPredicate} with the given keyword.
+     *
+     * @param keyword The keyword to match against tutorial subjects.
+     */
     public SubjectMatchesKeywordsPredicate(String keyword) {
         this.keyword = keyword;
     }
