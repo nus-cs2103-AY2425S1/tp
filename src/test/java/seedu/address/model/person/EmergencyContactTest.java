@@ -11,81 +11,83 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 public class EmergencyContactTest {
+    private static final EmergencyContact ALICE_EMERGENCY_CONTACT = ALICE.getFirstEmergencyContact();
+    private static final EmergencyContact BOB_EMERGENCY_CONTACT = BOB.getFirstEmergencyContact();
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(ALICE.getEmergencyContact().isSamePerson(ALICE.getEmergencyContact()));
+        assertTrue(ALICE_EMERGENCY_CONTACT.isSamePerson(ALICE_EMERGENCY_CONTACT));
 
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        EmergencyContact editedAlice = new EmergencyContact(ALICE.getEmergencyContact().getName(),
+        EmergencyContact editedAlice = new EmergencyContact(ALICE_EMERGENCY_CONTACT.getName(),
                 new Phone(VALID_PHONE_BOB),
                 new Relationship(VALID_ECRS_BOB));
-        assertTrue(ALICE.getEmergencyContact().isSamePerson(editedAlice));
+        assertTrue(ALICE_EMERGENCY_CONTACT.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new EmergencyContact(BOB.getName(), ALICE.getEmergencyContact().getPhone(),
-                ALICE.getEmergencyContact().getRelationship());
-        assertFalse(ALICE.getEmergencyContact().isSamePerson(editedAlice));
+        editedAlice = new EmergencyContact(BOB.getName(), ALICE_EMERGENCY_CONTACT.getPhone(),
+                ALICE_EMERGENCY_CONTACT.getRelationship());
+        assertFalse(ALICE_EMERGENCY_CONTACT.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         EmergencyContact editedBob = new EmergencyContact(
-                new Name(BOB.getEmergencyContact().getName().fullName.toLowerCase()),
-                BOB.getEmergencyContact().getPhone(),
-                BOB.getEmergencyContact().getRelationship());
-        assertFalse(BOB.getEmergencyContact().isSamePerson(editedBob));
+                new Name(BOB_EMERGENCY_CONTACT.getName().fullName.toLowerCase()),
+                BOB_EMERGENCY_CONTACT.getPhone(),
+                BOB_EMERGENCY_CONTACT.getRelationship());
+        assertFalse(BOB_EMERGENCY_CONTACT.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_ECNAME_BOB + " ";
         editedBob = new EmergencyContact(new Name(nameWithTrailingSpaces),
-                BOB.getEmergencyContact().getPhone(),
-                BOB.getEmergencyContact().getRelationship());
-        assertFalse(BOB.getEmergencyContact().isSamePerson(editedBob));
+                BOB_EMERGENCY_CONTACT.getPhone(),
+                BOB_EMERGENCY_CONTACT.getRelationship());
+        assertFalse(BOB_EMERGENCY_CONTACT.isSamePerson(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
         EmergencyContact aliceEmergencyContactCopy = new EmergencyContact(
-                ALICE.getEmergencyContact().getName(), ALICE.getEmergencyContact().getPhone(),
-                ALICE.getEmergencyContact().getRelationship());
-        assertTrue(ALICE.getEmergencyContact().equals(aliceEmergencyContactCopy));
+                ALICE_EMERGENCY_CONTACT.getName(), ALICE_EMERGENCY_CONTACT.getPhone(),
+                ALICE_EMERGENCY_CONTACT.getRelationship());
+        assertTrue(ALICE_EMERGENCY_CONTACT.equals(aliceEmergencyContactCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.getEmergencyContact().equals(ALICE.getEmergencyContact()));
+        assertTrue(ALICE_EMERGENCY_CONTACT.equals(ALICE_EMERGENCY_CONTACT));
 
         // null -> returns false
-        assertFalse(ALICE.getEmergencyContact().equals(null));
+        assertFalse(ALICE_EMERGENCY_CONTACT.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.getEmergencyContact().equals(5));
+        assertFalse(ALICE_EMERGENCY_CONTACT.equals(5));
 
         // different person -> returns false
-        assertFalse(ALICE.getEmergencyContact().equals(BOB.getEmergencyContact()));
+        assertFalse(ALICE_EMERGENCY_CONTACT.equals(BOB_EMERGENCY_CONTACT));
 
         // different name -> returns false
         EmergencyContact editedAliceEmergencyContact = new EmergencyContact(
-                BOB.getEmergencyContact().getName(),
-                ALICE.getEmergencyContact().getPhone(),
-                ALICE.getEmergencyContact().getRelationship()
+                BOB_EMERGENCY_CONTACT.getName(),
+                ALICE_EMERGENCY_CONTACT.getPhone(),
+                ALICE_EMERGENCY_CONTACT.getRelationship()
         );
         assertFalse(ALICE.equals(editedAliceEmergencyContact));
 
         // different phone -> returns false
         editedAliceEmergencyContact = new EmergencyContact(
-                ALICE.getEmergencyContact().getName(),
-                BOB.getEmergencyContact().getPhone(),
-                ALICE.getEmergencyContact().getRelationship()
+                ALICE_EMERGENCY_CONTACT.getName(),
+                BOB_EMERGENCY_CONTACT.getPhone(),
+                ALICE_EMERGENCY_CONTACT.getRelationship()
         );
         assertFalse(ALICE.equals(editedAliceEmergencyContact));
 
         // different relationship -> returns false
         editedAliceEmergencyContact = new EmergencyContact(
-                ALICE.getEmergencyContact().getName(),
-                ALICE.getEmergencyContact().getPhone(),
-                BOB.getEmergencyContact().getRelationship()
+                ALICE_EMERGENCY_CONTACT.getName(),
+                ALICE_EMERGENCY_CONTACT.getPhone(),
+                BOB_EMERGENCY_CONTACT.getRelationship()
         );
         assertFalse(ALICE.equals(editedAliceEmergencyContact));
 

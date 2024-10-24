@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -39,7 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
@@ -69,19 +70,23 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+
         Name ecName = ParserUtil.parseName(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).get());
         Phone ecPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).get());
         Relationship ecRelationship = ParserUtil.parseRelationship(
                 argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).get());
+        EmergencyContact emergencyContact = new EmergencyContact(ecName, ecPhone, ecRelationship);
+        Set<EmergencyContact> emergencyContacts = new LinkedHashSet<>();
+        emergencyContacts.add(emergencyContact);
+
         DoctorName doctorName = ParserUtil.parseDoctorName(argMultimap.getValue(PREFIX_DOC_NAME).get());
         Phone doctorPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_DOC_PHONE).get());
         Email doctorEmail = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_DOC_EMAIL).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-        EmergencyContact emergencyContact = new EmergencyContact(ecName, ecPhone, ecRelationship);
         Doctor doctor = new Doctor(doctorName, doctorPhone, doctorEmail);
 
-        Person person = new Person(name, phone, email, address, emergencyContact, doctor, tagList);
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Person person = new Person(name, phone, email, address, emergencyContacts, doctor, tagList);
 
         return new AddCommand(person);
     }

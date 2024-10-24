@@ -1,9 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DoctorName;
@@ -38,9 +41,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setEmergencyContactName(person.getEmergencyContact().getName());
-        descriptor.setEmergencyContactPhone(person.getEmergencyContact().getPhone());
-        descriptor.setEmergencyContactRelationship(person.getEmergencyContact().getRelationship());
+        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
+        descriptor.setEmergencyContactName(person.getFirstEmergencyContact().getName());
+        descriptor.setEmergencyContactPhone(person.getFirstEmergencyContact().getPhone());
+        descriptor.setEmergencyContactRelationship(person.getFirstEmergencyContact().getRelationship());
         descriptor.setDoctorName(person.getDoctor().getName());
         descriptor.setDoctorPhone(person.getDoctor().getPhone());
         descriptor.setDoctorEmail(person.getDoctor().getEmail());
@@ -76,6 +80,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact Index} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyContactIndex(Index index) {
+        descriptor.setIndexOfEmergencyContactToEdit(index);
         return this;
     }
 

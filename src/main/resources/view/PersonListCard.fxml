@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17">
   <GridPane HBox.hgrow="ALWAYS">
@@ -31,9 +32,12 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="ecName" styleClass="emergency_contact" text="\$ecName" />
-      <Label fx:id="ecPhone" styleClass="emergency_contact" text="\$ecName" />
-      <Label fx:id="ecRelationship" styleClass="emergency_contact" text="\$ecRelationship" />
+      <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/17">
+        <padding>
+          <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+        <StackPane fx:id="emergencyContactListPanelPlaceholder" maxHeight="180" VBox.vgrow="ALWAYS" />
+      </VBox>
       <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName" />
       <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone" />
       <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail" />

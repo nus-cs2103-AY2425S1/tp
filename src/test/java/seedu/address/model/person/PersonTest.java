@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.exceptions.EmergencyContactNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -93,9 +95,16 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", emergency contact="
-                + ALICE.getEmergencyContact().toString() + ", doctor=" + ALICE.getDoctor().toString()
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", emergency contacts="
+                + ALICE.getEmergencyContacts().toString() + ", doctor=" + ALICE.getDoctor().toString()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void invalid_emergencyContactIndex_throwsEmergencyContactNotFoundException() {
+        Person person = new PersonBuilder().build();
+        assertThrows(EmergencyContactNotFoundException.class, () ->
+                person.getEmergencyContact(Index.fromOneBased(10)));
     }
 }

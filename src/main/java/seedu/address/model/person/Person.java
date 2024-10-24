@@ -4,10 +4,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.exceptions.EmergencyContactNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,7 +27,9 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final EmergencyContact emergencyContact;
+    // LinkedHashSet preserves the order of emergency contacts such that
+    // the index of the emergency contact can be reliably access by the Delete command.
+    private final Set<EmergencyContact> emergencyContacts = new LinkedHashSet<>();
     private final Doctor doctor;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -32,13 +37,13 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-            EmergencyContact emergencyContact, Doctor doctor, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, emergencyContact, tags);
+            Set<EmergencyContact> emergencyContacts, Doctor doctor, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, emergencyContacts, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.emergencyContact = emergencyContact;
+        this.emergencyContacts.addAll(emergencyContacts);
         this.doctor = doctor;
         this.tags.addAll(tags);
     }
@@ -58,9 +63,60 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+    public EmergencyContact getFirstEmergencyContact() {
+        return emergencyContacts.iterator().next();
+    }
 
-    public EmergencyContact getEmergencyContact() {
-        return emergencyContact;
+    public Set<EmergencyContact> getEmergencyContacts() {
+        return Collections.unmodifiableSet(emergencyContacts);
+    }
+
+    public EmergencyContact getEmergencyContact(Index oneBasedIndex)
+            throws EmergencyContactNotFoundException {
+        int i = oneBasedIndex.getZeroBased();
+        for (EmergencyContact emergencyContact : emergencyContacts) {
+            if (i == 0) {
+                return emergencyContact;
+            }
+            i = i - 1;
+        }
+        throw new EmergencyContactNotFoundException();
+    }
+
+    /**
+     * Returns a copy of emergencyContacts with
+     * @param emergencyContactToRemove removed
+     * @return a copy of emergencyContacts with {@code emergencyContactToRemove} removed
+     */
+    public Set<EmergencyContact> removeEmergencyContact(EmergencyContact emergencyContactToRemove) {
+        Set<EmergencyContact> updatedEmergencyContacts = new LinkedHashSet<>();
+        for (EmergencyContact emergencyContact : emergencyContacts) {
+            if (emergencyContact.equals(emergencyContactToRemove)) {
+                continue;
+            } else {
+                updatedEmergencyContacts.add(emergencyContact);
+            }
+        }
+        return updatedEmergencyContacts;
+    }
+
+    public Boolean hasOnlyOneEmergencyContact() {
+        return emergencyContacts.size() == 1;
+    }
+
+    /**
+     * Checks if the specified emergency contact exists in the list of emergency contacts.
+     *
+     * @param emergencyContactToCheck The emergency contact to check for.
+     * @return {@code true} if the emergency contact exists in the list, {@code false} otherwise.
+     */
+    public Boolean hasEmergencyContact(EmergencyContact emergencyContactToCheck) {
+        for (EmergencyContact emergencyContact : emergencyContacts) {
+            if (emergencyContact.equals((emergencyContactToCheck))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Doctor getDoctor() {
@@ -109,7 +165,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && emergencyContact.equals(otherPerson.emergencyContact)
+                && emergencyContacts.equals(otherPerson.emergencyContacts)
                 && doctor.equals(otherPerson.doctor)
                 && tags.equals(otherPerson.tags);
     }
@@ -117,7 +173,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, emergencyContact, doctor, tags);
+        return Objects.hash(name, phone, email, address, emergencyContacts, doctor, tags);
     }
 
     @Override
@@ -127,7 +183,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("emergency contact", emergencyContact)
+                .add("emergency contacts", emergencyContacts)
                 .add("doctor", doctor)
                 .add("tags", tags)
                 .toString();
