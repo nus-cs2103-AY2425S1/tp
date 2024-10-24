@@ -48,6 +48,8 @@ public class Messages {
         person.getTags().forEach(builder::append);
         builder.append("; Games: ");
         person.getGames().keySet().forEach(builder::append);
+        builder.append("; Preferred Times: ");
+        person.getPreferredTimes().forEach(builder::append);
         return builder.toString();
     }
 

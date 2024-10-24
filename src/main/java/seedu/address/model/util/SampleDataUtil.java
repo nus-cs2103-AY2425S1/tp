@@ -27,34 +27,34 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         Game sampleGame = new Game("LoL",
-                new Username("LeagueGamer"), new SkillLevel("bad"), new Role("Support"));
+                new Username("LeagueGamer"), new SkillLevel("bad"), new Role("Support"), false);
         HashMap<String, Game> sample = new HashMap<String, Game>();
         sample.put("LoL", sampleGame);
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"), sample,
-                getPreferredTimeSet("Monday 2100")),
+                getPreferredTimeSet("2100-2200")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"), getGameMap("LoL"),
-                getPreferredTimeSet("Monday 2030")),
+                getPreferredTimeSet("2030-2130")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"), getGameMap("LoL"),
-                getPreferredTimeSet("Saturday 1900")),
+                getPreferredTimeSet("1900-2100")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"), getGameMap("LoL"),
-                getPreferredTimeSet("Tuesday 2100", "Thursday 1900")),
+                getPreferredTimeSet("2100-2130", "1900-2030")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"), getGameMap("LoL"),
-                getPreferredTimeSet("Sunday 1800")),
+                getPreferredTimeSet("1800-2000")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"), getGameMap("LoL"),
-                getPreferredTimeSet("Friday 2100"))
+                getPreferredTimeSet("2100-2130"))
         };
     }
 
@@ -82,7 +82,7 @@ public class SampleDataUtil {
         Map<String, Game> gameMap = new HashMap<>();
         Arrays.stream(strings)
                 .forEach((gameName) -> gameMap.put(gameName, new Game(gameName, new Username("nil"),
-                        new SkillLevel("nil"), new Role("nil"))));
+                        new SkillLevel("nil"), new Role("nil"), false)));
         return gameMap;
     }
 

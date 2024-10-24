@@ -6,14 +6,14 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "preferred times": ["Monday 1200"]
+    "preferred times": ["1200-1400", "2100-2230"]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "preferred times": [ ]
+    "preferred times": ["1800-2000"]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
