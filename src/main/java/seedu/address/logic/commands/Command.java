@@ -1,16 +1,13 @@
 package seedu.address.logic.commands;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
 
-    public static final String MESSAGE_EXECUTED_ERROR = "This command has already been executed";
     public static final String MESSAGE_NOT_EXECUTED_ERROR = "This command has not been executed";
-
+    public static final String MESSAGE_EXECUTED_ERROR = "This command has already been executed";
     /**
      * Indicates whether the command is executed.
      * Should be set to true after the command is executed.
