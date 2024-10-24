@@ -144,6 +144,10 @@
     -fx-text-fill: #333333;
 }
 
+.bold-text {
+    -fx-font-weight: bold;
+}
+
 .stack-pane {
      -fx-background-color: derive(#f5f5f5, 20%);
 }

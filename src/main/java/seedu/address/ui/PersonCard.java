@@ -60,9 +60,9 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         studentId.setText("StudentID: " + person.getStudentId().value);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
         tag.setText(person.getTag().role.getRole());
+        course.setText(person.getCourse().course);
+        course.getStyleClass().add("bold-text");
 
         if (person.getTag().role.getRole().equalsIgnoreCase("Student")) {
             tagPane.getStyleClass().add("student-pane");
@@ -74,7 +74,7 @@ public class PersonCard extends UiPart<Region> {
                 .map(m -> m.toString() + "\n")
                 .reduce("", (x, y) -> x + y);
 
-        course.setText(modulesAsString.isEmpty() ? "No enrolled modules" : modulesAsString);
+        module.setText(modulesAsString.isEmpty() ? "No enrolled modules" : modulesAsString);
         /*person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));*/
