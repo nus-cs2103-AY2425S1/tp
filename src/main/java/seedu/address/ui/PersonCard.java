@@ -27,6 +27,7 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+    private EmergencyContactListPanel emergencyContactListPanel;
 
     @FXML
     private HBox cardPane;
@@ -62,10 +63,14 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        EmergencyContactListPanel emergencyContactListPanel = new EmergencyContactListPanel(
+
+        emergencyContactListPanel = new EmergencyContactListPanel(
                 FXCollections.observableArrayList(person.getEmergencyContacts()));
         emergencyContactListPanelPlaceholder.getChildren().add(emergencyContactListPanel.getRoot());
+        // 90 is the height of 1 EmergencyContactHeight. Will update in future to make this dynamic
+        // instead of hard-coded.
         emergencyContactListPanelPlaceholder.setPrefHeight(90 * person.getEmergencyContacts().size());
+
         doctorName.setText(person.getDoctor().getName().getDoctorName());
         doctorPhone.setText(person.getDoctor().getPhone().value);
         doctorEmail.setText(person.getDoctor().getEmail().value);
