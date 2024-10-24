@@ -41,8 +41,8 @@ public class TypicalPersons {
             Map.entry(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(false))
     );
     private static final Map<LocalDateTime, Attendance> SAMPLE_ATTENDANCES_2 = Map.ofEntries(
-            Map.entry(LocalDateTime.of(2024, 2, 14, 10, 0), new Attendance(false)),
-            Map.entry(LocalDateTime.of(2024, 2, 21, 10, 0), new Attendance(true))
+            Map.entry(LocalDateTime.of(2024, 1, 1, 12, 0), new Attendance(false)),
+            Map.entry(LocalDateTime.of(2024, 1, 8, 12, 0), new Attendance(true))
     );
     private static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
