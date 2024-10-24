@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -193,8 +195,11 @@ public class ParserUtil {
      * @return {@code Set<Index>}
      * @throws ParseException
      */
-
     public static Set<Index> parsePersonIndexString(String personIndexString) throws ParseException {
+        if (personIndexString.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Messages.MESSAGE_NO_CONTACTS_SPECIFIED));
+        }
         Set<Index> personIndexSet;
         try {
             personIndexSet = Arrays.stream(personIndexString.split("\\s+"))
