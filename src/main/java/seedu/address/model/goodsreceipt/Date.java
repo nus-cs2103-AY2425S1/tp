@@ -4,16 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a date related to goods.
  */
 public class Date {
-    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
+    private static final String DATE_FORMAT_READ = "yyyy-MM-dd HH:mm";
+    private static final String DATE_FORMAT_WRITE = "EEEE : dd MMMM yyyy, hh.mm a";
     public static final String MESSAGE_INVALID_FORMAT =
-            String.format("Dates should only be in the format of <%s>.", DATE_FORMAT);
-    private static final DateTimeFormatter PATTERN_READ = DateTimeFormatter.ofPattern(DATE_FORMAT);
+            String.format("Dates should only be in the format of <%s>.", DATE_FORMAT_READ);
+    private static final DateTimeFormatter PATTERN_READ = DateTimeFormatter.ofPattern(DATE_FORMAT_READ);
+    private static final DateTimeFormatter PATTERN_WRITE = DateTimeFormatter.ofPattern(DATE_FORMAT_WRITE)
+            .withZone(ZoneId.of("Singapore"));
 
     private LocalDateTime dateTime;
 
@@ -36,7 +40,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return dateTime.toString();
+        return dateTime.format(PATTERN_WRITE);
     }
 
     @Override
