@@ -38,7 +38,7 @@ public class ListingCard extends UiPart<Region> {
     private Line underline;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ListingCard} with the given {@code Listing} and index to display.
      */
     public ListingCard(Listing listing, int displayedIndex) {
         super(FXML);
