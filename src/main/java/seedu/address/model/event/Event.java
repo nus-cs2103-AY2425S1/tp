@@ -2,8 +2,14 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.tag.Tag;
 import seedu.address.model.id.UniqueId;
 
 /**
@@ -14,18 +20,21 @@ public class Event {
     private final Name name;
     private final Date date;
     private final UniqueId id;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructor for an Event with an automatically generated UniqueId.
      *
      * @param name The name of the event.
      * @param date The date of the event.
+     * @param tags The tags of the event.
      */
-    public Event(Name name, Date date) {
-        requireAllNonNull(name, date);
+    public Event(Name name, Date date, Set<Tag> tags) {
+        requireAllNonNull(name, date, tags);
         this.id = new UniqueId();
         this.name = name;
         this.date = date;
+        this.tags.addAll(tags);
     }
 
     /**
@@ -55,6 +64,15 @@ public class Event {
     }
 
     /**
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
      * Returns true if both events have the same name.
      * This defines a weaker notion of equality between two events.
      */
@@ -78,12 +96,14 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return name.equals(otherEvent.name) && date.equals(otherEvent.date);
+        return name.equals(otherEvent.name)
+                && date.equals(otherEvent.date)
+                && tags.equals(otherEvent.tags);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode() + name.hashCode() + date.hashCode();
+        return Objects.hash(name, date, tags);
     }
 
     @Override
@@ -92,7 +112,7 @@ public class Event {
                 .add("id", id)
                 .add("name", name)
                 .add("date", date)
+                .add("tags", tags)
                 .toString();
     }
 }
-

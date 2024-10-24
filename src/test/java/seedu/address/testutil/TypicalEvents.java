@@ -21,7 +21,7 @@ public class TypicalEvents {
     public static final Event ALICE = new EventBuilder().withName("Alice Pauline Wedding")
             .withDate("2021-10-10").build();
     public static final Event BENSON = new EventBuilder().withName("Benson Meier Birthday")
-            .withDate("2021-11-11").build();
+            .withDate("2021-11-11").withTags("party", "alcohol", "classmates").build();
     public static final Event CARL = new EventBuilder().withName("Carl Kurz Tea Party")
             .withDate("2021-12-12").build();
     public static final Event DANIEL = new EventBuilder().withName("Daniel Meier Farewell")

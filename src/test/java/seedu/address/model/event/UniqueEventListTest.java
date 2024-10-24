@@ -3,16 +3,19 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BIRTHDAY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.BIRTHDAY;
+import static seedu.address.testutil.TypicalEvents.WEDDING;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.commons.name.Name;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.testutil.EventBuilder;
 
 public class UniqueEventListTest {
     private final UniqueEventList uniqueEventList = new UniqueEventList();
@@ -27,19 +30,20 @@ public class UniqueEventListTest {
 
     @Test
     public void contains_eventNotInList_returnsFalse() {
-        assertFalse(uniqueEventList.contains(testEvent));
+        assertFalse(uniqueEventList.contains(WEDDING));
     }
 
     @Test
     public void contains_eventInList_returnsTrue() {
-        uniqueEventList.add(testEvent);
-        assertTrue(uniqueEventList.contains(testEvent));
+        uniqueEventList.add(WEDDING);
+        assertTrue(uniqueEventList.contains(WEDDING));
     }
 
     @Test
     public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueEventList.add(testEvent);
-        assertTrue(uniqueEventList.contains(similarTestEvent));
+        Event similarWedding = new EventBuilder(WEDDING).withDate(VALID_DATE_BIRTHDAY).build();
+        uniqueEventList.add(WEDDING);
+        assertTrue(uniqueEventList.contains(similarWedding));
     }
 
     @Test
@@ -49,8 +53,8 @@ public class UniqueEventListTest {
 
     @Test
     public void add_duplicateEvent_throwsDuplicateEventException() {
-        uniqueEventList.add(testEvent);
-        assertThrows(DuplicateEventException.class, () -> uniqueEventList.add(testEvent));
+        uniqueEventList.add(WEDDING);
+        assertThrows(DuplicateEventException.class, () -> uniqueEventList.add(WEDDING));
     }
 
     @Test
@@ -60,13 +64,13 @@ public class UniqueEventListTest {
 
     @Test
     public void remove_eventDoesNotExist_throwsEventNotFoundException() {
-        assertThrows(EventNotFoundException.class, () -> uniqueEventList.remove(testEvent));
+        assertThrows(EventNotFoundException.class, () -> uniqueEventList.remove(WEDDING));
     }
 
     @Test
     public void remove_existingEvent_removesEvent() {
-        uniqueEventList.add(testEvent);
-        uniqueEventList.remove(testEvent);
+        uniqueEventList.add(WEDDING);
+        uniqueEventList.remove(WEDDING);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
@@ -78,9 +82,9 @@ public class UniqueEventListTest {
 
     @Test
     public void setEvents_uniqueEventList_replacesOwnListWithProvidedUniqueEventList() {
-        uniqueEventList.add(testEvent);
+        uniqueEventList.add(WEDDING);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.add(differentEvent);
+        expectedUniqueEventList.add(WEDDING);
         uniqueEventList.setEvents(expectedUniqueEventList);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
@@ -92,17 +96,17 @@ public class UniqueEventListTest {
 
     @Test
     public void setEvents_list_replacesOwnListWithProvidedList() {
-        uniqueEventList.add(testEvent);
-        List<Event> eventList = List.of(differentEvent);
+        uniqueEventList.add(WEDDING);
+        List<Event> eventList = List.of(BIRTHDAY);
         uniqueEventList.setEvents(eventList);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.add(differentEvent);
+        expectedUniqueEventList.add(BIRTHDAY);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
     @Test
     public void setEvents_listWithDuplicateEvents_throwsDuplicateEventException() {
-        List<Event> listWithDuplicateEvents = Arrays.asList(testEvent, testEvent);
+        List<Event> listWithDuplicateEvents = Arrays.asList(WEDDING, WEDDING);
         assertThrows(DuplicateEventException.class, () -> uniqueEventList.setEvents(listWithDuplicateEvents));
     }
 

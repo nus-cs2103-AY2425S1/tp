@@ -33,26 +33,18 @@ import seedu.address.logic.commands.UnassignCommand;
 import seedu.address.logic.commands.ViewEventCommand;
 import seedu.address.logic.commands.ViewVendorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.commons.name.Name;
-import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.EditVendorDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.VendorBuilder;
 import seedu.address.testutil.VendorUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
-
-    @Test
-    public void parseCommand_add() throws Exception {
-        Vendor vendor = new VendorBuilder().build();
-        CreateVendorCommand command = (CreateVendorCommand) parser
-                .parseCommand(VendorUtil.getCreateVendorCommand(vendor));
-        assertEquals(new CreateVendorCommand(vendor), command);
-    }
 
     @Test
     public void parseCommand_assign() throws Exception {
@@ -68,9 +60,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_createEvent() throws Exception {
-        Event partyEvent = new Event(new Name("Party"), new Date("2024-10-10"));
-        CreateEventCommand command = (CreateEventCommand) parser.parseCommand("create e/ n/Party on/2024-10-10");
-        assertEquals(new CreateEventCommand(partyEvent), command);
+        Event event = new EventBuilder().build();
+        CreateEventCommand command = (CreateEventCommand) parser.parseCommand(EventUtil.getCreateEventCommand(event));
+        assertEquals(new CreateEventCommand(event), command);
+    }
+
+    @Test
+    public void parseCommand_createVendor() throws Exception {
+        Vendor vendor = new VendorBuilder().build();
+        CreateVendorCommand command = (CreateVendorCommand) parser
+                .parseCommand(VendorUtil.getCreateVendorCommand(vendor));
+        assertEquals(new CreateVendorCommand(vendor), command);
     }
 
     @Test
