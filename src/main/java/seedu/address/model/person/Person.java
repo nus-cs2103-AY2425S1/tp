@@ -40,6 +40,32 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    private static Person guest = new Person(new Name("Guest"),
+            new Phone(),
+            new Email(),
+            new Address(),
+            new DietaryPreference(),
+            new Remark(),
+            Collections.emptySet());
+
+
+    public static Person getGuest() {
+        return guest;
+    }
+
+    private static Person supplier = new Person(new Name("Supplier"),
+            new Phone(),
+            new Email(),
+            new Address(),
+            new DietaryPreference(),
+            new Remark(),
+            Collections.emptySet());
+
+
+    public static Person getSupplier() {
+        return guest;
+    }
+
     public Name getName() {
         return name;
     }

@@ -9,6 +9,9 @@ import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.OrderList;
 import seedu.address.model.order.OrderStatus;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.product.Product;
@@ -49,6 +52,16 @@ public class AddCustomerOrderCommand extends Command {
                                         .toList();
 
         CustomerOrder customerOrder = new CustomerOrder(phoneNumber, productList, OrderStatus.PENDING);
+        List<Person> personList = model.getFilteredPersonList();
+        Person person = Person.getGuest();
+
+        for (Person p : personList) {
+            if (p.getPhone().equals(new Phone(phoneNumber))) {
+                 person = p;
+            }
+        }
+        customerOrder.setPerson(person);
+
         model.addCustomerOrder(customerOrder);
 
         return new CommandResult(String.format(MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS, customerOrder.viewOrder()));
