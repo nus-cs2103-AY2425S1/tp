@@ -27,10 +27,11 @@ public class TypicalPersons {
             .withJobCode("SWE2024").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTag("N")
-            .withRemark("have pHD").build();
+            .withRemark("").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withJobCode("HRD2025")
             .withEmail("johnd@example.com").withPhone("98765432")
+            .withRemark("")
             .withTag("TP").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withJobCode("INTERN087").withTag("TC").build();

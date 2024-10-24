@@ -9,6 +9,7 @@ import seedu.address.model.person.JobCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Tag;
 import seedu.address.model.person.Remark;
 
@@ -39,6 +40,7 @@ class JsonAdaptedPerson {
         this.jobCode = jobCode;
         this.tag = tag;
         this.remark = remark;
+
     }
 
     /**
@@ -102,9 +104,6 @@ class JsonAdaptedPerson {
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
-        }
-        if (!Remark.isValidRemark(remark)) {
-            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
         }
         final Remark modelRemark = new Remark(remark);
 

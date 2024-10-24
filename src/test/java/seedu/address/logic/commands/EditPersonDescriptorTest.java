@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

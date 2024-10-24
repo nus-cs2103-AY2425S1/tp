@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG, PREFIX_REMARK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_JOBCODE, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_REMARK)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_JOBCODE, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -45,7 +45,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         JobCode jobCode = ParserUtil.parseJobCode(argMultimap.getValue(PREFIX_JOBCODE).get());
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
-        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
+        Remark remark = ParserUtil.parseRemark(
+                argMultimap.getValue(PREFIX_REMARK).isPresent()
+                        ? argMultimap.getValue(PREFIX_REMARK).get()
+                        : ""
+        );
+
 
         Person person = new Person(name, phone, email, jobCode, tag, remark);
 
