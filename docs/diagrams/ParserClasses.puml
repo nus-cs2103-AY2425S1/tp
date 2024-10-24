@@ -5,12 +5,15 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 Class "{abstract}\nCommand" as Command
-Class XYZCommand
+Class AbCommand
+Class TbCommand
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
 Class AddressBookParser
-Class XYZCommandParser
+Class TransactionBookParser
+Class AbCommandParser
+Class TbCommandParser
 Class CliSyntax
 Class ParserUtil
 Class ArgumentMultimap
@@ -21,18 +24,29 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 
-AddressBookParser .down.> XYZCommandParser: <<create>>
+AddressBookParser .down.> AbCommandParser: <<create>>
 
-XYZCommandParser ..> XYZCommand : <<create>>
+AbCommandParser ..> AbCommand : <<create>>
 AddressBookParser ..> Command : <<use>>
-XYZCommandParser .up.|> Parser
-XYZCommandParser ..> ArgumentMultimap
-XYZCommandParser ..> ArgumentTokenizer
+AbCommandParser .up.|> Parser
+AbCommandParser ..> ArgumentMultimap
+AbCommandParser ..> ArgumentTokenizer
 ArgumentTokenizer .left.> ArgumentMultimap
-XYZCommandParser ..> CliSyntax
+AbCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
-XYZCommandParser ..> ParserUtil
+AbCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
-XYZCommand -up-|> Command
+AbCommand -up-|> Command
+
+TransactionBookParser .down.> TbCommandParser: <<create>>
+
+TbCommandParser .up.> TbCommand : <<create>>
+TransactionBookParser ..> Command : <<use>>
+TbCommandParser .up.|> Parser
+TbCommandParser .up.> ArgumentMultimap
+TbCommandParser .up.> ArgumentTokenizer
+TbCommandParser .up.> CliSyntax
+TbCommandParser .up.> ParserUtil
+TbCommand -up-|> Command
 @enduml
