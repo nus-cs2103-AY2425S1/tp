@@ -20,7 +20,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListTaskCommand;
+import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
@@ -89,7 +89,7 @@ public class AddressBookParser {
         case AssignWeddingCommand.COMMAND_WORD -> new AssignWeddingCommandParser().parse(arguments);
         case UnassignWeddingCommand.COMMAND_WORD -> new UnassignWeddingCommandParser().parse(arguments);
         case CreateTaskCommand.COMMAND_WORD -> new CreateTaskCommandParser().parse(arguments);
-        case ListTaskCommand.COMMAND_WORD -> new ListTaskCommand();
+        case ListTasksCommand.COMMAND_WORD -> new ListTasksCommand();
         case DeleteTaskCommand.COMMAND_WORD -> new DeleteTaskCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);

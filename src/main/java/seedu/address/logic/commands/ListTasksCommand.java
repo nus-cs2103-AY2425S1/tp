@@ -10,9 +10,9 @@ import seedu.address.model.Model;
 /**
  * Lists all tasks in the address book to the user.
  */
-public class ListTaskCommand extends Command {
+public class ListTasksCommand extends Command {
 
-    public static final String COMMAND_WORD = "list-task";
+    public static final String COMMAND_WORD = "list-tasks";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 

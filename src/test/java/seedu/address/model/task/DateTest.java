@@ -71,6 +71,12 @@ public class DateTest {
     }
 
     @Test
+    public void equals_self_returnsTrue() {
+        Date date1 = new Date(VALID_DATE);
+        assertTrue(date1.equals(date1));
+    }
+
+    @Test
     public void equals_differentDate_returnsFalse() {
         Date date1 = new Date(VALID_DATE);
         Date date2 = new Date("2023-11-20"); // Different date

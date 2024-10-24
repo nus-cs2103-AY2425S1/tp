@@ -15,7 +15,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListTaskCommand.
  */
-public class ListTaskCommandTest {
+public class ListTasksCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,14 +28,14 @@ public class ListTaskCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandResult actualCommandResult = new ListTaskCommand().execute(model);
-        assertCommandSuccess(new ListTaskCommand(), model, actualCommandResult, expectedModel);
+        CommandResult actualCommandResult = new ListTasksCommand().execute(model);
+        assertCommandSuccess(new ListTasksCommand(), model, actualCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showTaskAtIndex(model, INDEX_FIRST); // Filters the task list to show only the first task
-        CommandResult actualCommandResult = new ListTaskCommand().execute(model);
-        assertCommandSuccess(new ListTaskCommand(), model, actualCommandResult, expectedModel);
+        CommandResult actualCommandResult = new ListTasksCommand().execute(model);
+        assertCommandSuccess(new ListTasksCommand(), model, actualCommandResult, expectedModel);
     }
 }
