@@ -12,9 +12,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CreateEventCommand;
+import seedu.address.model.commons.name.Name;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.name.Name;
 
 public class CreateEventCommandParserTest {
 

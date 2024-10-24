@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CreateEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commons.name.Name;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.name.Name;
 
 /**
  * Parses input arguments and creates a new CreateEventCommand object

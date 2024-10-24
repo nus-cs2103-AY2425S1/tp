@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.name.Name;
+import seedu.address.model.commons.name.Name;
 
 public class EventTest {
 
