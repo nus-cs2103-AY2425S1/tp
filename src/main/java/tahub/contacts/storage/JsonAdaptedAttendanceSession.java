@@ -14,7 +14,7 @@ public class JsonAdaptedAttendanceSession {
      * Constructs a {@code JsonAdaptedAttendanceSession} with the given attendance details.
      */
     @JsonCreator
-    public JsonAdaptedAttendanceSession(@JsonProperty("sessionAttendance") Boolean isSessionAttended) {
+    public JsonAdaptedAttendanceSession(@JsonProperty("isSessionAttended") Boolean isSessionAttended) {
         this.isSessionAttended = isSessionAttended;
     }
 
