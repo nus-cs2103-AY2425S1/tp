@@ -38,7 +38,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalCompanies.MICROSOFT;
 import static seedu.address.testutil.TypicalCompanies.TESLA;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
