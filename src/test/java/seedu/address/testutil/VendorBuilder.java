@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.wedding.Wedding;
 
@@ -32,7 +33,8 @@ public class VendorBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<Wedding> weddings;
-    // need to add Task here
+
+    private Set<Task> tasks;
 
     /**
      * Creates a {@code VendorBuilder} with the default details.
@@ -44,6 +46,7 @@ public class VendorBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         weddings = new HashSet<>();
+        tasks = new HashSet<>();
     }
 
     /**
@@ -56,6 +59,7 @@ public class VendorBuilder {
         address = vendorToCopy.getAddress();
         tags = new HashSet<>(vendorToCopy.getTags());
         weddings = new HashSet<>(vendorToCopy.getWeddings());
+        tasks = new HashSet<>(vendorToCopy.getTasks());
     }
 
     /**
@@ -106,7 +110,17 @@ public class VendorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Task} objects to the {@code Person} that we are building.
+     * You can either modify this method to accept specific tasks like Todo, Deadline, or Event
+     * or adapt the SampleDataUtil to properly convert them.
+     */
+    public VendorBuilder withTasks(String ... tasks) {
+        this.tasks = SampleDataUtil.getTaskSet(tasks);
+        return this;
+    }
+
     public Vendor build() {
-        return new Vendor(name, phone, email, address, tags, weddings);
+        return new Vendor(name, phone, email, address, tags, weddings, tasks);
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -15,8 +16,9 @@ public class Vendor extends Person {
      * Every field must be present and not null.
      */
     // add the Task field here
-    public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Wedding> weddings) {
-        super(name, phone, email, address, tags, weddings);
+    public Vendor(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Wedding> weddings,
+                  Set<Task> tasks) {
+        super(name, phone, email, address, tags, weddings, tasks);
     }
 
     /**

@@ -16,6 +16,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 import seedu.address.model.wedding.Wedding;
 
 class JsonAdaptedVendor {
@@ -28,6 +32,7 @@ class JsonAdaptedVendor {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedVendor} with the given vendor details.
@@ -36,7 +41,8 @@ class JsonAdaptedVendor {
     public JsonAdaptedVendor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("weddings") List<JsonAdaptedWedding> weddings) {
+                             @JsonProperty("weddings") List<JsonAdaptedWedding> weddings,
+                             @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +52,9 @@ class JsonAdaptedVendor {
         }
         if (weddings != null) {
             this.weddings.addAll(weddings);
+        }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
         }
     }
 
@@ -63,6 +72,24 @@ class JsonAdaptedVendor {
         weddings.addAll(source.getWeddings().stream()
                 .map(JsonAdaptedWedding::new)
                 .collect(Collectors.toList()));
+        tasks.addAll(source.getTasks().stream()
+                .map(this::mapToJsonAdaptedTask)
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Helper function to map a Task to its corresponding JsonAdaptedTask subclass.
+     */
+    private JsonAdaptedTask mapToJsonAdaptedTask(Task task) {
+        if (task instanceof Todo) {
+            return new JsonAdaptedTodo((Todo) task);
+        } else if (task instanceof Deadline) {
+            return new JsonAdaptedDeadline((Deadline) task);
+        } else if (task instanceof Event) {
+            return new JsonAdaptedEvent((Event) task);
+        } else {
+            throw new IllegalArgumentException("Unknown task type");
+        }
     }
 
     /**
@@ -73,9 +100,14 @@ class JsonAdaptedVendor {
     public Vendor toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         final List<Wedding> personWeddings = new ArrayList<>();
+        final List<Task> personTasks = new ArrayList<>();
 
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        for (JsonAdaptedTask task : tasks) {
+            personTasks.add(task.toModelType());
         }
 
         for (JsonAdaptedWedding wedding : weddings) {
@@ -112,11 +144,13 @@ class JsonAdaptedVendor {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
+
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Wedding> modelWeddings = new HashSet<>(personWeddings);
+        final Set<Task> modelTasks = new HashSet<>(personTasks);
 
-        return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings);
+        return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
     }
 }

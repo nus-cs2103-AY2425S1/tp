@@ -17,13 +17,16 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.CreateTaskCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
@@ -38,11 +41,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TypicalTasks;
 
 public class AddressBookParserTest {
 
@@ -194,6 +199,33 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD) instanceof ListWeddingsCommand);
         assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD + " 3") instanceof ListWeddingsCommand);
     }
+
+    @Test
+    public void parseCommand_listTask() throws Exception {
+        assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD) instanceof ListTasksCommand);
+        assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD + " 3") instanceof ListTasksCommand);
+    }
+
+    @Test
+    public void parseCommand_createTask() throws Exception {
+        String userInput = CreateTaskCommand.COMMAND_WORD
+                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
+                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+        HashSet<Task> tasksToAdd = new HashSet<>(TypicalTasks.getTypicalTasks());
+
+        CreateTaskCommand expectedCommand = new CreateTaskCommand(tasksToAdd);
+        CreateTaskCommand command = (CreateTaskCommand) parser.parseCommand(userInput);
+
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_deleteTask() throws Exception {
+        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
+                DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteTaskCommand(INDEX_FIRST), command);
+    }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

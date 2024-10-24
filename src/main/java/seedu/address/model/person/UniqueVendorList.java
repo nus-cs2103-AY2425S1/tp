@@ -53,7 +53,7 @@ public class UniqueVendorList implements Iterable<Vendor> {
             throw new DuplicateVendorException();
         }
         Vendor vendor = new Vendor(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(),
-                toAdd.getAddress(), toAdd.getTags(), toAdd.getWeddings());
+                toAdd.getAddress(), toAdd.getTags(), toAdd.getWeddings(), toAdd.getTasks());
         internalList.add(vendor);
     }
 

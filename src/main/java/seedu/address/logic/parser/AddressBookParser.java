@@ -14,12 +14,15 @@ import seedu.address.logic.commands.AssignVendorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.CreateTaskCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UnassignVendorCommand;
 import seedu.address.logic.commands.UntagCommand;
@@ -91,6 +94,9 @@ public class AddressBookParser {
         case AssignVendorCommand.COMMAND_WORD -> new AssignVendorCommandParser().parse(arguments);
         case AddVendorCommand.COMMAND_WORD -> new AddVendorCommandParser().parse(arguments);
         case UnassignVendorCommand.COMMAND_WORD -> new UnassignVendorCommandParser().parse(arguments);
+        case CreateTaskCommand.COMMAND_WORD -> new CreateTaskCommandParser().parse(arguments);
+        case ListTasksCommand.COMMAND_WORD -> new ListTasksCommand();
+        case DeleteTaskCommand.COMMAND_WORD -> new DeleteTaskCommandParser().parse(arguments);
 
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);

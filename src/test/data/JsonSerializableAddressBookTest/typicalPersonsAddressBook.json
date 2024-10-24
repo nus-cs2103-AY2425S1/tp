@@ -34,7 +34,12 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "tasks": [{
+      "type" : "todo",
+      "description" : "Buy cake",
+      "isDone" : false
+    }]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -88,5 +93,15 @@
       "guestList": [],
       "address": null,
       "date": null
-    }]
+    }],
+  "tasks": [{
+    "type" : "todo",
+    "description" : "Buy groceries",
+    "isDone" : false
+  }, {
+    "type" : "deadline",
+    "description" : "Submit report",
+    "isDone" : false,
+    "by" : "2024-12-31"
+  } ]
 }

@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -18,6 +19,20 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
+
+    public static final String MESSAGE_INVALID_TASK_TYPE = "Unknown task type: %1$s. "
+            + "Expected one of: todo, deadline, event.";
+
+    public static final String MESSAGE_INVALID_DEADLINE_FORMAT = "Invalid deadline format. "
+            + "Usage: create-task tk/deadline [description] /by [date]";
+    public static final String MESSAGE_INVALID_EVENT_FORMAT = "Invalid event format."
+            + " Usage: create-task tk/event [description] /from [start] /to [end]";
+
+    public static final String MESSAGE_INCOMPLETE_TASK_DESCRIPTION = "Task description is incomplete. "
+            + "Expected format: tk/[task type] [task details].";
+    public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -78,4 +93,7 @@ public class Messages {
         return wedding.getWeddingName().toString();
     }
 
+    public static String format(Task task) {
+        return task.getDescription();
+    }
 }
