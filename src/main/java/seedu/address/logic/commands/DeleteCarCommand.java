@@ -22,7 +22,7 @@ public class DeleteCarCommand extends Command {
             + ": Deletes the car currently belonging to the client of the index provided.\n"
             + "Client must already have a car. The index must be a positive integer.\n"
             + "Client's car cannot be currently checked-in in order to be deleted.\n"
-            + "Example: " + COMMAND_WORD  + " 1 ";
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_USER_IS_CHECKED_IN = "This person's car is currently checked in.";
     public static final String MESSAGE_DELETE_CAR_SUCCESS =
@@ -31,6 +31,9 @@ public class DeleteCarCommand extends Command {
 
     private final Index index;
 
+    /**
+     * Creates a DeleteCarCommand to delete a {@code Car} from the {@code Person}
+     */
     public DeleteCarCommand(Index index) {
         requireNonNull(index);
         this.index = index;
