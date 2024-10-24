@@ -54,7 +54,7 @@ public class CheckClientCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (clientToCheck.isServicing()) {
             return new CommandResult(String.format(MESSAGE_CHECK_IN_CLIENT_SUCCESS,
-                    clientToCheck.getName()));
+                    clientToCheck.getName(), clientToCheck.getVrn()));
         }
         return new CommandResult(String.format(MESSAGE_CHECK_OUT_CLIENT_SUCCESS,
                 clientToCheck.getName(), clientToCheck.getVrn()));
