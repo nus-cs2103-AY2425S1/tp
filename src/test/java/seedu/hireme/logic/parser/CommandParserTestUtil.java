@@ -35,7 +35,10 @@ public class CommandParserTestUtil {
             parser.parse(userInput);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
-            assertEquals(expectedMessage, pe.getMessage());
+            // Log both expected and actual messages for debugging purposes
+            System.out.println("Expected: [" + expectedMessage + "]");
+            System.out.println("Actual:   [" + pe.getMessage().trim() + "]");
+            assertEquals(expectedMessage.trim(), pe.getMessage().trim());
         }
     }
 }

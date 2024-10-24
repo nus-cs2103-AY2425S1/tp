@@ -97,6 +97,14 @@ public class TypicalInternshipApplications {
         return ab;
     }
 
+    public static AddressBook<InternshipApplication> getClonedAddressBook() {
+        AddressBook<InternshipApplication> clonedAb = new AddressBook<>();
+        for (InternshipApplication internshipApp : getTypicalInternshipApplications()) {
+            clonedAb.addItem(internshipApp.deepCopy());
+        }
+        return clonedAb;
+    }
+
     public static List<InternshipApplication> getTypicalInternshipApplications() {
         return new ArrayList<>(Arrays.asList(APPLE, BOFA, CITIBANK, DELL, EY, FIGMA, YAHOO));
     }
