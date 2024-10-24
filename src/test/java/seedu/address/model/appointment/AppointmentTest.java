@@ -2,6 +2,7 @@ package seedu.address.model.appointment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalDoctors.ALICE;
 import static seedu.address.testutil.TypicalDoctors.BENSON;
@@ -47,6 +48,14 @@ public class AppointmentTest {
 
         // different appointment -> returns false
         assertFalse(APPOINTMENT_A.isSameAppointment(APPOINTMENT_B));
+    }
+    @Test
+    public void getAppointmentById_invalidId_returnsNull() {
+        // Attempt to retrieve an appointment using a non-existing ID
+        Appointment retrievedAppointment = Appointment.getAppointmentById(999);
+
+        // Check that the result is null
+        assertNull(retrievedAppointment);
     }
 
     @Test

@@ -124,6 +124,11 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public void deleteAppointment(Appointment appointment) {
+        addressBook.deleteAppointment(appointment); // Assuming appointments are stored in AddressBook
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

@@ -61,7 +61,7 @@ public class Appointment {
         int newId;
         do {
             newId = r.nextInt();
-        } while (appointmentById.containsKey(newId));
+        } while (appointmentById.containsKey(newId) || newId <= 0);
 
         return newId;
     }
@@ -77,12 +77,21 @@ public class Appointment {
         }
 
         Appointment appointment = appointmentById.get(id);
-        appointment.doctor.removeAppointment(appointment);
         appointment.patient.removeAppointment(appointment);
+        appointment.doctor.removeAppointment(appointment);
 
         appointmentById.remove(id);
 
         return true;
+    }
+
+    /**
+     * Retrieves an appointment by its ID.
+     * @param id The ID of the appointment to retrieve.
+     * @return The appointment with the given ID, or null if it doesn't exist.
+     */
+    public static Appointment getAppointmentById(Integer id) {
+        return appointmentById.get(id); // returns null if ID doesn't exist
     }
 
     public Integer getId() {
@@ -165,5 +174,4 @@ public class Appointment {
                 .add("time", time)
                 .toString();
     }
-
 }

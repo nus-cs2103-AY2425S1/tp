@@ -65,4 +65,25 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a valid signed integer.
+     * A valid signed integer can be positive, negative, or zero.
+     * e.g. "1", "-1", "0", {@code Integer.MAX_VALUE}, {@code Integer.MIN_VALUE} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "1.5" (contains decimal), "abc" (contains letters), "1a" (contains both digits and letters),
+     * @param s The string to check for valid integer format.
+     * @return true if {@code s} represents a valid signed integer, otherwise false.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isInteger(String s) {
+        requireNonNull(s);
+
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }

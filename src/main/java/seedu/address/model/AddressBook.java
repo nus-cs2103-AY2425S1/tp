@@ -115,6 +115,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         appointments.add(a);
     }
 
+    /**
+     * Deletes a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void deleteAppointment(Appointment a) {
+        appointments.remove(a);
+    }
+
     //// util methods
 
     @Override
