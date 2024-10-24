@@ -13,6 +13,7 @@ public class Appointment {
     private final int patientId;
     private final int doctorId;
     private final String remarks;
+    private final boolean completed;
 
     /**
      * Creates an appointment instance associated with the specified patient, doctor, and remarks.
@@ -27,6 +28,16 @@ public class Appointment {
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.remarks = remarks;
+        this.completed = false;
+    }
+
+    private Appointment(LocalDateTime dateTime, int patientId, int doctorId, String remarks, Boolean completed) {
+        requireAllNonNull(dateTime, patientId, doctorId, remarks);
+        this.dateTime = dateTime;
+        this.patientId = patientId;
+        this.doctorId = doctorId;
+        this.remarks = remarks;
+        this.completed = completed;
     }
 
     public LocalDateTime getDateTime() {
@@ -45,6 +56,9 @@ public class Appointment {
         return remarks;
     }
 
+    public Appointment markAsComplete() {
+        return new Appointment(this.dateTime, this.patientId, this.doctorId, this.remarks, true);
+    }
     /**
      * Determines if an appointment is the same appointment including checking for remarks.
      *
@@ -90,9 +104,15 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment: " + getDateTime() + " for " + getPatientId()
-                + " (patient id) with " + getDoctorId() + " (doctor id). "
-                + "Remarks: " + getRemarks();
+        if (this.completed) {
+            return "Appointment: " + getDateTime() + " for " + getPatientId()
+                    + " (patient id) with " + getDoctorId() + " (doctor id). "
+                    + "Remarks: " + getRemarks();
+        } else {
+            return "Appointment: " + getDateTime() + " for " + getPatientId()
+                    + " (patient id) with " + getDoctorId() + " (doctor id). "
+                    + "Remarks: " + getRemarks();
+        }
     }
 }
 
