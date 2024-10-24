@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the guest list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
@@ -96,39 +96,52 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of **all** persons in the address book.
+Shows a list of **all** persons in the guest list.
 
 Format: `list`
 
 ### Creating a new tag: `newtag`
 
-Creates a new tag that can be used to tag people with.
+Creates new tag(s) that can be used to tag guests with.
 
-Format: `newtag TAG_NAME`
-* Tag name cannot be more than 50 characters long.
+Format: `newtag t/TAG_NAME1 t/TAG_NAME2...`
+* Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Tag names are **case-insensitive**. e.g `newtag BRIDE'S SIDE` is the same as `newtag Bride's Side`
+* Leading and trailing spaces are ignored. e.g `newtag t/ bride's side  t/ groom's side  ` is the same as `newtag t/bride's side t/groom's side`.
+* Duplicate tags (with the same name) are **not** allowed.
+* Tag names are **case-insensitive**. e.g `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
+* Only 30 (or fewer) of such tags can exist at any point.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tip: You may add any number of tags at once (as long as the total number does not exceed 30).
+</div>
 
 Examples:
-* `newtag Bride's Side`
+* `newtag t/bride's side`
+* `newtag t/bride's side t/groom's side`
 
 ![img.png](img.png)
 
 ### Deleting a defined tag: `deletetag`
 
-Deletes an existing tag defined previously.
+Deletes existing tag(s) defined previously.
 
 Format: `deletetag t/TAG_NAME1 t/TAG_NAME2...`
 * Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Tag names are case-insensitive.
+* Leading and trailing spaces are ignored. e.g `deletetag t/ bride's side  t/ groom's side` is the same as `deletetag t/bride's side t/groom's side`.
 * User cannot delete a tag that has not been added via `newtag` before.
-* Any number of tag arguments is accepted, as long as all of them have been defined before.
+* Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tip: You may delete any number of tags at once.
+</div>
 
 Examples:
-* `deletetag t/Bride's Side`
+* `deletetag t/bride's side`
+* `deletetag t/bride's side t/Groom's side`
 ![img_2.png](img_2.png)
 
 ### Tagging a person: `tag`
@@ -136,7 +149,7 @@ Examples:
 Tags a person with the given tag.
 
 Format: `tag INDEX t/TAG`
-* Tag must already exist before tagging it to a person.
+* Tag must have already been defined using `newtag` before tagging it to a person.
 
 Examples:
 * `tag 1 t/Bride's Side` Adds the tag "Bride's Side" to the 1st person in the list.
