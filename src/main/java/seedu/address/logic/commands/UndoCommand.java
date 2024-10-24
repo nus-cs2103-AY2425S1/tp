@@ -15,7 +15,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Reverts the most recent changes to the current AddressBook.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Successfully undo.";
+    public static final String MESSAGE_SUCCESS = "Undo succesfully executed.";
     public static final String MESSAGE_FAILURE = "No command to undo.";
 
     @Override
