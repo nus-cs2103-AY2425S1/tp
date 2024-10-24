@@ -1,0 +1,37 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam classMethodAttributeIconSize 0
+hide empty methods
+
+
+Class "<<interface>>\nModel" as Model
+Class "{abstract}\nCommand" as Command
+Class "{abstract}\nFindCommand" as FindCommand
+Command :  CommandResult execute(Model model) &#123;abstract&#125;
+
+
+Model <.left. FindCommand
+Class FindXYZCommand extends FindCommand
+Class FindCommand extends Command
+Class "{abstract}\nPredicate<T>" as Predicate {
+    + boolean test(T t) &#123;abstract&#125;
+}
+Class "{abstract}\nTraitContainsKeywordPredicate<T>" as TraitContainsKeywordPredicate
+Class "XYZContainsKeywordsPredicate" as XYZContainsKeywordPredicate
+Class TraitContainsKeywordPredicate implements Predicate
+Class XYZContainsKeywordPredicate extends TraitContainsKeywordPredicate
+
+TraitContainsKeywordPredicate.up.>Predicate
+FindXYZCommand -right-> XYZContainsKeywordPredicate
+
+hide FindCommand fields
+hide Model fields
+hide TraitContainsKeywordPredicate fields
+hide FindXYZCommand fields
+hide XYZContainsKeywordPredicate fields
+
+
+
+@enduml
