@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String telegramHandle;
+    private final String moduleName;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String contactType;
 
@@ -39,6 +41,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("telegramHandle") String telegramHandle,
+                             @JsonProperty("moduleName") String moduleName,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("contactType") String contactType) {
         this.name = name;
@@ -46,6 +49,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.telegramHandle = telegramHandle;
         this.contactType = contactType;
+        this.moduleName = moduleName;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -60,6 +64,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().map(Email::toString).orElse(null);
         telegramHandle = source.getTelegramHandle().value;
         contactType = source.getContactType().value.toString();
+        moduleName = source.getModuleName().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -118,9 +123,17 @@ class JsonAdaptedPerson {
         }
         final ContactType modelContactType = new ContactType(contactType);
 
+        if (moduleName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ModuleName.class.getSimpleName()));
+        }
+        if (!ModuleName.isValidModName(moduleName)) {
+            throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
+        }
+        final ModuleName modelModuleName = new ModuleName(moduleName);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle, modelTags);
-
+        return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle,
+                modelModuleName, modelTags);
     }
 
 }

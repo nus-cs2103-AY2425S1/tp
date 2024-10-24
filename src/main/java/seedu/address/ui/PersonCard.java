@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label moduleName;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -56,6 +58,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().map(Phone::toString).orElse(" "));
         email.setText(person.getEmail().map(Email::toString).orElse(" "));
         telegramHandle.setText(person.getTelegramHandle().value);
+        moduleName.setText(person.getModuleName().toString());
         String contactTypeStr = person.getContactType().value.toString().toLowerCase();
         contactType.setText(contactTypeStr);
         person.getTags().stream()

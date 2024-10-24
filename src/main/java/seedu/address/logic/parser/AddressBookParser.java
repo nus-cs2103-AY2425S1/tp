@@ -85,6 +85,7 @@ public class AddressBookParser {
         case SwitchThemeCommand.COMMAND_WORD:
             return new SwitchThemeCommandParser().parse(arguments);
 
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

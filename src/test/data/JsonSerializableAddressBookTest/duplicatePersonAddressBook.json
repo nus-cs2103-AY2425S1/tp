@@ -4,6 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "telegramHandle": "@alicepauline",
+    "moduleName" : "CS2100",
     "tags": [ "friends" ],
     "contactType" : "PERSONAL"
   }, {
@@ -11,6 +12,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "telegramHandle": "@alicepauline",
+    "moduleName" : "CS2100",
     "contactType" : "PERSONAL"
   } ]
 }
