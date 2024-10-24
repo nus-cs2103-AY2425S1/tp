@@ -28,7 +28,7 @@ public class Student {
     private final Fee fee;
 
     /**
-     * Every field must be present and not null except isPresent.
+     * Every field must be present and not null except hasPaid.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Fee fee) {
         requireAllNonNull(name, phone, email, address, tags);
