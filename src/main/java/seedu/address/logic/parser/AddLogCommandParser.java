@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
 
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.log.AppointmentDate;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 
 /**
@@ -38,12 +40,16 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
 
             // Parse date
             String date = argMultimap.getValue(PREFIX_DATE).get();
+            AppointmentDate appointmentDate = new AppointmentDate(date);
 
             // Parse log
-            String log = argMultimap.getValue(PREFIX_LOG).get();
+            String entry = argMultimap.getValue(PREFIX_LOG).get();
+
+            // Create log object
+            Log log = new Log(appointmentDate, entry);
 
             // Create and return AddLogCommand with parsed values
-            return new AddLogCommand(identityNumber, date, log);
+            return new AddLogCommand(identityNumber, log);
 
         } catch (ParseException pe) {
             throw new ParseException(

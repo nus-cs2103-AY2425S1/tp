@@ -175,6 +175,25 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void clearSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSavedCommand(Command command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult executeSavedCommand() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -28,23 +28,28 @@ public class CommandResult {
     /** The application should use the index returned. */ // NEW: I dont think this is a good implementation.
     private final int personIndex;
 
+    /** The previous command prompts the user for confirmation */
+    private final boolean prompt;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean list, int personIndex) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isPrompt, boolean list, int personIndex) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.list = list;
         this.personIndex = personIndex;
+        this.prompt = isPrompt;
     }
+
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, -1);
+        this(feedbackToUser, false, false, false, false, -1);
     }
 
     public String getFeedbackToUser() {
@@ -66,6 +71,10 @@ public class CommandResult {
     // might need more validation to check if personIndex > -1 before retrieving?
     public int getPersonIndex() {
         return personIndex;
+    }
+
+    public boolean isPrompt() {
+        return prompt;
     }
 
     @Override
@@ -98,6 +107,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("prompt", prompt)
                 .add("list", list)
                 .add("personIndex", personIndex)
                 .toString();
