@@ -2,6 +2,7 @@ package seedu.address.model.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.capitalizeEachWord;
 
 /**
  * Represents a Pet's name in PawPatrol.
@@ -23,7 +24,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        this.name = name;
+        this.name = capitalizeEachWord(name);
     }
 
     /**

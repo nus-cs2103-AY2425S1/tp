@@ -25,6 +25,7 @@ class JsonAdaptedPet {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Pet's %s field is missing!";
 
+    private final String uniqueId;
     private final String name;
     private final String species;
     private final String breed;
@@ -36,9 +37,11 @@ class JsonAdaptedPet {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPet(@JsonProperty("name") String name, @JsonProperty("species") String species,
-                             @JsonProperty("breed") String breed, @JsonProperty("age") String age,
-                             @JsonProperty("sex") String sex, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPet(@JsonProperty("uniqueId") String uid, @JsonProperty("name") String name,
+                             @JsonProperty("species") String species, @JsonProperty("breed") String breed,
+                             @JsonProperty("age") String age, @JsonProperty("sex") String sex,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.uniqueId = uid;
         this.name = name;
         this.species = species;
         this.breed = breed;
@@ -53,6 +56,7 @@ class JsonAdaptedPet {
      * Converts a given {@code Pet} into this class for Jackson use.
      */
     public JsonAdaptedPet(Pet source) {
+        uniqueId = source.getUniqueID();
         name = source.getName().name;
         species = source.getSpecies().value;
         breed = source.getBreed().value;
@@ -72,6 +76,10 @@ class JsonAdaptedPet {
         final List<Tag> petTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             petTags.add(tag.toModelType());
+        }
+
+        if (uniqueId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "UniqueId"));
         }
 
         if (name == null) {
@@ -115,6 +123,6 @@ class JsonAdaptedPet {
         final Sex modelSex = new Sex(sex);
 
         final Set<Tag> modelTags = new HashSet<>(petTags);
-        return new Pet(modelName, modelSpecies, modelBreed, modelAge, modelSex, modelTags);
+        return new Pet(uniqueId, modelName, modelSpecies, modelBreed, modelAge, modelSex, modelTags);
     }
 }

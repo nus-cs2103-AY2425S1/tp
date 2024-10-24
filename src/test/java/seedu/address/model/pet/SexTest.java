@@ -27,15 +27,17 @@ public class SexTest {
         // invalid sex
         assertFalse(Sex.isValidSex("")); // empty string
         assertFalse(Sex.isValidSex(" ")); // spaces only
-        assertFalse(Sex.isValidSex("male")); // more than one character
+        assertFalse(Sex.isValidSex("male")); // more than one character and 'm' is not capitalised
         assertFalse(Sex.isValidSex("*")); // contains non-alphanumeric characters
         assertFalse(Sex.isValidSex("G")); // contains neither 'M' nor 'F' (for male/female)
 
         // valid sex
         assertTrue(Sex.isValidSex("F")); // one character only and is 'M' or 'F'
-        assertTrue(Name.isValidName("M")); // one character only and is 'M' or 'F'
-        assertTrue(Name.isValidName("f")); // lowercase 'm' or 'f'
-        assertTrue(Name.isValidName("m")); // lowercase 'm' or 'f'
+        assertTrue(Sex.isValidSex("M")); // one character only and is 'M' or 'F'
+        assertTrue(Sex.isValidSex("f")); // lowercase 'm' or 'f'
+        assertTrue(Sex.isValidSex("m")); // lowercase 'm' or 'f'
+        assertTrue(Sex.isValidSex("Female")); // full form of sex is acceptable
+        assertTrue(Sex.isValidSex("Male")); // full form of sex is acceptable
     }
 
     @Test
