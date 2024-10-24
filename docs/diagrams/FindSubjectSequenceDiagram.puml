@@ -62,10 +62,7 @@ ref over FindSubjectCommand, Model : filter person list with p
 FindSubjectCommand --> LogicManager : result
 deactivate FindSubjectCommand
 
-
 [<-- LogicManager : result
 deactivate
-
-
 
 @enduml
