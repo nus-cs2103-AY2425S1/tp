@@ -6,8 +6,10 @@ skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-down-> "1" UniqueProjectList
+AddressBook *-down-> "1" UniqueAssignmentList
 AddressBook *-right-> "1" UniqueTagList
 AddressBook *-right-> "1" UniqueSkillList
+UniqueAssignmentList -[hidden]left- UniqueProjectList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueSkillList -[hidden]down- UniqueTagList
@@ -30,4 +32,8 @@ UniqueProjectList --> Project
 
 Project *--> ProjectName
 Project *--> ProjectId
+
+UniqueAssignmentList --> Assignment
+
+Assignment *--> AssignmentId
 @enduml
