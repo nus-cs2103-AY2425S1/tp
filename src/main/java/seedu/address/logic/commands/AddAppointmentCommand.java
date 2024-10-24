@@ -28,9 +28,9 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_ID + "[DOCTOR_ID] "
             + PREFIX_REMARK + "[ADDITIONAL REMARK]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATE + "2024-12-31 15:23"
+            + PREFIX_DATE + "2024-12-31 15:23 "
             + PREFIX_ID + "1234 "
-            + PREFIX_ID + "5678"
+            + PREFIX_ID + "5678 "
             + PREFIX_REMARK + "third physiotherapy session";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Successfully added appointment to a patient";
