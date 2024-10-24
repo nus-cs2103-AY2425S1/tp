@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
+import seedu.address.model.AppointmentDateFilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 
 /**
@@ -62,6 +63,49 @@ public class Appt {
 
     public static boolean isValidAppt(String trimmedDate) {
         return true;
+    }
+
+    public boolean isOn(LocalDate date) {
+        return dateTime.toLocalDate().isEqual(date);
+    }
+
+    public boolean isAfter(LocalDate date) {
+        return dateTime.toLocalDate().isAfter(date);
+    }
+
+    /**
+     * returns true if appointment date is the same as date or after date
+     */
+    public boolean isAfterOrOn(LocalDate date) {
+        LocalDate curr = dateTime.toLocalDate();
+        return isAfter(date) || isOn(date);
+    }
+
+    public boolean isBefore(LocalDate date) {
+        return dateTime.toLocalDate().isBefore(date);
+    }
+
+    public boolean isBeforeOrOn(LocalDate date) {
+        return isBefore(date) || isOn(date);
+    }
+
+    public boolean isBetweenDates(LocalDate start, LocalDate end) {
+        return isAfterOrOn(start) && isBeforeOrOn(end);
+    }
+
+    public boolean isSameService(HealthService service) {
+        return true;
+    }
+
+    /**
+     * returns true if appointment's date is between start and end date and has same healthservice
+     */
+    public boolean isBetweenDatesAndMatchService(AppointmentDateFilter dateFilter) {
+        LocalDate startDate = dateFilter.getStartDate() == null ? LocalDate.now() : dateFilter.getStartDate();
+        LocalDate endDate = dateFilter.getEndDate();
+        HealthService service = dateFilter.getHealthService();
+
+        return isBetweenDates(startDate, endDate) && isSameService(service);
     }
 
     @Override

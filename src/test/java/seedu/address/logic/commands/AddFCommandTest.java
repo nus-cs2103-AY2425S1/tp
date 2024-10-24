@@ -8,7 +8,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.function.Predicate;
+import java.util.logging.Filter;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.FilteredAppointment.FilteredAppointment;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -149,7 +152,12 @@ public class AddFCommandTest {
         }
 
         @Override
-        public void setFilteredAppointments(TreeMap<Appt, Person> filteredAppointments) {
+        public void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TreeSet<FilteredAppointment> getFilteredAppts() {
             throw new AssertionError("This method should not be called");
         }
     }

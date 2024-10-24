@@ -2,6 +2,10 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.FilteredAppointment.FilteredAppointment.APPOINTMENT_COMPARATOR;
+
+import java.nio.file.Path;
+import java.util.TreeSet;
 import static seedu.address.model.person.Appt.DATETIME_COMPARATOR;
 
 import java.nio.file.Path;
@@ -13,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.FilteredAppointment.FilteredAppointment;
 import seedu.address.model.person.Appt;
 import seedu.address.model.person.Person;
 
@@ -25,8 +30,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final TreeMap<Appt, Person> filteredAppts;
-
+    private final TreeSet<FilteredAppointment> filteredAppts;
+  
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -38,7 +43,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.filteredAppts = new TreeMap<>(DATETIME_COMPARATOR);
+        this.filteredAppts = new TreeSet<>(APPOINTMENT_COMPARATOR);
     }
 
     public ModelManager() {
@@ -134,9 +139,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setFilteredAppointments(TreeMap<Appt, Person> filteredAppointments) {
+    public void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments) {
         this.filteredAppts.clear();
-        this.filteredAppts.putAll(filteredAppointments);
+        this.filteredAppts.addAll(filteredAppointments);
+    }
+
+    @Override
+    public TreeSet<FilteredAppointment> getFilteredAppts() {
+        return this.filteredAppts;
     }
 
     @Override
