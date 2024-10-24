@@ -290,29 +290,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                      |
 | `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                   |
 | `* *`    | user             | find a person by name                                                       | locate details of persons without having to go through the entire list |
-| `* *`    | user             | search through my contacts                                                  | find a specific person                                                |
-| `* *`    | new user         | see usage instructions                                                      | know how to use the app                                               |
-| `* *`    | user             | edit contact                                                                | update contact with new information                                   |
-| `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                        |
-| `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                          |
-| `* *`    | user             | archive contact                                                             | hide less frequently used contacts without deleting them              |
-| `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                               |
-| `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident               |
-| `* *`    | user             | undo a command                                                              | fix a mistake I made                                                  |
-| `* *`    | new user         | import all contact details into the app                                     | start using without manual setup                                      |
-| `* *`    | sales rep        | keep track of clients I have contacted by seeing when I last contacted them | avoid wasting time calling them again about the same product          |
-| `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                               |
-| `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                            |
-| `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                               |
+| `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
+| `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
+| `* *`    | user             | edit contact                                                                | update contact with new information                                    |
+| `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
+| `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                           |
+| `* *`    | user             | archive contact                                                             | hide less frequently used contacts without deleting them               |
+| `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
+| `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
+| `* *`    | user             | undo a command                                                              | fix a mistake I made                                                   |
+| `* *`    | new user         | import all contact details into the app                                     | start using without manual setup                                       |
+| `* *`    | sales rep        | keep track of clients I have contacted by seeing when I last contacted them | avoid wasting time calling them again about the same product           |
+| `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
+| `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                             |
+| `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                                |
 | `* *`    | sales rep        | delete notes from a client's contact                                        | remove incorrect or outdated notes                                    |
-| `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics     |
-| `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                       |
-| `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                           |
-| `* *`    | sales rep        | export a list of contact emails                                             | add them to a mailing list                                            |
-| `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                           |
-| `*`      | user             | sort contacts by name                                                       | locate a person easily                                                |
-| `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                               |
-| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                        |
+| `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics      |
+| `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
+| `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                            |
+| `* *`    | sales rep        | export a list of contact emails                                             | add them to a mailing list                                             |
+| `* *`    | sales rep        | export my contacts                                                          | send it to my coworker who needs it for his work                       |
+| `* *`    | sales rep        | add a tag to multiple clients                                               | tag the clients more easily                                            |
+| `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
+| `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
+| `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
 
 ### Use cases
 
@@ -471,6 +472,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2b. The note index is invalid.
 
     - 2b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC9 - Export contact list**
+
+**MSS**
+
+1.  Actor requests to export contact list to a specific file.
+2.  System exports the contact information into the file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. System detects that the directory does not exist.
+
+    - 1a1. System creates the directory.
+
+      Use case resumes from step 2.
+
+- 1b. System detects that the file is used by another process.
+
+    - 1b1. System shows an error message.
 
       Use case ends.
 
