@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
@@ -121,6 +122,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Person findPersonByName(Name name) {
+        requireNonNull(name);
+        return addressBook.findPersonByName(name);
     }
 
     @Override

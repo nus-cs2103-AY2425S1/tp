@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.Order;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.shortcut.Alias;
@@ -94,6 +95,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    Person findPersonByName(Name name);
 
     void removeOrder(Order order);
 

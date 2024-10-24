@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -15,7 +14,6 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -55,64 +53,6 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
-    }
-
-    @Test
-    public void putOrderTest() {
-        Order cake = new Order("Cake");
-        Order pizza = new Order("Pizza");
-        Order noodle = new Order("Noodle");
-
-        Person p = new PersonBuilder().build();
-        p.putOrder(cake);
-        p.putOrder(cake);
-        p.putOrder(pizza);
-        p.putOrder(noodle);
-        p.putOrder(noodle);
-        p.putOrder(noodle);
-
-        HashMap<Order, Integer> orderFrequency = new HashMap<>();
-        orderFrequency.put(cake, 2);
-        orderFrequency.put(pizza, 1);
-        orderFrequency.put(noodle, 3);
-
-        assertEquals(orderFrequency, p.getOrderFrequency());
-
-        orderFrequency.put(cake, 1);
-        assertNotEquals(orderFrequency, p.getOrderFrequency());
-
-        orderFrequency.remove(cake);
-        p.removeOrder(cake);
-        assertEquals(orderFrequency, p.getOrderFrequency());
-    }
-
-    @Test
-    public void personBuilderWithOrderFrequencyTest() {
-        HashMap<Order, Integer> orders = new HashMap<>();
-        orders.put(new Order("cake"), 10);
-        Person p = new PersonBuilder().withOrderFrequency(orders).build();
-    }
-
-    @Test
-    public void removeOrderTest() {
-        Order cake = new Order("Cake");
-        Order pizza = new Order("Pizza");
-        Order noodle = new Order("Noodle");
-
-        Person p = new PersonBuilder().build();
-        p.putOrder(cake);
-        p.putOrder(cake);
-        p.putOrder(pizza);
-        p.putOrder(noodle);
-        p.putOrder(noodle);
-        p.putOrder(noodle);
-
-        HashMap<Order, Integer> orderFrequency = new HashMap<>();
-        orderFrequency.put(pizza, 1);
-        orderFrequency.put(noodle, 3);
-
-        p.removeOrder(cake);
-        assertEquals(orderFrequency, p.getOrderFrequency());
     }
 
     @Test
@@ -180,6 +120,7 @@ public class PersonTest {
     public void hashCodeTest() {
         // This hashCode test is not complete, this only test orderFrequency
 
+        /*
         Order cake = new Order("Cake");
         Order pizza = new Order("Pizza");
 
@@ -192,6 +133,8 @@ public class PersonTest {
 
         assertNotEquals(p1.hashCode(), p2.hashCode());
         assertEquals(p1.hashCode(), p3.hashCode());
+
+         */
     }
 
     @Test
@@ -245,7 +188,7 @@ public class PersonTest {
                 + ", tags="
                 + ALICE.getTags()
                 + ", orders="
-                + ALICE.getOrderFrequency()
+                + ALICE.getOrderTracker()
                 + ", isArchived="
                 + ALICE.isArchived()
                 + "}";

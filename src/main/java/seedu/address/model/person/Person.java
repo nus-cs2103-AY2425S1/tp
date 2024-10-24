@@ -4,14 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderTracker;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,12 +23,12 @@ public class Person implements Comparable<Person> {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final HashMap<Order, Integer> orderFrequency;
 
     // Data fields
     private final Address address;
     private final PostalCode postalCode;
     private final Set<Tag> tags = new HashSet<>();
+    private final OrderTracker tracker;
     private final Boolean isArchived;
 
     /**
@@ -43,7 +42,7 @@ public class Person implements Comparable<Person> {
         this.address = address;
         this.postalCode = postalCode;
         this.tags.addAll(tags);
-        this.orderFrequency = new HashMap<>();
+        this.tracker = new OrderTracker();
         this.isArchived = false;
     }
 
@@ -51,15 +50,15 @@ public class Person implements Comparable<Person> {
      * Every field with orderFrequency must be present and not null
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  PostalCode postalCode, Set<Tag> tags, HashMap<Order, Integer> orders) {
-        requireAllNonNull(name, phone, email, address, tags, orders);
+                  PostalCode postalCode, Set<Tag> tags, OrderTracker tracker) {
+        requireAllNonNull(name, phone, email, address, tags, tracker);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.postalCode = postalCode;
-        this.orderFrequency = orders;
+        this.tracker = tracker;
         this.isArchived = false;
     }
 
@@ -75,7 +74,7 @@ public class Person implements Comparable<Person> {
         this.address = address;
         this.tags.addAll(tags);
         this.postalCode = postalCode;
-        this.orderFrequency = new HashMap<>();
+        this.tracker = new OrderTracker();
         this.isArchived = isArchived;
     }
 
@@ -99,8 +98,8 @@ public class Person implements Comparable<Person> {
         return postalCode;
     }
 
-    public HashMap<Order, Integer> getOrderFrequency() {
-        return this.orderFrequency;
+    public OrderTracker getOrderTracker() {
+        return this.tracker;
     }
 
     public boolean isArchived() {
@@ -108,27 +107,15 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Increase the frequency of an order by 1 for the customer
+     * Add an order to the person
      * @param order The order to increase its frequency
      */
     public void putOrder(Order order) {
-        this.orderFrequency.merge(order, 1, Integer::sum);
-    }
-
-    /**
-     * Remove order frequency record for order
-     * @param order The order to remove
-     */
-    public void removeOrder(Order order) {
-        this.orderFrequency.remove(order);
+        this.tracker.add(order);
     }
 
     private int getTotalOrderFrequencyCount() {
-        int sum = 0;
-        for (Map.Entry<Order, Integer> entry: this.orderFrequency.entrySet()) {
-            sum += entry.getValue();
-        }
-        return sum;
+        return tracker.getTotalOrder();
     }
 
     /**
@@ -202,14 +189,14 @@ public class Person implements Comparable<Person> {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && postalCode.equals(otherPerson.postalCode)
-                && orderFrequency.equals(otherPerson.orderFrequency)
+                && tracker.equals(otherPerson.tracker)
                 && isArchived == otherPerson.isArchived;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, postalCode, tags, orderFrequency, isArchived);
+        return Objects.hash(name, phone, email, address, postalCode, tags, tracker, isArchived);
     }
 
     @Override
@@ -221,9 +208,12 @@ public class Person implements Comparable<Person> {
                 .add("address", address)
                 .add("postalCode", postalCode)
                 .add("tags", tags)
-                .add("orders", orderFrequency)
+                .add("orders", tracker)
                 .add("isArchived", isArchived)
                 .toString();
     }
 
+    public void clearOrder() {
+        this.tracker.clear();
+    }
 }

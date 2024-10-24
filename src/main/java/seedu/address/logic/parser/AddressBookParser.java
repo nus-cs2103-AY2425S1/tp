@@ -26,6 +26,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListOrderCommand;
 import seedu.address.logic.commands.ListShortCutCommand;
+import seedu.address.logic.commands.PutOrderCommand;
+import seedu.address.logic.commands.ShowOrderHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -96,14 +98,25 @@ public class AddressBookParser {
             return new DownloadCommandParser().parse(arguments);
         case AddOrderCommand.COMMAND_WORD:
             return new AddOrderCommandParser().parse(arguments);
+
         case DeleteOrderCommand.COMMAND_WORD:
             return new DeleteOrderCommandParser().parse(arguments);
-        case DelShortCutCommand.COMMAND_WORD:
-            return new DelShortCutCommandParser().parse(arguments);
+
         case ListOrderCommand.COMMAND_WORD:
             return new ListOrderCommand();
+
+        case PutOrderCommand.COMMAND_WORD:
+            return new PutOrderCommandParser().parse(arguments);
+
+        case ShowOrderHistoryCommand.COMMAND_WORD:
+            return new ShowOrderHistoryCommandParser().parse(arguments);
+
+        case DelShortCutCommand.COMMAND_WORD:
+            return new DelShortCutCommandParser().parse(arguments);
+
         case ListShortCutCommand.COMMAND_WORD:
             return new ListShortCutCommand();
+
         case AddShortCutCommand.COMMAND_WORD:
             return new AddShortCutCommandParser().parse(arguments);
         default:

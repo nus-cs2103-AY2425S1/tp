@@ -1,10 +1,9 @@
 package seedu.address.testutil;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderTracker;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,7 +30,7 @@ public class PersonBuilder {
     private Address address;
     private PostalCode postalCode;
     private Set<Tag> tags;
-    private HashMap<Order, Integer> orderFrequency;
+    private OrderTracker tracker;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,7 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         postalCode = new PostalCode(DEFAULT_POSTAL_CODE);
         tags = new HashSet<>();
-        orderFrequency = new HashMap<>();
+        tracker = new OrderTracker();
     }
 
     /**
@@ -56,7 +55,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         postalCode = personToCopy.getPostalCode();
         tags = new HashSet<>(personToCopy.getTags());
-        orderFrequency = new HashMap<>(personToCopy.getOrderFrequency());
+        tracker = personToCopy.getOrderTracker();
     }
 
     /**
@@ -108,14 +107,14 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code orderFrequency} of the {@code Person} that we are building.
+     * Sets the {@code orders} of the {@code Person} that we are building.
      */
-    public PersonBuilder withOrderFrequency(HashMap<Order, Integer> orders) {
-        this.orderFrequency = orders;
+    public PersonBuilder withOrderTracker(OrderTracker orders) {
+        this.tracker = orders;
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, postalCode, tags, orderFrequency);
+        return new Person(name, phone, email, address, postalCode, tags, tracker);
     }
 }
