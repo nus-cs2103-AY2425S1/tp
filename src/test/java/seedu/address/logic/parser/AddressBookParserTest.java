@@ -32,12 +32,14 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasFeaturePredicate;
+import seedu.address.model.person.SchedulePredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -115,12 +117,22 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_filterByTag() throws Exception {
+    public void parseCommand_filter() throws Exception {
         //tag only
         FilterCommand command = (FilterCommand) parser.parseCommand(
               FilterCommand.COMMAND_WORD + " " + "t/ High Risk"
         );
-        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null)),
+        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null, null, null)),
+              command);
+
+    }
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        //tag only
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+              ScheduleCommand.COMMAND_WORD + " " + "d/ 16 February 2024"
+        );
+        assertEquals(new ScheduleCommand(new SchedulePredicate(new Date("16 February 2024"))),
               command);
 
     }

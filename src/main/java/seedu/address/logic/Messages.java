@@ -23,7 +23,7 @@ public class Messages {
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,10 +48,14 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tag: ")
-                .append(person.getTag());
+                .append(person.getAddress());
+        if (person.getTag() != null) {
+            builder.append("; Tag: ").append(person.getTag());
+        }
+
+        if (person.getAllergy() != null) {
+            builder.append("; Allergy: ").append(person.getAllergy());
+        }
         return builder.toString();
     }
-
 }

@@ -23,7 +23,6 @@ import seedu.address.model.person.Person;
  */
 public class DateCommand extends Command {
     public static final String COMMAND_WORD = "date";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the appointment date of the person identified "
             + "by their name, phone and/or email "
@@ -83,7 +82,7 @@ public class DateCommand extends Command {
 
         Person personToEdit = matchingPersons.get(0);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTag(), date);
+                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergy(), date);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
