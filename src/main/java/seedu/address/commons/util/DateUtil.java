@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -13,8 +14,9 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class DateUtil {
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    private static final String DATE_FORMAT = "uuuu-MM-dd";
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT)
+            .withResolverStyle(ResolverStyle.STRICT);
     private static final Logger logger = LogsCenter.getLogger(DateUtil.class);
 
     /**
