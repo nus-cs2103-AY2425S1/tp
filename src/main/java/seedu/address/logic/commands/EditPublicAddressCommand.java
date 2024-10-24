@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -39,6 +41,8 @@ public class EditPublicAddressCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(EditPublicAddressCommand.class);
+
     private final Index index;
     private final PublicAddress publicAddress;
 
@@ -69,6 +73,9 @@ public class EditPublicAddressCommand extends Command {
         Person personToEdit = getPersonToEdit(model);
 
         if (!personToEdit.hasPublicAddressWithLabel(publicAddress.getNetwork(), publicAddress.label)) {
+            logger.warning(String.format(
+                    "Attempted to edit a public address with a non-matching label %1$s for network %2$s on person %3$s",
+                    publicAddress.label, publicAddress.getNetwork(), personToEdit.getName()));
             throw new CommandException(
                     String.format(MESSAGE_NON_MATCHING_LABEL, publicAddress.getNetwork(), personToEdit.getName()));
         }
