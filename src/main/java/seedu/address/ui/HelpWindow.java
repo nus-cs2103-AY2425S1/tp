@@ -56,9 +56,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     private void setHelpText() {
         helpTextFlow.getChildren().addAll(
-                createHeader("BA€ 1.0 Help                                                    "),
+                createHeader("BA€ 1.4 Help                                                    "),
                 createParagraph(
-                        "Welcome to BA€ 1.0, your powerful ally in optimizing recurring sales.",
+                        "Welcome to BA€ 1.4, your powerful ally in optimizing recurring sales.",
                         "This guide will help you navigate the key features and commands of BA€."
                 ),
                 createHeader("Key Features and Commands"),
