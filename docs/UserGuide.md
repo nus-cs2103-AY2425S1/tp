@@ -145,6 +145,23 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Exporting all contacts: `export`
+
+Exports all persons in the addressbook into a csv file located in the data folder.
+
+Format: `export`
+
+### Importing persons: `import`
+
+Reads the specified file to import from and adds the persons to the addressbook.
+
+Format: `import FILENAME`
+
+Examples:
+* `import contacts.csv` adds persons stored in `contacts.csv` to the addressbook.
+* The file has to be located in the data folder
+* The specified file name has to exactly match the name of the file to import from
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -203,3 +220,5 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Export** | `export`
+**Import** | `import FILENAME`<br> e.g., `import contacts.csv`
