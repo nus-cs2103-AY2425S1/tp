@@ -65,23 +65,23 @@ public class NameContainsKeywordsPredicateTest {
     public void test_tagsContainsKeywords_returnsTrue() {
         NameContainsKeywordsPredicate predicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("EV"));
-        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon, Musk, EV").build()));
+        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon", "Musk", "EV").build()));
 
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Elon", "Musk"));
-        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon, Musk, EV").build()));
+        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon", "Musk", "EV").build()));
 
         // Only one matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Zuckerberg", "Elon"));
-        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon, Musk, EV").build()));
+        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon", "Musk", "EV").build()));
 
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("mUsK", "eV"));
-        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon, Musk, EV").build()));
+        assertTrue(predicate.test(new CompanyBuilder().withTags("Elon", "Musk", "EV").build()));
 
         // Matches both name and tag
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Musk", "EV", "Tesla"));
-        assertTrue(predicate.test(new CompanyBuilder().withName("Tesla").withTags("Elon, Musk, EV").build()));
+        assertTrue(predicate.test(new CompanyBuilder().withName("Tesla").withTags("Elon", "Musk", "EV").build()));
     }
 
     @Test
