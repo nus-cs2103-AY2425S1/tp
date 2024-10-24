@@ -61,10 +61,10 @@ public class ListArchiveFilesCommandTest {
 
     @Test
     public void execute_withMultipleArchiveFiles_success() throws IOException {
-        Files.createFile(Path.of(archiveDir.toString(), "multipleArchive1.json"));
-        Files.createFile(Path.of(archiveDir.toString(), "multipleArchive2.json"));
-        String expectedMessage = ListArchiveFilesCommand.MESSAGE_SUCCESS + "\n" + "multipleArchive1.json\n"
-                + "multipleArchive2.json";
+        Files.createFile(Path.of(archiveDir.toString(), "multiple_archive1.json"));
+        Files.createFile(Path.of(archiveDir.toString(), "multiple_archive2.json"));
+        String expectedMessage = ListArchiveFilesCommand.MESSAGE_SUCCESS + "\n" + "multiple_archive1.json\n"
+                + "multiple_archive2.json";
         assertCommandSuccess(new ListArchiveFilesCommand(), modelStub, expectedMessage, modelStub);
     }
 }
