@@ -134,6 +134,8 @@ Shows a list of all concertContacts in the Concert Phone book.
 
 Format: `listcc`
 
+💡 `TAB` key can be used to toggle the concertContact view
+
 ### Adding a person: `addp`
 
 Adds a person to the Concert Phone book.
@@ -153,11 +155,11 @@ Examples:
 
 Adds a Concert to the Concert Phone book.
 
-- Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
-- FYI: If user were to add a date that does not exist, closest date in the same month will be added
-  e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
+Format: `addc n/NAME a/ADDRESS d/DATE`
 
-Format: `addc n/CONCERTNAME a/ADDRESS d/DATE`
+- Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
+- FYI: If user were to add a date that does not exist where the day is less than 32, closest date in the same month will be added
+  e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
 
 Examples:
 
@@ -343,7 +345,7 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 | **List Person and Concerts** | `list`                                                                                                                                                                       |
 | **List ConcertContacts**     | `listcc`                                                                                                                                                                     |
 | **Add Person**               | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​` <br> e.g., `add n/Alex Yeoh p/22224444 e/alexyeoh@example.com a/123, Clementi Rd, 1234665 r/Artist t/friend` |
-| **Add Concert**              | `addc n/CONCERTNAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                             |
+| **Add Concert**              | `addc n/NAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                                    |
 | **Add ConcertContact**       | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
 | **Delete Person**            | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
 | **Delete Concert**           | `deletep INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
