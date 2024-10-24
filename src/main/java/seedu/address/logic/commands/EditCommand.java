@@ -21,11 +21,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,7 +49,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com"
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Successfully edited %1$s!";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -102,7 +104,13 @@ public class EditCommand extends Command {
         // edit command does not allow editing appointments
         Appointment updatedAppointment = personToEdit.getAppointment();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags, updatedAppointment, updatedProperty);
+        if (personToEdit instanceof Buyer) {
+            return new Buyer(updatedName, updatedPhone, updatedEmail,
+                    updatedTags, updatedAppointment, updatedProperty);
+        } else {
+            return new Seller(updatedName, updatedPhone, updatedEmail,
+                    updatedTags, updatedAppointment, updatedProperty);
+        }
     }
 
     @Override

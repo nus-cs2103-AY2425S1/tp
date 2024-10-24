@@ -3,29 +3,46 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
 
-<HBox id="cardPane" fx:id="cardPane" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" minHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.5, 0, 5);">
   <GridPane style="-fx-background-color: #1d1d1d; -fx-padding: 10; -fx-background-radius: 10" HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" prefWidth="342.0" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105" prefWidth="342.0" GridPane.columnIndex="0" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.5, 0, 5);">
       <padding>
         <Insets bottom="15" left="15" right="15" top="15" />
       </padding>
       <HBox alignment="CENTER_LEFT" spacing="5">
-        <Label fx:id="id" styleClass="cell_big_label" text="ID:" textFill="#FFD700" />
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" textFill="#FFD700" />
+        <Label fx:id="id" styleClass="cell_big_label" text="ID:" textFill="#FFD700" style="-fx-font-weight: bold; -fx-font-size: 35px;" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" textFill="#FFD700" style="-fx-font-weight: bold; -fx-font-size: 35px;" />
+        <HBox spacing="20"/>
+        <Label fx:id="role" styleClass="rounded_label"/>
       </HBox>
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" textFill="#FFD700" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" textFill="#FFD700" />
-      <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" textFill="#FFD700" />
-      <Label fx:id="property" styleClass="cell_small_label" text="\$property" textFill="#FFD700" />
-      <FlowPane fx:id="tags" style="-fx-background-color: #1a1a1a; -fx-padding: 5; -fx-background-radius: 5;">
-      </FlowPane>
+      <Line fx:id="underline" stroke="#FFD700" strokeWidth="2" />
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Phone number:" textFill="#FFD700" style="-fx-font-weight: bold;" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" textFill="#C2C4C6" />
+      </HBox>
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Email:" textFill="#FFD700" style="-fx-font-weight: bold;" />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" textFill="#C2C4C6" />
+      </HBox>
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Appointment:" textFill="#FFD700" style="-fx-font-weight: bold;" />
+        <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" textFill="#C2C4C6" />
+      </HBox>
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Property:" textFill="#FFD700" style="-fx-font-weight: bold;" />
+        <Label fx:id="property" styleClass="cell_small_label" text="\$property" textFill="#C2C4C6" />
+      </HBox>
     </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
+    <VBox fx:id="tagsContainer" alignment="TOP_RIGHT" GridPane.columnIndex="1" spacing="5">
+      <FlowPane fx:id="tags" alignment="TOP_RIGHT" vgap="5" hgap="5" />
+    </VBox>
+    <rowConstraints>
+      <RowConstraints />
+    </rowConstraints>
   </GridPane>
 </HBox>

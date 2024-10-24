@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
@@ -41,7 +41,9 @@ public class Person {
         this.appointment = appointment;
         this.property = property;
         this.tags.addAll(tags);
+
     }
+
     /**
      * Constructs a {@code Person} object with the specified name.
      * Initializes the phone number as {@code null}, sets the property to a default empty value,
@@ -90,8 +92,12 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        if (otherPerson == null) {
+            return false;
+        }
+
+        // Case-insensitive name comparison
+        return otherPerson.getName().fullName.equalsIgnoreCase(this.getName().fullName);
     }
 
     /**
@@ -134,4 +140,6 @@ public class Person {
                 .add("property", property)
                 .toString();
     }
+
+    public abstract String getRole();
 }

@@ -17,6 +17,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -24,12 +25,14 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 public class DeleteAppointmentCommandTest {
     private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
 
 
     @Test
@@ -44,12 +47,23 @@ public class DeleteAppointmentCommandTest {
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 personToDeleteAppointment.getName());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person personWithoutAppointment = new Person(personToDeleteAppointment.getName(),
-                personToDeleteAppointment.getPhone(), personToDeleteAppointment.getEmail(),
-                personToDeleteAppointment.getTags(),
-                new Appointment(new Date(""), new From(""), new To("")),
-                personToDeleteAppointment.getProperty());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
+        Person personWithoutAppointment;
+        if (personToDeleteAppointment instanceof Buyer) {
+            personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
+                    personToDeleteAppointment.getPhone(),
+                    personToDeleteAppointment.getEmail(),
+                    personToDeleteAppointment.getTags(),
+                    new Appointment(new Date(""), new From(""), new To("")),
+                    personToDeleteAppointment.getProperty());
+        } else { // Assuming it's a Seller if not a Buyer
+            personWithoutAppointment = new Seller(personToDeleteAppointment.getName(),
+                    personToDeleteAppointment.getPhone(),
+                    personToDeleteAppointment.getEmail(),
+                    personToDeleteAppointment.getTags(),
+                    new Appointment(new Date(""), new From(""), new To("")),
+                    personToDeleteAppointment.getProperty());
+        }
         expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
 
         assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);

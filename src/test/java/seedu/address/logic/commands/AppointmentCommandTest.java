@@ -19,11 +19,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -55,8 +57,8 @@ public class AppointmentCommandTest {
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         // Arrange
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().build());
-        Index invalidIndex = Index.fromZeroBased(1); // Invalid index
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().buildBuyer());
+        Index invalidIndex = Index.fromZeroBased(1);
 
         AppointmentCommand command = new AppointmentCommand(invalidIndex, validAppointment);
 
@@ -68,7 +70,7 @@ public class AppointmentCommandTest {
     @Test
     public void execute_validIndex_addAppointmentSuccess() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").build();
+        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
         AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
@@ -77,7 +79,8 @@ public class AppointmentCommandTest {
         CommandResult result = command.execute(modelStub);
 
         // Assert
-        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO).build();
+        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
+                .buildBuyer();
         assertEquals(String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)),
                 result.getFeedbackToUser());
     }
@@ -85,7 +88,7 @@ public class AppointmentCommandTest {
     @Test
     public void execute_validIndex_updatesPersonWithAppointment() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").build();
+        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
         AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
@@ -94,12 +97,14 @@ public class AppointmentCommandTest {
         command.execute(modelStub);
 
         // Assert
-        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO).build();
+        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
+                .buildBuyer();
         assertEquals(editedPerson.getAppointment(), validAppointment);
     }
 
     /**
      * A default model stub that have all of the methods failing.
+     * Possible to abstract this
      */
     private class ModelStub implements Model {
         @Override
@@ -148,6 +153,26 @@ public class AppointmentCommandTest {
         }
 
         @Override
+        public Path getListingsFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setListingsFilePath(Path listingsFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setListings(ReadOnlyListings listings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyListings getListings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -159,6 +184,10 @@ public class AppointmentCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person getPersonByName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,7 +202,32 @@ public class AppointmentCommandTest {
         }
 
         @Override
-        public Person getPersonByName(Name name) {
+        public boolean hasListing(Listing listing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteListing(Listing listing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addListing(Listing listing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setListing(Listing target, Listing editedListing) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Listing> getFilteredListingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredListingList(Predicate<Listing> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

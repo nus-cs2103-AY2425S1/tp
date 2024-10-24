@@ -17,18 +17,20 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
-
+import seedu.address.model.person.Seller;
 
 
 public class DeletePropertyCommandTest {
     private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
 
 
     @Test
@@ -42,10 +44,17 @@ public class DeletePropertyCommandTest {
         String expectedMessage = String.format(DeletePropertyCommand.MESSAGE_DELETE_PROPERTY_SUCCESS,
                 personToDeleteProperty.getName());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person personWithoutProperty = new Person(personToDeleteProperty.getName(), personToDeleteProperty.getPhone(),
-                personToDeleteProperty.getEmail(), personToDeleteProperty.getTags(),
-                personToDeleteProperty.getAppointment(), new Property(""));
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
+        Person personWithoutProperty;
+        if (personToDeleteProperty instanceof Buyer) {
+            personWithoutProperty = new Buyer(personToDeleteProperty.getName(), personToDeleteProperty.getPhone(),
+                    personToDeleteProperty.getEmail(), personToDeleteProperty.getTags(),
+                    personToDeleteProperty.getAppointment(), new Property(""));
+        } else {
+            personWithoutProperty = new Seller(personToDeleteProperty.getName(), personToDeleteProperty.getPhone(),
+                    personToDeleteProperty.getEmail(), personToDeleteProperty.getTags(),
+                    personToDeleteProperty.getAppointment(), new Property(""));
+        }
         expectedModel.setPerson(personToDeleteProperty, personWithoutProperty);
 
         assertCommandSuccess(deletePropertyCommand, model, expectedMessage, expectedModel);

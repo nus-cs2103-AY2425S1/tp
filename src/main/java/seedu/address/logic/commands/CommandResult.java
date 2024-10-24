@@ -19,13 +19,22 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application will show list of all listings. */
+    private final boolean showListings;
+
+    /** The application will show list of all clients. */
+    private final boolean showClients;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showListings, boolean showClients) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showListings = showListings;
+        this.showClients = showClients;
     }
 
     /**
@@ -33,7 +42,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false,
+                false, false);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +56,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowListings() {
+        return showListings;
+    }
+
+    public boolean isShowClients() {
+        return showClients;
     }
 
     @Override
@@ -62,12 +80,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showListings == otherCommandResult.showListings
+                && showClients == otherCommandResult.showClients;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showListings, showClients);
     }
 
     @Override
@@ -76,6 +96,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showListings", showListings)
+                .add("showClients", showClients)
                 .toString();
     }
 

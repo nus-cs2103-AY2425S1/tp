@@ -200,3 +200,51 @@
     -fx-border-radius: 12px;
     -fx-border-width: 3px;
 }
+
+.buyer_label {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;  /* Adjust the radius for the rounded effect */
+    -fx-padding: 1 10;  /* Space inside the label */
+    -fx-font-size: 20px;
+}
+
+.seller_label {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;  /* Adjust the radius for the rounded effect */
+    -fx-padding: 1 10;  /* Space inside the label */
+    -fx-font-size: 20px;
+}
+
+.bookmark {
+    -fx-background-color: #2eb774;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0.5, 0, 5);
+    -fx-font-weight: bold;
+    -fx-padding: 5 5 5 20;
+    -fx-shape: "M 100 0 L 20 0 L 0 7.5 L 20 15 L 100 15 Z";
+}
+
+.cell_big_label {
+    -fx-font-size: 18pt;
+    -fx-text-fill: #FFD700;
+}
+
+.chat-button {
+    -fx-padding: 10;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-transition: background-color 0.3s, transform 0.3s;
+}
+
+.chat-button:hover {
+    -fx-background-color: #1d1d1d;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}

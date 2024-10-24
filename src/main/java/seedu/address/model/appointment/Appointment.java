@@ -8,7 +8,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * All fields must be non-null.
  */
 public class Appointment {
-
     private final Date date;
     private final From from;
     private final To to;
@@ -62,7 +61,7 @@ public class Appointment {
     }
     @Override
     public String toString() {
-        return String.format("Date: %s, From: %s, To: %s", date.value, from.value, to.value);
+        return String.format("Date: %s (From: %s To: %s)", date.value, from.value, to.value);
     }
 
     @Override

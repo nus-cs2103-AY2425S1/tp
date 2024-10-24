@@ -7,11 +7,13 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -108,8 +110,17 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, tags, appointment, property);
+    /**
+     * Creates a {@code Buyer} instance.
+     */
+    public Buyer buildBuyer() {
+        return new Buyer(name, phone, email, tags, appointment, property);
     }
 
+    /**
+     * Creates a {@code Seller} instance.
+     */
+    public Seller buildSeller() {
+        return new Seller(name, phone, email, tags, appointment, property);
+    }
 }
