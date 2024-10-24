@@ -12,6 +12,6 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 **Value Proposition:**
 
->Our app is designed to help tech-savvy full-time tuition teachers manage the schedules and contact details of a small to medium number of students. 
+>Our app is designed to help tech-savvy full-time tuition teachers manage the schedules and contact details of a small to medium number of students.
 The app focuses on preventing scheduling conflicts by automatically checking for overlapping lesson times and organising students into groups for easier lesson planning.
 
