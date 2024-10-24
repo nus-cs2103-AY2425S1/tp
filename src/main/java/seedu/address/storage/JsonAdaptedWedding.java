@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -58,7 +59,7 @@ class JsonAdaptedWedding {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted wedding.
      */
-    public Wedding toModelType() throws IllegalValueException {
+    public Wedding toModelType(List<Wedding> weddingList) throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -70,6 +71,8 @@ class JsonAdaptedWedding {
         if (client == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Client.class.getSimpleName()));
         }
+
+        Client finalClient = new Client(client.toModelType(weddingList));
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
@@ -87,7 +90,7 @@ class JsonAdaptedWedding {
         }
         final Venue modelVenue = new Venue(venue);
 
-        return new Wedding(modelName, null, modelDate, modelVenue);
+        return new Wedding(modelName, finalClient, modelDate, modelVenue);
     }
 
     @Override
