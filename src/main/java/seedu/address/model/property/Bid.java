@@ -3,6 +3,10 @@ package seedu.address.model.property;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+
 /**
  * Represents bid price (maximum buying price) of property in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -11,6 +15,7 @@ public class Bid {
     public static final String MESSAGE_CONSTRAINTS =
             "Bid price should be an integer";
     public static final String VALIDATION_REGEX = "\\d+";
+    private static final Logger logger = LogsCenter.getLogger(Bid.class);
     public final String value;
 
     /**
@@ -19,8 +24,12 @@ public class Bid {
      * @param bid A valid bid.
      */
     public Bid(String bid) {
+        logger.info("Creating Bid object: " + bid);
         requireNonNull(bid);
+        assert bid != null : "Bid string cannot be null";
         checkArgument(isValidBid(bid), MESSAGE_CONSTRAINTS);
+        assert isValidBid(bid) != false : "Bid string must be non-negative integer";
+        logger.info("Bid object created: " + bid);
         value = bid;
     }
 
