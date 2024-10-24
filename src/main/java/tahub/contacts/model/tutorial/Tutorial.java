@@ -75,7 +75,7 @@ public class Tutorial {
 
         Tutorial otherTutorial = (Tutorial) other;
         return this.tutorialId.equals(otherTutorial.tutorialId)
-                && this.course.equals(otherTutorial.course);
+                && this.course.isConflictCourse(otherTutorial.course);
     }
 
     @Override
