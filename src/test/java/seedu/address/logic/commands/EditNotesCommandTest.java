@@ -34,7 +34,7 @@ public class EditNotesCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_editNotesCommand_success() {
+    public void execute_editNotesCommand_success() throws Exception {
         // Create the person and expected models as in the original
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
