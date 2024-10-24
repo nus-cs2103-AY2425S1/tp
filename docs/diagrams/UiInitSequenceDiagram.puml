@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant "ui:UiManager" as UiManager UI_COLOR
+participant ":MainWindow" as MainWin UI_COLOR
+participant ":HelpWindow" as HelpWin UI_COLOR
+participant ":PersonListPanel" as PersonListP UI_COLOR
+participant ":ResultDisplay" as ResultDisplay UI_COLOR
+participant ":DetailPanel" as DetailPanel UI_COLOR
+participant ":StatusBarFooter" as SBF UI_COLOR
+participant ":CommandBox" as CB UI_COLOR
+end box
+
+[-> UiManager : ui.start(primaryStage)
+activate UiManager
+
+UiManager -> UiManager
+activate UiManager #gray
+UiManager --> UiManager
+deactivate UiManager
+
+create MainWin
+UiManager -> MainWin : MainWindow(primaryStage, logic)
+activate MainWin
+
+create HelpWin
+MainWin -> HelpWin : HelpWindow()
+activate HelpWin
+MainWin <-- HelpWin
+deactivate HelpWin
+
+UiManager <-- MainWin
+deactivate MainWin
+
+UiManager -> MainWin : show()
+activate MainWin
+
+UiManager <-- MainWin
+deactivate MainWin
+
+UiManager -> MainWin : fillInnerParts()
+activate MainWin
+
+create PersonListP
+MainWin -> PersonListP : PersonListPanel(logic.getFilteredPersonList())
+activate PersonListP
+PersonListP --> MainWin
+deactivate PersonListP
+
+create ResultDisplay
+MainWin -> ResultDisplay : ResultDisplay()
+activate ResultDisplay
+ResultDisplay --> MainWin
+deactivate ResultDisplay
+
+create DetailPanel
+MainWin -> DetailPanel : DetailPanel()
+activate DetailPanel
+DetailPanel --> MainWin
+deactivate DetailPanel
+
+create SBF
+MainWin -> SBF : StatusBarFooter(logic.getAddressBookFilePath())
+activate SBF
+SBF --> MainWin
+deactivate SBF
+
+create CB
+MainWin -> CB : CommandBox(this::executeCommand)
+activate CB
+CB --> MainWin
+deactivate CB
+
+MainWin --> UiManager
+deactivate MainWin
+
+[<-- UiManager
+deactivate UiManager
+@enduml
