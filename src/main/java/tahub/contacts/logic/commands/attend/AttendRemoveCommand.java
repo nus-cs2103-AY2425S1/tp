@@ -12,19 +12,20 @@ import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Attendance;
+import tahub.contacts.model.course.exceptions.AttendanceOperationException;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 
 /**
- * Marks a student's attendance as present.
+ * Removes the last attendance session of a student.
  */
-public class AttendPresentCommand extends Command {
+public class AttendRemoveCommand extends Command {
 
-    public static final String COMMAND_WORD = "attend-present";
+    public static final String COMMAND_WORD = "attend-remove";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student in a particular course and tutorial "
-            + "group as having attended a session (present).\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the last attendance session record of a "
+            + "student in a particular course and tutorial group.\n"
             + "Parameters: "
             + PREFIX_MATRICULATION_NUMBER + "MATRICULATION NUMBER "
             + PREFIX_CODE + "COURSE CODE "
@@ -37,13 +38,15 @@ public class AttendPresentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New attended session marked for student %1$s";
     public static final String MESSAGE_NO_SCA_FOUND = "Student %1$s could not be found.";
+    public static final String MESSAGE_ATTENDANCE_NO_SESSIONS_TO_REMOVE
+            = "There are no available attendance sessions to remove.";
 
     private final StudentCourseAssociation toFind;
 
     /**
-     * Creates a CourseCommand to mark a student's attendance as present.
+     * Creates a CourseCommand to remove the last attendance session of a student.
      */
-    public AttendPresentCommand(StudentCourseAssociation targetSca) {
+    public AttendRemoveCommand(StudentCourseAssociation targetSca) {
         requireNonNull(targetSca);
         this.toFind = targetSca;
     }
@@ -65,7 +68,11 @@ public class AttendPresentCommand extends Command {
         Attendance attendance = foundSca.getAttendance();
         requireNonNull(attendance);
 
-        attendance.addAttendedLesson();
+        try {
+            attendance.removeLast();
+        } catch (AttendanceOperationException e) {
+            throw new CommandException(MESSAGE_ATTENDANCE_NO_SESSIONS_TO_REMOVE);
+        }
 
         // return success
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toFind)));
@@ -78,11 +85,11 @@ public class AttendPresentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AttendPresentCommand otherAttendPresentCommand)) {
+        if (!(other instanceof AttendRemoveCommand otherAttendRemoveCommand)) {
             return false;
         }
 
-        return toFind.equals(otherAttendPresentCommand.toFind);
+        return toFind.equals(otherAttendRemoveCommand.toFind);
     }
 
     @Override

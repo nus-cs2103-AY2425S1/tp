@@ -17,14 +17,15 @@ import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationLis
 import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 
 /**
- * Marks a student's attendance as present.
+ * Clears the attendance record of a particular student.
  */
-public class AttendPresentCommand extends Command {
+public class AttendClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "attend-present";
+    public static final String COMMAND_WORD = "attend-clear";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student in a particular course and tutorial "
-            + "group as having attended a session (present).\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the attendance records of "
+            + "a student in a particular course and tutorial "
+            + "group.\n"
             + "Parameters: "
             + PREFIX_MATRICULATION_NUMBER + "MATRICULATION NUMBER "
             + PREFIX_CODE + "COURSE CODE "
@@ -35,15 +36,15 @@ public class AttendPresentCommand extends Command {
             + PREFIX_CODE + "CS1010 "
             + PREFIX_TUTORIAL + "T01 ";
 
-    public static final String MESSAGE_SUCCESS = "New attended session marked for student %1$s";
+    public static final String MESSAGE_SUCCESS = "Attendance records cleared for student %1$s";
     public static final String MESSAGE_NO_SCA_FOUND = "Student %1$s could not be found.";
 
     private final StudentCourseAssociation toFind;
 
     /**
-     * Creates a CourseCommand to mark a student's attendance as present.
+     * Creates a CourseCommand to clear a student's attendance records.
      */
-    public AttendPresentCommand(StudentCourseAssociation targetSca) {
+    public AttendClearCommand(StudentCourseAssociation targetSca) {
         requireNonNull(targetSca);
         this.toFind = targetSca;
     }
@@ -65,7 +66,7 @@ public class AttendPresentCommand extends Command {
         Attendance attendance = foundSca.getAttendance();
         requireNonNull(attendance);
 
-        attendance.addAttendedLesson();
+        attendance.clear();
 
         // return success
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toFind)));
@@ -78,11 +79,11 @@ public class AttendPresentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AttendPresentCommand otherAttendPresentCommand)) {
+        if (!(other instanceof AttendClearCommand otherAttendClearCommand)) {
             return false;
         }
 
-        return toFind.equals(otherAttendPresentCommand.toFind);
+        return toFind.equals(otherAttendClearCommand.toFind);
     }
 
     @Override

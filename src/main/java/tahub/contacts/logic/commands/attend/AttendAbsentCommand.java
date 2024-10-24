@@ -17,14 +17,14 @@ import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationLis
 import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 
 /**
- * Marks a student's attendance as present.
+ * Marks a student's attendance as absent.
  */
-public class AttendPresentCommand extends Command {
+public class AttendAbsentCommand extends Command {
 
-    public static final String COMMAND_WORD = "attend-present";
+    public static final String COMMAND_WORD = "attend-absent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student in a particular course and tutorial "
-            + "group as having attended a session (present).\n"
+            + "group as not having attended a session (absent).\n"
             + "Parameters: "
             + PREFIX_MATRICULATION_NUMBER + "MATRICULATION NUMBER "
             + PREFIX_CODE + "COURSE CODE "
@@ -35,15 +35,15 @@ public class AttendPresentCommand extends Command {
             + PREFIX_CODE + "CS1010 "
             + PREFIX_TUTORIAL + "T01 ";
 
-    public static final String MESSAGE_SUCCESS = "New attended session marked for student %1$s";
+    public static final String MESSAGE_SUCCESS = "New absent session marked for student %1$s";
     public static final String MESSAGE_NO_SCA_FOUND = "Student %1$s could not be found.";
 
     private final StudentCourseAssociation toFind;
 
     /**
-     * Creates a CourseCommand to mark a student's attendance as present.
+     * Creates a CourseCommand to mark a student's attendance as absent.
      */
-    public AttendPresentCommand(StudentCourseAssociation targetSca) {
+    public AttendAbsentCommand(StudentCourseAssociation targetSca) {
         requireNonNull(targetSca);
         this.toFind = targetSca;
     }
@@ -65,7 +65,7 @@ public class AttendPresentCommand extends Command {
         Attendance attendance = foundSca.getAttendance();
         requireNonNull(attendance);
 
-        attendance.addAttendedLesson();
+        attendance.addAbsentLesson();
 
         // return success
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toFind)));
@@ -78,11 +78,11 @@ public class AttendPresentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AttendPresentCommand otherAttendPresentCommand)) {
+        if (!(other instanceof AttendAbsentCommand otherAttendAbsentCommand)) {
             return false;
         }
 
-        return toFind.equals(otherAttendPresentCommand.toFind);
+        return toFind.equals(otherAttendAbsentCommand.toFind);
     }
 
     @Override
