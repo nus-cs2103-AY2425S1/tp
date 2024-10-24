@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant "d:TagCommand" as TagCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tag 1 t/florist")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("tag 1 t/florist")
+activate AddressBookParser
+
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
+
+AddressBookParser -> TagCommandParser : parse("1 t/florist")
+activate TagCommandParser
+
+create TagCommand
+TagCommandParser -> TagCommand
+activate TagCommand
+
+TagCommand --> TagCommandParser :
+deactivate TagCommand
+
+TagCommandParser --> AddressBookParser : d
+deactivate TagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+TagCommandParser -[hidden]-> AddressBookParser
+destroy TagCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> TagCommand : execute(m)
+activate TagCommand
+
+
+TagCommand -> Model : hasTag(florist)
+activate Model
+Model --> TagCommand : true
+deactivate Model
+
+TagCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+Model --> TagCommand
+deactivate Model
+
+create CommandResult
+TagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> TagCommand
+deactivate CommandResult
+
+TagCommand --> LogicManager : r
+deactivate TagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
