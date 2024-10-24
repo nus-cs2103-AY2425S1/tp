@@ -17,11 +17,11 @@ public class ConfirmationNoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (Command.stack.isEmpty()) {
+        if (Command.STACK.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
         }
 
-        Command.stack.removeLast();
+        Command.STACK.removeLast();
 
         // Wrap around the command to execute
         return new CommandResult(MESSAGE_CANCEL_COMMAND_SUCCESS);

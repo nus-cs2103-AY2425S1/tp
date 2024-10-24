@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import careconnect.logic.Messages;
 import careconnect.logic.commands.exceptions.CommandException;
-import careconnect.model.AddressBook;
 import careconnect.model.Model;
 
 /**
@@ -17,11 +16,11 @@ public class ConfirmationYesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (Command.stack.isEmpty()) {
+        if (Command.STACK.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_EXECUTABLE_COMMAND);
         }
 
-        Command commandToExecute = Command.stack.getLast();
+        Command commandToExecute = Command.STACK.getLast();
 
         // Wrap around the command to execute
         return commandToExecute.execute(model);

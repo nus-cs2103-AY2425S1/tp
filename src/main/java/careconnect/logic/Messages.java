@@ -28,7 +28,7 @@ public class Messages {
     public static final String MESSAGE_TAG_NOT_FOUND_IN_PERSON = "Warning: tag %1$s not found in person %2$s";
 
     // Used for confirmation commands (y/n)
-    public static final String MESSAGE_NO_EXECUTABLE_COMMAND= "There is no command to execute";
+    public static final String MESSAGE_NO_EXECUTABLE_COMMAND = "There is no command to execute";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

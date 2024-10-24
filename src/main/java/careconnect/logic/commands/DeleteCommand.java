@@ -27,6 +27,9 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * @param targetIndex of the person in the filtered person list to delete
+     */
     public DeleteCommand(Index targetIndex) {
         super(true);
         this.targetIndex = targetIndex;
@@ -48,7 +51,7 @@ public class DeleteCommand extends Command {
 
         if (this.requireConfirmation) {
             // Add a DeleteCommand to the stack
-            Command.stack.add(new DeleteCommand(this.targetIndex, false));
+            Command.STACK.add(new DeleteCommand(this.targetIndex, false));
             return new CommandResult(Command.CONFIRMATION_MESSAGE);
         }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());

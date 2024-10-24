@@ -2,6 +2,9 @@ package careconnect.logic.commands;
 
 import java.util.Stack;
 
+/**
+ * Provides a Stack utility with constrained accessor methods.
+ */
 public class CommandStack {
     private final Stack<Command> stack = new Stack<>();
 
@@ -23,10 +26,18 @@ public class CommandStack {
         return stack.pop();
     }
 
+    /**
+     * Removes the last command from the stack. Returns nothing.
+     */
     public void removeLast() {
         stack.pop();
     }
 
+    /**
+     * Checks if there is any executable commands in the stack
+     *
+     * @return boolean indicating if the command stack is empty
+     */
     public boolean isEmpty() {
         return stack.isEmpty();
     }

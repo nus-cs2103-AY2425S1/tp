@@ -27,7 +27,7 @@ public class ClearCommand extends Command {
 
         if (this.requireConfirmation) {
             // Add a ClearCommand to the stack
-            Command.stack.add(new ClearCommand(false));
+            Command.STACK.add(new ClearCommand(false));
             return new CommandResult(Command.CONFIRMATION_MESSAGE);
         }
         model.setAddressBook(new AddressBook());

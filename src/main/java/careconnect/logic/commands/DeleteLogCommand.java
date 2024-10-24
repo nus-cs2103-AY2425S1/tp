@@ -93,7 +93,7 @@ public class DeleteLogCommand extends Command {
 
         if (this.requireConfirmation) {
             // Add a DeleteLogCommand to the stack
-            Command.stack.add(new DeleteLogCommand(personIndex, logIndex, false));
+            Command.STACK.add(new DeleteLogCommand(personIndex, logIndex, false));
             return new CommandResult(Command.CONFIRMATION_MESSAGE,
                     false, false, personIndex.getZeroBased());
         }

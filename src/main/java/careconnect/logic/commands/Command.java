@@ -1,7 +1,5 @@
 package careconnect.logic.commands;
 
-import java.util.Stack;
-
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.model.Model;
 
@@ -10,11 +8,11 @@ import careconnect.model.Model;
  */
 public abstract class Command {
 
-    public static String CONFIRMATION_MESSAGE = "This action is irreversible. Press y to continue, or n to cancel.";
+    public static final String CONFIRMATION_MESSAGE =
+            "This action is irreversible. Press y to continue, or n to cancel.";
+    protected static final CommandStack STACK = new CommandStack();
 
     protected final boolean requireConfirmation;
-
-    protected static final CommandStack stack = new CommandStack();
 
     protected Command() {
         this.requireConfirmation = false;
