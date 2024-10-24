@@ -32,6 +32,7 @@ public class AddNotesCommand extends Command {
             + "n/ High profile client.";
 
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Person: %1$s";
+    public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
 
     private final Index index;
     private final Note note;
@@ -62,7 +63,7 @@ public class AddNotesCommand extends Command {
         Set<Note> notesToEdit = new LinkedHashSet<>(personToEdit.getNotes());
 
         if (notesToEdit.contains(note)) {
-            throw new CommandException(Note.DUPLICATE_MESSAGE_CONSTRAINTS);
+            throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
 
         notesToEdit.add(note);
@@ -87,6 +88,21 @@ public class AddNotesCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         return String.format(MESSAGE_ADD_NOTES_SUCCESS, Messages.format(personToEdit));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddNotesCommand)) {
+            return false;
+        }
+
+        AddNotesCommand otherAddNotesCommand = (AddNotesCommand) other;
+        return note.equals(otherAddNotesCommand.note);
     }
 
 }
