@@ -30,7 +30,7 @@ import seedu.address.testutil.EditWeddingDescriptorBuilder;
 import seedu.address.testutil.WeddingBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditWeddingCommand.
  */
 public class EditWeddingCommandTest {
 

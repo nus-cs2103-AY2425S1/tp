@@ -113,13 +113,12 @@ public class EditWeddingCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditWeddingCommand)) {
+        if (!(other instanceof EditWeddingCommand otherEditWeddingCommand)) {
             return false;
         }
 
-        EditWeddingCommand otherEditCommand = (EditWeddingCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editWeddingDescriptor.equals(otherEditCommand.editWeddingDescriptor);
+        return index.equals(otherEditWeddingCommand.index)
+                && editWeddingDescriptor.equals(otherEditWeddingCommand.editWeddingDescriptor);
     }
 
     @Override

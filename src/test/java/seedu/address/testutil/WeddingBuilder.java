@@ -10,16 +10,11 @@ import seedu.address.model.wedding.WeddingName;
 
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Wedding objects.
  */
 public class WeddingBuilder {
 
     public static final String DEFAULT_WEDDING_NAME = "Amy's Wedding";
-    public static final String DEFAULT_PEOPLE_COUNT = "0";
-    // default partner1 is blank string as partner1 is optional
-    public static final String DEFAULT_PARTNER1 = "";
-    // default partner2 is blank string as partner2 is optional
-    public static final String DEFAULT_PARTNER2 = "";
     // default address is blank string as address is optional
     public static final String DEFAULT_ADDRESS = "";
     // default date is blank string as date is optional
@@ -34,18 +29,16 @@ public class WeddingBuilder {
     private String date;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code WeddingBuilder} with the default details.
      */
     public WeddingBuilder() {
         weddingName = new WeddingName(DEFAULT_WEDDING_NAME);
-        //partner1 = new PersonBuilder().withName(DEFAULT_PARTNER1).build();
-        //partner2 = new PersonBuilder().withName(DEFAULT_PARTNER2).build();
         address = new Address(DEFAULT_ADDRESS);
         date = DEFAULT_DATE;
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the WeddingBuilder with the data of {@code personToCopy}.
      */
     public WeddingBuilder(Wedding weddingToCopy) {
         weddingName = weddingToCopy.getWeddingName();
@@ -74,7 +67,7 @@ public class WeddingBuilder {
     /**
      * Sets the {@code partner2} of the {@code Wedding} that we are building.
      */
-    public WeddingBuilder withPartner2(Person partner21) {
+    public WeddingBuilder withPartner2(Person partner2) {
         this.partner2 = partner2;
         return this;
     }
