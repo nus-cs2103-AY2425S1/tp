@@ -1,8 +1,10 @@
 package tuteez.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.model.person.Name;
@@ -94,6 +96,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the person's details */
+    ObjectProperty<Optional<Person>> getLastViewedPerson();
+
+    /**
+     * Updates the lastViewedPerson after a DisplayCommand is called.
+     */
+    void updateLastViewedPerson(Person personOnDisplay);
 
     /**
      * Returns the {@code person} in the address book with the given name.

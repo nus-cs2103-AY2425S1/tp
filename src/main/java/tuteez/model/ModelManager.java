@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import tuteez.commons.core.GuiSettings;
@@ -24,6 +27,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObjectProperty<Optional<Person>> lastViewedPerson =
+            new SimpleObjectProperty<>(Optional.empty());
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -103,6 +108,7 @@ public class ModelManager implements Model {
     @Override
     public void displayPerson(Person target) {
         addressBook.displayPerson(target);
+        updateLastViewedPerson(target);
     }
 
     @Override
@@ -144,6 +150,18 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObjectProperty<Optional<Person>> getLastViewedPerson() {
+        return lastViewedPerson;
+    }
+
+    @Override
+    public void updateLastViewedPerson(Person personOnDisplay) {
+        requireNonNull(personOnDisplay);
+        lastViewedPerson.set(Optional.of(personOnDisplay));
+        logger.info("Last viewed person updated: " + personOnDisplay.getName().fullName);
     }
 
     @Override
