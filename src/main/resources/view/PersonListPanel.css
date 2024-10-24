@@ -32,6 +32,7 @@
     -fx-pref-width: 0;
     -fx-max-width: 0;
     -fx-min-width: 0;
+    -fx-cursor: null;
 }
 
 .list-cell {

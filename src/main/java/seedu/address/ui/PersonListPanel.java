@@ -7,9 +7,11 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -46,6 +48,8 @@ public class PersonListPanel extends UiPart<Region> {
             assert(personListView != null);
             logger.info("Setting up auto scroll mechanism");
             setupAutoScroll(personList);
+
+            disableScrollbarButtons();
         });
     }
 
@@ -102,5 +106,13 @@ public class PersonListPanel extends UiPart<Region> {
                 }
             }
         });
+    }
+
+    private void disableScrollbarButtons() {
+        for (Node node : personListView.lookupAll(".scroll-bar")) {
+            if (node instanceof ScrollBar scrollBar) {
+                scrollBar.setDisable(true);
+            }
+        }
     }
 }
