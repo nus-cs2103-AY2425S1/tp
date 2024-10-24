@@ -11,22 +11,31 @@ administrators.
 
 ## Table of Contents
 
+## Table of Contents
+
+## Table of Contents
+
+## Table of Contents
+
 1. [Installation](#1-installation)
-2. [Main Features](#2-main-features)
-    - [2.1 Viewing Help](#21-viewing-help)
-    - [2.2 Adding a Person](#22-adding-a-person)
-    - [2.3 Listing All Persons](#23-listing-all-persons)
-    - [2.4 Editing a Person](#24-editing-a-person)
-    - [2.5 Locating Persons by Name](#25-locating-persons-by-name)
-    - [2.6 Deleting a Person](#26-deleting-a-person)
-    - [2.7 Clearing All Entries](#27-clearing-all-entries)
-    - [2.8 Exiting the Program](#28-exiting-the-program)
-    - [2.9 Saving the Data](#29-saving-the-data)
-    - [2.10 Editing the Data File](#210-editing-the-data-file)
-    - [2.11 Marking a Payment as Completed](#211-marking-a-payment-as-completed)
-    - [2.12 Displaying pie chart of class distribution](#212-displaying-pie-chart-of-class-distribution)
-    - [2.13 Bar Chart](#213-bar-chart)
-3. [FAQs](#3-faqs)
+2. [Command Instructions](#2-command-instructions)
+   - [2.1 Viewing Help](#21-viewing-help--help)
+   - [2.2 Adding a Person](#22-adding-a-person-add)
+   - [2.3 Listing All Persons](#23-listing-all-persons-list)
+   - [2.4 Editing a Person](#24-editing-a-person-edit)
+   - [2.5 Locating Persons by Name](#25-locating-persons-by-name-find)
+   - [2.6 Deleting a Person](#26-deleting-a-person-delete)
+   - [2.7 Clearing All Entries](#27-clearing-all-entries-clear)
+   - [2.8 Exiting the Program](#28-exiting-the-program-exit)
+   - [2.9 Saving the Data](#29-saving-the-data)
+   - [2.10 Editing the Data File](#210-editing-the-data-file)
+   - [2.11 Marking a Payment as Completed](#211-marking-a-payment-as-completed)
+   - [2.12 Displaying Pie Chart of Class Distribution](#212-displaying-pie-chart-of-class-distribution-pie)
+   - [2.13 Displaying Bar Chart](#213-displaying-bar-chart-bar)
+   - [2.14 Viewing Command History](#214-viewing-command-history-arrow-keys)
+3. [FAQ](#3-faq)
+
+
 
 ***
 
