@@ -15,7 +15,7 @@ import seedu.address.model.person.Price;
 import seedu.address.model.person.Property;
 
 /**
- * Adds a property to the list of properties to buy for a specific contact.
+ * Records the {@code Property} bought.
  */
 public class BoughtPropertyCommand extends Command {
     public static final String COMMAND_WORD = "bought";

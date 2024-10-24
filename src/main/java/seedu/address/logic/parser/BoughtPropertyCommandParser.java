@@ -16,6 +16,7 @@ public class BoughtPropertyCommandParser implements Parser<BoughtPropertyCommand
     /**
      * Parses the given {@code String} of arguments in the context of the BoughtPropertyCommand
      * and returns an BoughtPropertyCommand object for execution.
+     * 
      * @throws ParseException if the user input does not conform the expected format
      */
     public BoughtPropertyCommand parse(String args) throws ParseException {
