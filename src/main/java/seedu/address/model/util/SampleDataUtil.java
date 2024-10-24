@@ -45,8 +45,12 @@ public class SampleDataUtil {
                 new ClientStatus("active"), new Deadline("10-12-2024")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), new ProjectStatus("completed"), new PaymentStatus("late"),
-                new ClientStatus("active"), new Deadline("20-12-2024"))
+                getTagSet("colleagues"), new ProjectStatus("completed"), new PaymentStatus("paid"),
+                new ClientStatus("active"), new Deadline("20-12-2024")),
+            new Person(new Name("Yu Ng"), new Phone("933-8872-9922"), new Email("yung@example.com"),
+                new Address("Blk 25 Yishun Street 21, #03-02"),
+                getTagSet("colleagues"), new ProjectStatus("completed"), new PaymentStatus("unpaid"),
+                new ClientStatus("old"), new Deadline("20-12-2023"))
         };
     }
 

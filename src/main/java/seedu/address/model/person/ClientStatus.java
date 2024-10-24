@@ -10,12 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ClientStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Client status must be either “active”, “unresponsive”, “potential”, or “old” (case insensitive).";
+            "Client status must be either “active”, “unresponsive”,"
+            + " “potential”, “blacklisted” or “old” (case insensitive).";
     public static final String NO_CLIENT_STATUS = "__No_Client_Status__";
     private static final String ACTIVE = "active";
     private static final String OLD = "old";
     private static final String POTENTIAL = "potential";
     private static final String UNRESPONSIVE = "unresponsive";
+    private static final String BLACKLISTED = "blacklisted";
 
     private final String value;
 
@@ -39,7 +41,8 @@ public class ClientStatus {
      */
     public static boolean isValidClientStatus(String test) {
         return test.equalsIgnoreCase(ACTIVE) || test.equalsIgnoreCase(UNRESPONSIVE)
-                || test.equalsIgnoreCase(POTENTIAL) || test.equalsIgnoreCase(OLD);
+                || test.equalsIgnoreCase(POTENTIAL) || test.equalsIgnoreCase(OLD)
+                || test.equalsIgnoreCase(BLACKLISTED);
     }
 
     /**
@@ -57,9 +60,15 @@ public class ClientStatus {
             return OLD;
         case POTENTIAL:
             return POTENTIAL;
+        case BLACKLISTED:
+            return BLACKLISTED;
         default:
             return status;
         }
+    }
+
+    public boolean isBlacklisted() {
+        return this.value.equals(BLACKLISTED);
     }
 
     @Override
