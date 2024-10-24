@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalProducts.APPLE;
-import static seedu.address.testutil.TypicalSuppliers.ALICE;
 import static seedu.address.testutil.TypicalSuppliers.BENSON;
 import static seedu.address.testutil.TypicalSuppliers.BOB;
 
@@ -71,20 +70,6 @@ public class AutoCompleteCommandTest {
             CliSyntax.PREFIX_PRODUCT_NAME.getPrefix());
         CommandResult result = autoCompleteCommand.execute(model);
         List<String> expectedCompletions = Arrays.asList(apple.getName().fullName);
-        assertEquals(String.join(AutoCompleteCommand.SUGGESTIONS_DELIMITER, expectedCompletions),
-            result.getFeedbackToUser());
-    }
-
-    @Test
-    public void execute_tagInputType_returnsTags() throws CommandException {
-        Product apple = new ProductBuilder(APPLE).withTags("fruit").build();
-        Supplier alice = new SupplierBuilder(ALICE).withTags("supplier").build();
-        model.addProduct(apple);
-        model.addSupplier(alice);
-
-        AutoCompleteCommand autoCompleteCommand = new AutoCompleteCommand("", CliSyntax.PREFIX_TAG.getPrefix());
-        CommandResult result = autoCompleteCommand.execute(model);
-        List<String> expectedCompletions = Arrays.asList("fruit", "supplier");
         assertEquals(String.join(AutoCompleteCommand.SUGGESTIONS_DELIMITER, expectedCompletions),
             result.getFeedbackToUser());
     }

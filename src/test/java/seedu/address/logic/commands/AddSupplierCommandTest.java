@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalSuppliers.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -94,6 +95,11 @@ public class AddSupplierCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<String> getAllTags() {
             throw new AssertionError("This method should not be called.");
         }
 

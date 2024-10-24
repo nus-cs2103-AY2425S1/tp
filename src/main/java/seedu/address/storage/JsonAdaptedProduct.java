@@ -1,10 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.product.StockLevel;
+import seedu.address.model.supplier.Name;
 
 /**
  * Jackson-friendly version of {@link Product}.
@@ -32,11 +30,12 @@ class JsonAdaptedProduct {
      * Constructs a {@code JsonAdaptedProduct} with the given product details.
      */
     @JsonCreator
-    public JsonAdaptedProduct(@JsonProperty("name") String name, @JsonProperty("supplierName") String supplierName,
-                              @JsonProperty("stockLevel") int stockLevel,
-                              @JsonProperty("minStockLevel") int minStockLevel,
-                              @JsonProperty("maxStockLevel") int maxStockLevel,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedProduct(
+            @JsonProperty("name") String name,
+            @JsonProperty("supplierName") String supplierName,
+            @JsonProperty("stockLevel") int stockLevel,
+            @JsonProperty("minStockLevel") int minStockLevel,
+            @JsonProperty("maxStockLevel") int maxStockLevel) {
         this.name = name;
         this.supplierName = supplierName;
         this.stockLevel = stockLevel;
@@ -53,12 +52,10 @@ class JsonAdaptedProduct {
     public JsonAdaptedProduct(Product source) {
         name = source.getName().fullName;
         supplierName = source.getSupplierName() != null ? source.getSupplierName().fullName : "";
-        stockLevel = source.getStockLevel();
-        minStockLevel = source.getMinStockLevel();
-        maxStockLevel = source.getMaxStockLevel();
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        StockLevel stock = source.getStockLevel();
+        stockLevel = stock.getStockLevel();
+        minStockLevel = stock.getMinStockLevel();
+        maxStockLevel = stock.getMaxStockLevel();
     }
 
     /**
@@ -67,25 +64,33 @@ class JsonAdaptedProduct {
      * @throws IllegalValueException if there were any data constraints violated in the adapted product.
      */
     public Product toModelType() throws IllegalValueException {
-        final List<Tag> productTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            productTags.add(tag.toModelType());
-        }
+        // Validate product name
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ProductName
-                .class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ProductName.class.getSimpleName()));
         }
         if (!ProductName.isValidName(name)) {
             throw new IllegalValueException(ProductName.MESSAGE_CONSTRAINTS);
         }
         final ProductName modelName = new ProductName(name);
-        final Set<Tag> modelTags = new HashSet<>(productTags);
-        Product product = new Product(modelName, modelTags);;
-        product.setStockLevel(stockLevel);
-        product.setMinStockLevel(minStockLevel);
-        product.setMaxStockLevel(maxStockLevel);
-        if (!supplierName.isEmpty()) {
-            product.setSupplierName(new seedu.address.model.supplier.Name(supplierName));
+
+        // Validate stock levels
+        StockLevel stockLevelObj;
+        try {
+            stockLevelObj = new StockLevel(stockLevel, minStockLevel, maxStockLevel);
+        } catch (Exception e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+
+        // Create the Product object
+        Product product = new Product(modelName, stockLevelObj);
+
+        // Set supplier name if present
+        if (supplierName != null && !supplierName.isEmpty()) {
+            if (!Name.isValidName(supplierName)) {
+                throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            }
+            product.setSupplierName(new Name(supplierName));
         }
         return product;
     }
