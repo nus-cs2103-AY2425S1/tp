@@ -1,7 +1,7 @@
 package seedu.internbuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
@@ -74,7 +74,7 @@ public class UpdateCommandTest {
     }
 
     @Test
-    public void equals_sameObject_returnsTrue() {
+    public void equals_sameObjectValue_returnsTrue() {
         AppStatus appStatus = new AppStatus("INTERVIEWED");
         UpdateCommand updateCommand = new UpdateCommand(INDEX_FIRST_COMPANY,
                 Index.fromOneBased(1), appStatus);
@@ -82,11 +82,12 @@ public class UpdateCommandTest {
                 Index.fromOneBased(1), appStatus);
 
         // same object -> returns true
+        assertTrue(updateCommand.equals(updateCommand));
         assertTrue(updateCommand.equals(updateCommand2));
     }
 
     @Test
-    public void equals_differentObject_returnsFalse() {
+    public void equals_differentObjectValue_returnsFalse() {
         AppStatus appStatus1 = new AppStatus("INTERVIEWED");
         AppStatus appStatus2 = new AppStatus("OFFERED");
         UpdateCommand updateCommand1 = new UpdateCommand(INDEX_FIRST_COMPANY,
@@ -95,6 +96,6 @@ public class UpdateCommandTest {
                 Index.fromOneBased(1), appStatus2);
 
         // different objects -> returns false
-        assertNotEquals(updateCommand1, updateCommand2);
+        assertFalse(updateCommand1.equals(updateCommand2));
     }
 }
