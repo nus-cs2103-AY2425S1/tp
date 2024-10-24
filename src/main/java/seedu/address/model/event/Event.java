@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
 
@@ -20,6 +21,7 @@ public class Event {
     private final String eventName;
     private final LocalDate date;
     private final Set<Person> attendees = new HashSet<>();
+    private final Address location;
 
     /**
      * Constructs an {@code Event}.
@@ -28,11 +30,13 @@ public class Event {
      * @param date A valid date.
      * @param attendees A set of {@code Person} attending the event.
      */
-    public Event(String eventName, LocalDate date, Set<Person> attendees) {
-        requireAllNonNull(eventName, date, attendees);
+    public Event(String eventName, LocalDate date, Address location, Set<Person> attendees) {
+        requireAllNonNull(eventName, date, location, attendees);
         this.eventName = eventName;
         this.date = date;
+        this.location = location;
         this.attendees.addAll(attendees);
+
     }
 
     public String getEventName() {
@@ -51,8 +55,9 @@ public class Event {
         return attendees.contains(person);
     }
 
-    // TODO: Implement Location for Event, then update equality to check for
-    //       name, date, and location
+    public Address getLocation() {
+        return location;
+    }
 
 
     /**
@@ -66,7 +71,8 @@ public class Event {
         return otherEvent != null
                 && otherEvent.getEventName().equals(getEventName())
                 && otherEvent.getDate().equals(getDate())
-                && otherEvent.getAttendees().equals(getAttendees());
+                && otherEvent.getAttendees().equals(getAttendees())
+                && location.equals(otherEvent.location);
     }
 
     @Override
@@ -92,10 +98,16 @@ public class Event {
 
     @Override
     public String toString() {
+        StringBuilder attendeesString = new StringBuilder();
+
+        for (Person attendee : attendees) {
+            attendeesString.append('\n').append(attendee.toString());
+        }
+
         return "Event{"
                 + "name='" + eventName + '\''
                 + ", date=" + date
-                + ", attendees=" + attendees
+                + ", \nattendees=" + attendeesString
                 + '}';
     }
 }

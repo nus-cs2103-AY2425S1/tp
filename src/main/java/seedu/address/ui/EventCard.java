@@ -33,6 +33,11 @@ public class EventCard extends UiPart<Region> {
     private static final Image IMAGE_PERSON_LIGHT =
             new Image("/images/person_light.png");
 
+    private static final Image IMAGE_LOCATION_DARK =
+            new Image("/images/location_dark.png");
+    private static final Image IMAGE_LOCATION_LIGHT =
+            new Image("/images/location_light.png");
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -51,6 +56,8 @@ public class EventCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label date;
+    @FXML
+    private Label locationLabel;
 
     @FXML
     private FlowPane attendees;
@@ -60,6 +67,8 @@ public class EventCard extends UiPart<Region> {
 
     @FXML
     private ImageView personIcon;
+    @FXML
+    private ImageView locationIcon;
 
     /**
      * Creates a {@code EventCard} with the given {@code Event} and index to display.
@@ -70,6 +79,7 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(event.getEventName());
         date.setText(event.getDate().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        locationLabel.setText(event.getLocation().value);
         attendees.getChildren().addAll(generateAttendeesLabels());
     }
 
@@ -127,9 +137,11 @@ public class EventCard extends UiPart<Region> {
         if (selected) {
             calendarIcon.setImage(IMAGE_CALENDAR_DARK);
             personIcon.setImage(IMAGE_PERSON_DARK);
+            locationIcon.setImage(IMAGE_LOCATION_DARK);
         } else {
             calendarIcon.setImage(IMAGE_CALENDAR_LIGHT);
             personIcon.setImage(IMAGE_PERSON_LIGHT);
+            locationIcon.setImage(IMAGE_LOCATION_LIGHT);
         }
     }
 }
