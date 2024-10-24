@@ -138,16 +138,41 @@
     -fx-text-fill: #333333;
 }
 
+.tag_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
 .stack-pane {
      -fx-background-color: derive(#f5f5f5, 20%);
 }
 
-.pane-with-border {
-     -fx-background-color: derive(#f5f5f5, 20%);
-     -fx-border-radius: 10px;
+.student-pane {
+     -fx-background-color: #33daff;
+     -fx-border-radius: 0;
      -fx-border-width: 1px;
-     -fx-border-color: #007BFF;
-     -fx-background-insets: 5px;
+     -fx-border-color: #33daff;
+     -fx-background-insets: 0;
+     -fx-padding: 1px;
+}
+
+.tutor-pane {
+     -fx-background-color: #ffa233;
+     -fx-border-radius: 0;
+     -fx-border-width: 1px;
+     -fx-border-color: #ffa233;
+     -fx-background-insets: 0;
+     -fx-padding: 1px;
+}
+.pane-with-border {
+     -fx-background-color: #33daff;
+     -fx-border-radius: 0;
+     -fx-border-width: 1px;
+     -fx-border-color: #33daff;
+     -fx-background-insets: 0;
+     -fx-padding: 1px;
+
 
 }
 

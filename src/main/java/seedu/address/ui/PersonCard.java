@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
 
 /**
@@ -39,9 +40,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label tag;
     @FXML
     private Label course;
+
+    @FXML
+    private Label module;
+
+    @FXML
+    private StackPane tagPane;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,11 +62,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        tag.setText(person.getTag().role.getRole());
 
-        FlowPane singleTagFlowPane = new FlowPane();
-        Label tagLabel = new Label(person.getTag().toString());
-        singleTagFlowPane.getChildren().add(tagLabel);
-        tags.getChildren().add(singleTagFlowPane);
+        if (person.getTag().role.getRole().equalsIgnoreCase("Student")) {
+            tagPane.getStyleClass().add("student-pane");
+        } else if (person.getTag().role.getRole().equalsIgnoreCase("Tutor")) {
+            tagPane.getStyleClass().add("tutor-pane");
+        }
 
         String modulesAsString = person.getModules().stream()
                 .map(m -> m.toString() + "\n")
