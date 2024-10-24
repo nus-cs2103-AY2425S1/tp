@@ -33,8 +33,10 @@ public class Transaction {
      * @param date        The date the transaction has taken place.
      * @param categories  The categories the transaction has.
      */
-    public Transaction(String id, Person person, Amount amount, Description description, Date date,
-                       Set<Category> categories) {
+    public Transaction(
+            String id, Person person, Amount amount, Description description, Date date,
+            Set<Category> categories
+    ) {
         CollectionUtil.requireAllNonNull(person, amount, description, date, categories);
         this.id = id;
         this.person = person;
