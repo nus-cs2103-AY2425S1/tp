@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_EMAIL_DETAILS;
+import static seedu.address.logic.Messages.MESSSAGE_INVALID_PHONE_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -41,13 +43,12 @@ public class DateCommandParser implements Parser<DateCommand> {
 
             // Validate the phone number format if present
             if (phone.isPresent() && !isValidPhone(phone.get())) {
-                throw new ParseException("ERROR: Invalid phone number format. "
-                        + "Enter a valid 8 digit phone number starting with 3, 6, 8 or 9.");
+                throw new ParseException(MESSSAGE_INVALID_PHONE_DETAILS);
             }
 
             // Validate the email format if present
             if (email.isPresent() && !isValidEmail(email.get())) {
-                throw new ParseException("ERROR: Invalid email format. Please provide a valid email address.");
+                throw new ParseException(MESSAGE_INVALID_EMAIL_DETAILS);
             }
 
             return new DateCommand(name, phone, email, new Date(date));

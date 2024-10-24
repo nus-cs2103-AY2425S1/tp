@@ -14,8 +14,13 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_EMAIL_DETAILS = "ERROR: Invalid email format. "
+            + "Please provide a valid email address.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_PERSON_DELETED = "No matching person found. Please check the details.";
+    public static final String MESSSAGE_INVALID_PHONE_DETAILS = "ERROR: Invalid phone number format. "
+            + "Enter a valid 8 digit phone number starting with 3, 6, 8 or 9.";
+
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";

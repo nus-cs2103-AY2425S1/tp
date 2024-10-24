@@ -69,6 +69,20 @@ public class DateCommandTest {
     }
 
     @Test
+    public void execute_invalidPhone_failure() {
+        DateCommand dateCommand = new DateCommand(Optional.empty(), Optional.of("11111111"),
+                Optional.empty(), new Date(VALID_DATE_BOB));
+        assertCommandFailure(dateCommand, model, DateCommand.MESSAGE_NO_PERSON_FOUND);
+    }
+
+    @Test
+    public void execute_invalidEmail_failure() {
+        DateCommand dateCommand = new DateCommand(Optional.empty(), Optional.empty(),
+                Optional.of("bobexample.com"), new Date(VALID_DATE_BOB));
+        assertCommandFailure(dateCommand, model, DateCommand.MESSAGE_NO_PERSON_FOUND);
+    }
+
+    @Test
     public void equals() {
         final DateCommand standardCommand = new DateCommand(Optional.of(VALID_NAME_AMY),
                 Optional.of(VALID_PHONE_AMY), Optional.of(VALID_EMAIL_AMY), new Date(VALID_DATE_AMY));
