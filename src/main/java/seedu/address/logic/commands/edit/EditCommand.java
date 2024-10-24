@@ -44,8 +44,8 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "(" + PREFIX_PHONE + "PHONE"
+            + " | " + PREFIX_EMAIL + "EMAIL) "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]+ "
             + "[" + PREFIX_MODULE + "(+ | -)(MODULECODE[-ROLETYPE])+]\n"
@@ -104,14 +104,15 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress().orElse(null));
+        Phone updatedPhone = editPersonDescriptor.getPhone().or(personToEdit :: getPhone).orElse(null);
+        Email updatedEmail = editPersonDescriptor.getEmail().or(personToEdit :: getEmail).orElse(null);
+        Address updatedAddress = editPersonDescriptor.getAddress().or(personToEdit :: getAddress).orElse(null);
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ModuleRoleMap updatedModuleRoleMap = editPersonDescriptor.getModuleRoleOperation()
                 .map(o -> o.execute(personToEdit.getModuleRoleMap())).orElse(personToEdit.getModuleRoleMap());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, Optional.ofNullable(updatedAddress),
+        return new Person(updatedName, Optional.ofNullable(updatedPhone), Optional.ofNullable(updatedEmail),
+                Optional.ofNullable(updatedAddress),
                 updatedTags, updatedModuleRoleMap);
     }
 
