@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Disabled;
@@ -26,8 +26,8 @@ public class AssignVendorCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST_PERSON);
+        Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(AssignVendorCommand.MESSAGE_SUCCESS,
                 personToAssign.getName());
@@ -48,10 +48,10 @@ public class AssignVendorCommandTest {
 
     @Test
     public void execute_duplicateVendor_throwsCommandException() {
-        Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         model.assignVendor(personToAssign);
 
-        AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST_PERSON);
+        AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
         assertCommandFailure(assignVendorCommand, model,
                 String.format(AssignVendorCommand.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
     }
@@ -59,10 +59,10 @@ public class AssignVendorCommandTest {
     @Disabled // disabled, to find why it doesnt work
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST_PERSON);
+        Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(AssignVendorCommand.MESSAGE_SUCCESS,
                 personToAssign.getName());
@@ -74,9 +74,9 @@ public class AssignVendorCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
@@ -87,14 +87,14 @@ public class AssignVendorCommandTest {
 
     @Test
     public void equals() {
-        AssignVendorCommand assignVendorFirstCommand = new AssignVendorCommand(INDEX_FIRST_PERSON);
-        AssignVendorCommand assignVendorSecondCommand = new AssignVendorCommand(INDEX_SECOND_PERSON);
+        AssignVendorCommand assignVendorFirstCommand = new AssignVendorCommand(INDEX_FIRST);
+        AssignVendorCommand assignVendorSecondCommand = new AssignVendorCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(assignVendorFirstCommand.equals(assignVendorFirstCommand));
 
         // same values -> returns true
-        AssignVendorCommand assignVendorFirstCommandCopy = new AssignVendorCommand(INDEX_FIRST_PERSON);
+        AssignVendorCommand assignVendorFirstCommandCopy = new AssignVendorCommand(INDEX_FIRST);
         assertTrue(assignVendorFirstCommand.equals(assignVendorFirstCommandCopy));
 
         // different types -> returns false

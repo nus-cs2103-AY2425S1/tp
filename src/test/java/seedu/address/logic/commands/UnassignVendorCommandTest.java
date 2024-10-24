@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -24,9 +24,9 @@ public class UnassignVendorCommandTest {
     // To add: test cases to check for validity
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         UnassignVendorCommand unassignVendorCommand = new UnassignVendorCommand(outOfBoundIndex);
@@ -36,14 +36,14 @@ public class UnassignVendorCommandTest {
 
     @Test
     public void equals() {
-        UnassignVendorCommand unassignVendorFirstCommand = new UnassignVendorCommand(INDEX_FIRST_PERSON);
-        UnassignVendorCommand unassignVendorSecondCommand = new UnassignVendorCommand(INDEX_SECOND_PERSON);
+        UnassignVendorCommand unassignVendorFirstCommand = new UnassignVendorCommand(INDEX_FIRST);
+        UnassignVendorCommand unassignVendorSecondCommand = new UnassignVendorCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(unassignVendorFirstCommand.equals(unassignVendorFirstCommand));
 
         // same values -> returns true
-        UnassignVendorCommand unassignVendorFirstCommandCopy = new UnassignVendorCommand(INDEX_FIRST_PERSON);
+        UnassignVendorCommand unassignVendorFirstCommandCopy = new UnassignVendorCommand(INDEX_FIRST);
         assertTrue(unassignVendorFirstCommand.equals(unassignVendorFirstCommandCopy));
 
         // different types -> returns false
