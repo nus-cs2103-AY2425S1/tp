@@ -27,8 +27,8 @@ public class SupplyOrderCard extends UiPart<Region> {
 
     public final Order order;
 
-//    @FXML
-//    private Label name;
+    @FXML
+    private Label name;
     @FXML
     private Label id;
     @FXML
@@ -46,7 +46,7 @@ public class SupplyOrderCard extends UiPart<Region> {
         super(FXML);
         this.order = order;
         id.setText(displayedIndex + ". ");
-//        name.setText(person.getName().fullName);
+        name.setText(order.getPerson().getName().fullName);
         phone.setText(order.getPhoneNumber());
         date.setText(order.getOrderDate());
         items.setText(order.viewOrder());
