@@ -41,10 +41,10 @@ MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-InspectWindow -down-> "*" DeliveryListPanel
+InspectWindow -down-> "1" DeliveryListPanel
 InspectWindow -down-> "0..1" HelpWindow
 
-DeliveryListPanel -down-> "1" DeliveryCard
+DeliveryListPanel -down-> "*" DeliveryCard
 
 PersonListPanel -down-> "*" PersonCard
 
@@ -57,6 +57,8 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+DeliveryCard --|> UiPart
+
 
 PersonCard ..> Model
 UiManager -right-> Logic
