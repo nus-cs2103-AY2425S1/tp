@@ -26,6 +26,7 @@ public class ModelManager implements Model {
 
     private final Listings listings;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Listing> filteredListings;
 
     private final FilteredList<Listing> filteredListings;
 
@@ -130,7 +131,7 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
-
+  
     //=========== Listings ================================================================================
 
     @Override
@@ -166,7 +167,6 @@ public class ModelManager implements Model {
 
         listings.setListing(target, editedListing);
     }
-
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -214,7 +214,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredListings.setPredicate(predicate);
     }
-
+  
     /**
      * Returns the listing with the same name as {@code name} exists in the address book.
      */
@@ -227,7 +227,6 @@ public class ModelManager implements Model {
                 .findFirst()
                 .orElse(null);
     }*/
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
