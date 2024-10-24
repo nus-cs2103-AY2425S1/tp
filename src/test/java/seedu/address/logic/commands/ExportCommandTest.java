@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_FAILURE;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_FILE_EXISTS;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_HOME_FILE_EXISTS;
+import static seedu.address.logic.commands.ExportCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
@@ -589,6 +590,108 @@ public class ExportCommandTest {
         // Verify data file exists and contains correct content
         assertTrue(Files.exists(dataFile));
         verifyExportedFileContent(dataFile, sampleStudent);
+    }
+
+    @Test
+    public void execute_homeDirectoryCopyFailsWithIoException() throws IOException, CommandException {
+        // Add a sample student
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        filesToCleanup.add(dataFile);
+
+        // Create a custom ExportCommand that will throw IOException during home directory copy
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                // This will cause Files.copy to throw IOException when trying to copy to home directory
+                return temporaryFolder.resolve("nonexistent").resolve("directory").resolve(filename + ".csv");
+            }
+        };
+
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify success message only mentions data file
+        String expectedMessage = String.format(MESSAGE_SUCCESS, 1, dataFile);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify the data file exists and contains the correct content
+        assertTrue(Files.exists(dataFile));
+        List<String> lines = Files.readAllLines(dataFile);
+        assertEquals(2, lines.size()); // Header + 1 student
+        assertTrue(lines.get(1).contains(sampleStudent.getName().fullName));
+    }
+
+    @Test
+    public void execute_mainWriteFailsAndCleanupFails() throws IOException {
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+
+        // Create a custom ExportCommand that will simulate both write failure and cleanup failure
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            public CommandResult execute(Model model) throws CommandException {
+                try {
+                    // Simulate main write failure
+                    throw new IOException("Simulated write failure");
+                } catch (IOException e) {
+                    // Simulate cleanup failure
+                    try {
+                        // Create an unwritable file to force cleanup failure
+                        Files.createFile(dataFile);
+                        dataFile.toFile().setReadOnly();
+                        Files.deleteIfExists(dataFile);
+                    } catch (IOException ignored) {
+                        // This is the ignored exception we want to cover
+                    }
+                    throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
+                }
+            }
+        };
+
+        // Execute and verify exception
+        String expectedMessage = String.format(MESSAGE_FAILURE, "Simulated write failure");
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void execute_fileExistsInHomeAndCleanupFails() throws IOException {
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        filesToCleanup.add(dataFile);
+
+        // Create a custom ExportCommand that will handle both exceptions
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            public CommandResult execute(Model model) throws CommandException {
+                try {
+                    // Write some initial content
+                    Files.write(dataFile, "test content".getBytes());
+
+                    // Simulate FileAlreadyExistsException
+                    throw new FileAlreadyExistsException(dataFile.toString());
+                } catch (FileAlreadyExistsException e) {
+                    try {
+                        // Make the file read-only to force cleanup failure
+                        dataFile.toFile().setReadOnly();
+                        Files.deleteIfExists(dataFile);
+                    } catch (IOException ignored) {
+                        // This is the ignored exception we want to cover
+                    }
+                    throw new CommandException(String.format(MESSAGE_HOME_FILE_EXISTS, getHomeFilePath(filename)));
+                } catch (IOException e) {
+                    throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
+                } finally {
+                    // Reset file permissions for cleanup
+                    dataFile.toFile().setWritable(true);
+                }
+            }
+        };
+
+        String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, exportCommand.getHomeFilePath(filename));
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
     }
 
     /**
