@@ -20,6 +20,10 @@ import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.StudentID;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Imports contacts from a CSV file into the address book.
+ * Supports adding both students and companies.
+ */
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
@@ -27,16 +31,28 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_FAILURE = "Failed to import contacts from: %1$s";
     public static final String MESSAGE_INVALID_CATEGORY = "Invalid category in CSV. Category must be either 'student' "
             + "or 'company'";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports file in comma-separated value(CSV) format"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports file in comma-separated value(CSV) format.\n"
             + "Example: " + COMMAND_WORD + " /path/to/file.csv";
-
     private final String filePath;
 
+    /**
+     * Creates an ImportCommand to import contacts from the specified CSV file path.
+     *
+     * @param filePath The path of the CSV file to import contacts from.
+     */
     public ImportCommand(String filePath) {
         requireNonNull(filePath);
         this.filePath = filePath;
     }
 
+    /**
+     * Executes the ImportCommand, reading contacts from the specified CSV file
+     * and adding them to the address book.
+     *
+     * @param model The model in which contacts are to be added.
+     * @return A CommandResult indicating success or failure of the import operation.
+     * @throws CommandException If an error occurs during file reading or processing.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -46,7 +62,7 @@ public class ImportCommand extends Command {
             String line = br.readLine(); // Skip the header row
 
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",", -1); // Split CSV by commas and include empty strings for empty fields
+                String[] values = line.split(","); // Split CSV by commas
 
                 if (values.length < 6) {
                     throw new CommandException("Invalid CSV format");
@@ -57,16 +73,15 @@ public class ImportCommand extends Command {
                 Phone phone = new Phone(values[3].trim());
                 Email email = new Email(values[4].trim());
                 Address address = new Address(values[5].trim());
-                Set<Tag> tagSet = parseTags(values, 6); // Start parsing tags from the 6th field onwards
+                Set<Tag> tagSet = parseTags(values.length > 6 ? values[6].trim() : "");
 
                 switch (category.toLowerCase()) {
                 case "student":
-                    // For students
                     String studentID = values[2].trim();
                     if (!studentID.isEmpty()) {
                         Student student = new Student(name, new StudentID(studentID), phone, email, address, tagSet);
                         if (!model.hasPerson(student)) {
-                            new AddStudentCommand(student).execute(model); // Add student using AddStudentCommand
+                            new AddStudentCommand(student).execute(model);
                             successCount++;
                         }
                     } else {
@@ -75,12 +90,11 @@ public class ImportCommand extends Command {
                     break;
 
                 case "company":
-                    // For companies
                     String industry = values[2].trim();
                     if (!industry.isEmpty()) {
                         Company company = new Company(name, new Industry(industry), phone, email, address, tagSet);
                         if (!model.hasPerson(company)) {
-                            new AddCompanyCommand(company).execute(model); // Add company using AddCompanyCommand
+                            new AddCompanyCommand(company).execute(model);
                             successCount++;
                         }
                     } else {
@@ -93,7 +107,8 @@ public class ImportCommand extends Command {
                 }
             }
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, filePath) + "\nSuccessfully imported: " + successCount + " entries");
+            return new CommandResult(String.format(MESSAGE_SUCCESS, filePath)
+                    + "\nSuccessfully imported: " + successCount + " entries");
 
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, filePath));
@@ -101,19 +116,28 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Parses tags starting from the specified index in the CSV values array.
+     * Parses a comma-separated string of tags into a {@code Set<Tag>}.
+     *
+     * @param tagsString The comma-separated string of tags.
+     * @return A {@code Set<Tag>} containing the parsed tags.
      */
-    private Set<Tag> parseTags(String[] values, int startIndex) {
+    private Set<Tag> parseTags(String tagsString) {
         Set<Tag> tags = new HashSet<>();
-        for (int i = startIndex; i < values.length; i++) {
-            String tagName = values[i].trim();
-            if (!tagName.isEmpty()) {
+        if (!tagsString.isEmpty()) {
+            String[] tagsArray = tagsString.split("\\s+"); // Split tags by spaces
+            for (String tagName : tagsArray) {
                 tags.add(new Tag(tagName));
             }
         }
         return tags;
     }
-    
+    /**
+     * Checks if two ImportCommand objects are equal.
+     * Two ImportCommand objects are considered equal if they have the same file path.
+     *
+     * @param other The other object to compare with.
+     * @return true if both objects have the same file path, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -128,6 +152,11 @@ public class ImportCommand extends Command {
         return filePath.equals(otherCommand.filePath);
     }
 
+    /**
+     * Returns the hash code for this ImportCommand.
+     *
+     * @return The hash code for this ImportCommand, based on the file path.
+     */
     @Override
     public int hashCode() {
         return filePath.hashCode();

@@ -24,7 +24,8 @@ public class ImportCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         // Empty file path argument
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ImportCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -38,6 +39,7 @@ public class ImportCommandParserTest {
     public void parse_noFileArg_throwsParseException() {
         // No file argument
         String emptyArg = "";
-        assertParseFailure(parser, emptyArg, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, emptyArg, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ImportCommand.MESSAGE_USAGE));
     }
 }

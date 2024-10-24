@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 public class ImportCommandTest {
 
@@ -33,7 +32,8 @@ public class ImportCommandTest {
 
         // Check if command executes successfully
         CommandResult result = importCommand.execute(model);
-        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, tempFile.toString()) + "\nSuccessfully imported: 2 entries", result.getFeedbackToUser());
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, tempFile.toString())
+                + "\nSuccessfully imported: 2 entries", result.getFeedbackToUser());
 
         Files.deleteIfExists(tempFile);
     }
