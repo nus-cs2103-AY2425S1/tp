@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
-import seedu.address.model.person.PersonAttendance;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -170,17 +174,41 @@ public class StudentTest {
     }
 
     @Test
-    void markAttendance_validDateAndStatus_success() {
-        LocalDate date = LocalDate.now();
-        student.markAttendance(date, "present");
-        PersonAttendance attendance = student.getAttendance(date);
-        assertEquals("present", attendance.toString());
+    public void getAttendanceRecord_noRecords_emptyList() {
+        // Create a student without attendance records
+        Name name = new Name("John Doe");
+        Phone phone = new Phone("12345678");
+        TutorialGroup tutorialGroup = new TutorialGroup("G01");
+        StudentNumber studentNumber = new StudentNumber("S1234567A");
+        Student student = new Student(name, phone, tutorialGroup, studentNumber);
+
+        // Verify that getAttendanceRecord() returns an empty list
+        assertEquals(0, student.getAttendanceRecord().size());
     }
 
     @Test
-    void getAttendance_nonExistentDate_returnsNull() {
-        LocalDate date = LocalDate.now().plusDays(1);
-        PersonAttendance attendance = student.getAttendance(date);
-        assertEquals(null, attendance);
+    public void getAttendanceRecord_multipleRecords_success() {
+        // Create a student
+        Name name = new Name("Jane Doe");
+        Phone phone = new Phone("87654321");
+        TutorialGroup tutorialGroup = new TutorialGroup("G02");
+        StudentNumber studentNumber = new StudentNumber("S7654321B");
+        Student student = new Student(name, phone, tutorialGroup, studentNumber);
+
+        // Mark attendance for multiple dates
+        student.markAttendance(LocalDate.of(2024, 10, 22), "p");
+        student.markAttendance(LocalDate.of(2024, 10, 23), "a");
+
+        // Get the attendance records
+        List<AttendanceRecord> attendanceRecords = student.getAttendanceRecord();
+
+        // Verify that the size is correct
+        assertEquals(2, attendanceRecords.size());
+
+        // Verify that the records match the expected values
+        assertEquals(LocalDate.of(2024, 10, 22), attendanceRecords.get(0).getDate());
+        assertEquals(new Attendance("p"), attendanceRecords.get(0).getAttendance());
+        assertEquals(LocalDate.of(2024, 10, 23), attendanceRecords.get(1).getDate());
+        assertEquals(new Attendance("a"), attendanceRecords.get(1).getAttendance());
     }
 }
