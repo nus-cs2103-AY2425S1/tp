@@ -18,7 +18,7 @@ Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "1" EmergencyContact
 Person *--> "1" Address
-Person *--> "1" Note
+Person *--> "1  " Note
 Person *--> "1" Level
 Person *--> "*" Subject
 Person *--> "*" LessonTime
