@@ -39,7 +39,7 @@ public class FindConcertContactCommandParserTest {
     }
 
     @Test
-    public void parse_inputWithPreamble_throwsParseException() {
+    public void parse_inputWithPreamble_success() {
         FindConcertContactCommand expectedFindConcertContact = new FindConcertContactCommand(
             INDEX_FIRST_PERSON, (Index) null);
         assertParseSuccess(parser,
