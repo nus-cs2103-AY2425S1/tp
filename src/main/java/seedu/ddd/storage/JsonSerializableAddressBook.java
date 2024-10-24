@@ -24,6 +24,7 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
     public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
+    public static final String MESSAGE_CONTACT_NOT_CREATED = "Event contains contact(s) that have not been created.";
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
     private final int nextContactId;
@@ -78,6 +79,12 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
+            List<Contact> contacts = event.getContacts();
+            for (Contact contact: contacts) {
+                if (!addressBook.hasContact(contact)) {
+                    throw new IllegalValueException(MESSAGE_CONTACT_NOT_CREATED);
+                }
+            }
             if (addressBook.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
