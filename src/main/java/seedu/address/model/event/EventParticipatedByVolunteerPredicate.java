@@ -31,7 +31,7 @@ public class EventParticipatedByVolunteerPredicate implements Predicate<Event> {
         }
 
         EventParticipatedByVolunteerPredicate otherVolInEventPredicate = (EventParticipatedByVolunteerPredicate) other;
-        return volunteerName.equals(otherVolInEventPredicate.volunteerName);
+        return volunteerName.equalsIgnoreCase(otherVolInEventPredicate.volunteerName);
     }
 
     @Override
