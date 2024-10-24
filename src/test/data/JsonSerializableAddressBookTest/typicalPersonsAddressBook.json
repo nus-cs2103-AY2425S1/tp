@@ -13,14 +13,16 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "comment": "",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "isVip" : true
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "comment": "",
-    "tags" : [ ]
+    "tags" : [ ],
+    "isVip" : true
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",

@@ -32,9 +32,10 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withComment("He can't lift heavy things!")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withVipState(true).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street").withVipState(true).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
