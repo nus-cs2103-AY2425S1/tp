@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.person.Appointment.ENGLISH_FORMAT;
+import static seedu.address.logic.parser.ParserUtil.ENGLISH_FORMAT;
 import static seedu.address.model.person.Appointment.TODAY;
 
 import java.util.logging.Logger;

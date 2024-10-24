@@ -34,7 +34,7 @@ public class BookingsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(new BookingIsOnDate(date));
-        String formattedDate = date.format(ParserUtil.ENGLISH_FORMAT_WITH_TIME);
+        String formattedDate = date.format(ParserUtil.ENGLISH_FORMAT);
         return new CommandResult(
                 String.format(Messages.MESSAGE_NUMBER_OF_BOOKINGS,
                         model.getFilteredPersonList().size(), formattedDate));

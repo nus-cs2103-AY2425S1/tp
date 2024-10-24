@@ -27,7 +27,7 @@ public class BookingIsOnDate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof BookingIsOnDate)) {
             return false;
         }
 
