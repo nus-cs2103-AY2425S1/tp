@@ -6,9 +6,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
+import seedu.address.ui.DisplayType;
 
 /**
- * Finds and lists all projects in address book whose name contains any of the argument keywords.
+ * Finds and lists all projects in address book whose name contains any of the
+ * argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindProjectCommand extends Command {
@@ -31,7 +33,8 @@ public class FindProjectCommand extends Command {
         requireNonNull(model);
         model.updateFilteredProjectList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PROJECTS_LISTED_OVERVIEW, model.getFilteredProjectList().size()));
+                String.format(Messages.MESSAGE_PROJECTS_LISTED_OVERVIEW, model.getFilteredProjectList().size()),
+                DisplayType.PROJECT_LIST);
     }
 
     @Override

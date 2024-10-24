@@ -19,6 +19,7 @@ import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
+import seedu.address.ui.DisplayType;
 
 /**
  * Adds a person to the address book.
@@ -88,7 +89,8 @@ public class AssignCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
         model.addAssignment(toAssign);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAssign)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAssign)),
+                DisplayType.ASSIGNMENT_LIST);
     }
 
     @Override

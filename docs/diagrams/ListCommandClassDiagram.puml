@@ -6,8 +6,8 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 Command <|-- ListCommand
 
-ListCommand <|-- ListPersonCommand
-ListCommand <|-- ListProjectCommand
+ListCommand <|-- ListPersonsCommand
+ListCommand <|-- ListProjectsCommand
 ListCommand <|-- ListProjectMembersCommand
 ListCommand <|-- ListAssignmentsCommand
 

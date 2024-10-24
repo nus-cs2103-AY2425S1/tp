@@ -5,14 +5,15 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.ui.DisplayType;
 
 /**
  * Lists all projects in the address book to the user.
  */
-public class ListProjectCommand extends ListCommand {
+public class ListProjectsCommand extends ListCommand {
 
     // Command word using the 'list' prefix + 'project'
-    public static final String COMMAND_WORD = COMMAND_PREFIX + "project";
+    public static final String COMMAND_WORD = COMMAND_PREFIX + "projects";
 
     public static final String MESSAGE_SUCCESS = "Listed all projects";
 
@@ -20,6 +21,6 @@ public class ListProjectCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, DisplayType.PROJECT_LIST);
     }
 }
