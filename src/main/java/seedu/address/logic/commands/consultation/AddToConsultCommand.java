@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
 
 /**
  * Adds students to a specific consultation.
@@ -31,7 +32,8 @@ public class AddToConsultCommand extends Command {
             + "[" + PREFIX_NAME + "NAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 n/John Doe n/Harry Ng";
 
-    public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to Consultation: %1$s";
+    public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to the Consultation: %1$s";
+    public static final String MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION = "%s is already added to the consultation!";
 
     private final Index index;
     private final List<Name> studentNames;
@@ -58,16 +60,24 @@ public class AddToConsultCommand extends Command {
                 index.getOneBased()));
         }
 
-        Consultation consultationToEdit = lastShownList.get(index.getZeroBased());
+        Consultation targetConsultation = lastShownList.get(index.getZeroBased());
+        Consultation editedConsultation = new Consultation(targetConsultation);
 
         for (Name studentName : studentNames) {
             Student student = model.findStudentByName(studentName)
                     .orElseThrow(() -> new CommandException("Student not found: " + studentName));
-            consultationToEdit.addStudent(student);
+            try {
+                editedConsultation.addStudent(student);
+            } catch (DuplicateStudentException e) {
+                throw new CommandException(
+                        String.format(MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION, studentName));
+            }
         }
 
+        model.setConsult(targetConsultation, editedConsultation);
+
         return new CommandResult(
-            String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)),
+            String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(editedConsultation)),
             COMMAND_TYPE);
     }
 
