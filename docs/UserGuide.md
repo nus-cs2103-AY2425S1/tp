@@ -54,19 +54,21 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 
    - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010` : Adds a concert named `Coachella` to the ConcertPhoneBook.
 
-   - `addcc 1 c/1` : Links the 1st person to the 1st concert
+   - `addcc pi/1 ci/1` : Links the 1st person to the 1st concert
 
    - `deletep 1` : Deletes the 1st person shown in the current person list.
 
    - `deletec 1` : Deletes the 1st concert shown in the current concert list.
 
-   - `deletecc 1 c/1` : Deletes the concertContact between the 1st person and 1st concert shown in the list.
+   - `deletecc 1` : Deletes the 1st concertContact shown in the current concertContact list.
 
    - `clear` : Deletes all contacts.
 
    - `findp n/alice bob charlie r/organiser` : Finds person(s) named either `Alice`, `Bob` or `Charlie` with an `organiser` role from the ConcertPhoneBook.
 
    - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the ConcertPhoneBook.
+
+   - `findcc pi/1 ci/1` : Finds the concertContact between the 1st person and 1st concert.
 
    - `exit` : Exits the app.
 
@@ -153,7 +155,7 @@ Adds a Concert to the Concert Phone book.
 
 - Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
 - FYI: If user were to add a date that does not exist, closest date in the same month will be added
-     e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
+  e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
 
 Format: `addc n/CONCERTNAME a/ADDRESS d/DATE`
 
@@ -167,7 +169,7 @@ Adds an association to the contact in the Concert Phone book with another Concer
 
 Format: `addcc pi/INDEX ci/CONCERT_INDEX`
 
-- Adds an association between the person at the specified `INDEX` to the concert at the specified `CONCERT_INDEX`
+- Adds an association between the person at the specified `PERSON_INDEX` to the concert at the specified `CONCERT_INDEX`
 - The index refers to the index number shown in the displayed person / concert list. The index **must be a positive integer** 1, 2, 3, …​
 
 ### Deleting a person : `deletep`
@@ -199,9 +201,9 @@ Format: `deletec INDEX`
 
 Deletes the specified concertContact from the Concert Phone book.
 
-Format: `deletecc pi/PERSON_INDEX ci/CONCERT_INDEX`
+Format: `deletecc INDEX`
 
-- Deletes the concertContact between the person in the specified `PERSON_INDEX` and the concert in the specified `CONCERT_INDEX`.
+- Deletes the concertContact at the specified `INDEX`
 - The index refers to the index number shown in the displayed person / concert list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
@@ -288,7 +290,7 @@ Format: `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`
 - Existing values will be updated to the input values.
 - Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
 - FYI: If user were to add a date that does not exist, closest date in the same month will be added
-    e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
+  e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
 
 Examples:
 
@@ -335,7 +337,7 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 ## Command summary
 
 | Action                       | Format, Examples                                                                                                                                                             |
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **List Person**              | `listp`                                                                                                                                                                      |
 | **List Concerts**            | `listc`                                                                                                                                                                      |
 | **List Person and Concerts** | `list`                                                                                                                                                                       |
@@ -345,7 +347,7 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 | **Add ConcertContact**       | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
 | **Delete Person**            | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
 | **Delete Concert**           | `deletep INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
-| **Delete ConcertContact**    | `deletecc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g., `deletecc pi/3 ci/3`                                                                                                   |
+| **Delete ConcertContact**    | `deletecc INDEX`<br> e.g., `deletecc 1`                                                                                                                                      |
 | **Clear**                    | `clear`                                                                                                                                                                      |
 | **Edit Person**              | `editp INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
 | **Edit Concert**             | `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`<br> e.g.,`editc 1 a/2 Stadium Drive d/2024-10-11 2200`                                                                           |
