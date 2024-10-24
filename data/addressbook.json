@@ -35,12 +35,6 @@
     "email" : "johndoe@example.com",
     "availableDate" : "2020-10-10",
     "involvedIn" : [ ]
-  }, {
-    "name" : "John doe",
-    "phone" : "98765432",
-    "email" : "johndoe@example.com",
-    "availableDate" : "2020-10-10",
-    "involvedIn" : [ ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
@@ -81,54 +75,6 @@
     "endTime" : "16:00",
     "location" : "Red Cross Center",
     "description" : "Organizing a blood donation drive",
-    "volunteers" : [ ]
-  }, {
-    "eventName" : "Food collectioasdn",
-    "date" : "2024-11-29",
-    "startTime" : "00:00",
-    "endTime" : "23:59",
-    "location" : "NTUC",
-    "description" : "Collecting unsold food from NTUC for distribution Collecting unsold food from NTUC for distributiona",
-    "volunteers" : [ ]
-  }, {
-    "eventName" : "Collecting unsold food from NTUC for distributisda",
-    "date" : "2024-11-29",
-    "startTime" : "00:00",
-    "endTime" : "23:59",
-    "location" : "NTUC",
-    "description" : "Collecting unsold food from NTUC for distribution",
-    "volunteers" : [ ]
-  }, {
-    "eventName" : "Food collection",
-    "date" : "2024-11-29",
-    "startTime" : "00:00",
-    "endTime" : "23:59",
-    "location" : "Collecting unsold food from NTUC for distributiasd",
-    "description" : "Collecting unsold food from NTUC for distribution",
-    "volunteers" : [ ]
-  }, {
-    "eventName" : "Foosdd collection",
-    "date" : "2024-11-29",
-    "startTime" : "00:00",
-    "endTime" : "23:59",
-    "location" : "Collecting unsold food from NTUC for distributiasd Collecting unsold food from NTUC for distributia",
-    "description" : "Collecting unsold food from NTUC for distribution",
-    "volunteers" : [ ]
-  }, {
-    "eventName" : "Fo collection",
-    "date" : "2024-11-29",
-    "startTime" : "00:00",
-    "endTime" : "23:59",
-    "location" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    "description" : "Collecting unsold food from NTUC for distribution",
-    "volunteers" : [ ]
-  }, {
-    "eventName" : "food collection",
-    "date" : "2024-11-29",
-    "startTime" : "00:00",
-    "endTime" : "23:59",
-    "location" : "NTUC",
-    "description" : "Collecting unsold food from NTUC for distribution",
     "volunteers" : [ ]
   } ]
 }

@@ -135,10 +135,8 @@ public class Event {
         if (otherEvent == this) {
             return true;
         }
-        String eventName = getName().toString();
-        String otherEventName = otherEvent.getName().toString();
         return otherEvent != null
-                && eventName.equalsIgnoreCase(otherEventName);
+                && otherEvent.getName().equals(getName());
     }
 
     /**
