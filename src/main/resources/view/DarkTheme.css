@@ -280,7 +280,7 @@
 }
 
 #detailPanel {
-    -fx-padding: 10 20 15 20;
+    -fx-padding: 0 0 0 20;
     -fx-background-color: #9a6447;
 }
 
@@ -297,7 +297,7 @@
 /* SCROLL BAR STYLING */
 
 .scroll-bar {
-    -fx-background-color: transparent; /* Optional: makes the scrollbar background transparent */
+    -fx-background-color: #534338; /* Optional: makes the scrollbar background transparent */
 }
 .scroll-bar:vertical .thumb {
     -fx-background-color: #9a6447; /* Sets the vertical scrollbar thumb to brown */
@@ -333,4 +333,13 @@
     -fx-border-radius: 3;
     -fx-background-radius: 3;
     -fx-font-size: 11;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #9a6447;
 }
