@@ -346,7 +346,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -365,18 +365,39 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **When adding Persons or Events**, most fields are mandatory. An update to allow for optional fields is in progress.
+3. **When adding Points of Contact to an Event**, the application does not check for duplicate entries. The remedy is to either use the Edit Event command or manually remove the duplicate Points of Contact. An update to prevent duplicate Points of Contact is in progress.
+3. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
+### Managing Contacts
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity`
+**Delete** | `delete person INDEX`<br> e.g., `delete person 3`
+**Edit** | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit person 1 n/James Lee e/jameslee@example.com`
+**Filter** | `filter person TAG`<br> e.g., `filter person Celebrity`
+**Find** | `find person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find person James Jake`
+**List** | `list person`
+**View** | `view person KEYWORD [MORE_KEYWORDS]`<br> e.g., `view person Jake Doe`
+
+### Managing Events
+Action | Format, Examples
+--------|------------------
+**Add** | `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`<br> e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe`
+**Delete** | `delete event INDEX`<br> e.g., `delete event 3`
+**Edit** | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> e.g.,`edit event 1 t/2024-03-21 v/Jane's Salon`
+**Filter** | `filter event CELEBRITY_NAME`<br> e.g., `filter event Jim Bob`
+**Find** | `find event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find event Hair Oscars`
+**List** | `list event`
+**View** | `view event KEYWORD [MORE_KEYWORDS]`<br> e.g., `view event Oscars`
+
+### Utility Commands
+Action | Format, Examples
+--------|------------------
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Exit** | `exit`
 **Help** | `help`
