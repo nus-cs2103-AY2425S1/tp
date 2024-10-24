@@ -27,7 +27,7 @@ public class Restaurant {
     private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
     private boolean isFavourite;
-    private final Tag price;
+    private final Price price;
 
     /**
      * Every field must be present and not null.
@@ -41,7 +41,7 @@ public class Restaurant {
         this.rating = rating;
 
         // Extract the price tag and other tags
-        Pair<Tag, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
+        Pair<Price, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
         this.price = priceTagAndOtherTags.getFirst();
         this.tags.addAll(priceTagAndOtherTags.getSecond());
 
@@ -74,9 +74,9 @@ public class Restaurant {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        Set<Tag> tags = new HashSet<>(this.tags);
-        tags.addAll(getPriceTags());
-        return Collections.unmodifiableSet(tags);
+        Set<Tag> allTags = new HashSet<>(this.tags);
+        allTags.addAll(getPriceTags());
+        return Collections.unmodifiableSet(allTags);
     }
 
     /**
