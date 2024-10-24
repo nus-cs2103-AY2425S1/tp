@@ -242,6 +242,12 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+<div>
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
+</div>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
