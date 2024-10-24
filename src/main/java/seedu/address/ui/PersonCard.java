@@ -47,7 +47,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label householdIncome;
     @FXML
+    private Label familySize;
+    @FXML
     private Label remark;
+    @FXML
+    private Label updatedAt;
     @FXML
     private FlowPane tags;
 
@@ -79,6 +83,8 @@ public class PersonCard extends UiPart<Region> {
 
         dateOfBirth.setText(String.format("%s (Age: %d)", person.getDateOfBirth(), getPersonAge(person)));
         householdIncome.setText(String.format("[Household Income] %s", person.getIncome()));
+        familySize.setText(String.format("Family size: %s", person.getFamilySize()));
+        updatedAt.setText(String.format("Last updated: %s", person.getUpdatedAt()));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

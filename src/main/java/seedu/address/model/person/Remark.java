@@ -32,11 +32,10 @@ public class Remark {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Remark)) {
+        if (!(other instanceof Remark otherRemark)) {
             return false;
         }
 
-        Remark otherRemark = (Remark) other;
         return value.equals(otherRemark.value);
     }
 

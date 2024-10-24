@@ -21,6 +21,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */

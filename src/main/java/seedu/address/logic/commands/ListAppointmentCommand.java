@@ -24,4 +24,9 @@ public class ListAppointmentCommand extends Command {
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         return new CommandResult(MESSAGE_SUCCESS, true, false, false);
     }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }

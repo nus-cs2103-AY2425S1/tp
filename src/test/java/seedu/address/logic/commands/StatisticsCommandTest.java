@@ -2,8 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.StatisticsCommand.appointmentsSoon;
 import static seedu.address.logic.commands.StatisticsCommand.highPriorityPeople;
-//import static seedu.address.logic.commands.StatisticsCommand.incomeLessThan2500;
+import static seedu.address.logic.commands.StatisticsCommand.incomeEightHundredOrLess;
 import static seedu.address.logic.commands.StatisticsCommand.lowPriorityPeople;
 import static seedu.address.logic.commands.StatisticsCommand.mediumPriorityPeople;
 import static seedu.address.logic.commands.StatisticsCommand.nbOfPeople;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,12 +40,16 @@ public class StatisticsCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsAllStats() {
         List<Person> personList = expectedModel.getFilteredPersonList();
+        List<Appointment> appointmentList = expectedModel.getFilteredAppointmentList();
+
         String expectedMessage = String.format(StatisticsCommand.MESSAGE_DISPLAY_STATISTICS_SUCCESS,
                 nbOfPeople(personList) + "\n"
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
-                + lowPriorityPeople(personList));
-        //                + incomeLessThan2500(personList));
+                + lowPriorityPeople(personList) + "\n"
+                + incomeEightHundredOrLess(personList) + "\n"
+                + appointmentsSoon(appointmentList));
+
         assertCommandSuccess(new StatisticsCommand(), model,
                 expectedMessage, expectedModel);
     }
@@ -52,13 +58,17 @@ public class StatisticsCommandTest {
     public void execute_listIsFiltered_showFilteredListStats() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
         List<Person> personList = expectedModel.getFilteredPersonList();
+        List<Appointment> appointmentList = expectedModel.getFilteredAppointmentList();
+
         String expectedMessage = String.format(StatisticsCommand.MESSAGE_DISPLAY_STATISTICS_SUCCESS,
                 nbOfPeople(personList) + "\n"
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
-                + lowPriorityPeople(personList));
-        //                + incomeLessThan2500(personList));
+                + lowPriorityPeople(personList) + "\n"
+                + incomeEightHundredOrLess(personList) + "\n"
+                + appointmentsSoon(appointmentList));
 
         assertCommandSuccess(new StatisticsCommand(), model,
                expectedMessage, expectedModel);

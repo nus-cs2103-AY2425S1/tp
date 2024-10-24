@@ -5,10 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,7 +30,10 @@ public class DeleteCommand extends Command {
                 + "Example: " + COMMAND_WORD + " 1, 2";
 
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People:\n%s";
+
     private final Index[] targetIndexes;
+    private final List<Person> personsToDelete = new ArrayList<>();
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
 
     /**
@@ -51,7 +57,6 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> personsToDelete = new ArrayList<>();
 
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -60,6 +65,11 @@ public class DeleteCommand extends Command {
             personsToDelete.add(lastShownList.get(targetIndex.getZeroBased()));
         }
 
+        logger.info("----------------[PEOPLE TO BE DELETED]["
+                + Arrays.stream(targetIndexes)
+                .map(index -> String.valueOf(index.getOneBased())) // Convert to String
+                .collect(Collectors.joining(", ")) + "]");
+
         String s = personsToDelete.stream().map(person -> {
             model.deleteAppointments(person.getName());
             model.deletePerson(person);
@@ -67,6 +77,19 @@ public class DeleteCommand extends Command {
         }).collect(Collectors.joining("\n\n"));
 
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, s));
+    }
+
+    public Index[] getTargetIndexes() {
+        return targetIndexes;
+    }
+
+    public List<Person> getPersonsToDelete() {
+        return personsToDelete;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 
     @Override

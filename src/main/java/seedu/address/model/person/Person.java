@@ -27,14 +27,18 @@ public class Person {
     private final Remark remark;
     private final DateOfBirth dateOfBirth;
     private final Income income;
+    private final FamilySize familySize;
     private final Set<Tag> tags = new HashSet<>();
+
+    private final UpdatedAt updatedAt;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
-                  DateOfBirth dateOfBirth, Income income, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, priority, remark, dateOfBirth, income, tags);
+                  DateOfBirth dateOfBirth, Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt) {
+        requireAllNonNull(name, phone, email, address, priority, remark,
+                dateOfBirth, income, familySize, tags, updatedAt);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,7 +47,9 @@ public class Person {
         this.remark = remark;
         this.dateOfBirth = dateOfBirth;
         this.income = income;
+        this.familySize = familySize;
         this.tags.addAll(tags);
+        this.updatedAt = updatedAt;
     }
 
     public Name getName() {
@@ -78,12 +84,20 @@ public class Person {
         return income;
     }
 
+    public FamilySize getFamilySize() {
+        return familySize;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public UpdatedAt getUpdatedAt() {
+        return updatedAt;
     }
 
     /**
@@ -121,13 +135,15 @@ public class Person {
                 && remark.equals(otherPerson.remark)
                 && dateOfBirth.equals(otherPerson.dateOfBirth)
                 && income.equals(otherPerson.income)
+                && familySize.equals(otherPerson.familySize)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, priority, remark, dateOfBirth, income, tags);
+        return Objects.hash(name, phone, email, address, priority, remark,
+                dateOfBirth, income, familySize, tags, updatedAt);
     }
 
     @Override
@@ -141,7 +157,9 @@ public class Person {
                 .add("remark", remark)
                 .add("dateOfBirth", dateOfBirth)
                 .add("income", income)
+                .add("familySize", familySize)
                 .add("tags", tags)
+                .add("updatedAt", updatedAt)
                 .toString();
     }
 }

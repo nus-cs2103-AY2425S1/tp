@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -28,6 +29,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -81,14 +83,16 @@ public class AddressBookParserTest {
         List<String> nameKeywords = Arrays.asList("foo", "bar");
         List<String> addressKeywords = Arrays.asList("clementi", "tampines");
         List<String> priorities = Arrays.asList("high", "medium");
+        List<String> incomes = List.of("1500");
 
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + PREFIX_NAME + nameKeywords.get(0) + " "
-                        + PREFIX_NAME + nameKeywords.get(1) + " " + PREFIX_ADDRESS + addressKeywords.get(0) + " "
-                        + PREFIX_ADDRESS + addressKeywords.get(1) + " " + PREFIX_PRIORITY + priorities.get(0) + " "
-                        + PREFIX_PRIORITY + priorities.get(1));
+                        + PREFIX_NAME + nameKeywords.get(1) + " "
+                        + PREFIX_ADDRESS + addressKeywords.get(0) + " " + PREFIX_ADDRESS + addressKeywords.get(1) + " "
+                        + PREFIX_PRIORITY + priorities.get(0) + " " + PREFIX_PRIORITY + priorities.get(1) + " "
+                        + PREFIX_INCOME + incomes.get(0));
 
-        assertEquals(new FindCommand(nameKeywords, addressKeywords, priorities), command);
+        assertEquals(new FindCommand(nameKeywords, addressKeywords, priorities, incomes), command);
     }
 
     @Test
@@ -114,6 +118,12 @@ public class AddressBookParserTest {
     public void parseCommand_statistics() throws Exception {
         assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD) instanceof StatisticsCommand);
         assertTrue(parser.parseCommand(StatisticsCommand.COMMAND_WORD + " 3") instanceof StatisticsCommand);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " name");
+        assertEquals(command, new SortCommand("name"));
     }
 
     @Test

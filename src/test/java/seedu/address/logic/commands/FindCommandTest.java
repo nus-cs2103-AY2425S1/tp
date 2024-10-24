@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.IncomePredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.PriorityPredicate;
 
@@ -38,20 +39,21 @@ public class FindCommandTest {
     private List<String> nameKeywords = new ArrayList<>();
     private List<String> addressKeywords = new ArrayList<>();
     private List<String> priorities = new ArrayList<>();
+    private List<String> incomes = new ArrayList<>();
 
     @Test
     public void equals() {
         List<String> firstNameList = Arrays.asList("first");
         List<String> secondNameList = Arrays.asList("second");
 
-        FindCommand findFirstCommand = new FindCommand(firstNameList, addressKeywords, priorities);
-        FindCommand findSecondCommand = new FindCommand(secondNameList, addressKeywords, priorities);
+        FindCommand findFirstCommand = new FindCommand(firstNameList, addressKeywords, priorities, incomes);
+        FindCommand findSecondCommand = new FindCommand(secondNameList, addressKeywords, priorities, incomes);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstNameList, addressKeywords, priorities);
+        FindCommand findFirstCommandCopy = new FindCommand(firstNameList, addressKeywords, priorities, incomes);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -60,7 +62,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different filters -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
@@ -69,7 +71,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         nameKeywords = Arrays.asList("Carl", "Elle", "Fiona");
 
-        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities);
+        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
         expectedModel.updateFilteredPersonList(new NameContainsKeywordsPredicate(nameKeywords));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -81,7 +83,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         addressKeywords = Arrays.asList("Clementi", "Jurong");
 
-        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities);
+        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
         expectedModel.updateFilteredPersonList(new AddressContainsKeywordsPredicate(addressKeywords));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -90,32 +92,47 @@ public class FindCommandTest {
 
     @Test
     public void execute_multiplePriorities_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
-        priorities = Arrays.asList("LOW");
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 6);
+        priorities = Arrays.asList("LOW", "HIGH");
 
-        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities);
+        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
         expectedModel.updateFilteredPersonList(new PriorityPredicate(priorities));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleIncomes_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        incomes = Arrays.asList("1000.00", "800");
+
+        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
+        expectedModel.updateFilteredPersonList(new IncomePredicate(incomes));
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, ALICE, CARL), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multipleParameters_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         nameKeywords = Arrays.asList("A", "B", "C", "D");
         addressKeywords = Arrays.asList("Jurong", "Clementi", "wall street");
         priorities = Arrays.asList("MEDIUM", "HIGH");
+        incomes = Arrays.asList("500.00", "0");
 
-        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities);
+        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
         AddressContainsKeywordsPredicate addressPredicate = new AddressContainsKeywordsPredicate(addressKeywords);
         PriorityPredicate priorityPredicate = new PriorityPredicate(priorities);
+        IncomePredicate incomePredicate = new IncomePredicate(incomes);
 
-        expectedModel.updateFilteredPersonList(namePredicate.and(addressPredicate).and(priorityPredicate));
+        expectedModel.updateFilteredPersonList(
+                namePredicate.and(addressPredicate).and(priorityPredicate).and(incomePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, ALICE), model.getFilteredPersonList());
+        assertEquals(List.of(BENSON), model.getFilteredPersonList());
     }
 
     @Test
@@ -123,7 +140,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         nameKeywords = Arrays.asList("Me");
 
-        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities);
+        FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
         expectedModel.updateFilteredPersonList(new NameContainsKeywordsPredicate(nameKeywords));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -133,10 +150,10 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         List<String> nameKeywords = Arrays.asList("keyword");
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(nameKeywords);
-        FindCommand findCommand = new FindCommand(nameKeywords, addressKeywords, priorities);
+        FindCommand findCommand = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
         String expected = FindCommand.class.getCanonicalName() + "{names=" + nameKeywords
-                + ", addresses=" + addressKeywords + ", priorities=" + priorities + "}";
+                + ", addresses=" + addressKeywords + ", priorities=" + priorities + ", incomes=" + incomes
+                + "}";
         assertEquals(expected, findCommand.toString());
     }
 }

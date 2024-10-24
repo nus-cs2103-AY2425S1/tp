@@ -49,12 +49,14 @@ public class ModelManager implements Model {
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
-        sortedPersons.setComparator(Comparator.comparing(Person::getPriority)); // sort by descending priority
+        sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority
+                .thenComparing(person -> person.getName().toString())); // sort by name alphabetically after
 
         this.appointments = FXCollections.observableList(appointments);
         filteredAppointments = new FilteredList<>(this.appointments);
-        sortedAppointments = new SortedList<>(filteredAppointments,
-                Comparator.comparing(Appointment::date).thenComparing(Appointment::startTime));
+        sortedAppointments = new SortedList<>(filteredAppointments);
+        sortedAppointments.setComparator(Comparator.comparing(Appointment::date)
+                .thenComparing(Appointment::startTime));
     }
 
     public ModelManager() {
@@ -126,6 +128,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPerson(Person person, int index) {
+        addressBook.addPerson(person, index);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
@@ -177,6 +185,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortingOrder(Comparator<Person> comparator) {
+        sortedPersons.setComparator(comparator);
     }
 
     @Override

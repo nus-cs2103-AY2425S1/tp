@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -26,12 +28,14 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,8 +53,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_DATE_OF_BIRTH + "DATE_OF_BIRTH] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
+            + "[" + PREFIX_INCOME + "INCOME] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -62,6 +68,9 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+
+    private Person personToEdit;
+    private Person editedPerson;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -84,8 +93,8 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        personToEdit = lastShownList.get(index.getZeroBased());
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson)) {
             if (model.hasPerson(editedPerson)) {
@@ -115,10 +124,25 @@ public class EditCommand extends Command {
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
+        // todo - allow edit of person's family size
+        FamilySize updatedFamilySize = personToEdit.getFamilySize();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority,
-                updatedRemark, updatedDateOfBirth, updatedIncome, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now());
+    }
+
+    public Person getUneditedPerson() {
+        return personToEdit;
+    }
+
+    public Person getEditedPerson() {
+        return editedPerson;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 
     @Override
@@ -173,6 +197,7 @@ public class EditCommand extends Command {
             setPriority(toCopy.priority);
             setRemark(toCopy.remark);
             setDateOfBirth(toCopy.dateOfBirth);
+            setIncome(toCopy.income);
             setTags(toCopy.tags);
         }
 
@@ -180,7 +205,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, priority, tags);
+            return CollectionUtil.isAnyNonNull(
+                    name, phone, email, address, priority, remark, dateOfBirth, income, tags);
         }
 
         public void setName(Name name) {
@@ -281,6 +307,8 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
+                    && Objects.equals(income, otherEditPersonDescriptor.income)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -291,7 +319,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("dateOfBirth", dateOfBirth)
                     .add("priority", priority)
+                    .add("income", income)
                     .add("remark", remark)
                     .add("tags", tags)
                     .toString();

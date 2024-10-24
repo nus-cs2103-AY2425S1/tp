@@ -46,6 +46,11 @@ public class DeleteAppointmentCommand extends Command {
     }
 
     @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

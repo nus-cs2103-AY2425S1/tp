@@ -20,7 +20,7 @@ public class GetCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Get the specified parameter of all the people in the filtered persons list.\n"
             + "Parameters: PARAMETER \n"
-            + "Example: " + COMMAND_WORD + " e/ p/";
+            + "Example: " + COMMAND_WORD + " email phone";
 
     public static final String MESSAGE_GET_PARAMETER_SUCCESS = "Here are the %s details:\n%s";
     private final String[] parameters;
@@ -50,21 +50,21 @@ public class GetCommand extends Command {
 
         for (int i = 0; i < parameters.length; i++) {
             String s = "";
-            switch (parameters[i]) {
+            switch (parameters[i].toLowerCase()) {
 
-            case "e/":
+            case "email":
                 resultString += getEmailMessage(lastShownList);
                 break;
 
-            case "p/":
+            case "phone":
                 resultString += getPhoneNumberMessage(lastShownList);
                 break;
 
-            case "n/":
+            case "name":
                 resultString += getNameMessage(lastShownList);
                 break;
 
-            case "a/":
+            case "address":
                 resultString += getAddressMessage(lastShownList);
                 break;
 
@@ -130,6 +130,11 @@ public class GetCommand extends Command {
                 .reduce((address1, address2) -> address1 + ",\n" + address2)
                 .orElse("");
         return String.format(MESSAGE_GET_PARAMETER_SUCCESS, "ADDRESS", message) + "\n\n";
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 
     @Override

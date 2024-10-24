@@ -19,6 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -39,6 +40,8 @@ public class ParserUtilTest {
     private static final String INVALID_DATE_2 = "zxcvbn";
     private static final String INVALID_DATE_FUTURE = "19 Mar 2900";
     private static final String INVALID_INCOME = "-21092";
+    private static final String INVALID_FAMILY_SIZE_1 = "0";
+    private static final String INVALID_FAMILY_SIZE_2 = "99jnksff2";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -53,7 +56,7 @@ public class ParserUtilTest {
     private static final String VALID_DATE_1 = "1 Jun 2022";
     private static final String VALID_DATE_2 = "31 Jul 1954";
     private static final String VALID_INCOME = "9212.2329";
-
+    private static final String VALID_FAMILY_SIZE = "1";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -353,5 +356,22 @@ public class ParserUtilTest {
                 ParserUtil.parseIncome(WHITESPACE + VALID_INCOME + WHITESPACE));
     }
 
+    @Test
+    public void parseFamilySize_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFamilySize(INVALID_FAMILY_SIZE_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseFamilySize(INVALID_FAMILY_SIZE_2));
+    }
+
+    @Test
+    public void parseFamilySize_validValueWithoutWhitespace_returnsFamilySize() throws Exception {
+        assertEquals(new FamilySize(Integer.parseInt(VALID_FAMILY_SIZE)),
+                ParserUtil.parseFamilySize(VALID_FAMILY_SIZE));
+    }
+
+    @Test
+    public void parseFamilySize_validValueWithWhitespace_returnsFamilySize() throws Exception {
+        assertEquals(new FamilySize(Integer.parseInt(VALID_FAMILY_SIZE)),
+                ParserUtil.parseFamilySize(WHITESPACE + VALID_FAMILY_SIZE + WHITESPACE));
+    }
 
 }
