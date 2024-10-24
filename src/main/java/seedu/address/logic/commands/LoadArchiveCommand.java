@@ -61,4 +61,19 @@ public class LoadArchiveCommand extends Command {
         logger.info("Loaded archive file: " + archiveFilename);
         return new CommandResult(String.format(MESSAGE_SUCCESS, archiveFilename));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LoadArchiveCommand)) {
+            return false;
+        }
+
+        LoadArchiveCommand otherDeleteCommand = (LoadArchiveCommand) other;
+        return archiveFilename.equals(otherDeleteCommand.archiveFilename);
+    }
 }
