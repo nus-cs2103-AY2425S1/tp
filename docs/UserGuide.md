@@ -50,27 +50,33 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+There are 5 CLI command formats as shown below:
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+1) `COMMAND_WORD`
+2) `COMMAND_WORD INDEX`
+3) `COMMAND_WORD PARAMETER`
+3) `COMMAND_WORD PARAMETERS`
+4) `COMMAND_WORD INDEX PARAMETERS`
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+Parameters often take up the form of `p/[PARAMETER]` where p is the parameter symbol. For example:`add n/John Doe`<br>
+- `n/` -> parameter symbol<br>
+- `John Doe` -> parameter.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+**Other things to note in this User Guide:**
+1) Items in square brackets are optional.<br>
+  e.g `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
+2) Parameters can be in any order:<br>
+  `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored:<br>
+  `help 123` is interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+4) If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a pop-up message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -167,19 +173,27 @@ Examples:
 * `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the 
 1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
 
-### List all person appointment: `schedule_all`
+### Show appointments on a specific date: `schedule_date`
 
-Lists all the appointments assigned to every person
+Lists all the appointments on a specific date.
+
+Format: `schedule_date DATE`
+
+* `DATE` must be in the form of `DD-MM-YYYY`.
+* Appointments that overlap with the specified date will be displayed.
+
+Examples:
+* `schedule_date 01-01-2020` returns all the appointments that takes place on 1 January 2020.
+
+### List all patient appointment: `schedule_all`
+
+Lists all the appointments assigned to every patient.
 
 Format: `schedule_all`
 
-Examples:
-* `list` followed by `make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
-  1st person in the address book that is on the 23rd of October 2024 from 12pm to 3pm.
-
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all patients and appointments information from WardWatch.
 
 Format: `clear`
 
@@ -235,5 +249,6 @@ Action     | Format, Examples
 **Find**   | `find FIELD/ KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/ James Jake`
 **List**   | `list`
 **Make_appt** | `make_appt INDEX a/APPOINTMENT_DESCRIPTION s/START_DATE_TIME e/END_DATE_TIME`<br> e.g.,`make_appt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00`
-**Schedule_all**| `schedule_all`<br> e.g.,`schedule_all`
+**Schedule_all**| `schedule_all`<br>
+**Schedule_date**| `schedule_date DATE`<br> e.g.,`schedule_date 01-01-2020`
 **Help**   | `help`
