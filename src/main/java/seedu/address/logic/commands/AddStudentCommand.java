@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -14,8 +15,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Student;
-
-
 
 /**
  * Adds a student to the address book.
@@ -33,6 +32,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_ADDRESS + " ADDRESS "
             + PREFIX_SUBJECT + " SUBJECT "
             + PREFIX_CLASSES + " CLASSES "
+            + PREFIX_ATTENDANCE + " ATTENDANCE"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
@@ -41,7 +41,8 @@ public class AddStudentCommand extends Command {
             + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
             + PREFIX_SUBJECT + " Physics "
-            + PREFIX_CLASSES + " 7A,7B ";
+            + PREFIX_CLASSES + " 7A,7B "
+            + PREFIX_ATTENDANCE + " 0 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON =

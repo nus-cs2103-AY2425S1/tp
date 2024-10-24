@@ -35,6 +35,9 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="subjects" styleClass="cell_small_label" text="\$subjects" />
       <Label fx:id="classes" styleClass="cell_small_label" text="\$classes" />
+      <HBox fx:id="daysAttendedContainer">
+        <Label fx:id="daysAttended" styleClass="cell_small_label" text="\$daysAttended" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>

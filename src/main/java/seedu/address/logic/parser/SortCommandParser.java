@@ -10,16 +10,15 @@ import seedu.address.model.person.Person;
  * Parses input arguments to create a new {@code SortCommand}.
  */
 public class SortCommandParser implements Parser<SortCommand> {
-
     @Override
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        Comparator<? extends Person> comparator;
+        Comparator<Person> comparator;
 
         switch (trimmedArgs) {
-        case "name" -> comparator = Comparator.comparing(Person::getNameString);
-        case "subject" -> comparator = Comparator.comparing(Person::getSubjectString);
-        case "classes" -> comparator = Comparator.comparing(Person::getClassesString);
+        case "name" -> comparator = Comparator.comparing(person -> person.getName().toString());
+        case "subject" -> comparator = Comparator.comparing(person -> person.getSubjects().toString());
+        case "class" -> comparator = Comparator.comparing(person -> person.getClasses().toString());
         default -> throw new ParseException(SortCommand.MESSAGE_USAGE);
         }
 

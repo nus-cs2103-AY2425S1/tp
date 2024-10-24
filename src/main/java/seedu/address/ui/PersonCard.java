@@ -5,7 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -44,6 +46,10 @@ public class PersonCard extends UiPart<Region> {
     private Label classes;
     @FXML
     private Label gender;
+    @FXML
+    private Label daysAttended;
+    @FXML
+    private HBox daysAttendedContainer;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -76,7 +82,14 @@ public class PersonCard extends UiPart<Region> {
         String formattedClasses = String.join(" • ", person.getClasses().stream()
                 .toArray(String[]::new));
         classes.setText("🏫 " + formattedClasses);
-
+        if (person instanceof Student) {
+            DaysAttended days = ((Student) person).getDaysAttended();
+            daysAttended.setText("📅 Days Attended: " + days);
+            daysAttendedContainer.setVisible(true);
+        } else {
+            daysAttendedContainer.setVisible(false);
+            daysAttendedContainer.setManaged(false);
+        }
     }
 
 }

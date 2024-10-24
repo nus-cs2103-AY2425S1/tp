@@ -19,8 +19,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class AddressBookTest {
 
@@ -103,6 +105,59 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+    }
+
+    @Test
+    public void markAttendance_marksAllStudentsAttendance_success() {
+        // Arrange
+        Student student1 = new StudentBuilder().withName("Student One").build();
+        Student student2 = new StudentBuilder().withName("Student Two").build();
+        addressBook.addPerson(student1);
+        addressBook.addPerson(student2);
+
+        // Act
+        addressBook.markAttendance();
+
+        // Assert
+        List<Person> persons = addressBook.getPersonList();
+        persons.stream()
+                .filter(person -> person instanceof Student)
+                .forEach(person -> assertEquals(1, ((Student) person).getDaysAttended().getDaysAttended()));
+    }
+
+    @Test
+    public void unmarkAttendance_unmarksStudentAttendance_success() {
+        // Arrange
+        Student student = new StudentBuilder().withName("Student One").build();
+        addressBook.addPerson(student);
+        student.markAttendance(); // Mark attendance to set it to 1
+
+        // Act
+        addressBook.unmarkAttendance(student);
+
+        // Assert
+        assertEquals(0, student.getDaysAttended().getDaysAttended());
+    }
+
+    @Test
+    public void resetAttendance_resetsAllStudentsAttendance_success() {
+        // Arrange
+        Student student1 = new StudentBuilder().withName("Student One").build();
+        Student student2 = new StudentBuilder().withName("Student Two").build();
+        addressBook.addPerson(student1);
+        addressBook.addPerson(student2);
+
+        // Mark attendance to set their attendance to 1
+        addressBook.markAttendance();
+
+        // Act
+        addressBook.resetAttendance();
+
+        // Assert
+        List<Person> persons = addressBook.getPersonList();
+        persons.stream()
+                .filter(person -> person instanceof Student)
+                .forEach(person -> assertEquals(0, ((Student) person).getDaysAttended().getDaysAttended()));
     }
 
 }

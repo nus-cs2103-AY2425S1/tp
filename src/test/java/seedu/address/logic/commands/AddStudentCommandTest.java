@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.MICHAEL;
 
@@ -26,8 +27,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.StudentBuilder;
-
-
 
 public class AddStudentCommandTest {
 
@@ -93,6 +92,9 @@ public class AddStudentCommandTest {
      * A default model stub that has all the methods failing.
      */
     private class ModelStub implements Model {
+        private final List<Person> persons = new ArrayList<>();
+        private final List<Person> markedAttendance = new ArrayList<>();
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -125,7 +127,8 @@ public class AddStudentCommandTest {
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(person);
+            persons.add(person);
         }
 
         @Override
@@ -140,17 +143,29 @@ public class AddStudentCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(person);
+            return persons.stream().anyMatch(p -> p.isSamePerson(person));
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(target);
+            persons.remove(target);
+            markedAttendance.remove(target);
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
+            requireAllNonNull(target, editedPerson);
+            int index = persons.indexOf(target);
+            if (index == -1) {
+                throw new AssertionError("This method should not be called.");
+            }
+            persons.set(index, editedPerson);
+            if (markedAttendance.contains(target)) {
+                markedAttendance.remove(target);
+                markedAttendance.add(editedPerson);
+            }
         }
 
         @Override
@@ -169,6 +184,30 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public void markAttendance() {
+            persons.forEach(person -> {
+                if (!markedAttendance.contains(person)) {
+                    markedAttendance.add(person);
+                }
+            });
+        }
+
+        @Override
+        public void unmarkAttendance(Person person) {
+            requireNonNull(person);
+            markedAttendance.removeIf(p -> p.isSamePerson(person));
+        }
+
+        @Override
+        public void resetAttendance() {
+            markedAttendance.clear();
+        }
+
+        // Helper method for tests
+        public boolean isPersonMarkedPresent(Person person) {
+            return markedAttendance.stream().anyMatch(p -> p.isSamePerson(person));
+        }
+
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -183,6 +222,7 @@ public class AddStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
+
 
     /**
      * A Model stub that contains a single student.
