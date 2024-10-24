@@ -39,18 +39,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (isEventFind) {
             String argsWithoutPrefix = argMultimap.getValue(PREFIX_EVENT).get();
             String[] nameKeywords = processKeywords(argsWithoutPrefix);
-            if (nameKeywords.length == 0) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
-            }
             return new FindEventCommand(new EventNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else {
             String argsWithoutPrefix = argMultimap.getValue(PREFIX_VENDOR).get();
             String[] nameKeywords = processKeywords(argsWithoutPrefix);
-            if (nameKeywords.length == 0) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindVendorCommand.MESSAGE_USAGE));
-            }
-            System.out.println(Arrays.asList(nameKeywords));
             return new FindVendorCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
     }
@@ -60,11 +52,11 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @param args the arguments
      * @return the keywords
      */
-    private String[] processKeywords(String args) {
+    private String[] processKeywords(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            return new String[0];
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

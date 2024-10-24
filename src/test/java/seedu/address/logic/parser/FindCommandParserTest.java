@@ -69,8 +69,8 @@ public class FindCommandParserTest {
     public void parse_emptyArgs_throwsParseException() {
         // invalid value
         assertParseFailure(parser, " e/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            FindEventCommand.MESSAGE_USAGE));
+            FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " v/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            FindVendorCommand.MESSAGE_USAGE));
+            FindCommand.MESSAGE_USAGE));
     }
 }
