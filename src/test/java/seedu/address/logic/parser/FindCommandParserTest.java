@@ -33,11 +33,11 @@ public class FindCommandParserTest {
                 + "find: Finds persons in the address book matching the given keywords across specified fields. "
                 + "You can search by name, address, attendance, tags, and more.\n"
                 + "Name, address, and tag searches support multiple words and duplicate prefix; other fields accept "
-                + "only a single word and single prefix. Partial matching is allowed, E.g. Doing find n/dav will match "
-                + "a person with the name David.Search is case-insensitive, and multiple conditions are combined "
+                + "only a single word and single prefix. Partial matching is allowed, E.g. Doing find n/dav will match"
+                + " a person with the name David.Search is case-insensitive, and multiple conditions are combined "
                 + "with logical AND.\n"
-                + "Parameters: [n/NAME] [attend/ATTENDANCE (true/false)][t/TAG]...\n"
-                + "Example: find n/John Doe t/friend attend/true");
+                + "Parameters: [n/NAME] [attend/DATE_RANGE (in the format of dd/MM/yy:dd/MM/yy)][t/TAG]...\n"
+                + "Example: find n/John Doe t/friend attend/24/10/2024:27/10/2024");
 
         // multiple whitespaces between keywords
         // assertParseSuccess(parser, "n/ \n Alice  a/Bob \n \t Bob  \t", expectedFindCommand);

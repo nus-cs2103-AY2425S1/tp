@@ -31,12 +31,12 @@ public class FindCommand extends Command {
             + "Search is case-insensitive, and multiple conditions are combined with logical AND.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE (true/false)]"
+            + "[" + PREFIX_ATTENDANCE + "DATE_RANGE (in the format of dd/MM/yy:dd/MM/yy)]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TAG + "friend "
-            + PREFIX_ATTENDANCE + "true";
+            + PREFIX_ATTENDANCE + "24/10/2024:27/10/2024";
 
     private final Predicate<Person> combinedPredicate;
     private final List<Predicate<Person>> predicates;
