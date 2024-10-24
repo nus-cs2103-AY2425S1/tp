@@ -12,10 +12,17 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+' New addition for Student class
+Student -up-|> Person
+Student *--> Name
+Student *--> Phone
+Student *--> Email
+Student *--> Address
+Student *--> Gender
+Student *--> Subject
+Student *--> Classes
+Student *--> Tag
+
 @enduml
+
