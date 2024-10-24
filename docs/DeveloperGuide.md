@@ -426,6 +426,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: UC7 - Delete note from a person contact**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to delete a specific note from a specific person.
+3.  System shows updated details excluding deleted note from that person.
+
+    Use case ends.
+
+**Extensions**
+
+- 3a. The specified person is invalid.
+
+    - 3a1. System shows an error message.
+
+      Use case ends.
+
+- 3b. The note index is invalid.
+
+    - 3b1. System shows an error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
