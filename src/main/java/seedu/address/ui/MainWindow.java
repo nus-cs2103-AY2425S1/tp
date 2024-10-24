@@ -39,6 +39,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private BarChartWindow barChartWindow;
 
+    private DetailedPersonCardWindow detailedPersonCardWindow;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -179,6 +181,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
 
+    /**
+     * Opens the detailed person card window.
+     */
+    @FXML
+    public void handleDetailedPersonCard() {
+        if (detailedPersonCardWindow != null) {
+            detailedPersonCardWindow.close();
+        }
+        detailedPersonCardWindow = new DetailedPersonCardWindow();
+        detailedPersonCardWindow.show();
+    }
+
 
 
 
@@ -228,6 +242,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowBarChart()) {
                 handleBarChart();
+            }
+
+            if (commandResult.isShowDetailedPerson()) {
+                handleDetailedPersonCard();
             }
 
 

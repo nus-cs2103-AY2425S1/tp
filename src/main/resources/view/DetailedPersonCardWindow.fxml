@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <VBox>
+                <children>
+                    <Label fx:id="name" text="Name" />
+                    <Label fx:id="phone" text="Phone" />
+                    <Label fx:id="address" text="Address" />
+                    <Label fx:id="email" text="Email" />
+                    <Label fx:id="fees" text="Fees" />
+                    <Label fx:id="classId" text="Class ID" />
+                    <Label fx:id="monthsPaid" text="Months Paid" />
+                </children>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>
