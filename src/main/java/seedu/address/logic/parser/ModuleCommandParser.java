@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import java.util.stream.Stream;
 
@@ -23,15 +22,16 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
      */
     public ModuleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STUDENTID, PREFIX_MODULE);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE);
+        String preamble = argMultimap.getPreamble();
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENTID, PREFIX_MODULE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENTID, PREFIX_MODULE);
-        StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE);
+        argMultimap.verifyNoDuplicateStudentId(args);
+        StudentId studentId = ParserUtil.parseStudentId(preamble);
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
 
         return new ModuleCommand(studentId, module);

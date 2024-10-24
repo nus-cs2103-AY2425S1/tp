@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -96,11 +97,13 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public GuiSettings getGuiSettings() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -111,6 +114,7 @@ public class AddCommandTest {
 
         @Override
         public Path getAddressBookFilePath() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -121,6 +125,12 @@ public class AddCommandTest {
 
         @Override
         public void addPerson(Person person) {
+
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addModule(Person person, Module module) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -131,16 +141,24 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
+
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteModule(Person target, Module module) {
             throw new AssertionError("This method should not be called.");
         }
 
