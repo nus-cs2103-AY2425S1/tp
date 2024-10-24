@@ -10,6 +10,7 @@ Class "<<interface>>\nParser" as Parser
 Class AddCommandParser
 Class DeleteCommandParser
 Class EditCommandParser
+Class FilterCommandParser
 Class FindCommandParser
 Class ListCommandParser
 Class NoteCommandParser
@@ -17,19 +18,17 @@ Class SortCommandParser
 Class StarCommandParser
 Class UnstarCommandParser
 
-
+}
 AddCommandParser -up-|> Parser
 DeleteCommandParser -up---|> Parser
 EditCommandParser -up--|> Parser
+FilterCommandParser -up--|> Parser
 FindCommandParser -up---|> Parser
 ListCommandParser -up--|> Parser
 NoteCommandParser -up---|> Parser
 SortCommandParser -up--|> Parser
 StarCommandParser -up---|> Parser
 UnstarCommandParser -up-|> Parser
-
-}
-
 
 @enduml
 
