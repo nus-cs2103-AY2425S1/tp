@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.person.Budget;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Vendor;
 
@@ -10,6 +11,7 @@ public class VendorBuilder extends PersonBuilder<VendorBuilder> {
     public static final String DEFAULT_COMPANY = "The Wedding People";
 
     private Company company;
+    private Budget budget;
 
     /**
      * Creates a {@code VendorBuilder} with the default details.
@@ -32,6 +34,14 @@ public class VendorBuilder extends PersonBuilder<VendorBuilder> {
      */
     public VendorBuilder withCompany(String company) {
         this.company = new Company(company);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Company} of the {@code Vendor} that we are building.
+     */
+    public VendorBuilder withBudget(Double budget) {
+        this.budget = new Budget(budget);
         return this;
     }
 

@@ -1,15 +1,10 @@
 package seedu.address.model.person;
 
-import java.math.BigDecimal;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-/**
- * Cannot be negative
- * Cannot be more than 2dp
- *
- */
+import java.math.BigDecimal;
+
 
 /**
  * Represents a Vendor's budget in the address book.
@@ -17,7 +12,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Budget {
     public static final String MESSAGE_CONSTRAINTS =
-            "Budget should be a non-negative number with up to 2 decimal places. Cannot have more than 15 significant digits.";
+            "Budget should be a non-negative number with up to 2 decimal places. "
+                    + "Cannot have more than 15 significant digits.";
     public static final Double MINIMUM_BUDGET = 0.00;
     public static final String FORMAT_2DP = "%.2f";
 
@@ -47,6 +43,13 @@ public class Budget {
         BigDecimal budgetDecimal = BigDecimal.valueOf(test);
         int scale = budgetDecimal.scale();
         return scale <= 2;
+    }
+
+    /**
+     * Returns the double value of budget.
+     */
+    public Double toDouble() {
+        return value;
     }
 
     @Override

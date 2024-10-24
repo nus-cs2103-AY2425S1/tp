@@ -99,7 +99,7 @@ public class VendorTest {
         String expected = Vendor.class.getCanonicalName() + "{name=" + AMY.getName() + ", phone="
                 + AMY.getPhone() + ", email=" + AMY.getEmail() + ", address="
                 + AMY.getAddress() + ", tags=" + AMY.getTags() + ", company="
-                + AMY.getCompany() + "}";
+                + AMY.getCompany() + ", budget=" + AMY.getBudget() + "}";
         assertEquals(expected, AMY.toString());
     }
 }
