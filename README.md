@@ -10,7 +10,7 @@
 This app aims to streamline the process of managing talent contact information by
 centralizing essential contact details, making it easier to organise, search, and update information
 on potential candidates. Its search and filtering capabilities help recruiters quickly find profiles
-based on specific criteria, improving efficiency and reducing time spent on 
+based on specific criteria, improving efficiency and reducing time spent on
 administrative tasks.
 
 * This is **a software development project for CS2103**.<br>
@@ -24,4 +24,3 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
   contacts.
 * For more detailed documentation, please visit [Talency Project Website](https://ay2425s1-cs2103-f09-3.github.io/tp/)
 * This project is based on AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-
