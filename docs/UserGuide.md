@@ -56,13 +56,13 @@ your wedding contact management tasks done faster than traditional GUI apps.
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `...` after them can be used multiple times including zero times.<br>
-  e.g. `t/TAG1 TAG2 ...` can be ignored (i.e. 0 tags), `t/friend` (i.e. 1 tags), `t/friend family` (i.e. 2 tags) etc.
+* Parameter descriptions containing a `...` indicate that the parameter can take one or more inputs or no inputs at all (only if inside an optional bracket).<br>
+  e.g. `[t/TAG1 TAG2 ...]` can be ignored (i.e. 0 tags) or replaced with `t/friend` (i.e. 1 tags) or `t/friend family` (i.e. 2 tags) etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Providing unexpected parameters for commands that do not take in parameters (such as `help`, `list`, `sort`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -72,9 +72,9 @@ your wedding contact management tasks done faster than traditional GUI apps.
 
 Shows a message with basic usage instructions for PlanPerfect. The link to this user guide can be copied to the clipboard for more advanced support.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 <br><br/>
 
@@ -99,9 +99,9 @@ Examples:
 
 ### Listing all contacts : `list`
 
-Shows a list of all contacts in the address book.
-
 Format: `list`
+
+Shows a list of all contacts in the address book.
 
 <br><br/>
 
@@ -209,28 +209,44 @@ Examples:
 
 ### Sort all entries: `sort`
 
+Format: `sort`
+
+Sorts the contacts in the current view in alphabetical order.
+
+
 <br><br/>
 ### Clearing all entries : `clear`
+
+Format: `clear`
 
 Confirms with the user whether they actually want to clear the address book, then clears all entries from the address 
 book only if the follow-up input is `yes` or `y` (case-insensitive). Any other input will result in the address book not 
 being cleared.
-
-Format: `clear`
 
 <br><br/>
 
 ## Wedding-related Features
 ### Add wedding: `addw`
 
+Format: `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CONTACT2_INDEX ...]`
+
+Adds a wedding to PlanPerfect with the specified date. Optionally allows users to pre-assign contacts to the wedding.
+
+* Running this command will create a new wedding in the wedding panel, allowing you to use its wedding index to execute relevant commands on that wedding.
+* Contact indexes must be valid in the context of the current view
+  * IMPORTANT: If you want to pre-assign contacts, be sure to use `list` to view all contacts BEFORE adding a new wedding. If you are in a wedding view, and you do not use the `list` command to exit from wedding view to the all contacts view, you will only be able to add contacts from the current wedding being viewed into the new wedding.
+
+Examples:
+* `addw n/Arif and Sonali Wedding d/30/04/2025`
+* `addw n/Daniel and Jane Wedding d/23/09/2025 c/1 3 4`
+
 <br><br/>
 
 ### View wedding : `view`
-Displays a list of contacts involved in a specified wedding.
 
-Format: `view INDEX`
+Format: `view WEDDING_INDEX`
 
-* Displays contacts involved in the wedding of the specified `INDEX`.
+* Displays contacts involved in the wedding at the specified `WEDDING_INDEX`.
 * The index refers to the index number shown in the displayed wedding list on the left of the screen.
 * The index **must be a positive integer** 1, 2, 3, ...
 
@@ -239,10 +255,10 @@ Examples:
 <br><br/>
 
 ### Edit wedding: `editw`
-Edits the wedding of the specified `INDEX`, changing its name and/or date
 
-Format: `editw INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
-* Edits the name and/or date in the wedding of the specified `INDEX`.
+Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
+
+* Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
 * The index refers to the index number shown in the displayed wedding list on the left of the screen.
 * The index **must be a positive integer** 1, 2, 3, ...
 
@@ -255,7 +271,6 @@ The edited wedding name provided must not be the name of a pre-existing wedding 
 
 Examples:
 * `editw 1 d/12/11/2025` edits the date of the first wedding shown on the displayed wedding list.
-  <br><br/>
 
 <br><br/>
 
@@ -268,22 +283,24 @@ Examples:
 <br><br/>
 
 ### Delete wedding: `deletew`
-Deletes the wedding of the specified `INDEX`
 
-Format: `deletew INDEX`
-* Deletes the wedding of the specified `INDEX`.
+Format: `deletew WEDDING_INDEX`
+
+* Deletes the wedding at the specified `WEDDING_INDEX`.
 * The index refers to the index number shown in the displayed wedding list on the left of the screen.
 * The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 * `deletew 4` deletes the fourth wedding shown on the displayed wedding list.
 
-  <br><br/>
-
 <br><br/>
 ## Other Features
 
 ### Listing all active tags : `taglist`
+
+Format: `taglist`
+
+* Lists all the tags in active use within PlanPerfect.
 
 <br><br/>
 
@@ -308,8 +325,8 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, PlanPerfect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause PlanPerfect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
@@ -340,16 +357,25 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend colleague`
-**List**   | `list`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Tag**    | `tag INDEX t/TAG1 [TAG2] ...` <br> e.g., `tag 1 t/photographer`
-**Untag**  | `untag INDEX t/TAG1 [TAG2] ...` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
-**Find**   | `find KEYWORD1 KEYWORD2 ...`<br> e.g., `find James Jake`
-**Filter** | `filter INDEX t/TAG1 [TAG2] ...` <br> e.g., `filter 2 t/friends colleagues`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Clear**  | `clear`
+**Add Contact**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend colleague`
+**List All Contacts**   | `list`
+**Edit Contact**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Tag Contact**    | `tag INDEX t/TAG1 [TAG2] ...` <br> e.g., `tag 1 t/photographer`
+**Untag Contact**  | `untag INDEX t/TAG1 [TAG2] ...` or `untag INDEX t/all` <br> e.g., `untag 1 t/friends buddies`
+**Find Contacts (by Keyword)**   | `find KEYWORD1 KEYWORD2 ...`<br> e.g., `find James Jake`
+**Filter Contacts (by Tag)** | `filter INDEX t/TAG1 [TAG2] ...` <br> e.g., `filter 2 t/friends colleagues`
+**Delete Contact** | `delete INDEX`<br> e.g., `delete 3`
+**Sort Contacts**   | `sort`
+**Clear All Contacts**  | `clear`
+**Add Wedding** | `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CONTACT2_INDEX ...]`<br> e.g., `addw n/Daniel and Jane Wedding d/23/09/2025 c/1 3 4`
+**View Wedding** | `view WEDDING_INDEX`<br> e.g., `view 3`
+**Edit Wedding** | `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`<br> e.g., `editw 1 d/12/11/2025`
+**Assign Contact to Wedding** | `assign WEDDING_INDEX c/CONTACT1_INDEX CONTACT2_INDEX ...`<br> e.g., `assign 2 c/1 2 3`
+**Unassign Contact from Wedding** | `unassign WEDDING_INDEX c/CONTACT1_INDEX CONTACT2_INDEX ...`<br> e.g., `unassign 4 c/3 5`
+**Delete Wedding** | `deletew WEDDING_INDEX`<br> e.g., `deleteW 3`
+**Get List of (Active) Tags** | `taglist`
 **Exit**   | `exit`
+
 
 
 
