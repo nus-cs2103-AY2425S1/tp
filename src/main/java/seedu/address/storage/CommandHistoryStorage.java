@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -43,10 +44,16 @@ public class CommandHistoryStorage {
      * @param text the content to write into the file
      */
     public static void writeToFile(String text) {
-        try (BufferedWriter bw =
-                     new BufferedWriter(new FileWriter(String.valueOf(commandHistoryFilePath), true))) {
-            bw.write(text);
-            bw.newLine();
+        try {
+            Path parentDir = commandHistoryFilePath.getParent();
+            if (parentDir != null && !Files.exists(parentDir)) {
+                Files.createDirectories(parentDir);
+            }
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(commandHistoryFilePath.toFile(), true))) {
+                bw.write(text);
+                bw.newLine();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
