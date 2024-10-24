@@ -306,9 +306,9 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**AddInsurance**   | `addInsurance INDEX iid/INSURANCE_ID`<br> eg., `addInsurance 1 id/ 1`
-**DeleteInsurance**   | `deleteInsurance INDEX iid/INSURANCE_ID`<br> eg., `deleteInsurance 1 id/ 1`
-**AddClaim**   | `addClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID ca/CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS`<br> eg., `addClaim 1 iid/1 cid/1 ca/151.20`
+**AddInsurance**   | `addInsurance INDEX iid/INSURANCE_ID`<br> eg., `addInsurance 1 iid/ 1`
+**DeleteInsurance**   | `deleteInsurance INDEX iid/INSURANCE_ID`<br> eg., `deleteInsurance 1 iid/ 1`
+**AddClaim**   | `addClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID ca/CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS`<br> eg., `addClaim 1 iid/1 cid/B1234 ca/151.20`
 **DeleteClaim**   | `deleteClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`<br> eg., `deleteClaim 1 iid/1 cid/B1234`
 **CloseClaim**   | `closeClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`<br> eg., `closeClaim 1 iid/1 cid/B1234`
 **ListClaims**   | `listClaims INDEX` <br> eg., `listClaims 1`
