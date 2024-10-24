@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.skill.Skill;
