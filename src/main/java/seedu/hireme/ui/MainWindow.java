@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic<InternshipApplication> logic;
 
     // Independent Ui parts residing in this Ui container
-    private InternshipListPanel internshipListPanel;
+    private InternshipApplicationListPanel internshipApplicationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -111,8 +111,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        internshipListPanel = new InternshipListPanel(logic.getFilteredList());
-        internshipApplicationListPanelPlaceholder.getChildren().add(internshipListPanel.getRoot());
+        internshipApplicationListPanel = new InternshipApplicationListPanel(logic.getFilteredList());
+        internshipApplicationListPanelPlaceholder.getChildren().add(internshipApplicationListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -164,8 +164,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public InternshipListPanel getInternshipListPanel() {
-        return internshipListPanel;
+    public InternshipApplicationListPanel getInternshipListPanel() {
+        return internshipApplicationListPanel;
     }
 
     /**
