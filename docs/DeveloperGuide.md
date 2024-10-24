@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Tuteez Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -137,6 +137,28 @@ The `Model` component,
 </box>
 
 
+**API** : [`LessonManager.java`]()
+
+<puml src="diagrams/LessonManagerClassDiagram.puml" width="450" />
+
+The `LessonManager` component,
+* stores all the info regarding `Lesson` objects.`LessonManager.dayLessonsMap` is a `HashMap` where keys are `Day`s, intuitively there are only 7 keys in the `HashMap`. One for each day of the week.
+* uses a `TreeSet<Lesson>` as value of `LessonManager.dayLessonMap`. A `TreeSet` is used to maintain ordering of lessons. Lessons are ordered according to `Lesson.startTime`
+* is the main class that determines any overlapping or clashing lessons. Refer to `LessonManager#isClashingWithExistingLesson`
+
+<puml src="diagrams/AddSequenceDiagram.puml" width="1000" />
+
+The diagram above is an example of how abstraction is used for the `AddCommand`. Some `opt` statements and other complexities have been removed but the general flow is clear.
+* In words, for every lesson a new student has. `LessonManager` checks against existing lessons on the same `Day`. It then calls `Lesson#isClashingWithOtherLesson` which takes two `Lesson` objects are arguments and returns `True` if they clash else `False`
+
+
+
+<box type="info" seamless>
+
+Note: As of `v1.4` clashing lessons are not allowed, hence when a `Person` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
+
+</box>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -148,6 +170,8 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -157,6 +181,34 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add/delete remark feature
+
+The `addRemarkCommand` allows users to add a remark to a specified person in the addressbook.
+The `deleteRemarkCommand` allows users to delete a remark from a specified person in the addressbook.
+They both use `RemarkCommandParser` to parse the user input and create an `addRemarkCommand` and `deleteRemarkCommand` object respectively, which modifies the `Person` object in the `Model`.
+
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
+
+<puml src="diagrams/AddRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -a Good progress` Command" />
+
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `deleteRemarkCommand`, taking `execute("remark 1 -d 2")` API call as an example.
+
+<puml src="diagrams/DeleteRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -d 2` Command" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `RemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+How the this feature works:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command `remark` (i.e., `RemarkCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddRemarkCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed.<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -290,10 +342,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​              | I want to …​            | So that I can…​                                                                                                 |
 |---------|----------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `* * *` | new user             | add my students' contact details | easily access and communicate with them or their guardians                                                      |
+| `* * *` | new user             | add my students' contact details | easily access and communicate with them or their guardians
 | `* * *` | new user             | search for a student's name        | find relevant student(s) easily                                                                                 |
 | `* * *` | new user             | delete students' entries     | remove students that I am no longer teaching                                                                    |
-| `* * *` | new user             | easily access my tutoring schedule with each student | stay organised and manage my records more effectively                       |
+| `* * *` | new user             | easily access my tutoring schedule with each student | stay organised and manage my records more effectively
 | `* * *` | new user             | be automatically alerted if there are scheduling conflicts when adding a new student whose tuition time overlaps with another student | quickly adjust their schedule and avoid double-booking                                                          |
 | `* * *` | new user             | organise my students' contact details                        | find my students' by certain categories easily                                                                  |
 | `* * *` | new user             | have an option to store the address of the students                        | easily go to the student's house if the tuition session is in person                                            |

@@ -64,10 +64,12 @@ public class Person {
     }
 
     public Name getName() {
+        assert name != null : "Name field should not be null";
         return name;
     }
 
     public Phone getPhone() {
+        assert phone != null : "Phone field should not be null";
         return phone;
     }
 
@@ -114,6 +116,15 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+    /**
+     * Determines whether the specified lesson is already present in the student's schedule.
+     *
+     * @param lesson the lesson to check for
+     * @return {@code true} if the lesson is already in the schedule, {@code false} otherwise
+     */
+    public boolean isLessonScheduled(Lesson lesson) {
+        return lessons.contains(lesson);
     }
 
     /**

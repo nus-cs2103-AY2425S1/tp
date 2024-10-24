@@ -29,7 +29,7 @@ public class TelegramUsernameTest {
     @Test
     public void isValidUsername() {
         // null username
-        assertThrows(NullPointerException.class, () -> TelegramUsername.isValidTelegramHandle(null));
+        assertTrue(TelegramUsername.isValidTelegramHandle(null));
 
         // invalid usernames
         assertFalse(TelegramUsername.isValidTelegramHandle("")); // empty string
