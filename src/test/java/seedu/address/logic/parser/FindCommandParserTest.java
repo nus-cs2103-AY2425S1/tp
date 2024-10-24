@@ -109,6 +109,6 @@ public class FindCommandParserTest {
     public void parse_invalidPrefix_throwsParseException() {
         // invalid prefix
         assertParseFailure(parser, "e/email@example.com", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindNameCommand.MESSAGE_USAGE));
+                FindCommand.MESSAGE_USAGE));
     }
 }
