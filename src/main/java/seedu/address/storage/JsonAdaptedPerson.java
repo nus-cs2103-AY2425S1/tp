@@ -125,5 +125,4 @@ class JsonAdaptedPerson {
             return new Seller(modelName, modelPhone, modelEmail, modelTags, modelAppointment, modelProperty);
         }
     }
-
 }
