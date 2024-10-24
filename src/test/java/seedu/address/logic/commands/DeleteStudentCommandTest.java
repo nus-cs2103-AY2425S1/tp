@@ -2,11 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
@@ -20,22 +23,36 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 public class DeleteStudentCommandTest {
+
+    private Student validStudent1;
+    private Student validStudent2;
+    private Student validStudent3;
+    private Student validStudent4;
+    private ModelStub modelStub;
+    @BeforeEach
+    public void setUp() {
+        validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
+        validStudent2 = new StudentBuilder().withName("John Ng").withStudentNumber("A0123456Y").build();
+        validStudent3 = new StudentBuilder().withName("John Ng").withStudentNumber("A9876543Z").build();
+        validStudent4 = new StudentBuilder().withName("John Ng").withStudentNumber("A1111111B").build();
+        modelStub = new ModelStubWithStudent(validStudent1, validStudent2,
+                validStudent3, validStudent4);
+    }
+
+
     // Ensure NullPointerException is thrown when no input is provided at all
     @Test
     public void constructor_nullInput_throwsNullPointerException() {
-        Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
-        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         assertThrows(NullPointerException.class, () -> new DeleteStudentCommand(null));
     }
 
     // Ensure IllegalArgumentException is thrown when blank values are provided where there should be non-blank input
     @Test
     public void constructor_blankInput_throwsIllegalArgumentException() {
-        Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
-        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         assertThrows(IllegalArgumentException.class, () -> new DeleteStudentCommand(new Name("")));
         assertThrows(IllegalArgumentException.class, () -> new DeleteStudentCommand(new Name("John Ng"),
                 new StudentNumber("")));
@@ -54,8 +71,6 @@ public class DeleteStudentCommandTest {
     // Ensure CommandException is thrown when student with valid provided student number is not found
     @Test
     public void execute_studentNumberNotFound_throwsCommandException() {
-        Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
-        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         DeleteStudentCommand command = new DeleteStudentCommand(new Name("John Ng"), new StudentNumber("A1234567Y"));
 
         assertThrows(CommandException.class, "This student is not in your student list.", () ->
@@ -65,18 +80,12 @@ public class DeleteStudentCommandTest {
     // Ensure CommandException is thrown when duplicate student names exist, and only name is provided
     @Test
     public void execute_duplicateStudentNames_throwsCommandException() {
-        Student validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
-        Student validStudent2 = new StudentBuilder().withName("John Ng").withStudentNumber("A0123456Y").build();
-        DeleteStudentCommandTest.ModelStubWithStudent modelStub =
-                new DeleteStudentCommandTest.ModelStubWithStudent(validStudent1, validStudent2);
-
         DeleteStudentCommand command = new DeleteStudentCommand(new Name("John Ng"));
 
-        assertThrows(CommandException.class, "There is more than 1 student of the same name.\n"
-                + "Their student numbers are as follows: A1234567X A0123456Y " + "\n"
-                + "Use the following command: deletes n/John Ng "
-                + "sn/STUDENT NUMBER to delete the student.", () ->
-                command.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(DeleteStudentCommand.MESSAGE_DUPLICATE_STUDENT,
+                        "A1234567X A0123456Y A9876543Z A1111111B", "John Ng"), () -> command.execute(modelStub));
+
     }
 
     // Ensure deletion by only provided name works when student with correct details exists
@@ -90,8 +99,8 @@ public class DeleteStudentCommandTest {
 
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS + validStudent.getName()
-                + " " + validStudent.getStudentNumber()),
+        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, validStudent.getName(),
+                        validStudent.getStudentNumber()),
                 result.getFeedbackToUser());
     }
 
@@ -106,50 +115,68 @@ public class DeleteStudentCommandTest {
 
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS + validStudent.getName()
-                        + " " + validStudent.getStudentNumber()),
+        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, validStudent.getName(),
+                        validStudent.getStudentNumber()),
                 result.getFeedbackToUser());
     }
 
     // Ensure deletion by provided name and provided student number works with duplicate student names
     @Test
     public void execute_duplicateStudentDeleteByNameAndStudentNumber_success() throws Exception {
-        Student validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
-        Student validStudent2 = new StudentBuilder().withName("John Ng").withStudentNumber("A0123456Y").build();
-        Student validStudent3 = new StudentBuilder().withName("John Ng").withStudentNumber("A9876543Z").build();
-        Student validStudent4 = new StudentBuilder().withName("John Ng").withStudentNumber("A1111111B").build();
-        DeleteStudentCommandTest.ModelStubWithStudent modelStub =
-                new DeleteStudentCommandTest.ModelStubWithStudent(validStudent1, validStudent2,
-                        validStudent3, validStudent4);
 
-        DeleteStudentCommand firstCommand = new DeleteStudentCommand(new Name("John Ng"),
-                new StudentNumber("A1234567X"));
+        Name john = new Name("John Ng");
 
-        CommandResult firstResult = firstCommand.execute(modelStub);
+        DeleteStudentCommand command = new DeleteStudentCommand(john, new StudentNumber("A1234567X"));
 
-        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS + validStudent1.getName()
-                        + " " + validStudent1.getStudentNumber()),
-                firstResult.getFeedbackToUser());
+        CommandResult secondResult = command.execute(modelStub);
+
+        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, john,
+                        validStudent1.getStudentNumber()),
+                secondResult.getFeedbackToUser());
 
         assertEquals(FXCollections.observableArrayList(validStudent2, validStudent3, validStudent4),
                 modelStub.getFilteredStudentList());
+    }
 
-        DeleteStudentCommand secondCommand = new DeleteStudentCommand(new Name("John Ng"),
-                new StudentNumber("A9876543Z"));
+    @Test
+    public void equals() {
+        DeleteStudentCommand deleteFirstCommand = new DeleteStudentCommand(new Name("John Ng"));
+        DeleteStudentCommand deleteSecondCommand = new DeleteStudentCommand(new Name("John Tan"));
+        DeleteStudentCommand deleteThirdCommand = new DeleteStudentCommand(validStudent1.getName(),
+                validStudent1.getStudentNumber());
 
-        CommandResult secondResult = secondCommand.execute(modelStub);
+        // same object -> returns true
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
 
-        assertEquals(String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS + validStudent3.getName()
-                        + " " + validStudent3.getStudentNumber()),
-                secondResult.getFeedbackToUser());
+        // same values -> returns true
+        DeleteStudentCommand deleteFirstCommandCopy = new DeleteStudentCommand(new Name("John Ng"));
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
-        assertEquals(FXCollections.observableArrayList(validStudent2, validStudent4),
-                modelStub.getFilteredStudentList());
+        // different types -> returns false
+        assertFalse(deleteFirstCommand.equals(new Object()));
+
+        // null -> returns false
+        assertFalse(deleteFirstCommand.equals(null));
+
+        // different student -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // non-null student number and null student number -> returns false
+        assertFalse(deleteThirdCommand.equals(deleteFirstCommand));
+    }
+
+    @Test
+    public void undo_validStudent() throws CommandException {
+        ModelStubWithStudent model = new ModelStubWithStudent(validStudent1);
+        DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(validStudent1.getName());
+        deleteStudentCommand.execute(model);
+
+        // undo the Delete Student Command
+        deleteStudentCommand.undo(model);
+        assertEquals(FXCollections.observableArrayList(validStudent1), model.getFilteredStudentList());
     }
 
     private class ModelStub implements Model {
-
-        private final ObservableList<Student> studentList = FXCollections.observableArrayList();
 
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -221,7 +248,6 @@ public class DeleteStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public Person getPersonByName(Name name) {
             return null;
@@ -243,19 +269,23 @@ public class DeleteStudentCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public void addStudent(int index, Student student) {
+            throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public int deleteStudent(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ObservableList<Student> getFilteredStudentList() {
-            return studentList;
+            throw new AssertionError("This method should not be called.");
         }
 
         public void deleteAllStudents() {
             throw new AssertionError("This method should not be called.");
         }
-
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
@@ -266,12 +296,18 @@ public class DeleteStudentCommandTest {
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
      * A Model stub that contains a single student.
      */
-    private class ModelStubWithStudent extends DeleteStudentCommandTest.ModelStub {
+    private class ModelStubWithStudent extends ModelStub {
 
         private final ObservableList<Student> students = FXCollections.observableArrayList();
 
@@ -294,6 +330,12 @@ public class DeleteStudentCommandTest {
         }
 
         @Override
+        public void addStudent(int index, Student student) {
+            requireNonNull(student);
+            students.add(index, student);
+        }
+
+        @Override
         public void addStudent(Student student) {
             requireNonNull(student);
             students.add(student);
@@ -306,21 +348,26 @@ public class DeleteStudentCommandTest {
         }
 
         @Override
-        public void deleteStudent(Student target) {
+        public int deleteStudent(Student target) {
             requireNonNull(target);
-            students.remove(target);
+            for (int i = 0; i < students.size(); i++) {
+                if (students.get(i).isSamePerson(target)) {
+                    students.remove(i);
+                    return i;
+                }
+            }
+            return -1;
         }
 
     }
 
-    private class ModelStubWithNoStudent extends DeleteStudentCommandTest.ModelStub {
+    /**
+     * A Model stub that contains no students.
+     */
+    private class ModelStubWithNoStudent extends ModelStub {
         @Override
         public ObservableList<Student> getFilteredStudentList() {
             return FXCollections.observableArrayList();
-        }
-        @Override
-        public Student getStudentByName(Name name) {
-            return null;
         }
 
         @Override

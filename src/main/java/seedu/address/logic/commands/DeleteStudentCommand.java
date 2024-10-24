@@ -25,7 +25,7 @@ public class DeleteStudentCommand extends Command {
             + " must be a valid student number)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Jerrell Lee " + PREFIX_STUDENT_NUMBER + "A1234567X";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: ";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s %2$s";
 
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list.";
 
@@ -35,11 +35,12 @@ public class DeleteStudentCommand extends Command {
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER" + " to delete the student.";
 
     private final Name name;
-
     private final StudentNumber studentNumber;
+    private Student studentToDelete;
+    private int index;
 
     /**
-     * Constructs a DeleteStudentCommand to delete the specified student by student number.
+     * Constructs a DeleteStudentCommand to delete the specified student by student name.
      *
      * @param name The student name of the student to be deleted.
      */
@@ -50,7 +51,7 @@ public class DeleteStudentCommand extends Command {
     }
 
     /**
-     * Constructs a DeleteStudentCommand to delete the specified student by student number.
+     * Constructs a DeleteStudentCommand to delete the specified student by student name and student number.
      *
      * @param name The student name of the student to be deleted.
      * @param studentNumber The student number of the student to be deleted.
@@ -84,43 +85,30 @@ public class DeleteStudentCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
 
-        // if there are multiple students with the same name, ensure that student number is provided
-        if (listToCheck.size() > 1 && this.studentNumber == null) {
-            StringBuilder duplicates = new StringBuilder();
-            for (Student student : listToCheck) {
-                duplicates.append(student.getStudentNumber());
-                duplicates.append(" ");
+        if (this.studentNumber != null) {
+            studentToDelete = listToCheck.stream()
+                        .filter(stu -> stu.getStudentNumber().equals(studentNumber))
+                        .reduce((a, b) -> b)
+                        .orElse(null);
+            if (studentToDelete == null) {
+                throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
             }
-            String duplicateStudentNumbers = duplicates.toString();
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers, name));
+            model.deleteStudent(studentToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, name, studentNumber));
         }
 
         if (listToCheck.size() > 1) {
-            for (Student student : listToCheck) {
-                if (student.getStudentNumber().equals(studentNumber)) {
-                    model.deleteStudent(student);
-                    return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS) + student.getName()
-                            + " " + student.getStudentNumber());
-                }
-            }
-            throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
+            String duplicateStudentNumbers = listToCheck.stream()
+                    .map(s -> s.getStudentNumber().toString())
+                    .reduce((a, b) -> a + " " + b)
+                    .orElse("");
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers, name));
         }
 
-        // happy path if exactly 1 student with the name is found
-        Student studentToDelete = model.getStudentByName(name);
-
-        if (studentToDelete == null) {
-            throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
-        }
-
-        // if student number is provided, check that it matches the student number of the student to delete
-        if (!studentToDelete.getStudentNumber().equals(this.studentNumber) && this.studentNumber != null) {
-            throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
-        }
-
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS) + studentToDelete.getName()
-                + " " + studentToDelete.getStudentNumber());
+        studentToDelete = listToCheck.get(0);
+        index = model.deleteStudent(studentToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, name,
+                studentToDelete.getStudentNumber()));
     }
 
     /**
@@ -135,11 +123,19 @@ public class DeleteStudentCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof DeleteStudentCommand)) {
+        if (!(other instanceof DeleteStudentCommand otherCommand)) {
             return false;
         }
 
-        DeleteStudentCommand otherDeleteStudentCommand = (DeleteStudentCommand) other;
-        return name.equals(otherDeleteStudentCommand.name);
+        return name.equals(otherCommand.name)
+                && ((studentNumber == null && otherCommand.studentNumber == null)
+                || (studentNumber != null && studentNumber.equals(otherCommand.studentNumber)));
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        assert studentToDelete != null;
+        model.addStudent(index, studentToDelete);
+        return true;
     }
 }

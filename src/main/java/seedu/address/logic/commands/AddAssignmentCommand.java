@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -63,6 +64,7 @@ public class AddAssignmentCommand extends Command {
         }
 
         student.addAssignment(assignment);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
     }
 
@@ -79,5 +81,12 @@ public class AddAssignmentCommand extends Command {
         AddAssignmentCommand otherCommand = (AddAssignmentCommand) other;
         return otherCommand.assignment.equals(this.assignment)
                 && otherCommand.name.equals(this.name);
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        Student student = model.getStudentByName(name);
+        student.deleteLastAssignment();
+        return true;
     }
 }

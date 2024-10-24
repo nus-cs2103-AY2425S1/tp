@@ -1,0 +1,17 @@
+{
+  "students" : [ {
+    "name" : "Valid Person",
+    "phone" : "83322191",
+    "email" : "dummy@example.com",
+    "address" : "dummy address",
+    "tutorialGroup" : "G22",
+    "studentNumber" : "A0272888H"
+  }, {
+    "name" : "Person with Invalid StudentNumber",
+    "phone" : "83331111",
+    "email" : "dummy@example.com",
+    "address" : "dummy address",
+    "tutorialGroup" : "G22",
+    "studentNumber" : "A1272888999H"
+  } ]
+}

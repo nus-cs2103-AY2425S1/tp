@@ -3,22 +3,24 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentQuery;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -32,7 +34,7 @@ public class Student extends Person {
     private static final Address DUMMY_ADDRESS = new Address("dummy address");
     private static final Set<Tag> DUMMY_TAG = new HashSet<>();
 
-    private final Map<LocalDate, PersonAttendance> attendanceRecords = new HashMap<>();
+    private final List<AttendanceRecord> attendanceRecords = new ArrayList<>();
 
 
     // Identity fields
@@ -48,6 +50,20 @@ public class Student extends Person {
         requireAllNonNull(tutorialGroup, studentNumber);
         this.tutorialGroup = tutorialGroup;
         this.studentNumber = studentNumber;
+    }
+
+    /**
+     * Overloaded constructor to include assignments. (Used for EditStudentCommand)
+     */
+    public Student(Name name, Phone phone, TutorialGroup tutorialGroup,
+                   StudentNumber studentNumber, ObservableList<Assignment> assignments,
+                   List<AttendanceRecord> attendanceRecords) {
+        super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
+        requireAllNonNull(tutorialGroup, studentNumber);
+        this.tutorialGroup = tutorialGroup;
+        this.studentNumber = studentNumber;
+        this.assignments.addAll(assignments);
+        this.attendanceRecords.addAll(attendanceRecords);
     }
 
     public TutorialGroup getTutorialGroup() {
@@ -113,13 +129,34 @@ public class Student extends Person {
      * @throws IllegalArgumentException if the provided status is invalid.
      */
     public void markAttendance(LocalDate date, String status) {
-        PersonAttendance attendance = new PersonAttendance(status);
-        attendanceRecords.put(date, attendance);
+        Attendance attendance = new Attendance(status);
+        for (AttendanceRecord ar : attendanceRecords) {
+            if (ar.getDate().equals(date)) {
+                ar.setAttendance(attendance);
+                return;
+            }
+        }
+        AttendanceRecord record = new AttendanceRecord(date, attendance);
+        attendanceRecords.add(record);
     }
 
-    public PersonAttendance getAttendance(LocalDate date) {
-        return attendanceRecords.get(date);
+    //getters
+
+    public List<AttendanceRecord> getAttendanceRecord() {
+        return attendanceRecords;
     }
+
+    public String getAttendanceRecordsString() {
+        List<AttendanceRecord> sortedRecords = attendanceRecords.stream()
+                .sorted(Comparator.comparing(AttendanceRecord::getDate))
+                .collect(Collectors.toList());
+        StringBuilder sb = new StringBuilder();
+        for (AttendanceRecord record : sortedRecords) {
+            sb.append(record.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
 
     /**
      * Adds an assignment
@@ -132,12 +169,50 @@ public class Student extends Person {
     }
 
     /**
+     * Adds an assignment at the specified index.
+     * @param index The index to add the assignment at.
+     * @param assignment A valid assignment.
+     */
+    public void addAssignment(int index, Assignment assignment) {
+        assert index >= 0 && index <= assignments.size();
+        requireAllNonNull(assignment);
+        assignments.add(index, assignment);
+    }
+
+    /**
+     * Returns the first index matching the given assignment query. If no such assignment is found, returns -1.
+     *
+     * @param assignmentQuery A valid assignment query.
+     * @return the index of the first assignment matching the query.
+     */
+    public int getAssignmentIndex(AssignmentQuery assignmentQuery) {
+        requireAllNonNull(assignmentQuery);
+        for (int i = 0; i < assignments.size(); i++) {
+            if (assignmentQuery.match(assignments.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Deletes the assignment at the specified index.
+     *
+     * @param index A valid index.
+     * @return the deleted assignment
+     */
+    public Assignment deleteAssignment(int index) {
+        assert index >= 0 && index < assignments.size();
+        return assignments.remove(index);
+    }
+
+    /**
      * Deletes the first assignment matching the given assignment query.
      *
      * @param assignmentQuery A valid assignment query.
      * @return the deleted assignment
      */
-    public Assignment deleteAssignment(AssignmentQuery assignmentQuery) throws CommandException {
+    public Assignment deleteAssignment(AssignmentQuery assignmentQuery) {
         requireAllNonNull(assignmentQuery);
         for (Assignment assignment : assignments) {
             if (assignmentQuery.match(assignment)) {
@@ -146,5 +221,21 @@ public class Student extends Person {
             }
         }
         return null;
+    }
+
+    /**
+     * Adds the attendance record to the attendance records
+     *
+     * @param ar A valid attendance record
+     */
+    public void addAttendanceRecord(AttendanceRecord ar) {
+        attendanceRecords.add(ar);
+    }
+
+    /**
+     * Deletes the last assignment in the list.
+     */
+    public void deleteLastAssignment() {
+        assignments.remove(assignments.size() - 1);
     }
 }

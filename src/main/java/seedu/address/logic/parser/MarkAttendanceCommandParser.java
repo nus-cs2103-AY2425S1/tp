@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRESENT;
@@ -9,8 +10,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
-import seedu.address.model.student.Attendance;
 
 
 /**
@@ -28,7 +29,8 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         );
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_PRESENT)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MarkAttendanceCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkAttendanceCommand.MESSAGE_USAGE));
         }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());

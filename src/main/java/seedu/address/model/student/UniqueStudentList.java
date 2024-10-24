@@ -45,6 +45,18 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Adds a student to the list at the specified index.
+     * The student must not already exist in the list.
+     */
+    public void add(int index, Student toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateStudentException();
+        }
+        internalList.add(index, toAdd);
+    }
+
+    /**
      * Replaces the student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the list.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
@@ -67,12 +79,18 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Removes the equivalent student from the list.
      * The student must exist in the list.
+     * @return the integer index of the student removed
      */
-    public void remove(Student toRemove) {
+    public int remove(Student toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new StudentNotFoundException();
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).isSameStudent(toRemove)) {
+                internalList.remove(i);
+                return i;
+            }
         }
+
+        throw new StudentNotFoundException();
     }
 
     public void setStudents(UniqueStudentList replacement) {
@@ -141,5 +159,9 @@ public class UniqueStudentList implements Iterable<Student> {
             }
         }
         return true;
+    }
+
+    public boolean isEmpty() {
+        return internalList.isEmpty();
     }
 }

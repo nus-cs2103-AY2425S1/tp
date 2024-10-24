@@ -78,9 +78,7 @@ public class Person {
         attendanceRecords.put(date, attendance);
     }
 
-    public PersonAttendance getAttendance(LocalDate date) {
-        return attendanceRecords.get(date);
-    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

@@ -21,7 +21,7 @@ public class AddStudentCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
         Student expectedStudent = new StudentBuilder().withName("John Doe").withPhone("12345678")
-                .withTutorialGroup("T01").withStudentNumber("A1234567X").build();
+                .withTutorialGroup("T01").withStudentNumber("A1234567X").build_default();
 
         AddStudentCommand command = parser.parse(" " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "12345678 "
                 + PREFIX_TUTORIAL_GROUP + "T01 " + PREFIX_STUDENT_NUMBER + "A1234567X");
