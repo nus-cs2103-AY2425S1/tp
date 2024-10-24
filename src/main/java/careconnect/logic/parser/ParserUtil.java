@@ -158,7 +158,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dateString} is invalid.
      */
     public static AppointmentDate parseAppointmentDate(String dateString) throws ParseException {
-        requireNonNull(dateString);
+        if (dateString.isEmpty() || dateString == null) {
+            return new AppointmentDate();
+        }
         String trimmedDateString = dateString.trim();
         if(!AppointmentDate.isValidAppointmentDateString(trimmedDateString)) {
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);

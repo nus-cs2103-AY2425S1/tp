@@ -22,6 +22,10 @@
                 </padding>
                 <Label fx:id="name" styleClass="label-header" text="\$first"/>
                 <FlowPane fx:id="tags"/>
+                <VBox>
+                    <Label styleClass="label-title" text="Next Appointment"/>
+                    <Label fx:id="appointmentDate" styleClass="label-content" text="\$appointmentDate"/>
+                </VBox>
                 <HBox spacing="24.0" VBox.vgrow="ALWAYS">
                     <VBox>
                         <Label styleClass="label-title" text="Phone"/>

@@ -19,6 +19,7 @@ import careconnect.logic.commands.ExitCommand;
 import careconnect.logic.commands.FindCommand;
 import careconnect.logic.commands.HelpCommand;
 import careconnect.logic.commands.ListCommand;
+import careconnect.logic.commands.SetAppointmentCommand;
 import careconnect.logic.commands.TagCommand;
 import careconnect.logic.commands.UntagCommand;
 import careconnect.logic.commands.ViewCommand;
@@ -87,6 +88,9 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case SetAppointmentCommand.COMMAND_WORD:
+            return new SetAppointmentCommandParser().parse(arguments);
 
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);

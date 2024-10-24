@@ -20,6 +20,7 @@ import careconnect.logic.parser.CliSyntax;
 import careconnect.model.Model;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -82,9 +83,10 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ArrayList<Log> updatedLogs = new ArrayList<>(personToEdit.getLogs());
+        AppointmentDate updatedAppointmentDate = personToEdit.getAppointmentDate();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedLogs);
+                updatedLogs, updatedAppointmentDate);
     }
 
     @Override

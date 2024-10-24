@@ -1,11 +1,14 @@
 package careconnect.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import careconnect.model.person.AppointmentDate;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -33,6 +36,13 @@ class JsonAdaptedPerson {
     private final ArrayList<JsonAdaptedLog> logs = new ArrayList<>();
 
     /**
+     * Appointment date stored as string in json adapted form
+     * "" means no appointment date
+     * else have appointment date in yyyy-MM-dd format
+     */
+    private final String appointmentDate;
+
+    /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
@@ -40,7 +50,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("logs") ArrayList<JsonAdaptedLog> logs) {
+                             @JsonProperty("logs") ArrayList<JsonAdaptedLog> logs,
+                             @JsonProperty("appointmentDate") String appointmentDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,6 +62,7 @@ class JsonAdaptedPerson {
         if (this.logs != null) {
             this.logs.addAll(logs);
         }
+        this.appointmentDate = appointmentDate;
     }
 
     /**
@@ -67,6 +79,7 @@ class JsonAdaptedPerson {
         logs.addAll(source.getLogs().stream()
                 .map(JsonAdaptedLog::new)
                 .collect(Collectors.toList()));
+        appointmentDate = source.getAppointmentDate().getDateString();
     }
 
     /**
@@ -124,7 +137,21 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final ArrayList<Log> modelLogs = new ArrayList<>(personLogs);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLogs);
+        final AppointmentDate modelAppointmentDate;
+
+
+        if (appointmentDate == null || appointmentDate.trim().isEmpty()) {
+            modelAppointmentDate = new AppointmentDate();
+        } else {
+            String trimmedDateString = appointmentDate.trim();
+            if(!AppointmentDate.isValidAppointmentDateString(trimmedDateString)) {
+                throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS);
+            }
+            modelAppointmentDate = new AppointmentDate(trimmedDateString);
+        }
+
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLogs, modelAppointmentDate);
     }
 
 }

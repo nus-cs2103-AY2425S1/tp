@@ -30,10 +30,6 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         CollectionUtil.requireAllNonNull(addressBook, userPrefs);
 
-        // Setting AppointmentDate formatter to be strict
-        // Perhaps can be made into userprefs in the future
-        AppointmentDate.DATE_FORMAT.setLenient(false);
-
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);

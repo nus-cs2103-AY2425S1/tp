@@ -17,6 +17,7 @@ import careconnect.logic.parser.CliSyntax;
 import careconnect.model.Model;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -33,7 +34,7 @@ public class SetAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets an appointment date for the person "
             + "identified "
             + "by the index number used in the displayed person list. "
-            + "DATE must be in the format: yyyy-mm-dd.\n"
+            + "If date is left blank, current appointment will be deleted.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + CliSyntax.PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -42,13 +43,13 @@ public class SetAppointmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Appointment set for person: %1$s on date: %2$s";
 
     private final Index targetIndex;
-    private final Date date;
+    private final AppointmentDate date;
 
     /**
      * @param index Index of the person in the filtered person list to set appointment for
      * @param date Appointment date to set
      */
-    public SetAppointmentCommand(Index index, Date date) {
+    public SetAppointmentCommand(Index index, AppointmentDate date) {
         requireAllNonNull(index, date);
         this.targetIndex = index;
         this.date = date;
@@ -58,7 +59,7 @@ public class SetAppointmentCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToSetAppointment} and
      * appointment set
      */
-    private static Person createPersonWithSetAppointment(Person personToSetAppointment, Date appointmentDate) {
+    private static Person createPersonWithSetAppointment(Person personToSetAppointment, AppointmentDate appointmentDate) {
         requireAllNonNull(personToSetAppointment, appointmentDate);
 
         Name name = personToSetAppointment.getName();
@@ -66,10 +67,10 @@ public class SetAppointmentCommand extends Command {
         Email email = personToSetAppointment.getEmail();
         Address address = personToSetAppointment.getAddress();
         ArrayList<Log> logs = new ArrayList<>(personToSetAppointment.getLogs());
-        Set<Tag> Tags = personToSetAppointment.getTags();
+        Set<Tag> tags = personToSetAppointment.getTags();
 
 
-        return new Person(name, phone, email, address, updatedTags, logs);
+        return new Person(name, phone, email, address, tags, logs, appointmentDate);
     }
 
     @Override
@@ -82,11 +83,11 @@ public class SetAppointmentCommand extends Command {
         }
 
         Person personToSetAppointment = lastShownList.get(targetIndex.getZeroBased());
-        Person personWithTagAdded = createPersonWithNewTag(personToSetAppointment, this.tag);
+        Person personWithSetAppointment = createPersonWithSetAppointment(personToSetAppointment, this.date);
 
-        model.setPerson(personToSetAppointment, personWithTagAdded);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.tag,
-                personToSetAppointment.getName()),
+        model.setPerson(personToSetAppointment, personWithSetAppointment);
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                personToSetAppointment.getName(), this.date),
                 false, false, targetIndex.getZeroBased());
     }
 
@@ -97,20 +98,20 @@ public class SetAppointmentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagCommand)) {
+        if (!(other instanceof SetAppointmentCommand)) {
             return false;
         }
-        TagCommand otherTagCommand = (TagCommand) other;
+        SetAppointmentCommand otherSetAppointmentCommand = (SetAppointmentCommand) other;
 
-        return targetIndex.equals(otherTagCommand.targetIndex)
-                && tag.equals(otherTagCommand.tag);
+        return targetIndex.equals(otherSetAppointmentCommand.targetIndex)
+                && date.equals(otherSetAppointmentCommand.date);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
-                .add("tag", tag)
+                .add("date", date)
                 .toString();
     }
 

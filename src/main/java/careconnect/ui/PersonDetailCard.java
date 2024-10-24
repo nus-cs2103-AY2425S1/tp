@@ -47,6 +47,8 @@ public class PersonDetailCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label appointmentDate;
+    @FXML
     private FlowPane tags;
     @FXML
     private StackPane logsListPanelPlaceHolder;
@@ -60,6 +62,7 @@ public class PersonDetailCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
+        appointmentDate.setText(person.getAppointmentDate().toString());
         addressLink.setOnMouseClicked(e -> {
             try {
                 String q = person.getAddress().value.replaceAll(" ", "+");

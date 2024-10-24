@@ -16,6 +16,7 @@ import careconnect.logic.parser.CliSyntax;
 import careconnect.model.Model;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -66,9 +67,10 @@ public class TagCommand extends Command {
         Address address = personToAddTag.getAddress();
         ArrayList<Log> logs = new ArrayList<>(personToAddTag.getLogs());
         Set<Tag> updatedTags = new HashSet<Tag>(personToAddTag.getTags());
+        AppointmentDate appointmentDate = personToAddTag.getAppointmentDate();
         updatedTags.add(newTag);
 
-        return new Person(name, phone, email, address, updatedTags, logs);
+        return new Person(name, phone, email, address, updatedTags, logs, appointmentDate);
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import careconnect.commons.util.CollectionUtil;
@@ -28,12 +29,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final ArrayList<Log> logs = new ArrayList<>();
+    private final AppointmentDate appointmentDate;
 
     /**
-     * Every field must be present and not null.
+     * Every field in params list here must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  ArrayList<Log> logs) {
+                  ArrayList<Log> logs, AppointmentDate appointmentDate) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags, logs);
         this.name = name;
         this.phone = phone;
@@ -41,6 +43,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.logs.addAll(logs);
+        this.appointmentDate = appointmentDate;
     }
 
     public Name getName() {
@@ -59,8 +62,8 @@ public class Person {
         return address;
     }
 
-    public Date getAppointmentDate() {
-        return appoinementDate;
+    public AppointmentDate getAppointmentDate() {
+        return appointmentDate;
     }
 
     /**
@@ -112,13 +115,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && logs.equals(otherPerson.logs);
+                && logs.equals(otherPerson.logs)
+                && appointmentDate.equals(otherPerson.appointmentDate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, logs);
+        return Objects.hash(name, phone, email, address, tags, appointmentDate, logs);
     }
 
     @Override
@@ -128,6 +132,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("appointmentDate", appointmentDate)
                 .add("tags", tags)
                 .add("logs", logs)
                 .toString();
