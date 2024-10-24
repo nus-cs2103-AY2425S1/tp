@@ -25,7 +25,7 @@ public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
     public static final Birthday EMPTY_BIRTHDAY = new Birthday("");
 
-    // Example histories for demonstration purposes.
+    // Example histories for demonstration purposes
     public static final History HISTORY_JOHN_DOE = History.addActivity(
             new History(LocalDate.of(2024, 1, 5)),
             LocalDate.of(2024, 2, 15), "Meeting about 3-bedroom condo");
@@ -49,6 +49,31 @@ public class SampleDataUtil {
                     new History(LocalDate.of(2024, 1, 15)),
                     LocalDate.of(2024, 2, 28), "Interested in rental properties"),
             LocalDate.of(2024, 3, 20), "Meeting about investment options");
+
+    public static final History HISTORY_JACK_TAN = History.addActivity(
+            new History(LocalDate.of(2024, 2, 2)),
+            LocalDate.of(2024, 3, 12), "Inquired about mortgage rates");
+
+    public static final History HISTORY_SARAH_NG = History.addActivity(
+            new History(LocalDate.of(2024, 1, 6)),
+            LocalDate.of(2024, 2, 14), "Initial consultation about selling HDB flat");
+
+    public static final History HISTORY_WILLIAM_GO = History.addActivity(
+            History.addActivity(
+                    new History(LocalDate.of(2024, 1, 22)),
+                    LocalDate.of(2024, 2, 5), "Negotiated condo deal"),
+            LocalDate.of(2024, 3, 3), "Follow-up on condo purchase");
+
+    public static final History HISTORY_AMY_WEE = History.addActivity(
+            new History(LocalDate.of(2024, 1, 15)),
+            LocalDate.of(2024, 2, 25), "Discussed long-term investment plans");
+
+    public static final History HISTORY_ALAN_CHEW = History.addActivity(
+            new History(LocalDate.of(2024, 2, 1)),
+            LocalDate.of(2024, 3, 5), "Viewed resale HDB flat");
+    public static final History HISTORY_SIGMA_RIZZLER = History.addActivity(
+            new History(LocalDate.of(2024, 2, 1)),
+            LocalDate.of(2024, 3, 5), "Rizzling at National University of Skibidi");
 
     @SuppressWarnings("checkstyle:Indentation")
     public static Person[] getSamplePersons() {
@@ -91,7 +116,51 @@ public class SampleDataUtil {
                         new Birthday("1970-02-18"),
                         getTagSet("investor", "longTermClient"),
                         new DateOfCreation(LocalDate.of(2024, 1, 15)),
-                        HISTORY_TOM_WONG)
+                        HISTORY_TOM_WONG),
+
+            new Person(new Name("Jack Tan"), new Phone("85434523"), new Email("jack.tan@example.com"),
+                        new Address("Blk 12 Boon Lay Drive, #05-67"),
+                        new Remark("Interested in property financing"),
+                        new Birthday("1982-01-15"),
+                        getTagSet("buyer", "financial"),
+                        new DateOfCreation(LocalDate.of(2024, 2, 2)),
+                        HISTORY_JACK_TAN),
+
+            new Person(new Name("Sarah Ng"), new Phone("91344521"), new Email("sarah.ng@example.com"),
+                        new Address("Blk 55 Serangoon Ave 3, #14-78"),
+                        new Remark("Planning to sell HDB flat"),
+                        new Birthday("1987-03-05"),
+                        getTagSet("seller"),
+                        new DateOfCreation(LocalDate.of(2024, 1, 6)),
+                        HISTORY_SARAH_NG),
+
+            new Person(new Name("William Go"), new Phone("96341234"), new Email("william.go@example.com"),
+                        new Address("Blk 34 Bishan St 23, #07-45"),
+                        new Remark("Looking to purchase condo"),
+                        new Birthday("1975-12-30"),
+                        getTagSet("buyer"),
+                        new DateOfCreation(LocalDate.of(2024, 1, 22)),
+                        HISTORY_WILLIAM_GO),
+
+            new Person(new Name("Amy Wee"), new Phone("97345678"), new Email("amy.wee@example.com"),
+                        new Address("Blk 123 Yishun Ring Road, #02-45"),
+                        new Remark("Interested in long-term investments"),
+                        new Birthday("1980-05-12"),
+                        getTagSet("investor"),
+                        new DateOfCreation(LocalDate.of(2024, 1, 15)),
+                        HISTORY_AMY_WEE),
+            new Person(new Name("Alan Chew"), new Phone("82345671"), new Email("alan.chew@example.com"),
+                        new Address("Blk 45 Bedok South Ave 2, #12-34"),
+                        new Remark("Viewing resale HDB flats"),
+                        new Birthday("1978-07-15"),
+                        getTagSet("buyer", "resale"),
+                        new DateOfCreation(LocalDate.of(2024, 2, 1)),
+                        HISTORY_ALAN_CHEW),
+            new Person(new Name("Sigma Rizzler"), new Phone("69420"), new Email("skibidi@dop.com"),
+                        new Address("Based Estate"), new Remark("Cool dude"), new Birthday("2000-06-09"),
+                        getTagSet("favourite"),
+                        new DateOfCreation(LocalDate.of(2000, 1, 1)),
+                        HISTORY_SIGMA_RIZZLER)
         };
     }
 

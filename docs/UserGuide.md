@@ -92,6 +92,20 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Sorting contacts: `sort`
+
+Sorts the contacts in the address book by their names in either ascending or descending order.
+
+Format: `sort ORDER`
+
+- `ORDER` must be either `asc` for ascending (A-Z) or `desc` for descending (Z-A).
+- If an invalid or no order is provided, an error message will be shown.
+
+Examples:
+* `sort asc` – Sorts contacts in alphabetical order (A-Z).
+* `sort desc` – Sorts contacts in reverse alphabetical order (Z-A).
+
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -140,16 +154,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Viewing a person's full profile: `view`
-
-Shows a person's full details in a pop-up, including those omitted from list view.
-
-Format: `view INDEX`
-
-* The person at the index will have their information displayed in a pop-up.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
 ### Clearing all entries : `clear`
 

@@ -62,8 +62,14 @@ public class PersonCard extends UiPart<Region> {
         remark.setText(person.getRemark().value);
         birthday.setText(person.getBirthday().toString());
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    // Check if the tag contains "favourite" and add a style class
+                    if (tag.tagName.equalsIgnoreCase("favourite")) {
+                        tagLabel.getStyleClass().add("favourite-tag");
+                    }
+                    tags.getChildren().add(tagLabel);
+                });
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
             StringBuilder historyText = new StringBuilder(date.toString() + ": \n");
             historyText.append(String.join(", \n", activities));

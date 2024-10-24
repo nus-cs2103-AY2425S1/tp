@@ -77,6 +77,13 @@ public class PersonTest {
     }
 
     @Test
+    public void personGetWeightTest() {
+        assertEquals(ALICE.getWeight(0), 0);
+        assertEquals(ALICE.getWeight(0, 1), 0);
+        assertEquals(ALICE.getWeight(0, 1, 2), 0);
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();

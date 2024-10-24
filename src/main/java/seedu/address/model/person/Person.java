@@ -30,6 +30,13 @@ public class Person {
     private final History history;
     private final Birthday birthday;
     /**
+     * array of preset tags, index 0: favourite == 1; archived == -1; default == 0;
+     *                       index 1: buyer == 1; seller == 0;
+     *                       index 2: business == 1; personal == 0;
+     * */
+    private final int[] flagWeights = new int[3]; // Initializes with {0, 0, 0}
+
+    /**
      * Every field must be present and not null. Used for new person creation
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -153,7 +160,13 @@ public class Person {
     public Birthday getBirthday() {
         return birthday;
     }
-
+    public int getWeight(int... tagIndex) {
+        int totalWeight = 0;
+        for (int index : tagIndex) {
+            totalWeight += flagWeights[index];
+        }
+        return totalWeight;
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
