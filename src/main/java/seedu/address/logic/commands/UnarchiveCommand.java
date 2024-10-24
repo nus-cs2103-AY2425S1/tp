@@ -27,67 +27,67 @@ import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.DeliveryAction;
 import seedu.address.ui.InspectWindow;
 
 
 /**
- * Archive a delivery identified using it's displayed index from the address book.
+ * Unarchive a delivery identified using it's displayed index from the address book.
  */
 
-public class ArchiveCommand extends Command {
+public class UnarchiveCommand extends Command {
 
-    public static final String COMMAND_WORD = "archive";
+    public static final String COMMAND_WORD = "unarchive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Archives the delivery identified by the index number used in the displayed delivery list.\n"
+            + ": Unarchives the delivery identified by the index number used in the displayed delivery list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ARCHIVED_DELIVERY_SUCCESS = "Archived Delivery for %1$s: %2$s";
+    public static final String MESSAGE_ARCHIVED_DELIVERY_SUCCESS = "Unarchived Delivery for %1$s: %2$s";
 
-    public static final String MESSAGE_INVALID_WINDOW = "Cannot archive contact. "
+    public static final String MESSAGE_INVALID_WINDOW = "Cannot unarchive contact. "
             + "Navigate to inspection window to archive deliveries";
 
     private final List<Index> indexList;
 
-    public ArchiveCommand(List<Index> indexList) {
+    public UnarchiveCommand(List<Index> indexList) {
         this.indexList = indexList;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         // Sort the indexList in descending order
-        indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
+        indexList.sort(Comparator.comparing(Index::getZeroBased));
 
         if (AddressBookParser.getInspect()) {
-            return handleDeliveryArchive(model);
+            return handleDeliveryUnarchive(model);
         } else {
             throw new CommandException(MESSAGE_INVALID_WINDOW);
         }
     }
 
     /**
-     * Handles the deletion of deliveries from the inspected person's delivery list based on the indexList.
+     * Handles the unarchiving of deliveries from the inspected person's delivery list based on the indexList.
      *
      * @param model The model containing the inspected person.
-     * @return A CommandResult containing a success message with details of the deleted deliveries.
+     * @return A CommandResult containing a success message with details of the unarchived deliveries.
      * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
      */
-    private CommandResult handleDeliveryArchive(Model model) throws CommandException {
+    private CommandResult handleDeliveryUnarchive(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         DeliveryList deliveryList = inspectedPerson.getDeliveryList();
         validateIndexes(inspectedPerson.getDeliveryListSize(), indexList);
 
-        List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
+        List<Delivery> deliveryToArchiveList = unarchiveDeliveries(inspectedPerson, deliveryList);
+        Collections.reverse(deliveryToArchiveList);
 
         return new CommandResult(String.format(
                 MESSAGE_ARCHIVED_DELIVERY_SUCCESS,
                 inspectedPerson.getName(),
                 Messages.formatDeliveryList(deliveryToArchiveList)),
-                DeliveryAction.ARCHIVE);
+                DeliveryAction.UNARCHIVE);
     }
 
     /**
@@ -107,57 +107,43 @@ public class ArchiveCommand extends Command {
     }
 
     /**
-     * Archive deliveries from the inspected person's delivery list based on the provided indexList.
+     * Unarchive deliveries from the inspected person's delivery list based on the provided indexList.
      *
-     * @param inspectedPerson The person whose deliveries are to be archived.
+     * @param inspectedPerson The person whose deliveries are to be unarchived.
      * @param deliveryList The list of deliveries to archive from.
      * @return A list of deliveries that were archived.
      */
-    private List<Delivery> archiveDeliveries(Person inspectedPerson, DeliveryList deliveryList) {
-        List<Delivery> deliveryToArchiveList = new ArrayList<>();
-        List<Delivery> deliveryToAddList = new ArrayList<>();
-
+    private List<Delivery> unarchiveDeliveries(Person inspectedPerson, DeliveryList deliveryList) {
+        List<Delivery> deliveryToUnarchiveList = new ArrayList<>();
         for (Index targetIndex : indexList) {
-            Delivery deliveryToArchive = deliveryList.asUnmodifiableObservableList().get(targetIndex.getZeroBased());
-            Delivery archivedDelivery = createArchivedDelivery(deliveryToArchive);
-
-            if (!deliveryToArchive.isArchived()) {
-                inspectedPerson.deleteDelivery(targetIndex);
-                deliveryToAddList.add(archivedDelivery);
+            Delivery deliveryToUnarchive = deliveryList.asUnmodifiableObservableList().get(targetIndex.getZeroBased());
+            Delivery unarchivedDelivery = createUnarchivedDelivery(deliveryToUnarchive);
+            if (deliveryToUnarchive.isArchived()) {
+                inspectedPerson.unarchiveDelivery(targetIndex, unarchivedDelivery);
             }
-            deliveryToArchiveList.add(archivedDelivery);
+            deliveryToUnarchiveList.add(unarchivedDelivery);
         }
-
-        Collections.reverse(deliveryToArchiveList);
-        Collections.reverse(deliveryToAddList);
-
-        for (Delivery deliveryToAdd : deliveryToAddList) {
-            inspectedPerson.addDelivery(deliveryToAdd);
-        }
-
-        return deliveryToArchiveList;
+        return deliveryToUnarchiveList;
     }
 
     /**
-     * Creates and returns a {@code Delivery} with the details of {@code toEdit}
-     * edited with {@code descriptor}.
+     * Creates and returns a {@code Delivery} with the details of {@code toUnarchive}.
      */
-    private static Delivery createArchivedDelivery(Delivery toArchive) {
-        assert toArchive != null;
+    private static Delivery createUnarchivedDelivery(Delivery toUnarchive) {
+        assert toUnarchive != null;
 
-        Set<ItemName> items = toArchive.getItems();
-        DeliveryId deliveryId = toArchive.getDeliveryId();
-        Address address = toArchive.getAddress();
-        Cost cost = toArchive.getCost();
-        Date date = toArchive.getDate();
-        Time time = toArchive.getTime();
-        Eta eta = toArchive.getEta();
-        Status status = toArchive.getStatus();
-        Set<Tag> tags = toArchive.getTags();
+        Set<ItemName> items = toUnarchive.getItems();
+        DeliveryId deliveryId = toUnarchive.getDeliveryId();
+        Address address = toUnarchive.getAddress();
+        Cost cost = toUnarchive.getCost();
+        Date date = toUnarchive.getDate();
+        Time time = toUnarchive.getTime();
+        Eta eta = toUnarchive.getEta();
+        Status status = toUnarchive.getStatus();
 
-        Archive updatedArchive = new Archive(true);
+        Archive updatedArchive = new Archive(false);
 
-        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, tags, updatedArchive);
+        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, updatedArchive);
     }
 
     /**
@@ -177,7 +163,10 @@ public class ArchiveCommand extends Command {
     }
 
     /**
-     * Check if the list to be archived are exactly equal
+     * Check if the list to be unarchived are exactly equal
+     *
+     * @param other
+     * @return
      */
     @Override
     public boolean equals(Object other) {
@@ -186,15 +175,15 @@ public class ArchiveCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ArchiveCommand)) {
+        if (!(other instanceof UnarchiveCommand)) {
             return false;
         }
 
-        ArchiveCommand otherArchiveCommand = (ArchiveCommand) other;
+        UnarchiveCommand otherUnarchiveCommand = (UnarchiveCommand) other;
         boolean isEqual = true;
         for (int i = 0; i < indexList.size(); i++) {
             Index targetIndex = indexList.get(i);
-            Index otherIndex = otherArchiveCommand.indexList.get(i);
+            Index otherIndex = otherUnarchiveCommand.indexList.get(i);
             isEqual = isEqual && targetIndex.equals(otherIndex);
         }
         return isEqual;

@@ -7,5 +7,6 @@ public enum DeliveryAction {
     NONE,
     ADD,
     DELETE,
-    ARCHIVE
+    ARCHIVE,
+    UNARCHIVE
 }

@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.tag.Tag;
 
@@ -25,6 +27,10 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Role role;
+
+    //Temporary initialisation for worker
+    private Worker worker = new Worker(new HashSet<>(Arrays.asList(new DeliveryId(), new DeliveryId())));
 
     // Data fields
     private final Address address;
@@ -34,11 +40,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Role role, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.role = role;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -57,6 +64,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public Worker getWorker() {
+        return worker;
     }
 
     /**
@@ -128,22 +143,26 @@ public class Person {
     }
 
     /**
-     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * Add the given delivery {@code unarchivedDelivery} to the list at {@code targetIndex}.
      * {@code targetIndex} must be a valid index in the deliveryList.
-     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
      */
-    public void archiveDelivery(Index targetIndex, Delivery archivedDelivery) {
+    public void unarchiveDelivery(Index targetIndex, Delivery unarchivedDelivery) {
         deleteDelivery(targetIndex);
-        addDelivery(archivedDelivery);
+        addDelivery(getFirstArchivedIndex(), unarchivedDelivery);
     }
 
     /**
-     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
-     * {@code targetIndex} must be a valid index in the deliveryList.
-     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
+     * Returns the index of the first archived delivery in the list.
      */
     public Index getFirstArchivedIndex() {
         return deliveryList.getFirstArchivedIndex();
+    }
+
+    /**
+     * Sets the Worker for this Person
+     */
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     /**

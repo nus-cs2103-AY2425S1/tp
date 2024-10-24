@@ -64,7 +64,7 @@ public class DeleteCommand extends Command {
     private CommandResult handlePersonDeletion(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        validateIndexes(lastShownList.size(), indexList);
+        validateIndexes(lastShownList.size(), indexList, true);
 
         List<Person> personToDeleteList = deletePersons(model, lastShownList);
 
@@ -83,7 +83,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
-        validateIndexes(deliveryList.size(), indexList);
+        validateIndexes(deliveryList.size(), indexList, false);
 
         List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList);
 
@@ -101,11 +101,15 @@ public class DeleteCommand extends Command {
      * @param indexList The list of indexes to be validated.
      * @throws CommandException if any index is out of bounds or if duplicates are found.
      */
-    private void validateIndexes(int listSize, List<Index> indexList) throws CommandException {
+    private void validateIndexes(int listSize, List<Index> indexList, boolean isPersonIndex) throws CommandException {
         boolean duplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
             if (targetIndex.getZeroBased() >= listSize || duplicate) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                if (isPersonIndex) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                } else {
+                    throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+                }
             }
         }
     }

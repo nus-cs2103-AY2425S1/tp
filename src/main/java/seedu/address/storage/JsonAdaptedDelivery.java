@@ -98,14 +98,12 @@ public class JsonAdaptedDelivery {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DeliveryId.class.getSimpleName()));
         }
+        final DeliveryId modelDeliveryId = new DeliveryId(deliveryId);
 
         final List<ItemName> deliveryItems = new ArrayList<>();
         for (JsonAdaptedItem item : items) {
             deliveryItems.add(item.toModelType());
         }
-
-        final DeliveryId modelDeliveryId = new DeliveryId(deliveryId);
-
         if (items.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "items"));
         }
