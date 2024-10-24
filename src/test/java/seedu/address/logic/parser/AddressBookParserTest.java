@@ -14,9 +14,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
@@ -41,11 +41,12 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryIsUpcomingPredicate;
 import seedu.address.model.delivery.Status;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.SupplierSortComparator;
 import seedu.address.model.person.SupplierSortNameComparator;
 import seedu.address.model.person.SupplierStatus;
+import seedu.address.model.person.predicates.NameContainsPredicate;
+import seedu.address.model.person.predicates.ProductContainsKeywordPredicate;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -139,11 +140,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_findSupplier() throws Exception {
+        String commandInput = "find -s n/Linkes pro/Iphone";
+        List<Predicate<Person>> listOfPredicates = new ArrayList<>();
+        listOfPredicates.add(new NameContainsPredicate("Linkes"));
+        listOfPredicates.add(new ProductContainsKeywordPredicate("Iphone"));
+
+        FindSupplierCommand command = (FindSupplierCommand) parser.parseCommand(commandInput);
+        assertEquals(new FindSupplierCommand(listOfPredicates), command);
     }
 
     @Test

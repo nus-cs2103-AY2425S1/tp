@@ -48,10 +48,10 @@
     "products" : [ "power tools"],
     "status" : "active"
   }, {
-    "name" : "George Best",
+    "name" : "George Pauline",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "company" : "company G",
+    "company" : "company A",
     "tags" : [ ],
     "status" : "active"
   } ],
