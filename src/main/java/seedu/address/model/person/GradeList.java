@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
 /**
  * Represents a list of grades for a student in the address book.
  */
@@ -37,13 +36,26 @@ public class GradeList {
     /**
      * Adds or updates the grade for a specific test.
      * If a grade for the given test name already exists, it is updated.
+     * If the total weightage of all grades exceeds 100%, a runtime exception is thrown.
      *
      * @param grade The grade to be recorded.
+     * @return A new GradeList containing the updated grades.
+     * @throws RuntimeException if the total weightage exceeds 100%.
      */
     public GradeList addGrade(Grade grade) {
         requireNonNull(grade, "Grade cannot be null");
-
         Map<String, Grade> newGrades = new HashMap<>(this.grades);
+
+        float totalWeightage = 0;
+        for (Grade g : newGrades.values()) {
+            totalWeightage += g.getWeightage();
+        }
+        totalWeightage += grade.getWeightage();
+
+        // Check if the total weightage exceeds 100%
+        if (totalWeightage > 100) {
+            throw new IllegalStateException("Total weightage exceeds 100%");
+        }
 
         newGrades.merge(grade.getTestName(), grade, (oldGrade, newGrade) -> newGrade);
 
@@ -115,7 +127,21 @@ public class GradeList {
         return summary;
     }
 
-    // TODO: Check if total weightage has crossed 100%
+    /**
+     * Calculates the total weightage of all the grades in the list.
+     *
+     * @return The total weightage of all grades as a percentage (0 to 100).
+     */
+    public float getTotalWeightage() {
+        float totalWeightage = 0;
+
+        // Iterate over all grades to sum their weightages
+        for (Grade g : this.grades.values()) {
+            totalWeightage += g.getWeightage();
+        }
+
+        return totalWeightage;
+    }
 
     /**
      * Returns true if the grade list is empty.
