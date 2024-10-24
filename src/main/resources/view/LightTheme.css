@@ -1,11 +1,6 @@
 .background {
-<<<<<<< HEAD
     -fx-background-color: derive(#ffffff, 20%);
     background-color: #F1F8E8; /* Used in the default.html file */
-=======
-    -fx-background-color: derive(#FEFAE0, 20%);
-    background-color: #FEFAE0; /* Used in the default.html file */
->>>>>>> master
 }
 
 .label {
