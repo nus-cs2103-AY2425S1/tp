@@ -53,7 +53,6 @@ public class AddAssignmentCommandTest {
                 expectedModel);
 
         assertTrue(addAssignmentCommand.undo(model));
-        System.out.println(HUGH.getAssignments());
-        assertTrue(HUGH.getAssignments().size() == 1);
+        assertTrue(HUGH.getAssignments().size() == 0);
     }
 }

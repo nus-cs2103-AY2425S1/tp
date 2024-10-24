@@ -56,7 +56,8 @@ public class EditStudentCommandTest {
         Student lastStudent = model.getFilteredStudentList().get(indexLastPerson.getZeroBased());
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
-        Student editedStudent = studentInList.withName(VALID_NAME_DIDDY).withPhone(VALID_PHONE_DIDDY).build();
+        Student editedStudent = studentInList.withName(VALID_NAME_DIDDY).withPhone(VALID_PHONE_DIDDY)
+                .buildFull();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_DIDDY)
                 .withPhone(VALID_PHONE_DIDDY).build();

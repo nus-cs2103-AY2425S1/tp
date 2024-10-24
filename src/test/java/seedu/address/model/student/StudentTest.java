@@ -107,7 +107,9 @@ public class StudentTest {
                 + "{name=" + HUGH.getName()
                 + ", contactNumber=" + HUGH.getPhone()
                 + ", tutorialGroup=" + HUGH.getTutorialGroup()
-                + ", studentNumber=" + HUGH.getStudentNumber() + "}";
+                + ", studentNumber=" + HUGH.getStudentNumber()
+                + ", assignments=" + HUGH.getAssignments()
+                + ", attendanceRecords=" + HUGH.getAttendanceRecord() + "}";
         assertEquals(expected, HUGH.toString());
     }
 
@@ -153,7 +155,7 @@ public class StudentTest {
     @Test
     void deleteAssignmentByIndex_validIndex_success() {
         Assignment deletedAssignment = student.deleteAssignment(1);
-        assertEquals(MATH_ASSIGNMENT_SUBMITTED, deletedAssignment);
+        assertEquals(SCIENCE_ASSIGNMENT_GRADED, deletedAssignment);
     }
 
     @Test
@@ -166,7 +168,7 @@ public class StudentTest {
     void getAssignmentIndex_existingAssignment_success() {
         AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, null, null, null, null);
         int index = student.getAssignmentIndex(query);
-        assertEquals(1, index);
+        assertEquals(0, index);
     }
 
     @Test
@@ -280,13 +282,13 @@ public class StudentTest {
     }
     @Test
     void getAttendanceRecordsString_noRecords_emptyString() {
-        Student student = new StudentBuilder().build_default();
+        Student student = new StudentBuilder().build();
         assertEquals("", student.getAttendanceRecordsString());
     }
 
     @Test
     void getAttendanceRecordsString_multipleRecords_success() {
-        Student student = new StudentBuilder().build_default();
+        Student student = new StudentBuilder().build();
         student.markAttendance(LocalDate.of(2024, 10, 22), "p");
         student.markAttendance(LocalDate.of(2024, 10, 23), "a");
 

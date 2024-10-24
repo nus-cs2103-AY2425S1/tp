@@ -29,8 +29,8 @@ public class DeleteAssignmentCommandTest {
     public void execute_deleteAssignment_success() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Student hughCopy = new StudentBuilder(HUGH).build();
-        hughCopy.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
         expectedModel.addStudent(hughCopy);
+        HUGH.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
 
         model.addStudent(HUGH);
         assertCommandSuccess(new DeleteAssignmentCommand(HUGH.getName(),
@@ -59,8 +59,8 @@ public class DeleteAssignmentCommandTest {
                 expectedModel);
 
         assertTrue(deleteAssignmentCommand.undo(model));
-        assertTrue(HUGH.getAssignments().size() == 2);
-        assertTrue(HUGH.getAssignments().get(1).equals(MATH_ASSIGNMENT_SUBMITTED));
+        assertTrue(HUGH.getAssignments().size() == 1);
+        assertTrue(HUGH.getAssignments().get(0).equals(MATH_ASSIGNMENT_SUBMITTED));
     }
 
     @Test
@@ -74,6 +74,6 @@ public class DeleteAssignmentCommandTest {
                 new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
                         null, null));
         assertFalse(deleteAssignmentCommand.undo(model));
-        assertTrue(hughCopy.getAssignments().size() == 3); // No change to the assignments list
+        assertTrue(hughCopy.getAssignments().size() == 2); // No change to the assignments list
     }
 }

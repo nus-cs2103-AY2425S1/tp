@@ -147,7 +147,7 @@ public class StudentBuilder {
      * Builds the student object with empty assignments and attendance records.
      * @return Student object
      */
-    public Student build_default() {
+    public Student build() {
         return new Student(name, phone, tutorialGroup, studentNumber);
     }
 
@@ -155,7 +155,7 @@ public class StudentBuilder {
      * Builds the student object with the given assignments and attendance records.
      * @return Student object
      */
-    public Student build() {
+    public Student buildFull() {
         return new Student(name, phone, tutorialGroup, studentNumber, assignments, attendanceRecords);
     }
 }

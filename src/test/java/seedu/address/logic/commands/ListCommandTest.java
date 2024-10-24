@@ -36,4 +36,25 @@ public class ListCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
+
+    @Test
+    public void equals() {
+        ListCommand listFirstCommand = new ListCommand();
+        ListCommand listSecondCommand = new ListCommand();
+
+        // same object -> returns true
+        assert listFirstCommand.equals(listFirstCommand);
+
+        // same values -> returns true
+        assert listFirstCommand.equals(listSecondCommand);
+
+        // different types -> returns false
+        assert !listFirstCommand.equals(1);
+
+        // null -> returns false
+        assert !listFirstCommand.equals(null);
+
+        // different student -> returns false
+        assert !listFirstCommand.equals(new ClearCommand());
+    }
 }
