@@ -188,7 +188,7 @@
 }
 
 .result-display .label {
-    -fx-text-fill: -ab3-darkerText !important;
+    -fx-text-fill: -ab3-darkerText;
     -fx-opacity: 1;
 }
 
@@ -224,7 +224,8 @@
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -ab3-menubar-text;
+    -fx-font-family: "Segoe UI Light";
 }
 
 .menu-bar {
