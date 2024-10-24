@@ -13,10 +13,10 @@ import java.net.URL;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.CHARLIE;
 
 public class VcfExporterTest {
-    private static final String ALICE_VCF_FILE_PATH = "alice.vcf";
+    private static final String ALICE_VCF_FILE_PATH = "charlie.vcf";
 
     private VcfExporter vcfExporter;
 
@@ -59,7 +59,7 @@ public class VcfExporterTest {
 
         // Export creates a file with the person's details
         AddressBook addressBook = new AddressBook();
-        addressBook.addPerson(ALICE);
+        addressBook.addPerson(CHARLIE);
         assertDoesNotThrow(() -> vcfExporter.exportAddressBook(addressBook));
 
         // Assert that the file exists now
