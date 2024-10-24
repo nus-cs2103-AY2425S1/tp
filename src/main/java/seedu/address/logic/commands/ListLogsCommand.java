@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -27,7 +25,7 @@ public class ListLogsCommand extends Command {
             + ": Lists all logs of a person identified by the NRIC.\n"
             + "Parameters: NRIC\n"
             + "Example: " + COMMAND_WORD + " i/S1234567A";
-  
+
     private final IdentityNumber identityNumber;
 
     /**
