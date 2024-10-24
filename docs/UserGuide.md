@@ -15,18 +15,20 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 ## Command summary
 Click on each command to jump to their subsection.
 
-| Action                                         | Format, Examples                                                                                                                                 |
-|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help--help)**                | `help`                                                                                                                                           |
-| **[Add](#adding-a-person-add)**                | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
-| **[List](#listing-all-persons--list)**         | `list`                                                                                                                                           |
-| **[Edit](#editing-a-person--edit)**            | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **[Mark](#marking-person-as-attended-mark)**   | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
-| **[Unmark](#marking-person-as-absent-unmark)** | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
-| **[Find](#locating-persons-by-name-find)**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
-| **[Delete](#deleting-a-person--delete)**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
-| **[Clear](#clearing-all-entries--clear)**      | `clear`                                                                                                                                          |
-| **[Exit](#exiting-the-program--exit)**         | `exit`                                                                                                                                           |
+| Action                                            | Format, Examples                                                                                                                                 |
+|---------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help--help)**                   | `help`                                                                                                                                           |
+| **[Add](#adding-a-person--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
+| **[List](#listing-all-persons--list)**            | `list`                                                                                                                                           |
+| **[Edit](#editing-a-person--edit)**               | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
+| **[Mark](#marking-person-as-attended--mark)**     | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
+| **[Unmark](#marking-person-as-absent--unmark)**   | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
+| **[Reset](#resetting-persons-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> e.g., `reset 2 tut/1`                                                                                             |
+| **[Find](#locating-persons-by-name--find)**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
+| **[Sort](#sorting-persons--sort)**                | `sort ORDER [n/][i/][tut/]`<br> e.g., `sort -1 i/`                                                                                               |
+| **[Delete](#deleting-a-person--delete)**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
+| **[Clear](#clearing-all-entries--clear)**         | `clear`                                                                                                                                          |
+| **[Exit](#exiting-the-program--exit)**            | `exit`                                                                                                                                           |
 
 ---
 
@@ -91,7 +93,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to the address book.
 
@@ -130,35 +132,64 @@ Examples:
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Marking person as attended: `mark`
+### Marking person as attended : `mark`
 
 Marks attendance as present of the person by the index number.
 
 Format: `mark INDEX tut/TUTORIAL`
 
 - Marks the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ or a **wildcard** *.
-- The tutorial number (week number) must be specified.
+- `TUTORIAL` can be in the format of:
+  - A positive number between 1-12 `eg. 1`.
+  - A list of numbers `eg. [1,3,5]`.
+  - A range of two numbers `eg. 3-6`. 
 
 Examples:
 
 - `mark 1 tut/1` Marks the 1st person in the address book as attended for tutorial 1.
 - `mark * tut/1` Marks all persons in the address book as attended for tutorial 1.
+- `mark * tut/1-3` Marks all persons in the address book as attended for tutorials 1 to 3.
+- `mark 1 tut/[2,4,12]` Marks the 1st person in the address book as attended for tutorials 2, 4 and 12.
 
-### Marking person as absent: `unmark`
+### Marking person as absent : `unmark`
 
 Marks attendance as absent of the person by the index number.
 
 Format: `unmark INDEX tut/TUTORIAL`
 
 - Marks the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ or a **wildcard** *.
-- The tutorial number (week number) must be specified.
+- `TUTORIAL` can be in the format of:
+    - A positive number between 1-12 `eg. 1`.
+    - A list of numbers `eg. [1,3,5]`.
+    - A range of two numbers `eg. 3-6`.
 
 Examples:
 
 - `unmark 1 tut/1` Marks the 1st person in the address book as absent for tutorial 1.
 - `unmark * tut/1` Marks all persons in the address book as absent for tutorial 1.
+- `unmark * tut/1-3` Marks all persons in the address book as absent for tutorials 1 to 3.
+- `unmark 1 tut/[2,4,12]` Marks the 1st person in the address book as absent for tutorials 2, 4 and 12.
 
-### Locating persons by name: `find`
+### Resetting person's attendance : `reset`
+
+Resets the attendance of the person by the index number.
+
+Format: `reset INDEX tut/TUTORIAL`
+
+- Resets the attendance of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ or a **wildcard** *.
+- `TUTORIAL` can be in the format of:
+    - A positive number between 1-12 `eg. 1`.
+    - A list of numbers `eg. [1,3,5]`.
+    - A range of two numbers `eg. 3-6`.
+
+Examples:
+
+- `reset 1 tut/1` Resets the attendance of the 1st person in the address book for tutorial 1.
+- `reset * tut/1` Resets the attendance of all persons in the address book for tutorial 1.
+- `reset * tut/1-3` Resets the attendance of all persons in the address book for tutorials 1 to 3.
+- `reset 1 tut/[2,4,12]` Resets the attendance of the 1st person in the address book for tutorials 2, 4 and 12.
+
+### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -176,6 +207,24 @@ Examples:
 - `find an` returns `armin` and `brian`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Sorting persons : `sort`
+
+Sorts the displayed list of persons by either name, student id or tutorial attendance.
+
+Format: `sort ORDER [n/][i/][tut/TUTORIAL]`
+
+- `ORDER` indicates whether the sorted list is **ascending** or **descending**.
+- **Ascending** is represented with integer 1.
+- **Descending** is represented with integer -1.
+- `n/` indicates sorting according to name.
+- `i/` indicates sorting according to student id.
+- `tut/TUTORIAL` indicates sorting according to tutorial attendance for a specific tutorial.
+
+Examples:
+
+- `sort -1 i/` sorts the person list in descending order according to student id.
+- `sort 1 tut/3` sorts the person list in ascending order according to tutorial 3 attendance.
 
 ### Deleting a person : `delete`
 
