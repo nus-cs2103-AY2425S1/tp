@@ -38,6 +38,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 import seedu.address.model.vendor.Vendor;
 import seedu.address.testutil.EditVendorDescriptorBuilder;
