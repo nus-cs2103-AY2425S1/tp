@@ -9,14 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -37,7 +35,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.FilterPersonDescriptorBuilder;
-
 
 public class FilterCommandParserTest {
 
@@ -83,8 +80,8 @@ public class FilterCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        String userInput = NAME_DESC_AMY;
-        FilterPersonDescriptor descriptor = new FilterPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        String userInput = " n/ Amy";
+        FilterPersonDescriptor descriptor = new FilterPersonDescriptorBuilder().withName("Amy").build();
         FilterCommand expectedCommand = new FilterCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -116,9 +113,9 @@ public class FilterCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         String userInput = PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + GENDER_DESC_AMY + NAME_DESC_AMY + MODULE_DESC_AMY + TAG_DESC_FRIEND;
+                + GENDER_DESC_AMY + " n/ Amy" + MODULE_DESC_AMY + TAG_DESC_FRIEND;
 
-        FilterPersonDescriptor descriptor = new FilterPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        FilterPersonDescriptor descriptor = new FilterPersonDescriptorBuilder().withName("Amy")
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_AMY)
                 .withModules(VALID_MODULE_AMY)
