@@ -179,4 +179,17 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static Set<Index> parseWeddingJobs(Collection<String> weddings) throws ParseException {
+        requireNonNull(weddings);
+
+        final Set<Index> weddingSet = new HashSet<>();
+        for (String weddingIndex : weddings) {
+            Index indexToAdd = parseIndex(weddingIndex);
+            if (!weddingSet.contains(indexToAdd)) {
+                weddingSet.add(indexToAdd);
+            }
+        }
+        return weddingSet;
+    }
 }

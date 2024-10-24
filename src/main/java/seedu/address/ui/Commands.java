@@ -5,8 +5,8 @@ package seedu.address.ui;
  * Each command has a name, an example format, and associated prefixes for parameters.
  */
 public enum Commands {
-    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG...]",
-            new String[]{"n/", "p/", "e/", "a/", "t/"}),
+    ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [w/WEDDING...]",
+            new String[]{"n/", "p/", "e/", "a/", "t/", "w/"}),
     DELETE("delete", "delete INDEX/NAME", new String[]{}),
     CLEAR("clear", "clear", new String[]{}),
     VIEW("view", "view NAME", new String[]{}),
@@ -17,8 +17,8 @@ public enum Commands {
     ADDWEDDING("addw", "addw n/WEDDINGNAME c/CLIENT [d/DATE] [v/VENUE]",
             new String[]{"d/", "v/", "c/", "n/"}),
     TAGWEDDING("tagw", "tagw INDEX/NAME w/WEDDING r/ROLE ", new String[]{"w/", "r/"}),
-    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [w/WEDDING]",
-            new String[]{"n/", "p/", "e/", "a/", "w/"}),
+    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
+            new String[]{"n/", "p/", "e/", "a/"}),
     VIEWWEDDING("vieww", "vieww NAME", new String[]{}),
 
     DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
