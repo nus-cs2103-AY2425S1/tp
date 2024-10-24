@@ -23,6 +23,9 @@ Class JsonAdaptedTag
 Class JsonAdaptedTask
 Class JsonAdaptedWedding
 Class JsonAdaptedVendor
+Class JsonAdaptedTodo
+Class JsonAdaptedDeadline
+Class JsonAdaptedEvent
 }
 
 }
@@ -45,5 +48,8 @@ JsonAdaptedPerson --> "0..*" JsonAdaptedTag
 JsonAdaptedPerson --> "0..*" JsonAdaptedWedding
 JsonAdaptedVendor --|> JsonAdaptedPerson
 JsonAdaptedVendor --> "0..*" JsonAdaptedTask
+JsonAdaptedEvent --|> JsonAdaptedTask
+JsonAdaptedTodo --|> JsonAdaptedTask
+JsonAdaptedDeadline --|> JsonAdaptedTask
 
 @enduml
