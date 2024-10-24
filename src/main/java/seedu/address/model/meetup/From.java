@@ -43,8 +43,14 @@ public class From {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        // Define the formatter with the desired pattern
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy (h:mma)");
+
+        // Format the LocalDateTime object
         String formattedDateTime = value.format(formatter);
+
+        // Convert "AM"/"PM" to lowercase
+        formattedDateTime = formattedDateTime.replace("AM", "am").replace("PM", "pm");
         return formattedDateTime;
     }
 

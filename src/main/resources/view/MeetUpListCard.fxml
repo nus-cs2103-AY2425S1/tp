@@ -26,10 +26,19 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="info" styleClass="cell_small_label" text="\$info" />
-      <Label fx:id="from" styleClass="cell_small_label" text="\$from" />
-      <Label fx:id="to" styleClass="cell_small_label" text="\$to" />
       <FlowPane fx:id="addedBuyers" alignment="CENTER_LEFT"/>
+      <Label fx:id="info" styleClass="cell_small_label" text="\$info" />
+      <GridPane hgap="10" vgap="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+        <!-- From Label and Value -->
+        <Label text="From:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="fromLabel" styleClass="cell_small_label" text="\$from" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <!-- To Label and Value -->
+        <Label text="To:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label fx:id="toLabel" styleClass="cell_small_label" text="\$to" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+      </GridPane>
+<!--      <Label fx:id="from" styleClass="cell_small_label" text="\$from" />-->
+<!--      <Label fx:id="to" styleClass="cell_small_label" text="\$to" />-->
     </VBox>
   </GridPane>
 </HBox>

@@ -49,10 +49,10 @@ public class BuyerCard extends UiPart<Region> {
         super(FXML);
         this.buyer = buyer;
         id.setText(displayedIndex + ". ");
-        name.setText(buyer.getName().fullName);
-        phone.setText(buyer.getPhone().value);
-        budget.setText(buyer.getBudget().value);
-        email.setText(buyer.getEmail().value);
+        name.setText(buyer.getName().toString());
+        phone.setText(buyer.getPhone().toString());
+        budget.setText(buyer.getBudget().toString());
+        email.setText(buyer.getEmail().toString());
         buyer.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

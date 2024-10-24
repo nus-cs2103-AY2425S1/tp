@@ -13,10 +13,9 @@ import java.util.Locale;
 public class Budget {
 
     public static final String MESSAGE_CONSTRAINTS = "Budget of the buyer (to the nearest SGD). "
-        + "It should be a positive integer more than 0 and can contain commas at the right positions "
-        + "(exactly 3 digits after each comma)"
-        + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). "
-        + "It must not be blank.";
+            + "It should be a positive integer more than 0 and not be blank. \n"
+            + "It can contain commas at the right positions (exactly 3 digits after each comma) \n"
+            + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). ";
 
     /*
      * Budget must be an integer greater than 0.
@@ -59,7 +58,7 @@ public class Budget {
 
     @Override
     public String toString() {
-        return value;
+        return String.format("$%s",value);
     }
 
     @Override

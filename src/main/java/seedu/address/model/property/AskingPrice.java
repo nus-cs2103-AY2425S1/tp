@@ -12,11 +12,10 @@ import java.util.Locale;
  */
 public class AskingPrice {
 
-    public static final String MESSAGE_CONSTRAINTS = "Asking price of property (to the nearest SGD). "
-            + "It should be a positive integer more than 0 and can contain commas at the right positions "
-            + "(exactly 3 digits after each comma)"
-            + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). "
-            + "It must not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Asking price of property (to the nearest SGD). \n"
+            + "It should be a positive integer more than 0 and not be blank. \n"
+            + "It can contain commas at the right positions (exactly 3 digits after each comma) \n"
+            + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). ";
 
     public static final String VALIDATION_REGEX = "^0*([1-9]\\d*|[1-9]\\d{0,2}(,\\d{3})*)$";
 
@@ -54,7 +53,7 @@ public class AskingPrice {
 
     @Override
     public String toString() {
-        return value;
+        return String.format("$%s",value);
     }
 
     @Override
