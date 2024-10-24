@@ -75,7 +75,7 @@ public class DeleteCarCommandTest {
         Person personCheckedInWithCar = new PersonBuilder()
                 .withCar("SGX1234B", "KMHGH4JH3EU073801", "Toyota", "Corolla")
                 .build();
-        
+
         personCheckedInWithCar.setServicing();
 
         // Step 2: Create the model stub that contains the person checked in with a car
