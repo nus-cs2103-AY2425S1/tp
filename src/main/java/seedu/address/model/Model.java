@@ -58,6 +58,26 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the user prefs' listings file path.
+     */
+    Path getListingsFilePath();
+
+    /**
+     * Sets the user prefs' listings file path.
+     */
+    void setListingsFilePath(Path listingsFilePath);
+
+    /**
+     * Replaces listingds data with the data in {@code addressBook}.
+     */
+    void setListings(ReadOnlyListings listings);
+
+    /** Returns the Listings */
+    ReadOnlyListings getListings();
+
+    // Methods for clients
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -89,17 +109,48 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    //Methods for listings
+
+    /**
+     * Returns true if a listing with the same identity as {@code listing} exists in the address book.
+     */
+    boolean hasListing(Listing listing);
+
+    /**
+     * Deletes the given listing.
+     * The listing must exist in the address book.
+     */
+    void deleteListing(Listing listing);
+
+    /**
+     * Adds the given listing.
+     * {@code listing} must not already exist in the address book.
+     */
+    void addListing(Listing listing);
+
+    /**
+     * Replaces the given person {@code target} with {@code editedListing}.
+     * {@code listing} must exist in the address book.
+     * The person identity of {@code editedListing} must not be the same as another existing person in the address book.
+     */
+    void setListing(Listing target, Listing editedListing);
+
+    /**
+     * Returns the listing with the same name as {@code listing} exists in the address book.
+     */
+    //Person getPersonByName(Name name);
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Listing> getFilteredListingList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of the filtered listing-list */
-    ObservableList<Listing> getFilteredListingList();
-
     /**
-     * Updates the filter of the filtered listing-list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered listing list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredListingList(Predicate<Listing> predicate);

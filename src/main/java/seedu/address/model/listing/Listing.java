@@ -1,11 +1,11 @@
 package seedu.address.model.listing;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 
@@ -14,9 +14,10 @@ import seedu.address.model.person.Person;
  * Guarantees: all fields are present and not null, and buyers is initialized to an empty set.
  */
 public class Listing {
+    private final Name name;
     private final Price price;
-    private final Size size;
-    private final Location location;
+    private final Area area;
+    private final Region region;
     private final Address address;
     private final Person seller;
     private final Set<Person> buyers;
@@ -26,35 +27,38 @@ public class Listing {
      *
      * @param address  Address of the listing.
      * @param price    Price of the listing.
-     * @param size     Size of the listing in square meters.
-     * @param location Location of the listing, represented by a {@code Location} enum.
+     * @param area     Area of the listing in square meters.
+     * @param region   Region of the listing, represented by a {@code Region} enum.
      * @param seller   Seller of the listing, represented by a {@code Person}.
      */
-    public Listing(Address address, Price price, Size size, Location location, Person seller) {
+    public Listing(Name name, Address address, Price price, Area area, Region region, Person seller, Set<Person> buyers) {
+        Objects.requireNonNull(name);
         Objects.requireNonNull(price);
-        Objects.requireNonNull(size);
-        Objects.requireNonNull(location);
+        Objects.requireNonNull(area);
+        Objects.requireNonNull(region);
         Objects.requireNonNull(address);
         Objects.requireNonNull(seller);
 
+        this.name = name;
         this.price = price;
-        this.size = size;
-        this.location = location;
+        this.area = area;
+        this.region = region;
         this.address = address;
         this.seller = seller;
-        this.buyers = new HashSet<>();
+        this.buyers = buyers;
     }
 
+    public Name getName() { return name; }
     public Price getPrice() {
         return price;
     }
 
-    public Size getSize() {
-        return size;
+    public Area getArea() {
+        return area;
     }
 
-    public Location getLocation() {
-        return location;
+    public Region getRegion() {
+        return region;
     }
 
     public Address getAddress() {
@@ -82,6 +86,7 @@ public class Listing {
         }
 
         return otherListing != null
+                && otherListing.name == this.name
                 && otherListing.address == this.address
                 && otherListing.seller == this.seller;
     }
@@ -97,20 +102,20 @@ public class Listing {
         }
 
         Listing otherListing = (Listing) other;
-        return address.equals(otherListing.address);
+        return name.equals(otherListing.name) && address.equals(otherListing.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(address, size, location, seller);
+        return Objects.hash(name, price, address, area, region, seller, buyers);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("address", address)
-                .add("size", size)
-                .add("location", location)
+                .add("area", area)
+                .add("region", region)
                 .add("seller", seller)
                 //.add("buyers", )
                 .toString();
