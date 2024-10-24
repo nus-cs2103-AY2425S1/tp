@@ -33,7 +33,6 @@ public class FindCommandParser implements Parser<Command> {
     }
 
     private FindPersonCommand parseForPerson(String args) throws ParseException {
-        System.out.println(args);
         String trimmedArgs = args.trim();
         System.out.println(trimmedArgs);
         if (trimmedArgs.isEmpty()) {

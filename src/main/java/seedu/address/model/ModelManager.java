@@ -122,6 +122,17 @@ public class ModelManager implements Model {
         PersonEventManager.setPersonForAllEvents(target, editedPerson);
     }
 
+    @Override
+    public boolean isPersonLinkedToEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        return PersonEventManager.isPersonLinkedToEvent(person, event);
+    }
+
+    @Override
+    public void linkPersonToEvent(Person person, Event event) {
+        requireAllNonNull(person, event);
+        PersonEventManager.addPersonToEvent(person, event);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -150,13 +161,14 @@ public class ModelManager implements Model {
     @Override
     public void deleteEvent(Event target) {
         addressBook.removeEvent(target);
-
         PersonEventManager.removeEvent(target);
     }
 
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        PersonEventManager.addEvent(event);
+
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
@@ -166,6 +178,12 @@ public class ModelManager implements Model {
 
         addressBook.setEvent(target, editedEvent);
         PersonEventManager.setEvent(target, editedEvent);
+    }
+
+    @Override
+    public Event getEventByName(Event event) {
+        requireNonNull(event);
+        return PersonEventManager.getEventByName(event);
     }
 
     //=========== Filtered Event List Accessors =============================================================

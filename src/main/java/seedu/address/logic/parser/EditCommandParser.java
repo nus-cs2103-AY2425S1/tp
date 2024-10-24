@@ -54,8 +54,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_PHONE,
                         PREFIX_EMAIL,
                         PREFIX_ADDRESS,
-                        PREFIX_TAG,
-                        PREFIX_EVENT);
+                        PREFIX_TAG);
+
 
         Index index;
 
