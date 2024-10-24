@@ -127,7 +127,38 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
         }
         return studentScas;
     }
-    
+
+    /**
+     * Returns an SCA based on the matriculation number, course code, and tutorial code as string queries.
+     * Throws a {@link RuntimeException} if an SCA matching the query is not found.
+     *
+     * @param matricNumber The matriculation number.
+     * @param courseCodeString The course code.
+     * @param tutorialCodeString The tutorial code.
+     * @return The SCA matching the queries, if one is found.
+     */
+    public StudentCourseAssociation getFromStrings(
+            String matricNumber, String courseCodeString, String tutorialCodeString) {
+        requireAllNonNull(matricNumber, courseCodeString, tutorialCodeString);
+
+        MatriculationNumber compMatricNumber = new MatriculationNumber(matricNumber);
+        Course compCourse = new Course(new CourseCode(courseCodeString), new CourseName("COURSE NAME PLACEHOLDER"));
+        Tutorial compTutorial = new Tutorial(tutorialCodeString, compCourse);
+
+        String notFoundErrorMessage = String.format(
+                "SCA not found for the query: %s, %s, %s",
+                matricNumber, courseCodeString, tutorialCodeString);
+
+        return internalList
+                .stream()
+                .filter(sca ->
+                        sca.getStudent().getMatricNumber().equals(compMatricNumber)
+                        && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial().equals(compTutorial)
+                )
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException(notFoundErrorMessage));
+    }
+
     /**
      * Replaces the SCA {@code target} in the list with {@code editedSca}.
      * {@code target} must exist in the list.

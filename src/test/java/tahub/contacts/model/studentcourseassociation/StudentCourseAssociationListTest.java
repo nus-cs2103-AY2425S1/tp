@@ -1,12 +1,15 @@
 package tahub.contacts.model.studentcourseassociation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
@@ -82,5 +85,24 @@ public class StudentCourseAssociationListTest {
         List<Tutorial> filteredTutorials = scaList.filterTutorialsByStudent(student1);
         List<Tutorial> expectedTutorials = List.of(tutorial1, tutorial2);
         assertEquals(expectedTutorials, filteredTutorials);
+    }
+
+    @Nested
+    @DisplayName("getFromStrings()")
+    class GetFromStrings {
+        @Test
+        @DisplayName("finds correct SCA if SCA is in list")
+        public void findsSca_ScaInList() {
+            StudentCourseAssociation foundSca = scaList.getFromStrings(
+                    "A1234567X", "CS1010", "T01");
+            assertEquals(foundSca, sca1);
+        }
+
+        @Test
+        @DisplayName("throws runtime exception if SCA is not in list but inputs are valid")
+        public void throwsRuntimeException_ScaNotInListInputsValid() {
+            assertThrows(RuntimeException.class, () -> scaList.getFromStrings(
+                    "A1234567X", "AB2000", "T02"));
+        }
     }
 }
