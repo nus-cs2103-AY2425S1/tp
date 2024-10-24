@@ -1,0 +1,36 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+Participant "User" as User
+Participant "LinkCommand" as LinkCommand
+Participant "Model" as Model
+Participant "Logic" as Logic
+
+User -> LinkCommand: execute()
+activate LinkCommand
+LinkCommand -> Model: getPersonByNric(caregiverNric)
+activate Model
+Model --> LinkCommand: caregiver
+deactivate Model
+LinkCommand -> Model: getPersonByNric(patientNric)
+activate Model
+Model --> LinkCommand: patient
+deactivate Model
+LinkCommand -> Logic: link(caregiver, patient)
+activate Logic
+Logic --> LinkCommand: success
+deactivate Logic
+LinkCommand -> Model: updatePerson(caregiver)
+activate Model
+Model --> LinkCommand: success
+deactivate Model
+LinkCommand -> Model: updatePerson(patient)
+activate Model
+Model --> LinkCommand: success
+deactivate Model
+LinkCommand -> User: showSuccessMessage()
+deactivate LinkCommand
+@enduml
