@@ -507,6 +507,96 @@ public class ExportCommandTest {
         assertFalse(Files.exists(dataFile), "Data file should be deleted after FileAlreadyExistsException");
     }
 
+    @Test
+    public void execute_fileCleanupAfterHomeExistsThrowsIoException() throws IOException {
+        // Setup test files
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+
+        // Create the file in home directory to trigger FileAlreadyExistsException
+        Files.createFile(homeFile);
+        filesToCleanup.add(homeFile);
+
+        // Create a command that will encounter both FileAlreadyExistsException and IOException during cleanup
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+
+            @Override
+            public CommandResult execute(Model model) throws CommandException {
+                try {
+                    // Write some content to dataFile to verify it exists
+                    Files.write(dataFile, "test content".getBytes());
+
+                    // Make the data file read-only to force IOException during cleanup
+                    dataFile.toFile().setReadOnly();
+
+                    // Simulate the FileAlreadyExistsException
+                    throw new FileAlreadyExistsException(getHomeFilePath(filename).toString());
+                } catch (FileAlreadyExistsException e) {
+                    try {
+                        Files.deleteIfExists(dataFile);
+                    } catch (IOException ignored) {
+                        // This is the ignored exception we want to cover
+                    }
+                    throw new CommandException(String.format(MESSAGE_HOME_FILE_EXISTS, getHomeFilePath(filename)));
+                } catch (IOException e) {
+                    throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
+                } finally {
+                    // Reset file permissions for cleanup
+                    dataFile.toFile().setWritable(true);
+                }
+            }
+        };
+
+        // Verify that the exception is thrown with the correct message
+        String expectedMessage = String.format(MESSAGE_HOME_FILE_EXISTS, homeFile);
+        assertThrows(CommandException.class, expectedMessage, () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void execute_homeCopyFailsWithUnhandledIoException() throws IOException, CommandException {
+        // Add a sample student
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+
+        // Make home directory read-only to force IOException during copy
+        testHomeDir.toFile().setReadOnly();
+
+        try {
+            ExportCommand exportCommand = new ExportCommand(filename, false, dataDir) {
+                @Override
+                protected Path getHomeFilePath(String filename) {
+                    return testHomeDir.resolve(filename + ".csv");
+                }
+            };
+
+            CommandResult result = exportCommand.execute(model);
+
+            // Verify success message only mentions data file
+            String expectedMessage = String.format(ExportCommand.MESSAGE_SUCCESS,
+                    1, dataFile);
+            assertEquals(expectedMessage, result.getFeedbackToUser());
+
+            // Verify data file exists and contains correct content
+            assertTrue(Files.exists(dataFile));
+            verifyExportedFileContent(dataFile, sampleStudent);
+        } finally {
+            // Reset directory permissions for cleanup
+            testHomeDir.toFile().setWritable(true);
+        }
+    }
+
     /**
      * Helper method to throw a fail
      * @param message Error message to pass to AssertionError
