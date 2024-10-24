@@ -55,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Tag role = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
+        Tag role = ParserUtil.parseOptionalTag(argMultimap.getValue(PREFIX_TAG).orElse(null));
         Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
 
         // Parse tags (roles and other tags)

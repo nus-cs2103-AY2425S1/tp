@@ -149,6 +149,17 @@ public class ParserUtil {
         return new Venue(trimmedVenue);
     }
 
+    public static Tag parseOptionalTag(String tag) throws ParseException {
+        if (tag == null) {
+            return null;
+        }
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Tag(trimmedTag);
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
