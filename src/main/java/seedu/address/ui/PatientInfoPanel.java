@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -101,9 +100,11 @@ public class PatientInfoPanel extends UiPart<Region> {
         nric.setText("NRIC: " + patient.getNric().toString());
         birthdate.setText("Birth Date: " + patient.getBirthdate().toString());
         sex.setText("Sex: " + patient.getSex().toString());
+        /*
         patient.getHealthServices().stream()
                 .sorted(Comparator.comparing(healthservice -> healthservice.healthServiceName))
                 .forEach(healthservice -> healthServices.getChildren().add(new Label(healthservice.healthServiceName)));
+        */
         phone.setText("Phone Number: " + (patient.getPhone() == null ? "" : patient.getPhone().toString()));
         email.setText("Email: " + (patient.getEmail() == null ? "" : patient.getEmail().toString()));
         address.setText("Address: " + (patient.getAddress() == null ? "" : patient.getAddress().toString()));

@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRECORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
