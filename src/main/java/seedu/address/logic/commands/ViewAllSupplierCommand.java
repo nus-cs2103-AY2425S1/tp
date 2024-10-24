@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ViewAllSupplierCommand extends ViewSupplierCommand {
 
-    public static final String COMMAND_WORD = "view_supplier";
+    public static final String COMMAND_WORD = "view_suppliers";
 
     public static final String MESSAGE_SUCCESS = "Showing all suppliers";
 

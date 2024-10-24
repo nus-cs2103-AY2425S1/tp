@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ViewAllProductCommand extends ViewProductCommand {
 
-    public static final String COMMAND_WORD = "view_product";
+    public static final String COMMAND_WORD = "view_products";
 
     public static final String MESSAGE_SUCCESS = "Showing all products";
 
