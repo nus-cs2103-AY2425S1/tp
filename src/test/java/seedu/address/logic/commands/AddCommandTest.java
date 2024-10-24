@@ -34,6 +34,7 @@ public class AddCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
+
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
@@ -45,6 +46,15 @@ public class AddCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
+
+    @Test
+    public void format_validPerson_correctFormat() {
+        Person validPerson = new PersonBuilder().build();
+        String expectedFormat = "Amy Bee; Phone: 85355255; Email: amy@gmail.com; Address: 123," +
+                " Jurong West Ave 6, #08-111; Fees: 564; Class ID: 1; Tags: ";
+        assertEquals(expectedFormat, Messages.format(validPerson));
+    }
+
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
