@@ -25,7 +25,7 @@ public class DeleteStudentCommand extends Command {
             + " must be a valid student number)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Jerrell Lee " + PREFIX_STUDENT_NUMBER + "A1234567X";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: $1%s $2%s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s %2$s";
 
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list.";
 
