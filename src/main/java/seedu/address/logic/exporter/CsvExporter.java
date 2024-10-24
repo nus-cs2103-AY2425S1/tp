@@ -39,7 +39,7 @@ public class CsvExporter implements Exporter {
         addressBook.getPersonList()
                 .forEach(person -> sj.add(convertToCsv(person)));
 
-        FileUtil.writeToFile(exportPath, sj.toString());
+        FileUtil.writeToFile(exportPath, sj + "\n");
     }
 
     /**
