@@ -24,7 +24,7 @@ public class AddListingCommandParser implements Parser<AddListingCommand> {
     public AddListingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS,
-                        PREFIX_REGION, PREFIX_SELLER);
+                        PREFIX_REGION, PREFIX_SELLER, PREFIX_BUYER);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION,
                 PREFIX_SELLER)
@@ -39,7 +39,7 @@ public class AddListingCommandParser implements Parser<AddListingCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Region region = ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get());
         Name sellerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SELLER).get());
-        Set<Name> buyerNameList = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Name> buyerNameList = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_BUYER));
 
         return new AddListingCommand(name, price, area, address, region, sellerName, buyerNameList);
     }

@@ -22,7 +22,7 @@ public class Area {
 
     @Override
     public String toString() {
-        return String.format("%d  m²", this.squareMeters);
+        return String.format("%d", this.squareMeters);
     }
 
     @Override
