@@ -76,7 +76,7 @@ public class ExportCommand extends Command {
         sb.append(person.getName().fullName).append(","); // Name
         if (person instanceof Student) {
             Student student = (Student) person;
-            sb.append("student,").append(student.getStudentID().toString()).append(","); // Category and studentID
+            sb.append("student,").append(student.getStudentId().toString()).append(","); // Category and studentID
         } else if (person instanceof Company) {
             Company company = (Company) person;
             sb.append("company,").append(company.getIndustry()).append(","); // Category and industry
