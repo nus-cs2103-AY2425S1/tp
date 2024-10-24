@@ -24,7 +24,10 @@ import seedu.address.logic.commands.deletecommands.DeleteTaskFromGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
 import seedu.address.logic.commands.editcommands.EditTaskCommand;
+import seedu.address.logic.commands.findcommands.FindCommand;
+import seedu.address.logic.commands.findcommands.FindGroupCommand;
 import seedu.address.logic.commands.findcommands.FindStudentCommand;
+import seedu.address.logic.commands.findcommands.FindTaskCommand;
 import seedu.address.logic.commands.listcommands.ListGroupCommand;
 import seedu.address.logic.commands.listcommands.ListStudentCommand;
 import seedu.address.logic.commands.listcommands.ListTaskCommand;
@@ -45,7 +48,10 @@ import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
 import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.findcommands.FindCommandParser;
+import seedu.address.logic.parser.findcommands.FindGroupCommandParser;
 import seedu.address.logic.parser.findcommands.FindStudentCommandParser;
+import seedu.address.logic.parser.findcommands.FindTaskCommandParser;
 import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
 import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListTaskCommandParser;
@@ -121,6 +127,10 @@ public class AddressBookParser {
         case ListGroupCommand.COMMAND_WORD:
             return new ListGroupCommandParser().parse(arguments);
 
+        case FindGroupCommand.COMMAND_WORD_ALIAS:
+        case FindGroupCommand.COMMAND_WORD:
+            return new FindGroupCommandParser().parse(arguments);
+
         case AddGroupCommand.COMMAND_WORD_ALIAS:
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
@@ -137,6 +147,10 @@ public class AddressBookParser {
         case ListTaskCommand.COMMAND_WORD_ALIAS:
         case ListTaskCommand.COMMAND_WORD:
             return new ListTaskCommandParser().parse(arguments);
+
+        case FindTaskCommand.COMMAND_WORD_ALIAS:
+        case FindTaskCommand.COMMAND_WORD:
+            return new FindTaskCommandParser().parse(arguments);
 
         case AddTaskToGroupCommand.COMMAND_WORD_ALIAS:
         case AddTaskToGroupCommand.COMMAND_WORD:

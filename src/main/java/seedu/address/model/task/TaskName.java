@@ -33,6 +33,13 @@ public class TaskName {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns String of TaskName.
+     */
+    public String getTaskName() {
+        return taskName;
+    }
+
     @Override
     public String toString() {
         return taskName;

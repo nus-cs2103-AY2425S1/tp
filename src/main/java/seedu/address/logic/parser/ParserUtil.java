@@ -29,6 +29,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -99,6 +100,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String student number} into a {@code StudentNumber}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code studentNumber} is invalid.
      */
     public static StudentNumber parseStudentNumber(String studentNumber) throws ParseException {
@@ -111,11 +113,11 @@ public class ParserUtil {
     }
 
     /**
-    * Parses a {@code String name} into a {@code GroupName}.
-    * Leading and trailing whitespaces will be trimmed.
-    *
-    * @throws ParseException if the given {@code name} is invalid.
-    */
+     * Parses a {@code String name} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedName = groupName.trim();
@@ -158,6 +160,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String status} into a {@code Status}
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Status parseStatus(String status) throws ParseException {
