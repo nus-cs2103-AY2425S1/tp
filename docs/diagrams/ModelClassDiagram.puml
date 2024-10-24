@@ -11,20 +11,20 @@ Package Model as ModelPackage <<Rectangle>> {
     Class AddressBook
     Class ModelManager
     Class UserPrefs
+    Class Address
 
     Package "Person " {
         Class UniquePersonList
         Class Person
-        Class Address
         Class Email
         Class Name
         Class Phone
+        Class Vendor
     }
 
     Package "Wedding " {
         Class UniqueWeddingList
         Class Wedding
-        Class WeddingAddress
         Class WeddingName
     }
 
@@ -37,7 +37,12 @@ Package Model as ModelPackage <<Rectangle>> {
     Package "Task " {
             Class UniqueTaskList
             Class Task
+            Class Description
+            Class Todo
+            Class Event
+            Class Deadline
             Class TaskName
+            Class Date
         }
 
     Class I #FFFFFF
@@ -66,17 +71,27 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Task
+Person *--> "*" Wedding
+Vendor -up--|> Person
 
 UniqueWeddingList ---> "~* all" Wedding
 
 Wedding *--> "1" WeddingName
-Wedding *--> "2" Person
-Wedding *--> "1" WeddingAddress
+Wedding *--> "0..2" Person
+Wedding *--> "1" Address
 
-UniqueTagList --> "* all" Tag
-UniqueTaskList --> "* all" Task
+UniqueTagList --> "~* all" Tag
 Tag *--> "1" TagName
-Task *--> "1" TaskName
+
+
+UniqueTaskList ---> "~* all" Task
+Task *-up-> "1" TaskName
+Task *-up-> "1" Description
+Task *-up-> "1" Date
+Todo -up-|> Task
+Event -up-|> Task
+Deadline -up-|> Task
 
 ' Adjusted visibility of hidden lines for better organization
 Person -[hidden]up--> I
