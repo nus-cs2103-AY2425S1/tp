@@ -15,18 +15,18 @@ import java.util.stream.Collectors;
 public class Meeting {
 
     // Data Fields
-    private List<UUID> contactUids;
-    private String meetingName;
-    private LocalDate meetingDate;
-    private LocalTime meetingTime;
+    private final List<UUID> contactUids;
+    private final String meetingName;
+    private final LocalDate meetingDate;
+    private final LocalTime meetingTime;
 
     /**
      * Constructs a {@code Meeting}.
      *
      * @param contactUids A list of indexes representing the contacts involved in the meeting.
-     * @param meetingName    Name of the meeting.
-     * @param meetingDate    Date of the meeting. Cannot be null.
-     * @param meetingTime    Time of the meeting. Cannot be null.
+     * @param meetingName Name of the meeting.
+     * @param meetingDate Date of the meeting. Cannot be null.
+     * @param meetingTime Time of the meeting. Cannot be null.
      */
     public Meeting(List<UUID> contactUids, String meetingName, LocalDate meetingDate, LocalTime meetingTime) {
         requireAllNonNull(meetingDate, meetingTime);
@@ -52,7 +52,7 @@ public class Meeting {
      */
     public String convertContactUidsToString() {
         return contactUids.stream()
-                .map(uid -> uid.toString())
+                .map(UUID::toString)
                 .collect(Collectors.joining(","));
     }
 
@@ -97,7 +97,8 @@ public class Meeting {
 
         return otherMeeting != null
                 && otherMeeting.getMeetingDate().equals(getMeetingDate())
-                && otherMeeting.getMeetingTime().equals(getMeetingTime());
+                && otherMeeting.getMeetingTime().equals(getMeetingTime())
+                && otherMeeting.getContactUids().equals((getContactUids()));
     }
 
     /**
@@ -115,7 +116,8 @@ public class Meeting {
         return otherMeeting != null
                 && otherMeeting.getMeetingDate().equals(getMeetingDate())
                 && otherMeeting.getMeetingTime().equals(getMeetingTime())
-                && otherMeeting.getMeetingName().equals(getMeetingName());
+                && otherMeeting.getMeetingName().equals(getMeetingName())
+                && otherMeeting.getContactUids().equals((getContactUids()));
     }
 
     /**

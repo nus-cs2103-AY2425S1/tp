@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditScheduleCommand;
 import seedu.address.logic.commands.EditScheduleCommand.EditScheduleDescriptor;
@@ -43,10 +46,19 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
 
+        List<Index> contactIndexes = argMultimap.getAllValues(PREFIX_CONTACT).stream()
+                .flatMap(value -> Stream.of(value.split("\\s+"))) // Split multiple indices by spaces
+                .map(contactIndexStr -> {
+                    try {
+                        return ParserUtil.parseIndex(contactIndexStr);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e); // Wrap ParseException to unchecked exception
+                    }
+                }).toList();
+
         // Parse and set the new values if present
         if (argMultimap.getValue(PREFIX_CONTACT).isPresent()) {
-            editScheduleDescriptor.setContactIndex(ParserUtil
-                    .parseIndex(argMultimap.getValue(PREFIX_CONTACT).get()).getZeroBased());
+            editScheduleDescriptor.setContactIndex(contactIndexes);
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editScheduleDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
