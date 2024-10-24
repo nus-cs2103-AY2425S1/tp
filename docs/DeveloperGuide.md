@@ -158,6 +158,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Statistics feature
+The `statistics` feature follows the sequence diagram here:
+<puml src="diagrams/StatisticsSequenceDiagram.puml" width="550" />
+
+Like `ListCommand`, it does not require the use of its own parser, as it only calls upon the FilteredList of the
+address book and processes it within the statistics feature.
+It uses a helper class called JobCodeStatistics that stores the number of applicants in each interview stage for that
+job code.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -272,7 +282,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: 
+**Target user profile**:
 
 * employees of a company's talent recruitment departments who need to manage contacts of job applicants.
 * prefer desktop apps over other types
@@ -280,9 +290,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: This app streamlines the process of managing talent contact information by centralizing essential 
-contact details, making it easier to organise, search, and update information on potential candidates. 
-Its search and filtering capabilities help recruiters quickly find profiles based on specific criteria, 
+**Value proposition**: This app streamlines the process of managing talent contact information by centralizing essential
+contact details, making it easier to organise, search, and update information on potential candidates.
+Its search and filtering capabilities help recruiters quickly find profiles based on specific criteria,
 improving efficiency and reducing time spent on administrative tasks.
 
 

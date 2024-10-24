@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,7 +76,25 @@ public class ArgumentTokenizer {
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
     }
+    /**
+     * Returns the list of prefixes in the string argument
+     */
+    public static List<Prefix> extractPrefixes(String argsString, Prefix... prefixes) {
 
+        List<PrefixPosition> prefixPositions = findAllPrefixPositions(argsString, prefixes);
+
+        // Sort by start position
+        prefixPositions.sort(Comparator.comparingInt(PrefixPosition::getStartPosition));
+
+        // Map prefixes to their argument values (if any)
+        List<Prefix> prefixesList = new ArrayList<>();
+        for (int i = 0; i < prefixPositions.size(); i++) {
+            // Extract and store prefixes and their arguments
+            Prefix prefix = prefixPositions.get(i).getPrefix();
+            prefixesList.add(prefix);
+        }
+        return prefixesList;
+    }
     /**
      * Extracts prefixes and their argument values, and returns an {@code ArgumentMultimap} object that maps the
      * extracted prefixes to their respective arguments. Prefixes are extracted based on their zero-based positions in

@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
+
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidJobCode(String)}
@@ -19,6 +21,9 @@ public class JobCode {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
     public static final int MAX_LENGTH = 12;
     public static final int MIN_LENGTH = 2;
+
+    public static final Comparator<JobCode> JOBCODE_COMPARATOR = Comparator.comparing(jobCode -> jobCode.value);
+
 
     public final String value;
 
