@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.listing.Area;
+import seedu.address.model.listing.Price;
+import seedu.address.model.listing.Region;
+import seedu.address.model.listing.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -48,6 +52,18 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses {@code Collection<String> names} into a {@code Set<Name>}.
+     */
+    public static Set<Name> parseNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final Set<Name> nameSet = new HashSet<>();
+        for (String n : names) {
+            nameSet.add(parseName(n));
+        }
+        return nameSet;
     }
 
     /**
@@ -120,5 +136,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String price} into a {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Price parsePrice(String price) {
+        BigDecimal decimalPrice = new BigDecimal(price);
+        return new Price(price, decimalPrice);
+    }
+
+    /**
+     * Parses {@code String area} into a {@code Area}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Area parseArea(String area) {
+        int intArea = Integer.parseInt(area);
+        return new Area(intArea);
+    }
+
+    /**
+     * Parses {@code String region} into a {@code Area}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Region parseRegion(String region) throws ParseException{
+        String normalizedInput = region.trim().toUpperCase().replace(" ", "");
+        for (Region r : Region.values()) {
+            if (r.name().equals(normalizedInput)) {
+                return r;
+            }
+        }
+        throw new ParseException("Invalid region: " + region);
     }
 }
