@@ -52,7 +52,7 @@ public class AddTagCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null;
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -77,9 +77,9 @@ public class AddTagCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, AddTagCommand.AddTagDescriptor addTagDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = addTagDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = addTagDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = addTagDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Name updatedName = personToEdit.getName();
+        Phone updatedPhone = personToEdit.getPhone();
+        Email updatedEmail = personToEdit.getEmail();
         Set<Tag> currentTags = personToEdit.getTags();
         Optional<Set<Tag>> optionalNewTags = addTagDescriptor.getTags();
         Set<Tag> updatedTags = new HashSet<Tag>();

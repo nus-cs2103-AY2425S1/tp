@@ -2,9 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -41,17 +38,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
         AddTagCommand.AddTagDescriptor addTagDescriptor = new AddTagCommand.AddTagDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            addTagDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            addTagDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            addTagDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-
-        parseTagstoAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::setTags);
+        parseTagsToAdd(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(addTagDescriptor::setTags);
 
         return new AddTagCommand(index, addTagDescriptor);
     }
@@ -61,7 +48,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagstoAdd(Collection<String> tags) throws ParseException {
+    private Optional<Set<Tag>> parseTagsToAdd(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {
