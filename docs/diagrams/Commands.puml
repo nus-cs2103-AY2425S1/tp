@@ -1,0 +1,128 @@
+@startuml
+!include style.puml
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class ClearCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    - PersonContainsKeywordsPredicate predicate
+    + CommandResult executeCommand(Model)
+}
+
+abstract class Command {
+    + CommandResult execute(Model)
+    # {abstract} CommandResult executeCommand(Model)
+    # boolean requiresCommit()
+}
+
+class UndoCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    + CommandResult executeCommand(Model)
+    # boolean requiresCommit()
+}
+
+class HelpCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String SHOWING_HELP_MESSAGE
+    + CommandResult executeCommand(Model)
+}
+
+class ExitCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_EXIT_ACKNOWLEDGEMENT
+    + CommandResult executeCommand(Model)
+}
+
+class FindCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    - PersonContainsKeywordsPredicate predicate
+    + CommandResult executeCommand(Model)
+    + boolean equals(Object)
+    + String toString()
+}
+
+class AddStudentCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    + {static} String MESSAGE_DUPLICATE_PERSON
+    - Student toAdd
+    + CommandResult executeCommand(Model)
+    + boolean equals(Object)
+    + String toString()
+}
+
+class AddTeacherCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    + {static} String MESSAGE_DUPLICATE_TEACHER
+    - Teacher toAdd
+    + CommandResult executeCommand(Model)
+    + boolean equals(Object)
+    + String toString()
+}
+
+class ListCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_SUCCESS
+    + CommandResult executeCommand(Model)
+}
+
+class SortCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    - Comparator<? extends Person> comparator
+    + CommandResult executeCommand(Model)
+    + boolean equals(Object)
+}
+
+class DeleteCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_DELETE_PERSON_SUCCESS
+    - Index[] targetIndexArray
+    + CommandResult executeCommand(Model)
+    + boolean equals(Object)
+    + String toString()
+}
+
+class exceptions.CommandException {
+}
+
+
+class EditCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_EDIT_PERSON_SUCCESS
+    + {static} String MESSAGE_NOT_EDITED
+    + {static} String MESSAGE_DUPLICATE_PERSON
+    + CommandResult executeCommand(Model)
+    - {static} Person createEditedPerson(Person, EditPersonDescriptor)
+    + boolean equals(Object)
+    + String toString()
+}
+
+' Inheritance relationships from the abstract Command class
+Command <|-- ClearCommand
+Command <|-- UndoCommand
+Command <|-- HelpCommand
+Command <|-- ExitCommand
+Command <|-- FindCommand
+Command <|-- AddStudentCommand
+Command <|-- AddTeacherCommand
+Command <|-- ListCommand
+Command <|-- SortCommand
+Command <|-- DeleteCommand
+Command <|-- EditCommand
+
+' Exception handling
+exceptions.Exception <|-- exceptions.CommandException
+@enduml
