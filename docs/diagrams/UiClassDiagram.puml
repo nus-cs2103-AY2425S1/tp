@@ -38,7 +38,7 @@ MainWindow *-down->  "1" SearchBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow -down-> "0..1" HelpWindow
 MainWindow -down-> "0..1" ContactDetails
 
 PersonListPanel -down-> "*" PersonCard
@@ -46,18 +46,18 @@ PersonListPanel -down-> "*" PersonCard
 MainWindow -left-|> UiPart
 ContactDetails -down-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-SearchBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ResultDisplay -down-|> UiPart
+CommandBox -down-|> UiPart
+SearchBox -down-|> UiPart
+PersonListPanel -down-|> UiPart
+PersonCard -down-|> UiPart
+StatusBarFooter -down-|> UiPart
+HelpWindow -down-|> UiPart
 
-PersonCard ..> Model
-ContactDetails ..> Model
+PersonCard .down.> Model
+ContactDetails .down.> Model
 
-UiManager -right-> Logic
+UiManager -left-> Logic
 MainWindow -left-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
@@ -66,5 +66,5 @@ SearchBox -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
-MainWindow -[hidden]-|> UiPart
+MainWindow -[hidden]down-|> UiPart
 @enduml
