@@ -293,7 +293,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 | `* *`    | educator | archive old student data                                  | keep my AB clean while being able to retrieve old information  |
 | `*`      | educator | set learning goals                                        | track their progress towards these goals                       |
 | `*`      | educator | undo/redo any changes                                     | avoid re-entering the data during a mis-entry                  |
-| `*`      | educator | see a list of suggested commands when typing out commands | easily                                                         |
+| `*`      | educator | see a list of suggested commands when typing out commands | easily type in the commands that I want and reduce typos       |
 | `*`      | educator | export student data                                       | share the information with others                              |
 | `*`      | educator | keep track of meetings with students                      | keep track of my commitments                                   |
 | `*`      | educator | see sample data                                           | try out the app's feature without adding my own student data   |
