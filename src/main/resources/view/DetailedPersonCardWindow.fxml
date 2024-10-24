@@ -7,16 +7,16 @@
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
-        <Scene>
-            <VBox>
+        <Scene stylesheets="@DetailedPersonCard.css">
+            <VBox spacing = "10" VBox.vgrow = "ALWAYS" styleClass="vbox">
                 <children>
-                    <Label fx:id="name" text="Name" />
-                    <Label fx:id="phone" text="Phone" />
-                    <Label fx:id="address" text="Address" />
-                    <Label fx:id="email" text="Email" />
-                    <Label fx:id="fees" text="Fees" />
-                    <Label fx:id="classId" text="Class ID" />
-                    <Label fx:id="monthsPaid" text="Months Paid" />
+                    <Label fx:id="name" text="Name" styleClass="label"/>
+                    <Label fx:id="phone" text="Phone" styleClass="label"/>
+                    <Label fx:id="address" text="Address" styleClass="label"/>
+                    <Label fx:id="email" text="Email" styleClass="label"/>
+                    <Label fx:id="fees" text="Fees" styleClass="label"/>
+                    <Label fx:id="classId" text="Class ID" styleClass="label"/>
+                    <Label fx:id="monthsPaid" text="Months Paid" styleClass="label"/>
                 </children>
             </VBox>
         </Scene>

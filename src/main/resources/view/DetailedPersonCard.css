@@ -1,0 +1,35 @@
+* {
+    -ab3-background: #D2C0BD;
+    -ab3-background-2: #F0E7E6;
+    -ab3-background-3: #FAFAF5;
+    -ab3-border: #4d4d4d;
+    -ab3-even-cell-background: #3c3e3f;
+    -ab3-odd-cell-background: #515658;
+    -ab3-selected-cell-background: #FFFFE0;
+    -ab3-filled-selected-card-pane: #98FB98;
+    -ab3-label: #010504;
+    -ab3-label-2: #555555;
+    -ab3-white: #ffffff;
+    -ab3-button-border: #e2e2e2;
+    -ab3-button-text-fill: #d8d8d8;
+    -ab3-button-hover: #3a3a3a;
+    -ab3-command-type-label: #f70d1a;
+    -ab3-menubar-text: #584747;
+    -ab3-darkerText: #333333;
+}
+
+
+.root {
+    -fx-background-color: -ab3-background; /* Light gray background */
+}
+
+.label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: -ab3-label; /* Dark gray text */
+}
+
+.vbox {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
