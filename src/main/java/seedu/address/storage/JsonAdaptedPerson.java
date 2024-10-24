@@ -32,6 +32,8 @@ public class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     @CsvBindByName
+    private int id;
+    @CsvBindByName
     private String name;
     @CsvBindByName
     private String phone;
@@ -55,11 +57,35 @@ public class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("hours") String hours,
+    public JsonAdaptedPerson(@JsonProperty("id") int id, @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("hours") String hours,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role,
             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.hours = hours;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
+        if (subjects != null) {
+            this.subjects.addAll(subjects);
+        }
+        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
+        this.role = role;
+    }
+
+    /**
+     * Alternative constructor for a {@code JsonAdaptedPerson} without the id.
+     */
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address, @JsonProperty("hours") String hours,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role,
+                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -91,6 +117,10 @@ public class JsonAdaptedPerson {
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
         role = (source instanceof Tutor) ? "Tutor" : "Tutee";
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -159,6 +189,7 @@ public class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        int id = this.getId();
         String name = this.getName();
         String phone = this.getPhone();
         String email = this.getEmail();
@@ -222,9 +253,9 @@ public class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (Objects.equals(role, "Tutor")) {
-            return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+            return new Tutor(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
         } else {
-            return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+            return new Tutee(id, modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
         }
 
     }
