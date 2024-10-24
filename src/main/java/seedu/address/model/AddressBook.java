@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
+import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -101,7 +102,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Assigns a volunteer to an event.
      */
-    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException {
+    public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException,
+            OverlappingAssignException {
         eventManager.assignVolunteerToEvent(volunteer, event);
         volunteerManager.assignEventToVolunteer(volunteer, event);
     }

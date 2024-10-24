@@ -135,7 +135,6 @@ public class Event {
         if (otherEvent == this) {
             return true;
         }
-
         return otherEvent != null
                 && otherEvent.getName().equals(getName());
     }
@@ -181,4 +180,20 @@ public class Event {
                 .add("description", description)
                 .toString();
     }
+
+    /**
+     * Checks if this event has any overlap with another event.
+     * @param event to be checked against
+     * @return boolean
+     */
+    public boolean isOverlappingWith(Event event) {
+
+        if (!this.date.isSameDate(event.getDate())) {
+            return false;
+        }
+
+        return !(endTime.isBefore(event.startTime)
+                || startTime.isAfter(event.endTime));
+    }
+
 }

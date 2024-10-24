@@ -9,29 +9,19 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Date;
+import seedu.address.model.event.Description;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.Time;
-import seedu.address.model.volunteer.Email;
-import seedu.address.model.volunteer.Name;
-import seedu.address.model.volunteer.Phone;
 
-public class ParserUtilTest {
-
-    /* Test input for Volunteer */
-    private static final String INVALID_VOLUNTEER_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_EMAIL = "example.com";
-
-    private static final String VALID_VOLUNTEER_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_EMAIL = "rachel@example.com";
+public class EventParserUtilTest {
 
     /* Test input for Event */
     private static final String INVALID_EVENT_NAME = "Hack@thon";
-    private static final String INVALID_DATE = "2020/10/10";
-    private static final String INVALID_START_TIME = "1111";
-    private static final String INVALID_END_TIME = "0000";
+    private static final String INVALID_DATE_FORMAT = "2020/10/10";
+    private static final String INVALID_DATE = "2020-32-32";
+    private static final String INVALID_TIME_24H_FORMAT = "0000";
+    private static final String INVALID_TIME = "11:69";
     private static final String INVALID_LOCATION = "LT 27!";
     private static final String INVALID_DESCRIPTION = "#friendParty";
 
@@ -43,96 +33,6 @@ public class ParserUtilTest {
     private static final String VALID_DESCRIPTION = "Friends Party";
 
     private static final String WHITESPACE = " \t\r\n";
-
-    /* Tests for Volunteer */
-    @Test
-    public void parseVolunteerIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> VolunteerParserUtil.parseIndex("10 a"));
-    }
-
-    @Test
-    public void parseVolunteerIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> VolunteerParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
-    }
-
-    @Test
-    public void parseVolunteerIndex_validInput_success() throws Exception {
-        // No whitespaces
-        assertEquals(INDEX_FIRST, VolunteerParserUtil.parseIndex("1"));
-
-        // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST, VolunteerParserUtil.parseIndex("  1  "));
-    }
-
-    @Test
-    public void parseVolunteerName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> VolunteerParserUtil.parseName((String) null));
-    }
-
-    @Test
-    public void parseVolunteerName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> VolunteerParserUtil.parseName(INVALID_VOLUNTEER_NAME));
-    }
-
-    @Test
-    public void parseVolunteerName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_VOLUNTEER_NAME);
-        assertEquals(expectedName, VolunteerParserUtil.parseName(VALID_VOLUNTEER_NAME));
-    }
-
-    @Test
-    public void parseVolunteerName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_VOLUNTEER_NAME + WHITESPACE;
-        Name expectedName = new Name(VALID_VOLUNTEER_NAME);
-        assertEquals(expectedName, VolunteerParserUtil.parseName(nameWithWhitespace));
-    }
-
-    @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> VolunteerParserUtil.parsePhone((String) null));
-    }
-
-    @Test
-    public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> VolunteerParserUtil.parsePhone(INVALID_PHONE));
-    }
-
-    @Test
-    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, VolunteerParserUtil.parsePhone(VALID_PHONE));
-    }
-
-    @Test
-    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, VolunteerParserUtil.parsePhone(phoneWithWhitespace));
-    }
-
-    @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> VolunteerParserUtil.parseEmail((String) null));
-    }
-
-    @Test
-    public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> VolunteerParserUtil.parseEmail(INVALID_EMAIL));
-    }
-
-    @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, VolunteerParserUtil.parseEmail(VALID_EMAIL));
-    }
-
-    @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, VolunteerParserUtil.parseEmail(emailWithWhitespace));
-    }
 
 
     /* Tests for Event */
@@ -187,6 +87,7 @@ public class ParserUtilTest {
     @Test
     public void parseDate_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> EventParserUtil.parseDate(INVALID_DATE));
+        assertThrows(ParseException.class, () -> EventParserUtil.parseDate(INVALID_DATE_FORMAT));
     }
 
     @Test
@@ -232,8 +133,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTime_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> EventParserUtil.parseTime(INVALID_START_TIME));
-        assertThrows(ParseException.class, () -> EventParserUtil.parseTime(INVALID_END_TIME));
+        assertThrows(ParseException.class, () -> EventParserUtil.parseTime(INVALID_TIME));
+        assertThrows(ParseException.class, () -> EventParserUtil.parseTime(INVALID_TIME_24H_FORMAT));
     }
 
     @Test
@@ -252,5 +153,28 @@ public class ParserUtilTest {
         String endTimeWithWhitespace = WHITESPACE + VALID_END_TIME + WHITESPACE;
         Time expectedEndTime = new Time(VALID_END_TIME);
         assertEquals(expectedEndTime, EventParserUtil.parseTime(endTimeWithWhitespace));
+    }
+
+    @Test
+    public void parseDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> EventParserUtil.parseDescription((String) null));
+    }
+
+    @Test
+    public void parseDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> EventParserUtil.parseDescription(INVALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
+        Description validDescription = new Description(VALID_DESCRIPTION);
+        assertEquals(validDescription, EventParserUtil.parseDescription(VALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+        String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+        Description validDescription = new Description(VALID_DESCRIPTION);
+        assertEquals(validDescription, EventParserUtil.parseDescription(descriptionWithWhitespace));
     }
 }

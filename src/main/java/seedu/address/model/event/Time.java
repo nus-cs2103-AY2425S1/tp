@@ -44,6 +44,10 @@ public class Time {
         }
     }
 
+    public boolean isAfter(Time other) {
+        return eventTime.isAfter(other.eventTime);
+    }
+
 
     /**
      * Returns true if this time is before the other time.

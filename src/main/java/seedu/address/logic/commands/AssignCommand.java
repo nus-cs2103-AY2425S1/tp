@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
+import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -21,6 +22,8 @@ import seedu.address.model.volunteer.Volunteer;
 public class AssignCommand extends Command {
     public static final String COMMAND_WORD = "assign";
     private static final String MESSAGE_DUPLICATE_ASSIGN = "Already assigned!";
+    private static final String MESSAGE_OVERLAP_ASSIGN = "This volunteer is already assigned to another event"
+            + " during this time slot.";
     private static final String MESSAGE_SUCCESS = "Volunteer assigned successfully!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a volunteer to an event."
             + "Parameters: "
@@ -75,8 +78,25 @@ public class AssignCommand extends Command {
             model.assignVolunteerToEvent(v, e);
         } catch (DuplicateAssignException exception) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
+        } catch (OverlappingAssignException exception) {
+            throw new CommandException(MESSAGE_OVERLAP_ASSIGN);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (other instanceof AssignCommand) {
+            AssignCommand otherAssignCommand = (AssignCommand) other;
+            return volunteerIndex.equals(otherAssignCommand.volunteerIndex)
+                    && eventIndex.equals(otherAssignCommand.eventIndex);
+        } else {
+            return false;
+        }
     }
 }

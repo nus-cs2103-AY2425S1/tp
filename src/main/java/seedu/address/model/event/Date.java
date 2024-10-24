@@ -44,7 +44,6 @@ public class Date {
         }
     }
 
-
     @Override
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -74,4 +73,7 @@ public class Date {
         return date.hashCode();
     }
 
+    public boolean isSameDate(Date date) {
+        return this.date.isEqual(date.date);
+    }
 }
