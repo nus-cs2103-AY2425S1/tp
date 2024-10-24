@@ -38,7 +38,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
+Person *--> "1" Name
 Person *--> "0..1" Phone
 Person *--> "0..1" Email
 note "Person must have reference to \neither a Phone or an Email" as N1
