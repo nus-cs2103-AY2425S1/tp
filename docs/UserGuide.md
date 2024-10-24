@@ -75,7 +75,7 @@ Format: `help`
 
 Allows the user to add a new client with details about payment status, client status, and project status.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
 * Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
@@ -85,9 +85,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 * `NAME` must not exist in Clientele+ already.
 * `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
 * `EMAIL`  Standard email format “user@example.com”
-* `PAYMENT STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
-* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
-* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
+* `PAYMENT_STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
+* `CLIENT_STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
+* `PROJECT_STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
@@ -100,7 +100,7 @@ Displays a list of all clients and their details.
 
 Format: `list`
 
-### Update client details : `edit`
+### Update Client Details : `edit`
 
 Allows updating of various statuses of an existing client.
 
@@ -125,7 +125,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Updates the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 1 ps/completed py/paid cs/old` Updates the project status, payment status and client status of the 1st person to be `completed`, `paid` and `old` respectively.
 
-### Locating clients by name: `find`
+### Locating Clients By Name: `find`
 
 Finds persons in address book who match parameters specified. Values matched are case insensitive.
 
@@ -165,19 +165,47 @@ Examples:
 * `list` followed by `delete id/2` deletes the 2nd person in the list.
 * `find Betsy` followed by `delete id/1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Blacklist a Client : `blacklist`
+
+Marks a client as "blacklisted".
+
+Format: `blacklist index`
+
+* Marks the client specified by the index `index` as "blacklisted".
+* `index` refers to the index number shown in the displayed person list.
+* `index` **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+* `blacklist 2` marks the second person in the list as blacklisted
+
+### Whitelist a Client : `whitelist`
+
+Whitelists a previously-blacklisted client.
+
+Format: `blacklist index cs/NEW_CLIENT_STATUS`
+
+* Changes the status of the client specified by the index `index` from "blacklisted" to `NEW_CLIENT_STATUS`.
+* `index` refers to the index number shown in the displayed person list.
+* `index` **must be a positive integer** 1, 2, 3, ...
+* `NEW_CLIENT_STATUS` refers to the new status of the client. Acceptable values are `potential`, `unresponsive`, `old` and `active`.
+
+Examples:
+* `blacklist 2 cs/active` whitelists the second person in the list and marks them as an `active` client.
+* `blacklist 1 cs/old` whitelists the first person in the list and marks them as an `old` client.
+
+### Clearing All Entries : `clear`
 
 Clears all entries from Clientele+.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the Program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### Saving the Data
 
 Clientele+ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 

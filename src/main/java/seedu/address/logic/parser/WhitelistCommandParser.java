@@ -24,6 +24,7 @@ public class WhitelistCommandParser implements Parser<WhitelistCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CLIENT_STATUS);
 
         Index index;
+        ClientStatus newClientStatus;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -31,7 +32,11 @@ public class WhitelistCommandParser implements Parser<WhitelistCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WhitelistCommand.MESSAGE_USAGE), pe);
         }
 
-        ClientStatus newClientStatus = ParserUtil.parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).get());
+        if (argMultimap.getValue(PREFIX_CLIENT_STATUS).isPresent()) {
+            newClientStatus = ParserUtil.parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).get());
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WhitelistCommand.MESSAGE_USAGE));
+        }
 
         return new WhitelistCommand(index, newClientStatus);
     }
