@@ -52,7 +52,8 @@ public class UndoCommand extends Command {
         Command latestCommand = pastCommands.get(pastCommands.size() - 1);
         String latestCommandWord = latestCommand.getCommandWord();
         logger.info("----------------[COMMAND UNDONE][" + latestCommandWord + "]");
-        String resultMessage = "";
+        String resultMessage = String.format(
+                "No change as command undone (%s) was not an action command", latestCommandWord);
 
         switch (latestCommandWord) {
         case "add":

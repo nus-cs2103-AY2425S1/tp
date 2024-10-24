@@ -178,8 +178,8 @@ Undoes the previous command from SocialBook.
 
 Format: `undo`
 
-* Undo works for: add, edit, delete, clear
-* Able to undo until no previous command for current execution.
+* Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear
+* Undo can be called multiple times till there is no more previous command for the current execution.
 
 Examples:
 * `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
@@ -250,6 +250,7 @@ Action           | Format, Examples
 **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Get**          | `get PARAMETERS`<br> e.g.,`get e/ p/`
+**Undo**         | `undo`
 **List**         | `list`
 **Statistics**   | `statistics`
 **Help**         | `help`
