@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,115 +14,141 @@ public class PersonContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        Map<String, String> firstPredicateSearchCriteria = Map.of("name", "first");
+        Map<String, String> secondPredicateSearchCriteria = Map.of("name", "first", "address", "second");
 
-        PersonContainsKeywordsPredicate firstP = new PersonContainsKeywordsPredicate(firstPredicateKeywordList);
-        PersonContainsKeywordsPredicate secondP = new PersonContainsKeywordsPredicate(secondPredicateKeywordList);
+        PersonContainsKeywordsPredicate firstPredicate =
+                new PersonContainsKeywordsPredicate(firstPredicateSearchCriteria);
+        PersonContainsKeywordsPredicate secondPredicate =
+                new PersonContainsKeywordsPredicate(secondPredicateSearchCriteria);
 
-        // sam
-        // e object -> returns true
-        assertTrue(firstP.equals(firstP));
+        // same object -> returns true
+        assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonContainsKeywordsPredicate firstPCopy = new PersonContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(firstP.equals(firstPCopy));
+        PersonContainsKeywordsPredicate firstPredicateCopy =
+                new PersonContainsKeywordsPredicate(firstPredicateSearchCriteria);
+        assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertFalse(firstP.equals(1));
+        assertFalse(firstPredicate.equals(1));
 
         // null -> returns false
-        assertFalse(firstP.equals(null));
+        assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
-        assertFalse(firstP.equals(secondP));
+        // different search criteria -> returns false
+        assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
-        // One keyword
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(
-                Collections.singletonList("Alice"));
+    public void test_personMatchesSearchCriteria_returnsTrue() {
+        // Search by name
+        Map<String, String> searchCriteria = Map.of("name", "Alice");
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Multiple keywords
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        // Search by name and address
+        searchCriteria = Map.of("name", "Alice", "address", "Street");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withAddress("123 Street").build()));
 
-        // Only one matching keyword
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        // Search by phone
+        searchCriteria = Map.of("phone", "91234567");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withPhone("91234567").build()));
 
-        // Mixed-case keywords
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        // Search by email
+        searchCriteria = Map.of("email", "alice@example.com");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@example.com").build()));
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new PersonContainsKeywordsPredicate(Arrays
-                .asList("91234567", "alice@email.com", "Main", "Street"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+        // Search by birthday
+        searchCriteria = Map.of("birthday", "01 01 2002");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withBirthday("01 01 2002").build()));
 
-        // Keywords match birthday, but does not match name
-        predicate = new PersonContainsKeywordsPredicate(Arrays
-                .asList("26", "June", "2002"));
-        assertTrue(predicate.test(new PersonBuilder().withBirthday("26 06 2002").build()));
-
-        // Keywords match address, but does not match name, phone and email
-        predicate = new PersonContainsKeywordsPredicate(Arrays
-                .asList("Jurong"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Bob").withPhone("81111111")
-                .withEmail("bob123@gmail.com").build()));
-
-        // Keywords match tags, but does not match anything else
-        predicate = new PersonContainsKeywordsPredicate(Arrays
-                .asList("likesCoffee"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("likesCoffee", "wealthy").build()));
-
-        // Partial match (keyword is a substring of name but not a full word match)
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Ali"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
-
-        // Extra spaces in keywords
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("  Alice  "));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
-
-        // Keywords matching multiple parts of the name
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol Bob").build()));
-
-        // Keyword matches a word in the middle of the name
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol Bob").build()));
-
+        // Search by tag
+        searchCriteria = Map.of("tag", "friend");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withTags("friend").build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+    public void test_partialMatches_returnsTrue() {
+        // Partial match at the beginning of the name
+        Map<String, String> searchCriteria = Map.of("name", "Ali");
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Non-matching keyword
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Carol"));
+        // Partial match with a tag
+        searchCriteria = Map.of("tag", "coff");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withTags("coffeeLover").build()));
+
+        // Partial match with address
+        searchCriteria = Map.of("address", "Stre");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withAddress("Main Street").build()));
+
+        // Partial match with email
+        searchCriteria = Map.of("email", "ali");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@example.com").build()));
+
+        // Partial match with phone
+        searchCriteria = Map.of("phone", "123");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertTrue(predicate.test(new PersonBuilder().withPhone("91234567").build()));
+    }
+
+    @Test
+    public void test_personDoesNotMatchSearchCriteria_returnsFalse() {
+        // Search by name (no match)
+        Map<String, String> searchCriteria = Map.of("name", "Carol");
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Special characters in keyword
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Alic@"));
+        // Search by name and address (no match)
+        searchCriteria = Map.of("name", "Alice", "address", "Main Street");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withAddress("123 Jurong Street").build()));
+
+        // Search by phone (no match)
+        searchCriteria = Map.of("phone", "98765432");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertFalse(predicate.test(new PersonBuilder().withPhone("91234567").build()));
+
+        // Search by email (no match)
+        searchCriteria = Map.of("email", "bob@example.com");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertFalse(predicate.test(new PersonBuilder().withEmail("alice@example.com").build()));
+
+        // Search by tag (no match)
+        searchCriteria = Map.of("tag", "colleague");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertFalse(predicate.test(new PersonBuilder().withTags("friend").build()));
+    }
+
+    @Test
+    public void test_partialMatches_returnsFalse() {
+        // Partial match not present
+        Map<String, String> searchCriteria = Map.of("name", "Alz");
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Keyword with numbers
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Alice123"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
-
+        // Incorrect partial match in email domain
+        searchCriteria = Map.of("email", "exampl");
+        predicate = new PersonContainsKeywordsPredicate(searchCriteria);
+        assertFalse(predicate.test(new PersonBuilder().withEmail("alice@exemplar.com").build()));
     }
 
     @Test
     public void toStringMethod() {
-        List<String> keywords = List.of("keyword1", "keyword2");
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(keywords);
+        Map<String, String> searchCriteria = Map.of("name", "keyword1", "address", "keyword2");
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
 
-        String expected = PersonContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected =
+                PersonContainsKeywordsPredicate.class.getCanonicalName() + "{searchCriteria=" + searchCriteria + "}";
         assertEquals(expected, predicate.toString());
     }
 }
