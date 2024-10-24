@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,8 +26,8 @@ public class AddMeetingCommand extends Command {
             + "Parameters: "
             + PREFIX_MEETING_TITLE + "TITLE "
             + PREFIX_MEETING_DATE + "DATE "
-            + PREFIX_BUYER + "BUYER "
-            + PREFIX_SELLER + "SELLER "
+            + PREFIX_BUYER_PHONE + "PHONE "
+            + PREFIX_SELLER_PHONE + "PHONE "
             + PREFIX_TYPE + "TYPE "
             + PREFIX_POSTALCODE + "POSTALCODE ";
 
@@ -55,16 +55,18 @@ public class AddMeetingCommand extends Command {
 
         model.getFilteredClientList().stream()
                 .filter(Client::isBuyer)
-                .filter(person -> person.getName().toString()
-                        .toLowerCase().contains(toAdd.getBuyer().toString().toLowerCase()))
+                .filter(client -> client.getPhone().equals(toAdd.getBuyerPhone()))
                 .findFirst().orElseThrow(() ->
-                        new CommandException(String.format("Buyer not found. ", toAdd.getBuyer())));
+                        new CommandException(
+                                String.format("Buyer with phone number: "
+                                        + toAdd.getBuyerPhone().toString() + " not found.")));
         model.getFilteredClientList().stream()
                 .filter(Client::isSeller)
-                .filter(person -> person.getName().toString().toLowerCase()
-                        .contains(toAdd.getSeller().toString().toLowerCase()))
+                .filter(client -> client.getPhone().equals(toAdd.getSellerPhone()))
                 .findFirst().orElseThrow(() ->
-                        new CommandException(String.format("Seller not found. ", toAdd.getSeller())));
+                        new CommandException(
+                                String.format("Seller with phone number: "
+                                        + toAdd.getSellerPhone().toString() + " not found.")));
         model.getFilteredPropertyList().stream().filter(p ->
                 p.getType().equals(toAdd.getType()) && p.getPostalCode().equals(toAdd.getPostalCode()))
                 .findFirst().orElseThrow(() ->
