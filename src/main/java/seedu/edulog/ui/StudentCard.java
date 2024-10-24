@@ -48,7 +48,8 @@ public class StudentCard extends UiPart<Region> {
     private final Image paidIcon = new Image(getClass().getResource("/images/paid.png").toExternalForm());
     private final Image unpaidIcon = new Image(getClass().getResource("/images/unpaid.png").toExternalForm());
 
-
+    private Label fee;
+  
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -65,6 +66,7 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         paidStatusIcon.setImage(student.getHasPaid() ? paidIcon : unpaidIcon);
+        fee.setText("$" + String.valueOf(student.getFee().value));
     }
 
     /**
@@ -101,7 +103,7 @@ public class StudentCard extends UiPart<Region> {
     public String getIdText() {
         return id.getText();
     }
-
+  
     /**
      * Returns the text displayed for the student's phone number.
      *

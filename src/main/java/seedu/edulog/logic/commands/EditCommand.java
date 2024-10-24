@@ -3,6 +3,7 @@ package seedu.edulog.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.edulog.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_TAG;
@@ -23,6 +24,7 @@ import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
+import seedu.edulog.model.student.Fee;
 import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Phone;
 import seedu.edulog.model.student.Student;
@@ -46,7 +48,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_FEE + "1000";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -100,8 +103,17 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Fee fee = editStudentDescriptor.getFee().orElse(studentToEdit.getFee());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Student result = new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, fee);
+        if (studentToEdit.getHasPaid()) {
+            result.mark();
+        } else {
+            result.unmark();
+        }
+
+        return result;
     }
 
     @Override
@@ -138,6 +150,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Fee fee;
 
         public EditStudentDescriptor() {}
 
@@ -151,13 +164,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setFee(toCopy.fee);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, fee);
         }
 
         public void setName(Name name) {
@@ -209,6 +223,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setFee(Fee fee) {
+            this.fee = fee;
+        }
+
+        public Optional<Fee> getFee() {
+            return Optional.ofNullable(fee);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -225,7 +247,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(address, otherEditStudentDescriptor.address)
-                    && Objects.equals(tags, otherEditStudentDescriptor.tags);
+                    && Objects.equals(tags, otherEditStudentDescriptor.tags)
+                    && Objects.equals(fee, otherEditStudentDescriptor.fee);
         }
 
         @Override
@@ -236,6 +259,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("edulog", address)
                     .add("tags", tags)
+                    .add("fee", fee)
                     .toString();
         }
     }

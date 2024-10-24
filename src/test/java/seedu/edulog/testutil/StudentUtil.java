@@ -2,6 +2,7 @@ package seedu.edulog.testutil;
 
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.edulog.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.edulog.logic.parser.CliSyntax.PREFIX_TAG;
@@ -37,6 +38,7 @@ public class StudentUtil {
         student.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        sb.append(PREFIX_FEE + String.valueOf(student.getFee().value) + " ");
         return sb.toString();
     }
 
@@ -57,6 +59,7 @@ public class StudentUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getFee().ifPresent(fee -> sb.append(PREFIX_FEE).append(String.valueOf(fee.value)));
         return sb.toString();
     }
 }

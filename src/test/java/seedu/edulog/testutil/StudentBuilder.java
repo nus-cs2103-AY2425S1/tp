@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
+import seedu.edulog.model.student.Fee;
 import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Phone;
 import seedu.edulog.model.student.Student;
@@ -21,6 +22,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final boolean DEFAULT_PAID = false;
+    public static final int DEFAULT_FEE = 100;
 
     private Name name;
     private Phone phone;
@@ -28,6 +30,7 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private boolean hasPaid;
+    private Fee fee;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -39,6 +42,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         hasPaid = DEFAULT_PAID;
+        fee = new Fee(DEFAULT_FEE);
     }
 
     /**
@@ -51,6 +55,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         hasPaid = studentToCopy.getHasPaid();
+        fee = studentToCopy.getFee();
     }
 
     /**
@@ -96,13 +101,21 @@ public class StudentBuilder {
     /**
      * Sets the {@code hasPaid} of the {@code Student} that we are building.
      */
-    public StudentBuilder withhasPaid(boolean hasPaid) {
+    public StudentBuilder withHasPaid(boolean hasPaid) {
         this.hasPaid = hasPaid;
         return this;
     }
 
+    /**
+     * Sets the {@code fee} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withFee(int fee) {
+        this.fee = new Fee(fee);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, address, tags, fee);
     }
 
 }
