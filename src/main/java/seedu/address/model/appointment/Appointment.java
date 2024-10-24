@@ -29,7 +29,7 @@ public class Appointment {
         this.appointment = LocalDateTime.parse(appointment, FORMATTER);
     }
 
-    public LocalDate getDate() {
+    public LocalDate getAppointmentDate() {
         return appointment.toLocalDate();
     }
 

@@ -68,8 +68,8 @@ public class PersonWithCriteriaPredicate implements Predicate<Person> {
             Set<Appointment> appointments = person.getAppointment();
             return appointments.stream()
                     .anyMatch(appointment ->
-                            !appointment.getDate().isAfter((LocalDate) r.upperBound)
-                                   && !appointment.getDate().isBefore((LocalDate) r.lowerBound));
+                            !appointment.getAppointmentDate().isAfter((LocalDate) r.upperBound)
+                                   && !appointment.getAppointmentDate().isBefore((LocalDate) r.lowerBound));
         } else {
             throw new IllegalArgumentException("Unsupported type: T must be either Integer or LocalDate");
         }
