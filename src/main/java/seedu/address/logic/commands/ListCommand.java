@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_ALIAS = "l";
     public static final String MESSAGE_SUCCESS = "Listed all persons";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all personnel in the system\n"
+            + ": Lists all personnel in the system.\n"
             + "Parameters: None\n"
             + "Example: " + COMMAND_WORD;
 

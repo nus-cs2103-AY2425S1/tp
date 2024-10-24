@@ -13,7 +13,7 @@ public class ListAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "attendance";
     public static final String COMMAND_ALIAS = "atd";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all members of the cca in the system\n"
+            + ": Lists all members of the cca in the system.\n"
             + "Parameters: None\n"
             + "Example: " + COMMAND_WORD;
 
