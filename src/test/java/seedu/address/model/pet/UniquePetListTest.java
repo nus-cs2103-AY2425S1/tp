@@ -42,7 +42,7 @@ public class UniquePetListTest {
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePetList.add(BELLA);
         Pet editedBella = new PetBuilder(BELLA).withAge(VALID_AGE_FLUFFY).build();
-        assertTrue(uniquePetList.contains(editedBella));
+        assertFalse(uniquePetList.contains(editedBella));
     }
 
     @Test

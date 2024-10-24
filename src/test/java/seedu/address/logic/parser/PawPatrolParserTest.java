@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_OWNER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -74,9 +75,20 @@ public class PawPatrolParserTest {
 
     @Test
     public void parseCommand_addPet() throws Exception {
-        Pet pet = new PetBuilder().build();
-        AddPetCommand command = (AddPetCommand) parser.parseCommand(PetUtil.getAddPetCommand(pet));
-        assertEquals(new AddPetCommand(pet), command);
+        Pet expectedPet = new PetBuilder().build();
+        AddPetCommand command = (AddPetCommand) parser.parseCommand(PetUtil.getAddPetCommand(expectedPet));
+
+        // Access the private field 'toAdd' in AddPetCommand using reflection
+        Field toAddField = AddPetCommand.class.getDeclaredField("toAdd");
+        toAddField.setAccessible(true); // Bypass the private modifier
+        Pet actualPet = (Pet) toAddField.get(command);
+
+        // Compare each field except uniqueId
+        assertEquals(expectedPet.getName(), actualPet.getName());
+        assertEquals(expectedPet.getSpecies(), actualPet.getSpecies());
+        assertEquals(expectedPet.getBreed(), actualPet.getBreed());
+        assertEquals(expectedPet.getAge(), actualPet.getAge());
+        assertEquals(expectedPet.getSex(), actualPet.getSex());
     }
 
     @Test

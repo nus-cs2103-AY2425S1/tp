@@ -83,6 +83,7 @@ public class EditPetCommand extends EditCommand<Pet> {
     private static Pet createEditedPet(Pet petToEdit, EditPetDescriptor editPetDescriptor) {
         assert petToEdit != null;
 
+        String uniqueId = petToEdit.getUniqueID();
         Name updatedName = editPetDescriptor.getName().orElse(petToEdit.getName());
         Species updatedSpecies = editPetDescriptor.getSpecies().orElse(petToEdit.getSpecies());
         Breed updatedBreed = editPetDescriptor.getBreed().orElse(petToEdit.getBreed());
@@ -90,7 +91,7 @@ public class EditPetCommand extends EditCommand<Pet> {
         Sex updatedSex = editPetDescriptor.getSex().orElse(petToEdit.getSex());
         Set<Tag> updatedTags = editPetDescriptor.getTags().orElse(petToEdit.getTags());
 
-        return new Pet(updatedName, updatedSpecies, updatedBreed, updatedAge, updatedSex, updatedTags);
+        return new Pet(uniqueId, updatedName, updatedSpecies, updatedBreed, updatedAge, updatedSex, updatedTags);
     }
 
     /**

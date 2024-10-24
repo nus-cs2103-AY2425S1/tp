@@ -48,7 +48,10 @@ public class ParserUtilTest {
     private static final String VALID_SPECIES = "Dog";
     private static final String VALID_BREED = "German Shepard";
     private static final String VALID_AGE = "7";
-    private static final String VALID_SEX = "M";
+    private static final String VALID_SEX_FEMALE = "f";
+    private static final String VALID_SEX_MALE = "M";
+    private static final String VALID_SEX_DISPLAY_FORMAT_FEMALE = "Female";
+    private static final String VALID_SEX_DISPLAY_FORMAT_MALE = "Male";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -268,15 +271,39 @@ public class ParserUtilTest {
 
     @Test
     public void parseSex_validValueWithoutWhitespace_returnsSex() throws Exception {
-        Sex expectedSex = new Sex(VALID_SEX);
-        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX));
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_MALE);
+        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX_MALE));
     }
 
     @Test
     public void parseSex_validValueWithWhitespace_returnsTrimmedSex() throws Exception {
-        String sexWithWhitespace = WHITESPACE + VALID_SEX + WHITESPACE;
-        Sex expectedSex = new Sex(VALID_SEX);
+        String sexWithWhitespace = WHITESPACE + VALID_SEX_MALE + WHITESPACE;
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_MALE);
         assertEquals(expectedSex, ParserUtil.parseSex(sexWithWhitespace));
+    }
+
+    @Test
+    public void parseSex_validFemaleValueConvertedToFullForm_returnsTrimmedSex() throws Exception {
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_FEMALE);
+        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX_FEMALE));
+    }
+
+    @Test
+    public void parseSex_validMaleValueConvertedToFullForm_returnsTrimmedSex() throws Exception {
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_MALE);
+        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX_MALE));
+    }
+
+    @Test
+    public void parseSex_validFullFormFemaleValueLeftAsItIs_returnsTrimmedSex() throws Exception {
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_FEMALE);
+        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX_DISPLAY_FORMAT_FEMALE));
+    }
+
+    @Test
+    public void parseSex_validFullFormMaleValueLeftAsItIs_returnsTrimmedSex() throws Exception {
+        Sex expectedSex = new Sex(VALID_SEX_DISPLAY_FORMAT_MALE);
+        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX_DISPLAY_FORMAT_MALE));
     }
 
     @Test

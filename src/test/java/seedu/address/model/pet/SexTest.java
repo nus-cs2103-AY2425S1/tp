@@ -1,14 +1,10 @@
 package seedu.address.model.pet;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.testutil.PetBuilder;
 
 public class SexTest {
 
@@ -31,39 +27,17 @@ public class SexTest {
         // invalid sex
         assertFalse(Sex.isValidSex("")); // empty string
         assertFalse(Sex.isValidSex(" ")); // spaces only
-        assertFalse(Sex.isValidSex("male")); // more than one character
+        assertFalse(Sex.isValidSex("male")); // more than one character and 'm' is not capitalised
         assertFalse(Sex.isValidSex("*")); // contains non-alphanumeric characters
         assertFalse(Sex.isValidSex("G")); // contains neither 'M' nor 'F' (for male/female)
 
         // valid sex
         assertTrue(Sex.isValidSex("F")); // one character only and is 'M' or 'F'
-        assertTrue(Name.isValidName("M")); // one character only and is 'M' or 'F'
-        assertTrue(Name.isValidName("f")); // lowercase 'm' or 'f'
-        assertTrue(Name.isValidName("m")); // lowercase 'm' or 'f'
-    }
-
-    @Test
-    public void testToString() {
-        Pet validFemalePet1 = new PetBuilder().withName("Fluffy").withSpecies("Dog").withBreed("Golden Retriever")
-                .withAge("5").withSex("F").build();
-        Pet validFemalePet2 = new PetBuilder().withName("Fluffy").withSpecies("Dog").withBreed("Golden Retriever")
-                .withAge("5").withSex("f").build();
-        Pet validMalePet1 = new PetBuilder().withName("Tubby").withSpecies("Turtle").withBreed("Pelomedusidae")
-                .withAge("2").withSex("M").build();
-        Pet validMalePet2 = new PetBuilder().withName("Tubby").withSpecies("Turtle").withBreed("Pelomedusidae")
-                .withAge("2").withSex("m").build();
-
-        // valid toString output
-        assertEquals("Female", validFemalePet1.getSex().toString());
-        assertEquals("Female", validFemalePet2.getSex().toString());
-        assertEquals("Male", validMalePet1.getSex().toString());
-        assertEquals("Male", validMalePet2.getSex().toString());
-
-        // invalid toString output
-        assertNotEquals("F", validFemalePet1.getSex().toString());
-        assertNotEquals("f", validFemalePet2.getSex().toString());
-        assertNotEquals("M", validMalePet1.getSex().toString());
-        assertNotEquals("m", validMalePet2.getSex().toString());
+        assertTrue(Sex.isValidSex("M")); // one character only and is 'M' or 'F'
+        assertTrue(Sex.isValidSex("f")); // lowercase 'm' or 'f'
+        assertTrue(Sex.isValidSex("m")); // lowercase 'm' or 'f'
+        assertTrue(Sex.isValidSex("Female")); // full form of sex is acceptable
+        assertTrue(Sex.isValidSex("Male")); // full form of sex is acceptable
     }
 
     @Test

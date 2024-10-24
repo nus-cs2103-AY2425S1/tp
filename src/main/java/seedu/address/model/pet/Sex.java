@@ -2,6 +2,7 @@ package seedu.address.model.pet;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.capitalizeEachWord;
 
 /**
  * Represents a Pet's sex in PawPatrol.
@@ -11,7 +12,7 @@ public class Sex {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Pet sex should be either 'M' or 'F' (case insensitive for Male and Female)";
-    public static final String VALIDATION_REGEX = "^[mMfF]$";
+    public static final String VALIDATION_REGEX = "^(M|m|F|f|Male|Female)$";
 
     public final String value;
 
@@ -23,7 +24,7 @@ public class Sex {
     public Sex(String sex) {
         requireNonNull(sex);
         checkArgument(isValidSex(sex), MESSAGE_CONSTRAINTS);
-        value = sex;
+        value = capitalizeEachWord(sex);
     }
 
     /**
@@ -35,13 +36,7 @@ public class Sex {
 
     @Override
     public String toString() {
-        if (value.equalsIgnoreCase("f")) {
-            return "Female";
-        } else if (value.equalsIgnoreCase("m")) {
-            return "Male";
-        } else {
-            return "Unknown";
-        }
+        return value;
     }
 
     @Override

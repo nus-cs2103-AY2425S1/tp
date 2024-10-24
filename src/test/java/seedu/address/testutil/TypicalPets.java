@@ -26,8 +26,7 @@ public class TypicalPets {
     public static final Pet AARFUL = new PetBuilder().withName("Aarful")
             .withSpecies("Dog").withBreed("Golden Retriever")
             .withAge("8").withSex("M").build();
-
-    public static final Pet MAX = new PetBuilder().withName("Max")
+    public static final Pet MAX = new PetBuilder().withUniqueId("b0408dc6-b7df-4598-a7ef-c4b45bf2fdc9").withName("Max")
             .withSpecies("Dog").withBreed("Golden Retriever")
             .withAge("7").withSex("M").build();
     public static final Pet MILO = new PetBuilder().withName("Milo")
