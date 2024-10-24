@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ public class EditScheduleCommandParserTest {
         descriptor.setName(new Name("Meeting"));
         descriptor.setDate(LocalDate.parse("01-10-2024", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         descriptor.setTime(LocalTime.parse("1400", DateTimeFormatter.ofPattern("HHmm")));
-        descriptor.setContactIndex(1);
+        descriptor.setContactIndex(List.of(Index.fromOneBased(1)));
 
         EditScheduleCommand expectedCommand = new EditScheduleCommand(Index.fromOneBased(1), descriptor);
 
@@ -57,7 +58,7 @@ public class EditScheduleCommandParserTest {
     }
 
     @Test
-    public void parse_missingField_failure() throws Exception {
+    public void parse_missingField_failure() {
         // Missing name
         String userInput = "1 " + PREFIX_NAME + "Lunch" + PREFIX_TIME + "1400 " + PREFIX_CONTACT + "1";
 

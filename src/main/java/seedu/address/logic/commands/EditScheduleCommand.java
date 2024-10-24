@@ -5,8 +5,11 @@ import static seedu.address.logic.commands.AddScheduleCommand.MESSAGE_DUPLICATE_
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -57,13 +60,19 @@ public class EditScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Meeting meetingToEdit = getMeeting(model);
-
         String updatedName = editScheduleDescriptor.getName().orElse(meetingToEdit.getMeetingName());
         LocalDate updatedDate = editScheduleDescriptor.getDate().orElse(meetingToEdit.getMeetingDate());
         LocalTime updatedTime = editScheduleDescriptor.getTime().orElse(meetingToEdit.getMeetingTime());
+        List<Index> contactIndexes = editScheduleDescriptor.getContactIndexes().orElse(List.of());
+
+        List<UUID> newContactUids = contactIndexes.stream()
+                .map(index -> model.getFilteredPersonList().get(index.getZeroBased()).getUid())
+                .collect(Collectors.toList());
+
+        List<UUID> updatedContactUids = getUpdatedContactUids(meetingToEdit, newContactUids);
 
         Meeting updatedMeeting = new Meeting(
-                meetingToEdit.getContactUids(),
+                updatedContactUids,
                 updatedName,
                 updatedDate,
                 updatedTime
@@ -80,14 +89,37 @@ public class EditScheduleCommand extends Command {
                 updatedName, updatedDate.toString(), updatedTime.toString()));
     }
 
+    private static List<UUID> getUpdatedContactUids(Meeting meetingToEdit, List<UUID> newContactUids) {
+        List<UUID> previousContactUids = meetingToEdit.getContactUids();
+
+        List<UUID> updatedContactUids = new ArrayList<>();
+        for (UUID uid : previousContactUids) {
+            if (!newContactUids.contains(uid)) {
+                updatedContactUids.add(uid);
+            }
+        }
+        for (UUID uid : newContactUids) {
+            if (!previousContactUids.contains(uid)) {
+                updatedContactUids.add(uid);
+            }
+        }
+
+        // check if updated contact list is empty, if so, revert to previous contact list
+        updatedContactUids = updatedContactUids.isEmpty() ? previousContactUids : updatedContactUids;
+        return updatedContactUids;
+    }
+
     private Meeting getMeeting(Model model) throws CommandException {
         List<Meeting> lastShownMeetingList = model.getWeeklySchedule();
         List<Person> lastShownPersonList = model.getFilteredPersonList();
 
-        int contactIndex = editScheduleDescriptor.getContactIndex().orElseThrow();
+        List<Index> contactIndex = editScheduleDescriptor.getContactIndexes().orElseThrow();
 
-        if (contactIndex < 0 || contactIndex >= lastShownPersonList.size()) {
-            throw new CommandException("The contact index provided is invalid.");
+        // check if any of the contact indexes are invalid
+        for (Index i : contactIndex) {
+            if (i.getZeroBased() >= lastShownPersonList.size() || i.getZeroBased() < 0) {
+                throw new CommandException("One or more contact indexes are invalid.");
+            }
         }
 
         if (targetIndex.getZeroBased() >= lastShownMeetingList.size()) {
@@ -128,7 +160,7 @@ public class EditScheduleCommand extends Command {
         private String name;
         private LocalDate date; // Use LocalDate for date representation
         private LocalTime time; // Use LocalTime for time representation
-        private int contactIndex;
+        private List<Index> contactIndex;
 
         public EditScheduleDescriptor() {
         }
@@ -157,11 +189,11 @@ public class EditScheduleCommand extends Command {
             this.time = time;
         }
 
-        public Optional<Integer> getContactIndex() {
-            return Optional.of(contactIndex);
+        public Optional<List<Index>> getContactIndexes() {
+            return Optional.ofNullable(contactIndex);
         }
 
-        public void setContactIndex(int contactIndex) {
+        public void setContactIndex(List<Index> contactIndex) {
             this.contactIndex = contactIndex;
         }
 
@@ -178,7 +210,8 @@ public class EditScheduleCommand extends Command {
 
             return getName().equals(otherDescriptor.getName())
                     && getDate().equals(otherDescriptor.getDate())
-                    && getTime().equals(otherDescriptor.getTime());
+                    && getTime().equals(otherDescriptor.getTime())
+                    && getContactIndexes().equals(otherDescriptor.getContactIndexes());
         }
 
         @Override
@@ -187,11 +220,12 @@ public class EditScheduleCommand extends Command {
                     .add("name", name)
                     .add("date", date)
                     .add("time", time)
+                    .add("contactIndex", contactIndex)
                     .toString();
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, time);
+            return CollectionUtil.isAnyNonNull(name, date, time, contactIndex);
         }
     }
 }
