@@ -19,10 +19,12 @@ import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
-    private static final String VALIDATION_REGEX = "^.+$";
-    private static final String MESSAGE_CONSTRAINTS =
+    /**
+     * Message to be displayed when invalid keyword is given.
+     */
+    public static final String MESSAGE_CONSTRAINTS =
             "Keywords should only contain alphanumeric characters and spaces, and it should not be blank";
+    private static final String VALIDATION_REGEX = "^.+$";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

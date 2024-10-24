@@ -4,8 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_LIST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPOSIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHLY_RENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENTAL_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RENT_DUE_DATE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RENTAL;
@@ -13,6 +20,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RENTAL;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.AddRentalCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.DeleteRentalCommand;
@@ -28,16 +36,31 @@ import seedu.address.model.client.Client;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.RentalInformationBuilder;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_cadd() throws Exception {
         Client client = new PersonBuilder().build();
         AddClientCommand command = (AddClientCommand) parser.parseCommand(PersonUtil.getAddCommand(client));
         assertEquals(new AddClientCommand(client), command);
+    }
+
+    @Test
+    public void parseCommand_radd() throws Exception {
+        AddRentalCommand command = (AddRentalCommand) parser.parseCommand(AddRentalCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ADDRESS
+                + RentalInformationBuilder.DEFAULT_ADDRESS + " " + PREFIX_RENTAL_START_DATE
+                + RentalInformationBuilder.DEFAULT_RENTAL_START_DATE + " " + PREFIX_RENTAL_END_DATE
+                + RentalInformationBuilder.DEFAULT_RENTAL_START_DATE + " " + PREFIX_RENT_DUE_DATE
+                + RentalInformationBuilder.DEFAULT_RENT_DUE_DATE + " " + PREFIX_MONTHLY_RENT
+                + RentalInformationBuilder.DEFAULT_MONTHLY_RENT + " " + PREFIX_DEPOSIT
+                + RentalInformationBuilder.DEFAULT_DEPOSIT + " " + PREFIX_CUSTOMER_LIST
+                + RentalInformationBuilder.DEFAULT_CUSTOMER_LIST);
+        assertEquals(new AddRentalCommand(INDEX_FIRST_PERSON, new RentalInformationBuilder().build()), command);
     }
 
     @Test
@@ -47,7 +70,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_cdelete() throws Exception {
         DeleteClientCommand command = (DeleteClientCommand) parser.parseCommand(
                 DeleteClientCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteClientCommand(INDEX_FIRST_PERSON), command);
@@ -63,7 +86,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_cedit() throws Exception {
         Client client = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(client).build();
         EditClientCommand command = (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " "
