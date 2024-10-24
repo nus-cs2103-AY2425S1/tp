@@ -6,18 +6,35 @@
 
 # NovaCare User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+NovaCare is a **desktop app for managing patients, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
+--------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+- [How to use NovaCare](#how-to-use-novacare)
+- [Quick start](#quick-start)
+- [Features](#features)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 
-<!-- * Table of Contents -->
-<page-nav-print />
+--------------------------------------------------------------------------------------------------------------------
+
+## How to use NovaCare
+
+This user guide is tailored for new and existing users of NovaCare. 
+
+
+If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section. 
+
+If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#Command Summary) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. You can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
