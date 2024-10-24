@@ -1,9 +1,6 @@
 # Qin Haichen
 
-- **HP**: 93691698
-- **Email**: [haichensurfs@gmail.com](mailto:haichensurfs@gmail.com)
-- **LinkedIn profile**: [LinkedIn Profile](#)
-- **Availability**: Available for internship Jan – Jun and May - Aug
+- **Availability**: Available for internship Jan – Jun and May - Aug (Hire pls im despo)
 
 ## Education
 
@@ -12,32 +9,30 @@
 **Aug 2023 - Jul 2027**
 
 - Bachelor of Computing in Computer Science
-  - Current GPA: 5.00/5.00 (Highest Distinction)
-  - Top scorer for Data Structures and Algorithms and Programming Methodology II
-  - Obtained top 8 in a robotics contest organized by the School of Computing
+  - Current GPA: Is a secret
+  - Decent scorer for Data Structures and Algorithms and Programming Methodology II
+  - Obtained top 8 (only 16 teams) in a robotics contest organized by the School of Computing
 - Bachelor of Science in Mathematics
-  - Current GPA: 5.00/5.00 (Highest Distinction)
-  - Obtained highest grade (A+) in Calculus, Linear Algebra, and Probability
+  - Current GPA: not enough to be proud of
+  - Maybe rejected from SPM application (I love u Chin Chee Whye)
 
-### NUS High School of Mathematics and Science
+### NOT RAFFLES INSTITUTION
 
 **Jan 2015 - Dec 2020**
 
-- NUS High School Diploma with Honours in Chemistry, Physics, and Mathematics
-  - Graduated with a Cumulative Average Point (CAP) of 4.8/5.0
-  - Part of the National Team for Physics Olympiad
-  - Gold Medal for Singapore Physics Olympiad
-  - Gold Medal for Singapore Maths Olympiad
+- NEVER TAKE A LEVELS CUZ TOO NOOB
+- OBTAINED C IN ECONS
 
 ## Projects
 
-- Collaborated with a team of four to create a mobile app with Unity engine and C# incorporating AR functionalities within 3 days and trained a Machine Learning model using YOLO_v8 for animal image recognition leveraging Python and TensorFlow.
-- Deployed a full-stack web application on Vercel platform that enables users to create and participate in prediction challenges using Next.js for frontend and Supabase for backend database management.
+- Figured out that $2.50 economic rice exists in Terrace
+- Convinced my friends that deck is the best canteen
 
 ## Technical Skills
 
-- **Languages**: Java, Python, Javascript, PostgreSQL, C#, C++
-- **Frameworks**: React, Next.js
+- Yap
+- Yap
+- Bullshitting
 
 ## Work Experience
 
@@ -46,6 +41,7 @@
 **Jan 2023 - Aug 2023**
 
 - Tutored multiple students for physics and mathematics at Junior College level
+- Available to tutor for 2040s and 2030s, no guarantee your grade will increase 
 
 ### Head Depot Clerk (Singapore Armed Forces)
 
@@ -53,18 +49,17 @@
 
 - Managed administrative processes for a depot with more than 70 people
 - Engineered an automated duty planning system using VBA and Power Query that streamlined scheduling for 70+ personnel, resulting in time savings of over 15 hours per week on administrative tasks.
-
+- Basically clerk lah what u want me do
 ### Research Intern (Cryowerx)
 
 **Apr 2019 - Oct 2019**
 
 - Developed innovative solutions to mitigate RFID signal detuning caused by medium placement or material obstructions.
 - Presented the project at Singapore Science Engineering Fair 2020, earning a Merit Award for its effectiveness in addressing complex engineering challenges related to RFID technology.
+- Unpaid internship btw LOL
 
 ## Community Involvement
-
-### Trained Repair Coach (Repair Kopitiam Singapore)
-
 **Apr 2023 - Present**
 
 - Trained to repair common electrical and mechanical devices
+- Avoided talking to people irl so that they feel safe
