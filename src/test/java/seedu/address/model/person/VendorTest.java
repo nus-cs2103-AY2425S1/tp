@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BUDGET_BOB;
@@ -107,5 +108,10 @@ public class VendorTest {
                 + AMY.getAddress() + ", tags=" + AMY.getTags() + ", company="
                 + AMY.getCompany() + ", budget=" + AMY.getBudget() + "}";
         assertEquals(expected, AMY.toString());
+    }
+
+    @Test
+    public void testHashCode_differentObjects_shouldReturnDifferentHashCodes() {
+        assertNotEquals(AMY.hashCode(), BOB.hashCode());
     }
 }
