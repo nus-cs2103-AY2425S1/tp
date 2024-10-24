@@ -53,7 +53,6 @@ class UndoCommandTest {
 
         assertEquals(UndoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
-        assert false;
     }
 
     @Test
