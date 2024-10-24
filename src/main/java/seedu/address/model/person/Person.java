@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.addresses.Network;
@@ -74,15 +75,57 @@ public class Person {
         this.publicAddresses.put(network, new HashSet<>(addresses));
     }
 
-
     /**
      * Gets the current Public address map
-     * Should be replaced with a better method in the future
      *
      * @return publicAddresses
      */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
         return Collections.unmodifiableMap(publicAddresses);
+    }
+
+    /**
+     * Checks if there is a public address associated with the specified network and label.
+     *
+     * @param network The network to search for
+     * @param label   The label to match against the public addresses
+     * @return true if a public address with the specified label exists for the given network, false otherwise
+     */
+    public boolean hasPublicAddressWithLabel(Network network, String label) {
+        return publicAddresses
+                .getOrDefault(network, Collections.emptySet())
+                .stream()
+                .anyMatch(addr -> addr.label.equalsIgnoreCase(label));
+    }
+
+    /**
+     * Returns a new {@code Person} object with the updated public address.
+     * If the public address already exists for the network, it is replaced with the new one.
+     *
+     * @param newPublicAddress The new or updated public address to be added or replaced
+     * @return A new {@code Person} object with the updated public address
+     */
+    public Person withUpdatedPublicAddress(PublicAddress newPublicAddress) {
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses
+                .entrySet()
+                .stream()
+                .map(entry -> Map.entry(
+                        entry.getKey(),
+                        entry.getKey().equals(newPublicAddress.getNetwork())
+                        ? updateAddressSet(entry.getValue(), newPublicAddress)
+                        : entry.getValue()
+                ))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    private Set<PublicAddress> updateAddressSet(Set<PublicAddress> addresses, PublicAddress newAddress) {
+        return addresses.stream()
+                .map(addr -> addr.label.equalsIgnoreCase(newAddress.label)
+                             ? newAddress
+                             : addr)
+                .collect(Collectors.toSet());
     }
 
     /**

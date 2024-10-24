@@ -1,0 +1,112 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
+
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressFactory;
+import seedu.address.model.person.Person;
+
+/**
+ * Represents a command to edit the public address of a person in the address book.
+ */
+public class EditPublicAddressCommand extends Command {
+
+    public static final String COMMAND_WORD = "editpa";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a public address of a contact.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_PUBLIC_ADDRESS_NETWORK + "NETWORK "
+            + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL "
+            + PREFIX_PUBLIC_ADDRESS + "NEW_ADDRESS\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+            + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet "
+            + PREFIX_PUBLIC_ADDRESS + "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
+
+    public static final String MESSAGE_NON_MATCHING_LABEL = "Label does not match any %1$s public addresses of %2$s";
+
+    public static final String MESSAGE_SUCCESS = "Edited Person: %1$s";
+
+    private final Index index;
+    private final PublicAddress publicAddress;
+
+    /**
+     * Creates an EditPublicAddressCommand to edit the public address of a specified person.
+     *
+     * @param index         of the person in the filtered person list to edit
+     * @param network       network type of desired public address
+     * @param label         label of desired public address
+     * @param publicAddress new public address
+     */
+    public EditPublicAddressCommand(Index index, Network network, String publicAddress, String label) {
+        requireAllNonNull(index, network, label, publicAddress);
+
+        this.index = index;
+        this.publicAddress = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
+    }
+
+    /**
+     * Executes the edit public address command by modifying the public address of the specified person.
+     *
+     * @param model Model where the command will be executed
+     * @return CommandResult indicating the result of the operation
+     * @throws CommandException if the command fails due to invalid input or state
+     */
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        Person personToEdit = getPersonToEdit(model);
+
+        if (!personToEdit.hasPublicAddressWithLabel(publicAddress.getNetwork(), publicAddress.label)) {
+            throw new CommandException(
+                    String.format(MESSAGE_NON_MATCHING_LABEL, publicAddress.getNetwork(), personToEdit.getName()));
+        }
+
+        Person editedPerson = personToEdit.withUpdatedPublicAddress(publicAddress);
+        model.setPerson(personToEdit, editedPerson);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private Person getPersonToEdit(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditPublicAddressCommand)) {
+            return false;
+        }
+
+        EditPublicAddressCommand otherCommand = (EditPublicAddressCommand) other;
+        return super.equals(otherCommand);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+}
