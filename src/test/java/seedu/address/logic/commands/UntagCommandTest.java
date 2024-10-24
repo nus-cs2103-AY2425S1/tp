@@ -69,6 +69,18 @@ public class UntagCommandTest {
     }
 
     @Test
+    public void execute_tagNotExist_throwsCommandException() {
+
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Tag tag = new Tag("friendss");
+        Set<Tag> tags = Set.of(tag);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tags);
+
+        assertCommandFailure(untagCommand, model, UntagCommand.MESSAGE_TAG_DOES_NOT_EXIST);
+    }
+
+    @Test
     public void equals() {
         Tag firstTag = new Tag("firstTag");
         Set<Tag> firstTags = Set.of(firstTag);
