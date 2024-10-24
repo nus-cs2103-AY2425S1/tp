@@ -315,7 +315,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAssignmentId_validValue_returnTrimedAssignmentId() throws Exception {
+    public void parseAssignmentId_validValue_returnTrimmedAssignmentId() throws Exception {
         AssignmentId expectedAssignmentId = new AssignmentId(VALID_ASSIGNMENT_ID);
         assertEquals(expectedAssignmentId, ParserUtil.parseAssignmentId(VALID_ASSIGNMENT_ID));
     }
