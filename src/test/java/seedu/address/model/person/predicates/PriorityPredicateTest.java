@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.predicates.PriorityPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class PriorityPredicateTest {
@@ -42,7 +41,6 @@ public class PriorityPredicateTest {
 
     @Test
     public void test_priorityMatches_returnsTrue() {
-
         // One keyword
         PriorityPredicate predicate = new PriorityPredicate(Collections.singletonList("LOW"));
         assertTrue(predicate.test(new PersonBuilder().withPriority("LOW").build()));

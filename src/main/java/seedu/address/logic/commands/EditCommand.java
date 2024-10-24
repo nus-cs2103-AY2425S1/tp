@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -50,8 +52,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_DATE_OF_BIRTH + "DATE_OF_BIRTH] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
+            + "[" + PREFIX_INCOME + "INCOME] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -173,6 +177,7 @@ public class EditCommand extends Command {
             setPriority(toCopy.priority);
             setRemark(toCopy.remark);
             setDateOfBirth(toCopy.dateOfBirth);
+            setIncome(toCopy.income);
             setTags(toCopy.tags);
         }
 
@@ -180,7 +185,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, priority, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, income,
+                    remark, priority, tags);
         }
 
         public void setName(Name name) {
@@ -280,7 +286,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
+                    && Objects.equals(income, otherEditPersonDescriptor.income)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -292,7 +300,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("dateOfBirth", dateOfBirth)
                     .add("priority", priority)
+                    .add("income", income)
                     .add("remark", remark)
                     .add("tags", tags)
                     .toString();
