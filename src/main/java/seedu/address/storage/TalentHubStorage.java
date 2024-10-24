@@ -10,12 +10,12 @@ import seedu.address.model.ReadOnlyAddressBook;
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface TalentHubStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getTalentHubFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
@@ -26,7 +26,7 @@ public interface AddressBookStorage {
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTalentHubFilePath()
      */
     Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
 

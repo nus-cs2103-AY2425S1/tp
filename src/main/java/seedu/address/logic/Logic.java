@@ -40,7 +40,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getTalentHubFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

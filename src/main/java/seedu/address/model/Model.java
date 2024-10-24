@@ -41,12 +41,12 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getTalentHubFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTalentHubFilePath(Path talentHubFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
