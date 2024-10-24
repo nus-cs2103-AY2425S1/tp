@@ -68,6 +68,7 @@ public class EditMeetingCommand extends Command {
         requireNonNull(model);
 
         if (index.getZeroBased() >= model.getMeetingSize()) {
+            System.out.println("INDEX VALUE: " + index.getZeroBased() + ", MEETING SIZE: " + model.getMeetingSize());
             throw new CommandException(Messages.MESSAGE_INVALID_MEETING_INDEX);
         }
 

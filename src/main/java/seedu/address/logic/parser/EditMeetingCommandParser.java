@@ -30,6 +30,7 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            System.out.println(index);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditMeetingCommand.MESSAGE_USAGE), pe);
