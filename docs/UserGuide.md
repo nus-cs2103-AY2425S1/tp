@@ -85,13 +85,15 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
 * `NAME` must not exist in Clientele+ already.
 * `PHONE_NUMBER` should be **Numeric** digits,may include “-” or spaces. Example: `555-1234` or `555 1234`.
 * `EMAIL`  Standard email format “user@example.com”
-* `PAYMENT_STATUS` Acceptable values are `paid`, `unpaid`, `p`, `u`, `0` for **paid**, `1` for **unpaid**. Case insensitive.
-* `CLIENT_STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
-* `PROJECT_STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
+* `PAYMENT STATUS` Acceptable values are `pending`, `partial`, `paid`, `late`. Case insensitive.
+* `CLIENT STATUS`  Acceptable values are `active`, `unresponsive`, `potential`, `old`. Case sensitive.
+* `PROJECT STATUS` Acceptable values are `in progress`, `completed`. Case insensitive.
+* `TAG` Should be alphanumeric. May contain spaces.
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
-t/friends ps/in progress py/unpaid cs/active`
+t/friends ps/in progress py/pending cs/active`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### View Client List : `list`
@@ -139,7 +141,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PRO
     matches `Hans Bo`
 * Phone number, email, address, project status, payment status, client status must match the exact string
   e.g. `cs/in progress` will not match `cs/in prog`
-* Only 1 tag needs to be matched for person to be found
+* Only 1 tag needs to be matched for a person to be found
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -242,7 +244,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friends ps/in progress py/unpaid cs/active`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friends ps/in progress py/pending cs/active`
 **Clear** | `clear`
 **Delete** | `delete [n/NAME] [id/ID]`<br> e.g., `delete n/John Doe` or `delete id/4`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`

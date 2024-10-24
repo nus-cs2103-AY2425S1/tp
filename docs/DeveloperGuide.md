@@ -248,6 +248,12 @@ The following sequence diagram shows how an undo operation goes through the `Log
 ![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
 </div>
 
+<div>
+
+`Storage` Class Diagram with support for archive:
+![StorageClassDiagramWithArchive](images/StorageClassDiagramWithArchive.png)
+</div>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
