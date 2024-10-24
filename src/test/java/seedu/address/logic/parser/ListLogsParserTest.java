@@ -2,12 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+//import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ListLogsCommand;
-import seedu.address.model.person.IdentityNumber;
+//import seedu.address.model.person.IdentityNumber;
 
 public class ListLogsParserTest {
 
@@ -33,7 +33,7 @@ public class ListLogsParserTest {
     }
 
     //TODO: Cant parse succesfully - perhaps due to missing person someetimes?
-    /**
+    /*
     @Test
     public void parse_validArgs_returnsListLogsCommand() {
         // no leading and trailing whitespaces
