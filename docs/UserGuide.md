@@ -168,8 +168,8 @@ Format: `filter person TAG`
 
 Examples:
 
-* `filter person Hairdresser` returns the persons with tag `HairDresser`.
-* `filter person Celcbrity` returns the persons with tag `Celebrity`.
+* `filter person Hairdresser` returns the person with tag `HairDresser`.
+* `filter person Celcbrity` returns the person with tag `Celebrity`.
 
 ![result for 'filter celebrity'](images/filterCelebrityResult.png)
 
@@ -177,15 +177,15 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete person INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list person` followed by `delete person 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete person 1` deletes the 1st person in the results of the `find` command.
 
 ![result for 'delete person'](images/delete_person.png)
 
@@ -300,15 +300,15 @@ Examples:
 
 Deletes the specified event from the address book.
 
-Format: `delete INDEX`
+Format: `delete event INDEX`
 
 * Deletes the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd event in the address book.
-* `find Oscars` followed by `delete 1` deletes the 1st event in the results of the `find` command.
+* `list event` followed by `delete event 2` deletes the 2nd event in the address book.
+* `find Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find` command.
 
 ![result for 'delete event'](images/delete_event.png)
 
