@@ -12,6 +12,8 @@ import seedu.address.model.id.UniqueId;
  */
 public class JsonAdaptedAssociation {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Association's %s field is missing!";
+    
     private final String vendorId;
     private final String eventId;
 
@@ -39,6 +41,14 @@ public class JsonAdaptedAssociation {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public Association toModelType() throws IllegalValueException {
+        // Check for missing fields
+        if (vendorId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "vendorId"));
+        }
+        if (eventId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "eventId"));
+        }
+
         // Convert the vendorId and eventId strings back into UniqueId objects
         UniqueId modelVendorId;
         UniqueId modelEventId;
