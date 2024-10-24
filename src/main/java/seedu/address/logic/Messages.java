@@ -20,7 +20,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX = "The concert index provided is invalid";
     public static final String MESSAGE_INVALID_CONCERT_CONTACT_DISPLAYED_INDEX =
             "The concertContact index provided is invalid";
-    public static final String MESSAGE_INVALID_CONCERT_CONTACT = "The person provided is not in the provided concert";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_CONCERTS_LISTED_OVERVIEW = "%1$d concerts listed!";
     public static final String MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW = "%1$d concertContacts listed!";
@@ -63,8 +62,11 @@ public class Messages {
      */
     public static String format(Concert concert) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(concert.getName()).append("; Address: ").append(concert.getAddress()).append(
-                "; Date: ").append(concert.getDate());
+        builder.append(concert.getName())
+                .append("; Address: ")
+                .append(concert.getAddress())
+                .append("; Date: ")
+                .append(concert.getDate());
         return builder.toString();
     }
 
