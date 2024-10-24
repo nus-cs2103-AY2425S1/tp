@@ -44,16 +44,31 @@ public class AddWorkExperienceCommand extends Command {
         this.workExp = workExp;
     }
 
+    /**
+     * Executes the AddWorkExperienceCommand to add a work experience to a specified person in the address book.
+     *
+     * @param model The model in which the command operates. The model must not be null.
+     * @return A CommandResult indicating the success of the operation, including a message detailing
+     *     the person who was updated and the added work experience.
+     * @throws CommandException If the specified index is out of bounds, indicating the person does not exist.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        // Assert that the list of persons is not null
+        assert lastShownList != null : "Filtered person list should not be null";
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        // Assert that the person to edit is not null
+        assert personToEdit != null : "Person to edit should not be null";
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), workExp,
@@ -62,9 +77,20 @@ public class AddWorkExperienceCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // Assert that the person was successfully updated
+        assert model.getFilteredPersonList().contains(editedPerson) : "Edited person should be in the updated list";
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit.getName(), workExp));
     }
 
+    /**
+     * Checks whether this AddWorkExperienceCommand is equal to another object.
+     *
+     * @param other The other object to compare to.
+     * @return True if the other object is an instance of AddWorkExperienceCommand and has the same
+     *     index and work experience as this command. Otherwise, returns false.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
