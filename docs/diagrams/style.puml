@@ -31,12 +31,6 @@
 !define STORAGE_COLOR_T3 #806600
 !define STORAGE_COLOR_T2 #544400
 
-!define APPLY_COLOR #0d5035
-!define APPLY_COLOR_T1 #3d9d5e
-!define APPLY_COLOR_T2 #6A6ADC
-!define APPLY_COLOR_T3 #1616B0
-!define APPLY_COLOR_T4 #101086
-
 !define USER_COLOR #000000
 
 skinparam Package {
