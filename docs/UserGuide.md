@@ -245,6 +245,16 @@ Removes a candidate from TalentSG.
 - `list` followed by `delete 2`: Deletes the second candidate.
 - `find Betsy` followed by `delete 1`: Deletes the first candidate in the search results.
 
+**Image Example**
+
+Command: ` delete 2 `
+
+Before the find command ran:
+<br><img src="images/DeleteCommandBefore.png" width = "300">
+
+After the find command ran:
+<br><img src="images/DeleteCommandAfter.png" width = "300">
+
 [⚠️ **Caution**]: Deleted entries cannot be recovered.
 
 ---
@@ -264,6 +274,16 @@ Filters candidates based on their status.
 
 - `filter st/Active`: Displays all active candidates.
 - `filter st/Shortlisted`: Shows candidates marked as shortlisted.
+
+**Image Example**
+
+Command: ` filter screening `
+
+Before the find command ran:
+<br><img src="images/FilterCommandBefore.png" width = "300">
+
+After the find command ran:
+<br><img src="images/FilterCommandAfter.png" width = "300">
 
 ---
 

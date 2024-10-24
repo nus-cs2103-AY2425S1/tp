@@ -180,7 +180,29 @@ The sequence diagram below illustrates the process of adding a person into Talen
 7. The UI reflects this new list with added `Person`.
 
 
+### Delete Feature ###
+
+#### `Delete Command` Implementation Sequence Diagram
+The sequence diagram below illustrates the process of deleting a person from TalentSG.
+
 <img src="images/DeleteCommandSequenceDiagram.png" width="550" />
+
+#### Key Components
+- `DeleteCommand`: Executes the deletion operation based on the user's input.
+- `AddCommandParser`: Parses user input to create a `DeleteCommand` object.
+- `LogicManager`: Invokes the `DeleteCommand` to execute the deletion operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
+- `Person`: Represents a person in TalentSG, encapsulating their personal information.
+- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
+
+#### Component Interaction Details
+1. The user executes the command `delete 2`, intending to delete a person with index 2 in the contact list.
+2. The `DeleteCommandParser` interprets the input.
+3. A `DeleteCommand` object is created.
+4. The `LogicManager` invokes the execute method of DeleteCommand.
+5. The execute method of `DeleteCommand` invokes the `deletePerson` method in `Model` property to delete the contact of the `Person` object.
+6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
+7. The UI reflects this new list with deleted `Person`.
 
 ### \[Proposed\] Undo/redo feature
 
