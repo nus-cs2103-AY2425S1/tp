@@ -328,8 +328,8 @@ public class InsurancePlansManager {
         if (this == other) {
             return true;
         } else if (other instanceof InsurancePlansManager) {
-            InsurancePlansManager otherInsurancePlanManager = (InsurancePlansManager) other;
-            if (!otherInsurancePlanManager.insurancePlans.equals(this.insurancePlans)) {
+            InsurancePlansManager otherInsurancePlansManager = (InsurancePlansManager) other;
+            if (!otherInsurancePlansManager.insurancePlans.equals(this.insurancePlans)) {
                 return false;
             }
             return true;
