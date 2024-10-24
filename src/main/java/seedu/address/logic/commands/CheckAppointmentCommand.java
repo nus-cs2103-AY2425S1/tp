@@ -55,23 +55,9 @@ public class CheckAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-<<<<<<< HEAD
-        String appointmentDetails;
-<<<<<<< HEAD
-
-        if (date != null) {
-            appointmentDetails = doctorToCheckAppointment.getOneDayDoctorAppointment(date, doctorId);
-        } else {
-            throw new CommandException(String.format(MESSAGE_NO_DATE_TIME, doctorToCheckAppointment.getName()));
-        }
-=======
-        throw new CommandException(String.format(MESSAGE_NO_APPOINTMENT_FOUND, doctorToCheckAppointment.getName()));
->>>>>>> master
-=======
         if (date == null) {
             throw new CommandException(String.format(MESSAGE_NO_DATE_TIME, doctorToCheckAppointment.getName()));
         }
->>>>>>> master
 
         String appointmentDetails = doctorToCheckAppointment.getStringAppointmentsForDay(date);
 

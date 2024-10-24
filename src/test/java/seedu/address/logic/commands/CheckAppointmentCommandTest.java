@@ -48,8 +48,14 @@ public class CheckAppointmentCommandTest {
         CheckAppointmentCommand command = new CheckAppointmentCommand(validDoctor.getId(), appointmentDate);
         CommandResult result = command.execute(modelStub);
 
-        String expectedMessage = String.format(MESSAGE_APPOINTMENT_FOUND, doctor.getName(),
-                validDoctor.getStringAppointmentsForDay(appointmentDate));
+        String expectedMessage = String.format("Appointments on %s:\n"
+                                        +  "Appointment: %s for %s (patient id) "
+                                        + "with %s (doctor id). Remarks: %s\n"
+                                        + "Appointment: %s for %s (patient id) "
+                                        + "with %s (doctor id). Remarks: %s\n",
+                appointmentDate, appointmentTime1, validPatient.getId(),
+                validDoctor.getId(), appointmentRemark, appointmentTime2,
+                validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
