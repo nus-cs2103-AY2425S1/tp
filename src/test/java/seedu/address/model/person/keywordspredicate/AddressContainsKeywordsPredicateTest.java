@@ -49,12 +49,12 @@ public class AddressContainsKeywordsPredicateTest {
                 new AddressContainsKeywordsPredicate(Arrays.asList("74 University Town, #04-02"));
         assertTrue(predicate.test(new PersonBuilder().withAddress("74 University Town, #04-02").build()));
 
-        // One full-matching keyword
-        predicate = new AddressContainsKeywordsPredicate(Arrays.asList("73 Jurong Island, #02-04"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("73 Jurong Island, #02-04").build()));
-
         // One partial-matching keyword
         predicate = new AddressContainsKeywordsPredicate(Arrays.asList("University Town"));
+        assertTrue(predicate.test(new PersonBuilder().withAddress("74 University Town, #04-02").build()));
+
+        // One partial-matching keyword, case-insensitive
+        predicate = new AddressContainsKeywordsPredicate(Arrays.asList("uNiversiTy Tow"));
         assertTrue(predicate.test(new PersonBuilder().withAddress("74 University Town, #04-02").build()));
     }
 
@@ -66,7 +66,7 @@ public class AddressContainsKeywordsPredicateTest {
 
         // Keywords match name, email and phone, but does not match address
         predicate = new AddressContainsKeywordsPredicate(Arrays.asList("Alice", "12345",
-                "alice@email.com", "West", "Street"));
+                "alice@email.com", "West", "Avenue"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
