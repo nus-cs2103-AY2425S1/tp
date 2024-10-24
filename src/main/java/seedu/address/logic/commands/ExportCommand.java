@@ -18,7 +18,7 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the whole contact list "
-            + "to a specfied file type. Only CSV and VCF are supported.\n"
+            + "to a specified file type. Only CSV and VCF are supported.\n"
             + "Parameters: " + PREFIX_FILE + "FILETYPE\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "csv";
 
