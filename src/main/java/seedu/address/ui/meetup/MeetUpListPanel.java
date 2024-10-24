@@ -26,14 +26,14 @@ public class MeetUpListPanel extends UiPart<Region> {
     /**
      * Creates a {@code BuyerListPanel} with the given {@code ObservableList}.
      */
-    public MeetUpListPanel(ObservableList<MeetUp> meetUpList) {
+    public MeetUpListPanel(ObservableList<MeetUp> meetUpList, ObservableList<MeetUp> originalList) {
         super(FXML);
         logger.info(meetUpList.toString());
         ArrayList<Boolean> hasOverlap = new ArrayList<Boolean>();
 
         for (MeetUp meetUp : meetUpList) {
             boolean foundOverlap = false;
-            for (MeetUp meetUp2 : meetUpList) {
+            for (MeetUp meetUp2 : originalList) {
                 if (!meetUp.isSameMeetUp(meetUp2) && doDateRangesOverlap(meetUp, meetUp2)) {
                     foundOverlap = true;
                     break;
