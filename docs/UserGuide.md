@@ -219,7 +219,7 @@ Format: `addmeeting mt/TITLE d/DATE b/BUYER s/SELLER t/TYPE c/POSTALCODE`
 Examples:
 * `addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456` adds a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
 
-  ![result for 'deletemeeting mt/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
+  ![result for 'addmeeting mt/Meeting 1 d/01-01-2024 b/Alice Pauline s/Daniel Meier t/HDB c/123456'](images/addmeeting.png)
 
 ### Deleting a meeting : `deletemeeting`
 
