@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalConcertContacts.ALICE_COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.COACHELLA;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -79,14 +80,19 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasPerson_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasConcert_nullConcert_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasConcert(null));
     }
 
     @Test
@@ -101,14 +107,25 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList()
-                .remove(0));
+    public void hasConcertContact_nullConcertContact_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasConcertContact(null));
     }
 
     @Test
-    public void hasConcert_nullConcert_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasConcert(null));
+    public void hasConcertContact_concertContactInAddressBook_returnsTrue() {
+        modelManager.addConcertContact(ALICE_COACHELLA);
+        assertTrue(modelManager.hasConcertContact(ALICE_COACHELLA));
+    }
+
+    @Test
+    public void hasConcertContact_concertContactNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasConcertContact(ALICE_COACHELLA));
+    }
+
+    @Test
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList()
+                .remove(0));
     }
 
     @Test

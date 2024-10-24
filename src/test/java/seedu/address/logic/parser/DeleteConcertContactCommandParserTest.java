@@ -1,12 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERTCONTACT;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,20 +21,13 @@ public class DeleteConcertContactCommandParserTest {
     private DeleteConcertContactCommandParser parser = new DeleteConcertContactCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, " " + PREFIX_PERSON + "1 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
-                new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT));
+    public void parse_validArgs_returnsDeleteConcertContactCommand() {
+        assertParseSuccess(parser, "1", new DeleteConcertContactCommand(INDEX_FIRST_CONCERTCONTACT));
     }
 
     @Test
-    public void parse_invalidPersonArg_throwsParseException() {
-        assertParseFailure(parser, " " + PREFIX_PERSON + "a " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConcertContactCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidConcertArg_throwsParseException() {
-        assertParseFailure(parser, " " + PREFIX_PERSON + "1 " + PREFIX_CONCERT + "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConcertContactCommand.MESSAGE_USAGE));
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteConcertContactCommand.MESSAGE_USAGE));
     }
 }
