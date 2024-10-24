@@ -7,15 +7,24 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalStudents.DIDDY;
+import static seedu.address.testutil.TypicalStudents.HUGH;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -128,5 +137,28 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void getAllStudentByName_matchingName_returnsAllMatchingStudents() {
+        modelManager.addStudent(DIDDY);
+        modelManager.addStudent(HUGH);
+        modelManager.addStudent(BOB);
+        ObservableList<Student> result = modelManager.getAllStudentsByName(BOB.getName());
+
+        List<Student> expectedList = new ArrayList<>();
+        expectedList.add(BOB);
+
+        assertEquals(FXCollections.observableArrayList(expectedList), result);
+    }
+
+    @Test
+    void getAllStudentByName_nonMatchingName_returnsEmptyList() {
+        modelManager.addStudent(DIDDY);
+        modelManager.addStudent(HUGH);
+        modelManager.addStudent(BOB);
+        ObservableList<Student> result = modelManager.getAllStudentsByName(new Name("Jerrell"));
+
+        assertTrue(result.isEmpty());
     }
 }
