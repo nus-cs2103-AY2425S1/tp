@@ -47,7 +47,7 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 
 4. **Run the Application**:
     - Open a command terminal.
-![locateTerminal.png](images%2FlocateTerminal.png)  
+![locateTerminal.png](images%2FlocateTerminal.png)
     - Navigate (`cd`) to the folder containing the `.jar` file.
 ![locateAppFile.png](images%2FlocateAppFile.png)
     - Run the application with the command:
