@@ -192,6 +192,21 @@ Exits the program.
 
 Format: `exit`
 
+### Autocomplete
+
+When using the program, you might have noticed that suggestions pop up when you are entering in commands. This is the autocomplete feature. 
+
+Autocomplete searches for keywords matching the word under the caret position. For example, when you type in `ad`, autocomplete will show a list of commands matching this initial string.
+
+Autocomplete also supports autocompletion for fields. These include: 
+* Modules `m/`
+* Tags `t/`
+* Gender `g/`
+
+When these prefixes are detected, autocomplete automatically displays a list of suggestions related to these fields.
+
+![Autocomplete example when keying in gender](images/AutocompleteExample.png)
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
