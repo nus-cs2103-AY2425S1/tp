@@ -19,6 +19,7 @@ Class LogicManager
 
 package Model {
 Class HiddenModel #FFFFFF
+Class Consultation
 }
 
 package Storage {
@@ -36,9 +37,11 @@ LogicManager .left.> Command : <<call>>
 
 LogicManager --> Model
 LogicManager --> Storage
+LogicManager --> Consultation : <<manage>>
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
+Command .up.> Consultation
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult
