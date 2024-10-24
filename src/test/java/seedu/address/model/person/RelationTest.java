@@ -30,6 +30,7 @@ public class RelationTest {
         assertFalse(Relation.isValidRelation(" ")); // spaces only
         assertFalse(Relation.isValidRelation("^")); // only non-alphanumeric characters
         assertFalse(Relation.isValidRelation("HW")); // contains non-alphanumeric characters
+        assertFalse(Relation.isValidRelation("A")); // contains an alphabet that is not H, W or U
 
         // valid Rsvp
         assertTrue(Relation.isValidRelation("H"));

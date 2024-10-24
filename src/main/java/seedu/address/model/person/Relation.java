@@ -39,7 +39,7 @@ public class Relation {
      * - "a" (contains an alphabet that is not H, W or U)
      * - "H " (contains more than 1 character)
      */
-    public static final String VALIDATION_REGEX = "[HhWwUu]";
+    public static final String VALIDATION_REGEX = "[\\p{Alpha}]";
 
     public final String relation;
 
