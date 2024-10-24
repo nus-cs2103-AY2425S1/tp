@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -45,8 +47,8 @@ public class StudentCourseAssociationListTest {
                 new Phone("12345678"), new Email("student1@example.com"), new Address("123 Street"), tags);
         student2 = new Person(new MatriculationNumber("A7654321X"), new Name("Amy"),
                 new Phone("87654321"), new Email("student2@example.com"), new Address("456 Avenue"), tags);
-        course1 = new Course("CS1010", "Introduction to CS");
-        course2 = new Course("CS2020", "Data Structures");
+        course1 = new Course(new CourseCode("CS1010"), new CourseName("Introduction to CS"));
+        course2 = new Course(new CourseCode("CS2020"), new CourseName("Data Structures"));
         tutorial1 = new Tutorial("T01", course1);
         tutorial2 = new Tutorial("T02", course2);
 

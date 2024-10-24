@@ -102,6 +102,13 @@ public interface Model {
 
     void addCourse(Course course);
 
+    /**
+     * Replaces the given course {@code target} with {@code editedCourse}.
+     * @param target the course to be replaced
+     * @param editedCourse the course to replace the target
+     */
+    void setCourse(Course target, Course editedCourse);
+
     boolean hasSca(StudentCourseAssociation sca);
 
     void deleteCourse(Course course);

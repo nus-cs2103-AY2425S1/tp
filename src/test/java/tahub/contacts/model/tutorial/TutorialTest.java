@@ -8,26 +8,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.CourseCode;
+import tahub.contacts.model.course.CourseName;
 
 public class TutorialTest {
 
     @Test
     public void getTutorialId() {
-        Course course = new Course("CS1101S", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
         Tutorial tutorial = new Tutorial("T1", course);
         assertEquals("T1", tutorial.getTutorialId());
     }
 
     @Test
     public void getCourse() {
-        Course course = new Course("CS1101S", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
         Tutorial tutorial = new Tutorial("T2", course);
         assertEquals(course, tutorial.getCourse());
     }
 
     @Test
     public void equals() {
-        Course course = new Course("CS1101S", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
         Tutorial tutorial1 = new Tutorial("T3", course);
         Tutorial tutorial2 = new Tutorial("T3", course);
         Tutorial tutorial3 = new Tutorial("T4", course);
@@ -38,7 +40,7 @@ public class TutorialTest {
 
     @Test
     public void hashCodeTest() {
-        Course course = new Course("CS1101S", "Programming Methodology");
+        Course course = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
         Tutorial tutorial1 = new Tutorial("T5", course);
         Tutorial tutorial2 = new Tutorial("T5", course);
         Tutorial tutorial3 = new Tutorial("T6", course);

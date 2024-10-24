@@ -119,6 +119,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setCourse(Course target, Course editedCourse) {
+        requireAllNonNull(target, editedCourse);
+
+        courseList.setCourse(target, editedCourse);
+    }
+
+    @Override
     public UniqueCourseList getCourseList() {
         return courseList;
     }

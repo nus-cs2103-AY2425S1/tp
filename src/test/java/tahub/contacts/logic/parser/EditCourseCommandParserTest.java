@@ -13,45 +13,39 @@ import static tahub.contacts.logic.parser.CommandParserTestUtil.assertParseSucce
 
 import org.junit.jupiter.api.Test;
 
-import tahub.contacts.logic.commands.CourseCommand;
-import tahub.contacts.model.course.Course;
+import tahub.contacts.logic.commands.EditCourseCommand;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
+import tahub.contacts.testutil.EditCourseDescriptorBuilder;
 
-public class CourseCommandParserTest {
+public class EditCourseCommandParserTest {
 
-    private final CourseCommandParser parser = new CourseCommandParser();
+    private final EditCourseCommandParser parser = new EditCourseCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Course expectedCourse = new Course(new CourseCode(VALID_COURSE_CODE), new CourseName(VALID_COURSE_NAME));
+        CourseCode courseCode = new CourseCode(VALID_COURSE_CODE);
+        EditCourseCommand.EditCourseDescriptor descriptor = new EditCourseDescriptorBuilder()
+                .withCourseName(VALID_COURSE_NAME).build();
+        EditCourseCommand expectedCommand = new EditCourseCommand(courseCode, descriptor);
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + COURSE_CODE_DESC + COURSE_NAME_DESC,
-                new CourseCommand(expectedCourse));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + COURSE_CODE_DESC + COURSE_NAME_DESC, expectedCommand);
     }
 
     @Test
     public void parse_missingParts_failure() {
         // no course code
-        assertParseFailure(parser, "Software Engineering",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
-
-        // no course description
-        assertParseFailure(parser, "CS2103T",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, COURSE_NAME_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCourseCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid course code
-        assertParseFailure(parser,
-                PREAMBLE_WHITESPACE + INVALID_COURSE_CODE_DESC + COURSE_NAME_DESC,
-                CourseCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_COURSE_CODE_DESC + COURSE_NAME_DESC, CourseCode.MESSAGE_CONSTRAINTS);
 
-        // invalid course description
-        assertParseFailure(parser,
-                PREAMBLE_WHITESPACE + COURSE_CODE_DESC + INVALID_COURSE_NAME_DESC,
-                CourseName.MESSAGE_CONSTRAINTS);
+        // invalid course name
+        assertParseFailure(parser, COURSE_CODE_DESC + INVALID_COURSE_NAME_DESC, CourseName.MESSAGE_CONSTRAINTS);
     }
 }

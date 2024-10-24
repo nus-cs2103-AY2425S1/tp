@@ -130,7 +130,7 @@ public class JsonAdaptedStudentCourseAssociationTest {
         assertDoesNotThrow(() -> {
             StudentCourseAssociation sca = adapter.toModelType();
             assertEquals(VALID_MATRICULATION_NUMBER, sca.getStudent().getMatricNumber().toString());
-            assertEquals(VALID_COURSE_CODE, sca.getCourse().courseCode);
+            assertEquals(VALID_COURSE_CODE, sca.getCourse().courseCode.toString());
             assertEquals(VALID_TUTORIAL_ID, sca.getTutorial().getTutorialId());
         });
     }
