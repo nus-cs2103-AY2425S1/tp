@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class DeleteTaskCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteTaskCommand() {
-        assertParseSuccess(parser, "1", new DeleteTaskCommand(INDEX_FIRST_TASK));
+        assertParseSuccess(parser, "1", new DeleteTaskCommand(INDEX_FIRST));
     }
 
     @Test

@@ -34,24 +34,24 @@ public class FindTagCommandTest {
         TagContainsKeywordsPredicate secondPredicate =
                 new TagContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindTagCommand filterFirstCommand = new FindTagCommand(firstPredicate);
-        FindTagCommand filterSecondCommand = new FindTagCommand(secondPredicate);
+        FindTagCommand findFirstCommand = new FindTagCommand(firstPredicate);
+        FindTagCommand findSecondCommand = new FindTagCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(filterFirstCommand.equals(filterFirstCommand));
+        assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindTagCommand filterFirstCommandCopy = new FindTagCommand(firstPredicate);
-        assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
+        FindTagCommand findFirstCommandCopy = new FindTagCommand(firstPredicate);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(filterFirstCommand.equals(1));
+        assertFalse(findFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(filterFirstCommand.equals(null));
+        assertFalse(findFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(filterFirstCommand.equals(filterSecondCommand));
+        assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test

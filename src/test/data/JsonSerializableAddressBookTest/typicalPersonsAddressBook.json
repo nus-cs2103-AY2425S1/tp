@@ -12,7 +12,23 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "weddings": ["Wedding 2", "Carla's Wedding"]
+    "weddings": [{
+      "weddingName": "Wedding 2",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    },{
+      "weddingName": "Carla's Wedding",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -35,7 +51,16 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "tags" : [ ],
+    "weddings" : [ {
+      "weddingName": "Wedding 2",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -50,7 +75,24 @@
     "tags" : [ ]
   } ],
   "tags": ["florist"],
-  "weddings": ["Wedding 2", "Carla's Wedding"],
+  "weddings": [{
+    "weddingName": "Wedding 2",
+    "peopleCount": 0,
+    "partner1": null,
+    "partner2": null,
+    "guestList": [],
+    "address": null,
+    "date": null
+  },
+    {
+      "weddingName": "Carla's Wedding",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+    }],
   "tasks": [{
     "type" : "todo",
     "description" : "Buy groceries",

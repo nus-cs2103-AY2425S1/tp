@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -32,10 +32,10 @@ public class UntagCommandTest {
 
     @Test
     public void execute_validTagsUnfilteredList_success() {
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("friends"))));
 
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
 
         String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS,
                 "friends", personToEdit.getName().toString());
@@ -68,10 +68,10 @@ public class UntagCommandTest {
                 new HashSet<>(),
                 new HashSet<>()
         );
-        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personWithTags);
+        model.setPerson(model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()), personWithTags);
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("friends")),
                 new Tag(new TagName("owesMoney"))));
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
         String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS,
                 "owesMoney, friends", personWithTags.getName().toString());
 
@@ -96,7 +96,7 @@ public class UntagCommandTest {
     @Test
     public void execute_nonExistentTag_failure() {
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("nonExistentTag"))));
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
         String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT;
         CommandTestUtil.assertCommandFailure(untagCommand, model, expectedMessage);
     }
@@ -142,9 +142,9 @@ public class UntagCommandTest {
                         new HashSet<>()
         );
 
-        model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()), personWithoutTags);
+        model.setPerson(model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased()), personWithoutTags);
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("friends"))));
-        UntagCommand untagCommand = new UntagCommand(INDEX_SECOND_PERSON, tagsToRemove);
+        UntagCommand untagCommand = new UntagCommand(INDEX_SECOND, tagsToRemove);
         String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT;
 
         CommandTestUtil.assertCommandFailure(untagCommand, model, expectedMessage);

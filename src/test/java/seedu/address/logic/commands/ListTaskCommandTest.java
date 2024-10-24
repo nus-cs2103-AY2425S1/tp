@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalTasks.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +34,7 @@ public class ListTaskCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showTaskAtIndex(model, INDEX_FIRST_TASK); // Filters the task list to show only the first task
+        showTaskAtIndex(model, INDEX_FIRST); // Filters the task list to show only the first task
         CommandResult actualCommandResult = new ListTaskCommand().execute(model);
         assertCommandSuccess(new ListTaskCommand(), model, actualCommandResult, expectedModel);
     }

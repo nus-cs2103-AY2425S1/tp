@@ -33,6 +33,7 @@ public class Messages {
     public static final String MESSAGE_INCOMPLETE_TASK_DESCRIPTION = "Task description is incomplete. "
             + "Expected format: tk/[task type] [task details].";
     public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
+    public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";

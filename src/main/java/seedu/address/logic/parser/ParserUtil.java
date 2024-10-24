@@ -111,6 +111,17 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static String parseDate(String address) throws ParseException {
+        requireNonNull(address);
+        return address.trim();
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -289,12 +300,21 @@ public class ParserUtil {
      * @throws ParseException if the given {@code String} wedding is an invalid wedding name.
      */
     public static Wedding parseWedding(String wedding) throws ParseException {
-        requireNonNull(wedding);
-        String trimmedWedding = wedding.trim();
+        return new Wedding(parseWeddingName(wedding));
+    }
+
+    /**
+     * Parses {@code String} wedding into {@code Wedding} object.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code String} wedding is an invalid wedding name.
+     */
+    public static WeddingName parseWeddingName(String weddingName) throws ParseException {
+        requireNonNull(weddingName);
+        String trimmedWedding = weddingName.trim();
         if (!Wedding.isValidWeddingName(trimmedWedding)) {
             throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
         }
-        return new Wedding(new WeddingName(trimmedWedding));
+        return new WeddingName(trimmedWedding);
     }
 
 

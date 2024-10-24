@@ -37,7 +37,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons, tag, and weddings.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons, tags, weddings and tasks.
      */
     @JsonCreator
     public JsonSerializableAddressBook(

@@ -244,6 +244,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonListByWedding(Predicate<Wedding> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person.getWeddings().stream().anyMatch(predicate));
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

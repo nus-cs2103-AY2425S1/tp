@@ -12,19 +12,24 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.keywordspredicate.DescriptionContainsKeywordsPredicate;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditWeddingDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -56,7 +61,9 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FLORIST = "florist";
     public static final String VALID_TAG_NEIGHBOR = "neighbor";
     public static final String VALID_TAG_PHOTOGRAPHER = "photographer";
-    public static final String VALID_WEDDING_AMY = "Amy's Wedding";
+    public static final String VALID_WEDDING_AMY = VALID_NAME_AMY.split(" ")[0] + "'s Wedding";
+    public static final String VALID_WEDDING_BOB = VALID_NAME_BOB.split(" ")[0] + "'s Wedding";
+    public static final String VALID_WEDDING_CLIVE = VALID_NAME_CLIVE.split(" ")[0] + "'s Wedding";
     public static final String VALID_TASK_TODO = "todo: Different Task";
 
 
@@ -100,6 +107,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditWeddingCommand.EditWeddingDescriptor DESC_WEDDING_AMY;
+    public static final EditWeddingCommand.EditWeddingDescriptor DESC_WEDDING_BOB;
+
     public static final Tag TEST_TAG_FLORIST = new Tag(new TagName(VALID_TAG_FLORIST));
 
     static {
@@ -109,6 +119,13 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    }
+
+    static {
+        DESC_WEDDING_AMY = new EditWeddingDescriptorBuilder().withName(VALID_WEDDING_AMY)
+                .withAddress(VALID_ADDRESS_AMY).build();
+        DESC_WEDDING_BOB = new EditWeddingDescriptorBuilder().withName(VALID_WEDDING_BOB)
+                .withAddress(VALID_ADDRESS_BOB).build();
     }
 
     /**
@@ -154,7 +171,7 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered person list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
@@ -162,9 +179,23 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered wedding list to show only the wedding at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showWeddingAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredWeddingList().size());
+
+        Wedding wedding = model.getFilteredWeddingList().get(targetIndex.getZeroBased());
+        final String[] splitName = wedding.getWeddingName().toString().split("\\s+");
+        model.updateFilteredWeddingList(new WeddingContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
+
+        assertEquals(1, model.getFilteredWeddingList().size());
     }
 
     /**
