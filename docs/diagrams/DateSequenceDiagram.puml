@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DateCommandParser" as DateCommandParser LOGIC_COLOR
+participant "d:DateCommand" as DateCommand LOGIC_COLOR
+participant "e:Person" as Person LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("date 1 d/31/10/2024")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("date 1 d/31/10/2024")
+activate AddressBookParser
+
+create DateCommandParser
+AddressBookParser -> DateCommandParser
+activate DateCommandParser
+
+DateCommandParser --> AddressBookParser
+deactivate DateCommandParser
+
+AddressBookParser -> DateCommandParser : parse("1 d/31/10/2024")
+activate DateCommandParser
+
+create DateCommand
+DateCommandParser -> DateCommand
+activate DateCommand
+
+DateCommand --> DateCommandParser :
+deactivate DateCommand
+
+DateCommandParser --> AddressBookParser : d
+deactivate DateCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DateCommandParser -[hidden]-> AddressBookParser
+destroy DateCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DateCommand : execute(m)
+activate DateCommand
+
+create Person
+DateCommand -> Person
+activate Person
+
+Person --> DateCommand
+deactivate Person
+
+DateCommand -> Model : setPerson(1, e)
+activate Model
+
+Model --> DateCommand
+deactivate Model
+
+create CommandResult
+DateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DateCommand
+deactivate CommandResult
+
+DateCommand --> LogicManager : r
+deactivate DateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
