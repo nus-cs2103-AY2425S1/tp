@@ -70,7 +70,7 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -94,11 +94,13 @@ BuyerList data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-All data are saved automatically as a JSON file within the storage folder. Advanced users are welcome to update data directly by editing that data file.
+All data is saved automatically as a JSON file within the storage folder. Advanced users are welcome to update data directly by editing that data file.
+
+Note: By default, the storage folder is set to a folder named `package` in the home folder.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, the data files will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the json files to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the JSON files to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Switching parser modes : `switch`
@@ -123,7 +125,7 @@ Examples:
 
 Adds a buyer to the buyer list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/<buyer,seller> [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A buyer can have any number of tags (including 0)
@@ -133,22 +135,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 u/buyer`
 * `add n/Betsy Crowe t/friend u/seller e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all buyers : `list`
+### Viewing all buyers : `view`
 
 Shows a list of all buyers in the buyer list.
 
-Format: `list`
-
-<div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.2**
-
-You will be able to view all people or filter by your contact type in the buyer list.
-
-Format: `view [t/<buyer,seller>]`
-
-Examples:
-* `view t/buyer`
-* `view`
-</div>
+Format: `view`
 
 ### Editing a buyer : `edit`
 
@@ -214,17 +205,16 @@ Examples:
 * `add n/Product Pitch i/Product pitch for James at MBS from/2024-10-31 13:00 to/2024-10-31 15:30`
 * `add n/Show buyer 3 houses i/Meet with James Jimes to show him 3 houses that fit his expectations from/2024-10-30 09:30 to/2024-10-30 10:30`
 
-### Listing all meet-ups : `list`
+### Viewing all meet-ups : `view`
 
 Shows a list of all meet-ups in the meet-up list.
 
-Format: `list`
+Format: `view`
 
 <div>
-Format: `list`
 
 Examples:
-* `list` will show you all meet-ups in the meet-up list.
+* `view` will show you all meet-ups in the meet-up list.
 </div>
 
 ### Editing a meet-up : `edit`
@@ -234,7 +224,7 @@ Edits an existing meet-up in the meet-up list.
 Format: `edit INDEX i/MEETUP_INFO from/MEETUP_FROM to/MEETUP_FROM`
 
 <div markdown="span" class="alert alert-primary">
-MEETUP_FROM and MEETUP_TO fields should follow the format YYYY-MM-DD HH:MM
+MEETUP_FROM and MEETUP_TO` fields should follow the format  `YYYY-MM-DD HH:MM`
 </div>
 
 * Edits the meet-up at the specified `INDEX`. The index refers to the index number shown in the displayed meet-up list. The index **must be a positive integer** 1, 2, 3, …​
@@ -281,7 +271,7 @@ Format: `add n/LANDLORD_NAME p/PHONE_NUMBER l/LOCATION a/ASKING_PRICE t/PROPERTY
 Examples:
 * `add n/John p/87152433 l/Paya Lebar a/200,000 t/Condominium`
 
-### Listing all buyers : `view`
+### Viewing all properties : `view`
 
 Shows a list of all properties in the property list.
 
@@ -301,7 +291,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st buyer to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd buyer to be `Betsy Crower`.
 
-### Locating Properites: `find`
+### Locating Properties: `find`
 
 Find property based on its attributes.
 
@@ -316,19 +306,7 @@ Format: `find [n/LANDLORD_NAME] [p/PHONE_NUMBER] [l/LOCATION] [a/ASKING_PRICE] [
 Examples:
 * `find n/John t/HDB 5 Room` returns `john` and `John Doe`
 
-### Deleting a property : `delete`
 
-Deletes the specified property from the property list.
-
-Format: `delete INDEX`
-
-* Deletes the property at the specified `INDEX`.
-* The index refers to the index number shown in the displayed property list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `view` followed by `delete 2` deletes the 2nd property in the property list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st buyer in the results of the `find` command.
 
 <br>_More features coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
