@@ -131,10 +131,10 @@ public class CommandStackTest {
         currCgr = CommandGetterResult.ofEmpty();
         // user presses arrow key up
         currCgr = emptyCommandStack.getEarlierCommandGetterResult(currCgr);
-        assertEquals(currCgr, CommandGetterResult.ofEmpty();
+        assertEquals(currCgr, CommandGetterResult.ofEmpty());
         // user presses arrow key down
         currCgr = emptyCommandStack.getLaterCommandGetterResult(currCgr);
-        assertEquals(currCgr, CommandGetterResult.ofEmpty();
+        assertEquals(currCgr, CommandGetterResult.ofEmpty());
         // user types something
         currCgr = currCgr.updateStringToDisplay(C1).updateIsModified(true);
         // user presses arrow key down - nothing changes
