@@ -32,7 +32,28 @@ public class DeleteTagCommandTest {
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test void execute_invalidNotFoundDeleteTagCommand() {
+    @Test
+    public void execute_validDeleteTagCommandStillInUse_failure() {
+        Tag tagToDelete = model.getFilteredTagList().get(3);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete);
+        String expectedMessage = String.format(
+                DeleteTagCommand.MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED, Messages.format(tagToDelete))
+                + "\n"
+                + Messages.MESSAGE_FORCE_DELETE_TAG;
+        assertCommandFailure(deleteTagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_validDeleteTagCommandStillInUseForce_success() {
+        Tag tagToDelete = model.getFilteredTagList().get(3);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete, true);
+        String expectedMessage = String.format(
+                DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, Messages.format(tagToDelete));
+        assertCommandSuccess(deleteTagCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_invalidNotFoundDeleteTagCommand() {
         Tag tagToDelete = model.getFilteredTagList().get(0);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND,
@@ -45,7 +66,6 @@ public class DeleteTagCommandTest {
 
         assertCommandFailure(expectedDeleteTagCommand, expectedModel, expectedMessage);
     }
-
     @Test
     public void equals() {
         DeleteTagCommand deleteFloristTagCommand = new DeleteTagCommand(FLORIST);
