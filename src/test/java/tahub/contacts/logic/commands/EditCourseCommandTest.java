@@ -19,7 +19,7 @@ import tahub.contacts.testutil.EditCourseDescriptorBuilder;
 
 public class EditCourseCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList());
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList(), null);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -32,7 +32,7 @@ public class EditCourseCommandTest {
         String expectedMessage = String.format(EditCourseCommand.MESSAGE_EDIT_COURSE_SUCCESS, editedCourse);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), new UniqueCourseList());
+                new UserPrefs(), new UniqueCourseList(), null);
         Course editedCourseCopy = new Course(new CourseCode("CS1101S"), new CourseName("Programming Basics"));
         expectedModel.addCourse(editedCourseCopy);
 
@@ -50,7 +50,7 @@ public class EditCourseCommandTest {
         String expectedMessage = String.format(EditCourseCommand.MESSAGE_EDIT_COURSE_SUCCESS, currentCourse);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), new UniqueCourseList());
+                new UserPrefs(), new UniqueCourseList(), null);
         Course currentCourseCopy = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
         expectedModel.addCourse(currentCourseCopy);
 

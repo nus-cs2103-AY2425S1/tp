@@ -40,13 +40,13 @@ class StudentCourseAssociationTest {
                         );
 
     private static final Course TEST_COURSE_1 = new Course(
-            "GA2030",
-            "Computer Gaming II"
+            new CourseCode("GA2030"),
+            new CourseName("Computer Gaming II")
     );
 
     private static final Course TEST_COURSE_2 = new Course(
-            "GA3230",
-            "Design and Analysis of Games"
+            new CourseCode("GA3230"),
+            new CourseName("Design and Analysis of Games")
     );
 
     private static final Tutorial TEST_TUTORIAL_1 = new Tutorial(

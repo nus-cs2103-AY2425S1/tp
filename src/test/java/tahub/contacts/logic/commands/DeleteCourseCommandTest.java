@@ -20,7 +20,7 @@ import tahub.contacts.model.course.UniqueCourseList;
 
 public class DeleteCourseCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList());
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList(), null);
 
     @Test
     public void execute_validCourseCodeUnfilteredList_success() {
@@ -31,7 +31,7 @@ public class DeleteCourseCommandTest {
         String expectedMessage = String.format(DeleteCourseCommand.MESSAGE_DELETE_COURSE_SUCCESS, courseToDelete);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), new UniqueCourseList());
+                new UserPrefs(), new UniqueCourseList(), null);
 
         assertCommandSuccess(deleteCourseCommand, model, expectedMessage, expectedModel);
     }
