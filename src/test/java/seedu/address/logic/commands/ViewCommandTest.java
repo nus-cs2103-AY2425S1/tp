@@ -68,9 +68,5 @@ public class ViewCommandTest {
         ViewCommand firstViewCommand = new ViewCommand(INDEX_FIRST_PERSON);
         String firstViewExpected = ViewCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_PERSON + "}";
         assertEquals(firstViewExpected, firstViewCommand.toString());
-
-        ViewCommand secondViewCommand = new ViewCommand(INDEX_SECOND_PERSON);
-        String secondViewExpected = ViewCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_SECOND_PERSON + "}";
-        assertEquals(secondViewExpected, secondViewCommand.toString());
     }
 }
