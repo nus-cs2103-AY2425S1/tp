@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -36,11 +37,15 @@ public class SupplierSortNameComparatorTest {
     @Test
     public void equals() {
         SupplierSortNameComparator comparator = new SupplierSortNameComparator(new SortOrder("a"));
+        SupplierSortNameComparator sameComparator = new SupplierSortNameComparator(new SortOrder("a"));
+        Object otherObject = new Object();
 
         // same values -> returns true
         assertTrue(comparator.equals(new SupplierSortNameComparator(new SortOrder("a"))));
 
         // same object -> returns true
-        assertTrue(comparator.equals(comparator));
+        assertTrue(comparator.equals(sameComparator));
+        //different object -> returns false
+        assertFalse(comparator.equals(otherObject));
     }
 }
