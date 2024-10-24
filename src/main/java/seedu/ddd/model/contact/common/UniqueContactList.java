@@ -43,32 +43,32 @@ public class UniqueContactList implements Iterable<Contact> {
     /**
      * Returns true if the list contains a client with the id as the given argument.
      */
-    public boolean containsClientId(Id idToCheck) {
-        requireNonNull(idToCheck);
+    public boolean containsClientId(ContactId contactIdToCheck) {
+        requireNonNull(contactIdToCheck);
         return internalList.stream()
                 .filter(contact -> contact instanceof Client)
                 .map(contact -> (Client) contact)
-                .anyMatch(client -> idToCheck.equals(client.getId()));
+                .anyMatch(client -> contactIdToCheck.equals(client.getId()));
     }
 
     /**
      * Returns true if the list contains a vendor with the id as the given argument.
      */
-    public boolean containsVendorId(Id idToCheck) {
-        requireNonNull(idToCheck);
+    public boolean containsVendorId(ContactId contactIdToCheck) {
+        requireNonNull(contactIdToCheck);
         return internalList.stream()
                 .filter(contact -> contact instanceof Vendor)
                 .map(contact -> (Vendor) contact)
-                .anyMatch(vendor -> idToCheck.equals(vendor.getId()));
+                .anyMatch(vendor -> contactIdToCheck.equals(vendor.getId()));
     }
 
     /**
      * Gets a contact from the list.
-     * The contact must already exist in the list.
+     * If contact has not been created or does not exist, a null object will be returned.
      */
-    public Contact get(Id id) {
-        requireNonNull(id);
-        return internalList.stream().filter(contact -> id.equals(contact.getId())).findFirst().get();
+    public Contact get(ContactId contactId) {
+        requireNonNull(contactId);
+        return internalList.stream().filter(contact -> contactId.equals(contact.getId())).findFirst().orElse(null);
     }
 
     /**

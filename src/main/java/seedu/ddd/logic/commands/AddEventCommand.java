@@ -16,7 +16,7 @@ import seedu.ddd.logic.commands.exceptions.CommandException;
 import seedu.ddd.model.AddressBook;
 import seedu.ddd.model.Model;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.vendor.Vendor;
 import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
@@ -40,8 +40,8 @@ public class AddEventCommand extends Command {
     public static final String MESSAGE_INVALID_CLIENT_IDS = "Client ID(s) %s not found in DDD";
     public static final String MESSAGE_INVALID_VENDOR_IDS = "Vendor ID(s) %s not found in DDD";
 
-    private final Set<Id> clientIds;
-    private final Set<Id> vendorIds;
+    private final Set<ContactId> clientContactIds;
+    private final Set<ContactId> vendorContactIds;
     private final Description description;
     private final EventId eventId;
 
@@ -49,14 +49,15 @@ public class AddEventCommand extends Command {
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public AddEventCommand(Set<Id> clientIds, Set<Id> vendorIds, Description description, EventId eventId) {
-        requireNonNull(clientIds);
-        requireNonNull(vendorIds);
+    public AddEventCommand(Set<ContactId> clientContactIds, Set<ContactId> vendorContactIds, Description description,
+            EventId eventId) {
+        requireNonNull(clientContactIds);
+        requireNonNull(vendorContactIds);
         requireNonNull(description);
         requireNonNull(eventId);
 
-        this.clientIds = clientIds;
-        this.vendorIds = vendorIds;
+        this.clientContactIds = clientContactIds;
+        this.vendorContactIds = vendorContactIds;
         this.description = description;
         this.eventId = eventId;
     }
@@ -65,20 +66,20 @@ public class AddEventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Set<Id> invalidClientIds = clientIdsNotInModel(model, this.clientIds);
-        Set<Id> invalidVendorIds = vendorIdsNotInModel(model, this.vendorIds);
+        Set<ContactId> invalidClientContactIds = clientIdsNotInModel(model, this.clientContactIds);
+        Set<ContactId> invalidVendorContactIds = vendorIdsNotInModel(model, this.vendorContactIds);
 
-        if (!invalidClientIds.isEmpty() && !invalidVendorIds.isEmpty()) {
+        if (!invalidClientContactIds.isEmpty() && !invalidVendorContactIds.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_INVALID_CONTACT_IDS,
-                    invalidClientIds, invalidVendorIds));
-        } else if (!invalidClientIds.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_INVALID_CLIENT_IDS, invalidClientIds));
-        } else if (!invalidVendorIds.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_INVALID_VENDOR_IDS, invalidVendorIds));
+                    invalidClientContactIds, invalidVendorContactIds));
+        } else if (!invalidClientContactIds.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_CLIENT_IDS, invalidClientContactIds));
+        } else if (!invalidVendorContactIds.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_VENDOR_IDS, invalidVendorContactIds));
         }
 
-        List<Client> clientsToAdd = clientIds.stream().map(id -> (Client) model.getContact(id)).toList();
-        List<Vendor> vendorsToAdd = vendorIds.stream().map(id -> (Vendor) model.getContact(id)).toList();
+        List<Client> clientsToAdd = clientContactIds.stream().map(id -> (Client) model.getContact(id)).toList();
+        List<Vendor> vendorsToAdd = vendorContactIds.stream().map(id -> (Vendor) model.getContact(id)).toList();
 
         Event eventToAdd = new Event(clientsToAdd, vendorsToAdd,
                 this.description, this.eventId);
@@ -94,12 +95,12 @@ public class AddEventCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(eventToAdd)));
     }
 
-    private Set<Id> clientIdsNotInModel(Model model, Set<Id> ids) {
-        return ids.stream().filter(id -> !model.hasClientId(id)).collect(Collectors.toSet());
+    private Set<ContactId> clientIdsNotInModel(Model model, Set<ContactId> contactIds) {
+        return contactIds.stream().filter(id -> !model.hasClientId(id)).collect(Collectors.toSet());
     }
 
-    private Set<Id> vendorIdsNotInModel(Model model, Set<Id> ids) {
-        return ids.stream().filter(id -> !model.hasVendorId(id)).collect(Collectors.toSet());
+    private Set<ContactId> vendorIdsNotInModel(Model model, Set<ContactId> contactIds) {
+        return contactIds.stream().filter(id -> !model.hasVendorId(id)).collect(Collectors.toSet());
     }
 
     @Override
@@ -114,16 +115,16 @@ public class AddEventCommand extends Command {
         }
 
         AddEventCommand otherAddEventCommand = (AddEventCommand) other;
-        return Objects.equals(clientIds, otherAddEventCommand.clientIds)
-                && Objects.equals(vendorIds, otherAddEventCommand.vendorIds)
+        return Objects.equals(clientContactIds, otherAddEventCommand.clientContactIds)
+                && Objects.equals(vendorContactIds, otherAddEventCommand.vendorContactIds)
                 && Objects.equals(description, otherAddEventCommand.description);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("clientIds", clientIds)
-                .add("vendorIds", vendorIds)
+                .add("clientIds", clientContactIds)
+                .add("vendorIds", vendorContactIds)
                 .add("description", description)
                 .toString();
     }

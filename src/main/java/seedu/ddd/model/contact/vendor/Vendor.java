@@ -1,5 +1,6 @@
 package seedu.ddd.model.contact.vendor;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -7,10 +8,11 @@ import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Id;
 import seedu.ddd.model.contact.common.Name;
 import seedu.ddd.model.contact.common.Phone;
+import seedu.ddd.model.event.common.Event;
 import seedu.ddd.model.tag.Tag;
 
 /**
@@ -28,10 +30,11 @@ public class Vendor extends Contact {
      * @param address A valid address.
      * @param service A valid service.
      * @param tags    A set of tags associated with the client.
-     * @param id      A valid id.
+     * @param contactId      A valid id.
      */
-    public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags, Id id) {
-        super(name, phone, email, address, tags, id);
+    public Vendor(Name name, Phone phone, Email email, Address address, Service service, Set<Tag> tags,
+            ContactId contactId) {
+        super(name, phone, email, address, tags, contactId);
         CollectionUtil.requireAllNonNull(service);
         this.service = service;
     }
@@ -91,5 +94,12 @@ public class Vendor extends Contact {
                 .add("id", this.getId())
                 .toString();
     }
-
+    @Override
+    public void addEvent(Event event) {
+        super.addEvent(event);
+        List<Vendor> vendors = event.getVendors();
+        if (!vendors.contains(this)) {
+            event.addVendor(this);
+        }
+    }
 }

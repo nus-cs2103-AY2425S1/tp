@@ -14,7 +14,7 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.contact.common.Id;
+import seedu.ddd.model.contact.common.ContactId;
 import seedu.ddd.model.event.common.Event;
 
 /**
@@ -129,21 +129,21 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasClientId(Id id) {
-        requireNonNull(id);
-        return addressBook.hasClientId(id);
+    public boolean hasClientId(ContactId contactId) {
+        requireNonNull(contactId);
+        return addressBook.hasClientId(contactId);
     }
 
     @Override
-    public boolean hasVendorId(Id id) {
-        requireNonNull(id);
-        return addressBook.hasVendorId(id);
+    public boolean hasVendorId(ContactId contactId) {
+        requireNonNull(contactId);
+        return addressBook.hasVendorId(contactId);
     }
 
     @Override
-    public Contact getContact(Id id) {
-        requireNonNull(id);
-        return addressBook.getContact(id);
+    public Contact getContact(ContactId contactId) {
+        requireNonNull(contactId);
+        return addressBook.getContact(contactId);
     }
 
     @Override
