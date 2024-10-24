@@ -117,6 +117,7 @@ public class NameAndAddressAndTagsContainsKeywordsPredicate implements Predicate
     public String toString() {
         return new ToStringBuilder(this)
                 .add("nameKeywords", nameKeywords)
-                .add("addressKeywords", addressKeywords).toString();
+                .add("addressKeywords", addressKeywords)
+                .add("tagKeywords", addressKeywords).toString();
     }
 }
