@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.SortIndividualCommand;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -119,6 +120,13 @@ public class Person {
      */
     public void addBuyProperty(Property property) {
         buyingProperties.add(property);
+        int isSupposedToBeMaintainedInSortedState = SortIndividualCommand.getSortStatus();
+        int isSortedFromLowToHigh = SortIndividualCommand.getIsFromLowToHighOrder();
+        if (isSupposedToBeMaintainedInSortedState == 1 && isSortedFromLowToHigh == 1) {
+            buyingProperties.sort((property1, property2) -> property1.getPrice().compareTo(property2.getPrice()));
+        } else if (isSupposedToBeMaintainedInSortedState == 1 && isSortedFromLowToHigh == 0) {
+            buyingProperties.sort((property1, property2) -> property2.getPrice().compareTo(property1.getPrice()));
+        }
     }
 
     /**
@@ -136,6 +144,13 @@ public class Person {
      */
     public void addSellProperty(Property property) {
         sellingProperties.add(property);
+        int isSupposedToBeMaintainedInSortedState = SortIndividualCommand.getSortStatus();
+        int isSortedFromLowToHigh = SortIndividualCommand.getIsFromLowToHighOrder();
+        if (isSupposedToBeMaintainedInSortedState == 1 && isSortedFromLowToHigh == 1) {
+            sellingProperties.sort((property1, property2) -> property1.getPrice().compareTo(property2.getPrice()));
+        } else if (isSupposedToBeMaintainedInSortedState == 1 && isSortedFromLowToHigh == 0) {
+            sellingProperties.sort((property1, property2) -> property2.getPrice().compareTo(property1.getPrice()));
+        }
     }
 
     /**

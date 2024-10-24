@@ -350,3 +350,18 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+/* Style for the tag box */
+.tag-box {
+    -fx-background-color: #008000; /* Dark blue background */
+    -fx-text-fill: white;          /* White text color */
+    -fx-padding: 1px 10px;         /* Reduced padding to minimize size */
+    -fx-border-radius: 8px;       /* Rounded corners */
+    -fx-background-radius: 8px;   /* Rounded background */
+    -fx-font-size: 10px;          /* Font size for tag text */
+    -fx-margin: 20px;              /* Margin for spacing between tags */
+    -fx-min-width: 0;             /* Allow tag box to shrink to fit text */
+    -fx-min-height: 0;            /* Allow tag box to shrink to fit text */
+    -fx-pref-width: -1;           /* Allow width to be determined by content */
+}
+
