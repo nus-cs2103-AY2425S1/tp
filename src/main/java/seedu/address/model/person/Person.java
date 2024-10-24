@@ -79,7 +79,7 @@ public class Person {
     public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone,
             Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
             HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
-        requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
+        requireAllNonNull(name, nric, birthdate, sex, healthServices);
         this.name = name;
         this.nric = nric;
         this.birthdate = birthdate;
