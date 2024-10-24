@@ -47,7 +47,7 @@ public class UnassignPiecesCommandTest {
 
     @Test
     public void execute_validIndexAndPianoPiece_success() {
-        Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student student = model.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Set<PianoPiece> studentFirstPianoPiece = student.getPianoPieces().stream()
                 .limit(1).collect(Collectors.toSet());
 
@@ -55,7 +55,7 @@ public class UnassignPiecesCommandTest {
 
         Student updatedStudent = student.withRemovedPianoPieces(studentFirstPianoPiece);
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
+        expectedModel.setStudent(model.getStudentList().get(0), updatedStudent);
 
         CommandResult commandResult = new CommandResult(String.format(UnassignPiecesCommand.MESSAGE_SUCCESS,
                 Messages.format(studentFirstPianoPiece),
@@ -65,7 +65,7 @@ public class UnassignPiecesCommandTest {
     }
     @Test
     public void execute_validIndexAndNoPianoPiece_success() {
-        Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student student = model.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Set<PianoPiece> studentPieces = student.getPianoPieces();
 
         Set<PianoPiece> noPieces = Set.of();
@@ -73,7 +73,7 @@ public class UnassignPiecesCommandTest {
 
         Student updatedStudent = student.withRemovedPianoPieces(studentPieces);
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
+        expectedModel.setStudent(model.getStudentList().get(0), updatedStudent);
 
         CommandResult commandResult = new CommandResult(String.format(UnassignPiecesCommand.MESSAGE_SUCCESS,
                 Messages.format(studentPieces),
@@ -83,7 +83,7 @@ public class UnassignPiecesCommandTest {
     }
     @Test
     public void execute_indexOutOfBounds_failure() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getStudentList().size() + 1);
         UnassignPiecesCommand command = new UnassignPiecesCommand(outOfBoundsIndex, validPianoPieces);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -91,14 +91,14 @@ public class UnassignPiecesCommandTest {
     @Test
     public void execute_studentNoPianoPiece_throwsCommandException() {
         UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
-        Student student = model.getFilteredStudentList().get(0);
-        model.setStudent(model.getFilteredStudentList().get(0),
+        Student student = model.getStudentList().get(0);
+        model.setStudent(model.getStudentList().get(0),
                 student.withRemovedPianoPieces(student.getPianoPieces()));
         assertCommandFailure(command, model, UnassignPiecesCommand.MESSAGE_NO_PIANO_PIECE_FOUND);
     }
     @Test
     public void execute_allPianoPiecesNotOnStudent_throwsCommandException() {
-        model.setStudent(model.getFilteredStudentList().get(0), ALICE);
+        model.setStudent(model.getStudentList().get(0), ALICE);
         Set<PianoPiece> piecesToRemove = BENSON.getPianoPieces();
         UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, piecesToRemove);
 
@@ -107,7 +107,7 @@ public class UnassignPiecesCommandTest {
     }
     @Test
     public void execute_subsetOfPianoPiecesNotOnStudent_throwsCommandException() {
-        model.setStudent(model.getFilteredStudentList().get(0), ALICE);
+        model.setStudent(model.getStudentList().get(0), ALICE);
         Set<PianoPiece> subsetNotPresent = BENSON.getPianoPieces();
         Set<PianoPiece> piecesToRemove = new HashSet<>(subsetNotPresent);
         piecesToRemove.addAll(ALICE.getPianoPieces());

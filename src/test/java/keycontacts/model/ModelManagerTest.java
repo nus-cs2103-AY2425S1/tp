@@ -90,8 +90,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getStudentList().remove(0));
     }
 
     @Test
@@ -121,11 +121,11 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         FindStudentDescriptor findStudentDescriptor = new FindStudentDescriptorBuilder()
                 .withName(ALICE.getName().fullName).build();
-        modelManager.updateFilteredStudentList(new StudentDescriptorMatchesPredicate(findStudentDescriptor));
+        modelManager.updateStudentList(new StudentDescriptorMatchesPredicate(findStudentDescriptor));
         assertFalse(modelManager.equals(new ModelManager(studentDirectory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        modelManager.updateStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

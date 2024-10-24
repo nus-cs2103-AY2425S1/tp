@@ -168,7 +168,7 @@ Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 Examples:
 * `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
 
-### Locating students by name: `find`
+### Locating students: `find`
 
 Finds students whose personal details match inputs
 
@@ -187,6 +187,23 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Sort students
+
+Sorts students with personal details
+
+Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [g/ASC or DESC]`
+
+* The order of keyword DOES matter. If there are ties in first field, it will use later fields to tie-break.
+* Other prefixes then `n/`, `/p`, `a/`, `g/` will be ignored.
+* Only name, phone number, address, and grade level are valid fields to be sorted against
+* The sorting order must be `ASC` or  `DESC`, and is case-SENSITIVE
+
+To clear the sorting conditions, use command `sort clear`
+
+Examples:
+* `sort n/ASC` sorts the students by name in ascending order.
+* `sort n/ASC g/DESC` sorts the students by name in ascending order, and tie-breaks with grade level in descending order
 
 ### Deleting a student : `delete`
 

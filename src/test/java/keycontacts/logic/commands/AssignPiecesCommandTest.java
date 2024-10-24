@@ -47,11 +47,11 @@ public class AssignPiecesCommandTest {
     @Test
     public void execute_validIndexAndPianoPiece_success() {
         AssignPiecesCommand command = new AssignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
-        Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student student = model.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student updatedStudent = student.withAddedPianoPieces(validPianoPieces);
 
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
+        expectedModel.setStudent(model.getStudentList().get(0), updatedStudent);
 
         CommandResult commandResult = new CommandResult(String.format(AssignPiecesCommand.MESSAGE_SUCCESS,
                 Messages.format(validPianoPieces),
@@ -61,7 +61,7 @@ public class AssignPiecesCommandTest {
     }
     @Test
     public void execute_indexOutOfBounds_failure() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getStudentList().size() + 1);
         AssignPiecesCommand command = new AssignPiecesCommand(outOfBoundsIndex, validPianoPieces);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);

@@ -55,7 +55,7 @@ public class CancelLessonCommandTest {
 
     @Test
     public void execute_indexOutOfBounds_failure() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getStudentList().size() + 1);
         CancelLessonCommand command = new CancelLessonCommand(outOfBoundsIndex, new Date(VALID_DATE),
                 new Time(VALID_START_TIME));
 
@@ -78,12 +78,12 @@ public class CancelLessonCommandTest {
         Date aliceDate = new Date("14-10-2024"); // this must be on the same day as Alice's regular lesson
         Time aliceTime = new Time("12:00");
         CancelLessonCommand command = new CancelLessonCommand(INDEX_FIRST_STUDENT, aliceDate, aliceTime);
-        Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student studentToUpdate = model.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         CancelledLesson cancelledLesson = new CancelledLesson(aliceDate);
         Student expectedUpdatedStudent = studentToUpdate.withAddedCancelledLesson(cancelledLesson);
 
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), expectedUpdatedStudent);
+        expectedModel.setStudent(model.getStudentList().get(0), expectedUpdatedStudent);
 
         CommandResult commandResult = new CommandResult(String.format(CancelLessonCommand.MESSAGE_SUCCESS,
                 aliceDate.toDisplay(), aliceTime, Messages.format(expectedUpdatedStudent)));

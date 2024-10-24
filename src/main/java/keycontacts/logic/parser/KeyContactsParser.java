@@ -21,6 +21,7 @@ import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.commands.MakeupLessonCommand;
 import keycontacts.logic.commands.ScheduleCommand;
+import keycontacts.logic.commands.SortCommand;
 import keycontacts.logic.commands.UnassignPiecesCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 
@@ -63,6 +64,7 @@ public class KeyContactsParser {
         case ClearCommand.COMMAND_WORD -> new ClearCommand();
         case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
         case ListCommand.COMMAND_WORD -> new ListCommand();
+        case SortCommand.COMMAND_WORD -> new SortCommandParser().parse(arguments);
         case ExitCommand.COMMAND_WORD -> new ExitCommand();
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
         case MakeupLessonCommand.COMMAND_WORD -> new MakeupCommandParser().parse(arguments);

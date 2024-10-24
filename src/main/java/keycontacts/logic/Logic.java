@@ -32,7 +32,7 @@ public interface Logic {
     ReadOnlyStudentDirectory getStudentDirectory();
 
     /** Returns an unmodifiable view of the filtered list of students */
-    ObservableList<Student> getFilteredStudentList();
+    ObservableList<Student> getStudentList();
 
     /**
      * Returns the user prefs' student directory file path.

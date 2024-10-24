@@ -58,9 +58,9 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("e").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.updateStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(5, model.getFilteredStudentList().size());
+        assertEquals(5, model.getStudentList().size());
     }
 
     @Test
@@ -69,9 +69,9 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("Carl Kurz").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.updateStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -89,9 +89,9 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("Alice Pauline").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.updateStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
     @Test
@@ -100,9 +100,9 @@ public class FindCommandTest {
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("Ku").build();
         StudentDescriptorMatchesPredicate predicate = new StudentDescriptorMatchesPredicate(descriptor);
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredStudentList(predicate);
+        expectedModel.updateStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(2, model.getFilteredStudentList().size());
+        assertEquals(2, model.getStudentList().size());
     }
 
     @Test
