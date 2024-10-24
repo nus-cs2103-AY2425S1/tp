@@ -1,20 +1,18 @@
 package careconnect.storage;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import careconnect.model.person.AppointmentDate;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Person;
@@ -144,7 +142,7 @@ class JsonAdaptedPerson {
             modelAppointmentDate = new AppointmentDate();
         } else {
             String trimmedDateString = appointmentDate.trim();
-            if(!AppointmentDate.isValidAppointmentDateString(trimmedDateString)) {
+            if (!AppointmentDate.isValidAppointmentDateString(trimmedDateString)) {
                 throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS);
             }
             modelAppointmentDate = new AppointmentDate(trimmedDateString);

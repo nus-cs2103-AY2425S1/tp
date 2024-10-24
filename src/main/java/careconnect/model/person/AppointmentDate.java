@@ -1,4 +1,5 @@
 package careconnect.model.person;
+
 import static java.util.Objects.requireNonNull;
 
 import java.text.SimpleDateFormat;
@@ -7,7 +8,6 @@ import java.util.Optional;
 
 import careconnect.commons.util.AppUtil;
 import careconnect.logic.parser.exceptions.ParseException;
-import careconnect.model.log.Log;
 
 /**
  * Represents a Person's Appointment Date in the address book.
@@ -18,7 +18,7 @@ public class AppointmentDate {
             "Appointment Dates must be valid and in the format yyyy-MM-dd";
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    public static final String VALIDATION_REGEX = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";;
+    public static final String VALIDATION_REGEX = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
 
     public final Optional<Date> date;
 
@@ -39,15 +39,15 @@ public class AppointmentDate {
         }
     }
 
-    public Optional<Date> getDate() {
-        return date;
-    }
-
     /**
      * Constructs an empty {@code AppointmentDate}.
      */
     public AppointmentDate() {
         this.date = Optional.empty();
+    }
+
+    public Optional<Date> getDate() {
+        return date;
     }
 
     public static boolean isValidAppointmentDateString(String test) {

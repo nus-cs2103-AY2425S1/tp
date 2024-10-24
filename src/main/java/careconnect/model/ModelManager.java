@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import careconnect.model.person.AppointmentDate;
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
 import careconnect.commons.util.CollectionUtil;

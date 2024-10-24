@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import careconnect.commons.exceptions.IllegalValueException;
 import careconnect.model.person.Address;
-import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Phone;

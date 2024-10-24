@@ -14,11 +14,11 @@ import careconnect.commons.util.StringUtil;
 import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.log.Log;
 import careconnect.model.person.Address;
+import careconnect.model.person.AppointmentDate;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
 import careconnect.model.person.Phone;
 import careconnect.model.tag.Tag;
-import careconnect.model.person.AppointmentDate;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -162,7 +162,7 @@ public class ParserUtil {
             return new AppointmentDate();
         }
         String trimmedDateString = dateString.trim();
-        if(!AppointmentDate.isValidAppointmentDateString(trimmedDateString)) {
+        if (!AppointmentDate.isValidAppointmentDateString(trimmedDateString)) {
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
         }
         return new AppointmentDate(trimmedDateString);

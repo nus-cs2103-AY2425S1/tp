@@ -4,8 +4,6 @@ import static careconnect.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -59,7 +57,8 @@ public class SetAppointmentCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToSetAppointment} and
      * appointment set
      */
-    private static Person createPersonWithSetAppointment(Person personToSetAppointment, AppointmentDate appointmentDate) {
+    private static Person createPersonWithSetAppointment(
+            Person personToSetAppointment, AppointmentDate appointmentDate) {
         requireAllNonNull(personToSetAppointment, appointmentDate);
 
         Name name = personToSetAppointment.getName();
