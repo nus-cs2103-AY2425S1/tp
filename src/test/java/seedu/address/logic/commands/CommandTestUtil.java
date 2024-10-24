@@ -14,12 +14,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.eventcommands.EditEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.personcommands.EditPersonCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
 import seedu.address.model.types.common.NameContainsKeywordsPredicate;
+import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -37,6 +41,16 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_NAME_ART_EXHIBIT = "Art Exhibit";
+    public static final String VALID_NAME_BOOK_FAIR = "Book Fair";
+    public static final String VALID_ADDRESS_ART_EXHIBIT = "101, Art Street";
+    public static final String VALID_ADDRESS_BOOK_FAIR = "45, Library Lane";
+    public static final String VALID_START_TIME_ART_EXHIBIT = "2024-11-15 10:00";
+    public static final String VALID_START_TIME_BOOK_FAIR = "2024-11-20 09:00";
+    public static final String VALID_TAG_LITERATURE = "literature";
+    public static final String VALID_TAG_CULTURE = "culture";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -60,6 +74,8 @@ public class CommandTestUtil {
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditEventCommand.EditEventDescriptor DESC_ART_EXHIBIT;
+    public static final EditEventCommand.EditEventDescriptor DESC_BOOK_FAIR;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -68,6 +84,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_ART_EXHIBIT = new EditEventDescriptorBuilder().withName(VALID_NAME_ART_EXHIBIT)
+                .withAddress(VALID_ADDRESS_ART_EXHIBIT).withStartTime(VALID_START_TIME_ART_EXHIBIT)
+                .withTags(VALID_TAG_CULTURE).build();
+        DESC_BOOK_FAIR = new EditEventDescriptorBuilder().withName(VALID_NAME_BOOK_FAIR)
+                .withAddress(VALID_ADDRESS_BOOK_FAIR).withStartTime(VALID_START_TIME_BOOK_FAIR)
+                .withTags(VALID_TAG_CULTURE, VALID_TAG_LITERATURE).build();
     }
 
     /**
@@ -124,6 +146,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+    /**
+     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        final String[] splitName = event.getName().fullName.split("\\s+");
+        model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredEventList().size());
     }
 
 }
