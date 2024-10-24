@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -101,12 +102,15 @@ public class EditPublicAddressCommand extends Command {
         }
 
         EditPublicAddressCommand otherCommand = (EditPublicAddressCommand) other;
-        return super.equals(otherCommand);
+        return index.equals(otherCommand.index) && publicAddress.equals(otherCommand.publicAddress);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("publicAddress", publicAddress)
+                .toString();
     }
 
 }
