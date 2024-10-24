@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ViewPersonCard viewPersonCard;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private VBox personList;
@@ -123,13 +124,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        // personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getSortedPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -222,6 +224,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isView()) {
                 openViewPersonCard(commandResult.getViewPerson());
+            }
+
+            if (commandResult.isProfileSwitched()) {
+                statusBarFooter.setSaveLocationStatus(logic.getAddressBookFilePath());
             }
 
             return commandResult;

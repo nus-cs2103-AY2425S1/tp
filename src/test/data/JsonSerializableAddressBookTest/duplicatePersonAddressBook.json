@@ -4,11 +4,13 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "telegram": "alicePauline",
-    "tags": [  ]
+    "tags": [  ],
+    "favouriteStatus": "NOT_FAVOURITE"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "telegram": "alicePauline"
+    "telegram": "alicePauline",
+    "favouriteStatus": "NOT_FAVOURITE"
   } ]
 }

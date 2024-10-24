@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,7 +35,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM, PREFIX_ROLE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
+                        PREFIX_ROLE, PREFIX_FAVOURITE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -47,8 +50,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Set<Attendance> emptyAttendanceList = new HashSet<>();
+        FavouriteStatus isFavourite = argMultimap.getValue(PREFIX_FAVOURITE).isPresent()
+                ? FavouriteStatus.FAVOURITE
+                : FavouriteStatus.NOT_FAVOURITE;
 
-        Person person = new Person(name, phone, email, telegram, roleList, emptyAttendanceList);
+        Person person = new Person(name, phone, email, telegram, roleList, emptyAttendanceList, isFavourite);
 
         return new AddCommand(person);
     }

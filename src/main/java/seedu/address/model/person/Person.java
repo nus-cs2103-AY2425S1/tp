@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 
 /**
@@ -24,6 +25,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Telegram telegram;
+    private final FavouriteStatus isFavourite;
 
     // Data fields
     private final Set<Role> roles = new HashSet<>();
@@ -33,14 +35,15 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Telegram telegram,
-                  Set<Role> roles, Set<Attendance> attendance) {
-        requireAllNonNull(name, phone, email, telegram, roles);
+                  Set<Role> roles, Set<Attendance> attendance, FavouriteStatus isFavourite) {
+        requireAllNonNull(name, phone, email, telegram, roles, isFavourite);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.roles.addAll(roles);
         this.attendance.addAll(attendance);
+        this.isFavourite = isFavourite;
     }
 
     public Name getName() {
@@ -59,12 +62,25 @@ public class Person {
         return telegram;
     }
 
+    public FavouriteStatus getFavouriteStatus() {
+        return isFavourite;
+    }
+
     /**
      * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Role> getRoles() {
         return Collections.unmodifiableSet(roles);
+    }
+
+    /**
+     * Check if Person is a Member
+     * @return true if Person has a role "Member"
+     */
+    public boolean isMember() {
+        Set<Role> roles = this.getRoles();
+        return roles.contains(new Member());
     }
 
     /**
@@ -94,15 +110,14 @@ public class Person {
             StringBuilder r = new StringBuilder("| ");
             Set<Role> roles = this.getRoles();
             for (Role role : roles) {
-                r.append(" " + role + " |");
+                r.append(role + " | ");
             }
             return r.toString();
-            // code for this method is currently not very elegant...
-        } else if (c.equals(Attendance.class)) {
+        } else if (this.isMember() && c.equals(Attendance.class)) {
             StringBuilder a = new StringBuilder("| ");
             Set<Attendance> sessions = this.getAttendance();
             for (Attendance sesh : sessions) {
-                a.append(" " + sesh + " |");
+                a.append(sesh + " | ");
             }
             return a.toString();
         } else {
@@ -120,8 +135,10 @@ public class Person {
         Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES")
                 ? field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n"
                 : field.getName().toUpperCase().equals("ATTENDANCE")
-                        ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
-                        : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
+                ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
+                : field.getName().toUpperCase().equals("ISFAVOURITE")
+                ? "> " + this.isFavourite + " CONTACT\n"
+                : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
         return contactInfo.toString();
     }
 

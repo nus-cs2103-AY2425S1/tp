@@ -12,6 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Person;
 
 /**
@@ -56,17 +57,17 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        if (person.getFavouriteStatus().equals(FavouriteStatus.FAVOURITE)) {
+            cardPane.getStyleClass().add("favCardPane");
+        } else {
+            cardPane.getStyleClass().remove("favCardPane");
+        }
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         telegram.setText("@" + person.getTelegram().value);
         email.setText(person.getEmail().value);
-        boolean isMember = true; //to remove
-        if (isMember) { //to change when Member role added
-            attendance.setVisible(true);
-        } else {
-            attendance.setVisible(false);
-        }
+        attendance.setVisible(person.isMember());
         attendanceDisplay = this.hasAttendedToday(person)
                 ? new SimpleStringProperty(" " + String.valueOf((char) 9745))
                 : new SimpleStringProperty(" " + String.valueOf((char) 9744));

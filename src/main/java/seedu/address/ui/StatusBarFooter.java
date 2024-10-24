@@ -25,4 +25,11 @@ public class StatusBarFooter extends UiPart<Region> {
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
+    /**
+     * Update the status bar footer when a profile is switched.
+     * @param saveLocation the data file path that will display on the footer
+     */
+    public void setSaveLocationStatus(Path saveLocation) {
+        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+    }
 }

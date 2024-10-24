@@ -7,11 +7,15 @@ import seedu.address.model.Model;
 import seedu.address.model.person.RoleIsMemberPredicate;
 
 /**
- * List all members of cca (people with member role) in address book
+ * Lists all members of the cca (people with member role) in address book
  */
 public class ListAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "attendance";
     public static final String COMMAND_ALIAS = "atd";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists all members of the cca in the system.\n"
+            + "Parameters: None\n"
+            + "Example: " + COMMAND_WORD;
 
     private static final RoleIsMemberPredicate memberFilter = new RoleIsMemberPredicate();
 

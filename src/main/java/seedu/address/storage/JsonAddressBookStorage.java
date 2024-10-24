@@ -31,6 +31,10 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         return filePath;
     }
 
+    public void updateAddressBookFilePath(Path filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(filePath);

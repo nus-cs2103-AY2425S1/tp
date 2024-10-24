@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NONFAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -23,6 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -38,17 +41,19 @@ public class EditCommand extends Command {
     public static final String COMMAND_ALIAS = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
-            + "[" + PREFIX_ROLE + "ROLE]...\n"
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_FAVOURITE + " or " + PREFIX_NONFAVOURITE + " (NOT BOTH)]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_FAVOURITE;
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -72,7 +77,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -103,8 +108,11 @@ public class EditCommand extends Command {
         Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         Set<Attendance> attendance = personToEdit.getAttendance();
+        FavouriteStatus updatedFavouriteStatus = editPersonDescriptor.getIsFavouriteStatus()
+                .orElse(personToEdit.getFavouriteStatus());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedRoles, attendance);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedRoles,
+                attendance, updatedFavouriteStatus);
     }
 
     @Override
@@ -140,6 +148,7 @@ public class EditCommand extends Command {
         private Email email;
         private Telegram telegram;
         private Set<Role> roles;
+        private FavouriteStatus isFavouriteStatus;
 
         public EditPersonDescriptor() {}
 
@@ -153,13 +162,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTelegram(toCopy.telegram);
             setRoles(toCopy.roles);
+            setFavouriteStatus(toCopy.isFavouriteStatus);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, roles);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, roles, isFavouriteStatus);
         }
 
         public void setName(Name name) {
@@ -194,16 +204,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(telegram);
         }
 
-        /*
-        public void setRoles(List<Role> roles) {
-            this.roles = roles;
+        public void setFavouriteStatus(FavouriteStatus isFavouriteStatus) {
+            this.isFavouriteStatus = isFavouriteStatus;
         }
 
-        public Optional<List<Role>> getRoles() {
-            return Optional.ofNullable(roles);
+        public Optional<FavouriteStatus> getIsFavouriteStatus() {
+            return Optional.ofNullable(isFavouriteStatus);
         }
-
-         */
 
         /**
          * Sets {@code roles} to this object's {@code roles}.
@@ -238,7 +245,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
-                    && Objects.equals(roles, otherEditPersonDescriptor.roles);
+                    && Objects.equals(roles, otherEditPersonDescriptor.roles)
+                    && Objects.equals(isFavouriteStatus, otherEditPersonDescriptor.isFavouriteStatus);
         }
 
         @Override
@@ -249,6 +257,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("telegram", telegram)
                     .add("roles", roles)
+                    .add("isFavouriteStatus", isFavouriteStatus)
                     .toString();
         }
     }

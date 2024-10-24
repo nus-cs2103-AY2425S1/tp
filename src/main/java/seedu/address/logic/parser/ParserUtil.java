@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.SortOrder;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -14,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.profile.Profile;
 import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 
@@ -140,5 +142,31 @@ public class ParserUtil {
             roleSet.add(parseRole(roleName));
         }
         return roleSet;
+    }
+
+    /**
+     * Parses {@code String profile} into a {@code Profile}
+     */
+    public static Profile parseProfileName(String profileName) throws ParseException {
+        requireNonNull(profileName);
+        String trimmedProfileName = profileName.trim();
+        if (!Profile.isValidProfile(trimmedProfileName)) {
+            throw new ParseException(Profile.MESSAGE_CONSTRAINTS);
+        }
+        return new Profile(trimmedProfileName);
+    }
+
+    /**
+     * Parses {@code order} into an appropriate {@code SortOrder}
+     */
+    public static SortOrder parseSortOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        for (SortOrder s : SortOrder.values()) {
+            if (trimmedOrder.equals(s.keyword)) {
+                return s;
+            }
+        }
+        throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
     }
 }

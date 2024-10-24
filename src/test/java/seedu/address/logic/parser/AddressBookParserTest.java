@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -24,9 +25,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.IsFavouritePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
+import seedu.address.model.person.TelegramContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -82,7 +85,9 @@ public class AddressBookParserTest {
                         .collect(Collectors.joining(" ")));
 
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords),
-                new RoleContainsKeywordsPredicate(List.of())), command);
+                new RoleContainsKeywordsPredicate(List.of()),
+                new TelegramContainsKeywordsPredicate(List.of()),
+                new IsFavouritePredicate(Optional.empty())), command);
     }
 
 

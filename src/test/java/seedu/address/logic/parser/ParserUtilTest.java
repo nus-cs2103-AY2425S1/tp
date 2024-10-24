@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.SortOrder;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -36,6 +37,11 @@ public class ParserUtilTest {
 
     private static final String WHITESPACE = " \t\r\n";
 
+    private static final String ASCENDING = "asc";
+    private static final String DESCENDING = "desc";
+    private static final String ORIGINAL = "og";
+    private static final String INVALID_ORDER = "invalid";
+
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
@@ -44,7 +50,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -192,5 +198,22 @@ public class ParserUtilTest {
         Set<Role> expectedRoleSet = new HashSet<Role>(Arrays.asList(new Role(VALID_ROLE_1), new Role(VALID_ROLE_2)));
 
         assertEquals(expectedRoleSet, actualRoleSet);
+    }
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(null));
+    }
+
+    @Test
+    public void parseSortOrder_validValue_returnsSortOrder() throws Exception {
+        assertEquals(SortOrder.ASC, ParserUtil.parseSortOrder(ASCENDING));
+        assertEquals(SortOrder.DESC, ParserUtil.parseSortOrder(DESCENDING));
+        assertEquals(SortOrder.OG, ParserUtil.parseSortOrder(ORIGINAL));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder(INVALID_ORDER));
     }
 }
