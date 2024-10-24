@@ -40,6 +40,24 @@ public class InterviewScoreTest {
     }
 
     @Test
+    public void isSameInterviewScore() {
+        InterviewScore interviewScore = new InterviewScore("5.0");
+
+        // same values -> returns true
+        assertTrue(interviewScore.isSameInterviewScore(new InterviewScore("5.0")));
+
+        // same object -> returns true
+        assertTrue(interviewScore.isSameInterviewScore(interviewScore));
+
+        // null -> returns false
+        assertFalse(interviewScore.isSameInterviewScore(null));
+
+        // different values -> returns false
+        assertFalse(interviewScore.isSameInterviewScore(new InterviewScore("4.5")));
+    }
+
+
+    @Test
     public void equals() {
         InterviewScore interviewScore = new InterviewScore("5.5");
 

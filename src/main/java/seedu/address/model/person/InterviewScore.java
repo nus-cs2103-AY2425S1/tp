@@ -13,7 +13,7 @@ public class InterviewScore {
             "Error: Invalid interview score. Please enter a valid interview score from 0.0 to 10.0, "
                     + "with a maximum of 1 decimal place.";
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the interview score must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      * Interview scores can only range from 0.0 to 10.0 with a maximum of a single decimal place.
      */
