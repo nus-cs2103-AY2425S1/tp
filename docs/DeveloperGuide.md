@@ -168,7 +168,7 @@ Above shows the sequence diagram when a user wants to add an event.
 7. Logic Manager calls the execute method of the AddEventCommand object
 8. AddEventCommand object calls the addEvent method of eventManager
 9. AddEventCommand object returns a CommandResult object to Logic Manager
-10. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
