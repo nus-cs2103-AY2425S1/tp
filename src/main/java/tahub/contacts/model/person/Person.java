@@ -1,5 +1,6 @@
 package tahub.contacts.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -43,6 +44,24 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates a {@link Person} with generic details, taking in only a {@link MatriculationNumber}.
+     *
+     * @param matricNumber Matriculation number.
+     * @return Person.
+     */
+    public static Person genericFromMatricNumber(MatriculationNumber matricNumber) {
+        requireNonNull(matricNumber);
+        return new Person(
+                matricNumber,
+                new Name("generic"),
+                new Phone("99999999"),
+                new Email("local@domain.tld"),
+                new Address("404 Address Not Found"),
+                new HashSet<>()
+        );
     }
 
     public MatriculationNumber getMatricNumber() {

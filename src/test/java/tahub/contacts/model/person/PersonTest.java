@@ -16,6 +16,7 @@ import static tahub.contacts.testutil.TypicalPersons.BOB;
 import java.util.HashSet;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.logic.Logic;
@@ -38,6 +39,16 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    @DisplayName("Generic MatricNumber-only factory method genericFromMatricNumber() returns "
+            + "Persons with correct matric Number")
+    public void genericFromMatricNumber_validMatricNumberInput_createdObjectHasCorrectMatricNumber() {
+        MatriculationNumber mn1 = new MatriculationNumber("A0000000X");
+        MatriculationNumber mn2 = new MatriculationNumber("A1234567X");
+        assertEquals(Person.genericFromMatricNumber(mn1).getMatricNumber(), mn1);
+        assertEquals(Person.genericFromMatricNumber(mn2).getMatricNumber(), mn2);
     }
 
     @Test
