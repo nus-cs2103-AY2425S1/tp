@@ -51,4 +51,24 @@ public class TimeTest {
         // different values -> returns false
         assertFalse(time.equals(new Time("10:00")));
     }
+
+    @Test
+    public void isAfter() {
+        Time time = new Time("12:00");
+
+        assertFalse(time.isAfter(time));
+        assertFalse(time.isAfter(new Time("12:00")));
+        assertFalse(time.isAfter(new Time("12:30")));
+        assertTrue(time.isAfter(new Time("11:30")));
+    }
+
+    @Test
+    public void isBefore() {
+        Time time = new Time("12:00");
+
+        assertFalse(time.isBefore(time));
+        assertFalse(time.isBefore(new Time("12:00")));
+        assertFalse(time.isBefore(new Time("11:30")));
+        assertTrue(time.isBefore(new Time("12:30")));
+    }
 }

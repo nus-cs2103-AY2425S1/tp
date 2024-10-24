@@ -1,4 +1,4 @@
-{
+    {
   "_comment": "Student directory save file which contains the same Student values as in TypicalStudents#getTypicalStudentDirectory()",
   "students" : [ {
     "name" : "Alice Pauline",
@@ -14,13 +14,9 @@
     },
     "cancelledLessons": [ "14-10-2024" ],
     "makeupLessons": [{
-      "lessonDate": "30-09-2021",
-      "startTime": "12:00",
-      "endTime": "14:00"
-    }, {
-      "lessonDate": "01-10-2021",
-      "startTime": "12:00",
-      "endTime": "14:00"
+      "lessonDate": "14-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
     }]
   }, {
     "name" : "Benson Meier",
@@ -31,14 +27,14 @@
     "pianoPieces": [ "Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2" ],
     "regularLesson": {
       "lessonDay": "TUESDAY",
-      "startTime": "13:00",
-      "endTime": "15:00"
+      "startTime": "12:00",
+      "endTime": "14:00"
     },
     "cancelledLessons": [ "15-10-2024" ],
     "makeupLessons": [{
-      "lessonDate": "01-10-2021",
-      "startTime": "12:00",
-      "endTime": "14:00"
+      "lessonDate": "15-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
     }]
   }, {
     "name" : "Carl Kurz",
@@ -49,14 +45,14 @@
     "pianoPieces": [ "Clair de Lune", "Le Sapin Op. 75 No. 5" ],
     "regularLesson": {
       "lessonDay": "WEDNESDAY",
-      "startTime": "18:00",
-      "endTime": "19:00"
+      "startTime": "12:00",
+      "endTime": "14:00"
     },
     "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "02-10-2021",
-      "startTime": "18:00",
-      "endTime": "19:00"
+      "lessonDate": "16-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
     }]
   }, {
     "name" : "Daniel Meier",
@@ -67,14 +63,14 @@
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "THURSDAY",
-      "startTime": "09:00",
-      "endTime": "10:00"
+      "startTime": "12:00",
+      "endTime": "14:00"
     },
     "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "03-10-2021",
-      "startTime": "09:00",
-      "endTime": "10:00"
+      "lessonDate": "17-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
     }]
   }, {
     "name" : "Elle Meyer",
@@ -85,13 +81,13 @@
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "FRIDAY",
-      "startTime": "11:00",
-      "endTime": "12:00"
+      "startTime": "12:00",
+      "endTime": "14:00"
     },
     "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "04-10-2021",
-      "startTime": "11:00",
+      "lessonDate": "18-10-2024",
+      "startTime": "10:00",
       "endTime": "12:00"
     }]
   }, {
@@ -103,14 +99,14 @@
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "SATURDAY",
-      "startTime": "20:00",
-      "endTime": "21:00"
+      "startTime": "12:00",
+      "endTime": "14:00"
     },
     "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "05-10-2021",
-      "startTime": "20:00",
-      "endTime": "21:00"
+      "lessonDate": "19-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
     }]
   }, {
     "name" : "George Best",
@@ -121,14 +117,14 @@
     "pianoPieces": [ ],
     "regularLesson": {
       "lessonDay": "SUNDAY",
-      "startTime": "15:00",
-      "endTime": "17:00"
+      "startTime": "12:00",
+      "endTime": "14:00"
     },
     "cancelledLessons": [ ],
     "makeupLessons": [{
-      "lessonDate": "06-10-2021",
-      "startTime": "15:00",
-      "endTime": "17:00"
+      "lessonDate": "20-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
     }]
   } ]
 }

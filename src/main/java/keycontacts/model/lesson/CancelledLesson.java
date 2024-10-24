@@ -64,4 +64,5 @@ public class CancelledLesson {
                 .map(string -> new CancelledLesson(new Date(string)))
                 .collect(Collectors.toSet());
     }
+
 }

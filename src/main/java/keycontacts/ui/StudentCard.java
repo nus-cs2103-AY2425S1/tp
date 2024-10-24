@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.student.Student;
 
@@ -102,7 +103,7 @@ public class StudentCard extends UiPart<Region> {
      */
     private String formatMakeupLessons(Student student) {
         List<MakeupLesson> sortedLessons = student.getMakeupLessons().stream()
-                .sorted(Comparator.comparing(MakeupLesson::getLessonDate))
+                .sorted(Comparator.comparing(MakeupLesson::getLessonDate).thenComparing(Lesson::getStartTime))
                 .collect(Collectors.toList());
 
         if (sortedLessons.isEmpty()) {

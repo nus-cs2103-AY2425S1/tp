@@ -2,10 +2,12 @@ package keycontacts.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import keycontacts.commons.core.GuiSettings;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 
@@ -80,6 +82,11 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     /**
+     * Returns a {@Code ClashResult} object containing details of lesson clashes.
+     */
+    Set<Lesson> getClashingLessons();
+
+    /**
      * Gets all students in the student directory who are part of {@code targetGroup}
      */
     ArrayList<Student> getStudentsInGroup(Group targetGroup);
@@ -92,4 +99,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
 }

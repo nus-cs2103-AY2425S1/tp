@@ -93,4 +93,15 @@ public class RegularLessonTest {
         assertFalse(regularLesson.isOnDayAndTime(lessonDay, new Time("09:00")));
         assertFalse(regularLesson.isOnDayAndTime(new Day("Sunday"), lessonTime));
     }
+
+    @Test
+    public void isClashing() {
+        RegularLesson regularLesson = ALICE.getRegularLesson();
+        MakeupLesson makeupLesson = new MakeupLesson(new Date("14-10-2024"), new Time("14:00"), new Time("16:00"));
+        MakeupLesson aliceMakeupLesson = ALICE.getMakeupLessons().stream().findFirst().get();
+        assertFalse(regularLesson.isClashing(ALICE.getRegularLesson()));
+        assertFalse(regularLesson.isClashing(makeupLesson));
+        assertFalse(makeupLesson.isClashing(regularLesson));
+        assertFalse(regularLesson.isClashing(aliceMakeupLesson));
+    }
 }

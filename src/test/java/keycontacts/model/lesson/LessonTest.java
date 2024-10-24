@@ -60,5 +60,15 @@ public class LessonTest {
         private LessonStub(Time startTime, Time endTime) {
             super(startTime, endTime);
         }
+
+        @Override
+        public boolean isClashing(RegularLesson other) {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        @Override
+        public boolean isClashing(MakeupLesson other) {
+            throw new AssertionError("This method should not be called!");
+        }
     }
 }

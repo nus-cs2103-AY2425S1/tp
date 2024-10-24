@@ -8,12 +8,15 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.Messages;
 import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
+import keycontacts.model.lesson.Lesson;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.student.Student;
 
@@ -39,7 +42,7 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SCHEDULE_LESSON_SUCCESS = "Scheduled lesson at %1$s for student: %2$s";
     public static final String MESSAGE_LESSON_UNCHANGED = "Lesson for the student is already at that time!";
-    public static final String MESSAGE_LESSON_CLASH = "There is a clashing lesson at that time!";
+    public static final String MESSAGE_LESSON_CLASH = "Could not create lesson due to clash with lesson: %1$s.";
 
     private final Index index;
     private final RegularLesson regularLesson;
@@ -63,15 +66,26 @@ public class ScheduleCommand extends Command {
         }
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
-        Student updatedStudent = studentToUpdate.withRegularLesson(regularLesson);
-        if (studentToUpdate.equals(updatedStudent)) {
+        if (studentToUpdate.getRegularLessonOptional().equals(Optional.ofNullable(regularLesson))) {
             throw new CommandException(MESSAGE_LESSON_UNCHANGED);
         }
-        model.setStudent(studentToUpdate, updatedStudent);
+        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(studentToUpdate.getGroup());
 
-        ArrayList<Student> studentsInGroup = model.getStudentsInGroup(updatedStudent.getGroup());
+        // try to update first
         for (Student groupStudent : studentsInGroup) {
-            model.setStudent(groupStudent, groupStudent.withRegularLesson(regularLesson));
+            model.setStudent(groupStudent, groupStudent.withRegularLesson(regularLesson).withoutCancelledLessons());
+        }
+
+        Set<Lesson> clashingLessons = model.getClashingLessons();
+        if (!clashingLessons.isEmpty()) { // if there are clashing lessons
+            // revert all updates
+            for (Student groupStudent : studentsInGroup) {
+                model.setStudent(groupStudent.withRegularLesson(regularLesson).withoutCancelledLessons(), groupStudent);
+            }
+            throw new CommandException(String.format(MESSAGE_LESSON_CLASH,
+                    clashingLessons.stream()
+                            .filter(lesson -> lesson != regularLesson)
+                            .findFirst().get().toDisplay()));
         }
 
         return new CommandResult(String.format(MESSAGE_SCHEDULE_LESSON_SUCCESS, regularLesson.toDisplay(),
