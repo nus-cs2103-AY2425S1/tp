@@ -1,6 +1,8 @@
-package seedu.address.model.person;
+package seedu.address.model.person.sorters;
 
 import java.util.Comparator;
+
+import seedu.address.model.person.Person;
 
 /**
  * Sorts persons such that VIPs appear first.

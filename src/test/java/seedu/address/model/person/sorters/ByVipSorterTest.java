@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.sorters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
 
 
