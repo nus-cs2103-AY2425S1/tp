@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
 /**
@@ -8,7 +11,7 @@ import java.util.Objects;
 public class Note {
 
     public static final String MESSAGE_CONSTRAINTS = "Notes should be alphanumeric.";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    public static final String VALIDATION_REGEX = "(?!^ +$)[\\p{Alnum} ]+";
 
     private String note;
 
@@ -18,6 +21,8 @@ public class Note {
      * @param note A valid note.
      */
     public Note(String note) {
+        requireNonNull(note);
+        checkArgument(isValidNoteName(note), MESSAGE_CONSTRAINTS);
         this.note = note;
     }
 
