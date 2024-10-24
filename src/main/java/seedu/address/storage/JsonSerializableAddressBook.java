@@ -63,7 +63,7 @@ class JsonSerializableAddressBook {
         }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            //addressBook is passed to person to get the wedding reference
+            //wedding list is passed to person to get the wedding reference
             Person person = jsonAdaptedPerson.toModelType(addressBook.getWeddingList());
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);

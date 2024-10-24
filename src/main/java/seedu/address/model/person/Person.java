@@ -98,7 +98,11 @@ public class Person {
     }
 
     public void addWeddingJob(Wedding wedding) {
-        weddingJobs.add(wedding);
+        if (ownWedding == null || !ownWedding.isSameWedding(wedding)){
+            weddingJobs.add(wedding);
+        } else {
+            throw new IllegalArgumentException("Cannot add own wedding as a job.");
+        }
     }
 
     /**

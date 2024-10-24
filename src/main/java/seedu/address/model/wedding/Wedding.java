@@ -20,14 +20,13 @@ public class Wedding {
      * Constructs a {@code Wedding}.
      */
     public Wedding(Name name, Client client, Date date, Venue venue) {
-        requireAllNonNull(name, client);
+        requireAllNonNull(name);
         this.name = name;
         this.client = client;
         this.date = date;
         this.venue = venue;
     }
 
-    /** this method is particularly for the storage of the wedding */
     public void addClient(Person person) {
         this.client = new Client(person);
     }

@@ -87,7 +87,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
     public void setWeddings(List<Wedding> weddings) {
         requireAllNonNull(weddings);
         if (!weddingsAreUnique(weddings)) {
-            throw new DuplicatePersonException();
+            //throw new DuplicateWeddingException();
         }
 
         internalList.setAll(weddings);

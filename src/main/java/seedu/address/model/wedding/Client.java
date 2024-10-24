@@ -22,6 +22,10 @@ public class Client {
         return person.toString();
     }
 
+    public void setOwnWedding(Wedding wedding) {
+        this.person.setOwnWedding(wedding);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

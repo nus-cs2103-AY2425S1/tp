@@ -71,9 +71,6 @@ class JsonAdaptedWedding {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Client.class.getSimpleName()));
         }
 
-        final Client dummyClient = new Client(new Person(new Name("dummy"), new Phone("12345678"),
-                new Email("dummy@gmail.com"), new Address("dummy"), null, null));
-
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
@@ -90,7 +87,7 @@ class JsonAdaptedWedding {
         }
         final Venue modelVenue = new Venue(venue);
 
-        return new Wedding(modelName, dummyClient, modelDate, modelVenue);
+        return new Wedding(modelName, null, modelDate, modelVenue);
     }
 
     @Override
