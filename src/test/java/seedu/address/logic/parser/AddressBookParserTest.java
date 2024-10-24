@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_AND_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,15 +25,21 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.TrackCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CategoryContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.student.Student;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.CompanyUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
@@ -46,6 +55,7 @@ public class AddressBookParserTest {
         assertEquals(new AddStudentCommand(student), command);
     }
 
+    @Test
     public void parseCommand_addCompany() throws Exception {
         Company company = new CompanyBuilder().build();
         AddCompanyCommand command = (AddCompanyCommand) parser.parseCommand(CompanyUtil.getAddCommand(company));
@@ -61,17 +71,34 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " " + INDEX_SECOND_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_AND_SECOND_PERSON) , command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Student student = new StudentBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(student).build();
+        Person person = new PersonBuilder().build();;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_tag() throws Exception {
+        HashSet<Tag> expectedTags = new HashSet<>();
+        expectedTags.add(new Tag("newTag"));
+        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonTagToAdd());
+        assertEquals(new TagCommand(INDEX_FIRST_PERSON, expectedTags), command);
+    }
+
+    @Test
+    public void parseCommand_track() throws Exception {
+        String keyword = "student";
+        TrackCommand command = (TrackCommand) parser.parseCommand(TrackCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new TrackCommand(new CategoryContainsKeywordsPredicate(keyword)), command);
     }
 
     @Test
@@ -101,9 +128,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_import() throws Exception {
+        String filePath = "/path/to/file.csv";
+        ImportCommand command = (ImportCommand) parser.parseCommand(ImportCommand.COMMAND_WORD + " " + filePath);
+        assertEquals(new ImportCommand(filePath), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
@@ -111,8 +145,4 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 
-    @Test
-    public void trackCommand_track() throws Exception {
-        assertTrue(parser.parseCommand(TrackCommand.COMMAND_WORD + " student") instanceof TrackCommand);
-    }
 }

@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -14,7 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Industry;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,6 +40,30 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndices} into an {@code List<Index>} and returns it. Leading and trailing whitespaces
+     * will be trimmed.
+     *
+     * @throws ParseException if the indices are invalid (not non-zero unsigned integer)
+     */
+    public static List<Index> parseIndices(String oneBasedIndices) throws ParseException {
+        String[] indicesString = oneBasedIndices.trim().split(" ");
+        System.out.println(indicesString[0]);
+        assert indicesString.length > 0;
+        List<Index> indices = new ArrayList<>();
+
+        for (String oneBasedIndex : indicesString) {
+            String trimmedIndex = oneBasedIndex.trim();
+            if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            indices.add(Index.fromOneBased(Integer.parseInt(trimmedIndex)));
+        }
+
+        indices.sort(Index::compareTo);
+        return indices;
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -58,13 +84,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static StudentID parseStudentID(String studentID) throws ParseException {
+    public static StudentId parseStudentID(String studentID) throws ParseException {
         requireNonNull(studentID);
         String trimmedID = studentID.trim();
-        if (!StudentID.isValidID(trimmedID)) {
-            throw new ParseException(StudentID.MESSAGE_CONSTRAINTS);
+        if (!StudentId.isValidId(trimmedID)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        return new StudentID(trimmedID);
+        return new StudentId(trimmedID);
     }
 
     /**

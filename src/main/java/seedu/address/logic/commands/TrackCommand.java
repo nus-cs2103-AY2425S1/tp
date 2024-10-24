@@ -14,7 +14,6 @@ public class TrackCommand extends Command {
 
     public static final String COMMAND_WORD = "track";
     public static final String MESSAGE_ARGUMENTS = "Category: %1$s";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Remark command not implemented yet";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 

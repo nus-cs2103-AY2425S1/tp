@@ -18,7 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Industry;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 
 public class JsonAdaptedPersonTest {
 
@@ -33,7 +33,7 @@ public class JsonAdaptedPersonTest {
 
     // Valid values for Student and Company
     private static final String VALID_NAME_STUDENT = BENSON.getName().toString();
-    private static final String VALID_STUDENT_ID = BENSON.getStudentID().toString();
+    private static final String VALID_STUDENT_ID = BENSON.getStudentId().toString();
     private static final String VALID_PHONE_STUDENT = BENSON.getPhone().toString();
     private static final String VALID_EMAIL_STUDENT = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS_STUDENT = BENSON.getAddress().toString();
@@ -149,7 +149,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidStudentID_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_STUDENT, "Student", VALID_PHONE_STUDENT,
                 VALID_EMAIL_STUDENT, VALID_ADDRESS_STUDENT, INVALID_STUDENT_ID, null, VALID_TAGS_STUDENT);
-        String expectedMessage = StudentID.MESSAGE_CONSTRAINTS;
+        String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -158,7 +158,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullStudentID_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_STUDENT, "Student", VALID_PHONE_STUDENT,
                 VALID_EMAIL_STUDENT, VALID_ADDRESS_STUDENT, null, null, VALID_TAGS_STUDENT);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentID.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
