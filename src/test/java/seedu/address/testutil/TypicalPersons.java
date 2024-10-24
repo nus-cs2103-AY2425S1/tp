@@ -21,6 +21,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonComparator;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -36,19 +37,19 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").withDateOfLastVisit("01-02-2024")
             .withEmergencyContact("92173902").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withDateOfLastVisit("01-01-2024")
+            .withEmail("heinz@example.com").withAddress("wall street").withDateOfLastVisit("01-01-2025")
             .withEmergencyContact().build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
-            .withDateOfLastVisit("01-01-2024").withEmergencyContact().build();
+            .withDateOfLastVisit("02-01-2024").withEmergencyContact().build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822249")
-            .withEmail("werner@example.com").withAddress("michegan ave").withDateOfLastVisit("01-01-2024")
+            .withEmail("werner@example.com").withAddress("michegan ave").withDateOfLastVisit("10-10-2024")
             .withEmergencyContact().build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824270")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withDateOfLastVisit("01-01-2024")
+            .withEmail("lydia@example.com").withAddress("little tokyo").withDateOfLastVisit("23-08-2024")
             .withEmergencyContact().build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
-            .withEmail("anna@example.com").withAddress("4th street").withDateOfLastVisit("01-01-2024")
+            .withEmail("anna@example.com").withAddress("4th street").withDateOfLastVisit("05-06-2024")
             .withEmergencyContact().build();
 
     // Manually added
@@ -79,13 +80,57 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
+        for (Person person : getTypicalPersonsAscendingName()) {
             ab.addPerson(person);
         }
         return ab;
     }
 
-    public static List<Person> getTypicalPersons() {
+    /**
+     * Returns an {@code AddressBook} with all the typical persons
+     * listed in appropriate order for {@code SortCommandTest}.
+     */
+    public static AddressBook getTypicalAddressBook(String sortParameter, boolean isAscending) {
+        assert (sortParameter.equals(PersonComparator.NAME)
+                || sortParameter.equals(PersonComparator.DATE_OF_LAST_VISIT));
+        AddressBook ab = new AddressBook();
+        if (isAscending) {
+            if (sortParameter.equals(PersonComparator.NAME)) {
+                for (Person person : getTypicalPersonsAscendingName()) {
+                    ab.addPerson(person);
+                }
+            } else {
+                for (Person person : getTypicalPersonsAscendingDateOfLastVisit()) {
+                    ab.addPerson(person);
+                }
+            }
+        } else {
+            if (sortParameter.equals(PersonComparator.NAME)) {
+                for (Person person : getTypicalPersonsDescendingName()) {
+                    ab.addPerson(person);
+                }
+            } else {
+                for (Person person : getTypicalPersonsDescendingDateOfLastVisit()) {
+                    ab.addPerson(person);
+                }
+            }
+        }
+        return ab;
+    }
+
+    public static List<Person> getTypicalPersonsAscendingName() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalPersonsDescendingName() {
+        return new ArrayList<>(Arrays.asList(GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE));
+    }
+
+    public static List<Person> getTypicalPersonsAscendingDateOfLastVisit() {
+        return new ArrayList<>(Arrays.asList(ALICE, DANIEL, BENSON, GEORGE, FIONA, ELLE, CARL));
+    }
+
+    public static List<Person> getTypicalPersonsDescendingDateOfLastVisit() {
+        return new ArrayList<>(Arrays.asList(CARL, ELLE, FIONA, GEORGE, BENSON, DANIEL, ALICE));
     }
 }

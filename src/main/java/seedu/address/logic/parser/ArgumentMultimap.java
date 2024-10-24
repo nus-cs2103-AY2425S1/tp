@@ -77,12 +77,28 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Checks if prefix is present, used specifically for find command
+     * Checks if prefix is present, used specifically for find and sort commands
      * where not all prefixes have to be present.
      * @param prefix Prefix of argument
      * @return true if prefix is present in argMultimap, false otherwise
      */
     public boolean isPresent(Prefix prefix) {
         return argMultimap.containsKey(prefix);
+    }
+
+    /**
+     * Checks if any of the prefixes in the list are present.
+     * Used by {@code SortCommandParser} to verify no invalid prefixes.
+     *
+     * @param prefixes
+     * @return true if any prefixes in the list are present, false otherwise.
+     */
+    public boolean anyIsPresent(Prefix[] prefixes) {
+        for (Prefix p : prefixes) {
+            if (isPresent(p)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -21,6 +21,7 @@ Class Phone
 Class Tag
 Class EmergencyContact
 Class DateOfLastVisit
+Class Remark
 
 Class I #FFFFFF
 }
@@ -46,6 +47,7 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> EmergencyContact
 Person *--> DateOfLastVisit
+Person *--> Remark
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
