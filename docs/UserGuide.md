@@ -26,7 +26,8 @@ for your large medical files.
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your computer.
-- To install Java 17, download Java [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+- To install Java 17, download Java. Refer to the [guide for installing Java](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
+  - Alternatively, download it from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - To check your Java version, refer [here](https://www.java.com/en/download/help/version_manual.html#).
 
 2. Download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It is a `.jar` file.
@@ -38,7 +39,7 @@ For more information, see this:
 3. Copy the file to the folder you want to use as the _home folder_ for your DocTrack.
 
 
-4. Open a command terminal of your preference, and run the commands:
+4. Open a [command terminal](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line) of your preference, and run the commands:
     ```
     cd HOME_FOLDER
     java -jar DocTrack.jar
@@ -296,7 +297,7 @@ Format: `clear appt`
 
 ##### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -341,8 +342,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: The data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
 Examples:
 
-<img src="images/json/addressbook.png" alt="Address Book JSON" width="300" height="auto">
-<img src="images/json/appointmentBook.png" alt="Appointment Book JSON" width="300" height="auto">
+<img src="images/json/addressbook.png" alt="Address Book JSON" width="420">
+
+
+<img src="images/json/appointmentBook.png" alt="Appointment Book JSON" width="390">
 
 <br><br>
 
