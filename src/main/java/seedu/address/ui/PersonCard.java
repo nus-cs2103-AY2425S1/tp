@@ -29,7 +29,6 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-
     private static final Image studentIcon =
         new Image(MainApp.class.getResourceAsStream("/images/role-icons/student.png"));
     private static final Image tutorIcon =
@@ -61,7 +60,6 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
 
-
         if (person.hasPhone()) {
             Label phone = new Label(person.getPhone().map(Object::toString).orElse(null));
             phone.getStyleClass().add("cell_small_label");
@@ -82,6 +80,7 @@ public class PersonCard extends UiPart<Region> {
             address.setText(person.getAddress().orElse(null).value);
             vBox.getChildren().add(address);
         }
+
         // Add tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
