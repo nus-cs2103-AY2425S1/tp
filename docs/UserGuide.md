@@ -293,6 +293,14 @@ Removes all candidates from TalentSG.
 
 **Format**: `clear`
 
+**Image Example**
+
+Before the clear command ran:
+<br><img src="images/ClearCommandBefore.png" width = "300">
+
+After the clear command ran:
+<br><img src="images/ClearCommandAfter.png" width = "300">
+
 [⚠️ **Caution**]: This action is irreversible.
 
 ---
@@ -302,6 +310,11 @@ Removes all candidates from TalentSG.
 Closes the TalentSG application.
 
 **Format**: `exit`
+
+**Image Example**
+
+Running the exit command:
+<br><img src="images/ExitCommand.png" width = "300">
 
 ---
 
