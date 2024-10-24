@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox id="cardPane" fx:id="cardPane" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane style="-fx-background-color: #1d1d1d; -fx-padding: 10; -fx-background-radius: 10" HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" prefWidth="342.0" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="15" left="15" right="15" top="15" />
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Label fx:id="id" styleClass="cell_big_label" text="ID:" textFill="#FFD700" />
+                <Label fx:id="name" styleClass="cell_big_label" text="\$first" textFill="#FFD700" />
+            </HBox>
+            <Label fx:id="price" styleClass="cell_small_label" text="\$price" textFill="#FFD700" />
+            <Label fx:id="area" styleClass="cell_small_label" text="\$area" textFill="#FFD700" />
+            <Label fx:id="region" styleClass="cell_small_label" text="\$region" textFill="#FFD700" />
+            <Label fx:id="address" styleClass="cell_small_label" text="\$address" textFill="#FFD700" />
+            <Label fx:id="seller" styleClass="cell_small_label" text="\$seller" textFill="#FFD700" />
+        </VBox>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+</HBox>

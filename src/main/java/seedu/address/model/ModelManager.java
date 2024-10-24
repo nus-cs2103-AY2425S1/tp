@@ -26,7 +26,6 @@ public class ModelManager implements Model {
 
     private final Listings listings;
     private final FilteredList<Person> filteredPersons;
-
     private final FilteredList<Listing> filteredListings;
 
     /**
@@ -167,7 +166,6 @@ public class ModelManager implements Model {
         listings.setListing(target, editedListing);
     }
 
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -227,7 +225,6 @@ public class ModelManager implements Model {
                 .findFirst()
                 .orElse(null);
     }*/
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
