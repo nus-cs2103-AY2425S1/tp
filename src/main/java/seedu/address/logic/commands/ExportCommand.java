@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -128,11 +127,6 @@ public class ExportCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_SUCCESS_WITH_COPY,
                         studentList.size(), dataFilePath, homeFilePath),
                         COMMAND_TYPE);
-            } catch (FileAlreadyExistsException e) {
-                // If file exists in home directory and force flag is not set
-                // Delete the data directory file and throw exception
-                Files.deleteIfExists(dataFilePath);
-                throw new CommandException(String.format(MESSAGE_HOME_FILE_EXISTS, homeFilePath));
             } catch (IOException e) {
                 // If home directory copy fails for other reasons, return success with data file only
                 return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), dataFilePath),
