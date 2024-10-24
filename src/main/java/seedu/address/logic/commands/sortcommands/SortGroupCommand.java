@@ -44,6 +44,7 @@ public class SortGroupCommand extends Command {
 
     @Override
     public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        versionHistory.addVersion(model);
         return versionHistory;
     }
 

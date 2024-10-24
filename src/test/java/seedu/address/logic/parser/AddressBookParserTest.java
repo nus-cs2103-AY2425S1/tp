@@ -7,6 +7,10 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
@@ -14,8 +18,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
 import seedu.address.logic.commands.deletecommands.DeleteStudentCommand;
+import seedu.address.logic.commands.findcommands.FindCommand;
+import seedu.address.logic.commands.findcommands.FindStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentMatchesQueryPredicate;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -50,13 +58,22 @@ public class AddressBookParserTest {
     }
 
     // will add back in v1.4
-    //    @Test
-    //    public void parseCommand_find() throws Exception {
-    //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-    //        FindCommand command = (FindCommand) parser.parseCommand(
-    //                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-    //        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    //    }
+    @Test
+    public void parseCommand_find() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findStudent() throws Exception {
+        String keyword = "Alice";
+        FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
+            FindStudentCommand.COMMAND_WORD + " " + keyword
+        );
+        assertEquals(new FindStudentCommand(new StudentMatchesQueryPredicate("alice")), command);
+    }
 
     @Test
     public void parseCommand_help() throws Exception {

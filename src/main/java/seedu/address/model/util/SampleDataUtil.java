@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
@@ -24,6 +26,9 @@ import seedu.address.model.task.TaskName;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    private static final Logger logger = LogsCenter.getLogger(SampleDataUtil.class);
+
     public static Student[] getSamplePersons() {
         return new Student[]{
             new Student(new Name("Alex Yeoh"), new Email("alexyeoh@u.nus.edu"),
@@ -109,6 +114,7 @@ public class SampleDataUtil {
         for (Task sampleTask : getSampleTasks()) {
             sampleAb.addTask(sampleTask);
         }
+        logger.info("Sample data loaded.");
         return sampleAb;
     }
 

@@ -262,6 +262,7 @@ public class ModelManager implements Model {
     @Override
     public void sortTaskList(Comparator<Task> comparator) {
         requireAllNonNull(comparator);
+        addressBook.setTasks(filteredTasks.sorted(comparator));
     }
 
     //=========== Filtered Student List Accessors =============================================================
