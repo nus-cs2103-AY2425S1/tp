@@ -100,6 +100,7 @@ public class Person implements Appointmentable {
         return appointments;
     }
 
+
     //    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
     //    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
     //        try {
@@ -241,6 +242,12 @@ public class Person implements Appointmentable {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
+    }
+
+    @Override
+    public void markAppointment(LocalDateTime dateTime, int patientId, int doctorId) throws CommandException{
+        requireAllNonNull(dateTime, patientId, doctorId);
+        getAppointment(dateTime, patientId, doctorId).markAsComplete();
     }
 
     @Override
