@@ -50,7 +50,7 @@ StorageManager --> AddressBook
 ModelManager --> StorageManager
 ModelManager --> AddressBook
 ModelManager --> Member
-Session --> "*" Point
-Member --> "*" Point
+Session --> "1" Point
+Member --> "1" Point
 Member --> "*" Session
 @enduml
