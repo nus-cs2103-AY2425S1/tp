@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -15,6 +16,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static DetailedPersonCardWindow detailedPersonCardWindow;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -70,5 +72,15 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        cardPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleMouseClick(event));
+    }
+
+    private void handleMouseClick(MouseEvent event) {
+        if (detailedPersonCardWindow != null) {
+            detailedPersonCardWindow.close();
+        }
+        DetailedPersonCardWindow.setPerson(person);
+        detailedPersonCardWindow = new DetailedPersonCardWindow();
+        detailedPersonCardWindow.show();
     }
 }

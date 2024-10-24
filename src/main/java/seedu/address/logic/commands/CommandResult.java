@@ -16,6 +16,8 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    private final boolean showDetailedPerson;
+
     private final boolean showPieChart;
 
     private final boolean showBarChart;
@@ -28,11 +30,12 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp,
-                         boolean showPieChart, boolean showBarChart, boolean exit) {
+                         boolean showPieChart, boolean showBarChart, boolean showDetailedPerson, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showPieChart = showPieChart;
         this.showBarChart = showBarChart;
+        this.showDetailedPerson = showDetailedPerson;
         this.exit = exit;
     }
 
@@ -42,7 +45,7 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser,
-                false, false, false, false);
+                false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -59,6 +62,10 @@ public class CommandResult {
 
     public boolean isShowBarChart() {
         return showBarChart;
+    }
+
+    public boolean isShowDetailedPerson() {
+        return showDetailedPerson;
     }
 
 
@@ -81,6 +88,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showPieChart == otherCommandResult.showPieChart
                 && showBarChart == otherCommandResult.showBarChart
+                && showDetailedPerson == otherCommandResult.showDetailedPerson
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
@@ -96,6 +104,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showPieChart", showPieChart)
                 .add("showBarChart", showBarChart)
+                .add("showDetailedPerson", showDetailedPerson)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();

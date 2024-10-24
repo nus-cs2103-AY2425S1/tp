@@ -27,7 +27,7 @@ public class PieChartCommand extends Command {
         });
         assert numOfStudentsInEachClass != null : "numOfStudentsInEachClass map should not be null";
         PieChartWindow.setData(numOfStudentsInEachClass);
-        return new CommandResult(MESSAGE_SUCCESS, false, true, false, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, true, false, false, false);
     }
 }
 

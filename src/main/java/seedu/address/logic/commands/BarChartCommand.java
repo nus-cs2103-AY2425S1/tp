@@ -35,7 +35,7 @@ public class BarChartCommand extends Command {
         });
         assert distributionOfMonthsPaid != null : "distributionOfMonthsPaid map should not be null";
         BarChartWindow.setData(distributionOfMonthsPaid);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }
 

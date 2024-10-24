@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.DetailedPersonCardWindow;
 
 /**
  * Opens a new window displaying detailed information of a selected person.
@@ -19,7 +20,7 @@ public class InfoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays detailed information of a person.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_INFO_PERSON_SUCCESS = "Displaying info of Person: %1$s";
+    public static final String MESSAGE_INFO_PERSON_SUCCESS = "Displaying info of Person: ";
     private final Index targetIndex;
     public InfoCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -33,7 +34,9 @@ public class InfoCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToShowInfo = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_INFO_PERSON_SUCCESS, Messages.format(personToShowInfo)));
+        DetailedPersonCardWindow.setPerson(personToShowInfo);
+        return new CommandResult(String.format(MESSAGE_INFO_PERSON_SUCCESS
+                + personToShowInfo.getName()), false, false, false, true, false);
     }
 
     @Override
