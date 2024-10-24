@@ -1,5 +1,6 @@
 package seedu.address.commons.core;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.isCollectionEqual;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * A Serializable class that contains command history data and command history max size.
  */
 public class CommandStack implements Serializable {
-    private static final int DEFAULT_COMMAND_ARRAY_LIST_MAX_SIZE = 2000;
+    public static final int DEFAULT_COMMAND_ARRAY_LIST_MAX_SIZE = 2000;
     /**
      * 0-th index of {@code commandArrayList} is treated as the earliest recorded executed command.
      * This is a consequence of {@code addCommand} adding new command strings to the back of {@code commandArrayList}.
@@ -23,11 +24,11 @@ public class CommandStack implements Serializable {
     private final int commandArrayListMaxSize;
     /**
      * Represents the index of the currently displayed element.
-     * If the value exceeds the index of the final index of commandArrayList, {@code CommandGetterResult}
+     * If the value is not a valid index of commandArrayList, {@code CommandGetterResult}
      * functions will clamp the value between {@code 0} and {@code commandArrayList.size()} inclusive.
      */
     @JsonIgnore
-    private int commandArrayIndex; //
+    private int commandArrayIndex; // note: using iterator instead of index brings problems w/ weaved up/down keys
 
     /**
      * Constructs a {@code CommandStack} with default max size, and empty history.
@@ -39,10 +40,23 @@ public class CommandStack implements Serializable {
     }
 
     /**
+     * Creates a {@code CommandStack} with default max size, and specified history.
+     */
+    public CommandStack(ArrayList<String> commandArrayList) {
+        requireNonNull(commandArrayList);
+        this.commandArrayList = new ArrayList<>();
+        this.commandArrayList.addAll(commandArrayList);
+        this.commandArrayListMaxSize = DEFAULT_COMMAND_ARRAY_LIST_MAX_SIZE;
+        this.commandArrayIndex = this.commandArrayList.size();
+    }
+
+    /**
      * Creates a {@code CommandStack} with specified max size, and specified history.
      */
     public CommandStack(ArrayList<String> commandArrayList, int commandArrayListMaxSize) {
-        this.commandArrayList = commandArrayList;
+        requireNonNull(commandArrayList);
+        this.commandArrayList = new ArrayList<>();
+        this.commandArrayList.addAll(commandArrayList);
         this.commandArrayListMaxSize = commandArrayListMaxSize;
         this.commandArrayIndex = commandArrayListMaxSize;
     }
@@ -59,47 +73,34 @@ public class CommandStack implements Serializable {
 
     public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
         if (commandGetterResult.getIsModifiedSinceLastArrowKey()) {
-            commandArrayIndex = commandArrayListMaxSize; // set to latest
+            commandArrayIndex = commandArrayList.size(); // set to latest
         }
         forceArrayIndexWithinBounds();
         if (commandArrayList.isEmpty()) {
-            return commandGetterResult
-                    .updateStringToDisplay("")
-                    .updateIsModified(false);
+            return CommandGetterResult.ofEmpty();
         }
         if (commandArrayIndex > 0) {
             commandArrayIndex--;
         }
-        return commandGetterResult
-                .updateStringToDisplay(commandArrayList.get(commandArrayIndex))
-                .updateIsModified(false);
+        return new CommandGetterResult(commandArrayList.get(commandArrayIndex), false);
     }
     public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
         if (commandGetterResult.getIsModifiedSinceLastArrowKey()) {
-            return commandGetterResult;
+            return commandGetterResult; // user modifying string - don't change string
         }
         forceArrayIndexWithinBounds();
-        if (commandArrayList.isEmpty()) {
-            return commandGetterResult
-                    .updateStringToDisplay("")
-                    .updateIsModified(false);
-        }
         if (commandArrayIndex < commandArrayList.size()) {
             commandArrayIndex++;
         }
         if (commandArrayIndex >= commandArrayList.size()) {
-            return commandGetterResult
-                    .updateStringToDisplay("")
-                    .updateIsModified(false);
+            return CommandGetterResult.ofEmpty(); // no earlier command
         }
-        return commandGetterResult
-                .updateStringToDisplay(commandArrayList.get(commandArrayIndex))
-                .updateIsModified(false);
+        return new CommandGetterResult(commandArrayList.get(commandArrayIndex), false);
     }
     /**
-     * Adds an executed command string to the front of {@code commandDeque}.
+     * Adds an executed command string to the back of {@code commandArrayList}.
      * If size of the command stack exceeds {@code commandStackMaxSize},
-     * removes the earliest added command string in history.
+     * removes the earliest added command string in history (index 0).
      */
     public CommandStack addCommand(String commandString) {
         assert(commandArrayList.size() <= commandArrayListMaxSize);

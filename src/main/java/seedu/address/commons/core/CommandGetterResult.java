@@ -5,7 +5,8 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Stores the result of getting command history, and the current unfinished string.
+ * Stores the result of getting command history, and boolean representing whether the user
+ * has edited the command since the arrow key event.
  * Behaviour for command history is based on Microsoft Powershell.
  * Guarantees: immutable.
  */
@@ -14,7 +15,7 @@ public class CommandGetterResult {
     private final boolean isModifiedSinceLastArrowKey;
 
     /**
-     * Constructs a CommandGetterResult with provided {@code stringToDisplay} and {@code isModifiedHistoricalCommand}.
+     * Constructs a CommandGetterResult with provided {@code stringToDisplay} and {@code isModifiedSinceLastArrowKey}.
      */
     public CommandGetterResult(String stringToDisplay, boolean isModifiedSinceLastArrowKey) {
         this.stringToDisplay = stringToDisplay;
@@ -26,6 +27,9 @@ public class CommandGetterResult {
 
     public CommandGetterResult updateIsModified(boolean isModifiedSinceLastArrowKey) {
         return new CommandGetterResult(stringToDisplay, isModifiedSinceLastArrowKey);
+    }
+    public static CommandGetterResult ofEmpty() {
+        return new CommandGetterResult("", false);
     }
 
     public String getStringToDisplay() {
