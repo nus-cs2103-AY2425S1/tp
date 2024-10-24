@@ -1,7 +1,5 @@
 package seedu.address.ui.commandpopup;
 
-
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.SortedSet;
@@ -12,8 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
-import javafx.geometry.Side;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.PopupControl;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -65,9 +65,8 @@ public class AutoSuggestionTextField extends TextField {
     private void showSuggestions(String input) {
         textFlowItems = FXCollections.observableArrayList(
                 // Filter suggestions based on the input
-                commandSet.stream()
-                        .filter(s -> s.toLowerCase().startsWith(input.toLowerCase()))
-                        .map(s -> buildTextFlow(s,input))
+                popUpFilter(commandSet, input).stream()
+                        .map(s -> buildTextFlow(s, input))
                         .toList());
         suggestionList.setItems(textFlowItems);
         suggestionList.setPrefHeight(calculateListViewHeight(textFlowItems));
@@ -96,7 +95,8 @@ public class AutoSuggestionTextField extends TextField {
                 case UP:
                     // Cycle up through suggestions
                     int currentIndexUp = suggestionList.getSelectionModel().getSelectedIndex();
-                    int previousIndexUp = (currentIndexUp - 1 + suggestionList.getItems().size()) % suggestionList.getItems().size();
+                    int previousIndexUp = (currentIndexUp - 1 + suggestionList.getItems().size())
+                            % suggestionList.getItems().size();
                     suggestionList.getSelectionModel().select(previousIndexUp);
                     suggestionList.scrollTo(previousIndexUp);
                     event.consume(); // Prevent further handling of the UP key
@@ -232,11 +232,11 @@ public class AutoSuggestionTextField extends TextField {
         int size = 18;
         int filterIndex = text.toLowerCase().indexOf(filter.toLowerCase());
         Text textBefore = new Text(text.substring(0, filterIndex));
-        textBefore.setFont(Font.font ("Comfortaa", FontWeight.BOLD, size));
+        textBefore.setFont(Font.font("Comfortaa", FontWeight.BOLD, size));
         Text textAfter = new Text(text.substring(filterIndex + filter.length()));
-        textAfter.setFont(Font.font ("Comfortaa", FontWeight.BOLD, size));
+        textAfter.setFont(Font.font("Comfortaa", FontWeight.BOLD, size));
         Text textFilter = new Text(text.substring(filterIndex, filterIndex + filter.length()));
-        textFilter.setFont(Font.font ("Comfortaa", FontWeight.BOLD, size));
+        textFilter.setFont(Font.font("Comfortaa", FontWeight.BOLD, size));
         textFilter.setFill(Color.ORANGE);
         TextFlow result = new TextFlow(textBefore, textFilter, textAfter);
         result.setPadding(new Insets(2, 10, 2, 10));
