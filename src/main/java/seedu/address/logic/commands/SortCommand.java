@@ -17,7 +17,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts all persons in the address book according to the given parameter.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by %s";
 
@@ -35,21 +35,27 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (parameter.equals(SortCommandParser.NAME)) {
+        switch (parameter) {
+
+        case SortCommandParser.NAME:
             model.updateSortingOrder(Comparator.comparing(person -> person.getName().toString()));
-        }
+            break;
 
-        if (parameter.equals(SortCommandParser.ADDRESS)) {
+        case SortCommandParser.ADDRESS:
             model.updateSortingOrder(Comparator.comparing(person -> person.getAddress().toString()));
-        }
+            break;
 
-        if (parameter.equals(SortCommandParser.PRIORITY)) {
+        case SortCommandParser.PRIORITY:
             model.updateSortingOrder(Comparator.comparing(Person::getPriority)
                     .thenComparing(person -> person.getName().toString()));
-        }
+            break;
 
-        if (parameter.equals(SortCommandParser.INCOME)) {
+        case SortCommandParser.INCOME:
             model.updateSortingOrder(Comparator.comparing(person -> person.getIncome().getValue()));
+            break;
+
+        default:
+            assert false : "Program should not reach here since parser checks for invalid parameter.";
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, parameter));
