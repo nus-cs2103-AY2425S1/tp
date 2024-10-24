@@ -141,21 +141,44 @@
     cursor: pointer;
     width: 100%;
     text-align: left;
+    position: relative;
   }
 
-  .toc-btns-first, .content-droppable-first {
+  .toc-btns > span {
+    position: relative;
+    z-index: 5;
+  }
+
+  .toc-btns::before {
+    content: "";
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    background-color: var(--code-bg-color);
+    transition: width 0.3s ease;
+    z-index: 0;
+    margin-left: 0;
+  }
+
+  .toc-btns-first, .content-droppable-first, .toc-btns-first::before {
     border: none;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
 
-  .toc-btns-last, .content-droppable-last {
+  .toc-btns-last, .content-droppable-last, .toc-btns-last::before {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
 
   .toc-btns:hover {
     background-color: var(--hover-bg-color);
+  }
+
+  .toc-btns:hover::before {
+    width: calc(100%);
   }
 </style>
 
@@ -171,22 +194,22 @@
 
 <div class="content toc-content">
   <a href="#installation-and-quick-start">
-    <button class="toc-btns toc-btns-first">1. Installation and Quick Start</button>
+    <button class="toc-btns toc-btns-first"><span>1. Installation and Quick Start</span></button>
   </a>
   <a href="#commands">
-    <button class="toc-btns">2. Commands</button>
+    <button class="toc-btns"><span>2. Commands</span></button>
   </a>
   <a href="#command-summary">
-    <button class="toc-btns">3. Commands Summary</button>
+    <button class="toc-btns"><span>3. Commands Summary</span></button>
   </a>
   <a href="#features">
-    <button class="toc-btns">4. Features</button>
+    <button class="toc-btns"><span>4. Features</span></button>
   </a>
   <a href="#faq">
-    <button class="toc-btns">5. FAQ</button>
+    <button class="toc-btns"><span>5. FAQ</span></button>
   </a>
   <a href="#known-issues">
-    <button class="toc-btns toc-btns-last">6. Known Issues</button>
+    <button class="toc-btns toc-btns-last"><span>6. Known Issues</span></button>
   </a>
 </div>
 
