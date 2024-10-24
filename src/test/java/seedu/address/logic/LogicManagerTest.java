@@ -24,6 +24,8 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -122,6 +124,55 @@ public class LogicManagerTest {
         Files.copy(typical, tempFile);
         logic.execute(input);
         Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    public void execute_undoCommand_success() throws Exception {
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+                + MODULE_DESC_AMY;
+        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(expectedPerson);
+
+        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, expectedPerson), expectedModel);
+
+        String undoCommand = UndoCommand.COMMAND_WORD;
+        expectedModel = new ModelManager();
+
+        assertCommandSuccess(undoCommand, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_undoCommand_noCommandToUndo_throwsCommandException() {
+        String undoCommand = UndoCommand.COMMAND_WORD;
+        assertCommandException(undoCommand, UndoCommand.MESSAGE_UNDO_FAILURE);
+    }
+
+    @Test
+    public void execute_redoCommand_success() throws Exception {
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+                + MODULE_DESC_AMY;
+        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(expectedPerson);
+
+        assertCommandSuccess(addCommand, String.format(AddCommand.MESSAGE_SUCCESS, expectedPerson), expectedModel);
+
+        String undoCommand = UndoCommand.COMMAND_WORD;
+        expectedModel = new ModelManager();
+
+        assertCommandSuccess(undoCommand, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
+
+        String redoCommand = RedoCommand.COMMAND_WORD;
+        expectedModel.addPerson(expectedPerson);
+
+        assertCommandSuccess(redoCommand, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_redoCommand_noCommandToRedo_throwsCommandException() {
+        String redoCommand = RedoCommand.COMMAND_WORD;
+        assertCommandException(redoCommand, RedoCommand.MESSAGE_REDO_FAILURE); // Expecting failure as there is nothing to redo
     }
 
     /**
