@@ -183,7 +183,7 @@ Format: `deletep INDEX`
 Examples:
 
 - `list` followed by `deletep 2` deletes the 2nd person in the Concert Phone book.
-- `findp Betsy` followed by `deletep 1` deletes the 1st person in the results of the `find` command.
+- `findp n/Betsy` followed by `deletep 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting a concert : `deletec`
 
