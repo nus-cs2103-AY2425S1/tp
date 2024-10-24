@@ -169,7 +169,7 @@ Format: `filter person TAG`
 Examples:
 
 * `filter person Hairdresser` returns the person with tag `HairDresser`.
-* `filter person Celcbrity` returns the person with tag `Celebrity`.
+* `filter person Celebrity` returns the person with tag `Celebrity`.
 
 ![result for 'filter celebrity'](images/filterCelebrityResult.png)
 
