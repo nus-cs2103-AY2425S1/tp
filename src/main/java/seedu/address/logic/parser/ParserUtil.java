@@ -217,6 +217,14 @@ public class ParserUtil {
         return trimmedArgs;
     }
 
+    /**
+     * Parses a string containing two dates, validates the format, and returns
+     * an array of two {@code LocalDate} objects, representing the start and end dates.
+     *
+     * @param searchString The input string containing the date range in the format "startDate:endDate".
+     * @return An array of two {@code LocalDate} objects: the start date and end date.
+     * @throws ParseException If the input format is invalid or if the start date is after the end date.
+     */
     public static LocalDate[] parseAttendanceDate(String searchString) throws ParseException {
         String trimmedString = parseMultipleWordsFromFindCommand(searchString);
         String[] attendanceDates = validateAndSplitDateString(trimmedString);
@@ -231,6 +239,13 @@ public class ParserUtil {
         return new LocalDate[]{startDate, endDate};
     }
 
+    /**
+     * Validates and splits the input string by the ":" delimiter, ensuring that it contains two parts.
+     *
+     * @param dateInput The input string containing the date range, expected to be in the format "startDate:endDate".
+     * @return An array of two strings: the start date and end date as strings.
+     * @throws ParseException If the input does not contain exactly two parts.
+     */
     public static String[] validateAndSplitDateString(String dateInput) throws ParseException {
         String[] dateParts = dateInput.split(":");
         if (dateParts.length != 2) {
@@ -239,6 +254,13 @@ public class ParserUtil {
         return dateParts;
     }
 
+    /**
+     * Parses a single date string into a {@code LocalDate} object using the specified date format.
+     *
+     * @param dateString The input string representing a single date.
+     * @return A {@code LocalDate} object representing the parsed date.
+     * @throws ParseException If the input string cannot be parsed into a valid date.
+     */
     public static LocalDate parseDate(String dateString) throws ParseException {
         try {
             return LocalDate.parse(parseSingleWordFromFindCommand(dateString), Attendance.VALID_DATE_FORMAT);

@@ -9,8 +9,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
+
 
 public class FindCommandParserTest {
 
