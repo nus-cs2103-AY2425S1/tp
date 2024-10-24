@@ -17,6 +17,8 @@ This project is a fork of [`AddressBook Level-3`](https://github.com/se-edu/addr
 
 The icon image for the app was found on [Flaticon.com](https://www.flaticon.com/free-icon/wedding-rings_531864?term=wedding&page=1&position=1&origin=tag&related_id=531864) and was created by [Freepik](https://www.flaticon.com/authors/freepik).
 
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Getting Started**
