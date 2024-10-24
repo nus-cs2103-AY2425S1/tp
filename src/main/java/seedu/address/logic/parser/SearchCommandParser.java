@@ -47,7 +47,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             return LocalDateTime.parse(args.get(), formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(
-                    String.format("herrrrrrrrrreeeeeeee", MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
     }
 
