@@ -16,7 +16,7 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_USAGE = "Reverses the most recent undo action,"
             + "restoring the previously deleted change.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Successfully redo.";
+    public static final String MESSAGE_SUCCESS = "Redo successfully executed.";
     public static final String MESSAGE_FAILURE = "No command to redo.";
 
     @Override
