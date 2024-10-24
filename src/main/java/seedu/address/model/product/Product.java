@@ -50,10 +50,19 @@ public class Product {
     }
 
     /**
-     * Removes assigned supplier and assignment status.
+     * Removes assigned supplier.
      */
     public void unsetSupplier() {
         this.supplierName = null;
+    }
+
+    /**
+     * Removes assigned supplier if is supplied by the specified supplier.
+     */
+    public void removeSupplier(Name supplierName) {
+        if (supplierName == this.supplierName) {
+            this.supplierName = null;
+        }
     }
 
     /**
