@@ -50,7 +50,7 @@ public class DeleteClaimCommandParserTest {
 
     /**
      * Tests if {@code DeleteClaimCommandParser}
-     * throws a {@code ParseException} when the claim ID is missing from user input
+     * throws a {@code ParseException} when the claim ID is missing from user input.
      */
     @Test
     public void parse_emptyClaimId_throwsParseException() {
@@ -64,7 +64,7 @@ public class DeleteClaimCommandParserTest {
 
     /**
      * Tests if {@code DeleteClaimCommandParser}
-     * throws a {@code ParseException} when the insurance ID is missing from user input
+     * throws a {@code ParseException} when the insurance ID is missing from user input.
      */
     @Test
     public void parse_emptyInsuranceId_throwsParseException() {
