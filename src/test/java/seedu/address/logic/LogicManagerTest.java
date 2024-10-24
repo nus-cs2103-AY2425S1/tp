@@ -24,8 +24,8 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -143,7 +143,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_undoCommand_noCommandToUndo_throwsCommandException() {
+    public void executeUndo_noCommandToUndo_throwsCommandException() {
         String undoCommand = UndoCommand.COMMAND_WORD;
         assertCommandException(undoCommand, UndoCommand.MESSAGE_UNDO_FAILURE);
     }
@@ -170,9 +170,9 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_redoCommand_noCommandToRedo_throwsCommandException() {
+    public void executeRedo_noCommandToRedo_throwsCommandException() {
         String redoCommand = RedoCommand.COMMAND_WORD;
-        assertCommandException(redoCommand, RedoCommand.MESSAGE_REDO_FAILURE); // Expecting failure as there is nothing to redo
+        assertCommandException(redoCommand, RedoCommand.MESSAGE_REDO_FAILURE);
     }
 
     /**
