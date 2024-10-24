@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 import seedu.address.model.person.UniqueBuyingPropertyList;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniqueSellingPropertyList;
 
 /**
