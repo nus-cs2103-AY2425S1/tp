@@ -84,8 +84,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String catStr} into a {@code Category} that represents the category.
-     * Leading and trailing whitespaces will be trimmed and capitalized
+     * Parses a {@code String catStr} into a {@code Category} that represents the category. Leading and trailing
+     * whitespaces will be trimmed and capitalized
      */
     public static Category parseCategory(String catStr) throws ParseException {
         requireNonNull(catStr);

@@ -40,11 +40,10 @@ public class Category {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Category)) {
+        if (!(other instanceof Category otherCategory)) {
             return false;
         }
 
-        Category otherCategory = (Category) other;
         return category.equals(otherCategory.category);
     }
 
