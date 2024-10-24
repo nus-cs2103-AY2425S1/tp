@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="StoreClass" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="StoreClass" minWidth="800" minHeight="700" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/storeclass.png" />
   </icons>

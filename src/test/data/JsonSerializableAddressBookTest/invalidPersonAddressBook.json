@@ -3,6 +3,9 @@
     "name": "Hans Muster",
     "phone": "#9482424",
     "gender": "male",
-    "modules" : [ "CS2103T" ]
+    "modules" : [ {
+      "module" : "MA1522",
+      "grade" : 20
+    } ]
   } ]
 }
