@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Volunteer;
 import seedu.address.model.person.comparators.NameComparator;
 import seedu.address.model.person.comparators.VolunteerComparator;
 
@@ -27,6 +28,16 @@ public enum SortOption {
         public Comparator<Person> getComparator() {
             return new VolunteerComparator();
         }
+
+        @Override
+        public String getRole() {
+            return "volunteer";
+        }
+
+        @Override
+        public Class<? extends Person> getRelatedClass() {
+            return Volunteer.class;
+        }
     };
     // Add more sorting options here if needed
 
@@ -36,6 +47,8 @@ public enum SortOption {
     public static final String MESSAGE_EMPTY_SORT_OPTION = "Sort option cannot be empty.";
 
     private final String value;
+    private final String role;
+    private final Class<? extends Person> relatedClass;
 
     /**
      * Constructs a {@code SortOption}.
@@ -44,6 +57,16 @@ public enum SortOption {
      */
     SortOption(String value) {
         this.value = value;
+        role = "Person";
+        relatedClass = Person.class;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public Class<? extends Person> getRelatedClass() {
+        return relatedClass;
     }
 
     /**
