@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AdvFilterCommandParser" as AdvFilterCommandParser LOGIC_COLOR
+participant "a:AdvFilterCommand" as AdvFilterCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("advfilter t/priority >= high")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("advfilter t/priority >= high")
+activate AddressBookParser
+
+create AdvFilterCommandParser
+AddressBookParser -> AdvFilterCommandParser
+activate AdvFilterCommandParser
+
+AdvFilterCommandParser --> AddressBookParser
+deactivate AdvFilterCommandParser
+
+AddressBookParser -> AdvFilterCommandParser : parse("t/priority >= high")
+activate AdvFilterCommandParser
+
+create AdvFilterCommand
+AdvFilterCommandParser -> AdvFilterCommand : new AdvFilterCommand(tagName, operator, tagValue)
+activate AdvFilterCommand
+
+AdvFilterCommand --> AdvFilterCommandParser
+deactivate AdvFilterCommand
+
+AdvFilterCommandParser --> AddressBookParser : a
+deactivate AdvFilterCommandParser
+AdvFilterCommandParser -[hidden]-> AddressBookParser
+destroy AdvFilterCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AdvFilterCommand : execute(model)
+activate AdvFilterCommand
+
+AdvFilterCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+
+Model --> AdvFilterCommand
+deactivate Model
+
+AdvFilterCommand -> AdvFilterCommand : constructSuccessMessage()
+activate AdvFilterCommand
+AdvFilterCommand --> AdvFilterCommand : "successMessage"
+deactivate AdvFilterCommand
+
+create CommandResult
+AdvFilterCommand -> CommandResult : new CommandResult(successMessage)
+activate CommandResult
+
+
+CommandResult --> AdvFilterCommand
+deactivate CommandResult
+
+AdvFilterCommand --> LogicManager : r
+deactivate AdvFilterCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
