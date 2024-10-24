@@ -1,4 +1,6 @@
 @startuml
+Title Storage Class Diagram
+
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
@@ -20,6 +22,8 @@ Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedConcert
+Class JsonAdaptedConcertContact
 }
 
 }
@@ -38,6 +42,8 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSerializableAddressBook --> "*" JsonAdaptedConcert
+JsonSerializableAddressBook --> "*" JsonAdaptedConcertContact
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
 @enduml

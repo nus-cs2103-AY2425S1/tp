@@ -1,4 +1,5 @@
 @startuml
+Title Undo Sequence Diagram - Logic
 !include style.puml
 skinparam ArrowFontStyle plain
 

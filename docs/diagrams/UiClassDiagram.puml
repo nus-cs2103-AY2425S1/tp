@@ -1,4 +1,6 @@
 @startuml
+Title Ui Class Diagram
+
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
@@ -13,6 +15,10 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class ConcertListPanel
+Class ConcertCard
+Class ConcertContactListPanel
+Class ConcertContactCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -33,10 +39,14 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ConcertListPanel
+MainWindow *-down-> "1" ConcertContactListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+ConcertListPanel -down-> "*" ConcertCard
+ConcertContactListPanel -down-> "*" ConcertContactCard
 
 MainWindow -left-|> UiPart
 
@@ -44,10 +54,16 @@ ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
+ConcertListPanel --|> UiPart
+ConcertCard --|> UiPart
+ConcertContactListPanel --|> UiPart
+ConcertContactCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ..> Model
+ConcertCard ..> Model
+ConcertContactCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

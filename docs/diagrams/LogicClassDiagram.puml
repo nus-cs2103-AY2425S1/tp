@@ -1,4 +1,6 @@
 @startuml
+Title Logic Class Diagram
+
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
@@ -39,7 +41,7 @@ LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindPersonCommand, etc
+note right of XYZCommand: XYZCommand = AddPersonCommand, \nFindPersonCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
