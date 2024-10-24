@@ -26,7 +26,8 @@ import seedu.address.model.person.Person;
 public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an event in the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an event in the address book. "
+            + "Multiple changes can be applied in a single command.\n"
             + "Parameters (index is one-based): "
             + PREFIX_INDEX + "<EVENT INDEX> "
             + "[" + PREFIX_NAME + "<NEW EVENT NAME>] "
@@ -49,7 +50,7 @@ public class UpdateCommand extends Command {
     private final LocalDate newDate;
     private final Set<Index> addIndices;
     private final Set<Index> removeIndices;
-    private final int indexToUpdate;
+    private final Index indexToUpdate;
 
     /**
      * Creates an UpdateCommand to update an event to the specified {@code Event}
@@ -58,7 +59,7 @@ public class UpdateCommand extends Command {
                          LocalDate newDate,
                          Set<Index> addIndices,
                          Set<Index> removeIndices,
-                         int indexToUpdate) {
+                         Index indexToUpdate) {
         this.newName = newName;
         this.newDate = newDate;
         this.indexToUpdate = indexToUpdate;
@@ -70,14 +71,15 @@ public class UpdateCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (indexToUpdate >= model.getEventListLength() || indexToUpdate < 0) {
+        if (indexToUpdate.getZeroBased() >= model.getEventListLength()
+                || indexToUpdate.getZeroBased() < 0) {
             throw new CommandException(MESSAGE_INDEX_OUT_OF_BOUNDS);
         }
 
         ObservableList<Event> eventList = model.getEventList();
         ObservableList<Person> personList = model.getAddressBook().getPersonList();
 
-        Event oldEvent = eventList.get(indexToUpdate);
+        Event oldEvent = eventList.get(indexToUpdate.getZeroBased());
         Event newEvent;
 
         // Add and remove attendees
@@ -89,7 +91,7 @@ public class UpdateCommand extends Command {
 
         assert newEvent != null;
 
-        model.updateEvent(newEvent, indexToUpdate);
+        model.updateEvent(newEvent, indexToUpdate.getZeroBased());
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 Messages.formatEvent(newEvent)));
     }

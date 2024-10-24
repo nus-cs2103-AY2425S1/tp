@@ -60,7 +60,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         }
 
         // Parse input and create an UpdateCommand
-        int indexToUpdate = parseIndex(argMultimap);
+        Index indexToUpdate = parseIndex(argMultimap);
         String name = parseName(argMultimap);
         LocalDate date = parseDate(argMultimap);
         Set<Index> addIndices = parseAttendeeIndices(argMultimap, PREFIX_ATTENDEES);
@@ -92,16 +92,8 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
      * @return The index of the event to update.
      * @throws ParseException If index supplied is not a valid integer.
      */
-    private int parseIndex(ArgumentMultimap argMultimap) throws ParseException {
-        int indexToUpdate = -1;
-        try {
-            indexToUpdate = Integer.parseInt(argMultimap.getValue(PREFIX_INDEX).get().trim());
-        } catch (NumberFormatException e) {
-            throw new ParseException(String.format("Index must be an integer. \n%1$s",
-                    UpdateCommand.MESSAGE_USAGE));
-        }
-        indexToUpdate -= 1; // subtract 1 because user's event list is not 0-indexed
-        return indexToUpdate;
+    private Index parseIndex(ArgumentMultimap argMultimap) throws ParseException {
+        return ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get().trim());
     }
 
     /**
@@ -159,14 +151,8 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                     .orElse("")
                     .split(" ");
             for (String s : attendeeIndicesString) {
-                try {
-                    Index attendeeIdx = Index.fromOneBased(Integer.parseInt(s));
-                    attendeeIndices.add(attendeeIdx);
-                } catch (NumberFormatException e) {
-                    throw new ParseException(
-                            String.format("Attendee index must be a valid integer. \n%1$s",
-                            UpdateCommand.MESSAGE_USAGE));
-                }
+                Index attendeeIdx = ParserUtil.parseIndex(s);
+                attendeeIndices.add(attendeeIdx);
             }
             if (attendeeIndices.isEmpty()) {
                 throw new ParseException(String.format("Attendee list cannot be empty. \n%1$s",
