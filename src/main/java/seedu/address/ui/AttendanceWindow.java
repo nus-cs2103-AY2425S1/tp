@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -49,7 +50,8 @@ public class AttendanceWindow {
 
         Set<LocalDate> attendanceDates = getAllAttendanceDates(model);
         for (LocalDate date : attendanceDates) {
-            TableColumn<AttendanceRow, String> dateColumn = new TableColumn<>(date.toString());
+            TableColumn<AttendanceRow, String> dateColumn =
+                    new TableColumn<>( DateTimeFormatter.ofPattern("MMM d yyyy").format(date));
 
             dateColumn.setCellValueFactory(cellData -> {
                 AttendanceRow row = cellData.getValue();
