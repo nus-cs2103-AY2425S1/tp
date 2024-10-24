@@ -205,7 +205,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags`<br> e.g., `find p/test_number n/test_name r/08-1234 t/friends colleagues`
+**Find**   | `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags`<br> e.g., `find p/test_number n/test_name r/08-1234 t/friends colleagues` `n/, p/, r/ or t/ with no paras following means list every one out`
 **List**   | `list`
 **Help**   | `help`
 **View**   |

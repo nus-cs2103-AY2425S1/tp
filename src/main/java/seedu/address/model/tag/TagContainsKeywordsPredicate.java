@@ -1,13 +1,16 @@
 package seedu.address.model.tag;
 
-import seedu.address.model.person.Person;
-
 import java.util.HashSet;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import seedu.address.model.person.Person;
+
+/**
+ * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.
+ */
 public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 

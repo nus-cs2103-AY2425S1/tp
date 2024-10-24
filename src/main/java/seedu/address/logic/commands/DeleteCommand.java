@@ -50,18 +50,18 @@ public class DeleteCommand extends ConcreteCommand {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-    /*
-    this part of code should only exist in javafx file so remove it so far
-    Show confirmation dialog
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Delete Confirmation");
-    alert.setHeaderText("Are you sure you want to delete this person?");
-    alert.setContentText(String.format("Name: %s", personToDelete.getName()));
-    ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
-    if (result != ButtonType.OK) {
-        return new CommandResult("Deletion cancelled.");
-    }
-     */
+        /*
+        this part of code should only exist in javafx file so remove it so far
+        Show confirmation dialog
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Confirmation");
+        alert.setHeaderText("Are you sure you want to delete this person?");
+        alert.setContentText(String.format("Name: %s", personToDelete.getName()));
+        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+        if (result != ButtonType.OK) {
+            return new CommandResult("Deletion cancelled.");
+        }
+         */
 
         model.deletePerson(personToDelete);
         isExecuted = true;

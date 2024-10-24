@@ -79,12 +79,12 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        Predicate<Person> combinedPredicate = p -> true;  // Base predicate
+        Predicate<Person> combinedPredicate = p -> true; // Base predicate
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        combinedPredicate = combinedPredicate.and(predicate);  // Combined predicate
+        combinedPredicate = combinedPredicate.and(predicate); // Combined predicate
 
         // Use the combinedPredicate for creating FindCommand if it's supposed to use the combined one
-        FindCommand findCommand = new FindCommand(combinedPredicate);  // Assuming constructor accepts Predicate<Person>
+        FindCommand findCommand = new FindCommand(combinedPredicate); // Assuming constructor accepts Predicate<Person>
 
         // Use FindCommand instance for ToStringBuilder in expected generation to match the test's 'this' context
         String expected = new ToStringBuilder(findCommand)
