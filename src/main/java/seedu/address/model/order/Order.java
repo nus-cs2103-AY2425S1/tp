@@ -71,6 +71,8 @@ public abstract class Order {
         this.status = status;
     }
 
+    public int getOrderId() { return orderId; }
+
     // Abstract method to be implemented by subclasses
     public abstract String getOrderType();
 
