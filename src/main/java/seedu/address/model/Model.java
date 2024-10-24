@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    AppointmentContainsDatePredicate PREDICATE_SHOW_ALL_APPOINTMENTS = new AppointmentContainsDatePredicate(null);
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,11 +87,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of the filtered appointment list */
-    ObservableList<Person> getFilteredAppointmentList();
+    /** Returns an unmodifiable view of the sorted appointment list */
+    ObservableList<Person> getSortedAppointmentList();
 
     /**
-     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+     * Updates the filter of the sorted appointment list to filter by the given {@code predicate}.
      */
-    void updateFilteredAppointmentList(Predicate<Person> predicate);
+    void filterAppointmentList(Predicate<Person> predicate);
 }
