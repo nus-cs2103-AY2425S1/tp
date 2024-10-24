@@ -25,11 +25,13 @@ test {
     finalizedBy jacocoTestReport
 
     systemProperty 'testfx.setup.timeout', '60000'
+    enableAssertions = true
 }
 
 task guiTests(type: Test) {
     useJUnitPlatform()
     include 'systemtests/**'
+    enableAssertions = true
 }
 
 task nonGuiTests(type: Test) {
@@ -37,6 +39,7 @@ task nonGuiTests(type: Test) {
     include 'spleetwaise/address/**'
     include 'spleetwaise/common/**'
     include 'spleetwaise/transaction/**'
+    enableAssertions = true
 }
 
 guiTests.mustRunAfter nonGuiTests
@@ -93,6 +96,10 @@ shadowJar {
     archiveBaseName = "spleetwaise"
     archiveVersion = "1.4"
     archiveClassifier = null
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'nonGuiTests', 'coverage'

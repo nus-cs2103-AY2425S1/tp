@@ -98,6 +98,7 @@ public class AddressBookModelManager implements AddressBookModel {
 
     @Override
     public void deletePerson(Person target) {
+        requireNonNull(target);
         addressBook.removePerson(target);
     }
 

@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+Class "<<interface>>\nReadOnlyTransactionBook" as ReadOnlyTransactionBook
+Class "<<interface>>\nTransactionBookModel" as TransactionBookModel
+Class TransactionBook
+Class TransactionBookModelManager
+
+Class Transaction
+Class Amount
+Class Date
+Class Description
+Class Person
+
+Class I #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> TransactionBookModel
+
+TransactionBook .up.|> ReadOnlyTransactionBook
+
+TransactionBookModelManager .up.|> TransactionBookModel
+TransactionBookModel .left.> ReadOnlyTransactionBook
+TransactionBookModelManager -left-> "1" TransactionBook
+
+TransactionBook *--> "~* all" Transaction
+Transaction *--> Person
+Transaction *--> Amount
+Transaction *--> Description
+Transaction *--> Date
+
+TransactionBookModelManager --> "~* filtered" Transaction
+@enduml
