@@ -61,8 +61,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText("Phone:  " + person.getPhone().value);
         address.setText("Address:  " + person.getAddress().value);
         email.setText("Email:  " + person.getEmail().value);
-        fees.setText("Fees:  " + String.valueOf(person.getFees().value));
-        classId.setText("Class ID:  " + String.valueOf(person.getClassId().value));
+        fees.setText("Fees:  " + person.getFees().value);
+        classId.setText("Class ID:  " + person.getClassId().value);
         monthsPaid.setText("Months Paid:  " + person.getMonthsPaid().stream()
                 .map(monthPaid -> monthPaid.monthPaidValue)
                 .reduce((curr, next) -> curr + " " + next)
