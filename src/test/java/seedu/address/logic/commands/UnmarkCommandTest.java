@@ -1,6 +1,17 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -11,15 +22,6 @@ import seedu.address.model.person.AttendanceCount;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class UnmarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -45,9 +47,9 @@ public class UnmarkCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        UnmarkCommand UnmarkCommand = new UnmarkCommand(outOfBoundIndex);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(outOfBoundIndex);
 
-        assertCommandFailure(UnmarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -59,8 +61,8 @@ public class UnmarkCommandTest {
             model.updateFilteredPersonList(predicate);
 
             Person personToUnmark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-            UnmarkCommand UnmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
-            CommandResult commandResult = UnmarkCommand.execute(model);
+            UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
+            CommandResult commandResult = unmarkCommand.execute(model);
 
             String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSON_SUCCESS,
                     Messages.getNameOnly(personToUnmark));
@@ -79,30 +81,30 @@ public class UnmarkCommandTest {
         model.updateFilteredPersonList(predicate);
         Index outOfBoundIndex = INDEX_THIRD_PERSON;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        UnmarkCommand UnmarkCommand = new UnmarkCommand(outOfBoundIndex);
-        assertCommandFailure(UnmarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(outOfBoundIndex);
+        assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        UnmarkCommand UnmarkFirstCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
-        UnmarkCommand UnmarkSecondCommand = new UnmarkCommand(INDEX_SECOND_PERSON);
+        UnmarkCommand unmarkFirstCommand = new UnmarkCommand(INDEX_FIRST_PERSON);
+        UnmarkCommand unmarkSecondCommand = new UnmarkCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(UnmarkFirstCommand.equals(UnmarkFirstCommand));
+        assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand));
 
         // same values -> returns true
-        UnmarkCommand UnmarkFirstCommandCopy = new UnmarkCommand(INDEX_FIRST_PERSON);
-        assertTrue(UnmarkFirstCommandCopy.equals(UnmarkFirstCommandCopy));
+        UnmarkCommand unmarkFirstCommandCopy = new UnmarkCommand(INDEX_FIRST_PERSON);
+        assertTrue(unmarkFirstCommandCopy.equals(unmarkFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(UnmarkFirstCommand.equals(1));
+        assertFalse(unmarkFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(UnmarkFirstCommand.equals(null));
+        assertFalse(unmarkFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(UnmarkFirstCommand.equals(UnmarkSecondCommand));
+        assertFalse(unmarkFirstCommand.equals(unmarkSecondCommand));
     }
 
     @Test
