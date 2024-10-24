@@ -147,6 +147,32 @@ Examples:
 *  `editgame 1 g/Overwatch u/Potato` Edits the username of game `Overwatch` of the 1st person to be `Potato`.
 *  `editgame 2 g/League of Legends u/Potato s/Pro r/Support` Edits the game `League of Legends` of the 2nd person to have the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
 
+### Favouriting a game : `favgame`
+
+Gives a **singular** game under an existing person in the address book the "favourite" status.
+
+Format: `favgame INDEX g/GAME`
+
+* Favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Favourited games are denoted by a star icon.
+* There will be no observable change if this command is used on a game that is already given the "favourite" status.
+
+Examples:
+* `favgame 2 g/Overwatch` Sets the game "Overwatch" of the 2nd person to "favourite".
+
+### Un-favouriting a game : `unfavgame`
+
+Removes the "favourite" status from a **singular** game under an existing person in the address book.
+
+Format: `unfavgame INDEX g/GAME`
+
+* Un-favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Once un-favourited, the star icon for that particular game should disappear.
+* There will be no observable change if this command is used on a game that is not set to "favourite".
+
+Examples:
+* `unfavgame 3 g/LoL` Remove the "favourite" status from the game "LoL" of the 3rd person.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
