@@ -3,6 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -25,15 +29,23 @@ import seedu.address.model.person.Person;
 public class EditAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "editapp";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an appointment from the person identified "
-            + "By the patient's NRIC number"
+            + "By the patient's NRIC number, date and start time"
             + "\nParameters: "
-            + PREFIX_NRIC + "PATIENT_NRIC\n"
-            + PREFIX_DATE + "DATE (DD/MM/YYYY) \n"
-            + PREFIX_START_TIME + "START_TIME (HH:MM) \n"
+            + PREFIX_FIND_NRIC + "PATIENT_NRIC\n"
+            + PREFIX_FIND_DATE + "DATE (DD/MM/YYYY) \n"
+            + PREFIX_FIND_START_TIME + "START_TIME (HH:MM) \n"
+            + PREFIX_NRIC + "NEW_PATIENT_NRIC\n"
+            + PREFIX_DATE + "NEW_DATE (DD/MM/YYYY) \n"
+            + PREFIX_START_TIME + "NEW_START_TIME (HH:MM) \n"
+            + PREFIX_END_TIME + "NEW_END_TIME (HH:MM) \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "S1234567A "
-            + PREFIX_DATE + "01/01/2025 "
-            + PREFIX_START_TIME + "10:00";
+            + PREFIX_FIND_NRIC + "S1234567A "
+            + PREFIX_FIND_DATE + "01/01/2025 "
+            + PREFIX_FIND_START_TIME + "10:00"
+            + PREFIX_NRIC + "S7654321B "
+            + PREFIX_DATE + "02/02/2025 "
+            + PREFIX_START_TIME + "11:00 "
+            + PREFIX_END_TIME + "12:00";
     public static final String MESSAGE_SUCCESS = "Edited appointment: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
     public static final String MESSAGE_INVALID_DATE = "Invalid date. Please use the DD/MM/YYYY format";
