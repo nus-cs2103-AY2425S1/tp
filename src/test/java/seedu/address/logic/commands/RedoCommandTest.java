@@ -14,11 +14,11 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class UndoCommandTest {
+public class RedoCommandTest {
 
     private Model model;
     private Model expectedModel;
-    private UndoCommand undoCommand;
+    private RedoCommand redoCommand;
     private Person newPerson1;
     private Person newPerson2;
 
@@ -26,7 +26,7 @@ public class UndoCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        undoCommand = new UndoCommand();
+        redoCommand = new RedoCommand();
         newPerson1 = new PersonBuilder().withName("New Person 1").withPhone("12345678")
                 .withEmail("new1@example.com").withAddress("123, New Street").build();
         newPerson2 = new PersonBuilder().withName("New Person 2").withPhone("87654321")
@@ -34,39 +34,46 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_noCommandsToUndo_throwsCommandException() {
-        assertThrows(CommandException.class, () -> undoCommand.execute(model));
+    public void execute_noCommandsToRedo_throwsCommandException() {
+        assertThrows(CommandException.class, () -> redoCommand.execute(model));
     }
 
     @Test
-    public void execute_singleUndo_success() throws Exception {
+    public void execute_singleRedo_success() throws Exception {
         model.addPerson(newPerson1);
         model.commitAddressBook();
+        model.undoAddressBook();
+
         expectedModel.addPerson(newPerson1);
         expectedModel.commitAddressBook();
-
-        model.undoAddressBook();
         expectedModel.undoAddressBook();
+
+        model.redoAddressBook();
+        expectedModel.redoAddressBook();
 
         assertEquals(expectedModel, model);
     }
 
     @Test
-    public void execute_multipleUndos_success() throws Exception {
+    public void execute_multipleRedos_success() throws Exception {
         model.addPerson(newPerson1);
         model.commitAddressBook();
         model.addPerson(newPerson2);
         model.commitAddressBook();
+        model.undoAddressBook();
+        model.undoAddressBook();
 
         expectedModel.addPerson(newPerson1);
         expectedModel.commitAddressBook();
         expectedModel.addPerson(newPerson2);
         expectedModel.commitAddressBook();
+        expectedModel.undoAddressBook();
+        expectedModel.undoAddressBook();
 
-        model.undoAddressBook();
-        model.undoAddressBook();
-        expectedModel.undoAddressBook();
-        expectedModel.undoAddressBook();
+        model.redoAddressBook();
+        model.redoAddressBook();
+        expectedModel.redoAddressBook();
+        expectedModel.redoAddressBook();
 
         assertEquals(expectedModel, model);
     }

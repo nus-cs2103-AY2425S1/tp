@@ -77,7 +77,7 @@ public class SearchCommandParser implements Parser<Command> {
             return new SearchAppointmentCommand(dateTime);
         } catch (CommandException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchAppointmentCommand.MESSAGE_USAGE));
+                    String.format(e.getMessage() + "\n" + SearchAppointmentCommand.MESSAGE_USAGE));
         }
     }
 
@@ -94,7 +94,7 @@ public class SearchCommandParser implements Parser<Command> {
             return new SearchPolicyCommand(policyName);
         } catch (CommandException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchPolicyCommand.MESSAGE_USAGE));
+                    String.format(e.getMessage() + "\n" + SearchPolicyCommand.MESSAGE_USAGE));
         }
     }
 }

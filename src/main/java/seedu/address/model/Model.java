@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -90,4 +91,30 @@ public interface Model {
      * Sorts the filtered person list using the given comparator.
      */
     void sortPersonList(Comparator<Person> comparator);
+
+    /**
+     * Saves the current state of the address book.
+     */
+    void commitAddressBook();
+
+    /**
+     * Restores the previous state of the address book.
+     * @throws CommandException if there are no states to undo.
+     */
+    void undoAddressBook() throws CommandException;
+
+    /**
+     * Restores the state of the address book to the state before the last undo.
+     */
+    void redoAddressBook();
+
+    /**
+     * Returns true if there are previous states to restore.
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Returns true if there are undone states to restore.
+     */
+    boolean canRedoAddressBook();
 }
