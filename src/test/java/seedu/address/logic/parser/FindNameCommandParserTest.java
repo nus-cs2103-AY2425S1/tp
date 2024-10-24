@@ -43,4 +43,22 @@ public class FindNameCommandParserTest {
         assertParseSuccess(parser, " \n Alice \n \t Bob(NUS)  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_nameWithInvalidCharacters_throwsParseException() {
+        // Test with invalid characters (e.g., numbers)
+        assertParseFailure(parser, "n/Alice123", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+
+        // Test with invalid characters (e.g., special characters)
+        assertParseFailure(parser, "n/Alice@Bob", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+
+        // Test with invalid characters (e.g., punctuation)
+        assertParseFailure(parser, "n/Alice!Bob", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+
+        // Test with mixed valid and invalid characters
+        assertParseFailure(parser, "n/Alice(Bob)@", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+    }
 }

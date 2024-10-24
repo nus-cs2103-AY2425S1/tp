@@ -57,6 +57,29 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_nameKeywordWithInvalidCharacters_throwsParseException() {
+        // Test with invalid characters like numbers
+        assertParseFailure(parser, "n/Alice123", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+
+        // Test with special characters not allowed (other than parenthesis)
+        assertParseFailure(parser, "n/Alice@", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+
+        // Test with mixed valid and invalid characters
+        assertParseFailure(parser, "n/Alice Bob$", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindNameCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validNameKeywordWithParenthesis_returnsFindNameCommand() {
+        // Test with valid name containing parentheses
+        FindNameCommand expectedFindNameCommand =
+                new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob(NUS)")));
+        assertParseSuccess(parser, "n/Alice Bob(NUS)", expectedFindNameCommand);
+    }
+
+    @Test
     public void parse_validArgsPhone_returnsFindPhoneCommand() {
         // valid phone number
         FindPhoneCommand expectedFindPhoneCommand =
