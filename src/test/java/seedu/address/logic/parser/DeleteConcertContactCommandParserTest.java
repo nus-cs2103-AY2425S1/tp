@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
@@ -24,19 +25,19 @@ public class DeleteConcertContactCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
+        assertParseSuccess(parser, " " + PREFIX_PERSON + "1 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
                 new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT));
     }
 
     @Test
     public void parse_invalidPersonArg_throwsParseException() {
-        assertParseFailure(parser, "a " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
+        assertParseFailure(parser, " " + PREFIX_PERSON + "a " + PREFIX_CONCERT + INDEX_FIRST_CONCERT.getOneBased(),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConcertContactCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidConcertArg_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_CONCERT + "a",
+        assertParseFailure(parser, " " + PREFIX_PERSON + "1 " + PREFIX_CONCERT + "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteConcertContactCommand.MESSAGE_USAGE));
     }
 }

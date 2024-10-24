@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
@@ -23,7 +24,8 @@ public class AddConcertContactCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, "" + PREFIX_CONCERT + INDEX_FIRST_CONCERT, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " " + PREFIX_PERSON + "" + PREFIX_CONCERT + INDEX_FIRST_CONCERT,
+                        MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
@@ -34,12 +36,12 @@ public class AddConcertContactCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT,
+        // negative index for person
+        assertParseFailure(parser, " " + PREFIX_PERSON + "-5 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT,
                 MESSAGE_INVALID_FORMAT);
 
-        // zero index
-        assertParseFailure(parser, "0 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT,
+        // zero index for person
+        assertParseFailure(parser, " " + PREFIX_PERSON + "0 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT,
                 MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
@@ -52,25 +54,25 @@ public class AddConcertContactCommandParserTest {
     @Test
     public void parse_invalidConcertInput_failure() {
         // negative index
-        assertParseFailure(parser, INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "-3",
+        assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "-3",
                 MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "0",
+        assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "0",
                 MESSAGE_INVALID_FORMAT);
 
         // no input
-        assertParseFailure(parser, INDEX_FIRST_PERSON + " " + PREFIX_CONCERT,
+        assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT,
                 MESSAGE_INVALID_FORMAT);
 
         // not integer
-        assertParseFailure(parser, INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "a",
+        assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "a",
                 MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_repeatedPrefix_failure() {
-        String invalidString = INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + INDEX_FIRST_CONCERT
+        String invalidString = " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + INDEX_FIRST_CONCERT
                 + " " + PREFIX_CONCERT + INDEX_SECOND_PERSON;
 
         assertParseFailure(parser, invalidString, Messages
@@ -81,7 +83,8 @@ public class AddConcertContactCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         Index concertIndex = INDEX_FIRST_CONCERT;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_CONCERT + concertIndex.getOneBased();
+        String userInput = " " + PREFIX_PERSON + targetIndex.getOneBased() + " " + PREFIX_CONCERT
+                            + concertIndex.getOneBased();
 
         AddConcertContactCommand expectedCommand = new AddConcertContactCommand(targetIndex, concertIndex);
 
