@@ -29,6 +29,10 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
+        // Null values are illegal values that should have been handled by
+        // the command parser or the storage's json converter.
+        assert test != null;
+
         return test.matches(VALIDATION_REGEX);
     }
 

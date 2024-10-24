@@ -33,6 +33,10 @@ public class EmployeeId {
      * Returns true if a given string is a valid employee id.
      */
     public static boolean isValidEmployeeId(String test) {
+        // Null values are illegal values that should have been handled by
+        // the command parser or the storage's json converter.
+        assert test != null;
+
         try {
             Integer.valueOf(test);
             return true;

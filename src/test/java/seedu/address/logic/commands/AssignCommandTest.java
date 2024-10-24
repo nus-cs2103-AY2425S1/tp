@@ -13,12 +13,16 @@ import static seedu.address.testutil.TypicalProjects.BETA;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -32,33 +36,28 @@ import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.AssignmentBuilder;
 
 public class AssignCommandTest {
-
     @Test
     public void constructor_nullAssignment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AssignCommand(null));
     }
 
-    // @Test
-    // public void execute_assignmentAcceptedByModel_addSuccessful() throws Exception {
-    //      ModelStubAcceptingAssignmentAdded modelStub = new ModelStubAcceptingAssignmentAdded();
-    //      Assignment validAssignment = new AssignmentBuilder().build();
-
-    // CommandResult commandResult = new AssignCommand(validAssignment).execute(modelStub);
-
-    //      assertEquals(String.format(AssignCommand.MESSAGE_SUCCESS, Messages.format(validAssignment)),
-    //              commandResult.getFeedbackToUser());
-    //      assertEquals(Arrays.asList(validAssignment), modelStub.assignmentsAdded);
-    // }
-
-    // @Test
-    // public void execute_duplicateAssignment_throwsCommandException() {
-    //     Assignment validAssignment = new AssignmentBuilder().build();
-    //     AssignCommand assignCommand = new AssignCommand(validAssignment);
-    //     ModelStub modelStub = new ModelStubWithAssignment(validAssignment);
-
-    //     assertThrows(CommandException.class,
-    //            AssignCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> assignCommand.execute(modelStub));
-    // }
+    @Test
+    public void execute_assignmentAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingAssignmentAdded modelStub = new ModelStubAcceptingAssignmentAdded();
+        Assignment validAssignment = new AssignmentBuilder().build();
+        CommandResult commandResult = new AssignCommand(validAssignment).execute(modelStub);
+        assertEquals(String.format(AssignCommand.MESSAGE_SUCCESS, Messages.format(validAssignment)),
+                  commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validAssignment), modelStub.assignmentsAdded);
+    }
+    @Test
+    public void execute_duplicateAssignment_throwsCommandException() {
+        Assignment validAssignment = new AssignmentBuilder().build();
+        AssignCommand assignCommand = new AssignCommand(validAssignment);
+        ModelStub modelStub = new ModelStubWithAssignment(validAssignment);
+        assertThrows(CommandException.class,
+                AssignCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> assignCommand.execute(modelStub));
+    }
 
     @Test
     public void equals() {
@@ -282,10 +281,26 @@ public class AssignCommandTest {
      */
     private class ModelStubWithAssignment extends ModelStub {
         private final Assignment assignment;
+        private final ArrayList<Person> persons = new ArrayList<>();
+        private final ArrayList<Project> projects = new ArrayList<>();
 
         ModelStubWithAssignment(Assignment assignment) {
             requireNonNull(assignment);
             this.assignment = assignment;
+        }
+
+        @Override
+        public ObservableList<Person> getPersonList() {
+            persons.add(ALICE);
+            persons.add(BENSON);
+            return FXCollections.observableArrayList(persons);
+        }
+
+        @Override
+        public ObservableList<Project> getProjectList() {
+            projects.add(ALPHA);
+            projects.add(BETA);
+            return FXCollections.observableArrayList(projects);
         }
 
         @Override
@@ -300,6 +315,22 @@ public class AssignCommandTest {
      */
     private class ModelStubAcceptingAssignmentAdded extends ModelStub {
         final ArrayList<Assignment> assignmentsAdded = new ArrayList<>();
+        final ArrayList<Person> persons = new ArrayList<>();
+        final ArrayList<Project> projects = new ArrayList<>();
+
+        @Override
+        public ObservableList<Person> getPersonList() {
+            persons.add(ALICE);
+            persons.add(BENSON);
+            return FXCollections.observableArrayList(persons);
+        }
+
+        @Override
+        public ObservableList<Project> getProjectList() {
+            projects.add(ALPHA);
+            projects.add(BETA);
+            return FXCollections.observableArrayList(projects);
+        }
 
         @Override
         public boolean hasAssignment(Assignment assignment) {

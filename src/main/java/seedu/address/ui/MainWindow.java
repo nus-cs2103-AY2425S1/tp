@@ -44,10 +44,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane topPanelPlaceholder;
+    private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane projectListPanelPlaceholder;
+
+    @FXML
+    private StackPane assignmentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -116,10 +119,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        topPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
         projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
+
+        assignmentListPanel = new AssignmentListPanel(logic.getFilteredAssignmentList());
+        assignmentListPanelPlaceholder.getChildren().add(assignmentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -148,9 +154,15 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleShowPersons() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        PersonListPanel placeholder = personListPanel;
-        topPanelPlaceholder.getChildren().add(placeholder.getRoot());
+        // TODO: Add highlighting
+    }
+
+    /**
+     * Shows the list of projects.
+     */
+    @FXML
+    public void handleShowProjects() {
+        // TODO: Add highlighting
     }
 
     /**
@@ -158,9 +170,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleShowAssignments() {
-        assignmentListPanel = new AssignmentListPanel(logic.getFilteredAssignmentList());
-        AssignmentListPanel placeholder = assignmentListPanel;
-        topPanelPlaceholder.getChildren().add(placeholder.getRoot());
+        // TODO: Add highlighting
     }
 
     /**
@@ -191,10 +201,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -206,11 +212,16 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.getTopPanelDisplayType().equals(DisplayType.PERSON_LIST)) {
+            // TODO: Consider using factory classes for this
+            if (commandResult.getDisplayType().equals(DisplayType.PERSON_LIST)) {
                 handleShowPersons();
             }
 
-            if (commandResult.getTopPanelDisplayType().equals(DisplayType.ASSIGNMENT_LIST)) {
+            if (commandResult.getDisplayType().equals(DisplayType.PROJECT_LIST)) {
+                handleShowProjects();
+            }
+
+            if (commandResult.getDisplayType().equals(DisplayType.ASSIGNMENT_LIST)) {
                 handleShowAssignments();
             }
 

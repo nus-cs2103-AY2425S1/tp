@@ -48,6 +48,10 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
+        // Null values are illegal values that should have been handled by
+        // the command parser or the storage's json converter.
+        assert test != null;
+
         return test.matches(VALIDATION_REGEX);
     }
 
