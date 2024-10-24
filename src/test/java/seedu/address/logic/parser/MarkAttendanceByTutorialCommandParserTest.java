@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 import seedu.address.logic.commands.MarkAttendanceByTutorialCommand;
 import seedu.address.model.tutorial.Tutorial;
 
