@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor GOODS_COLOR
+skinparam classBackgroundColor GOODS_COLOR
+skinparam ClassAttributeFontColor #FFFFFF
+
+Package "Goods Class Diagram" as GoodsPackage <<Rectangle>> {
+Class Person
+Class GoodsName {
+    - name : String
+}
+enum "<<enumeration>>\n GoodsCatgeories" as GoodsCategories {
+    CONSUMABLES
+    LIFESTYLE
+    SPECIALTY
+}
+Class Goods
+Class GoodsReceipt {
+    - procurementDate : Date
+    - arrivalDate : Date
+    - isDelivered : Boolean
+    - quantity : int
+    - price : double
+
+    + isFromSupplier(Name supplierName) : Boolean
+}
+}
+
+Person "1" -- "0..*" Goods : supplies >
+(Person, Goods) .. GoodsReceipt
+Goods "1" *-- "1" GoodsName
+Goods "1" --> "1" GoodsCategories
+
+show GoodsReceipt attributes
+show GoodsReceipt methods
+show GoodsCategories attributes
+show GoodsName attributes
+
+@enduml

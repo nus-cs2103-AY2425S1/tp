@@ -149,6 +149,15 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+### Goods Classes ###
+
+<img src="images/GoodsClassDiagram.png" width="550">
+
+Goods classes are specific for SupplyCentral, where many convenience functions will be built in the application to cater to specific suppliers.
+Person (Suppliers) will,
+* be able to supply multiple Goods
+* will be tracked with a unique Goods Receipt, which contains more useful information related to the transaction
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
