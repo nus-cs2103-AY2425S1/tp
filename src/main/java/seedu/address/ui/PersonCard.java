@@ -44,6 +44,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
 
+    @FXML
+    private Label role;
+
+    @FXML
+    private Label roleId;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -56,6 +62,8 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         remark.setText(person.getRemark().getValue());
         email.setText(person.getEmail().value);
+        role.setText(person.getRole());
+        roleId.setText("ID: " + String.valueOf(person.getId()));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
