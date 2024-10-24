@@ -68,7 +68,9 @@ public class Messages {
                 .append("; From: ")
                 .append(meetup.getFrom())
                 .append("; To: ")
-                .append(meetup.getTo());
+                .append(meetup.getTo())
+                .append("; Added Buyers: ");
+        meetup.getAddedBuyers().forEach(builder::append);
         return builder.toString();
     }
 

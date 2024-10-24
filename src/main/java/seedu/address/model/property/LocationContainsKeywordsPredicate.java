@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Property};s {code LandlordName} matches any of the keywords given.
+ * Tests that a {@code Property};s {code Location} matches any of the keywords given.
  */
 public class LocationContainsKeywordsPredicate implements Predicate<Property> {
     private final List<String> keywords;

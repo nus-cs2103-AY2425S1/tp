@@ -14,6 +14,7 @@ public class Budget {
 
     public static final String MESSAGE_CONSTRAINTS = "Budget of the buyer (to the nearest SGD). "
         + "It should be a positive integer more than 0 and can contain commas at the right positions "
+        + "(exactly 3 digits after each comma)"
         + "E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). "
         + "It must not be blank.";
 

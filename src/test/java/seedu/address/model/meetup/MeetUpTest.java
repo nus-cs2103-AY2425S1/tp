@@ -3,6 +3,8 @@ package seedu.address.model.meetup;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_ADDED_PERSON_ALEX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_ADDED_PERSON_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
@@ -31,7 +33,8 @@ public class MeetUpTest {
         MeetUp editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP)
                 .withName(VALID_MEETUP_NAME_PITCH)
                 .withFrom(VALID_MEETUP_FROM_PITCH)
-                .withTo(VALID_MEETUP_TO_PITCH).build();
+                .withTo(VALID_MEETUP_TO_PITCH)
+                .withAddedBuyers(VALID_MEETUP_ADDED_PERSON_ALEX).build();
         assertTrue(PITCH_MEETUP.isSameMeetUp(editedNetWorkingMeetUp));
 
         // name differs in case, all other attributes same -> returns false
@@ -78,12 +81,17 @@ public class MeetUpTest {
         // different to -> returns false
         editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withTo(VALID_MEETUP_TO_NETWORKING).build();
         assertFalse(PITCH_MEETUP.equals(editedPitchMeetUp));
+
+        // different tags -> returns false
+        editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withAddedBuyers(VALID_MEETUP_ADDED_PERSON_BETTY).build();
+        assertFalse(PITCH_MEETUP.equals(editedPitchMeetUp));
     }
 
     @Test
     public void toStringMethod() {
         String expected = MeetUp.class.getCanonicalName() + "{name=" + PITCH_MEETUP.getName() + ", info="
-                + PITCH_MEETUP.getInfo() + ", from=" + PITCH_MEETUP.getFrom() + ", to=" + PITCH_MEETUP.getTo() + "}";
+                + PITCH_MEETUP.getInfo() + ", from=" + PITCH_MEETUP.getFrom() + ", to=" + PITCH_MEETUP.getTo()
+                + ", addedBuyers=" + PITCH_MEETUP.getAddedBuyers() + "}";
         assertEquals(expected, PITCH_MEETUP.toString());
     }
 }
