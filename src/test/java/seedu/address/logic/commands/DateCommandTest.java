@@ -12,24 +12,18 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 import java.util.Optional;
@@ -66,18 +60,6 @@ public class DateCommandTest {
         expectedModel.setPerson(personToEdit, editedPerson);
         assertCommandSuccess(dateCommand, model, expectedMessage, expectedModel);
     }
-//    @Test
-//    public void execute_filteredList_success() {
-//        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-//        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-//        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-//                .withDate(DATE_STUB).build();
-//        DateCommand dateCommand = new DateCommand(INDEX_FIRST_PERSON, new Date(editedPerson.getDate().value));
-//        String expectedMessage = String.format(DateCommand.MESSAGE_ADD_DATE_SUCCESS, editedPerson);
-//        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-//        expectedModel.setPerson(firstPerson, editedPerson);
-//        assertCommandSuccess(dateCommand, model, expectedMessage, expectedModel);
-//    }
 
     @Test
     public void execute_personNotFound_failure() {
