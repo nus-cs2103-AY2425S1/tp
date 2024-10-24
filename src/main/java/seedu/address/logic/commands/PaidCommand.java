@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class PaidCommand extends Command {
     public static final String COMMAND_WORD = "paid";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the policy identified by the policy name as paid and updates the next payment date.\n"
-            + "Parameters: INDEX (must be a positive integer) POLICY_NAME\n"
-            + "Example: " + COMMAND_WORD + " 1 Health Insurance";
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_POLICY_NAME + "POLICY_NAME\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_POLICY_NAME + "Health Insurance";
 
     public static final String MESSAGE_SUCCESS = "Policy %1$s for %2$s is marked as paid. Next payment date updated.";
     public static final String MESSAGE_INVALID_POLICY = "The policy %1$s does not exist for %2$s.";
