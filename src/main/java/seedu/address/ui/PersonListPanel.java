@@ -37,6 +37,12 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public void updateUiState(UiState uiState) {
         this.uiState = uiState;
+
+        // Reset the items to force ListView to update
+        ObservableList<Person> currentItems = personListView.getItems();
+        personListView.setItems(null); // Temporarily set to null
+        personListView.setItems(currentItems); // Re-set the same list
+
         personListView.refresh();
     }
 

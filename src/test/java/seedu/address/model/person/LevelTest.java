@@ -29,12 +29,12 @@ public class LevelTest {
         assertFalse(Level.isValidLevelName(" ")); // spaces only
         assertFalse(Level.isValidLevelName("^")); // only non-alphanumeric characters
         assertFalse(Level.isValidLevelName("s!gm4")); // contains non-alphanumeric characters
-        assertFalse(Level.isValidLevelName("S5 Express"));
+        assertFalse(Level.isValidLevelName("S5 EXPRESS"));
         // valid levels
-        assertTrue(Level.isValidLevelName("S1 Express"));
-        assertTrue(Level.isValidLevelName("S2 Express"));
-        assertTrue(Level.isValidLevelName("S3 Express"));
-        assertTrue(Level.isValidLevelName("S4 Express"));
+        assertTrue(Level.isValidLevelName("S1 EXPRESS"));
+        assertTrue(Level.isValidLevelName("S2 EXPRESS"));
+        assertTrue(Level.isValidLevelName("S3 EXPRESS"));
+        assertTrue(Level.isValidLevelName("S4 EXPRESS"));
 
         assertTrue(Level.isValidLevelName("S2 NA"));
         assertTrue(Level.isValidLevelName("S2 NA"));
@@ -56,10 +56,10 @@ public class LevelTest {
 
     @Test
     public void equals() {
-        Level level = new Level("S1 Express");
+        Level level = new Level("S1 EXPRESS");
 
         // same values -> returns true
-        assertTrue(level.equals(new Level("S1 Express")));
+        assertTrue(level.equals(new Level("S1 EXPRESS")));
 
         // same object -> returns true
         assertTrue(level.equals(level));
@@ -71,6 +71,6 @@ public class LevelTest {
         assertFalse(level.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(level.equals(new Level("S2 Express")));
+        assertFalse(level.equals(new Level("S2 EXPRESS")));
     }
 }

@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMERGENCY_CONTACT = "93838383";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
-    public static final String DEFAULT_LEVEL = "S1 Express";
+    public static final String DEFAULT_LEVEL = "S1 EXPRESS";
 
     private Name name;
     private Phone phone;

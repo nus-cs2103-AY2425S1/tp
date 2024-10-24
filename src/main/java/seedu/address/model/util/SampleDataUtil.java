@@ -47,7 +47,7 @@ public class SampleDataUtil {
 
             new Person(new Name("David Li"), new Phone("91031282"), new EmergencyContact("93210283"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Note(""),
-                getSubjectSet("BIOLOGY"), new Level("S4 Express"), new TaskList(),
+                getSubjectSet("BIOLOGY"), new Level("S4 EXPRESS"), new TaskList(),
                 getLessonTimeSet("MON-11:00-13:00")),
 
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new EmergencyContact("92624417"),
