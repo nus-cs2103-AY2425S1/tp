@@ -89,7 +89,7 @@ public interface Model {
      * Check if any of the already exist for the person.
      * {@code person} must already exist in the address book.
      */
-    Boolean tagExists(Person target, Set<Tag> tags);
+    boolean tagExists(Person target, Set<Tag> tags);
 
     /**
      * Adds the tags to the specified person.

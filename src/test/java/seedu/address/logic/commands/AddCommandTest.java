@@ -159,7 +159,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Boolean tagExists(Person target, Set<Tag> tags) {
+        public boolean tagExists(Person target, Set<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
 
