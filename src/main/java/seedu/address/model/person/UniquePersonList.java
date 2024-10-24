@@ -49,7 +49,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Adds person to the list at specified index.
+     * Adds person to observablelist.
      *
      * @param toAdd person to be added.
      * @param index position to be added it.
