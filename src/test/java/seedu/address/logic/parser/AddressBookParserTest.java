@@ -23,11 +23,16 @@ import seedu.address.logic.commands.contact.commands.EditCommand;
 import seedu.address.logic.commands.contact.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.contact.commands.FindCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
+import seedu.address.logic.commands.contact.commands.SearchCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonIsRolePredicate;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.Sponsor;
+import seedu.address.model.role.Volunteer;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -77,6 +82,15 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_search() throws Exception {
+        List<Role> roles = Arrays.asList(new Sponsor(), new Volunteer());
+        SearchCommand command = (SearchCommand) parser.parseCommand(
+                SearchCommand.COMMAND_WORD + " "
+                        + roles.stream().map(Role::getRoleName).collect(Collectors.joining(" ")));
+        assertEquals(new SearchCommand(new PersonIsRolePredicate(roles)), command);
     }
 
     @Test
