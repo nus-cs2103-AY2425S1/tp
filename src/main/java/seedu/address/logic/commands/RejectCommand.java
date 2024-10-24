@@ -49,8 +49,8 @@ public class RejectCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToReject = model.findPersonByNameAndJob(name, job);
-        Person personRejected = new Person(personToReject.getName(), personToReject.getJob(), personToReject.getPhone()
-                , personToReject.getEmail(), personToReject.getTags());
+        Person personRejected = new Person(personToReject.getName(), personToReject.getJob(), personToReject.getPhone(),
+                personToReject.getEmail(), personToReject.getTags());
 
         if (personToReject == null) {
             if (!model.isJobPresent(job)) {
