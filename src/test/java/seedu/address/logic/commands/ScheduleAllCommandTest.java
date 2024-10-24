@@ -13,7 +13,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ScheduleAllCommand.
  */
 public class ScheduleAllCommandTest {
 
@@ -28,14 +28,14 @@ public class ScheduleAllCommandTest {
 
     @Test
     public void execute_scheduleIsNotFiltered_showsSameList() {
-        expectedModel.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+        expectedModel.filterAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
         assertCommandSuccess(new ScheduleAllCommand(), model, ScheduleAllCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
+    public void execute_scheduleIsFiltered_showsEverything() {
         showAppointmentAtIndex(model, INDEX_FIRST_PERSON);
-        expectedModel.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+        expectedModel.filterAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
         assertCommandSuccess(new ScheduleAllCommand(), model, ScheduleAllCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

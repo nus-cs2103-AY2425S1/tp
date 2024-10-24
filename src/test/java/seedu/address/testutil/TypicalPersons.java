@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -24,21 +25,17 @@ public class TypicalPersons {
             .withMedication("gluten-free diet").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withId("P54321").withWard("A2").withDiagnosis("Celiac Disease")
-            .withMedication("gluten-free diet").withNotes("some notes")
-            .withAppointment("surgery",
-                    LocalDateTime.of(2024, 11, 11, 11, 0),
-                    LocalDateTime.of(2024, 11, 11, 11, 50))
-            .build();
+            .withMedication("gluten-free diet").withNotes("some notes").withAppointment("Checkup",
+                    LocalDateTime.parse("23-10-2024-16-00", DATE_TIME_FORMATTER),
+                    LocalDateTime.parse("24-10-2024-16-00", DATE_TIME_FORMATTER)).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withId("P73443").withWard("B3").withDiagnosis("Celiac Disease")
-            .withMedication("gluten-free diet").build();
+            .withMedication("gluten-free diet").withAppointment("Surgery",
+                    LocalDateTime.parse("23-10-2024-12-00", DATE_TIME_FORMATTER),
+                    LocalDateTime.parse("23-10-2024-14-00", DATE_TIME_FORMATTER)).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withId("P54786").withWard("C8").withDiagnosis("Celiac Disease")
-            .withMedication("gluten-free diet")
-            .withAppointment("surgery",
-                    LocalDateTime.of(2024, 11, 13, 11, 0),
-                    LocalDateTime.of(2024, 11, 13, 11, 50))
-            .build();
+            .withMedication("gluten-free diet").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withId("P27346").withWard("I5").withDiagnosis("Celiac Disease")
             .withMedication("gluten-free diet").build();
