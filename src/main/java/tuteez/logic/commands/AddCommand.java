@@ -71,6 +71,7 @@ public class AddCommand extends Command {
 
         Set<Lesson> lessonSet = toAdd.getLessons();
         for (Lesson lesson: lessonSet) {
+            assert lesson != null;
             if (model.isClashingWithExistingLesson(lesson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_LESSON);
             }
