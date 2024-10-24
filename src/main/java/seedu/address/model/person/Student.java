@@ -115,4 +115,5 @@ public class Student extends Person {
     public void resetAttendance() {
         this.daysAttended.reset();
     }
+
 }

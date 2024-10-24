@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class DaysAttended {
 
     public static final String MESSAGE_CONSTRAINTS = "Days attended should be a non-negative integer";
-    public int daysAttended;
+    private int daysAttended;
 
     /**
      * Constructs a {@code daysAttended}.
@@ -21,6 +21,10 @@ public class DaysAttended {
         requireNonNull(daysAttended);
         checkArgument(isValidDaysAttended(daysAttended), MESSAGE_CONSTRAINTS);
         this.daysAttended = daysAttended;
+    }
+
+    public int getDaysAttended() {
+        return daysAttended;
     }
 
     /**

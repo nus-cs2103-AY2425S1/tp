@@ -70,6 +70,6 @@ public class StudentTest {
     @Test
     public void getClassesString_validClasses_returnsClassesString() {
         Student student = new StudentBuilder().withClasses("Class A", "Class B").build();
-        assertEquals("Class A, Class B", student.getClasses().toString());
+        assertEquals("[Class A, Class B]", student.getClasses().toString());
     }
 }

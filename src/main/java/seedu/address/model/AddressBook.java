@@ -143,8 +143,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void markAttendance() {
         for (Person person : persons) {
-            if (person instanceof Student) {
-                ((Student) person).markAttendance();
+            if (person instanceof Student student) {
+                student.markAttendance();
             }
         }
     }
@@ -153,8 +153,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Unmarks the attendance of a particular student.
      */
     public void unmarkAttendance(Person personToUnmark) {
-        if (personToUnmark instanceof Student) {
-            ((Student) personToUnmark).unmarkAttendance();
+        if (personToUnmark instanceof Student student) {
+            student.unmarkAttendance();
         }
     }
 
@@ -163,8 +163,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetAttendance() {
         for (Person person : persons) {
-            if (person instanceof Student) {
-                ((Student) person).resetAttendance();
+            if (person instanceof Student student) {
+                student.resetAttendance();
             }
         }
     }

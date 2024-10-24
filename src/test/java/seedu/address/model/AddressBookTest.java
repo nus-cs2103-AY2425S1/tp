@@ -122,7 +122,7 @@ public class AddressBookTest {
         List<Person> persons = addressBook.getPersonList();
         persons.stream()
                 .filter(person -> person instanceof Student)
-                .forEach(person -> assertEquals(1, ((Student) person).getDaysAttended().daysAttended));
+                .forEach(person -> assertEquals(1, ((Student) person).getDaysAttended().getDaysAttended()));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class AddressBookTest {
         addressBook.unmarkAttendance(student);
 
         // Assert
-        assertEquals(0, student.getDaysAttended().daysAttended);
+        assertEquals(0, student.getDaysAttended().getDaysAttended());
     }
 
     @Test
@@ -157,7 +157,7 @@ public class AddressBookTest {
         List<Person> persons = addressBook.getPersonList();
         persons.stream()
                 .filter(person -> person instanceof Student)
-                .forEach(person -> assertEquals(0, ((Student) person).getDaysAttended().daysAttended));
+                .forEach(person -> assertEquals(0, ((Student) person).getDaysAttended().getDaysAttended()));
     }
 
 }

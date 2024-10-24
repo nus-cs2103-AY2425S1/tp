@@ -32,7 +32,7 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validArgsClasses_returnsSortCommand() throws Exception {
-        SortCommand command = parser.parse("classes");
+        SortCommand command = parser.parse("class");
         Comparator<? super Person> expectedComparator = Comparator.comparing(person -> person.getClasses().toString());
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);

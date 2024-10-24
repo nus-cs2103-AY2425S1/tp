@@ -19,7 +19,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DaysAttended;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 
@@ -56,7 +63,8 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
         Set<String> classes = parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
-        DaysAttended daysAttended = ParserUtil.parseDaysAttended(Integer.valueOf(argMultimap.getValue(PREFIX_ATTENDANCE).get()));
+        DaysAttended daysAttended = ParserUtil.parseDaysAttended(
+                Integer.valueOf(argMultimap.getValue(PREFIX_ATTENDANCE).get()));
 
         // Create the Student object
         Student student = new Student(name, gender, phone, email, address, tagList, subjectList, classes, daysAttended);

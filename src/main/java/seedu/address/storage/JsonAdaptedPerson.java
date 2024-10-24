@@ -9,9 +9,16 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javafx.beans.property.IntegerProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DaysAttended;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,7 +85,7 @@ class JsonAdaptedPerson {
             .map(String::toString)
             .collect(Collectors.toList()));
         if (source instanceof Student) {
-            this.daysAttended = ((Student) source).getDaysAttended().daysAttended;
+            this.daysAttended = ((Student) source).getDaysAttended().getDaysAttended();
         } else {
             daysAttended = null;
         }

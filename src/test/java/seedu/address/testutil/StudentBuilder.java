@@ -3,7 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DaysAttended;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -124,6 +131,9 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code DaysAttended} of the {@code Student} that we are building.
+     */
     public StudentBuilder withDaysAttended(Integer daysAttended) {
         this.daysAttended = new DaysAttended(daysAttended);
         return this;

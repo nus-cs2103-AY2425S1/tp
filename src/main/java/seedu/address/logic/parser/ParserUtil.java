@@ -9,7 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DaysAttended;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -183,6 +189,11 @@ public class ParserUtil {
         return classSet;
     }
 
+    /**
+     * Parses a {@code Integer daysAttended} into a {@code DaysAttended}.
+     *
+     * @throws ParseException if the given {@code daysAttended} is invalid.
+     */
     public static DaysAttended parseDaysAttended(Integer daysAttended) throws ParseException {
         requireNonNull(daysAttended);
         if (!DaysAttended.isValidDaysAttended(daysAttended)) {
