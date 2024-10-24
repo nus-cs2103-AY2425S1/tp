@@ -365,6 +365,15 @@
     -fx-font-size: 11;
 }
 
+.education-label {
+    -fx-text-fill: white;
+    -fx-background-color: #00008b;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
 .grade-label {
     -fx-text-fill: white;
     -fx-background-color: #6c757d;

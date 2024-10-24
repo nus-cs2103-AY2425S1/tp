@@ -21,6 +21,7 @@ Class Name
 Class Phone
 Class Tag
 Class Student extends Person
+Class Education
 Class Grade
 
 Class I #FFFFFF
@@ -47,6 +48,7 @@ Person *--> "1" Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Student *--> Education
 Student *--> Grade
 
 Person -[hidden]up--> I

@@ -64,6 +64,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
+                + editPersonDescriptor.getEducation().orElse(null) + ", education="
                 + editPersonDescriptor.getAddress().orElse(null) + ", parent name="
                 + editPersonDescriptor.getParentName().orElse(null) + ", parent phone="
                 + editPersonDescriptor.getParentPhone().orElse(null) + ", parent email="

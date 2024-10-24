@@ -62,12 +62,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public static JsonAdaptedPerson of(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("education") String education, @JsonProperty("grade") String grade,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("parentEmail") String parentEmail, @JsonProperty("grade") String grade,
+            @JsonProperty("parentEmail") String parentEmail,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned) {
         if (parentName != null) {
-            return new JsonAdaptedStudent(name, phone, email, address, parentName, parentPhone, parentEmail,
-                    grade, tags, isPinned);
+            return new JsonAdaptedStudent(name, phone, email, address, education, grade, parentName, parentPhone,
+                    parentEmail, tags, isPinned);
         }
         return new JsonAdaptedPerson(name, phone, email, address, tags, isPinned);
     }
