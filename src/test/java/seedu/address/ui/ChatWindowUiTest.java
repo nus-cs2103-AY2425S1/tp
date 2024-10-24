@@ -93,6 +93,108 @@ public class ChatWindowUiTest extends ApplicationTest {
     }
 
     @Test
+    public void getResponse_addKeyword_success() {
+        interact(() -> {
+            assertEquals("I assume you are having trouble with the add command.\n"
+                    + "Can you help specify which you are referring to?\n"
+                    + "• Adding a buyer/seller client profile\n"
+                    + "• Adding an appointment\n"
+                    + "• Adding a property\n"
+                    + "• Adding a listing",
+                    chatWindow.getResponse("add"));
+        });
+    }
+
+    @Test
+    public void getResponse_deleteKeyword_success() {
+        interact(() -> {
+            assertEquals("I assume you are having trouble with the delete command.\n" 
+                    + "Can you help specify which you are referring to?\n"
+                    + "• Deleting a buyer/seller client profile\n"
+                    + "• Deleting an appointment\n"
+                    + "• Deleting a property\n"
+                    + "• Deleting a listing",
+                    chatWindow.getResponse("delete"));
+        });
+    }
+
+    @Test
+    public void getResponse_addBuyer_success() {
+        assertEquals("This is how to add a buyer!\n"
+                        + "buyer n/{name} p/{phone number} e/{email}",
+                chatWindow.getResponse("add buyer"));
+        assertEquals("This is how to add a buyer!\n"
+                        + "buyer n/{name} p/{phone number} e/{email}",
+                chatWindow.getResponse("adding a buyer"));
+    }
+
+    @Test
+    public void getResponse_addSeller_success() {
+        assertEquals("This is how to add a seller!\n"
+                        + "seller n/{name} p/{phone number} e/{email}",
+                chatWindow.getResponse("add seller"));
+    }
+
+    @Test
+    public void getResponse_addAppointment_success() {
+        assertEquals("This is how to add an appointment!\n"
+                        + "apt {index} d/{date} fr/{start time} to/{end time}",
+                chatWindow.getResponse("add appointment"));
+        assertEquals("This is how to add an appointment!\n"
+                        + "apt {index} d/{date} fr/{start time} to/{end time}",
+                chatWindow.getResponse("adding an appointment"));
+    }
+
+    @Test
+    public void getResponse_addProperty_success() {
+        assertEquals("This is how to add a property!\n"
+                        + "prop {index} prop/{date} fr/{address}",
+                chatWindow.getResponse("add property"));
+    }
+
+    @Test
+    public void getResponse_deleteBuyer_success() {
+        assertEquals("This is how to delete a buyer!\n"
+                        + "delete n/{name}",
+                chatWindow.getResponse("delete buyer"));
+    }
+
+    @Test
+    public void getResponse_deleteSeller_success() {
+        assertEquals("This is how to delete a seller!\n"
+                        + "delete n/{name}",
+                chatWindow.getResponse("delete seller"));
+    }
+
+    @Test
+    public void getResponse_deleteAppointment_success() {
+        assertEquals("This is how to delete an appointment!\n"
+                        + "delapt n/{name}",
+                chatWindow.getResponse("delete appointment"));
+    }
+
+    @Test
+    public void getResponse_deleteProperty_success() {
+        assertEquals("This is how to delete a property!\n"
+                        + "delprop n/{name}",
+                chatWindow.getResponse("delete property"));
+    }
+
+    @Test
+    public void getResponse_clientCategory_success() {
+        assertEquals("We categorise clients into buyers and sellers for clarity of our users!\n"
+                        + "Maybe consider:\n"
+                        + "• Adding a buyer\n"
+                        + "• Adding a seller",
+                chatWindow.getResponse("add client"));
+        assertEquals("We categorise clients into buyers and sellers for clarity of our users!\n"
+                        + "Maybe consider:\n"
+                        + "• Deleting a buyer\n"
+                        + "• Deleting a seller",
+                chatWindow.getResponse("delete client"));
+    }
+
+    @Test
     public void getResponse_invalidMessage_failure() {
         String expected = "I'm sorry, I didn't understand that. Can you please \n"
                 + "rephrase?";

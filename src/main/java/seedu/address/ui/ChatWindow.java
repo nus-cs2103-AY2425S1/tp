@@ -94,16 +94,16 @@ public class ChatWindow {
         } else if (Pattern.compile("\\b(g+o+o+d+b+y+|b+y+e+|b+y+|bye|goodbye)\\b")
                 .matcher(message).find()) {
             return "Goodbye! Have a great day!";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*b+u+y+e+r+\\b")
-                .matcher(message).find()) {
-            return "This is how to add a buyer!\n"
-                    + "buyer n/{name} p/{phone number} e/{email}";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b")
                 .matcher(message).find()) {
             return "We categorise clients into buyers and sellers for clarity of our users!\n"
                     + "Maybe consider:\n"
                     + "• Adding a buyer\n"
                     + "• Adding a seller";
+        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*b+u+y+e+r+\\b")
+                .matcher(message).find()) {
+            return "This is how to add a buyer!\n"
+                    + "buyer n/{name} p/{phone number} e/{email}";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*s+e+l+e+r+\\b")
                 .matcher(message).find()) {
             return "This is how to add a seller!\n"
