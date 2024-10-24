@@ -50,7 +50,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.appointment = appointment; // Appointment field initialized
-        this.logEntries =  new LogList();
+        this.logEntries = new LogList();
     }
 
     public Name getName() {
@@ -143,7 +143,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, address, tags, appointment, logEntries); // Include appointment in hashCode
+        return Objects.hash(name, phone, email, nric, address, tags, appointment, logEntries);
     }
 
     @Override
