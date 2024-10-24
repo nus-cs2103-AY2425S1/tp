@@ -16,11 +16,13 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteAssignmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -108,6 +110,24 @@ public class AddressBookParserTest {
                         parser.parseCommand(DeleteAssignmentCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
                 DeleteAssignmentCommand.COMMAND_WORD + " a/1 n/1") instanceof DeleteAssignmentCommand);
+    }
+
+    @Test
+    public void parseCommand_adds() throws Exception {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(AddStudentCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(AddStudentCommand.COMMAND_WORD
+                + " n/John Doe p/98765432 tg/G16 sn/A1234567X") instanceof AddStudentCommand);
+    }
+
+    @Test
+    public void parseCommand_edits() throws Exception {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStudentCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(EditStudentCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(
+                EditStudentCommand.COMMAND_WORD + " 1 n/John Doe") instanceof EditStudentCommand);
     }
 
     @Test
