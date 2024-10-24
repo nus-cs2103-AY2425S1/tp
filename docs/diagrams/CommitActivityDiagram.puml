@@ -1,7 +1,7 @@
 @startuml
 skin rose
-skinparam ActivityFontSize 15
-skinparam ArrowFontSize 12
+skinparam ActivityFontSize 14
+skinparam ArrowFontSize 13
 start
 :User executes command;
 
@@ -12,7 +12,12 @@ if () then ([command commits AddressBook])
     :Purge redundant states;
     :Save AddressBook to
     addressBookStateList;
+elseif () then ([command commits WeddingBook])
+    : Purge redundant states;
+    : Save WeddingBook to
+    weddingBookStateList;
 else ([else])
+
 endif
 stop
 @enduml
