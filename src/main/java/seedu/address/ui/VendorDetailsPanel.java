@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ObservableObjectValue;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -38,6 +40,8 @@ public class VendorDetailsPanel extends UiPart<Region> {
     private GridPane detailsHolder;
     @FXML
     private StackPane detailsChildrenPlaceholder;
+    @FXML
+    private FlowPane tags;
 
     private ObservableList<Event> assignedEvents;
 
@@ -69,6 +73,8 @@ public class VendorDetailsPanel extends UiPart<Region> {
         name.setText(vendor.getName().fullName);
         phone.setText(vendor.getPhone().value);
         description.setText(vendor.getDescription().value);
+        vendor.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     private void showVendorDetails() {
