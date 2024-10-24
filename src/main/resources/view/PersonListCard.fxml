@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="300" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="70" GridPane.columnIndex="0">
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
@@ -25,7 +26,20 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" style="-fx-font-weight: bold;"/>
+        <Region minWidth="20"/>
+        <HBox spacing="0.5" alignment="CENTER_LEFT"> <!-- HBox for phone icon and number -->
+          <ImageView fx:id="phoneIcon" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true"/>
+          <Label fx:id="phone" styleClass="cell_big_label" text="\$phone" />
+        </HBox>
+      </HBox>
+      <HBox spacing="0.5" alignment="CENTER_LEFT">
+        <ImageView fx:id="addressIcon" fitHeight="13" fitWidth="13" pickOnBounds="true" preserveRatio="true"/>
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      </HBox>
+      <HBox spacing="0.5" alignment="CENTER_LEFT">
+        <ImageView fx:id="emailIcon" fitHeight="13" fitWidth="13" pickOnBounds="true" preserveRatio="true"/>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
@@ -33,5 +47,10 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" />
     </VBox>
+    <FlowPane fx:id="tags" GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="TOP_RIGHT" prefWidth="10">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="5" />
+      </padding>
+    </FlowPane>
   </GridPane>
 </HBox>

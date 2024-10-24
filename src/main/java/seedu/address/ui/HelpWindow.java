@@ -17,15 +17,35 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String COMMAND_SUMMARY = """
+        Commands:
+            ▪ Viewing Help: help
+
+            ▪ Adding a Person: add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…
+
+            ▪ Listing All Persons: list
+
+            ▪ Editing a Person: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
+
+            ▪ Locating Persons: find KEYWORD [MORE_KEYWORDS]
+
+            ▪ Deleting a Person: delete NAME or delete INDEX
+
+            ▪ Clearing All Entries: clear
+
+            ▪ Exiting the Program: exit
+        """;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-
     @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private Label commandSummary;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +55,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        commandSummary.setText(COMMAND_SUMMARY);
     }
 
     /**
