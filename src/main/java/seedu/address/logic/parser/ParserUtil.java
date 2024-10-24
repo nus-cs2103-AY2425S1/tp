@@ -102,22 +102,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a tutorial id and converts it into an integer.
-     *
-     * @param id String id of the tutorial.
-     * @return an integer id of the tutorial.
-     * @throws ParseException if the id is invalid.
-     */
-    public static TutorialId parseTutIndex(String id) throws ParseException {
-        requireNonNull(id);
-        String trimmedId = id.trim();
-        if (!TutorialId.isValidTutorialClass(trimmedId)) {
-            throw new ParseException(TutorialId.MESSAGE_CONSTRAINTS);
-        }
-        return TutorialId.of(trimmedId);
-    }
-
-    /**
      * Parses a date string in the format "dd/MM/yyyy" and converts it to a {@link TutDate} object.
      *
      * @param date The date string in the format "dd/MM/yyyy".

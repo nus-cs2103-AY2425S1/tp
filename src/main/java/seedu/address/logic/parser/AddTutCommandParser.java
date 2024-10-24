@@ -31,7 +31,7 @@ public class AddTutCommandParser implements Parser<AddTutCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUT_NAME, PREFIX_TUT_ID);
         TutName tutName = ParserUtil.parseTutName(argMultimap.getValue(PREFIX_TUT_NAME).get());
-        TutorialId id = ParserUtil.parseTutIndex(argMultimap.getValue(PREFIX_TUT_ID).get());
+        TutorialId id = ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUT_ID).get());
 
         Tutorial tutorial = Tutorial.of(tutName, id);
 

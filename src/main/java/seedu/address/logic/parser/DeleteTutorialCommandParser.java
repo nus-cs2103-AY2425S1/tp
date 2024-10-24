@@ -28,7 +28,7 @@ public class DeleteTutorialCommandParser implements Parser<DeleteTutorialCommand
                 );
             }
 
-            Tutorial tutorial = Tutorial.of(new TutName("random"), ParserUtil.parseTutIndex(args));
+            Tutorial tutorial = Tutorial.of(new TutName("random"), ParserUtil.parseTutorialId(args));
             return new DeleteTutorialCommand(tutorial);
 
         } catch (ParseException pe) {
