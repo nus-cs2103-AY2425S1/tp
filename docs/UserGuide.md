@@ -22,7 +22,7 @@
     --black-color: rgb(0, 0, 0);
   }
 
-  * {
+  .ug {
     font-family: 'DM Sans', sans-serif;
     transition: 0.2s ease;
   }
@@ -50,7 +50,7 @@
   }
 
   .headers-first {
-    margin-top: 128px;
+    margin-top: 72px;
   }
 
   .content {
@@ -183,9 +183,11 @@
   }
 
   .last-component {
-    margin-bottom: 128px;
+    margin-bottom: 96px;
   }
 </style>
+
+<div class="ug">
 
 <h1 class="headers headers-first">StaffSync User Guide</h1>
 
@@ -746,3 +748,5 @@ _Details coming soon ..._
 </div>
 
 <div class="last-component"></div>
+
+</div>
