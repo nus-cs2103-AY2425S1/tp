@@ -13,6 +13,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.Model;
@@ -51,7 +53,7 @@ public class AttendanceWindow {
         Set<LocalDate> attendanceDates = getAllAttendanceDates(model);
         for (LocalDate date : attendanceDates) {
             TableColumn<AttendanceRow, String> dateColumn =
-                    new TableColumn<>( DateTimeFormatter.ofPattern("MMM d yyyy").format(date));
+                    new TableColumn<>(DateTimeFormatter.ofPattern("MMM d yyyy").format(date));
 
             dateColumn.setCellValueFactory(cellData -> {
                 AttendanceRow row = cellData.getValue();
@@ -66,6 +68,12 @@ public class AttendanceWindow {
 
         VBox vbox = new VBox(table);
         vbox.setAlignment(Pos.CENTER);
+        vbox.setFillWidth(true);
+        VBox.setVgrow(table, Priority.ALWAYS);
+
+        table.setMinHeight(Region.USE_COMPUTED_SIZE);
+        table.setMinWidth(Region.USE_COMPUTED_SIZE);
+
         Scene scene = new Scene(vbox);
         stage.setScene(scene);
         stage.show();
