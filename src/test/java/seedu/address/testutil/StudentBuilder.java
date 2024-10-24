@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
@@ -33,6 +35,13 @@ public class StudentBuilder {
     public static final String DEFAULT_SUBMISSION_STATUS = "Y";
     public static final String DEFAULT_GRADING_STATUS = "Y";
     public static final String DEFAULT_GRADE = "95";
+    public static final Assignment DEFAULT_ASSIGNMENT = new Assignment(
+            new AssignmentName(DEFAULT_ASSIGNMENT_NAME),
+            new Deadline(DEFAULT_DEADLINE),
+            new Status(DEFAULT_SUBMISSION_STATUS),
+            new Status(DEFAULT_GRADING_STATUS),
+            new Grade(DEFAULT_GRADE)
+    );
 
     //========================Attendance default values ====================
     public static final String DEFAULT_ATTENDANCE_DATE = "2020-01-01";
@@ -44,7 +53,7 @@ public class StudentBuilder {
     private TutorialGroup tutorialGroup;
     private StudentNumber studentNumber;
 
-    private List<Assignment> assignments;
+    private ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
     //=============Attendance Fields==============
     private List<AttendanceRecord> attendanceRecords;
@@ -57,15 +66,7 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_CONTACT_NUMBER);
         tutorialGroup = new TutorialGroup(DEFAULT_TUTORIAL_GROUP);
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
-        assignments = new ArrayList<>();
-        Assignment assignment = new Assignment(
-                new AssignmentName(DEFAULT_ASSIGNMENT_NAME),
-                new Deadline(DEFAULT_DEADLINE),
-                new Status(DEFAULT_SUBMISSION_STATUS),
-                new Status(DEFAULT_GRADING_STATUS),
-                new Grade(DEFAULT_GRADE)
-        );
-        assignments.add(assignment);
+        assignments.add(DEFAULT_ASSIGNMENT);
         attendanceRecords = new ArrayList<>();
         Attendance attendance = new Attendance(DEFAULT_ATTENDANCE_STATUS);
         AttendanceRecord attendanceRecord = new AttendanceRecord(LocalDate.parse(DEFAULT_ATTENDANCE_DATE), attendance);
@@ -142,8 +143,19 @@ public class StudentBuilder {
         return this;
     }
 
-
-    public Student build() {
+    /**
+     * Builds the student object with empty assignments and attendance records.
+     * @return Student object
+     */
+    public Student build_default() {
         return new Student(name, phone, tutorialGroup, studentNumber);
+    }
+
+    /**
+     * Builds the student object with the given assignments and attendance records.
+     * @return Student object
+     */
+    public Student build() {
+        return new Student(name, phone, tutorialGroup, studentNumber, assignments, attendanceRecords);
     }
 }

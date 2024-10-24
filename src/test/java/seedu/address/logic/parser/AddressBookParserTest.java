@@ -142,6 +142,11 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand("undo") instanceof seedu.address.logic.commands.UndoCommand);
+    }
+
+    @Test
     public void parseCommand_markAttendance() throws Exception {
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), () ->

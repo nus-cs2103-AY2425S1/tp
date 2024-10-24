@@ -42,6 +42,8 @@ public class DeleteAssignmentCommand extends Command {
 
     public final AssignmentQuery assignmentQuery;
     public final Name name;
+    private int index;
+    private Assignment assignment;
 
     /**
      * Creates an DeleteAssignmentCommand to add the specified {@code Assignment}
@@ -60,11 +62,13 @@ public class DeleteAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
         }
 
-        Assignment assignment = student.deleteAssignment(assignmentQuery);
+        index = student.getAssignmentIndex(assignmentQuery);
 
-        if (assignment == null) {
+        if (index == -1) {
             throw new CommandException(MESSAGE_NO_ASSIGNMENT_FOUND);
         }
+
+        assignment = student.deleteAssignment(index);
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
     }
 
@@ -81,5 +85,17 @@ public class DeleteAssignmentCommand extends Command {
         DeleteAssignmentCommand otherCommand = (DeleteAssignmentCommand) other;
         return otherCommand.name.equals(this.name)
                 && otherCommand.assignmentQuery.equals(this.assignmentQuery);
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        // The command will only have been executed if assignment was assigned a value
+        if (assignment == null) {
+            return false;
+        }
+
+        Student student = model.getStudentByName(name);
+        student.addAssignment(index, assignment);
+        return true;
     }
 }

@@ -23,7 +23,7 @@ public class AttendanceWindowTest {
 
         // Add students with attendance records
         Student student1 = new StudentBuilder().withName("John Doe").withStudentNumber("A1234567M")
-                .withTutorialGroup("A01").build();
+                .withTutorialGroup("A01").build_default();
         student1.markAttendance(LocalDate.of(2024, 10, 1), "p");
         student1.markAttendance(LocalDate.of(2024, 10, 15), "p");
 
@@ -77,7 +77,7 @@ public class AttendanceWindowTest {
 
         // Add a student without attendance records
         Student student1 = new StudentBuilder().withName("John Doe").withStudentNumber("A1234567M")
-                .withTutorialGroup("A01").build();
+                .withTutorialGroup("A01").build_default();
         model.addStudent(student1);
 
         AttendanceWindow window = new AttendanceWindow(new TutorialGroup("A01"));
@@ -115,11 +115,11 @@ public class AttendanceWindowTest {
         Model model = new ModelManager();
 
         Student student1 = new StudentBuilder().withName("John Doe").withStudentNumber("A1234567M")
-                .withTutorialGroup("A01").build();
+                .withTutorialGroup("A01").build_default();
         student1.markAttendance(LocalDate.of(2024, 10, 1), "p");
 
         Student student2 = new StudentBuilder().withName("Jane Doe").withStudentNumber("A7654321M")
-                .withTutorialGroup("A01").build();
+                .withTutorialGroup("A01").build_default();
         student2.markAttendance(LocalDate.of(2024, 10, 15), "a");
 
         model.addStudent(student1);

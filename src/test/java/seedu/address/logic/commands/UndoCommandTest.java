@@ -1,24 +1,17 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -26,71 +19,52 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
-import seedu.address.testutil.StudentBuilder;
 
-public class AddStudentCommandTest {
+public class UndoCommandTest {
+    private CommandStack commandStack;
+    private Model model;
 
-    @Test
-    public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null));
+    @BeforeEach
+    public void setUp() {
+        commandStack = CommandStack.getInstance();
+        model = new ModelStub();
     }
 
     @Test
-    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-        Student validStudent = new StudentBuilder().build();
-
-        CommandResult commandResult = new AddStudentCommand(validStudent).execute(modelStub);
-
-        assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.formatStudentName(validStudent)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
+    public void execute_emptyStack() {
+        commandStack.clear();
+        assertEquals("There are no commands to undo",
+                new UndoCommand().execute(model).getFeedbackToUser());
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
-        Student validStudent = new StudentBuilder().build();
-        AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithStudent(validStudent);
+    public void execute_nonEmptyStack_notUndoableCommand() {
+        Command command = new NotUndoableCommandStub();
+        commandStack.push(command);
+        assertEquals("The previous command is not undoable",
+                new UndoCommand().execute(model).getFeedbackToUser());
+    }
 
-        assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_STUDENT, () ->
-                addStudentCommand.execute(modelStub));
+    @Test
+    public void execute_nonEmptyStack_undoableCommand() {
+        Command command = new UndoableCommandStub();
+        commandStack.push(command);
+        assertEquals(UndoCommand.MESSAGE_SUCCESS,
+                new UndoCommand().execute(model).getFeedbackToUser());
     }
 
     @Test
     public void equals() {
-        Student alice = new StudentBuilder().withName("Alice").build();
-        Student bob = new StudentBuilder().withName("Bob").build();
-        AddStudentCommand addAliceCommand = new AddStudentCommand(alice);
-        AddStudentCommand addBobCommand = new AddStudentCommand(bob);
+        UndoCommand undoCommand = new UndoCommand();
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(undoCommand, undoCommand);
 
-        // same values -> returns true
-        AddStudentCommand addAliceCommandCopy = new AddStudentCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        // different object -> returns false
+        assertFalse(undoCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different student -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void undo_validStudent() throws CommandException {
-        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-        Student validStudent = new StudentBuilder().build();
-        AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
-        addStudentCommand.execute(modelStub);
-
-        // undo the Add Student Command
-        addStudentCommand.undo(modelStub);
-        assertEquals(Arrays.asList(), modelStub.studentsAdded);
+        assertFalse(undoCommand.equals(null));
     }
 
     /**
@@ -211,58 +185,34 @@ public class AddStudentCommandTest {
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
             throw new AssertionError("This method should not be called.");
         }
-
     }
 
-    /**
-     * A Model stub that contains a single student.
-     */
-    private class ModelStubWithStudent extends ModelStub {
-        private final Student student;
-
-        ModelStubWithStudent(Student student) {
-            requireNonNull(student);
-            this.student = student;
+    private class NotUndoableCommandStub extends Command {
+        @Override
+        public CommandResult execute(Model model) {
+            return new CommandResult("Not Undoable command executed");
         }
 
         @Override
-        public boolean hasStudent(Student student) {
-            requireNonNull(student);
-            return (this.student).isSameStudent((Student) student);
+        public boolean undo(Model model) {
+            return false;
         }
     }
 
-    /**
-     * A Model stub that always accept the student being added.
-     */
-    private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Person> studentsAdded = new ArrayList<>();
-
+    private class UndoableCommandStub extends Command {
         @Override
-        public boolean hasStudent(Student student) {
-            requireNonNull(student);
-            return studentsAdded.stream().map(p -> (Student) p).anyMatch(student::isSameStudent);
+        public CommandResult execute(Model model) {
+            return new CommandResult("Undoable command executed");
         }
 
         @Override
-        public void addStudent(Student student) {
-            requireNonNull(student);
-            studentsAdded.add(student);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-
-        @Override
-        public int deleteStudent(Student target) {
-            studentsAdded.remove(target);
-            return 0;
+        public boolean undo(Model model) {
+            return true;
         }
     }
 }
