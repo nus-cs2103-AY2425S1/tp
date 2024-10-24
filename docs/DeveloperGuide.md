@@ -281,14 +281,14 @@ particular, this representative works with B2B sales.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- | ---------------- |-----------------------------------------------------------------------------| ---------------------------------------------------------------------- |
-| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
-| `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
-| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
-| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                               |
-| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                       |
-| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                    |
+| Priority | As a …           | I want to …                                                                 | So that I can …                                                       |
+| -------- | ---------------- |-----------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | user             | add a new contact                                                           | save the contact information of people                                |
+| `* * *`  | user             | delete a contact                                                            | free up space in my app                                               |
+| `* * *`  | user             | view all contact                                                            | see the full list of contacts                                         |
+| `* * *`  | user             | view a contact                                                              | retrieve contact information of a person                              |
+| `* * *`  | user             | save all contact                                                            | retain all information for when i reopen the app                      |
+| `* * *`  | sales rep        | have a low query time                                                       | avoid wasting much time querying my desired contact                   |
 | `* *`    | user             | find a person by name                                                       | locate details of persons without having to go through the entire list |
 | `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
 | `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
@@ -304,7 +304,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
 | `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                             |
 | `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                                |
- `* *`    | sales rep        | edit notes saved to client's contact                                        | keep track of my conversation with them                                |
+| `* *`    | sales rep        | edit notes saved to client's contact                                        | keep track of my conversation with them                                |
+| `* *`    | sales rep        | delete notes from a client's contact                                        | remove incorrect or outdated notes                                    |
 | `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics      |
 | `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
 | `* *`    | sales rep        | keep note of my client's email addresses                                    | potentially send promotions or survey forms                            |
@@ -473,7 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC9 - Edit a note to a person contact**
+**Use case: UC9 - Edit a note of a person contact**
 
 **MSS**
 1.  Actor performs <u>list all people (UC2)</u>.
@@ -500,6 +501,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2c. The note index is invalid.
 
     - 2c1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Delete note from a person contact**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to delete a specific note from a specific person.
+3.  System shows updated details excluding deleted note from that person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+    - 2a1. System shows an error message.
+
+      Use case ends.
+
+- 2b. The note index is invalid.
+
+    - 2b1. System shows an error message.
 
       Use case ends.
 
