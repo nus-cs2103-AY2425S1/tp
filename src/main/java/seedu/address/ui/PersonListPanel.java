@@ -18,7 +18,6 @@ import seedu.address.model.person.Person;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private boolean isInitialized = false; // Add this flag
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
@@ -64,7 +63,8 @@ public class PersonListPanel extends UiPart<Region> {
     private void setupAutoScroll(ObservableList<Person> personList) {
         personListView.getItems().addListener((ListChangeListener<Person>) change -> {
             while (change.next()) {
-                if (change.wasAdded() && isInitialized) {
+                System.out.println(change.getAddedSubList());
+                if (change.wasAdded()) {
                     Platform.runLater(() -> {
                         personListView.scrollTo(change.getTo());
                         personListView.getSelectionModel().select(change.getTo() - 1);
@@ -84,6 +84,5 @@ public class PersonListPanel extends UiPart<Region> {
                 }
             }
         });
-        isInitialized = true;
     }
 }
