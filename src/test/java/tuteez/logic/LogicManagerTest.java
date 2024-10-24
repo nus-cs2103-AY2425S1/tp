@@ -16,8 +16,6 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -92,7 +90,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getLastViewedPerson_noPersonViewed_returns_Optional_Empty() {
+    public void getLastViewedPerson_noPersonViewed_returns_emptyOptional() {
         assertEquals(Optional.empty(), logic.getLastViewedPerson().get());
     }
 
