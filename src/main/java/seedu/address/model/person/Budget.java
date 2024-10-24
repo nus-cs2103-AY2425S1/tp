@@ -22,6 +22,8 @@ public class Budget {
         requireNonNull(budget);
         checkArgument(isValidBudget(budget), MESSAGE_CONSTRAINTS);
 
+        assert !budget.isEmpty();
+
         // Fixes "."
         if (budget.equals(".")) {
             value = "0.00";
