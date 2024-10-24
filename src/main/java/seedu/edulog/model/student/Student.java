@@ -161,6 +161,7 @@ public class Student {
                 .add("edulog", address)
                 .add("tags", tags)
                 .add("hasPaid", hasPaid)
+                .add("fee", fee)
                 .toString();
     }
 

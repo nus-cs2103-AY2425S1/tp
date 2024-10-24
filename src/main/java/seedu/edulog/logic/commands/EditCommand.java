@@ -259,6 +259,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("edulog", address)
                     .add("tags", tags)
+                    .add("fee", fee)
                     .toString();
         }
     }
