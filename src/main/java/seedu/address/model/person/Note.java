@@ -26,10 +26,6 @@ public class Note {
         return this.note;
     }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
-
     @Override
     public boolean equals(Object other) {
 

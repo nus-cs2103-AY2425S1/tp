@@ -93,8 +93,9 @@ public class EditNotesCommand extends Command {
     private Person updateNote(Person personToEdit, Set<Note> notesToEdit) {
         // Convert Set to List for indexed access
         List<Note> notesList = new ArrayList<>(notesToEdit);
-        notesList.get(noteIndex.getZeroBased()).setNote(note.getNote());
+        notesList.set(noteIndex.getZeroBased(), note);
         Set<Note> editedNotes = new LinkedHashSet<>(notesList);
+
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), editedNotes);
