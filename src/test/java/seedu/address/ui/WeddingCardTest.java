@@ -2,17 +2,20 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javafx.application.Platform;
-import javafx.scene.control.Label;
+import java.lang.reflect.Field;
+import java.util.concurrent.CountDownLatch;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import javafx.application.Platform;
+import javafx.scene.control.Label;
 import seedu.address.model.wedding.Datetime;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
-import java.lang.reflect.Field;
-import java.util.concurrent.CountDownLatch;
+
 
 public class WeddingCardTest {
 

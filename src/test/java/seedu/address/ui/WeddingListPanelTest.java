@@ -3,11 +3,12 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import seedu.address.model.wedding.Datetime;
 import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
