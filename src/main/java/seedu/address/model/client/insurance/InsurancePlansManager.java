@@ -75,7 +75,7 @@ public class InsurancePlansManager {
      *                                the client's list of insurance plans.
      */
     public InsurancePlan getInsurancePlan(int insuranceId) throws InsurancePlanException {
-        for (InsurancePlan plan : insurancePlans) {
+        for (InsurancePlan plan : this.insurancePlans) {
             if (plan.getInsurancePlanId() == insuranceId) {
                 return plan;
             }
@@ -150,8 +150,8 @@ public class InsurancePlansManager {
             throw new ClaimException(DUPLICATE_CLAIM_ID_MESSAGE);
         }
         for (InsurancePlan p : insurancePlans) {
-            if (p.equals(insurancePlan)) {
-                p.claims.add(claim);
+            if (p.insurancePlanId == insurancePlan.getInsurancePlanId()) {
+                p.addClaim(claim);
                 this.claimIds.add(claim.getClaimId());
             }
         }
@@ -165,11 +165,27 @@ public class InsurancePlansManager {
      */
     public void deleteClaimFromInsurancePlan(InsurancePlan insurancePlan, Claim claim) {
         for (InsurancePlan p : insurancePlans) {
-            if (p.equals(insurancePlan)) {
+            if (p.insurancePlanId == insurancePlan.getInsurancePlanId()) {
                 p.removeClaim(claim);
                 this.claimIds.remove(claim.getClaimId());
             }
         }
+    }
+
+    /**
+     * Closes a claim from the specified insurance plan of the client.
+     *
+     * @param planToBeUsed            The insurance plan the claim belongs to.
+     * @param claimToBeMarkedAsClosed The claim to be marked as closed.
+     */
+    public void closeClaim(InsurancePlan planToBeUsed, Claim claimToBeMarkedAsClosed) throws ClaimException {
+        for (InsurancePlan p : insurancePlans) {
+            if (p.insurancePlanId == planToBeUsed.getInsurancePlanId()) {
+                Claim claimToClose = p.getClaim(claimToBeMarkedAsClosed.getClaimId());
+                claimToClose.close();
+            }
+        }
+        planToBeUsed.sortClaims();
     }
 
     /**
@@ -245,20 +261,20 @@ public class InsurancePlansManager {
 
     /**
      * Retrieves a formatted string listing all claims associated with the insurance plans.
-     *
+     * <p>
      * This method constructs a string representation of claims for each insurance plan
      * managed by the current entity. If there are no insurance plans, it returns a message
      * indicating that there are no insurance plans available. For each insurance plan,
      * it lists the claims, and if a plan has no claims, it appends a message indicating that
      * there are no claims for that particular plan.
-     *
+     * <p>
      * The format of the returned string is as follows:
      * - For each insurance plan, it includes the plan's details.
      * - If an insurance plan has no claims, it appends {@link #NO_CLAIMS_MESSAGE}.
      * - If claims exist, they are listed with an index number.
      *
      * @return A string representation of all claims associated with the insurance plans,
-     *         or {@link #NO_INSURANCE_PLANS_MESSAGE} if there are no insurance plans.
+     *     or {@link #NO_INSURANCE_PLANS_MESSAGE} if there are no insurance plans.
      */
     public String accessClaims() {
         StringBuilder listOfClaims = new StringBuilder();
@@ -319,5 +335,18 @@ public class InsurancePlansManager {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Creates a copy of this object for testing purposes only.
+     */
+    public InsurancePlansManager createCopy() throws InsurancePlanException, ClaimException {
+        String jsonPlansString = toString();
+        InsurancePlansManager copy = new InsurancePlansManager(jsonPlansString);
+
+        String jsonClaimsString = this.convertClaimsToJson();
+        copy.addAllClaimsFromJson(jsonClaimsString);
+
+        return copy;
     }
 }
