@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam linetype ortho
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
@@ -39,13 +40,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+
+' Adjust the exit points of diamonds from the Person class to avoid clutter
 Person *--> Name
 Person *--> Phone
 Person *--> IdentityNumber
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
-Person *---> "*" Log
+Person *--> "*" Log
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -53,6 +56,9 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> IdentityNumber
+IdentityNumber -[hidden]right-> Tag
+Tag -[hidden]right-> Log
 
 ModelManager --> "~* filtered" Person
 @enduml
