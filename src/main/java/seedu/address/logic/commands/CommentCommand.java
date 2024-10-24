@@ -19,19 +19,16 @@ public class CommentCommand extends Command {
 
     public static final String COMMAND_WORD = "comment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the comment of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Existing comments will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "c/ [COMMENT]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "c/ Is always late to class.";
+    public static final String MESSAGE_USAGE =
+            "Ensure the correct Format: " + COMMAND_WORD + " INDEX c/ COMMENT\n"
+                    + "Ensure the Prefix: c/ is after the INDEX and before the COMMENT \n"
+                    + "Required Parameter: Ensure INDEX is a valid positive integer within your current"
+                    + " list size shown \n"
+                    + "Optional Parameter: Ensure COMMENT is empty to remove comments, "
+                    + "or any value to add a comment \n"
+                    + "Example: " + "comment 1 c/ Is always late to class. \n"
+                    + "This will add a comment to the person identified by the index number used";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Comment command not implemented yet";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Comment: %2$s";
     public static final String MESSAGE_ADD_COMMENT_SUCCESS = "Added comment to Person: %1$s";
     public static final String MESSAGE_DELETE_COMMENT_SUCCESS = "Removed comment from Person: %1$s";
 
