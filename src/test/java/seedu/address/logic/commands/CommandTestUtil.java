@@ -2,12 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -51,6 +46,7 @@ public class CommandTestUtil {
     public static final String AGE_DESC_BOB = " " + PREFIX_AGE + VALID_AGE_BOB;
     public static final String DETAIL_DESC_AMY = " " + PREFIX_DETAIL + VALID_DETAIL_AMY;
     public static final String DETAIL_DESC_BOB = " " + PREFIX_DETAIL + VALID_DETAIL_BOB;
+    public static final String REMOVE_TAG_DESC_1A = " " + PREFIX_REMOVE_TAG + VALID_STUDY_GROUP_TAG_1A;
     public static final String STUDY_GROUP_TAG_DESC_1A = " " + PREFIX_STUDY_GROUP_TAG + VALID_STUDY_GROUP_TAG_1A;
     public static final String STUDY_GROUP_TAG_DESC_2B = " " + PREFIX_STUDY_GROUP_TAG + VALID_STUDY_GROUP_TAG_2B;
 
