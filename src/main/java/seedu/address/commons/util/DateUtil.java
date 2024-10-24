@@ -3,40 +3,46 @@ package seedu.address.commons.util;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
- * A class for representing dates.
+ * Helper functions for handling dates.
  */
 public class DateUtil {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    private static final Logger logger = LogsCenter.getLogger(DateUtil.class);
 
     /**
-     * Returns if a given string is a valid date.
-     *
-     * @param date The date to be checked.
+     * Returns if a given string is a valid date in the correct format.
      */
     public static boolean isValidDate(String date) {
-        try {
-            LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
-            return true;
-        } catch (DateTimeException e) {
-            return false;
-        }
+        return parseDate(date).isPresent();
     }
 
     /**
-     * Returns if a given string is a date that is after today.
-     *
-     * @param date The date to be checked.
-     * @return true if the date is after today, false otherwise.
+     * Returns if a given string is a valid date in the correct format and is after today.
      */
-    public static boolean isAfterToday(String date) {
-        if (!isValidDate(date)) {
-            return false;
-        }
-        LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
-        return parsedDate.isAfter(LocalDate.now());
+    public static boolean isDateAfterToday(String date) {
+        LocalDate today = LocalDate.now();
+        return parseDate(date)
+                .map(parsedDate -> parsedDate.isAfter(today))
+                .orElse(false);
     }
+
+    private static Optional<LocalDate> parseDate(String date) {
+        try {
+            LocalDate parsedDate = LocalDate.parse(date, DATE_FORMATTER);
+            logger.fine("Parsed date: " + parsedDate);
+            return Optional.of(parsedDate);
+        } catch (DateTimeException e) {
+            logger.warning("Unable to parse date: " + date);
+            return Optional.empty();
+        }
+    }
+
 }
