@@ -7,7 +7,7 @@ import static keycontacts.commons.util.AppUtil.checkArgument;
  * Represents a Student's phone number in the student directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements Comparable<Phone> {
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -56,6 +56,11 @@ public class Phone {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Phone o) {
+        return value.compareTo(o.value);
     }
 
 }

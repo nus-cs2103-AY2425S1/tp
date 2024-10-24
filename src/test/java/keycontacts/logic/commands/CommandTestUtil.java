@@ -120,25 +120,25 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         StudentDirectory expectedStudentDirectory = new StudentDirectory(actualModel.getStudentDirectory());
-        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getStudentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedStudentDirectory, actualModel.getStudentDirectory());
-        assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredList, actualModel.getStudentList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s student directory.
      */
     public static void showStudentAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getStudentList().size());
 
-        Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
+        Student student = model.getStudentList().get(targetIndex.getZeroBased());
         FindStudentDescriptorBuilder builder = new FindStudentDescriptorBuilder();
         builder.withName(student.getName().fullName);
-        model.updateFilteredStudentList(new StudentDescriptorMatchesPredicate(builder.build()));
+        model.filterStudentList(new StudentDescriptorMatchesPredicate(builder.build()));
 
-        assertEquals(1, model.getFilteredStudentList().size());
+        assertEquals(1, model.getStudentList().size());
     }
 
 }
