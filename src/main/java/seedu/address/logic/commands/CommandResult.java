@@ -139,6 +139,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("history", history)
+                .add("promptConfirmation", isPromptConfirmation())
                 .toString();
     }
 
