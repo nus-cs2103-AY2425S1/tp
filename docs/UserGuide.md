@@ -6,7 +6,9 @@
 
 # T_Assistant User Guide
 
-T_Assistant is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, T_Assistant can get your contact management tasks done faster than traditional GUI apps.
+T_Assistant is a **desktop app for CS2103 tutors managing their students, groups and tasks** optimized for use via a  Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+
+If you can type fast, T_Assistant can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,7 +19,7 @@ T_Assistant is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F12-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 

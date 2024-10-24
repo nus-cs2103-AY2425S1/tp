@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "T_Assistant",
-  "titleSuffix": "AddressBook Level-3",
+  "titleSuffix": "",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
