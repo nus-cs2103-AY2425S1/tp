@@ -7,39 +7,49 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-    </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" spacing="12" GridPane.columnIndex="0">
-      <padding>
-        <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-      </padding>
-      <Label fx:id="name" styleClass="label-header" text="\$first" />
-      <FlowPane fx:id="tags" />
-        <HBox spacing="24.0" VBox.vgrow="ALWAYS">
-            <VBox>
-                <Label styleClass="label-title" text="Phone" />
-                <Label fx:id="phone" styleClass="label-content" text="\$phone" />
+<HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane"
+      xmlns="http://javafx.com/javafx/17">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
+        </columnConstraints>
+        <VBox>
+            <VBox alignment="CENTER_LEFT" minHeight="175" spacing="12" GridPane.columnIndex="0">
+                <padding>
+                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
+                </padding>
+                <Label fx:id="name" styleClass="label-header" text="\$first"/>
+                <FlowPane fx:id="tags"/>
+                <HBox spacing="24.0" VBox.vgrow="ALWAYS">
+                    <VBox>
+                        <Label styleClass="label-title" text="Phone"/>
+                        <Label fx:id="phone" styleClass="label-content" text="\$phone"/>
+                    </VBox>
+                    <VBox>
+                        <Label styleClass="label-title" text="Email"/>
+                        <Label fx:id="email" styleClass="label-content" text="\$email"/>
+                    </VBox>
+                </HBox>
+                <VBox>
+                    <Label styleClass="label-title" text="Home Address"/>
+                    <HBox spacing="4" VBox.vgrow="ALWAYS">
+                        <Label fx:id="address" styleClass="label-content" text="\$address"/>
+                        <Label fx:id="addressLink" styleClass="link" text="(click to view map)"/>
+                    </HBox>
+                </VBox>
             </VBox>
-            <VBox>
-                <Label styleClass="label-title" text="Email" />
-                <Label fx:id="email" styleClass="label-content" text="\$email" />
+            <VBox fx:id="logsList" minWidth="380" styleClass="pane" >
+                <padding>
+                    <Insets left="10.0" top="10.0"/>
+                </padding>
+                <StackPane fx:id="logsListPanelPlaceHolder" styleClass="pane-without-border"
+                           VBox.vgrow="ALWAYS"/>
             </VBox>
-        </HBox>
-      <VBox>
-        <Label styleClass="label-title" text="Home Address" />
-          <HBox spacing="4" VBox.vgrow="ALWAYS">
-              <Label fx:id="address" styleClass="label-content" text="\$address" />
-              <Label fx:id="addressLink" styleClass="link" text="(click to view map)" />
-          </HBox>
-      </VBox>
-    </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
-  </GridPane>
+        </VBox>
+        <rowConstraints>
+            <RowConstraints/>
+        </rowConstraints>
+    </GridPane>
 </HBox>

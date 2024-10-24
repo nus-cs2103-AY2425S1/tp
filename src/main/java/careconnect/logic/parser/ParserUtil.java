@@ -2,13 +2,16 @@ package careconnect.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import careconnect.commons.core.index.Index;
 import careconnect.commons.util.StringUtil;
 import careconnect.logic.parser.exceptions.ParseException;
+import careconnect.model.log.Log;
 import careconnect.model.person.Address;
 import careconnect.model.person.Email;
 import careconnect.model.person.Name;
@@ -23,8 +26,10 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -120,5 +125,42 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseLogDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        Date parsedDate;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        sdf.setLenient(false); // Disable lenient parsing, strict checking
+        try {
+            // Attempt to parse the date string
+            parsedDate = sdf.parse(trimmedDate);
+        } catch (java.text.ParseException e) {
+            // If a ParseException occurs, the string is not a valid date
+            throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+        }
+        return parsedDate;
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Log}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static String parseLogRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Log.isValidLogRemark(trimmedRemark)) {
+            throw new ParseException(Log.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedRemark;
     }
 }

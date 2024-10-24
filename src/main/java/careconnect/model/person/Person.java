@@ -1,12 +1,15 @@
 package careconnect.model.person;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import careconnect.commons.util.CollectionUtil;
 import careconnect.commons.util.ToStringBuilder;
+import careconnect.model.log.Log;
 import careconnect.model.tag.Tag;
 
 /**
@@ -23,17 +26,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ArrayList<Log> logs = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  ArrayList<Log> logs) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, tags, logs);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.logs.addAll(logs);
     }
 
     public Name getName() {
@@ -61,6 +67,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable log list, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Log> getLogs() {
+        return Collections.unmodifiableList(this.logs);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -84,22 +98,22 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && logs.equals(otherPerson.logs);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, logs);
     }
 
     @Override
@@ -110,6 +124,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("logs", logs)
                 .toString();
     }
 
