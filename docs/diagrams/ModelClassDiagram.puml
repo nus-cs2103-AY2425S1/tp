@@ -43,7 +43,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> "0..1"Address
 Person *--> "*" Tag
-Person *--> "*" ModuleRoleMap
+Person *--> "1" ModuleRoleMap
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
