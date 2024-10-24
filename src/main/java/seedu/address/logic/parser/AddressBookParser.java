@@ -19,8 +19,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchCommand;
 import seedu.address.logic.commands.ScreenCommand;
-import seedu.address.logic.commands.ViewCompanyCommand;
 import seedu.address.logic.commands.UnmatchCommand;
+import seedu.address.logic.commands.ViewCompanyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
