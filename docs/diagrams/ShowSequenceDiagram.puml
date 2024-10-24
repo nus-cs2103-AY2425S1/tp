@@ -9,8 +9,8 @@ end box
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":ShowCommandParser" as ShowCommandParser LOGIC_COLOR
+participant "d:ShowCommand" as ShowCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -24,53 +24,53 @@ activate MainWindow
 MainWindow -> LogicManager
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("show 1")
 activate AddressBookParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create ShowCommandParser
+AddressBookParser -> ShowCommandParser
+activate ShowCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+ShowCommandParser --> AddressBookParser
+deactivate ShowCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+AddressBookParser -> ShowCommandParser : parse("1")
+activate ShowCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create ShowCommand
+ShowCommandParser -> ShowCommand
+activate ShowCommand
 
-DeleteCommand --> DeleteCommandParser :
-deactivate DeleteCommand
+ShowCommand --> ShowCommandParser :
+deactivate ShowCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+ShowCommandParser --> AddressBookParser : d
+deactivate ShowCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+ShowCommandParser -[hidden]-> AddressBookParser
+destroy ShowCommandParser
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
-activate DeleteCommand
+LogicManager -> ShowCommand : execute(m)
+activate ShowCommand
 
-DeleteCommand -> Model : getFilteredPersonList()
+ShowCommand -> Model : getFilteredPersonList()
 activate Model
 
-Model --> DeleteCommand
+Model --> ShowCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+ShowCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> ShowCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+ShowCommand --> LogicManager : r
+deactivate ShowCommand
 
 LogicManager --> MainWindow : r
 deactivate LogicManager
