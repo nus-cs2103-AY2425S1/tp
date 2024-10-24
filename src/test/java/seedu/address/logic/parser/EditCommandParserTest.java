@@ -17,10 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.HEALTHRECORD_DESC_AMY
 import static seedu.address.logic.commands.CommandTestUtil.HEALTHRECORD_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HEALTHRISK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.HEALTHRISK_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_BLOOD_TEST;
-import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_HEALTHSERVICE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SEX_DESC;
@@ -133,7 +130,7 @@ public class EditCommandParserTest {
                 Sex.MESSAGE_CONSTRAINTS); // invalid sex
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_BIRTHDATE_DESC,
                 Birthdate.MESSAGE_CONSTRAINTS); // invalid birthdate
-        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_HEALTHSERVICE_DESC,
+        assertParseFailure(parser, VALID_NRIC_AMY,
                 HealthService.MESSAGE_CONSTRAINTS); // invalid health service
 
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NRIC_DESC + SEX_DESC_AMY,
@@ -148,7 +145,7 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Nric targetNric = new Nric("T0123456A");
         String userInput = targetNric + NAME_DESC_AMY + NRIC_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + BLOODTYPE_DESC_AMY + NOKNAME_DESC_AMY + NOKPHONE_DESC_AMY + ALLERGY_DESC_AMY + HEALTHRISK_DESC_AMY
                 + HEALTHRECORD_DESC_AMY + APPOINTMENT_DESC_AMY + NOTE_DESC_AMY;
 
@@ -201,12 +198,6 @@ public class EditCommandParserTest {
         // birthdate
         userInput = targetNric + BIRTHDATE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withBirthDate(VALID_BIRTHDATE_AMY).build();
-        expectedCommand = new EditCommand(targetNric, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // health services
-        userInput = targetNric + HEALTHSERVICE_DESC_VACCINATION;
-        descriptor = new EditPersonDescriptorBuilder().build();
         expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -294,112 +285,105 @@ public class EditCommandParserTest {
 
         // mulltiple valid name fields repeated
         userInput = targetNric + NAME_DESC_BOB + NAME_DESC_AMY + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple valid nric fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + NRIC_DESC_AMY + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
         // multiple valid sex fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + SEX_DESC_AMY + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEX));
 
         // multiple valid birthdate fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB + BIRTHDATE_DESC_AMY
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDATE));
 
-        // multiple valid health service fields repeated
-        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + HEALTHSERVICE_DESC_BLOOD_TEST + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB
-                + HEALTHRISK_DESC_BOB + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEALTHSERVICE));
-
         // multiple valid phone fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple valid email fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple valid address fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ADDRESS_DESC_AMY
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ADDRESS_DESC_AMY
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple valid blood type fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + BLOODTYPE_DESC_AMY + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB
                 + HEALTHRISK_DESC_BOB + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BLOODTYPE));
 
         // multiple valid next-of-kin name fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKNAME_DESC_AMY + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB
                 + HEALTHRISK_DESC_BOB + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOKNAME));
 
         // multiple valid next-of-kin phone fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + NOKPHONE_DESC_AMY + ALLERGY_DESC_BOB
                 + HEALTHRISK_DESC_BOB + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOKPHONE));
 
         // multiple valid allergy fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + ALLERGY_DESC_AMY
                 + HEALTHRISK_DESC_BOB + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ALLERGY));
 
         // multiple valid health risk fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRISK_DESC_AMY + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEALTHRISK));
 
         // multiple valid health record fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + HEALTHRECORD_DESC_AMY + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEALTHRECORD));
 
         // multiple valid appointment fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + APPOINTMENT_DESC_AMY + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_APPOINTMENT));
 
         // multiple valid note fields repeated
         userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_VACCINATION + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGY_DESC_BOB + HEALTHRISK_DESC_BOB
                 + HEALTHRECORD_DESC_BOB + APPOINTMENT_DESC_BOB + NOTE_DESC_BOB + NOTE_DESC_AMY;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));

@@ -3,10 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_BLOOD_TEST;
-import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_HEALTHSERVICE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SEX_DESC;
@@ -34,7 +31,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -51,21 +47,21 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
-                + BIRTHDATE_DESC_BOB + HEALTHSERVICE_DESC_BLOOD_TEST, new AddCommand(expectedPerson));
+                + BIRTHDATE_DESC_BOB, new AddCommand(expectedPerson));
 
 
         // multiple health services - all accepted
         Person expectedPersonMultipleHealthServices = new PersonBuilder(BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
-                        + BIRTHDATE_DESC_BOB + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION,
+                        + BIRTHDATE_DESC_BOB,
                 new AddCommand(expectedPersonMultipleHealthServices));
     }
 
     @Test
     public void parse_repeatedNonHealthServiceValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
-                + BIRTHDATE_DESC_BOB + HEALTHSERVICE_DESC_BLOOD_TEST;
+                + BIRTHDATE_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -155,32 +151,28 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid NRIC
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_NRIC_DESC + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION, Nric.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_NRIC_DESC + SEX_DESC_BOB + BIRTHDATE_DESC_BOB,
+                Nric.MESSAGE_CONSTRAINTS);
 
         // invalid Sex
-        assertParseFailure(parser, NAME_DESC_BOB + NRIC_DESC_BOB + INVALID_SEX_DESC + BIRTHDATE_DESC_BOB
-                + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION, Sex.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + NRIC_DESC_BOB + INVALID_SEX_DESC + BIRTHDATE_DESC_BOB,
+                Sex.MESSAGE_CONSTRAINTS);
 
         // invalid Birthdate
-        assertParseFailure(parser, NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + INVALID_BIRTHDATE_DESC
-                + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION, Birthdate.MESSAGE_CONSTRAINTS);
-
-        // invalid health service
-        assertParseFailure(parser, NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
-                + INVALID_HEALTHSERVICE_DESC + HEALTHSERVICE_DESC_VACCINATION, HealthService.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + INVALID_BIRTHDATE_DESC,
+                Birthdate.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + NRIC_DESC_BOB + SEX_DESC_BOB + INVALID_BIRTHDATE_DESC
-                        + HEALTHSERVICE_DESC_VACCINATION, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + NRIC_DESC_BOB + SEX_DESC_BOB + INVALID_BIRTHDATE_DESC,
+                Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
-                + BIRTHDATE_DESC_BOB + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION,
+                + BIRTHDATE_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
