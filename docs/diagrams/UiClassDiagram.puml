@@ -19,16 +19,16 @@ Class StatusBarFooter
 Class CommandBox
 }
 
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
-}
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
 
 package Logic <<Rectangle>> {
 Class HiddenLogic #FFFFFF
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
@@ -49,14 +49,14 @@ CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 WeddingListPanel --|> UiPart
-WeddingCard --|> UiPart
+WeddingCard ---|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ..> Model
 WeddingCard ..> Model
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
 WeddingListPanel -[hidden]left- PersonListPanel
 PersonListPanel -[hidden]left- HelpWindow
