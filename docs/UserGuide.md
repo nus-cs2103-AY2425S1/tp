@@ -167,6 +167,16 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Set a volunteer's hours
+
+Sets a volunteers hours to a certain amount.
+
+Format: `setHours INDEX h/HOURS`
+
+* The index is based on the indices in the latest list command.
+
+Example: `setHours 2 h/20`
+
 ### Searching persons by field: `search`
 
 Search persons whose fields match the keywords given.
@@ -222,6 +232,32 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
   There must be at least one index provided, and indices should be separated by a space.
 * There cannot be two groups with the same name. If a group
   with the given `GROUP_NAME` currently exists, the command will fail.
+
+### Editing a group's name : `editGroupName`
+
+Edits the name of a group that currently exists.
+
+Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
+
+* Changes the group with the name `OLD_GROUP_NAME`'s name to
+`NEW_GROUP_NAME`.
+* The old group name must exist, and the new group name must not already be in use.
+* If either of the above conditions are not met, the command will fail.
+
+### Adding new members to a existing group : `addToGroup`
+
+Adds new members to a group that currently exists.
+
+Format: `addToGroup g/GROUP_NAME m/[INDICES]`
+
+* Adds new members to the group with the name `GROUP_NAME`.
+* The indices are based on the indices displayed in the last list command.
+* There must already exist a group with the name `GROUP_NAME`. The indices
+must be valid indices.
+* If either of the above conditions are not met, the command will fail.
+
+Example:
+* `addToGroup g/blood drive 2024 m/1 2 5 6`
 
 ### Deleting a group: `deleteGroup`
 
@@ -298,8 +334,11 @@ Action     | Format, Examples
 **List**   | `list`
 **Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
+**Set a Volunteer's Hours** | `setHours INDEX [h/HOURS]`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
 **View Group**   | `viewGroup g/GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
 **List Groups**  | `listGroups`
 **Get Emails**   | `email`
+**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
+**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
