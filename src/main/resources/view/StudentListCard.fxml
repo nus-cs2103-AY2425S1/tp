@@ -45,7 +45,10 @@
       </padding>
 
       <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-      <Label fx:id="grade" />
+      <FlowPane>
+        <Label fx:id="education" />
+        <Label fx:id="grade" />
+      </FlowPane>
       <ScrollPane fitToWidth="true" fitToHeight="true"
                   styleClass="scroll-pane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true">
         <content>
