@@ -61,7 +61,7 @@ public class ParserUtil {
     public static StudentId parseStudentID(String studentID) throws ParseException {
         requireNonNull(studentID);
         String trimmedID = studentID.trim();
-        if (!StudentId.isValidID(trimmedID)) {
+        if (!StudentId.isValidId(trimmedID)) {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(trimmedID);
