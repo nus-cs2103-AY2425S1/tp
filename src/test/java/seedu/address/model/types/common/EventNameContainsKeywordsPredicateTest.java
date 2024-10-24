@@ -38,7 +38,7 @@ public class EventNameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different event -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

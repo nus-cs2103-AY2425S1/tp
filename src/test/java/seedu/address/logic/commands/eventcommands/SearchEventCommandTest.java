@@ -55,7 +55,7 @@ public class SearchEventCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         EventTagContainsKeywordsPredicate predicate = preparePredicate(" ");
         SearchEventCommand command = new SearchEventCommand(predicate);
@@ -65,7 +65,7 @@ public class SearchEventCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
         EventTagContainsKeywordsPredicate predicate = preparePredicate("Hobby Music");
         SearchEventCommand command = new SearchEventCommand(predicate);
