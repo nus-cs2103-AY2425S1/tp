@@ -373,4 +373,13 @@ public class AutoSuggestionTextField extends TextField {
     public SortedSet<String> getEntries() {
         return commandSet;
     }
+
+    /**
+     * Get the existing suggestionList.
+     *
+     * @return The existing suggestionList.
+     */
+    public ListView<TextFlow> getSuggestionList() {
+        return suggestionList;
+    }
 }
