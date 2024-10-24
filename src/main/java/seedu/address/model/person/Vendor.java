@@ -50,7 +50,7 @@ public class Vendor extends Person {
                   Company company) {
         super(name, phone, email, address, tags);
         this.company = company;
-        this.budget = new Budget(Budget.MINIMUM_BUDGET);
+        this.budget = new Budget("0");
     }
 
     /**

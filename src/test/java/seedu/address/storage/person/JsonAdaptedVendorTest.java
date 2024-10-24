@@ -27,7 +27,7 @@ public class JsonAdaptedVendorTest extends JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BRIAN.getEmail().toString();
     private static final String VALID_ADDRESS = BRIAN.getAddress().toString();
     private static final String VALID_COMPANY = BRIAN.getCompany().toString();
-    private static final double VALID_BUDGET = BRIAN.getBudget().toDouble();
+    private static final String VALID_BUDGET = BRIAN.getBudget().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BRIAN.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

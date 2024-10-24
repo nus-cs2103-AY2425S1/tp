@@ -22,7 +22,7 @@ import seedu.address.storage.JsonAdaptedTag;
  */
 public class JsonAdaptedVendor extends JsonAdaptedPerson {
     private final String company;
-    private final Double budget;
+    private final String budget;
 
     /**
      * Constructs a {@code JsonAdaptedVendor} with the given vendor details.
@@ -34,7 +34,7 @@ public class JsonAdaptedVendor extends JsonAdaptedPerson {
              @JsonProperty("email") String email,
              @JsonProperty("address") String address,
              @JsonProperty("company") String company,
-             @JsonProperty("Budget") Double budget,
+             @JsonProperty("Budget") String budget,
              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
         setType(type);

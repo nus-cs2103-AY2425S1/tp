@@ -153,19 +153,10 @@ public class ParserUtil {
             return null;
         }
         String trimmedBudget = budget.trim();
-        double budgetValue;
-
-        try {
-            budgetValue = Double.parseDouble(trimmedBudget);
-        } catch (NumberFormatException e) {
+        if (!Budget.isValidBudget(trimmedBudget)) {
             throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
         }
-
-        if (!Budget.isValidBudget(budgetValue)) {
-            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
-        }
-
-        return new Budget(budgetValue);
+        return new Budget(trimmedBudget);
     }
 
     /**
