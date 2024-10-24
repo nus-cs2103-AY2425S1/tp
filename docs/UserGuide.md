@@ -248,21 +248,21 @@
 
 <br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
-
+  <br>
 * Items in square brackets are optional.
   e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
-
-* Parameters can be in any order.<br>
+  <br>
+* Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
+  <br>
 * Parameters and commands are case-sensitive
   e.g. the command `Help` and `edit 1 N/John Doe` will return an error
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+  <br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
+  <br>
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
@@ -359,7 +359,7 @@
 <div class="content content-droppable">
 
 <details>
-  <summary><strong>[WIP] Editing a person<br><code>edit</code></strong>
+  <summary><strong>Editing a person<br><code>edit</code></strong>
     <span class="material-symbols-outlined chevrons">
       chevron_right
     </span>
