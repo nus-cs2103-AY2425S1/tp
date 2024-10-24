@@ -82,17 +82,45 @@ In this comprehensive user guide, we will take you to experience a full journey 
 ### 1.1 What is TrackMate
 <a id="what-is-trackmate"></a>
 
-TO BE DONE
+TrackMate is a desktop application specifically designed for teaching assistants (TAs) who work at the School of 
+Computing (SoC) of National University of Singapore (NUS). By providing an efficient solution to manage student data, 
+TrackMate simplifies the process of tracking assignments, tutorials, and attendance. With its powerful Command Line 
+Interface (CLI), TrackMate allows TAs to efficiently manage student information while enhancing productivity in their 
+administrative tasks.
+
+Overview of Main Features:
+* Tutorial Management: Track student tutorial groups for each session.
+* Attendance Monitoring: Record attendance effortlessly to ensure that student participation is logged accurately.
+* Assignment Tracking: Easily add, update, and manage assignment submissions and statuses for students.
 
 ### 1.2 User Proficiency and Expectations
 <a id="user-proficiency-and-expectations"></a>
 
-TO BE DONE
+* Level of Relatedness: Users of TrackMate are TAs within SoC who are actively involved in managing students’ 
+academic progress, particularly in tutorials, assignments, and attendance tracking.
+
+
+* Comprehension: Users are expected to have a working knowledge of academic processes such as student grading, 
+tutorial scheduling, and attendance monitoring within the context of NUS.
+
+
+* Prior Knowledge: TrackMate assumes users have basic computer proficiency, particularly in navigating CLI 
+environments, and are comfortable managing data related to student performance.
+
+
+* Desire for Efficiency: Users of TrackMate prioritize streamlined workflows, allowing them to manage student 
+data effectively while reducing the time spent on repetitive tasks.
 
 ### 1.3 Why This Guide Matters
 <a id="why-this-guide-matters"></a>
 
-TO BE DONE
+This guide is crafted to ensure that you make the most of TrackMate's functionality. Whether you are just starting 
+out or are an experienced TA, the guide will walk you through using the tool efficiently, offering shortcuts and tips 
+to enhance your experience. By following the steps outlined here, you'll be able to simplify your workflow, allowing 
+you to focus more on teaching and less on administrative tasks.
+
+We’re here to help you make the most out of your TA experience with TrackMate. Let’s dive in and explore how TrackMate 
+can transform the way you manage student data at SoC!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -322,18 +350,30 @@ Example:
 #### 4.3.1 Adding an assignment: `addAsg`
 <a id="adding-an-assignment-add"></a>
 
-> TO BE DONE
+> Add a new assignment with the given title and due date to the TrackMate application.
+
+Format: `addAsg n/ASSIGNMENT_TITLE d/yyyy-MM-dd HHmm`
+
+Command Details & Constraints:
+* Create a new assignment with title ASSIGNMENT_TITLE and the specified due date.
+* Due date is in the format yyyy-MM-dd HHmm.
+* Duplicate assignment titles are not allowed.
+
+Example:
+1. `addAsg n/CS2103T Assignment 2 d/25-10-2024 2359`
+2. `addAsg n/CS2101 CA1 d/23-09-2024 1200`
+
 
 #### 4.3.2 Delete an assigment: `deleteAsg`
 <a id="deleting-an-assignment-deleteAsg"></a>
 
 > Delete a specified assignment from the TrackMate application.
 
-Format: `deleteAsg CS2101 CA3`
+Format: `deleteAsg ASSIGNMENT_TITLE`
 
 Command Details & Constraints:
-* Deletes the assignment based on the `ASSIGNMENT_NAME`
-    * The `ASSIGNMENT_NAME` must exist in the assignment list.
+* Deletes the assignment based on the `ASSIGNMENT_TITLE`
+    * The `ASSIGNMENT_TITLE` must exist in the assignment list.
 * No prefix is required for `deleteAsg` command.
 * The command should only consist of exactly two words: `deleteAsg` and a valid `ASSIGNMENT_NAME`
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
@@ -345,22 +385,67 @@ Example:
 #### 4.3.3 List assignments: `listAsg`
 <a id="listing-assignments-listAsg"></a>
 
-> TO BE DONE
+> List all assignments tracked in the TrackMate application.
+
+Format: `listAsg`
+
+Command Details & Constraints:
+* This command will display all assignments with details such as:
+  * title
+  * due date
+  * number of students who have completed the assignment
+
 
 #### 4.3.4 Mark an assignment: `markAsg`
 <a id="marking-an-assignment-markAsg"></a>
 
-> TO BE DONE
+> Mark the status of the given assignment for the student at specified index as completed.
+
+Format: `markAsg INDEX n/ASSIGNMENT_TITLE`
+
+Command Details & Constraints:
+* Using the given index of the student, TrackMate will mark his/her assignment status as completed. 
+* Assignment with the given title must exist.
+* Student at the specified index must exist.
+
+Example:
+1. `markAsg 1 n/CS2103T Assignment 2`
+2. `markAsg 12 n/CS2101 CA1`
 
 #### 4.3.5 Unmark an assignment: `unmarkAsg`
 <a id="unmarking-an-assignment-unmarkAsg"></a>
 
-> TO BE DONE
+> Mark the status of the given assignment for the student at specified index as not completed.
+
+Format: `unmarkAsg INDEX n/ASSIGNMENT_TITLE`
+
+Command Details & Constraints:
+* This command is the opposite of mark command.
+* Using the given index of the student, TrackMate will mark his/her assignment status as not completed.
+* Assignment with the given title must exist.
+* Student at the specified index must exist.
+
+Example:
+1. `unmarkAsg 1 n/CS2103T Assignment 2`
+2. `unmarkAsg 10 n/CS2101 CA1`
 
 #### 4.3.6 Check an assignment: `checkAsg`
 <a id="checking-an-assignment-checkAsg"></a>
 
-> TO BE DONE
+> Check the completion statistics of the specified assignment.
+
+Format: `checkAsg n/ASSIGNMENT_TITLE`
+
+Command Details & Constraints:
+* This command will display the statistics for the given assignment. This includes:
+  * Number of students who have completed the assignments
+  * List of students who have completed the assignment.
+  * List of students who have not completed the assignment.
+* Assignment with the given title must exist.
+
+Example:
+1. `checkAsg n/CS2103T Assignment 2`
+2. `checkAsg n/CS2101 CA1`
 
 ### 4.4 Attendance Data Related Commands:
 <a id="assignment-data-commands"></a>
