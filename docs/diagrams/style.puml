@@ -13,6 +13,13 @@
 !define UI_COLOR_T3 #166800
 !define UI_COLOR_T4 #0E4100
 
+/'
+ 'T5 through T7 are placeholders, will change later - Jean Yang
+ '/
+!define UI_COLOR_T5 #3FC71B
+!define UI_COLOR_T6 #166800
+!define UI_COLOR_T7 #0E4100
+
 !define LOGIC_COLOR #3333C4
 !define LOGIC_COLOR_T1 #C8C8FA
 !define LOGIC_COLOR_T2 #6A6ADC
