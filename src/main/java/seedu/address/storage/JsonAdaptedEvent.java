@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
+import seedu.address.model.name.Name;
 
 /**
  * Jackson-friendly version of {@link Event}.

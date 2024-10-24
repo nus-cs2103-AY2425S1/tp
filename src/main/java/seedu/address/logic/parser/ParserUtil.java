@@ -10,9 +10,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Date;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.vendor.Description;
-import seedu.address.model.vendor.Name;
 import seedu.address.model.vendor.Phone;
 
 /**
@@ -55,20 +55,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code seedu.address.model.event.Name}.
+     * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static seedu.address.model.event.Name parseEventName(String name) throws ParseException {
+    public static Name parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!seedu.address.model.event.Name.isValidName(trimmedName)) {
+        if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        // unable to import event.Name directly due to clashing names
-        // TODO modify after name clash is resolved
-        return new seedu.address.model.event.Name(trimmedName);
+        return new Name(trimmedName);
     }
 
     /**
