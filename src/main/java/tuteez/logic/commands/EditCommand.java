@@ -54,8 +54,8 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johnd@gmail.com\n"
-            + "Note: Input values can be blank only for optional parameters specified in 'add' "
-            + "in order to delete the existing value.";
+            + "Note: You can leave the optional parameters specified in 'add' blank "
+            + "in order to delete the existing values.";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
