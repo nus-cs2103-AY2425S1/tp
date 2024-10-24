@@ -13,12 +13,15 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
+abstract Class Person
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Hours
+Class Subject
+
 
 Class I #FFFFFF
 }
@@ -39,9 +42,11 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
+Person *--> Hours
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Subject
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,4 +56,7 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+
+Tutor .up.|> Person
+Tutee .up.|> Person
 @enduml
