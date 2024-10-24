@@ -14,10 +14,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AssignPolicyCommand;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Policy;
-import seedu.address.commons.core.index.Index;
+
+
 public class AssignPolicyCommandParserTest {
 
     private AssignPolicyCommandParser parser = new AssignPolicyCommandParser();
