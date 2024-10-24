@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,25 +43,20 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label remark;
-    @FXML
     private Label dateOfBirth;
     @FXML
     private Label householdIncome;
     @FXML
     private Label familySize;
     @FXML
-    private FlowPane tags;
+    private Label remark;
     @FXML
     private Label updatedAt;
-
     @FXML
-    private Label date;
-    @FXML
-    private Label time;
+    private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -87,30 +81,14 @@ public class PersonCard extends UiPart<Region> {
             remark.setText(value);
         }
 
-        Appointment appointment = person.getAppointment();
-        if (appointment != null) {
-            date.setText(appointment.getFormattedDate());
-            time.setText("%s – %s".formatted(
-                    appointment.getFormattedStartTime(),
-                    appointment.getFormattedEndTime()));
-        }
-
-        dateOfBirth.setText(
-                String.format("%s (Age: %d)",
-                        person.getDateOfBirth(),
-                        getPersonAge(person)
-                )
-        );
-
+        dateOfBirth.setText(String.format("%s (Age: %d)", person.getDateOfBirth(), getPersonAge(person)));
         householdIncome.setText(String.format("[Household Income] %s", person.getIncome()));
-
         familySize.setText(String.format("Family size: %s", person.getFamilySize()));
+        updatedAt.setText(String.format("Last updated: %s", person.getUpdatedAt()));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-        updatedAt.setText(String.format("Last updated: %s", person.getUpdatedAt()));
     }
 
     private static int getPersonAge(Person person) {

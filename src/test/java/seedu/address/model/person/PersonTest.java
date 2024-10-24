@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
-
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
@@ -35,7 +34,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withFamilySize(VALID_FAMILY_SIZE_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withFamilySize(VALID_FAMILY_SIZE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -95,8 +94,12 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRemark("DIFFERENT REMARK").build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different age -> returns false
+        // different date of birth -> returns false
         editedAlice = new PersonBuilder(ALICE).withDateOfBirth("28 May 1978").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different income -> returns false
+        editedAlice = new PersonBuilder(ALICE).withIncome(2500).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different family size -> returns false
@@ -118,10 +121,10 @@ public class PersonTest {
                 + ALICE.getPriority() + ", remark="
                 + ALICE.getRemark() + ", dateOfBirth="
                 + ALICE.getDateOfBirth() + ", income="
-                + ALICE.getIncome() + ", appointment="
-                + ALICE.getAppointment() + ", familySize="
+                + ALICE.getIncome() + ", familySize="
                 + ALICE.getFamilySize() + ", tags="
-                + ALICE.getTags() + "}";
+                + ALICE.getTags() + ", updatedAt="
+                + ALICE.getUpdatedAt() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

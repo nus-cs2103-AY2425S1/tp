@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook3;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -18,13 +20,13 @@ import seedu.address.model.scheme.MoeFinancialAssistanceScheme;
 import seedu.address.model.scheme.StudentCareFeeAssistanceScheme;
 
 public class SchemeCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook3(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook3(), new UserPrefs());
+
+    private final Model model = new ModelManager(getTypicalAddressBook3(), new ArrayList<>(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook3(), new ArrayList<>(), new UserPrefs());
 
     @Test
     public void execute_notSchemeAvail_success() {
-        CommandResult expectedCommandResult = new CommandResult("No schemes available for this family.",
-                false, false);
+        CommandResult expectedCommandResult = new CommandResult("No schemes available for this family.");
         assertCommandSuccess(new SchemeCommand(INDEX_THIRD_PERSON), model, expectedCommandResult, expectedModel);
     }
 
@@ -32,15 +34,14 @@ public class SchemeCommandTest {
     public void execute_allSchemeAvail_success() {
         CommandResult expectedCommandResult = new CommandResult("1. "
                 + MoeFinancialAssistanceScheme.SCHEME_NAME + "\n"
-                + "2. " + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n", false, false);
+                + "2. " + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n");
         assertCommandSuccess(new SchemeCommand(INDEX_FIRST_PERSON), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_oneSchemeAvail_success() {
         CommandResult expectedCommandResult = new CommandResult("1. "
-                + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n",
-                false, false);
+                + StudentCareFeeAssistanceScheme.SCHEME_NAME + "\n");
         assertCommandSuccess(new SchemeCommand(INDEX_SECOND_PERSON), model, expectedCommandResult, expectedModel);
     }
 

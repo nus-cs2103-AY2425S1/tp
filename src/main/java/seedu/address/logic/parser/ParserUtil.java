@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
@@ -179,7 +180,7 @@ public class ParserUtil {
         try {
             return LocalDate.parse(date.trim());
         } catch (DateTimeParseException e) {
-            throw new ParseException("Dates should be in yyyy-MM-dd format");
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE_FORMAT);
         }
     }
 
@@ -194,7 +195,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(time.trim());
         } catch (DateTimeParseException e) {
-            throw new ParseException("Times should be in HH:mm format");
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
     }
 

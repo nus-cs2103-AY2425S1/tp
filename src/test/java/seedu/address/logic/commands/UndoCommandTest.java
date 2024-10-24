@@ -16,6 +16,8 @@ import static seedu.address.testutil.TypicalPastCommands.EDIT_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPastCommands.EMPTY_COMMAND_LAST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook2;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +35,8 @@ public class UndoCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook2(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook2(), new ArrayList<>(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new ArrayList<>(), new UserPrefs());
     }
 
     @Test
@@ -114,6 +116,4 @@ public class UndoCommandTest {
         // different past commands -> returns false
         assertFalse(undoFirstCommand.equals(undoSecondCommand));
     }
-
-
 }

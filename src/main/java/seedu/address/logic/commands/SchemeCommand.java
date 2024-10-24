@@ -61,7 +61,7 @@ public class SchemeCommand extends Command {
         if (result.toString().equals("")) {
             result = new StringBuilder("No schemes available for this family.");
         }
-        return new CommandResult(result.toString(), false, false);
+        return new CommandResult(result.toString());
     }
 
     @Override

@@ -18,7 +18,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SchemeCommand;
 import seedu.address.logic.commands.StatisticsCommand;
 
@@ -53,14 +52,11 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String STATISTICS_COMMAND = StatisticsCommand.MESSAGE_USAGE + "\n";
 
-    private static final String SCHEDULE_COMMAND = ScheduleCommand.MESSAGE_USAGE + "\n";
-
     private static final String SCHEME_COMMAND = SchemeCommand.MESSAGE_USAGE + "\n";
 
     private static final String HELP_COMMAND = HelpCommand.MESSAGE_USAGE + "\n";
     private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
-        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEDULE_COMMAND, SCHEME_COMMAND,
-        HELP_COMMAND, EXIT_COMMAND};
+        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEME_COMMAND, HELP_COMMAND, EXIT_COMMAND};
 
     @FXML
     private Button copyButton;
