@@ -251,6 +251,18 @@ Examples:
 * `sort sch/descending` will sort by schedule in descending order
   ![result for 'sort descending'](images/sortByScheduleDesc.png)
 
+### Backing up save file : `backup`
+
+Creates a backup of the current save file.
+
+Format: `backup`
+
+* Backup AddressBook data are saved automatically as a JSON file `[JAR file location]/backup/addressbook.json`.
+
+* The backup file can be used in order to restore the AddressBook data in case of data loss, or to transfer the data to another device.
+
+* Users can safely move or copy the backup file to another device, without worrying above negative consequences.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
