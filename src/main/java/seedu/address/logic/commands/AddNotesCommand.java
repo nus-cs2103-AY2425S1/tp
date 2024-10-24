@@ -24,7 +24,7 @@ public class AddNotesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add the note of the person identified "
-            + "by the index number used in the last person listing. "
+            + "by the person index number used on the left display panel. "
             + "New note(letters and numbers) will be appended to the notes currently stored.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "n/ [NOTES]\n"
