@@ -21,7 +21,11 @@ import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
+import seedu.address.model.shortcut.ShortCut;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class AddressBookTest {
 
@@ -30,6 +34,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getShortCutList());
     }
 
     @Test
@@ -50,7 +55,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_VEGETARIAN)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        AddressBookStub newData = new AddressBookStub(newPersons, Collections.emptyList());
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -88,21 +93,36 @@ public class AddressBookTest {
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
+    @Test
+    public void hasShortCut_shortcutNotInAddressBook_returnsFalse() {
+        ShortCut shortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
+        assertFalse(addressBook.hasShortCut(shortCut));
+    }
+
+    @Test
+    public void hasShortCut_shortcutInAddressBook_returnsTrue() {
+        ShortCut shortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
+        addressBook.addShortCut(shortCut);
+        assertTrue(addressBook.hasShortCut(shortCut));
+    }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
+                + ", shortcuts=" + addressBook.getShortCutList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons, orders, and shortcuts lists can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<ShortCut> shortcuts = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<ShortCut> shortcuts) {
             this.persons.setAll(persons);
+            this.shortcuts.setAll(shortcuts);
         }
 
         @Override
@@ -115,6 +135,9 @@ public class AddressBookTest {
             throw new UnsupportedOperationException("This method is not implemented yet.");
         }
 
+        @Override
+        public ObservableList<ShortCut> getShortCutList() {
+            return shortcuts;
+        }
     }
-
 }
