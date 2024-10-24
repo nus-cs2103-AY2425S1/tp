@@ -24,7 +24,7 @@ public class AddNotesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add the note of the person identified "
-            + "by the index number used in the last person listing. "
+            + "by the person index number used on the left display panel. "
             + "New note(letters and numbers) will be appended to the notes currently stored.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "n/ [NOTES]\n"
@@ -32,14 +32,15 @@ public class AddNotesCommand extends Command {
             + "n/ High profile client.";
 
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes to Person: %1$s";
+    public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
 
     private final Index index;
     private final Note note;
 
 
     /**
-     * @param index of the person in the filtered person list to edit the notes
-     * @param note of the person to be updated to
+     * @param index of the person in the filtered person list to add a new note
+     * @param note of the person to be added
      */
     public AddNotesCommand(Index index, Note note) {
         requireAllNonNull(index, note);
@@ -62,7 +63,7 @@ public class AddNotesCommand extends Command {
         Set<Note> notesToEdit = new LinkedHashSet<>(personToEdit.getNotes());
 
         if (notesToEdit.contains(note)) {
-            throw new CommandException(Note.DUPLICATE_MESSAGE_CONSTRAINTS);
+            throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
 
         notesToEdit.add(note);
@@ -87,6 +88,21 @@ public class AddNotesCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         return String.format(MESSAGE_ADD_NOTES_SUCCESS, Messages.format(personToEdit));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddNotesCommand)) {
+            return false;
+        }
+
+        AddNotesCommand otherAddNotesCommand = (AddNotesCommand) other;
+        return note.equals(otherAddNotesCommand.note);
     }
 
 }

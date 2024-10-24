@@ -304,6 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | sales rep        | view my most popular/active clients                                         | promote the new product                                                |
 | `* *`    | sales rep        | remember the client's preferred products                                    | recommend related products                                             |
 | `* *`    | sales rep        | add notes to client's contact                                               | keep track of my conversation with them                                |
+| `* *`    | sales rep        | edit notes saved to client's contact                                        | keep track of my conversation with them                                |
 | `* *`    | sales rep        | delete notes from a client's contact                                        | remove incorrect or outdated notes                                    |
 | `* *`    | sales rep        | group my clients by industry                                                | tell if sales are doing well in that industry among other metrics      |
 | `* *`    | sales rep        | add tags to clients                                                         | categorize them                                                        |
@@ -451,7 +452,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC8 - Delete note from a person contact**
+**Use case: UC8 - Export contact list**
+
+**MSS**
+1.  Actor requests to export contact list to a specific file.
+2.  System exports the contact information into the file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. System detects that the directory does not exist.
+
+    - 1a1. System creates the directory.
+
+      Use case resumes from step 2.
+
+- 1b. System detects that the file is used by another process.
+
+    - 1b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC9 - Edit a note of a person contact**
+
+**MSS**
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to edit a note to a specific person.
+3.  System shows details of the newly edited note of that person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+    - 2a1. System shows an error message.
+
+      Use case ends.
+
+
+- 2b. The note name is invalid.
+
+    - 2b1. System shows an error message.
+
+      Use case ends.
+
+- 2c. The note index is invalid.
+
+    - 2c1. System shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Delete note from a person contact**
 
 **MSS**
 
@@ -472,29 +525,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2b. The note index is invalid.
 
     - 2b1. System shows an error message.
-
-      Use case ends.
-
-**Use case: UC9 - Export contact list**
-
-**MSS**
-
-1.  Actor requests to export contact list to a specific file.
-2.  System exports the contact information into the file.
-
-    Use case ends.
-
-**Extensions**
-
-- 1a. System detects that the directory does not exist.
-
-    - 1a1. System creates the directory.
-
-      Use case resumes from step 2.
-
-- 1b. System detects that the file is used by another process.
-
-    - 1b1. System shows an error message.
 
       Use case ends.
 
