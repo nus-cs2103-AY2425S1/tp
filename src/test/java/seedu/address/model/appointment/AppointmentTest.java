@@ -72,4 +72,16 @@ public class AppointmentTest {
                 + "}";
         assertEquals(expected, APPOINTMENT_A.toString());
     }
+
+    @Test
+    public void getDoctorName() {
+        String expected = ALICE.getName().toString();
+        assertEquals(expected, APPOINTMENT_A.getDoctorName());
+    }
+
+    @Test
+    public void getPatientName() {
+        String expected = CARL.getName().toString();
+        assertEquals(expected, APPOINTMENT_A.getPatientName());
+    }
 }

@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.doctor.Doctor;
+import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Doctor} objects to be used in tests.
@@ -75,5 +77,13 @@ public class TypicalDoctors {
 
     public static List<Doctor> getTypicalDoctors() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalDoctors()) {
+            ab.addPerson(person);
+        }
+        return ab;
     }
 }

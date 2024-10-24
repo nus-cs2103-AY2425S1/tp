@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Patient} objects to be used in tests.
@@ -79,5 +81,13 @@ public class TypicalPatients {
 
     public static List<Patient> getTypicalPatients() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPatients()) {
+            ab.addPerson(person);
+        }
+        return ab;
     }
 }
