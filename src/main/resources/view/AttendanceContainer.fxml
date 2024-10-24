@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="5" />
+    </padding>
+    <Label text="Classes"/>
+    <Label fx:id="tutorial" styleClass="cell_small_label" text="\$tutorials" style="-fx-padding: 0 0 5 0"/>
+    <Label text="Attendance"/>
+    <HBox>
+        <Label fx:id="week" styleClass="cell_small_label" text="\$current week"/>
+        <Label styleClass="cell_small_label" text=" | "/>
+        <Label fx:id="dateRange" styleClass="cell_small_label" text="\$date range"/>
+    </HBox>
+    <VBox fx:id="attendanceList" />
+</VBox>
