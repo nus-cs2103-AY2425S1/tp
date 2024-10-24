@@ -22,7 +22,9 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListArchiveFilesCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadArchiveCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -94,6 +96,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_archive() throws Exception {
         assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
+    }
+
+    @Test
+    public void parseCommand_listArchiveFiles() throws Exception {
+        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD) instanceof ListArchiveFilesCommand);
+        assertTrue(parser.parseCommand(ListArchiveFilesCommand.COMMAND_WORD + " 3") instanceof ListArchiveFilesCommand);
+    }
+
+    @Test
+    public void parseCommand_loadArchive() throws Exception {
+        assertTrue(parser.parseCommand(LoadArchiveCommand.COMMAND_WORD) instanceof LoadArchiveCommand);
     }
 
     @Test

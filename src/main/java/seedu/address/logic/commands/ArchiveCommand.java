@@ -8,7 +8,7 @@ import seedu.address.commons.core.filename.Filename;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Archives the address book.
  */
 public class ArchiveCommand extends Command {
 
