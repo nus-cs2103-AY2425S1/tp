@@ -126,6 +126,25 @@ public class CommandStackTest {
         // =============================================== END OF SCENARIO 2 ================================
     }
     @Test
+    public void commandGetters_emptyStack_behaviourAsExpected() {
+        CommandStack emptyCommandStack = new CommandStack(new ArrayList<>());
+        currCgr = CommandGetterResult.ofEmpty();
+        // user presses arrow key up
+        currCgr = emptyCommandStack.getEarlierCommandGetterResult(currCgr);
+        assertEquals(currCgr, CommandGetterResult.ofEmpty();
+        // user presses arrow key down
+        currCgr = emptyCommandStack.getLaterCommandGetterResult(currCgr);
+        assertEquals(currCgr, CommandGetterResult.ofEmpty();
+        // user types something
+        currCgr = currCgr.updateStringToDisplay(C1).updateIsModified(true);
+        // user presses arrow key down - nothing changes
+        currCgr = emptyCommandStack.getLaterCommandGetterResult(currCgr);
+        assertEquals(currCgr, new CommandGetterResult(C1, true));
+        // user presses arrow key up - reset to blank
+        currCgr = emptyCommandStack.getEarlierCommandGetterResult(currCgr);
+        assertEquals(currCgr, CommandGetterResult.ofEmpty());
+    }
+    @Test
     public void addCommand_smallStack_behaviourAsExpected() {
         CommandStack extCommandStack = initSmallStack();
         CommandStack newCommandStack = extCommandStack.addCommand(C4);
