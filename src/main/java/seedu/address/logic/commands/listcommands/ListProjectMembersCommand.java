@@ -34,6 +34,8 @@ public class ListProjectMembersCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
+        // TODO: Check that this does not cause any side effects (e.g. change displayed
+        // assignment list)
         model.updateFilteredAssignmentList(predicate);
         List<Assignment> filteredAssignments = model.getFilteredAssignmentList();
 
