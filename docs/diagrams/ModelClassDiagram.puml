@@ -8,6 +8,7 @@ Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyEventBook" as ReadOnlyEventBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nReadOnlyEventBook" as ReadOnlyEventBook
 Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class EventBook
@@ -23,6 +24,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Event
 
 Class I #FFFFFF
 }
