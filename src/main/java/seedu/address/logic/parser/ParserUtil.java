@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -202,6 +204,8 @@ public class ParserUtil {
     public static Network parseNetwork(String network) throws ParseException {
         requireNonNull(network);
         String trimmedNetwork = network.trim();
+        Logger logger = LogsCenter.getLogger(ParserUtil.class);
+        logger.info(trimmedNetwork);
         try {
             return Network.valueOf(trimmedNetwork);
         } catch (IllegalArgumentException e) {
