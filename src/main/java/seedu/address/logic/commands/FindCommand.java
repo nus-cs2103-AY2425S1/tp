@@ -30,7 +30,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_PARAMETERS = FindEmployeeCommand.ARGUMENT_WORD + " for employees, "
             + FindPotentialCommand.ARGUMENT_WORD + " for potential hires, and "
             + FindCommand.ARGUMENT_WORD + " for both employees and potential hires.";
-    public static final String COMMAND_KEYWORDS = PREFIX_NAME + "/[NAME] " + PREFIX_PHONE + "/[PHONE NUMBERS] "
+    public static final String COMMAND_KEYWORDS = PREFIX_NAME + "/[NAMES] " + PREFIX_PHONE + "/[PHONE NUMBERS] "
             + PREFIX_EMAIL + "/[EMAILS]" + PREFIX_DEPARTMENT + "/[DEPARTMENTS] " + PREFIX_ROLE + "/[ROLES]";
     public static final String MESSAGE_FORMAT = COMMAND_WORD + "PARAMETER KEYWORD [MORE_KEYWORDS]"
             + "\nParameter: " + COMMAND_PARAMETERS

@@ -624,7 +624,7 @@ testers are expected to do more *exploratory* testing.
 ### Finding a person
 
 1. Finding a person
-   1. Test case: `find e n/john`<br>
+   1. Test case: `find e n/John`<br>
    Expected: Number of employees with name `John` listed found shown in the status message.
    Displays the list of employees found.
 
@@ -636,9 +636,9 @@ testers are expected to do more *exploratory* testing.
    Expected: Number of employees and potential hires with email `john@example.com` listed shown in the status message.
    Displays the list of persons found.
    
-   4. Test case: `Find e d/IT r/SWE`<br>
+   4. Test case: `find e d/IT r/SWE`<br>
    Expected: Number of employees with department `IT` and role `SWE` listed shown in the status message.
-   Displays the list of persons found
+   Displays the list of employees found
 
    5. Test case: `Find e n/john`, `Find ph p/12345678`, `Find all john@example.com`<br>
    Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
