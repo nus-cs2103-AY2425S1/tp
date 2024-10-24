@@ -35,6 +35,8 @@ public class PersonDetailedView extends UiPart<Region> {
     @FXML
     private Label birthday;
     @FXML
+    private Label age;
+    @FXML
     private Label hasPaid;
     @FXML
     private FlowPane tags;
@@ -59,6 +61,7 @@ public class PersonDetailedView extends UiPart<Region> {
         phone.setText("+65 " + person.getPhone().value);
         address.setText("Address: " + person.getAddress().value);
         birthday.setText("Birthday: " + person.getBirthday().value);
+        age.setText("Age: " + person.getAge().value);
         email.setText(person.getEmail().value);
         hasPaid.setText("Paid status: " + (person.getHasPaid() ? "Paid" : "Not Paid"));
         person.getTags().stream()
