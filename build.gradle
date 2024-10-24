@@ -20,21 +20,13 @@ checkstyle {
     toolVersion = '10.2'
 }
 
-test {
-    useJUnitPlatform()
-    finalizedBy jacocoTestReport
-
-    systemProperty 'testfx.setup.timeout', '60000'
-    enableAssertions = true
-}
-
-task guiTests(type: Test) {
+tasks.register('guiTests', Test) {
     useJUnitPlatform()
     include 'systemtests/**'
     enableAssertions = true
 }
 
-task nonGuiTests(type: Test) {
+tasks.register('nonGuiTests', Test) {
     useJUnitPlatform()
     include 'spleetwaise/address/**'
     include 'spleetwaise/common/**'
@@ -42,20 +34,30 @@ task nonGuiTests(type: Test) {
     enableAssertions = true
 }
 
-guiTests.mustRunAfter nonGuiTests
-task allTests {
+tasks.register('allTests') {
     dependsOn nonGuiTests, guiTests
 }
 
-task coverage(type: JacocoReport) {
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+
+    systemProperty 'testfx.setup.timeout', '60000'
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'prism.order', 'sw'
+    systemProperty 'prism.text', 't2k'
+    enableAssertions = true
+
+    exclude 'systemtests/**'
+}
+
+tasks.register('coverage', JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
     executionData.from files(jacocoTestReport.executionData)
-    afterEvaluate {
-        classDirectories.from files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/*.jar'])
-        })
-    }
+    classDirectories.setFrom(files(classDirectories.files.collect {
+        fileTree(dir: it, exclude: ['**/*.jar'])
+    }))
     reports {
         html.required = true
         xml.required = true
