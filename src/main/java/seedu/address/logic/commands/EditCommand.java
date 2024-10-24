@@ -29,6 +29,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -118,10 +119,12 @@ public class EditCommand extends Command {
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         // edit command does not allow editing appointments
         Appointment updatedAppointment = personToEdit.getAppointment();
+        // todo - allow edit of person's family size
+        FamilySize updatedFamilySize = personToEdit.getFamilySize();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority,
-                updatedRemark, updatedDateOfBirth, updatedIncome, updatedAppointment, updatedTags);
+                updatedRemark, updatedDateOfBirth, updatedIncome, updatedAppointment, updatedFamilySize, updatedTags);
     }
 
     @Override
