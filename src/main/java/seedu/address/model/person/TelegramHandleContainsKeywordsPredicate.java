@@ -29,7 +29,7 @@ public class TelegramHandleContainsKeywordsPredicate implements Predicate<Person
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof TelegramHandleContainsKeywordsPredicate)) {
             return false;
         }
 
