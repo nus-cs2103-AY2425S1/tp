@@ -22,8 +22,6 @@ public class AddressBookStatistics {
     private UniqueSellingPropertyList uniqueSellingPropertyList;
     private UniqueBuyingPropertyList uniqueBuyingPropertyList;
 
-    private UniquePersonList persons;
-
     /**
      * Initialises an empty {@code AddressBookStatistics} that has all field set to 0 or a new empty list.
      */
