@@ -29,7 +29,7 @@ public class EventNewCommand extends Command {
             + EVENT_PREFIX_START_TIME + "START TIME "
             + EVENT_PREFIX_END_TIME + "END TIME "
             + EVENT_PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "Example: " + EVENT_COMMAND_INDICATOR + COMMAND_WORD + " "
+            + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " "
             + EVENT_PREFIX_NAME + "Food collection "
             + EVENT_PREFIX_LOCATION + "NTUC "
             + EVENT_PREFIX_DATE + "2024-11-29 "
