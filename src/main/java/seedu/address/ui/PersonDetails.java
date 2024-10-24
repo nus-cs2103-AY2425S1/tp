@@ -5,6 +5,7 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 
@@ -17,7 +18,7 @@ public class PersonDetails {
     @FXML
     private Label birthdayLabel;
     @FXML
-    private FlowPane historyLabel;
+    private VBox history;
     @FXML
     private Label remarkLabel;
     @FXML
@@ -51,14 +52,12 @@ public class PersonDetails {
         birthdayLabel.setText(person.getBirthday().value.toString());
         remarkLabel.setText(person.getRemark().value);
 
-        StringBuilder historyText = new StringBuilder();
         person.getHistory().getHistoryEntries().forEach((date, activities) -> {
-            historyText.append(date.toString()).append(": \n");
-            historyText.append(String.join(", \n", activities)).append("\n");
-            Label history = new Label(historyText.toString());
-            historyLabel.getChildren().add(history);
+            StringBuilder historyText = new StringBuilder(date.toString() + ": \n");
+            historyText.append(String.join(", \n", activities));
+            Label historyLabel = new Label(historyText.toString());
+            history.getChildren().add(historyLabel);
         });
-
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> {

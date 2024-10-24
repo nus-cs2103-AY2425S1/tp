@@ -49,6 +49,9 @@
         </content>
     </ScrollPane>
 
-    <FlowPane fx:id="historyLabel" text="History:" />
+    <VBox fx:id="history" prefHeight="23.0" prefWidth="419.0"  spacing="10.0">
+        <children>
+        </children>
+    </VBox>
 </children>
 </VBox>
