@@ -21,6 +21,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonId;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -93,6 +94,7 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
+        PersonId unchangedId = personToEdit.getId();
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -101,9 +103,9 @@ public class EditCommand extends Command {
         assert updatedPhone != null : "Updated phone should not be null";
         assert updatedEmail != null : "Updated email should not be null";
         assert updatedAddress != null : "Updated address should not be null";
-        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Tag> unchangedTags = personToEdit.getTags();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(unchangedId, updatedName, updatedPhone, updatedEmail, updatedAddress, unchangedTags);
     }
 
     @Override

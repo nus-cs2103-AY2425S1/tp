@@ -62,7 +62,7 @@ public class TagCommand extends Command {
         addedTags.addAll(personToTag.getTags());
 
         // Creating new Person
-        Person newPerson = new Person(personToTag.getName(), personToTag.getPhone(),
+        Person newPerson = new Person(personToTag.getId(), personToTag.getName(), personToTag.getPhone(),
                 personToTag.getEmail(), personToTag.getAddress(), addedTags);
 
         if (newPerson.getTags().size() > 6) {
