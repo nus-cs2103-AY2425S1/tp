@@ -47,8 +47,9 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        history.add(commandText);
-
+        if (!commandText.trim().equals("")) { // check for just whitespace input
+            history.add(commandText.trim()); // trim to remove unwanted whitespace
+        }
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
