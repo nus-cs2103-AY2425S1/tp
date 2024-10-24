@@ -99,6 +99,8 @@ public class Person {
 
     /**
      * Adds a wedding to the list of wedding jobs.
+     *
+     * @param wedding {@code Wedding} to be added to the list of wedding jobs
      */
     public void addWeddingJob(Wedding wedding) {
         if (ownWedding == null || !ownWedding.isSameWedding(wedding)) {

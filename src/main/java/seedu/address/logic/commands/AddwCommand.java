@@ -81,8 +81,8 @@ public class AddwCommand extends Command {
      * Selects the client based on the provided index.
      *
      * @param model The model containing the list of persons.
-     * @return The selected client.
-     * @throws CommandException If the index is invalid.
+     * @return The selected client at the given index.
+     * @throws CommandException If the list is empty or the index is invalid.
      */
     public Person selectClientWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();

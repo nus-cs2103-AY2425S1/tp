@@ -86,21 +86,21 @@ public class Wedding {
 
     // Commented to follow Object class definition
     // All weddings are unique
-//    @Override
-//    public boolean equals(Object other) {
-//        if (other == this) {
-//            return true;
-//        }
-//
-//        if (!(other instanceof Wedding)) {
-//            return false;
-//        }
-//
-//        Wedding otherWedding = (Wedding) other;
-//        return name.equals(otherWedding.name)
-//               && date.equals(otherWedding.date)
-//               && venue.equals(otherWedding.venue);
-//    }
+    //    @Override
+    //    public boolean equals(Object other) {
+    //        if (other == this) {
+    //            return true;
+    //        }
+    //
+    //        if (!(other instanceof Wedding)) {
+    //            return false;
+    //        }
+    //
+    //        Wedding otherWedding = (Wedding) other;
+    //        return name.equals(otherWedding.name)
+    //               && date.equals(otherWedding.date)
+    //               && venue.equals(otherWedding.venue);
+    //    }
 
     @Override
     public int hashCode() {

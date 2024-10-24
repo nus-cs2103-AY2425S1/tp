@@ -111,7 +111,7 @@ public class EditCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on
      * @return the person to be edited
-     * @throws CommandException if an invalid index is given
+     * @throws CommandException if the list is empty or if the index is invalid
      */
     public Person editWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
