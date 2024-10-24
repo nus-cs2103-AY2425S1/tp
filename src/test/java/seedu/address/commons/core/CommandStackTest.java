@@ -128,7 +128,7 @@ public class CommandStackTest {
     @Test
     public void commandGetters_emptyStack_behaviourAsExpected() {
         CommandStack emptyCommandStack = new CommandStack(new ArrayList<>());
-        currCgr = CommandGetterResult.ofEmpty();
+        CommandGetterResult currCgr = CommandGetterResult.ofEmpty();
         // user presses arrow key up
         currCgr = emptyCommandStack.getEarlierCommandGetterResult(currCgr);
         assertEquals(currCgr, CommandGetterResult.ofEmpty());
