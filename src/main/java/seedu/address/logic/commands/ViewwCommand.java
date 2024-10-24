@@ -78,7 +78,7 @@ public class ViewwCommand extends Command {
      * @throws CommandException if an invalid index is given
      */
     private PersonMatchesWeddingPredicate viewWithIndex(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Wedding> lastShownList = model.getFilteredWeddingList();
         if (lastShownList.isEmpty()) {
             throw new CommandException(MESSAGE_VIEW_EMPTY_LIST_ERROR);
         }
@@ -87,7 +87,7 @@ public class ViewwCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                     lastShownList.size()));
         }
-        Wedding weddingToView = model.getFilteredWeddingList().get(targetIndex.getZeroBased());
+        Wedding weddingToView = lastShownList.get(targetIndex.getZeroBased());
 
         return new PersonMatchesWeddingPredicate(weddingToView);
     }
