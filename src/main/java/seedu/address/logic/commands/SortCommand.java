@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,6 +15,8 @@ import seedu.address.model.person.Person;
  * Sorts the list of contacts by specified field and order.
  */
 public class SortCommand extends Command {
+
+    private static final Logger logger = Logger.getLogger(SortCommand.class.getName());
 
     public static final String COMMAND_WORD = "sort";
 
@@ -51,6 +54,8 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        logger.info("Executing SortCommand with field: " + field + " and order: " + order);
+
         Comparator<Person> comparator;
         switch (field.toLowerCase()) {
         case "name":
@@ -60,16 +65,20 @@ public class SortCommand extends Command {
             comparator = Comparator.comparingInt(Person::getTotalNumProps);
             break;
         default:
+            logger.warning("Invalid field specified: " + field);
             throw new CommandException(MESSAGE_AVAILABLE_FIELDS);
         }
 
         if (order.equalsIgnoreCase("H")) {
             comparator = comparator.reversed();
         } else if (!order.equalsIgnoreCase("L")) {
+            logger.warning("Invalid order specified: " + order);
             throw new CommandException(MESSAGE_INVALID_ORDER);
         }
 
         model.sortPersonList(comparator);
+
+        logger.info("SortCommand executed successfully");
 
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, field, order));
     }
