@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -20,6 +21,18 @@ public class BudgetTest {
     }
 
     @Test
+    public void constructor_validInputs_success() {
+        assertEquals("0.00", new Budget(".").toString());   // Fixes "."
+        assertEquals("0.00", new Budget("0").toString());   // Fixes "x"
+        assertEquals("5.00", new Budget("5").toString());   // Fixes "x"
+        assertEquals("5.00", new Budget("5.").toString());   // Fixes "x."
+        assertEquals("5.50", new Budget("5.5").toString()); // Fixes "x.x"
+        assertEquals("0.50", new Budget(".5").toString());  // Fixes ".xx"
+        assertEquals("0.00", new Budget(".00").toString());
+        assertEquals("100.99", new Budget("100.99").toString());
+    }
+
+    @Test
     public void isValidBudget() {
         // null budget number
         assertThrows(NullPointerException.class, () -> Budget.isValidBudget(null));
@@ -34,14 +47,12 @@ public class BudgetTest {
         assertFalse(Budget.isValidBudget(" . ")); // whitespace string
         assertFalse(Budget.isValidBudget("238213798213281 2132132321")); // space between string
 
-
-
         // valid budget numbers
+        assertTrue(Budget.isValidBudget("."));
         assertTrue(Budget.isValidBudget("0.0"));
         assertTrue(Budget.isValidBudget(".03"));
         assertTrue(Budget.isValidBudget("1242938420331"));
         assertTrue(Budget.isValidBudget("1."));
-        assertTrue(Budget.isValidBudget("."));
     }
 
     @Test

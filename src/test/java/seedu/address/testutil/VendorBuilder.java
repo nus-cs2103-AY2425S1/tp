@@ -9,6 +9,7 @@ import seedu.address.model.person.Vendor;
  */
 public class VendorBuilder extends PersonBuilder<VendorBuilder> {
     public static final String DEFAULT_COMPANY = "The Wedding People";
+    public static final String DEFAULT_BUDGET = "0.00";
 
     private Company company;
     private Budget budget;
@@ -19,6 +20,7 @@ public class VendorBuilder extends PersonBuilder<VendorBuilder> {
     public VendorBuilder() {
         super();
         company = new Company(DEFAULT_COMPANY);
+        budget = new Budget(DEFAULT_BUDGET);
     }
 
     /**
@@ -27,6 +29,7 @@ public class VendorBuilder extends PersonBuilder<VendorBuilder> {
     public VendorBuilder(Vendor vendorToCopy) {
         super(vendorToCopy);
         company = vendorToCopy.getCompany();
+        budget = vendorToCopy.getBudget();
     }
 
     /**
@@ -46,6 +49,6 @@ public class VendorBuilder extends PersonBuilder<VendorBuilder> {
     }
 
     public Vendor build() {
-        return new Vendor(getName(), getPhone(), getEmail(), getAddress(), getTags(), company);
+        return new Vendor(getName(), getPhone(), getEmail(), getAddress(), getTags(), company, budget);
     }
 }
