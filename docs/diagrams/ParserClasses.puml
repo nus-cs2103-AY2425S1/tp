@@ -34,6 +34,8 @@ XYZContactCommandParser ..> XYZContactCommand : <<create>>
 XYZLessonCommandParser ..> XYZLessonCommand : <<create>>
 TutorEaseParser ..> Command : <<use>>
 
+ContactCommandParser .up.|> Parser
+LessonCommandParser .up.|> Parser
 XYZContactCommandParser .up.|> Parser
 XYZContactCommandParser ..> ArgumentMultimap
 XYZContactCommandParser ..> ArgumentTokenizer
