@@ -28,6 +28,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -104,8 +105,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Wedding> updatedWeddings = editPersonDescriptor.getWeddings().orElse(personToEdit.getWeddings());
+        Set<Task> updatedTasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedWeddings);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags, updatedWeddings, updatedTasks);
     }
 
     @Override
@@ -143,6 +146,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Set<Wedding> weddings;
+        private Set<Task> tasks;
 
         public EditPersonDescriptor() {}
 
@@ -157,6 +161,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setWeddings(toCopy.weddings);
+            setTasks(toCopy.tasks);
         }
 
         /**
@@ -204,6 +209,23 @@ public class EditCommand extends Command {
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable task set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tasks} is null.
+         */
+        public Optional<Set<Task>> getTasks() {
+            return (tasks != null) ? Optional.of(Collections.unmodifiableSet(tasks)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tasks} to this object's {@code tasks}.
+         * A defensive copy of {@code tasks} is used internally.
+         */
+        public void setTasks(Set<Task> tasks) {
+            this.tasks = (tasks != null) ? new HashSet<>(tasks) : null;
         }
 
         /**

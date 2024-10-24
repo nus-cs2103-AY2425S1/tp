@@ -82,6 +82,11 @@ public class UnassignWeddingCommand extends Command {
         if (!updatedWeddings.containsAll(weddingsToRemove)) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
+        for (Wedding wedding : updatedWeddings) {
+            if (weddingsToRemove.contains(wedding)) {
+                wedding.decreasePeopleCount();
+            }
+        }
         updatedWeddings.removeAll(weddingsToRemove);
 
         Person editedPerson = new Person(
@@ -90,7 +95,8 @@ public class UnassignWeddingCommand extends Command {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 personToEdit.getTags(),
-                updatedWeddings);
+                updatedWeddings,
+                personToEdit.getTasks());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

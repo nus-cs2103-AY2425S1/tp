@@ -49,8 +49,38 @@ public class TagCommandTest {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 updatedTags,
-                personToEdit.getWeddings());
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
         expectedModel.setPerson(personToEdit, editedPerson);
+
+        CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validTagsUnfilteredListWithForce_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("colleague"))));
+
+        // Ensure the model has the tag before adding it to the person
+
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd, true);
+
+        String expectedMessage = String.format(Messages.MESSAGE_ADD_TAG_SUCCESS,
+                "colleague", personToEdit.getName().toString());
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        updatedTags.addAll(tagsToAdd);
+        Person editedPerson = new Person(
+                personToEdit.getName(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getAddress(),
+                updatedTags,
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.addTag(new Tag(new TagName("colleague")));
 
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
@@ -64,6 +94,7 @@ public class TagCommandTest {
                 new Email("test@example.com"),
                 new Address("123, Test Street"),
                 new HashSet<>(List.of(new Tag(new TagName("family")))),
+                new HashSet<>(),
                 new HashSet<>()
         );
         model.addTag(new Tag(new TagName("family")));
@@ -86,7 +117,8 @@ public class TagCommandTest {
                 personWithTags.getEmail(),
                 personWithTags.getAddress(),
                 updatedTags,
-                personWithTags.getWeddings());
+                personWithTags.getWeddings(),
+                personWithTags.getTasks());
         expectedModel.setPerson(personWithTags, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
@@ -108,7 +140,7 @@ public class TagCommandTest {
     public void execute_nonExistentTag_failure() {
         HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("nonExistentTag"))));
         TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
-        String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND;
+        String expectedMessage = Messages.MESSAGE_TAG_NOT_FOUND + '\n' + Messages.MESSAGE_FORCE_TAG_TO_CONTACT;
 
         CommandTestUtil.assertCommandFailure(tagCommand, model, expectedMessage);
     }

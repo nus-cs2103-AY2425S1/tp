@@ -20,11 +20,12 @@ public class CommandResult {
     private final boolean exit;
 
     /**
-     * Which view to switch to.
+     * Enum to indicate which view to switch to.
      */
     public enum SwitchView {
         PERSON,
         WEDDING,
+        TASK,
         NONE
     }
 
@@ -77,7 +78,7 @@ public class CommandResult {
      */
     public boolean isSwitchView() {
         return switch (switchView) {
-        case PERSON, WEDDING -> true;
+        case PERSON, WEDDING, TASK -> true;
         default -> false;
         };
     }
