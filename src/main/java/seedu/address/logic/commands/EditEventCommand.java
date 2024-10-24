@@ -46,7 +46,10 @@ public class EditEventCommand extends Command {
     private final EditEventDescriptor editEventDescriptor;
 
     /**
-     * Creates an EditEventCommand to edit the specified {@code Event}
+     * Creates an EditEventCommand to edit the specified {@code Event}.
+     *
+     * @param eventId ID of the event to edit.
+     * @param editEventDescriptor Details to edit the event with.
      */
     public EditEventCommand(int eventId, EditEventDescriptor editEventDescriptor) {
         requireNonNull(editEventDescriptor);
@@ -54,6 +57,13 @@ public class EditEventCommand extends Command {
         this.editEventDescriptor = new EditEventDescriptor(editEventDescriptor);
     }
 
+    /**
+     * Executes the edit event command and updates the event in the model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display.
+     * @throws CommandException if the event ID does not exist or no changes are specified.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -74,14 +84,19 @@ public class EditEventCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Event} with the details of {@code eventToEdit}
+     * Creates and returns an {@code Event} with the details of {@code eventToEdit}
      * edited with {@code editEventDescriptor}.
+     *
+     * @param eventToEdit The event to edit.
+     * @param editEventDescriptor Details to edit the event with.
+     * @return A new event instance with updated details.
      */
     private static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
         assert eventToEdit != null;
 
         EventName updatedName = editEventDescriptor.getName().orElse(eventToEdit.getEventName());
-        EventDescription updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getEventDescription());
+        EventDescription updatedDescription = editEventDescriptor.getDescription()
+                        .orElse(eventToEdit.getEventDescription());
         EventDuration updatedDuration = editEventDescriptor.getDuration().orElse(eventToEdit.getEventDuration());
 
         return new Event(updatedName, updatedDescription, updatedDuration, eventToEdit.getEventId());
@@ -121,44 +136,89 @@ public class EditEventCommand extends Command {
 
         public EditEventDescriptor() {}
 
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code toCopy} is used internally.
+         *
+         * @param toCopy The descriptor to copy from.
+         */
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);
             setDescription(toCopy.description);
-            setDuration(toCopy.duration); // This will now work correctly
+            setDuration(toCopy.duration);
         }
 
+        /**
+         * Returns true if any field is edited.
+         *
+         * @return true if any field is edited, false otherwise.
+         */
         public boolean isAnyFieldEdited() {
             return name != null || description != null || duration != null;
         }
 
+        /**
+         * Sets the name of the event.
+         *
+         * @param name The new name of the event.
+         */
         public void setName(EventName name) {
             this.name = name;
         }
 
+        /**
+         * Returns the name of the event.
+         *
+         * @return An Optional containing the name of the event if present.
+         */
         public Optional<EventName> getName() {
             return Optional.ofNullable(name);
         }
 
+        /**
+         * Sets the description of the event.
+         *
+         * @param description The new description of the event.
+         */
         public void setDescription(EventDescription description) {
             this.description = description;
         }
 
+        /**
+         * Returns the description of the event.
+         *
+         * @return An Optional containing the description of the event if present.
+         */
         public Optional<EventDescription> getDescription() {
             return Optional.ofNullable(description);
         }
 
-        // New method to set duration using an EventDuration object
+        /**
+         * Sets the duration of the event using an EventDuration object.
+         *
+         * @param duration The new duration of the event.
+         */
         public void setDuration(EventDuration duration) {
             this.duration = duration;
         }
 
-        // Existing method to set duration using start and end dates
+        /**
+         * Sets the duration of the event using start and end dates.
+         *
+         * @param startDate The start date of the event.
+         * @param endDate The end date of the event.
+         */
         public void setDuration(LocalDate startDate, LocalDate endDate) {
             if (startDate != null && endDate != null) {
                 this.duration = new EventDuration(startDate, endDate);
             }
         }
 
+        /**
+         * Returns the duration of the event.
+         *
+         * @return An Optional containing the duration of the event if present.
+         */
         public Optional<EventDuration> getDuration() {
             return Optional.ofNullable(duration);
         }
@@ -179,5 +239,4 @@ public class EditEventCommand extends Command {
                     && getDuration().equals(otherDescriptor.getDuration());
         }
     }
-
 }

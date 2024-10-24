@@ -45,10 +45,12 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             editEventDescriptor.setName(eventName);
         }
         if (argMultiMap.getValue(PREFIX_EVENT_DESCRIPTION).isPresent()) {
-            EventDescription eventDescription = ParserUtil.parseEventDescription(argMultiMap.getValue(PREFIX_EVENT_DESCRIPTION).get());
+            EventDescription eventDescription = ParserUtil
+                    .parseEventDescription(argMultiMap.getValue(PREFIX_EVENT_DESCRIPTION).get());
             editEventDescriptor.setDescription(eventDescription);
         }
-        if (argMultiMap.getValue(PREFIX_EVENT_START_DATE).isPresent() && argMultiMap.getValue(PREFIX_EVENT_END_DATE).isPresent()) {
+        if (argMultiMap.getValue(PREFIX_EVENT_START_DATE)
+                        .isPresent() && argMultiMap.getValue(PREFIX_EVENT_END_DATE).isPresent()) {
             EventDuration eventDuration = ParserUtil.parseEventDuration(
                     argMultiMap.getValue(PREFIX_EVENT_START_DATE).get(),
                     argMultiMap.getValue(PREFIX_EVENT_END_DATE).get());

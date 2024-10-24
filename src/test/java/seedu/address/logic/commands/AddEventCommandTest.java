@@ -89,7 +89,7 @@ public class AddEventCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -201,6 +201,21 @@ public class AddEventCommandTest {
         public int generateNewEventId() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasEventById(int id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Event getEventById(int id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEvent(Event target, Event editedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -227,7 +242,7 @@ public class AddEventCommandTest {
     }
 
     /**
-     * A Model stub that always accept the event being added.
+     * A Model stub that always accepts the event being added.
      */
     private class ModelStubAcceptingEventAdded extends ModelStub {
         final ArrayList<Event> eventsAdded = new ArrayList<>();
@@ -254,5 +269,4 @@ public class AddEventCommandTest {
             return 1;
         }
     }
-
 }
