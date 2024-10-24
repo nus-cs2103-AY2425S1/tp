@@ -145,7 +145,7 @@ Adds a student to the address book.
 
 Deletes the specified student from the address book.
 
-**Format:** `delete i/INDEX`
+**Format:** `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
